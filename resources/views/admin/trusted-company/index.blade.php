@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Users CMS')
+@section('title', 'Venidici Testimony CMS')
 
 @section('container')
 
@@ -22,7 +22,9 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="mb-0 mb-3 text-gray-800">Users</h1>
+            <h1 class="mb-0 mb-3 text-gray-800">Trusted Company</h1>
+            <a href="/admin/trusted-companies/create" class="btn btn-primary btn-user p-3">Create New Trusted Company</a>
+
         </div>
         
         <!-- Content Row -->
@@ -36,9 +38,9 @@
                 <div class="container-fluid p-0 mt-3">
                     <!-- Page Heading -->
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
-                    <h1 class="h5 mb-2 text-gray-800 d-inline">Showing 1 to 10 from 100 results</h1>
 
                     <div class="row mt-2 mb-3">
+                        <!--
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Show:
@@ -71,6 +73,7 @@
                                 </label>
                             </div>
                         </div>
+                        -->
                     </div>
 
                     <!-- Main Table -->
@@ -81,47 +84,37 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Full Name</th>
-                                                <th>Email</th>
-                                                <th>Telephone</th>
-                                                <th>Referral Code</th>
-                                                <th>Occupancy</th>
-                                                <th>Status</th>
-                                                <th  class="text-nowrap">Signed Up At</th>
+                                                <th>Name</th>
+                                                <th>Image</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Fernandha Dzaky</td>
-                                                <td>fernandhadzaky@hotmail.com</td>
-                                                <td>+62811138893</td>
-                                                <td>SABD32</td>
-                                                <td>Student</td>
-                                                <td style="color:green">Active</td>
-                                                <td class="text-nowrap">16/04/2021</td>
+                                                <td>
+                                                    <input type="text" name="name" class="form-control form-control-user" value="Fernandha Dzaky">
+                                                </td>
+                                                <td>
+                                                    <p>Current image:</p>
+                                                    <img src="/assets/images/admin/testimony-dummy.png" style="width:10vw" class="img-fluid" alt=""> 
+                                                    <p>Click button below to change image</p>
+                                                    <input type="file" name="image" accept="image/*">
+                                                </td>   
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <form action="" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this trusted company?')">Delete</button>
                                                                 </div>
                                                             </form> 
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-info shadow-sm" type="submit" onclick="return confirm('Are you sure you want to suspend this user?')">Suspend</button>
-                                                                </div>
-                                                            </form> 
-                                                            <!--
+                                                      
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/trusted-companies/1/update">Update</a>
                                                             </div>
-                                                            -->
+                                                   
                                                     </div>
                                                 </td>
                                             </tr>

@@ -47,6 +47,133 @@
                 </div>
             </div>
             <!-- End of Card -->
+            
+            <!-- Card -->
+            <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
+                                    Woki</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-palette fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
+            <!-- Card -->
+            <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
+                                    Online Courses</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
+            <!-- Card -->
+            <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
+                                    Bootcamp</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-campground fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
+            <!-- Card -->
+            <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
+                                    Community</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-handshake fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
+            <!-- Card -->
+            <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
+                                    Krest</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-business-time fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
+            <!-- Card -->
+            <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
+                                    Mentoring</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-people-arrows fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
+            <!-- Card -->
+            <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
+                                    Virtual Company</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-building fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
         </div>
 
         <!-- Page Heading -->
@@ -61,12 +188,29 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <h5 class="mb-0 mb-3 text-gray-800" style="color:white">Top Section</h5>
+                <h5 class="mb-0 mb-3 text-gray-800" style="color:white">Home Page Top Section</h5>
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label for="">Title</label>
-                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">Lorem ipsum donor amet</textarea>
+                    <label for="">Heading</label>
+                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">Anytime, anywhere.
+Learn on your schedule from any device
+                    </textarea>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="">Sub-Heading</label>
+                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla                     
+                    </textarea>
+                </div>
+            </div>
+            <div class="col-12">
+                    <p>Current Video</p>
+                    <video autoplay controls="false" style="width:20vw;height:auto;border:4px solid black;border-radius:5px" src='/assets/videos/admin/CEPAT.mp4' type='video/mp4'></video>
+
+                <div class="form-group">
+                    <input type="file" >
                 </div>
             </div>
         </div>

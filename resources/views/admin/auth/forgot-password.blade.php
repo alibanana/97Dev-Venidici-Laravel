@@ -35,7 +35,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block" style="background-color:rgb(18, 39, 77);padding: 3vw;text-align:center">
+                            <div class="col-lg-6 d-none d-lg-block" style="background-color:#FFFFFF;padding: 3vw;text-align:center">
                                 <img src="/assets/images/admin/logo_square.jpg" class="img-fluid" alt="">
                             </div>       
                             <div class="col-lg-6">

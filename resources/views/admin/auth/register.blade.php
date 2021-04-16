@@ -30,7 +30,7 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block" style="background-color:rgb(18, 39, 77);display:flex !important;align-items:center !important;padding:0vw 3vw">
+                    <div class="col-lg-5 d-none d-lg-block" style="background-color:#FFFFFF;display:flex !important;align-items:center !important;padding:0vw 3vw">
                         <img src="img/jai-logo.png" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-7">
