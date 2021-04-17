@@ -12,10 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/* START OF CLIENT ROUTING */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client/index');
 });
+/* END OF CLIENT ROUTING */
+
 
 /* START ADMIN ROUTING */
 Route::get('/admin/dashboard', function () {
