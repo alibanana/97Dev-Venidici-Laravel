@@ -12,8 +12,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/* START OF CLIENT ROUTING */
 
+
+/* DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+/* END OF DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
+
+
+/* START OF CLIENT ROUTING */
 Route::get('/', function () {
     return view('client/index');
 });
@@ -62,6 +74,6 @@ Route::get('/admin/trusted-companies/1/update', function () {
 });
 /* END OF TRUSTED COMPANY ROUTING */
 
-
-
 /* END OF ADMIN ROUTING */
+
+require __DIR__.'/auth.php';
