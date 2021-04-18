@@ -16,7 +16,7 @@ class CreateUserDetailsTable extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->string('telephone', 16);
-            $table->string('referrral_code', 6);
+            $table->string('referral_code', 6);
             $table->date('birthdate')->nullable();
             $table->enum('gender', ['Male', 'Female'])->nullable();
             $table->text('address')->nullable();
