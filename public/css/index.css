@@ -3,9 +3,7 @@
     margin: 0;
     padding: 0;
 }
-body, html {
-    height: 100%;
-  }
+
 @font-face {
     font-family: Rubik Bold;
     src: url(/fonts/Rubik/Rubik-Bold.ttf);
@@ -28,6 +26,10 @@ body, html {
 @font-face {
     font-family: Poppins Medium;
     src: url(/fonts/Poppins/Poppins-Medium.otf);
+}
+@font-face {
+    font-family: Hypebeast;
+    src: url(/fonts/Hypebeast/Hypebeast.ttf);
 }
 
 /* start of background images */
@@ -60,12 +62,12 @@ body, html {
 .auth-background{
     background-image: url("/assets/images/client/Auth_BG.png");
     /* Full height */
-  height: 100%; 
+    height: 100%; 
 
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /* end of background images*/
@@ -133,12 +135,14 @@ body, html {
     border: 2px solid transparent;
 }
 .navbar-item-active{
-    background: #2B6CAA!important;
-    color:#FFFFFF !important;
+    color:#2B6CAA !important;
+    text-decoration-line: underline;
+    text-decoration-color: #2B6CAA !important;
+    text-underline-offset: 0.7vw;
+    text-decoration-thickness: 0.2vw;
 }
 .navbar-item:hover{
-    border: 2px solid #2B6CAA;
-    color: #3B3C43;
+    color: #2B6CAA;
 
 
 }
@@ -184,7 +188,6 @@ body, html {
     border: none;
     padding: 1vw;
     font-family: Rubik Medium;
-    color: rgba(0, 0, 0, 0.5);
 }
 .btn-search{
     background-color: #2B6CAA;
@@ -385,7 +388,16 @@ body, html {
     background-image: url("/assets/images/client/Auth_Bottom_BG.png");
     background-position:right bottom;
     background-repeat: no-repeat;
-    background-size: 15%;
+    background-size:92%;
+}
+.white-modal-signup{
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding:2vw 4vw 8vw 4vw;
+    background-image: url("/assets/images/client/SignUp_BG.png");
+    background-position:left bottom;
+    background-repeat: no-repeat;
+    background-size:92%;
 }
 
 .btn-blue-bordered{
@@ -397,4 +409,9 @@ body, html {
     border: 2px solid #2B6CAA;
     color: #3B3C43;
     background-color: #FFFFFF;
+}
+
+.btn-blue-bordered:hover{
+    color: #FFFFFF;
+    background-color: #2B6CAA !important;
 }
