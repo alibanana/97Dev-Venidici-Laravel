@@ -26,7 +26,7 @@ class UserDetail extends Model
         'birthdate' => 'date',
     ];
 
-    public function Users() {
+    public function users() {
         return $this->hasOne(User::class);
     }
 }
