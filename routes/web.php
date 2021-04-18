@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +33,24 @@ Route::get('/', function () {
 });
 /* END OF CLIENT ROUTING */
 
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+| Description:
+| All routes in the group below has /admin prefix, admin.* name and uses
+| ['auth', 'is_admin'] middleware (user must be logged in to access it).
+|
+| Controllers can be found inside -> App\Http\Controllers\Admin\
+| Controllers Used:
+|   - DashboardController
+*/
+Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+});
 
 /* START ADMIN ROUTING */
-Route::get('/admin/dashboard', function () {
-    return view('admin/index');
-});
 Route::get('/admin/login', function () {
     return view('admin/auth/login');
 });
@@ -44,9 +59,6 @@ Route::get('/admin/forgot-password', function () {
 });
 Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
-});
-Route::get('/admin/users', function () {
-    return view('admin/users');
 });
 
 /* TESTIMONY ROUTING */
