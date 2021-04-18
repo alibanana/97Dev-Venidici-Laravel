@@ -1,8 +1,8 @@
 @extends('./layouts/client-main')
+@section('title', 'Venidici Home')
 
 @section('content')
 
-<!-- NAVBAR -->
 
 <div class="row m-0">
     <div class="col-md-6 p-0">
@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-6 p-0 home-background">
         <div style="margin-top:13.2vw;margin-left:1.5vw">
-            <video style="width:33.5vw;height:23vw;border-radius:1vw;display:block;object-fit: cover;"  controls="false" >
+            <video style="width:33.8vw;height:23vw;border-radius:1vw;display:block;object-fit: cover;"  controls="false" >
                 <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
                 <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
                 Your browser does not support HTML video.

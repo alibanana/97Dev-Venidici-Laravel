@@ -3,7 +3,9 @@
     margin: 0;
     padding: 0;
 }
-
+body, html {
+    height: 100%;
+  }
 @font-face {
     font-family: Rubik Bold;
     src: url(/fonts/Rubik/Rubik-Bold.ttf);
@@ -53,6 +55,17 @@
     background-position:right bottom;
     background-repeat: no-repeat;
     background-size: 23%;
+}
+
+.auth-background{
+    background-image: url("/assets/images/client/Auth_BG.png");
+    /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* end of background images*/
@@ -137,6 +150,12 @@
     color: white;
     padding: 0px !important;
   }
+.container-modal {
+    position: relative;
+    text-align: center;
+    color: white;
+    padding: 0px !important;
+  }
 
 /* Top left text */
 .top-left {
@@ -144,9 +163,23 @@
     top: 0px;
     left: 0vw;
   }
-
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 .blue-input-form{
     background: #2B6CAA1A;
+    border-radius: 10px;
+    border: none;
+    padding: 1vw;
+    font-family: Rubik Medium;
+    color: rgba(0, 0, 0, 0.5);
+}
+.auth-input-form{
+    background: #FBFAFF;
     border-radius: 10px;
     border: none;
     padding: 1vw;
@@ -343,4 +376,25 @@
 
 *:focus {
     outline: none;
+}
+
+.white-modal{
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding:2vw 4vw 8vw 4vw;
+    background-image: url("/assets/images/client/Auth_Bottom_BG.png");
+    background-position:right bottom;
+    background-repeat: no-repeat;
+    background-size: 15%;
+}
+
+.btn-blue-bordered{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #2B6CAA;
+    color: #3B3C43;
+    background-color: #FFFFFF;
 }
