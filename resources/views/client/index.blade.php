@@ -552,7 +552,7 @@
                             <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
                             <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:2vw;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
     
                     </div>
                     <!-- END OF SMALL TESTIMONY CARD -->
