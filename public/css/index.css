@@ -27,6 +27,10 @@
     font-family: Poppins Medium;
     src: url(/fonts/Poppins/Poppins-Medium.otf);
 }
+@font-face {
+    font-family: Hypebeast;
+    src: url(/fonts/Hypebeast/Hypebeast.ttf);
+}
 
 /* start of background images */
 .home-background{
@@ -53,6 +57,17 @@
     background-position:right bottom;
     background-repeat: no-repeat;
     background-size: 23%;
+}
+
+.auth-background{
+    background-image: url("/assets/images/client/Auth_BG.png");
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /* end of background images*/
@@ -120,18 +135,26 @@
     border: 2px solid transparent;
 }
 .navbar-item-active{
-    background: #2B6CAA!important;
-    color:#FFFFFF !important;
+    color:#2B6CAA !important;
+    text-decoration-line: underline;
+    text-decoration-color: #2B6CAA !important;
+    text-underline-offset: 0.7vw;
+    text-decoration-thickness: 0.2vw;
 }
 .navbar-item:hover{
-    border: 2px solid #2B6CAA;
-    color: #3B3C43;
+    color: #2B6CAA;
 
 
 }
 
 /* Container holding the image and the text */
 .container {
+    position: relative;
+    text-align: center;
+    color: white;
+    padding: 0px !important;
+  }
+.container-modal {
     position: relative;
     text-align: center;
     color: white;
@@ -144,7 +167,13 @@
     top: 0px;
     left: 0vw;
   }
-
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 .blue-input-form{
     background: #2B6CAA1A;
     border-radius: 10px;
@@ -152,6 +181,13 @@
     padding: 1vw;
     font-family: Rubik Medium;
     color: rgba(0, 0, 0, 0.5);
+}
+.auth-input-form{
+    background: #FBFAFF;
+    border-radius: 10px;
+    border: none;
+    padding: 1vw;
+    font-family: Rubik Medium;
 }
 .btn-search{
     background-color: #2B6CAA;
@@ -287,7 +323,7 @@
     font-family:Rubik Regular
 }
 .course-card-blue:hover{
-    box-shadow: 0px 0px 10px 4px rgba(206, 51, 105, 0.3);
+    box-shadow: 0px 0px 10px 4px rgba(43, 108, 170, 0.3);
 }
 /* END OF BLUE COURSE CARD */
 
@@ -322,7 +358,7 @@
     font-family:Rubik Regular
 }
 .course-card-green:hover{
-    box-shadow: 0px 0px 10px 4px rgba(206, 51, 105, 0.3);
+    box-shadow: 0px 0px 10px 4px rgba(103, 187, 163, 0.3);
 }
 /* END OF GREEN COURSE CARD */
 .course-card-description{
@@ -339,4 +375,43 @@
     box-shadow: 0px 0px 20px rgba(157, 157, 157, 0.15);
     border-radius: 10px;
     padding:1.2vw
+}
+
+*:focus {
+    outline: none;
+}
+
+.white-modal{
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding:2vw 4vw 8vw 4vw;
+    background-image: url("/assets/images/client/Auth_Bottom_BG.png");
+    background-position:right bottom;
+    background-repeat: no-repeat;
+    background-size:92%;
+}
+.white-modal-signup{
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding:2vw 4vw 8vw 4vw;
+    background-image: url("/assets/images/client/SignUp_BG.png");
+    background-position:left bottom;
+    background-repeat: no-repeat;
+    background-size:92%;
+}
+
+.btn-blue-bordered{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #2B6CAA;
+    color: #3B3C43;
+    background-color: #FFFFFF;
+}
+
+.btn-blue-bordered:hover{
+    color: #FFFFFF;
+    background-color: #2B6CAA !important;
 }

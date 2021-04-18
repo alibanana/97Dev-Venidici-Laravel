@@ -31,6 +31,12 @@ Route::get('/dashboard', function () {
 Route::get('/', function () {
     return view('client/index');
 });
+Route::get('/login', function () {
+    return view('client/auth/login');
+});
+Route::get('/signup', function () {
+    return view('client/auth/signup');
+});
 /* END OF CLIENT ROUTING */
 
 /*

@@ -31,14 +31,26 @@
 
     
 
-    <title>Venidici Home Page</title>
+    <title>@yield('title')</title>
 
   </head>
   <body >
-   
-    <!-- START OF NAVBAR  -->
-    
-    <!--END OF NAVBAR -->
+    @if(!Request::is('login'))
+      @if(!Request::is('signup'))
+    <!-- END OF NAVBAR -->
+    <div class="navbar-floating">
+        <img src="/assets/images/client/logo-horizontal.png" style="width: 8vw;" class="img-fluid" alt="">
+        <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Home</a>
+        <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
+        <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Public</a>
+        <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Community</a>
+        
+        <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Log In</a>
+        
+    </div>
+    <!-- START OF BANNER SECTION -->
+    @endif
+    @endif
     @yield('content')
 
 

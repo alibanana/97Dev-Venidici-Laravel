@@ -1,19 +1,9 @@
 @extends('./layouts/client-main')
+@section('title', 'Venidici Home')
 
 @section('content')
 
-<!-- NAVBAR -->
 
-<!-- END OF NAVBAR -->
-<div class="navbar-floating">
-    <img src="/assets/images/client/logo-horizontal.png" style="width: 8vw;" class="img-fluid" alt="">
-    <a href="" class="normal-text navbar-item navbar-item-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Home</a>
-    <a href="" class="normal-text navbar-item " style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
-    <a href="" class="normal-text navbar-item " style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Public</a>
-    <a href="" class="normal-text navbar-item " style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Community</a>
-    <a href="" class="normal-text navbar-item " style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Sign In</a>
-</div>
-<!-- START OF BANNER SECTION -->
 <div class="row m-0">
     <div class="col-md-6 p-0">
         <div class="page-container-left" style="padding-top: 13vw;padding-bottom:9vw">
@@ -45,7 +35,7 @@
     </div>
     <div class="col-md-6 p-0 home-background">
         <div style="margin-top:13.2vw;margin-left:1.5vw">
-            <video style="width:33.5vw;height:23vw;border-radius:1vw;display:block;object-fit: cover;"  controls="false" >
+            <video style="width:33.8vw;height:23vw;border-radius:1vw;display:block;object-fit: cover;"  controls="false" >
                 <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
                 <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
                 Your browser does not support HTML video.
@@ -63,7 +53,7 @@
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">10</p>
                 <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Trusted Companies</p>
             </div>
-            <img src="/assets/images/icons/vertical-splitter.png" style="max-height:4vw" class="img-fluid" alt="">
+            <img src="/assets/images/icons/vertical-splitter.png" style="max-height:6vw" class="img-fluid" alt="">
             <img src="/assets/images/client/logo-itb 2.png" style="max-height:4vw" class="img-fluid" alt="">
             <img src="/assets/images/client/bca-bank.png" style="max-height:4vw" class="img-fluid" alt="">
             <img src="/assets/images/client/flick.png" style="max-height:4vw" class="img-fluid" alt="">
@@ -190,122 +180,342 @@
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;">Top classes for you</p>
         <div style="padding:2vw 10vw 4vw 10vw;">
             <div style="display:flex;justify-content:space-between;align-items:center;background: #FFFFFF;border: 2px solid rgba(157, 157, 157, 0.1);border-radius: 10px;padding:1vw 3vw">
-                <p class="normal-text btn-blue-on-hover btn-blue-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Most Popular</p>
-                <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
-                <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Online Course</p>
+
+                <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Most Popular</p>
+                <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
+                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Online Course</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
             </div>
         </div>
     </div>
-    <div class="row m-0 p-0">
-        <div class="col-4 p-0" >
-            <div style="display: flex;justify-content:center">
+    <!-- MOST POPULAR -->
+    <div class="course-content" id="course-popular">
+        <div class="row m-0 p-0">
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
 
-                <!-- START OF ONE RED COURSE CARD -->
-                <div class="course-card-red">
-                    <div class="container">
-                        <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                        <div class="top-left card-tag small-text" >Woki</div>
-                    </div>
-                    <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                        <div style="display:flex;justify-content:space-between;align-items:center">
-                            <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                            <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                    <!-- START OF ONE RED COURSE CARD -->
+                    <div class="course-card-red">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Woki</div>
                         </div>
-                        <div class="collapse" id="woki-collapse" style="margin-top:1vw">
-                            <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                        </div>
-                        <div style="display: flex;justify-content:space-between;margin-top:1vw" >
-                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                            <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
-                        </div>
-                        <hr>
-                        <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                            <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                            <a href="#" class="course-card-button normal-text">Enroll Now</a>
-                            <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
-                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
+                            </div>
 
+                        </div>
                     </div>
+                    <!-- END OF ONE RED COURSE CARD -->
                 </div>
-                <!-- END OF ONE RED COURSE CARD -->
             </div>
-        </div>
 
 
-        <div class="col-4 p-0" >
-            <div style="display: flex;justify-content:center">
-                <!-- START OF ONE BLUE COURSE CARD -->
-                <div class="course-card-blue">
-                    <div class="container">
-                        <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                        <div class="top-left card-tag small-text" >Workshop</div>
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE BLUE COURSE CARD -->
+                    <div class="course-card-blue">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Workshop</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="workshop-collapse" data-toggle="collapse" href="#workshop-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="workshop-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                            </div>
+            
+                        </div>
                     </div>
-                    <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                        <div style="display:flex;justify-content:space-between;align-items:center">
-                            <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                            <i style="font-size:2vw;" role="button"  aria-controls="workshop-collapse" data-toggle="collapse" href="#workshop-collapse" class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="collapse" id="workshop-collapse" style="margin-top:1vw">
-                            <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                        </div>
-                        <div style="display: flex;justify-content:space-between;margin-top:1vw" >
-                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                            <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
-                        </div>
-                        <hr>
-                        <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                            <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                            <a href="#" class="course-card-button normal-text">Enroll Now</a>
-                        </div>
-        
-                    </div>
+                    <!-- END OF ONE BLUE COURSE CARD -->
                 </div>
-                <!-- END OF ONE BLUE COURSE CARD -->
             </div>
-        </div>
 
 
-        <div class="col-4 p-0" >
-            <div style="display: flex;justify-content:center">
-                <!-- START OF ONE GREEN COURSE CARD -->
-                <div class="course-card-green">
-                    <div class="container">
-                        <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                        <div class="top-left card-tag small-text" >Online Course</div>
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE GREEN COURSE CARD -->
+                    <div class="course-card-green">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Online Course</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="course-collapse" data-toggle="collapse" href="#course-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="course-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                            </div>
+            
+                        </div>
                     </div>
-                    <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                        <div style="display:flex;justify-content:space-between;align-items:center">
-                            <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                            <i style="font-size:2vw;" role="button"  aria-controls="course-collapse" data-toggle="collapse" href="#course-collapse" class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="collapse" id="course-collapse" style="margin-top:1vw">
-                            <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                        </div>
-                        <div style="display: flex;justify-content:space-between;margin-top:1vw" >
-                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                            <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
-                        </div>
-                        <hr>
-                        <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                            <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                            <a href="#" class="course-card-button normal-text">Enroll Now</a>
-                        </div>
-        
-                    </div>
+                    <!-- END OF ONE GREEN COURSE CARD -->
                 </div>
-                <!-- END OF ONE GREEN COURSE CARD -->
+            </div>
+            <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
+                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+
             </div>
         </div>
     </div>
+    <!-- END OF MOST POPULAR -->
+    <!-- WOKI -->
+    <div class="course-content" id="course-woki" style="display:none">
+        <div class="row m-0 p-0">
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
 
-    <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-        <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                    <!-- START OF ONE RED COURSE CARD -->
+                    <div class="course-card-red">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Woki</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
+                            </div>
 
+                        </div>
+                    </div>
+                    <!-- END OF ONE RED COURSE CARD -->
+                </div>
+            </div>
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+
+                    <!-- START OF ONE RED COURSE CARD -->
+                    <div class="course-card-red">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Woki</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- END OF ONE RED COURSE CARD -->
+                </div>
+            </div>
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+
+                    <!-- START OF ONE RED COURSE CARD -->
+                    <div class="course-card-red">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Woki</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- END OF ONE RED COURSE CARD -->
+                </div>
+            </div>
+            <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
+                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+
+            </div>
+
+            
+        </div>
     </div>
+    <!-- END OF WOKI -->
+
+    <!-- ONLINE COURSE -->
+    <div class="course-content" id="course-online" style="display:none">
+        <div class="row m-0 p-0">
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE GREEN COURSE CARD -->
+                    <div class="course-card-green">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Online Course</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="course-collapse" data-toggle="collapse" href="#course-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="course-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                            </div>
+            
+                        </div>
+                    </div>
+                    <!-- END OF ONE GREEN COURSE CARD -->
+                </div>
+            </div>
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE GREEN COURSE CARD -->
+                    <div class="course-card-green">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Online Course</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="course-collapse" data-toggle="collapse" href="#course-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="course-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                            </div>
+            
+                        </div>
+                    </div>
+                    <!-- END OF ONE GREEN COURSE CARD -->
+                </div>
+            </div>
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE GREEN COURSE CARD -->
+                    <div class="course-card-green">
+                        <div class="container">
+                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                            <div class="top-left card-tag small-text" >Online Course</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <i style="font-size:2vw;" role="button"  aria-controls="course-collapse" data-toggle="collapse" href="#course-collapse" class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="collapse" id="course-collapse" style="margin-top:1vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                            </div>
+                            <hr>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                            </div>
+            
+                        </div>
+                    </div>
+                    <!-- END OF ONE GREEN COURSE CARD -->
+                </div>
+            </div>
+            <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
+                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+            </div>
+
+            
+        </div>
+    </div>
+    <!-- END OF ONLINE COURSE -->
+
     <!-- END OF CLASSES SECTION -->
-
     <!-- START OF TESTIMONY SECTION -->
     <div class="row m-0 page-container" style="padding-top: 10vw;">
         <div class="col-12 col-md-7 p-0 ">
@@ -342,7 +552,7 @@
                             <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
                             <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:2vw;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
     
                     </div>
                     <!-- END OF SMALL TESTIMONY CARD -->
@@ -395,15 +605,22 @@
     <!-- END OF TESTIMONY SECTION -->
 </div>
 <!-- END OF FEATURE, COURSE AND TESTIMONY SECTION -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>
-    console.log("kepanggil");
-    $(window).scroll(function () {
-    var Bottom = $(window).height() + $(window).scrollTop() >= $(document).height();
-    if(Bottom)
-    {
-    console.log('what');
-    }
-    });
+    function changeCourse(evt, categoryName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("course-content")
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("course-links");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace("btn-blue-active", "btn-blue-on-hover");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " btn-blue-active";
+        }
+         
 </script>
 @endsection
