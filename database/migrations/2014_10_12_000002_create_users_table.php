@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_admin');
-            $table->unsignedBigInteger('user_role_id')->default(0);
+            $table->unsignedBigInteger('user_role_id')->default(1);
             $table->foreign('user_role_id')->references('id')->on('user_roles')->onDelete('cascade');
             $table->unsignedBigInteger('user_detail_id')->nullable();
             $table->foreign('user_detail_id')->references('id')->on('user_details')->onDelete('cascade');
