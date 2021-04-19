@@ -25,11 +25,17 @@ Route::get('/signup', function () {
 });
 
 /* START OF ONLINE COURSE ROUTING */
-
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
 /* END OF ONLINE COURSE ROUTING */
+
+/* START OF WOKI ROUTING */
+
+Route::get('/woki/sertifikat-menjadi-seniman', function () {
+    return view('client/woki/detail');
+});
+/* END OF WOKI ROUTING */
 /* END OF CLIENT ROUTING */
 
 
