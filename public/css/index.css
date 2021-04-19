@@ -69,6 +69,18 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.online-course-detail-bg{
+    background-image: url("/assets/images/client/Online_Course_Detail_BG.png");
+    background-position:2.5vw 6vw;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+.woki-detail-bg{
+    background-image: url("/assets/images/client/Woki_Detail_BG.png");
+    background-position:2.5vw 6vw;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
 
 /* end of background images*/
 
@@ -87,17 +99,17 @@
 
 /* font size */
 .big-heading{
-    font-size: 3vw;
+    font-size: 2.8vw;
 }
 .medium-heading{
-    font-size: 2.6vw;
-    line-height: 3.4vw;
+    font-size: 2.2vw;
+    line-height: 3vw;
 }
 .small-heading{
     font-size: 2vw;
 }
 .sub-description{
-    font-size: 1.35vw;
+    font-size: 1.4vw;
 }
 .bigger-text{
     font-size: 1.2vw;
@@ -183,7 +195,7 @@
     color: rgba(0, 0, 0, 0.5);
 }
 .auth-input-form{
-    background: #FBFAFF;
+    background: #F7F7F9;
     border-radius: 10px;
     border: none;
     padding: 1vw;
@@ -289,6 +301,9 @@
 .course-card-red:hover{
     box-shadow: 0px 0px 10px 4px rgba(206, 51, 105, 0.3);
 }
+.course-card-red #star-section{
+    border-bottom:2px solid #CE3369
+}
 /* END OF RED COURSE CARD */
 
 /* START OF BLUE COURSE CARD */
@@ -325,6 +340,9 @@
 .course-card-blue:hover{
     box-shadow: 0px 0px 10px 4px rgba(43, 108, 170, 0.3);
 }
+.course-card-blue #star-section{
+    border-bottom:2px solid #2B6CAA
+}
 /* END OF BLUE COURSE CARD */
 
 /* START OF GREEN COURSE CARD */
@@ -360,7 +378,19 @@
 .course-card-green:hover{
     box-shadow: 0px 0px 10px 4px rgba(103, 187, 163, 0.3);
 }
+.course-card-green #star-section{
+    border-bottom:2px solid #67BBA3
+}
 /* END OF GREEN COURSE CARD */
+
+
+/* START OF PERLENGKAPAN CARD */
+.perlengkapan-card-red{
+    border: 2px solid #CE3369;
+    border-radius: 10px;
+    height:20vw
+}
+/* END OF PERLENGKAPAN CARD */
 .course-card-description{
     display: -webkit-box;
     overflow : hidden !important;
@@ -410,8 +440,106 @@
     color: #3B3C43;
     background-color: #FFFFFF;
 }
+.btn-blue-bordered-active{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #2B6CAA;
+    color: #FFFFFF;
+    background-color: #2B6CAA !important;
+}
 
 .btn-blue-bordered:hover{
     color: #FFFFFF;
     background-color: #2B6CAA !important;
+}
+
+
+.btn-purple-bordered-active{
+    border-radius: 5px;
+    padding:0.5vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #A24A9C;
+    color: #FFFFFF;
+    background-color: #A24A9C !important;
+}
+
+
+.green-tag{
+    background: #FFFFFF;
+    border: 2px solid #67BBA3;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color:#3B3C43;
+    text-decoration:none;
+    padding:0.5vw
+}
+.green-tag:hover{
+    color:#3B3C43;
+}
+
+.red-tag{
+    background: #FFFFFF;
+    border: 2px solid #CE3369;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color:#3B3C43;
+    text-decoration:none;
+    padding:0.5vw
+}
+.red-tag:hover{
+    color:#3B3C43;
+}
+
+.profil-text-green-active{
+    text-decoration-line: underline;
+    text-decoration-color: #67BBA3 !important;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 0.2vw;
+    color:#3B3C43 !important
+}
+.profil-text-green{
+    color: rgba(59, 60, 67, 0.5);
+    text-decoration-line: underline;
+    text-decoration-color: #FFFFFF;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 0.2vw;
+}
+.profil-text-green:hover{
+    color:#67BBA3
+}
+
+.profil-text-red-active{
+    text-decoration-line: underline;
+    text-decoration-color: #CE3369 !important;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 0.2vw;
+    color:#3B3C43 !important
+}
+.profil-text-red{
+    color: rgba(59, 60, 67, 0.5);
+    text-decoration-line: underline;
+    text-decoration-color: #FFFFFF;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 0.2vw;
+}
+.profil-text-red:hover{
+    color:#CE3369
+}
+
+.course-detail-card-green{
+    background: #FFFFFF;
+    box-shadow: -4px -4px 8px rgba(103, 187, 163, 0.1), 4px 4px 8px #F5F5F5;
+    border-radius: 10px;
+    padding:2vw 2vw
+}
+.course-detail-card-red{
+    background: #FFFFFF;
+    box-shadow: -4px -4px 8px rgba(206, 51, 105, 0.1), 4px 4px 8px #F5F5F5;
+    border-radius: 10px;
+    padding:2vw 2vw
 }

@@ -7,7 +7,7 @@
 <div class="row m-0">
     <div class="col-md-6 p-0">
         <div class="page-container-left" style="padding-top: 13vw;padding-bottom:9vw">
-            <p class="medium-heading" style="font-family: Rubik Bold;color:#3B3C43;white-space:pre-line" >Anytime, anywhere.
+            <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43;white-space:pre-line" >Anytime, anywhere.
             Learn on your schedule
             from any device</p>
             <p class="sub-description" style="font-family: Rubik Regular;color:#808080;white-space:pre-line" >Lorem ipsum dolor sit amet, consectetur adipiscing 
@@ -47,7 +47,7 @@
 
 <!-- START OF TRUSTED COMPANY SECTION -->
 <div class="row m-0 page-container" style="z-index: 99;padding-bottom:5vw">
-    <div class="col-12 p-0" style="margin-top:-2vw">
+    <div class="col-12 p-0" style="margin-top:-4vw">
         <div style="background-color: #FCFCFC;border-radius:10px;padding:2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">10</p>
@@ -213,10 +213,19 @@
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
                                 <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                             </div>
 
@@ -247,7 +256,16 @@
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
                                 <a href="#" class="course-card-button normal-text">Enroll Now</a>
@@ -280,10 +298,19 @@
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
                             </div>
             
                         </div>
@@ -313,19 +340,28 @@
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center">
                                 <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-one" data-toggle="collapse" href="#woki-collapse-one" class="fas fa-caret-down"></i>
                             </div>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                            <div class="collapse" id="woki-collapse-one" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
                                 <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                             </div>
 
@@ -346,19 +382,28 @@
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center">
                                 <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-two" data-toggle="collapse" href="#woki-collapse-two" class="fas fa-caret-down"></i>
                             </div>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                            <div class="collapse" id="woki-collapse-two" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
                                 <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                             </div>
 
@@ -379,19 +424,28 @@
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center">
                                 <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-three" data-toggle="collapse" href="#woki-collapse-three" class="fas fa-caret-down"></i>
                             </div>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                            <div class="collapse" id="woki-collapse-three" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
                                 <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                             </div>
 
@@ -433,7 +487,16 @@
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
                                 <a href="#" class="course-card-button normal-text">Enroll Now</a>
@@ -464,7 +527,16 @@
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
                                 <a href="#" class="course-card-button normal-text">Enroll Now</a>
@@ -495,7 +567,16 @@
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
-                            <hr>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                </div>
+                            </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
                                 <a href="#" class="course-card-button normal-text">Enroll Now</a>
@@ -531,11 +612,12 @@
                         -webkit-line-clamp: 5 !important;
                         -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
                         <div style="display: flex;justify-content:center">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width:1vw;height:auto" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width:1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width:1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width:1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width:1vw;height:auto;margin-left:0.5vw" alt="STAR">
+                            <i style="font-size:1vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
+
                         </div>
                         <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-top:1vw;margin-bottom:0.4vw">Gabriel Amileano</p>
                         <p class="small-text" style="font-family: Rubik Medium;color:#808080;margin-bottom:0px">Copy Writer</p>
@@ -546,11 +628,11 @@
                     <div class="testimony-card" style="margin-top: 2vw;width: 20vw;">
                         <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw">4.9/5</p>
                         <div style="display: flex;justify-content:center">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
+                            <i style="font-size:1vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
                         </div>
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
     
@@ -565,11 +647,11 @@
                      <div class="testimony-card" style="margin-top: 2vw;width: 16vw;">
                         <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw">4.9/5</p>
                         <div style="display: flex;justify-content:center">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
+                            <i style="font-size:1vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
                         </div>
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:2vw;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
     
@@ -580,11 +662,11 @@
                         <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width: 6vw;height:auto" alt="">
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
                         <div style="display: flex;justify-content:center">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
-                            <img src="/assets/images/client/star.svg" class="img-fluid" style="width: 1vw;height:auto;margin-left:0.5vw" alt="STAR">
+                            <i style="font-size:1vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                            <i style="font-size:1vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
                         </div>
                         <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-top:1vw;margin-bottom:0.4vw">Gabriel Amileano</p>
                         <p class="small-text" style="font-family: Rubik Medium;color:#808080;margin-bottom:0px">Copy Writer</p>
