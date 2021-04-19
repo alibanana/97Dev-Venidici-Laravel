@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
 use App\Models\User;
+use App\Models\UserDetail;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,52 @@ class UserController extends Controller
 
         $users = new User;
 
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $users = $users->orderBy('created_at', 'desc');
+            } else {
+                $users = $users->orderBy('created_at');
+            }
+        } else {
+            $users = $users->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('filter')) {
+            if ($request->filter == "") {
+                $url = route('admin.users.index', request()->except('filter'));
+                return redirect($url);
+            } else {
+                $users_status_list = ['active', 'suspended'];
+                if (!in_array($request->filter, $users_status_list)) {
+                    $url = route('admin.users.index', request()->except('filter'));
+                    return redirect($url);    
+                }
+                $users = $users->where('status', $request->filter);
+            }
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('admin.users.index', request()->except('search'));
+                return redirect($url);
+            } else {
+                $userDetails = UserDetail::select(DB::raw('user_id as id'), 'telephone', 'referral_code', 'occupancy');
+                $users = $users->joinSub($userDetails, 'details', function ($join) {
+                    $join->on('users.id', '=', 'details.id');
+                });
+                
+                $search = $request->search;
+
+                $users = $users->where(function ($query) use ($search) {
+                    $query->where([['name', 'like', "%".$search."%"]])
+                    ->orWhere([['email', 'like', "%".$search."%"]])
+                    ->orWhere([['telephone', 'like', "%".$search."%"]])
+                    ->orWhere([['referral_code', 'like', "%".$search."%"]])
+                    ->orWhere([['occupancy', 'like', "%".$search."%"]]);
+                });
+            }
+        }
+
         $show_options = [10, 25, 50, 100, "All"];
 
         if ($request->has('show')) {
@@ -35,7 +83,7 @@ class UserController extends Controller
                         route('admin.users.index', request()->except(['search', 'page'])));
                 }
 
-                $users = $users->all();
+                $users = $users->get();
                 $users_data_flag = 0;
             } else {
                 $users = $users->paginate($request->show);
@@ -79,7 +127,7 @@ class UserController extends Controller
             'to' => $users_to,
             'total' => $users_count
         ];
-
+        
         return view('admin/users', compact('users', 'users_data'));
     }
 }

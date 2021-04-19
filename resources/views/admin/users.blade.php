@@ -35,7 +35,7 @@
                 <div class="container-fluid p-0 mt-3">
                     <!-- Page Heading -->
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
-                    <h1 class="h5 mb-2 text-gray-800 d-inline">Showing 1 to 10 from 100 results</h1>
+                    <h1 class="h5 mb-2 text-gray-800 d-inline">{{ "(Showing " . $users_data['from'] . " to " . $users_data['to'] . " of " . $users_data['total'] . " results)" }}</h1>
 
                     <div class="row mt-2 mb-3">
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
@@ -62,7 +62,7 @@
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
-                                    <form action="" method="GET">
+                                    <form action="{{ route('admin.users.index') }}" method="GET">
                                         <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
                                         @if (Request::get('show'))
                                             <input name="show" value="{{ Request::get('show') }}" hidden>
@@ -76,70 +76,81 @@
 
                     <!-- Main Table -->
                     <div class="card shadow mb-4">
-											<div class="card-body">
-												<div class="table-responsive">
-													<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-														<thead>
-															<tr>
-																<th>No.</th>
-																<th>Full Name</th>
-																<th>Email</th>
-																<th>Telephone</th>
-																<th>Referral Code</th>
-																<th>Occupancy</th>
-																<th>Status</th>
-																<th  class="text-nowrap">Signed Up At</th>
-																<th>Action</th>
-															</tr>
-														</thead>
-														<tbody>
-															@foreach ($users as $user)
-																<tr>
-																	<td>{{ $users_data['from'] + $loop->index }}</td>
-																	<td>{{ $user->name }}</td>
-																	<td>{{ $user->email }}</td>
-																	@if ($user->detail()->exists())
-																		<td>+62811138893</td>
-																		<td>SABD32</td>
-																		<td>Student</td>
-																	@else
-																		<td>-</td>
-																		<td>-</td>
-																		<td>-</td>
-																	@endif
-																	<td style="color:green">Active</td>
-																	<td class="text-nowrap">16/04/2021</td>
-																	<td>
-																			<div class="d-sm-flex align-items-center justify-content-center mb-4">
-																				<form action="" method="post">
-																						@csrf
-																						@method('delete')
-																						<div style="padding: 0px 2px">
-																								<button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
-																						</div>
-																				</form> 
-																				<form action="" method="post">
-																						@csrf
-																						@method('delete')
-																						<div style="padding: 0px 2px">
-																								<button class="d-sm-inline-block btn btn-info shadow-sm" type="submit" onclick="return confirm('Are you sure you want to suspend this user?')">Suspend</button>
-																						</div>
-																				</form> 
-																				<!--
-																				<div style="padding: 0px 2px;">
-																						<a class="d-sm-inline-block btn btn-info shadow-sm" href="">Update</a>
-																				</div>
-																				-->
-																			</div>
-																		</td>
-																</tr>
-															@endforeach
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-										<!-- /.container-fluid -->
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>No.</th>
+											<th>Full Name</th>
+											<th>Email</th>
+											<th>Telephone</th>
+											<th>Referral Code</th>
+											<th>Occupancy</th>
+											<th>Status</th>
+											<th  class="text-nowrap">Signed Up At</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach ($users as $user)
+											<tr>
+												<td>{{ $users_data['from'] + $loop->index }}</td>
+												<td>{{ $user->name }}</td>
+												<td>{{ $user->email }}</td>
+												@if ($user->userDetail()->exists())
+													<td>{{ $user->userDetail->telephone }}</td>
+													<td>{{ $user->userDetail->referral_code }}</td>
+													<td>{{ $user->userDetail->occupancy }}</td>
+												@else
+													<td>-</td>
+													<td>-</td>
+													<td>-</td>
+												@endif
+												@if ($user->status == 'active')
+													<td style="color:green">Active</td>
+												@else
+													<td style="color:red">Suspended</td>
+												@endif
+												<td class="text-nowrap">{{ $user->created_at->diffForHumans() }}</td>
+												<td>
+													<div class="d-sm-flex align-items-center justify-content-center mb-4">
+														<form action="" method="post">
+																@csrf
+																@method('delete')
+																<div style="padding: 0px 2px">
+																		<button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+																</div>
+														</form> 
+														<form action="" method="post">
+																@csrf
+																@method('delete')
+																<div style="padding: 0px 2px">
+																		<button class="d-sm-inline-block btn btn-info shadow-sm" type="submit" onclick="return confirm('Are you sure you want to suspend this user?')">Suspend</button>
+																</div>
+														</form> 
+														<!--
+														<div style="padding: 0px 2px;">
+																<a class="d-sm-inline-block btn btn-info shadow-sm" href="">Update</a>
+														</div>
+														-->
+													</div>
+												</td>
+											</tr>
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+						</div>
+						@unless (Request::get("show") == "All")
+							<div class="row mb-4">
+								<div class="mx-auto">
+									{{ $users->appends(request()->input())->links("pagination::bootstrap-4") }}
+								</div>
+							</div>
+						@endunless
+					</div>
+					<!-- /.container-fluid -->
                 </div>
             </div>
         </div>
