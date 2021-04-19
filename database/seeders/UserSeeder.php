@@ -46,14 +46,29 @@ class UserSeeder extends Seeder
         $genders = ['Male', 'Female'];
         $interests = ['Photography', 'Technologies', 'Automotives', 'Martial Arts', 'Football'];
 
-        for ($i = 0; $i < 20; $i++) {
+        $number_of_users = 80;
+
+        for ($i = 0; $i < $number_of_users; $i++) {
+            
+            if ($i < $number_of_users / 2) {
+                $status = "active";
+            } else {
+                $status = "suspended";
+            }
+
+            $timestamp = $faker
+                ->dateTimeBetween($startDate = '-1 months', $endDate = 'now');
+
             $user = User::create([
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'is_admin' => false,
+                'status' => $status,
                 'remember_token' => Str::random(10),
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp
             ]);
 
             $user->userDetail()->create([
@@ -65,6 +80,8 @@ class UserSeeder extends Seeder
                 'company' => $faker->company,
                 'occupancy' => $faker->jobTitle,
                 'interest' => $interests[rand(0, count($interests) - 1)],
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp
             ]);
 
             $user->save();
