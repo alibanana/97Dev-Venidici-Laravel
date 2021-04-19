@@ -23,6 +23,13 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('client/auth/signup');
 });
+
+/* START OF ONLINE COURSE ROUTING */
+
+Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
+    return view('client/online-course/detail');
+});
+/* END OF ONLINE COURSE ROUTING */
 /* END OF CLIENT ROUTING */
 
 

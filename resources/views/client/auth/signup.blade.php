@@ -12,7 +12,7 @@
             </div>
             <form action="">
                 <div class="row m-0">
-                    <div class="col-md-6" style="padding:1vw 4vw;">
+                    <div class="col-6" style="padding:1vw 4vw;">
                         <div style="text-align:center;">
                             <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                             <div  class="auth-input-form" style="display: flex;align-items:center;margin-top:1vw">
@@ -63,7 +63,7 @@
                             <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw">Sign Up</button>
                         </div>
                     </div>   
-                    <div class="col-md-6" style="padding-right:3vw;padding-top:5vw;display: flex;flex-direction: column;justify-content: center;">
+                    <div class="col-6" style="padding-right:3vw;padding-top:5vw;display: flex;flex-direction: column;justify-content: center;">
                         <p class="big-heading" style="font-family:Rubik Medium;color:#55525B;">Mari kita sambut Indonesia <span style="font-family:Hypebeast;color:#F4C257;font-size:3.5vw !important;line-height:1vw">EMAS!</span> </p>
                         <img src="/assets/images/client/Sign_Up_Illustration.png" class="img-fluid" style="width:100%;height:auto" alt="">
                     </div> 

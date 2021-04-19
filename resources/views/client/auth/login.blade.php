@@ -12,11 +12,11 @@
             </div>
             <form action="">
                 <div class="row m-0">
-                    <div class="col-md-6" style="padding-left:3.5vw;padding-top:5vw">
+                    <div class="col-6" style="padding-left:3.5vw;padding-top:5vw">
                         <p class="big-heading" style="font-family:Rubik Medium;color:#55525B;">Mari kita sambut Indonesia <span style="font-family:Hypebeast;color:#F4C257;font-size:3.5vw !important;line-height:1vw">EMAS!</span> </p>
                         <img src="/assets/images/client/Login_Image.png" class="img-fluid" style="width:100%;height:auto" alt="">
                     </div>   
-                    <div class="col-md-6" style="padding:0vw 4vw;display: flex;flex-direction: column;justify-content: center;">
+                    <div class="col-6" style="padding:0vw 4vw;display: flex;flex-direction: column;justify-content: center;">
                         <div style="text-align:center">
                             <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                             <div  class="auth-input-form" style="display: flex;align-items:center;margin-top:1vw">
