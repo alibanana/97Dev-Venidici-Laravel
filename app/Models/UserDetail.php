@@ -12,6 +12,7 @@ class UserDetail extends Model
     protected $table = 'user_details';
 
     protected $fillable = [
+        'user_id',
         'telephone',
         'referral_code',
         'birthdate',
@@ -26,7 +27,7 @@ class UserDetail extends Model
         'birthdate' => 'date',
     ];
 
-    public function users() {
-        return $this->hasOne(User::class);
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

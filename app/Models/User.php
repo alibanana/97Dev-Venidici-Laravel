@@ -17,12 +17,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'user_role_id',
         'name',
         'email',
         'password',
-        'is_admin',
-        'user_role_id',
-        'user_detail_id',
+        'is_admin'
     ];
 
     /**
@@ -44,11 +43,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role() {
+    public function userDetail() {
+        return $this->hasOne(UserDetail::class);
+    }
+
+    public function userRole() {
         return $this->belongsTo(UserRole::class);
     }
 
-    public function detail() {
-        return $this->belongsTo(UserDetail::class);
-    }
 }

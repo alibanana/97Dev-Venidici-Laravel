@@ -56,15 +56,18 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
 
-            $user->detail()->create([
+            $user->userDetail()->create([
                 'telephone' => $faker->e164PhoneNumber,
                 'referral_code' => Str::random(6),
                 'birthdate' => $faker->date($format = 'Y-m-d', $max = '-16 years'),
                 'gender' => $genders[rand(0, count($genders) - 1)],
                 'address' => $faker->address,
                 'company' => $faker->company,
+                'occupancy' => $faker->jobTitle,
                 'interest' => $interests[rand(0, count($interests) - 1)],
             ]);
+
+            $user->save();
         }
     }
 }

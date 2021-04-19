@@ -15,6 +15,8 @@ class CreateUserDetailsTable extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('telephone', 16);
             $table->string('referral_code', 6);
             $table->date('birthdate')->nullable();
