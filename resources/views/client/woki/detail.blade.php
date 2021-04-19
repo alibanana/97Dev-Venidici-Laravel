@@ -4,12 +4,12 @@
 @section('content')
 
 
-<div class="row m-0 page-container online-course-detail-bg" style="padding-top:13vw;padding-bottom:10vw">
+<div class="row m-0 page-container woki-detail-bg" style="padding-top:13vw;padding-bottom:10vw">
     <!-- START OF LEFT SECTION -->
     <div class="col-8" >
         <div style="padding-right:10vw">
-            <p class="medium-heading" style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</p>
-            <p class="medium-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw">Sertifikat menjadi Seniman</p>
+            <p class="medium-heading" style="font-family:Hypebeast;color:#CE3369">WOKI</p>
+            <p class="medium-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw">Sertifikat menjadi komedian lucu</p>
             
             <p class="sub-description" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line">Need to be funny fast? This is the course for people that
                 find it hard to be funny.</p>
@@ -32,36 +32,36 @@
                 </div>
             </div>
             <!-- WHAT YOU WILL LEARN SECTION -->
-            <div style="background: rgba(103, 187, 163, 0.1);border-radius: 10px;padding:1.5vw;margin-top:2vw">
+            <div style="background: rgba(206, 51, 105, 0.1);border-radius: 10px;padding:1.5vw;margin-top:2vw">
                 <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Apa saja yang akan dipelajari</p>
                 <div class="row m-0" style="padding-top:2vw">
                     <div class="col-6">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
+                            <i style="color:#CE3369" class="fas fa-check-circle bigger-text"></i>
                             <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
+                            <i style="color:#CE3369" class="fas fa-check-circle bigger-text"></i>
                             <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar</p>
                         </div>
                     </div>
                     <div class="col-6" style="margin-top:1vw">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
+                            <i style="color:#CE3369" class="fas fa-check-circle bigger-text"></i>
                             <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar</p>
                         </div>
                     </div>
                     <div class="col-6" style="margin-top:1vw">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
+                            <i style="color:#CE3369" class="fas fa-check-circle bigger-text"></i>
                             <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
                         </div>
                     </div>
                     <div class="col-6" style="margin-top:1vw">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
+                            <i style="color:#CE3369" class="fas fa-check-circle bigger-text"></i>
                             <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
                         </div>
                     </div>
@@ -74,18 +74,103 @@
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:2vw">Persyaratan</p>
         
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-top:1vw">   
-            <a class="green-tag normal-text" style="margin-top:1vw">Muka lucu dan unik</a>
-            <a class="green-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
-            <a class="green-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
-            <a class="green-tag normal-text" style="margin-top:1vw">Another Muka 1</a>
-            <a class="green-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
+            <a class="red-tag normal-text" style="margin-top:1vw">Muka lucu dan unik</a>
+            <a class="red-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
+            <a class="red-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
+            <a class="red-tag normal-text" style="margin-top:1vw">Another Muka 1</a>
+            <a class="red-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
         </div>
         <!-- END OF PERSYARATAN SECTION -->
 
+        <!-- START OF PERLENGKAPAN SENI SECTION -->
+        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:3vw">Perlengkapan Seni</p>
+        <div id="perlengkapan-carousel" style="margin-top:2vw" class="carousel slide" data-interval="5000" data-ride="carousel">
+            <div class="carousel-inner" style="padding: 0vw 2vw;">
+                
+                <div class="carousel-item active">
+                    <div class="row m-0">
+                        <div class="col-4">
+                            <!-- START OF ONE PERLENGKAPAN COURSE CARD -->
+                            <div class="perlengkapan-card-red">
+                                <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                                <div style="text-align:center">
+                                    <p class="normal-text" style="margin-top:1vw">Perlengkapan untuk menggambar</p>
+                                </div>
+                            </div>
+                            <!-- END OF ONE PERLENGKAPAN COURSE CARD -->
+                        </div>
+                        <div class="col-4">
+                            <!-- START OF ONE PERLENGKAPAN COURSE CARD -->
+                            <div class="perlengkapan-card-red">
+                                <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                                <div style="text-align:center">
+                                    <p class="normal-text" style="margin-top:1vw">Peralatan Melukis</p>
+                                </div>
+                            </div>
+                            <!-- END OF ONE PERLENGKAPAN COURSE CARD -->
+                        </div>
+                        <div class="col-4">
+                            <!-- START OF ONE PERLENGKAPAN COURSE CARD -->
+                            <div class="perlengkapan-card-red">
+                                <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                                <div style="text-align:center">
+                                    <p class="normal-text" style="margin-top:1vw">Perlengkapan untuk menggambar</p>
+                                </div>
+                            </div>
+                            <!-- END OF ONE PERLENGKAPAN COURSE CARD -->
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row m-0">
+                        <div class="col-4">
+                            <!-- START OF ONE PERLENGKAPAN COURSE CARD -->
+                            <div class="perlengkapan-card-red">
+                                <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                                <div style="text-align:center">
+                                    <p class="normal-text" style="margin-top:1vw">Peralatan Melukis </p>
+                                </div>
+                            </div>
+                            <!-- END OF ONE PERLENGKAPAN COURSE CARD -->
+                        </div>
+                        <div class="col-4">
+                            <!-- START OF ONE PERLENGKAPAN COURSE CARD -->
+                            <div class="perlengkapan-card-red">
+                                <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                                <div style="text-align:center">
+                                    <p class="normal-text" style="margin-top:1vw">Perlengkapan untuk menggambar</p>
+                                </div>
+                            </div>
+                            <!-- END OF ONE PERLENGKAPAN COURSE CARD -->
+                        </div>
+                        <div class="col-4">
+                            <!-- START OF ONE PERLENGKAPAN COURSE CARD -->
+                            <div class="perlengkapan-card-red">
+                                <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                                <div style="text-align:center">
+                                    <p class="normal-text" style="margin-top:1vw">Perlengkapan untuk menggambar</p>
+                                </div>
+                            </div>
+                            <!-- END OF ONE PERLENGKAPAN COURSE CARD -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev"   data-bs-target="#perlengkapan-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                <img src="/assets/images/icons/arrow-left-2.svg" id="carousel-control-left-menu-image" style="width:1vw;z-index:99;margin-left:0px" alt="NEXT">
+                <span class="visually-hidden">Prev</span>
+            </a>
+            <a class="carousel-control-next"   data-bs-target="#perlengkapan-carousel" style="width:2vw" role="button"data-bs-slide="next">
+                <img src="/assets/images/icons/arrow-right-2.svg" id="carousel-control-right-menu-image" style="width:1vw;z-index:99;margin-right:0px" alt="NEXT">
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div> 
+        <!-- END OF PERLENGKAPAN SENI SECTION -->
+
         <!-- START OF PROFIL PEMBICARA SECTION -->
-        <div style="display:flex;align-items:center;margin-top:3vw">
-            <p class="sub-description profil-text-green profil-text-green-active profil-links"  onclick="changeContent(event, 'tentang-course')" style="font-family:Rubik Medium;margin-bottom:0px;cursor:pointer">Tetang <span style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</span> ini</p>
-            <p class="sub-description profil-text-green profil-links" onclick="changeContent(event, 'profil-pembicara')" style="font-family:Rubik Medium;margin-bottom:0px;cursor:pointer;margin-left:3vw">Profil Pembicara </p>
+        <div style="display:flex;align-items:center;margin-top:4vw">
+            <p class="sub-description profil-text-red profil-text-red-active profil-links"  onclick="changeContent(event, 'tentang-course')" style="font-family:Rubik Medium;margin-bottom:0px;cursor:pointer">Tetang <span style="font-family:Hypebeast;color:#CE3369">WOKI</span> ini</p>
+            <p class="sub-description profil-text-red profil-links" onclick="changeContent(event, 'profil-pembicara')" style="font-family:Rubik Medium;margin-bottom:0px;cursor:pointer;margin-left:3vw">Profil Pembicara </p>
 
         </div>
         <div  class="bigger-text profil-content" id="tentang-course"  style="margin-top:1vw">
@@ -116,7 +201,7 @@
 
     <!-- START OF RIGHT SECTION -->
     <div class="col-4" style="padding:0vw 2vw">
-        <div class="course-detail-card-green">
+        <div class="course-detail-card-red">
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp 300,000</p>
             <button class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Add to cart</button>
             <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Buy Now</button>
@@ -147,25 +232,26 @@
                 <div class="row m-0 p-0">
                     <div class="col-4 p-0" >
                         <div style="display: flex;justify-content:flex-start">
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green">
+
+                            <!-- START OF ONE RED COURSE CARD -->
+                            <div class="course-card-red">
                                 <div class="container">
                                     <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
+                                    <div class="top-left card-tag small-text" >Woki</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                                     <div style="display:flex;justify-content:space-between;align-items:center">
                                         <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse-one" data-toggle="collapse" href="#course-collapse-one" class="fas fa-caret-down"></i>
+                                        <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-one" data-toggle="collapse" href="#woki-collapse-one" class="fas fa-caret-down"></i>
                                     </div>
-                                    <div class="collapse" id="course-collapse-one" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                                    <div class="collapse" id="woki-collapse-one" style="margin-top:1vw">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                         <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                         <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                                     </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">   
+                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                         <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
                                             <i style="color:#F4C257" class="fas fa-star small-text"></i>
@@ -177,35 +263,37 @@
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                         <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
+                                        <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                                     </div>
-                    
+
                                 </div>
                             </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
+                            <!-- END OF ONE RED COURSE CARD -->
                         </div>
                     </div>
                     <div class="col-4 p-0" >
                         <div style="display: flex;justify-content:center">
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green">
+
+                            <!-- START OF ONE RED COURSE CARD -->
+                            <div class="course-card-red">
                                 <div class="container">
                                     <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
+                                    <div class="top-left card-tag small-text" >Woki</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                                     <div style="display:flex;justify-content:space-between;align-items:center">
                                         <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse-two" data-toggle="collapse" href="#course-collapse-two" class="fas fa-caret-down"></i>
+                                        <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-two" data-toggle="collapse" href="#woki-collapse-two" class="fas fa-caret-down"></i>
                                     </div>
-                                    <div class="collapse" id="course-collapse-two" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                                    <div class="collapse" id="woki-collapse-two" style="margin-top:1vw">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                         <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                         <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                                     </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">   
+                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                         <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
                                             <i style="color:#F4C257" class="fas fa-star small-text"></i>
@@ -217,35 +305,37 @@
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                         <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
+                                        <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                                     </div>
-                    
+
                                 </div>
                             </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
+                            <!-- END OF ONE RED COURSE CARD -->
                         </div>
                     </div>
                     <div class="col-4 p-0" >
                         <div style="display: flex;justify-content:flex-end">
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green">
+
+                            <!-- START OF ONE RED COURSE CARD -->
+                            <div class="course-card-red">
                                 <div class="container">
                                     <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
+                                    <div class="top-left card-tag small-text" >Woki</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                                     <div style="display:flex;justify-content:space-between;align-items:center">
                                         <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse-three" data-toggle="collapse" href="#course-collapse-three" class="fas fa-caret-down"></i>
+                                        <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-three" data-toggle="collapse" href="#woki-collapse-three" class="fas fa-caret-down"></i>
                                     </div>
-                                    <div class="collapse" id="course-collapse-three" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                                    <div class="collapse" id="woki-collapse-three" style="margin-top:1vw">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                         <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                         <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                                     </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">   
+                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                         <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
                                             <i style="color:#F4C257" class="fas fa-star small-text"></i>
@@ -257,14 +347,16 @@
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                         <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
+                                        <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                                     </div>
-                    
+
                                 </div>
                             </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
+                            <!-- END OF ONE RED COURSE CARD -->
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <!-- END OF ONLINE COURSE -->
@@ -283,10 +375,10 @@
             }
             tablinks = document.getElementsByClassName("profil-links");
             for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("profil-text-green-active", "profil-text-green");
+                tablinks[i].className = tablinks[i].className.replace("profil-text-red-active", "profil-text-red");
             }
             document.getElementById(categoryName).style.display = "block";
-            evt.currentTarget.className += " profil-text-green-active";
+            evt.currentTarget.className += " profil-text-red-active";
         }
          
 </script>

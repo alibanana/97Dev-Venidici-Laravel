@@ -47,7 +47,7 @@
 
 <!-- START OF TRUSTED COMPANY SECTION -->
 <div class="row m-0 page-container" style="z-index: 99;padding-bottom:5vw">
-    <div class="col-12 p-0" style="margin-top:-2vw">
+    <div class="col-12 p-0" style="margin-top:-4vw">
         <div style="background-color: #FCFCFC;border-radius:10px;padding:2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">10</p>
@@ -225,7 +225,7 @@
                             </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
                                 <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                             </div>
 
@@ -340,9 +340,9 @@
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center">
                                 <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-one" data-toggle="collapse" href="#woki-collapse-one" class="fas fa-caret-down"></i>
                             </div>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                            <div class="collapse" id="woki-collapse-one" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
@@ -361,7 +361,7 @@
                             </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
                                 <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                             </div>
 
@@ -382,9 +382,9 @@
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center">
                                 <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-two" data-toggle="collapse" href="#woki-collapse-two" class="fas fa-caret-down"></i>
                             </div>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                            <div class="collapse" id="woki-collapse-two" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
@@ -403,7 +403,7 @@
                             </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
                                 <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                             </div>
 
@@ -424,9 +424,9 @@
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center">
                                 <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                                <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse-three" data-toggle="collapse" href="#woki-collapse-three" class="fas fa-caret-down"></i>
                             </div>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                            <div class="collapse" id="woki-collapse-three" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
@@ -445,7 +445,7 @@
                             </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
                                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a>
                                 <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                             </div>
 

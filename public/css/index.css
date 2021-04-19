@@ -75,6 +75,12 @@
     background-repeat: no-repeat;
     background-size: 90%;
 }
+.woki-detail-bg{
+    background-image: url("/assets/images/client/Woki_Detail_BG.png");
+    background-position:2.5vw 6vw;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
 
 /* end of background images*/
 
@@ -376,6 +382,15 @@
     border-bottom:2px solid #67BBA3
 }
 /* END OF GREEN COURSE CARD */
+
+
+/* START OF PERLENGKAPAN CARD */
+.perlengkapan-card-red{
+    border: 2px solid #CE3369;
+    border-radius: 10px;
+    height:20vw
+}
+/* END OF PERLENGKAPAN CARD */
 .course-card-description{
     display: -webkit-box;
     overflow : hidden !important;
@@ -467,27 +482,64 @@
     color:#3B3C43;
 }
 
-.profil-text-active{
+.red-tag{
+    background: #FFFFFF;
+    border: 2px solid #CE3369;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color:#3B3C43;
+    text-decoration:none;
+    padding:0.5vw
+}
+.red-tag:hover{
+    color:#3B3C43;
+}
+
+.profil-text-green-active{
     text-decoration-line: underline;
     text-decoration-color: #67BBA3 !important;
     text-underline-offset: 1vw;
     text-decoration-thickness: 0.2vw;
     color:#3B3C43 !important
 }
-.profil-text{
+.profil-text-green{
     color: rgba(59, 60, 67, 0.5);
     text-decoration-line: underline;
     text-decoration-color: #FFFFFF;
     text-underline-offset: 1vw;
     text-decoration-thickness: 0.2vw;
 }
-.profil-text:hover{
+.profil-text-green:hover{
     color:#67BBA3
 }
 
-.course-detail-card{
+.profil-text-red-active{
+    text-decoration-line: underline;
+    text-decoration-color: #CE3369 !important;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 0.2vw;
+    color:#3B3C43 !important
+}
+.profil-text-red{
+    color: rgba(59, 60, 67, 0.5);
+    text-decoration-line: underline;
+    text-decoration-color: #FFFFFF;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 0.2vw;
+}
+.profil-text-red:hover{
+    color:#CE3369
+}
+
+.course-detail-card-green{
     background: #FFFFFF;
     box-shadow: -4px -4px 8px rgba(103, 187, 163, 0.1), 4px 4px 8px #F5F5F5;
+    border-radius: 10px;
+    padding:2vw 2vw
+}
+.course-detail-card-red{
+    background: #FFFFFF;
+    box-shadow: -4px -4px 8px rgba(206, 51, 105, 0.1), 4px 4px 8px #F5F5F5;
     border-radius: 10px;
     padding:2vw 2vw
 }
