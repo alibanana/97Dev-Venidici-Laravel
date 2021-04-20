@@ -93,38 +93,40 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    <img src="/assets/images/admin/testimony-dummy.png" style="width:10vw" class="img-fluid" alt=""> 
-                                                </td>
-                                                <td>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                                </td>
-                                                <td>
-                                                   4.9
-                                                </td>
-                                                <td>
-                                                    Fernandha Dzaky
-                                                </td>
-                                                <td>Developer</td>
-                                                <td>
-                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                            @foreach ($fake_testimonies as $testimony)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>
+                                                        <img src="{{ asset($testimony->thumbnail) }}" style="width:10vw" class="img-fluid" alt="Thumbnail not available."> 
+                                                    </td>
+                                                    <td>{{ $testimony->content }}</td>
+                                                    <td>{{ $testimony->rating }}</td>
+                                                    @if (empty($testimony->name))
+                                                        <td style="color: red">Name not available!</td>
+                                                    @else
+                                                        <td>{{ $testimony->name }}</td>
+                                                    @endif
+                                                    @if (empty($testimony->occupancy))
+                                                        <td style="color: red">Occupancy not available!</td>
+                                                    @else
+                                                        <td>{{ $testimony->occupancy }}</td>
+                                                    @endif
+                                                    <td>
+                                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <form action="" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
                                                                     <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this testimony?')">Delete</button>
                                                                 </div>
-                                                            </form> 
-                                                      
+                                                            </form>
                                                             <div style="padding: 0px 2px;">
                                                                 <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/testimonies/1/update">Update</a>
                                                             </div>
-                                                   
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

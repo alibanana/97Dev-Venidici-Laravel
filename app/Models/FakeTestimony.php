@@ -20,6 +20,6 @@ class FakeTestimony extends Model
     ];
 
     protected $casts = [
-        'rating' => 'decimal:2'
+        'rating' => 'decimal:1'
     ];
 }
