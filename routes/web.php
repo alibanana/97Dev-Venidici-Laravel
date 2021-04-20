@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FakeTestimonyController;
@@ -27,11 +28,18 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 /* END OF DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
 
+/*
+|--------------------------------------------------------------------------
+| Client Routes
+|
+| Controllers can be found inside -> App\Http\Controllers\Client\
+| Controllers Used:
+|   - PagesController
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [PagesController::class, 'index'])->name('index');
 
 /* START OF CLIENT ROUTING */
-Route::get('/', function () {
-    return view('client/index');
-});
 Route::get('/login', function () {
     return view('client/auth/login');
 });

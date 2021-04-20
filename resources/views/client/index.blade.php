@@ -605,22 +605,23 @@
                 <div>
                     <!-- BIG TESTIMONY CARD -->
                     <div class="testimony-card" style="width: 20vw;">
-                        <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width: 6vw;height:auto" alt="">
+                        <img src="{{ asset($fake_testimonies_big[0]->thumbnail) }}" class="img-fluid" style="width: 6vw;height:auto" alt="thumbnail not avaliable..">
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000; display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 5 !important;
-                        -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
+                        -webkit-box-orient: vertical !important;">{{ $fake_testimonies_big[0]->content }}</p>
                         <div style="display: flex;justify-content:center">
-                            <i style="font-size:1vw;color:#F4C257" class="fas fa-star"></i>
-                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
-                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
-                            <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
-                            <i style="font-size:1vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
-
+                            @for ($i = 1; $i <= $fake_testimonies_big[0]->rating; $i++)
+                                @if ($i == 1)
+                                    <i style="font-size:1vw;color:#F4C257" class="fas fa-star"></i>
+                                @else
+                                    <i style="font-size:1vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                                @endif
+                            @endfor
                         </div>
-                        <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-top:1vw;margin-bottom:0.4vw">Gabriel Amileano</p>
-                        <p class="small-text" style="font-family: Rubik Medium;color:#808080;margin-bottom:0px">Copy Writer</p>
+                        <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-top:1vw;margin-bottom:0.4vw">{{ $fake_testimonies_big[0]->name }}</p>
+                        <p class="small-text" style="font-family: Rubik Medium;color:#808080;margin-bottom:0px">{{ $fake_testimonies_big[0]->occupancy }}</p>
                     </div>
                     <!-- END OF BIG TESTIMONY CARD -->
     
