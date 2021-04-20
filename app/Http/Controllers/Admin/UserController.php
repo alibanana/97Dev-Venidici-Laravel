@@ -35,17 +35,12 @@ class UserController extends Controller
         }
 
         if ($request->has('filter')) {
-            if ($request->filter == "") {
+            $users_status_list = ['active', 'suspended'];
+            if (!in_array($request->filter, $users_status_list)) {
                 $url = route('admin.users.index', request()->except('filter'));
-                return redirect($url);
-            } else {
-                $users_status_list = ['active', 'suspended'];
-                if (!in_array($request->filter, $users_status_list)) {
-                    $url = route('admin.users.index', request()->except('filter'));
-                    return redirect($url);    
-                }
-                $users = $users->where('status', $request->filter);
+                return redirect($url);    
             }
+            $users = $users->where('status', $request->filter);
         }
 
         if ($request->has('search')) {
