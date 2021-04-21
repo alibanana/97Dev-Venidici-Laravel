@@ -85,9 +85,6 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
 Route::get('/admin/login', function () {
     return view('admin/auth/login');
 });
-Route::get('/admin/cms/homepage', function () {
-    return view('admin/cms/homepage');
-});
 Route::get('/admin/reviews', function () {
     return view('admin/reviews');
 });
