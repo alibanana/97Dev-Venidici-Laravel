@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class adminTopbar extends Component
+class AdminTopbar extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class adminTopbar extends Component
      */
     public function render()
     {
-        return view('components.adminTopbar');
+        return view('components.AdminTopbar');
     }
 }
