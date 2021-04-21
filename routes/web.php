@@ -94,29 +94,6 @@ Route::get('/admin/forgot-password', function () {
 Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
 });
-
-/* TESTIMONY ROUTING */
-Route::get('/admin/testimonies/create', function () {
-    return view('admin/testimony/create');
-});
-Route::get('/admin/testimonies/1/update', function () {
-    return view('admin/testimony/update');
-});
-/* END OF TESTIMONY ROUTING */
-
-
-/* TRUSTED COMPANY ROUTING */
-Route::get('/admin/trusted-companies', function () {
-    return view('admin/trusted-company/index');
-});
-Route::get('/admin/trusted-companies/create', function () {
-    return view('admin/trusted-company/create');
-});
-Route::get('/admin/trusted-companies/1/update', function () {
-    return view('admin/trusted-company/update');
-});
-/* END OF TRUSTED COMPANY ROUTING */
-
 /* END OF ADMIN ROUTING */
 
 require __DIR__.'/auth.php';
