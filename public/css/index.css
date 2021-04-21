@@ -33,6 +33,12 @@
 }
 
 /* start of background images */
+.banner-background{
+    background-image: url("/assets/images/client/Home_Page_Banner_2.png");
+    background-position:left top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
 .home-background{
     background-image: url("/assets/images/client/Home_Page_Banner.png");
     background-position:right top;
@@ -40,10 +46,10 @@
     background-size: 100%;
 }
 .our-programs-background{
-    background-image: url("/assets/images/client/Our-Programs-Background.png");
-    background-position:5vw 6vw;
+    background-image: url("/assets/images/client/Our_Program_BG.png");
+    background-position:6.7vw 5.1vw;
     background-repeat: no-repeat;
-    background-size: 90%;
+    background-size: 7%;
 }
 .feature-section-background{
     background-image: url("/assets/images/client/Feature_BG.png");
@@ -81,7 +87,12 @@
     background-repeat: no-repeat;
     background-size: 90%;
 }
-
+.feature-background{
+    background-image: url("/assets/images/client/Feature_BG_2.png");
+    background-position:left top;
+    background-repeat: no-repeat;
+    background-size: 91%;
+}
 /* end of background images*/
 
 /* start of page padding */
@@ -89,49 +100,54 @@
     padding-left:8.5vw
 }
 .page-container-right{
-    padding-right:8vw
+    padding-right:8.5vw
 }
 .page-container{
-    padding-left:8vw;
-    padding-right:8vw
+    padding-left:8.5vw;
+    padding-right:8.5vw
 }
 /* end of page padding */
 
 /* font size */
 .big-heading{
     font-size: 2.8vw;
+    line-height: 3.2vw;
+
 }
 .medium-heading{
-    font-size: 2.2vw;
+    font-size: 2.4vw;
     line-height: 3vw;
 }
 .small-heading{
-    font-size: 2vw;
+    font-size: 1.8vw;
 }
 .sub-description{
     font-size: 1.4vw;
+    line-height: 2vw;
+
 }
 .bigger-text{
-    font-size: 1.2vw;
+    font-size: 1.3vw;
 }
 .normal-text{
-    font-size: 1.1vw;
+    font-size: 1.05vw;
 }
 .small-text{
-    font-size: 1vw;
+    font-size: 0.9vw;
+    line-height: 1.2vw;
 }
 /* end of font size */
 
 .navbar-floating{
     position: fixed;
     width: 65vw;
-    margin: 2vw auto; /* Will not center vertically and won't work in IE6/7. */
+    margin: 3.2vw auto; /* Will not center vertically and won't work in IE6/7. */
     left: 0;
     right: 0;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
-    padding: 1vw;
+    padding: 0.8vw 1vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -150,7 +166,7 @@
     color:#2B6CAA !important;
     text-decoration-line: underline;
     text-decoration-color: #2B6CAA !important;
-    text-underline-offset: 0.7vw;
+    text-underline-offset: 0.4vw;
     text-decoration-thickness: 0.2vw;
 }
 .navbar-item:hover{
@@ -186,12 +202,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-.blue-input-form{
-    background: #2B6CAA1A;
+.grey-input-form{
+    background: #F0F4F9;
     border-radius: 10px;
     border: none;
     padding: 1vw;
-    font-family: Rubik Medium;
+    font-family: Rubik Regular;
     color: rgba(0, 0, 0, 0.5);
 }
 .auth-input-form{
@@ -213,12 +229,12 @@
     display: flex;
     background: #FFFFFF;
     box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
-    height: 13.5vw;
+    height: 12.5vw;
     border-radius: 10px;
-    margin-top:2vw
+    width:38.5vw
 }
 .our-programs-card img{
-   width: 13.5vw;
+   width: 15vw;
    object-fit: cover;
    border-radius: 10px 0px 0px 10px;
 }
@@ -227,7 +243,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    padding:1.5vw 2vw
+    padding:1.4vw 2vw;
 }
 
 .our-programs-card-description{
@@ -242,7 +258,7 @@
     background: rgba(111, 159, 205, 0.5);
     border-radius: 5px;
     color:#FFFFFF;
-    padding:0.5vw 1vw;
+    padding:0.3vw 1vw;
     transition: 0.3s ease-in-out;
 
 }
@@ -259,7 +275,7 @@
 
 .btn-blue-on-hover{
     border-radius: 5px;
-    padding:0.5vw 1vw;
+    padding:0.5vw 1.5vw;
     transition: 0.3s ease-in-out;
     color: #3B3C43;
 }
@@ -272,7 +288,7 @@
 .course-card-red{
     border: 2px solid #CE3369;
     border-radius: 10px;
-    width:24vw
+    width:20.3vw
 }
 .course-card-red i{
     color:#CE3369;
@@ -310,7 +326,7 @@
 .course-card-blue{
     border: 2px solid #2B6CAA;
     border-radius: 10px;
-    width:24vw
+    width:20.3vw
 
 }
 .course-card-blue i{
@@ -349,7 +365,7 @@
 .course-card-green{
     border: 2px solid #67BBA3;
     border-radius: 10px;
-    width:24vw
+    width:20.3vw
 }
 .course-card-green i{
     color:#67BBA3;
@@ -542,4 +558,11 @@
     box-shadow: -4px -4px 8px rgba(206, 51, 105, 0.1), 4px 4px 8px #F5F5F5;
     border-radius: 10px;
     padding:2vw 2vw
+}
+.card-white{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+    border-radius: 10px;
+    padding: 1vw;
+
 }

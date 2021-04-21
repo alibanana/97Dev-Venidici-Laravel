@@ -93,11 +93,11 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>
-                                                    <input type="text" name="name" class="form-control form-control-user" value="Fernandha Dzaky">
+                                                    BCA
                                                 </td>
                                                 <td>
                                                     <p>Current image:</p>
-                                                    <img src="/assets/images/admin/testimony-dummy.png" style="width:10vw" class="img-fluid" alt=""> 
+                                                    <img src="/assets/images/client/bca-bank.png" style="width:10vw" class="img-fluid" alt=""> 
                                                     <p>Click button below to change image</p>
                                                     <input type="file" name="image" accept="image/*">
                                                 </td>   

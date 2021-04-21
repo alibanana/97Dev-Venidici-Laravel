@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class adminFooter extends Component
+class AdminFooter extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class adminFooter extends Component
      */
     public function render()
     {
-        return view('components.adminFooter');
+        return view('components.AdminFooter');
     }
 }

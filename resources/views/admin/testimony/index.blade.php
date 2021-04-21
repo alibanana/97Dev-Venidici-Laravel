@@ -102,12 +102,12 @@
                                                     <td>{{ $testimony->content }}</td>
                                                     <td>{{ $testimony->rating }}</td>
                                                     @if (empty($testimony->name))
-                                                        <td style="color: red">Name not available!</td>
+                                                        <td style="color: black">Name not available!</td>
                                                     @else
                                                         <td>{{ $testimony->name }}</td>
                                                     @endif
                                                     @if (empty($testimony->occupancy))
-                                                        <td style="color: red">Occupancy not available!</td>
+                                                        <td style="color: black">Occupancy not available!</td>
                                                     @else
                                                         <td>{{ $testimony->occupancy }}</td>
                                                     @endif

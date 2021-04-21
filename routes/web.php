@@ -84,6 +84,15 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
 Route::get('/admin/login', function () {
     return view('admin/auth/login');
 });
+Route::get('/admin/cms/homepage', function () {
+    return view('admin/cms/homepage');
+});
+Route::get('/admin/cms', function () {
+    return view('admin/cms/index');
+});
+Route::get('/admin/reviews', function () {
+    return view('admin/reviews');
+});
 Route::get('/admin/forgot-password', function () {
     return view('admin/auth/forgot-password');
 });
