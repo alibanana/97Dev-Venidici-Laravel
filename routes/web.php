@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\FakeTestimonyController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,13 +71,14 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 | Controllers can be found inside -> App\Http\Controllers\Admin\
 | Controllers Used:
 |   - DashboardController
+|   - HomepageController
 |   - UserController
 |   - FakeTestimonyController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/testimonies', [FakeTestimonyController::class, 'index'])->name('testimonies.index');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });
 
 /* START ADMIN ROUTING */
@@ -86,9 +87,6 @@ Route::get('/admin/login', function () {
 });
 Route::get('/admin/cms/homepage', function () {
     return view('admin/cms/homepage');
-});
-Route::get('/admin/cms', function () {
-    return view('admin/cms/index');
 });
 Route::get('/admin/reviews', function () {
     return view('admin/reviews');
