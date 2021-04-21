@@ -176,7 +176,7 @@
             <!-- End of Card -->
         </div>
 
-        <!-- Page Heading -->
+        <!-- Page Heading 
         <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-5">
             <h2 class="mb-0 mb-3 text-gray-800" style="color:white">Content Management System</h2>
             <form method="POST" action="">
@@ -194,7 +194,7 @@
                 <div class="form-group">
                     <label for="">Heading</label>
                     <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">Anytime, anywhere.
-Learn on your schedule from any device
+            Learn on your schedule from any device
                     </textarea>
                 </div>
             </div>
@@ -207,7 +207,6 @@ Learn on your schedule from any device
             </div>
             <div class="col-12">
                     <p>Current Video</p>
-                    <!--<video autoplay controls="false" style="width:20vw;height:auto;border:4px solid black;border-radius:5px" src='/assets/videos/admin/CEPAT.ogg' type='video/ogg'></video>-->
                     <video style="width:20vw;height:auto;border:4px solid black;border-radius:5px"  controls="false" >
                         <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
                         <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
@@ -218,6 +217,7 @@ Learn on your schedule from any device
                 </div>
             </div>
         </div>
+        -->
 
     </div>
     <!-- /.container-fluid -->

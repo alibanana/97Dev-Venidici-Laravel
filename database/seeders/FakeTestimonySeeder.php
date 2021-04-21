@@ -17,14 +17,14 @@ class FakeTestimonySeeder extends Seeder
     {
         $testimonies = [
             [
-                'thumbnail' => 'assets/images/admin/fake-testimony-dummy-1.png',
+                'thumbnail' => 'assets/images/seeder/fake-testimony-dummy-1.png',
                 'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
                 'rating' => 5,
                 'name' =>  'Gabrielle Amilaeno',
                 'occupancy' => 'Copy Writer'
             ],
             [
-                'thumbnail' => 'assets/images/admin/fake-testimony-dummy-2.png',
+                'thumbnail' => 'assets/images/seeder/fake-testimony-dummy-2.png',
                 'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
                 'rating' => 5,
                 'name' =>  'Fernandha Dzaky',

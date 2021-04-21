@@ -22,9 +22,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="mb-0 mb-3 text-gray-800">Trusted Company</h1>
-            <a href="/admin/trusted-companies/create" class="btn btn-primary btn-user p-3">Create New Trusted Company</a>
-
+            <h1 class="mb-0 mb-3 text-gray-800">Reviews</h1>
         </div>
         
         <!-- Content Row -->
@@ -40,7 +38,7 @@
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
 
                     <div class="row mt-2 mb-3">
-                        <!--
+        
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Show:
@@ -73,7 +71,7 @@
                                 </label>
                             </div>
                         </div>
-                        -->
+                        
                     </div>
 
                     <!-- Main Table -->
@@ -84,37 +82,31 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Name</th>
-                                                <th>Image</th>
+                                                <th>Category</th>
+                                                <th>Course</th>
+                                                <th>Testimony</th>
+                                                <th>Rating</th>
+                                                <th class="text-nowrap">Name</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>
-                                                    <input type="text" name="name" class="form-control form-control-user" value="Fernandha Dzaky">
-                                                </td>
-                                                <td>
-                                                    <p>Current image:</p>
-                                                    <img src="/assets/images/admin/testimony-dummy.png" style="width:10vw" class="img-fluid" alt=""> 
-                                                    <p>Click button below to change image</p>
-                                                    <input type="file" name="image" accept="image/*">
-                                                </td>   
+                                                <td>Online Course</td>
+                                                <td>How to be funny</td>
+                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quo eligendi illum culpa fugiat delectus? Atque, suscipit! Hic nostrum corporis quibusdam, adipisci recusandae provident magnam voluptatum, non aliquam delectus odit!</td>
+                                                <td>4.9</td>
+                                                <td>Fernandha Dzaky</td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this trusted company?')">Delete</button>
-                                                                </div>
-                                                            </form> 
-                                                      
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/trusted-companies/1/update">Update</a>
+                                                        <form action="" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <div style="padding: 0px 2px">
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this review?')">Delete</button>
                                                             </div>
-                                                   
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\FakeTestimonyController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +54,6 @@ Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
 /* END OF ONLINE COURSE ROUTING */
 
 /* START OF WOKI ROUTING */
-
 Route::get('/woki/sertifikat-menjadi-seniman', function () {
     return view('client/woki/detail');
 });
@@ -72,18 +71,22 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 | Controllers can be found inside -> App\Http\Controllers\Admin\
 | Controllers Used:
 |   - DashboardController
+|   - HomepageController
 |   - UserController
 |   - FakeTestimonyController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/testimonies', [FakeTestimonyController::class, 'index'])->name('testimonies.index');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });
 
 /* START ADMIN ROUTING */
 Route::get('/admin/login', function () {
     return view('admin/auth/login');
+});
+Route::get('/admin/reviews', function () {
+    return view('admin/reviews');
 });
 Route::get('/admin/forgot-password', function () {
     return view('admin/auth/forgot-password');
@@ -91,29 +94,6 @@ Route::get('/admin/forgot-password', function () {
 Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
 });
-
-/* TESTIMONY ROUTING */
-Route::get('/admin/testimonies/create', function () {
-    return view('admin/testimony/create');
-});
-Route::get('/admin/testimonies/1/update', function () {
-    return view('admin/testimony/update');
-});
-/* END OF TESTIMONY ROUTING */
-
-
-/* TRUSTED COMPANY ROUTING */
-Route::get('/admin/trusted-companies', function () {
-    return view('admin/trusted-company/index');
-});
-Route::get('/admin/trusted-companies/create', function () {
-    return view('admin/trusted-company/create');
-});
-Route::get('/admin/trusted-companies/1/update', function () {
-    return view('admin/trusted-company/update');
-});
-/* END OF TRUSTED COMPANY ROUTING */
-
 /* END OF ADMIN ROUTING */
 
 require __DIR__.'/auth.php';

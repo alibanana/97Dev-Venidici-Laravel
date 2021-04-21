@@ -15,7 +15,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
+    @if(Request::is('admin/dashboard') || Request::is('admin/dashboard'))
     <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
         <a class="nav-link" href="/admin/dashboard"><i class="fas fa-fw fa-tachometer-alt"></i>Dashboard</a>
     </li>
 
@@ -26,6 +30,24 @@
         Menu
     </div>
     
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/cms') || Request::is('admin/cms/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEleven"
+            aria-expanded="true" aria-controls="collapseEleven">
+            <i class="fas fa-images fa-cog"></i>
+            <span>CMS</span>
+        </a>
+        <div id="collapseEleven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin/cms/homepage">Home Page</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/users') || Request::is('admin/users/*'))
     <li class="nav-item active">
@@ -133,19 +155,19 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/testimonies') || Request::is('admin/testimonies/*'))
+    @if(Request::is('admin/reviews') || Request::is('admin/reviews/*'))
     <li class="nav-item active">
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/testimonies" 
+        <a class="nav-link" href="/admin/reviews" 
             aria-expanded="true" >
             <i class="fas fa-comments"></i>
-            <span>Testimonies</span>
+            <span>Reviews</span>
         </a>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Pages Collapse Menu
     @if(Request::is('admin/trusted-companies') || Request::is('admin/trusted-companies/*'))
     <li class="nav-item active">
     @else
@@ -157,7 +179,7 @@
             <span>Trusted Companies</span>
         </a>
     </li>
-    
+     -->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
