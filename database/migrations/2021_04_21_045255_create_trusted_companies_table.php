@@ -15,7 +15,6 @@ class CreateTrustedCompaniesTable extends Migration
     {
         Schema::create('trusted_companies', function (Blueprint $table) {
             $table->id();
-            $table->string('company');
             $table->string('image');
             $table->timestamps();
         });

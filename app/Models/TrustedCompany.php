@@ -12,7 +12,6 @@ class TrustedCompany extends Model
     protected $table = 'trusted_companies';
 
     protected $fillable = [
-        'company',
         'image'
     ];
 }
