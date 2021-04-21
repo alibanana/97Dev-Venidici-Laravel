@@ -54,7 +54,6 @@ Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
 /* END OF ONLINE COURSE ROUTING */
 
 /* START OF WOKI ROUTING */
-
 Route::get('/woki/sertifikat-menjadi-seniman', function () {
     return view('client/woki/detail');
 });

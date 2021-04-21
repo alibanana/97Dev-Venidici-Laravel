@@ -716,7 +716,6 @@
         <div class="col-12 col-md-5 p-0" style="display: flex;flex-direction: column;justify-content: center;">
             <p class="medium-heading" style="font-family: Rubik Medium;color:#000000;">Our higlighted students revealing</p>
             <p class="sub-description" style="font-family: Rubik Regular;color:#000000;margin-top:2vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-
         </div>
     </div>
     <!-- END OF TESTIMONY SECTION -->
