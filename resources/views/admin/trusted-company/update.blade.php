@@ -52,7 +52,7 @@
                     <br>
                         <label for="">Current Image</label>
                         <br>
-                    <img src="/assets/images/admin/testimony-dummy.png" alt="Snow" style="width:10vw;margin-top:1vw">
+                    <img src="/assets/images/client/bca-bank.png" alt="Snow" style="width:10vw;margin-top:1vw">
                 </div>
             </div>
             <div class="col-6">
@@ -60,7 +60,7 @@
                     <label for="">Name</label>
                     <input type="text" name="name" class="form-control form-control-user"
                         id="phone" aria-describedby=""
-                        placeholder="Here insert testimony name (e.g. Fernandha Dzaky)" value="Fernandha Dzaky"> 
+                        placeholder="Here insert company name (e.g. BCA)" value="BCA"> 
                     @error('name')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
