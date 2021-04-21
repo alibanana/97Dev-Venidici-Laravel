@@ -37,7 +37,7 @@
                             <div class="col mr-2">
                                 <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
                                     Users</div>
-                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">{{ $users_count }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users fa-2x text-gray-300"></i>
