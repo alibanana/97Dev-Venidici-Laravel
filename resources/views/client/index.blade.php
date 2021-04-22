@@ -45,31 +45,31 @@
 </div>
  END OF BANNER SECTION -->
 
-<div class="row m-0 banner-background" style="height:47vw">
+<div class="row m-0 banner-background page-container" style="height:50vw;padding-top:16vw;text-align:center">
     <div class="col-md-12 p-0">
-        <div class="page-container-left" style="padding-top: 13vw;padding-bottom:9vw">
-            <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Selamat datang di
+        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Selamat datang di
         Venidici</p>
-            <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line" >“Veni, vidi, vici.” Saya datang, saya lihat, saya
-            taklukkan.</p>
-            <div style="display: flex;margin-top:2vw;">
-                <div  class="grey-input-form" style="display: flex;align-items:center">
-                    <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
-                  
-                    <input type="text" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);" placeholder="Course Title">
-                 
-                </div>
-                <div style="margin-left: 1vw;">
-                    <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">
-                        <option selected>Categories</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div style="margin-left: 1vw;">
-                    <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
-                </div>
+        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line" >“Veni, vidi, vici.” Saya datang, saya lihat, saya
+        taklukkan.</p>
+        <div style="display: flex;margin-top:2vw;justify-content:center;">
+            <div  class="grey-input-form" style="display: flex;align-items:center">
+                <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
+                
+                <input type="text" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);" placeholder="Course Title">
+                
+            </div>
+            <div style="margin-left: 1vw;">
+            <!--
+                <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
+                <select class="grey-input-form small-text" style="height:100%;padding-right:4vw" aria-label="">
+                    <option selected>Categories</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div style="margin-left: 1vw;">
+                <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </div>
@@ -77,21 +77,21 @@
 
 <!-- START OF TRUSTED COMPANY SECTION -->
 <div class="row m-0 page-container" style="z-index: 99;padding-bottom:5vw">
-    <div class="col-12 p-0" style="margin-top:-6vw">
+    <div class="col-12 p-0" style="margin-top:-5vw">
         <div style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">10</p>
                 <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Trusted Companies</p>
             </div>
-            <img src="/assets/images/icons/vertical-splitter.png" style="max-height:6vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/logo-itb 2.png" style="max-height:4vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/bca-bank.png" style="max-height:4vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/flick.png" style="max-height:4vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/silvi.png" style="max-height:4vw" class="img-fluid" alt="">
+            <img src="/assets/images/icons/vertical-splitter.png" style="max-height:3.5vw" class="img-fluid" alt="">
+            <img src="/assets/images/client/logo-itb 2.png" style="max-height:3.5vw" class="img-fluid" alt="">
+            <img src="/assets/images/client/bca-bank.png" style="max-height:3.5vw" class="img-fluid" alt="">
+            <img src="/assets/images/client/flick.png" style="max-height:3.5vw" class="img-fluid" alt="">
+            <img src="/assets/images/client/silvi.png" style="max-height:3.5vw" class="img-fluid" alt="">
         </div>
     </div>
 </div>
-<!-- END OFTRUSTED COMPANY SECTION -->
+<!-- END OF TRUSTED COMPANY SECTION -->
 
 <!-- START OF OUR PROGRAMS SECTION -->
 <div class="row m-0 page-container our-programs-background" style="padding-bottom:8vw">
@@ -99,60 +99,68 @@
         <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Our <span class="big-heading" style="font-family:Hypebeast;margin-left:1vw" >PROGRAMS</span></p>
     </div>
     <div class="col-6 p-0">
-        <div class="our-programs-card" style="margin-top:2.5vw">
-            <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-            <div class="right-section" >
-                <div>
-                    <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Program 1</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                </div>
-                <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
+        <a href="" style="text-decoration:none">
+            <div class="our-programs-card" style="margin-top:2.5vw">
+                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
+                <div class="right-section" >
+                    <div>
+                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Program 1</p>
+                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    </div>
+                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
+                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-6 p-0" style="display:flex;justify-content:flex-end;margin-top:2.5vw">
-        <div class="our-programs-card">
-            <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-            <div class="right-section" >
-                <div>
-                    <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Program 1</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                </div>
-                <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
+        <a href="" style="text-decoration:none">
+            <div class="our-programs-card">
+                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
+                <div class="right-section" >
+                    <div>
+                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Program 1</p>
+                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    </div>
+                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
+                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-6 p-0">
-        <div class="our-programs-card" style="margin-top:2.5vw">
-            <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-            <div class="right-section" >
-                <div>
-                    <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Program 1</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                </div>
-                <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
+        <a href="" style="text-decoration:none">
+            <div class="our-programs-card" style="margin-top:2.5vw">
+                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
+                <div class="right-section" >
+                    <div>
+                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Program 1</p>
+                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    </div>
+                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
+                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-6 p-0" style="display:flex;justify-content:flex-end;margin-top:2.5vw">
-        <div class="our-programs-card">
-            <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-            <div class="right-section" >
-                <div>
-                    <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Program 1</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                </div>
-                <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
+        <a href="" style="text-decoration:none">
+            <div class="our-programs-card">
+                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
+                <div class="right-section" >
+                    <div>
+                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Program 1</p>
+                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    </div>
+                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
+                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 <!-- END OF OUR PROGRAMS SECTION -->
@@ -625,7 +633,7 @@
 <!-- END OF FEATURE, COURSE AND TESTIMONY SECTION -->
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container" style=";background:#F6F6F6">
-        <div class="col-12 col-md-6" style="padding-top:4vw;padding-bottom:4vw">
+        <div class="col-6" style="padding-top:4vw;padding-bottom:4vw">
             <div style="display: flex;align-items:center;">
                 <!-- LEFT TESTIMONY -->
                 <div>
@@ -690,7 +698,7 @@
                 <div style="margin-left: 2vw">
                      <!-- SMALL TESTIMONY CARD -->
 
-                     <div class="testimony-card" style="margin-top: 2vw;width: 16vw;">
+                     <div class="testimony-card" style="width: 16vw;">
                         <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw">{{ $fake_testimonies_small[1]->rating }}/5</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
@@ -742,13 +750,53 @@
                 <!-- END OF RIGHT TESTIMONY -->
             </div>
         </div>
-        <div class="col-12 col-md-6" style="display: flex;flex-direction: column;justify-content: center;">
+        <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;">
             <p class="medium-heading" style="font-family: Rubik Medium;color:#000000;">Our higlighted students revealing</p>
             <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
 
         </div>
     </div>
     <!-- END OF TESTIMONY SECTION -->
+
+    <!-- START OF PENGAJAR AND COLLABORATOR SECTION -->
+    <div class="row m-0 page-container pengajar-background" style="padding-top:8vw;padding-bottom:8vw">
+        <div class="col-12 p-0">
+            <div style="display:flex;align-items:center;justify-content:center">
+                <a href="" style="text-decoration:none">
+                    <div class="rounded-card" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-right:2vw">
+                        <p class="small-heading" id="card-title" style="color:#3B3C43;font-family:Rubik Medium">Menjadi Pengajar</p>
+                        <img src="/assets/images/client/Menjadi_Pengajar.png" style="height:13vw;margin-top:1vw" class="img-fluid" alt="Menjadi Pengajar">
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">Bagikan pengalamanmu dengan mengajar bersama kami kepada generasi digital saat ini sekarang!</p>
+                    </div>
+                </a>
+                <a href="" style="text-decoration:none">
+                    <div class="rounded-card" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-left:2vw">
+                        <p class="small-heading" id="card-title" style="color:#3B3C43;font-family:Rubik Medium">Menjadi Kolaborator</p>
+                        <img src="/assets/images/client/Menjadi_Kolaborator.png" style="height:13vw;margin-top:1vw" class="img-fluid" alt="Menjadi Kolaborator">
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">Bagikan pengalamanmu dengan mengajar bersama kami kepada generasi digital saat ini sekarang!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- END OF PENGAJAR AND COLLABORATOR SECTION -->
+
+    <!-- START OF NEWSLETTER SECTION -->
+    <div class="row m-0 page-container" style="padding-bottom:8vw">
+        <div class="col-12">
+            <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;justify-content:space-between;align-items:center">
+                <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
+                <div style="padding:0vw 4vw 0vw 0vw">
+                    <p class="medium-heading" style="color:#FFFFFF;font-family:Rubik Bold">Subscribe to our newsletter.....?</p>
+                    <p class="bigger-text" style="color:#FFFFFF;font-family:Rubik Regular;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua </p>
+                </div>
+                <a href="#" class="btn-blue bigger-text" style="text-decoration: none;font-family:Rubik Regular;">Subscribe Now</a>
+            </div> 
+        </div>
+    </div>
+    <!-- END OF NEWSLETTER SECTION -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>

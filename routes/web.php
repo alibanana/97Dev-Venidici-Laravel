@@ -48,9 +48,13 @@ Route::get('/signup', function () {
 });
 
 /* START OF ONLINE COURSE ROUTING */
+Route::get('/online-course', function () {
+    return view('client/online-course/index');
+});
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
+
 /* END OF ONLINE COURSE ROUTING */
 
 /* START OF WOKI ROUTING */
