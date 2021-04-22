@@ -55,7 +55,7 @@
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
                 
-                <input type="text" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);" placeholder="Course Title">
+                <input type="text" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw" placeholder="Course Title">
                 
             </div>
             <div style="margin-left: 1vw;">
@@ -146,39 +146,23 @@
             </div>
         </a>
     </div>
-    <div class="col-6 p-0" style="display:flex;justify-content:flex-end;margin-top:2.5vw">
-        <a href="" style="text-decoration:none">
-            <div class="our-programs-card">
-                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-                <div class="right-section" >
-                    <div>
-                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Program 1</p>
-                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    </div>
-                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Program 1</a>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
 </div>
 <!-- END OF OUR PROGRAMS SECTION -->
 
 <!-- START OF FEATURE, COURSE AND TESTIMONY SECTION -->
 <div class="row m-0 page-container feature-background" style="padding-bottom: 6vw;">
     <!-- START OF FEATURE SECTION -->
-    <div class="col-12 p-0 " style="text-align: right;">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;padding-right:5vw;margin-top:4vw">Apa yang akan kamu
-        dapat dari Venidici?</p>
+    <div class="col-12 p-0 " style="text-align: center;">
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:3vw">Apa yang akan kamu dapat
+        dari Venidici?</p>
     </div>
-    <div class="col-8 p-0">
+    <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:2vw">
 
-        <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel" style="margin-top:-3vw">
+        <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 6vw;">
                 
                 <div class="carousel-item active">
-                    <div class="card-white" style="display: flex;align-items:center;height:15vw">
+                    <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
                         <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                             <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Feature number 1</p>
@@ -759,7 +743,7 @@
     <!-- END OF TESTIMONY SECTION -->
 
     <!-- START OF PENGAJAR AND COLLABORATOR SECTION -->
-    <div class="row m-0 page-container pengajar-background" style="padding-top:8vw;padding-bottom:8vw">
+    <div class="row m-0 page-container pengajar-background" style="padding-top:4vw;padding-bottom:8vw">
         <div class="col-12 p-0">
             <div style="display:flex;align-items:center;justify-content:center">
                 <a href="" style="text-decoration:none">
@@ -783,16 +767,19 @@
 
     <!-- START OF NEWSLETTER SECTION -->
     <div class="row m-0 page-container" style="padding-bottom:8vw">
-        <div class="col-12">
-            <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;justify-content:space-between;align-items:center">
+        <div class="col-12" style="padding:0vw 3vw">
+            <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
-                <div style="padding:0vw 4vw 0vw 0vw">
+                <div style="width:80%;margin-left:2vw">
                     <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Subscribe to our newsletter.....?</p>
-                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua </p>
+                    <div style="display:flex;align-items:center">
+                        <input class="normal-text" placeholder="Type your email" name="" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;">
+                        <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
+                        <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
+
+                    </div>
+
                 </div>
-                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">Subscribe Now</a>
             </div> 
         </div>
     </div>
