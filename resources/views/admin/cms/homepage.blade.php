@@ -55,14 +55,13 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="">Heading</label>
-                                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">Anytime, anywhere.
-                                    </textarea>
+                                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">{{ $configs['cms.homepage.top-section.heading']->value }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="">Sub-Heading</label>
-                                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla</textarea>
+                                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -84,7 +83,7 @@
                     <form method="POST" action="">
                     @csrf
                     @method("put")
-                        <div class="row" style="margin-top:8vw" >
+                        <div class="row" style="margin-top:4vw" >
                             <div class="col-6" >
                                 <h5 class="mb-0 mb-3 text-gray-800" style="color:white">Trusted Company Section</h5>
                             </div>
@@ -96,7 +95,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Trusted Company Count</label>
-                                    <input type="text" class="form-control form-control-user" value="10" name="">
+                                    <input type="text" class="form-control form-control-user" value="{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}" name="">
                                     </textarea>
                                 </div>
                             </div>
@@ -126,7 +125,7 @@
 
                     <!-- Testimonies Section -->
                     <div class="row">
-						<div class="col-12" style="margin-top:8vw">
+						<div class="col-12" style="margin-top:4vw">
 							<h5 class="mb-0 mb-3 text-gray-800" style="color:white">Testimony Section</h5>
 						</div>
                         <div class="col-12">
