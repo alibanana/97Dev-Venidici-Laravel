@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Home')
+@section('title', 'Venidici Online Course')
 
 @section('content')
 <!-- START OF BANNER SECTION -->
@@ -10,7 +10,7 @@
         elit. Adipiscing et nunc, amet quisque velit
         pharetra at accumsan.</p>
         
-        <a href="#search-course-section" class="sub-description btn-blue-bordered btn-blue-bordered-active" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;width:100%;margin-top:5vw">Search Courses</a>
+        <a href="#search-course-section" class="sub-description btn-blue-bordered btn-blue-bordered-active" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;width:100%;margin-top:5vw;padding:0.8vw 1vw">Search Courses</a>
 
     </div>
 </div>
@@ -121,14 +121,37 @@
                         -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pretium id molestie suspendisse mi venenatis arcu amet scelerisque. Volutpat sit phasellus arcu, elit porttitor senectus. Ut lobortis vitae est leo ultrices pulvinar sodales. Nisl aliquam, in sit aenean vitae.</p>
                     </div>
                 </div>
+                <div class="carousel-item">
+                    <div class="card-white" style="height:20vw;padding:2.5vw">
+                        <div style="display:flex;align-items:center">   
+                            <img src="/assets/images/client/testimony-image-dummy.png" style="width:5vw" class="img-fluid" alt="">
+                            <div style="margin-left:1vw">
+                                <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">Mr. Gabriel Amileano</p>
+                                <p class="bigger-text" style="font-family: Rubik Regular;color:#55525B;margin-top:-0.3vw;margin-bottom:0vw">Student</p>
+                            </div>
+                        </div>
+                        <div style="display: flex;justify-content:flex-start;margin-top:1vw">
+                            <i style="color:#F4C257" class="fas fa-star bigger-text"></i>
+                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star bigger-text"></i>
+                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star bigger-text"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star bigger-text"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star bigger-text"></i>
+                        </div>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#55525B;margin-top:1vw; display: -webkit-box;
+                        overflow : hidden !important;
+                        text-overflow: ellipsis !important;
+                        -webkit-line-clamp: 4 !important;
+                        -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pretium id molestie suspendisse mi venenatis arcu amet scelerisque. Volutpat sit phasellus arcu, elit porttitor senectus. Ut lobortis vitae est leo ultrices pulvinar sodales. Nisl aliquam, in sit aenean vitae.</p>
+                    </div>
+                </div>
 
             </div>
             <a class="carousel-control-prev"   data-bs-target="#feature-carousel" style="width:2vw" role="button"data-bs-slide="prev">
-                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2.5vw;z-index:99;margin-left:0px" alt="NEXT">
+                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
             <a class="carousel-control-next"   data-bs-target="#feature-carousel" style="width:2vw"  role="button"data-bs-slide="next">
-                <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2.5vw;z-index:99;margin-right:0px" alt="NEXT">
+                <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>
         </div>  

@@ -46,6 +46,9 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('client/auth/signup');
 });
+Route::get('/dashboard', function () {
+    return view('client/user-dashboard');
+});
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', function () {

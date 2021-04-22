@@ -352,7 +352,7 @@
                 </div>
             </div>
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/online-course" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
 
             </div>
         </div>
@@ -621,7 +621,7 @@
                 </div>
             </div>
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/online-course" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
             </div>
         </div>
     </div>
@@ -787,12 +787,12 @@
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;justify-content:space-between;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
                 <div style="padding:0vw 4vw 0vw 0vw">
-                    <p class="medium-heading" style="color:#FFFFFF;font-family:Rubik Bold">Subscribe to our newsletter.....?</p>
-                    <p class="bigger-text" style="color:#FFFFFF;font-family:Rubik Regular;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing
+                    <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Subscribe to our newsletter.....?</p>
+                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing
                     elit, sed do eiusmod tempor incididunt ut labore et
                     dolore magna aliqua </p>
                 </div>
-                <a href="#" class="btn-blue bigger-text" style="text-decoration: none;font-family:Rubik Regular;">Subscribe Now</a>
+                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">Subscribe Now</a>
             </div> 
         </div>
     </div>
