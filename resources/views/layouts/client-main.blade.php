@@ -44,9 +44,13 @@
         <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
         <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Community</a>
-        
+        @if(!Request::is('dashboard'))
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Log In</a>
-        
+        @endif
+        @if(Request::is('dashboard'))
+        <a class="sub-description" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-shopping-cart"></i></a>
+        <a class="sub-description" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-user"></i></a>
+        @endif
     </div>
     <!-- START OF BANNER SECTION -->
     @endif

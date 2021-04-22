@@ -125,6 +125,10 @@
     padding-left:8.5vw;
     padding-right:8.5vw
 }
+.page-container-inner{
+    padding-left:18vw;
+    padding-right:18vw
+}
 /* end of page padding */
 
 /* font size */
@@ -252,7 +256,7 @@
     border-radius: 10px;
     width:38.5vw
 }
-.our-programs-card:hover #card-title{
+.our-programs-card #card-title{
     color:#2B6CAA !important
 }
 .our-programs-card img{
@@ -454,7 +458,7 @@
     border-radius: 10px;
     padding:2vw 4vw 8vw 4vw;
     background-image: url("/assets/images/client/Auth_Bottom_BG.png");
-    background-position:right bottom;
+    background-position:right 6.5vw;
     background-repeat: no-repeat;
     background-size:92%;
 }
@@ -462,10 +466,10 @@
     background: #FFFFFF;
     border-radius: 10px;
     padding:2vw 4vw 8vw 4vw;
-    background-image: url("/assets/images/client/SignUp_BG.png");
+    /*background-image: url("/assets/images/client/SignUp_BG.png");
     background-position:left bottom;
     background-repeat: no-repeat;
-    background-size:92%;
+    background-size:92%;*/
 }
 
 .btn-blue-bordered{
@@ -599,3 +603,159 @@
 .rounded-card:hover #card-title{
     color:#2B6CAA !important
 }
+
+.blue-text-underline{
+    color:#EEEEEE;
+    transition: 0.2s ease-in-out;
+    text-decoration-line: underline;
+    text-decoration-color: #FFFFFF !important;
+    text-underline-offset: 0.4vw;
+    text-decoration-thickness: 0.2vw;
+}
+.blue-text-underline:hover{
+    color:#2B6CAA
+}
+.blue-text-underline-active{
+    color:#2B6CAA !important;
+    text-decoration-line: underline;
+    text-decoration-color: #2B6CAA !important;
+    text-underline-offset: 0.4vw;
+    text-decoration-thickness: 0.2vw;
+}
+
+
+
+.container-image-card {
+    position: relative;
+    padding: 0px !important;
+    margin: 0px;
+}
+
+.blue-bordered-card{
+    border: 2px solid #2B6CAA;
+    border-radius: 10px;
+    height:12vw;
+}
+.blue-bordered-card img{
+    height: 100%;
+    width:15.5vw;
+    object-fit: cover;
+    border-radius: 10px 0px 0px 10px;
+ }
+ .blue-bordered-card .right-section{
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: flex-start;
+     padding:1.4vw 2vw;
+ }
+ 
+.blue-bordered-card .card-tag{
+    background-color: #2B6CAA;
+    padding:0.3vw 2vw;
+    border-radius:10px 0px 10px 0px;
+    font-family:Rubik Regular;
+    color:#FFFFFF
+}
+
+.blue-bordered-card #detail-button{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #2B6CAA;
+    color: #FFFFFF;
+    background-color: #2B6CAA !important;
+}
+.blue-bordered-card #meeting-link{
+    color: #2B6CAA;
+
+}
+.blue-bordered-card:hover{
+    box-shadow: 0px 0px 10px 4px rgba(43, 108, 170, 0.3);
+}
+
+.blue-bordered-card i{
+    color:#2B6CAA
+}
+
+
+
+
+
+
+.red-bordered-card{
+    border: 2px solid #CE3369;
+    border-radius: 10px;
+    height:12vw;
+}
+.red-bordered-card img{
+    height: 100%;
+    width:15.5vw;
+    object-fit: cover;
+    border-radius: 10px 0px 0px 10px;
+ }
+ .red-bordered-card .right-section{
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: flex-start;
+     padding:1.4vw 2vw;
+ }
+ 
+.red-bordered-card .card-tag{
+    background-color: #CE3369;
+    padding:0.3vw 2vw;
+    border-radius:10px 0px 10px 0px;
+    font-family:Rubik Regular;
+    color:#FFFFFF
+}
+.red-bordered-card #detail-button{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #CE3369;
+    color: #FFFFFF;
+    background-color: #CE3369 !important;
+}
+.red-bordered-card #meeting-link{
+    color: #CE3369;
+
+}
+.red-bordered-card:hover{
+    box-shadow: 0px 0px 10px 4px rgba(206, 51, 105, 0.3);
+}
+.red-bordered-card i{
+    color:#CE3369
+}
+
+.progress-bar-vertical {
+    width: 8.4vw;
+    min-height: 5vw;
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .progress-bar-vertical .progress-bar-blue {
+    width: 100%;
+    height: 0;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+    background-color: #2B6CAA;
+    color:#FFFFFF;
+    text-align: center;
+  }
+  .progress-bar-vertical .progress-bar-red {
+    width: 100%;
+    height: 0;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+    background-color: #CE3369;
+    color:#FFFFFF;
+    text-align: center;
+  }
