@@ -77,10 +77,10 @@
     background-size: cover;
 }
 .online-course-detail-bg{
-    background-image: url("/assets/images/client/Online_Course_Detail_BG.png");
-    background-position:2.5vw 6vw;
+    background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
+    background-position:6.8vw 9vw;
     background-repeat: no-repeat;
-    background-size: 90%;
+    background-size: 5%;
 }
 .woki-detail-bg{
     background-image: url("/assets/images/client/Woki_Detail_BG.png");
@@ -107,7 +107,7 @@
     background-size: 43%;
 }
 .enroll-background{
-    background-image: url("/assets/images/client/Enroll_BG.png");
+    background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
     background-position:5.5vw 5vw;
     background-repeat: no-repeat;
     background-size: 5%;
@@ -508,6 +508,9 @@
     border: 2px solid #A24A9C;
     color: #FFFFFF;
     background-color: #A24A9C !important;
+}
+.btn-purple-bordered-active:hover{
+    color: #FFFFFF;
 }
 
 

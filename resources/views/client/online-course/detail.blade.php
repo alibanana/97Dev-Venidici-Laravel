@@ -4,24 +4,24 @@
 @section('content')
 
 
-<div class="row m-0 page-container online-course-detail-bg" style="padding-top:13vw;padding-bottom:10vw">
+<div class="row m-0 page-container online-course-detail-bg" style="padding-top:11vw;padding-bottom:10vw">
     <!-- START OF LEFT SECTION -->
-    <div class="col-8" >
+    <div class="col-9" >
         <div style="padding-right:10vw">
             <p class="medium-heading" style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</p>
-            <p class="medium-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw">Sertifikat menjadi Seniman</p>
+            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Sertifikat menjadi Seniman</p>
             
-            <p class="sub-description" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line">Need to be funny fast? This is the course for people that
+            <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">Need to be funny fast? This is the course for people that
                 find it hard to be funny.</p>
-            <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh <span style="font-family:Rubik Bold">Mr. Raditya Dika</span></p>
-            <video style="width:100%;height:23vw;display:block;object-fit: cover;margin-top:2vw"  controls="false" >
+            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh <span style="font-family:Rubik Bold">Mr. Raditya Dika</span></p>
+            <video style="width:42vw;height:20vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px"  controls="false" >
                 <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
                 <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
                 Your browser does not support HTML video.
             </video> 
 
-            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw"><i class="fas fa-user-graduate"></i> <span style="margin-left:1vw">150 Pelajar</span></p>
-            <div style="display:flex;align-items:center;margin-top:1vw;">
+            <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw;margin-bottom:0px"><i class="fas fa-user-graduate"></i> <span style="margin-left:1vw">150 Pelajar</span></p>
+            <div style="display:flex;align-items:center;margin-top:0.5vw">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
                 <div style="display: flex;justify-content:center;margin-left:1vw">
                     <i style="color:#F4C257" class="fas fa-star sub-description"></i>
@@ -37,32 +37,32 @@
                 <div class="row m-0" style="padding-top:2vw">
                     <div class="col-6">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
-                            <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
+                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
-                            <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar</p>
+                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar</p>
                         </div>
                     </div>
                     <div class="col-6" style="margin-top:1vw">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
-                            <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar</p>
+                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar</p>
                         </div>
                     </div>
                     <div class="col-6" style="margin-top:1vw">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
-                            <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
+                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
                         </div>
                     </div>
                     <div class="col-6" style="margin-top:1vw">
                         <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle bigger-text"></i>
-                            <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:1vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
+                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@
 
         </div>
         <div  class="bigger-text profil-content" id="tentang-course"  style="margin-top:1vw">
-            <p class="bigger-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
+            <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet tortor gravida ut nam. Sapien duis feugiat feugiat nunc. Nunc cras dolor risus magnis facilisis elementum pharetra. Nunc dolor lacus, accumsan, vestibulum, faucibus libero, vulputate vitae, mauris.
 
     Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing pharetra sit faucibus justo, faucibus gravida. Fringilla ipsum, commodo, sem arcu. Netus aliquet sit malesuada vel velit in rhoncus, ac pellentesque. Facilisis tortor senectus facilisis sit. Posuere quis massa purus, molestie convallis viverra ligula euismod sapien. Sollicitudin euismod molestie adipiscing mauris ullamcorper consequat nunc eget.
@@ -103,7 +103,7 @@
             <img src="/assets/images/client/Placeholder.png" class="img-fluid" style="width:15vw" alt="PROFILE PICTURE">
             
             <p class="sub-description" style="font-family:Rubik Medium;color:#000000;margin-top:2vw;margin-bottom:0px">Mr. Raditya Dika</p>
-            <p class="bigger-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
+            <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non vulputate cras pharetra malesuada libero mauris. Aliquet et enim eget felis quis et aliquam mi urna. Sagittis dictum consequat aenean posuere curabitur. Eget mauris habitasse mattis egestas tellus enim. Vestibulum massa iaculis in pellentesque aliquam morbi sem.</p>
         </div>
         <!-- END OF PROFIL PEMBICARA SECTION -->
@@ -115,25 +115,27 @@
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
-    <div class="col-4" style="padding:0vw 2vw">
+    <div class="col-3 p-0" >
         <div class="course-detail-card-green">
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp 300,000</p>
             <button class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Add to cart</button>
             <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Buy Now</button>
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
-                <p class="bigger-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">109 Menit video eksklusif</span></p>
-                <p class="bigger-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">1 Assesment</span></p>
-                <p class="bigger-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Akses seumur hidup</span></p>
-                <p class="bigger-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Sertifikat keberhasilan</span></p>
+                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">109 Menit video eksklusif</span></p>
+                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">1 Assesment</span></p>
+                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Akses seumur hidup</span></p>
+                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Sertifikat keberhasilan</span></p>
             </div>
-            <p class="bigger-text" style="font-family:Rubik Medium;color: #3B3C43;margin-bottom:2vw;margin-top:2vw;">Butuh pelatihan untuk perusahaan Anda?</p>
-            <a href="#" class="normal-text btn-purple-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:2vw">Program Krest</a>
+            <p class="small-text" style="font-family:Rubik Medium;color: #3B3C43;margin-bottom:2vw;margin-top:2vw;">Butuh pelatihan untuk perusahaan Anda?</p>
+            <div style="text-align:center">
+                <a href="#" class="small-text btn-purple-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Program Krest</a>
+            </div>
 
         </div>
         <div style="padding:2vw;background:#FFFFFF">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Ada <span style="font-family:Hypebeast">Pertanyaan?</span> </p>
-            <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
+            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
             <a  href="https://api.whatsapp.com/send?phone=+62818180509&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." target="_blank" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;"><i class="fab fa-whatsapp"></i> <span style="margin-left:0.5vw">+628112345678</span></a>
 
         </div>
