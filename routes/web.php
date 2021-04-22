@@ -57,6 +57,9 @@ Route::get('/online-course', function () {
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
+Route::get('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1', function () {
+    return view('client/online-course/learn');
+});
 
 /* END OF ONLINE COURSE ROUTING */
 

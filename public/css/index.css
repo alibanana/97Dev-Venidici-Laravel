@@ -96,9 +96,9 @@
 }
 .feature-background{
     background-image: url("/assets/images/client/Feature_BG_2.png");
-    background-position:left top;
+    background-position:23vw top;
     background-repeat: no-repeat;
-    background-size: 91%;
+    background-size: 45%;
 }
 .review-course-background{
     background-image: url("/assets/images/client/Review_CourseList_BG.png");
@@ -111,6 +111,12 @@
     background-position:5.5vw 5vw;
     background-repeat: no-repeat;
     background-size: 5%;
+}
+.course-page-background{
+    background-image: url("/assets/images/client/Course_Page_BG.png");
+    background-position:5.2vw 17.4vw;
+    background-repeat: no-repeat;
+    background-size: 88%;
 }
 /* end of background images*/
 
@@ -251,12 +257,19 @@
 .our-programs-card{
     display: flex;
     background: #FFFFFF;
-    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
     height: 12.5vw;
     border-radius: 10px;
-    width:38.5vw
+    width:38.5vw;
+    transition: 0.2s ease-in-out;
+    border: 1px solid rgba(48, 48, 48, 0.05);
+
 }
-.our-programs-card #card-title{
+
+.our-programs-card:hover{
+    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+
+}
+.our-programs-card:hover #card-title{
     color:#2B6CAA !important
 }
 .our-programs-card img{
@@ -598,9 +611,13 @@
 
 .rounded-card{
     background: #FFFFFF;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
     border-radius: 10px;
     transition: 0.2s ease-in-out;
+    border: 1px solid rgba(48, 48, 48, 0.05);
+}
+.rounded-card:hover{
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+
 }
 
 .rounded-card:hover #card-title{
@@ -608,10 +625,9 @@
 }
 
 .blue-text-underline{
-    color:#EEEEEE;
-    transition: 0.2s ease-in-out;
+    color: rgba(59, 60, 67, 0.5);    transition: 0.2s ease-in-out;
     text-decoration-line: underline;
-    text-decoration-color: #FFFFFF !important;
+    text-decoration-color: #FFFFFF;
     text-underline-offset: 0.4vw;
     text-decoration-thickness: 0.2vw;
 }
@@ -762,3 +778,11 @@
     color:#FFFFFF;
     text-align: center;
   }
+
+.course-collapse{
+    background: #FFFFFF;
+    padding:1vw
+}
+.course-collapse:hover{
+    background: rgba(111, 159, 205, 0.1)
+}
