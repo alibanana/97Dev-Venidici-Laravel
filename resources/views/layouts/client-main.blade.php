@@ -23,7 +23,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- web icon    -->
-    <link rel="shortcut icon" type="image/jpg" href="/assets/images/client/logo-box.png"/>
+    <link rel="shortcut icon" type="image/jpg" href="/assets/images/client/icon-transparent.png"/>
   
     <!-- wow js -->
     <link rel="stylesheet" href="/WOW-master/css/libs/animate.css">
@@ -39,7 +39,7 @@
       @if(!Request::is('signup'))
     <!-- END OF NAVBAR -->
     <div class="navbar-floating">
-        <!--<img src="/assets/images/client/logo-horizontal.png" style="width: 8vw;" class="img-fluid" alt="">-->
+        <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Home</a>
         <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
         <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Public</a>
