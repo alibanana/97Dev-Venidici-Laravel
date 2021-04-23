@@ -101,12 +101,60 @@ Route::get('/admin/login', function () {
 Route::get('/admin/reviews', function () {
     return view('admin/reviews');
 });
+
 Route::get('/admin/forgot-password', function () {
     return view('admin/auth/forgot-password');
 });
 Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
 });
+
+
+/* TESTIMONY ROUTING */
+Route::get('/admin/testimonies/create', function () {
+    return view('admin/testimony/create');
+});
+Route::get('/admin/testimonies/1/update', function () {
+    return view('admin/testimony/update');
+});
+/* END OF TESTIMONY ROUTING */
+
+/* START OF PROMO CODE*/
+Route::get('/admin/promo', function () {
+    return view('admin/promo/index');
+});
+Route::get('/admin/promo/create', function () {
+    return view('admin/promo/create');
+});
+Route::get('/admin/promo/1/update', function () {
+    return view('admin/promo/update');
+});
+/* END OF PROMO CODE */
+
+
+/* TRUSTED COMPANY ROUTING */
+Route::get('/admin/trusted-companies', function () {
+    return view('admin/trusted-company/index');
+});
+Route::get('/admin/trusted-companies/create', function () {
+    return view('admin/trusted-company/create');
+});
+Route::get('/admin/trusted-companies/1/update', function () {
+    return view('admin/trusted-company/update');
+});
+/* END OF TRUSTED COMPANY ROUTING */
+
+/* START OF ONLINE COURSE ROUTING */
+Route::get('/admin/online-courses', function () {
+    return view('admin/online-course/index');
+});
+/* END OF ONLINE COURSE ROUTING */
+
+/* START OF ANALYTICS ROUTING */
+Route::get('/admin/analytics/online-course', function () {
+    return view('admin/analytics/online-course');
+});
+/* END OF ANALYTICS ROUTING */
 /* END OF ADMIN ROUTING */
 
 require __DIR__.'/auth.php';

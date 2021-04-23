@@ -56,10 +56,21 @@
             </span>
           </a>
 
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-left:-13.5vw;width:18vw">
+            <div class="dropdown-item" style="margin-top:0.5vw">
+              <div style="display:flex;justify-content:space-between">
+                <p class="small-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;">Payment Completed!</p>   
+                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">20/04/2021</p>   
+              </div>
+              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">Click here to view more..</a>
+            </div>
+            <div class="dropdown-item" style="margin-top:0.5vw">
+              <div style="display:flex;justify-content:space-between">
+                <p class="small-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;">Payment Completed!</p>   
+                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">20/04/2021</p>   
+              </div>
+              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">Click here to view more..</a>
+            </div>
           </div>
         </div>
         <a id="cart_icon" class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA;margin-right:0.8vw">

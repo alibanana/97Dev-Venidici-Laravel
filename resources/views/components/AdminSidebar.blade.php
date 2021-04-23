@@ -36,14 +36,33 @@
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEleven"
-            aria-expanded="true" aria-controls="collapseEleven">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCMS"
+            aria-expanded="true" aria-controls="collapseCMS">
             <i class="fas fa-images fa-cog"></i>
             <span>CMS</span>
         </a>
-        <div id="collapseEleven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseCMS" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseCMS">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/admin/cms/homepage">Home Page</a>
+            </div>
+        </div>
+    </li>
+    
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/analytics') || Request::is('admin/analytics/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAnalytics"
+            aria-expanded="true" aria-controls="collapseAnalytics">
+            <i class="fas fa-chart-line"></i>
+            <span>Analytics</span>
+        </a>
+        <div id="collapseAnalytics" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseAnalytics">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin/analytics/online-course">Online Course</a>
+                <a class="collapse-item" href="/admin/cms/homepage">Woki</a>
             </div>
         </div>
     </li>
@@ -61,6 +80,19 @@
         </a>
     </li>
 
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/online-courses') || Request::is('admin/online-courses/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/online-courses" 
+            aria-expanded="true" >
+            <i class="fas fa-graduation-cap"></i>
+            <span>Online Courses</span>
+        </a>
+    </li>
+
 
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/woki') || Request::is('admin/woki/*'))
@@ -75,20 +107,9 @@
         </a>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/online-courses') || Request::is('admin/online-courses/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link" href="/admin/online-courses" 
-            aria-expanded="true" >
-            <i class="fas fa-graduation-cap"></i>
-            <span>Online Courses</span>
-        </a>
-    </li>
+   
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Pages Collapse Menu 
     @if(Request::is('admin/bootcamp') || Request::is('admin/bootcamp/*'))
     <li class="nav-item active">
     @else
@@ -100,20 +121,9 @@
             <span>Bootcamp</span>
         </a>
     </li>
+    -->
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/community') || Request::is('admin/community/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link" href="/admin/community" 
-            aria-expanded="true" >
-            <i class="fas fa-handshake"></i>
-            <span>Community</span>
-        </a>
-    </li>
-
+  
 
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/krest') || Request::is('admin/krest/*'))
@@ -128,7 +138,7 @@
         </a>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Pages Collapse Menu
     @if(Request::is('admin/mentoring') || Request::is('admin/mentoring/*'))
     <li class="nav-item active">
     @else
@@ -140,6 +150,7 @@
             <span>Mentoring</span>
         </a>
     </li>
+     -->
 
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/virtual-company-visit') || Request::is('admin/virtual-company-visit/*'))
@@ -150,9 +161,23 @@
         <a class="nav-link" href="/admin/virtual-company-visit" 
             aria-expanded="true" >
             <i class="fas fa-building"></i>
-            <span>Virtual Company Visit</span>
+            <span>Virtual Workshop</span>
         </a>
     </li>
+
+    <!-- Nav Item - Pages Collapse Menu
+    @if(Request::is('admin/community') || Request::is('admin/community/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/community" 
+            aria-expanded="true" >
+            <i class="fas fa-handshake"></i>
+            <span>Community</span>
+        </a>
+    </li>
+    -->
 
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/reviews') || Request::is('admin/reviews/*'))
@@ -164,6 +189,19 @@
             aria-expanded="true" >
             <i class="fas fa-comments"></i>
             <span>Reviews</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/promo') || Request::is('admin/promo/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/promo" 
+            aria-expanded="true" >
+            <i class="fas fa-tags"></i>
+            <span>Promo</span>
         </a>
     </li>
 

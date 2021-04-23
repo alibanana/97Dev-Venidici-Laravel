@@ -78,6 +78,35 @@
                                 </div>
                             </div>
                         </div>
+						<div class="col-12">
+							<div class="form-group">
+								<label for="">Heading</label>
+								<textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">Anytime, anywhere.
+								</textarea>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<label for="">Sub-Heading</label>
+								<textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla</textarea>
+							</div>
+						</div>
+						<div class="col-12">
+								<p>Banner</p>
+                                <img src="/assets/images/client/Home_Page_Banner_2.png" class="img-fluid" style="width:40%" alt="">
+                                <!--
+								<video style="width:20vw;height:auto;border:4px solid black;border-radius:5px"  controls="false" >
+									<source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
+									<source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
+									Your browser does not support HTML video.
+								</video>        
+                                -->     
+							<div class="form-group" style="margin-top:1vw">
+                                <label for="">Click button below to update banner</label> <br>
+								<input type="file" >
+							</div>
+						</div>
+                    </div>
                     </form>
 
                     <!-- Trusted Companies Section -->
@@ -122,9 +151,9 @@
                                 </div>
                             @endforeach
                         </div>
-                    </form>
 
-                    <!-- Testimonies Section -->
+                    </div>
+                    </form> 
                     <div class="row">
 						<div class="col-12" style="margin-top:8vw">
 							<h5 class="mb-0 mb-3 text-gray-800" style="color:white">Testimony Section</h5>
