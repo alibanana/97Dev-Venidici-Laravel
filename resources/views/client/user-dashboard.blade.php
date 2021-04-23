@@ -10,8 +10,20 @@
             <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:15vw;object-fit:cover" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
-                    <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Gabriel Amileano Vidyananto</p>   
-                    <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Edit</a>
+                    <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Gabriel Amileano Vidyananto</p> 
+                    <div class="dropdown show">
+                        
+                        <a class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</a>
+
+                        <div class="dropdown-menu" aria-labelledby="editDropdown" style="">
+                            <div class="dropdown-item" >
+                                <a href="#" class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none">Profile</a>   
+                            </div>
+                            <div class="dropdown-item" style="margin-top:0.5vw">
+                                <a href="#" class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none">Change Password</a>   
+                            </div>
+                        </div>
+                    </div>  
                 </div>
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">10 Points</p>   
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">gabrielamileano@gmail.com</p>   

@@ -807,12 +807,18 @@
     font-size: 0.9vw;
   }
 
-  /* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-  }
+.cart-card-grey{
+    background-color: #FBFBFB;
+    padding:1vw;
+    /*width:45vw;*/
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cart-card-blue{
+    background-color: #6F9FCD;
+    padding:1vw;
+    width:4vw;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;flex-direction: column;justify-content: center;align-items: center;
+}

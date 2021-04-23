@@ -62,14 +62,14 @@
                 <p class="small-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;">Payment Completed!</p>   
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">20/04/2021</p>   
               </div>
-              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">Click here to view more..</a>
+              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">View more..</a>
             </div>
             <div class="dropdown-item" style="margin-top:0.5vw">
               <div style="display:flex;justify-content:space-between">
                 <p class="small-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;">Payment Completed!</p>   
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">20/04/2021</p>   
               </div>
-              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">Click here to view more..</a>
+              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">View more..</a>
             </div>
           </div>
         </div>

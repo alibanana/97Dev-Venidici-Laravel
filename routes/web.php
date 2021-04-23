@@ -52,6 +52,9 @@ Route::get('/signup-interests', function () {
 Route::get('/dashboard', function () {
     return view('client/user-dashboard');
 });
+Route::get('/cart', function () {
+    return view('client/cart');
+});
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', function () {
