@@ -38,6 +38,7 @@
     background-position:left top;
     background-repeat: no-repeat;
     background-size: 100%;
+    height:100%;
 }
 .home-background{
     background-image: url("/assets/images/client/Home_Page_Banner.png");
@@ -76,10 +77,10 @@
     background-size: cover;
 }
 .online-course-detail-bg{
-    background-image: url("/assets/images/client/Online_Course_Detail_BG.png");
-    background-position:2.5vw 6vw;
+    background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
+    background-position:6.8vw 9vw;
     background-repeat: no-repeat;
-    background-size: 90%;
+    background-size: 5%;
 }
 .woki-detail-bg{
     background-image: url("/assets/images/client/Woki_Detail_BG.png");
@@ -87,11 +88,35 @@
     background-repeat: no-repeat;
     background-size: 90%;
 }
+.pengajar-background{
+    background-image: url("/assets/images/client/Pengajar_BG.png");
+    background-position:18vw 6vw;
+    background-repeat: no-repeat;
+    background-size: 20%;
+}
 .feature-background{
     background-image: url("/assets/images/client/Feature_BG_2.png");
+    background-position:23vw top;
+    background-repeat: no-repeat;
+    background-size: 45%;
+}
+.review-course-background{
+    background-image: url("/assets/images/client/Review_CourseList_BG.png");
     background-position:left top;
     background-repeat: no-repeat;
-    background-size: 91%;
+    background-size: 43%;
+}
+.enroll-background{
+    background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
+    background-position:5.5vw 5vw;
+    background-repeat: no-repeat;
+    background-size: 5%;
+}
+.course-page-background{
+    background-image: url("/assets/images/client/Course_Page_BG.png");
+    background-position:5.2vw 17.4vw;
+    background-repeat: no-repeat;
+    background-size: 88%;
 }
 /* end of background images*/
 
@@ -105,6 +130,10 @@
 .page-container{
     padding-left:8.5vw;
     padding-right:8.5vw
+}
+.page-container-inner{
+    padding-left:18vw;
+    padding-right:18vw
 }
 /* end of page padding */
 
@@ -147,7 +176,7 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
-    padding: 0.8vw 1vw;
+    padding: 0.4vw 2vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -202,6 +231,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  /* Bottom left text */
+.bottom-left {
+    position: absolute;
+    bottom: 0.5vw;
+    left: 1.5vw;
+  }
 .grey-input-form{
     background: #F0F4F9;
     border-radius: 10px;
@@ -228,10 +263,20 @@
 .our-programs-card{
     display: flex;
     background: #FFFFFF;
-    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
     height: 12.5vw;
     border-radius: 10px;
-    width:38.5vw
+    width:38.5vw;
+    transition: 0.2s ease-in-out;
+    border: 1px solid rgba(48, 48, 48, 0.05);
+
+}
+
+.our-programs-card:hover{
+    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+
+}
+.our-programs-card:hover #card-title{
+    color:#2B6CAA !important
 }
 .our-programs-card img{
    width: 15vw;
@@ -432,7 +477,7 @@
     border-radius: 10px;
     padding:2vw 4vw 8vw 4vw;
     background-image: url("/assets/images/client/Auth_Bottom_BG.png");
-    background-position:right bottom;
+    background-position:right 6.5vw;
     background-repeat: no-repeat;
     background-size:92%;
 }
@@ -440,10 +485,10 @@
     background: #FFFFFF;
     border-radius: 10px;
     padding:2vw 4vw 8vw 4vw;
-    background-image: url("/assets/images/client/SignUp_BG.png");
+    /*background-image: url("/assets/images/client/SignUp_BG.png");
     background-position:left bottom;
     background-repeat: no-repeat;
-    background-size:92%;
+    background-size:92%;*/
 }
 
 .btn-blue-bordered{
@@ -482,6 +527,9 @@
     border: 2px solid #A24A9C;
     color: #FFFFFF;
     background-color: #A24A9C !important;
+}
+.btn-purple-bordered-active:hover{
+    color: #FFFFFF;
 }
 
 
@@ -565,4 +613,212 @@
     border-radius: 10px;
     padding: 1vw;
 
+}
+
+.rounded-card{
+    background: #FFFFFF;
+    border-radius: 10px;
+    transition: 0.2s ease-in-out;
+    border: 1px solid rgba(48, 48, 48, 0.05);
+}
+.rounded-card:hover{
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+
+}
+
+.rounded-card:hover #card-title{
+    color:#2B6CAA !important
+}
+
+.blue-text-underline{
+    color: rgba(59, 60, 67, 0.5);    transition: 0.2s ease-in-out;
+    text-decoration-line: underline;
+    text-decoration-color: #FFFFFF;
+    text-underline-offset: 0.4vw;
+    text-decoration-thickness: 0.2vw;
+}
+.blue-text-underline:hover{
+    color:#2B6CAA
+}
+.blue-text-underline-active{
+    color:#2B6CAA !important;
+    text-decoration-line: underline;
+    text-decoration-color: #2B6CAA !important;
+    text-underline-offset: 0.4vw;
+    text-decoration-thickness: 0.2vw;
+}
+
+
+
+.container-image-card {
+    position: relative;
+    padding: 0px !important;
+    margin: 0px;
+}
+
+.blue-bordered-card{
+    border: 2px solid #2B6CAA;
+    border-radius: 10px;
+    height:12vw;
+}
+.blue-bordered-card img{
+    height: 100%;
+    width:15.5vw;
+    object-fit: cover;
+    border-radius: 10px 0px 0px 10px;
+ }
+ .blue-bordered-card .right-section{
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: flex-start;
+     padding:1.4vw 2vw;
+ }
+ 
+.blue-bordered-card .card-tag{
+    background-color: #2B6CAA;
+    padding:0.3vw 2vw;
+    border-radius:10px 0px 10px 0px;
+    font-family:Rubik Regular;
+    color:#FFFFFF
+}
+
+.blue-bordered-card #detail-button{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #2B6CAA;
+    color: #FFFFFF;
+    background-color: #2B6CAA !important;
+}
+.blue-bordered-card #meeting-link{
+    color: #2B6CAA;
+
+}
+.blue-bordered-card:hover{
+    box-shadow: 0px 0px 10px 4px rgba(43, 108, 170, 0.3);
+}
+
+.blue-bordered-card i{
+    color:#2B6CAA
+}
+
+
+
+
+
+
+.red-bordered-card{
+    border: 2px solid #CE3369;
+    border-radius: 10px;
+    height:12vw;
+}
+.red-bordered-card img{
+    height: 100%;
+    width:15.5vw;
+    object-fit: cover;
+    border-radius: 10px 0px 0px 10px;
+ }
+ .red-bordered-card .right-section{
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: flex-start;
+     padding:1.4vw 2vw;
+ }
+ 
+.red-bordered-card .card-tag{
+    background-color: #CE3369;
+    padding:0.3vw 2vw;
+    border-radius:10px 0px 10px 0px;
+    font-family:Rubik Regular;
+    color:#FFFFFF
+}
+.red-bordered-card #detail-button{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #CE3369;
+    color: #FFFFFF;
+    background-color: #CE3369 !important;
+}
+.red-bordered-card #meeting-link{
+    color: #CE3369;
+
+}
+.red-bordered-card:hover{
+    box-shadow: 0px 0px 10px 4px rgba(206, 51, 105, 0.3);
+}
+.red-bordered-card i{
+    color:#CE3369
+}
+
+.progress-bar-vertical {
+    width: 8.4vw;
+    min-height: 5vw;
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .progress-bar-vertical .progress-bar-blue {
+    width: 100%;
+    height: 0;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+    background-color: #2B6CAA;
+    color:#FFFFFF;
+    text-align: center;
+  }
+  .progress-bar-vertical .progress-bar-red {
+    width: 100%;
+    height: 0;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+    background-color: #CE3369;
+    color:#FFFFFF;
+    text-align: center;
+  }
+
+.course-collapse{
+    background: #FFFFFF;
+    padding:1vw
+}
+.course-collapse:hover{
+    background: rgba(111, 159, 205, 0.1)
+}
+#cart_icon .counter[data-count]:after{
+    position:absolute;
+    right:7%;
+    top:0%;
+    content: attr(data-count);
+    padding:0.2vw;
+    border-radius:50%;
+    line-height:1em;
+    color: white;
+    background:rgba(255,0,0,.85);
+    text-align:center;
+    min-width: 1.2vw;
+    font-size: 0.9vw;
+  }
+
+.cart-card-grey{
+    background-color: #FBFBFB;
+    padding:1vw;
+    /*width:45vw;*/
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cart-card-blue{
+    background-color: #6F9FCD;
+    padding:1vw;
+    width:4vw;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;flex-direction: column;justify-content: center;align-items: center;
 }

@@ -65,17 +65,20 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                    <p>Current Video</p>
-                                    <!--<video autoplay controls="false" style="width:20vw;height:auto;border:4px solid black;border-radius:5px" src='/assets/videos/admin/CEPAT.ogg' type='video/ogg'></video>-->
-                                    <video style="width:20vw;height:auto;border:4px solid black;border-radius:5px"  controls="false" >
-                                        <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
-                                        <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
-                                        Your browser does not support HTML video.
-                                    </video>             
-                                <div class="form-group">
-                                    <input type="file" >
-                                </div>
-                            </div>
+								<p>Banner</p>
+                                <img src="/assets/images/client/Home_Page_Banner_2.png" class="img-fluid" style="width:40%" alt="">
+                                <!--
+								<video style="width:20vw;height:auto;border:4px solid black;border-radius:5px"  controls="false" >
+									<source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
+									<source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
+									Your browser does not support HTML video.
+								</video>        
+                                -->     
+								<div class="form-group" style="margin-top:1vw">
+	                                <label for="">Click button below to update banner</label> <br>
+									<input type="file" >
+								</div>
+							</div>
                         </div>
                     </form>
 
