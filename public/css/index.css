@@ -231,6 +231,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  /* Bottom left text */
+.bottom-left {
+    position: absolute;
+    bottom: 0.5vw;
+    left: 1.5vw;
+  }
 .grey-input-form{
     background: #F0F4F9;
     border-radius: 10px;
@@ -786,3 +792,27 @@
 .course-collapse:hover{
     background: rgba(111, 159, 205, 0.1)
 }
+#cart_icon .counter[data-count]:after{
+    position:absolute;
+    right:7%;
+    top:0%;
+    content: attr(data-count);
+    padding:0.2vw;
+    border-radius:50%;
+    line-height:1em;
+    color: white;
+    background:rgba(255,0,0,.85);
+    text-align:center;
+    min-width: 1.2vw;
+    font-size: 0.9vw;
+  }
+
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }

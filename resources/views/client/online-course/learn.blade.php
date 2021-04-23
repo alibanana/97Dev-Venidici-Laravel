@@ -15,7 +15,7 @@
     <!-- START OF LEARNING SECTION -->
     <div class="col-8 p-0">
         <div style="margin-top:2vw">
-            <iframe style="width:100%;height:35vw;border-radius:10px;display:block;object-fit: cover;" 
+            <iframe style="width:100%;height:35vw;border-radius:10px;display:block;object-fit: cover" 
                 src="https://www.youtube.com/embed/znnMerAsRbk">
             </iframe>
         </div>
@@ -54,7 +54,7 @@
                                 <a href="" style="text-decoration:none">
                                     <div class="course-collapse">
                                         <div style="display:flex;justify-content:space-between">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">QnA Part 1</p>
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Introduction</p>
                                             <p class="normal-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:0px">3:20</p>
                                         </div>
                                         <i style="color:#E2E2E2" class="fas fa-play-circle"></i>
@@ -65,7 +65,7 @@
                                 <a href="" style="text-decoration:none">
                                     <div class="course-collapse">
                                         <div style="display:flex;justify-content:space-between">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">QnA Part 2</p>
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Knowing Yourself Part 1</p>
                                             <p class="normal-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:0px">4:20</p>
                                         </div>
                                         <i style="color:#E2E2E2" class="fas fa-play-circle"></i>
@@ -87,11 +87,12 @@
                         </h2>
                         <div id="collapseFAQ" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionFAQ">
                             <div class="accordion-body" style="padding:0vw;border:none !important">
+                                
                                 <!-- START OF ONE COURSE -->
                                 <a href="" style="text-decoration:none">
                                     <div class="course-collapse">
                                         <div style="display:flex;justify-content:space-between">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Introduction</p>
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">QnA Part 1</p>
                                             <p class="normal-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:0px">3:20</p>
                                         </div>
                                         <i style="color:#E2E2E2" class="fas fa-play-circle"></i>
@@ -102,7 +103,7 @@
                                 <a href="" style="text-decoration:none">
                                     <div class="course-collapse">
                                         <div style="display:flex;justify-content:space-between">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Knowing Yourself Part 1</p>
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">QnA Part 2</p>
                                             <p class="normal-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:0px">4:20</p>
                                         </div>
                                         <i style="color:#E2E2E2" class="fas fa-play-circle"></i>

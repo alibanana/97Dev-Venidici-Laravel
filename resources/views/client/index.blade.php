@@ -773,7 +773,7 @@
                 <div style="width:80%;margin-left:2vw">
                     <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Subscribe to our newsletter.....?</p>
                     <div style="display:flex;align-items:center">
-                        <input class="normal-text" placeholder="Type your email" name="" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;">
+                        <input class="normal-text" placeholder="Type your email" name="" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
 

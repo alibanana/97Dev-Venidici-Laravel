@@ -46,7 +46,7 @@
     <!-- Live Pelatihan Content -->
     <div style="padding:0px" class="user-content" id="live-pelatihan">
         <div class="col-12 p-0">
-            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
+            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
                     <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
@@ -61,14 +61,14 @@
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw">View Details</a>
+                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw">View Details</a>
                         <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
                     </div>
                 </div> 
             </div>
         </div>
         <div class="col-12 p-0">
-            <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
+            <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
                     <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw">View Details</a>
+                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw">View Details</a>
                         <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
                     </div>
                 </div> 
@@ -96,7 +96,7 @@
     <!-- Pelatihan Aktiv Content -->
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktiv">
         <div class="col-12 p-0">
-            <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
+            <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
                 <div class="container-image-card">
                     <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
@@ -106,8 +106,8 @@
                         <div>
                             <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">19 August 2021  |  09:00 - 12:00</p>
+                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
+                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
@@ -116,13 +116,13 @@
                             30%
                             </div>
                         </div>
-                        <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
+                        <a href="/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
                     </div>
                 </div> 
             </div>
         </div>
         <div class="col-12 p-0">
-            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
+            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
                 <div class="container-image-card">
                     <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
@@ -132,8 +132,8 @@
                         <div>
                             <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">19 August 2021  |  09:00 - 12:00</p>
+                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
+                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
@@ -142,7 +142,7 @@
                             50%
                             </div>
                         </div>
-                        <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
+                        <a href="/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
                     </div>
                 </div> 
             </div>
@@ -164,8 +164,8 @@
                         <div>
                             <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">19 August 2021  |  09:00 - 12:00</p>
+                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
+                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
@@ -186,8 +186,8 @@
                         <div>
                             <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">19 August 2021  |  09:00 - 12:00</p>
+                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
+                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
