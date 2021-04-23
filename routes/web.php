@@ -106,6 +106,7 @@ Route::get('/admin/cms', function () {
 Route::get('/admin/reviews', function () {
     return view('admin/reviews');
 });
+
 Route::get('/admin/forgot-password', function () {
     return view('admin/auth/forgot-password');
 });
@@ -122,6 +123,18 @@ Route::get('/admin/testimonies/1/update', function () {
 });
 /* END OF TESTIMONY ROUTING */
 
+/* START OF PROMO CODE*/
+Route::get('/admin/promo', function () {
+    return view('admin/promo/index');
+});
+Route::get('/admin/promo/create', function () {
+    return view('admin/promo/create');
+});
+Route::get('/admin/promo/1/update', function () {
+    return view('admin/promo/update');
+});
+/* END OF PROMO CODE */
+
 
 /* TRUSTED COMPANY ROUTING */
 Route::get('/admin/trusted-companies', function () {
@@ -135,6 +148,17 @@ Route::get('/admin/trusted-companies/1/update', function () {
 });
 /* END OF TRUSTED COMPANY ROUTING */
 
+/* START OF ONLINE COURSE ROUTING */
+Route::get('/admin/online-courses', function () {
+    return view('admin/online-course/index');
+});
+/* END OF ONLINE COURSE ROUTING */
+
+/* START OF ANALYTICS ROUTING */
+Route::get('/admin/analytics/online-course', function () {
+    return view('admin/analytics/online-course');
+});
+/* END OF ANALYTICS ROUTING */
 /* END OF ADMIN ROUTING */
 
 require __DIR__.'/auth.php';
