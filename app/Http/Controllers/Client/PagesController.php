@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\FakeTestimony;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,12 @@ class PagesController extends Controller
         $fake_testimonies_small = $fake_testimonies->whereNull('thumbnail')->whereNull('name')->whereNull('occupancy')->values();
 
         return view('client/index', compact('fake_testimonies_big', 'fake_testimonies_small'));
+    }
+
+    public function autocomplete(Request $request){
+        $datas = User::select('name')
+                        ->where("name","LIKE","%{$request->terms}%")
+                        ->get();
+        return response()->json($datas);
     }
 }

@@ -45,7 +45,7 @@
                     <div class="accordion-item" >
                         <h2 class="accordion-header" id="headingOne" style="background: rgba(111, 159, 205, 0.1)">
                         <button class="accordion-button bigger-text" style="border:none;border-radius:0px;font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMaterial" aria-expanded="true" aria-controls="collapseMaterial">
-                        Material
+                        <span class="bigger-text">Material</span>
                         </button>
                         </h2>
                         <div id="collapseMaterial" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionMaterial">
@@ -81,8 +81,8 @@
                 <div class="accordion" id="accordionFAQ">
                     <div class="accordion-item" >
                         <h2 class="accordion-header" id="headingOne" style="background: rgba(111, 159, 205, 0.1)">
-                        <button class="accordion-button bigger-text" style="border:none;border-radius:0px;font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFAQ" aria-expanded="true" aria-controls="collapseFAQ">
-                        Question and Answer
+                        <button class="accordion-button bigger-text" style=";border:none;border-radius:0px;font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFAQ" aria-expanded="true" aria-controls="collapseFAQ">
+                        <span class="bigger-text">Question and Answer</span>
                         </button>
                         </h2>
                         <div id="collapseFAQ" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionFAQ">

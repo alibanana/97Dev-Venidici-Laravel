@@ -7,7 +7,7 @@
 <div class="row m-0 page-container" style="padding-top:14vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
         <div class="card-white" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
-            <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:15vw;object-fit:cover" class="img-fluid" alt="DISPLAY PICTURE">
+            <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:15vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Gabriel Amileano Vidyananto</p> 
@@ -17,7 +17,7 @@
 
                         <div class="dropdown-menu" aria-labelledby="editDropdown" style="">
                             <div class="dropdown-item" >
-                                <a href="#" class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none">Profile</a>   
+                                <a href="#" class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none">Edit Profile</a>   
                             </div>
                             <div class="dropdown-item" style="margin-top:0.5vw">
                                 <a href="#" class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none">Change Password</a>   
