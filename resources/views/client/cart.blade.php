@@ -111,7 +111,7 @@
       
         </div>
     </div>  
-    <div class="col-4 p-0" style="background-color:#2B6CAA;height:110vh">
+    <div class="col-4 p-0" style="background-color:#2B6CAA;height:60vw">
         <div class="" style="padding-top:11vw;padding-left:4vw;padding-right:4vw">
             <p class="medium-heading" style="font-family:Rubik Medium;color:#FFFFFF;">Shipping Details</p>
             <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-top:4vw">Shipping Address</p>

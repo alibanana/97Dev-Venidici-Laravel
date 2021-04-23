@@ -55,7 +55,7 @@
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
                 
-                <input type="text" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw" placeholder="Course Title">
+                <input type="text" class="small-text typeahead" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw" placeholder="Course Title">
                 
             </div>
             <div style="margin-left: 1vw;">
@@ -802,4 +802,5 @@
         }
          
 </script>
+
 @endsection

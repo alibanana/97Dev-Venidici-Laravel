@@ -40,6 +40,9 @@ Route::get('/dashboard', function () {
 Route::get('/', [PagesController::class, 'index'])->name('index');
 
 /* START OF CLIENT ROUTING */
+
+Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
+
 Route::get('/login', function () {
     return view('client/auth/login');
 });
