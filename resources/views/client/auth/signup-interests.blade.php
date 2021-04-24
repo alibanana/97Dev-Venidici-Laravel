@@ -21,44 +21,44 @@
 
                         <div class="row" style="overflow:scroll;height:22vw;margin-top:1vw">
                             <div class="col-6 p-0" style="margin-top:1.5vw">
-                                <a href="">
                                     <div class="container">
-                                        <img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                        <div class="bottom-left">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Tech</p>
-                                        </div>
+                                        <a href="">
+                                            <img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
+                                            <div class="bottom-left">
+                                                <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Tech</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
                             </div>
                             <div class="col-6 p-0" style="margin-top:1.5vw">
-                                <a href="">
                                     <div class="container">
-                                        <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                        <div class="bottom-left">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Math</p>
-                                        </div>
+                                        <a href="">
+                                            <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
+                                            <div class="bottom-left">
+                                                <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Math</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
                             </div>
                             <div class="col-6 p-0" style="margin-top:1.5vw">
-                                <a href="">
                                     <div class="container">
-                                        <img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                        <div class="bottom-left">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Tech</p>
-                                        </div>
+                                        <a href="">
+                                            <img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
+                                            <div class="bottom-left">
+                                                <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Tech</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
                             </div>
                             <div class="col-6 p-0" style="margin-top:1.5vw">
-                                <a href="">
                                     <div class="container">
-                                        <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                        <div class="bottom-left">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Math</p>
-                                        </div>
+                                        <a href="">
+                                            <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
+                                            <div class="bottom-left">
+                                                <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Math</p>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
                             </div>
                             <div class="col-6 p-0" style="margin-top:1.5vw">
                                 <a href="">
