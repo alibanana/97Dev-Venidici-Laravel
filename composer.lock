@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b4e5c4a079a99be174594c9ba5eceb0",
+    "content-hash": "b55b38e0989db836dd8d7c0c4afa253e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -807,6 +807,70 @@
                 "url"
             ],
             "time": "2021-03-21T16:25:00+00:00"
+        },
+        {
+            "name": "kavist/rajaongkir",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kavist/rajaongkir.git",
+                "reference": "c1ab72000d05b1cb6b0a1a1364d6200b78976377"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kavist/rajaongkir/zipball/c1ab72000d05b1cb6b0a1a1364d6200b78976377",
+                "reference": "c1ab72000d05b1cb6b0a1a1364d6200b78976377",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "codedungeon/phpunit-result-printer": "^0.26.2",
+                "fzaninotto/faker": "^1.8",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^4.1",
+                "phpunit/phpunit": "^8.0",
+                "spatie/phpunit-watcher": "^1.12"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Kavist\\RajaOngkir\\Providers\\LaravelServiceProvider"
+                    ],
+                    "aliases": {
+                        "RajaOngkir": "Kavist\\RajaOngkir\\Facades\\RajaOngkir"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kavist\\RajaOngkir\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ian Mustafa",
+                    "email": "mail@ianmustafa.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Klien API PHP untuk RajaOngkir",
+            "homepage": "https://github.com/kavist/rajaongkir",
+            "keywords": [
+                "laravel",
+                "rajaongkir"
+            ],
+            "support": {
+                "issues": "https://github.com/kavist/rajaongkir/issues",
+                "source": "https://github.com/kavist/rajaongkir/tree/v1.1.0"
+            },
+            "time": "2019-10-11T01:21:56+00:00"
         },
         {
             "name": "laravel/framework",
@@ -4598,6 +4662,48 @@
                 "validate"
             ],
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "xfers/xfers-php",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Xfers/xfers-php.git",
+                "reference": "62667f5f323a5094871ae731ad63dcc901687702"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Xfers/xfers-php/zipball/62667f5f323a5094871ae731ad63dcc901687702",
+                "reference": "62667f5f323a5094871ae731ad63dcc901687702",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "^1.2",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xfers\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Xfers and contributors",
+                    "homepage": "https://github.com/Xfers/xfers-php/contributors"
+                }
+            ],
+            "description": "Xfers PHP Bindings",
+            "support": {
+                "issues": "https://github.com/Xfers/xfers-php/issues",
+                "source": "https://github.com/Xfers/xfers-php/tree/v1.3.0"
+            },
+            "time": "2017-03-30T19:34:45+00:00"
         }
     ],
     "packages-dev": [

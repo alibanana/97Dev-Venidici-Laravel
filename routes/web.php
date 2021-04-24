@@ -58,6 +58,9 @@ Route::get('/dashboard', function () {
 Route::get('/cart', function () {
     return view('client/cart');
 });
+Route::get('/rajaongkir/provinces', [RajaOngkirController::class, 'getProvinces'])->name('customer.rajaongkir.getProvinces');
+Route::get('/rajaongkir/cities', [RajaOngkirController::class, 'getCities'])->name('customer.rajaongkir.getCities');
+Route::post('/rajaongkir/checkOngkir', [RajaOngkirController::class, 'checkOngkir'])->name('customer.rajaongkir.checkOngkir');
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', function () {
