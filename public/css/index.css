@@ -519,6 +519,20 @@ html, body {
     background-color: #2B6CAA !important;
 }
 
+.btn-yellow-bordered{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #F4C257;
+    color: #3B3C43;
+    background-color: #FFFFFF;
+}
+.btn-yellow-bordered:hover{
+    color: #FFFFFF;
+    background-color: #F4C257 !important;
+}
 
 .btn-purple-bordered-active{
     border-radius: 5px;
@@ -816,6 +830,7 @@ html, body {
     display:flex;
     align-items: center;
     justify-content: space-between;
+    width:54.5vw
 }
 .cart-card-blue{
     background-color: #6F9FCD;

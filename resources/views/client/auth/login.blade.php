@@ -9,7 +9,7 @@
     -->
     <div class="col-12 p-0">
 
-            <div class="centered white-modal" style="width:65vw">
+            <div class="centered white-modal" style="width:65vw;padding-bottom:4vw">
                 <div style="display:flex;justify-content:space-between">
                     <a href="/" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Home</span></a>
                     <!--<a href="/signup" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none">Sign up<i style="margin-left:0.5vw" class="fas fa-arrow-right"></i></a>-->
@@ -43,14 +43,20 @@
                                         </span>
                                     @enderror
                                 </div> 
-                                <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw">Log In</button>
+                                <div style="display:flex;justify-content:space-between;margin-bottom:2vw">
+                                    <a href="/signup" class="normal-text btn-yellow-bordered" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw">Sign Up</a>
+                                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw">Log In</button>
+                                </div>
+                                <button class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;width:100%;background-color:#67BBA3;border:none;color:#FFFFFF;border-radius:5px;padding:0.5vw 2vw"> <i class="fab fa-google"></i> <span style="margin-left:0.5vw">Login with Google Account</span></button>
                             </div>
                         </div>   
                     </div>
                 </form>
+                <!--
                 <div style="display:flex;justify-content:flex-end;margin-top:2vw;padding-bottom:3vw">
                     <a href="/signup" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none">Belum punya akun? Daftar sekarang<i style="margin-left:0.5vw" class="fas fa-arrow-right"></i></a>
                 </div>
+                -->
             </div>
     </div>
 </div>

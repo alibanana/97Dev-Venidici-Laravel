@@ -2,7 +2,7 @@
 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color:#2B6CAA">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/dashboard">
         <!--
         <div class="sidebar-brand-icon">
             <img src="/assets/images/admin/logo_circle.png" alt="" class="img-fluid" class="img-fluid" style="width:3vw">
