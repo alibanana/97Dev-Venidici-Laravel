@@ -45,12 +45,12 @@
 </div>
  END OF BANNER SECTION -->
 
-<div class="row m-0 banner-background page-container" style="height:50vw;padding-top:16vw;text-align:center">
+<div class="row m-0 banner-background page-container"
+    style="height: 50vw; padding-top: 16vw; text-align: center;
+    background-image: url({{ $configs['cms.homepage.top-section.background']->value }});">
     <div class="col-md-12 p-0">
-        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Selamat datang di
-        Venidici</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line" >“Veni, vidi, vici.” Saya datang, saya lihat, saya
-        taklukkan.</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
+        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</p>
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">

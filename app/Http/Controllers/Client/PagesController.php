@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Config;
 use App\Models\FakeTestimony;
 use App\Models\User;
 
@@ -21,17 +22,19 @@ class PagesController extends Controller
 {
     // Show the main landing page of the app.
     public function index() {
+        $config_keyword = 'cms.homepage';
+        $configs = Config::select('key', 'value')->where([['key', 'like', "%".$config_keyword."%"]])->get()->keyBy('key');
+
         $fake_testimonies = FakeTestimony::orderByRaw('CHAR_LENGTH(content) DESC')->get();
         $fake_testimonies_big = $fake_testimonies->whereNotNull('thumbnail')->whereNotNull('name')->whereNotNull('occupancy')->values();
         $fake_testimonies_small = $fake_testimonies->whereNull('thumbnail')->whereNull('name')->whereNull('occupancy')->values();
 
-        return view('client/index', compact('fake_testimonies_big', 'fake_testimonies_small'));
+        return view('client/index', compact('configs', 'fake_testimonies_big', 'fake_testimonies_small'));
     }
 
     public function autocomplete(Request $request){
-        $datas = User::select('name')
-                        ->where("name","LIKE","%{$request->terms}%")
-                        ->get();
+        $datas = User::select('name')->where("name", "like", "%{$request->terms}%")->get();
+
         return response()->json($datas);
     }
 }

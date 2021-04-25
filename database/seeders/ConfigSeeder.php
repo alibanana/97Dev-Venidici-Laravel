@@ -18,15 +18,15 @@ class ConfigSeeder extends Seeder
         $configs = [
             [
                 'key' => 'cms.homepage.top-section.heading',
-                'value' => 'Anytime, anywhere.'
+                'value' => "Selamat datang di\nVenidici"
             ],
             [
                 'key' => 'cms.homepage.top-section.sub-heading',
-                'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla.'
+                'value' => "“Veni, vidi, vici.” Saya datang, saya lihat, saya\ntaklukkan."
             ],
             [
-                'key' => 'cms.homepage.top-section.video',
-                'value' => 'assets/videos/seeder/homepage-video.mp4'
+                'key' => 'cms.homepage.top-section.background',
+                'value' => 'assets/images/seeder/homepage_background.png'
             ],
             [
                 'key' => 'cms.homepage.trusted-company-section.trusted-company-count',

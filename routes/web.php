@@ -92,11 +92,11 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - DashboardController
 |   - HomepageController
 |   - UserController
-|   - FakeTestimonyController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
+    Route::put('/cms/homepage/top-section', [AdminHomepageController::class, 'updateTopSection'])->name('cms.homepage.top-section.update');
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });
 

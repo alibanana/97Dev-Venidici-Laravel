@@ -34,17 +34,10 @@
 
 /* start of background images */
 .banner-background{
-    background-image: url("/assets/images/client/Home_Page_Banner_2.png");
     background-position:left top;
     background-repeat: no-repeat;
     background-size: 100%;
     height:100%;
-}
-.home-background{
-    background-image: url("/assets/images/client/Home_Page_Banner.png");
-    background-position:right top;
-    background-repeat: no-repeat;
-    background-size: 100%;
 }
 .our-programs-background{
     background-image: url("/assets/images/client/Our_Program_BG.png");

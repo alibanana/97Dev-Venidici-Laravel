@@ -40,7 +40,7 @@
 					</div>
                     
 					<!-- Home Page Top Section -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('admin.cms.homepage.top-section.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method("put")
                         <div class="row">
@@ -48,35 +48,28 @@
                                 <h5 class="mb-0 mb-3 text-gray-800" style="color:white">Home Page Top Section</h5>
                             </div>
                             <div class="col-6" style="display:flex;justify-content:flex-end">
-                                <button type="submit" class="btn btn-primary btn-user" style="padding:1vw 8vw" onclick='return confirm("Are you sure you want to update the content?")'>
+                                <button type="submit" class="btn btn-primary btn-user" style="padding:1vw 8vw" onclick='return confirm("Are you sure you want to update the Top-Section of the Homepage?")'>
                                     Update Content
                                 </button>						
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="">Heading</label>
-                                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">{{ $configs['cms.homepage.top-section.heading']->value }}</textarea>
+                                    <textarea name="heading" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title" required>{{ $configs['cms.homepage.top-section.heading']->value }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="">Sub-Heading</label>
-                                    <textarea name="title" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</textarea>
+                                    <textarea name="sub-heading" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title" required>{{ $configs['cms.homepage.top-section.sub-heading']->value }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
 								<p>Banner</p>
-                                <img src="/assets/images/client/Home_Page_Banner_2.png" class="img-fluid" style="width:40%" alt="">
-                                <!--
-								<video style="width:20vw;height:auto;border:4px solid black;border-radius:5px"  controls="false" >
-									<source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
-									<source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
-									Your browser does not support HTML video.
-								</video>        
-                                -->     
-								<div class="form-group" style="margin-top:1vw">
-	                                <label for="">Click button below to update banner</label> <br>
-									<input type="file" >
+                                <img src="{{ asset($configs['cms.homepage.top-section.background']->value) }}" class="img-fluid" style="width:40%" alt="Homepage background image not available!">    
+                                <div class="form-group" style="margin-top:1vw">
+                                    <label for="">Click button below to update banner</label> <br>
+									<input type="file" name="image" >
 								</div>
 							</div>
                         </div>
