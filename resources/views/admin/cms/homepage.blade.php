@@ -56,12 +56,22 @@
                                 <div class="form-group">
                                     <label for="">Heading</label>
                                     <textarea name="heading" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title" required>{{ $configs['cms.homepage.top-section.heading']->value }}</textarea>
+                                    @error('heading')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="">Sub-Heading</label>
                                     <textarea name="sub-heading" class="form-control form-control-user" cols="30" rows="2" placeholder="Here insert title" required>{{ $configs['cms.homepage.top-section.sub-heading']->value }}</textarea>
+                                    @error('sub-heading')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">
@@ -69,8 +79,13 @@
                                 <img src="{{ asset($configs['cms.homepage.top-section.background']->value) }}" class="img-fluid" style="width:40%" alt="Homepage background image not available!">    
                                 <div class="form-group" style="margin-top:1vw">
                                     <label for="">Click button below to update banner</label> <br>
-									<input type="file" name="image" >
-								</div>
+									<input type="file" name="image" accept=".jpeg,.jpg,.png" >
+                                    @error('image')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
 							</div>
                         </div>
                     </form>

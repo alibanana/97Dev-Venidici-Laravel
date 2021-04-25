@@ -40,7 +40,8 @@ class HomepageController extends Controller
     public function updateTopSection(Request $request) {
         $validated = $request->validate([
             'heading' => 'required',
-            'sub-heading' => 'required'
+            'sub-heading' => 'required',
+            'image' => 'mimes:jpeg,jpg,png'
         ]);
 
         $config_heading = Config::where('key', 'cms.homepage.top-section.heading')->first();
@@ -55,6 +56,8 @@ class HomepageController extends Controller
             $filepath = Helper::storeImage($request->file('image'), 'storage/images/config/');
 
             $config_background = Config::where('key', 'cms.homepage.top-section.background')->first();
+            
+            unlink($config_background->value);
             $config_background->value = $filepath;
             $config_background->save();
         }
