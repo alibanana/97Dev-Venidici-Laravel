@@ -80,14 +80,13 @@
     <div class="col-12 p-0" style="margin-top:-5vw">
         <div style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
-                <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">10</p>
+                <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
                 <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Trusted Companies</p>
             </div>
             <img src="/assets/images/icons/vertical-splitter.png" style="max-height:3.5vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/logo-itb 2.png" style="max-height:3.5vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/bca-bank.png" style="max-height:3.5vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/flick.png" style="max-height:3.5vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/silvi.png" style="max-height:3.5vw" class="img-fluid" alt="">
+            @foreach ($trusted_companies as $company)
+                <img src="{{ asset($company->image) }}" style="max-height:3.5vw" class="img-fluid" alt="Image not available..">                
+            @endforeach
         </div>
     </div>
 </div>

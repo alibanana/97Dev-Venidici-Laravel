@@ -44,24 +44,47 @@ class HomepageController extends Controller
             'image' => 'mimes:jpeg,jpg,png'
         ]);
 
-        $config_heading = Config::where('key', 'cms.homepage.top-section.heading')->first();
+        $config_heading = Config::where('key', 'cms.homepage.top-section.heading')->firstOrFail();
         $config_heading->value = $validated['heading'];
         $config_heading->save();
 
-        $config_sub_heading = Config::where('key', 'cms.homepage.top-section.sub-heading')->first();
+        $config_sub_heading = Config::where('key', 'cms.homepage.top-section.sub-heading')->firstOrFail();
         $config_sub_heading->value = $validated['sub-heading'];
         $config_sub_heading->save();
 
         if ($request->has('image')) {
-            $filepath = Helper::storeImage($request->file('image'), 'storage/images/config/');
-
-            $config_background = Config::where('key', 'cms.homepage.top-section.background')->first();
-            
+            $filepath = Helper::storeImage($request->file('image'), 'storage/images/configs/');
+            $config_background = Config::where('key', 'cms.homepage.top-section.background')->firstorfail();
             unlink($config_background->value);
             $config_background->value = $filepath;
             $config_background->save();
         }
 
-        return redirect()->route('admin.cms.homepage.index')->with('message', 'Top Section has been update!');
+        return redirect()->route('admin.cms.homepage.index')->with('message', 'Top Section has been updated!');
+    }
+
+    // Update Trusted Company in the database.
+    public function updateTrustedCompany(Request $request) {
+        $validated = $request->validate([
+            'trusted-company-count' => 'required',
+            'images' => 'array',
+            'images.*' => 'mimes:jpeg,jpg,png'
+        ]);
+
+        $config_trusted_company_count = Config::where('key', 'cms.homepage.trusted-company-section.trusted-company-count')->firstOrFail();
+        $config_trusted_company_count->value = $validated['trusted-company-count'];
+        $config_trusted_company_count->save();
+
+        if ($request->has('images')) {
+            foreach ($request->file('images') as $company_id => $image) {
+                $filepath = Helper::storeImage($image, 'storage/images/trusted-companies/');
+                $company = TrustedCompany::findOrFail($company_id);
+                unlink($company->image);
+                $company->image = $filepath;
+                $company->save();
+            }
+        }
+
+        return redirect()->route('admin.cms.homepage.index')->with('message', 'Trusted Company Section has been updated!');
     }
 }

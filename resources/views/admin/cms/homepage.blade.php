@@ -91,7 +91,7 @@
                     </form>
 
                     <!-- Trusted Companies Section -->
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('admin.cms.homepage.trusted-company.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method("put")
                         <div class="row" style="margin-top:4vw" >
@@ -99,15 +99,20 @@
                                 <h5 class="mb-0 mb-3 text-gray-800" style="color:white">Trusted Company Section</h5>
                             </div>
                             <div class="col-6" style="display:flex;justify-content:flex-end">
-                                <button type="submit" class="btn btn-primary btn-user" style="padding:1vw 8vw" onclick='return confirm("Are you sure you want to update the content?")'>
+                                <button type="submit" class="btn btn-primary btn-user" style="padding:1vw 8vw" onclick='return confirm("Are you sure you want to update the Trusted Company section in the Homepage?")'>
                                     Update Content
                                 </button>						
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Trusted Company Count</label>
-                                    <input type="text" class="form-control form-control-user" value="{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}" name="">
-                                    </textarea>
+                                    <input type="text" name="trusted-company-count" class="form-control form-control-user" 
+                                        value="{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}" required>
+                                    @error('trusted-company-count')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-6"></div>
@@ -115,18 +120,18 @@
                                 <div class="col-3 mb-4">
                                     <div class="card shadow h-100 py-2">
                                         <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
+                                            <div class="row no-gutters align-items-center" style="height: 250px">
                                                 <div class="col" style="text-align:center">
                                                     <img src="{{ asset($company->image) }}" alt="" class="img-fluid">
-                                                    <!-- START OF UPLOADED IMAGE -->
-                                                    <input type="file" name="image" accept="image/*" style="margin-top:2vw">
-                                                    @error('image')
-                                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
                                                 </div>
                                             </div>
+                                            <!-- START OF UPLOADED IMAGE -->
+                                            <input type="file" name="images[{{ $company->id }}]" accept=".jpeg,.jpg,.png" style="margin-top:2vw">
+                                            @error('images.' . $company->id)
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

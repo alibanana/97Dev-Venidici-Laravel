@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Config;
+use App\Models\TrustedCompany;
 use App\Models\FakeTestimony;
 use App\Models\User;
 
@@ -25,11 +26,13 @@ class PagesController extends Controller
         $config_keyword = 'cms.homepage';
         $configs = Config::select('key', 'value')->where([['key', 'like', "%".$config_keyword."%"]])->get()->keyBy('key');
 
+        $trusted_companies = TrustedCompany::all();
+
         $fake_testimonies = FakeTestimony::orderByRaw('CHAR_LENGTH(content) DESC')->get();
         $fake_testimonies_big = $fake_testimonies->whereNotNull('thumbnail')->whereNotNull('name')->whereNotNull('occupancy')->values();
         $fake_testimonies_small = $fake_testimonies->whereNull('thumbnail')->whereNull('name')->whereNull('occupancy')->values();
 
-        return view('client/index', compact('configs', 'fake_testimonies_big', 'fake_testimonies_small'));
+        return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small'));
     }
 
     public function autocomplete(Request $request){
