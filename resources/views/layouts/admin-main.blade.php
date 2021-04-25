@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="stylesheet"  type="text/css"  href="/css/admin.css">
     <title>@yield('title')</title>
 
     <!-- Custom fonts for this template-->
@@ -146,64 +147,6 @@
             </div>
         </div>
     </div>
-
-    <!-- instagram Modal-->
-    <div class="modal fade" id="instagramModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Instagram Credential</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                @if (session()->has('error_validation_on_instagram_modal'))
-                <div class="p-3 mt-2 mb-0">
-                    <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                        {{ session()->get('error_validation_on_instagram_modal') }}     
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-                @endif
-
-                <form method="POST" action="">
-                @csrf
-                <div class="modal-body">
-                    <h6 class="modal-title" id="exampleModalLabel">Username</h6>
-                    <div class="form-group mt-2">
-                        <input type="text" name="instagram_username" class="form-control form-control-user"
-                            id="exampleInputPassword" value="" placeholder="Insert your instagram username" required>
-                        @error('instagram_username')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <h6 class="modal-title" id="exampleModalLabel">Password</h6>
-                    <div class="form-group mt-2">
-                        <input type="password" value="" name="instagram_password" class="form-control form-control-user"
-                            id="exampleInputPassword" placeholder="Insert your instagram password" required>
-                        @error('instagram_password')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" type="submit">Change Credential</button>   
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>

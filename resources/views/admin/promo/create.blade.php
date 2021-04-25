@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Testimony CMS')
+@section('title', 'Venidici Create Promo')
 
 @section('container')
 

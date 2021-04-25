@@ -86,11 +86,19 @@
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/online-courses" 
-            aria-expanded="true" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourse"
+            aria-expanded="true" aria-controls="collapseCourse">
             <i class="fas fa-graduation-cap"></i>
             <span>Online Courses</span>
         </a>
+        <div id="collapseCourse" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseCourse">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin/online-courses">Online Courses</a>
+                <a class="collapse-item" href="/admin/online-courses/course-categories">Course Categories</a>
+                <a class="collapse-item" href="/admin/online-courses/assesments">Assesments</a>
+                <a class="collapse-item" href="/admin/online-courses/teachers">Teachers</a>
+            </div>
+        </div>
     </li>
 
 

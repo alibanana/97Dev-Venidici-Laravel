@@ -1,8 +1,11 @@
-#uploadButton{
-    background-color: #fa7600;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 0.3rem;
-    cursor: pointer;
-    
+.course-link-active{
+    color:#2B6CAA !important;
+    border-bottom:2px solid #2B6CAA;
+}
+.course-link{
+    color:grey
+}
+.course-link:hover{
+    color:#2B6CAA
+
 }

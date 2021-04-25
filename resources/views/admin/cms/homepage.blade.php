@@ -40,7 +40,7 @@
 						
 						
 					</div>
-                    
+                    <!-- START OF TOP SECTION -->
                     <form method="POST" action="">
                     @csrf
                     @method("put")
@@ -83,7 +83,8 @@
 						</div>
                     </div>
                     </form>
-
+                    <!-- END OF TOP SECTION -->
+                    <!-- TRUSTED COMPANY SECTIION -->
                     <form method="POST" action="">
                     @csrf
                     @method("put")
@@ -109,7 +110,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col" style="text-align:center">
-                                            <img src="/assets/images/client/bca-bank.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/client/bca-bank.png" alt="" style="width:14vw;" class="img-fluid">
                                             <!-- START OF UPLOADED IMAGE -->
                                             <input type="file" name="image" accept="image/*" style="margin-top:2vw">
                                             @error('image')
@@ -127,7 +128,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col" style="text-align:center">
-                                            <img src="/assets/images/client/bca-bank.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/client/bca-bank.png" alt="" style="width:14vw;" class="img-fluid">
                                             <!-- START OF UPLOADED IMAGE -->
                                             <input type="file" name="image" accept="image/*" style="margin-top:2vw">
                                             @error('image')
@@ -145,7 +146,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col" style="text-align:center">
-                                            <img src="/assets/images/client/bca-bank.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/client/bca-bank.png" alt="" style="width:14vw;" class="img-fluid">
                                             <!-- START OF UPLOADED IMAGE -->
                                             <input type="file" name="image" accept="image/*" style="margin-top:2vw">
                                             @error('image')
@@ -163,7 +164,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col" style="text-align:center">
-                                            <img src="/assets/images/client/bca-bank.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/client/bca-bank.png" alt="" style="width:14vw;" class="img-fluid">
                                             <!-- START OF UPLOADED IMAGE -->
                                             <input type="file" name="image" accept="image/*" style="margin-top:2vw">
                                             @error('image')
@@ -178,6 +179,57 @@
                         </div>
                     </div>
                     </form> 
+                    <!-- END OF TRUSTED COMPANY SECTION -->
+
+                    <!-- START OF APA YANG KAMU DAPAT SECTION -->
+                    <form method="POST" action="">
+                    @csrf
+                    @method("put")
+                    <div class="row" style="margin-top:8vw" >
+						<div class="col-12" >
+                            <h5 class="mb-0 mb-3 text-gray-800" style="color:white">Apa Yang Kamu Dapat Section</h5>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Title</label>
+                                <input type="text" name="title" class="form-control" value="Feature 1">
+                                @error('title')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>                        
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                Current image: <br>
+                                <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 5vw;" alt=""> 
+                                <br>
+                                <br>
+                                <label for="">Click button below to change image</label>
+                                <input type="file" name="image">
+                                @error('image')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>                        
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+								<label for="">Description</label>
+								<textarea name="description" class="form-control form-control-user" rows="2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla</textarea>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                        <!-- END OF APA YANG KAMU DAPAT SECTION -->
+                    <!-- TESTIMONY SECTION -->
                     <div class="row">
 						<div class="col-12" style="margin-top:8vw">
 							<h5 class="mb-0 mb-3 text-gray-800" style="color:white">Testimony Section</h5>
@@ -271,7 +323,8 @@
                             </div>
                         </div>
 						
-					</div>
+                    </div>
+                    <!-- END OF TESTIMONY SECTION -->
 					<!-- /.container-fluid -->
                 </div>
             </div>
