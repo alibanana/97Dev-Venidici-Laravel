@@ -3,7 +3,10 @@
     margin: 0;
     padding: 0;
 }
-
+html, body {
+    margin:0px;
+    height:100%;
+}
 @font-face {
     font-family: Rubik Bold;
     src: url(/fonts/Rubik/Rubik-Bold.ttf);
@@ -63,7 +66,6 @@
     background-image: url("/assets/images/client/Auth_BG.png");
     /* Full height */
     height: 100%; 
-
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
@@ -468,7 +470,7 @@
 .white-modal{
     background: #FFFFFF;
     border-radius: 10px;
-    padding:2vw 4vw 8vw 4vw;
+    padding:2vw 4vw 0vw 4vw;
     background-image: url("/assets/images/client/Auth_Bottom_BG.png");
     background-position:right 6.5vw;
     background-repeat: no-repeat;
