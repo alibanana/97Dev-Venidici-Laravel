@@ -154,6 +154,40 @@ Route::get('/admin/trusted-companies/1/update', function () {
 Route::get('/admin/online-courses', function () {
     return view('admin/online-course/index');
 });
+Route::get('/admin/online-courses/create', function () {
+    return view('admin/online-course/create');
+});
+Route::get('/admin/online-courses/create-video/1', function () {
+    return view('admin/online-course/create-video');
+});
+Route::get('/admin/online-courses/1/update', function () {
+    return view('admin/online-course/update');
+});
+Route::get('/admin/admin/course-categories/create', function () {
+    return view('admin/online-course/create-category');
+});
+Route::get('/admin/online-courses/course-categories', function () {
+    return view('admin/course-category/index');
+});
+Route::get('/admin/online-courses/assesments', function () {
+    return view('admin/assesment/index');
+});
+Route::get('/admin/online-courses/assesments/create', function () {
+    return view('admin/assesment/create');
+});
+Route::get('/admin/online-courses/assesments/1/update', function () {
+    return view('admin/assesment/update');
+});
+
+Route::get('/admin/online-courses/teachers', function () {
+    return view('admin/teacher/index');
+});
+Route::get('/admin/online-courses/teachers/create', function () {
+    return view('admin/teacher/create');
+});
+Route::get('/admin/online-courses/teachers/1/update', function () {
+    return view('admin/teacher/update');
+});
 /* END OF ONLINE COURSE ROUTING */
 
 /* START OF ANALYTICS ROUTING */

@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Promo Codes')
+@section('title', 'Venidici Teachers')
 
 @section('container')
 
@@ -22,8 +22,8 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="mb-0 mb-3 text-gray-800">Promo Code</h1>
-            <a href="/admin/promo/create" class="btn btn-primary btn-user p-3">Create New Promo Code</a>
+            <h2 class="mb-0 mb-3 text-gray-800">Teacher List</h2>
+            <a href="/admin/online-courses/teachers/create" class="btn btn-primary btn-user p-3">Create New Teacher</a>
 
         </div>
         
@@ -40,16 +40,7 @@
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
 
                     <div class="row mt-2 mb-3">
-                        <!--
-                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
-                            <div class="dataTables_length" id="show_entries">
-                                <label class="w-100">Show:
-                                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'show' => '10']) }}" @if (Request::get('show') == '10') selected @endif>10</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
+            
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
@@ -73,7 +64,6 @@
                                 </label>
                             </div>
                         </div>
-                        -->
                     </div>
 
                     <!-- Main Table -->
@@ -84,32 +74,59 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Code</th>
-                                                <th>Discount</th>
-                                                <th>Valid From</th>
-                                                <th>Valid Until</th>
+                                                <th>Teacher</th>
+                                                <th>Description</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>GRX45</td>
-                                                <td>10%</td>   
-                                                <td>20/04/2021</td>   
-                                                <td>20/05/2021</td>   
+                                                <td style="text-align:center" class="text-nowrap">
+                                                    <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
+                                                    <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
+                                                </td>
+                                                <td>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
+                                                </td>  
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <form action="" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
                                                                 </div>
                                                             </form> 
                                                       
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promo/1/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/teachers/1/update">Update</a>
+                                                            </div>
+                                                   
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td style="text-align:center" class="text-nowrap">
+                                                    <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
+                                                    <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
+                                                </td>
+                                                <td>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
+                                                </td>  
+                                                <td>
+                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                            <form action="" method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div style="padding: 0px 2px">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
+                                                                </div>
+                                                            </form> 
+                                                      
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/teachers/1/update">Update</a>
                                                             </div>
                                                    
                                                     </div>
