@@ -97,6 +97,7 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
     Route::put('/cms/homepage/top-section', [AdminHomepageController::class, 'updateTopSection'])->name('cms.homepage.top-section.update');
+    Route::put('/cms/homepage/trusted-company', [AdminHomepageController::class, 'updateTrustedCompany'])->name('cms.homepage.trusted-company.update');
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });
 
@@ -135,19 +136,6 @@ Route::get('/admin/promo/1/update', function () {
     return view('admin/promo/update');
 });
 /* END OF PROMO CODE */
-
-
-/* TRUSTED COMPANY ROUTING */
-Route::get('/admin/trusted-companies', function () {
-    return view('admin/trusted-company/index');
-});
-Route::get('/admin/trusted-companies/create', function () {
-    return view('admin/trusted-company/create');
-});
-Route::get('/admin/trusted-companies/1/update', function () {
-    return view('admin/trusted-company/update');
-});
-/* END OF TRUSTED COMPANY ROUTING */
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/admin/online-courses', function () {
