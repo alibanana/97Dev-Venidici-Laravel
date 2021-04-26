@@ -12,6 +12,7 @@
         "kavist/rajaongkir": "^1.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "tymon/jwt-auth": "1.0.1",
         "xfers/xfers-php": "^1.3"
     },
     "require-dev": {
