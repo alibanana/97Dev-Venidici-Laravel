@@ -33,9 +33,24 @@
         <!-- start of table -->
         
         <div class="row">
+            <div class="col-3">
+                <input type="file" name="image">
+                @error('image')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
             <div class="col-6">
                 <input type="text" name="name" class="form-control" placeholder="Enter course categryy (e.g. Tech)">
-                <button type="submit" href="/admin/promo/create" class="btn btn-primary btn-user"  style="margin-top:1vw" >Create New Category</button>
+                @error('name')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="col-3" style="text-align:right">
+                <button type="submit" href="/admin/promo/create" class="btn btn-primary btn-user">Create New Category</button>
             </div>
             <div class="col-md-12">
                 <!-- Begin Page Content -->
@@ -49,6 +64,7 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
+                                            <th>Image</th>
                                             <th>Category</th>
                                             <th>Action</th>
                                         </tr>
@@ -56,6 +72,11 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
+                                            <td>
+                                                <img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:6vw;height:6vw;border-radius:10px" alt="Interest">
+                                                <br> <br> Click button below to update image <br>
+                                                <input type="file" name="image">
+                                            </td>
                                             <td>
                                                 <input type="text" name="name" class="form-control" value="Technologies">
                                             </td> 
