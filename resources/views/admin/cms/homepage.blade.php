@@ -38,7 +38,7 @@
 					<div class="d-sm-flex align-items-center justify-content-between mb-4 mt-5">
 						<h2 class="mb-0 mb-3 text-gray-800" style="color:white">Content Management System</h2>
 					</div>
-                    
+
 					<!-- Home Page Top Section -->
                     <form method="POST" action="{{ route('admin.cms.homepage.top-section.update') }}" enctype="multipart/form-data">
                     @csrf
@@ -138,8 +138,7 @@
                             @endforeach
                         </div>
                     </form>
-
-                    <!-- Testimonies Section -->
+                    
                     <div class="row">
 						<div class="col-12" style="margin-top:4vw">
 							<h5 class="mb-0 mb-3 text-gray-800" style="color:white">Testimony Section</h5>
@@ -240,7 +239,8 @@
                             </div>
                         </div>
 						
-					</div>
+                    </div>
+                    <!-- END OF TESTIMONY SECTION -->
 					<!-- /.container-fluid -->
                 </div>
             </div>

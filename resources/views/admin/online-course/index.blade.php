@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Testimony CMS')
+@section('title', 'Venidici Online Courses')
 
 @section('container')
 
@@ -23,7 +23,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="mb-0 mb-3 text-gray-800">Online Courses</h1>
-            <a href="/admin/trusted-companies/create" class="btn btn-primary btn-user p-3">Create New Course</a>
+            <a href="/admin/online-courses/create" class="btn btn-primary btn-user p-3">Create New Course</a>
 
         </div>
         
@@ -114,7 +114,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td style="color:green">Active</td>
+                                                <td style="color:green">Published</td>
 
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
@@ -125,18 +125,16 @@
                                                                     <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
                                                                 </div>
                                                             </form> 
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
+                                                            </div>
                                                             <form action="" method="post">
                                                                 @csrf
                                                                 @method('put')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to hide this online course?')">Hide</button>
+                                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this online course as draft?')">Set as draft</button>
                                                                 </div>
                                                             </form> 
-                                                      
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/trusted-companies/1/update">Update</a>
-                                                            </div>
-                                                   
                                                     </div>
                                                 </td>
                                             </tr>
@@ -163,7 +161,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td style="color:green">Active</td>
+                                                <td>DRAFT</td>
 
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
@@ -174,16 +172,9 @@
                                                                     <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
                                                                 </div>
                                                             </form> 
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('put')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to hide this online course?')">Hide</button>
-                                                                </div>
-                                                            </form> 
                                                             
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/trusted-companies/1/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
                                                             </div>
                                                     </div>
                                                 </td>
