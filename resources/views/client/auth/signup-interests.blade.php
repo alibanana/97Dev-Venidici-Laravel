@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <!-- START OF ONE LEFT INTEREST -->
-                    <div class="col-4" style="margin-top:2vw">
+                    <div class="col-4" style="display:flex;justify-content:flex-start;margin-top:2vw">
                         <a href="">
                             <div class="container interest-card">
                                 <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
@@ -54,7 +54,7 @@
                     </div>
                     <!-- END OF ONE RIGHT INTEREST -->
                     <!-- START OF ONE LEFT INTEREST -->
-                    <div class="col-4" style="margin-top:2vw">
+                    <div class="col-4" style="display:flex;justify-content:flex-start;margin-top:2vw">
                         <a href="">
                             <div class="container interest-card">
                                 <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
