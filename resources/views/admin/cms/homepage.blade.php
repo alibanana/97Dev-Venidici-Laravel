@@ -171,7 +171,9 @@
                                             <td>
                                                 <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                     <div style="padding: 0px 2px;">
-                                                        <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/testimonies/1/update">Update</a>
+                                                        <a class="d-sm-inline-block btn btn-info shadow-sm"
+                                                        href="{{ route('admin.cms.homepage.testimonies.edit',
+                                                        ['id' => $fake_testimonies_big[0]->id, 'flag' => 'true']) }}">Update</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -188,7 +190,9 @@
                                             <td>
                                                 <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                     <div style="padding: 0px 2px;">
-                                                        <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/testimonies/1/update">Update</a>
+                                                        <a class="d-sm-inline-block btn btn-info shadow-sm" 
+                                                        href="{{ route('admin.cms.homepage.testimonies.edit', 
+                                                        ['id' => $fake_testimonies_big[1]->id, 'flag' => 'true']) }}">Update</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -205,7 +209,9 @@
                                             <td>
                                                 <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                     <div style="padding: 0px 2px;">
-                                                        <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/testimonies/1/update">Update</a>
+                                                        <a class="d-sm-inline-block btn btn-info shadow-sm" 
+                                                        href="{{ route('admin.cms.homepage.testimonies.edit', 
+                                                        ['id' => $fake_testimonies_small[0]->id, 'flag' => 'false']) }}">Update</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -222,7 +228,9 @@
                                             <td>
                                                 <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                     <div style="padding: 0px 2px;">
-                                                        <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/testimonies/1/update">Update</a>
+                                                        <a class="d-sm-inline-block btn btn-info shadow-sm" 
+                                                        href="{{ route('admin.cms.homepage.testimonies.edit', 
+                                                        ['id' => $fake_testimonies_small[1]->id, 'flag' => 'false']) }}">Update</a>
                                                     </div>
                                                 </div>
                                             </td>

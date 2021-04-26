@@ -22,85 +22,94 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="mb-0 mb-3 text-gray-800">Update Testimony Form</h2>
+            @if ($flag == 'true')
+                <h2 class="mb-0 mb-3 text-gray-800">Update Big Testimony Form</h2>
+            @else
+                <h2 class="mb-0 mb-3 text-gray-800">Update Small Testimony Form</h2>
+            @endif
         </div>
         
         <!-- Content Row -->
 
         <!-- start of form -->
-        <form method="POST" action="{{ route('admin.cms.homepage.testimonies.update') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.cms.homepage.testimonies.update', $testimony->id) }}" enctype="multipart/form-data">
         @csrf
-        @method('put')           
+        @method('put')
+            <input type="hidden" name="flag" value="{{ $flag }}" hidden>
             <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <div>
-                            <label for="">Testimony Thumbnail</label>
+                @if ($flag == 'true')
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div>
+                                <label for="">Testimony Thumbnail</label>
+                            </div>
+                            <!-- START OF UPLOADED IMAGE -->
+                            <input type="file" name="thumbnail" accept=".jpeg,.jpg,.png">
+                            @error('thumbnail')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <br>
+                            <br>
+                            <label for="">Current Image</label>
+                            <br>
+                            <img src="{{ asset($testimony->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;margin-top:1vw">
                         </div>
-                        <!-- START OF UPLOADED IMAGE -->
-                        <input type="file" name="thumbnail" accept="image/*">
-                        @error('thumbnail')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <br>
-                        <br>
-                        <label for="">Current Image</label>
-                        <br>
-                        <img src="{{ asset($testimony->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;margin-top:1vw">
                     </div>
-                </div>
+                @endif
                 <div class="col-12">
                     <div class="form-group">
                         <label for="">Testimony</label>
-                        <textarea name="testimony" class="form-control form-control-user" cols="30" rows="3" placeholder="Here insert testimony">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco</textarea>
+                        <textarea name="testimony" class="form-control form-control-user" cols="30" rows="3" placeholder="Here insert testimony" required>{{ $testimony->content }}</textarea>
                         @error('testimony')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Rating</label>
-                        <input type="text" name="rating" class="form-control form-control-user"
-                            id="email" aria-describedby=""
-                            placeholder="Here insert rating (e.g. 4.9)" value="4.9" >          
+                        <input type="number" name="rating" class="form-control form-control-user"
+                            aria-describedby="" step=".01"
+                            placeholder="Here insert rating (e.g. 4.9)" value="{{ $testimony->rating }}" required>          
                         @error('rating')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror      
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <input type="text" name="name" class="form-control form-control-user"
-                            id="phone" aria-describedby=""
-                            placeholder="Here insert testimony name (e.g. Fernandha Dzaky)" value="Fernandha Dzaky"> 
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror               
+                @if ($flag == 'true')
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" name="name" class="form-control form-control-user"
+                                id="phone" aria-describedby=""
+                                placeholder="Here insert testimony name (e.g. Fernandha Dzaky)" value="{{ $testimony->name }}"> 
+                            @error('name')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror               
+                        </div>
                     </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="">Occupancy</label>
-                        <input type="text" name="occupancy" class="form-control form-control-user"
-                            id="phone" aria-describedby=""
-                            placeholder="Here insert testimony occupancy (e.g. Copy Writer)" value="Developer"> 
-                        @error('occupancy')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror               
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Occupancy</label>
+                            <input type="text" name="occupancy" class="form-control form-control-user"
+                                id="phone" aria-describedby=""
+                                placeholder="Here insert testimony occupancy (e.g. Copy Writer)" value="{{ $testimony->occupancy }}"> 
+                            @error('occupancy')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
+                @endif
                 <div class="col-12">
                     <div style="display:flex;justify-content:flex-end">
                         <button type="submit"  class="btn btn-primary btn-user p-3">Update New Testimony</button>

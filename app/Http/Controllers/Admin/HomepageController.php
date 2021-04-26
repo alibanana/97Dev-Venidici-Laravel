@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helper\Helper;
 
+use Axiom\Rules\Decimal;
+
 use App\Models\Config;
 use App\Models\TrustedCompany;
 use App\Models\FakeTestimony;
@@ -87,4 +89,48 @@ class HomepageController extends Controller
 
         return redirect()->route('admin.cms.homepage.index')->with('message', 'Trusted Company Section has been updated!');
     }
+
+    // Show page to update Fake Testimonies.
+    public function editTestimonies($id, $flag) {
+        $testimony = FakeTestimony::findOrFail($id);
+
+        return view('admin/testimony/update', compact('testimony', 'flag'));
+    }
+
+    // Update Fake Testimonies in the database.
+    public function updateTestimonies(Request $request, $id) {
+        if ($request->flag == 'true') {
+            $validated = $request->validate([
+                'thumbnail' => 'mimes:jpeg,jpg,png',
+                'testimony' => 'required',
+                'rating' => ['required', 'numeric', 'between:0,5', new Decimal(1, 1)],
+                'name' => 'required|alpha_spaces',
+                'occupancy' => 'required'
+            ]);
+        } else if ($request->flag == 'false') {
+            $validated = $request->validate([
+                'testimony' => 'required',
+                'rating' => ['required', 'numeric', 'between:0,5', new Decimal(1, 1)]
+            ]);
+        }
+
+        $testimony = FakeTestimony::findOrFail($id);
+
+        if ($request->flag == 'true') {
+            if ($request->has('thumbnail')) {
+                $filepath = Helper::storeImage($request->file('thumbnail'), 'storage/images/testimonies/');
+                unlink($testimony->thumbnail);
+                $testimony->thumbnail = $filepath;
+            }
+            $testimony->name = $validated['name'];
+            $testimony->occupancy = $validated['occupancy'];
+        }
+
+        $testimony->content = $validated['testimony'];
+        $testimony->rating = $validated['rating'];
+        $testimony->save();
+        
+        return redirect()->route('admin.cms.homepage.index')->with('message', 'Testimony Section has been updated!');
+    }
+
 }

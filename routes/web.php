@@ -98,6 +98,8 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
     Route::put('/cms/homepage/top-section', [AdminHomepageController::class, 'updateTopSection'])->name('cms.homepage.top-section.update');
     Route::put('/cms/homepage/trusted-company', [AdminHomepageController::class, 'updateTrustedCompany'])->name('cms.homepage.trusted-company.update');
+    Route::get('/cms/homepage/testimonies/{id}/update/{flag}', [AdminHomepageController::class, 'editTestimonies'])->name('cms.homepage.testimonies.edit');
+    Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
 });
 
@@ -115,15 +117,6 @@ Route::get('/admin/forgot-password', function () {
 Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
 });
-
-/* TESTIMONY ROUTING */
-Route::get('/admin/testimonies/create', function () {
-    return view('admin/testimony/create');
-});
-Route::get('/admin/testimonies/1/update', function () {
-    return view('admin/testimony/update');
-});
-/* END OF TESTIMONY ROUTING */
 
 /* START OF PROMO CODE*/
 Route::get('/admin/promo', function () {
