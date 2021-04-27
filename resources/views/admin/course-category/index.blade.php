@@ -33,17 +33,17 @@
         <!-- start of table -->
         
         <div class="row">
-            <div class="col-3">
-                <input type="file" name="image">
-                @error('image')
+            <div class="col-6">
+                <input type="text" name="name" class="form-control" placeholder="Enter course category (e.g. Tech, Math)">
+                @error('name')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                     <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </div>
-            <div class="col-6">
-                <input type="text" name="name" class="form-control" placeholder="Enter course categryy (e.g. Tech)">
-                @error('name')
+            <div class="col-3">
+                <input type="file" name="image">
+                @error('image')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                     <strong>{{ $message }}</strong>
                     </span>
@@ -70,33 +70,38 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>
-                                                <img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:6vw;height:6vw;border-radius:10px" alt="Interest">
-                                                <br> <br> Click button below to update image <br>
-                                                <input type="file" name="image">
-                                            </td>
-                                            <td>
-                                                <input type="text" name="name" class="form-control" value="Technologies">
-                                            </td> 
-                                            <td>
-                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                        <div style="padding: 0px 2px;">
-                                                            <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promo/1/update">Update</a>
-                                                        </div>
-                                                
-                                                        <form action="" method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <div style="padding: 0px 2px">
-                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
-                                                            </div>
-                                                        </form> 
-                                                    
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @foreach ($course_categories as $category)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <img src="{{ asset($category->image) }}" class="img-fluid" style="width:6vw;height:6vw;border-radius:10px" alt="Interest">
+                                                    <br> <br> Click button below to update image <br>
+                                                    <input type="file" name="image" form="courseCategoryUpdateForm{{ $category->id }}">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="category" class="form-control" value="{{ $category->category }}" form="courseCategoryUpdateForm{{ $category->id }}" required>
+                                                </td> 
+                                                <td>
+                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                            <form id="courseCategoryUpdateForm{{ $category->id }}" action="{{ route('admin.course-categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div style="padding: 0px 2px;">
+                                                                    <button class="d-sm-inline-block btn btn-info shadow-sm" type="submit">Update</button>
+                                                                </div>
+                                                            </form>
+                                                            <form action="" method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div style="padding: 0px 2px">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
+                                                                </div>
+                                                            </form> 
+                                                        
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
