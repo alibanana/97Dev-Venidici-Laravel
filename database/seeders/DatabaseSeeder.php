@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FakeTestimonySeeder::class,
             TrustedCompanySeeder::class,
-            ConfigSeeder::class
+            ConfigSeeder::class,
+            CourseTypeSeeder::class
         ]);
     }
 }
