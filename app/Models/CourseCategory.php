@@ -15,4 +15,8 @@ class CourseCategory extends Model
         'category',
         'image'
     ];
+
+    public function courses() {
+        return $this->hasMany(Course::class);
+    }
 }

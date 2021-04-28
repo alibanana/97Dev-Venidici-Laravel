@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             TrustedCompanySeeder::class,
             ConfigSeeder::class,
             CourseTypeSeeder::class,
-            CourseCategorySeeder::class
+            CourseCategorySeeder::class,
+            CourseSeeder::class
         ]);
     }
 }

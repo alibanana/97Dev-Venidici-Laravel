@@ -27,6 +27,14 @@ class CourseCategorySeeder extends Seeder
             [
                 'category' => 'Math',
                 'image' => 'assets/images/seeder/category-math.png'
+            ],
+            [
+                'category' => 'Personal Development',
+                'image' => 'assets/images/seeder/category-personal-development.png'
+            ],
+            [
+                'category' => 'Business',
+                'image' => 'assets/images/seeder/category-business.png'
             ]
         ];
 
