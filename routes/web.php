@@ -5,6 +5,7 @@ use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
 
 /*
@@ -92,6 +93,7 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - DashboardController
 |   - HomepageController
 |   - UserController
+|   - OnlineCourseController
 |   - CourseCategoryController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
@@ -105,6 +107,8 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
     // UserController
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    // OnlineCourseController
+    Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
     // CourseCategoryController
     Route::get('/online-courses/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/online-courses/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
@@ -140,9 +144,6 @@ Route::get('/admin/promo/1/update', function () {
 /* END OF PROMO CODE */
 
 /* START OF ONLINE COURSE ROUTING */
-Route::get('/admin/online-courses', function () {
-    return view('admin/online-course/index');
-});
 Route::get('/admin/online-courses/create', function () {
     return view('admin/online-course/create');
 });

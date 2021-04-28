@@ -15,7 +15,7 @@ class Course extends Model
         'thumbnail',
         // 'preview_video',
         'title',
-        'sub-title',
+        'sub_title',
         'description',
         'price', // default -> 0
         'enrollment_status', // default -> Open
