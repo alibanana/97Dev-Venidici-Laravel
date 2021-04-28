@@ -21,7 +21,10 @@ class DatabaseSeeder extends Seeder
             UserRoleSeeder::class,
             UserSeeder::class,
             FakeTestimonySeeder::class,
-            TrustedCompanySeeder::class
+            TrustedCompanySeeder::class,
+            ConfigSeeder::class,
+            CourseTypeSeeder::class,
+            CourseCategorySeeder::class
         ]);
     }
 }

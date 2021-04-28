@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b4e5c4a079a99be174594c9ba5eceb0",
+    "content-hash": "23651cf3f47a41afebbd81f0545cb459",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -809,6 +809,80 @@
             "time": "2021-03-21T16:25:00+00:00"
         },
         {
+            "name": "intervention/image",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
+                "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@olivervogel.com",
+                    "homepage": "http://olivervogel.com/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/master"
+            },
+            "time": "2019-11-02T09:15:47+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v8.37.0",
             "source": {
@@ -1273,6 +1347,52 @@
                 }
             ],
             "time": "2021-01-18T20:58:21+00:00"
+        },
+        {
+            "name": "mattkingshott/axiom",
+            "version": "v3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mattkingshott/axiom.git",
+                "reference": "c96c97fcd0913a9b64f47f0ed63adc21543dabd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mattkingshott/axiom/zipball/c96c97fcd0913a9b64f47f0ed63adc21543dabd2",
+                "reference": "c96c97fcd0913a9b64f47f0ed63adc21543dabd2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Axiom\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A package that provides a library of reusable Laravel validation rules.",
+            "homepage": "https://github.com/mattkingshott/axiom",
+            "keywords": [
+                "axiom",
+                "laravel",
+                "php",
+                "rules",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/mattkingshott/axiom/issues",
+                "source": "https://github.com/mattkingshott/axiom/tree/v3.2.1"
+            },
+            "time": "2021-03-25T12:05:06+00:00"
         },
         {
             "name": "monolog/monolog",

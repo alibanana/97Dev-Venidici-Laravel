@@ -45,12 +45,12 @@
 </div>
  END OF BANNER SECTION -->
 
-<div class="row m-0 banner-background page-container" style="height:50vw;padding-top:16vw;text-align:center">
+<div class="row m-0 banner-background page-container"
+    style="height: 50vw; padding-top: 16vw; text-align: center;
+    background-image: url({{ $configs['cms.homepage.top-section.background']->value }});">
     <div class="col-md-12 p-0">
-        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Selamat datang di
-        Venidici</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line" >“Veni, vidi, vici.” Saya datang, saya lihat, saya
-        taklukkan.</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
+        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</p>
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
@@ -80,14 +80,13 @@
     <div class="col-12 p-0" style="margin-top:-5vw">
         <div style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
-                <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">10</p>
+                <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
                 <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Trusted Companies</p>
             </div>
             <img src="/assets/images/icons/vertical-splitter.png" style="max-height:3.5vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/logo-itb 2.png" style="max-height:3.5vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/bca-bank.png" style="max-height:3.5vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/flick.png" style="max-height:3.5vw" class="img-fluid" alt="">
-            <img src="/assets/images/client/silvi.png" style="max-height:3.5vw" class="img-fluid" alt="">
+            @foreach ($trusted_companies as $company)
+                <img src="{{ asset($company->image) }}" style="max-height:3.5vw" class="img-fluid" alt="Image not available..">                
+            @endforeach
         </div>
     </div>
 </div>

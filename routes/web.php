@@ -5,6 +5,7 @@ use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,6 @@ Route::get('/dashboard', function () {
 Route::get('/', [PagesController::class, 'index'])->name('index');
 
 /* START OF CLIENT ROUTING */
-
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
 
 Route::get('/login', function () {
@@ -92,12 +92,24 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - DashboardController
 |   - HomepageController
 |   - UserController
-|   - FakeTestimonyController
+|   - CourseCategoryController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
+    // DashboardController
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
+    // HomepageController
+    Route::put('/cms/homepage/top-section', [AdminHomepageController::class, 'updateTopSection'])->name('cms.homepage.top-section.update');
+    Route::put('/cms/homepage/trusted-company', [AdminHomepageController::class, 'updateTrustedCompany'])->name('cms.homepage.trusted-company.update');
+    Route::get('/cms/homepage/testimonies/{id}/update/{flag}', [AdminHomepageController::class, 'editTestimonies'])->name('cms.homepage.testimonies.edit');
+    Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
+    // UserController
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    // CourseCategoryController
+    Route::get('/online-courses/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
+    Route::post('/online-courses/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
+    Route::put('/online-courses/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
+    Route::delete('/online-courses/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
 });
 
 /* START ADMIN ROUTING */
@@ -115,16 +127,6 @@ Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
 });
 
-
-/* TESTIMONY ROUTING */
-Route::get('/admin/testimonies/create', function () {
-    return view('admin/testimony/create');
-});
-Route::get('/admin/testimonies/1/update', function () {
-    return view('admin/testimony/update');
-});
-/* END OF TESTIMONY ROUTING */
-
 /* START OF PROMO CODE*/
 Route::get('/admin/promo', function () {
     return view('admin/promo/index');
@@ -136,19 +138,6 @@ Route::get('/admin/promo/1/update', function () {
     return view('admin/promo/update');
 });
 /* END OF PROMO CODE */
-
-
-/* TRUSTED COMPANY ROUTING */
-Route::get('/admin/trusted-companies', function () {
-    return view('admin/trusted-company/index');
-});
-Route::get('/admin/trusted-companies/create', function () {
-    return view('admin/trusted-company/create');
-});
-Route::get('/admin/trusted-companies/1/update', function () {
-    return view('admin/trusted-company/update');
-});
-/* END OF TRUSTED COMPANY ROUTING */
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/admin/online-courses', function () {
@@ -162,12 +151,6 @@ Route::get('/admin/online-courses/create-video/1', function () {
 });
 Route::get('/admin/online-courses/1/update', function () {
     return view('admin/online-course/update');
-});
-Route::get('/admin/admin/course-categories/create', function () {
-    return view('admin/online-course/create-category');
-});
-Route::get('/admin/online-courses/course-categories', function () {
-    return view('admin/course-category/index');
 });
 Route::get('/admin/online-courses/assesments', function () {
     return view('admin/assesment/index');
