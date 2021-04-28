@@ -104,7 +104,7 @@
 
 
     <script>
-        var path = "{{route('autocomplete')}}";
+        var path = "{{ env('APP_URL') . route('autocomplete', [], false) }}";
 
         $('input.typeahead').typeahead({
           source: function(terms,process){
