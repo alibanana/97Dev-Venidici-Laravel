@@ -11,5 +11,11 @@ class CourseType extends Model
 
     protected $table = 'course_types';
 
-    protected $fillable = ['type'];
+    protected $fillable = [
+        'type'
+    ];
+
+    public function courses() {
+        return $this->hasMany(Course::class);
+    }
 }
