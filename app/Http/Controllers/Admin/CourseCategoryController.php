@@ -29,30 +29,62 @@ class CourseCategoryController extends Controller
 
     // Store new category to the database
     public function store(Request $request) {
+        $validated = $request->validate([
+            'category' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png'
+        ]);
 
+        $category = new CourseCategory;
+        $category->category = $validated['category'];
+        $category->image = Helper::storeImage($request->file('image'), 'storage/images/course-categories/');
+        $category->save();
+
+        return redirect()->route('admin.course-categories.index')->with('message', 'New Category has been added!');
     }
 
     // Update existing category in the database.
     public function update(Request $request, $id) {
+        $attributes = [
+            'category' => 'category-' . $id,
+            'image' => 'image-' . $id
+        ];
+
         $validated = Validator::make($request->all(), [
-            'category-' . $id => 'required',
-            'image-' . $id => 'mimes:jpeg,jpg,png'
+            $attributes['category'] => 'required',
+            $attributes['image'] => 'mimes:jpeg,jpg,png'
         ])->setAttributeNames([
-            'category-' . $id => 'category',
-            'image-' . $id => 'image'
+            $attributes['category'] => 'category',
+            $attributes['image'] => 'image'
         ])->validate();
             
         $category = CourseCategory::findOrFail($id);
-        $category->category = $validated['category'];
+        $category->category = $validated[$attributes['category']];
         
-        if ($request->has('image')) {
-            $filepath = Helper::storeImage($request->file('image'), 'storage/images/course-categories/');
+        if ($request->has($attributes['image'])) {
+            $filepath = Helper::storeImage($request->file($attributes['image']), 'storage/images/course-categories/');
             unlink($category->image);
             $category->image = $filepath;
         }
 
         $category->save();
 
-        return redirect()->route('admin.course-categories.index')->with('message', 'Course category has been updated!');
+        if ($category->wasChanged()) {
+            $message = 'Category (' . $category->category . ') has been updated';
+        } else {
+            $message = 'No changes was made to Category (' . $category->category . ')';
+        }
+        
+        return redirect()->route('admin.course-categories.index')->with('message', $message);
+    }
+
+    // Deletes category (by id) from the database.
+    public function destroy($id) {
+        $category = CourseCategory::findOrFail($id);
+
+        unlink($category->image);
+        $category->delete();
+        
+        $message = 'Category (' . $category->category . ') has been deleted.';
+        return redirect()->route('admin.course-categories.index')->with('message', $message);
     }
 }

@@ -30,7 +30,7 @@
         <!-- start of table -->
         <div class="row">
             <div class="col-6">
-                <input type="text" name="name" class="form-control" placeholder="Enter course category (e.g. Tech, Math)">
+                <input type="text" name="category" class="form-control" placeholder="Enter course category (e.g. Tech, Math)" form="courseCategoryStoreForm" required>
                 @error('category')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                     <strong>{{ $message }}</strong>
@@ -38,7 +38,7 @@
                 @enderror
             </div>
             <div class="col-3">
-                <input type="file" name="image">
+                <input type="file" name="image" form="courseCategoryStoreForm" required>
                 @error('image')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                     <strong>{{ $message }}</strong>
@@ -46,7 +46,10 @@
                 @enderror
             </div>
             <div class="col-3" style="text-align:right">
-                <button type="submit" href="/admin/promo/create" class="btn btn-primary btn-user">Create New Category</button>
+                <form id="courseCategoryStoreForm" action="{{ route('admin.course-categories.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                    <button type="submit" class="btn btn-primary btn-user">Create New Category</button>
+                </form>
             </div>
             <div class="col-md-12">
                 <!-- Begin Page Content -->
@@ -96,7 +99,7 @@
                                                                     <button class="d-sm-inline-block btn btn-info shadow-sm" type="submit">Update</button>
                                                                 </div>
                                                             </form>
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.course-categories.destroy', $category->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">

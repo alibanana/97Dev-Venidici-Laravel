@@ -95,16 +95,21 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - CourseCategoryController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
+    // DashboardController
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
+    // HomepageController
     Route::put('/cms/homepage/top-section', [AdminHomepageController::class, 'updateTopSection'])->name('cms.homepage.top-section.update');
     Route::put('/cms/homepage/trusted-company', [AdminHomepageController::class, 'updateTrustedCompany'])->name('cms.homepage.trusted-company.update');
     Route::get('/cms/homepage/testimonies/{id}/update/{flag}', [AdminHomepageController::class, 'editTestimonies'])->name('cms.homepage.testimonies.edit');
     Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
+    // UserController
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    // CourseCategoryController
     Route::get('/online-courses/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/online-courses/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
     Route::put('/online-courses/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
+    Route::delete('/online-courses/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
 });
 
 /* START ADMIN ROUTING */
