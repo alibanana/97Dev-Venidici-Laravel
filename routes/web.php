@@ -103,7 +103,8 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
     Route::get('/online-courses/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
-    Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
+    Route::post('/online-courses/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
+    Route::put('/online-courses/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
 });
 
 /* START ADMIN ROUTING */
@@ -145,9 +146,6 @@ Route::get('/admin/online-courses/create-video/1', function () {
 });
 Route::get('/admin/online-courses/1/update', function () {
     return view('admin/online-course/update');
-});
-Route::get('/admin/admin/course-categories/create', function () {
-    return view('admin/online-course/create-category');
 });
 Route::get('/admin/online-courses/assesments', function () {
     return view('admin/assesment/index');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Helper\Helper;
 
 use App\Models\CourseCategory;
@@ -26,12 +27,21 @@ class CourseCategoryController extends Controller
         return view('admin/course-category/index', compact('course_categories'));
     }
 
-    public function update(Request $request, $id) {
-        $validated = $request->validate([
-            'category' => 'required',
-            'image' => 'mimes:jpeg,jpg,png'
-        ]);
+    // Store new category to the database
+    public function store(Request $request) {
 
+    }
+
+    // Update existing category in the database.
+    public function update(Request $request, $id) {
+        $validated = Validator::make($request->all(), [
+            'category-' . $id => 'required',
+            'image-' . $id => 'mimes:jpeg,jpg,png'
+        ])->setAttributeNames([
+            'category-' . $id => 'category',
+            'image-' . $id => 'image'
+        ])->validate();
+            
         $category = CourseCategory::findOrFail($id);
         $category->category = $validated['category'];
         
