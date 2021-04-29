@@ -30,6 +30,7 @@
             <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
             <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
             <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'course-assesment')" style="margin-left:1.5vw;cursor:pointer">Course Assesment</h5>
+            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
         </div>
         
         <!-- Content Row -->
@@ -41,19 +42,6 @@
                 @csrf  
                 @method('put')         
                 <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Title</label>
-                            <input type="text" name="name" class="form-control form-control-user"
-                                id="phone" aria-describedby=""
-                                placeholder="Enter couse title" value="Emotional Intelligence"> 
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror               
-                        </div>
-                    </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Thumbnail</label> <br>
@@ -72,11 +60,23 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Subtitle</label>
-                            <input type="text" name="date" class="form-control form-control-user"
+                            <label for="">Title</label>
+                            <input type="text" name="name" class="form-control form-control-user"
                                 id="phone" aria-describedby=""
-                                placeholder="Enter course subtitle" value="Recorded Webinar"> 
-                            @error('date')
+                                placeholder="Enter couse title" value="Emotional Intelligence"> 
+                            @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror               
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Subtitle</label>
+                            <textarea name="subtitle" id="" rows="3" class="form-control">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis provident atque quo animi quasi alias facilis tempora commodi cumque dolore aliquid fugiat ipsum magnam, omnis, iste dolorem. Numquam, cupiditate magnam?</textarea> 
+                            @error('subtitle')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -97,6 +97,34 @@
                             @enderror               
                         </div>
                         <p> <span> <a href="/admin/online-courses/course-categories" target="_blank">Click here</a> </span> to add new category</p>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Embed youtube link for preview  (src only)</label>
+                            <input type="text" name="video" class="form-control form-control-user"
+                                    id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg" value="https://www.youtube.com/embed/DSJlhjZNVpg"> 
+                            @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror               
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Assesment</label> <br>
+                            <select name="assesment" id="" class="form-control form-control-user">
+                                <option >No Assesment</option>
+                                <option value="1" selected>Quiz of Business Case Room</option>
+                                <option value="2">Quiz of Business Plan Room</option>
+                            </select>
+                            @error('assesment')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror               
+                        </div>
+                        <p> <span> <a href="/admin/online-courses/assesments" target="_blank">Click here</a> </span> to add new assesment</p>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
@@ -129,7 +157,7 @@
                     </div>
                     -->
                     <div class="col-6" style="margin-top:3vw">
-                        <label for="">Student's Requirements</label>
+                        <label for="">Persyaratan</label>
                         <div>
                             <div class="row" >
                                 <div class="col-md-12">
@@ -148,11 +176,11 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" id="add_requirement" onlick="duplicateRequirement()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more requirement</button> 
+                        <button type="button" id="add_requirement" onlick="duplicateRequirement()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 
                     </div>
                     <div class="col-6" style="margin-top:3vw">
-                        <label for="">What student get on this course</label>
+                        <label for="">Kamu akan dapat?</label>
                         <div>
                             <div class="row">
 
@@ -164,7 +192,32 @@
                             
                             </div>
                         </div>
-                        <button type="button" id="add_advantage" onlick="duplicateAdvantage()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more advantage</button> 
+                        <button type="button" id="add_advantage" onlick="duplicateAdvantage()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+
+                    </div>
+                    <div class="col-6" style="margin-top:3vw">
+                        <label for="">Apa yang akan dipelajari?</label>
+                        <div>
+                            <div class="row" id="learn_duplicator" >
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="Bisa melawak dengan benar dan tidak garing">
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="row"  >
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="Bisa melawak dengan benar">
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <button type="button" id="add_learn" onlick="duplicateLearn()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 
                     </div>
                     <div class="col-12" style="padding:2vw 1vw">
@@ -325,11 +378,11 @@
                             <div class="form-check" style="margin-top:1vw">
                                 <input class="form-check-input" type="radio" onclick="enableInput()" name="pricing_options" id="pricing_options">
                                 <label class="form-check-label" for="pricing_options"  >
-                                    One-Time Purchase
+                                    One-Time Purchase (Rp.)
                                 </label>
                                 <input type="text" name="name" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
                                     id="phone" aria-describedby=""
-                                    placeholder="Enter couse title" disabled> 
+                                    placeholder="e.g. 100000" disabled> 
 
                             </div>
                             @error('name')
@@ -410,6 +463,8 @@
                             </span>
                             @enderror               
                         </div>
+                        <p> <span> <a href="/admin/online-courses/assesments" target="_blank">Click here</a> </span> to view assesment result</p>
+
                     </div>
                     <div class="col-6">
                         <div style="display:flex;justify-content:flex-end">
@@ -421,6 +476,87 @@
             </form>
         </div>
         <!-- END OF COURSE ASSESMENT-->
+
+        <!-- START OF Teacher-->
+        <div class="course-content" id="teacher-page" style="display:none">
+            <div class="row mt-2 mb-3">
+                <div class="col-sm-12 col-md-8">
+                    <div id="dataTable_filter" class="dataTables_filter">
+                        <label class="w-100">Search:
+                            <form action="" method="GET">
+                                <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm w-100" placeholder="" aria-controls="dataTable">
+                                @if (Request::get('show'))
+                                    <input name="show" value="{{ Request::get('show') }}" hidden>
+                                @endif
+                                <input type="submit" style="visibility: hidden;" hidden/>
+                            </form>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Teacher</th>
+                                    <th>Description</th>
+                                    <th >Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td style="text-align:center" class="text-nowrap">
+                                        <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
+                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
+                                    </td>
+                                    <td>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
+                                    </td>  
+                                    <td>
+                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                <form action="" method="post">
+                                                    @csrf
+                                                    @method('put')
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to select this teacher?')">Un-select Teacher</button>
+                                                    </div>
+                                                </form> 
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td style="text-align:center" class="text-nowrap">
+                                        <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
+                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
+                                    </td>
+                                    <td>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
+                                    </td>  
+                                    <td>
+                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                <form action="" method="post">
+                                                    @csrf
+                                                    @method('put')
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to select this teacher?')">Select Teacher</button>
+                                                    </div>
+                                                </form> 
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF Teacher-->
     </div>
     <!-- /.container-fluid -->
 </div>
@@ -453,6 +589,23 @@ function duplicateAdvantage() {
         var clone = original2.cloneNode(true); // "deep" clone
         $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
         clone.id = "advantage_duplicator" + ++i; // there can only be one element with an ID
+        original2.parentNode.appendChild(clone);
+    } else {
+
+    }
+}
+</script>
+<script>
+document.getElementById('add_learn').onclick = duplicateLearn;
+
+var i = 0;
+var original2 = document.getElementById('learn_duplicator');
+
+function duplicateLearn() {
+    if(confirm("Are you sure, you want to add more item?")){
+        var clone = original2.cloneNode(true); // "deep" clone
+        $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
+        clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
         original2.parentNode.appendChild(clone);
     } else {
 

@@ -58,6 +58,16 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                            <div class="dataTables_length" id="show_entries">
+                                <label class="w-100">Category:
+                                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Tech']) }}" @if (Request::get('filter') == 'Tech') selected @endif>Tech</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Math']) }}" @if (Request::get('filter') == 'Math') selected @endif>Math</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:

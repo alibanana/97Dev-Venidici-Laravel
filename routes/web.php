@@ -144,6 +144,9 @@ Route::get('/admin/promo/1/update', function () {
 /* END OF PROMO CODE */
 
 /* START OF ONLINE COURSE ROUTING */
+Route::get('/admin/online-courses/1', function () {
+    return view('admin/online-course/detail');
+});
 Route::get('/admin/online-courses/create', function () {
     return view('admin/online-course/create');
 });
@@ -155,6 +158,9 @@ Route::get('/admin/online-courses/1/update', function () {
 });
 Route::get('/admin/online-courses/assesments', function () {
     return view('admin/assesment/index');
+});
+Route::get('/admin/online-courses/assesments/1', function () {
+    return view('admin/assesment/detail');
 });
 Route::get('/admin/online-courses/assesments/create', function () {
     return view('admin/assesment/create');

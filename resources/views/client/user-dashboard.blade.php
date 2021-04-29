@@ -50,9 +50,9 @@
     <div class="col-12 p-0" style="">
         <div style="display:flex">
 
-            <p class="small-heading blue-text-underline blue-text-underline-active user-links" onclick="changeContent(event, 'live-pelatihan')"  style="font-family:Rubik Medium;cursor:pointer;margin-bottom:0px">Jadwal Live Pelatihan</p>
-            <p class="small-heading blue-text-underline user-links" onclick="changeContent(event, 'pelatihan-aktiv')" style="font-family:Rubik Medium;margin-left:5vw;cursor:pointer;margin-bottom:0px">Pelatihan Aktiv</p>
-            <p class="small-heading blue-text-underline user-links" onclick="changeContent(event, 'pelatihan-selesai')" style="font-family:Rubik Medium;margin-left:5vw;cursor:pointer;margin-bottom:0px">Pelatihan Selesai</p>
+            <p class="sub-description blue-text-underline blue-text-underline-active user-links" onclick="changeContent(event, 'live-pelatihan')"  style="font-family:Rubik Medium;cursor:pointer;margin-bottom:0px">Jadwal Live Pelatihan</p>
+            <p class="sub-description blue-text-underline user-links" onclick="changeContent(event, 'pelatihan-aktiv')" style="font-family:Rubik Medium;margin-left:3vw;cursor:pointer;margin-bottom:0px">Pelatihan Aktiv</p>
+            <p class="sub-description blue-text-underline user-links" onclick="changeContent(event, 'pelatihan-selesai')" style="font-family:Rubik Medium;margin-left:3vw;cursor:pointer;margin-bottom:0px">Pelatihan Selesai</p>
         </div>
     </div>
     <!-- Live Pelatihan Content -->
