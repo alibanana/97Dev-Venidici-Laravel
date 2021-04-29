@@ -73,7 +73,7 @@
             </div>
           </div>
         </div>
-        <a id="cart_icon" class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA;margin-right:0.8vw">
+        <a id="cart_icon" class="sub-description navbar-item" href="/cart" style="color:#2B6CAA;margin-right:0.8vw">
           <span class="counter fa-stack has-badge" data-count="3">
             <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse"></i>
           </span>

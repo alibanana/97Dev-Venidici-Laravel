@@ -61,6 +61,16 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                            <div class="dataTables_length" id="show_entries">
+                                <label class="w-100">Category:
+                                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Tech']) }}" @if (Request::get('filter') == 'Tech') selected @endif>Tech</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Math']) }}" @if (Request::get('filter') == 'Math') selected @endif>Math</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
@@ -118,13 +128,9 @@
 
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
-                                                                </div>
-                                                            </form> 
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="/admin/online-courses/1/update">View Detail</a>
+                                                            </div>
                                                             <div style="padding: 0px 2px;">
                                                                 <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
                                                             </div>
@@ -133,6 +139,13 @@
                                                                 @method('put')
                                                                 <div style="padding: 0px 2px">
                                                                     <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this online course as draft?')">Set as draft</button>
+                                                                </div>
+                                                            </form> 
+                                                            <form action="" method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div style="padding: 0px 2px">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
                                                                 </div>
                                                             </form> 
                                                     </div>
@@ -165,6 +178,14 @@
 
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="/admin/online-courses/1/update">View Detail</a>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
+                                                            </div>
                                                             <form action="" method="post">
                                                                 @csrf
                                                                 @method('delete')
@@ -172,10 +193,6 @@
                                                                     <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
                                                                 </div>
                                                             </form> 
-                                                            
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
-                                                            </div>
                                                     </div>
                                                 </td>
                                             </tr>

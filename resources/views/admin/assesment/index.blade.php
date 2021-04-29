@@ -85,6 +85,7 @@
                                                 <th>No.</th>
                                                 <th>Assesment</th>
                                                 <th>Duration</th>
+                                                <th>Course</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -93,6 +94,7 @@
                                                 <td>1</td>
                                                 <td>Quiz of Business Case Room</td>
                                                 <td>10</td> 
+                                                <td style="color:green">How to be funny</td> 
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
 
@@ -117,7 +119,8 @@
                                             <tr>
                                                 <td>2</td>
                                                 <td>Quiz of Business Plan Room</td>
-                                                <td>5</td> 
+                                                <td>5</td>
+                                                <td>Not assigned yet</td>  
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
 

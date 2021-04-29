@@ -67,16 +67,15 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Subtitle</label>
-                    <input type="text" name="date" class="form-control form-control-user"
-                        id="phone" aria-describedby=""
-                        placeholder="Enter course subtitle" > 
-                    @error('date')
+                    <textarea name="subtitle" id="" rows="3" class="form-control"></textarea> 
+                    @error('subtitle')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror               
                 </div>
             </div>
+            
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Category</label> <br>
@@ -95,9 +94,21 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
+                    <label for="">Embed youtube link for preview  (src only)</label>
+                    <input type="text" name="video" class="form-control form-control-user"
+                            id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg"> 
+                    @error('name')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror               
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
                     <label for="">Assesment</label> <br>
                     <select name="assesment" id="" class="form-control form-control-user">
-                        <option disabled selected>Choose Assesment</option>
+                        <option selected>No Assesment</option>
                         <option value="1">Quiz of Business Case Room</option>
                         <option value="2">Quiz of Business Plan Room</option>
                     </select>
@@ -112,7 +123,7 @@
             <div class="col-12">
                 <div class="form-group">
                     <label for="">Description</label>
-                    <textarea name="description" id="" rows="5"  class="form-control form-control-user"></textarea>
+                    <textarea name="description" id="" rows="4"  class="form-control form-control-user"></textarea>
                     @error('descriptoin')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
@@ -140,33 +151,49 @@
             </div>
             -->
             <div class="col-6" style="margin-top:3vw">
-                <label for="">Student's Requirements</label>
+                <label for="">Persyaratan</label>
                 <div>
                     <div class="row" id="requirement_duplicator">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" name="requirement[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement">
+                                <input type="text" name="requirement[]" class="form-control form-control-user" id="" placeholder="e,g. Muka lucu dan unik">
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="button" id="add_requirement" onlick="duplicateRequirement()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more requirement</button> 
+                <button type="button" id="add_requirement" onlick="duplicateRequirement()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 
             </div>
             <div class="col-6" style="margin-top:3vw">
-                <label for="">What student get on this course</label>
+                <label for="">Kamu akan dapat?</label>
                 <div>
                     <div class="row" id="advantage_duplicator" >
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" name="advantage[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement">
+                                <input type="text" name="advantage[]" class="form-control form-control-user" id="" placeholder="e.g. 109 Menit Video Ekslusif">
                             </div>
                         </div>
                     
                     </div>
                 </div>
-                <button type="button" id="add_advantage" onlick="duplicateAdvantage()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more advantage</button> 
+                <button type="button" id="add_advantage" onlick="duplicateAdvantage()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+
+            </div>
+            <div class="col-6" style="margin-top:3vw">
+                <label for="">Apa yang akan dipelajari?</label>
+                <div>
+                    <div class="row" id="learn_duplicator" >
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing">
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                <button type="button" id="add_learn" onlick="duplicateLearn()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 
             </div>
             <div class="col-12" style="padding:2vw 1vw">
@@ -215,6 +242,23 @@ function duplicateAdvantage() {
         var clone = original2.cloneNode(true); // "deep" clone
         $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
         clone.id = "advantage_duplicator" + ++i; // there can only be one element with an ID
+        original2.parentNode.appendChild(clone);
+    } else {
+
+    }
+}
+</script>
+<script>
+document.getElementById('add_learn').onclick = duplicateLearn;
+
+var i = 0;
+var original2 = document.getElementById('learn_duplicator');
+
+function duplicateLearn() {
+    if(confirm("Are you sure, you want to add more item?")){
+        var clone = original2.cloneNode(true); // "deep" clone
+        $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
+        clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
         original2.parentNode.appendChild(clone);
     } else {
 

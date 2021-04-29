@@ -37,7 +37,7 @@
                 <div class="col-6">
                     <h6 class="modal-title" id="exampleModalLabel">Embed Youtube Link (src only)</h6>
                     <div class="form-group mt-2">
-                        <input type="password" name="video" class="form-control form-control-user"
+                        <input type="text" name="video" class="form-control form-control-user"
                             id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg">
                         @error('video')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -60,7 +60,7 @@
                 <div class="col-6">
                     <h6 class="modal-title" id="exampleModalLabel">Description</h6>
                     <div class="form-group mt-2">
-                        <textarea name="description" id="" rows="5" class="form-control">
+                        <textarea name="description" id="" rows="4" class="form-control">
 
                         </textarea>
                         @error('description')
@@ -72,10 +72,10 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="">Finish Date</label>
+                        <label for="">Duration in seconds</label>
                         <input type="text" name="date" class="form-control form-control-user"
                             id="phone" aria-describedby=""
-                            placeholder="Here insert date finished (e.g. 21 Februari 2021)" > 
+                            placeholder="e.g. 60" > 
                         @error('date')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
