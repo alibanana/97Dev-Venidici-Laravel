@@ -43,7 +43,9 @@
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Show:
                                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'show' => '10']) }}" @if (Request::get('show') == '10') selected @endif>10</option>
+                                        @foreach ($courses_data['per_page_options'] as $option)
+                                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'show' => $option]) }}" @if (Request::get('show') == $option) selected @endif>{{ $option }}</option>
+                                        @endforeach
                                     </select>
                                 </label>
                             </div>
@@ -62,8 +64,10 @@
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Category:
                                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Tech']) }}" @if (Request::get('filter') == 'Tech') selected @endif>Tech</option>
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Math']) }}" @if (Request::get('filter') == 'Math') selected @endif>Math</option>
+                                        @foreach ($course_categories as $category)
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => $category->category]) }}" @if (Request::get('filter') == $category->category) selected @endif>{{ $category->category }}</option>
+                                        @endforeach
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => '']) }}" @if (!Request::has('filter')) selected @endif>None</option>
                                     </select>
                                 </label>
                             </div>
