@@ -58,6 +58,9 @@ Route::get('/dashboard', function () {
 Route::get('/cart', function () {
     return view('client/cart');
 });
+Route::get('/shipping', function () {
+    return view('client/cart-shipping');
+});
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', function () {
