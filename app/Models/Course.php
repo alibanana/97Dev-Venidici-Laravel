@@ -13,7 +13,7 @@ class Course extends Model
         'course_type_id',
         'course_category_id',
         'thumbnail',
-        // 'preview_video',
+        'preview_video',
         'title',
         'sub_title',
         'description',
