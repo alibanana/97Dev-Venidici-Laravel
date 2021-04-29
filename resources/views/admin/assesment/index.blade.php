@@ -109,7 +109,7 @@
                                                                 </div>
                                                             </form> 
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/promo/1/update">View Result</a>
+                                                                <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/online-courses/assesments/1">View Result</a>
                                                             </div>
                                                       
                                                    

@@ -463,7 +463,7 @@
                             </span>
                             @enderror               
                         </div>
-                        <p> <span> <a href="/admin/online-courses/assesments" target="_blank">Click here</a> </span> to vieww assesment result</p>
+                        <p> <span> <a href="/admin/online-courses/assesments" target="_blank">Click here</a> </span> to view assesment result</p>
 
                     </div>
                     <div class="col-6">

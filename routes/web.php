@@ -158,6 +158,9 @@ Route::get('/admin/trusted-companies/1/update', function () {
 Route::get('/admin/online-courses', function () {
     return view('admin/online-course/index');
 });
+Route::get('/admin/online-courses/1', function () {
+    return view('admin/online-course/detail');
+});
 Route::get('/admin/online-courses/create', function () {
     return view('admin/online-course/create');
 });
@@ -175,6 +178,9 @@ Route::get('/admin/online-courses/course-categories', function () {
 });
 Route::get('/admin/online-courses/assesments', function () {
     return view('admin/assesment/index');
+});
+Route::get('/admin/online-courses/assesments/1', function () {
+    return view('admin/assesment/detail');
 });
 Route::get('/admin/online-courses/assesments/create', function () {
     return view('admin/assesment/create');

@@ -129,7 +129,7 @@
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="/admin/online-courses/1/update">View Detail</a>
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="/admin/online-courses/1">View Detail</a>
                                                             </div>
                                                             <div style="padding: 0px 2px;">
                                                                 <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
@@ -179,7 +179,7 @@
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="/admin/online-courses/1/update">View Detail</a>
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="/admin/online-courses/1">View Detail</a>
                                                             </div>
                                                             
                                                             
