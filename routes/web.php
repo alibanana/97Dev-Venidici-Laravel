@@ -5,6 +5,8 @@ use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FakeTestimonyController;
+use App\Http\Controllers\SocialController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,8 @@ use App\Http\Controllers\Admin\FakeTestimonyController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -209,5 +213,10 @@ Route::get('/admin/analytics/online-course', function () {
 });
 /* END OF ANALYTICS ROUTING */
 /* END OF ADMIN ROUTING */
+
+/* START OF GOOGLE AUTH */
+Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [App\Http\Controllers\SocialController::class, 'handleGoogleCallback']);
+/* END OF GOOGLE AUTH*/
 
 require __DIR__.'/auth.php';
