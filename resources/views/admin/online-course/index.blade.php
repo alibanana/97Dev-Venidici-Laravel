@@ -147,7 +147,7 @@
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="/admin/online-courses/1">View Detail</a>
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="{{ route('admin.online-courses.show', $course->id) }}">View Detail</a>
                                                             </div>
                                                             @if ($course->publish_status == 'Published')
                                                                 <form action="{{ route('admin.online-courses.set-publish-status-to-draft', $course->id) }}" method="post">

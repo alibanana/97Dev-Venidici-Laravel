@@ -132,6 +132,13 @@ class OnlineCourseController extends Controller
         return view('admin/online-course/index', compact('course_categories', 'courses', 'courses_data'));
     }
 
+    // Show Admin -> Online Course Detail Page
+    public function show($id) {
+        $course = Course::findOrFail($id);
+
+        return view('admin/online-course/detail', compact('course'));
+    }
+
     // Show Admin -> Create New Online Page
     public function create() {
         $course_categories = CourseCategory::select('id', 'category')->get();
