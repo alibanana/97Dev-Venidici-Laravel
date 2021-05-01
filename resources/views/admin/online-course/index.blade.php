@@ -36,7 +36,7 @@
                 <div class="container-fluid p-0 mt-3">
                     <!-- Page Heading -->
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
-                    <h1 class="h5 mb-2 text-gray-800 d-inline">{{ "(Showing " . 10 . " to " . 100 . " of " . 125 . " results)" }}</h1>
+                    <h1 class="h5 mb-2 text-gray-800 d-inline">{{ "(Showing " . $courses_data['from'] . " to " . $courses_data['to'] . " of " . $courses_data['total'] . " results)" }}</h1>
 
                     <div class="row mt-2 mb-3">
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
@@ -103,14 +103,14 @@
                                         <tbody>
                                             @foreach ($courses as $course)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $courses_data['from'] + $loop->index }}</td>
                                                     <td>
                                                         <div style="display:flex;align-items:center">
                                                             <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="width:10vw" alt="Thumbnail not available..">
                                                             <div style="margin-left:1vw">
                                                                 <p style="color:grey;margin-bottom:0px;">{{ $course->courseCategory->category }}</p>
                                                                 <p style="color:black;font-weight:bold;margin-bottom:0px">{{ $course->title }}</p>
-                                                                <p style="color:black;">{{ $course->sub_title }}</p>
+                                                                <p style="color:black;">{{ $course->subtitle }}</p>
                                                                 @if ($course->price == 0)
                                                                     <p style="margin-bottom:0px">FREE</p>
                                                                 @else

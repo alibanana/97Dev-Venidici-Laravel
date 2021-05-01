@@ -22,7 +22,7 @@ class CreateCoursesTable extends Migration
             $table->string('thumbnail');
             $table->string('preview_video');
             $table->string('title');
-            $table->text('sub_title');
+            $table->text('subtitle');
             $table->text('description');
             $table->unsignedInteger('price')->default(0);
             $table->enum('enrollment_status', ['Open', 'Close'])->default('Open');
