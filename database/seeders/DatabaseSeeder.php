@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             CourseCategorySeeder::class,
             CourseSeeder::class,
             CourseRequirementSeeder::class,
-            CourseFeatureSeeder::class // Kamu akan dapat? section
+            CourseFeatureSeeder::class, // Kamu akan dapat? section
+            LocationSeeder::class
         ]);
     }
 }
