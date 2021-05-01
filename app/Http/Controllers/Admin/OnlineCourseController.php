@@ -205,13 +205,18 @@ class OnlineCourseController extends Controller
     }
 
     // Change the public status of the chosen Online Course to Draft.
-    public function setPublishStatusToDraft(Request $request, $id) {
+    public function setPublishStatusToOpposite(Request $request, $id) {
         $course = Course::findOrFail($id);
 
-        $course->publish_status = 'Draft';
+        if ($course->publish_status == 'Draft') {
+            $course->publish_status = 'Published';
+        } else if ($course->publish_status == 'Published') {
+            $course->publish_status = 'Draft';
+        }
+        
         $course->save();
 
-        $message = 'Online Course (' . $course->title . ') publish_status updated to Draft';
+        $message = 'Online Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
         return redirect()->route('admin.online-courses.index')->with('message', $message);
     }
 }

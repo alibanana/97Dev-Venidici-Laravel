@@ -149,14 +149,16 @@
                                                             <div style="padding: 0px 2px;">
                                                                 <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="{{ route('admin.online-courses.show', $course->id) }}">View Detail</a>
                                                             </div>
-                                                            @if ($course->publish_status == 'Published')
-                                                                <form action="{{ route('admin.online-courses.set-publish-status-to-draft', $course->id) }}" method="post">
-                                                                    @csrf
-                                                                    <div style="padding: 0px 2px">
+                                                            <form action="{{ route('admin.online-courses.set-publish-status-to-opposite', $course->id) }}" method="post">
+                                                                @csrf
+                                                                <div style="padding: 0px 2px">
+                                                                    @if ($course->publish_status == 'Draft')
+                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this online course as published?')">Set as published</button>
+                                                                    @elseif ($course->publish_status == 'Published')
                                                                         <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this online course as draft?')">Set as draft</button>
-                                                                    </div>
-                                                                </form>
-                                                            @endif
+                                                                    @endif
+                                                                </div>
+                                                            </form>
                                                             <div style="padding: 0px 2px;">
                                                                 <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.online-courses.edit', $course->id) }}">Update</a>
                                                             </div>

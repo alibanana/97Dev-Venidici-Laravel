@@ -121,7 +121,7 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
     Route::post('/online-courses', [AdminOnlineCourseController::class, 'store'])->name('online-courses.store');
     Route::delete('/online-course/{id}', [AdminOnlineCourseController::class, 'destroy'])->name('online-courses.destroy');
-    Route::post('/online-courses/{id}/set-publish-status-to-draft', [AdminOnlineCourseController::class, 'setPublishStatusToDraft'])->name('online-courses.set-publish-status-to-draft');
+    Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
     // OnlineCourseUpdateController
     Route::get('/online-courses/{id}/update', [AdminOnlineCourseUpdateController::class, 'edit'])->name('online-courses.edit');
     // CourseCategoryController
