@@ -62,7 +62,7 @@
             <!--
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                    <select name="province" id=""  class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular">
+                    <select name="province" id=""  class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                         <option value="" disabled selected>Kategori</option>
                         <option value="">Online Course</option>
                     </select>                    

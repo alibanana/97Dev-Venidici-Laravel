@@ -148,6 +148,18 @@ Route::get('/admin/promo/1/update', function () {
 });
 /* END OF PROMO CODE */
 
+/* START OF HASHTAG*/
+Route::get('/admin/hashtags', function () {
+    return view('admin/hashtag/index');
+});
+Route::get('/admin/hashtags/create', function () {
+    return view('admin/hashtag/create');
+});
+Route::get('/admin/hashtags/1/update', function () {
+    return view('admin/hashtag/update');
+});
+/* END OF HASHTAG */
+
 
 /* TRUSTED COMPANY ROUTING */
 Route::get('/admin/trusted-companies', function () {
