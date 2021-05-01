@@ -7,7 +7,7 @@
 <div class="row m-0 page-container" style="padding-top:14vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
         <div class="card-white" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
-            <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:15vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
+            <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Gabriel Amileano Vidyananto</p> 
@@ -29,7 +29,11 @@
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">gabrielamileano@gmail.com</p>   
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Student</p>   
                 <div style="width:70%">
-                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Jalan duren tiga indah 5 Blok I no. 11, Pancoran, Jakarta Selatan, DKI Jakarta, 13720</p>   
+                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw;display: -webkit-box;
+                        overflow : hidden !important;
+                        text-overflow: ellipsis !important;
+                        -webkit-line-clamp: 2 !important;
+                        -webkit-box-orient: vertical !important;">Jalan duren tiga indah 5 Blok I no. 11, Pancoran, Jakarta Selatan, DKI Jakarta, 13720</p>   
                 </div>
                 <div style="display:flex;align-items:center;margin-top:0.8vw">   
                     <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px">Tech</p>

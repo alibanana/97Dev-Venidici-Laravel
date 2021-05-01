@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryCo
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -58,6 +61,9 @@ Route::get('/dashboard', function () {
 });
 Route::get('/cart', function () {
     return view('client/cart');
+});
+Route::get('/shipping', function () {
+    return view('client/cart-shipping');
 });
 
 /* START OF ONLINE COURSE ROUTING */
@@ -144,6 +150,18 @@ Route::get('/admin/promo/1/update', function () {
 });
 /* END OF PROMO CODE */
 
+/* START OF HASHTAG*/
+Route::get('/admin/hashtags', function () {
+    return view('admin/hashtag/index');
+});
+Route::get('/admin/hashtags/create', function () {
+    return view('admin/hashtag/create');
+});
+Route::get('/admin/hashtags/1/update', function () {
+    return view('admin/hashtag/update');
+});
+/* END OF HASHTAG */
+
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/admin/online-courses/1', function () {
     return view('admin/online-course/detail');
@@ -184,5 +202,10 @@ Route::get('/admin/analytics/online-course', function () {
 });
 /* END OF ANALYTICS ROUTING */
 /* END OF ADMIN ROUTING */
+
+/* START OF GOOGLE AUTH */
+Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [App\Http\Controllers\SocialController::class, 'handleGoogleCallback']);
+/* END OF GOOGLE AUTH*/
 
 require __DIR__.'/auth.php';

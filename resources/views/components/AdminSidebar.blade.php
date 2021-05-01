@@ -201,6 +201,18 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/hashtags') || Request::is('admin/hashtags/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/hashtags" 
+            aria-expanded="true" >
+            <i class="fas fa-hashtag"></i>
+            <span>Hashtags</span>
+        </a>
+    </li>
+    <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/promo') || Request::is('admin/promo/*'))
     <li class="nav-item active">
     @else

@@ -113,6 +113,20 @@ html, body {
     background-repeat: no-repeat;
     background-size: 88%;
 }
+
+.cart-background{
+    background-image: url("/assets/images/client/Cart_BG.png");
+    background-position:22vw 12.8vw;
+    background-repeat: no-repeat;
+    background-size: 15%;
+}
+
+.shipping-background{
+    background-image: url("/assets/images/client/Cart_BG.png");
+    background-position:7vw 37vw;
+    background-repeat: no-repeat;
+    background-size: 5%;
+}
 /* end of background images*/
 
 /* start of page padding */
@@ -818,7 +832,7 @@ html, body {
 
 .cart-card-grey{
     background-color: #FBFBFB;
-    padding:1vw;
+    padding:1vw 2vw;
     /*width:45vw;*/
     display:flex;
     align-items: center;
@@ -827,8 +841,22 @@ html, body {
 }
 .cart-card-blue{
     background-color: #6F9FCD;
-    padding:1vw;
-    width:4vw;
-    border-radius: 0px 10px 10px 0px;
+    width:3vw;
+    border-radius: 0px 10px 0px 0px;
     display: flex;flex-direction: column;justify-content: center;align-items: center;
+    transition: 0.2s ease-in-out;
+}
+.cart-card-blue:hover{
+    background-color:#2B6CAA
+}
+.cart-card-red{
+    background: rgba(206, 51, 105, 0.5);   
+    width:3vw;
+    border-radius: 0px 0px 10px 0px;
+    display: flex;flex-direction: column;justify-content: center;align-items: center;
+    transition: 0.2s ease-in-out;
+}
+
+.cart-card-red:hover{
+    background-color:#CE3369
 }

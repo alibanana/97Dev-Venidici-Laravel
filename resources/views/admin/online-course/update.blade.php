@@ -220,6 +220,40 @@
                         <button type="button" id="add_learn" onlick="duplicateLearn()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 
                     </div>
+                    <div class="col-6" style="margin-top:3vw">
+                        <label for="">Hashtag</label>
+                        <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
+                        <div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <select name="hashtag[]" class="form-control form-control-user"  id="">
+                                            <option value="1" selected>Tech</option>
+                                            <option value="2">Math</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row"  id="hashtag_duplicator" >
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <select name="hashtag[]" class="form-control form-control-user"  id="">
+                                            <option value="1">Tech</option>
+                                            <option value="2" selected>Math</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <button type="button" id="add_hashtag" onlick="duplicateHashtag()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+
+                    </div>
                     <div class="col-12" style="padding:2vw 1vw">
                         <div style="display:flex;justify-content:flex-end">
                             <button type="submit"  class="btn btn-primary btn-user p-3">Update Course</button>
@@ -627,6 +661,22 @@ function duplicateLearn() {
             evt.currentTarget.className += " course-link-active";
         }
          
+</script>
+<script>
+document.getElementById('add_hashtag').onclick = duplicateHashtag;
+
+var i = 0;
+var original2 = document.getElementById('hashtag_duplicator');
+
+function duplicateHashtag() {
+    if(confirm("Are you sure, you want to add more item?")){
+        var clone = original2.cloneNode(true); // "deep" clone
+        clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
+        original2.parentNode.appendChild(clone);
+    } else {
+
+    }
+}
 </script>
 <script>
     function disableInput() {
