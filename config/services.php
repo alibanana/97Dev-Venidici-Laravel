@@ -29,5 +29,19 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => 'http://127.0.0.1:8000/login/google/callback',
+    ], 
+
+    'midtrans' => [
+        'serverKey'     => env('MIDTRANS_SERVERKEY'),
+        'clientKey'     => env('MIDTRANS_CLIENTKEY'),
+        // Change false into true when it's ready for production
+        'isProduction'  => env('MIDTRANS_IS_PRODUCTION', false),
+        'isSanitized'   => env('MIDTRANS_IS_SANITIZED', true),
+        'is3ds'         => env('MIDTRANS_IS_3DS', true),                
+    ],
 
 ];

@@ -13,9 +13,9 @@ class Course extends Model
         'course_type_id',
         'course_category_id',
         'thumbnail',
-        // 'preview_video',
+        'preview_video',
         'title',
-        'sub_title',
+        'subtitle',
         'description',
         'price', // default -> 0
         'enrollment_status', // default -> Open
@@ -30,5 +30,13 @@ class Course extends Model
 
     public function courseCategory() {
         return $this->belongsTo(CourseCategory::class);
+    }
+
+    public function courseRequirements() {
+        return $this->hasMany(CourseRequirement::class);
+    }
+
+    public function courseFeatures() {
+        return $this->hasMany(CourseFeature::class);
     }
 }

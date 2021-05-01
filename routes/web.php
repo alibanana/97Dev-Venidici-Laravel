@@ -6,7 +6,9 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
+use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,8 @@ use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryCo
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -97,6 +101,7 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - HomepageController
 |   - UserController
 |   - OnlineCourseController
+|   - OnlineCourseUpdateController // Update is separated because its very complex.
 |   - CourseCategoryController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
@@ -112,11 +117,18 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
     // OnlineCourseController
     Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
+    Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
+    Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
+    Route::post('/online-courses', [AdminOnlineCourseController::class, 'store'])->name('online-courses.store');
+    Route::delete('/online-course/{id}', [AdminOnlineCourseController::class, 'destroy'])->name('online-courses.destroy');
+    Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
+    // OnlineCourseUpdateController
+    Route::get('/online-courses/{id}/update', [AdminOnlineCourseUpdateController::class, 'edit'])->name('online-courses.edit');
     // CourseCategoryController
-    Route::get('/online-courses/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
-    Route::post('/online-courses/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
-    Route::put('/online-courses/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
-    Route::delete('/online-courses/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    Route::get('/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
+    Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
+    Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
+    Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
 });
 
 /* START ADMIN ROUTING */
@@ -147,22 +159,21 @@ Route::get('/admin/promo/1/update', function () {
 /* END OF PROMO CODE */
 
 /* START OF ONLINE COURSE ROUTING */
+/* START OF HASHTAG*/
+Route::get('/admin/hashtags', function () {
+    return view('admin/hashtag/index');
+});
+Route::get('/admin/hashtags/create', function () {
+    return view('admin/hashtag/create');
+});
+Route::get('/admin/hashtags/1/update', function () {
+    return view('admin/hashtag/update');
+});
+/* END OF HASHTAG */
 
-Route::get('/admin/online-courses', function () {
-    return view('admin/online-course/index');
-});
-Route::get('/admin/online-courses/1', function () {
-    return view('admin/online-course/detail');
-});
-
-Route::get('/admin/online-courses/create', function () {
-    return view('admin/online-course/create');
-});
+/* START OF ONLINE COURSE ROUTING */
 Route::get('/admin/online-courses/create-video/1', function () {
     return view('admin/online-course/create-video');
-});
-Route::get('/admin/online-courses/1/update', function () {
-    return view('admin/online-course/update');
 });
 Route::get('/admin/online-courses/assesments', function () {
     return view('admin/assesment/index');
@@ -194,5 +205,10 @@ Route::get('/admin/analytics/online-course', function () {
 });
 /* END OF ANALYTICS ROUTING */
 /* END OF ADMIN ROUTING */
+
+/* START OF GOOGLE AUTH */
+Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [App\Http\Controllers\SocialController::class, 'handleGoogleCallback']);
+/* END OF GOOGLE AUTH*/
 
 require __DIR__.'/auth.php';

@@ -20,9 +20,9 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('course_category_id')->nullable();
             $table->foreign('course_category_id')->references('id')->on('course_categories')->onDelete('set null');
             $table->string('thumbnail');
-            // $table->string('preview_video'); // Belum ada di view.
+            $table->string('preview_video');
             $table->string('title');
-            $table->text('sub_title');
+            $table->text('subtitle');
             $table->text('description');
             $table->unsignedInteger('price')->default(0);
             $table->enum('enrollment_status', ['Open', 'Close'])->default('Open');

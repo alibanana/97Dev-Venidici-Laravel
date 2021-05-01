@@ -25,7 +25,10 @@ class DatabaseSeeder extends Seeder
             ConfigSeeder::class,
             CourseTypeSeeder::class,
             CourseCategorySeeder::class,
-            CourseSeeder::class
+            CourseSeeder::class,
+            CourseRequirementSeeder::class,
+            CourseFeatureSeeder::class, // Kamu akan dapat? section
+            LocationSeeder::class
         ]);
     }
 }

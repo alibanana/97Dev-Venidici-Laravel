@@ -20,7 +20,7 @@
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/dashboard"><i class="fas fa-fw fa-tachometer-alt"></i>Dashboard</a>
+        <a class="nav-link" href="{{ route('admin.dashboard.index') }}"><i class="fas fa-fw fa-tachometer-alt"></i>Dashboard</a>
     </li>
 
     <!-- Divider -->
@@ -73,7 +73,7 @@
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/users" 
+        <a class="nav-link" href="{{ route('admin.users.index') }}" 
             aria-expanded="true" >
             <i class="fas fa-users"></i>
             <span>Users</span>
@@ -93,8 +93,8 @@
         </a>
         <div id="collapseCourse" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseCourse">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/admin/online-courses">Online Courses</a>
-                <a class="collapse-item" href="/admin/online-courses/course-categories">Course Categories</a>
+                <a class="collapse-item" href="{{ route('admin.online-courses.index') }}">Online Courses</a>
+                <a class="collapse-item" href="{{ route('admin.course-categories.index') }}">Course Categories</a>
                 <a class="collapse-item" href="/admin/online-courses/assesments">Assesments</a>
                 <a class="collapse-item" href="/admin/online-courses/teachers">Teachers</a>
             </div>
@@ -200,6 +200,18 @@
         </a>
     </li>
 
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/hashtags') || Request::is('admin/hashtags/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/hashtags" 
+            aria-expanded="true" >
+            <i class="fas fa-hashtag"></i>
+            <span>Hashtags</span>
+        </a>
+    </li>
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/promo') || Request::is('admin/promo/*'))
     <li class="nav-item active">

@@ -19,9 +19,11 @@ class CreateUsersTable extends Migration
             $table->foreign('user_role_id')->references('id')->on('user_roles')->onDelete('set null');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('provider_id')->nullable();
+            $table->text('avatar')->nullable();            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_admin');
+            $table->boolean('is_admin')->nullable();
             $table->enum('status', ['active', 'suspended'])->default('active');
             $table->rememberToken();
             $table->timestamps();

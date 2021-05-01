@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Online Course Detail')
+@section('title', 'Venidici Hastag CMS')
 
 @section('container')
 
@@ -12,65 +12,19 @@
     <div class="container-fluid">
 
         @if (session()->has('message'))
-            <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
-                {{ session()->get('message') }}            
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
+            {{ session()->get('message') }}            
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         @endif
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between">
-            <h1 class="mb-0 mb-3 text-gray-800">{{ $course->title }}</h1>
-        </div>
-        @if ($course->price == 0)
-            <h4 style="">FREE</h4>
-        @else
-            <h4 style="">Rp. {{ $course->price }}</h4>
-        @endif
-        <div style="display: flex;font-size:1.5vw" class="mb-4">
-            {{ $course->average_rating }}
-            <div style="margin-left:0.5vw">
-                @for ($i = 1; $i < 6; $i++)
-                    @if ($i <= $course->average_rating)
-                        @if ($i == 1)
-                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                        @else
-                            <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star"></i>
-                        @endif
-                    @else
-                        @if ($i == 1)
-                            <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
-                        @else
-                            <i style="margin-left:0.2vw;color:#B3B5C2" class="fas fa-star"></i>
-                        @endif
-                    @endif
-                @endfor
-            </div>
-            
-        </div>
-        <div class="card-body p-0">
-            <div class="row">
-                <div class="col-6">
-                    <div class="card bg-light text-black shadow">
-                        <div class="card-body">
-                            Total Course Sold
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">20</div>
-                        </div>
-                    </div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-2">
+            <h1 class="mb-0 mb-3 text-gray-800">Hashtag</h1>
+            <a href="/admin/hashtags/create" class="btn btn-primary btn-user p-3">Create New Hashtag</a>
 
-                </div>
-                <div class="col-6">
-                    <div class="card bg-light text-black shadow">
-                        <div class="card-body">
-                            Total Earnings
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 150.000</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
         
         <!-- Content Row -->
@@ -84,9 +38,18 @@
                 <div class="container-fluid p-0 mt-3">
                     <!-- Page Heading -->
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
-                    <h1 class="h5 mb-2 text-gray-800 d-inline">Student List</h1> <br>
 
                     <div class="row mt-2 mb-3">
+                        <!--
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                            <div class="dataTables_length" id="show_entries">
+                                <label class="w-100">Show:
+                                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'show' => '10']) }}" @if (Request::get('show') == '10') selected @endif>10</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
@@ -97,6 +60,7 @@
                                 </label>
                             </div>
                         </div>
+                          -->
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
@@ -114,30 +78,39 @@
                     </div>
 
                     <!-- Main Table -->
-                    <div class="card shadow mb-4 mt-2">
+                    <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Full Name</th>
-                                                <th>Email</th>
-                                                <th>Telephone</th>
+                                                <th>Name</th>
+                                                <th>Image</th>
+                                                <th>Color Code</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Fernandha Dzaky</td>
-                                                <td>Fernandhadzaky@hotmail.com</td>
-                                                <td>08111377893</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Alifio Rasyid</td>
-                                                <td>official.alifio@gmail.com</td>
-                                                <td>08123456789</td>
+                                                <td>Tech</td>
+                                                <td><img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:5vw;height:5vw;border-radius:10px" alt="Interest"></td>   
+                                                <td>FFFFFF</td>   
+                                                <td>
+                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                        <div style="padding: 0px 2px;">
+                                                            <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/hashtags/1/update">Update</a>
+                                                        </div>
+                                                        <form action="" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <div style="padding: 0px 2px">
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this hashtag?')">Delete</button>
+                                                            </div>
+                                                        </form> 
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
