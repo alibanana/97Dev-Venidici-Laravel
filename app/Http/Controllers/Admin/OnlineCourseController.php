@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Helper\Helper;
 
 use App\Models\CourseCategory;
 use App\Models\Course;
+use App\Models\CourseRequirement;
+use App\Models\CourseFeature;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,6 +141,49 @@ class OnlineCourseController extends Controller
 
     // Store New Online Course on the database.
     public function store(Request $request) {
+        $validated = Validator::make($request->all(), [
+            'title' => 'required',
+            'thumbnail' => 'required|mimes:jpeg,jpg,png',
+            'subtitle' => 'required',
+            'course_category_id' => 'required',
+            'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
+            'description' => 'required'
+        ])->setAttributeNames([
+            'course_category_id' => 'category',
+            'preview_video_link' => 'video link'
+        ])->validate();
+
+        $course = new Course;
+        $course->course_type_id = 1;
+        $course->course_category_id = $validated['course_category_id'];
+        $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/online-courses/');
+        $course->preview_video = $validated['preview_video_link'];
+        $course->title = $validated['title'];
+        $course->subtitle = $validated['subtitle'];
+        $course->description = $validated['description'];
+        $course->save();
+
+        if ($request->has('requirements')) {
+            foreach ($request->requirements as $requirement_value) {
+                if ($requirement_value != "") {
+                    $new_requirement = new CourseRequirement;
+                    $new_requirement->course_id = $course->id;
+                    $new_requirement->requirement = $requirement_value;
+                    $new_requirement->save();
+                }
+            }
+        }
+
+        if ($request->has('features')) {
+            foreach ($request->features as $feature_value) {
+                if ($feature_value != "") {
+                    $new_feature = new CourseFeature;
+                    $new_feature->course_id = $course->id;
+                    $new_feature->feature = $feature_value;
+                    $new_feature->save();
+                }
+            }
+        }
 
         return redirect()->route('admin.online-courses.index')->with('message', 'New Online Course has been added!');
     }
