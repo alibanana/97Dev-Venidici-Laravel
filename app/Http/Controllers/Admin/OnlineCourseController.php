@@ -66,7 +66,7 @@ class OnlineCourseController extends Controller
 
                 $courses = $courses->where(function ($query) use ($search) {
                     $query->where([['title', 'like', "%".$search."%"]])
-                    ->orWhere([['sub_title', 'like', "%".$search."%"]]);
+                    ->orWhere([['subtitle', 'like', "%".$search."%"]]);
                 });
             }
         }
@@ -186,5 +186,14 @@ class OnlineCourseController extends Controller
         }
 
         return redirect()->route('admin.online-courses.index')->with('message', 'New Online Course has been added!');
+    }
+
+    // Delete Online Course from the database.
+    public function destroy($id) {
+        $course = Course::findOrFail($id);
+        unlink($course->thumbnail);
+        $course->delete();
+        $message = 'Online Course (' . $course->title . ') has been deleted.';
+        return redirect()->route('admin.online-courses.index')->with('message', $message);
     }
 }

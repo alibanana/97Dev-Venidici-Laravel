@@ -146,7 +146,7 @@
                                                     @endif
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                                <form action="" method="post">
+                                                                <form action="{{ route('admin.online-courses.destroy', $course->id) }}" method="post">
                                                                     @csrf
                                                                     @method('delete')
                                                                     <div style="padding: 0px 2px">
