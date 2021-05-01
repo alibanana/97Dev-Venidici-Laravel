@@ -196,4 +196,15 @@ class OnlineCourseController extends Controller
         $message = 'Online Course (' . $course->title . ') has been deleted.';
         return redirect()->route('admin.online-courses.index')->with('message', $message);
     }
+
+    // Change the public status of the chosen Online Course to Draft.
+    public function setPublishStatusToDraft(Request $request, $id) {
+        $course = Course::findOrFail($id);
+
+        $course->publish_status = 'Draft';
+        $course->save();
+
+        $message = 'Online Course (' . $course->title . ') publish_status updated to Draft';
+        return redirect()->route('admin.online-courses.index')->with('message', $message);
+    }
 }

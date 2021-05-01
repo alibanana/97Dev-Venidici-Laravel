@@ -146,23 +146,27 @@
                                                     @endif
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                                <form action="{{ route('admin.online-courses.destroy', $course->id) }}" method="post">
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="/admin/online-courses/1">View Detail</a>
+                                                            </div>
+                                                            @if ($course->publish_status == 'Published')
+                                                                <form action="{{ route('admin.online-courses.set-publish-status-to-draft', $course->id) }}" method="post">
                                                                     @csrf
-                                                                    @method('delete')
-                                                                    <div style="padding: 0px 2px">
-                                                                        <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
-                                                                    </div>
-                                                                </form> 
-                                                                <div style="padding: 0px 2px;">
-                                                                    <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
-                                                                </div>
-                                                                <form action="" method="post">
-                                                                    @csrf
-                                                                    @method('put')
                                                                     <div style="padding: 0px 2px">
                                                                         <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this online course as draft?')">Set as draft</button>
                                                                     </div>
-                                                                </form> 
+                                                                </form>
+                                                            @endif
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
+                                                            </div>
+                                                            <form action="{{ route('admin.online-courses.destroy', $course->id) }}" method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div style="padding: 0px 2px">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
+                                                                </div>
+                                                            </form> 
                                                         </div>
                                                     </td>
                                                 </tr>
