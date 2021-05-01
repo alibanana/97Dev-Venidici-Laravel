@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use App\Models\Course;
+use App\Models\Hashtag;
 
 class CourseSeeder extends Seeder
 {
@@ -58,8 +59,18 @@ class CourseSeeder extends Seeder
             ]
         ];
 
-        foreach ($courses as $key => $value) {
-            Course::create($value);
-        }
+        // foreach ($courses as $key => $value) {
+        //     Course::create($value);
+        // }
+
+        $course1 = Course::create($courses[0]);
+        $course1->hashtags()->attach(Hashtag::find(27)->first());
+        $course1->hashtags()->attach(Hashtag::find(28)->first());
+        $course1->hashtags()->attach(Hashtag::find(30)->first());
+
+        $course2 = Course::create($courses[1]);
+        $course2->hashtags()->attach(Hashtag::find(10)->first());
+        $course2->hashtags()->attach(Hashtag::find(14)->first());
+        $course2->hashtags()->attach(Hashtag::find(29)->first());
     }
 }

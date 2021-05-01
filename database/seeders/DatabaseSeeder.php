@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ConfigSeeder::class,
             CourseTypeSeeder::class,
             CourseCategorySeeder::class,
+            HashtagSeeder::class,
             CourseSeeder::class,
             CourseRequirementSeeder::class,
             CourseFeatureSeeder::class, // Kamu akan dapat? section

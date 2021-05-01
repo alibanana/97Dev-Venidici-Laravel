@@ -39,4 +39,8 @@ class Course extends Model
     public function courseFeatures() {
         return $this->hasMany(CourseFeature::class);
     }
+
+    public function hashtags() {
+        return $this->belongsToMany(Hashtag::class);
+    }
 }
