@@ -87,7 +87,7 @@
                             </span>
                         @enderror               
                     </div>
-                    <p> <span> <a href="/admin/online-courses/course-categories" target="_blank">Click here</a> </span> to add new category</p>
+                    <p> <span> <a href="{{ route('admin.course-categories.index') }}" target="_blank">Click here</a> </span> to add new category</p>
                 </div>
                 <div class="col-6">
                     <div class="form-group">

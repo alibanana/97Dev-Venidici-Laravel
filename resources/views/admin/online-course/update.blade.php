@@ -15,7 +15,7 @@
         <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
             {{ session()->get('message') }}            
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-            <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
             </button>
         </div>
         @endif
@@ -45,26 +45,25 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Thumbnail</label> <br>
-                            <img src="/assets/images/client/our-programs-card-dummy.png" alt="" style="width:14vw;" class="img-fluid">
+                            <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
                             <br>
                             <br>
                             Click button below to update image
-                            <input type="file" name="thumbnail"
-                                aria-describedby=""> 
+                            <input type="file" name="thumbnail" aria-describedby=""> 
                             @error('thumbnail')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Title</label>
-                            <input type="text" name="name" class="form-control form-control-user"
+                            <input type="text" name="title" class="form-control form-control-user"
                                 id="phone" aria-describedby=""
-                                placeholder="Enter couse title" value="Emotional Intelligence"> 
-                            @error('name')
+                                placeholder="Enter couse title" value="{{ old('title', $course->title) }}"> 
+                            @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -75,7 +74,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Subtitle</label>
-                            <textarea name="subtitle" id="" rows="3" class="form-control">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis provident atque quo animi quasi alias facilis tempora commodi cumque dolore aliquid fugiat ipsum magnam, omnis, iste dolorem. Numquam, cupiditate magnam?</textarea> 
+                            <textarea name="subtitle" id="" rows="3" class="form-control">{{ old('subtitle', $course->subtitle) }}</textarea> 
                             @error('subtitle')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -86,17 +85,22 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Category</label> <br>
-                            <select name="category" id="" class="form-control form-control-user">
-                                <option value="1">Tech</option>
-                                <option value="2">Math</option>
+                            <select name="course_category_id" id="" class="form-control form-control-user">
+                                @foreach ($course_categories as $category)
+                                    @if ($category->id == $course->course_category_id)
+                                        <option value="{{ $course->course_category_id }}" selected>{{ $category->category }}</option>
+                                    @else
+                                        <option value="{{ $course->course_category_id }}">{{ $category->category }}</option>
+                                    @endif
+                                @endforeach
                             </select>
-                            @error('category')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('course_category_id')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
-                        <p> <span> <a href="/admin/online-courses/course-categories" target="_blank">Click here</a> </span> to add new category</p>
+                        <p> <span> <a href="{{ route('admin.course-categories.index') }}" target="_blank">Click here</a> </span> to add new category</p>
                     </div>
                     <div class="col-6">
                         <div class="form-group">

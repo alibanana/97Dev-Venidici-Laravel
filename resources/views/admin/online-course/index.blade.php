@@ -158,7 +158,7 @@
                                                                 </form>
                                                             @endif
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/1/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.online-courses.edit', $course->id) }}">Update</a>
                                                             </div>
                                                             <form action="{{ route('admin.online-courses.destroy', $course->id) }}" method="post">
                                                                 @csrf
