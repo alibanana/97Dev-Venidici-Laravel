@@ -171,9 +171,14 @@
                                     </table>
                                 </div>
                             </div>
+                            @unless (Request::get("show") == "All")
+                                <div class="row mb-4">
+                                    <div class="mx-auto">
+                                        {{ $courses->appends(request()->input())->links("pagination::bootstrap-4") }}
+                                    </div>
+                                </div>
+                            @endunless
                         </div>
-                        
-        
                     <!-- /.container-fluid -->
 
                 </div>

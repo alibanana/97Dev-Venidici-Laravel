@@ -31,4 +31,12 @@ class Course extends Model
     public function courseCategory() {
         return $this->belongsTo(CourseCategory::class);
     }
+
+    public function courseRequirements() {
+        return $this->hasMany(CourseRequirement::class);
+    }
+
+    public function courseFeatures() {
+        return $this->hasMany(CourseFeature::class);
+    }
 }

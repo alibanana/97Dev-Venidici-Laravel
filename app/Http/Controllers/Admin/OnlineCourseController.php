@@ -127,4 +127,17 @@ class OnlineCourseController extends Controller
 
         return view('admin/online-course/index', compact('course_categories', 'courses', 'courses_data'));
     }
+
+    // Show Admin -> Create New Online Page
+    public function create() {
+        $course_categories = CourseCategory::select('id', 'category')->get();
+
+        return view('admin/online-course/create', compact('course_categories'));
+    }
+
+    // Store New Online Course on the database.
+    public function store(Request $request) {
+
+        return redirect()->route('admin.online-courses.index')->with('message', 'New Online Course has been added!');
+    }
 }

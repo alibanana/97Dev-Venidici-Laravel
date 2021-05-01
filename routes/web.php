@@ -109,6 +109,7 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
     // OnlineCourseController
     Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
+    Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
     // CourseCategoryController
     Route::get('/online-courses/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/online-courses/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
@@ -146,9 +147,6 @@ Route::get('/admin/promo/1/update', function () {
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/admin/online-courses/1', function () {
     return view('admin/online-course/detail');
-});
-Route::get('/admin/online-courses/create', function () {
-    return view('admin/online-course/create');
 });
 Route::get('/admin/online-courses/create-video/1', function () {
     return view('admin/online-course/create-video');
