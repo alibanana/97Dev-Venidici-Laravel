@@ -71,7 +71,7 @@
             <!-- END OF WHAT YOU WILL LEARN SECTION -->
         </div>
         <!-- START OF PERSYARATAN SECTION -->
-        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:2vw">Persyaratan</p>
+        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:4vw">Persyaratan</p>
         
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-top:1vw">   
             <a class="green-tag normal-text" style="margin-top:1vw">Muka lucu dan unik</a>
@@ -83,11 +83,39 @@
         <!-- END OF PERSYARATAN SECTION -->
 
         <!-- START OF PROFIL PEMBICARA SECTION -->
+        <!--
         <div style="display:flex;align-items:center;margin-top:3vw">
             <p class="sub-description profil-text-green profil-text-green-active profil-links"  onclick="changeContent(event, 'tentang-course')" style="font-family:Rubik Medium;margin-bottom:0px;cursor:pointer">Tetang <span style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</span> ini</p>
             <p class="sub-description profil-text-green profil-links" onclick="changeContent(event, 'profil-pembicara')" style="font-family:Rubik Medium;margin-bottom:0px;cursor:pointer;margin-left:3vw">Profil Pembicara </p>
 
         </div>
+        -->
+        <!-- START OF PROFIL PEMBICARA SECTION -->
+        <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw;color:#3B3C43">Profil Pembicara</p>
+            <!-- START OF ONE LECTURE -->
+            <div style="display:flex;margin-top:2vw;align-items:flex-start">
+                <img src="/assets/images/client/testimony-image-dummy.png" style="width:5vw;height:5vw" class="img-fluid" alt="">
+                <div style="margin-left:1vw">
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">Mr. Raditya Dika</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#000000">Berpengalaman sebagai Consumer Insight Lead di LinkAja, REA Group Asia, Garudafood, dan menjadi Head of Research And Development di IdEA. Kak Irfan juga sering diundang oleh TV besar di indonesia sebagai Consumer Behavior Expert dan saat ini juga menjadi Co-Owner dari Waroeng Ondel Ondel Betawi di Leiden, Netherlands.</p>
+                </div>
+
+            </div>
+            <!-- END OF ONE LECTURE -->
+            <!-- START OF ONE LECTURE -->
+            <div style="display:flex;margin-top:2vw;align-items:flex-start">
+                <img src="/assets/images/client/testimony-image-dummy.png" style="width:5vw;height:5vw" class="img-fluid" alt="">
+                <div style="margin-left:1vw">
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">Mr. Raditya Dika</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#000000">Berpengalaman sebagai Consumer Insight Lead di LinkAja, REA Group Asia, Garudafood, dan menjadi Head of Research And Development di IdEA. Kak Irfan juga sering diundang oleh TV besar di indonesia sebagai Consumer Behavior Expert dan saat ini juga menjadi Co-Owner dari Waroeng Ondel Ondel Betawi di Leiden, Netherlands.</p>
+                </div>
+
+            </div>
+            <!-- END OF ONE LECTURE -->
+
+
+        <!-- END OF PROFIL PEMBICARA SECTION -->
+        <p class="sub-description profil-text-green profil-text-green-active profil-links" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw">Tetang <span style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</span> ini</p>
         <div  class="bigger-text profil-content" id="tentang-course"  style="margin-top:1vw">
             <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet tortor gravida ut nam. Sapien duis feugiat feugiat nunc. Nunc cras dolor risus magnis facilisis elementum pharetra. Nunc dolor lacus, accumsan, vestibulum, faucibus libero, vulputate vitae, mauris.

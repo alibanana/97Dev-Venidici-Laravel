@@ -867,3 +867,74 @@ html, body {
 .cart-card-red:hover{
     background-color:#CE3369
 }
+
+/*POP UP*/
+  
+.overlay {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: -30%;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popup {
+    margin: 40vw auto;
+    background: #ffffff;
+    border-radius: 10px;
+    width: 80%;
+    position: relative;
+    transition: all 1s ease-in-out;
+  
+  }
+
+  .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 0.2s;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #2B6CAA;
+  }
+  .popup .close:hover {
+    color: #252525;
+  }
+  
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+  .popup-product .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #2B6CAA;
+  }
+  .popup-product .close:hover {
+    color: #252525;
+  }
+  
+  .popup-product .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+  
+  
+
+/*END OF POP UP*/
