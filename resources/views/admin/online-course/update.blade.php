@@ -15,7 +15,7 @@
         <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
             {{ session()->get('message') }}            
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-            <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
             </button>
         </div>
         @endif
@@ -45,29 +45,28 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Thumbnail</label> <br>
-                            <img src="/assets/images/client/our-programs-card-dummy.png" alt="" style="width:14vw;" class="img-fluid">
+                            <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
                             <br>
                             <br>
                             Click button below to update image
-                            <input type="file" name="thumbnail"
-                                aria-describedby=""> 
+                            <input type="file" name="thumbnail" aria-describedby=""> 
                             @error('thumbnail')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Title</label>
-                            <input type="text" name="name" class="form-control form-control-user"
-                                id="phone" aria-describedby=""
-                                placeholder="Enter couse title" value="Emotional Intelligence"> 
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <input type="text" name="title" class="form-control form-control-user"
+                                id="phone" aria-describedby="" requi
+                                placeholder="Enter couse title" value="{{ old('title', $course->title) }}" required> 
+                            @error('title')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
@@ -75,7 +74,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Subtitle</label>
-                            <textarea name="subtitle" id="" rows="3" class="form-control">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis provident atque quo animi quasi alias facilis tempora commodi cumque dolore aliquid fugiat ipsum magnam, omnis, iste dolorem. Numquam, cupiditate magnam?</textarea> 
+                            <textarea name="subtitle" id="" rows="3" class="form-control" required>{{ old('subtitle', $course->subtitle) }}</textarea> 
                             @error('subtitle')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -86,34 +85,40 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Category</label> <br>
-                            <select name="category" id="" class="form-control form-control-user">
-                                <option value="1">Tech</option>
-                                <option value="2">Math</option>
+                            <select name="course_category_id" id="" class="form-control form-control-user" required>
+                                @foreach ($course_categories as $category)
+                                    @if ($category->id == $course->course_category_id)
+                                        <option value="{{ $course->course_category_id }}" selected>{{ $category->category }}</option>
+                                    @else
+                                        <option value="{{ $course->course_category_id }}">{{ $category->category }}</option>
+                                    @endif
+                                @endforeach
                             </select>
-                            @error('category')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('course_category_id')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
-                        <p> <span> <a href="/admin/online-courses/course-categories" target="_blank">Click here</a> </span> to add new category</p>
+                        <p> <span> <a href="{{ route('admin.course-categories.index') }}" target="_blank">Click here</a> </span> to add new category</p>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Embed youtube link for preview  (src only)</label>
-                            <input type="text" name="video" class="form-control form-control-user"
-                                    id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg" value="https://www.youtube.com/embed/DSJlhjZNVpg"> 
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <input type="text" name="preview_video_link" class="form-control form-control-user"
+                                    id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg"
+                                    value="{{ old('preview_video_link', $course->preview_video) }}" required> 
+                            @error('preview_video_link')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Assesment</label> <br>
-                            <select name="assesment" id="" class="form-control form-control-user">
+                            <select name="assesment" id="" class="form-control form-control-user" disabled>
                                 <option >No Assesment</option>
                                 <option value="1" selected>Quiz of Business Case Room</option>
                                 <option value="2">Quiz of Business Plan Room</option>
@@ -129,12 +134,12 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea name="description" id="" rows="5"  class="form-control form-control-user">Pesatnya perkembangan teknologi saat ini sudah banyak menggeser manusia dari berbagai pekerjaan. Di masa yang akan datang, kemampuan dalam me-manage manusialah yang diprediksi akan terus eksis dan justru meningkat dalam permintaan. Era baru pekerjaan itu kini hampir di depan mata, sudah siapkah kamu?</textarea>
-                            @error('descriptoin')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror               
+                            <textarea name="description" id="" rows="5"  class="form-control form-control-user" required>{{ old('description', $course->description) }}</textarea>
+                            @error('description')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror             
                         </div>
                     </div>
                     <!--
@@ -158,64 +163,40 @@
                     -->
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Persyaratan</label>
-                        <div>
-                            <div class="row" >
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="requirement[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement" value="A Windows/Linux/MacOS based computer or laptop">
+                            <div>
+                                @foreach ($course->courseRequirements as $requirement)
+                                    @if ($loop->first)
+                                        <div class="row" id="requirement_duplicator">
+                                    @else
+                                        <div class="row" id="requirement_duplicator{{ $loop->index }}">
+                                    @endif
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement" value="{{ $requirement->requirement }}">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
-                        <div>
-                            <div class="row" id="requirement_duplicator">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="requirement[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement" value="A stable internet connection">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <button type="button" id="add_requirement" onlick="duplicateRequirement()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
-
                     </div>
-                    <div class="col-6" style="margin-top:3vw">
-                        <label for="">Kamu akan dapat?</label>
-                        <div>
-                            <div class="row">
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="advantage[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement">
-                                    </div>
-                                </div>
-                            
-                            </div>
-                        </div>
-                        <button type="button" id="add_advantage" onlick="duplicateAdvantage()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
-
-                    </div>
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Apa yang akan dipelajari?</label>
                         <div>
-                            <div class="row" id="learn_duplicator" >
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="Bisa melawak dengan benar dan tidak garing">
+                            @foreach ($course->courseFeatures as $feature)
+                                @if ($loop->first)
+                                    <div class="row" id="learn_duplicator">
+                                @else
+                                    <div class="row" id="learn_duplicator{{ $loop->index }}">
+                                @endif
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="{{ $feature->feature }}">
+                                        </div>
                                     </div>
                                 </div>
-                            
-                            </div>
-                            <div class="row"  >
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="Bisa melawak dengan benar">
-                                    </div>
-                                </div>
-                            
-                            </div>
+                            @endforeach
                         </div>
                         <button type="button" id="add_learn" onlick="duplicateLearn()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 
@@ -224,31 +205,15 @@
                         <label for="">Hashtag</label>
                         <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
                         <div>
-                            <div class="row">
-
+                            <div class="row" id="hashtag_duplicator">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <select name="hashtag[]" class="form-control form-control-user"  id="">
+                                        <select name="hashtag[]" class="form-control form-control-user" id="" disabled>
                                             <option value="1" selected>Tech</option>
                                             <option value="2">Math</option>
                                         </select>
                                     </div>
                                 </div>
-                            
-                            </div>
-                        </div>
-                        <div>
-                            <div class="row"  id="hashtag_duplicator" >
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <select name="hashtag[]" class="form-control form-control-user"  id="">
-                                            <option value="1">Tech</option>
-                                            <option value="2" selected>Math</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            
                             </div>
                         </div>
                         <button type="button" id="add_hashtag" onlick="duplicateHashtag()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
@@ -597,86 +562,53 @@
 
 <script>
 document.getElementById('add_requirement').onclick = duplicateRequirement;
-var i = 0;
-var original = document.getElementById('requirement_duplicator');
-console.log(original);
+var i = 0; var original = document.getElementById('requirement_duplicator');
 function duplicateRequirement() {
-    console.log('requirement clicked')
     if(confirm("Are you sure, you want to add more item?")){
         var clone = original.cloneNode(true); // "deep" clone
         $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
         clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
         original.parentNode.appendChild(clone);
-    } else {
-
-    }
-}
-</script>
-<script>
-document.getElementById('add_advantage').onclick = duplicateAdvantage;
-
-var i = 0;
-var original2 = document.getElementById('advantage_duplicator');
-
-function duplicateAdvantage() {
-    if(confirm("Are you sure, you want to add more item?")){
-        var clone = original2.cloneNode(true); // "deep" clone
-        $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
-        clone.id = "advantage_duplicator" + ++i; // there can only be one element with an ID
-        original2.parentNode.appendChild(clone);
-    } else {
-
     }
 }
 </script>
 <script>
 document.getElementById('add_learn').onclick = duplicateLearn;
-
-var i = 0;
-var original2 = document.getElementById('learn_duplicator');
-
+var i = 0; var original2 = document.getElementById('learn_duplicator');
 function duplicateLearn() {
     if(confirm("Are you sure, you want to add more item?")){
         var clone = original2.cloneNode(true); // "deep" clone
         $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
         clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
         original2.parentNode.appendChild(clone);
-    } else {
-
+    }
+}
+</script>
+<script>
+document.getElementById('add_hashtag').onclick = duplicateHashtag;
+var i = 0; var original3 = document.getElementById('hashtag_duplicator');
+function duplicateHashtag() {
+    if(confirm("Are you sure, you want to add more item?")){
+        var clone = original3.cloneNode(true); // "deep" clone
+        clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
+        original3.parentNode.appendChild(clone);
     }
 }
 </script>
 <script>
     function changeContent(evt, categoryName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("course-content")
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("course-item");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("course-link-active", "course-link");
-            }
-            document.getElementById(categoryName).style.display = "block";
-            evt.currentTarget.className += " course-link-active";
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("course-content")
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
-         
-</script>
-<script>
-document.getElementById('add_hashtag').onclick = duplicateHashtag;
-
-var i = 0;
-var original2 = document.getElementById('hashtag_duplicator');
-
-function duplicateHashtag() {
-    if(confirm("Are you sure, you want to add more item?")){
-        var clone = original2.cloneNode(true); // "deep" clone
-        clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
-        original2.parentNode.appendChild(clone);
-    } else {
-
+        tablinks = document.getElementsByClassName("course-item");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace("course-link-active", "course-link");
+        }
+        document.getElementById(categoryName).style.display = "block";
+        evt.currentTarget.className += " course-link-active";
     }
-}
 </script>
 <script>
     function disableInput() {

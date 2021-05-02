@@ -20,7 +20,16 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserRoleSeeder::class,
             UserSeeder::class,
-            FakeTestimonySeeder::class
+            FakeTestimonySeeder::class,
+            TrustedCompanySeeder::class,
+            ConfigSeeder::class,
+            CourseTypeSeeder::class,
+            CourseCategorySeeder::class,
+            HashtagSeeder::class,
+            CourseSeeder::class,
+            CourseRequirementSeeder::class,
+            CourseFeatureSeeder::class, // Kamu akan dapat? section
+            LocationSeeder::class
         ]);
     }
 }

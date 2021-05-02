@@ -122,6 +122,9 @@ return [
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
+    // Custom attributes & messages.
+    'alpha_spaces' => 'The :attribute may only contain letters and spaces.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

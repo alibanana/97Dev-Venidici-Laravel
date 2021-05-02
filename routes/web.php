@@ -2,11 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\FakeTestimonyController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
+use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
+use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +47,6 @@ Route::get('/dashboard', function () {
 Route::get('/', [PagesController::class, 'index'])->name('index');
 
 /* START OF CLIENT ROUTING */
-
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
 
 Route::get('/login', function () {
@@ -97,24 +99,45 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 | Controllers can be found inside -> App\Http\Controllers\Admin\
 | Controllers Used:
 |   - DashboardController
+|   - HomepageController
 |   - UserController
-|   - FakeTestimonyController
+|   - OnlineCourseController
+|   - OnlineCourseUpdateController // Update is separated because its very complex.
+|   - CourseCategoryController
+|   - HashtagController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/testimonies', [FakeTestimonyController::class, 'index'])->name('testimonies.index');
+    // DashboardController
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
+    // HomepageController
+    Route::put('/cms/homepage/top-section', [AdminHomepageController::class, 'updateTopSection'])->name('cms.homepage.top-section.update');
+    Route::put('/cms/homepage/trusted-company', [AdminHomepageController::class, 'updateTrustedCompany'])->name('cms.homepage.trusted-company.update');
+    Route::get('/cms/homepage/testimonies/{id}/update/{flag}', [AdminHomepageController::class, 'editTestimonies'])->name('cms.homepage.testimonies.edit');
+    Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
+    // UserController
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    // OnlineCourseController
+    Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
+    Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
+    Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
+    Route::post('/online-courses', [AdminOnlineCourseController::class, 'store'])->name('online-courses.store');
+    Route::delete('/online-course/{id}', [AdminOnlineCourseController::class, 'destroy'])->name('online-courses.destroy');
+    Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
+    // OnlineCourseUpdateController
+    Route::get('/online-courses/{id}/update', [AdminOnlineCourseUpdateController::class, 'edit'])->name('online-courses.edit');
+    // CourseCategoryController
+    Route::get('/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
+    Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
+    Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
+    Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    // HashtagController
+    Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
 });
 
 /* START ADMIN ROUTING */
 Route::get('/admin/login', function () {
     return view('admin/auth/login');
-});
-Route::get('/admin/cms/homepage', function () {
-    return view('admin/cms/homepage');
-});
-Route::get('/admin/cms', function () {
-    return view('admin/cms/index');
 });
 Route::get('/admin/reviews', function () {
     return view('admin/reviews');
@@ -126,15 +149,6 @@ Route::get('/admin/forgot-password', function () {
 Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
 });
-
-/* TESTIMONY ROUTING */
-Route::get('/admin/testimonies/create', function () {
-    return view('admin/testimony/create');
-});
-Route::get('/admin/testimonies/1/update', function () {
-    return view('admin/testimony/update');
-});
-/* END OF TESTIMONY ROUTING */
 
 /* START OF PROMO CODE*/
 Route::get('/admin/promo', function () {
@@ -149,9 +163,6 @@ Route::get('/admin/promo/1/update', function () {
 /* END OF PROMO CODE */
 
 /* START OF HASHTAG*/
-Route::get('/admin/hashtags', function () {
-    return view('admin/hashtag/index');
-});
 Route::get('/admin/hashtags/create', function () {
     return view('admin/hashtag/create');
 });
@@ -160,40 +171,9 @@ Route::get('/admin/hashtags/1/update', function () {
 });
 /* END OF HASHTAG */
 
-
-/* TRUSTED COMPANY ROUTING */
-Route::get('/admin/trusted-companies', function () {
-    return view('admin/trusted-company/index');
-});
-Route::get('/admin/trusted-companies/create', function () {
-    return view('admin/trusted-company/create');
-});
-Route::get('/admin/trusted-companies/1/update', function () {
-    return view('admin/trusted-company/update');
-});
-/* END OF TRUSTED COMPANY ROUTING */
-
 /* START OF ONLINE COURSE ROUTING */
-Route::get('/admin/online-courses', function () {
-    return view('admin/online-course/index');
-});
-Route::get('/admin/online-courses/1', function () {
-    return view('admin/online-course/detail');
-});
-Route::get('/admin/online-courses/create', function () {
-    return view('admin/online-course/create');
-});
 Route::get('/admin/online-courses/create-video/1', function () {
     return view('admin/online-course/create-video');
-});
-Route::get('/admin/online-courses/1/update', function () {
-    return view('admin/online-course/update');
-});
-Route::get('/admin/admin/course-categories/create', function () {
-    return view('admin/online-course/create-category');
-});
-Route::get('/admin/online-courses/course-categories', function () {
-    return view('admin/course-category/index');
 });
 Route::get('/admin/online-courses/assesments', function () {
     return view('admin/assesment/index');

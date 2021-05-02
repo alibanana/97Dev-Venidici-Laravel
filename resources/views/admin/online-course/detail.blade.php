@@ -12,27 +12,41 @@
     <div class="container-fluid">
 
         @if (session()->has('message'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
-            {{ session()->get('message') }}            
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
+                {{ session()->get('message') }}            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between">
-            <h1 class="mb-0 mb-3 text-gray-800">Emotional Intelligence</h1>
+            <h1 class="mb-0 mb-3 text-gray-800">{{ $course->title }}</h1>
         </div>
-        <h4 style="">Rp. 75.000</h4>
+        @if ($course->price == 0)
+            <h4 style="">FREE</h4>
+        @else
+            <h4 style="">Rp. {{ $course->price }}</h4>
+        @endif
         <div style="display: flex;font-size:1.5vw" class="mb-4">
-            4.5
+            {{ $course->average_rating }}
             <div style="margin-left:0.5vw">
-                <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star"></i>
-                <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star"></i>
-                <i style="margin-left:0.2vw;color:#B3B5C2" class="fas fa-star"></i>
-                <i style="margin-left:0.2vw;color:#B3B5C2" class="fas fa-star"></i>
+                @for ($i = 1; $i < 6; $i++)
+                    @if ($i <= $course->average_rating)
+                        @if ($i == 1)
+                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                        @else
+                            <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star"></i>
+                        @endif
+                    @else
+                        @if ($i == 1)
+                            <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                        @else
+                            <i style="margin-left:0.2vw;color:#B3B5C2" class="fas fa-star"></i>
+                        @endif
+                    @endif
+                @endfor
             </div>
             
         </div>
