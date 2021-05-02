@@ -9,6 +9,7 @@ use App\Models\Config;
 use App\Models\TrustedCompany;
 use App\Models\FakeTestimony;
 use App\Models\User;
+use App\Models\Hashtag;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,17 @@ class PagesController extends Controller
         $datas = User::select('name')->where("name", "like", "%{$request->terms}%")->get();
 
         return response()->json($datas);
+    }
+    public function signup_interest()
+    {
+        $interests = Hashtag::all();
+        return view('client/auth/signup-interests', compact('interests'));
+
+    }
+    public function signup_interest_testing(Request $request)
+    {
+        $input = $request->all();
+        dd($input['interest']);
+
     }
 }

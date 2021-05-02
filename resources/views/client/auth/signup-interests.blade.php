@@ -5,11 +5,12 @@
 
 <div class="row m-0">
     <div class="col-md-12 p-0" style="background: radial-gradient(100% 313.25% at 0% 0%, #2B6CAA 0%, #67BBA3 100%);backdrop-filter: blur(20px);;height:100vh">
-        <div class="centered white-modal-signup" style="width:70vw;padding-bottom:4vw !important;height:85vh">
+        <div class="centered white-modal-signup" style="width:70vw;padding-bottom:4vw !important;">
             <div style="display:flex;justify-content:space-between">
                 <a href="/signup" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">General Info</span></a>
             </div>
-            <form action="">
+            <form action="/testing" method="POST" >
+            @csrf                   
                 <div class="row m-0 page-container">
                     <div class="col-12 p-0">
                         <div style="text-align:center;margin-top:2vw">
@@ -17,80 +18,26 @@
                             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
                         </div>
                     </div>
-                    <!-- START OF ONE LEFT INTEREST -->
-                    <div class="col-4" style="display:flex;justify-content:flex-start;margin-top:2vw">
-                        <a href="">
-                            <div class="container interest-card">
-                                <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                <div class="centered">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Tech</p>
+                    <div class="row m-0"  style="overflow:scroll;height:25vw;margin-top:1vw">
+                        @foreach($interests as $interest)
+                        <div class="col-4" style="display:flex;
+                        @if($loop->iteration % 3 == 1)
+                        justify-content:flex-start;
+                        @elseif($loop->iteration % 3 ==2)
+                        justify-content:center;
+                        @else
+                        justify-content:flex-end;
+                        @endif
+                        margin-top:2vw">
+                                <div class="container interest-card" id="interest_card_{{$interest->id}}" style="background-image: url({{$interest->image}});cursor:pointer" onclick="toggleInterest('interest_card_{{$interest->id}}')">
+                                        <input type="hidden" name="interest[{{$interest->id}}]" value="0">
+                                        <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{$interest->hashtag}}</p>
                                 </div>
-                            </div>
-                        </a>
+                        </div>
+                        @endforeach
                     </div>
-                    <!-- END OF ONE LEFT INTEREST -->
-                    <!-- START OF ONE MIDDLE INTEREST -->
-                    <div class="col-4" style="display:flex;justify-content:center;margin-top:2vw">
-                        <a href="">
-                            <div class="container interest-card">
-                                <img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                <div class="centered">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Arts</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- END OF ONE MIDDLE INTEREST -->
-                    <!-- START OF ONE RIGHT INTEREST -->
-                    <div class="col-4" style="display:flex;justify-content:flex-end;margin-top:2vw">
-                        <a href="">
-                            <div class="container interest-card">
-                                <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                <div class="centered">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Math</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- END OF ONE RIGHT INTEREST -->
-                    <!-- START OF ONE LEFT INTEREST -->
-                    <div class="col-4" style="display:flex;justify-content:flex-start;margin-top:2vw">
-                        <a href="">
-                            <div class="container interest-card">
-                                <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                <div class="centered">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Tech</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- END OF ONE LEFT INTEREST -->
-                    <!-- START OF ONE MIDDLE INTEREST -->
-                    <div class="col-4" style="display:flex;justify-content:center;margin-top:2vw">
-                        <a href="">
-                            <div class="container interest-card">
-                                <img src="/assets/images/client/Interest_Dummy.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                <div class="centered">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Arts</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- END OF ONE MIDDLE INTEREST -->
-                    <!-- START OF ONE RIGHT INTEREST -->
-                    <div class="col-4" style="display:flex;justify-content:flex-end;margin-top:2vw">
-                        <a href="">
-                            <div class="container interest-card">
-                                <img src="/assets/images/client/Interest_Dummy_2.png" class="img-fluid" style="width:11vw;height:11vw;border-radius:10px" alt="Interest">
-                                <div class="centered">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Math</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- END OF ONE RIGHT INTEREST -->
                     <div class="col-12 p-0" style="text-align:center;margin-top:3vw">
-                        <a href="/signup-interests" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</a>
+                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
                     </div>  
                 </div>
             </form>
@@ -98,4 +45,16 @@
     </div>
 </div>
 <!-- END OF BANNER SECTION -->
+
+<script>
+    function toggleInterest(id) {
+        var element = document.getElementById(id);
+        element.classList.toggle("interest-card-active");
+        value=$(element).find("input[type=hidden]");
+        if(value.val() == 0)
+            $(element).find("input[type=hidden]").val('1');
+        else
+            $(element).find("input[type=hidden]").val('0');
+    }
+</script>
 @endsection

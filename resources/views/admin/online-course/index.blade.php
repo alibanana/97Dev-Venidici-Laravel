@@ -110,7 +110,8 @@
                                                             <div style="margin-left:1vw">
                                                                 <p style="color:grey;margin-bottom:0px;">{{ $course->courseCategory->category }}</p>
                                                                 <p style="color:black;font-weight:bold;margin-bottom:0px">{{ $course->title }}</p>
-                                                                <p style="color:black;">{{ $course->subtitle }}</p>
+                                                                <p style="color:black;margin-bottom:0px">{{ $course->subtitle }}</p>
+                                                                <p style="color:grey;">@foreach($course->hashtags as $tag)#{{ $tag->hashtag }} @endforeach</p>
                                                                 @if ($course->price == 0)
                                                                     <p style="margin-bottom:0px">FREE</p>
                                                                 @else

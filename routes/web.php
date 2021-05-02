@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
 
 /*
@@ -44,6 +45,8 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/', [PagesController::class, 'index'])->name('index');
+Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest');
+Route::post('/testing', [PagesController::class, 'signup_interest_testing'])->name('signup_interest_testing');
 
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
@@ -54,9 +57,9 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('client/auth/signup');
 });
-Route::get('/signup-interests', function () {
-    return view('client/auth/signup-interests');
-});
+//Route::get('/signup-interests', function () {
+    //return view('client/auth/signup-interests');
+//});
 Route::get('/dashboard', function () {
     return view('client/user-dashboard');
 });
@@ -103,6 +106,7 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - OnlineCourseController
 |   - OnlineCourseUpdateController // Update is separated because its very complex.
 |   - CourseCategoryController
+|   - HashtagController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     // DashboardController
@@ -129,6 +133,13 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
     Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    // HashtagController
+    Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
+    Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
+    Route::post('/hashtags', [AdminHashtagController::class, 'store'])->name('hashtags.store');
+    Route::get('/hashtags/{id}/update', [AdminHashtagController::class, 'edit'])->name('hashtags.edit');
+    Route::put('/hashtags/{id}', [AdminHashtagController::class, 'update'])->name('hashtags.update');
+    Route::delete('/hashtags/{id}', [AdminHashtagController::class, 'destroy'])->name('hashtags.destroy');
 });
 
 /* START ADMIN ROUTING */

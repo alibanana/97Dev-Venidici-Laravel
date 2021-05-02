@@ -65,7 +65,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-lock"></i>
-                            <input type="text" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;" placeholder="********">
+                            <input type="password" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;" placeholder="********">
                             @error('password')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
