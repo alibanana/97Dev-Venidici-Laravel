@@ -68,75 +68,75 @@
 
                     <!-- Main Table -->
                     <div class="card shadow mb-4">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Teacher</th>
-                                                <th>Description</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td style="text-align:center" class="text-nowrap">
-                                                    <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
-                                                    <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
-                                                </td>
-                                                <td>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
-                                                </td>  
-                                                <td>
-                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
-                                                                </div>
-                                                            </form> 
-                                                      
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/teachers/1/update">Update</a>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Teacher</th>
+                                            <th>Description</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td style="text-align:center" class="text-nowrap">
+                                                <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
+                                                <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
+                                            </td>
+                                            <td>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
+                                            </td>  
+                                            <td>
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                        <form action="" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <div style="padding: 0px 2px">
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
                                                             </div>
-                                                   
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td style="text-align:center" class="text-nowrap">
-                                                    <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
-                                                    <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
-                                                </td>
-                                                <td>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
-                                                </td>  
-                                                <td>
-                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
-                                                                </div>
-                                                            </form> 
-                                                      
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/teachers/1/update">Update</a>
+                                                        </form> 
+                                                    
+                                                        <div style="padding: 0px 2px;">
+                                                            <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/teachers/1/update">Update</a>
+                                                        </div>
+                                                
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td style="text-align:center" class="text-nowrap">
+                                                <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
+                                                <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
+                                            </td>
+                                            <td>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
+                                            </td>  
+                                            <td>
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                        <form action="" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <div style="padding: 0px 2px">
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
                                                             </div>
-                                                   
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                        </form> 
+                                                    
+                                                        <div style="padding: 0px 2px;">
+                                                            <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/teachers/1/update">Update</a>
+                                                        </div>
+                                                
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                    </div>
                         
         
                     <!-- /.container-fluid -->
