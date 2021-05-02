@@ -115,9 +115,9 @@
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/hashtags/1/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.hashtags.edit', $tag->id) }}">Update</a>
                                                             </div>
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.hashtags.destroy', $tag->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">

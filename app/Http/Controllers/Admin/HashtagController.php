@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helper\Helper;
 
 use App\Models\Hashtag;
 
@@ -40,7 +41,8 @@ class HashtagController extends Controller
                 $search = $request->search;
 
                 $tags = $tags->where(function ($query) use ($search) {
-                    $query->where([['hashtag', 'like', "%".$search."%"]]);
+                    $query->where([['hashtag', 'like', "%".$search."%"]])
+                    ->orWhere([['color', 'like', "%".$search."%"]]);
                 });
             }
         }
@@ -104,5 +106,79 @@ class HashtagController extends Controller
         ];
 
         return view('admin/hashtag/index', compact('tags', 'tags_data'));
+    }
+
+    // Shows the Admin Create New Hashtag Page.
+    public function create() {
+        return view('admin/hashtag/create');
+    }
+
+    // Store New Hashtag in the database.
+    public function store(Request $request) {
+        $validated = $request->validate([
+            'hashtag' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png',
+            'color' => 'required|string|max:7|starts_with:#'
+        ]);
+
+        $tag = new Hashtag;
+        $tag->hashtag = $validated['hashtag'];
+        $tag->image = Helper::storeImage($request->file('image'), 'storage/images/hashtags/');
+        $tag->color = $validated['color'];
+        $tag->save();
+
+        return redirect()->route('admin.hashtags.index')->with('message', 'New Hashtag has been added!');
+    }
+
+    // Shows the Admin Update Hashtag Page.
+    public function edit($id) {
+        $tag = Hashtag::findOrFail($id);
+
+        return view('admin/hashtag/update', compact('tag'));
+    }
+
+    // Update existing Hashtag in the database.
+    public function update(Request $request, $id) {
+        $validated = $request->validate([
+            'hashtag' => 'required',
+            'image' => 'mimes:jpeg,jpg,png',
+            'color' => 'required|string|max:7|starts_with:#'
+        ]);
+        
+        $tag = Hashtag::findOrFail($id);
+        $tag->hashtag = $validated['hashtag'];
+        $tag->color = $validated['color'];
+        
+        if ($request->has('image')) {
+            unlink($tag->image);
+            $tag->image = Helper::storeImage($request->file('image'), 'storage/images/hashtags/');
+        }
+        
+        $tag->save();
+
+        if ($tag->wasChanged()) {
+            $message = 'Hashtag (' . $tag->hashtag . ') has been updated!';
+        } else {
+            $message = 'No changes was made to Hashtag (' . $tag->hashtag . ')';
+        }
+
+        return redirect()->route('admin.hashtags.index')->with('message', 'New Hashtag has been added!');
+    }
+
+    // Delete Hashtag from the database.
+    public function destroy($id) {
+        $tag = Hashtag::findOrFail($id);
+
+        $course_ids = [];
+        foreach ($tag->courses as $course) {
+            $course_ids[] = $course->id;
+        }
+        
+        $tag->courses()->detach($course_ids);
+        unlink($tag->image);
+
+        $tag->delete();
+
+        return redirect()->route('admin.hashtags.index')->with('message', 'Hashtag has been deleted from the database!');
     }
 }

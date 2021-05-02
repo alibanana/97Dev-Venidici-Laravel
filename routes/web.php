@@ -133,6 +133,11 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
+    Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
+    Route::post('/hashtags', [AdminHashtagController::class, 'store'])->name('hashtags.store');
+    Route::get('/hashtags/{id}/update', [AdminHashtagController::class, 'edit'])->name('hashtags.edit');
+    Route::put('/hashtags/{id}', [AdminHashtagController::class, 'update'])->name('hashtags.update');
+    Route::delete('/hashtags/{id}', [AdminHashtagController::class, 'destroy'])->name('hashtags.destroy');
 });
 
 /* START ADMIN ROUTING */
@@ -161,15 +166,6 @@ Route::get('/admin/promo/1/update', function () {
     return view('admin/promo/update');
 });
 /* END OF PROMO CODE */
-
-/* START OF HASHTAG*/
-Route::get('/admin/hashtags/create', function () {
-    return view('admin/hashtag/create');
-});
-Route::get('/admin/hashtags/1/update', function () {
-    return view('admin/hashtag/update');
-});
-/* END OF HASHTAG */
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/admin/online-courses/create-video/1', function () {
