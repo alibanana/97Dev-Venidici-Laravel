@@ -162,7 +162,7 @@ class HashtagController extends Controller
             $message = 'No changes was made to Hashtag (' . $tag->hashtag . ')';
         }
 
-        return redirect()->route('admin.hashtags.index')->with('message', 'New Hashtag has been added!');
+        return redirect()->route('admin.hashtags.index')->with('message', $message);
     }
 
     // Delete Hashtag from the database.
