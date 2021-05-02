@@ -19,6 +19,7 @@ class CreateHashtagsTable extends Migration
             $table->string('image')->nullable();
             $table->string('color')->nullable();
             $table->boolean('show_as_interest')->default(false);
+            $table->timestamps();
         });
 
         Schema::create('course_hashtag', function (Blueprint $table) {
@@ -27,6 +28,7 @@ class CreateHashtagsTable extends Migration
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->unsignedBigInteger('hashtag_id');
             $table->foreign('hashtag_id')->references('id')->on('hashtags')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

@@ -41,6 +41,6 @@ class Course extends Model
     }
 
     public function hashtags() {
-        return $this->belongsToMany(Hashtag::class);
+        return $this->belongsToMany(Hashtag::class, 'course_hashtag')->withTimestamps();
     }
 }

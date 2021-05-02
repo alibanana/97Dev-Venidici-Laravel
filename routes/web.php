@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
 
 /*
@@ -103,6 +104,7 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - OnlineCourseController
 |   - OnlineCourseUpdateController // Update is separated because its very complex.
 |   - CourseCategoryController
+|   - HashtagController
 */
 Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     // DashboardController
@@ -129,6 +131,8 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
     Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    // HashtagController
+    Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
 });
 
 /* START ADMIN ROUTING */
@@ -159,9 +163,6 @@ Route::get('/admin/promo/1/update', function () {
 /* END OF PROMO CODE */
 
 /* START OF HASHTAG*/
-Route::get('/admin/hashtags', function () {
-    return view('admin/hashtag/index');
-});
 Route::get('/admin/hashtags/create', function () {
     return view('admin/hashtag/create');
 });
