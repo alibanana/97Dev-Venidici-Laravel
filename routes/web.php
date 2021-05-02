@@ -45,6 +45,8 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/', [PagesController::class, 'index'])->name('index');
+Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest');
+Route::post('/testing', [PagesController::class, 'signup_interest_testing'])->name('signup_interest_testing');
 
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
@@ -55,9 +57,9 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('client/auth/signup');
 });
-Route::get('/signup-interests', function () {
-    return view('client/auth/signup-interests');
-});
+//Route::get('/signup-interests', function () {
+    //return view('client/auth/signup-interests');
+//});
 Route::get('/dashboard', function () {
     return view('client/user-dashboard');
 });

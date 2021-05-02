@@ -850,19 +850,18 @@ END OF OUR PROGRAMS SECTION -->
 
 <script>
     function changeCourse(evt, categoryName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("course-content")
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("course-links");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("btn-blue-active", "btn-blue-on-hover");
-            }
-            document.getElementById(categoryName).style.display = "block";
-            evt.currentTarget.className += " btn-blue-active";
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("course-content")
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
-         
+        tablinks = document.getElementsByClassName("course-links");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace("btn-blue-active", "btn-blue-on-hover");
+        }
+        document.getElementById(categoryName).style.display = "block";
+        evt.currentTarget.className += " btn-blue-active";
+    }
 </script>
 
 @endsection

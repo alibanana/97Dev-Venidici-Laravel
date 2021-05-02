@@ -963,4 +963,35 @@ html, body {
 
 /*END OF POP UP*/
 
-.ou
+.interest-card{
+    width:12vw;
+    height:12vw;
+    border-radius:10px;
+    background-size: 12vw;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.2s ease-in-out;
+
+    background-position:center;
+
+}
+.interest-card-active{
+    background: #2B6CAA;
+    backdrop-filter: blur(4px);
+    background-image: none !important;
+}
+
+/* always show scrollbars */
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0.5vw;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, .5);
+  }
+  
