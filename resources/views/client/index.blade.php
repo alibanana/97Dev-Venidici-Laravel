@@ -98,7 +98,7 @@
 </div>
 <!-- END OF TRUSTED COMPANY SECTION -->
 
-<!-- START OF OUR PROGRAMS SECTION -->
+<!-- START OF OUR PROGRAMS SECTION 
 <div class="row m-0 page-container our-programs-background" style="padding-bottom:8vw">
     <div class="col-12 p-0">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Our <span class="big-heading" style="font-family:Hypebeast;margin-left:1vw" >PROGRAMS</span></p>
@@ -151,6 +151,53 @@
             </div>
         </a>
     </div>
+</div>
+END OF OUR PROGRAMS SECTION -->
+
+<!-- START OF OUR PROGRAMS SECTION -->
+<div class="row m-0 page-container our-programs-background" style="padding-bottom:8vw">
+    <div class="col-12 p-0">
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:1vw">Our <span class="big-heading" style="font-family:Hypebeast;margin-left:1vw" >PROGRAMS</span></p>
+    </div>
+    <!-- START OF ONE LEFT PROGRAMS -->
+    <div class="col-4 p-0">
+        <a href="/online-course" style="text-decoration:none">
+            <div class="our-programs-card-home" style="margin-top:2.5vw">
+                <img src="/assets/images/client/Our_Programs_Icon.png" style="width:5vw;" class="img-fluid" alt="">
+                <div>
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">Online Course</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- END OF ONE LEFT PROGRAMS -->
+    <!-- START OF ONE MIDDLE PROGRAMS -->
+    <div class="col-4 p-0">
+        <a href="/" style="text-decoration:none">
+            <div class="our-programs-card-home" style="margin-top:2.5vw;border-radius:0px !important">
+                <img src="/assets/images/client/Our_Programs_Icon.png" style="width:5vw;" class="img-fluid" alt="">
+                <div>
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">Program 2</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- END OF ONE MIDDLE PROGRAMS -->
+    <!-- START OF ONE RIGHT PROGRAMS -->
+    <div class="col-4 p-0">
+        <a href="/" style="text-decoration:none">
+            <div class="our-programs-card-home" style="margin-top:2.5vw;border-radius: 0px 10px 10px 0px;">
+                <img src="/assets/images/client/Our_Programs_Icon.png" style="width:5vw;" class="img-fluid" alt="">
+                <div>
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">Program 1</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- END OF ONE RIGHT PROGRAMS -->
 </div>
 <!-- END OF OUR PROGRAMS SECTION -->
 
@@ -622,12 +669,12 @@
 <!-- END OF FEATURE, COURSE AND TESTIMONY SECTION -->
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container" style=";background:#F6F6F6">
-        <div class="col-6" style="padding-top:4vw;padding-bottom:4vw">
-            <div style="display: flex;align-items:center;">
+        <div class="col-6  testimony-background" style="padding-top:4vw;padding-bottom:4vw;">
+            <div style="display: flex;">
                 <!-- LEFT TESTIMONY -->
                 <div>
                     <!-- BIG TESTIMONY CARD -->
-                    <div class="testimony-card" style="width: 20vw;">
+                    <div class="testimony-card" style="width: 20vw;padding:3vw !important">
                         <img src="{{ asset($fake_testimonies_big[0]->thumbnail) }}" class="img-fluid" style="width: 6vw;height:auto" alt="thumbnail not avaliable..">
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000; display: -webkit-box;
                         overflow : hidden !important;
@@ -657,7 +704,7 @@
                     <!-- END OF BIG TESTIMONY CARD -->
     
                     <!-- SMALL TESTIMONY CARD -->
-                    <div class="testimony-card" style="margin-top: 2vw;width: 20vw;">
+                    <div class="testimony-card" style="margin-top: 2vw;width: 15vw;float:right">
                         <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw">{{ $fake_testimonies_small[0]->rating }}/5</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
@@ -676,7 +723,11 @@
                                 @endif
                             @endfor
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;margin-bottom:0px">{{ $fake_testimonies_small[0]->content }}</p>
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;margin-bottom:0px;display: -webkit-box;
+                        overflow : hidden !important;
+                        text-overflow: ellipsis !important;
+                        -webkit-line-clamp: 3 !important;
+                        -webkit-box-orient: vertical !important;">{{ $fake_testimonies_small[0]->content }}</p>
     
                     </div>
                     <!-- END OF SMALL TESTIMONY CARD -->
@@ -686,8 +737,7 @@
                 <!-- RIGHT TESTIMONY -->
                 <div style="margin-left: 2vw">
                      <!-- SMALL TESTIMONY CARD -->
-
-                     <div class="testimony-card" style="width: 16vw;">
+                     <div class="testimony-card" style="width: 12vw;">
                         <p class="small-text" style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw">{{ $fake_testimonies_small[1]->rating }}/5</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
@@ -706,7 +756,11 @@
                                 @endif
                             @endfor
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:2vw;margin-bottom:0px">{{ $fake_testimonies_small[1]->content }}</p>
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;margin-bottom:0px;display: -webkit-box;
+                        overflow : hidden !important;
+                        text-overflow: ellipsis !important;
+                        -webkit-line-clamp: 3 !important;
+                        -webkit-box-orient: vertical !important;">{{ $fake_testimonies_small[1]->content }}</p>
                     </div>
                     <!-- END OF SMALL TESTIMONY CARD -->
                     <!-- BIG TESTIMONY CARD -->
@@ -740,8 +794,12 @@
             </div>
         </div>
         <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;">
-            <p class="medium-heading" style="font-family: Rubik Medium;color:#000000;">Our higlighted students revealing</p>
-            <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+            <p class="medium-heading" style="font-family: Rubik Medium;color:#000000;">Our higlighted students <br> revealing</p>
+            <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis
+            nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. </p>
 
         </div>
     </div>

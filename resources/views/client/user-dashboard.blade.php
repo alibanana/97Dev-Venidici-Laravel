@@ -230,10 +230,12 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container" style="padding-top:9vw">   
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
+        <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
             <strong><a href="#edit-profile">Click here</a></strong> This is a toast message contains a warning or a reminder
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        <!-- END OF ALERT MESSAGE -->
     </div>
 </div>
 <div class="row m-0 page-container" style="padding-top:1.5vw;">
