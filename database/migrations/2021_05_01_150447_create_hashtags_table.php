@@ -16,9 +16,9 @@ class CreateHashtagsTable extends Migration
         Schema::create('hashtags', function (Blueprint $table) {
             $table->id();
             $table->string('hashtag');
-            $table->string('image')->nullable();
-            $table->string('color')->nullable();
-            $table->boolean('show_as_interest')->default(false);
+            $table->string('image');
+            $table->string('color');
+            // $table->boolean('show_as_interest')->default(false);
             $table->timestamps();
         });
 
