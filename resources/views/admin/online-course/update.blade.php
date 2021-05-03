@@ -163,6 +163,18 @@
                     -->
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Persyaratan</label>
+                            @if(count($course->courseRequirements) == 0)
+                            <div>
+                                <div class="row" id="requirement_duplicator" >
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="display:flex">
+                                            <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing">
+                                            <button onClick="removeDiv(this)" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             <div>
                                 @foreach ($course->courseRequirements as $requirement)
                                     @if ($loop->first)
@@ -171,8 +183,9 @@
                                         <div class="row" id="requirement_duplicator{{ $loop->index }}">
                                     @endif
                                         <div class="col-md-12">
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:flex">
                                                 <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement" value="{{ $requirement->requirement }}">
+                                                <button onClick="removeDiv(this)" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -184,6 +197,18 @@
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Apa yang akan dipelajari?</label>
                         <div>
+                            @if(count($course->courseFeatures) == 0)
+                            <div>
+                                <div class="row" id="learn_duplicator" >
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="display:flex">
+                                            <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing">
+                                            <button onClick="removeDiv(this)" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             @foreach ($course->courseFeatures as $feature)
                                 @if ($loop->first)
                                     <div class="row" id="learn_duplicator">
@@ -207,11 +232,12 @@
                         <div>
                             <div class="row" id="hashtag_duplicator">
                                 <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="form-group" style="display:flex">
                                         <select name="hashtag[]" class="form-control form-control-user" id="" disabled>
                                             <option value="1" selected>Tech</option>
                                             <option value="2">Math</option>
                                         </select>
+                                        <button onClick="removeDiv(this)" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -619,5 +645,10 @@ function duplicateHashtag() {
     document.getElementById("price-input").disabled = false;
     console.log('enabled')
     }
+</script>
+<script>
+function removeDiv(elem){
+    $(elem).parent('div').remove();
+}
 </script>
 @endsection

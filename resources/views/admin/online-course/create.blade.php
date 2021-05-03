@@ -157,8 +157,9 @@
                     <div>
                         <div class="row" id="requirement_duplicator">
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <div class="form-group" style="display:flex">
                                     <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="e,g. Muka lucu dan unik">
+                                    <button onClick="removeDiv(this)" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -171,8 +172,9 @@
                     <div>
                         <div class="row" id="learn_duplicator" >
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <div class="form-group" style="display:flex">
                                     <input type="text" name="features[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing">
+                                    <button onClick="removeDiv(this)" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -186,11 +188,12 @@
                 <div>
                     <div class="row" id="hashtag_duplicator" >
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group" style="display:flex">
                                 <select name="hashtag[]" class="form-control form-control-user"  id="" disabled>
                                     <option value="1">Tech</option>
                                     <option value="2">Math</option>
                                 </select>
+                                <button onClick="removeDiv(this)" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </div>
                     </div>
@@ -208,6 +211,7 @@
     </div>
     <!-- /.container-fluid -->
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>
 document.getElementById('add_requirement').onclick = duplicateRequirement;
@@ -251,6 +255,12 @@ function duplicateHashtag() {
         clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
         original3.parentNode.appendChild(clone);
     }
+}
+</script>
+
+<script>
+function removeDiv(elem){
+    $(elem).parent('div').remove();
 }
 </script>
 @endsection
