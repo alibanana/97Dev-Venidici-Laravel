@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Course;
 use App\Models\CourseCategory;
+use App\Models\Hashtag;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,15 @@ class OnlineCourseUpdateController extends Controller
     public function edit($id) {
         $course = Course::findOrFail($id);
         $course_categories = CourseCategory::select('id', 'category')->get();
+        $tags = Hashtag::all();
 
-        return view('admin/online-course/update', compact('course', 'course_categories'));
+        return view('admin/online-course/update', compact('course', 'course_categories', 'tags'));
+    }
+
+    // Update existing Online-Course in the database.
+    public function update(Request $request, $id) {
+        $course = Course::findOrFail($id);
+
+        return redirect()->route('admin.online-courses.edit', $id)->with('message', 'Online Course (name) has been updated!');
     }
 }
