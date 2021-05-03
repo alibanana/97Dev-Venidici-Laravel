@@ -51,7 +51,7 @@ html, body {
 }
 .our-programs-background{
     background-image: url("/assets/images/client/Our_Program_BG.png");
-    background-position:6.7vw 6.1vw;
+    background-position:9.5vw 6.1vw;
     background-repeat: no-repeat;
     background-size: 7%;
 }
@@ -160,10 +160,13 @@ html, body {
 /* end of page padding */
 
 /* font size */
+.super-big-heading{
+    font-size: 3.5vw;
+    line-height: 5vw;
+}
 .big-heading{
     font-size: 2.8vw;
     line-height: 3.2vw;
-
 }
 .medium-heading{
     font-size: 2.4vw;
@@ -282,6 +285,17 @@ html, body {
     border-radius: 10px ;
 }
 
+.our-programs-card-homepage{
+    background: #FFFFFF;
+    border-radius: 10px;width:20vw;
+}
+.our-programs-card-homepage:hover{
+    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+
+}
+.our-programs-card-homepage:hover #card-title{
+    color:#2B6CAA !important
+}
 .our-programs-card-home{
     background: #FFFFFF;
     transition: 0.2s ease-in-out;
@@ -391,7 +405,11 @@ html, body {
     border: 2px solid #CE3369;
     border-radius: 10px;
     margin-bottom: 0px;
-
+    transition: 0.2s ease-in-out;
+}
+.course-card-red .course-card-button:hover{
+    background-color: #CE3369;
+    color:#FFFFFF
 }
 .course-card-red .card-tag{
     background-color: #CE3369;
@@ -430,7 +448,11 @@ html, body {
     border: 2px solid #2B6CAA;
     border-radius: 10px;
     margin-bottom: 0px;
-
+    transition: 0.2s ease-in-out;
+}
+.course-card-blue .course-card-button:hover{
+    background-color: #2B6CAA;
+    color:#FFFFFF
 }
 .course-card-blue .card-tag{
     background-color: #2B6CAA;
@@ -468,7 +490,11 @@ html, body {
     border: 2px solid #67BBA3;
     border-radius: 10px;
     margin-bottom: 0px;
-
+    transition: 0.2s ease-in-out;
+}
+.course-card-green .course-card-button:hover{
+    background-color: #67BBA3;
+    color:#FFFFFF
 }
 .course-card-green .card-tag{
     background-color: #67BBA3;
@@ -863,7 +889,7 @@ html, body {
 
 .cart-card-grey{
     background-color: #FBFBFB;
-    padding:1vw 2vw;
+    padding:1vw;
     /*width:45vw;*/
     display:flex;
     align-items: center;
@@ -883,7 +909,7 @@ html, body {
 .cart-card-red{
     background: rgba(206, 51, 105, 0.5);   
     width:3vw;
-    border-radius: 0px 0px 10px 0px;
+    border-radius: 0px 10px 10px 0px;
     display: flex;flex-direction: column;justify-content: center;align-items: center;
     transition: 0.2s ease-in-out;
 }
@@ -975,11 +1001,11 @@ html, body {
     transition: 0.2s ease-in-out;
 
     background-position:center;
+    backdrop-filter: blur(4px);
 
 }
 .interest-card-active{
     background: #2B6CAA;
-    backdrop-filter: blur(4px);
     background-image: none !important;
 }
 

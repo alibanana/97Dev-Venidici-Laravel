@@ -29,10 +29,10 @@
                         justify-content:flex-end;
                         @endif
                         margin-top:2vw">
-                                <div class="container interest-card" id="interest_card_{{$interest->id}}" style="background-image: url({{$interest->image}});cursor:pointer" onclick="toggleInterest('interest_card_{{$interest->id}}')">
-                                        <input type="hidden" name="interest[{{$interest->id}}]" value="0">
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{$interest->hashtag}}</p>
-                                </div>
+                            <div class="container interest-card" id="interest_card_{{$interest->id}}" style="background-image: url({{$interest->image}});cursor:pointer" onclick="toggleInterest('interest_card_{{$interest->id}}')">
+                                <input type="hidden" name="interest[{{$interest->id}}]" value="0">
+                                <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{$interest->hashtag}}</p>
+                            </div>
                         </div>
                         @endforeach
                     </div>
