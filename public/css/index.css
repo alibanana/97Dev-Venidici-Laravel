@@ -391,7 +391,11 @@ html, body {
     border: 2px solid #CE3369;
     border-radius: 10px;
     margin-bottom: 0px;
-
+    transition: 0.2s ease-in-out;
+}
+.course-card-red .course-card-button:hover{
+    background-color: #CE3369;
+    color:#FFFFFF
 }
 .course-card-red .card-tag{
     background-color: #CE3369;
@@ -430,7 +434,11 @@ html, body {
     border: 2px solid #2B6CAA;
     border-radius: 10px;
     margin-bottom: 0px;
-
+    transition: 0.2s ease-in-out;
+}
+.course-card-blue .course-card-button:hover{
+    background-color: #2B6CAA;
+    color:#FFFFFF
 }
 .course-card-blue .card-tag{
     background-color: #2B6CAA;
@@ -468,7 +476,11 @@ html, body {
     border: 2px solid #67BBA3;
     border-radius: 10px;
     margin-bottom: 0px;
-
+    transition: 0.2s ease-in-out;
+}
+.course-card-green .course-card-button:hover{
+    background-color: #67BBA3;
+    color:#FFFFFF
 }
 .course-card-green .card-tag{
     background-color: #67BBA3;
@@ -863,7 +875,7 @@ html, body {
 
 .cart-card-grey{
     background-color: #FBFBFB;
-    padding:1vw 2vw;
+    padding:1vw;
     /*width:45vw;*/
     display:flex;
     align-items: center;
@@ -883,7 +895,7 @@ html, body {
 .cart-card-red{
     background: rgba(206, 51, 105, 0.5);   
     width:3vw;
-    border-radius: 0px 0px 10px 0px;
+    border-radius: 0px 10px 10px 0px;
     display: flex;flex-direction: column;justify-content: center;align-items: center;
     transition: 0.2s ease-in-out;
 }

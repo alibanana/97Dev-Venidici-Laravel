@@ -14,11 +14,16 @@
             <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">Need to be funny fast? This is the course for people that
                 find it hard to be funny.</p>
             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh <span style="font-family:Rubik Bold">Mr. Raditya Dika</span></p>
-            <video style="width:42vw;height:20vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px"  controls="false" >
+            <!--<video style="width:42vw;height:20vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px"  controls="false" >
                 <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
                 <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
                 Your browser does not support HTML video.
-            </video> 
+            </video> -->
+            <div style="margin-top:2vw">
+                <iframe style="width:42vw;height:25vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px" 
+                    src="https://www.youtube.com/embed/znnMerAsRbk">
+                </iframe>
+            </div>
 
             <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw;margin-bottom:0px"><i class="fas fa-user-graduate"></i> <span style="margin-left:1vw">150 Pelajar</span></p>
             <div style="display:flex;align-items:center;margin-top:0.5vw">
@@ -184,18 +189,19 @@
                                     <div class="top-left card-tag small-text" >Online Course</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center">
-                                        <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse-one" data-toggle="collapse" href="#course-collapse-one" class="fas fa-caret-down"></i>
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
+                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
+                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse1" data-toggle="collapse" href="#course-collapse1" class="fas fa-caret-down"></i>
                                     </div>
-                                    <div class="collapse" id="course-collapse-one" style="margin-top:1vw">
+                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
+                                    <div class="collapse" id="course-collapse1" style="margin-top:1vw">
                                         <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                                     </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
                                         <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                         <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                                     </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">   
+                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                         <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
                                             <i style="color:#F4C257" class="fas fa-star small-text"></i>
@@ -206,8 +212,8 @@
                                         </div>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
                                     </div>
                     
                                 </div>
@@ -224,18 +230,19 @@
                                     <div class="top-left card-tag small-text" >Online Course</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center">
-                                        <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse-two" data-toggle="collapse" href="#course-collapse-two" class="fas fa-caret-down"></i>
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
+                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
+                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse2" data-toggle="collapse" href="#course-collapse2" class="fas fa-caret-down"></i>
                                     </div>
-                                    <div class="collapse" id="course-collapse-two" style="margin-top:1vw">
+                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
+                                    <div class="collapse" id="course-collapse2" style="margin-top:1vw">
                                         <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                                     </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
                                         <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                         <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                                     </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">   
+                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                         <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
                                             <i style="color:#F4C257" class="fas fa-star small-text"></i>
@@ -246,8 +253,8 @@
                                         </div>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
                                     </div>
                     
                                 </div>
@@ -264,18 +271,19 @@
                                     <div class="top-left card-tag small-text" >Online Course</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center">
-                                        <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse-three" data-toggle="collapse" href="#course-collapse-three" class="fas fa-caret-down"></i>
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
+                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
+                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse3" data-toggle="collapse" href="#course-collapse3" class="fas fa-caret-down"></i>
                                     </div>
-                                    <div class="collapse" id="course-collapse-three" style="margin-top:1vw">
+                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
+                                    <div class="collapse" id="course-collapse3" style="margin-top:1vw">
                                         <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                                     </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
                                         <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                         <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                                     </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">   
+                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                         <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
                                             <i style="color:#F4C257" class="fas fa-star small-text"></i>
@@ -286,8 +294,8 @@
                                         </div>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
                                     </div>
                     
                                 </div>

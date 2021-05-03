@@ -270,15 +270,16 @@ END OF OUR PROGRAMS SECTION -->
                             <div class="top-left card-tag small-text" >Woki</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center">
-                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
+                                <a href="/woki/sertifikat-menjadi-seniman" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">How to be funny?</a>
                                 <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
                             </div>
+                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
                             <div class="collapse" id="woki-collapse" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
-                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
+                                <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
@@ -314,13 +315,14 @@ END OF OUR PROGRAMS SECTION -->
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center">
-                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                                <a href="/woki/sertifikat-menjadi-seniman" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
                                 <i style="font-size:2vw;" role="button"  aria-controls="workshop-collapse" data-toggle="collapse" href="#workshop-collapse" class="fas fa-caret-down"></i>
                             </div>
+                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
                             <div class="collapse" id="workshop-collapse" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
@@ -355,14 +357,15 @@ END OF OUR PROGRAMS SECTION -->
                             <div class="top-left card-tag small-text" >Online Course</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center">
-                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">How to be funny?</p>
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
+                                <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
                                 <i style="font-size:2vw;" role="button"  aria-controls="course-collapse" data-toggle="collapse" href="#course-collapse" class="fas fa-caret-down"></i>
                             </div>
+                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
                             <div class="collapse" id="course-collapse" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                             </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
                             </div>
