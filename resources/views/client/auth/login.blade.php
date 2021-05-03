@@ -18,7 +18,7 @@
                     <div class="row m-0">
                         <div class="col-6" style="padding-left:3.5vw;padding-top:5vw">
                             <p class="big-heading" style="font-family:Rubik Medium;color:#55525B;">Mari kita sambut Indonesia <span style="font-family:Hypebeast;color:#F4C257;font-size:3.5vw !important;line-height:1vw">EMAS!</span> </p>
-                            <img src="/assets/images/client/Login_Image.png" class="img-fluid" style="width:100%;height:20vw;object-fit:cover" alt="">
+                            <img src="/assets/images/client/Login_Image.png" class="img-fluid" style="width:100%;height:18vw;object-fit:cover" alt="">
                         </div>   
                         <div class="col-6" style="padding:0vw 4vw;display: flex;flex-direction: column;justify-content: center;">
                             <div style="text-align:center">
@@ -26,7 +26,7 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Email Address</p>
                                 <div  class="auth-input-form" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                                    <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;" placeholder="johndoe@gmail.com">
+                                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="johndoe@gmail.com">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $message }}</strong>
@@ -36,23 +36,21 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Password</p>
                                 <div  class="auth-input-form" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-lock"></i>
-                                    <input type="password" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;" placeholder="*******">
+                                    <input type="password" name="password" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="*******">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div> 
-                                <div style="display:flex;justify-content:space-between;margin-bottom:2vw">
+                                <div style="display:flex;justify-content:space-between;">
                                     <button type="submit" class="normal-text btn-blue-bordered w-100" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw">Login</button>
                                 </div>
+                                <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;margin-bottom:0.4vw;margin-top:1vw;margin-bottom:1vw">OR</p>
                                 <a href="{{ route('login.google') }}" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;width:100%;display:inline-block;background-color:#67BBA3;border:none;color:#FFFFFF;border-radius:5px;padding:0.5vw 2vw;text-decoration:none"> <i class="fab fa-google"></i> <span style="margin-left:0.5vw">Login with Google Account</span></a>
-                                <div style="text-align:center !important">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;margin-bottom:0.4vw;margin-top:1vw">OR</p>
+                                    <div style="text-align:center !important">
                                 </div>
-                                <div class="normal-text btn-yellow-bordered w-100"   onclick="window.open('/signup','_self');" style="cursor:pointer;margin-top:1vw">
-                                    <a href="/signup" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:0.5vw;text-decoration:none;color: #3B3C43;">Sign Up</a>
-                                </div>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;">Belum punya akun? <span> <a href="/signup">Daftar di sini</a> </span> </p>
                             </div>
                         </div>   
                     </div>

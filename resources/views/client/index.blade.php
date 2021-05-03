@@ -153,12 +153,26 @@
 </div>
 END OF OUR PROGRAMS SECTION -->
 
+<!-- START OF INDONESIA EMAS SECTION -->
+<div class="row m-0 page-container" style="padding-bottom:10vw;padding-top:2vw">
+    <div class="col-7 p-0">
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line">Kami ingin...</p>
+        <p class="super-big-heading" style="font-family: Rubik Medium;color:#2B6CAA;white-space:pre-line;">Mewujudkan
+        Indonesia Emas 2045</p>
+        <p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Saya datang, saya lihat, saya taklukan!”</p>
+    </div>
+    <div class="col-5" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+        <img src="/assets/images/client/Emas_BG.png" style="width:24vw" class="img-fluid" alt="">
+    </div>
+</div>
+<!-- END OF INDONESIA EMAS SECTION -->
+
 <!-- START OF OUR PROGRAMS SECTION -->
 <div class="row m-0 page-container our-programs-background" style="padding-bottom:8vw">
-    <div class="col-12 p-0">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:1vw">Our <span class="big-heading" style="font-family:Hypebeast;margin-left:1vw" >PROGRAMS</span></p>
+    <div class="col-12 p-0" style="text-align:center">
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:1vw"><span class="big-heading" style="font-family:Hypebeast;margin-left:1vw" >PROGRAM </span> Venidici</p>
     </div>
-    <!-- START OF ONE LEFT PROGRAMS -->
+    <!--
     <div class="col-4 p-0">
         <a href="/online-course" style="text-decoration:none">
             <div class="our-programs-card-home" style="margin-top:2.5vw">
@@ -170,33 +184,49 @@ END OF OUR PROGRAMS SECTION -->
             </div>
         </a>
     </div>
-    <!-- END OF ONE LEFT PROGRAMS -->
-    <!-- START OF ONE MIDDLE PROGRAMS -->
-    <div class="col-4 p-0">
-        <a href="/" style="text-decoration:none">
-            <div class="our-programs-card-home" style="margin-top:2.5vw;border-radius:0px !important">
-                <img src="/assets/images/client/Our_Programs_Icon.png" style="width:5vw;" class="img-fluid" alt="">
-                <div>
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">Program 2</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+    -->
+    <!-- START OF ONE PROGRAMS -->
+    <div class="col-4 p-0" style="display:flex;justify-content:center">
+        <a href="/online-course" style="text-decoration:none">
+            <div class="our-programs-card-homepage" style="margin-top:2.5vw">
+                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
+                <div style="padding:1.5vw">
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Online Course</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Online Course</a>
                 </div>
             </div>
         </a>
     </div>
-    <!-- END OF ONE MIDDLE PROGRAMS -->
-    <!-- START OF ONE RIGHT PROGRAMS -->
-    <div class="col-4 p-0">
-        <a href="/" style="text-decoration:none">
-            <div class="our-programs-card-home" style="margin-top:2.5vw;border-radius: 0px 10px 10px 0px;">
-                <img src="/assets/images/client/Our_Programs_Icon.png" style="width:5vw;" class="img-fluid" alt="">
-                <div>
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">Program 1</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+    <!-- END OF ONE PROGRAMS -->
+    <!-- START OF ONE PROGRAMS -->
+    <div class="col-4 p-0" style="display:flex;justify-content:center">
+        <a href="/online-course" style="text-decoration:none">
+            <div class="our-programs-card-homepage" style="margin-top:2.5vw">
+                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
+                <div style="padding:1.5vw">
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">WOKI</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Woki</a>
                 </div>
             </div>
         </a>
     </div>
-    <!-- END OF ONE RIGHT PROGRAMS -->
+    <!-- END OF ONE PROGRAMS -->
+    <!-- START OF ONE PROGRAMS -->
+    <div class="col-4 p-0" style="display:flex;justify-content:center">
+        <a href="/online-course" style="text-decoration:none">
+            <div class="our-programs-card-homepage" style="margin-top:2.5vw">
+                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
+                <div style="padding:1.5vw">
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Krest</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Krest</a>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- END OF ONE PROGRAMS -->
 </div>
 <!-- END OF OUR PROGRAMS SECTION -->
 
