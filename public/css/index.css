@@ -978,7 +978,6 @@ html, body {
 
 }
 .interest-card-active{
-    background: #2B6CAA;
     backdrop-filter: blur(4px);
     background-image: none !important;
 }
