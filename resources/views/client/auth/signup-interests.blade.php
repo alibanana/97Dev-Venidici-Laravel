@@ -20,20 +20,21 @@
                     </div>
                     <div class="row m-0"  style="overflow:scroll;height:25vw;margin-top:1vw">
                         @foreach($interests as $interest)
-                        <div class="col-4" style="display:flex;
-                        @if($loop->iteration % 3 == 1)
-                        justify-content:flex-start;
-                        @elseif($loop->iteration % 3 ==2)
-                        justify-content:center;
-                        @else
-                        justify-content:flex-end;
-                        @endif
-                        margin-top:2vw">
-                            <div class="container interest-card" id="interest_card_{{$interest->id}}" style="background-image: url({{$interest->image}});cursor:pointer" onclick="toggleInterest('interest_card_{{$interest->id}}')">
-                                <input type="hidden" name="interest[{{$interest->id}}]" value="0">
-                                <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{$interest->hashtag}}</p>
+                            <div class="col-4" style="display:flex;
+                            @if($loop->iteration % 3 == 1)
+                                justify-content:flex-start;
+                            @elseif($loop->iteration % 3 ==2)
+                                justify-content:center;
+                            @else
+                                justify-content:flex-end;
+                            @endif
+                            margin-top:2vw">
+                                <div class="container interest-card" id="interest_card_{{$interest->id}}" 
+                                style="background-image: url({{ $interest->image }});cursor:pointer" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
+                                    <input type="hidden" name="interest[{{ $interest->id }}]" value="0">
+                                    <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{ $interest->hashtag }}</p>
+                                </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                     <div class="col-12 p-0" style="text-align:center;margin-top:3vw">
@@ -47,14 +48,19 @@
 <!-- END OF BANNER SECTION -->
 
 <script>
-    function toggleInterest(id) {
+    function toggleInterest(id, color_code) {
         var element = document.getElementById(id);
+        
         element.classList.toggle("interest-card-active");
         value=$(element).find("input[type=hidden]");
-        if(value.val() == 0)
+
+        if (value.val() == 0) {
             $(element).find("input[type=hidden]").val('1');
-        else
+            element.style.backgroundColor = color_code;
+        } else {
             $(element).find("input[type=hidden]").val('0');
+            element.style.backgroundColor = '';
+        }
     }
 </script>
 @endsection
