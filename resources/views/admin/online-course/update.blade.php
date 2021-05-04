@@ -162,19 +162,16 @@
                     -->
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Persyaratan <span style="color: orange">(At least one element must be present!)</span></label>
-                            @if(count($course->courseRequirements) == 0)
-                                <div id="requirement_duplicator_wrapper">
-                                    <div class="row" id="requirement_duplicator" >
-                                        <div class="col-md-12">
-                                            <div class="form-group" style="display:flex">
-                                                <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing">
-                                                <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                            </div>
+                            
+                            <div id="requirement_duplicator_wrapper">
+                                <div class="row" id="requirement_duplicator" style="display:none">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="display:flex">
+                                            <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement">
+                                            <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                            <div id="requirement_duplicator_wrapper">
                                 @foreach ($course->courseRequirements as $requirement)
                                     @if ($loop->first)
                                         <div class="row" id="requirement_duplicator">
@@ -195,19 +192,16 @@
 
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Apa yang akan dipelajari? <span style="color: orange">(At least one element must be present!)</span></label>
-                            @if(count($course->courseFeatures) == 0)
-                                <div id="learn_duplicator_wrapper">
-                                    <div class="row" id="learn_duplicator" >
-                                        <div class="col-md-12">
-                                            <div class="form-group" style="display:flex">
-                                                <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" required>
-                                                <button type="button" onClick="removeDiv(this, 'learn_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                            </div>
+                            
+                            <div id="learn_duplicator_wrapper">
+                                <div class="row" id="learn_duplicator" style="display:none">
+                                    <div class="col-md-12">
+                                        <div class="form-group d-flex">
+                                            <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisamelawak dengan benar dan tidak garing" required>
+                                            <button type="button" onClick="removeDiv(this, 'learn_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                            <div id="learn_duplicator_wrapper">
                                 @foreach ($course->courseFeatures as $feature)
                                     @if ($loop->first)
                                         <div class="row" id="learn_duplicator">
@@ -230,6 +224,18 @@
                         <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
                         <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
                         <div id="hashtag_duplicator_wrapper">
+                            <div class="row" id="hashtag_duplicator" style="display:none" >
+                                <div class="col-md-12">
+                                    <div class="form-group" style="display:flex">
+                                        <select name="hashtag[]" class="form-control form-control-user" id="" required>
+                                            @foreach ($tags as $tag)
+                                                <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                             @foreach ($course->hashtags as $hashtag)
                                 <div class="row" id="hashtag_duplicator">
                                     <div class="col-md-12">
@@ -598,6 +604,7 @@ function duplicateRequirement() {
     if(confirm("Are you sure, you want to add more item?")){
         var clone = original.cloneNode(true); // "deep" clone
         $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
+        clone.style.display = "block";
         clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
         original.parentNode.appendChild(clone);
     }
@@ -610,6 +617,7 @@ function duplicateLearn() {
     if(confirm("Are you sure, you want to add more item?")){
         var clone = original2.cloneNode(true); // "deep" clone
         $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
+        clone.style.display = "block";
         clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
         original2.parentNode.appendChild(clone);
     }
@@ -621,6 +629,7 @@ var i = 0; var original3 = document.getElementById('hashtag_duplicator');
 function duplicateHashtag() {
     if(confirm("Are you sure, you want to add more item?")){
         var clone = original3.cloneNode(true); // "deep" clone
+        clone.style.display = "block";
         clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
         original3.parentNode.appendChild(clone);
     }
@@ -654,7 +663,7 @@ function duplicateHashtag() {
 <script>
 function removeDiv(elem, wrapper_id){
     var parent = $(elem).parent('div').parent('div').parent('div');
-    if (document.getElementById(wrapper_id).childElementCount > 1) {
+    if (document.getElementById(wrapper_id).childElementCount > 2) {
         parent.remove();
     } else {
         alert("At least one element must be present!");

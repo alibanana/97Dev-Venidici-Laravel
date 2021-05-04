@@ -155,6 +155,15 @@
                         </span>
                     @enderror
                     <div id="requirement_duplicator_wrapper">
+
+                        <div class="row" id="requirement_duplicator" style="display:none">
+                            <div class="col-md-12">
+                                <div class="form-group" style="display:flex">
+                                    <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="e,g. Muka lucu dan unik" required>
+                                    <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row" id="requirement_duplicator">
                             <div class="col-md-12">
                                 <div class="form-group" style="display:flex">
@@ -175,6 +184,14 @@
                         </span>
                     @enderror
                     <div id="learn_duplicator_wrapper">
+                        <div class="row" id="learn_duplicator" style="display:none">
+                            <div class="col-md-12">
+                                <div class="form-group" style="display:flex">
+                                    <input type="text" name="features[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" required>
+                                    <button type="button" onClick="removeDiv(this, 'learn_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row" id="learn_duplicator" >
                             <div class="col-md-12">
                                 <div class="form-group" style="display:flex">
@@ -196,6 +213,18 @@
                     </span>
                 @enderror
                 <div id="hashtag_duplicator_wrapper">
+                    <div class="row" id="hashtag_duplicator" style="display:none">
+                        <div class="col-md-12">
+                            <div class="form-group d-flex">
+                                <select name="hashtags[]" class="form-control form-control-user" id="" required>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row" id="hashtag_duplicator">
                         <div class="col-md-12">
                             <div class="form-group d-flex">
@@ -228,12 +257,11 @@
 document.getElementById('add_requirement').onclick = duplicateRequirement;
 var i = 0;
 var original = document.getElementById('requirement_duplicator');
-console.log(original);
 function duplicateRequirement() {
-    console.log('requirement clicked')
     if (confirm("Are you sure, you want to add more item?")) {
         var clone = original.cloneNode(true); // "deep" clone
         $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
+        clone.style.display = "block";
         clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
         original.parentNode.appendChild(clone);
     }
@@ -249,6 +277,7 @@ function duplicateLearn() {
     if(confirm("Are you sure, you want to add more item?")){
         var clone = original2.cloneNode(true); // "deep" clone
         $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
+        clone.style.display = "block";
         clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
         original2.parentNode.appendChild(clone);
     }
@@ -263,6 +292,7 @@ var original3 = document.getElementById('hashtag_duplicator');
 function duplicateHashtag() {
     if(confirm("Are you sure, you want to add more item?")){
         var clone = original3.cloneNode(true); // "deep" clone
+        clone.style.display = "block";
         clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
         original3.parentNode.appendChild(clone);
     }
@@ -272,7 +302,7 @@ function duplicateHashtag() {
 <script>
 function removeDiv(elem, wrapper_id){
     var parent = $(elem).parent('div').parent('div').parent('div');
-    if (document.getElementById(wrapper_id).childElementCount > 1) {
+    if (document.getElementById(wrapper_id).childElementCount > 2) {
         parent.remove();
     } else {
         alert("At least one element must be present!");
