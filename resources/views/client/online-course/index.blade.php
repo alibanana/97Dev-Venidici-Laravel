@@ -17,7 +17,7 @@
 
 <!-- END OF BANNER SECTION -->
 
-<!-- START OF OUR PROGRAMS SECTION -->
+<!-- START OF OUR PROGRAMS SECTION 
 <div class="row m-0 page-container enroll-background" style="padding-bottom:8vw;padding-top:6vw">
     <div class="col-12 p-0">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Why enroll in Venidici's<span class="big-heading" style="font-family:Hypebeast;margin-left:1vw;color:#2B6CAA" >ONLINE COURSE</span></p>
@@ -87,8 +87,9 @@
         </a>
     </div>
 </div>
-<!-- END OF OUR PROGRAMS SECTION -->
-
+END OF OUR PROGRAMS SECTION -->
+<div style="padding-bottom:5vw">
+</div>
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container review-course-background" style="padding-bottom: 8vw;padding-top:4vw">
     <!-- START OF FEATURE SECTION -->
@@ -157,10 +158,10 @@
         </div>  
 
     </div>
-    <div class="col-4 p-0 ">
+    <div class="col-4 p-0 " style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s Online Courses</p>
-        <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
-        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>
+        <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
+        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
 
     </div>
 </div>
@@ -196,11 +197,10 @@
     <div class="col-12 p-0" style="text-align: center;margin-top:1vw">
         <div style="padding:2vw 13.5vw 1vw 13.5vw;">
             <div style="display:flex;justify-content:space-between;align-items:center;background: #FFFFFF;border: 2px solid rgba(157, 157, 157, 0.1);border-radius: 10px;padding:0.7vw">
-
-                <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Suggestion</p>
-                <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
-                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Online Course</p>
-                <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
+                <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Featured</p>
+                <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Business</p>
+                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Personal Development</p>
+                <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Medical</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
             </div>
         </div>

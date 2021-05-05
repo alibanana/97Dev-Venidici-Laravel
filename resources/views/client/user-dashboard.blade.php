@@ -26,6 +26,13 @@
                         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">General Information</p>
                     </div>
                     <!-- START OF LEFT SECTION -->
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Display Picture</p>
+
+                        <input type="file" id="images" name="images[]" accept=".jpg,.jpeg,.png" />
+                        <!--
+                        <label id="uploadButton" for="images" style="font-family:Rubik Medium">Choose Image</label>-->
+                    </div>
                     <div class="col-6" style="">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">

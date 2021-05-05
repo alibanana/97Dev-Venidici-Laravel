@@ -11,6 +11,7 @@ use App\Models\CourseCategory;
 use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
+use App\Models\Hashtag;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,8 +143,9 @@ class OnlineCourseController extends Controller
     // Show Admin -> Create New Online Page
     public function create() {
         $course_categories = CourseCategory::select('id', 'category')->get();
+        $tags = Hashtag::all();
 
-        return view('admin/online-course/create', compact('course_categories'));
+        return view('admin/online-course/create', compact('course_categories', 'tags'));
     }
 
     // Store New Online Course on the database.
@@ -154,7 +156,10 @@ class OnlineCourseController extends Controller
             'subtitle' => 'required',
             'course_category_id' => 'required',
             'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
-            'description' => 'required'
+            'description' => 'required',
+            'requirements' => 'required|array|min:1',
+            'features' => 'required|array|min:1',
+            'hashtags' => 'required|array|min:1'
         ])->setAttributeNames([
             'course_category_id' => 'category',
             'preview_video_link' => 'video link'
@@ -170,27 +175,31 @@ class OnlineCourseController extends Controller
         $course->description = $validated['description'];
         $course->save();
 
-        if ($request->has('requirements')) {
-            foreach ($request->requirements as $requirement_value) {
-                if ($requirement_value != "") {
-                    $new_requirement = new CourseRequirement;
-                    $new_requirement->course_id = $course->id;
-                    $new_requirement->requirement = $requirement_value;
-                    $new_requirement->save();
-                }
+        foreach ($request->requirements as $requirement_value) {
+            if ($requirement_value != "") {
+                $new_requirement = new CourseRequirement;
+                $new_requirement->course_id = $course->id;
+                $new_requirement->requirement = $requirement_value;
+                $new_requirement->save();
             }
         }
 
-        if ($request->has('features')) {
-            foreach ($request->features as $feature_value) {
-                if ($feature_value != "") {
-                    $new_feature = new CourseFeature;
-                    $new_feature->course_id = $course->id;
-                    $new_feature->feature = $feature_value;
-                    $new_feature->save();
-                }
+        foreach ($request->features as $feature_value) {
+            if ($feature_value != "") {
+                $new_feature = new CourseFeature;
+                $new_feature->course_id = $course->id;
+                $new_feature->feature = $feature_value;
+                $new_feature->save();
             }
         }
+
+        $added_hashtag_ids = [];
+        foreach ($request->hashtags as $tag_id) {
+            if (!in_array($tag_id, $added_hashtag_ids)) {
+                $added_hashtag_ids[] = $tag_id;
+            }
+        }
+        $course->hashtags()->attach($added_hashtag_ids);
 
         return redirect()->route('admin.online-courses.index')->with('message', 'New Online Course has been added!');
     }

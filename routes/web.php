@@ -29,10 +29,13 @@ use App\Http\Controllers\SocialController;
 // });
 
 
-
+Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return view('client/user-dashboard');
+});
+//Route::get('/dashboard', function () {
+    //return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
 /* END OF DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
 
 /*
@@ -46,7 +49,7 @@ Route::get('/dashboard', function () {
 */
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest');
-Route::post('/testing', [PagesController::class, 'signup_interest_testing'])->name('signup_interest_testing');
+Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info');
 
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
@@ -60,9 +63,8 @@ Route::get('/signup', function () {
 //Route::get('/signup-interests', function () {
     //return view('client/auth/signup-interests');
 //});
-Route::get('/dashboard', function () {
-    return view('client/user-dashboard');
-});
+
+
 Route::get('/cart', function () {
     return view('client/cart');
 });
@@ -128,6 +130,7 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
     // OnlineCourseUpdateController
     Route::get('/online-courses/{id}/update', [AdminOnlineCourseUpdateController::class, 'edit'])->name('online-courses.edit');
+    Route::put('/online-courses/{id}', [AdminOnlineCourseUpdateController::class, 'update'])->name('online-courses.update');
     // CourseCategoryController
     Route::get('/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
@@ -221,5 +224,12 @@ Route::get('/admin/analytics/online-course', function () {
 Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [App\Http\Controllers\SocialController::class, 'handleGoogleCallback']);
 /* END OF GOOGLE AUTH*/
+
+
+/* START OF FOR PUBLIC ROUTING */
+Route::get('/for-public/online-course', function () {
+    return view('client/for-public/online-course');
+});
+/* END OF FOR PUBLIC ROUTING*/
 
 require __DIR__.'/auth.php';
