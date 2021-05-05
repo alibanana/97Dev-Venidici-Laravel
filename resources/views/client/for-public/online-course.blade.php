@@ -6,10 +6,29 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container for-public-background " style="height:55vw">
     <div class="col-6 p-0">
-        <div style="padding-top:19vw;margin-left:-0.5vw">
-            <p class="big-heading" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;line-height:3.5vw">A look at how we put
+        <div style="padding-top:18.5vw;margin-left:-0.5vw">
+            <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw">A look at how we put
             the pieces together</p>
             <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:1vw;line-height:2vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. </p>
+            <div class="row m-0">
+                <div class="col-9 p-0">
+                    <div style="margin-top:0.5vw;text-align:center">
+                        <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;">Explore our programs </p>
+                        <div style="display:flex;justify-content:center;align-items:center;">
+                            <a href="#" class="normal-text blue-link blue-link-active" style="font-family:Rubik Medium;margin-right:1.5vw">
+                                Online Course
+                            </a>
+                            <a href="#" class="normal-text red-link" style="font-family:Rubik Medium">
+                                Woki
+                            </a>
+                            <a href="#" class="normal-text yellow-link" style="font-family:Rubik Medium;margin-left:1.5vw">
+                                Sharing Session
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
