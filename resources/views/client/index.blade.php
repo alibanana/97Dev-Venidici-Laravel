@@ -154,7 +154,7 @@
 END OF OUR PROGRAMS SECTION -->
 
 <!-- START OF INDONESIA EMAS SECTION -->
-<div class="row m-0 page-container" style="padding-bottom:10vw;padding-top:2vw">
+<div class="row m-0 page-container" style="padding-bottom:8vw;padding-top:2vw">
     <div class="col-7 p-0">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line">Kami ingin...</p>
         <p class="super-big-heading" style="font-family: Rubik Medium;color:#2B6CAA;white-space:pre-line;">Mewujudkan

@@ -31,14 +31,16 @@
                             </div>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <div style="display:flex;align-items:center;margin-right:2vw">
-                                <a href="#">
+                            <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
+                                <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">                                    
                                     <i class="fas fa-plus" style="margin-right:0.5vw;color:#C4C4C4"></i>
-                                </a>
-                                <input type="text" name="qty" class="normal-text" value="1" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
-                                <a href="#">
+                                </div>
+                                <input type="text" name="qty" class="qty-input normal-text" value="1" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+                                <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
+
                                     <i class="fas fa-minus" style="margin-left:0.5vw;color:#C4C4C4"></i>
-                                </a>
+                                </div>
+                                
                             </div>
                             <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. 300.000</p>
                         </div>
@@ -113,14 +115,16 @@
                             </div>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <div style="display:flex;align-items:center;margin-right:2vw">
-                                <a href="#">
+                            <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
+                                <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">                                    
                                     <i class="fas fa-plus" style="margin-right:0.5vw;color:#C4C4C4"></i>
-                                </a>
-                                <input type="text" name="qty" class="normal-text" value="1" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
-                                <a href="#">
+                                </div>
+                                <input type="text" name="qty" class="qty-input normal-text" value="1" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+                                <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
+
                                     <i class="fas fa-minus" style="margin-left:0.5vw;color:#C4C4C4"></i>
-                                </a>
+                                </div>
+                                
                             </div>
                             <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. 300.000</p>
                         </div>
@@ -163,5 +167,29 @@
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
+<script>
+$('.increment-btn').click(function (e) {
+    console.log('add');
+    e.preventDefault();
+    var incre_value = $(this).parents('.quantity').find('.qty-input').val();
+    var value = parseInt(incre_value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value<10){
+        value++;
+        $(this).parents('.quantity').find('.qty-input').val(value);
+    }
+});
 
+$('.decrement-btn').click(function (e) {
+    e.preventDefault();
+    var decre_value = $(this).parents('.quantity').find('.qty-input').val();
+    var value = parseInt(decre_value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value>1){
+        value--;
+        $(this).parents('.quantity').find('.qty-input').val(value);
+    }
+});
+
+</script>
 @endsection

@@ -18,13 +18,14 @@ class CreateUserDetailsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('telephone', 16);
-            $table->string('referral_code', 6);
+            $table->string('referral_code', 6)->nullable();
             $table->date('birthdate')->nullable();
             $table->enum('gender', ['Male', 'Female'])->nullable();
             $table->text('address')->nullable();
             $table->string('company')->nullable();
             $table->string('occupancy')->nullable();
             $table->text('interest')->nullable();
+            $table->text('response')->nullable();
             $table->timestamps();
         });
     }

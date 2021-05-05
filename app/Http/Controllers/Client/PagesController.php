@@ -10,6 +10,8 @@ use App\Models\TrustedCompany;
 use App\Models\FakeTestimony;
 use App\Models\User;
 use App\Models\Hashtag;
+use App\Models\UserDetail;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,10 +49,62 @@ class PagesController extends Controller
         return view('client/auth/signup-interests', compact('interests'));
 
     }
-    public function signup_interest_testing(Request $request)
-    {
-        $input = $request->all();
-        dd($input['interest']);
 
+
+    public function storeGeneralInfo(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'telephone' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'response' => 'required',
+            'referral_code' => '',
+        ]);
+        
+        $request->session()->put('name', $validated['name']);
+        $request->session()->put('telephone', $validated['telephone']);
+        $request->session()->put('email', $validated['email']);
+        $request->session()->put('password', $validated['password']);
+        $request->session()->put('response', $validated['response']);
+        if($validated['referral_code'])
+            $request->session()->put('referral_code', $validated['referral_code']);
+
+        //$name = $request->session()->get('name');
+
+
+        return redirect()->route('signup_interest');
+    }
+    public function storeInterest(Request $request)
+    {
+        $validated = $request->validate([
+            'interests' => 'required|array|min:1',
+        ]);
+
+        //here store to user and user detail table
+  
+
+        $user = User::create([
+            'user_role_id' => 1,
+            'name' => $request->session()->get('name'),
+            'email' => $request->session()->get('email'),
+            'avatar' => 'Display_Picture_Dummy.png',
+            'password' => Hash::make($request->session()->get('password')),
+            'is_admin' => '0',
+        ]);
+        $user_id = User::latest()->first()->id;
+
+        $user_detail = UserDetail::create([
+            'user_id' => $user_id,
+            'telephone' => $request->session()->get('telephone'),
+            'referral_code' => $request->session()->get('referral_code'),
+            'response' => $request->session()->get('response'),
+        ]);
+        
+
+        //here store to user_hashtag table
+        $request->session()->flush();
+        
+        return view('client/user-dashboard');
     }
 }

@@ -29,10 +29,13 @@ use App\Http\Controllers\SocialController;
 // });
 
 
-
+Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return view('client/user-dashboard');
+});
+//Route::get('/dashboard', function () {
+    //return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
 /* END OF DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
 
 /*
@@ -46,7 +49,7 @@ Route::get('/dashboard', function () {
 */
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest');
-Route::post('/testing', [PagesController::class, 'signup_interest_testing'])->name('signup_interest_testing');
+Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info');
 
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
@@ -60,9 +63,8 @@ Route::get('/signup', function () {
 //Route::get('/signup-interests', function () {
     //return view('client/auth/signup-interests');
 //});
-Route::get('/dashboard', function () {
-    return view('client/user-dashboard');
-});
+
+
 Route::get('/cart', function () {
     return view('client/cart');
 });

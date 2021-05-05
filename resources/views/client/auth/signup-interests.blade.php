@@ -9,7 +9,7 @@
             <div style="display:flex;justify-content:space-between">
                 <a href="/signup" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">General Info</span></a>
             </div>
-            <form action="/testing" method="POST" >
+            <form action="{{ route('store_interest') }}" method="POST">
             @csrf                   
                 <div class="row m-0 page-container">
                     <div class="col-12 p-0">
@@ -17,6 +17,11 @@
                             <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
                         </div>
+                        @error('interests')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row m-0"  style="overflow:scroll;height:25vw;margin-top:1vw">
                         @foreach($interests as $interest)
@@ -31,7 +36,7 @@
                             margin-top:2vw">
                                 <div class="container interest-card" id="interest_card_{{$interest->id}}" 
                                 style="background-image: url({{ $interest->image }});cursor:pointer" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
-                                    <input type="hidden" name="interest[{{ $interest->id }}]" value="0">
+                                    <input type="hidden" name="interests[{{ $interest->id }}]" value="0">
                                     <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{ $interest->hashtag }}</p>
                                 </div>
                             </div>

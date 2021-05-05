@@ -53,4 +53,6 @@ class User extends Authenticatable
         return $this->belongsTo(UserRole::class);
     }
 
+    //here insert userHashtag has many ??
+
 }

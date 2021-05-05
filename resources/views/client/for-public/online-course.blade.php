@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Online Course Detail')
+@section('title', 'Venidici Online Course')
 
 @section('content')
 

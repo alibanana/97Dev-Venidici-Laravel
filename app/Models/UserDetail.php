@@ -21,6 +21,7 @@ class UserDetail extends Model
         'company',
         'occupancy',
         'interest',
+        'response',
     ];
 
     protected $casts = [
