@@ -175,37 +175,31 @@ class OnlineCourseController extends Controller
         $course->description = $validated['description'];
         $course->save();
 
-        if ($request->has('requirements')) {
-            foreach ($request->requirements as $requirement_value) {
-                if ($requirement_value != "") {
-                    $new_requirement = new CourseRequirement;
-                    $new_requirement->course_id = $course->id;
-                    $new_requirement->requirement = $requirement_value;
-                    $new_requirement->save();
-                }
+        foreach ($request->requirements as $requirement_value) {
+            if ($requirement_value != "") {
+                $new_requirement = new CourseRequirement;
+                $new_requirement->course_id = $course->id;
+                $new_requirement->requirement = $requirement_value;
+                $new_requirement->save();
             }
         }
 
-        if ($request->has('features')) {
-            foreach ($request->features as $feature_value) {
-                if ($feature_value != "") {
-                    $new_feature = new CourseFeature;
-                    $new_feature->course_id = $course->id;
-                    $new_feature->feature = $feature_value;
-                    $new_feature->save();
-                }
+        foreach ($request->features as $feature_value) {
+            if ($feature_value != "") {
+                $new_feature = new CourseFeature;
+                $new_feature->course_id = $course->id;
+                $new_feature->feature = $feature_value;
+                $new_feature->save();
             }
         }
 
-        if ($request->has('hashtags')) {
-            $added_hashtag_ids = [];
-            foreach ($request->hashtags as $tag_id) {
-                if (!in_array($tag_id, $added_hashtag_ids)) {
-                    $added_hashtag_ids[] = $tag_id;
-                }
+        $added_hashtag_ids = [];
+        foreach ($request->hashtags as $tag_id) {
+            if (!in_array($tag_id, $added_hashtag_ids)) {
+                $added_hashtag_ids[] = $tag_id;
             }
-            $course->hashtags()->attach($added_hashtag_ids);
         }
+        $course->hashtags()->attach($added_hashtag_ids);
 
         return redirect()->route('admin.online-courses.index')->with('message', 'New Online Course has been added!');
     }

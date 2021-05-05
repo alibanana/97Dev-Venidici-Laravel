@@ -162,72 +162,80 @@
                     -->
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Persyaratan <span style="color: orange">(At least one element must be present!)</span></label>
-                            
-                            <div id="requirement_duplicator_wrapper">
-                                <div class="row" id="requirement_duplicator" style="display:none">
+                        @error('requirements')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        {{-- Element to be duplicated --}}
+                        <div id="requirement_duplicator_wrapper">
+                            <div class="row" id="requirement_duplicator" style="display:none">
+                                <div class="col-md-12">
+                                    <div class="form-group" style="display:flex">
+                                        <input type="text" class="form-control form-control-user" placeholder="Enter Student Requirement">
+                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach ($course->courseRequirements as $requirement)
+                                <div class="row" id="requirement_duplicator{{ $loop->iteration }}">
                                     <div class="col-md-12">
                                         <div class="form-group" style="display:flex">
-                                            <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement">
+                                            <input type="text" name="requirements[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="{{ $requirement->requirement }}" required>
                                             <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                                @foreach ($course->courseRequirements as $requirement)
-                                    @if ($loop->first)
-                                        <div class="row" id="requirement_duplicator">
-                                    @else
-                                        <div class="row" id="requirement_duplicator{{ $loop->index }}">
-                                    @endif
-                                        <div class="col-md-12">
-                                            <div class="form-group" style="display:flex">
-                                                <input type="text" name="requirements[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement" value="{{ $requirement->requirement }}">
-                                                <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                            @endforeach
+                        </div>
                         <button type="button" id="add_requirement" onlick="duplicateRequirement()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
                     </div>
 
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Apa yang akan dipelajari? <span style="color: orange">(At least one element must be present!)</span></label>
-                            
-                            <div id="learn_duplicator_wrapper">
-                                <div class="row" id="learn_duplicator" style="display:none">
+                        @error('features')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        {{-- Element to be duplicated --}}
+                        <div id="learn_duplicator_wrapper">
+                            <div class="row" id="learn_duplicator" style="display:none">
+                                <div class="col-md-12">
+                                    <div class="form-group d-flex">
+                                        <input type="text" class="form-control form-control-user" placeholder="e.g. Bisamelawak dengan benar dan tidak garing">
+                                        <button type="button" onClick="removeDiv(this, 'learn_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach ($course->courseFeatures as $feature)
+                                <div class="row" id="learn_duplicator{{ $loop->iteration }}">
                                     <div class="col-md-12">
                                         <div class="form-group d-flex">
-                                            <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisamelawak dengan benar dan tidak garing" required>
+                                            <input type="text" name="features[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="{{ $feature->feature }}" required>
                                             <button type="button" onClick="removeDiv(this, 'learn_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                                @foreach ($course->courseFeatures as $feature)
-                                    @if ($loop->first)
-                                        <div class="row" id="learn_duplicator">
-                                    @else
-                                        <div class="row" id="learn_duplicator{{ $loop->index }}">
-                                    @endif
-                                        <div class="col-md-12">
-                                            <div class="form-group d-flex">
-                                                <input type="text" name="learn[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="{{ $feature->feature }}" required>
-                                                <button type="button" onClick="removeDiv(this, 'learn_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                            @endforeach
+                        </div>
                         <button type="button" id="add_learn" onlick="duplicateLearn()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 
                     </div>
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
                         <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
+                        @error('hashtags')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <div id="hashtag_duplicator_wrapper">
-                            <div class="row" id="hashtag_duplicator" style="display:none" >
+                            {{-- Element to be duplicated --}}
+                            <div class="row" id="hashtag_duplicator" style="display:none">
                                 <div class="col-md-12">
                                     <div class="form-group" style="display:flex">
-                                        <select name="hashtag[]" class="form-control form-control-user" id="" required>
+                                        <select class="form-control form-control-user">
                                             @foreach ($tags as $tag)
                                                 <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
                                             @endforeach
@@ -237,10 +245,10 @@
                                 </div>
                             </div>
                             @foreach ($course->hashtags as $hashtag)
-                                <div class="row" id="hashtag_duplicator">
+                                <div class="row" id="hashtag_duplicator{{ $loop->iteration }}">
                                     <div class="col-md-12">
                                         <div class="form-group" style="display:flex">
-                                            <select name="hashtag[]" class="form-control form-control-user" id="" required>
+                                            <select name="hashtags[]" class="form-control form-control-user" required>
                                                 @foreach ($tags as $tag)
                                                     @if ($hashtag->hashtag == $tag->hashtag)
                                                         <option value="{{ $tag->id }}" selected>{{ $tag->hashtag }}</option>
@@ -601,38 +609,36 @@
 document.getElementById('add_requirement').onclick = duplicateRequirement;
 var i = 0; var original = document.getElementById('requirement_duplicator');
 function duplicateRequirement() {
-    if(confirm("Are you sure, you want to add more item?")){
-        var clone = original.cloneNode(true); // "deep" clone
-        $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
-        clone.style.display = "block";
-        clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
-        original.parentNode.appendChild(clone);
-    }
+    var clone = original.cloneNode(true); // "deep" clone
+    $(clone).find("input").attr("name", "requirements[]");
+    $(clone).find("input").attr("required", "");
+    clone.style.display = "block";
+    clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
+    original.parentNode.appendChild(clone);
 }
 </script>
 <script>
 document.getElementById('add_learn').onclick = duplicateLearn;
 var i = 0; var original2 = document.getElementById('learn_duplicator');
 function duplicateLearn() {
-    if(confirm("Are you sure, you want to add more item?")){
-        var clone = original2.cloneNode(true); // "deep" clone
-        $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
-        clone.style.display = "block";
-        clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
-        original2.parentNode.appendChild(clone);
-    }
+    var clone = original2.cloneNode(true); // "deep" clone
+    $(clone).find("input").attr("name", "features[]");
+    $(clone).find("input").attr("required", "");
+    clone.style.display = "block";
+    clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
+    original2.parentNode.appendChild(clone);
 }
 </script>
 <script>
 document.getElementById('add_hashtag').onclick = duplicateHashtag;
 var i = 0; var original3 = document.getElementById('hashtag_duplicator');
 function duplicateHashtag() {
-    if(confirm("Are you sure, you want to add more item?")){
-        var clone = original3.cloneNode(true); // "deep" clone
-        clone.style.display = "block";
-        clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
-        original3.parentNode.appendChild(clone);
-    }
+    var clone = original3.cloneNode(true); // "deep" clone
+    $(clone).find("select").attr("name", "hashtags[]");
+    $(clone).find("select").attr("required", "");
+    clone.style.display = "block";
+    clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
+    original3.parentNode.appendChild(clone);
 }
 </script>
 <script>
