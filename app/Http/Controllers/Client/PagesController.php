@@ -88,7 +88,6 @@ class PagesController extends Controller
             'user_role_id' => 1,
             'name' => $request->session()->get('name'),
             'email' => $request->session()->get('email'),
-            'avatar' => 'Display_Picture_Dummy.png',
             'password' => Hash::make($request->session()->get('password')),
             'is_admin' => '0',
         ]);
@@ -101,7 +100,6 @@ class PagesController extends Controller
             'response' => $request->session()->get('response'),
         ]);
         
-
         //here store to user_hashtag table
         $request->session()->flush();
         
