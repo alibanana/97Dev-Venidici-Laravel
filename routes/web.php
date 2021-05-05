@@ -210,4 +210,11 @@ Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redir
 Route::get('login/google/callback', [App\Http\Controllers\SocialController::class, 'handleGoogleCallback']);
 /* END OF GOOGLE AUTH*/
 
+
+/* START OF FOR PUBLIC ROUTING */
+Route::get('/for-public/online-course', function () {
+    return view('client/for-public/online-course');
+});
+/* END OF FOR PUBLIC ROUTING*/
+
 require __DIR__.'/auth.php';
