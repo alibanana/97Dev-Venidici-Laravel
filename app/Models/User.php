@@ -53,6 +53,8 @@ class User extends Authenticatable
         return $this->belongsTo(UserRole::class);
     }
 
-    //here insert userHashtag has many ??
+    public function hashtags() {
+        return $this->belongsToMany(Hashtag::class, 'user_hashtag')->withTimestamps();
+    }
 
 }
