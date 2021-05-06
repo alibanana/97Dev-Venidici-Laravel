@@ -90,21 +90,33 @@
                     </div>
                     <div class="col-6">
                         <label for="">Student's Requirements</label>
-                        <div>
-                            <div class="row">
+                        <div id="requirement_duplicator_wrapper">
+                            {{-- Element to be duplicated --}}
+                            <div class="row" id="requirement_duplicator" style="display:none">
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="requirement[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement" value="A Windows/Linux/MacOS based computer or laptop">
+                                    <div class="form-group d-flex"> 
+                                        <input type="text" name="requirement[]" class="form-control form-control-user" placeholder="Enter Student Requirement">
+                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                     </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="row" id="requirement_duplicator">
+                            <div class="row" id="requirement_duplicator1">
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" name="requirement[]" class="form-control form-control-user" id="" placeholder="Enter Student Requirement" value="High ambition for the future">
+                                    <div class="form-group d-flex"> 
+                                        <input type="text" name="requirement[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="Pinter">
+                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                     </div>
+
+                                </div>
+                            </div>
+                            <div class="row" id="requirement_duplicator2">
+                                <div class="col-md-12">
+                                    <div class="form-group d-flex"> 
+                                        <input type="text" name="requirement[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="Rajin">
+                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -302,21 +314,26 @@
 </div>
 
 <script>
-    document.getElementById('add_requirement').onclick = duplicateRequirement;
-    var i = 0;
-    var original = document.getElementById('requirement_duplicator');
-    console.log(original);
-    function duplicateRequirement() {
-        console.log('requirement clicked')
-        if(confirm("Are you sure, you want to add more item?")){
-            var clone = original.cloneNode(true); // "deep" clone
-            $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
-            clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
-            original.parentNode.appendChild(clone);
-        } else {
-
-        }
+document.getElementById('add_requirement').onclick = duplicateHashtag;
+var i = 1; var original3 = document.getElementById('requirement_duplicator');
+function duplicateHashtag() {
+    var clone = original3.cloneNode(true); // "deep" clone
+    $(clone).find("input").attr("name", "requirement[]");
+    $(clone).find("input").attr("required", "");
+    clone.style.display = "block";
+    clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
+    original3.parentNode.appendChild(clone);
+}
+</script>
+<script>
+function removeDiv(elem, wrapper_id){
+    var parent = $(elem).parent('div').parent('div').parent('div');
+    if (document.getElementById(wrapper_id).childElementCount > 2) {
+        parent.remove();
+    } else {
+        alert("At least one element must be present!");
     }
+}
 </script>
 
 <script>

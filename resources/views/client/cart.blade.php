@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
+                                <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
                                 <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">                                    
                                     <i class="fas fa-plus" style="margin-right:0.5vw;color:#C4C4C4"></i>
                                 </div>

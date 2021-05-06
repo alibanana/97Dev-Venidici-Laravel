@@ -124,7 +124,7 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     // OnlineCourseController
     Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
     Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
-    Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
+    //Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
     Route::post('/online-courses', [AdminOnlineCourseController::class, 'store'])->name('online-courses.store');
     Route::delete('/online-course/{id}', [AdminOnlineCourseController::class, 'destroy'])->name('online-courses.destroy');
     Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
