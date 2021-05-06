@@ -146,8 +146,21 @@ html, body {
     background-repeat: no-repeat;
     background-size: 74%;
 }
-.for-public-background{
+.our-values-background-woki{
+    background-image: url("/assets/images/client/our_values_background_woki.png");
+    background-position:56vw 10vw;
+    background-repeat: no-repeat;
+    background-size: 35%;
+}
+.for-public-oc-background{
     background-image: url("/assets/images/client/For_Public_BG.png");
+    background-position:top left;
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+}
+.for-public-woki-background{
+    background-image: url("/assets/images/client/For_Public_Woki_BG.png");
     background-position:top left;
     background-repeat: no-repeat;
     background-size: 100%;

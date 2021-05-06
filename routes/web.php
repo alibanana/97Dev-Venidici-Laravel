@@ -217,6 +217,9 @@ Route::get('login/google/callback', [App\Http\Controllers\SocialController::clas
 Route::get('/for-public/online-course', function () {
     return view('client/for-public/online-course');
 });
+Route::get('/for-public/woki', function () {
+    return view('client/for-public/woki');
+});
 /* END OF FOR PUBLIC ROUTING*/
 
 require __DIR__.'/auth.php';
