@@ -14,7 +14,8 @@
                     <a href="/" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Home</span></a>
                     <!--<a href="/signup" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none">Sign up<i style="margin-left:0.5vw" class="fas fa-arrow-right"></i></a>-->
                 </div>
-                <form action="">
+                <form action="{{ route('login') }}" method="POST">
+                @csrf
                     <div class="row m-0">
                         <div class="col-6" style="padding-left:3.5vw;padding-top:5vw">
                             <p class="big-heading" style="font-family:Rubik Medium;color:#55525B;">Mari kita sambut Indonesia <span style="font-family:Hypebeast;color:#F4C257;font-size:3.5vw !important;line-height:1vw">EMAS!</span> </p>
@@ -26,7 +27,7 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Email Address</p>
                                 <div  class="auth-input-form" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="johndoe@gmail.com">
+                                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="johndoe@gmail.com" value="{{ old('email') }}">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $message }}</strong>

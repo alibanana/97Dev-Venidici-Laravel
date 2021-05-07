@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_role_id')->nullable();
+            $table->unsignedBigInteger('user_role_id')->nullable()->default(1);
             $table->foreign('user_role_id')->references('id')->on('user_roles')->onDelete('set null');
             $table->string('name');
             $table->string('email')->unique();
@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->text('avatar')->nullable();            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_admin')->nullable();
             $table->enum('status', ['active', 'suspended'])->default('active');
             $table->rememberToken();
             $table->timestamps();
