@@ -45,6 +45,7 @@ Route::get('/dashboard', function () {
 | Controllers can be found inside -> App\Http\Controllers\Client\
 | Controllers Used:
 |   - PagesController
+|   - CartController
 |--------------------------------------------------------------------------
 */
 Route::get('/', [PagesController::class, 'index'])->name('index');
@@ -65,9 +66,20 @@ Route::get('/signup', function () {
 //});
 
 
-Route::get('/cart', function () {
-    return view('client/cart');
+//Route::get('/cart', function () {
+    //return view('client/cart');
+//});
+Route::get('/dashboard', function () {
+    return view('client/user-dashboard');
 });
+/* CART ROUTING */
+Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
+Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
+Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total');
+Route::get('/cart/totalWeight', [CartController::class, 'getCartTotalWeight'])->name('customer.cart.getCartTotalWeight');
+Route::post('/cart/remove', [CartController::class, 'removeCart'])->name('customer.cart.remove');
+Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll');
+
 Route::get('/shipping', function () {
     return view('client/cart-shipping');
 });
