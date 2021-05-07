@@ -24,7 +24,6 @@ class UserSeeder extends Seeder
                 'email' => env('SUPER_ADMIN_EMAIL'),
                 'email_verified_at' => now(),
                 'password' => bcrypt(env('SUPER_ADMIN_PASSWORD')),
-                'is_admin' => true,
                 'user_role_id' => 3,
                 'remember_token' => Str::random(10),
             ],
@@ -33,7 +32,6 @@ class UserSeeder extends Seeder
                 'email' => env('ADMIN_EMAIL'),
                 'email_verified_at' => now(),
                 'password' => bcrypt(env('ADMIN_PASSWORD')),
-                'is_admin' => true,
                 'user_role_id' => 2,
                 'remember_token' => Str::random(10),
             ]
@@ -64,7 +62,6 @@ class UserSeeder extends Seeder
                 'email' => $faker->unique()->safeEmail,
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
-                'is_admin' => false,
                 'status' => $status,
                 'remember_token' => Str::random(10),
                 'created_at' => $timestamp,

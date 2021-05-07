@@ -81,7 +81,8 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/online-courses') || Request::is('admin/online-courses/*'))
+    @if(Request::is('admin/online-courses') || Request::is('admin/online-courses/*') || Request::is('admin/course-categories') ||
+    Request::is('admin/course-categories/*') || Request::is('admin/assessments') || Request::is('admin/assessments/*'))
     <li class="nav-item active">
     @else
     <li class="nav-item">
@@ -95,7 +96,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.online-courses.index') }}">Online Courses</a>
                 <a class="collapse-item" href="{{ route('admin.course-categories.index') }}">Course Categories</a>
-                <a class="collapse-item" href="/admin/online-courses/assesments">Assesments</a>
+                <a class="collapse-item" href="{{ route('admin.assesments.index') }}">Assesments</a>
                 <a class="collapse-item" href="/admin/online-courses/teachers">Teachers</a>
             </div>
         </div>

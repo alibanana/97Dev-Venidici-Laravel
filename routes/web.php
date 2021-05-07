@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
 
@@ -51,9 +52,9 @@ Route::post('/testing', [PagesController::class, 'signup_interest_testing'])->na
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
 
-Route::get('/login', function () {
-    return view('client/auth/login');
-});
+// Route::get('/login', function () {
+//     return view('client/auth/login');
+// });
 Route::get('/signup', function () {
     return view('client/auth/signup');
 });
@@ -62,7 +63,7 @@ Route::get('/signup', function () {
 //});
 Route::get('/dashboard', function () {
     return view('client/user-dashboard');
-});
+})->middleware('auth');
 Route::get('/cart', function () {
     return view('client/cart');
 });
@@ -108,7 +109,7 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - CourseCategoryController
 |   - HashtagController
 */
-Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     // DashboardController
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
@@ -134,6 +135,8 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
     Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    // AssestmentController
+    Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assesments.index');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -174,17 +177,14 @@ Route::get('/admin/promo/1/update', function () {
 Route::get('/admin/online-courses/create-video/1', function () {
     return view('admin/online-course/create-video');
 });
-Route::get('/admin/online-courses/assesments', function () {
-    return view('admin/assesment/index');
-});
 Route::get('/admin/online-courses/assesments/1', function () {
-    return view('admin/assesment/detail');
+    return view('admin/assessment/detail');
 });
 Route::get('/admin/online-courses/assesments/create', function () {
-    return view('admin/assesment/create');
+    return view('admin/assessment/create');
 });
 Route::get('/admin/online-courses/assesments/1/update', function () {
-    return view('admin/assesment/update');
+    return view('admin/assessment/update');
 });
 
 Route::get('/admin/online-courses/teachers', function () {
