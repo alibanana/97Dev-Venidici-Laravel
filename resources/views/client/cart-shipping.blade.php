@@ -15,9 +15,11 @@
                 <div class="col-12 col-sm-6" >
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Provinsi</p>
                     <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                        <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
-                            <option value="">DKI Jakarta</option>
-                            <option value="">Instagram</option>
+                        <select onchange="if (this.value) window.location.href=this.value" name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            <option disabled selected >Pilih Provinsi</option>
+                            @foreach($provinces as $province)
+                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'province' => $province->id]) }}" @if (Request::get('province') == $province->id) selected @endif>{{$province->name }}</option>
+                            @endforeach
                         </select>                    
                         @error('province')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -29,9 +31,15 @@
                 <div class="col-12 col-sm-6">
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Kota</p>
                     <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                        <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
-                            <option value="">Jakarta Selatan</option>
-                            <option value="">Instagram</option>
+                        <select onchange="if (this.value) window.location.href=this.value" name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            @if($cities == null)
+                                <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+
+                            @else
+                                @foreach($cities as $city)
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'city' => $city->id]) }}" @if (Request::get('city') == $city->id) selected @endif>{{$city->name }}</option>
+                                @endforeach          
+                            @endif
                         </select>                    
                         @error('province')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -44,8 +52,13 @@
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Metode Pengiriman</p>
                     <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                         <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
-                            <option value="">TIKI</option>
-                            <option value="">JNE</option>
+                            @if(Request::get('city') == null)
+                                <option disabled selected>Pilih Kota terlebih dahulu</option>
+                            @else
+                                <option disabled selected>Pilih metode pengiriman</option>
+                                <option value="">TIKI</option>
+                                <option value="">JNE</option>
+                            @endif
                         </select>                    
                         @error('province')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -89,7 +102,7 @@
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:2vw">
                 <div style="display:flex;justify-content:space-between;align-items:center">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Sub total</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp 99,999,999</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{$sub_total}}</p>
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>

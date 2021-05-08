@@ -22,7 +22,6 @@ class User extends Authenticatable
         'email',
         'provider_id',
         'password',
-        'is_admin',
         'status'
     ];
 
@@ -55,6 +54,13 @@ class User extends Authenticatable
 
     public function hashtags() {
         return $this->belongsToMany(Hashtag::class, 'user_hashtag')->withTimestamps();
+    }
+    public function carts() {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function invoices() {
+        return $this->hasMany(Invoice::class);
     }
 
 }

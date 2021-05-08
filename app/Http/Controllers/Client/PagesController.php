@@ -12,6 +12,8 @@ use App\Models\User;
 use App\Models\Hashtag;
 use App\Models\UserDetail;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Course;
+use App\Models\Cart;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +36,12 @@ class PagesController extends Controller
         $fake_testimonies = FakeTestimony::orderByRaw('CHAR_LENGTH(content) DESC')->get();
         $fake_testimonies_big = $fake_testimonies->whereNotNull('thumbnail')->whereNotNull('name')->whereNotNull('occupancy')->values();
         $fake_testimonies_small = $fake_testimonies->whereNull('thumbnail')->whereNull('name')->whereNull('occupancy')->values();
-
-        return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small'));
+        
+        $courses = Course::where('course_type_id','1')->take(3)->get();
+        $cart_count = Cart::with('course')
+                ->where('user_id', auth()->user()->id)
+                ->count();
+        return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','courses','cart_count'));
     }
 
     public function autocomplete(Request $request){
@@ -104,5 +110,23 @@ class PagesController extends Controller
         $request->session()->flush();
         
         return view('client/user-dashboard');
+    }
+
+    public function course_detail($id){
+        $course = Course::findOrFail($id);
+        $cart_count = Cart::with('course')
+                ->where('user_id', auth()->user()->id)
+                ->count();
+        return view('client/online-course/detail', compact('course','cart_count'));
+
+    }
+
+    public function dashboard_index()
+    {
+        $cart_count = Cart::with('course')
+                ->where('user_id', auth()->user()->id)
+                ->count();
+        return view('client/user-dashboard', compact('cart_count'));
+
     }
 }

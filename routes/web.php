@@ -8,8 +8,10 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\Client\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +31,12 @@ use App\Http\Controllers\SocialController;
 // });
 
 
+
+
+
 Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
-Route::get('/dashboard', function () {
-    return view('client/user-dashboard');
-});
+Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('customer.dashboard');
+
 //Route::get('/dashboard', function () {
     //return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
@@ -45,6 +49,7 @@ Route::get('/dashboard', function () {
 | Controllers can be found inside -> App\Http\Controllers\Client\
 | Controllers Used:
 |   - PagesController
+|   - CartController
 |--------------------------------------------------------------------------
 */
 Route::get('/', [PagesController::class, 'index'])->name('index');
@@ -65,17 +70,36 @@ Route::get('/signup', function () {
 //});
 
 
-Route::get('/cart', function () {
-    return view('client/cart');
-});
-Route::get('/shipping', function () {
-    return view('client/cart-shipping');
-});
+//Route::get('/cart', function () {
+    //return view('client/cart');
+//});
+// Route::get('/dashboard', function () {
+//     return view('client/user-dashboard');
+// });
+/* CART ROUTING */
+Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
+Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index');
+Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
+Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total');
+Route::get('/cart/totalWeight', [CartController::class, 'getCartTotalWeight'])->name('customer.cart.getCartTotalWeight');
+Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove');
+Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll');
+Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart');
+Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty');
+Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty');
+
+//})->middleware('auth');
+
+// Route::get('/shipping', function () {
+//     return view('client/cart-shipping');
+// });
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', function () {
     return view('client/online-course/index');
 });
+Route::get('/online-course/{id}', [PagesController::class, 'course_detail'])->name('customer.course_detail');
+
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
@@ -110,7 +134,7 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - CourseCategoryController
 |   - HashtagController
 */
-Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     // DashboardController
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
@@ -136,6 +160,8 @@ Route::prefix('admin')->name('admin.')->middleware([])->group(function() {
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
     Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    // AssestmentController
+    Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assesments.index');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -189,17 +215,14 @@ Route::get('/admin/hashtags/1/update', function () {
 Route::get('/admin/online-courses/create-video/1', function () {
     return view('admin/online-course/create-video');
 });
-Route::get('/admin/online-courses/assesments', function () {
-    return view('admin/assesment/index');
-});
 Route::get('/admin/online-courses/assesments/1', function () {
-    return view('admin/assesment/detail');
+    return view('admin/assessment/detail');
 });
 Route::get('/admin/online-courses/assesments/create', function () {
-    return view('admin/assesment/create');
+    return view('admin/assessment/create');
 });
 Route::get('/admin/online-courses/assesments/1/update', function () {
-    return view('admin/assesment/update');
+    return view('admin/assessment/update');
 });
 
 Route::get('/admin/online-courses/teachers', function () {

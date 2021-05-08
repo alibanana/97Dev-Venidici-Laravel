@@ -45,10 +45,10 @@
         <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
         <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*'))navbar-item-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Community</a>
-        @if(!Request::is('dashboard'))
+        @if (!Auth::check())
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Log In</a>
         @endif
-        @if(Request::is('dashboard'))
+        @if (Auth::check())
         <div class="dropdown show">
           <a id="cart_icon" class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="counter fa-stack has-badge" data-count="1">
@@ -81,11 +81,11 @@
           </div>
         </div>
         <a id="cart_icon" class="sub-description navbar-item" href="/cart" style="color:#2B6CAA;margin-right:0.8vw">
-          <span class="counter fa-stack has-badge" data-count="3">
-            <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse"></i>
+          <span class="counter fa-stack has-badge" data-count="{{$cart_count}}">
+            <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart'))navbar-item-active @endif"></i>
           </span>
         </a>
-        <a class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-user"></i></a>
+        <a class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @endif"></i></a>
         
         @endif
         

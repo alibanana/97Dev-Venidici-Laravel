@@ -9,10 +9,9 @@
     <div class="col-9" >
         <div style="padding-right:10vw">
             <p class="medium-heading" style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</p>
-            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Sertifikat menjadi Seniman</p>
+            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
             
-            <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">Need to be funny fast? This is the course for people that
-                find it hard to be funny.</p>
+            <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">{{$course->description}}</p>
             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh <span style="font-family:Rubik Bold">Mr. Raditya Dika</span></p>
             <!--<video style="width:42vw;height:20vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px"  controls="false" >
                 <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
@@ -21,7 +20,7 @@
             </video> -->
             <div style="margin-top:2vw">
                 <iframe style="width:42vw;height:25vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px" 
-                    src="https://www.youtube.com/embed/znnMerAsRbk">
+                    src="{{$course->preview_video}}">
                 </iframe>
             </div>
 
@@ -149,9 +148,25 @@
 
     <!-- START OF RIGHT SECTION -->
     <div class="col-3 p-0" >
+        @if(session('success'))
+            <!-- ALERT MESSAGE -->
+            <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <!-- END OF ALERT MESSAGE -->
+        @endif
         <div class="course-detail-card-green">
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp 300,000</p>
-            <button class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Add to cart</button>
+            <form action="{{ route('customer.cart.store') }}" method="post">
+            @csrf
+                <input type="hidden" name="course_id" value="{{$course->id}}">
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
+                <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="price" value="{{$course->price}}">
+                <input type="hidden" name="weight" value="0">
+                <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Add to cart</button>
+            </form>
             <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Buy Now</button>
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
