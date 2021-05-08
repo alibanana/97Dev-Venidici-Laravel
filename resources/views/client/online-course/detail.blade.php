@@ -149,13 +149,13 @@
     <!-- START OF RIGHT SECTION -->
     <div class="col-3 p-0" >
         @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size: 12px;font-family:PoppinsMedium">
-              {{ session('success') }}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 20px;font-family:PoppinsMedium">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <!-- ALERT MESSAGE -->
+            <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-          @endif
+            <!-- END OF ALERT MESSAGE -->
+        @endif
         <div class="course-detail-card-green">
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp 300,000</p>
             <form action="{{ route('customer.cart.store') }}" method="post">

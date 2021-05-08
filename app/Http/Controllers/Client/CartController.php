@@ -6,7 +6,9 @@ use Cookie;
 use App\Models\Cart;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Course;
+use App\Models\Province;
+use App\Models\City;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class CartController extends Controller
 {
@@ -21,8 +23,48 @@ class CartController extends Controller
                 ->where('user_id', auth()->user()->id)
                 ->orderBy('created_at', 'desc')
                 ->get();
-        
-        return view('client/cart', compact('carts'));
+        $cart_count = Cart::with('course')
+                ->where('user_id', auth()->user()->id)
+                ->count();
+        return view('client/cart', compact('carts','cart_count'));
+    }
+    public function shipment_index(Request $request)
+    {
+        $carts = Cart::with('course')
+                ->where('user_id', auth()->user()->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        $cart_count = Cart::with('course')
+                ->where('user_id', auth()->user()->id)
+                ->count();
+        $sub_total = 0;
+        foreach($carts as $cart)
+        {
+            $sub_total += $cart->quantity * $cart->course->price;
+        }
+        $provinces = Province::all();
+
+        if ($request->has('province')) {
+            $province_id = $request['province'];
+            $cities = City::where('province_id', $province_id)->get();
+        }
+        else{
+            $cities = null;
+        }
+
+        if ($request->has('city')) {
+            $city_id = $request['city'];
+
+            // $cost = RajaOngkir::ongkosKirim([
+            //     'origin'        => 153,  //kode jaksel
+            //     'destination'   => $city_id, // ID kota/kabupaten tujuan
+            //     'weight'        => '200', // berat barang dalam gram
+            //     'courier'       => 'JNE' // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+            // ])->get();
+            // dd($cost);
+        }
+
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total'));
     }
 
     public function store(Request $request)
@@ -50,6 +92,7 @@ class CartController extends Controller
                 'weight'        => $request->weight
             ]);
         }
+       
         
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
@@ -83,7 +126,24 @@ class CartController extends Controller
         //         ->delete();
         Cart::findOrFail($cart_id)->delete();
         
-        return redirect()->back()->with('success', 'Removed Item Cart');
+        return redirect()->back()->with('success', 'Item Removed');
+    }
+    public function increaseQty(Request $request)
+    {
+        $cart = Cart::findOrFail($request->cart_id);
+        $cart->quantity = $cart->quantity+1;
+        $cart->price = $cart->price+$cart->price;
+        $cart->save();
+        return redirect()->back();
+    }
+    public function decreaseQty(Request $request)
+    {
+        $cart = Cart::findOrFail($request->cart_id);
+        $cart->quantity = $cart->quantity-1;
+        $cart->price = $cart->price-$cart->course->price;
+
+        $cart->save();
+        return redirect()->back();
     }
 
     

@@ -30,11 +30,11 @@ class AuthenticatedSessionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(LoginRequest $request)
-    {
+    {   
         $userStatus = User::where('email', $request->email)->firstOrFail()->status;
         
         if ($userStatus == 'suspended') {
-            return redirect()->route('login')->with('message', 'Your account has been suspended!'); 
+            return redirect()->route('login')->with('message', 'Your account has been suspended!');
         }
         
         $request->authenticate();

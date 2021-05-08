@@ -81,7 +81,7 @@
           </div>
         </div>
         <a id="cart_icon" class="sub-description navbar-item" href="/cart" style="color:#2B6CAA;margin-right:0.8vw">
-          <span class="counter fa-stack has-badge" data-count="3">
+          <span class="counter fa-stack has-badge" data-count="{{$cart_count}}">
             <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart'))navbar-item-active @endif"></i>
           </span>
         </a>

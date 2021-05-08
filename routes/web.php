@@ -31,10 +31,12 @@ use App\Http\Controllers\Client\CartController;
 // });
 
 
+
+
+
 Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
-Route::get('/dashboard', function () {
-    return view('client/user-dashboard');
-});
+Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('customer.dashboard');
+
 //Route::get('/dashboard', function () {
     //return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
@@ -71,23 +73,26 @@ Route::get('/signup', function () {
 //Route::get('/cart', function () {
     //return view('client/cart');
 //});
-Route::get('/dashboard', function () {
-    return view('client/user-dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('client/user-dashboard');
+// });
 /* CART ROUTING */
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
+Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index');
 Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
 Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total');
 Route::get('/cart/totalWeight', [CartController::class, 'getCartTotalWeight'])->name('customer.cart.getCartTotalWeight');
-Route::post('/cart/remove', [CartController::class, 'removeCart'])->name('customer.cart.remove');
+Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove');
 Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll');
 Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart');
+Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty');
+Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty');
 
 //})->middleware('auth');
 
-Route::get('/shipping', function () {
-    return view('client/cart-shipping');
-});
+// Route::get('/shipping', function () {
+//     return view('client/cart-shipping');
+// });
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', function () {
