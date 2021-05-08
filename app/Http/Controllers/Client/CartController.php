@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Client;
+use Cookie;
 
 use App\Models\Cart;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Course;
 
 class CartController extends Controller
 {
@@ -20,7 +22,7 @@ class CartController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
         
-                return view('client/cart', compact('carts'));
+        return view('client/cart', compact('carts'));
     }
 
     public function store(Request $request)
@@ -59,9 +61,8 @@ class CartController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->sum('price');
         
-        return redirect()->back()->with('success', 'Total Cart Price: '$carts);
+        return redirect()->back()->with('success', 'Total Cart Price: '.$carts);
 
-        ]);
     }
 
     public function getCartTotalWeight()
@@ -71,7 +72,7 @@ class CartController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->sum('weight');
         
-        return redirect()->back()->with('success', 'Total Cart Weight: '$carts);
+        return redirect()->back()->with('success', 'Total Cart Price: '.$carts);
 
     }
 
@@ -84,6 +85,7 @@ class CartController extends Controller
         
         return redirect()->back()->with('success', 'Removed Item Cart');
     }
+
     
     /**
      * removeAllCart

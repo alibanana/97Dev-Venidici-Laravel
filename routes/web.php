@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryCo
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\Client\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +57,9 @@ Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
 
-// Route::get('/login', function () {
-//     return view('client/auth/login');
-// });
+Route::get('/login', function () {
+    return view('client/auth/login');
+});
 Route::get('/signup', function () {
     return view('client/auth/signup');
 });
@@ -80,6 +81,7 @@ Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('custom
 Route::get('/cart/totalWeight', [CartController::class, 'getCartTotalWeight'])->name('customer.cart.getCartTotalWeight');
 Route::post('/cart/remove', [CartController::class, 'removeCart'])->name('customer.cart.remove');
 Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll');
+Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart');
 
 //})->middleware('auth');
 
@@ -91,6 +93,8 @@ Route::get('/shipping', function () {
 Route::get('/online-course', function () {
     return view('client/online-course/index');
 });
+Route::get('/online-course/{id}', [PagesController::class, 'course_detail'])->name('customer.course_detail');
+
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });

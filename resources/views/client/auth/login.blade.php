@@ -28,22 +28,22 @@
                                 <div  class="auth-input-form" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-envelope"></i>
                                     <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="johndoe@gmail.com" value="{{ old('email') }}">
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>  
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;text-align:left !important">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Password</p>
                                 <div  class="auth-input-form" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-lock"></i>
                                     <input type="password" name="password" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="*******">
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div> 
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;text-align:left !important">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 <div style="display:flex;justify-content:space-between;">
                                     <button type="submit" class="normal-text btn-blue-bordered w-100" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw">Login</button>
                                 </div>

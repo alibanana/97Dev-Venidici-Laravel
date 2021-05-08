@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Hashtag;
 use App\Models\UserDetail;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Course;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,9 @@ class PagesController extends Controller
         $fake_testimonies = FakeTestimony::orderByRaw('CHAR_LENGTH(content) DESC')->get();
         $fake_testimonies_big = $fake_testimonies->whereNotNull('thumbnail')->whereNotNull('name')->whereNotNull('occupancy')->values();
         $fake_testimonies_small = $fake_testimonies->whereNull('thumbnail')->whereNull('name')->whereNull('occupancy')->values();
-
-        return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small'));
+        
+        $courses = Course::where('course_type_id','1')->take(3)->get();
+        return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','courses'));
     }
 
     public function autocomplete(Request $request){
@@ -104,5 +106,11 @@ class PagesController extends Controller
         $request->session()->flush();
         
         return view('client/user-dashboard');
+    }
+
+    public function course_detail($id){
+        $course = Course::findOrFail($id);
+        return view('client/online-course/detail', compact('course'));
+
     }
 }

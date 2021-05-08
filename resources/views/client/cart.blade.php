@@ -99,8 +99,11 @@
                     <!-- END OF ONE ITEM COLLAPSE -->
                 </div>
                 <!-- END OF ONE WOKI CARD -->
+                @foreach($carts as $cart)
                 <!-- ONE COURSE CARD -->
-                <div style="display:flex;margin-top:1vw">
+                <div style="display:flex;margin-top:1vw" class="cartpage">
+                    <input type="hidden" name="product_id" class="product_id normal-text" value="{{$cart->course_id}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+
                     <div class="cart-card-grey">
                         <div style="display:flex;align-items:center;width:70%">
                             <div class="form-check">
@@ -109,7 +112,7 @@
                             <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
                             <div style="margin-left:1vw">
                                 <div style="display:flex;align-items:flex-start">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">Ini adalah judul pelatihan yang ada panjangnya sampe 2 baris</p>
+                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">{{$cart->course->title}}</p>
                                 </div>
                                 <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Mr. Raditya Dika</p>
                             </div>
@@ -119,14 +122,14 @@
                                 <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">                                    
                                     <i class="fas fa-plus" style="margin-right:0.5vw;color:#C4C4C4"></i>
                                 </div>
-                                <input type="text" name="qty" class="qty-input normal-text" value="1" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+                                <input type="text" name="qty" class="qty-input normal-text" value="{{ $data['item_quantity'] }}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
                                 <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
 
                                     <i class="fas fa-minus" style="margin-left:0.5vw;color:#C4C4C4"></i>
                                 </div>
                                 
                             </div>
-                            <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. 300.000</p>
+                            <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{$cart->price}}</p>
                         </div>
                     </div>
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
@@ -141,6 +144,7 @@
                     </div>
                 </div>
                 <!-- END OF ONE COURSE CARD -->
+                @endforeach
 
             <!-- END OF ITEM SECTION -->
 
@@ -191,5 +195,33 @@ $('.decrement-btn').click(function (e) {
     }
 });
 
+</script>
+
+<script>
+
+// Update Cart Data
+
+$('.changeQuantity').click(function (e) {
+    e.preventDefault();
+
+    var quantity = $(this).closest(".cartpage").find('.qty-input').val();
+    var product_id = $(this).closest(".cartpage").find('.product_id').val();
+    var data = {
+        '_token': $('input[name=_token]').val(),
+        'quantity':quantity,
+        'product_id':product_id,
+    };
+
+    $.ajax({
+        url: '/update-to-cart',
+        type: 'POST',
+        data: data,
+        success: function (response) {
+            window.location.reload();
+            alertify.set('notifier','position','top-right');
+            alertify.success(response.status);
+        }
+    });
+});
 </script>
 @endsection
