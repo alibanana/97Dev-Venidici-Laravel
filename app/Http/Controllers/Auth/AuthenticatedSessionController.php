@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         
-        ifUserSuspended($request);
+        $this->ifUserSuspended($request);
 
         // Redirect based on user's role.
         if (Auth::user()->userRole->id == 1) {
