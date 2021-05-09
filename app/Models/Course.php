@@ -47,4 +47,8 @@ class Course extends Model
     public function carts() {
         return $this->hasMany(Cart::class);
     }
+
+    public function assessment() {
+        return $this->hasOne(Assessment::class);
+    }
 }

@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             CourseRequirementSeeder::class,
             CourseFeatureSeeder::class, // Kamu akan dapat? section
-            LocationSeeder::class
+            AssessmentSeeder::class, // Assessment & Requirements are seeded here.
+            LocationSeeder::class,
         ]);
     }
 }
