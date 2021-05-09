@@ -130,7 +130,7 @@ html, body {
 
 .shipping-background{
     background-image: url("/assets/images/client/Cart_BG.png");
-    background-position:7vw 37vw;
+    background-position:7vw 45vw;
     background-repeat: no-repeat;
     background-size: 5%;
 }
@@ -223,6 +223,10 @@ html, body {
     font-size: 0.9vw;
     line-height: 1.2vw;
 }
+.very-small-text{
+    font-size: 0.8vw;
+    line-height: 1.2vw;
+}
 /* end of font size */
 
 .navbar-floating{
@@ -238,7 +242,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 99;
+    z-index: 999;
 }
 .navbar-item{
     border-radius: 5px;
@@ -918,6 +922,7 @@ html, body {
     text-align:center;
     min-width: 1.2vw;
     font-size: 0.9vw;
+    height:1.2vw
   }
 
 .cart-card-grey{
@@ -1142,4 +1147,89 @@ html, body {
     text-decoration:none;
     padding:0.5vw 1vw;
     border:1px solid #FFFFFF
+}
+
+.payment-method-card{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);
+    border-radius: 10px;
+    padding:0.5vw;
+    border:2px solid #ffffff;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+.payment-method-card .payment-method-text{
+    color:#3B3C43
+}
+.payment-method-card:hover{
+    border:2px solid #2B6CAA
+}
+.payment-method-card:hover .payment-method-text{
+    color:#2B6CAA
+}
+.payment-method-card-active{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);
+    border-radius: 10px;
+    padding:0.5vw;
+    border:2px solid #2B6CAA;
+    color:#2B6CAA;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: -31%;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 40vw 0vw 40vw 42.5vw;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+    border-radius: 10px;
+    width: 40%;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    padding:2vw
+}
+
+.popup .close {
+    position: absolute;
+    top: 0px;
+    right: 30px;
+    transition: all 200ms;
+    color: #145CA8    ;
+}
+.popup .close:hover {
+    color: #252525;
+}
+
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+
+.notif-item:hover{
+    color:#2B6CAA
+}
+.notif-item-active{
+    color:#2B6CAA !important;
+    text-decoration-line: underline;
+    text-decoration-color: #2B6CAA !important;
+    text-underline-offset: 0.4vw;
+    text-decoration-thickness: 0.2vw;
 }

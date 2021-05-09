@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Cart')
+@section('title', 'Venidici Shipping')
 
 @section('content')
 
@@ -68,6 +68,17 @@
                     </div>  
                 </div>
                 <div class="col-12" style="margin-top:1vw">
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Catatan Untuk Pengirim</p>
+                    <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                        <input type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Kado untuk..">                   
+                        @error('province')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>  
+                </div>
+                <div class="col-12" style="margin-top:1vw">
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Alamat</p>
                     <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                         <textarea name="" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">Jalan 123 Komplek ABC - Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos</textarea>                
@@ -118,8 +129,8 @@
                 </div>
             </div>
             <!-- END OF NOMINAL CARD -->
-            <div style="text-align:center">
-                <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>
+            <div style="text-align:center;margin-top:1.5vw">
+                <a href="{{ route('customer.cart.payment_index') }}" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Lanjut ke Pembayaran</a>
             </div>
         </div>
     </div>
