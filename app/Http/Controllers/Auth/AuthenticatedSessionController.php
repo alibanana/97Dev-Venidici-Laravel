@@ -31,21 +31,19 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {   
-        $userStatus = User::where('email', $request->email)->firstOrFail()->status;
-        
-        if ($userStatus == 'suspended') {
-            return redirect()->route('login')->with('message', 'Your account has been suspended!');
-        }
-        
         $request->authenticate();
 
         $request->session()->regenerate();
+        
+        ifUserSuspended($request);
 
-        //if (Auth::user()->userRole->id == 1) {
-            //return redirect()->route('index');
-        //}
+        // Redirect based on user's role.
+        if (Auth::user()->userRole->id == 1) {
+            return redirect()->route('index');
+        } else {
+            return redirect()->route('admin.dashboard.index');
+        }
 
-        return redirect()->route('index');
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -64,5 +62,15 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    // Log user if he/she is suspended.
+    private function ifUserSuspended(Request $request) { 
+        if (Auth::user()->status == 'suspended') {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->route('login')->with('message', 'Your account has been suspended!');
+        }
     }
 }
