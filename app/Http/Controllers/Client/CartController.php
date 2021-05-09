@@ -93,7 +93,8 @@ class CartController extends Controller
             ]);
         }
        
-        
+        $request->session()->put('cart_count',$request->session()->get('cart_count')+1);  
+
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
@@ -119,13 +120,14 @@ class CartController extends Controller
 
     }
 
-    public function removeCart($cart_id)
+    public function removeCart(Request $request ,$cart_id)
     {
         // Cart::with('course')
         //         ->whereId($request->cart_id)
         //         ->delete();
-        Cart::findOrFail($cart_id)->delete();
-        
+        $cart= Cart::findOrFail($cart_id);
+        $request->session()->put('cart_count',$request->session()->get('cart_count')-$cart->quantity);  
+        $cart->delete();
         return redirect()->back()->with('success', 'Item Removed');
     }
     public function increaseQty(Request $request)
@@ -134,6 +136,8 @@ class CartController extends Controller
         $cart->quantity = $cart->quantity+1;
         $cart->price = $cart->price+$cart->price;
         $cart->save();
+        $request->session()->put('cart_count',$request->session()->get('cart_count')+1);  
+
         return redirect()->back();
     }
     public function decreaseQty(Request $request)
@@ -143,7 +147,13 @@ class CartController extends Controller
         $cart->price = $cart->price-$cart->course->price;
 
         $cart->save();
+        $request->session()->put('cart_count',$request->session()->get('cart_count')-1);  
+
         return redirect()->back();
+    }
+
+    public function payment_index(Request $request){
+        return view('client/cart-payment');
     }
 
     

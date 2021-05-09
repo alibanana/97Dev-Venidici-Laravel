@@ -79,6 +79,7 @@ Route::get('/signup', function () {
 /* CART ROUTING */
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
 Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index');
+Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index');
 Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
 Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total');
 Route::get('/cart/totalWeight', [CartController::class, 'getCartTotalWeight'])->name('customer.cart.getCartTotalWeight');

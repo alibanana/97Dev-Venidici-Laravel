@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
 
 use App\Models\User;
 
@@ -44,7 +45,10 @@ class AuthenticatedSessionController extends Controller
         //if (Auth::user()->userRole->id == 1) {
             //return redirect()->route('index');
         //}
-
+        $cart_count = Cart::with('course')
+                    ->where('user_id', Auth::user()->id)
+                    ->count();
+        $request->session()->put('cart_count', $cart_count);  
         return redirect()->route('index');
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
