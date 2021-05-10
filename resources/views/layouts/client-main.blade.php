@@ -43,7 +43,7 @@
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
-        <a href="" class="normal-text navbar-item" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
+        <a href="/for-corporate/krest" class="normal-text navbar-item" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
         <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <a href="" class="normal-text navbar-item" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
@@ -74,9 +74,8 @@
 
     <!-- START OF POPUP -->
     <div id="notification" class="overlay">
-        <div class="popup">
-          
-          <a class="close sub-description" href="#closed" style="margin-top:1.5vw" >&times;</a>
+        <div class="popup-notif">
+          <a class="close-notif medium-heading" href="#closed" style="margin-top:1vw;text-decoration:none" >&times;</a>
           <div class="content" >
             <div style="display:flex;align-items:center;padding-bottom:2vw">
               <p class="normal-text notif-item notif-item-active notif-links" onclick="changeNotification(event, 'semua-notification')" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;color:##3B3C43">Semua</p>

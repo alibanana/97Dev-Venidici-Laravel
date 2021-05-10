@@ -259,4 +259,10 @@ Route::get('/for-public/woki', function () {
 });
 /* END OF FOR PUBLIC ROUTING*/
 
+/* START OF FOR CORPORATE ROUTING */
+Route::get('/for-corporate/krest', function () {
+    return view('client/for-corporate/krest');
+});
+/* END OF FOR CORPORATE ROUTING*/
+
 require __DIR__.'/auth.php';
