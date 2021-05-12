@@ -310,7 +310,7 @@
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -332,7 +332,7 @@
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -360,7 +360,7 @@
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -386,7 +386,7 @@
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -418,7 +418,7 @@
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -440,7 +440,7 @@
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -644,7 +644,7 @@
                 <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
-            <a class="carousel-control-next"   data-bs-target="#saran-carousel" style="width:2.5vw;padding-right:5vw"  role="button"data-bs-slide="next">
+            <a class="carousel-control-next"   data-bs-target="#saran-carousel" style="width:2.5vw;"  role="button"data-bs-slide="next">
                 <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>

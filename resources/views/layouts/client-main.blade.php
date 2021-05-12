@@ -39,11 +39,11 @@
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
-    <!-- END OF NAVBAR -->
+    <!-- START OF NAVBAR -->
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
-        <a href="/for-corporate/krest" class="normal-text navbar-item" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
+        <a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
         <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <a href="" class="normal-text navbar-item" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
@@ -67,7 +67,7 @@
         @endif
         
     </div>
-    <!-- START OF BANNER SECTION -->
+    <!-- END OF NAVBAR -->
         @endif
       @endif
     @endif
@@ -110,7 +110,7 @@
               </a>
               <!-- END OF ONE YELLOW CARD -->
               <!-- ONE BLUE CARD -->
-              <a href="" style="text-decoration:none">
+              <a href="/transaction-detail/1" style="text-decoration:none">
                 <div style="display:flex;margin-top:1vw;" >
                   <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
@@ -164,7 +164,7 @@
             <div class="col-md-12 notif-content" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
               
               <!-- ONE BLUE CARD -->
-              <a href="" style="text-decoration:none">
+              <a href="/transaction-detail/1" style="text-decoration:none">
                 <div style="display:flex;" >
                   <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
@@ -188,7 +188,7 @@
               </a>
               <!-- END OF ONE BLUE CARD -->
               <!-- ONE BLUE CARD -->
-              <a href="" style="text-decoration:none">
+              <a href="/transaction-detail/1" style="text-decoration:none">
                 <div style="display:flex;margin-top:1vw;" >
                   <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
@@ -212,7 +212,7 @@
               </a>
               <!-- END OF ONE BLUE CARD -->
               <!-- ONE BLUE CARD -->
-              <a href="" style="text-decoration:none">
+              <a href="/transaction-detail/1" style="text-decoration:none">
                 <div style="display:flex;margin-top:1vw;" >
                   <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">

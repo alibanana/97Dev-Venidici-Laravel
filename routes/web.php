@@ -115,6 +115,11 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
     return view('client/woki/detail');
 });
 /* END OF WOKI ROUTING */
+
+Route::get('/transaction-detail/1', function () {
+    return view('client/transaction-detail');
+});
+
 /* END OF CLIENT ROUTING */
 
 /*
@@ -199,6 +204,18 @@ Route::get('/admin/promo/1/update', function () {
 });
 /* END OF PROMO CODE */
 
+/* START OF INFORMATION CODE*/
+Route::get('/admin/information', function () {
+    return view('admin/information/index');
+});
+Route::get('/admin/information/create', function () {
+    return view('admin/information/create');
+});
+Route::get('/admin/information/1/update', function () {
+    return view('admin/information/update');
+});
+/* END OF INFORMATION CODE */
+
 /* START OF ONLINE COURSE ROUTING */
 /* START OF HASHTAG*/
 Route::get('/admin/hashtags', function () {
@@ -242,6 +259,15 @@ Route::get('/admin/analytics/online-course', function () {
     return view('admin/analytics/online-course');
 });
 /* END OF ANALYTICS ROUTING */
+
+
+/* START OF NEWS LETTER ROUTING */
+Route::get('/admin/newsletter', function () {
+    return view('admin/newsletter/index');
+});
+/* END OF NEWS LETTER ROUTING */
+
+
 /* END OF ADMIN ROUTING */
 
 /* START OF GOOGLE AUTH */

@@ -15,10 +15,10 @@
                     <div style="margin-top:0.5vw;text-align:center">
                         <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;">Explore our programs </p>
                         <div style="display:flex;justify-content:center;align-items:center;">
-                            <a href="/for-public/online-course" class="normal-text blue-link blue-link-active" style="font-family:Rubik Medium;margin-right:1.5vw">
+                            <a href="/for-public/online-course" class="normal-text blue-link blue-link-active" style="font-family:Rubik Medium;margin-right:1.5vw;width:10vw">
                                 Online Course
                             </a>
-                            <a href="/for-public/woki" class="normal-text red-link" style="font-family:Rubik Medium">
+                            <a href="/for-public/woki" class="normal-text red-link" style="font-family:Rubik Medium;width:10vw">
                                 Woki
                             </a>
                             <!--
@@ -60,12 +60,12 @@
         </div>
     </div>
     <div class="col-6">
-        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Our History</p>
+        <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Apa itu Online Courses?</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
+        <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem.
         </p>
+        <a href="" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">Explore Our Library Now!</a>
+
     </div>
 </div>
 <!-- END OF OUR HISTORY -->
@@ -89,23 +89,25 @@
 <!-- START OF OUR MISSION -->
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
     <div style="text-align:center">
-        <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Our Mission</p>
+        <p class="sub-description" style="font-family: Rubik Medium;color:#67BBA3">Our Mission</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Painless onboarding and simple <br> process implementation</p>
     </div>
     <div class="row m-0" style="padding-top:2vw">
         <div class="col-3">
             <div class="our-mission-card" style="">
                 <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">1.</p>
-                <div style="text-align:center">
-                    <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                <div style="">
+                    <div style="text-align:center">
+                        <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                    </div>
                     <div style="height:5vw;margin-top:1vw">
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
                         -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
                     </div>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#000000;display: -webkit-box;
+                    <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
@@ -115,17 +117,19 @@
         </div>
         <div class="col-3">
             <div class="our-mission-card" style="">
-                <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">1.</p>
-                <div style="text-align:center">
-                    <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">2.</p>
+                <div style="">
+                    <div style="text-align:center">
+                        <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                    </div>
                     <div style="height:5vw;margin-top:1vw">
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
+                        -webkit-box-orient: vertical !important;">Materi yang padat dan jelas</p>
                     </div>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#000000;display: -webkit-box;
+                    <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
@@ -135,17 +139,19 @@
         </div>
         <div class="col-3">
             <div class="our-mission-card" style="">
-                <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">1.</p>
-                <div style="text-align:center">
-                    <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">3.</p>
+                <div style="">
+                    <div style="text-align:center">
+                        <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                    </div>
                     <div style="height:5vw;margin-top:1vw">
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
                         -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
                     </div>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#000000;display: -webkit-box;
+                    <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
@@ -155,17 +161,19 @@
         </div>
         <div class="col-3">
             <div class="our-mission-card" style="">
-                <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">1.</p>
-                <div style="text-align:center">
-                    <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">4.</p>
+                <div style="">
+                    <div style="text-align:center">
+                        <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                    </div>
                     <div style="height:5vw;margin-top:1vw">
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
+                        -webkit-box-orient: vertical !important;">Materi yang padat dan jelas</p>
                     </div>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#000000;display: -webkit-box;
+                    <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
@@ -180,7 +188,7 @@
 <!-- START OF OUR VALUES -->
 <div class="row m-0 page-container our-values-background" style="padding-top:15vw;padding-bottom:15vw">
     <div class="col-12 p-0">   
-        <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Our Values</p>
+        <p class="sub-description" style="font-family: Rubik Medium;color:#67BBA3">Our Values</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">feeding your curiosity engaged <br> on the go</p>
         <div style="width:60vw;margin-top:2vw">
             <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
@@ -194,7 +202,7 @@
 <!-- START OF HIGHLIGHTED EVENTS -->
 <div class="row m-0 page-container" style="padding-top:6vw;padding-bottom:6vw;background-color:#F6F6F6">
     <div class="col-12">
-        <p class="big-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-left:2.9vw">Highlighted <span style="font-family:Hypebeast;color:#2B6CAA">Events</span> </p>
+        <p class="big-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-left:2.9vw">Highlighted <span style="font-family:Hypebeast;color:#67BBA3">Events</span> </p>
     </div>
     <div class="row m-0" style="display:flex;align-items:center;padding-top:1.5vw">   
 
@@ -291,4 +299,25 @@
     <!-- END OF QUESTION SECTION -->
 </div>
 <!-- END OF FAQ SECTION -->
+
+<!-- START OF NEWSLETTER SECTION -->
+<div class="row m-0 page-container" style="padding-bottom:8vw">
+        <div class="col-12" style="padding:0vw 3vw">
+            <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
+                <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
+                <div style="width:60%;margin-left:2vw">
+                    <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Curios with our Programs?</p>
+                    
+                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore.
+                    </p>
+                    <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
+                    
+                    
+                </div>
+                <a href="/online-course"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Search Course</a>
+            </div> 
+        </div>
+    </div>
+    <!-- END OF NEWSLETTER SECTION -->
 @endsection

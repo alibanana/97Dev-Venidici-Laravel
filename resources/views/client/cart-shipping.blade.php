@@ -56,8 +56,8 @@
                                 <option disabled selected>Pilih Kota terlebih dahulu</option>
                             @else
                                 <option disabled selected>Pilih metode pengiriman</option>
-                                <option value="">TIKI</option>
-                                <option value="">JNE</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'JNE']) }}" @if (Request::get('shipping') == 'JNE') selected @endif>JNE</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'TIKI']) }}" @if (Request::get('shipping') == 'TIKI') selected @endif>TIKI</option>
                             @endif
                         </select>                    
                         @error('province')
@@ -113,7 +113,7 @@
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:2vw">
                 <div style="display:flex;justify-content:space-between;align-items:center">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Sub total</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{$sub_total}}</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($sub_total, 0, ',', ',') }}</p>
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>
