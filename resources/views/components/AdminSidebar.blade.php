@@ -98,6 +98,7 @@
                 <a class="collapse-item" href="{{ route('admin.course-categories.index') }}">Course Categories</a>
                 <a class="collapse-item" href="{{ route('admin.assesments.index') }}">Assesments</a>
                 <a class="collapse-item" href="/admin/online-courses/teachers">Teachers</a>
+                <a class="collapse-item" href="/admin/reviews">Reviews</a>
             </div>
         </div>
     </li>
@@ -113,6 +114,19 @@
             aria-expanded="true" >
             <i class="fas fa-palette"></i>
             <span>Woki</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/hashtags') || Request::is('admin/hashtags/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/hashtags" 
+            aria-expanded="true" >
+            <i class="fas fa-hashtag"></i>
+            <span>Hashtags</span>
         </a>
     </li>
 
@@ -188,31 +202,8 @@
     </li>
     -->
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/reviews') || Request::is('admin/reviews/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link" href="/admin/reviews" 
-            aria-expanded="true" >
-            <i class="fas fa-comments"></i>
-            <span>Reviews</span>
-        </a>
-    </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/hashtags') || Request::is('admin/hashtags/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link" href="/admin/hashtags" 
-            aria-expanded="true" >
-            <i class="fas fa-hashtag"></i>
-            <span>Hashtags</span>
-        </a>
-    </li>
+    
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/promo') || Request::is('admin/promo/*'))
     <li class="nav-item active">
@@ -223,6 +214,32 @@
             aria-expanded="true" >
             <i class="fas fa-tags"></i>
             <span>Promo</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/newsletter') || Request::is('admin/newsletter/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/newsletter" 
+            aria-expanded="true" >
+            <i class="fas fa-newspaper"></i>
+            <span>Newsletter</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/information') || Request::is('admin/information/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/information" 
+            aria-expanded="true" >
+            <i class="fas fa-info"></i>
+            <span>Information</span>
         </a>
     </li>
 

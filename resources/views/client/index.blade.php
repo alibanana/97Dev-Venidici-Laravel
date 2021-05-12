@@ -193,7 +193,7 @@ END OF OUR PROGRAMS SECTION -->
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Online Course</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Online Course</a>
+                    <a href="/online-course" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Online Course</a>
                 </div>
             </div>
         </a>

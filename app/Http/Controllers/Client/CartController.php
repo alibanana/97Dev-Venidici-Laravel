@@ -54,7 +54,7 @@ class CartController extends Controller
 
         if ($request->has('city')) {
             $city_id = $request['city'];
-
+            
             // $cost = RajaOngkir::ongkosKirim([
             //     'origin'        => 153,  //kode jaksel
             //     'destination'   => $city_id, // ID kota/kabupaten tujuan

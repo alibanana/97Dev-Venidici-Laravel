@@ -680,6 +680,20 @@ html, body {
     color: #FFFFFF;
 }
 
+.btn-red-bordered-active{
+    border-radius: 5px;
+    padding:0.2vw 2vw;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: Rubik Medium;
+    border: 2px solid #CE3369;
+    color: #FFFFFF;
+    background-color: #CE3369 !important;
+}
+.btn-red-bordered-active:hover{
+    color: #FFFFFF;
+}
+
 
 .green-tag{
     background: #FFFFFF;
@@ -1056,7 +1070,7 @@ html, body {
     background-image: none !important;
 }
 
-/* always show scrollbars */
+/* always show scrollbars 
 
 ::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -1067,13 +1081,15 @@ html, body {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, .5);
   }
+
+ end of scroll bars */
   
 .our-mission-card{
     width:18vw;
     background: #FDFDFD;
     border: 1px solid #D7D6D6;
     box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 10px;
     padding:1vw
 }
 
@@ -1274,4 +1290,8 @@ html, body {
 }
 .krest-card:hover #krest-card-description {
     color:#3B3C43
+}
+
+.display-icon{
+    display:block !important;
 }
