@@ -23,4 +23,8 @@ class Assessment extends Model
     public function assessmentRequirements() {
         return $this->hasMany(AssessmentRequirement::class);
     }
+
+    public function assessmentQuestions() {
+        return $this->hasMany(AssessmentQuestion::class);
+    }
 }
