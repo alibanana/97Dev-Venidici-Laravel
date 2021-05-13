@@ -103,7 +103,7 @@
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/assesments/1/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.assessments.edit', $assessment->id) }}">Update</a>
                                                             </div>
                                                             <form action="{{ route('admin.assessments.destroy', $assessment->id) }}" method="post">
                                                                 @csrf

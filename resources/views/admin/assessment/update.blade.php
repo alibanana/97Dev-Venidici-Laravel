@@ -12,17 +12,17 @@
     <div class="container-fluid">
 
         @if (session()->has('message'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
-            {{ session()->get('message') }}            
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
+                {{ session()->get('message') }}            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h2 class="mb-0 mb-3 text-gray-800">Update Assesment</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">Update Assessment ({{ $assessment->title }})</h2>
         </div>
         <div class="d-sm-flex align-items-center mb-2">
             <h5 class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')"  style="cursor:pointer">Basic Informations</h5>
@@ -30,36 +30,23 @@
         </div>
         
         <!-- Content Row -->
-       
 
         <!-- START OF BASIC INFORMATION -->
         <div class="course-content" id="basic-informations">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
-                @csrf           
+            <form action="{{ route('admin.assessments.update-basic-info', $assessment->id) }}" method="POST">
+            @csrf
+            @method('put')
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
                             <label for="">Title</label>
                             <input type="text" name="title" class="form-control form-control-user"
-                                id="phone" aria-describedby=""
-                                placeholder="Enter assesment title" value="Quiz of Business Case Room"> 
+                                id="phone" aria-describedby="" value="{{ old('title', $assessment->title) }}"
+                                placeholder="Enter assesment title" required>
                             @error('title')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror               
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="">Category</label>
-                            <input type="text" name="category" class="form-control form-control-user"
-                                id="phone" aria-describedby=""
-                                placeholder="Enter assesment category" value="Tech"> 
-                            @error('category')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
@@ -67,68 +54,62 @@
                         <div class="form-group">
                             <label for="">Duration (minutes)</label>
                             <input type="text" name="duration" class="form-control form-control-user"
-                                id="phone" aria-describedby=""
-                                placeholder="e.g. 10" value="10"> 
+                                id="phone" aria-describedby="" value="{{ old('description', $assessment->duration) }}"
+                                placeholder="e.g. 10" min="1" required> 
                             @error('duration')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Description</label> <br>
-                            <textarea name="description" id="" class="form-control" rows="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati fugiat repellat reiciendis quis rem dolorem tempore aspernatur consequatur, quod architecto voluptatem repudiandae vel neque qui culpa? Tempora exercitationem dolorum quia?
-                            </textarea>
+                            <textarea name="description" id="" class="form-control" rows="5" required>{{ old('description', $assessment->description) }}</textarea>
                             @error('description')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
                     <div class="col-6">
-                        <label for="">Student's Requirements</label>
+                        <label for="">Assessment's Requirements <span style="color: orange">(At least one element must be present!)</span></label>
+                        @error('requirements')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <div id="requirement_duplicator_wrapper">
                             {{-- Element to be duplicated --}}
                             <div class="row" id="requirement_duplicator" style="display:none">
                                 <div class="col-md-12">
                                     <div class="form-group d-flex"> 
-                                        <input type="text" name="requirement[]" class="form-control form-control-user" placeholder="Enter Student Requirement">
+                                        <input type="text" class="form-control form-control-user" placeholder="Enter Student Requirement">
                                         <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                     </div>
-
                                 </div>
                             </div>
-                            <div class="row" id="requirement_duplicator1">
-                                <div class="col-md-12">
-                                    <div class="form-group d-flex"> 
-                                        <input type="text" name="requirement[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="Pinter">
-                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                            @foreach ($assessment->assessmentRequirements as $requirement)
+                                <div class="row" id="requirement_duplicator{{ $loop->iteration }}">
+                                    <div class="col-md-12">
+                                        <div class="form-group d-flex"> 
+                                            <input type="text" name="requirements[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="{{ $requirement->requirement }}" required>
+                                            <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                        </div>
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="row" id="requirement_duplicator2">
-                                <div class="col-md-12">
-                                    <div class="form-group d-flex"> 
-                                        <input type="text" name="requirement[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="Rajin">
-                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                    </div>
-
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         <button type="button" id="add_requirement" onlick="duplicateRequirement()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more requirement</button> 
-
                     </div>
+
                     <div class="col-12" style="padding:2vw 1vw">
                         <div style="display:flex;justify-content:flex-end">
-                            <button type="submit"  class="btn btn-primary btn-user p-3">Update Assessment</button>
+                            <button type="submit" class="btn btn-primary btn-user p-3">Update Assessment</button>
                         </div>
                     </div>
-
                 </div>
             </form>
         </div>
@@ -318,7 +299,7 @@ document.getElementById('add_requirement').onclick = duplicateHashtag;
 var i = 1; var original3 = document.getElementById('requirement_duplicator');
 function duplicateHashtag() {
     var clone = original3.cloneNode(true); // "deep" clone
-    $(clone).find("input").attr("name", "requirement[]");
+    $(clone).find("input").attr("name", "requirements[]");
     $(clone).find("input").attr("required", "");
     clone.style.display = "block";
     clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
