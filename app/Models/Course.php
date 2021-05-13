@@ -21,7 +21,7 @@ class Course extends Model
         'enrollment_status', // default -> Open
         'publish_status', // default -> Draft
         'total_duration', // nullable
-        'average_rating' // default -> 0 
+        'average_rating' // default -> 0
     ];
 
     public function courseType() {

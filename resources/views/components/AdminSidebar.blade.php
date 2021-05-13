@@ -96,7 +96,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.online-courses.index') }}">Online Courses</a>
                 <a class="collapse-item" href="{{ route('admin.course-categories.index') }}">Course Categories</a>
-                <a class="collapse-item" href="{{ route('admin.assesments.index') }}">Assesments</a>
+                <a class="collapse-item" href="{{ route('admin.assessments.index') }}">Assesments</a>
                 <a class="collapse-item" href="/admin/online-courses/teachers">Teachers</a>
             </div>
         </div>

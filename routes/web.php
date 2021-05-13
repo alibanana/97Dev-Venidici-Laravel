@@ -148,7 +148,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     // OnlineCourseController
     Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
     Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
-    //Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
+    Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
     Route::post('/online-courses', [AdminOnlineCourseController::class, 'store'])->name('online-courses.store');
     Route::delete('/online-course/{id}', [AdminOnlineCourseController::class, 'destroy'])->name('online-courses.destroy');
     Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
@@ -161,7 +161,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
     // AssestmentController
-    Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assesments.index');
+    Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assessments.index');
+    Route::get('/assessments/create', [AdminAssessmentController::class, 'create'])->name('assessments.create');
+    Route::post('/assessments', [AdminAssessmentController::class, 'store'])->name('assessments.store');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -204,9 +206,6 @@ Route::get('/admin/online-courses/create-video/1', function () {
 });
 Route::get('/admin/online-courses/assesments/1', function () {
     return view('admin/assessment/detail');
-});
-Route::get('/admin/online-courses/assesments/create', function () {
-    return view('admin/assessment/create');
 });
 Route::get('/admin/online-courses/assesments/1/update', function () {
     return view('admin/assessment/update');

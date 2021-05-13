@@ -111,16 +111,16 @@
 
 
     <script>
-        var path = "{{ env('APP_URL') . route('autocomplete', [], false) }}";
+      // 
+      var path = "{{ env('APP_URL') . route('autocomplete', [], false) }}";
 
-        $('input.typeahead').typeahead({
-          source: function(terms,process){
-            return $.get(path,{terms:terms},function(data){
-              return process(data);
-            });
-          }
-        });
-      
+      $('input.typeahead').typeahead({
+        source: function(terms, process){
+          return $.get(path, {terms:terms}, function(data) {
+            return process(data);
+          });
+        }
+      });
     </script>
   </body>
 </html>

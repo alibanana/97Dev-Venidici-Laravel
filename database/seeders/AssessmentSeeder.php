@@ -18,6 +18,11 @@ class AssessmentSeeder extends Seeder
     {
         $assessments = [
             [
+                'title' => 'Assessment Template',
+                'duration' => 99,
+                'description' => 'This is an example of what an assessment would look like.' 
+            ],
+            [
                 'course_id' => 1,
                 'title' => 'Assessment for Emotional Intelligence Course',
                 'duration' => 15,
@@ -28,7 +33,7 @@ class AssessmentSeeder extends Seeder
                 'title' => 'Assessment for Path to Winning Business Competition Course',
                 'duration' => 60,
                 'description' => 'This assessment is for testing purposes only, for the Path to Winning Business Competition Course.' 
-            ]
+            ],
         ];
 
         foreach ($assessments as $key => $value) {
@@ -38,18 +43,26 @@ class AssessmentSeeder extends Seeder
         $assessment_requirements = [
             [
                 'assessment_id' => 1,
-                'requirement' => 'Max Essay Length: 500 words'
+                'requirement' => 'This is the first requirements for the assessment.'
             ],
             [
                 'assessment_id' => 1,
-                'requirement' => 'English only!'
+                'requirement' => 'This is the second requirements for the assessment.'
             ],
             [
                 'assessment_id' => 2,
+                'requirement' => 'Max Essay Length: 500 words'
+            ],
+            [
+                'assessment_id' => 2,
+                'requirement' => 'English only!'
+            ],
+            [
+                'assessment_id' => 3,
                 'requirement' => 'Max Essay Length: 3000 words.'
             ],
             [
-                'assessment_id' => 1,
+                'assessment_id' => 3,
                 'requirement' => 'Indonesian / English languages only!'
             ],
         ];
