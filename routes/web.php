@@ -164,6 +164,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assessments.index');
     Route::get('/assessments/create', [AdminAssessmentController::class, 'create'])->name('assessments.create');
     Route::post('/assessments', [AdminAssessmentController::class, 'store'])->name('assessments.store');
+    Route::delete('/assessments/{id}', [AdminAssessmentController::class, 'destroy'])->name('assessments.destroy');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');

@@ -57,4 +57,12 @@ class AssessmentController extends Controller
 
         return redirect()->route('admin.assessments.index')->with('message', $message);
     }
+
+    // Delete existing Assessment (by ID) from the database.
+    public function destroy($id) {
+        $assessment = Assessment::findOrFail($id);
+        $assessment->delete();
+        $message = 'Assessment (' . $assessment->id . ') has been deleted from the database!';
+        return redirect()->route('admin.assessments.index')->with('message', $message);
+    }
 }

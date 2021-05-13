@@ -105,11 +105,11 @@
                                                             <div style="padding: 0px 2px;">
                                                                 <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/assesments/1/update">Update</a>
                                                             </div>
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.assessments.destroy', $assessment->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this Assessment?')">Delete</button>
                                                                 </div>
                                                             </form>
                                                             <div style="padding: 0px 2px;">

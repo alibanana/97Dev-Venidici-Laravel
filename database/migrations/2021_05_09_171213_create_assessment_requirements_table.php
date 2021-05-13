@@ -15,8 +15,8 @@ class CreateAssessmentRequirementsTable extends Migration
     {
         Schema::create('assessment_requirements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('assessment_id')->nullable();
-            $table->foreign('assessment_id')->references('id')->on('assessments')->onDelete('set null');
+            $table->unsignedBigInteger('assessment_id');
+            $table->foreign('assessment_id')->references('id')->on('assessments')->onDelete('cascade');
             $table->string('requirement');
             $table->timestamps();
         });
