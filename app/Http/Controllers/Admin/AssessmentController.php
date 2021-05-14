@@ -142,4 +142,17 @@ class AssessmentController extends Controller
         $message = 'Assessment (' . $assessment->id . ') has been deleted from the database!';
         return redirect()->route('admin.assessments.index')->with('message', $message);
     }
+
+    // Delete a specific question from the database.
+    public function destroyQuestion($assessment_id, $question_id) {
+        $assessment = Assessment::findOrFail($assessment_id);
+        $question = $assessment->assessmentQuestions()->where('id', $question_id)->firstOrFail();
+        $question->delete();
+        
+        $message = 'Question (' . $question->id . ') has been deleted from the database!';
+        
+        return redirect()->route('admin.assessments.edit', $assessment_id)
+            ->with('message', $message)
+            ->with('flag', 'questions');
+    }
 }

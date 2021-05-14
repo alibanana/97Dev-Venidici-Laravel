@@ -211,9 +211,12 @@
 
                         <div class="col-12" style="padding:2vw 0vw">
                             <div style="display:flex;justify-content:flex-end">
-                                <form action="" method="post">
-                                    @csrf
-                                    @method('delete')
+                                <form action="{{ route('admin.assessments.destroy-question', [
+                                    'assessment_id' => $assessment->id,
+                                    'question_id' => $question->id
+                                ]) }}" method="POST">
+                                @csrf
+                                @method('delete')
                                     <div style="padding: 0px 2px">
                                         <button class="d-sm-inline-block btn btn-danger shadow-sm p-3" style="margin-right:1vw" type="submit" onclick="return confirm('Are you sure you want to delete this question?')">Delete</button>
                                     </div>
