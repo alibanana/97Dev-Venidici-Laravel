@@ -18,6 +18,7 @@ class CreateAssessmentQuestionAnswersTable extends Migration
             $table->unsignedBigInteger('assessment_question_id');
             $table->foreign('assessment_question_id')->references('id')->on('assessment_questions')->onDelete('cascade');
             $table->string('answer');
+            $table->boolean('is_correct');
             $table->timestamps();
         });
     }
