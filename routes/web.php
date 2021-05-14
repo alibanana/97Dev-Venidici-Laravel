@@ -216,4 +216,9 @@ Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redir
 Route::get('login/google/callback', [App\Http\Controllers\SocialController::class, 'handleGoogleCallback']);
 /* END OF GOOGLE AUTH*/
 
+/* START OF DOMPDF ROUTING */
+Route::get('/certificate/{id}/pdf', 'PagesController@print');
+/* END OF DOMPDF ROUTING */
+
+
 require __DIR__.'/auth.php';

@@ -11,6 +11,8 @@ use App\Models\FakeTestimony;
 use App\Models\User;
 use App\Models\Hashtag;
 
+use PDF;
+
 /*
 |--------------------------------------------------------------------------
 | Client PagesController Class.
@@ -52,5 +54,13 @@ class PagesController extends Controller
         $input = $request->all();
         dd($input['interest']);
 
+    }
+    public function print($id){
+        $certificate = Certificate::findorfail($id);
+        $pdf = PDF::loadView('certificate', compact())
+        ->setPaper('A4', 'landscape');
+        
+        // return $pdf->download('certificate.pdf'); //download
+        return $pdf->stream(); //view
     }
 }
