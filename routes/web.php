@@ -278,4 +278,12 @@ Route::get('/for-corporate/krest', function () {
 });
 /* END OF FOR CORPORATE ROUTING*/
 
+
+Route::get('/email/verifyUser', function () {
+    return view('emails/verifyUser');
+});
+Route::get('/certificate', function () {
+    return view('client/certificate');
+});
+
 require __DIR__.'/auth.php';

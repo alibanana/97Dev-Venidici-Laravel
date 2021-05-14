@@ -51,13 +51,14 @@
                 <div class="col-12 col-sm-6" style="margin-top:1vw">
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Metode Pengiriman</p>
                     <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                        <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                        <select onchange="if (this.value) window.location.href=this.value" name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                             @if(Request::get('city') == null)
                                 <option disabled selected>Pilih Kota terlebih dahulu</option>
                             @else
                                 <option disabled selected>Pilih metode pengiriman</option>
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'JNE']) }}" @if (Request::get('shipping') == 'JNE') selected @endif>JNE</option>
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'TIKI']) }}" @if (Request::get('shipping') == 'TIKI') selected @endif>TIKI</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'jne']) }}" @if (Request::get('shipping') == 'jne') selected @endif>JNE</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'tiki']) }}" @if (Request::get('shipping') == 'tiki') selected @endif>TIKI</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'pos']) }}" @if (Request::get('shipping') == 'pos') selected @endif>POS</option>
                             @endif
                         </select>                    
                         @error('province')
@@ -117,7 +118,7 @@
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp 99,999,999</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($shipping_cost, 0, ',', ',') }}</p>
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>
