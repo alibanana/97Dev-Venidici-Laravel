@@ -25,8 +25,8 @@
             <h2 class="mb-0 mb-3 text-gray-800">Update Assessment ({{ $assessment->title }})</h2>
         </div>
         <div class="d-sm-flex align-items-center mb-2">
-            <h5 class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')"  style="cursor:pointer">Basic Informations</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'questions')" style="margin-left:1.5vw;cursor:pointer">Questions</h5>
+            <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')"  style="cursor:pointer">Basic Informations</h5>
+            <h5 id="questions-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'questions')" style="margin-left:1.5vw;cursor:pointer">Questions</h5>
         </div>
         
         <!-- Content Row -->
@@ -117,176 +117,114 @@
 
         <!-- START OF QUESTIONS -->
         <div class="course-content" id="questions" style="display:none">
-            <div class="row">                
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="">Question</label>
-                        <textarea name="question" class="form-control" id="" rows="4"></textarea>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror               
-                    </div>
-                </div>
-                <div class="col-12">
-                    <label for="">Answers</label>
-                    <div>
-                        <div class="row" id="answer_duplicator">
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <input type="text" name="answer[]" class="form-control form-control-user" id="" placeholder="Enter Answer">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <select name="" id="" class="form-control">
-                                    <option value="1">Correct Answer</option>
-                                    <option value="0">False Answer</option>
-                                </select>
-                            </div>
+            <form action="{{ route('admin.assessments.store-question', $assessment->id) }}", method="POST">
+            @csrf
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Question</label>
+                            <textarea name="question" class="form-control" id="" rows="4"></textarea>
+                            @error('question')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror               
                         </div>
                     </div>
-                    <button type="button" id="add_answer" onlick="duplicateAnswer()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more answer</button> 
-
-                </div>
-                <div class="col-12" style="margin-top:2vw">
-                    <div style="display:flex;justify-content:flex-end">
-                        <button type="submit" href="/admin/online-courses/assesments/create" class="btn btn-primary btn-user p-3">Add New Question</button>
-
-
+                    <div class="col-12">
+                        <label for="">Answers</label>
+                        <div>
+                            {{-- Element to be duplicated --}}
+                            <div class="row" id="answer_duplicator" style="display:none">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="" placeholder="Enter Answer">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <select id="" class="form-control">
+                                        <option value="1">Correct Answer</option>
+                                        <option value="0">False Answer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" id="answer_duplicator1">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <input type="text" name="answers[1][answer]" class="form-control form-control-user" id="" placeholder="Enter Answer" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <select name="answers[1][is_correct]" id="" class="form-control" required>
+                                        <option value="1">Correct Answer</option>
+                                        <option value="0">False Answer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="add_answer" onlick="duplicateAnswer()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more answer</button> 
+                    </div>
+                    <div class="col-12" style="margin-top:2vw">
+                        <div style="display:flex;justify-content:flex-end">
+                            <button type="submit" class="btn btn-primary btn-user p-3">Add New Question</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>         
             <!-- START OF ONE MATERI -->
             <hr>
             <h3 style="margin-top:2vw">Question List</h3>
 
-            <!-- START OF ONE QUESTION -->
-            <div class="row">                
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="">Question #1</label>
-                        <textarea name="question" class="form-control" id="" rows="4">Hal yang harus dilakukan sewaktu "Structure Problem" di 7-Step Problem Solving Provess adalah</textarea>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror               
-                    </div>
-                </div>
-                <div class="col-12">
-                    <label for="">Answers</label>
-                    <div>
-                        <div class="row" id="answer_duplicator">
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <input type="text" name="answer[]" class="form-control form-control-user" id="" placeholder="Enter Answer" value="Debate and agree as a team on definition of the core problem">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <select name="" id="" class="form-control">
-                                    <option value="1" selected>Correct Answer</option>
-                                    <option value="0">False Answer</option>
-                                </select>
-                            </div>
+            @foreach ($assessment->assessmentQuestions as $question)
+                <div class="row">                
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Question #{{ $loop->iteration }}</label>
+                            <textarea name="question" class="form-control" id="" rows="4">{{ $question->question }}</textarea>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
-                    <div>
-                        <div class="row" id="answer_duplicator">
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <input type="text" name="answer[]" class="form-control form-control-user" id="" placeholder="Enter Answer" value="Focus on most influencing Issues">
+                    <div class="col-12">
+                        <label for="">Answers</label>
+                        @foreach ($question->assessmentQuestionAnswers as $answer)
+                            <div>
+                                <div class="row" id="answer_duplicator">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <input type="text" name="answer[]" class="form-control form-control-user" id="" placeholder="Enter Answer" value="{{ $answer->answer }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <select name="" id="" class="form-control">
+                                            <option value="1" @if($answer->is_correct) selected @endif>Correct Answer</option>
+                                            <option value="0" @if(!$answer->is_correct) selected @endif>False Answer</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <select name="" id="" class="form-control">
-                                    <option value="1">Correct Answer</option>
-                                    <option value="0" selected>False Answer</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!--<button type="button" id="add_answer" onlick="duplicateAnswer()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more answer</button> -->
+                        @endforeach
+                        <!--<button type="button" id="add_answer" onlick="duplicateAnswer()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more answer</button> -->
 
-                    <div class="col-12" style="padding:2vw 0vw">
-                        <div style="display:flex;justify-content:flex-end">
-                            <form action="" method="post">
-                                @csrf
-                                @method('delete')
-                                <div style="padding: 0px 2px">
-                                    <button class="d-sm-inline-block btn btn-danger shadow-sm p-3" style="margin-right:1vw" type="submit" onclick="return confirm('Are you sure you want to delete this question?')">Delete</button>
-                                </div>
-                            </form> 
-                            <button type="submit"  class="btn btn-primary btn-user p-3">Update Question</button>
+                        <div class="col-12" style="padding:2vw 0vw">
+                            <div style="display:flex;justify-content:flex-end">
+                                <form action="" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <div style="padding: 0px 2px">
+                                        <button class="d-sm-inline-block btn btn-danger shadow-sm p-3" style="margin-right:1vw" type="submit" onclick="return confirm('Are you sure you want to delete this question?')">Delete</button>
+                                    </div>
+                                </form> 
+                                <button type="submit"  class="btn btn-primary btn-user p-3">Update Question</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <!-- END OF ONE QUESTION -->
-            <!-- START OF ONE QUESTION -->
-            <div class="row">                
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="">Question #2</label>
-                        <textarea name="question" class="form-control" id="" rows="4">Hal yang harus dilakukan sewaktu "Structure Problem" di 7-Step Problem Solving Provess adalah</textarea>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror               
-                    </div>
-                </div>
-                <div class="col-12">
-                    <label for="">Answers</label>
-                    <div>
-                        <div class="row" id="answer_duplicator">
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <input type="text" name="answer[]" class="form-control form-control-user" id="" placeholder="Enter Answer" value="Debate and agree as a team on definition of the core problem">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <select name="" id="" class="form-control">
-                                    <option value="1" selected>Correct Answer</option>
-                                    <option value="0">False Answer</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="row" id="answer_duplicator">
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <input type="text" name="answer[]" class="form-control form-control-user" id="" placeholder="Enter Answer" value="Focus on most influencing Issues">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <select name="" id="" class="form-control">
-                                    <option value="1">Correct Answer</option>
-                                    <option value="0" selected>False Answer</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!--<button type="button" id="add_answer" onlick="duplicateAnswer()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Add more answer</button> -->
-
-                    <div class="col-12" style="padding:2vw 0vw">
-                        <div style="display:flex;justify-content:flex-end">
-                            <form action="" method="post">
-                                @csrf
-                                @method('delete')
-                                <div style="padding: 0px 2px">
-                                    <button class="d-sm-inline-block btn btn-danger shadow-sm p-3" style="margin-right:1vw" type="submit" onclick="return confirm('Are you sure you want to delete this question?')">Delete</button>
-                                </div>
-                            </form> 
-                            <button type="submit"  class="btn btn-primary btn-user p-3">Update Question</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <!-- END OF ONE QUESTION -->
+                <hr>
+            @endforeach
         </div>
         <!-- END OF QUESTIONS -->
 
@@ -316,47 +254,55 @@ function removeDiv(elem, wrapper_id){
     }
 }
 </script>
-
 <script>
     document.getElementById('add_answer').onclick = duplicateAnswer;
-    var i = 0;
+    var i = 2;
     var original2 = document.getElementById('answer_duplicator');
     function duplicateAnswer() {
-        console.log('requirement clicked')
-        if(confirm("Are you sure, you want to add more item?")){
-            var clone = original2.cloneNode(true); // "deep" clone
-            $(clone).find("input[type=text], textarea").removeAttr("checked").val('');
-            clone.id = "answer_duplicator" + ++i; // there can only be one element with an ID
-            original2.parentNode.appendChild(clone);
-        } else {
-
-        }
+        var clone = original2.cloneNode(true); // "deep" clone
+        $(clone).find("input").attr("name", "answers[" + i + "][answer]");
+        $(clone).find("input").attr("required", '');
+        $(clone).find("select").attr("name", "answers[" + i + "][is_correct]");
+        $(clone).find("select").attr("required", '');
+        clone.style.display = "flex";
+        clone.id = "answer_duplicator" + i++; // there can only be one element with an ID
+        original2.parentNode.appendChild(clone);
     }
 </script>
 <script>
     function changeContent(evt, categoryName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("course-content")
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("course-item");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("course-link-active", "course-link");
-            }
-            document.getElementById(categoryName).style.display = "block";
-            evt.currentTarget.className += " course-link-active";
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("course-content")
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
-         
+        tablinks = document.getElementsByClassName("course-item");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace("course-link-active", "course-link");
+        }
+        document.getElementById(categoryName).style.display = "block";
+        evt.currentTarget.className += " course-link-active";
+    }
 </script>
 <script>
     function disableInput() {
-    document.getElementById("price-input").disabled = true;
-    console.log('disabled')
+        document.getElementById("price-input").disabled = true;
+        console.log('disabled')
     }
     function enableInput() {
-    document.getElementById("price-input").disabled = false;
-    console.log('enabled')
+        document.getElementById("price-input").disabled = false;
+        console.log('enabled')
     }
 </script>
+@if (session()->has('flag'))
+    @if (session('flag') == 'basic-informations')
+        <script>
+            document.getElementById('basic-informations-button').click();
+        </script>
+    @elseif (session('flag') == 'questions')
+        <script>
+            document.getElementById('questions-button').click();
+        </script>
+    @endif
+@endif
 @endsection

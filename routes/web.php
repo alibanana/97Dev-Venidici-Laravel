@@ -164,6 +164,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assessments.index');
     Route::get('/assessments/create', [AdminAssessmentController::class, 'create'])->name('assessments.create');
     Route::post('/assessments', [AdminAssessmentController::class, 'store'])->name('assessments.store');
+    Route::post('/assessments/{id}/questions', [AdminAssessmentController::class, 'storeQuestion'])->name('assessments.store-question');
     Route::get('/assessments/{id}/update', [AdminAssessmentController::class, 'edit'])->name('assessments.edit');
     Route::put('/assessments/{id}/update-basic-info', [AdminAssessmentController::class, 'updateBasicInfo'])->name('assessments.update-basic-info');
     Route::delete('/assessments/{id}', [AdminAssessmentController::class, 'destroy'])->name('assessments.destroy');

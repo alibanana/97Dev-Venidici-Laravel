@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Assessment;
 use App\Models\AssessmentRequirement;
+use App\Models\AssessmentQuestion;
+use App\Models\AssessmentQuestionAnswer;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,10 +62,40 @@ class AssessmentController extends Controller
         return redirect()->route('admin.assessments.index')->with('message', $message);
     }
 
+    // Stores new Question in the database.
+    public function storeQuestion(Request $request, $id) {
+        $assessment = Assessment::findOrFail($id);
+        
+        $validated = $request->validate([
+            'question' => 'required',
+            'answers' => 'array|min:1',
+            'answers.*.answer' => 'required',
+            'answers.*.is_correct' => 'required|boolean'
+        ]);
+
+        $question = AssessmentQuestion::create([
+            'assessment_id' => $assessment->id,
+            'question' => $validated['question']
+        ]);
+
+        foreach ($validated['answers'] as $answer) {
+            $newAnswer = AssessmentQuestionAnswer::create([
+                'assessment_question_id' => $question->id,
+                'answer' => $answer['answer'],
+                'is_correct' => $answer['is_correct']
+            ]);
+        }
+
+        $message = "New Question has been added to the database!";
+
+        return redirect()->route('admin.assessments.edit', $id)
+            ->with('message', $message)
+            ->with('flag', 'questions');
+    }
+
     // Shows the Update Assessment Page.
     public function edit($id) {
         $assessment = Assessment::findOrFail($id);
-
         return view('admin/assessment/update', compact('assessment'));
     }
 
@@ -98,7 +130,9 @@ class AssessmentController extends Controller
             $message = 'No changes was made to Assessment (' . $assessment->title . ')';
         }
 
-        return redirect()->route('admin.assessments.edit', $id)->with('message', $message);
+        return redirect()->route('admin.assessments.edit', $id)
+            ->with('message', $message)
+            ->with('flag', 'basic-informations');
     }
 
     // Delete existing Assessment (by ID) from the database.
