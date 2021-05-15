@@ -82,7 +82,8 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/online-courses') || Request::is('admin/online-courses/*') || Request::is('admin/course-categories') ||
-    Request::is('admin/course-categories/*') || Request::is('admin/assessments') || Request::is('admin/assessments/*'))
+    Request::is('admin/course-categories/*') || Request::is('admin/teachers') || Request::is('admin/teachers/*')|| 
+    Request::is('admin/assessments') || Request::is('admin/assessments/*'))
     <li class="nav-item active">
     @else
     <li class="nav-item">
@@ -97,7 +98,7 @@
                 <a class="collapse-item" href="{{ route('admin.online-courses.index') }}">Online Courses</a>
                 <a class="collapse-item" href="{{ route('admin.course-categories.index') }}">Course Categories</a>
                 <a class="collapse-item" href="{{ route('admin.assessments.index') }}">Assesments</a>
-                <a class="collapse-item" href="/admin/online-courses/teachers">Teachers</a>
+                <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
             </div>
         </div>
     </li>

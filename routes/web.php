@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
@@ -159,6 +160,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
     Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    // TeacherController
+    Route::get('/teachers', [AdminTeacherController::class, 'index'])->name('teachers.index');
     // AssestmentController
     Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assessments.index');
     Route::get('/assessments/create', [AdminAssessmentController::class, 'create'])->name('assessments.create');
@@ -213,9 +216,6 @@ Route::get('/admin/online-courses/assesments/1', function () {
     return view('admin/assessment/detail');
 });
 
-Route::get('/admin/online-courses/teachers', function () {
-    return view('admin/teacher/index');
-});
 Route::get('/admin/online-courses/teachers/create', function () {
     return view('admin/teacher/create');
 });

@@ -57,9 +57,11 @@ class CourseSeeder extends Seeder
         $course1 = Course::create($courses[0]);
         // $course1->hashtags()->attach([27, 28, 30]);
         $course1->hashtags()->attach([1, 2, 3]);
+        $course1->teachers()->attach([2, 3]);
 
         $course2 = Course::create($courses[1]);
         // $course2->hashtags()->attach([10, 14, 29]);
         $course2->hashtags()->attach([5, 7, 2]);
+        $course2->teachers()->attach([1]);
     }
 }

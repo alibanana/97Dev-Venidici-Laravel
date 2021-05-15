@@ -51,4 +51,8 @@ class Course extends Model
     public function assessment() {
         return $this->hasOne(Assessment::class);
     }
+
+    public function teachers() {
+        return $this->belongsToMany(Teacher::class, 'course_teacher')->withTimestamps();
+    }
 }
