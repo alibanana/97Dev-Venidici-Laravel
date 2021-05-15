@@ -104,12 +104,13 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Assesment</label> <br>
-                        <select name="assesment" id="" class="form-control form-control-user" disabled>
-                            <option selected>No Assesment</option>
-                            <option value="1">Quiz of Business Case Room</option>
-                            <option value="2">Quiz of Business Plan Room</option>
+                        <select name="assessment_id" id="" class="form-control form-control-user" required>
+                            <option value="0" selected>No Assesment</option>
+                            @foreach ($assessments as $assessment)
+                                <option value="{{ $assessment->id }}">{{ $assessment->title }}</option>
+                            @endforeach
                         </select>
-                        @error('assesment')
+                        @error('assessment_id')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
