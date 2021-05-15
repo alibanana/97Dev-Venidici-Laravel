@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Assessment;
 use App\Models\AssessmentRequirement;
@@ -135,6 +136,69 @@ class AssessmentController extends Controller
             ->with('flag', 'basic-informations');
     }
 
+    // Update a specific question.
+    public function updateQuestion(Request $request, $assessment_id, $question_id) {
+        $assessment = Assessment::findOrFail($assessment_id);
+        $question = $assessment->assessmentQuestions()->where('id', $question_id)->firstOrFail();
+
+        $validator = Validator::make($request->all(), [
+            'question_' . $question_id => 'required',
+            'answers' => 'required|array|min:1',
+            'answers.*.id' => 'numeric',
+            'answers.*.answer' => 'required',
+            'answers.*.is_correct' => 'required|boolean'
+        ])->setAttributeNames([
+            'question_' . $question_id => 'question'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('admin.assessments.edit', $assessment->id)
+                ->with('flag', 'questions')
+                ->withErrors($validated->errors());
+        }
+
+        $validated = $validator->validate();
+
+        $question->question = $validated['question_'. $question_id];
+        $question->save();
+
+        $answers_ids = $question->assessmentQuestionAnswers()->select('id')->get()->map
+            ->only('id')->flatten()->toArray();
+
+        $wasAnswersChanged = false;
+        foreach ($validated['answers'] as $answer) {
+            if ($answer['id']) {  // Updates existing answer.
+                if (in_array($answer['id'], $answers_ids)) {
+                    $answerToBeUpdated = $question->assessmentQuestionAnswers()
+                        ->where('id', $answer['id'])->first();
+                    $answerToBeUpdated->answer = $answer['answer'];
+                    $answerToBeUpdated->is_correct = $answer['is_correct'];
+                    $answerToBeUpdated->save();
+                    if (!$wasAnswersChanged && $answerToBeUpdated->wasChanged()) {
+                        $wasAnswersChanged = true;
+                    }
+                }
+            } else { // Create new answer.
+                AssessmentQuestionAnswer::create([
+                    'assessment_question_id' => $question_id,
+                    'answer' => $answer['answer'],
+                    'is_correct' => $answer['is_correct']
+                ]);
+                if (!$wasAnswersChanged) $wasAnswersChanged = true;
+            }
+        }
+
+        if ($question->wasChanged() || $wasAnswersChanged) {
+            $message = 'Question (' . $question->id . ') has been updated in the database.';
+        } else {
+            $message = 'No changes was made to Question (' . $question->id . ')';
+        }
+
+        return redirect()->route('admin.assessments.edit', $assessment->id)
+            ->with('message', $message)
+            ->with('flag', 'questions');
+    }
+
     // Delete existing Assessment (by ID) from the database.
     public function destroy($id) {
         $assessment = Assessment::findOrFail($id);
@@ -148,10 +212,10 @@ class AssessmentController extends Controller
         $assessment = Assessment::findOrFail($assessment_id);
         $question = $assessment->assessmentQuestions()->where('id', $question_id)->firstOrFail();
         $question->delete();
-        
+
         $message = 'Question (' . $question->id . ') has been deleted from the database!';
         
-        return redirect()->route('admin.assessments.edit', $assessment_id)
+        return redirect()->route('admin.assessments.edit', $assessment->id)
             ->with('message', $message)
             ->with('flag', 'questions');
     }
