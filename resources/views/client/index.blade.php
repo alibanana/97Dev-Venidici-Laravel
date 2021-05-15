@@ -582,6 +582,9 @@ END OF OUR PROGRAMS SECTION -->
                                 <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">{{ $course->title }}</p>
                                 <i style="font-size:2vw;" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
                             </div>
+                            @foreach ($course->hashtags as $tag)
+                                <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
+                            @endforeach
                             <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:1vw">
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
                             </div>
@@ -592,13 +595,23 @@ END OF OUR PROGRAMS SECTION -->
                                 @endif
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                                 <div style="display: flex;justify-content:center;margin-left:1vw">
-                                    <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                    @for ($i = 1; $i < 6; $i++)
+                                        @if ($i <= $course->average_rating)
+                                            @if ($i == 1)
+                                                <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                            @endif
+                                        @else
+                                            @if ($i == 1)
+                                                <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                            @endif
+                                        @endif
+                                    @endfor
                                 </div>
                             </div>
                             <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
