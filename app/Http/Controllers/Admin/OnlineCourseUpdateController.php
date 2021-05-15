@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
 use App\Models\Hashtag;
+use App\Models\Assessment;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +30,10 @@ class OnlineCourseUpdateController extends Controller
     public function edit($id) {
         $course = Course::findOrFail($id);
         $course_categories = CourseCategory::select('id', 'category')->get();
+        $available_assessments = Assessment::doesntHave('course')->get();
         $tags = Hashtag::all();
 
-        return view('admin/online-course/update', compact('course', 'course_categories', 'tags'));
+        return view('admin/online-course/update', compact('course', 'course_categories', 'available_assessments', 'tags'));
     }
 
     // Update existing Online-Course in the database.
@@ -42,13 +44,15 @@ class OnlineCourseUpdateController extends Controller
             'subtitle' => 'required',
             'course_category_id' => 'required',
             'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
+            'assessment_id' => 'required|integer',
             'description' => 'required',
             'requirements' => 'required|array|min:1',
             'features' => 'required|array|min:1',
             'hashtags' => 'required|array|min:1'
         ])->setAttributeNames([
             'course_category_id' => 'category',
-            'preview_video_link' => 'video link'
+            'preview_video_link' => 'video link',
+            'assessment_id' => 'assessment',
         ])->validate();
 
         $course = Course::findOrFail($id);
@@ -65,6 +69,24 @@ class OnlineCourseUpdateController extends Controller
         }
 
         $course->save();
+
+        $wasAssessmentChanged = false;
+
+        if ($course->assessment) {
+            if ($course->assessment->id != $validated['assessment_id']) {
+                $assessment = $course->assessment; 
+                $assessment->course_id = null;
+                $assessment->save();
+                if (!$wasAssessmentChanged) $wasAssessmentChanged = true;
+            }
+        }
+
+        if ($validated['assessment_id'] != '0') {
+            $assessment = Assessment::find($validated['assessment_id']);
+            $assessment->course_id = $course->id;
+            $assessment->save();
+            if (!$wasAssessmentChanged) $wasAssessmentChanged = true;
+        }
 
         $course->courseRequirements()->delete();
         foreach ($request->requirements as $requirement_value) {
@@ -95,7 +117,7 @@ class OnlineCourseUpdateController extends Controller
         }
         $course->hashtags()->attach($added_hashtag_ids);
 
-        if ($course->wasChanged()) {
+        if ($course->wasChanged() || $wasAssessmentChanged) {
             $message = 'Online Course (' . $course->title . ') has been updated';
         } else {
             $message = 'No changes was made to Online Course (' . $course->title . ')';
