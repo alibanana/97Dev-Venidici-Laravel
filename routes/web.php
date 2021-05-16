@@ -287,7 +287,8 @@ Route::get('/certificate', function () {
     return view('client/certificate');
 });
 /* START OF DOMPDF ROUTING */
-Route::get('/certificate/{id}/pdf', 'PagesController@print');
+Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
+
 /* END OF DOMPDF ROUTING */
 
 

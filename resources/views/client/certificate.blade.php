@@ -24,8 +24,8 @@
 </head>
 <body style="margin:0">
     <div class="container">
-        <img src="/assets/images/client/Sertifikat Venidici-Bisnis.png" style="width:100vw" class="img-fluid" alt="Newsletter Illustration">
-        <div class="top-left" style="font-size:4.2vw">Laskmi Azzahra Kaheraning</div>
+        <img src="assets/images/client/Sertifikat Venidici-Bisnis.png" style="width:100%" class="img-fluid" alt="Newsletter Illustration">
+        <p class="top-left" style="font-size:4.2vw"> Laskmi Azzahra Kaheraning</p>
     </div>
 </body>
 </html>

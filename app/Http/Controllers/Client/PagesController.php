@@ -126,18 +126,15 @@ class PagesController extends Controller
     public function course_detail($id){
         $course = Course::findOrFail($id);
         return view('client/online-course/detail', compact('course'));
-
     }
 
     public function dashboard_index()
     {
         return view('client/user-dashboard');
-
     }
-    public function print($id){
-        $certificate = Certificate::findorfail($id);
-        $pdf = PDF::loadView('certificate', compact())
-        ->setPaper('A4', 'landscape');
+    public function print(){
+        $pdf = PDF::loadView('client/certificate')
+        ->setPaper('A4', 'potrait');
         
         // return $pdf->download('certificate.pdf'); //download
         return $pdf->stream(); //view
