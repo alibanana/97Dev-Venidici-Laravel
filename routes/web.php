@@ -154,7 +154,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
     // OnlineCourseUpdateController
     Route::get('/online-courses/{id}/update', [AdminOnlineCourseUpdateController::class, 'edit'])->name('online-courses.edit');
-    Route::put('/online-courses/{id}', [AdminOnlineCourseUpdateController::class, 'update'])->name('online-courses.update');
+    Route::put('/online-courses/{id}/update-basic-info', [AdminOnlineCourseUpdateController::class, 'updateBasicInfo'])->name('online-courses.update-basic-info');
+    Route::put('/online-courses/{id}/update-pricing-enrollment', [AdminOnlineCourseUpdateController::class, 'updatePricingEnrollment'])->name('online-courses.update-pricing-enrollment');
     // CourseCategoryController
     Route::get('/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');

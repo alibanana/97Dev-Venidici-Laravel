@@ -25,19 +25,19 @@
             <h2 class="mb-0 mb-3 text-gray-800">Update Online Course</h2>
         </div>
         <div class="d-sm-flex align-items-center mb-2">
-            <h5 class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')"  style="cursor:pointer">Basic Informations</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'course-assesment')" style="margin-left:1.5vw;cursor:pointer">Course Assesment</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
+            <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h5>
+            <h5 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5>
+            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
+            <h5 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
+            <h5 id="course-assessment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'course-assesment')" style="margin-left:1.5vw;cursor:pointer">Course Assesment</h5>
+            <h5 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
         </div>
         
         <!-- Content Row -->
 
         <!-- START OF BASIC INFORMATION -->
         <div class="course-content" id="basic-informations">
-            <form id="online-course-update-form" action="{{ route('admin.online-courses.update', $course->id) }}" method="POST" enctype="multipart/form-data">
+            <form id="online-course-update-form" action="{{ route('admin.online-courses.update-basic-info', $course->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf  
                 @method('put')         
                 <div class="row">
@@ -390,29 +390,29 @@
 
         <!-- START OF PRICE AND ENROLLMENT -->
         <div class="course-content" id="pricing-enrollment" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
-            @csrf  
+            <form action="{{ route('admin.online-courses.update-pricing-enrollment', $course->id) }}" method="POST">
+            @csrf
             @method('put') 
                 <div class="row" style="margin-top:2vw">
                     <div class="col-6">
                         <div class="form-group">
                             <h5 for="">Enrollment Scenario</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="enrollment_scenario" id="enrollment_scenario" checked>
+                                <input class="form-check-input" type="radio" name="enrollment_status" value="Open" id="enrollment_status" @if($course->enrollment_status == 'Open') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Open Enrollment
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="enrollment_scenario" id="enrollment_scenario">
+                                <input class="form-check-input" type="radio" name="enrollment_status" value="Close" id="enrollment_status" @if($course->enrollment_status == 'Close') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Close Enrollment
                                 </label>
                             </div>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('enrollment_status')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
@@ -420,25 +420,22 @@
                         <div class="form-group">
                             <h5 for="">Pricing Options</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio"  onclick="disableInput()" name="pricing_options" id="pricing_options" checked>
+                                <input class="form-check-input" type="radio" onclick="disableInput()" name="is_free" value="1" id="pricing_options" @if($course->price == 0) checked @endif>
                                 <label class="form-check-label" for="pricing_options">
                                     Free
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" onclick="enableInput()" name="pricing_options" id="pricing_options">
-                                <label class="form-check-label" for="pricing_options"  >
-                                    One-Time Purchase (Rp.)
-                                </label>
-                                <input type="text" name="name" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
-                                    id="phone" aria-describedby=""
-                                    placeholder="e.g. 100000" disabled> 
-
+                                <input class="form-check-input" type="radio" onclick="enableInput()" name="is_free" value="0" id="pricing_options" @if($course->price != 0) checked @endif>
+                                <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.) <span style="color: orange">(Min: Rp 10000)</span></label>
+                                <input type="number" name="price" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
+                                    id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" min="10000"
+                                    placeholder="e.g. 100000" @if($course->price == 0) disabled @endif required>
                             </div>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('price')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
@@ -446,7 +443,6 @@
                         <div style="display:flex;justify-content:flex-end">
                             <button type="submit" class="btn btn-primary btn-user p-3">Update Pricing</button>
                         </div>
-
                     </div>
                 </div>
             </form>
@@ -682,4 +678,11 @@ function removeDiv(elem, wrapper_id){
     }
 }
 </script>
+@if (Session::has('page-option'))
+    @if (Session::get('page-option') == 'basic-informations')
+        <script>document.getElementById('basic-information-button').click()</script>
+    @elseif (Session::get('page-option') == 'pricing-and-enrollment')
+        <script>document.getElementById('pricing-and-enrollment-button').click()</script>
+    @endif
+@endif
 @endsection
