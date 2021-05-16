@@ -128,7 +128,7 @@ class OnlineCourseUpdateController extends Controller
             ->with('page-option', 'basic-informations');
     }
 
-    // Updates data as seen under the Update Online Course -> Pricing & Enrollment Scenario tab.
+    // Updates Course's Pricing & Enrollment Status.
     public function updatePricingEnrollment(Request $request, $id) {
         $validated = $request->validate([
             'enrollment_status' => 'required',
@@ -156,5 +156,26 @@ class OnlineCourseUpdateController extends Controller
         return redirect()->route('admin.online-courses.edit', $id)
             ->with('message', $message)
             ->with('page-option', 'pricing-and-enrollment');
+    }
+
+    // Updates Publish Status
+    public function updatePublishStatus(Request $request, $id) {
+        $validated = $request->validate([
+            'publish_status' => 'required'
+        ]);
+
+        $course = Course::findOrFail($id);
+        $course->publish_status = $validated['publish_status'];
+        $course->save();
+
+        if ($course->wasChanged()) {
+            $message = 'Online Course (' . $course->title . '), "Publish Status" has been updated';
+        } else {
+            $message = 'No changes was made to Online Course (' . $course->title . ')';
+        }
+
+        return redirect()->route('admin.online-courses.edit', $id)
+            ->with('message', $message)
+            ->with('page-option', 'publish-status');
     }
 }

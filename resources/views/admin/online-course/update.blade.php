@@ -452,30 +452,30 @@
 
         <!-- START OF PUBLISH STATUS -->
         <div class="course-content" id="publish-status" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.online-courses.update-publish-status', $course->id) }}" method="POST">
             @csrf  
             @method('put') 
                 <div class="row" style="margin-top:2vw">
                     <div class="col-6">
                         <div class="form-group">
-                            <h5 for="">Enrollment Scenario</h5>
+                            <h5 for="">Publish Status</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                <input class="form-check-input" type="radio" name="publish_status" value="Draft" id="flexRadioDefault1" @if($course->publish_status == 'Draft') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Draft <br>
                                     Students cannot purchase or enroll in this course. For students that are already enrolled, this course will not appear on their Student Dashboard.
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="publish_status" value="Published" id="flexRadioDefault2" @if($course->publish_status == 'Published') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Published <br>
                                     Students can purchase, enroll in, and access the content of this course. For students that are enrolled, this course will appear on their Student Dashboard.                            </label>
                             </div>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('publish_status')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
@@ -683,6 +683,8 @@ function removeDiv(elem, wrapper_id){
         <script>document.getElementById('basic-information-button').click()</script>
     @elseif (Session::get('page-option') == 'pricing-and-enrollment')
         <script>document.getElementById('pricing-and-enrollment-button').click()</script>
+    @elseif (Session::get('page-option') == 'publish-status')
+        <script>document.getElementById('publish-status-button').click()</script>
     @endif
 @endif
 @endsection
