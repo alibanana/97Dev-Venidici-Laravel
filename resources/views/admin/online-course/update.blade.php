@@ -529,11 +529,8 @@
                 <div class="col-sm-12 col-md-8">
                     <div id="dataTable_filter" class="dataTables_filter">
                         <label class="w-100">Search:
-                            <form action="" method="GET">
-                                <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm w-100" placeholder="" aria-controls="dataTable">
-                                @if (Request::get('show'))
-                                    <input name="show" value="{{ Request::get('show') }}" hidden>
-                                @endif
+                            <form action="{{ route('admin.online-courses.edit', $course->id) }}" method="GET">
+                                <input name="search_teacher" value="{{ Request::get('search_teacher') }}" type="search" class="form-control form-control-sm w-100" aria-controls="dataTable">
                                 <input type="submit" style="visibility: hidden;" hidden/>
                             </form>
                         </label>
@@ -554,48 +551,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td style="text-align:center" class="text-nowrap">
-                                        <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
-                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
-                                    </td>
-                                    <td>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
-                                    </td>  
-                                    <td>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    @method('put')
-                                                    <div style="padding: 0px 2px">
-                                                        <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to select this teacher?')">Un-select Teacher</button>
-                                                    </div>
-                                                </form> 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td style="text-align:center" class="text-nowrap">
-                                        <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
-                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
-                                    </td>
-                                    <td>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
-                                    </td>  
-                                    <td>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    @method('put')
-                                                    <div style="padding: 0px 2px">
-                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to select this teacher?')">Select Teacher</button>
-                                                    </div>
-                                                </form> 
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach ($teachers as $teacher)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td style="text-align:center" class="text-nowrap">
+                                            <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
+                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }}</p>
+                                        </td>
+                                        <td>{{ $teacher->description }}</td>  
+                                        <td>
+                                            @if ($teacher->courses()->where('course_id', $course->id)->first())
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.online-courses.detach-teacher', $course->id) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}" hidden>
+                                                            <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to remove this teacher from the course?')">Un-select Teacher</button>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            @else
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.online-courses.attach-teacher', $course->id) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}" hidden>
+                                                            <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to add this teacher to the course?')">Select Teacher</button>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -685,6 +675,8 @@ function removeDiv(elem, wrapper_id){
         <script>document.getElementById('pricing-and-enrollment-button').click()</script>
     @elseif (Session::get('page-option') == 'publish-status')
         <script>document.getElementById('publish-status-button').click()</script>
+    @elseif (Session::get('page-option') == 'teacher')
+        <script>document.getElementById('teacher-button').click()</script>
     @endif
 @endif
 @endsection

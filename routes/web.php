@@ -163,6 +163,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/online-courses/{id}/update-basic-info', [AdminOnlineCourseUpdateController::class, 'updateBasicInfo'])->name('online-courses.update-basic-info');
     Route::put('/online-courses/{id}/update-pricing-enrollment', [AdminOnlineCourseUpdateController::class, 'updatePricingEnrollment'])->name('online-courses.update-pricing-enrollment');
     Route::put('/online-courses/{id}/update-publish-status', [AdminOnlineCourseUpdateController::class, 'updatePublishStatus'])->name('online-courses.update-publish-status');
+    Route::put('/online-courses/{id}/attach-teacher', [AdminOnlineCourseUpdateController::class, 'attachTeacher'])->name('online-courses.attach-teacher');
+    Route::put('/online-courses/{id}/detach-teacher', [AdminOnlineCourseUpdateController::class, 'detachTeacher'])->name('online-courses.detach-teacher');
     // CourseCategoryController
     Route::get('/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
