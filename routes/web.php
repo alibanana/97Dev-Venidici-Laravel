@@ -286,5 +286,9 @@ Route::get('/email/verifyUser', function () {
 Route::get('/certificate', function () {
     return view('client/certificate');
 });
+/* START OF DOMPDF ROUTING */
+Route::get('/certificate/{id}/pdf', 'PagesController@print');
+/* END OF DOMPDF ROUTING */
+
 
 require __DIR__.'/auth.php';

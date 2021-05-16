@@ -16,6 +16,8 @@ use App\Models\UserDetail;
 use App\Models\Course;
 use App\Models\Cart;
 
+use PDF;
+
 /*
 |--------------------------------------------------------------------------
 | Client PagesController Class.
@@ -131,5 +133,13 @@ class PagesController extends Controller
     {
         return view('client/user-dashboard');
 
+    }
+    public function print($id){
+        $certificate = Certificate::findorfail($id);
+        $pdf = PDF::loadView('certificate', compact())
+        ->setPaper('A4', 'landscape');
+        
+        // return $pdf->download('certificate.pdf'); //download
+        return $pdf->stream(); //view
     }
 }
