@@ -162,6 +162,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
     // TeacherController
     Route::get('/teachers', [AdminTeacherController::class, 'index'])->name('teachers.index');
+    Route::get('/teachers/create', [AdminTeacherController::class, 'create'])->name('teachers.create');
+    Route::post('/teachers', [AdminTeacherController::class, 'store'])->name('teachers.store');
+    Route::get('/teachers/{id}/update', [AdminTeacherController::class, 'edit'])->name('teachers.edit');
+    Route::put('/teachers/{id}', [AdminTeacherController::class, 'update'])->name('teachers.update');
+    Route::delete('/teachers/{id}', [AdminTeacherController::class, 'destroy'])->name('teachers.destroy');
     // AssestmentController
     Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assessments.index');
     Route::get('/assessments/create', [AdminAssessmentController::class, 'create'])->name('assessments.create');
@@ -214,13 +219,6 @@ Route::get('/admin/online-courses/create-video/1', function () {
 });
 Route::get('/admin/online-courses/assesments/1', function () {
     return view('admin/assessment/detail');
-});
-
-Route::get('/admin/online-courses/teachers/create', function () {
-    return view('admin/teacher/create');
-});
-Route::get('/admin/online-courses/teachers/1/update', function () {
-    return view('admin/teacher/update');
 });
 /* END OF ONLINE COURSE ROUTING */
 
