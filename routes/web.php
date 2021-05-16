@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
+use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
@@ -96,10 +98,8 @@ Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('custo
 // });
 
 /* START OF ONLINE COURSE ROUTING */
-Route::get('/online-course', function () {
-    return view('client/online-course/index');
-});
-Route::get('/online-course/{id}', [PagesController::class, 'course_detail'])->name('customer.course_detail');
+Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
+Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
 
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
@@ -154,7 +154,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     // OnlineCourseController
     Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
     Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
-    //Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
+    Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
     Route::post('/online-courses', [AdminOnlineCourseController::class, 'store'])->name('online-courses.store');
     Route::delete('/online-course/{id}', [AdminOnlineCourseController::class, 'destroy'])->name('online-courses.destroy');
     Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
@@ -166,8 +166,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
     Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    // TeacherController
+    Route::get('/teachers', [AdminTeacherController::class, 'index'])->name('teachers.index');
     // AssestmentController
-    Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assesments.index');
+    Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assessments.index');
+    Route::get('/assessments/create', [AdminAssessmentController::class, 'create'])->name('assessments.create');
+    Route::post('/assessments', [AdminAssessmentController::class, 'store'])->name('assessments.store');
+    Route::post('/assessments/{id}/questions', [AdminAssessmentController::class, 'storeQuestion'])->name('assessments.store-question');
+    Route::get('/assessments/{id}/update', [AdminAssessmentController::class, 'edit'])->name('assessments.edit');
+    Route::put('/assessments/{id}', [AdminAssessmentController::class, 'updateBasicInfo'])->name('assessments.update-basic-info');
+    Route::put('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'updateQuestion'])->name('assessments.update-question');
+    Route::delete('/assessments/{id}', [AdminAssessmentController::class, 'destroy'])->name('assessments.destroy');
+    Route::delete('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'destroyQuestion'])->name('assessments.destroy-question');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -223,16 +233,7 @@ Route::get('/admin/online-courses/create-video/1', function () {
 Route::get('/admin/online-courses/assesments/1', function () {
     return view('admin/assessment/detail');
 });
-Route::get('/admin/online-courses/assesments/create', function () {
-    return view('admin/assessment/create');
-});
-Route::get('/admin/online-courses/assesments/1/update', function () {
-    return view('admin/assessment/update');
-});
 
-Route::get('/admin/online-courses/teachers', function () {
-    return view('admin/teacher/index');
-});
 Route::get('/admin/online-courses/teachers/create', function () {
     return view('admin/teacher/create');
 });

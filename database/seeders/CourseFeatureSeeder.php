@@ -16,6 +16,15 @@ class CourseFeatureSeeder extends Seeder
     public function run()
     {
         $features = [
+            // Emotional Intelligence
+            [
+                'course_id' => 1,
+                'feature' => 'Gambaran umum dari Emotional Intelligence',
+            ],
+            [
+                'course_id' => 1,
+                'feature' => 'Manage your own emotions',
+            ],
             // Path to Winning Business Competition
             [
                 'course_id' => 2,

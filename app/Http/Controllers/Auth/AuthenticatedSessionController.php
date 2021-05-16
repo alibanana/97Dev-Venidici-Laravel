@@ -32,24 +32,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {   
-        
         $request->authenticate();
-        $userStatus = User::where('email', $request->email)->firstOrFail()->status;
-        
-        if ($userStatus == 'suspended') {
-            return redirect()->route('login')->with('message', 'Your account has been suspended!');
-        }
-        
+
         $request->session()->regenerate();
         
-        //if (Auth::user()->userRole->id == 1) {
-            //return redirect()->route('index');
-        //}
-        $cart_count = Cart::with('course')
-                    ->where('user_id', Auth::user()->id)
-                    ->count();
-        $request->session()->put('cart_count', $cart_count);  
-        return redirect()->route('index');
+        $this->ifUserSuspended($request);
+
+        // Redirect based on user's role.
+        if (Auth::user()->userRole->id == 1) {
+            return redirect()->route('index');
+        } else {
+            return redirect()->route('admin.dashboard.index');
+        }
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -68,5 +62,15 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    // Log user if he/she is suspended.
+    private function ifUserSuspended(Request $request) { 
+        if (Auth::user()->status == 'suspended') {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->route('login')->with('message', 'Your account has been suspended!');
+        }
     }
 }

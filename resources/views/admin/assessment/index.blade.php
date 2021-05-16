@@ -23,7 +23,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h2 class="mb-0 mb-3 text-gray-800">Assesment List</h2>
-            <a href="/admin/online-courses/assesments/create" class="btn btn-primary btn-user p-3">Create New Assesment</a>
+            <a href="{{ route('admin.assessments.create') }}" class="btn btn-primary btn-user p-3">Create New Assesment</a>
 
         </div>
         <div class="row mt-2">
@@ -90,58 +90,35 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Quiz of Business Case Room</td>
-                                                <td>10</td> 
-                                                <td style="color:green">How to be funny</td> 
-                                                <td>
-                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-
+                                            @foreach ($assessments as $assessment)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $assessment->title }}</td>
+                                                    <td>{{ $assessment->duration }}</td>
+                                                    @if ($assessment->course)
+                                                        <td><a href="{{ route('admin.online-courses.show', $assessment->course->id) }}" style="color:green">{{ $assessment->course->title }}</a></td>
+                                                    @else
+                                                        <td style="color:grey">Not assigned to an assessment yet.</td>
+                                                    @endif
+                                                    <td>
+                                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/assesments/1/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.assessments.edit', $assessment->id) }}">Update</a>
                                                             </div>
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.assessments.destroy', $assessment->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this Assessment?')">Delete</button>
                                                                 </div>
-                                                            </form> 
+                                                            </form>
                                                             <div style="padding: 0px 2px;">
                                                                 <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/online-courses/assesments/1">View Result</a>
                                                             </div>
-                                                      
-                                                   
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Quiz of Business Plan Room</td>
-                                                <td>5</td>
-                                                <td>Not assigned yet</td>  
-                                                <td>
-                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/assesments/1/update">Update</a>
-                                                            </div>
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this assesment?')">Delete</button>
-                                                                </div>
-                                                            </form> 
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/promo/1/update">View Result</a>
-                                                            </div>
-                                                      
-                                                   
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

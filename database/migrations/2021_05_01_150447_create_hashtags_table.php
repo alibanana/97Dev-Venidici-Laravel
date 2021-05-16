@@ -48,6 +48,7 @@ class CreateHashtagsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('user_hashtag');
         Schema::dropIfExists('course_hashtag');
         Schema::dropIfExists('hashtags');
     }

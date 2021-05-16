@@ -116,13 +116,19 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Assesment</label> <br>
-                            <select name="assesment" id="" class="form-control form-control-user" disabled>
-                                <option >No Assesment</option>
-                                <option value="1" selected>Quiz of Business Case Room</option>
-                                <option value="2">Quiz of Business Plan Room</option>
+                            <label for="">Assessment</label> <br>
+                            <select name="assessment_id" class="form-control form-control-user" required>
+                                @if (!$course->assessment)
+                                    <option value="0" selected>No Assessment</option>
+                                @else
+                                    <option value="0">No Assessment</option>
+                                    <option value="{{ $course->assessment->id }}" selected>{{ $course->assessment->title }}</option>
+                                @endif
+                                @foreach ($available_assessments as $assessment)
+                                    <option value="{{ $assessment->id }}">{{ $assessment->title }}</option>
+                                @endforeach
                             </select>
-                            @error('assesment')
+                            @error('assessment_id')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
