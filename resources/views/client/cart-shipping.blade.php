@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Cart')
+@section('title', 'Venidici Shipping')
 
 @section('content')
 
@@ -51,15 +51,27 @@
                 <div class="col-12 col-sm-6" style="margin-top:1vw">
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Metode Pengiriman</p>
                     <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                        <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                        <select onchange="if (this.value) window.location.href=this.value" name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                             @if(Request::get('city') == null)
                                 <option disabled selected>Pilih Kota terlebih dahulu</option>
                             @else
                                 <option disabled selected>Pilih metode pengiriman</option>
-                                <option value="">TIKI</option>
-                                <option value="">JNE</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'jne']) }}" @if (Request::get('shipping') == 'jne') selected @endif>JNE</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'tiki']) }}" @if (Request::get('shipping') == 'tiki') selected @endif>TIKI</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'pos']) }}" @if (Request::get('shipping') == 'pos') selected @endif>POS</option>
                             @endif
                         </select>                    
+                        @error('province')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>  
+                </div>
+                <div class="col-12" style="margin-top:1vw">
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Catatan Untuk Pengirim</p>
+                    <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                        <input type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Kado untuk..">                   
                         @error('province')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
@@ -102,11 +114,11 @@
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:2vw">
                 <div style="display:flex;justify-content:space-between;align-items:center">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Sub total</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{$sub_total}}</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($sub_total, 0, ',', ',') }}</p>
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp 99,999,999</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($shipping_cost, 0, ',', ',') }}</p>
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>
@@ -118,8 +130,8 @@
                 </div>
             </div>
             <!-- END OF NOMINAL CARD -->
-            <div style="text-align:center">
-                <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>
+            <div style="text-align:center;margin-top:1.5vw">
+                <a href="{{ route('customer.cart.payment_index') }}" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Lanjut ke Pembayaran</a>
             </div>
         </div>
     </div>

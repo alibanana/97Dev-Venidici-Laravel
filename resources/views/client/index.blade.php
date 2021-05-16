@@ -193,7 +193,7 @@ END OF OUR PROGRAMS SECTION -->
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Online Course</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Online Course</a>
+                    <a href="/online-course" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Online Course</a>
                 </div>
             </div>
         </a>
@@ -578,8 +578,8 @@ END OF OUR PROGRAMS SECTION -->
                             <div class="top-left card-tag small-text">Online Course</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center">
-                                <p class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B">{{ $course->title }}</p>
+                            <div style="display:flex;justify-content:space-between;">
+                                <a href="/online-course/{{$course->id}}" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
                                 <i style="font-size:2vw;" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
                             </div>
                             @foreach ($course->hashtags as $tag)

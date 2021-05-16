@@ -9,9 +9,11 @@
     <div class="col-9" >
         <div style="padding-right:10vw">
             <p class="medium-heading" style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</p>
+
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
             
-            <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">{{$course->description}}</p>
+            <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">{{$course->subtitle}}</p>
+            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh <span style="font-family:Rubik Bold">Mr. Raditya Dika</span></p>
             <!--<video style="width:42vw;height:20vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px"  controls="false" >
                 <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
@@ -122,13 +124,7 @@
         <p class="sub-description profil-text-green profil-text-green-active profil-links" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw">Tetang <span style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</span> ini</p>
         <div  class="bigger-text profil-content" id="tentang-course"  style="margin-top:1vw">
             <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet tortor gravida ut nam. Sapien duis feugiat feugiat nunc. Nunc cras dolor risus magnis facilisis elementum pharetra. Nunc dolor lacus, accumsan, vestibulum, faucibus libero, vulputate vitae, mauris.
-
-    Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing pharetra sit faucibus justo, faucibus gravida. Fringilla ipsum, commodo, sem arcu. Netus aliquet sit malesuada vel velit in rhoncus, ac pellentesque. Facilisis tortor senectus facilisis sit. Posuere quis massa purus, molestie convallis viverra ligula euismod sapien. Sollicitudin euismod molestie adipiscing mauris ullamcorper consequat nunc eget.
-    
-    Dictum a tincidunt diam ac fermentum mauris, faucibus ut suspendisse. Sit quisque malesuada integer duis aliquet vitae nunc volutpat. Sed quis adipiscing morbi quisque. Morbi eget maecenas aliquam tincidunt tincidunt. Sed felis eget bibendum pulvinar accumsan etiam aliquet sagittis. 
-
-    Scelerisque enim, leo montes, erat scelerisque sapien egestas amet, bibendum. Et, mauris, faucibus at amet aliquam rhoncus. Tincidunt nunc ac sit blandit est.
+                {{$course->description}}
             </p>
         </div>
         <div class="profil-content" id="profil-pembicara" style="display:none;margin-top:3vw">
@@ -157,7 +153,11 @@
             <!-- END OF ALERT MESSAGE -->
         @endif
         <div class="course-detail-card-green">
-            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp 300,000</p>
+            @if($course->price == 0)
+            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
+            @else
+            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($course->price, 0, ',', ',') }}</p>
+            @endif
             <form action="{{ route('customer.cart.store') }}" method="post">
             @csrf
                 <input type="hidden" name="course_id" value="{{$course->id}}">
@@ -177,7 +177,7 @@
             </div>
             <p class="small-text" style="font-family:Rubik Medium;color: #3B3C43;margin-bottom:2vw;margin-top:2vw;">Butuh pelatihan untuk perusahaan Anda?</p>
             <div style="text-align:center">
-                <a href="#" class="small-text btn-purple-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Program Krest</a>
+                <a href="/for-corporate/krest" class="small-text btn-purple-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Program Krest</a>
             </div>
 
         </div>

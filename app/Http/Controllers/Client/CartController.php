@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Province;
 use App\Models\City;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
+use Illuminate\Support\Facades\Http;
 
 class CartController extends Controller
 {
@@ -38,6 +39,8 @@ class CartController extends Controller
                 ->where('user_id', auth()->user()->id)
                 ->count();
         $sub_total = 0;
+        $shipping_cost = 0;
+
         foreach($carts as $cart)
         {
             $sub_total += $cart->quantity * $cart->course->price;
@@ -52,19 +55,19 @@ class CartController extends Controller
             $cities = null;
         }
 
-        if ($request->has('city')) {
+        if ($request->has('shipping')) {
             $city_id = $request['city'];
-
-            // $cost = RajaOngkir::ongkosKirim([
-            //     'origin'        => 153,  //kode jaksel
-            //     'destination'   => $city_id, // ID kota/kabupaten tujuan
-            //     'weight'        => '200', // berat barang dalam gram
-            //     'courier'       => 'JNE' // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
-            // ])->get();
-            // dd($cost);
+            $courier_type = $request['shipping'];
+            $response = RajaOngkir::ongkosKirim([
+                'origin'        => 153,  //kode jaksel
+                'destination'   => $city_id, // ID kota/kabupaten tujuan
+                'weight'        => 1500, // berat barang dalam gram
+                'courier'       => $courier_type // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+            ])->get();
+            $shipping_cost = $response[0]['costs'][0]['cost'][0]['value'];
         }
 
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total'));
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost'));
     }
 
     public function store(Request $request)
@@ -93,7 +96,8 @@ class CartController extends Controller
             ]);
         }
        
-        
+        $request->session()->put('cart_count',$request->session()->get('cart_count')+1);  
+
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
@@ -119,13 +123,14 @@ class CartController extends Controller
 
     }
 
-    public function removeCart($cart_id)
+    public function removeCart(Request $request ,$cart_id)
     {
         // Cart::with('course')
         //         ->whereId($request->cart_id)
         //         ->delete();
-        Cart::findOrFail($cart_id)->delete();
-        
+        $cart= Cart::findOrFail($cart_id);
+        $request->session()->put('cart_count',$request->session()->get('cart_count')-$cart->quantity);  
+        $cart->delete();
         return redirect()->back()->with('success', 'Item Removed');
     }
     public function increaseQty(Request $request)
@@ -134,6 +139,8 @@ class CartController extends Controller
         $cart->quantity = $cart->quantity+1;
         $cart->price = $cart->price+$cart->price;
         $cart->save();
+        $request->session()->put('cart_count',$request->session()->get('cart_count')+1);  
+
         return redirect()->back();
     }
     public function decreaseQty(Request $request)
@@ -143,7 +150,13 @@ class CartController extends Controller
         $cart->price = $cart->price-$cart->course->price;
 
         $cart->save();
+        $request->session()->put('cart_count',$request->session()->get('cart_count')-1);  
+
         return redirect()->back();
+    }
+
+    public function payment_index(Request $request){
+        return view('client/cart-payment');
     }
 
     

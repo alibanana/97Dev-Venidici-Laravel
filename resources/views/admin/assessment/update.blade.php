@@ -133,10 +133,10 @@
                     </div>
                     <div class="col-12">
                         <label for="">Answers</label>
-                        <div>
+                        <div id="answer_duplicator_wrapper">
                             {{-- Element to be duplicated --}}
                             <div class="row" id="answer_duplicator" style="display:none">
-                                <div class="col-md-10">
+                                <div class="col-md-9">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="" placeholder="Enter Answer">
                                     </div>
@@ -147,9 +147,13 @@
                                         <option value="0">False Answer</option>
                                     </select>
                                 </div>
+                                <div class="col-1">
+                                    <button type="button" onClick="removeDiv(this, 'answer_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                                
                             </div>
                             <div class="row" id="answer_duplicator1">
-                                <div class="col-md-10">
+                                <div class="col-md-9">
                                     <div class="form-group">
                                         <input type="text" name="answers[1][answer]" class="form-control form-control-user" id="" placeholder="Enter Answer" required>
                                     </div>
@@ -159,6 +163,9 @@
                                         <option value="1">Correct Answer</option>
                                         <option value="0">False Answer</option>
                                     </select>
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" onClick="removeDiv(this, 'answer_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -293,6 +300,20 @@ function removeDiv(elem, wrapper_id){
         document.getElementById(categoryName).style.display = "block";
         evt.currentTarget.className += " course-link-active";
     }
+</script>
+<script>
+function removeDiv(elem, wrapper_id){
+    if(wrapper_id == 'requirement_duplicator_wrapper')
+        var parent = $(elem).parent('div').parent('div').parent('div');
+    else
+        var parent = $(elem).parent('div').parent('div');
+
+    if (document.getElementById(wrapper_id).childElementCount > 2) {
+        parent.remove();
+    } else {
+        alert("At least one element must be present!");
+    }
+}
 </script>
 <script>
     function disableInput() {

@@ -16,6 +16,8 @@ use App\Models\UserDetail;
 use App\Models\Course;
 use App\Models\Cart;
 
+use PDF;
+
 /*
 |--------------------------------------------------------------------------
 | Client PagesController Class.
@@ -28,7 +30,7 @@ use App\Models\Cart;
 class PagesController extends Controller
 {
     // Show the main landing page of the app.
-    public function index() {
+    public function index(Request $request) {
         $config_keyword = 'cms.homepage';
         $configs = Config::select('key', 'value')->where([['key', 'like', "%".$config_keyword."%"]])->get()->keyBy('key');
 
@@ -121,12 +123,20 @@ class PagesController extends Controller
         return view('client/user-dashboard');
     }
 
+    public function course_detail($id){
+        $course = Course::findOrFail($id);
+        return view('client/online-course/detail', compact('course'));
+    }
+
     public function dashboard_index()
     {
-        $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
-        return view('client/user-dashboard', compact('cart_count'));
-
+        return view('client/user-dashboard');
+    }
+    public function print(){
+        $pdf = PDF::loadView('client/certificate')
+        ->setPaper('A4', 'potrait');
+        
+        // return $pdf->download('certificate.pdf'); //download
+        return $pdf->stream(); //view
     }
 }

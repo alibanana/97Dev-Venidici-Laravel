@@ -81,6 +81,7 @@ Route::get('/signup', function () {
 /* CART ROUTING */
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
 Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index');
+Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index');
 Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
 Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total');
 Route::get('/cart/totalWeight', [CartController::class, 'getCartTotalWeight'])->name('customer.cart.getCartTotalWeight');
@@ -114,6 +115,11 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
     return view('client/woki/detail');
 });
 /* END OF WOKI ROUTING */
+
+Route::get('/transaction-detail/1', function () {
+    return view('client/transaction-detail');
+});
+
 /* END OF CLIENT ROUTING */
 
 /*
@@ -214,6 +220,18 @@ Route::get('/admin/promo/1/update', function () {
 });
 /* END OF PROMO CODE */
 
+/* START OF INFORMATION CODE*/
+Route::get('/admin/information', function () {
+    return view('admin/information/index');
+});
+Route::get('/admin/information/create', function () {
+    return view('admin/information/create');
+});
+Route::get('/admin/information/1/update', function () {
+    return view('admin/information/update');
+});
+/* END OF INFORMATION CODE */
+
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/admin/online-courses/create-video/1', function () {
     return view('admin/online-course/create-video');
@@ -228,6 +246,15 @@ Route::get('/admin/analytics/online-course', function () {
     return view('admin/analytics/online-course');
 });
 /* END OF ANALYTICS ROUTING */
+
+
+/* START OF NEWS LETTER ROUTING */
+Route::get('/admin/newsletter', function () {
+    return view('admin/newsletter/index');
+});
+/* END OF NEWS LETTER ROUTING */
+
+
 /* END OF ADMIN ROUTING */
 
 /* START OF GOOGLE AUTH */
@@ -244,5 +271,24 @@ Route::get('/for-public/woki', function () {
     return view('client/for-public/woki');
 });
 /* END OF FOR PUBLIC ROUTING*/
+
+/* START OF FOR CORPORATE ROUTING */
+Route::get('/for-corporate/krest', function () {
+    return view('client/for-corporate/krest');
+});
+/* END OF FOR CORPORATE ROUTING*/
+
+
+Route::get('/email/verifyUser', function () {
+    return view('emails/verifyUser');
+});
+Route::get('/certificate', function () {
+    return view('client/certificate');
+});
+/* START OF DOMPDF ROUTING */
+Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
+
+/* END OF DOMPDF ROUTING */
+
 
 require __DIR__.'/auth.php';

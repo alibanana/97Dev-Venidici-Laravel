@@ -34,66 +34,295 @@
     <title>@yield('title')</title>
 
   </head>
-  <body >
+  <body style="padding-right:0px !important">
+  
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
-    <!-- END OF NAVBAR -->
+    <!-- START OF NAVBAR -->
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
-        <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Home</a>
-        <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
-        <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*'))navbar-item-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">For Public</a>
-        <a href="" class="normal-text navbar-item" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Community</a>
+        <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
+        <a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
+        <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
+        <a href="" class="normal-text navbar-item" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
-        <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Log In</a>
+        <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Log In</a>
         @endif
         @if (Auth::check())
-        <div class="dropdown show">
-          <a id="cart_icon" class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="counter fa-stack has-badge" data-count="1">
-              <i class="p3 fas fa-bell fa-stack-1x xfa-inverse"></i>
-            </span>
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin-left:-13.5vw;width:18vw;overflow:scroll;height:10vw;">
-            <div class="dropdown-item" style="margin-top:0.5vw">
-              <div style="display:flex;justify-content:space-between">
-                <p class="small-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;">Payment Completed!</p>   
-                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">20/04/2021</p>   
-              </div>
-              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">View more..</a>
-            </div>
-            <div class="dropdown-item" style="margin-top:0.5vw">
-              <div style="display:flex;justify-content:space-between">
-                <p class="small-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;">Payment Completed!</p>   
-                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">20/04/2021</p>   
-              </div>
-              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">View more..</a>
-            </div>
-            <div class="dropdown-item" style="margin-top:0.5vw">
-              <div style="display:flex;justify-content:space-between">
-                <p class="small-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;">Payment Completed!</p>   
-                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">20/04/2021</p>   
-              </div>
-              <a href="#" class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;">View more..</a>
-            </div>
-          </div>
-        </div>
-        <a id="cart_icon" class="sub-description navbar-item" href="/cart" style="color:#2B6CAA;margin-right:0.8vw">
-          <span class="counter fa-stack has-badge" data-count="{{$cart_count}}">
+        
+        <a id="cart_icon" class="sub-description navbar-item" href="/cart" style="color:#2B6CAA">
+          <span class="counter fa-stack has-badge" data-count="{{Session::get('cart_count')}}">
             <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart'))navbar-item-active @endif"></i>
           </span>
         </a>
+        <a id="notification_icon" class="sub-description navbar-item" href="#notification" style="color:#2B6CAA;margin-right:0.8vw">
+          <span class="counter fa-stack has-badge" data-count="">
+            <i class="p3 fas fa-bell fa-stack-1x xfa-inverse"></i>
+          </span>
+        </a>
+      
         <a class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @endif"></i></a>
         
         @endif
         
     </div>
-    <!-- START OF BANNER SECTION -->
+    <!-- END OF NAVBAR -->
         @endif
       @endif
     @endif
+
+    <!-- START OF POPUP -->
+    <div id="notification" class="overlay">
+        <div class="popup-notif">
+          <a class="close-notif medium-heading" href="#closed" style="margin-top:1vw;text-decoration:none" >&times;</a>
+          <div class="content" >
+            <div style="display:flex;align-items:center;padding-bottom:2vw">
+              <p class="normal-text notif-item notif-item-active notif-links" onclick="changeNotification(event, 'semua-notification')" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;color:##3B3C43">Semua</p>
+              <p class="normal-text notif-item notif-links" onclick="changeNotification(event, 'transaksi-notification')" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;color:##3B3C43;margin-left:2vw">Transaksi</p>
+              <p class="normal-text notif-item notif-links" onclick="changeNotification(event, 'informasi-notification')" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;color:##3B3C43;margin-left:2vw">Informasi</p>
+
+            </div>
+            <!-- START OF SEMUA NOTIFICATION -->
+            <div class="col-md-12 notif-content" id="semua-notification" style="overflow:scroll;height:20vw;">
+              <!-- ONE YELLOW CARD -->
+              <a href="" style="text-decoration:none">
+                <div style="display:flex;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE YELLOW CARD -->
+              <!-- ONE BLUE CARD -->
+              <a href="/transaction-detail/1" style="text-decoration:none">
+                <div style="display:flex;margin-top:1vw;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE BLUE CARD -->
+              <!-- ONE YELLOW CARD -->
+              <a href="" style="text-decoration:none">
+                <div style="display:flex;margin-top:1vw;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE YELLOW CARD -->
+            </div>
+            <!-- END OF SEMUA NOTIFICATION -->
+
+            <!-- START OF TRANSAKSI NOTIFICATION -->
+            <div class="col-md-12 notif-content" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
+              
+              <!-- ONE BLUE CARD -->
+              <a href="/transaction-detail/1" style="text-decoration:none">
+                <div style="display:flex;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE BLUE CARD -->
+              <!-- ONE BLUE CARD -->
+              <a href="/transaction-detail/1" style="text-decoration:none">
+                <div style="display:flex;margin-top:1vw;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE BLUE CARD -->
+              <!-- ONE BLUE CARD -->
+              <a href="/transaction-detail/1" style="text-decoration:none">
+                <div style="display:flex;margin-top:1vw;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE BLUE CARD -->
+            </div>
+            <!-- END OF TRANSAKSI NOTIFICATION -->
+
+            <!-- START OF INFORMASI NOTIFICATION -->
+            <div class="col-md-12 notif-content" id="informasi-notification" style="overflow:scroll;height:20vw;display:none">
+              
+              <!-- ONE YELLOW CARD -->
+              <a href="" style="text-decoration:none">
+                <div style="display:flex;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE YELLOW CARD -->
+
+              <!-- ONE YELLOW CARD -->
+              <a href="" style="text-decoration:none">
+                <div style="display:flex;margin-top:1vw;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE YELLOW CARD -->
+
+              <!-- ONE YELLOW CARD -->
+              <a href="" style="text-decoration:none">
+                <div style="display:flex;margin-top:1vw;" >
+                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+
+                      </div>
+                  </div>
+                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                      <div style="padding:0.6vw 1vw">
+                          
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          overflow : hidden !important;
+                          text-overflow: ellipsis !important;
+                          -webkit-line-clamp: 2 !important;
+                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
+                      </div>
+                  </div>
+                </div>
+              </a>
+              <!-- END OF ONE YELLOW CARD -->
+            </div>
+            <!-- END OF INFORMASI NOTIFICATION -->
+
+          </div>
+        </div>
+    </div>
+    <!-- END OF POPUP -->
+  
     @yield('content')
 
 
@@ -110,6 +339,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha512-HWlJyU4ut5HkEj0QsK/IxBCY55n5ZpskyjVlAoV9Z7XQwwkqXoYdCIC93/htL3Gu5H3R4an/S0h2NXfbZk3g7w==" crossorigin="anonymous"></script>
 
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+    <script>
+        function changeNotification(evt, categoryName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("notif-content")
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("notif-links");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace("notif-item-active", "notif-item");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " notif-item-active";
+        }
+    </script>
     <script>
       // 
       var path = "{{ env('APP_URL') . route('autocomplete', [], false) }}";
@@ -122,5 +368,6 @@
         }
       });
     </script>
+   
   </body>
 </html>

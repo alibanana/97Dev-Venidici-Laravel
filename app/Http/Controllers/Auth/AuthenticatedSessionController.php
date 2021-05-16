@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
 
 use App\Models\User;
 
@@ -43,7 +44,6 @@ class AuthenticatedSessionController extends Controller
         } else {
             return redirect()->route('admin.dashboard.index');
         }
-
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
 

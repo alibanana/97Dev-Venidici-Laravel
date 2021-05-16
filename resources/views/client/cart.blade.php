@@ -67,7 +67,7 @@
                                 
                             </div>
                             <div style="width:7.5vw">
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{$cart->price}}</p>
+                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                                 
                             </div>
                             <div style="width:7.5vw">
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. 250000</p>
+                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($course->price, 0, ',', ',') }}</p>
                             </div>                        
                         </div>
                     </div>
@@ -193,7 +193,7 @@
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw">
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Total</p>
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp  <?php echo $total_price ?></p>
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp  <?php echo number_format($total_price, 0, ',', ',') ?></p>
                 </div>
             </div>
             <!-- END OF NOMINAL CARD -->

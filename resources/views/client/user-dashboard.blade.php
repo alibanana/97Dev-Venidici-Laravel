@@ -254,7 +254,9 @@
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{Auth::user()->name}}</p> 
                     <div class="dropdown show">
                         
-                        <a class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</a>
+                        <!--<a class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>-->
+                        <a class="small-heading" style="color:grey;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+
 
                         <div class="dropdown-menu" aria-labelledby="editDropdown" style="">
                             <div class="dropdown-item" >
@@ -262,6 +264,14 @@
                             </div>
                             <div class="dropdown-item" style="margin-top:0.5vw">
                                 <a href="#change-password" class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none">Change Password</a>   
+                            </div>
+                            <div class="dropdown-item" style="margin-top:0.5vw">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" style="background:none;border:none">
+                                        <p class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none"> <span><i class="fas fa-sign-out-alt"></i></span> Log out</p>   
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>  
@@ -310,7 +320,7 @@
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -332,7 +342,7 @@
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -360,7 +370,7 @@
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -386,7 +396,7 @@
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -418,7 +428,7 @@
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -440,7 +450,7 @@
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
@@ -644,7 +654,7 @@
                 <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
-            <a class="carousel-control-next"   data-bs-target="#saran-carousel" style="width:2.5vw;padding-right:5vw"  role="button"data-bs-slide="next">
+            <a class="carousel-control-next"   data-bs-target="#saran-carousel" style="width:2.5vw;"  role="button"data-bs-slide="next">
                 <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>
