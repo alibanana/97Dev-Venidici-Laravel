@@ -254,22 +254,22 @@
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{Auth::user()->name}}</p> 
                     <div class="dropdown show">
                         
-                        <!--<a class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>-->
-                        <a class="small-heading" style="color:grey;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                        <a class="small-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                        <!--<a class="small-heading" style="color:grey;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>-->
 
 
-                        <div class="dropdown-menu" aria-labelledby="editDropdown" style="">
-                            <div class="dropdown-item" >
-                                <a href="#edit-profile" class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none">Edit Profile</a>   
+                        <div class="dropdown-menu" aria-labelledby="editDropdown" style="border-radius:10px;padding:0px;width:14vw">
+                            <div class="edit-item" style="border-radius:10px 10px 0px 0px">
+                                <a href="#edit-profile" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Edit Profile</span></a>   
                             </div>
-                            <div class="dropdown-item" style="margin-top:0.5vw">
-                                <a href="#change-password" class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none">Change Password</a>   
+                            <div class="edit-item">
+                                <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
                             </div>
-                            <div class="dropdown-item" style="margin-top:0.5vw">
+                            <div class="edit-item" style="border-radius:0px 0px 10px 10px">
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" style="background:none;border:none">
-                                        <p class="normal-text" style="font-family:Rubik Regular;color:#000000;margin-bottom:0px;text-decoration:none"> <span><i class="fas fa-sign-out-alt"></i></span> Log out</p>   
+                                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-sign-out-alt"></i> <span style="margin-left:0.84vw">Log out</span></p>   
                                     </button>
                                 </form>
                             </div>

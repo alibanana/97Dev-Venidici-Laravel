@@ -79,6 +79,8 @@ Route::get('/signup', function () {
 //     return view('client/user-dashboard');
 // });
 /* CART ROUTING */
+Route::get('/createPayment', [CartController::class, 'createPayment'])->name('customer.cart.createPayment');
+Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
 Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index');
 Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index');

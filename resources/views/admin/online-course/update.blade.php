@@ -314,7 +314,7 @@
                             <div class="card-header">
                                 <div style="display:flex;justify-content:space-between;align-items:center">
                                     <div>
-                                        <input style="font-family:bold" style="width:50% !important" type="text" value="Materi">
+                                        <input style="width:50% !important;" type="text" value="Materi">
                                         <button type="submit"  class="btn btn-primary btn-info">Update Section</button>    
                                     </div>
                                     <div>
@@ -355,7 +355,7 @@
                             <div class="card-header">
                                 <div style="display:flex;justify-content:space-between;align-items:center">
                                     <div>
-                                        <input style="font-family:bold" style="width:50% !important" type="text" value="QnA">
+                                        <input style="width:50% !important" type="text" value="QnA">
                                         <button type="submit"  class="btn btn-primary btn-info">Update Section</button>    
                                     </div>
                                     <div>

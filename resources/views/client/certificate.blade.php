@@ -6,26 +6,25 @@
     <title>Certificate</title>
     <style>
     /* Container holding the image and the text */
-    .container {
-    position: relative;
-    text-align: center;
-    color: white;
+    #container {
+        position: relative;
+        text-align: center;
+        color: white;
     }
 
-
     /* Top left text */
-    .top-left {
-    position: absolute;
-    top: 27vw;
-    left: 10vw;
+    #top-left {
+        position: absolute;
+        top: 23vw;
+        left: 10vw;
     }
 
     </style>
 </head>
 <body style="margin:0">
-    <div class="container">
-        <img src="assets/images/client/Sertifikat Venidici-Bisnis.png" style="width:100%" class="img-fluid" alt="Newsletter Illustration">
-        <p class="top-left" style="font-size:4.2vw"> Laskmi Azzahra Kaheraning</p>
+    <div id="container">
+        <img src="assets/images/client/Sertifikat Venidici-Bisnis.png" style="width:100%"  alt="Newsletter Illustration">
+        <p id="top-left" style="font-size:4.2vw">Laskmi Azzahra Kaheraning</p>
     </div>
 </body>
 </html>

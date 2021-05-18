@@ -1309,3 +1309,17 @@ html, body {
 .display-icon{
     display:block !important;
 }
+
+.edit-item{
+    padding: 0.5vw 1vw;
+}
+
+.edit-item:hover{
+    background-color: #2B6CAA;
+}
+.edit-item:hover a{
+    color:#FFFFFF !important
+}
+.edit-item:hover p{
+    color:#FFFFFF !important
+}
