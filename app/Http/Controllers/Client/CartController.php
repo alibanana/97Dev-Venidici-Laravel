@@ -40,6 +40,7 @@ class CartController extends Controller
                 ->count();
         $sub_total = 0;
         $shipping_cost = 0;
+        $tipe_pengiriman = null;
 
         foreach($carts as $cart)
         {
@@ -61,13 +62,22 @@ class CartController extends Controller
             $response = RajaOngkir::ongkosKirim([
                 'origin'        => 153,  //kode jaksel
                 'destination'   => $city_id, // ID kota/kabupaten tujuan
-                'weight'        => 1500, // berat barang dalam gram
+                'weight'        => 1000, // berat barang dalam gram
                 'courier'       => $courier_type // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
             ])->get();
-            $shipping_cost = $response[0]['costs'][0]['cost'][0]['value'];
+            //$shipping_cost = $response[0]['costs'][0]['cost'][0]['value'];
+            $tipe_pengiriman = $response[0]['costs'];
         }
 
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost'));
+        if ($request->has('tipe')) {
+            $nama_tipe = $request['tipe'];
+            foreach($tipe_pengiriman as $tipe)
+            {
+                if($tipe['service'] == $nama_tipe)
+                    $shipping_cost = $tipe['cost'][0]['value'];
+            }
+        }
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman'));
     }
 
     public function store(Request $request)
@@ -158,6 +168,7 @@ class CartController extends Controller
     public function payment_index(Request $request){
         return view('client/cart-payment');
     }
+
 
     
     /**

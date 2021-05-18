@@ -592,6 +592,9 @@ END OF OUR PROGRAMS SECTION -->
                                 <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
                                 @if ($course->total_duration)
                                     <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">{{ $course->total_duration }} mins</p>
+                                    @else
+                                    <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">- mins</p>
+
                                 @endif
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">

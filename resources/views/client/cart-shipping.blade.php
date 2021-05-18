@@ -34,10 +34,9 @@
                         <select onchange="if (this.value) window.location.href=this.value" name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                             @if($cities == null)
                                 <option disabled selected>Pilih Provinsi terlebih dahulu</option>
-
                             @else
                                 @foreach($cities as $city)
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'city' => $city->id]) }}" @if (Request::get('city') == $city->id) selected @endif>{{$city->name }}</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'city' => $city->city_id]) }}" @if (Request::get('city') == $city->city_id) selected @endif>{{$city->name }}</option>
                                 @endforeach          
                             @endif
                         </select>                    
@@ -68,6 +67,19 @@
                         @enderror
                     </div>  
                 </div>
+                @if($tipe_pengiriman != null)
+                    <div class="col-12 col-sm-6" style="margin-top:1vw">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Tipe Pengiriman</p>
+                        <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                            <select onchange="if (this.value) window.location.href=this.value" name="tipe_pengiriman" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            <option disabled selected>Pilih tipe pengiriman</option>
+                                @foreach($tipe_pengiriman as $tipe)
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'tipe' =>$tipe['service']]) }}" @if (Request::get('tipe') == $tipe['service']) selected @endif>{{$tipe['service']}} - (Estimasi {{$tipe['cost'][0]['etd']}} hari) </option>
+                                @endforeach
+                            </select>        
+                        </div>  
+                    </div>
+                @endif
                 <div class="col-12" style="margin-top:1vw">
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Catatan Untuk Pengirim</p>
                     <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
@@ -118,7 +130,12 @@
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($shipping_cost, 0, ',', ',') }}</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">
+                    @if($shipping_cost == 0)
+                    -
+                    @else
+                    Rp {{ number_format($shipping_cost, 0, ',', ',') }}</p>
+                    @endif
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>
