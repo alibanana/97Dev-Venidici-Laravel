@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 
 class CheckoutController extends Controller
 {
@@ -32,37 +33,71 @@ class CheckoutController extends Controller
         $random = '';
         for ($i = 0; $i < $length; $i++) {
             $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
-        }
+        };
 
         $no_invoice = 'INV-'.Str::upper($random);
-
+        
         $invoice = Invoice::create([
-            'invoice'       => $no_invoice,
+            'invoice_no'    => $no_invoice,
             'user_id'       => auth()->user()->id,
-            'courier'       => $input['courier'],
-            'service'       => $input['service'],
-            'cost_courier'  => $input['cost'],
-            'weight'        => $input['weight'],
+            'courier'       => 'jne',
+            'service'       => 'CTC',
+            'cost_courier'  => $input['cost_courier'],
+            'total_weight'  => $input['weight'],
             'name'          => $input['name'],
             'phone'         => $input['phone'],
-            'province'      => $input['province'],
-            'city'          => $input['city'],
+            'province'      => '6',
+            'city'          => '153',
             'address'       => $input['address'],
             'grand_total'   => $input['grand_total'],
             'status'        => 'pending',
         ]);
         //create order
-        foreach (Cart::where('customer_id', auth()->user()->id)->get() as $cart) {
+        foreach (Cart::where('user_id', auth()->user()->id)->get() as $cart) {
 
-        //insert product ke table order
-        $invoice->orders()->create([
-            'invoice_id'    => $invoice->id,
-            'order_item_id' => 1,
-            'qty'           => $cart->quantity,
-            'price'         => $cart->price,
-        ]);
+            //insert product ke table order
+            $invoice->orders()->create([
+                'invoice_id'    => $invoice->id,
+                'order_item_id' => 1,
+                'qty'           => $cart->quantity,
+                'price'         => $cart->price,
+            ]);
+        };
 
+        $invoice_id = Invoice::latest()->first()->id;
 
+        //hit xfers api to create payment order
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
+        ->withHeaders([
+            'Accept' => 'application/vnd.api+json',
+            'Content-Type' => 'application/vnd.api+json'
+ 
+        ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
+            "data" => [
+                "attributes" => [
+                    "paymentMethodType" => "virtual_bank_account",
+                    "amount" => $input['grand_total'],
+                    "referenceId" => $no_invoice,
+                    "expiredAt" => "2021-05-19T06:07:04+07:00",
+                    "description" => "Order Number ".$invoice_id,
+                    "paymentMethodOptions" =>[
+                        "bankShortCode" => "BCA",
+                        "displayName" => "Venidici",
+                        "suffixNo" => ""
+                    ]
+ 
+                ]
+            ]
+        ]); 
+ 
+        $payment_object = json_decode($response->body(), true);
+        return redirect('/transaction-detail/'.$no_invoice);
+    }
+    public function transactionDetail($id){
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/contract_0b0eb35476e14b4d8466464f3b567601');
+        $payment_status = json_decode($response->body(), true);
+        dd($payment_status);
+        return view('client/transaction-detail', compact('payment_status'));
     }
     public function createPayment(Request $request, $id){
 
@@ -71,7 +106,7 @@ class CheckoutController extends Controller
         //delete cart
 
         //get user last invoice
-        $order = Order::find($id)
+        $order = Order::find($id);
 
         //hit xfers api to create payment order
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
