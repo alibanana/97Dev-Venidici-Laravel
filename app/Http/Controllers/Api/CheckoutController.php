@@ -19,16 +19,41 @@ class CheckoutController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request)
-    {
-        $this->middleware('auth:api')->except('notificationHandler');
-
-        $this->request = $request;
-        // Set midtrans configuration
-        \Midtrans\Config::$serverKey    = config('services.midtrans.serverKey');
-        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
-        \Midtrans\Config::$isSanitized  = config('services.midtrans.isSanitized');
-        \Midtrans\Config::$is3ds        = config('services.midtrans.is3ds');
+    public function getBankStatus(Request $request, $id){
+        //EXAMPLE GET REQUEST
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
+        $payment_status = json_decode($response->body(), true);
+    }
+ 
+    public function createPayment(Request $request, $id){
+        //get order by id
+        $order = Order::find($id)
+        //$response = Http::withBasicAuth('test_8eadd736893866e0c212521298aa6c57', 'c99fd1d5-6443-4a4d-a2df-8dbb68f5d043')
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
+        ->withHeaders([
+            'Accept' => 'application/vnd.api+json',
+            'Content-Type' => 'application/vnd.api+json'
+ 
+        ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
+            "data" => [
+                "attributes" => [
+                    "paymentMethodType" => "virtual_bank_account",
+                    "amount" => $order->price,
+                    "referenceId" => $order->invoice_id,
+                    "expiredAt" => "2021-05-19T06:07:04+07:00",
+                    "description" => "Order Number ".$input['invoice_id'],
+                    "paymentMethodOptions" =>[
+                        "bankShortCode" => "BCA",
+                        "displayName" => "Venidici",
+                        "suffixNo" => ""
+                    ]
+ 
+                ]
+            ]
+        ]); 
+ 
+        $payment_status = json_decode($response->body(), true);
+        dd($payment_status);
     } 
 
     public function store()
