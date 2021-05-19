@@ -22,8 +22,11 @@ class Invoice extends Model
         'city', 
         'address', 
         'status', 
-        'snap_token', 
+        'snap_token',
+        'total_order_price',
+        'discounted_price', 
         'grand_total'
+        'xfers_payment_id'
     ];
 
     public function user() {
