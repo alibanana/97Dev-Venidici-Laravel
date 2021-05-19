@@ -25,7 +25,7 @@ class Invoice extends Model
         'snap_token',
         'total_order_price',
         'discounted_price', 
-        'grand_total'
+        'grand_total',
         'xfers_payment_id'
     ];
 

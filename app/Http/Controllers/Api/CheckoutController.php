@@ -28,8 +28,7 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
-        dd($input);
-        //create invoice
+            //create invoice
         $length = 10;
         $random = '';
         for ($i = 0; $i < $length; $i++) {
@@ -39,19 +38,21 @@ class CheckoutController extends Controller
         $no_invoice = 'INV-'.Str::upper($random);
         
         $invoice = Invoice::create([
-            'invoice_no'    => $no_invoice,
-            'user_id'       => auth()->user()->id,
-            'courier'       => $input['courier'],
-            'service'       => $input['service'],
-            'cost_courier'  => $input['cost_courier'],
-            'total_weight'  => $input['weight'],
-            'name'          => $input['name'],
-            'phone'         => $input['phone'],
-            'province'      => $input['province'],
-            'city'          => $input['city'],
-            'address'       => $input['address'],
-            'grand_total'   => $input['grand_total'],
-            'status'        => 'pending',
+            'invoice_no'            => $no_invoice,
+            'user_id'               => auth()->user()->id,
+            'courier'               => $input['courier'],
+            'service'               => $input['service'],
+            'cost_courier'          => $input['cost_courier'],
+            'total_weight'          => $input['weight'],
+            'name'                  => $input['name'],
+            'phone'                 => $input['phone'],
+            'province'              => $input['province'],
+            'city'                  => $input['city'],
+            'address'               => $input['address'],
+            'grand_total'           => $input['grand_total'],
+            'status'                => 'pending',
+            'total_order_price'     => 10000,
+            'discounted_price'      => 200
         ]);
         //create order
         foreach (Cart::where('user_id', auth()->user()->id)->get() as $cart) {
@@ -59,7 +60,7 @@ class CheckoutController extends Controller
             //insert product ke table order
             $invoice->orders()->create([
                 'invoice_id'    => $invoice->id,
-                'order_item_id' => 1,
+                'course_id'     => $cart->course_id,
                 'qty'           => $cart->quantity,
                 'price'         => $cart->price,
             ]);
@@ -79,19 +80,19 @@ class CheckoutController extends Controller
                     "paymentMethodType" => "virtual_bank_account",
                     "amount" => $input['grand_total'],
                     "referenceId" => $no_invoice,
-                    "expiredAt" => "2021-05-19T06:07:04+07:00",
+                    "expiredAt" => "2021-05-20T06:07:04+07:00",
                     "description" => "Order Number ".$invoice_id,
                     "paymentMethodOptions" =>[
-                        "bankShortCode" => "BCA",
+                        "bankShortCode" => $input['bankShortCode'],
                         "displayName" => "Venidici",
                         "suffixNo" => ""
                     ]
- 
                 ]
             ]
         ]); 
  
         $payment_object = json_decode($response->body(), true);
+        dd($payment_object['data']['id']);
         return redirect('/transaction-detail/'.$no_invoice);
     }
     public function transactionDetail($id){

@@ -31,7 +31,7 @@ class CreateInvoicesTable extends Migration
             $table->bigInteger('total_order_price');
             $table->bigInteger('discounted_price');
             $table->bigInteger('grand_total');
-            $table->integer('xfers_payment_id');
+            $table->integer('xfers_payment_id')->nullable();
             $table->timestamps();
         });
     }

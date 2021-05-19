@@ -84,6 +84,8 @@
                                 @if($cities == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
                                 @else
+                                    <option disabled selected>Pilih Kota</option>
+
                                     @foreach($cities as $city)
                                     <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'city' => $city->city_id]) }}" @if (Request::get('city') == $city->city_id) selected @endif>{{$city->name }}</option>
                                     @endforeach          
@@ -208,6 +210,7 @@
                         <input type="hidden" name="city" value="{{Request::get('city')}}">
                         <input type="hidden" name="courier" value="{{Request::get('shipping')}}">
                         <input type="hidden" name="service" value="{{Request::get('tipe')}}">
+                        <input type="hidden" name="bankShortCode" id="bankShortCode" value="">
                         <button type="button" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>                
                 
                 </div>
@@ -230,7 +233,9 @@
         }
         document.getElementById(icon_id).style.display = "block";
         evt.currentTarget.className += " payment-method-card-active";
-        $(element).find("input[type=hidden]").val(type);
+        document.getElementById("bankShortCode").value = type;
+
+
 
     }
 </script>
