@@ -112,11 +112,19 @@
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/woki" 
-            aria-expanded="true" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWoki"
+            aria-expanded="true" aria-controls="collapseWoki">
             <i class="fas fa-palette"></i>
             <span>Woki</span>
         </a>
+
+        <div id="collapseWoki" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseWoki">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin/woki">Woki Courses</a>
+                <a class="collapse-item" href="/admin/art-supply">Art Supply</a>
+
+            </div>
+        </div>
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->

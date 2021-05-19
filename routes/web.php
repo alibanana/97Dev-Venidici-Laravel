@@ -201,6 +201,35 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::delete('/hashtags/{id}', [AdminHashtagController::class, 'destroy'])->name('hashtags.destroy');
 });
 
+/* START OF WOKI ROUTING */
+Route::get('/admin/woki', function () {
+    return view('admin/woki/index');
+});
+Route::get('/admin/woki/1', function () {
+    return view('admin/woki/detail');
+});
+Route::get('/admin/woki/create-video/1', function () {
+    return view('admin/woki/create-video');
+});
+Route::get('/admin/woki/create', function () {
+    return view('admin/woki/create');
+});
+Route::get('/admin/woki/1/update', function () {
+    return view('admin/woki/update');
+});
+/* END OF WOKI ROUTING */
+/* START OF art-supply ROUTING */
+Route::get('/admin/art-supply', function () {
+    return view('admin/art-supply/index');
+});
+Route::get('/admin/art-supply/create', function () {
+    return view('admin/art-supply/create');
+});
+Route::get('/admin/art-supply/1/update', function () {
+    return view('admin/art-supply/update');
+});
+/* END OF art-supply ROUTING */
+
 /* START ADMIN ROUTING */
 Route::get('/admin/login', function () {
     return view('admin/auth/login');
