@@ -23,7 +23,7 @@
             <form action="">
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
-                        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">General Information</p>
+                        <p class="sub-description" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">General Information</p>
                     </div>
                     <!-- START OF LEFT SECTION -->
                     <div class="col-12">

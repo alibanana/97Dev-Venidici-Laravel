@@ -12,23 +12,30 @@
     </div>
     <div class="col-8 p-0" style="">
         <div class="page-container-left" style="padding-top:3vw;padding-right:9vw">
-            
+            @if($payment_status['data']['attributes']['status'] == 'pending')
+
             <!-- ALERT MESSAGE -->
             <div class="alert alert-dismissible fade show small-text"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
                 <div style="display:flex;align-items:center">
                     <i class="fas fa-exclamation-triangle small-heading" style="color:#F4C257"></i>
+                    <?php
+                        $date = explode('T', $payment_status['data']['attributes']['createdAt']);
+                        $time = explode('+', $date[1]);
+                    ?>
                     <p style="margin-bottom:0px;margin-left:1vw">
-                        Hai, Gabriel. Harap selesaikan pembayaran sebelum 12/12/21 00:00 atau proses pembayaran akan ditutup. Terima kasih.            
+                        Hai, Gabriel. Harap selesaikan pembayaran sebelum {{$date[0]}} {{$time[0]}} atau proses pembayaran akan ditutup. Terima kasih.            
                     </p>
                 </div>
             </div>
             <!-- END OF ALERT MESSAGE -->
-            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:3vw">Metode Pembayaran</p>
+            @endif
+            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43; @if($payment_status['data']['attributes']['status'] == 'pending') margin-top:3vw @endif">Metode Pembayaran</p>
+            @if($payment_status['data']['attributes']['paymentMethod']['instructions']['bankShortCode'] == 'BCA')
             <!-- START OF ONE PAYMENT METHOD -->
             <div class="payment-method-card-active" style="" >
                 <div style="display:flex;justify-content:space-between;align-items:center">
                     <div style="display:flex;align-items:center">
-                        <img src="/assets/images/client/BCA_LOGO.png" style="width:6vw;height:5vw;" class="img-fluid" alt="">
+                        <img src="/assets/images/client/BCA_LOGO.png" style="width:5vw;height:4vw;border-radius:10px;object-fit:cover" class="img-fluid" alt="">
                         <p class="bigger-text payment-method-text" style="font-family:Rubik Medium;margin-bottom:0px;margin-left:1vw">Bank BCA ( Virtual Account )</p>
                     </div>
                     <div>
@@ -37,6 +44,22 @@
                 </div>
             </div>
             <!-- END OF ONE PAYMENT METHOD -->
+            @else
+            <!-- START OF ONE PAYMENT METHOD -->
+            <div class="payment-method-card-active" style="" >
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div style="display:flex;align-items:center">
+                        <img src="/assets/images/client/BRI_LOGO.jpeg" style="width:5vw;height:4vw;border-radius:10px;object-fit:cover" class="img-fluid" alt="">
+                        <p class="bigger-text payment-method-text" style="font-family:Rubik Medium;margin-bottom:0px;margin-left:1vw">Bank BRI ( Virtual Account )</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-check-circle small-heading" style="color:#2B6CAA;margin-right:1vw"></i>
+                    </div>    
+                </div>
+            </div>
+            <!-- END OF ONE PAYMENT METHOD -->
+
+            @endif
             
             <!-- START OF PAYMENT INSTRUCTION -->
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:2vw;">
@@ -50,8 +73,8 @@
                     <div class="collapse" id="collapseExample" style="padding-top:1vw">
                         <div class="">
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">1. Pilih m-Transfer dan pilih BCA Virtual Account.</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">2. Masukan nomor Virtual Account <span style="font-family:Rubik Medium;color:#074EE8">127 0811 7654 3210</span>  dan pilih send. </p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">3. Pastikan total tagihan dari BCA Virtual Account sesuai dengan <span style="font-family:Rubik Medium;color:#074EE8"> total pembayaran</span> di halaman ini. Pastikan juga Merchant bernama <span style="font-family:Rubik Medium;color:#074EE8">Venidici</span>. Jika semua sudah benar, pilih Yes/Ya.</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">2. Masukan nomor Virtual Account <span style="font-family:Rubik Medium;color:#074EE8">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</span>  dan pilih send. </p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">3. Pastikan total tagihan dari BCA Virtual Account sesuai dengan <span style="font-family:Rubik Medium;color:#074EE8"> total pembayaran</span> di halaman ini. Pastikan juga Merchant bernama <span style="font-family:Rubik Medium;color:#074EE8">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['displayName']}}</span>. Jika semua sudah benar, pilih Yes/Ya.</p>
                         </div>
                     </div>
                 </div>
@@ -72,14 +95,20 @@
             </div>       
             <!-- START OF STATUS CARD -->
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1vw 1.5vw;margin-top:1vw;text-align:center">
+                @if($payment_status['data']['attributes']['status'] == 'pending')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#CE3369;margin-bottom:0px">Menunggu Pembayaran</p>
+                @elseif($payment_status['data']['attributes']['status'] == 'paid')
+                <p class="bigger-text" style="font-family:Rubik Medium;color:green;margin-bottom:0px">Pembayaran Diterima</p>
+                @elseif($payment_status['data']['attributes']['status'] == 'completed')
+                <p class="bigger-text" style="font-family:Rubik Medium;color:green;margin-bottom:0px">Pembelian Selesai</p>
+                @endif
             </div>
             <!-- END OF STATUS CARD -->       
 
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:3vw">Virtual Account Number</p>            
             <!-- START OF VA CARD -->
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1vw 1.5vw;margin-top:1vw;text-align:center">
-                <p class="bigger-text" style="font-family:Rubik Medium;color:#074EE8;margin-bottom:0px">127 0811 7654 3210</p>
+                <p class="bigger-text" style="font-family:Rubik Medium;color:#074EE8;margin-bottom:0px">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</p>
             </div>
             <!-- END OF VA CARD -->  
 

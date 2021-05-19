@@ -21,8 +21,8 @@
                 <div class="payment-method-card bank-links" style="" id="payment_method_1"  onclick="togglePayment(event, 'checked_icon_1','bca')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
-                            <img src="/assets/images/client/BCA_LOGO.png" style="width:4vw;height:3vw;object-fit:cover" class="img-fluid" alt="">
-                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank BCA ( Virtual Account )</p>
+                            <img src="/assets/images/client/BCA_LOGO.png" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
+                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw;">Bank BCA ( Virtual Account )</p>
                         </div>
                         <div id="checked_icon_1" class="bank-content" style="display:none">
                             <i class="fas fa-check-circle small-heading" style="color:#2B6CAA;margin-right:1vw"></i>
@@ -35,8 +35,8 @@
                 <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_2"  onclick="togglePayment(event, 'checked_icon_2','bri')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
-                            <img src="/assets/images/client/BCA_LOGO.png" style="width:4vw;height:3vw;object-fit:cover" class="img-fluid" alt="">
-                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank BCA ( Virtual Account )</p>
+                            <img src="/assets/images/client/BRI_LOGO.jpeg" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
+                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank BRI ( Virtual Account )</p>
                         </div>
                         <div id="checked_icon_2" class="bank-content" style="display:none">
                             <i class="fas fa-check-circle small-heading" style="color:#2B6CAA;margin-right:1vw"></i>
