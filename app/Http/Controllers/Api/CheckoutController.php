@@ -28,6 +28,7 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
+        dd($input);
         //create invoice
         $length = 10;
         $random = '';
@@ -40,14 +41,14 @@ class CheckoutController extends Controller
         $invoice = Invoice::create([
             'invoice_no'    => $no_invoice,
             'user_id'       => auth()->user()->id,
-            'courier'       => 'jne',
-            'service'       => 'CTC',
+            'courier'       => $input['courier'],
+            'service'       => $input['service'],
             'cost_courier'  => $input['cost_courier'],
             'total_weight'  => $input['weight'],
             'name'          => $input['name'],
             'phone'         => $input['phone'],
-            'province'      => '6',
-            'city'          => '153',
+            'province'      => $input['province'],
+            'city'          => $input['city'],
             'address'       => $input['address'],
             'grand_total'   => $input['grand_total'],
             'status'        => 'pending',

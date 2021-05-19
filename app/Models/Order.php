@@ -11,10 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'invoice_id', 
-        'invoice', 
-        'course_id', 
-        'course_title', 
-        'thumbnail', 
+        'order_item_id', 
         'qty', 
         'price'
     ];

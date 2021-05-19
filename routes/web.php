@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Api\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,9 @@ Route::get('/signup', function () {
 //     return view('client/user-dashboard');
 // });
 /* CART ROUTING */
-Route::get('/createPayment', [CartController::class, 'createPayment'])->name('customer.cart.createPayment');
+
+Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail');
+Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
 Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
 Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index');
@@ -118,9 +121,9 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 });
 /* END OF WOKI ROUTING */
 
-Route::get('/transaction-detail/1', function () {
-    return view('client/transaction-detail');
-});
+//Route::get('/transaction-detail/1', function () {
+    //return view('client/transaction-detail');
+//});
 
 /* END OF CLIENT ROUTING */
 
@@ -292,6 +295,8 @@ Route::get('/certificate', function () {
 Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
 
 /* END OF DOMPDF ROUTING */
+
+
 
 
 require __DIR__.'/auth.php';
