@@ -21,7 +21,9 @@ class Course extends Model
         'enrollment_status', // default -> Open
         'publish_status', // default -> Draft
         'total_duration', // nullable
-        'average_rating' // default -> 0
+        'average_rating', // default -> 0
+        'isDeleted',
+        'withArtOrNo'
     ];
 
     public function courseType() {
@@ -54,5 +56,9 @@ class Course extends Model
 
     public function teachers() {
         return $this->belongsToMany(Teacher::class, 'course_teacher')->withTimestamps();
+    }
+
+    public function orders() {
+        return $this->hasMany(Order::class);
     }
 }

@@ -23,7 +23,7 @@ class Order extends Model
         return $this->belongsTo(Invoice::class);
     }
 
-    public function order_item() {
-        return $this->belongsTo(OrderItem::class);
+    public function course() {
+        return $this->belongsTo(Course::class);
     }
 }
