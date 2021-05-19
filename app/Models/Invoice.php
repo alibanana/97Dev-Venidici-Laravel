@@ -22,7 +22,6 @@ class Invoice extends Model
         'city', 
         'address', 
         'status', 
-        'snap_token',
         'total_order_price',
         'discounted_price', 
         'grand_total'

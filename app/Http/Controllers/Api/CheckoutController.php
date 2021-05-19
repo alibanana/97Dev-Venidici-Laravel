@@ -39,19 +39,21 @@ class CheckoutController extends Controller
         $no_invoice = 'INV-'.Str::upper($random);
         
         $invoice = Invoice::create([
-            'invoice_no'    => $no_invoice,
-            'user_id'       => auth()->user()->id,
-            'courier'       => $input['courier'],
-            'service'       => $input['service'],
-            'cost_courier'  => $input['cost_courier'],
-            'total_weight'  => $input['weight'],
-            'name'          => $input['name'],
-            'phone'         => $input['phone'],
-            'province'      => $input['province'],
-            'city'          => $input['city'],
-            'address'       => $input['address'],
-            'grand_total'   => $input['grand_total'],
-            'status'        => 'pending',
+            'invoice_no'        => $no_invoice,
+            'user_id'           => auth()->user()->id,
+            'courier'           => $input['courier'],
+            'service'           => $input['service'],
+            'cost_courier'      => $input['cost_courier'],
+            'total_weight'      => $input['weight'],
+            'name'              => $input['name'],
+            'phone'             => $input['phone'],
+            'province'          => $input['province'],
+            'city'              => $input['city'],
+            'address'           => $input['address'],
+            'status'            => 'pending',
+            'total_order_price' => $input['total_order_price'],
+            'discounted_price'  => $input
+            'grand_total'       => $input['grand_total'],
         ]);
         //create order
         foreach (Cart::where('user_id', auth()->user()->id)->get() as $cart) {
@@ -92,6 +94,11 @@ class CheckoutController extends Controller
         ]); 
  
         $payment_object = json_decode($response->body(), true);
+
+        $invoice = Invoice::findorfail($input['invoice_id']);
+        $invoice->xfers_payment_id  =   $input['xfers_payment_id'];
+        $invoice->save();
+
         return redirect('/transaction-detail/'.$no_invoice);
     }
     public function transactionDetail($id){
