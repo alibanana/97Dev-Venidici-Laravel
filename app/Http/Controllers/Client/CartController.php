@@ -10,6 +10,7 @@ use App\Models\Province;
 use App\Models\City;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {
@@ -29,6 +30,7 @@ class CartController extends Controller
                 ->count();
         return view('client/cart', compact('carts','cart_count'));
     }
+    
     public function shipment_index(Request $request)
     {
         $carts = Cart::with('course')
@@ -38,6 +40,9 @@ class CartController extends Controller
         $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
+        $today = Carbon::now()->addDays(1);
+        $today->setTimezone('Asia/Jakarta');
+        $total_price = 0;
         $sub_total = 0;
         $shipping_cost = 0;
         $tipe_pengiriman = null;
@@ -77,7 +82,8 @@ class CartController extends Controller
                     $shipping_cost = $tipe['cost'][0]['value'];
             }
         }
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman'));
+        $total_price = $sub_total + $shipping_cost;
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today'));
     }
 
     public function store(Request $request)

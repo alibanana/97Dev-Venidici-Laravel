@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Midtrans\Snap;
 use App\Models\Cart;
 use App\Models\Invoice;
+use App\Models\Order;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +52,7 @@ class CheckoutController extends Controller
             'address'               => $input['address'],
             'grand_total'           => $input['grand_total'],
             'status'                => 'pending',
-            'total_order_price'     => 10000,
+            'total_order_price'     => $input['total_order_price'],
             'discounted_price'      => 200
         ]);
         //create order
@@ -80,7 +81,7 @@ class CheckoutController extends Controller
                     "paymentMethodType" => "virtual_bank_account",
                     "amount" => $input['grand_total'],
                     "referenceId" => $no_invoice,
-                    "expiredAt" => "2021-05-20T06:07:04+07:00",
+                    "expiredAt" => $input['date'].'T'.$input['time'].'+07:00',
                     "description" => "Order Number ".$invoice_id,
                     "paymentMethodOptions" =>[
                         "bankShortCode" => $input['bankShortCode'],
@@ -93,17 +94,26 @@ class CheckoutController extends Controller
  
         $payment_object = json_decode($response->body(), true);
 
-
         $invoice = Invoice::findorfail($invoice_id);
         $invoice->xfers_payment_id  =  $payment_object['data']['id'];
         $invoice->save();
+
+        foreach (Cart::where('user_id', auth()->user()->id)->get() as $cart) {
+
+            $cart->delete();
+        };
 
         return redirect('/transaction-detail/'.$payment_object['data']['id']);
     }
     public function transactionDetail($id){
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
         $payment_status = json_decode($response->body(), true);
-        return view('client/transaction-detail', compact('payment_status'));
+        $invoice = Invoice::where('xfers_payment_id',$id)->first();
+        $orders = Order::with('course')
+                ->where('invoice_id', $invoice->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        return view('client/transaction-detail', compact('payment_status','orders','invoice'));
     }
     public function createPayment(Request $request, $id){
 

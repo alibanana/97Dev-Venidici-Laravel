@@ -16,7 +16,7 @@
             <!-- ITEM SECTION -->
             @if(count($carts) == 0)
             <div >
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;">Tidak ada barang di kerjang.</p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;">Tidak ada barang di keranjang.</p>
             </div>
             @endif
                 <?php $total_price = 0; ?>

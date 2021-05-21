@@ -156,7 +156,7 @@
             @if($course->price == 0)
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
             @else
-            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($course->price, 0, ',', ',') }}</p>
+            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
             @endif
             <form action="{{ route('customer.cart.store') }}" method="post">
             @csrf

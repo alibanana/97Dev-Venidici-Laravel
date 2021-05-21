@@ -421,6 +421,18 @@ html, body {
     -webkit-box-orient: vertical;
     margin-bottom: 0px;
 }
+.btn-dark-blue{
+    background: #2B6CAA;
+    border-radius: 5px;
+    color:#FFFFFF;
+    padding:0.3vw 1vw;
+    transition: 0.3s ease-in-out;
+
+}
+.btn-dark-blue:hover{
+    background: #12487B !important;
+    color: #FFFFFF !important;
+}
 .btn-blue{
     background: rgba(111, 159, 205, 0.5);
     border-radius: 5px;
@@ -583,7 +595,9 @@ html, body {
 .perlengkapan-card-red{
     border: 2px solid #CE3369;
     border-radius: 10px;
-    height:20vw
+    height:20vw;
+    width:20.3vw
+
 }
 /* END OF PERLENGKAPAN CARD */
 .course-card-description{
@@ -1211,11 +1225,33 @@ html, body {
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);
     border-radius: 10px;
-    padding:0.5vw;
+    padding:1vw;
     border:2px solid #2B6CAA;
     color:#2B6CAA;
     transition: 0.2s ease-in-out;
     cursor: pointer;
+}
+.payment-method-card-active-left{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);
+    border-radius: 10px 0px 0px 10px;
+    padding:1vw;
+    border:2px solid #2B6CAA;
+    color:#2B6CAA;
+}
+.payment-method-card-active-right{
+    background: rgba(43, 108, 170, 0.5);    
+    box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);
+    border-radius: 0px 10px 10px 0px;
+    padding:0.5vw;
+    border-top:2px solid #2B6CAA;
+    border-right:2px solid #2B6CAA;
+    border-bottom:2px solid #2B6CAA;
+    transition: 0.2s ease-in-out;
+
+}
+.payment-method-card-active-right:hover{
+    background: #2B6CAA;    
 }
 
 .overlay {
@@ -1280,7 +1316,7 @@ html, body {
     box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
     border-radius: 10px;
     padding:1vw;
-    width:100%;
+    width:22vw;
     height:18vw;
     transition: 0.2s ease-in-out;
 
@@ -1290,9 +1326,6 @@ html, body {
     background: #FFFFFF;
     border: 1px solid #B8D1EE;
     box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
-    padding:1vw;
-    width:100%;
-    height:18vw;
     cursor: pointer;
 }
 
@@ -1322,4 +1355,15 @@ html, body {
 }
 .edit-item:hover p{
     color:#FFFFFF !important
+}
+
+#refresh-button:hover{
+    background-color:#2B6CAA;
+    transition: 0.2s ease-in-out;
+
+}
+
+#refresh-button:hover i{
+    color:#FFFFFF !important;
+
 }

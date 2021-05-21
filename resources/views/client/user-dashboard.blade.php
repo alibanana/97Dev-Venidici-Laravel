@@ -27,41 +27,41 @@
                     </div>
                     <!-- START OF LEFT SECTION -->
                     <div class="col-12">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Display Picture</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Display Picture</p>
 
                         <input type="file" id="images" name="images[]" accept=".jpg,.jpeg,.png" />
                         <!--
                         <label id="uploadButton" for="images" style="font-family:Rubik Medium">Choose Image</label>-->
                     </div>
                     <div class="col-6" style="">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="John Doe" value="John Doe">
+                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="John Doe" value="{{Auth::user()->name}}">
                             @error('name')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>  
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="+62812345678" value="62812345678">
+                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="{{Auth::user()->userDetail->telephone}}">
                             @error('telephone')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>  
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Gender</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Gender</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <select name="" id=""  class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%">
-                                <option value=""  disabled selected>Choose Gender</option>
-                                <option value="">Male</option>
-                                <option value="">Female</option>
-                                <option value="">None of the above</option>
+                            <select name="" id=""  class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
+                                <option disabled selected>Choose Gender</option>
+                                <option value="Male" @if(Auth::user()->userDetail->gender == 'Male') selected @endif>Male</option>
+                                <option value="Female" @if(Auth::user()->userDetail->gender == 'Female') selected @endif>Female</option>
+                                <option value="None of the above" @if(Auth::user()->userDetail->gender == 'None of the above') selected @endif>None of the above</option>
                             </select>
                         </div>  
                         
@@ -69,30 +69,30 @@
                     <!-- END OF LEFT SECTION --> 
                     <!-- RIGHT SECTION -->
                     <div class="col-6" style="">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Birthdate</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Birthdate</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                            <input type="date" name="birthdate" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="dd.mm.yyyy">
+                            <input type="date" name="birthdate" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="dd.mm.yyyy" value="{{Auth::user()->userDetail->birthdate}}">
                             @error('birthdate')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>  
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Company/Institution</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Company/Institution</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
-                            <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Binus University International">
+                            <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Binus University International" value="{{Auth::user()->userDetail->company}}">
                             @error('company')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>  
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pekerjaan</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pekerjaan</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-friends"></i>
-                            <input type="text" name="referral_code" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Mahasiswa">
+                            <input type="text" name="referral_code" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Mahasiswa" value="{{Auth::user()->userDetail->occupancy}}">
                             @error('referral_code')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -106,9 +106,9 @@
                     
 
                     <div class="col-12 col-sm-6" >
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                 <option value="">DKI Jakarta</option>
                                 <option value="">Instagram</option>
                             </select>                    
@@ -120,9 +120,9 @@
                         </div>  
                     </div>
                     <div class="col-12 col-sm-6">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                 <option value="">Jakarta Selatan</option>
                                 <option value="">Instagram</option>
                             </select>                    
@@ -134,9 +134,9 @@
                         </div>  
                     </div>
                     <div class="col-12" style="margin-top:1vw">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">Jalan 123 Komplek ABC - Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos</textarea>                
+                            <textarea name="" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #3B3C43;;width:100%">Jalan 123 Komplek ABC - Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos</textarea>                
                             @error('province')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -177,30 +177,30 @@
                     </div>
                     <!-- START OF LEFT SECTION -->
                     <div class="col-12" style="">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Old Password</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Old Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="current_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="John Doe" value="John Doe">
+                            <input type="password" name="current_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="John Doe" value="John Doe">
                             @error('current_password')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>  
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">New Password</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="new_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="+62812345678" value="62812345678">
+                            <input type="password" name="new_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="62812345678">
                             @error('new_password')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>  
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Confirm New Password</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Confirm New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="+62812345678" value="62812345678">
+                            <input type="password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="62812345678">
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -283,13 +283,13 @@
                     </a>
                 </div>
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->email}}</p>   
-                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Student</p>   
+                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->userDetail->occupancy}}</p>   
                 <div style="width:70%">
                     <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Jalan duren tiga indah 5 Blok I no. 11, Pancoran, Jakarta Selatan, DKI Jakarta, 13720</p>   
+                        -webkit-box-orient: vertical !important;">{{Auth::user()->userDetail->address}}</p>   
                 </div>
                 <div style="display:flex;align-items:center;margin-top:0.8vw">   
                     <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px">Tech</p>
