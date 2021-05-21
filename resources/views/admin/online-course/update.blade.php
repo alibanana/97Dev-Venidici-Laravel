@@ -29,7 +29,6 @@
             <h5 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5>
             <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
             <h5 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
-            <h5 id="course-assessment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'course-assesment')" style="margin-left:1.5vw;cursor:pointer">Course Assesment</h5>
             <h5 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
         </div>
         
@@ -490,39 +489,6 @@
         </div>
         <!-- END OF PUBLISH STATUS -->
 
-        <!-- START OF COURSE ASSESMENT-->
-        <div class="course-content" id="course-assesment" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
-            @csrf  
-            @method('put') 
-                <div class="row" style="margin-top:2vw;align-items:center;display:flex">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <h5 for="">Select Course Assesment</h5>
-                            <select name="assesment" id="" class="form-control">
-                                <option value="0" selected>No Assesment</option>
-                                <option value="1">Quiz of Business Case Room</option>
-                            </select>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror               
-                        </div>
-                        <p> <span> <a href="/admin/online-courses/assesments" target="_blank">Click here</a> </span> to view assesment result</p>
-
-                    </div>
-                    <div class="col-6">
-                        <div style="display:flex;justify-content:flex-end">
-                            <button type="submit" class="btn btn-primary btn-user p-3">Update Course Assesment</button>
-                        </div>
-
-                    </div>
-                </div>
-            </form>
-        </div>
-        <!-- END OF COURSE ASSESMENT-->
-
         <!-- START OF Teacher-->
         <div class="course-content" id="teacher-page" style="display:none">
             <div class="row mt-2 mb-3">
@@ -650,7 +616,7 @@ function duplicateHashtag() {
 </script>
 <script>
     function disableInput() {
-    document.getElementById("price-input").disabled = true;
+    document.getElementById("price-input").disabled = strue;
     console.log('disabled')
     }
     function enableInput() {

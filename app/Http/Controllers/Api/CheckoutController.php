@@ -105,6 +105,7 @@ class CheckoutController extends Controller
 
         return redirect('/transaction-detail/'.$payment_object['data']['id']);
     }
+    
     public function transactionDetail($id){
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
         $payment_status = json_decode($response->body(), true);
@@ -115,9 +116,8 @@ class CheckoutController extends Controller
                 ->get();
         return view('client/transaction-detail', compact('payment_status','orders','invoice'));
     }
-    public function createPayment(Request $request, $id){
 
-        
+    public function createPayment(Request $request, $id){        
         //create order
         //delete cart
 
