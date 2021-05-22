@@ -302,22 +302,22 @@
 
 <!-- START OF NEWSLETTER SECTION -->
 <div class="row m-0 page-container" style="padding-bottom:8vw">
-        <div class="col-12" style="padding:0vw 3vw">
-            <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
-                <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
-                <div style="width:60%;margin-left:2vw">
-                    <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Curios with our Programs?</p>
-                    
-                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore.
-                    </p>
-                    <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
-                    
-                    
-                </div>
-                <a href="/online-course"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Search Course</a>
-            </div> 
-        </div>
+    <div class="col-12" style="padding:0vw 3vw">
+        <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
+            <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
+            <div style="width:60%;margin-left:2vw">
+                <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Curios with our Programs?</p>
+                
+                <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore.
+                </p>
+                <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
+                
+                
+            </div>
+            <a href="/online-course"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Search Course</a>
+        </div> 
     </div>
-    <!-- END OF NEWSLETTER SECTION -->
+</div>
+<!-- END OF NEWSLETTER SECTION -->
 @endsection

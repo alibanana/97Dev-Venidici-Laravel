@@ -25,19 +25,18 @@
             <h2 class="mb-0 mb-3 text-gray-800">Update Online Course</h2>
         </div>
         <div class="d-sm-flex align-items-center mb-2">
-            <h5 class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')"  style="cursor:pointer">Basic Informations</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'course-assesment')" style="margin-left:1.5vw;cursor:pointer">Course Assesment</h5>
-            <h5 class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
+            <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h5>
+            <h5 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5>
+            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
+            <h5 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
+            <h5 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
         </div>
         
         <!-- Content Row -->
 
         <!-- START OF BASIC INFORMATION -->
         <div class="course-content" id="basic-informations">
-            <form id="online-course-update-form" action="{{ route('admin.online-courses.update', $course->id) }}" method="POST" enctype="multipart/form-data">
+            <form id="online-course-update-form" action="{{ route('admin.online-courses.update-basic-info', $course->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf  
                 @method('put')         
                 <div class="row">
@@ -116,13 +115,19 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Assesment</label> <br>
-                            <select name="assesment" id="" class="form-control form-control-user" disabled>
-                                <option >No Assesment</option>
-                                <option value="1" selected>Quiz of Business Case Room</option>
-                                <option value="2">Quiz of Business Plan Room</option>
+                            <label for="">Assessment</label> <br>
+                            <select name="assessment_id" class="form-control form-control-user" required>
+                                @if (!$course->assessment)
+                                    <option value="0" selected>No Assessment</option>
+                                @else
+                                    <option value="0">No Assessment</option>
+                                    <option value="{{ $course->assessment->id }}" selected>{{ $course->assessment->title }}</option>
+                                @endif
+                                @foreach ($available_assessments as $assessment)
+                                    <option value="{{ $assessment->id }}">{{ $assessment->title }}</option>
+                                @endforeach
                             </select>
-                            @error('assesment')
+                            @error('assessment_id')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -308,7 +313,7 @@
                             <div class="card-header">
                                 <div style="display:flex;justify-content:space-between;align-items:center">
                                     <div>
-                                        <input style="font-family:bold" style="width:50% !important" type="text" value="Materi">
+                                        <input style="width:50% !important;" type="text" value="Materi">
                                         <button type="submit"  class="btn btn-primary btn-info">Update Section</button>    
                                     </div>
                                     <div>
@@ -349,7 +354,7 @@
                             <div class="card-header">
                                 <div style="display:flex;justify-content:space-between;align-items:center">
                                     <div>
-                                        <input style="font-family:bold" style="width:50% !important" type="text" value="QnA">
+                                        <input style="width:50% !important" type="text" value="QnA">
                                         <button type="submit"  class="btn btn-primary btn-info">Update Section</button>    
                                     </div>
                                     <div>
@@ -384,29 +389,29 @@
 
         <!-- START OF PRICE AND ENROLLMENT -->
         <div class="course-content" id="pricing-enrollment" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
-            @csrf  
+            <form action="{{ route('admin.online-courses.update-pricing-enrollment', $course->id) }}" method="POST">
+            @csrf
             @method('put') 
                 <div class="row" style="margin-top:2vw">
                     <div class="col-6">
                         <div class="form-group">
                             <h5 for="">Enrollment Scenario</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="enrollment_scenario" id="enrollment_scenario" checked>
+                                <input class="form-check-input" type="radio" name="enrollment_status" value="Open" id="enrollment_status" @if($course->enrollment_status == 'Open') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Open Enrollment
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="enrollment_scenario" id="enrollment_scenario">
+                                <input class="form-check-input" type="radio" name="enrollment_status" value="Close" id="enrollment_status" @if($course->enrollment_status == 'Close') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Close Enrollment
                                 </label>
                             </div>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('enrollment_status')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
@@ -414,25 +419,22 @@
                         <div class="form-group">
                             <h5 for="">Pricing Options</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio"  onclick="disableInput()" name="pricing_options" id="pricing_options" checked>
+                                <input class="form-check-input" type="radio" onclick="disableInput()" name="is_free" value="1" id="pricing_options" @if($course->price == 0) checked @endif>
                                 <label class="form-check-label" for="pricing_options">
                                     Free
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" onclick="enableInput()" name="pricing_options" id="pricing_options">
-                                <label class="form-check-label" for="pricing_options"  >
-                                    One-Time Purchase (Rp.)
-                                </label>
-                                <input type="text" name="name" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
-                                    id="phone" aria-describedby=""
-                                    placeholder="e.g. 100000" disabled> 
-
+                                <input class="form-check-input" type="radio" onclick="enableInput()" name="is_free" value="0" id="pricing_options" @if($course->price != 0) checked @endif>
+                                <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.) <span style="color: orange">(Min: Rp 10000)</span></label>
+                                <input type="number" name="price" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
+                                    id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" min="10000"
+                                    placeholder="e.g. 100000" @if($course->price == 0) disabled @endif required>
                             </div>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('price')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
@@ -440,7 +442,6 @@
                         <div style="display:flex;justify-content:flex-end">
                             <button type="submit" class="btn btn-primary btn-user p-3">Update Pricing</button>
                         </div>
-
                     </div>
                 </div>
             </form>
@@ -450,30 +451,30 @@
 
         <!-- START OF PUBLISH STATUS -->
         <div class="course-content" id="publish-status" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.online-courses.update-publish-status', $course->id) }}" method="POST">
             @csrf  
             @method('put') 
                 <div class="row" style="margin-top:2vw">
                     <div class="col-6">
                         <div class="form-group">
-                            <h5 for="">Enrollment Scenario</h5>
+                            <h5 for="">Publish Status</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                <input class="form-check-input" type="radio" name="publish_status" value="Draft" id="flexRadioDefault1" @if($course->publish_status == 'Draft') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Draft <br>
                                     Students cannot purchase or enroll in this course. For students that are already enrolled, this course will not appear on their Student Dashboard.
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="publish_status" value="Published" id="flexRadioDefault2" @if($course->publish_status == 'Published') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Published <br>
                                     Students can purchase, enroll in, and access the content of this course. For students that are enrolled, this course will appear on their Student Dashboard.                            </label>
                             </div>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            @error('publish_status')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror               
                         </div>
                     </div>
@@ -488,50 +489,14 @@
         </div>
         <!-- END OF PUBLISH STATUS -->
 
-        <!-- START OF COURSE ASSESMENT-->
-        <div class="course-content" id="course-assesment" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
-            @csrf  
-            @method('put') 
-                <div class="row" style="margin-top:2vw;align-items:center;display:flex">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <h5 for="">Select Course Assesment</h5>
-                            <select name="assesment" id="" class="form-control">
-                                <option value="0" selected>No Assesment</option>
-                                <option value="1">Quiz of Business Case Room</option>
-                            </select>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror               
-                        </div>
-                        <p> <span> <a href="/admin/online-courses/assesments" target="_blank">Click here</a> </span> to view assesment result</p>
-
-                    </div>
-                    <div class="col-6">
-                        <div style="display:flex;justify-content:flex-end">
-                            <button type="submit" class="btn btn-primary btn-user p-3">Update Course Assesment</button>
-                        </div>
-
-                    </div>
-                </div>
-            </form>
-        </div>
-        <!-- END OF COURSE ASSESMENT-->
-
         <!-- START OF Teacher-->
         <div class="course-content" id="teacher-page" style="display:none">
             <div class="row mt-2 mb-3">
                 <div class="col-sm-12 col-md-8">
                     <div id="dataTable_filter" class="dataTables_filter">
                         <label class="w-100">Search:
-                            <form action="" method="GET">
-                                <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm w-100" placeholder="" aria-controls="dataTable">
-                                @if (Request::get('show'))
-                                    <input name="show" value="{{ Request::get('show') }}" hidden>
-                                @endif
+                            <form action="{{ route('admin.online-courses.edit', $course->id) }}" method="GET">
+                                <input name="search_teacher" value="{{ Request::get('search_teacher') }}" type="search" class="form-control form-control-sm w-100" aria-controls="dataTable">
                                 <input type="submit" style="visibility: hidden;" hidden/>
                             </form>
                         </label>
@@ -552,48 +517,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td style="text-align:center" class="text-nowrap">
-                                        <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
-                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
-                                    </td>
-                                    <td>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
-                                    </td>  
-                                    <td>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    @method('put')
-                                                    <div style="padding: 0px 2px">
-                                                        <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to select this teacher?')">Un-select Teacher</button>
-                                                    </div>
-                                                </form> 
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td style="text-align:center" class="text-nowrap">
-                                        <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
-                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
-                                    </td>
-                                    <td>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
-                                    </td>  
-                                    <td>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    @method('put')
-                                                    <div style="padding: 0px 2px">
-                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to select this teacher?')">Select Teacher</button>
-                                                    </div>
-                                                </form> 
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach ($teachers as $teacher)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td style="text-align:center" class="text-nowrap">
+                                            <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
+                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }}</p>
+                                        </td>
+                                        <td>{{ $teacher->description }}</td>  
+                                        <td>
+                                            @if ($teacher->courses()->where('course_id', $course->id)->first())
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.online-courses.detach-teacher', $course->id) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}" hidden>
+                                                            <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to remove this teacher from the course?')">Un-select Teacher</button>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            @else
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.online-courses.attach-teacher', $course->id) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}" hidden>
+                                                            <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to add this teacher to the course?')">Select Teacher</button>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -658,7 +616,7 @@ function duplicateHashtag() {
 </script>
 <script>
     function disableInput() {
-    document.getElementById("price-input").disabled = true;
+    document.getElementById("price-input").disabled = strue;
     console.log('disabled')
     }
     function enableInput() {
@@ -676,4 +634,15 @@ function removeDiv(elem, wrapper_id){
     }
 }
 </script>
+@if (Session::has('page-option'))
+    @if (Session::get('page-option') == 'basic-informations')
+        <script>document.getElementById('basic-information-button').click()</script>
+    @elseif (Session::get('page-option') == 'pricing-and-enrollment')
+        <script>document.getElementById('pricing-and-enrollment-button').click()</script>
+    @elseif (Session::get('page-option') == 'publish-status')
+        <script>document.getElementById('publish-status-button').click()</script>
+    @elseif (Session::get('page-option') == 'teacher')
+        <script>document.getElementById('teacher-button').click()</script>
+    @endif
+@endif
 @endsection

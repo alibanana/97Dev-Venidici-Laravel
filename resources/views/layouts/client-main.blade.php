@@ -56,7 +56,7 @@
             <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart'))navbar-item-active @endif"></i>
           </span>
         </a>
-        <a id="cart_icon" class="sub-description navbar-item" href="#notification" style="color:#2B6CAA;margin-right:0.8vw">
+        <a id="notification_icon" class="sub-description navbar-item" href="#notification" style="color:#2B6CAA;margin-right:0.8vw">
           <span class="counter fa-stack has-badge" data-count="">
             <i class="p3 fas fa-bell fa-stack-1x xfa-inverse"></i>
           </span>
@@ -357,16 +357,16 @@
         }
     </script>
     <script>
-        var path = "{{ env('APP_URL') . route('autocomplete', [], false) }}";
+      // 
+      var path = "{{ env('APP_URL') . route('autocomplete', [], false) }}";
 
-        $('input.typeahead').typeahead({
-          source: function(terms,process){
-            return $.get(path,{terms:terms},function(data){
-              return process(data);
-            });
-          }
-        });
-      
+      $('input.typeahead').typeahead({
+        source: function(terms, process){
+          return $.get(path, {terms:terms}, function(data) {
+            return process(data);
+          });
+        }
+      });
     </script>
    
   </body>

@@ -26,10 +26,14 @@ class DatabaseSeeder extends Seeder
             CourseTypeSeeder::class,
             CourseCategorySeeder::class,
             HashtagSeeder::class,
+            TeacherSeeder::class,
             CourseSeeder::class,
             CourseRequirementSeeder::class,
             CourseFeatureSeeder::class, // Kamu akan dapat? section
-            LocationSeeder::class
+            AssessmentSeeder::class, // Assessment & Requirements are seeded here.
+            LocationSeeder::class,
+            SectionSeeder::class,
+            SectionContentSeeder::class
         ]);
     }
 }

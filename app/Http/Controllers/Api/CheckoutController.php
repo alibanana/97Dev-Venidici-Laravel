@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api;
 use Midtrans\Snap;
 use App\Models\Cart;
 use App\Models\Invoice;
+use App\Models\Order;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 
 class CheckoutController extends Controller
 {
@@ -19,95 +21,214 @@ class CheckoutController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request)
-    {
-        $this->middleware('auth:api')->except('notificationHandler');
+    public function getBankStatus(Request $request, $id){
+        //EXAMPLE GET REQUEST
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
+        $payment_status = json_decode($response->body(), true);
+    }
+    
+    public function store(Request $request){
+        $input = $request->all();
+            //create invoice
+        $length = 10;
+        $random = '';
+        for ($i = 0; $i < $length; $i++) {
+            $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+        };
 
-        $this->request = $request;
-        // Set midtrans configuration
-        \Midtrans\Config::$serverKey    = config('services.midtrans.serverKey');
-        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
-        \Midtrans\Config::$isSanitized  = config('services.midtrans.isSanitized');
-        \Midtrans\Config::$is3ds        = config('services.midtrans.is3ds');
+        $no_invoice = 'INV-'.Str::upper($random);
+        
+        $invoice = Invoice::create([
+            'invoice_no'            => $no_invoice,
+            'user_id'               => auth()->user()->id,
+            'courier'               => $input['courier'],
+            'service'               => $input['service'],
+            'cost_courier'          => $input['cost_courier'],
+            'total_weight'          => $input['weight'],
+            'name'                  => $input['name'],
+            'phone'                 => $input['phone'],
+            'province'              => $input['province'],
+            'city'                  => $input['city'],
+            'address'               => $input['address'],
+            'grand_total'           => $input['grand_total'],
+            'status'                => 'pending',
+            'total_order_price'     => $input['total_order_price'],
+            'discounted_price'      => 200
+        ]);
+        //create order
+        foreach (Cart::where('user_id', auth()->user()->id)->get() as $cart) {
+
+            //insert product ke table order
+            $invoice->orders()->create([
+                'invoice_id'    => $invoice->id,
+                'course_id'     => $cart->course_id,
+                'qty'           => $cart->quantity,
+                'price'         => $cart->price,
+            ]);
+        };
+
+        $invoice_id = Invoice::latest()->first()->id;
+
+        //hit xfers api to create payment order
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
+        ->withHeaders([
+            'Accept' => 'application/vnd.api+json',
+            'Content-Type' => 'application/vnd.api+json'
+ 
+        ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
+            "data" => [
+                "attributes" => [
+                    "paymentMethodType" => "virtual_bank_account",
+                    "amount" => $input['grand_total'],
+                    "referenceId" => $no_invoice,
+                    "expiredAt" => $input['date'].'T'.$input['time'].'+07:00',
+                    "description" => "Order Number ".$invoice_id,
+                    "paymentMethodOptions" =>[
+                        "bankShortCode" => $input['bankShortCode'],
+                        "displayName" => "Venidici",
+                        "suffixNo" => ""
+                    ]
+                ]
+            ]
+        ]); 
+ 
+        $payment_object = json_decode($response->body(), true);
+
+        $invoice = Invoice::findorfail($invoice_id);
+        $invoice->xfers_payment_id  =  $payment_object['data']['id'];
+        $invoice->save();
+
+        foreach (Cart::where('user_id', auth()->user()->id)->get() as $cart) {
+
+            $cart->delete();
+        };
+
+        return redirect('/transaction-detail/'.$payment_object['data']['id']);
+    }
+    
+    public function transactionDetail($id){
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
+        $payment_status = json_decode($response->body(), true);
+        $invoice = Invoice::where('xfers_payment_id',$id)->first();
+        $orders = Order::with('course')
+                ->where('invoice_id', $invoice->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        return view('client/transaction-detail', compact('payment_status','orders','invoice'));
+    }
+
+    public function createPayment(Request $request, $id){        
+        //create order
+        //delete cart
+
+        //get user last invoice
+        $order = Order::find($id);
+
+        //hit xfers api to create payment order
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
+        ->withHeaders([
+            'Accept' => 'application/vnd.api+json',
+            'Content-Type' => 'application/vnd.api+json'
+ 
+        ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
+            "data" => [
+                "attributes" => [
+                    "paymentMethodType" => "virtual_bank_account",
+                    "amount" => $order->price,
+                    "referenceId" => $order->invoice_id,
+                    "expiredAt" => "2021-05-19T06:07:04+07:00",
+                    "description" => "Order Number ".$input['invoice_id'],
+                    "paymentMethodOptions" =>[
+                        "bankShortCode" => "BCA",
+                        "displayName" => "Venidici",
+                        "suffixNo" => ""
+                    ]
+ 
+                ]
+            ]
+        ]); 
+ 
+        $payment_status = json_decode($response->body(), true);
+        dd($payment_status);
     } 
 
-    public function store()
-    {
-        DB::transaction(function() {
+    // public function store()
+    // {
+    //     DB::transaction(function() {
 
-            /**
-             * algorithm create no invoice
-             */
-            $length = 10;
-            $random = '';
-            for ($i = 0; $i < $length; $i++) {
-                $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
-            }
+    //         /**
+    //          * algorithm create no invoice
+    //          */
+    //         $length = 10;
+    //         $random = '';
+    //         for ($i = 0; $i < $length; $i++) {
+    //             $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+    //         }
 
-            $no_invoice = 'INV-'.Str::upper($random);
+    //         $no_invoice = 'INV-'.Str::upper($random);
 
-            $invoice = Invoice::create([
-                'invoice'       => $no_invoice,
-                'customer_id'   => auth()->guard('api')->user()->id,
-                'courier'       => $this->request->courier,
-                'service'       => $this->request->service,
-                'cost_courier'  => $this->request->cost,
-                'weight'        => $this->request->weight,
-                'name'          => $this->request->name,
-                'phone'         => $this->request->phone,
-                'province'      => $this->request->province,
-                'city'          => $this->request->city,
-                'address'       => $this->request->address,
-                'grand_total'   => $this->request->grand_total,
-                'status'        => 'pending',
-            ]);
+    //         $invoice = Invoice::create([
+    //             'invoice'       => $no_invoice,
+    //             'customer_id'   => auth()->guard('api')->user()->id,
+    //             'courier'       => $this->request->courier,
+    //             'service'       => $this->request->service,
+    //             'cost_courier'  => $this->request->cost,
+    //             'weight'        => $this->request->weight,
+    //             'name'          => $this->request->name,
+    //             'phone'         => $this->request->phone,
+    //             'province'      => $this->request->province,
+    //             'city'          => $this->request->city,
+    //             'address'       => $this->request->address,
+    //             'grand_total'   => $this->request->grand_total,
+    //             'status'        => 'pending',
+    //         ]);
 
-            foreach (Cart::where('customer_id', auth()->guard('api')->user()->id)->get() as $cart) {
+    //         foreach (Cart::where('customer_id', auth()->guard('api')->user()->id)->get() as $cart) {
 
-                //insert product ke table order
-                $invoice->orders()->create([
-                    'invoice_id'    => $invoice->id,
-                    'invoice'       => $no_invoice,    
-                    'product_id'    => $cart->product_id,
-                    'product_name'  => $cart->product->title,
-                    'image'         => $cart->product->image,
-                    'qty'           => $cart->quantity,
-                    'price'         => $cart->price,
-                ]);
+    //             //insert product ke table order
+    //             $invoice->orders()->create([
+    //                 'invoice_id'    => $invoice->id,
+    //                 'invoice'       => $no_invoice,    
+    //                 'product_id'    => $cart->product_id,
+    //                 'product_name'  => $cart->product->title,
+    //                 'image'         => $cart->product->image,
+    //                 'qty'           => $cart->quantity,
+    //                 'price'         => $cart->price,
+    //             ]);
 
-            }
+    //         }
 
-            // Buat transaksi ke midtrans kemudian save snap tokennya.
-            $payload = [
-                'transaction_details' => [
-                    'order_id'      => $invoice->invoice,
-                    'gross_amount'  => $invoice->grand_total,
-                ],
-                'customer_details' => [
-                    'first_name'       => $invoice->name,
-                    'email'            => auth()->guard('api')->user()->email,
-                    'phone'            => $invoice->phone,
-                    'shipping_address' => $invoice->address  
-                ]
-            ];
+    //         // Buat transaksi ke midtrans kemudian save snap tokennya.
+    //         $payload = [
+    //             'transaction_details' => [
+    //                 'order_id'      => $invoice->invoice,
+    //                 'gross_amount'  => $invoice->grand_total,
+    //             ],
+    //             'customer_details' => [
+    //                 'first_name'       => $invoice->name,
+    //                 'email'            => auth()->guard('api')->user()->email,
+    //                 'phone'            => $invoice->phone,
+    //                 'shipping_address' => $invoice->address  
+    //             ]
+    //         ];
 
-            //create snap token
-            $snapToken = Snap::getSnapToken($payload);
-            $invoice->snap_token = $snapToken;
-            $invoice->save();
+    //         //create snap token
+    //         $snapToken = Snap::getSnapToken($payload);
+    //         $invoice->snap_token = $snapToken;
+    //         $invoice->save();
 
-            $this->response['snap_token'] = $snapToken;
+    //         $this->response['snap_token'] = $snapToken;
 
 
-        });
+    //     });
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Order Successfully',  
-            $this->response
-        ]);
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Order Successfully',  
+    //         $this->response
+    //     ]);
 
-    }
+    // }
     
     /**
      * notificationHandler

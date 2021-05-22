@@ -153,7 +153,11 @@
             <!-- END OF ALERT MESSAGE -->
         @endif
         <div class="course-detail-card-green">
-            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($course->price, 0, ',', ',') }}</p>
+            @if($course->price == 0)
+            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
+            @else
+            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+            @endif
             <form action="{{ route('customer.cart.store') }}" method="post">
             @csrf
                 <input type="hidden" name="course_id" value="{{$course->id}}">

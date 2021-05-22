@@ -10,20 +10,22 @@ class Invoice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'invoice', 
+        'invoice_no', 
         'user_id', 
         'courier', 
         'service', 
         'cost_courier', 
-        'weight', 
+        'total_weight', 
         'name', 
         'phone', 
         'province', 
         'city', 
         'address', 
         'status', 
-        'snap_token', 
-        'grand_total'
+        'total_order_price',
+        'discounted_price', 
+        'grand_total',
+        'xfers_payment_id'
     ];
 
     public function user() {

@@ -2,16 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
+use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
+use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Api\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +80,10 @@ Route::get('/signup', function () {
 //     return view('client/user-dashboard');
 // });
 /* CART ROUTING */
+
+Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail');
+Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
+Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
 Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index');
 Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index');
@@ -96,10 +103,8 @@ Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('custo
 // });
 
 /* START OF ONLINE COURSE ROUTING */
-Route::get('/online-course', function () {
-    return view('client/online-course/index');
-});
-Route::get('/online-course/{id}', [PagesController::class, 'course_detail'])->name('customer.course_detail');
+Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
+Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
 
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
@@ -116,9 +121,9 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 });
 /* END OF WOKI ROUTING */
 
-Route::get('/transaction-detail/1', function () {
-    return view('client/transaction-detail');
-});
+//Route::get('/transaction-detail/1', function () {
+    //return view('client/transaction-detail');
+//});
 
 /* END OF CLIENT ROUTING */
 
@@ -154,20 +159,39 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     // OnlineCourseController
     Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
     Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
-    //Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
+    Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
     Route::post('/online-courses', [AdminOnlineCourseController::class, 'store'])->name('online-courses.store');
     Route::delete('/online-course/{id}', [AdminOnlineCourseController::class, 'destroy'])->name('online-courses.destroy');
     Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
     // OnlineCourseUpdateController
     Route::get('/online-courses/{id}/update', [AdminOnlineCourseUpdateController::class, 'edit'])->name('online-courses.edit');
-    Route::put('/online-courses/{id}', [AdminOnlineCourseUpdateController::class, 'update'])->name('online-courses.update');
+    Route::put('/online-courses/{id}/update-basic-info', [AdminOnlineCourseUpdateController::class, 'updateBasicInfo'])->name('online-courses.update-basic-info');
+    Route::put('/online-courses/{id}/update-pricing-enrollment', [AdminOnlineCourseUpdateController::class, 'updatePricingEnrollment'])->name('online-courses.update-pricing-enrollment');
+    Route::put('/online-courses/{id}/update-publish-status', [AdminOnlineCourseUpdateController::class, 'updatePublishStatus'])->name('online-courses.update-publish-status');
+    Route::put('/online-courses/{id}/attach-teacher', [AdminOnlineCourseUpdateController::class, 'attachTeacher'])->name('online-courses.attach-teacher');
+    Route::put('/online-courses/{id}/detach-teacher', [AdminOnlineCourseUpdateController::class, 'detachTeacher'])->name('online-courses.detach-teacher');
     // CourseCategoryController
     Route::get('/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
     Route::put('/course-categories/{id}', [AdminCourseCategoryController::class, 'update'])->name('course-categories.update');
     Route::delete('/course-categories/{id}', [AdminCourseCategoryController::class, 'destroy'])->name('course-categories.destroy');
+    // TeacherController
+    Route::get('/teachers', [AdminTeacherController::class, 'index'])->name('teachers.index');
+    Route::get('/teachers/create', [AdminTeacherController::class, 'create'])->name('teachers.create');
+    Route::post('/teachers', [AdminTeacherController::class, 'store'])->name('teachers.store');
+    Route::get('/teachers/{id}/update', [AdminTeacherController::class, 'edit'])->name('teachers.edit');
+    Route::put('/teachers/{id}', [AdminTeacherController::class, 'update'])->name('teachers.update');
+    Route::delete('/teachers/{id}', [AdminTeacherController::class, 'destroy'])->name('teachers.destroy');
     // AssestmentController
-    Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assesments.index');
+    Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assessments.index');
+    Route::get('/assessments/create', [AdminAssessmentController::class, 'create'])->name('assessments.create');
+    Route::post('/assessments', [AdminAssessmentController::class, 'store'])->name('assessments.store');
+    Route::post('/assessments/{id}/questions', [AdminAssessmentController::class, 'storeQuestion'])->name('assessments.store-question');
+    Route::get('/assessments/{id}/update', [AdminAssessmentController::class, 'edit'])->name('assessments.edit');
+    Route::put('/assessments/{id}', [AdminAssessmentController::class, 'updateBasicInfo'])->name('assessments.update-basic-info');
+    Route::put('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'updateQuestion'])->name('assessments.update-question');
+    Route::delete('/assessments/{id}', [AdminAssessmentController::class, 'destroy'])->name('assessments.destroy');
+    Route::delete('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'destroyQuestion'])->name('assessments.destroy-question');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -176,6 +200,35 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/hashtags/{id}', [AdminHashtagController::class, 'update'])->name('hashtags.update');
     Route::delete('/hashtags/{id}', [AdminHashtagController::class, 'destroy'])->name('hashtags.destroy');
 });
+
+/* START OF WOKI ROUTING */
+Route::get('/admin/woki', function () {
+    return view('admin/woki/index');
+});
+Route::get('/admin/woki/1', function () {
+    return view('admin/woki/detail');
+});
+Route::get('/admin/woki/create-video/1', function () {
+    return view('admin/woki/create-video');
+});
+Route::get('/admin/woki/create', function () {
+    return view('admin/woki/create');
+});
+Route::get('/admin/woki/1/update', function () {
+    return view('admin/woki/update');
+});
+/* END OF WOKI ROUTING */
+/* START OF art-supply ROUTING */
+Route::get('/admin/art-supply', function () {
+    return view('admin/art-supply/index');
+});
+Route::get('/admin/art-supply/create', function () {
+    return view('admin/art-supply/create');
+});
+Route::get('/admin/art-supply/1/update', function () {
+    return view('admin/art-supply/update');
+});
+/* END OF art-supply ROUTING */
 
 /* START ADMIN ROUTING */
 Route::get('/admin/login', function () {
@@ -236,22 +289,6 @@ Route::get('/admin/online-courses/create-video/1', function () {
 Route::get('/admin/online-courses/assesments/1', function () {
     return view('admin/assessment/detail');
 });
-Route::get('/admin/online-courses/assesments/create', function () {
-    return view('admin/assessment/create');
-});
-Route::get('/admin/online-courses/assesments/1/update', function () {
-    return view('admin/assessment/update');
-});
-
-Route::get('/admin/online-courses/teachers', function () {
-    return view('admin/teacher/index');
-});
-Route::get('/admin/online-courses/teachers/create', function () {
-    return view('admin/teacher/create');
-});
-Route::get('/admin/online-courses/teachers/1/update', function () {
-    return view('admin/teacher/update');
-});
 /* END OF ONLINE COURSE ROUTING */
 
 /* START OF ANALYTICS ROUTING */
@@ -290,5 +327,20 @@ Route::get('/for-corporate/krest', function () {
     return view('client/for-corporate/krest');
 });
 /* END OF FOR CORPORATE ROUTING*/
+
+
+Route::get('/email/verifyUser', function () {
+    return view('emails/verifyUser');
+});
+Route::get('/certificate', function () {
+    return view('client/certificate');
+});
+/* START OF DOMPDF ROUTING */
+Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
+
+/* END OF DOMPDF ROUTING */
+
+
+
 
 require __DIR__.'/auth.php';

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Config;
 use App\Models\TrustedCompany;
@@ -11,10 +13,10 @@ use App\Models\FakeTestimony;
 use App\Models\User;
 use App\Models\Hashtag;
 use App\Models\UserDetail;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Course;
 use App\Models\Cart;
-use Illuminate\Support\Facades\Auth;
+
+use PDF;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,13 +40,19 @@ class PagesController extends Controller
         $fake_testimonies_big = $fake_testimonies->whereNotNull('thumbnail')->whereNotNull('name')->whereNotNull('occupancy')->values();
         $fake_testimonies_small = $fake_testimonies->whereNull('thumbnail')->whereNull('name')->whereNull('occupancy')->values();
         
-        $courses = Course::where('course_type_id','1')->take(3)->get();
-        if(Auth::check())
-        {
-            $request->session()->put('cart_count', 0);  
+        // Get 3 Online Courses
+        $online_courses = Course::where('course_type_id','1')->take(3)->get();
+
+        if(Auth::check()) {
+            $cart_count = Cart::with('course')
+                ->where('user_id', auth()->user()->id)
+                ->count();
+
+            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','online_courses','cart_count'));
+        } else {
+            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses'));
         }
         
-        return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','courses'));
     }
 
     public function autocomplete(Request $request){
@@ -118,12 +126,17 @@ class PagesController extends Controller
     public function course_detail($id){
         $course = Course::findOrFail($id);
         return view('client/online-course/detail', compact('course'));
-
     }
 
     public function dashboard_index()
     {
         return view('client/user-dashboard');
-
+    }
+    public function print(){
+        $pdf = PDF::loadView('client/certificate')
+        ->setPaper('A4', 'potrait');
+        
+        // return $pdf->download('certificate.pdf'); //download
+        return $pdf->stream(); //view
     }
 }

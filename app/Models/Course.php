@@ -21,7 +21,9 @@ class Course extends Model
         'enrollment_status', // default -> Open
         'publish_status', // default -> Draft
         'total_duration', // nullable
-        'average_rating' // default -> 0 
+        'average_rating', // default -> 0
+        'isDeleted',
+        'withArtOrNo'
     ];
 
     public function courseType() {
@@ -46,5 +48,21 @@ class Course extends Model
 
     public function carts() {
         return $this->hasMany(Cart::class);
+    }
+
+    public function assessment() {
+        return $this->hasOne(Assessment::class);
+    }
+
+    public function teachers() {
+        return $this->belongsToMany(Teacher::class, 'course_teacher')->withTimestamps();
+    }
+
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
+    public function sections() {
+        return $this->hasMany(Section::class);
     }
 }

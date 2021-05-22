@@ -11,10 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'invoice_id', 
-        'invoice', 
         'course_id', 
-        'course_title', 
-        'thumbnail', 
         'qty', 
         'price'
     ];
@@ -23,7 +20,7 @@ class Order extends Model
         return $this->belongsTo(Invoice::class);
     }
 
-    public function order_item() {
-        return $this->belongsTo(OrderItem::class);
+    public function course() {
+        return $this->belongsTo(Course::class);
     }
 }

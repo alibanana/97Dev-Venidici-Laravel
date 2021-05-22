@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
 use App\Models\Hashtag;
+use App\Models\Assessment;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,9 +144,10 @@ class OnlineCourseController extends Controller
     // Show Admin -> Create New Online Page
     public function create() {
         $course_categories = CourseCategory::select('id', 'category')->get();
+        $assessments = Assessment::doesntHave('course')->get();
         $tags = Hashtag::all();
 
-        return view('admin/online-course/create', compact('course_categories', 'tags'));
+        return view('admin/online-course/create', compact('course_categories', 'assessments', 'tags'));
     }
 
     // Store New Online Course on the database.
@@ -156,13 +158,15 @@ class OnlineCourseController extends Controller
             'subtitle' => 'required',
             'course_category_id' => 'required',
             'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
+            'assessment_id' => 'required|integer',
             'description' => 'required',
             'requirements' => 'required|array|min:1',
             'features' => 'required|array|min:1',
             'hashtags' => 'required|array|min:1'
         ])->setAttributeNames([
             'course_category_id' => 'category',
-            'preview_video_link' => 'video link'
+            'preview_video_link' => 'video link',
+            'assessment_id' => 'assessment'
         ])->validate();
 
         $course = new Course;
@@ -174,6 +178,12 @@ class OnlineCourseController extends Controller
         $course->subtitle = $validated['subtitle'];
         $course->description = $validated['description'];
         $course->save();
+
+        if ($validated['assessment_id'] != '0') {
+            $assessment = Assessment::find($validated['assessment_id']);
+            $assessment->course_id = $course->id;
+            $assessment->save();
+        }
 
         foreach ($request->requirements as $requirement_value) {
             if ($requirement_value != "") {

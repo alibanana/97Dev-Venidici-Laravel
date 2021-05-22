@@ -23,7 +23,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h2 class="mb-0 mb-3 text-gray-800">Teacher List</h2>
-            <a href="/admin/online-courses/teachers/create" class="btn btn-primary btn-user p-3">Create New Teacher</a>
+            <a href="{{ route('admin.teachers.create') }}" class="btn btn-primary btn-user p-3">Create New Teacher</a>
 
         </div>
         
@@ -54,11 +54,8 @@
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
-                                    <form action="" method="GET">
+                                    <form action="{{ route('admin.teachers.index') }}" method="GET">
                                         <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
-                                        @if (Request::get('show'))
-                                            <input name="show" value="{{ Request::get('show') }}" hidden>
-                                        @endif
                                         <input type="submit" style="visibility: hidden;" hidden/>
                                     </form>
                                 </label>
@@ -80,58 +77,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td style="text-align:center" class="text-nowrap">
-                                                <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
-                                                <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
-                                            </td>
-                                            <td>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
-                                            </td>  
-                                            <td>
-                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                        <form action="" method="post">
+                                        @foreach ($teachers as $teacher)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td style="text-align:center" class="text-nowrap">
+                                                    <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="">
+                                                    <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }}</p>
+                                                </td>
+                                                <td>{{ $teacher->description }}</td>  
+                                                <td>
+                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                        <form action="{{ route('admin.teachers.destroy', $teacher->id) }}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                             <div style="padding: 0px 2px">
                                                                 <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
                                                             </div>
                                                         </form> 
-                                                    
                                                         <div style="padding: 0px 2px;">
-                                                            <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/teachers/1/update">Update</a>
+                                                            <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.teachers.edit', $teacher->id) }}">Update</a>
                                                         </div>
-                                                
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td style="text-align:center" class="text-nowrap">
-                                                <img src="/assets/images/client/testimony-image-dummy.png" class="img-fluid" style="width:5vw" alt="">
-                                                <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Alifio Rasyid</p>
-                                            </td>
-                                            <td>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem est, corporis impedit eius fuga vel reiciendis, numquam aspernatur quo laudantium itaque atque maiores? Ipsa, corrupti. Deserunt id quas eius eligendi?
-                                            </td>  
-                                            <td>
-                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                        <form action="" method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <div style="padding: 0px 2px">
-                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
-                                                            </div>
-                                                        </form> 
-                                                    
-                                                        <div style="padding: 0px 2px;">
-                                                            <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/online-courses/teachers/1/update">Update</a>
-                                                        </div>
-                                                
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

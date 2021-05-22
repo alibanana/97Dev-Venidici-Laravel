@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Province;
 use App\Models\City;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
+use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {
@@ -28,6 +30,7 @@ class CartController extends Controller
                 ->count();
         return view('client/cart', compact('carts','cart_count'));
     }
+    
     public function shipment_index(Request $request)
     {
         $carts = Cart::with('course')
@@ -37,7 +40,13 @@ class CartController extends Controller
         $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
+        $today = Carbon::now()->addDays(1);
+        $today->setTimezone('Asia/Jakarta');
+        $total_price = 0;
         $sub_total = 0;
+        $shipping_cost = 0;
+        $tipe_pengiriman = null;
+
         foreach($carts as $cart)
         {
             $sub_total += $cart->quantity * $cart->course->price;
@@ -52,19 +61,29 @@ class CartController extends Controller
             $cities = null;
         }
 
-        if ($request->has('city')) {
+        if ($request->has('shipping')) {
             $city_id = $request['city'];
-            
-            // $cost = RajaOngkir::ongkosKirim([
-            //     'origin'        => 153,  //kode jaksel
-            //     'destination'   => $city_id, // ID kota/kabupaten tujuan
-            //     'weight'        => '200', // berat barang dalam gram
-            //     'courier'       => 'JNE' // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
-            // ])->get();
-            // dd($cost);
+            $courier_type = $request['shipping'];
+            $response = RajaOngkir::ongkosKirim([
+                'origin'        => 153,  //kode jaksel
+                'destination'   => $city_id, // ID kota/kabupaten tujuan
+                'weight'        => 1000, // berat barang dalam gram
+                'courier'       => $courier_type // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+            ])->get();
+            //$shipping_cost = $response[0]['costs'][0]['cost'][0]['value'];
+            $tipe_pengiriman = $response[0]['costs'];
         }
 
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total'));
+        if ($request->has('tipe')) {
+            $nama_tipe = $request['tipe'];
+            foreach($tipe_pengiriman as $tipe)
+            {
+                if($tipe['service'] == $nama_tipe)
+                    $shipping_cost = $tipe['cost'][0]['value'];
+            }
+        }
+        $total_price = $sub_total + $shipping_cost;
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today'));
     }
 
     public function store(Request $request)
@@ -155,6 +174,7 @@ class CartController extends Controller
     public function payment_index(Request $request){
         return view('client/cart-payment');
     }
+
 
     
     /**
