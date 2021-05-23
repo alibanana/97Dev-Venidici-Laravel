@@ -70,7 +70,7 @@ class CartController extends Controller
             //kalo user udah pernah save city di user detail
             if($city_id == null)
                 $city_id = auth()->user()->userDetail->city_id;
-                
+
             $courier_type = $request['shipping'];
             $response = RajaOngkir::ongkosKirim([
                 'origin'        => 153,  //kode jaksel

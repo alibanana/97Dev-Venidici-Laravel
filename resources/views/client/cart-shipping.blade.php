@@ -66,11 +66,13 @@
                     <div class="col-12 col-sm-6" >
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+
+                            
                             <select required onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 <option disabled >Pilih Provinsi</option>
                                 @foreach($provinces as $province)
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'province' => $province->id]) }}" 
-                                    @if(Auth::user()->userDetail->province_id != null)
+                                <option value="{{ request()->fullUrlWithQuery(['province' => $province->id]) }}" 
+                                    @if(Auth::user()->userDetail->province_id != null && !Request::get('province'))
                                         @if(Auth::user()->userDetail->province_id == $province->id)
                                         selected
                                         @endif
@@ -80,7 +82,8 @@
                                     
                                     >{{$province->name }}</option>
                                 @endforeach
-                            </select>                    
+                            </select>            
+                              
                             @error('province')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -98,20 +101,20 @@
                                     <option disabled>Pilih Kota</option>
 
                                     @foreach($cities as $city)
-                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'city' => $city->city_id]) }}" 
+                                    <option value="{{ request()->fullUrlWithQuery(['city' => $city->city_id]) }}" 
 
-                                        @if(Auth::user()->userDetail->city_id != null)
-                                            @if(Auth::user()->userDetail->city_id == $city->id)
+                                        @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
+                                            @if(Auth::user()->userDetail->city_id == $city->city_id)
                                             selected
                                             @endif
-                                        @else (Request::get('city') == $city->id) 
+                                        @elseif (Request::get('city') == $city->city_id) 
                                         selected 
                                         @endif
                                         
                                         >{{$city->name }}</option>
                                     @endforeach          
                                 @endif
-                            </select>                    
+                            </select>        
                             @error('province')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
