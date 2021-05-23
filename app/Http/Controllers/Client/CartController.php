@@ -58,11 +58,19 @@ class CartController extends Controller
             $cities = City::where('province_id', $province_id)->get();
         }
         else{
-            $cities = null;
+            if(auth()->user()->userDetail->city_id != null)
+                $cities = City::get();
+            else
+                $cities = null;
         }
 
         if ($request->has('shipping')) {
             $city_id = $request['city'];
+
+            //kalo user udah pernah save city di user detail
+            if($city_id == null)
+                $city_id = auth()->user()->userDetail->city_id;
+                
             $courier_type = $request['shipping'];
             $response = RajaOngkir::ongkosKirim([
                 'origin'        => 153,  //kode jaksel
@@ -71,7 +79,7 @@ class CartController extends Controller
                 'courier'       => $courier_type // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
             ])->get();
             //$shipping_cost = $response[0]['costs'][0]['cost'][0]['value'];
-            $tipe_pengiriman = $response[0]['costs'];
+            $tipe_pengiriman = $response[0]['costs']; // contoh ctc
         }
 
         if ($request->has('tipe')) {

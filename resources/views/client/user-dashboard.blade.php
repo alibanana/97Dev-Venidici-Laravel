@@ -109,8 +109,9 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                <option value="">DKI Jakarta</option>
-                                <option value="">Instagram</option>
+                                @foreach($provinces as $province)
+                                    <option value="{{$province->id}}" @if( Auth::user()->userDetail->province_id == $province->id) selected @endif>{{$province->name }}</option>
+                                @endforeach
                             </select>                    
                             @error('province')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -122,11 +123,12 @@
                     <div class="col-12 col-sm-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                <option value="">Jakarta Selatan</option>
-                                <option value="">Instagram</option>
+                            <select name="city" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                @foreach($cities as $city)
+                                    <option value="{{$city->id}}"  @if( Auth::user()->userDetail->city_id == $city->id) selected @endif>{{$city->name }}</option>
+                                @endforeach
                             </select>                    
-                            @error('province')
+                            @error('city')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -136,7 +138,7 @@
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #3B3C43;;width:100%">Jalan 123 Komplek ABC - Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos</textarea>                
+                            <textarea name="" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
                             @error('province')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>

@@ -53,6 +53,8 @@
         </div>
     </div>
     <!-- END OF MODAL VA -->
+
+    <!-- START OF PAGE CONTENT -->
     <div class="row m-0 shipping-background" style="padding-bottom:4vw">
         
         <div class="col-8 p-0" style="">
@@ -65,9 +67,18 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select required onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
-                                <option disabled selected >Pilih Provinsi</option>
+                                <option disabled >Pilih Provinsi</option>
                                 @foreach($provinces as $province)
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'province' => $province->id]) }}" @if (Request::get('province') == $province->id) selected @endif>{{$province->name }}</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'province' => $province->id]) }}" 
+                                    @if(Auth::user()->userDetail->province_id != null)
+                                        @if(Auth::user()->userDetail->province_id == $province->id)
+                                        selected
+                                        @endif
+                                    @elseif(Request::get('province') == $province->id) 
+                                    selected 
+                                    @endif
+                                    
+                                    >{{$province->name }}</option>
                                 @endforeach
                             </select>                    
                             @error('province')
@@ -81,13 +92,23 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Kota</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select required onchange="if (this.value) window.location.href=this.value" id=""  class="normal-text" name="" style="background:transparent;border:none;color: #5F5D70;;width:100%">
-                                @if($cities == null)
-                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                @if($cities == null && Auth::user()->userDetail->city_id == null)
+                                    <option disabled>Pilih Provinsi terlebih dahulu</option>
                                 @else
-                                    <option disabled selected>Pilih Kota</option>
+                                    <option disabled>Pilih Kota</option>
 
                                     @foreach($cities as $city)
-                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'city' => $city->city_id]) }}" @if (Request::get('city') == $city->city_id) selected @endif>{{$city->name }}</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'city' => $city->city_id]) }}" 
+
+                                        @if(Auth::user()->userDetail->city_id != null)
+                                            @if(Auth::user()->userDetail->city_id == $city->id)
+                                            selected
+                                            @endif
+                                        @else (Request::get('city') == $city->id) 
+                                        selected 
+                                        @endif
+                                        
+                                        >{{$city->name }}</option>
                                     @endforeach          
                                 @endif
                             </select>                    
@@ -102,7 +123,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Metode Pengiriman</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select required onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
-                                @if(Request::get('city') == null)
+                                @if(Request::get('city') == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Kota terlebih dahulu</option>
                                 @else
                                     <option disabled selected>Pilih metode pengiriman</option>
@@ -145,7 +166,7 @@
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="address" value="Jalan 123 Komplek ABC - Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">Jalan 123 Komplek ABC - Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos</textarea>                
+                            <textarea name="address" value="{{Auth::user()->userDetail->address}}" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
                             @error('address')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
