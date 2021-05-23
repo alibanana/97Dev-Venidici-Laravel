@@ -15,6 +15,8 @@ use App\Models\Hashtag;
 use App\Models\UserDetail;
 use App\Models\Course;
 use App\Models\Cart;
+use App\Models\Province;
+use App\Models\City;
 
 use PDF;
 
@@ -130,7 +132,10 @@ class PagesController extends Controller
 
     public function dashboard_index()
     {
-        return view('client/user-dashboard');
+        $provinces = Province::all();
+        $cities = City::all();
+
+        return view('client/user-dashboard', compact('provinces','cities'));
     }
     public function print(){
         $pdf = PDF::loadView('client/certificate')
