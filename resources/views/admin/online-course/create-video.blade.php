@@ -37,6 +37,8 @@
                 <div class="col-12">
                     <h6 class="modal-title" id="exampleModalLabel">Attachment</h6>
                     <div class="form-group mt-2">
+                        <!-- if there is no attachment, change the text below to "no attachment" -->
+                        <p> <span> <a href="" target="_blank">click here</a> </span> to view current attachment</p>
                         <input type="file" name="attachment">
                         @error('attachment')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">

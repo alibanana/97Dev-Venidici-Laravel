@@ -37,6 +37,14 @@ class CheckoutController extends Controller
         };
 
         $no_invoice = 'INV-'.Str::upper($random);
+
+        //kalo user udah pernah save province di user detail
+        if($input['province'] == null)
+            $input['province'] = auth()->user()->userDetail->province_id;
+
+        //kalo user udah pernah save city di user detail
+        if($input['city'] == null)
+            $input['city'] = auth()->user()->userDetail->city_id;
         
         $invoice = Invoice::create([
             'invoice_no'            => $no_invoice,
