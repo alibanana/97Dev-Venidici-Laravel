@@ -109,6 +109,9 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                @if(Auth::user()->userDetail->province_id == null)
+                                <option disabled selected>Pilih Provinsi</option>
+                                @endif
                                 @foreach($provinces as $province)
                                     <option value="{{$province->id}}" @if( Auth::user()->userDetail->province_id == $province->id) selected @endif>{{$province->name }}</option>
                                 @endforeach
@@ -124,8 +127,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="city" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                @if(Auth::user()->userDetail->city_id == null)
+                                <option disabled selected>Pilih Kota</option>
+                                @endif
                                 @foreach($cities as $city)
-                                    <option value="{{$city->id}}"  @if( Auth::user()->userDetail->city_id == $city->id) selected @endif>{{$city->name }}</option>
+                                    <option value="{{$city->id}}"  @if( Auth::user()->userDetail->city_id == $city->city_id) selected @endif>{{$city->name }}</option>
                                 @endforeach
                             </select>                    
                             @error('city')

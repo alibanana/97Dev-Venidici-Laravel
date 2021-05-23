@@ -58,6 +58,7 @@ class CheckoutController extends Controller
             'province'              => $input['province'],
             'city'                  => $input['city'],
             'address'               => $input['address'],
+            'shipping_notes'        => $input['shipping_notes'],
             'grand_total'           => $input['grand_total'],
             'status'                => 'pending',
             'total_order_price'     => $input['total_order_price'],
@@ -114,51 +115,47 @@ class CheckoutController extends Controller
         return redirect('/transaction-detail/'.$payment_object['data']['id']);
     }
     public function transactionDetail($id){
+
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
+
         $payment_status = json_decode($response->body(), true);
+
         $invoice = Invoice::where('xfers_payment_id',$id)->first();
+
         $orders = Order::with('course')
                 ->where('invoice_id', $invoice->id)
                 ->orderBy('created_at', 'desc')
                 ->get();
-        return view('client/transaction-detail', compact('payment_status','orders','invoice'));
+
+        $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+
+        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
     }
-    public function createPayment(Request $request, $id){
 
-        
-        //create order
-        //delete cart
-
-        //get user last invoice
-        $order = Order::find($id);
-
-        //hit xfers api to create payment order
+    public function cancelPayment(Request $request, $id)
+    {
+        //hit xfers api to cancel payment
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
         ->withHeaders([
             'Accept' => 'application/vnd.api+json',
             'Content-Type' => 'application/vnd.api+json'
  
-        ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
+        ])->post('https://sandbox-id.xfers.com/api/v4/payments/'.$id.'/tasks', [
             "data" => [
                 "attributes" => [
-                    "paymentMethodType" => "virtual_bank_account",
-                    "amount" => $order->price,
-                    "referenceId" => $order->invoice_id,
-                    "expiredAt" => "2021-05-19T06:07:04+07:00",
-                    "description" => "Order Number ".$input['invoice_id'],
-                    "paymentMethodOptions" =>[
-                        "bankShortCode" => "BCA",
-                        "displayName" => "Venidici",
-                        "suffixNo" => ""
-                    ]
- 
+                    "action" => "cancel"
                 ]
             ]
         ]); 
- 
-        $payment_status = json_decode($response->body(), true);
-        dd($payment_status);
-    } 
+
+        $payment_object = json_decode($response->body(), true);
+        return redirect('/transaction-detail/'.$payment_object['data']['attributes']['targetId']);
+
+    }
 
     // public function store()
     // {

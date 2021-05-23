@@ -34,7 +34,7 @@ class CreateHashtagsTable extends Migration
         Schema::create('user_hashtag', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('hashtag_id');
             $table->foreign('hashtag_id')->references('id')->on('hashtags')->onDelete('cascade');
             $table->timestamps();

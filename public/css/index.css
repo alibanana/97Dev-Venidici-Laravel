@@ -1224,7 +1224,7 @@ html, body {
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);
     border-radius: 10px;
-    padding:1vw;
+    padding:0.5vw;
     border:2px solid #2B6CAA;
     color:#2B6CAA;
     transition: 0.2s ease-in-out;

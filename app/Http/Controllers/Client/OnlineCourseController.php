@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Cart;
 use App\Models\Course;
+use App\Models\Invoice;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,9 @@ class OnlineCourseController extends Controller
             $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
+            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
-            return view('client/online-course/index', compact('cart_count'));
+            return view('client/online-course/index', compact('cart_count','transactions'));
         } else {
             return view('client/online-course/index');
         }
@@ -39,7 +41,8 @@ class OnlineCourseController extends Controller
         $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
+        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('client/online-course/detail', compact('course','cart_count'));
+        return view('client/online-course/detail', compact('course','cart_count','transactions'));
     }
 }

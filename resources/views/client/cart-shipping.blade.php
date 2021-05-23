@@ -158,8 +158,8 @@
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Catatan Untuk Pengirim</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <input type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Kado untuk..">                   
-                            @error('province')
+                            <input type="text" name="shipping_notes" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Kado untuk..">                   
+                            @error('shipping_notes')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>

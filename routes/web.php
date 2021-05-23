@@ -82,6 +82,7 @@ Route::get('/signup', function () {
 /* CART ROUTING */
 
 Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail');
+Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment');
 Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
 Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
@@ -301,18 +302,16 @@ Route::get('login/google/callback', [App\Http\Controllers\SocialController::clas
 
 
 /* START OF FOR PUBLIC ROUTING */
-Route::get('/for-public/online-course', function () {
-    return view('client/for-public/online-course');
-});
-Route::get('/for-public/woki', function () {
-    return view('client/for-public/woki');
-});
+
+Route::get('/for-public/online-course', [PagesController::class, 'online_course_index'])->name('customer.online_course_index');
+Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
+
 /* END OF FOR PUBLIC ROUTING*/
 
 /* START OF FOR CORPORATE ROUTING */
-Route::get('/for-corporate/krest', function () {
-    return view('client/for-corporate/krest');
-});
+
+Route::get('/for-corporate/krest', [PagesController::class, 'krest_index'])->name('customer.krest_index');
+
 /* END OF FOR CORPORATE ROUTING*/
 
 
