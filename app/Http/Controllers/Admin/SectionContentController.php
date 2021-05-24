@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Helper\Helper;
 
 use App\Models\Section;
 use App\Models\SectionContent;
@@ -54,10 +55,24 @@ class SectionContentController extends Controller
     // Update a specific content (based on its id) in the database.
     public function update(Request $request, $id) {
         $validated = $request->validate([
-            // Add validations here
+            'attachment' => 'mimes:pps,ppt,pptx,xls,xlsm,xlsx,doc,docx,pdf',
+            'title' => 'required',
+            'youtube_link' => 'required|starts_with:https://www.youtube.com/embed/',
+            'description' => 'required',
+            'duration' => 'required|integer|min:1'
         ]);
 
         $content = SectionContent::findOrFail($id);
+        $content->title = $validated['title'];
+        $content->youtube_link = $validated['youtube_link'];
+        $content->description = $validated['description'];
+        $content->duration = $validated['duration'];
+        $content->save();
+
+        if ($request->has('attachment')) {
+            $content->attachment = Helper::storeImage($request->file('attachment'), 'storage/documents/section-contents/');
+            $content->save();
+        }
 
         if ($content->wasChanged()) {
             $message = "Section's Content (" . $content->title  . ') has been updated';
