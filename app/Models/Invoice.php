@@ -21,6 +21,7 @@ class Invoice extends Model
         'province', 
         'city', 
         'address', 
+        'shipping_notes', 
         'status', 
         'total_order_price',
         'discounted_price', 

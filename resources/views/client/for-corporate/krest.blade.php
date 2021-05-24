@@ -376,38 +376,39 @@ END OF OUR VALUES-->
 
 <!-- START OF CONTACT US SECTION -->
 <form action="">
-<div class="row m-0 page-container" style="padding-top:8vw;padding-bottom:8vw">
-<!--
-    <div class="col-6">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div  class="white-input-form" style="display: flex;align-items:center;width:48%">
-                <i style="color:#DAD9E2" class="fas fa-user"></i>
-                <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" value="{{ old('email') }}">
-            </div>  
-            <div  class="white-input-form" style="display: flex;align-items:center;width:48%">
-                <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" value="{{ old('email') }}">
-            </div>  
+    <div class="row m-0 page-container" style="padding-top:8vw;padding-bottom:8vw">
+    <!--
+        <div class="col-6">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div  class="white-input-form" style="display: flex;align-items:center;width:48%">
+                    <i style="color:#DAD9E2" class="fas fa-user"></i>
+                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" value="{{ old('email') }}">
+                </div>  
+                <div  class="white-input-form" style="display: flex;align-items:center;width:48%">
+                    <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                    <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" value="{{ old('email') }}">
+                </div>  
 
-        </div>
-        <div  class="white-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-            <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" value="{{ old('email') }}">
-        </div> 
-        <div class="white-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-            <textarea name="" id="" rows="6" class="normal-text"   style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukkan pesan anda disini"></textarea>                
-        </div>  
-    </div>
-    -->
-    <div class="col-12" style="text-align:center">
-        <p class="medium-heading" style="font-family: Rubik Bold;color:#55525B">Hubungi Kami Lebih Lanjut</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#55525B;margin-top:2vw">Tanyakan kami apapun dan kami senang membantu</p>
-            <div>
-                <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
-                    Kirim Pesan
-                </button>   
             </div>
+            <div  class="white-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
+                <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" value="{{ old('email') }}">
+            </div> 
+            <div class="white-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
+                <textarea name="" id="" rows="6" class="normal-text"   style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukkan pesan anda disini"></textarea>                
+            </div>  
+        </div>
+        -->
+        <div class="col-12" style="text-align:center">
+            <p class="medium-heading" style="font-family: Rubik Bold;color:#55525B">Hubungi Kami Lebih Lanjut</p>
+            <p class="sub-description" style="font-family: Rubik Regular;color:#55525B;margin-top:2vw">Tanyakan kami apapun dan kami senang membantu</p>
+                <div>
+                    <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
+                        Kirim Pesan
+                    </button>   
+                </div>
 
-            
+                
+            </div>
         </div>
     </div>
 </form>

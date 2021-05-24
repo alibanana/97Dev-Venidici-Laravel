@@ -196,13 +196,16 @@
                 </a>
             </div>       
             <!-- START OF STATUS CARD -->
-            <div style="background: @if($payment_status['data']['attributes']['status'] == 'pending') #F4C257 @else #67BBA3 @endif;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1vw 1.5vw;margin-top:1vw;text-align:center">
+            <div style="background: @if($payment_status['data']['attributes']['status'] == 'pending') #F4C257 @elseif($payment_status['data']['attributes']['status'] == 'cancelled') #F7F7F9 @else #67BBA3 @endif;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1vw 1.5vw;margin-top:1vw;text-align:center">
                 @if($payment_status['data']['attributes']['status'] == 'pending')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px"><i class="far fa-clock"></i> <span style="margin-left:1vw">Menunggu Pembayaran</span></p>
                 @elseif($payment_status['data']['attributes']['status'] == 'paid')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Pembayaran Diterima</p>
                 @elseif($payment_status['data']['attributes']['status'] == 'completed')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:green;margin-bottom:0px">Pembelian Selesai</p>
+                
+                @elseif($payment_status['data']['attributes']['status'] == 'cancelled')
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px"><i class="far fa-window-close"></i> <span style="margin-left:1vw">Pembelian Dibatalkan</span></p>
                 @endif
             </div>
             <!-- END OF STATUS CARD -->       
@@ -230,8 +233,11 @@
                 </div>
                 
             </div>
-            <div style="text-align:center;margin-top:1vw">   
-                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <a href="">Click here</a> </span> to cancel the payment </p>
+            <div style="text-align:center;margin-top:1vw">  
+                <form action="{{route('customer.cart.cancelPayment',$invoice->xfers_payment_id)}}" method="POST">
+                @csrf
+                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to cancel the payment </p>
+                </form> 
             </div>
            
             <!-- END OF ONE PAYMENT METHOD -->     

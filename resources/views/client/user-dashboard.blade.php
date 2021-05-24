@@ -109,8 +109,12 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                <option value="">DKI Jakarta</option>
-                                <option value="">Instagram</option>
+                                @if(Auth::user()->userDetail->province_id == null)
+                                <option disabled selected>Pilih Provinsi</option>
+                                @endif
+                                @foreach($provinces as $province)
+                                    <option value="{{$province->id}}" @if( Auth::user()->userDetail->province_id == $province->id) selected @endif>{{$province->name }}</option>
+                                @endforeach
                             </select>                    
                             @error('province')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -122,11 +126,15 @@
                     <div class="col-12 col-sm-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                <option value="">Jakarta Selatan</option>
-                                <option value="">Instagram</option>
+                            <select name="city" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                @if(Auth::user()->userDetail->city_id == null)
+                                <option disabled selected>Pilih Kota</option>
+                                @endif
+                                @foreach($cities as $city)
+                                    <option value="{{$city->id}}"  @if( Auth::user()->userDetail->city_id == $city->city_id) selected @endif>{{$city->name }}</option>
+                                @endforeach
                             </select>                    
-                            @error('province')
+                            @error('city')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -136,7 +144,7 @@
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #3B3C43;;width:100%">Jalan 123 Komplek ABC - Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos</textarea>                
+                            <textarea name="" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
                             @error('province')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -291,10 +299,10 @@
                         -webkit-line-clamp: 2 !important;
                         -webkit-box-orient: vertical !important;">{{Auth::user()->userDetail->address}}</p>   
                 </div>
-                <div style="display:flex;align-items:center;margin-top:0.8vw">   
-                    <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px">Tech</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#CE3369;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;margin-left:1vw">Art</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#67BBA3;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;margin-left:1vw">Math</p>
+                <div style="display:flex;align-items:center;margin-top:0.8vw">
+                    @foreach(Auth::user()->hashtags as $hashtag)
+                    <p class="small-text" style="font-family:Rubik Medium;color:{{$hashtag->color}};background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;@if($loop->iteration != 1) margin-left:1vw @endif">{{$hashtag->hashtag}}</p>
+                    @endforeach
                 </div>
 
             </div>

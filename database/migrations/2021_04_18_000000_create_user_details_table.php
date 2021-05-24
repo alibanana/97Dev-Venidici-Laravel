@@ -17,6 +17,7 @@ class CreateUserDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('display_picture')->nullable();
             $table->string('telephone', 16);
             $table->string('referral_code', 6)->nullable();
             $table->date('birthdate')->nullable();
@@ -26,6 +27,8 @@ class CreateUserDetailsTable extends Migration
             $table->string('occupancy')->nullable();
             $table->text('interest')->nullable();
             $table->text('response')->nullable();
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->unsignedBigInteger('city_id')->nullable();
             $table->timestamps();
         });
     }

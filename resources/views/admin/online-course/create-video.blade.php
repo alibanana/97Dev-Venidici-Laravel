@@ -34,23 +34,38 @@
         <form action="/admin/online-courses/1/update" method="POST" enctype="multipart/form-data">
         @csrf           
             <div class="row">
-                <div class="col-6">
-                    <h6 class="modal-title" id="exampleModalLabel">Embed Youtube Link (src only)</h6>
+                <div class="col-12">
+                    <h6 class="modal-title" id="exampleModalLabel">Attachment</h6>
                     <div class="form-group mt-2">
-                        <input type="text" name="video" class="form-control form-control-user"
-                            id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg">
-                        @error('video')
+                        <!-- if there is no attachment, change the text below to "no attachment" -->
+                        <p> <span> <a href="" target="_blank">click here</a> </span> to view current attachment</p>
+                        <input type="file" name="attachment">
+                        @error('attachment')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
                 </div>
+              
                 <div class="col-6">
-                    <h6 class="modal-title" id="exampleModalLabel">Attachment</h6>
+                    <h6 class="modal-title" id="exampleModalLabel">Title</h6>
                     <div class="form-group mt-2">
-                        <input type="file" name="attachment">
-                        @error('attachment')
+                        <input type="text" name="title" class="form-control form-control-user"
+                            id="exampleInputPassword" placeholder="e.g. Introduction to course">
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>  
+                <div class="col-6">
+                    <h6 class="modal-title" id="exampleModalLabel">Embed Youtube Link (src only)</h6>
+                    <div class="form-group mt-2">
+                        <input type="text" name="video" class="form-control form-control-user"
+                            id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg">
+                        @error('video')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -85,7 +100,7 @@
                 </div>
                 <div class="col-12">
                     <div style="display:flex;justify-content:flex-end">
-                        <button type="submit" class="btn btn-primary btn-user p-3">Add New Video</button>
+                        <button type="submit" class="btn btn-primary btn-user p-3">Update Content</button>
                     </div>
                 </div>
 

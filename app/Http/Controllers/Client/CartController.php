@@ -11,6 +11,7 @@ use App\Models\City;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use App\Models\Invoice;
 
 class CartController extends Controller
 {
@@ -28,7 +29,9 @@ class CartController extends Controller
         $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
-        return view('client/cart', compact('carts','cart_count'));
+        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('client/cart', compact('carts','cart_count','transactions'));
     }
     
     public function shipment_index(Request $request)
@@ -40,6 +43,9 @@ class CartController extends Controller
         $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
+
+        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
         $today = Carbon::now()->addDays(1);
         $today->setTimezone('Asia/Jakarta');
         $total_price = 0;
@@ -58,11 +64,19 @@ class CartController extends Controller
             $cities = City::where('province_id', $province_id)->get();
         }
         else{
-            $cities = null;
+            if(auth()->user()->userDetail->city_id != null)
+                $cities = City::get();
+            else
+                $cities = null;
         }
 
         if ($request->has('shipping')) {
             $city_id = $request['city'];
+
+            //kalo user udah pernah save city di user detail
+            if($city_id == null)
+                $city_id = auth()->user()->userDetail->city_id;
+
             $courier_type = $request['shipping'];
             $response = RajaOngkir::ongkosKirim([
                 'origin'        => 153,  //kode jaksel
@@ -71,7 +85,7 @@ class CartController extends Controller
                 'courier'       => $courier_type // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
             ])->get();
             //$shipping_cost = $response[0]['costs'][0]['cost'][0]['value'];
-            $tipe_pengiriman = $response[0]['costs'];
+            $tipe_pengiriman = $response[0]['costs']; // contoh ctc
         }
 
         if ($request->has('tipe')) {
@@ -83,7 +97,7 @@ class CartController extends Controller
             }
         }
         $total_price = $sub_total + $shipping_cost;
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today'));
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions'));
     }
 
     public function store(Request $request)
