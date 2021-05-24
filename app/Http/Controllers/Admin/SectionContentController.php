@@ -70,7 +70,8 @@ class SectionContentController extends Controller
         $content->save();
 
         if ($request->has('attachment')) {
-            $content->attachment = Helper::storeImage($request->file('attachment'), 'storage/documents/section-contents/');
+            if (!is_null($content->attachment)) unlink($content->attachment);
+            $content->attachment = Helper::storeFile($request->file('attachment'), 'storage/documents/section-contents/');
             $content->save();
         }
 
@@ -89,7 +90,7 @@ class SectionContentController extends Controller
     public function destroy($id) {
         $content = SectionContent::findOrFail($id);
 
-        if (!is_null($content->attachment)) { unlink($content->attachment); }
+        if (!is_null($content->attachment)) unlink($content->attachment);
         $content->delete();
 
         $message = 'Content (' . $content->title  . ') has been deleted from the database';
