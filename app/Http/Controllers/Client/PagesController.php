@@ -83,7 +83,15 @@ class PagesController extends Controller
     public function signup_interest()
     {
         $interests = Hashtag::all();
-        return view('client/auth/signup-interests', compact('interests'));
+        $transactions=null;
+        $cart_count=0;
+        return view('client/auth/signup-interests', compact('interests','cart_count','transactions'));
+    }
+
+    public function signup_general_info(){
+        $transactions=null;
+        $cart_count=0;
+        return view('client/auth/signup', compact('cart_count','transactions'));
     }
 
     public function storeGeneralInfo(Request $request)

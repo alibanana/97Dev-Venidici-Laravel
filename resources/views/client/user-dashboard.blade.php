@@ -300,9 +300,9 @@
                         -webkit-box-orient: vertical !important;">{{Auth::user()->userDetail->address}}</p>   
                 </div>
                 <div style="display:flex;align-items:center;margin-top:0.8vw">
-                    <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px">Tech</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#CE3369;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;margin-left:1vw">Art</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#67BBA3;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;margin-left:1vw">Math</p>
+                    @foreach(Auth::user()->hashtags as $hashtag)
+                    <p class="small-text" style="font-family:Rubik Medium;color:{{$hashtag->color}};background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;@if($loop->iteration != 1) margin-left:1vw @endif">{{$hashtag->hashtag}}</p>
+                    @endforeach
                 </div>
 
             </div>
