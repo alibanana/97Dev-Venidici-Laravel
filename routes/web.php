@@ -56,15 +56,13 @@ Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('cus
 |--------------------------------------------------------------------------
 */
 Route::get('/', [PagesController::class, 'index'])->name('index');
+Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
 Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest');
 Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info');
 
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
 
-Route::get('/login', function () {
-    return view('client/auth/login');
-});
 Route::get('/signup', function () {
     return view('client/auth/signup');
 });

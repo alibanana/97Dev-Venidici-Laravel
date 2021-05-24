@@ -299,7 +299,7 @@
                         -webkit-line-clamp: 2 !important;
                         -webkit-box-orient: vertical !important;">{{Auth::user()->userDetail->address}}</p>   
                 </div>
-                <div style="display:flex;align-items:center;margin-top:0.8vw">   
+                <div style="display:flex;align-items:center;margin-top:0.8vw">
                     <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px">Tech</p>
                     <p class="small-text" style="font-family:Rubik Medium;color:#CE3369;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;margin-left:1vw">Art</p>
                     <p class="small-text" style="font-family:Rubik Medium;color:#67BBA3;background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;margin-left:1vw">Math</p>

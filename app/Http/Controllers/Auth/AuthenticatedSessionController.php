@@ -21,7 +21,19 @@ class AuthenticatedSessionController extends Controller
     public function create()
     {
         // return view('auth.login');
-        return view('client/auth/login');
+        if(Auth::check()) {
+            $cart_count = Cart::with('course')
+                ->where('user_id', auth()->user()->id)
+                ->count();
+            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            return view('client/auth/login',compact('cart_count','transactions'));
+            
+        }
+        else{
+            $transactions=null;
+            $cart_count=0;
+            return view('client/auth/login',compact('cart_count','transactions'));
+        }
     }
 
     /**

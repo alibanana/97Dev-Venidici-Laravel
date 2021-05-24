@@ -46,18 +46,33 @@ class PagesController extends Controller
         
         // Get 3 Online Courses
         $online_courses = Course::where('course_type_id','1')->take(3)->get();
-
+        
         if(Auth::check()) {
             $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
+            ->where('user_id', auth()->user()->id)
+            ->count();
             $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
             return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','online_courses','cart_count','transactions'));
         } else {
-            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses'));
+            $transactions=null;
+            $cart_count=0;
+            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','cart_count','transactions'));
         }
         
+    }
+
+    public function community_index(){
+        if(Auth::check()) {
+            $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            return view('client/community', compact('cart_count','transactions'));
+        } else {
+            $transactions=null;
+            $cart_count=0;
+            return view('client/community', compact('cart_count','transactions'));
+        }
     }
 
     public function autocomplete(Request $request){

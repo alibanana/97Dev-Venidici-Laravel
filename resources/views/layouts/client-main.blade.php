@@ -45,7 +45,7 @@
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
         <a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
         <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
-        <a href="" class="normal-text navbar-item" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
+        <a href="/community" class="normal-text navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Log In</a>
         @endif
@@ -162,36 +162,39 @@
 
             <!-- START OF TRANSAKSI NOTIFICATION -->
             <div class="col-md-12 notif-content" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
-              @foreach($transactions as $transaction)
-              <!-- ONE BLUE CARD -->
-              <a href="/transaction-detail/{{$transaction->xfers_payment_id}}" style="text-decoration:none">
-                <div style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
 
-                      </div>
+              @if($transactions != null)
+                @foreach($transactions as $transaction)
+                <!-- ONE BLUE CARD -->
+                <a href="/transaction-detail/{{$transaction->xfers_payment_id}}" style="text-decoration:none">
+                  <div style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
+                    <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                        <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                          <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
+
+                        </div>
+                    </div>
+                    <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                        <div style="padding:0.6vw 1vw">
+                            
+                          <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
+                          <?php
+                              $date_time = explode(' ', $transaction->created_at);
+                          ?>
+                          <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
+                          <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                            overflow : hidden !important;
+                            text-overflow: ellipsis !important;
+                            -webkit-line-clamp: 2 !important;
+                            -webkit-box-orient: vertical !important;">Hi, {{$transaction->user->name}}. Harap segera selesaikan pembayaranmu</p>
+                            <!-- Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”. -->
+                        </div>
+                    </div>
                   </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
-                      <div style="padding:0.6vw 1vw">
-                          
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
-                        <?php
-                            $date_time = explode(' ', $transaction->created_at);
-                        ?>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
-                          overflow : hidden !important;
-                          text-overflow: ellipsis !important;
-                          -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Hi, {{$transaction->user->name}}. Harap segera selesaikan pembayaranmu</p>
-                          <!-- Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”. -->
-                      </div>
-                  </div>
-                </div>
-              </a>
-              <!-- END OF ONE BLUE CARD -->
-              @endforeach
+                </a>
+                <!-- END OF ONE BLUE CARD -->
+                @endforeach
+              @endif
             </div>
             <!-- END OF TRANSAKSI NOTIFICATION -->
 
