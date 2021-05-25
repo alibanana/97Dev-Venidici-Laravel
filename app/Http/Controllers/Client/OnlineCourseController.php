@@ -12,6 +12,7 @@ use App\Models\Invoice;
 use App\Models\Teacher;
 use App\Models\Section;
 use App\Models\SectionContent;
+use App\Models\Assessment;
 /*
 |--------------------------------------------------------------------------
 | Client OnlineCourseController Class.
@@ -55,12 +56,25 @@ class OnlineCourseController extends Controller
 
     public function learn($id,$detail_id)
     {
+        
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
         $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
         $sections = Section::where('course_id',$id)->get();
         $content = SectionContent::findOrFail($detail_id);
-        return view('client/online-course/learn', compact('cart_count','transactions','sections','content'));
+        $assessment = Assessment::where('course_id',$id)->first();
+        
+        return view('client/online-course/learn', compact('cart_count','transactions','sections','content','assessment'));
+    }
+    
+    public function showAssesment(Request $request, $id)
+    {
+        $input = $request->all();
+        $assessment = Assessment::findOrFail($id);
+        $assessment->duration  =  $input['duration'];
+        $assessment->save();
+        return view('client/online-course/assessment',compact('assessment'));
+
     }
 }

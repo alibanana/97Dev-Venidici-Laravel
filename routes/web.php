@@ -105,6 +105,7 @@ Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('custo
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
+Route::get('/online-course/assessment/{id}', [OnlineCourseController::class, 'showAssesment'])->name('online-course-assesment.show');
 
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');

@@ -118,7 +118,6 @@ class CheckoutController extends Controller
         ]); 
  
         $payment_object = json_decode($response->body(), true);
-
         $invoice = Invoice::findorfail($invoice_id);
         $invoice->xfers_payment_id  =  $payment_object['data']['id'];
         $invoice->save();
