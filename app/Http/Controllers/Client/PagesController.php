@@ -19,6 +19,7 @@ use App\Models\Province;
 use App\Models\City;
 use App\Models\UserHashtag;
 use App\Models\Invoice;
+use App\Models\Order;
 
 use PDF;
 
@@ -118,6 +119,7 @@ class PagesController extends Controller
 
         return redirect()->route('signup_interest');
     }
+
     public function storeInterest(Request $request)
     {
         $validated = $request->validate([
@@ -165,9 +167,17 @@ class PagesController extends Controller
 
     public function course_detail($id){
         $course = Course::findOrFail($id);
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
-        return view('client/online-course/detail', compact('course','transactions'));
+        if(Auth::check()) {
+            $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            return view('client/online-course/detail', compact('course','cart_count','transactions'));
+        } else {
+            $transactions=null;
+            $cart_count=0;
+            return view('client/online-course/detail', compact('course','cart_count','transactions'));
+        }
     }
 
     public function dashboard_index()
@@ -178,35 +188,58 @@ class PagesController extends Controller
             ->where('user_id', auth()->user()->id)
             ->count();
         $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
-        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions'));
+                
+        $orders = Order::whereHas('invoice', function ($query){
+            $query->where(
+                [
+                    ['status', '=', 'paid'],
+                    ['user_id', '=', auth()->user()->id],
+                ]
+            );
+                })->orderBy('orders.created_at', 'desc')->get();
+        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders'));
     }
 
     public function krest_index(){
-        $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
-        return view('client/for-corporate/krest', compact('cart_count','transactions'));
-
+        if(Auth::check()) {
+            $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            return view('client/for-corporate/krest', compact('cart_count','transactions'));
+        } else {
+            $transactions=null;
+            $cart_count=0;
+            return view('client/for-corporate/krest', compact('cart_count','transactions'));
+        }
     }
 
     public function online_course_index(){
-        $cart_count = Cart::with('course')
+        if(Auth::check()) {
+            $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
-        return view('client/for-public/online-course', compact('cart_count','transactions'));
+            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            return view('client/for-public/online-course', compact('cart_count','transactions'));
+        } else {
+            $transactions=null;
+            $cart_count=0;
+            return view('client/for-public/online-course', compact('cart_count','transactions'));
+        }
     }
     public function woki_index(){
-        $cart_count = Cart::with('course')
+        
+        if(Auth::check()) {
+            $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
-        return view('client/for-public/woki', compact('cart_count','transactions'));
+            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            return view('client/for-public/woki', compact('cart_count','transactions'));
+        } else {
+            $transactions=null;
+            $cart_count=0;
+            return view('client/for-public/woki', compact('cart_count','transactions'));
+        }
     }
 
     public function print(){

@@ -1366,3 +1366,51 @@ html, body {
     color:#FFFFFF !important;
 
 }
+
+/* start of drag drop*/
+
+.drop-zone {
+    max-width: 100%;
+    height: 10vw;
+    padding: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    color: #cccccc;
+    border: 2px dashed #2B6CAA;
+    border-radius: 10px;
+  }
+  
+  .drop-zone--over {
+    border-style: solid;
+  }
+  
+  .drop-zone__input {
+    display: none;
+  }
+  
+  .drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #707070;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+  }
+/* end of drag drop*/

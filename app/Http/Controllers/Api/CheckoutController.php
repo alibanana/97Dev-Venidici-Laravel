@@ -147,7 +147,7 @@ class CheckoutController extends Controller
         ])->post('https://sandbox-id.xfers.com/api/v4/payments/'.$id.'/tasks', [
             "data" => [
                 "attributes" => [
-                    "action" => "cancel"
+                    "action" => "receive_payment"
                 ]
             ]
         ]); 

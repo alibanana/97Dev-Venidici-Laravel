@@ -14,7 +14,19 @@
             
             <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">{{$course->subtitle}}</p>
             <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
-            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh <span style="font-family:Rubik Bold">Mr. Raditya Dika</span></p>
+            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh 
+            
+            @foreach($course->teachers as $teacher)
+            <span style="font-family:Rubik Bold">
+                @if($loop->last)
+                and
+                @elseif(!$loop->first)
+                ,
+                @endif
+                {{$teacher->name}}
+            </span>
+            @endforeach
+            </p>
             <!--<video style="width:42vw;height:20vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px"  controls="false" >
                 <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
                 <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
@@ -28,49 +40,38 @@
 
             <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw;margin-bottom:0px"><i class="fas fa-user-graduate"></i> <span style="margin-left:1vw">150 Pelajar</span></p>
             <div style="display:flex;align-items:center;margin-top:0.5vw">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                 <div style="display: flex;justify-content:center;margin-left:1vw">
-                    <i style="color:#F4C257" class="fas fa-star sub-description"></i>
-                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
-                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
-                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                    @for ($i = 1; $i < 6; $i++)
+                        @if ($i <= $course->average_rating)
+                            @if ($i == 1)
+                                <i style="color:#F4C257" class="fas fa-star sub-description"></i>
+                            @else
+                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
+                            @endif
+                        @else
+                            @if ($i == 1)
+                                <i style="color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            @else
+                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            @endif
+                        @endif
+                    @endfor
                 </div>
             </div>
             <!-- WHAT YOU WILL LEARN SECTION -->
             <div style="background: rgba(103, 187, 163, 0.1);border-radius: 10px;padding:1.5vw;margin-top:2vw">
                 <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Apa saja yang akan dipelajari</p>
                 <div class="row m-0" style="padding-top:2vw">
-                    <div class="col-6">
+                    @foreach($course->courseFeatures as $features)
+
+                    <div class="col-6" style="@if($loop->iteration > 2) margin-top:1vw @endif">
                         <div style="display:flex;align-items:baseline">
                             <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">{{$features->feature}}</p>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar</p>
-                        </div>
-                    </div>
-                    <div class="col-6" style="margin-top:1vw">
-                        <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar</p>
-                        </div>
-                    </div>
-                    <div class="col-6" style="margin-top:1vw">
-                        <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
-                        </div>
-                    </div>
-                    <div class="col-6" style="margin-top:1vw">
-                        <div style="display:flex;align-items:baseline">
-                            <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">Bisa melawak dengan benar dan tidak garing</p>
-                        </div>
-                    </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -79,12 +80,10 @@
         <!-- START OF PERSYARATAN SECTION -->
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:4vw">Persyaratan</p>
         
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-top:1vw">   
-            <a class="green-tag normal-text" style="margin-top:1vw">Muka lucu dan unik</a>
-            <a class="green-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
-            <a class="green-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
-            <a class="green-tag normal-text" style="margin-top:1vw">Another Muka 1</a>
-            <a class="green-tag normal-text" style="margin-top:1vw">Another Muka lucu dan unik</a>
+        <div style="display:flex;align-items:center;flex-wrap:wrap;padding-top:1vw">   
+            @foreach($course->courseRequirements as $req)
+            <a class="green-tag normal-text" style="margin-top:1vw;@if($loop->iteration != 1) margin-left:1vw @endif">{{$req->requirement}}</a>
+            @endforeach
         </div>
         <!-- END OF PERSYARATAN SECTION -->
 
@@ -98,27 +97,19 @@
         -->
         <!-- START OF PROFIL PEMBICARA SECTION -->
         <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw;color:#3B3C43">Profil Pembicara</p>
+            @foreach($course->teachers as $teacher)
+
             <!-- START OF ONE LECTURE -->
             <div style="display:flex;margin-top:2vw;align-items:flex-start">
-                <img src="/assets/images/client/testimony-image-dummy.png" style="width:5vw;height:5vw" class="img-fluid" alt="">
+                <img src="{{ asset($teacher->image) }}" style="width:5vw;height:5vw" class="img-fluid" alt="">
                 <div style="margin-left:1vw">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">Mr. Raditya Dika</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#000000">Berpengalaman sebagai Consumer Insight Lead di LinkAja, REA Group Asia, Garudafood, dan menjadi Head of Research And Development di IdEA. Kak Irfan juga sering diundang oleh TV besar di indonesia sebagai Consumer Behavior Expert dan saat ini juga menjadi Co-Owner dari Waroeng Ondel Ondel Betawi di Leiden, Netherlands.</p>
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">{{$teacher->name}}</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#000000">{{$teacher->description}}</p>
                 </div>
 
             </div>
             <!-- END OF ONE LECTURE -->
-            <!-- START OF ONE LECTURE -->
-            <div style="display:flex;margin-top:2vw;align-items:flex-start">
-                <img src="/assets/images/client/testimony-image-dummy.png" style="width:5vw;height:5vw" class="img-fluid" alt="">
-                <div style="margin-left:1vw">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">Mr. Raditya Dika</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#000000">Berpengalaman sebagai Consumer Insight Lead di LinkAja, REA Group Asia, Garudafood, dan menjadi Head of Research And Development di IdEA. Kak Irfan juga sering diundang oleh TV besar di indonesia sebagai Consumer Behavior Expert dan saat ini juga menjadi Co-Owner dari Waroeng Ondel Ondel Betawi di Leiden, Netherlands.</p>
-                </div>
-
-            </div>
-            <!-- END OF ONE LECTURE -->
-
+            @endforeach
 
         <!-- END OF PROFIL PEMBICARA SECTION -->
         <p class="sub-description profil-text-green profil-text-green-active profil-links" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw">Tetang <span style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</span> ini</p>
@@ -161,7 +152,9 @@
             <form action="{{ route('customer.cart.store') }}" method="post">
             @csrf
                 <input type="hidden" name="course_id" value="{{$course->id}}">
+                @if(Auth::check())
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
+                @endif
                 <input type="hidden" name="quantity" value="1">
                 <input type="hidden" name="price" value="{{$course->price}}">
                 <input type="hidden" name="weight" value="0">
