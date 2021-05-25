@@ -116,7 +116,7 @@ html, body {
 }
 .course-page-background{
     background-image: url("/assets/images/client/Course_Page_BG.png");
-    background-position:5.2vw 17.4vw;
+    background-position:5.2vw 14.5vw;
     background-repeat: no-repeat;
     background-size: 88%;
 }
@@ -964,8 +964,13 @@ html, body {
     background: #FFFFFF;
     padding:1vw
 }
+
 .course-collapse:hover{
     background: rgba(111, 159, 205, 0.1)
+}
+.course-collapse-active{
+    background: rgba(111, 159, 205, 0.1)
+
 }
 #cart_icon .counter[data-count]:after{
     position:absolute;

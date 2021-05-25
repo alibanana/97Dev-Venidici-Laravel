@@ -131,13 +131,15 @@ class CheckoutController extends Controller
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-        return view('client/transaction-detail', compact('payment_status','orders','invoice'));
+        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
     }
 
     public function createPayment(Request $request, $id){        
-        //create order
-        //delete cart
-
+        
+        $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
         $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));

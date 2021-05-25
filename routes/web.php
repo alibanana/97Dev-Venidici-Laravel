@@ -109,7 +109,7 @@ Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
-Route::get('online-course/{id}/learn/lecture', [OnlineCourseController::class, 'learn'])->name('online-course.learn');
+Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn');
 
 //Route::get('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1', function () {
     //return view('client/online-course/learn');

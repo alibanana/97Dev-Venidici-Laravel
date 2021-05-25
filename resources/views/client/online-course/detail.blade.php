@@ -101,7 +101,7 @@
 
             <!-- START OF ONE LECTURE -->
             <div style="display:flex;margin-top:2vw;align-items:flex-start">
-                <img src="{{ asset($teacher->image) }}" style="width:5vw;height:5vw" class="img-fluid" alt="">
+                <img src="{{ asset($teacher->image) }}" style="width:5vw;height:5vw;object-fit:cover" class="img-fluid" alt="">
                 <div style="margin-left:1vw">
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">{{$teacher->name}}</p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#000000">{{$teacher->description}}</p>
@@ -163,7 +163,7 @@
             <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Buy Now</button>
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
-                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">109 Menit video eksklusif</span></p>
+                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">{{$course->total_duration}} Menit video eksklusif</span></p>
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">1 Assesment</span></p>
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Akses seumur hidup</span></p>
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Sertifikat keberhasilan</span></p>
