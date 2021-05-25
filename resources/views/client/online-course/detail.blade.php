@@ -101,7 +101,7 @@
 
             <!-- START OF ONE LECTURE -->
             <div style="display:flex;margin-top:2vw;align-items:flex-start">
-                <img src="{{ asset($teacher->image) }}" style="width:5vw;height:5vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="{{ asset($teacher->image) }}" style="width:5vw;height:5vw;object-fit:cover;filter: drop-shadow(0px 10px 20px rgba(31, 32, 65, 0.1));border-radius:10px;border:2px solid #F2F2F2" class="img-fluid" alt="">
                 <div style="margin-left:1vw">
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">{{$teacher->name}}</p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#000000">{{$teacher->description}}</p>
@@ -112,25 +112,141 @@
             @endforeach
 
         <!-- END OF PROFIL PEMBICARA SECTION -->
+        <!-- START OF TENTANG ONLINE COURSE -->
         <p class="sub-description profil-text-green profil-text-green-active profil-links" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw">Tetang <span style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</span> ini</p>
         <div  class="bigger-text profil-content" id="tentang-course"  style="margin-top:1vw">
             <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
                 {{$course->description}}
             </p>
         </div>
-        <div class="profil-content" id="profil-pembicara" style="display:none;margin-top:3vw">
-            <img src="/assets/images/client/Placeholder.png" class="img-fluid" style="width:15vw" alt="PROFILE PICTURE">
-            
-            <p class="sub-description" style="font-family:Rubik Medium;color:#000000;margin-top:2vw;margin-bottom:0px">Mr. Raditya Dika</p>
-            <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non vulputate cras pharetra malesuada libero mauris. Aliquet et enim eget felis quis et aliquam mi urna. Sagittis dictum consequat aenean posuere curabitur. Eget mauris habitasse mattis egestas tellus enim. Vestibulum massa iaculis in pellentesque aliquam morbi sem.</p>
+        <!-- END OF TENTANG ONLINE COURSE -->
+
+        <!-- START OF REVIEW SECTION -->
+        <form action="">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4vw">
+            <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px">Ulasan dari pelajar</p>
+            <p onclick="openReview()" id="add-review-button" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Tambah Ulasan</p>                
         </div>
-        <!-- END OF PROFIL PEMBICARA SECTION -->
+        <div style="display:none" id="review-area">
+            <!--
+            <div style="display: flex;justify-content:flex-start;margin-top:2vw;align-items:center;">
+                <p style="margin-bottom:0px;cursor:pointer">
+                    <i style="color:#F4C257" class="fas fa-star sub-description"></i>
+                </p>
+                <p style="margin-bottom:0px;cursor:pointer">
+                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
+                </p>
+                <p style="margin-bottom:0px;cursor:pointer">
+                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                </p>
+                <p style="margin-bottom:0px;cursor:pointer">
+                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                </p>
+                <p style="margin-bottom:0px;cursor:pointer">
+                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                </p>
+            </div>-->
+            <div class="rate" style="margin-top:1vw" >
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1" title="text">1 star</label>
+            </div>
+            <textarea class="normal-text" name="" placeholder="Masukan review anda disini" id="" style="width:100%;background: #FFFFFF;border: 2px solid #C4C4C4;box-sizing: border-box;border-radius: 5px;margin-top:1vw;padding:0.5vw" rows="4"></textarea>
+            <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
+                <button type="submit" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
+            </div>
+        </div>
+        </form>
 
 
-       
+        <div style="overflow:scroll;height:30vw;margin-top:3vw">
+            <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;">
+            <!-- START OF USER REVIEWS -->
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
+                <div style="display:flex">
+                    <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
+                    <div style="margin-left:1vw">
+                        <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">Grace Vieli Vidyananto</p>
+                        <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
+                            <i style="color:#F4C257" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">1 Mei 2021 - 09:30</p>
+            </div>
+            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aut facere ab facilis ipsa voluptates consequatur perspiciatis reprehenderit consectetur iusto. Fugit animi architecto distinctio quam asperiores, ullam nihil eaque vel?</p>
+    
+            <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;margin-top:2vw">
+    
+            <!-- END OF USER REVIEWS -->
+            <!-- START OF USER REVIEWS -->
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
+                <div style="display:flex">
+                    <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
+                    <div style="margin-left:1vw">
+                        <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">Grace Vieli Vidyananto</p>
+                        <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
+                            <i style="color:#F4C257" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">1 Mei 2021 - 09:30</p>
+            </div>
+            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aut facere ab facilis ipsa voluptates consequatur perspiciatis reprehenderit consectetur iusto. Fugit animi architecto distinctio quam asperiores, ullam nihil eaque vel?</p>
+    
+            <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;margin-top:2vw">
+    
+            <!-- END OF USER REVIEWS -->
+            <!-- START OF USER REVIEWS -->
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
+                <div style="display:flex">
+                    <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
+                    <div style="margin-left:1vw">
+                        <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">Grace Vieli Vidyananto</p>
+                        <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
+                            <i style="color:#F4C257" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">1 Mei 2021 - 09:30</p>
+            </div>
+            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aut facere ab facilis ipsa voluptates consequatur perspiciatis reprehenderit consectetur iusto. Fugit animi architecto distinctio quam asperiores, ullam nihil eaque vel?</p>
+    
+            <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;margin-top:2vw">
+    
+            <!-- END OF USER REVIEWS -->
 
+        </div>
+        <div style="background-color:#2B6CAA;height:2vw;text-align:center;border-radius:5px;margin-top:1vw">
+        <i class="fas fa-sort-down sub-description" style="color:#FFFFFF"></i>
+        </div>
+        
+        
+        
+        
     </div>
+    <!-- END OF REVIEW SECTION -->
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
@@ -183,7 +299,7 @@
     </div>
     <!-- END OF RIGHT SECTION -->
     <!-- START OF RECOMMENDED SECTION -->
-    <div class="col-12" style="margin-top:3vw">
+    <div class="col-12" style="margin-top:8vw">
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;">Pilihan kelas lainnya untuk kamu</p>
         <!-- ONLINE COURSE -->
         <div class="course-content" id="course-online" style="margin-top:2vw">
@@ -322,18 +438,29 @@
 
 <script>
     function changeContent(evt, categoryName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("profil-content")
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("profil-links");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("profil-text-green-active", "profil-text-green");
-            }
-            document.getElementById(categoryName).style.display = "block";
-            evt.currentTarget.className += " profil-text-green-active";
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("profil-content")
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
+        tablinks = document.getElementsByClassName("profil-links");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace("profil-text-green-active", "profil-text-green");
+        }
+        document.getElementById(categoryName).style.display = "block";
+        evt.currentTarget.className += " profil-text-green-active";
+    }
+         
+</script>
+<script>
+    function openReview() {
+        document.getElementById('review-area').style.display = "block";
+        document.getElementById('add-review-button').style.display = "none";
+    }
+    function closeReview() {
+        document.getElementById('review-area').style.display = "none";
+        document.getElementById('add-review-button').style.display = "block";
+    }
          
 </script>
 
