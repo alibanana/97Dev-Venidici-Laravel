@@ -17,16 +17,34 @@
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
                         <i style="color:#DAD9E2" class="fas fa-user"></i>
-                        <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" value="{{ old('email') }}">
+                        <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" >
                     </div>  
                     <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
                         <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                        <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" value="{{ old('email') }}">
+                        <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" >
                     </div>  
 
                 </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                    <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
+                        <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
+                        <input type="text" name="telephone" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="No. Telp" >
+                    </div>  
+                    <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
+                        <i style="color:#DAD9E2" class="fas fa-building"></i>
+                        <input type="text" name="company" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Nama Perusahaan" >
+                    </div>  
+                </div>
+                <div  class="auth-input-form" style="display: flex;align-items:center;margin-top:1vw">
+                    <i style="color:#DAD9E2" class="fas fa-address-card"></i>
+                    <select name="" id=""  class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
+                        <option disabled selected>Pilih Program</option>
+                        <option value="Male" >Male</option>
+                        <option value="Female" >Female</option>
+                    </select>
+                </div>  
                 <div  class="auth-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" value="{{ old('email') }}">
+                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" >
                 </div> 
                 <div class="auth-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
                     <textarea name="" id="" rows="6" class="normal-text"   style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukkan pesan anda disini"></textarea>                
@@ -382,16 +400,16 @@ END OF OUR VALUES-->
             <div style="display:flex;justify-content:space-between;align-items:center;">
                 <div  class="white-input-form" style="display: flex;align-items:center;width:48%">
                     <i style="color:#DAD9E2" class="fas fa-user"></i>
-                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" value="{{ old('email') }}">
+                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" >
                 </div>  
                 <div  class="white-input-form" style="display: flex;align-items:center;width:48%">
                     <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                    <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" value="{{ old('email') }}">
+                    <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" >
                 </div>  
 
             </div>
             <div  class="white-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-                <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" value="{{ old('email') }}">
+                <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" >
             </div> 
             <div class="white-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
                 <textarea name="" id="" rows="6" class="normal-text"   style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukkan pesan anda disini"></textarea>                

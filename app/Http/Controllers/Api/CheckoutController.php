@@ -38,9 +38,9 @@ class CheckoutController extends Controller
         session()->put('promotion', [
             'name'      -> $promotion->code,
             'discount'  -> $promotion-> discount,
-        ])
+        ]);
 
-        return redirect()->back()->with('success', 'Coupon has been applied')
+        return redirect()->back()->with('success', 'Coupon has been applied');
     }
     
     public function store(Request $request){

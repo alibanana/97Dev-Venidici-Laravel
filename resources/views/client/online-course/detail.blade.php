@@ -19,7 +19,7 @@
             @foreach($course->teachers as $teacher)
             <span style="font-family:Rubik Bold">
                 @if($loop->last)
-                and
+                dan
                 @elseif(!$loop->first)
                 ,
                 @endif
@@ -129,24 +129,6 @@
             <p onclick="openReview()" id="add-review-button" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Tambah Ulasan</p>                
         </div>
         <div style="display:none" id="review-area">
-            <!--
-            <div style="display: flex;justify-content:flex-start;margin-top:2vw;align-items:center;">
-                <p style="margin-bottom:0px;cursor:pointer">
-                    <i style="color:#F4C257" class="fas fa-star sub-description"></i>
-                </p>
-                <p style="margin-bottom:0px;cursor:pointer">
-                    <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
-                </p>
-                <p style="margin-bottom:0px;cursor:pointer">
-                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                </p>
-                <p style="margin-bottom:0px;cursor:pointer">
-                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                </p>
-                <p style="margin-bottom:0px;cursor:pointer">
-                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                </p>
-            </div>-->
             <div class="rate" style="margin-top:1vw" >
                 <input type="radio" id="star5" name="rating" value="5" />
                 <label for="star5" title="text">5 stars</label>
@@ -265,6 +247,18 @@
             @else
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
             @endif
+            <?php $flag = null;?>
+            @foreach($transactions as $transaction)
+                @foreach($transaction->orders as $order)
+                    @if($order->course->id == $course->id)
+                        <?php $flag = true;?>
+                    @endif
+                @endforeach
+            @endforeach
+            @if($flag == true)
+
+            <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
+            @else
             <form action="{{ route('customer.cart.store') }}" method="post">
             @csrf
                 <input type="hidden" name="course_id" value="{{$course->id}}">
@@ -273,9 +267,10 @@
                 @endif
                 <input type="hidden" name="quantity" value="1">
                 <input type="hidden" name="price" value="{{$course->price}}">
-                <input type="hidden" name="weight" value="0">
+                <input type="hidden" name="weight" value="0">                
                 <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Add to cart</button>
             </form>
+            @endif
             <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Buy Now</button>
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">

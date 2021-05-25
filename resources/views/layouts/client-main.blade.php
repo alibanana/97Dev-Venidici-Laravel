@@ -170,7 +170,7 @@
                   <div style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                         <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                          <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
+                          <i class="fas fa-shopping-cart bigger-text" style="color:#2B6CAA"></i>
 
                         </div>
                     </div>
@@ -186,7 +186,16 @@
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
                             -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Hi, {{$transaction->user->name}}. Harap segera selesaikan pembayaranmu</p>
+                            -webkit-box-orient: vertical !important;">Hi, {{$transaction->user->name}}. Harap segera selesaikan pembayaranmu untuk pelatihan: 
+                            @foreach($transaction->orders as $order)
+                                @if($loop->last)
+                                dan
+                                @elseif(!$loop->first)
+                                ,
+                                @endif
+                                "{{$order->course->title}}"
+                            @endforeach
+                          </p>
                             <!-- Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”. -->
                         </div>
                     </div>

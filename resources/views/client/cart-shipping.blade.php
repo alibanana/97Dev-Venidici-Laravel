@@ -35,8 +35,8 @@
                 <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_2"  onclick="togglePayment(event, 'checked_icon_2','bri')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
-                            <img src="/assets/images/client/BRI_LOGO.jpeg" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
-                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank BRI ( Virtual Account )</p>
+                            <img src="/assets/images/client/BTPN_LOGO.jpeg" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
+                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank BTPN ( Virtual Account )</p>
                         </div>
                         <div id="checked_icon_2" class="bank-content" style="display:none">
                             <i class="fas fa-check-circle small-heading" style="color:#2B6CAA;margin-right:1vw"></i>
@@ -169,7 +169,7 @@
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="address" value="{{Auth::user()->userDetail->address}}" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
+                            <textarea name="address" required value="{{Auth::user()->userDetail->address}}" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
                             @error('address')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>

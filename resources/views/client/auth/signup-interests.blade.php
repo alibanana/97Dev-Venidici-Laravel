@@ -16,17 +16,7 @@
                         <div style="text-align:center;margin-top:2vw">
                             <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
-                            <p class="bigger-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0vw">Maksimal 3 pilihan</p>
-                            @if(session('message'))
-                                <!-- ALERT MESSAGE -->
-                                <div style="display:flex;justify-content:center">
-                                    <div class="alert alert-warning alert-dismissible fade show small-text normal-text"  style="width:90%;margin-bottom:0px;margin-top:1vw"role="alert">
-                                        Tidak bisa lebih dari 3 pilihan
-                                        <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                </div>
-                                <!-- END OF ALERT MESSAGE -->
-                            @endif
+                            <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
                         </div>
                         @error('interests')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">

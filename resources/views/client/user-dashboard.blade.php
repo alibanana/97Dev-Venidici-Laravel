@@ -377,7 +377,7 @@
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
         @foreach($orders as $course)
         <div class="col-12 p-0">
-            <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('online-course/{{$course->course->id}}/learn/lecture/1','_self');">
+            <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->course->id}}/learn/lecture/1','_self');">
                 <div class="container-image-card">
                     <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" > @if($course->course->course_type_id == 1) Online Course @else Woki @endif</div>
@@ -394,9 +394,9 @@
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <div class="progress progress-bar-vertical">
+                        <div class="progress progress-bar-vertical" style="background: rgba(43, 108, 170, 0.3);">
                             <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 10%;">
-                            <p style="margin-top:-3vw">10%</p>
+                            <p style="margin-top:-3vw" class="normal-text">10%</p>
                             </div>
                         </div>
                         <a href="/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
