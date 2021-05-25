@@ -328,11 +328,11 @@
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:70%">
+                    <div class="right-section" style="width:37vw">
                         <div>
                             <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
@@ -350,11 +350,11 @@
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:70%">
+                    <div class="right-section" style="width:37vw">
                         <div>
                             <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
@@ -375,25 +375,28 @@
 
     <!-- Pelatihan Aktif Content -->
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
+        @foreach($orders as $course)
         <div class="col-12 p-0">
-            <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
+            <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('online-course/{{$course->course->id}}/learn/lecture/1','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" >Woki</div>
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
+                    <div class="top-left card-tag small-text" > @if($course->course->course_type_id == 1) Online Course @else Woki @endif</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:70%">
+                    <div class="right-section" style="width:37vw">
                         <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
+                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->course->title}}</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
+                            <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
+                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->course->subtitle}}</p>
+                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->course->courseCategory->category}}</a>
+
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                         <div class="progress progress-bar-vertical">
-                            <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 30%;">
-                            30%
+                            <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 10%;">
+                            <p style="margin-top:-3vw">10%</p>
                             </div>
                         </div>
                         <a href="/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
@@ -401,6 +404,9 @@
                 </div> 
             </div>
         </div>
+        
+        @endforeach
+        <!--
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
                 <div class="container-image-card">
@@ -427,7 +433,7 @@
                 </div> 
             </div>
         </div>
-
+        -->
     </div>
     <!-- End of Pelatihan Aktif Content -->
 
@@ -436,11 +442,11 @@
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:70%">
+                    <div class="right-section" style="width:36.8vw">
                         <div>
                             <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
@@ -458,11 +464,11 @@
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
+                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Workshop</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:70%">
+                    <div class="right-section" style="width:36.8vw">
                         <div>
                             <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   

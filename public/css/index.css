@@ -116,7 +116,7 @@ html, body {
 }
 .course-page-background{
     background-image: url("/assets/images/client/Course_Page_BG.png");
-    background-position:5.2vw 17.4vw;
+    background-position:5.2vw 14.5vw;
     background-repeat: no-repeat;
     background-size: 88%;
 }
@@ -964,8 +964,13 @@ html, body {
     background: #FFFFFF;
     padding:1vw
 }
+
 .course-collapse:hover{
     background: rgba(111, 159, 205, 0.1)
+}
+.course-collapse-active{
+    background: rgba(111, 159, 205, 0.1)
+
 }
 #cart_icon .counter[data-count]:after{
     position:absolute;
@@ -1366,3 +1371,88 @@ html, body {
     color:#FFFFFF !important;
 
 }
+
+/* start of drag drop*/
+
+.drop-zone {
+    max-width: 100%;
+    height: 10vw;
+    padding: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    color: #cccccc;
+    border: 2px dashed #2B6CAA;
+    border-radius: 10px;
+  }
+  
+  .drop-zone--over {
+    border-style: solid;
+  }
+  
+  .drop-zone__input {
+    display: none;
+  }
+  
+  .drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #707070;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+  }
+/* end of drag drop*/
+
+
+/* start of star rating */
+.rate {
+    float: left;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+/* end of star rating*/

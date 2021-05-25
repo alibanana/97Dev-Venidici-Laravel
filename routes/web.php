@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
+use App\Http\Controllers\Admin\SectionController as AdminSectionController;
+use App\Http\Controllers\Admin\SectionContentController as AdminSectionContentController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
@@ -107,9 +109,11 @@ Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
-Route::get('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1', function () {
-    return view('client/online-course/learn');
-});
+Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn');
+
+//Route::get('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1', function () {
+    //return view('client/online-course/learn');
+//});
 
 /* END OF ONLINE COURSE ROUTING */
 
@@ -140,6 +144,8 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - UserController
 |   - OnlineCourseController
 |   - OnlineCourseUpdateController // Update is separated because its very complex.
+|   - SectionController
+|   - SectionContentController
 |   - CourseCategoryController
 |   - HashtagController
 */
@@ -168,6 +174,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/online-courses/{id}/update-publish-status', [AdminOnlineCourseUpdateController::class, 'updatePublishStatus'])->name('online-courses.update-publish-status');
     Route::put('/online-courses/{id}/attach-teacher', [AdminOnlineCourseUpdateController::class, 'attachTeacher'])->name('online-courses.attach-teacher');
     Route::put('/online-courses/{id}/detach-teacher', [AdminOnlineCourseUpdateController::class, 'detachTeacher'])->name('online-courses.detach-teacher');
+    // SectionController
+    Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
+    Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');
+    Route::delete('sections/{id}', [AdminSectionController::class, 'destroy'])->name('sections.destroy');
+    // SectionSegmentController
+    Route::post('/section-contents', [AdminSectionContentController::class, 'store'])->name('section-contents.store');
+    Route::get('/section-contents/{id}/update', [AdminSectionContentController::class, 'edit'])->name('section-contents.edit');
+    Route::put('/section-contents/{id}', [AdminSectionContentController::class, 'update'])->name('section-contents.update');
+    Route::delete('/section-contents/{id}', [AdminSectionContentController::class, 'destroy'])->name('section-contents.destroy');
     // CourseCategoryController
     Route::get('/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');

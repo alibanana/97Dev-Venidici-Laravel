@@ -21,7 +21,7 @@ class CreateSectionContentsTable extends Migration
             $table->string('youtube_link')->nullable();
             $table->string('attachment')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedInteger('duration')->nullable();
+            $table->unsignedInteger('duration')->nullable(); // in seconds
             $table->timestamps();
         });
     }

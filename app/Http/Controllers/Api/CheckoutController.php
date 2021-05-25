@@ -134,10 +134,20 @@ class CheckoutController extends Controller
         //create order
         //delete cart
 
+
+
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
+        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
+    }
 
+    public function createPayment(Request $request, $id){        
+        
+        $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
         $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
@@ -154,7 +164,7 @@ class CheckoutController extends Controller
         ])->post('https://sandbox-id.xfers.com/api/v4/payments/'.$id.'/tasks', [
             "data" => [
                 "attributes" => [
-                    "action" => "cancel"
+                    "action" => "receive_payment"
                 ]
             ]
         ]); 

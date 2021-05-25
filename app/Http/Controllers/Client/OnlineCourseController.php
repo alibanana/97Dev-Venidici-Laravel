@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Course;
 use App\Models\Invoice;
-
+use App\Models\Teacher;
+use App\Models\Section;
+use App\Models\SectionContent;
 /*
 |--------------------------------------------------------------------------
 | Client OnlineCourseController Class.
@@ -38,11 +40,27 @@ class OnlineCourseController extends Controller
     // Shows the details for each course.
     public function show($id){
         $course = Course::findOrFail($id);
-        $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        if(Auth::check()) {
+            $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            return view('client/online-course/detail', compact('course','cart_count','transactions'));
+        } else {
+            $transactions=null;
+            $cart_count=0;
+            return view('client/online-course/detail', compact('course','cart_count','transactions'));
+        }
+    }
 
-        return view('client/online-course/detail', compact('course','cart_count','transactions'));
+    public function learn($id,$detail_id)
+    {
+        $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $sections = Section::where('course_id',$id)->get();
+        $content = SectionContent::findOrFail($detail_id);
+        return view('client/online-course/learn', compact('cart_count','transactions','sections','content'));
     }
 }

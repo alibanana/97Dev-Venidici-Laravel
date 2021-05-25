@@ -200,7 +200,7 @@
                 @if($payment_status['data']['attributes']['status'] == 'pending')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px"><i class="far fa-clock"></i> <span style="margin-left:1vw">Menunggu Pembayaran</span></p>
                 @elseif($payment_status['data']['attributes']['status'] == 'paid')
-                <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Pembayaran Diterima</p>
+                <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px"><i class="fas fa-check"></i><span style="margin-left:1vw">Pembayaran Diterima</span></p>
                 @elseif($payment_status['data']['attributes']['status'] == 'completed')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:green;margin-bottom:0px">Pembelian Selesai</p>
                 
