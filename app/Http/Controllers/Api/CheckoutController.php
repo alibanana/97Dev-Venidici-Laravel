@@ -114,6 +114,7 @@ class CheckoutController extends Controller
 
         return redirect('/transaction-detail/'.$payment_object['data']['id']);
     }
+    
     public function transactionDetail($id){
 
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
@@ -130,6 +131,12 @@ class CheckoutController extends Controller
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
+        return view('client/transaction-detail', compact('payment_status','orders','invoice'));
+    }
+
+    public function createPayment(Request $request, $id){        
+        //create order
+        //delete cart
 
         $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 

@@ -31,4 +31,23 @@ class Helper
 
         return $destinationPath.$newName;
     }
+
+    public static function storeFile($file, $destinationPath) {
+        $ext = strtolower($file->getClientOriginalExtension());
+
+        if (!File::isDirectory($destinationPath)){
+            File::makeDirectory($destinationPath, 0777, true, true);
+        }
+
+        while(true){
+            $newName = rand(100000,PHP_INT_MAX).'.'.$ext;
+            if (!file_exists($destinationPath.$newName)){
+                break;
+            }
+        }
+        
+        $file->move($destinationPath, $newName);
+
+        return $destinationPath.$newName;
+    }
 }

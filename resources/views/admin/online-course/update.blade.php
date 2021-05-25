@@ -29,7 +29,6 @@
             <h5 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5>
             <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
             <h5 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
-            <h5 id="course-assessment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'course-assesment')" style="margin-left:1.5vw;cursor:pointer">Course Assesment</h5>
             <h5 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
         </div>
         
@@ -60,7 +59,7 @@
                         <div class="form-group">
                             <label for="">Title</label>
                             <input type="text" name="title" class="form-control form-control-user"
-                                id="phone" aria-describedby="" placeholder="Enter couse title"
+                                id="phone" aria-describedby="" placeholder="Enter course title"
                                 value="{{ old('title', $course->title) }}" required> 
                             @error('title')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -284,29 +283,31 @@
 
         <!-- START OF MANAGE CURRICULUM -->
         <div class="course-content" id="manage-curriculum" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
-            @csrf  
+            <form action="{{ route('admin.sections.store') }}" method="POST">
+            @csrf
+                <input type="hidden" name="course_id" value="{{ $course->id }}" hidden>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Section</label>
-                            <input type="text" name="name" class="form-control form-control-user"
-                                id="phone" aria-describedby=""
-                                placeholder="Enter couse section" > 
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror               
+                            <input type="text" name="section-title" class="form-control form-control-user"
+                                id="phone" aria-describedby="" value="{{ old('section-title') }}"
+                                placeholder="Enter couse section" required> 
+                            @error('section-title')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-6" style="padding:2vw 1vw">
                         <div style="display:flex;justify-content:flex-start">
-                            <button type="submit"  class="btn btn-primary btn-user">Add Section</button>
+                            <button type="submit" class="btn btn-primary btn-user">Add Section</button>
                         </div>
                     </div>
                 </div>
             </form>
+            @foreach ($course->sections as $section)
                 <!-- START OF ONE MATERI -->
                 <div class="row" style="margin-top:2vw">
                     <div class="col-12">
@@ -314,77 +315,68 @@
                             <div class="card-header">
                                 <div style="display:flex;justify-content:space-between;align-items:center">
                                     <div>
-                                        <input style="width:50% !important;" type="text" value="Materi">
-                                        <button type="submit"  class="btn btn-primary btn-info">Update Section</button>    
+                                        <form action="{{ route('admin.sections.update', $section->id) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                            <input style="width:50% !important;" type="text" name="section-title-{{ $section->id }}" 
+                                                value="{{ old('section-title-' . $section->id, $section->title) }}" required>
+                                            @error('section-title-' . $section->id)
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
+                                            <button type="submit" class="btn btn-primary btn-info" onclick="return confirm('Are you sure you want to update this section?')">Update Section</button>    
+                                        </form>
                                     </div>
                                     <div>
-                                        <button type="submit"  class="btn btn-primary btn-danger">Delete Section</button>
-
+                                        <form action="{{ route('admin.sections.destroy', $section->id) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                            <button type="submit" class="btn btn-primary btn-danger" onclick="return confirm('Are you sure you want to remove this section from the course?')">Delete Section</button>
+                                        </form>
                                     </div>
                                 </div>                        
                             </div>
                             <ul class="list-group list-group-flush">
-                                <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
-                                Introduction to Course
-                                    <div>
-                                        <!--<a href="#" data-toggle="modal" data-target="#addContentModal"  class="btn btn-primary btn-primary">
-                                        Add Content
-                                        </a>-->
-                                        <a href="/admin/online-courses/create-video/1" class="btn btn-primary btn-primary">
-                                        Add Content
-                                        </a>
-
-                                        <button type="submit"  class="btn btn-primary btn-danger">Delete Content</button>
+                                @foreach ($section->sectionContents as $content)
+                                <form action="{{ route('admin.section-contents.destroy', $content->id) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
+                                    {{ $content->title }}
+                                        <div>
+                                            <!--<a href="#" data-toggle="modal" data-target="#addContentModal"  class="btn btn-primary btn-primary">
+                                            Add Content
+                                            </a>-->
+                                            <a href="{{ route('admin.section-contents.edit', $content->id) }}" class="btn btn-primary btn-primary">
+                                            Update content
+                                            </a>
+                                            <button type="submit" class="btn btn-primary btn-danger" onclick="return confirm('Are you sure you want to remove this content?')">Delete Content</button>
+                                        </div>
+                                    </div>     
+                                </form>
+                                @endforeach
+                                <form action="{{ route('admin.section-contents.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="section_id" value="{{ $section->id }}" hidden>
+                                    <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
+                                        <input type="text" placeholder="Enter new lecture title" style="width:80%" 
+                                            name="section-{{ $section->id }}-newContentTitle" 
+                                            value="{{ old('section-' . $section->id . '-newContentTitle') }}" required>
+                                        @error('section-' . $section->id . '-newContentTitle')
+                                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror 
+                                        <button type="submit" class="btn btn-primary btn-info">Create Lecture</button>
                                     </div>
-                                </div>     
-                                <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
-                                    <input type="text" placeholder="Enter new lecture title" style="width:80%">
-                                    <div>
-                                        <button type="submit"  class="btn btn-primary btn-info">Create Lecture</button>
-                                    </div>
-                                </div>     
+                                </form>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <!-- END OF ONE MATERI -->
-                <!-- START OF ONE MATERI -->
-                <div class="row" style="margin-top:2vw">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div style="display:flex;justify-content:space-between;align-items:center">
-                                    <div>
-                                        <input style="width:50% !important" type="text" value="QnA">
-                                        <button type="submit"  class="btn btn-primary btn-info">Update Section</button>    
-                                    </div>
-                                    <div>
-                                        <button type="submit"  class="btn btn-primary btn-danger">Delete Section</button>
-
-                                    </div>
-                                </div>                        
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
-                                QnA Video Session #1 
-                                    <div>
-                                        <a href="#" data-toggle="modal" data-target="#addContentModal"  class="btn btn-primary btn-primary">
-                                        Add Content
-                                        </a>
-                                        <button type="submit"  class="btn btn-primary btn-danger">Delete Content</button>
-                                    </div>
-                                </div>     
-                                <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
-                                    <input type="text" placeholder="Enter new lecture title" style="width:80%">
-                                    <div>
-                                        <button type="submit"  class="btn btn-primary btn-info">Create Lecture</button>
-                                    </div>
-                                </div>     
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- END OF ONE MATERI -->
+            @endforeach
         </div>
         <!-- END OF MANAGE CURRICULUM -->
 
@@ -489,39 +481,6 @@
             </form>
         </div>
         <!-- END OF PUBLISH STATUS -->
-
-        <!-- START OF COURSE ASSESMENT-->
-        <div class="course-content" id="course-assesment" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
-            @csrf  
-            @method('put') 
-                <div class="row" style="margin-top:2vw;align-items:center;display:flex">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <h5 for="">Select Course Assesment</h5>
-                            <select name="assesment" id="" class="form-control">
-                                <option value="0" selected>No Assesment</option>
-                                <option value="1">Quiz of Business Case Room</option>
-                            </select>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror               
-                        </div>
-                        <p> <span> <a href="/admin/online-courses/assesments" target="_blank">Click here</a> </span> to view assesment result</p>
-
-                    </div>
-                    <div class="col-6">
-                        <div style="display:flex;justify-content:flex-end">
-                            <button type="submit" class="btn btn-primary btn-user p-3">Update Course Assesment</button>
-                        </div>
-
-                    </div>
-                </div>
-            </form>
-        </div>
-        <!-- END OF COURSE ASSESMENT-->
 
         <!-- START OF Teacher-->
         <div class="course-content" id="teacher-page" style="display:none">
@@ -650,7 +609,7 @@ function duplicateHashtag() {
 </script>
 <script>
     function disableInput() {
-    document.getElementById("price-input").disabled = true;
+    document.getElementById("price-input").disabled = strue;
     console.log('disabled')
     }
     function enableInput() {
@@ -671,6 +630,8 @@ function removeDiv(elem, wrapper_id){
 @if (Session::has('page-option'))
     @if (Session::get('page-option') == 'basic-informations')
         <script>document.getElementById('basic-information-button').click()</script>
+    @elseif (Session::get('page-option') == 'manage-curriculum')
+        <script>document.getElementById('manage-curriculum-button').click()</script>
     @elseif (Session::get('page-option') == 'pricing-and-enrollment')
         <script>document.getElementById('pricing-and-enrollment-button').click()</script>
     @elseif (Session::get('page-option') == 'publish-status')
