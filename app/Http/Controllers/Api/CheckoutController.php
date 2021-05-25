@@ -6,6 +6,7 @@ use Midtrans\Snap;
 use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\Order;
+use App\Models\Promotion;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,21 @@ class CheckoutController extends Controller
         //EXAMPLE GET REQUEST
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
         $payment_status = json_decode($response->body(), true);
+    }
+
+    public function promo(Request $request, $id){
+        $promotion = Promotion::where('code', $request->code)->first();
+
+        if(!$promotion){
+            return redirect()->back()->with('error','Invalid coupon code');
+        }
+
+        session()->put('promotion', [
+            'name'      -> $promotion->code,
+            'discount'  -> $promotion-> discount,
+        ])
+
+        return redirect()->back()->with('success', 'Coupon has been applied')
     }
     
     public function store(Request $request){
