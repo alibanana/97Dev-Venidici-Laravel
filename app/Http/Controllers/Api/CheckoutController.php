@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use Midtrans\Snap;
-use App\Models\Cart;
-use App\Models\Invoice;
-use App\Models\Order;
-use App\Models\Promotion;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Midtrans\Snap;
+
+use Axiom\Rules\TelephoneNumber;
+
+use App\Models\Cart;
+use App\Models\Invoice;
+use App\Models\Order;
+use App\Models\Promotion;
 
 class CheckoutController extends Controller
 {
@@ -44,26 +47,21 @@ class CheckoutController extends Controller
     }
     
     public function store(Request $request){
-        $input = $request->all();
-        $this->validate($request, [
+        $validated = $request->validate([
             'courier'               => 'required',
             'service'               => 'required',
             'cost_courier'          => 'required',
-            'total_weight'          => 'required',
+            'total_weight'          => 'required|integer',
             'name'                  => 'required',
-            'phone'                 => 'required',
-            'province'              => 'required',
-            'city'                  => 'required',
+            'phone'                 => ['required', 'integer', new TelephoneNumber()],
             'address'               => 'required',
             'shipping_notes'        => 'required',
-            'grand_total'           => 'required',
-            'total_order_price'     => 'required',
+            'grand_total'           => 'required|integer',
+            'total_order_price'     => 'required|integer',
             'date'                  => 'required',
             'time'                  => 'required',
             'bankShortCode'         => 'required',
-
-
-        ]); 
+        ]);
 
         $length = 10;
         $random = '';
@@ -74,30 +72,30 @@ class CheckoutController extends Controller
         $no_invoice = 'INV-'.Str::upper($random);
 
         // kalo user udah pernah save province di user detail
-        if($input['province'] == null)
-            $input['province'] = auth()->user()->userDetail->province_id;
+        if($validated['province'] == null)
+            $validated['province'] = auth()->user()->userDetail->province_id;
 
         // kalo user udah pernah save city di user detail
-        if($input['city'] == null)
-            $input['city'] = auth()->user()->userDetail->city_id;
+        if($validated['city'] == null)
+            $validated['city'] = auth()->user()->userDetail->city_id;
         
         // create invoice
         $invoice = Invoice::create([
             'invoice_no'            => $no_invoice,
             'user_id'               => auth()->user()->id,
-            'courier'               => $input['courier'],
-            'service'               => $input['service'],
-            'cost_courier'          => $input['cost_courier'],
-            'total_weight'          => $input['weight'],
-            'name'                  => $input['name'],
-            'phone'                 => $input['phone'],
-            'province'              => $input['province'],
-            'city'                  => $input['city'],
-            'address'               => $input['address'],
-            'shipping_notes'        => $input['shipping_notes'],
-            'grand_total'           => $input['grand_total'],
+            'courier'               => $validated['courier'],
+            'service'               => $validated['service'],
+            'cost_courier'          => $validated['cost_courier'],
+            'total_weight'          => $validated['weight'],
+            'name'                  => $validated['name'],
+            'phone'                 => $validated['phone'],
+            'province'              => $validated['province'],
+            'city'                  => $validated['city'],
+            'address'               => $validated['address'],
+            'shipping_notes'        => $validated['shipping_notes'],
+            'grand_total'           => $validated['grand_total'],
             'status'                => 'pending',
-            'total_order_price'     => $input['total_order_price'],
+            'total_order_price'     => $validated['total_order_price'],
             'discounted_price'      => 200
         ]);
 
@@ -126,12 +124,12 @@ class CheckoutController extends Controller
                 "data" => [
                     "attributes" => [
                         "paymentMethodType" => "virtual_bank_account",
-                        "amount" => $input['grand_total'],
+                        "amount" => $validated['grand_total'],
                         "referenceId" => $no_invoice,
-                        "expiredAt" => $input['date'].'T'.$input['time'].'+07:00',
+                        "expiredAt" => $validated['date'].'T'.$validated['time'].'+07:00',
                         "description" => "Order Number ".$invoice_id,
                         "paymentMethodOptions" =>[
-                            "bankShortCode" => $input['bankShortCode'],
+                            "bankShortCode" => $validated['bankShortCode'],
                             "displayName" => "Venidici",
                             "suffixNo" => ""
                         ]
