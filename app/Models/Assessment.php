@@ -27,4 +27,14 @@ class Assessment extends Model
     public function assessmentQuestions() {
         return $this->hasMany(AssessmentQuestion::class);
     }
+
+    public function users() {
+        return $this->belongsToMany(User::class, 'user_assessment')
+            ->withPivot(
+                'user_data', // nullable
+                'status', // default -> pending
+                'time_taken', // nullable
+                'score' // nullable
+            )->withTimestamps();
+    }
 }
