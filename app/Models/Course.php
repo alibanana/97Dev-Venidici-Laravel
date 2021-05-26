@@ -46,6 +46,10 @@ class Course extends Model
         return $this->belongsToMany(Hashtag::class, 'course_hashtag')->withTimestamps();
     }
 
+    public function users() {
+        return $this->belongsToMany(User::class, 'user_course')->withTimestamps();
+    }
+
     public function carts() {
         return $this->hasMany(Cart::class);
     }
