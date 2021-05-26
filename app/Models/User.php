@@ -55,6 +55,11 @@ class User extends Authenticatable
     public function hashtags() {
         return $this->belongsToMany(Hashtag::class, 'user_hashtag')->withTimestamps();
     }
+
+    public function courses() {
+        return $this->belongsToMany(Course::class, 'user_course')->withTimestamps();
+    }
+    
     public function carts() {
         return $this->hasMany(Cart::class);
     }
