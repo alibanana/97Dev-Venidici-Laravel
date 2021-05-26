@@ -56,7 +56,7 @@
                     <div class="card bg-light text-black shadow">
                         <div class="card-body">
                             Total Course Sold
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">20</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($course->users) }}</div>
                         </div>
                     </div>
 
@@ -91,8 +91,8 @@
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
                                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'oldest']) }}" @if (Request::get('sort') == 'oldest') selected @endif>Oldest</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}" @if (Request::get('sort') == 'oldest') selected @endif>Oldest</option>
                                     </select>
                                 </label>
                             </div>
@@ -127,18 +127,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Fernandha Dzaky</td>
-                                                <td>Fernandhadzaky@hotmail.com</td>
-                                                <td>08111377893</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Alifio Rasyid</td>
-                                                <td>official.alifio@gmail.com</td>
-                                                <td>08123456789</td>
-                                            </tr>
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    @if ($user->userDetail()->exists() && !is_null($user->userDetail->telephone))                                                
+                                                        <td>{{ $user->userDetail->telephone }}</td>
+                                                    @else
+                                                        <td style="color: red">Phone number not available!</td>
+                                                    @endif
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
