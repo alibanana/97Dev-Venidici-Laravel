@@ -99,13 +99,43 @@
             document.getElementById("duration_input").value = timer+1;
 
             
+            
+            
         }, 1000);
+        var url = "{{ '/online-course/assessment/'.$assessment->id }}";
+        var id= 
+            $.ajax({
+                url: url,
+                type: "PATCH",
+                cache: false,
+                data:{
+                    _token:'{{ csrf_token() }}',
+                    duration: document.getElementById("duration_input").value
+                },
+                success: function(dataResult){
+                    console.log(dataResult)
+                    dataResult = JSON.parse(dataResult);
+                    console.log(dataResult);
+                    if(dataResult.statusCode)
+                    {
+                        window.location = "/online-course/assessment/{{$assessment->id}}";
+                    }
+                    else{
+                        alert("Internal Servers Error");
+                    }
+                        
+                }
+            })
+        ;
     }
     </script>
     <script>
     window.onload = function () {
         var display = document.querySelector('#time');
         startTimer({{$assessment->duration}}, display);
+        
+        
+        
     };
     </script>
   </body>
