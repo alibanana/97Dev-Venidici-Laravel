@@ -16,7 +16,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id');
+            $table->foreign('invoice_id')->references('id')->on('invoice')->onDelete('set null');
             $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('course')->onDelete('set null');
             $table->integer('qty');
             $table->integer('price');
             $table->timestamps();
