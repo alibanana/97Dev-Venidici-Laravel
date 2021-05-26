@@ -23,7 +23,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="mb-0 mb-3 text-gray-800">Promo Code</h1>
-            <a href="/admin/promo/create" class="btn btn-primary btn-user p-3">Create New Promo Code</a>
+            <a href="/admin/promotions/create" class="btn btn-primary btn-user p-3">Create New Promo Code</a>
 
         </div>
         
@@ -60,6 +60,7 @@
                                 </label>
                             </div>
                         </div>
+                        -->
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
@@ -73,7 +74,7 @@
                                 </label>
                             </div>
                         </div>
-                        -->
+                        
                     </div>
 
                     <!-- Main Table -->
@@ -92,15 +93,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($promotions as $promotion)
                                             <tr>
-                                                <td>1</td>
-                                                <td>GRX45</td>
-                                                <td>10%</td>   
-                                                <td>20/04/2021</td>   
-                                                <td>20/05/2021</td>   
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$promotion->code}}</td>
+                                                <td>{{$promotion->discount}}%</td>   
+                                                <td>{{$promotion->start_date}}</td>   
+                                                <td>{{$promotion->finish_date}}</td>   
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.promotions.destroy', $promotion->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
@@ -109,12 +111,13 @@
                                                             </form> 
                                                       
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promo/1/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promotions/{{$promotion->id}}/update">Update</a>
                                                             </div>
                                                    
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

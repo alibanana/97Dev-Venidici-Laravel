@@ -31,16 +31,16 @@
 
         <!-- start of form -->
         
-        <form action="/admin/trusted-companies" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.promotions.store') }}" method="POST" >
         @csrf           
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Promo Code</label>
-                    <input type="text" name="name" class="form-control form-control-user"
-                        id="phone" aria-describedby=""
+                    <input type="text" name="code" class="form-control form-control-user"
+                        id="code" aria-describedby=""
                         placeholder="Here insert promo code (e.g. GRX45)" > 
-                    @error('name')
+                    @error('code')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -50,10 +50,10 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Discount</label>
-                    <input type="text" name="name" class="form-control form-control-user"
-                        id="phone" aria-describedby=""
+                    <input type="text" name="discount" class="form-control form-control-user"
+                        id="discount" aria-describedby=""
                         placeholder="Here insert discount amount (e.g. 40%)" > 
-                    @error('name')
+                    @error('discount')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -63,10 +63,10 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Start Date</label>
-                    <input type="text" name="date" class="form-control form-control-user"
-                        id="phone" aria-describedby=""
-                        placeholder="Here insert date start (e.g. 20 Februari 2021)" > 
-                    @error('date')
+                    <input type="date" name="start_date" class="form-control form-control-user"
+                        id="start_date" aria-describedby=""
+                        placeholder="Here insert date start (e.g. 2022-05-26)" > 
+                    @error('start_date')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -76,10 +76,10 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Finish Date</label>
-                    <input type="text" name="date" class="form-control form-control-user"
-                        id="phone" aria-describedby=""
-                        placeholder="Here insert date finished (e.g. 21 Februari 2021)" > 
-                    @error('date')
+                    <input type="date" name="finish_date" class="form-control form-control-user"
+                        id="finish_date" aria-describedby=""
+                        placeholder="Here insert date finished (e.g. 2022-05-27)" > 
+                    @error('finish_date')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                     </span>

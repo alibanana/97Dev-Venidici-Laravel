@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryCo
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
+use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Api\CheckoutController;
@@ -83,6 +84,7 @@ Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('aut
 
 Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail');
 Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment');
+Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment');
 Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
 Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
@@ -96,6 +98,8 @@ Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('
 Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart');
 Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty');
 Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty');
+
+Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount');
 
 //})->middleware('auth');
 
@@ -215,6 +219,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/hashtags/{id}/update', [AdminHashtagController::class, 'edit'])->name('hashtags.edit');
     Route::put('/hashtags/{id}', [AdminHashtagController::class, 'update'])->name('hashtags.update');
     Route::delete('/hashtags/{id}', [AdminHashtagController::class, 'destroy'])->name('hashtags.destroy');
+    // PromotionController
+    Route::get('/promotions', [AdminPromotionController::class, 'index'])->name('promotions.index');
+    Route::get('/promotions/create', [AdminPromotionController::class, 'create'])->name('promotions.create');
+    Route::post('/promotions', [AdminPromotionController::class, 'store'])->name('promotions.store');
+    Route::get('/promotions/{id}/update', [AdminPromotionController::class, 'edit'])->name('promotions.edit');
+    Route::put('/promotions/{id}', [AdminPromotionController::class, 'update'])->name('promotions.update');
+    Route::delete('/promotions/{id}', [AdminPromotionController::class, 'destroy'])->name('promotions.destroy');
 });
 
 /* START OF WOKI ROUTING */

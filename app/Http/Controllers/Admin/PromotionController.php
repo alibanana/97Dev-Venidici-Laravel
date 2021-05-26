@@ -32,7 +32,7 @@ class PromotionController extends Controller
                     $url = route('admin.promotions.index', request()->except('search'));
                     return redirect($url);
                 } else {
-                    $promotions = $promotions->where('name', 'like', "%".$request->search."%");
+                    $promotions = $promotions->where('code', 'like', "%".$request->search."%");
                 }
             }
     
@@ -62,15 +62,15 @@ class PromotionController extends Controller
         $validated = $request->validate([
             'code'          => 'required',
             'discount'      => 'required',
-            'start_date'    => 'required',
-            'end_date'      => 'required',
+            'start_date'    => 'required|date_format:Y-m-d',
+            'finish_date'   => 'required|date_format:Y-m-d',
         ]);
 
         $promotion = new Promotion();
-        $promotion->code        = $validated['code'];
-        $promotion->discount    = $validated['discount'];
-        $promotion->start_date  = $validated['start_date'];
-        $promotion->end_date    = $validated['end_date'];
+        $promotion->code            = $validated['code'];
+        $promotion->discount        = $validated['discount'];
+        $promotion->start_date      = $validated['start_date'];
+        $promotion->finish_date     = $validated['finish_date'];
         $promotion->save();
 
         $message = 'New promotion (' . $promotion->code . ') has been added to the database.';
@@ -110,19 +110,19 @@ class PromotionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
         $validated = $request->validate([
             'code'          => 'required',
             'discount'      => 'required',
-            'start_date'    => 'required',
-            'end_date'      => 'required',
+            'start_date'    => 'required|date_format:Y-m-d',
+            'finish_date'   => 'required|date_format:Y-m-d',
         ]);
 
         $promotion = Promotion::findOrFail($id);
         $promotion->code        = $validated['code'];
         $promotion->discount    = $validated['discount'];
         $promotion->start_date  = $validated['start_date'];
-        $promotion->end_date    = $validated['end_date'];
+        $promotion->finish_date    = $validated['finish_date'];
 
         
         $promotion->save();
@@ -147,7 +147,7 @@ class PromotionController extends Controller
         $promotion = Promotion::findOrFail($id);
         $promotion->delete();
 
-        $message = 'promotion (' . $promotion->name . ') has been deleted.';
+        $message = 'promotion (' . $promotion->code . ') has been deleted.';
         
         return redirect()->route('admin.promotions.index')->with('message', $message);
     }
