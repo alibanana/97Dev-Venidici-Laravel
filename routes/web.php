@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
+use App\Http\Controllers\Client\AssessmentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -105,7 +106,8 @@ Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('custo
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
-Route::get('/online-course/assessment/{id}', [OnlineCourseController::class, 'showAssesment'])->name('online-course-assesment.show');
+Route::get('/online-course/assessment/{id}', [AssessmentController::class, 'showAssesment'])->name('online-course-assesment.show');
+Route::patch('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer');
 
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');

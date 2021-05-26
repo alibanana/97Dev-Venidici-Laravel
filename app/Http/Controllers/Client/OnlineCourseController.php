@@ -68,13 +68,5 @@ class OnlineCourseController extends Controller
         return view('client/online-course/learn', compact('cart_count','transactions','sections','content','assessment'));
     }
     
-    public function showAssesment(Request $request, $id)
-    {
-        $input = $request->all();
-        $assessment = Assessment::findOrFail($id);
-        $assessment->duration  =  $input['duration'];
-        $assessment->save();
-        return view('client/online-course/assessment',compact('assessment'));
-
-    }
+    
 }
