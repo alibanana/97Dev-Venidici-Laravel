@@ -45,9 +45,8 @@
                         <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">{{$assessment->title}}</p>
                         <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">Durasi {{floor(($assessment->duration / 60) % 60)}}:@if(strlen($assessment->duration % 60) == 1)<span>0</span>@endif{{$assessment->duration % 60}}</p>
                     </div>
-                    <form action="/online-course/assessment/{{$assessment->id}}">
-                        <input type="hidden" name="duration" value="{{$assessment->duration}}">
-                        <button type="submit" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Mulai Assesment</button>                
+                    <form action="">
+                        <button onclick="window.open('/online-course/assessment/{{$assessment->id}}','_self');" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Mulai Assesment</button>                
                     </form>
 
                 </div>

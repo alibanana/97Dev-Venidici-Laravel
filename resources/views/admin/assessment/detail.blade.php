@@ -91,7 +91,7 @@
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/online-courses/assesments/1">View Result</a>
+                                                                <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/assessments/1/result/1">View Result</a>
                                                             </div>
                                                     </div>
                                                 </td>
@@ -105,7 +105,7 @@
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/online-courses/assesments/1">View Result</a>
+                                                                <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/assessments/1/result/1">View Result</a>
                                                             </div>
                                                     </div>
                                                 </td>

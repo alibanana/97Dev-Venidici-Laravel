@@ -27,31 +27,31 @@
     <div class="col-12 p-0" style="padding-bottom:3vw">
         <div class="page-container">
             <div style="display:flex;align-items:center">
-                <img src="/assets/images/client/xfers_logo_alt.png" class="img-fluid" style="width:15vw" alt="">         
-                <div style="margin-left:4vw">
-                    <!-- ALERT MESSAGE -->
-                    <div class="alert alert-dismissible fade show"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
-                        <div style="display:flex;align-items:center">
-                            <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
-                            <?php
-                                $date = explode('T', $payment_status['data']['attributes']['expiredAt']);
-                                $time = explode('+', $date[1]);
-                            ?>
-                            <p style="margin-bottom:0px;margin-left:1vw" class="very-small-text">
-                                Selesaikan pembayaran anda sebelum  {{$date[0]}} {{$time[0]}} atau proses pembayaran akan ditutup.
-                            </p>
+                <img src="/assets/images/client/xfers_logo_alt.png" class="img-fluid" style="width:15vw" alt="">
+                @if($invoice->status == 'pending')
+         
+                    <div style="margin-left:4vw">
+                        <!-- ALERT MESSAGE -->
+                        <div class="alert alert-dismissible fade show"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
+                            <div style="display:flex;align-items:center">
+                                <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
+                                <?php
+                                    $date = explode('T', $payment_status['data']['attributes']['expiredAt']);
+                                    $time = explode('+', $date[1]);
+                                ?>
+                                <p style="margin-bottom:0px;margin-left:1vw" class="very-small-text">
+                                    Selesaikan pembayaran anda sebelum  {{$date[0]}} {{$time[0]}} atau proses pembayaran akan ditutup.
+                                </p>
+                            </div>
                         </div>
+                        <!-- END OF ALERT MESSAGE -->
                     </div>
-                    <!-- END OF ALERT MESSAGE -->
-                </div>
+                @endif
             </div>
         </div>
     </div>
     <div class="col-8 p-0" style="">
         <div class="page-container-left" style="padding-top:3vw;padding-right:9vw">
-            @if($payment_status['data']['attributes']['status'] == 'pending')
-
-            @endif
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Isi Keranjang</p>
             <!-- START OF ITEM LIST -->
 
@@ -69,15 +69,26 @@
                                 <div style="display:flex;align-items:flex-start">
                                     <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">{{$cart->course->title}}</p>
                                 </div>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
+                                @foreach($cart->course->teachers as $teacher)
+                                    @if(($loop->last )&& (count($cart->course->teachers) != 1 ))
+                                    dan
+                                    @elseif(!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>
                             </div>
                         </div>
                         <div style="display:flex;align-items:center">
+                            @if($cart->course->course_type_id != 1)
                             <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
                                 <p style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
                                 {{$cart->qty}}
                                 </p>
                             </div>
+                            @endif
                             <div style="width:7.5vw">
                                 @if($cart->course->price == 0)
                                 <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
@@ -200,19 +211,20 @@
                 </a>
             </div>       
             <!-- START OF STATUS CARD -->
-            <div style="background: @if($payment_status['data']['attributes']['status'] == 'pending') #F4C257 @elseif($payment_status['data']['attributes']['status'] == 'cancelled') #F7F7F9 @else #67BBA3 @endif;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:0.5vw 1.5vw;margin-top:1vw;text-align:center">
-                @if($payment_status['data']['attributes']['status'] == 'pending')
+            <div style="background: @if($invoice->status == 'pending') #F4C257 @elseif($invoice->status == 'cancelled') #F7F7F9 @else #67BBA3 @endif;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:0.5vw 1.5vw;margin-top:1vw;text-align:center">
+                @if($invoice->status == 'pending')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px"><i class="far fa-clock"></i> <span style="margin-left:1vw">Menunggu Pembayaran</span></p>
-                @elseif($payment_status['data']['attributes']['status'] == 'paid')
+                @elseif($invoice->status == 'paid')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px"><i class="fas fa-check"></i><span style="margin-left:1vw">Pembayaran Diterima</span></p>
-                @elseif($payment_status['data']['attributes']['status'] == 'completed')
+                @elseif($invoice->status == 'completed')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:green;margin-bottom:0px">Pembelian Selesai</p>
                 
-                @elseif($payment_status['data']['attributes']['status'] == 'cancelled')
+                @elseif($invoice->status == 'cancelled')
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px"><i class="far fa-window-close"></i> <span style="margin-left:1vw">Pembelian Dibatalkan</span></p>
                 @endif
             </div>
             <!-- END OF STATUS CARD -->       
+            @if($invoice->status == 'pending')
 
             <!-- START OF ONE PAYMENT METHOD -->
             <div style="display:flex;margin-top:2vw">
@@ -224,7 +236,6 @@
                                 <p class="small-text" style="margin-bottom:0.5vw;font-family:Rubik Medium;color:#3B3C43">Bank {{$payment_status['data']['attributes']['paymentMethod']['instructions']['bankShortCode']}} ( Virtual Account)</p>
                                 <p class="sub-description" style="font-family:Rubik Medium;color:#074EE8;margin-bottom:0px">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</p>
                             </div>
-
                         </div>
 
                     </div>
@@ -238,6 +249,7 @@
             </div>
             
             <!-- END OF ONE PAYMENT METHOD -->  
+            @endif
 
             <!-- START OF SHIPPING ADDRESS -->
             <div style="background: #FFFFFF;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;margin-top:2vw">
