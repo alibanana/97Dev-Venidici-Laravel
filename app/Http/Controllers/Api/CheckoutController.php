@@ -62,6 +62,7 @@ class CheckoutController extends Controller
             'date'                  => 'required',
             'time'                  => 'required',
             'bankShortCode'         => 'required',
+            'discounted_price'      => 'required|integer'
         ]);
 
         $input = $request->all();
@@ -70,7 +71,7 @@ class CheckoutController extends Controller
             $validated = $request->validate([
                 'code' => 'required'
             ]);
-            $promo = Promotion::where('code',$validated['code'])->first();
+            $promo = Promotion::where('code', $validated['code'])->first();
             if(!$promo) return redirect()->back()->with('discount_not_found','Discount Code tidak ditemukan');
             
             $request->session()->put('promotion_code', $promo);
@@ -110,7 +111,7 @@ class CheckoutController extends Controller
             'grand_total'           => $validated['grand_total'],
             'status'                => 'pending',
             'total_order_price'     => $validated['total_order_price'],
-            'discounted_price'      => $input['discounted_price']
+            'discounted_price'      => $validated['discounted_price']
         ]);
 
         // Create order item & attach course to user.
