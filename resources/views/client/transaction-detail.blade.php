@@ -281,6 +281,9 @@
                 </div>
             </div>
             <!-- END OF NOMINAL CARD --> 
+
+            @if($invoice->status == 'pending')
+
             <!-- CANCEL PAYMENT -->
             <div style="text-align:center;margin-top:1vw">  
                 <form action="{{route('customer.cart.cancelPayment',$invoice->xfers_payment_id)}}" method="POST">
@@ -298,6 +301,7 @@
                 </form> 
             </div>
            <!-- END OF RECEIVE PAYMENT -->
+           @endif
            
         </div>
     </div>

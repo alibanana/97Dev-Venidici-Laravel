@@ -166,18 +166,18 @@
               @if($transactions != null)
                 @foreach($transactions as $transaction)
                 <!-- ONE BLUE CARD -->
-                <a href="/transaction-detail/{{$transaction->xfers_payment_id}}" style="text-decoration:none">
-                  <div style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
+                <a  href="{{$transaction->link}}" style="text-decoration:none">
+                  <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                        <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <div class="notification-left-blue-border">
                           <i class="fas fa-shopping-cart bigger-text" style="color:#2B6CAA"></i>
 
                         </div>
                     </div>
-                    <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                    <div class="notification-right-blue-border" style="background: rgba(43, 108, 170, 0.1)">
                         <div style="padding:0.6vw 1vw">
                             
-                          <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
+                          <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$transaction->title}}</p>
                           <?php
                               $date_time = explode(' ', $transaction->created_at);
                           ?>
@@ -186,15 +186,7 @@
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
                             -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Hi, {{$transaction->user->name}}. Harap segera selesaikan pembayaranmu untuk pelatihan: 
-                            @foreach($transaction->orders as $order)
-                                @if($loop->last)
-                                dan
-                                @elseif(!$loop->first)
-                                ,
-                                @endif
-                                "{{$order->course->title}}"
-                            @endforeach
+                            -webkit-box-orient: vertical !important;">{{$transaction->description}}
                           </p>
                             <!-- Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”. -->
                         </div>

@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Promotion;
+use App\Models\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -144,6 +145,33 @@ class CheckoutController extends Controller
         };
         $request->session()->forget('promotion_code');
 
+        $courses_string = "";
+
+        $x = 1;
+        $length = count($invoice->orders);
+        foreach($invoice->orders as $order)
+        {
+            if($x == $length && $length != 1)
+                $courses_string = $courses_string." dan ";
+            
+            elseif($x != 1)
+                $courses_string = $courses_string.", ";
+
+            $courses_string = $courses_string.$order->course->title;
+            $x++;
+        }
+
+
+        // create notification
+        $notification = Notification::create([
+            'user_id'           => auth()->user()->id,
+            'isInformation'     => 0,
+            'title'             => 'Kami masih menunggu pembayaran kamu..   ',
+            'description'       => 'Hi, '.auth()->user()->name.' Harap segera selesaikan pembayaranmu untuk pelatihan: '.$courses_string,
+            'link'              => '/transaction-detail/'.$payment_object['data']['id']
+        ]);
+        
+
         return redirect('/transaction-detail/'.$payment_object['data']['id']);
     }
     
@@ -170,7 +198,13 @@ class CheckoutController extends Controller
             ->where('user_id', auth()->user()->id)
             ->count();
         
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+        )->orderBy('created_at', 'desc')->get();
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
     }
 
