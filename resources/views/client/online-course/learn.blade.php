@@ -3,7 +3,14 @@
 
 @section('content')
 
-
+<?php $last_content_id =0;?>
+@foreach($sections as $section)
+    @foreach($section->sectionContents as $content_detail)
+        @if($loop->last)
+            <?php $last_content_id = $content_detail->id ?>
+        @endif
+    @endforeach
+@endforeach
 <div class="row m-0 page-container course-page-background" style="padding-top:11vw;padding-bottom:10vw">
     <!-- START OF BANNER SECTION -->
     <div class="col-12 p-0">
@@ -30,6 +37,30 @@
             </div>
             <div style="margin-top:2vw" class="user-content" id="deskripsi">
                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">{{$content->description}}</p>
+                @if($content->id == $last_content_id)
+                <div>
+                <p class="bigger-text"style="font-family:Rubik Medium;text-decoration-color: #F7F7F7;margin-top:1vw;">Assessment</p>
+                <div style="display:flex;justify-content:space-between">
+                    <div>
+                        <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">{{$assessment->title}}</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">Durasi {{floor(($assessment->duration / 60) % 60)}}:@if(strlen($assessment->duration % 60) == 1)<span>0</span>@endif{{$assessment->duration % 60}}</p>
+                    </div>
+                    <form action="">
+                        <button onclick="window.open('/online-course/assessment/{{$assessment->id}}','_self');" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Mulai Assesment</button>                
+                    </form>
+
+                </div>
+                <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Deskripsi Assesment</p>
+                <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">{{$assessment->description}}</p>
+                <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Persyaratan</p>
+                @foreach($assessment->assessmentRequirements as $req)
+                    <div style="display:flex;align-items:baseline;margin-top:0.5vw">
+                        <i style="color:#C4C4C4" class="fas fa-circle very-small-text"></i>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">{{$req->requirement}}</p>
+                    </div>
+                @endforeach
+                </div>
+                @endif
             </div>
             <div style="margin-top:2vw;display:none" class="user-content" id="notes">
                 @if($content->attachment)
@@ -56,9 +87,15 @@
                             <span class="bigger-text">{{$section->title}}</span>
                         </button>
                         </h2>
+
+                        <?php 
+                        $flag=null;
+                        if($loop->last) $flag = true;
+                        ?>
                         <div id="collapse{{$section->id}}" class="accordion-collapse @if($content->section_id != $section->id) collapse @endif" aria-labelledby="heading{{$section->id}}" data-bs-parent="#accordion{{$section->id}}">
                             <div class="accordion-body" style="padding:0vw;border:none !important">
                                 @foreach($section->sectionContents as $content_detail)
+                                <?php $last_content_id++; ?>
                                 <!-- START OF ONE COURSE -->
                                 <a href="/online-course/{{$section->course_id}}/learn/lecture/{{$content_detail->id}}" style="text-decoration:none">
                                     <div class="course-collapse @if($content_detail->id == $content->id) course-collapse-active @endif">
@@ -69,6 +106,9 @@
                                             </div>
                                         </div>
                                         <i style="color:#E2E2E2" class="fas fa-play-circle"></i>
+                                        @if($loop->last && $flag)
+                                        <i style="color:#E2E2E2" class="fas fa-question-circle"></i>
+                                        @endif
                                     </div>  
                                 </a>
                                 <!-- END OF ONE COURSE -->

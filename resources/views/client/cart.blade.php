@@ -42,6 +42,7 @@
                             </div>
                         </div>
                         <div style="display:flex;align-items:center">
+                            @if($cart->course_type_id == 1)
                             <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
                                 <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">
                                     <form action="{{ route('customer.increaseQty') }}" method="POST">
@@ -66,6 +67,7 @@
                                 </div>
                                 
                             </div>
+                            @endif
                             <div style="width:7.5vw">
                                 <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
                             </div>

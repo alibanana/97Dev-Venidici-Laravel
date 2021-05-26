@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             AssessmentSeeder::class, // Assessment & Requirements are seeded here.
             LocationSeeder::class,
             SectionSeeder::class,
-            SectionContentSeeder::class
+            SectionContentSeeder::class,
+            PromotionSeeder::class
         ]);
     }
 }

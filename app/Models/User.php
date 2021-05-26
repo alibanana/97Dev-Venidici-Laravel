@@ -55,6 +55,11 @@ class User extends Authenticatable
     public function hashtags() {
         return $this->belongsToMany(Hashtag::class, 'user_hashtag')->withTimestamps();
     }
+
+    public function courses() {
+        return $this->belongsToMany(Course::class, 'user_course')->withTimestamps();
+    }
+    
     public function carts() {
         return $this->hasMany(Cart::class);
     }
@@ -63,4 +68,7 @@ class User extends Authenticatable
         return $this->hasMany(Invoice::class);
     }
 
+    public function notifications() {
+        return $this->hasMany(Notification::class);
+    }
 }

@@ -217,12 +217,12 @@
 
     
     <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/promo') || Request::is('admin/promo/*'))
+    @if(Request::is('admin/promotions') || Request::is('admin/promotions/*'))
     <li class="nav-item active">
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/promo" 
+        <a class="nav-link" href="/admin/promotions" 
             aria-expanded="true" >
             <i class="fas fa-tags"></i>
             <span>Promo</span>

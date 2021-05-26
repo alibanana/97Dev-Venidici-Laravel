@@ -12,6 +12,7 @@ use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use App\Models\Invoice;
+use App\Models\Promotion;   
 
 class CartController extends Controller
 {
@@ -97,6 +98,7 @@ class CartController extends Controller
             }
         }
         $total_price = $sub_total + $shipping_cost;
+
         return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions'));
     }
 
@@ -185,8 +187,16 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function payment_index(Request $request){
-        return view('client/cart-payment');
+    //public function payment_index(Request $request){
+        //return view('client/cart-payment');
+    //}
+    
+    public function checkDiscount()
+    {
+        
+
+
+
     }
 
 

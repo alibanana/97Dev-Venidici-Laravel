@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
+use App\Http\Controllers\Client\AssessmentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryCo
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
+use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Api\CheckoutController;
@@ -82,6 +84,7 @@ Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('aut
 
 Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail');
 Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment');
+Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment');
 Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
 Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
@@ -96,6 +99,8 @@ Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('c
 Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty');
 Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty');
 
+Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount');
+
 //})->middleware('auth');
 
 // Route::get('/shipping', function () {
@@ -105,6 +110,8 @@ Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('custo
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
+Route::get('/online-course/assessment/{id}', [AssessmentController::class, 'showAssesment'])->name('online-course-assesment.show');
+Route::patch('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer');
 
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
@@ -196,6 +203,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/teachers/{id}', [AdminTeacherController::class, 'update'])->name('teachers.update');
     Route::delete('/teachers/{id}', [AdminTeacherController::class, 'destroy'])->name('teachers.destroy');
     // AssestmentController
+    Route::get('/assessments/{assessment_id}/result/{user_id}', [AdminAssessmentController::class, 'showResult'])->name('assessments.showResult');
     Route::get('/assessments', [AdminAssessmentController::class, 'index'])->name('assessments.index');
     Route::get('/assessments/create', [AdminAssessmentController::class, 'create'])->name('assessments.create');
     Route::post('/assessments', [AdminAssessmentController::class, 'store'])->name('assessments.store');
@@ -205,6 +213,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'updateQuestion'])->name('assessments.update-question');
     Route::delete('/assessments/{id}', [AdminAssessmentController::class, 'destroy'])->name('assessments.destroy');
     Route::delete('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'destroyQuestion'])->name('assessments.destroy-question');
+
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -212,6 +221,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/hashtags/{id}/update', [AdminHashtagController::class, 'edit'])->name('hashtags.edit');
     Route::put('/hashtags/{id}', [AdminHashtagController::class, 'update'])->name('hashtags.update');
     Route::delete('/hashtags/{id}', [AdminHashtagController::class, 'destroy'])->name('hashtags.destroy');
+    // PromotionController
+    Route::get('/promotions', [AdminPromotionController::class, 'index'])->name('promotions.index');
+    Route::get('/promotions/create', [AdminPromotionController::class, 'create'])->name('promotions.create');
+    Route::post('/promotions', [AdminPromotionController::class, 'store'])->name('promotions.store');
+    Route::get('/promotions/{id}/update', [AdminPromotionController::class, 'edit'])->name('promotions.edit');
+    Route::put('/promotions/{id}', [AdminPromotionController::class, 'update'])->name('promotions.update');
+    Route::delete('/promotions/{id}', [AdminPromotionController::class, 'destroy'])->name('promotions.destroy');
 });
 
 /* START OF WOKI ROUTING */

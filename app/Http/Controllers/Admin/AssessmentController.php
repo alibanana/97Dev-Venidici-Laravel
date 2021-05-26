@@ -219,4 +219,9 @@ class AssessmentController extends Controller
             ->with('message', $message)
             ->with('flag', 'questions');
     }
+    
+    public function showResult($assessment_id, $user_id)
+    {
+        return view('admin/assessment/result');
+    }
 }

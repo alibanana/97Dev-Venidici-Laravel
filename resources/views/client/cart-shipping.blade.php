@@ -35,8 +35,8 @@
                 <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_2"  onclick="togglePayment(event, 'checked_icon_2','bri')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
-                            <img src="/assets/images/client/BRI_LOGO.jpeg" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
-                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank BRI ( Virtual Account )</p>
+                            <img src="/assets/images/client/BTPN_LOGO.jpeg" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
+                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank BTPN ( Virtual Account )</p>
                         </div>
                         <div id="checked_icon_2" class="bank-content" style="display:none">
                             <i class="fas fa-check-circle small-heading" style="color:#2B6CAA;margin-right:1vw"></i>
@@ -47,7 +47,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
-                <button type="submit" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
+                <button type="submit" name="action" value="createPaymentObject" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
             </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
 
                             
-                            <select required onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            <select  onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 <option disabled >Pilih Provinsi</option>
                                 @foreach($provinces as $province)
                                 <option value="{{ request()->fullUrlWithQuery(['province' => $province->id]) }}" 
@@ -84,17 +84,17 @@
                                 @endforeach
                             </select>            
                               
-                            @error('province')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('province')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-12 col-sm-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Kota</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select required onchange="if (this.value) window.location.href=this.value" id=""  class="normal-text" name="" style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            <select  onchange="if (this.value) window.location.href=this.value" id=""  class="normal-text" name="" style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled>Pilih Provinsi terlebih dahulu</option>
                                 @else
@@ -115,17 +115,17 @@
                                     @endforeach          
                                 @endif
                             </select>        
-                            @error('province')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('city')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-12 col-sm-6" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Metode Pengiriman</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select required onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            <select  onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 @if(Request::get('city') == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Kota terlebih dahulu</option>
                                 @else
@@ -135,25 +135,30 @@
                                     <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'pos']) }}" @if (Request::get('shipping') == 'pos') selected @endif>POS</option>
                                 @endif
                             </select>                    
-                            @error('province')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('courier')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                         <div class="col-12 col-sm-6" style="margin-top:1vw">
                             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Tipe Pengiriman</p>
                             <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                                <select required onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                                <select  onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 <option disabled selected>Pilih Metode Pengiriman terlebih dahulu</option>
                                     @if($tipe_pengiriman != null)
                                         @foreach($tipe_pengiriman as $tipe)
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'tipe' =>$tipe['service']]) }}" @if (Request::get('tipe') == $tipe['service']) selected @endif>{{$tipe['service']}} - (Estimasi {{$tipe['cost'][0]['etd']}} hari) </option>
+                                        <option value="{{ request()->fullUrlWithQuery(['tipe' =>$tipe['service']]) }}" @if (Request::get('tipe') == $tipe['service']) selected @endif>{{$tipe['service']}} - (Estimasi {{$tipe['cost'][0]['etd']}} hari) </option>
                                         @endforeach
                                     @endif
                                 </select>        
-                            </div>  
+                            </div> 
+                            @error('service')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror 
                         </div>
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Catatan Untuk Pengirim</p>
@@ -170,33 +175,65 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <textarea name="address" value="{{Auth::user()->userDetail->address}}" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
-                            @error('address')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('address')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
             </div>
         </div>  
         <div class="col-4 p-0 ">
             <div class="page-container-right" style="padding-top:11vw">
+                @if(session('discount_not_found'))
 
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                    {{ session('discount_not_found') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- END OF ALERT MESSAGE -->
+                @elseif(session('discount_found'))
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                    {{ session('discount_found') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- END OF ALERT MESSAGE -->
+
+                @endif
                 <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Ringkasan Pembayaran</p>
                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:2vw">Kode Voucher</p>
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                    
-                    <div class="auth-input-form" style="display: flex;align-items:center;width:50%">
-                        <input type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="1234567">                   
-                        @error('province')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>  
-                    <button class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Apply</button>
-                </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        
+                        <div class="auth-input-form" style="display: flex;align-items:center;width:50%">
+                            @if(Session::get('promotion_code'))
+                            <input name="code" value="{{Session::get('promotion_code')->code}}" type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukan kode promo">                   
+                            @else
+                            <input name="code" type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukan kode promo">                   
+                            @endif   
+                        </div>  
+                        
+                        <button type="submit" name="action" value="checkDiscount" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Apply</button>
+                    </div>
+                    @error('code')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    <?php 
+                        if(Session::get('promotion_code'))
+                        {
+                            $discount = Session::get('promotion_code')->discount;
+                            $discounted_price = $sub_total * ($discount/100);
+                        }
+                        else
+                            $discounted_price = 0;
+                    ?>
+                    <input type="hidden" value="{{$discounted_price}}" name="discounted_price">
+
                 <!-- START OF NOMINAL CARD -->
                 <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:2vw">
                     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -218,8 +255,9 @@
                     </div>
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>
-                        <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp -99,999,999</p>
+                        <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($discounted_price, 0, ',', ',') }}</p>
                     </div>
+                    <?php $total_price += $discounted_price?>
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;">
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Total</p>
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($total_price, 0, ',', ',') }}</p>
@@ -275,6 +313,16 @@
 
 
     }
+</script>
+
+<script>
+    function checkDiscount()
+    {
+        console.log(document.getElementById('check_discount_form'))
+        document.getElementById("check_discount_form").submit();
+
+    }
+
 </script>
 
 @endsection
