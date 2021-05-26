@@ -17,6 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->text('invoice_no');
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
             $table->string('courier');
             $table->string('service');
             $table->bigInteger('cost_courier');
