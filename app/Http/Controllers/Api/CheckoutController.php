@@ -108,9 +108,6 @@ class CheckoutController extends Controller
                 'qty'           => $cart->quantity,
                 'price'         => $cart->price,
             ]);
-
-            if (!auth()->user()->courses->contains($cart->course_id))
-                auth()->user()->courses()->attach($cart->course_id);
         };
 
         $invoice_id = Invoice::latest()->first()->id;
@@ -167,6 +164,7 @@ class CheckoutController extends Controller
             ->where('user_id', auth()->user()->id)
             ->count();
         $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
     }
 
