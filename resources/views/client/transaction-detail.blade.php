@@ -26,29 +26,33 @@
 <div class="row m-0" style="padding-bottom:4vw;padding-top:11vw">
     <div class="col-12 p-0" style="padding-bottom:3vw">
         <div class="page-container">
-            <img src="/assets/images/client/xfers_logo_alt.png" class="img-fluid" style="width:18vw" alt="">         
+            <div style="display:flex;align-items:center">
+                <img src="/assets/images/client/xfers_logo_alt.png" class="img-fluid" style="width:15vw" alt="">         
+                <div style="margin-left:4vw">
+                    <!-- ALERT MESSAGE -->
+                    <div class="alert alert-dismissible fade show"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
+                        <div style="display:flex;align-items:center">
+                            <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
+                            <?php
+                                $date = explode('T', $payment_status['data']['attributes']['expiredAt']);
+                                $time = explode('+', $date[1]);
+                            ?>
+                            <p style="margin-bottom:0px;margin-left:1vw" class="very-small-text">
+                                Selesaikan pembayaran anda sebelum  {{$date[0]}} {{$time[0]}} atau proses pembayaran akan ditutup.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- END OF ALERT MESSAGE -->
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-8 p-0" style="">
         <div class="page-container-left" style="padding-top:3vw;padding-right:9vw">
             @if($payment_status['data']['attributes']['status'] == 'pending')
 
-            <!-- ALERT MESSAGE -->
-            <div class="alert alert-dismissible fade show small-text"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
-                <div style="display:flex;align-items:center">
-                    <i class="fas fa-exclamation-triangle small-heading" style="color:#F4C257"></i>
-                    <?php
-                        $date = explode('T', $payment_status['data']['attributes']['expiredAt']);
-                        $time = explode('+', $date[1]);
-                    ?>
-                    <p style="margin-bottom:0px;margin-left:1vw">
-                        Hai, Gabriel. Harap selesaikan pembayaran sebelum {{$date[0]}} {{$time[0]}} atau proses pembayaran akan ditutup. Terima kasih.            
-                    </p>
-                </div>
-            </div>
-            <!-- END OF ALERT MESSAGE -->
             @endif
-            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43; @if($payment_status['data']['attributes']['status'] == 'pending') margin-top:3vw @endif">Isi Keranjang</p>
+            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Isi Keranjang</p>
             <!-- START OF ITEM LIST -->
 
                 @foreach($orders as $cart)
@@ -196,7 +200,7 @@
                 </a>
             </div>       
             <!-- START OF STATUS CARD -->
-            <div style="background: @if($payment_status['data']['attributes']['status'] == 'pending') #F4C257 @elseif($payment_status['data']['attributes']['status'] == 'cancelled') #F7F7F9 @else #67BBA3 @endif;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1vw 1.5vw;margin-top:1vw;text-align:center">
+            <div style="background: @if($payment_status['data']['attributes']['status'] == 'pending') #F4C257 @elseif($payment_status['data']['attributes']['status'] == 'cancelled') #F7F7F9 @else #67BBA3 @endif;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:0.5vw 1.5vw;margin-top:1vw;text-align:center">
                 @if($payment_status['data']['attributes']['status'] == 'pending')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px"><i class="far fa-clock"></i> <span style="margin-left:1vw">Menunggu Pembayaran</span></p>
                 @elseif($payment_status['data']['attributes']['status'] == 'paid')
@@ -210,15 +214,14 @@
             </div>
             <!-- END OF STATUS CARD -->       
 
-            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:3vw">Virtual Account Number</p>       
             <!-- START OF ONE PAYMENT METHOD -->
-            <div style="display:flex">
+            <div style="display:flex;margin-top:2vw">
 
                 <div class="payment-method-card-active-left" style="width:100%" >
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
                             <div>
-                                <p class="normal-text" style="margin-bottom:0.5vw;font-family:Rubik Medium;color:#3B3C43">Bank {{$payment_status['data']['attributes']['paymentMethod']['instructions']['bankShortCode']}} ( Virtual Account)</p>
+                                <p class="small-text" style="margin-bottom:0.5vw;font-family:Rubik Medium;color:#3B3C43">Bank {{$payment_status['data']['attributes']['paymentMethod']['instructions']['bankShortCode']}} ( Virtual Account)</p>
                                 <p class="sub-description" style="font-family:Rubik Medium;color:#074EE8;margin-bottom:0px">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</p>
                             </div>
 
@@ -233,16 +236,19 @@
                 </div>
                 
             </div>
-            <div style="text-align:center;margin-top:1vw">  
-                <form action="{{route('customer.cart.cancelPayment',$invoice->xfers_payment_id)}}" method="POST">
-                @csrf
-                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to cancel the payment </p>
-                </form> 
-            </div>
-           
-            <!-- END OF ONE PAYMENT METHOD -->     
+            
+            <!-- END OF ONE PAYMENT METHOD -->  
 
-            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:3vw">Ringkasan Pembayaran</p>            
+            <!-- START OF SHIPPING ADDRESS -->
+            <div style="background: #FFFFFF;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;margin-top:2vw">
+                <div style="display:flex;align-items:center">
+                    <i class="fas fa-map-marker-alt sub-description" style="color:#2B6CAA"></i>
+                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;padding-left:1vw">{{$invoice->address}}</p>
+                </div>
+            </div>
+            <!-- END OF SHIPPING ADDRESS -->   
+
+            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw">Ringkasan Pembayaran</p>            
             <!-- START OF NOMINAL CARD -->
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:1vw">
                 <div style="display:flex;justify-content:space-between;align-items:center">
@@ -263,6 +269,23 @@
                 </div>
             </div>
             <!-- END OF NOMINAL CARD --> 
+            <!-- CANCEL PAYMENT -->
+            <div style="text-align:center;margin-top:1vw">  
+                <form action="{{route('customer.cart.cancelPayment',$invoice->xfers_payment_id)}}" method="POST">
+                @csrf
+                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to cancel the payment </p>
+                </form> 
+            </div>
+           <!-- END OF CANCEL PAYMENT -->
+
+            <!-- RECEIVE PAYMENT -->
+            <div style="text-align:center;margin-top:1vw">  
+                <form action="{{route('customer.cart.receivePayment',$invoice->xfers_payment_id)}}" method="POST">
+                @csrf
+                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to simulate payment </p>
+                </form> 
+            </div>
+           <!-- END OF RECEIVE PAYMENT -->
            
         </div>
     </div>

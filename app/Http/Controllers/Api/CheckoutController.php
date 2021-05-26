@@ -45,26 +45,18 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
-        $this->validate($request, [
-            'courier'               => 'required',
-            'service'               => 'required',
-            'cost_courier'          => 'required',
-            'total_weight'          => 'required',
-            'name'                  => 'required',
-            'phone'                 => 'required',
-            'province'              => 'required',
-            'city'                  => 'required',
-            'address'               => 'required',
-            'shipping_notes'        => 'required',
-            'grand_total'           => 'required',
-            'total_order_price'     => 'required',
-            'date'                  => 'required',
-            'time'                  => 'required',
-            'bankShortCode'         => 'required',
+        if($input['action'] == 'checkDiscount')
+        {
+            $validated = $request->validate([
+                'code'          => 'required'
+            ]);
+            $promo = Promotion::where('code',$validated['code'])->first();
+            if(!$promo) return redirect()->back()->with('discount_not_found','Discount Code tidak ditemukan');
+            
+            $request->session()->put('promotion_code', $promo);
+            return redirect()->back()->with('discount_found','Discount Code applied');
 
-
-        ]); 
-
+        }
         $length = 10;
         $random = '';
         for ($i = 0; $i < $length; $i++) {
@@ -98,7 +90,7 @@ class CheckoutController extends Controller
             'grand_total'           => $input['grand_total'],
             'status'                => 'pending',
             'total_order_price'     => $input['total_order_price'],
-            'discounted_price'      => 200
+            'discounted_price'      => $input['discounted_price']
         ]);
 
         // Create order item & attach course to user.
@@ -153,12 +145,16 @@ class CheckoutController extends Controller
     }
     
     public function transactionDetail($id){
-
+        
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
-
         $payment_status = json_decode($response->body(), true);
-
         $invoice = Invoice::where('xfers_payment_id',$id)->first();
+
+        if($invoice->status == 'pending')
+        {
+            $invoice->status = $payment_status['data']['attributes']['status'];
+            $invoice->save();
+        }
 
         $orders = Order::with('course')
                 ->where('invoice_id', $invoice->id)
@@ -168,6 +164,7 @@ class CheckoutController extends Controller
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
+        
         $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
     }
@@ -183,6 +180,26 @@ class CheckoutController extends Controller
     }
 
     public function cancelPayment(Request $request, $id)
+    {
+        //hit xfers api to cancel payment
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
+        ->withHeaders([
+            'Accept' => 'application/vnd.api+json',
+            'Content-Type' => 'application/vnd.api+json'
+ 
+        ])->post('https://sandbox-id.xfers.com/api/v4/payments/'.$id.'/tasks', [
+            "data" => [
+                "attributes" => [
+                    "action" => "cancel"
+                ]
+            ]
+        ]); 
+
+        $payment_object = json_decode($response->body(), true);
+        return redirect('/transaction-detail/'.$payment_object['data']['attributes']['targetId']);
+
+    }
+    public function receivePayment(Request $request, $id)
     {
         //hit xfers api to cancel payment
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))

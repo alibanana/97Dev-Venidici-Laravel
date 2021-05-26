@@ -14,5 +14,5 @@ class Promotion extends Model
         'discount',
         'start_date',
         'finish_date'
-    ]
+    ];
 }
