@@ -45,7 +45,7 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
-            //create invoice
+
         $length = 10;
         $random = '';
         for ($i = 0; $i < $length; $i++) {
@@ -54,14 +54,15 @@ class CheckoutController extends Controller
 
         $no_invoice = 'INV-'.Str::upper($random);
 
-        //kalo user udah pernah save province di user detail
+        // kalo user udah pernah save province di user detail
         if($input['province'] == null)
             $input['province'] = auth()->user()->userDetail->province_id;
 
-        //kalo user udah pernah save city di user detail
+        // kalo user udah pernah save city di user detail
         if($input['city'] == null)
             $input['city'] = auth()->user()->userDetail->city_id;
         
+        // create invoice
         $invoice = Invoice::create([
             'invoice_no'            => $no_invoice,
             'user_id'               => auth()->user()->id,
@@ -80,50 +81,52 @@ class CheckoutController extends Controller
             'total_order_price'     => $input['total_order_price'],
             'discounted_price'      => 200
         ]);
-        //create order
-        foreach (Cart::where('user_id', auth()->user()->id)->get() as $cart) {
 
-            //insert product ke table order
+        // Create order item & attach course to user.
+        foreach (auth()->user()->carts as $cart) {
+            // insert product ke table order
             $invoice->orders()->create([
                 'invoice_id'    => $invoice->id,
                 'course_id'     => $cart->course_id,
                 'qty'           => $cart->quantity,
                 'price'         => $cart->price,
             ]);
+
+            if (!auth()->user()->courses->contains($cart->course_id))
+                auth()->user()->courses()->attach($cart->course_id);
         };
 
         $invoice_id = Invoice::latest()->first()->id;
 
         //hit xfers api to create payment order
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
-        ->withHeaders([
-            'Accept' => 'application/vnd.api+json',
-            'Content-Type' => 'application/vnd.api+json'
- 
-        ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
-            "data" => [
-                "attributes" => [
-                    "paymentMethodType" => "virtual_bank_account",
-                    "amount" => $input['grand_total'],
-                    "referenceId" => $no_invoice,
-                    "expiredAt" => $input['date'].'T'.$input['time'].'+07:00',
-                    "description" => "Order Number ".$invoice_id,
-                    "paymentMethodOptions" =>[
-                        "bankShortCode" => $input['bankShortCode'],
-                        "displayName" => "Venidici",
-                        "suffixNo" => ""
+            ->withHeaders([
+                'Accept' => 'application/vnd.api+json',
+                'Content-Type' => 'application/vnd.api+json'
+            ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
+                "data" => [
+                    "attributes" => [
+                        "paymentMethodType" => "virtual_bank_account",
+                        "amount" => $input['grand_total'],
+                        "referenceId" => $no_invoice,
+                        "expiredAt" => $input['date'].'T'.$input['time'].'+07:00',
+                        "description" => "Order Number ".$invoice_id,
+                        "paymentMethodOptions" =>[
+                            "bankShortCode" => $input['bankShortCode'],
+                            "displayName" => "Venidici",
+                            "suffixNo" => ""
+                        ]
                     ]
                 ]
             ]
-        ]); 
- 
+        ); 
+        
         $payment_object = json_decode($response->body(), true);
         $invoice = Invoice::findorfail($invoice_id);
         $invoice->xfers_payment_id  =  $payment_object['data']['id'];
         $invoice->save();
 
-        foreach (Cart::where('user_id', auth()->user()->id)->get() as $cart) {
-
+        foreach (auth()->user()->carts as $cart) {
             $cart->delete();
         };
 
