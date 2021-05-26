@@ -295,8 +295,78 @@
     @yield('content')
 
 
+    @if(!Request::is('login') )
+      @if(!Request::is('signup'))
+        @if(!Request::is('signup-interests'))
+          @if(!Request::is('cart'))
     <!-- FOOTER -->
+    <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw">
+      <div class="col-12 p-0">
+        <div style="display:flex;justify-content:space-between">
+          <div>
+            <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:3vw" class="img-fluid" alt="">
+            <p class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:1vw">Copyright © 2021 Venidici. <br>
+            All rights reserved.</p>
+          </div>
+
+          <div>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Homepage</p>
+            <a href="/" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Home</a>
+          </div>
+
+          <div>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">For Public</p>
+            <div>
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Online Course</a>
+            </div>
+            <div>
+              <a href="/for-public/woki" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Woki</a>
+            </div>
+          </div>
+
+          <div>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">For Corporate</p>
+            <div>
+              <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Krest</a>
+            </div>
+          </div>
+
+          <div>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Community</p>
+            <div>
+              <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
+            </div>
+          </div>
+
+          <div>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Profile</p>
+            <div>
+              <a href="/dashboard" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">User Dashboard</a>
+            </div>
+          </div>
+
+          <div>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Social</p>
+            <div>
+              <a href="https://twitter.com/venidici_id?lang=en" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-twitter bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Twitter</span></a>
+            </div>
+            <div style="margin-top:0.5vw">
+              <a href="https://www.facebook.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-facebook bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Facebook</span></a>
+            </div>
+            <div style="margin-top:0.5vw">
+              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-instagram bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Instagram</span></a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
     <!-- END OF FOOTER -->
+    @endif
+      @endif
+        @endif
+          @endif
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- BOOTSTRAP 5-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>

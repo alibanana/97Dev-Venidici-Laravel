@@ -38,7 +38,16 @@
                     <div class="form-group mt-2">
                         <!-- if there is no attachment, change the text below to "no attachment" -->
                         @if ($content->attachment)
-                            <p> <span> <a href="{{ asset($content->attachment) }}" target="_blank">click here</a> </span> to view current attachment</p>
+                            <div style="display:flex;align-items:center">
+                                <p style="margin-bottom:0px;padding-right:2vw"> <span> <a href="{{ asset($content->attachment) }}" target="_blank">click here</a> </span> to view current attachment</p>
+                                <form action="" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <div style="padding: 0px 2px">
+                                        <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Remove Attachment</button>
+                                    </div>
+                                </form> 
+                            </div>
                         @else
                             <p>No attachment available.</p>
                         @endif

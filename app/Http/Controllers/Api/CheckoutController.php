@@ -45,6 +45,7 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
+
         if($input['action'] == 'checkDiscount')
         {
             $validated = $request->validate([
@@ -57,6 +58,7 @@ class CheckoutController extends Controller
             return redirect()->back()->with('discount_found','Discount Code applied');
 
         }
+
         $length = 10;
         $random = '';
         for ($i = 0; $i < $length; $i++) {
@@ -140,18 +142,21 @@ class CheckoutController extends Controller
         foreach (auth()->user()->carts as $cart) {
             $cart->delete();
         };
+        $request->session()->forget('promotion_code');
 
         return redirect('/transaction-detail/'.$payment_object['data']['id']);
     }
     
     public function transactionDetail($id){
         
-        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
-        $payment_status = json_decode($response->body(), true);
         $invoice = Invoice::where('xfers_payment_id',$id)->first();
+        $payment_status = null;
 
+        //get latest payment status if invoice status still pending
         if($invoice->status == 'pending')
         {
+            $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
+            $payment_status = json_decode($response->body(), true);
             $invoice->status = $payment_status['data']['attributes']['status'];
             $invoice->save();
         }
