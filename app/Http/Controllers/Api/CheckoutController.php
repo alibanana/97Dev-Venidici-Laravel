@@ -45,6 +45,25 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
+        $this->validate($request, [
+            'courier'               => 'required',
+            'service'               => 'required',
+            'cost_courier'          => 'required',
+            'total_weight'          => 'required',
+            'name'                  => 'required',
+            'phone'                 => 'required',
+            'province'              => 'required',
+            'city'                  => 'required',
+            'address'               => 'required',
+            'shipping_notes'        => 'required',
+            'grand_total'           => 'required',
+            'total_order_price'     => 'required',
+            'date'                  => 'required',
+            'time'                  => 'required',
+            'bankShortCode'         => 'required',
+
+
+        ]); 
 
         $length = 10;
         $random = '';
