@@ -216,16 +216,6 @@ class CheckoutController extends Controller
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
     }
 
-    public function createPayment(Request $request, $id){        
-        
-        $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
-        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
-    }
-
     public function cancelPayment(Request $request, $id)
     {
         //hit xfers api to cancel payment
