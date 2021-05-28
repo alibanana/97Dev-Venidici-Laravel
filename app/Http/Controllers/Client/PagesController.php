@@ -94,6 +94,7 @@ class PagesController extends Controller
 
         return response()->json($datas);
     }
+    /*
     public function signup_interest()
     {
         $interests = Hashtag::all();
@@ -101,6 +102,7 @@ class PagesController extends Controller
         $cart_count=0;
         return view('client/auth/signup-interests', compact('interests','cart_count','transactions'));
     }
+    */
 
     public function signup_general_info(){
         $transactions=null;

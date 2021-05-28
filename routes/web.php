@@ -65,7 +65,7 @@ Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->nam
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
 Route::get('/signup', [PagesController::class, 'signup_general_info'])->name('signup_general_info')->middleware('guest');
-Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest')->middleware('guest');
+/*Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest')->middleware('guest');*/
 Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info')->middleware('guest');
 
 /* START OF CLIENT ROUTING */
@@ -90,10 +90,10 @@ Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])
 Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware('auth');
 Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware('auth');
 Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware('auth');
-Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware('auth');
+Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
 Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
 Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index')->middleware('auth');
-Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store')->middleware('auth');
+Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
 Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware('auth');
 Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove')->middleware('auth');
 Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll')->middleware('auth');

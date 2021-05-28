@@ -177,7 +177,8 @@
             <!-- START OF USER REVIEWS -->
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
                 <div style="display:flex">
-                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src=""  @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
+                    
+                    <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src=""  @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
                     <div style="margin-left:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">{{$review->user->name}}</p>
                         <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
@@ -229,6 +230,7 @@
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
             @endif
             <?php $flag = null;?>
+            @if(Auth::check())
             @foreach($transactions as $transaction)
                 @if($transaction->invoice->status == 'paid' || $transaction->invoice->status == 'completed')
                 @foreach($transaction->invoice->orders as $order)
@@ -238,6 +240,7 @@
                 @endforeach
                 @endif
             @endforeach
+            @endif
             @if($flag == true)
 
             <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
