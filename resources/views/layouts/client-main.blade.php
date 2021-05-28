@@ -162,7 +162,7 @@
 
             <!-- START OF TRANSAKSI NOTIFICATION -->
             <div class="col-md-12 notif-content" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
-              @if(Auth::check() && count($transactions) == 0)
+              @if(count($transactions) == 0)
                 <div style="">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada transaksi.</p>
                 </div>

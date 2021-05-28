@@ -8,9 +8,7 @@
         <div class="centered white-modal-signup" style="width:70vw;padding-bottom:4vw !important">
             <div style="display:flex;justify-content:space-between">
                 <a href="/login" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Login</span></a>
-                @if(Session::get('name'))
-                <a href="/signup-interests" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none">Your interests<i style="margin-left:0.5vw" class="fas fa-arrow-right"></i></a>
-                @endif
+                <!--<a href="/signup-interests" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none">Your interests<i style="margin-left:0.5vw" class="fas fa-arrow-right"></i></a>-->
             </div>
             <form action="{{ route('store_general_info') }}" method="POST">
             @csrf   
