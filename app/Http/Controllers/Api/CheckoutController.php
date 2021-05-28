@@ -239,7 +239,19 @@ class CheckoutController extends Controller
                 ->where('invoice_id', $invoice->id)
                 ->orderBy('created_at', 'desc')
                 ->get();
-        return view('client/transaction-detail', compact('payment_status','orders','invoice'));
+
+        $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+        
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+        )->orderBy('created_at', 'desc')->get();
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
     }
 
 
