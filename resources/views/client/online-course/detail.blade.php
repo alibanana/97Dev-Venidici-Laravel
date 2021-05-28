@@ -249,11 +249,13 @@
             @endif
             <?php $flag = null;?>
             @foreach($transactions as $transaction)
-                @foreach($transaction->orders as $order)
+                @if($transaction->invoice->status == 'paid' || $transaction->invoice->status == 'completed')
+                @foreach($transaction->invoice->orders as $order)
                     @if($order->course->id == $course->id)
                         <?php $flag = true;?>
                     @endif
                 @endforeach
+                @endif
             @endforeach
             @if($flag == true)
 
@@ -268,10 +270,10 @@
                 <input type="hidden" name="quantity" value="1">
                 <input type="hidden" name="price" value="{{$course->price}}">
                 <input type="hidden" name="weight" value="0">                
-                <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Add to cart</button>
+                <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
             </form>
             @endif
-            <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Buy Now</button>
+            <button class="normal-text  btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">{{$course->total_duration}} Menit video eksklusif</span></p>

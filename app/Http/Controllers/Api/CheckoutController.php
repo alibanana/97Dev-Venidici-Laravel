@@ -46,6 +46,7 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
+       
 
         if($input['action'] == 'checkDiscount')
         {
@@ -59,6 +60,18 @@ class CheckoutController extends Controller
             return redirect()->back()->with('discount_found','Discount Code applied');
 
         }
+        $this->validate($request, [
+            'courier'               => 'required',
+            'weight'                => 'required',
+            'name'                  => 'required',
+            'phone'                 => 'required',
+            'address'               => 'required',
+            'grand_total'           => 'required',
+            'total_order_price'     => 'required',
+            'date'                  => 'required',
+            'time'                  => 'required',
+            'bankShortCode'         => 'required',
+        ]); 
 
         $length = 10;
         $random = '';
@@ -165,9 +178,10 @@ class CheckoutController extends Controller
         // create notification
         $notification = Notification::create([
             'user_id'           => auth()->user()->id,
+            'invoice_id'        => $invoice->id,
             'isInformation'     => 0,
             'title'             => 'Kami masih menunggu pembayaran kamu..   ',
-            'description'       => 'Hi, '.auth()->user()->name.' Harap segera selesaikan pembayaranmu untuk pelatihan: '.$courses_string,
+            'description'       => 'Hi, '.auth()->user()->name.'. Harap segera selesaikan pembayaranmu untuk pelatihan: '.$courses_string,
             'link'              => '/transaction-detail/'.$payment_object['data']['id']
         ]);
         
@@ -187,6 +201,38 @@ class CheckoutController extends Controller
             $payment_status = json_decode($response->body(), true);
             $invoice->status = $payment_status['data']['attributes']['status'];
             $invoice->save();
+
+
+            // start of courses string
+            $courses_string = "";
+
+            $x = 1;
+            $length = count($invoice->orders);
+            foreach($invoice->orders as $order)
+            {
+                if($x == $length && $length != 1)
+                    $courses_string = $courses_string." dan ";
+                
+                elseif($x != 1)
+                    $courses_string = $courses_string.", ";
+    
+                $courses_string = $courses_string.$order->course->title;
+                $x++;
+            }
+            // end of courses string
+
+
+            if($payment_status['data']['attributes']['status'] == 'paid' || $payment_status['data']['attributes']['status'] == 'completed')
+            {
+                foreach($invoice->notifications as $notif)
+                {
+                    if($notif->user_id == auth()->user()->id && $notif->invoice_id == $invoice->id)
+                        $newNotif = Notification::findOrFail($notif->id);
+                        $newNotif->title        = 'Pembayaran Telah Berhasil!';
+                        $newNotif->description  = 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah berhasil.';
+                        $newNotif->save();
+                }
+            }
         }
 
         $orders = Order::with('course')
@@ -213,8 +259,13 @@ class CheckoutController extends Controller
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
+            $transactions = Notification::where(
+                [   
+                    ['user_id', '=', auth()->user()->id],
+                    ['isInformation', '=', 0],
+                    
+                ]
+            )->orderBy('created_at', 'desc')->get();
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
     }
 
@@ -235,6 +286,35 @@ class CheckoutController extends Controller
         ]); 
 
         $payment_object = json_decode($response->body(), true);
+
+        $invoice = Invoice::where('xfers_payment_id',$id)->first();
+
+        // start of courses string
+        $courses_string = "";
+
+        $x = 1;
+        $length = count($invoice->orders);
+        foreach($invoice->orders as $order)
+        {
+            if($x == $length && $length != 1)
+                $courses_string = $courses_string." dan ";
+            
+            elseif($x != 1)
+                $courses_string = $courses_string.", ";
+
+            $courses_string = $courses_string.$order->course->title;
+            $x++;
+        }
+        // end of courses string
+
+        foreach($invoice->notifications as $notif)
+        {
+            if($notif->user_id == auth()->user()->id && $notif->invoice_id == $invoice->id)
+                $newNotif = Notification::findOrFail($notif->id);
+                $newNotif->title        = 'Pembayaran Telah Dibatalkan!';
+                $newNotif->description  = 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah dibatalkan.';
+                $newNotif->save();
+        }
         return redirect('/transaction-detail/'.$payment_object['data']['attributes']['targetId']);
 
     }

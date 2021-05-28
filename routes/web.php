@@ -43,6 +43,7 @@ use App\Http\Controllers\Api\CheckoutController;
 
 Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
 Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('customer.dashboard');
+Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
 
 //Route::get('/dashboard', function () {
     //return view('dashboard');

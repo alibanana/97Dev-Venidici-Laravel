@@ -242,6 +242,68 @@
 </div>
 <!-- END OF POPUP POINT EXPLANATION-->
 
+<!-- START OF POPUP INTERESTS-->
+<div id="my-interests" class="overlay" style="overflow:scroll">
+    <div class="popup" style="">
+        <a class="close" href="#" >&times;</a>
+        <div class="content" style="padding:2vw">
+
+            <div class="row m-0 ">
+                <div class="col-md-12 p-0">
+                    <div class="white-modal-signup" style="padding-bottom:4vw !important;">
+                        <form action="{{ route('store_interest') }}" method="POST">
+                        @csrf                   
+                            <div class="row m-0 page-container">
+                                <div class="col-12 p-0">
+                                    <div style="text-align:center">
+                                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
+                                        <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
+                                        <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
+                                    </div>
+                                    @error('interests')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="row m-0"  style="overflow:scroll;height:25vw;margin-top:1vw">
+                                    @foreach($interests as $interest)
+                                    <?php $flag = FALSE; ?>
+                                        @foreach(Auth::user()->hashtags as $hashtag)
+                                            @if($hashtag->id == $interest->id)
+                                                <?php $flag =TRUE ; ?>
+                                            @endif
+                                        @endforeach
+                                        <div class="col-4" style="display:flex;
+                                        @if($loop->iteration % 3 == 1)
+                                            justify-content:flex-start;
+                                        @elseif($loop->iteration % 3 ==2)
+                                            justify-content:center;
+                                        @else
+                                            justify-content:flex-end;
+                                        @endif
+                                        margin-top:2vw">
+                                            <div class="container interest-card @if($flag) interest-card-active @endif" id="interest_card_{{$interest->id}}" 
+                                            style="background-image: url({{ $interest->image }});cursor:pointer; @if($flag) background-color: {{$interest->color}}; @endif" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
+                                                <input type="hidden" name="interests[{{ $interest->id }}]" value="0">
+                                                <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{ $interest->hashtag }}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="col-12 p-0" style="text-align:center;margin-top:3vw">
+                                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update My Interests</button>
+                                </div>  
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF POPUP INTERESTS-->
+
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container" style="padding-top:9vw">   
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
@@ -272,6 +334,9 @@
                             </div>
                             <div class="edit-item">
                                 <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
+                            </div>
+                            <div class="edit-item">
+                                <a href="#my-interests" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-heart"></i> <span style="margin-left:0.87vw">My interests</span></a>   
                             </div>
                             <div class="edit-item" style="border-radius:0px 0px 10px 10px">
                                 <form action="{{ route('logout') }}" method="POST">
@@ -375,6 +440,11 @@
 
     <!-- Pelatihan Aktif Content -->
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
+        @if(count($orders) == 0)
+            <div style="margin-top:2vw">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;">Tidak ada pelatihan aktif.</p>
+            </div>
+        @endif
         @foreach($orders as $course)
         <div class="col-12 p-0">
             <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->course->id}}/learn/lecture/1','_self');">
@@ -695,5 +765,21 @@
             evt.currentTarget.className += " blue-text-underline-active";
         }
          
+</script>
+<script>
+    function toggleInterest(id, color_code) {
+        var element = document.getElementById(id);
+        
+        element.classList.toggle("interest-card-active");
+        value=$(element).find("input[type=hidden]");
+
+        if (value.val() == 0) {
+            $(element).find("input[type=hidden]").val('1');
+            element.style.backgroundColor = color_code;
+        } else {
+            $(element).find("input[type=hidden]").val('0');
+            element.style.backgroundColor = '';
+        }
+    }
 </script>
 @endsection

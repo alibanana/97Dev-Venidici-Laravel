@@ -13,6 +13,8 @@ use App\Models\Teacher;
 use App\Models\Section;
 use App\Models\SectionContent;
 use App\Models\Assessment;
+use App\Models\Notification;
+
 /*
 |--------------------------------------------------------------------------
 | Client OnlineCourseController Class.
@@ -30,8 +32,13 @@ class OnlineCourseController extends Controller
             $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
+    $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+        )->orderBy('created_at', 'desc')->get();
             return view('client/online-course/index', compact('cart_count','transactions'));
         } else {
             return view('client/online-course/index');
@@ -45,7 +52,13 @@ class OnlineCourseController extends Controller
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();
             return view('client/online-course/detail', compact('course','cart_count','transactions'));
         } else {
             $transactions=null;
@@ -60,7 +73,13 @@ class OnlineCourseController extends Controller
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+        )->orderBy('created_at', 'desc')->get();        
         $sections = Section::where('course_id',$id)->get();
         $content = SectionContent::findOrFail($detail_id);
         $assessment = Assessment::where('course_id',$id)->first();

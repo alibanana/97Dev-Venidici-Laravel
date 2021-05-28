@@ -98,7 +98,7 @@
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled>Pilih Provinsi terlebih dahulu</option>
                                 @else
-                                    <option disabled>Pilih Kota</option>
+                                    <option disabled selected>Pilih Kota</option>
 
                                     @foreach($cities as $city)
                                     <option value="{{ request()->fullUrlWithQuery(['city' => $city->city_id]) }}" 
@@ -174,7 +174,7 @@
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="address" value="{{Auth::user()->userDetail->address}}" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
+                            <textarea name="address" value="{{ old('address') }}" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #5F5D70;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -255,9 +255,9 @@
                     </div>
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>
-                        <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($discounted_price, 0, ',', ',') }}</p>
+                        <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discounted_price, 0, ',', ',') }}</p>
                     </div>
-                    <?php $total_price += $discounted_price?>
+                    <?php $total_price -= $discounted_price?>
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;">
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Total</p>
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($total_price, 0, ',', ',') }}</p>

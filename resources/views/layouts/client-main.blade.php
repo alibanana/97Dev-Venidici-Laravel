@@ -162,11 +162,34 @@
 
             <!-- START OF TRANSAKSI NOTIFICATION -->
             <div class="col-md-12 notif-content" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
-
-              @if($transactions != null)
+              @if(Auth::check() && count($transactions) == 0)
+                <div style="">
+                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada transaksi.</p>
+                </div>
+              @endif
+              @if($transactions)
                 @foreach($transactions as $transaction)
+                <?php
+                    $users = explode(',', $transaction->hasSeen);
+                    $hasSeen = FALSE;
+                    foreach($users as $user_id)
+                    {
+                      if($user_id == Auth::user()->id)
+                        $hasSeen = TRUE;
+                    }
+                ?>
                 <!-- ONE BLUE CARD -->
+                <form action="{{ route('customer.seeNotification') }}" method="POST">
+                @csrf  
+                @method('put')  
+                @if(!$hasSeen)
+                <a href="javascript:;" onclick="parentNode.submit();"style="text-decoration:none">
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                <input type="hidden" name="notification_id" value="{{$transaction->id}}">
+                <input type="hidden" name="link" value="{{$transaction->link}}">
+                @else
                 <a  href="{{$transaction->link}}" style="text-decoration:none">
+                @endif
                   <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                         <div class="notification-left-blue-border">
@@ -174,12 +197,12 @@
 
                         </div>
                     </div>
-                    <div class="notification-right-blue-border" style="background: rgba(43, 108, 170, 0.1)">
+                    <div class="notification-right-blue-border" @if(!$hasSeen) style="background: rgba(43, 108, 170, 0.1) @endif">
                         <div style="padding:0.6vw 1vw">
                             
                           <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$transaction->title}}</p>
                           <?php
-                              $date_time = explode(' ', $transaction->created_at);
+                              $date_time = explode(' ', $transaction->updated_at);
                           ?>
                           <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
                           <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
@@ -193,6 +216,7 @@
                     </div>
                   </div>
                 </a>
+                </form>
                 <!-- END OF ONE BLUE CARD -->
                 @endforeach
               @endif
