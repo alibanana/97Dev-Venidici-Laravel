@@ -419,8 +419,9 @@
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                     <select name="province" id=""  class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                        <option value="" disabled selected>Kategori</option>
+                        <option value="" disabled selected>Pilih Kategori</option>
                         <option value="">Online Course</option>
+                        <option value="">Woki</option>
                     </select>                    
                     @error('province')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -530,7 +531,7 @@ END OF OUR PROGRAMS SECTION -->
     </div>
     <!--
     <div class="col-4 p-0">
-        <a href="/online-course" style="text-decoration:none">
+        <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-home" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Icon.png" style="width:5vw;" class="img-fluid" alt="">
                 <div>
@@ -543,13 +544,13 @@ END OF OUR PROGRAMS SECTION -->
     -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
-        <a href="/online-course" style="text-decoration:none">
+        <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Online Course</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    <a href="/online-course" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Online Course</a>
+                    <a href="/online-course?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Online Course</a>
                 </div>
             </div>
         </a>
@@ -557,7 +558,7 @@ END OF OUR PROGRAMS SECTION -->
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
-        <a href="/online-course" style="text-decoration:none">
+        <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
@@ -571,7 +572,7 @@ END OF OUR PROGRAMS SECTION -->
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
-        <a href="/online-course" style="text-decoration:none">
+        <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
@@ -633,13 +634,15 @@ END OF OUR PROGRAMS SECTION -->
     <div class="col-12 p-0" style="text-align: center;margin-top:12vw">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;">Top <span class="big-heading" style="font-family:Hypebeast;color:#A24A9C" >CLASSES</span> for you</p>
         <div style="padding:2vw 13.5vw 4vw 13.5vw;">
-            <div style="display:flex;justify-content:space-between;align-items:center;background: #FFFFFF;border: 2px solid rgba(157, 157, 157, 0.1);border-radius: 10px;padding:0.7vw">
+            <div style="display:flex;justify-content:space-between;align-items:center;background: #FFFFFF;border: 2px solid rgba(157, 157, 157, 0.1);border-radius: 10px;padding:0.7vw 8vw">
 
                 <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Most Popular</p>
                 <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
                 <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Online Course</p>
+                <!--
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
+                -->
             </div>
         </div>
     </div>
@@ -775,10 +778,12 @@ END OF OUR PROGRAMS SECTION -->
                     <!-- END OF ONE GREEN COURSE CARD -->
                 </div>
             </div>
+            <!--
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="/online-course" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/online-course?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
 
             </div>
+            -->
         </div>
     </div>
     <!-- END OF MOST POPULAR -->
@@ -912,7 +917,7 @@ END OF OUR PROGRAMS SECTION -->
                 </div>
             </div>
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/woki" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
 
             </div>
 
@@ -992,7 +997,7 @@ END OF OUR PROGRAMS SECTION -->
             </div>
             @endforeach
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="/online-course" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/online-course?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
             </div>
         </div>
     </div>

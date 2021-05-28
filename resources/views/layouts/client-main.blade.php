@@ -71,7 +71,7 @@
         @endif
       @endif
     @endif
-
+    @if(Auth::check())
     <!-- START OF POPUP -->
     <div id="notification" class="overlay">
         <div class="popup-notif">
@@ -202,7 +202,7 @@
                             
                           <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$transaction->title}}</p>
                           <?php
-                              $date_time = explode(' ', $transaction->updated_at);
+                              $date_time = explode(' ', $transaction->updated_at->diffForHumans());
                           ?>
                           <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
                           <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
@@ -307,6 +307,7 @@
         </div>
     </div>
     <!-- END OF POPUP -->
+    @endif
   
     @yield('content')
 
@@ -353,13 +354,14 @@
               <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
             </div>
           </div>
-
+          @if(Auth::check())
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Profile</p>
             <div>
               <a href="/dashboard" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">User Dashboard</a>
             </div>
           </div>
+          @endif
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Social</p>

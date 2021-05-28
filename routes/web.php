@@ -16,8 +16,10 @@ use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\ReviewController;
 use App\Http\Controllers\Api\CheckoutController;
 
 /*
@@ -41,9 +43,9 @@ use App\Http\Controllers\Api\CheckoutController;
 
 
 
-Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
-Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('customer.dashboard');
-Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
+Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest')->middleware('auth');
+Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('customer.dashboard')->middleware('auth');
+Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware('auth');
 
 //Route::get('/dashboard', function () {
     //return view('dashboard');
@@ -62,9 +64,9 @@ Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->nam
 */
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
-Route::get('/signup', [PagesController::class, 'signup_general_info'])->name('signup_general_info');
-Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest');
-Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info');
+Route::get('/signup', [PagesController::class, 'signup_general_info'])->name('signup_general_info')->middleware('guest');
+Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest')->middleware('guest');
+Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info')->middleware('guest');
 
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
@@ -83,41 +85,36 @@ Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('aut
 // });
 /* CART ROUTING */
 
-Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail');
-Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment');
-Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment');
-Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
-Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus');
-Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
-Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index');
-Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index');
-Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
-Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total');
-Route::get('/cart/totalWeight', [CartController::class, 'getCartTotalWeight'])->name('customer.cart.getCartTotalWeight');
-Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove');
-Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll');
-Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart');
-Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty');
-Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty');
+Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail')->middleware('auth');
+Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment')->middleware('auth');
+Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware('auth');
+Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware('auth');
+Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware('auth');
+Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware('auth');
+Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
+Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index')->middleware('auth');
+Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store')->middleware('auth');
+Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware('auth');
+Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove')->middleware('auth');
+Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll')->middleware('auth');
+Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart')->middleware('auth');
+Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty')->middleware('auth');
+Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty')->middleware('auth');
 
-Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount');
+Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount')->middleware('auth');
 
-//})->middleware('auth');
-
-// Route::get('/shipping', function () {
-//     return view('client/cart-shipping');
-// });
 
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
-Route::get('/online-course/assessment/{id}', [AssessmentController::class, 'showAssesment'])->name('online-course-assesment.show');
-Route::patch('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer');
+Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
+Route::get('/online-course/assessment/{id}', [AssessmentController::class, 'showAssesment'])->name('online-course-assesment.show')->middleware('auth');
+Route::patch('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
+Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
 
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
-Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn');
 
 //Route::get('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1', function () {
     //return view('client/online-course/learn');
@@ -229,6 +226,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/promotions/{id}/update', [AdminPromotionController::class, 'edit'])->name('promotions.edit');
     Route::put('/promotions/{id}', [AdminPromotionController::class, 'update'])->name('promotions.update');
     Route::delete('/promotions/{id}', [AdminPromotionController::class, 'destroy'])->name('promotions.destroy');
+    
+    //ReviewController
+    Route::get('/reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
+    Route::delete('/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('reviews.destroy');
+
 });
 
 /* START OF WOKI ROUTING */
@@ -264,9 +266,9 @@ Route::get('/admin/art-supply/1/update', function () {
 Route::get('/admin/login', function () {
     return view('admin/auth/login');
 });
-Route::get('/admin/reviews', function () {
-    return view('admin/reviews');
-});
+//Route::get('/admin/reviews', function () {
+    //return view('admin/reviews');
+//});
 
 Route::get('/admin/forgot-password', function () {
     return view('admin/auth/forgot-password');
@@ -275,17 +277,6 @@ Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
 });
 
-/* START OF PROMO CODE*/
-Route::get('/admin/promo', function () {
-    return view('admin/promo/index');
-});
-Route::get('/admin/promo/create', function () {
-    return view('admin/promo/create');
-});
-Route::get('/admin/promo/1/update', function () {
-    return view('admin/promo/update');
-});
-/* END OF PROMO CODE */
 
 /* START OF INFORMATION CODE*/
 Route::get('/admin/information', function () {
