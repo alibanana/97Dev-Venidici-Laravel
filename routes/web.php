@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\ReviewController;
 use App\Http\Controllers\Api\CheckoutController;
 
 /*
@@ -111,6 +112,7 @@ Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('c
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
+Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store');
 Route::get('/online-course/assessment/{id}', [AssessmentController::class, 'showAssesment'])->name('online-course-assesment.show');
 Route::patch('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer');
 

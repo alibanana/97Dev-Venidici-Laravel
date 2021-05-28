@@ -64,7 +64,7 @@
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Apa itu Online Courses?</p>
         <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem.
         </p>
-        <a href="" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">Explore Our Library Now!</a>
+        <a href="/online-course" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">Explore Our Library Now!</a>
 
     </div>
 </div>
@@ -251,7 +251,7 @@
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">What is your shipping policy?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">What is your shipping policy?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
@@ -266,7 +266,7 @@
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Can I refund the course that i enrolled?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Can I refund the course that i enrolled?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
@@ -281,7 +281,7 @@
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    

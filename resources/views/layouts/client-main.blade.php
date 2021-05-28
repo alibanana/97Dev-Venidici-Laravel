@@ -202,7 +202,7 @@
                             
                           <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$transaction->title}}</p>
                           <?php
-                              $date_time = explode(' ', $transaction->updated_at);
+                              $date_time = explode(' ', $transaction->updated_at->diffForHumans());
                           ?>
                           <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
                           <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;

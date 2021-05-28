@@ -633,13 +633,15 @@ END OF OUR PROGRAMS SECTION -->
     <div class="col-12 p-0" style="text-align: center;margin-top:12vw">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;">Top <span class="big-heading" style="font-family:Hypebeast;color:#A24A9C" >CLASSES</span> for you</p>
         <div style="padding:2vw 13.5vw 4vw 13.5vw;">
-            <div style="display:flex;justify-content:space-between;align-items:center;background: #FFFFFF;border: 2px solid rgba(157, 157, 157, 0.1);border-radius: 10px;padding:0.7vw">
+            <div style="display:flex;justify-content:space-between;align-items:center;background: #FFFFFF;border: 2px solid rgba(157, 157, 157, 0.1);border-radius: 10px;padding:0.7vw 8vw">
 
                 <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Most Popular</p>
                 <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
                 <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Online Course</p>
+                <!--
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
+                -->
             </div>
         </div>
     </div>
@@ -775,10 +777,12 @@ END OF OUR PROGRAMS SECTION -->
                     <!-- END OF ONE GREEN COURSE CARD -->
                 </div>
             </div>
+            <!--
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
                 <a href="/online-course" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
 
             </div>
+            -->
         </div>
     </div>
     <!-- END OF MOST POPULAR -->
@@ -912,7 +916,7 @@ END OF OUR PROGRAMS SECTION -->
                 </div>
             </div>
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="#" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/woki" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
 
             </div>
 
