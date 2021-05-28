@@ -17,6 +17,8 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('invoice_id')->nullable();
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('set null');
             $table->boolean('isInformation');
             $table->string('title');
             $table->text('description');

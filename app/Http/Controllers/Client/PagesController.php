@@ -20,6 +20,7 @@ use App\Models\City;
 use App\Models\UserHashtag;
 use App\Models\Invoice;
 use App\Models\Order;
+use App\Models\Notification;
 
 use PDF;
 
@@ -52,7 +53,13 @@ class PagesController extends Controller
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
             return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','online_courses','cart_count','transactions'));
         } else {
             $transactions=null;
@@ -67,7 +74,13 @@ class PagesController extends Controller
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
             return view('client/community', compact('cart_count','transactions'));
         } else {
             $transactions=null;
@@ -171,7 +184,13 @@ class PagesController extends Controller
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
             return view('client/online-course/detail', compact('course','cart_count','transactions'));
         } else {
             $transactions=null;
@@ -187,8 +206,14 @@ class PagesController extends Controller
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
                 
+            ]
+            )->orderBy('created_at', 'desc')->get();
+        
         $orders = Order::whereHas('invoice', function ($query){
             $query->where(
                 [
@@ -197,7 +222,10 @@ class PagesController extends Controller
                 ]
             );
                 })->orderBy('orders.created_at', 'desc')->get();
-        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders'));
+
+        $interests = Hashtag::all();
+
+        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders','interests'));
     }
 
     public function krest_index(){
@@ -205,7 +233,13 @@ class PagesController extends Controller
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
             return view('client/for-corporate/krest', compact('cart_count','transactions'));
         } else {
             $transactions=null;
@@ -219,7 +253,13 @@ class PagesController extends Controller
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
             return view('client/for-public/online-course', compact('cart_count','transactions'));
         } else {
             $transactions=null;
@@ -233,7 +273,13 @@ class PagesController extends Controller
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
             return view('client/for-public/woki', compact('cart_count','transactions'));
         } else {
             $transactions=null;
@@ -248,5 +294,13 @@ class PagesController extends Controller
         
         // return $pdf->download('certificate.pdf'); //download
         return $pdf->stream(); //view
+    }
+
+    public function seeNotification(Request $request){
+        $input = $request->all();
+        $notification = Notification::findOrFail($input['notification_id']);
+        $notification->hasSeen = $notification->hasSeen.$input['user_id'].',';
+        $notification->save();
+        return redirect($input['link']);
     }
 }
