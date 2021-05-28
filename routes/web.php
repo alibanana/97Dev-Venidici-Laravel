@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController;
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -231,6 +232,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/promotions/{id}/update', [AdminPromotionController::class, 'edit'])->name('promotions.edit');
     Route::put('/promotions/{id}', [AdminPromotionController::class, 'update'])->name('promotions.update');
     Route::delete('/promotions/{id}', [AdminPromotionController::class, 'destroy'])->name('promotions.destroy');
+    
+    //ReviewController
+    Route::get('/reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
+    Route::delete('/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('reviews.destroy');
+
 });
 
 /* START OF WOKI ROUTING */
@@ -266,9 +272,9 @@ Route::get('/admin/art-supply/1/update', function () {
 Route::get('/admin/login', function () {
     return view('admin/auth/login');
 });
-Route::get('/admin/reviews', function () {
-    return view('admin/reviews');
-});
+//Route::get('/admin/reviews', function () {
+    //return view('admin/reviews');
+//});
 
 Route::get('/admin/forgot-password', function () {
     return view('admin/auth/forgot-password');

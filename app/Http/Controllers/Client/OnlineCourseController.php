@@ -36,7 +36,7 @@ class OnlineCourseController extends Controller
             if ($request['cat'] == "Featured") {
                 $courses = $courses->orderBy('created_at', 'desc');
             } else {
-                $courses = $courses->where('course_category_id',$request['cat'])->orderBy('created_at');
+                $courses = $courses->where('course_category_id',$request['cat'])->orderBy('created_at','desc');
             }
         } else {
             $courses = $courses->orderBy('created_at', 'desc');
