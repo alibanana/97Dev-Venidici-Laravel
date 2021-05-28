@@ -64,7 +64,7 @@
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Apa itu Online Courses?</p>
         <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem.
         </p>
-        <a href="/online-course" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">Explore Our Library Now!</a>
+        <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">Explore Our Library Now!</a>
 
     </div>
 </div>
@@ -315,7 +315,7 @@
                 
                 
             </div>
-            <a href="/online-course"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Search Course</a>
+            <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Search Course</a>
         </div> 
     </div>
 </div>

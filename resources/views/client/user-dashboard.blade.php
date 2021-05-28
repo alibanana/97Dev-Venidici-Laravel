@@ -318,7 +318,7 @@
 <div class="row m-0 page-container" style="padding-top:1.5vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
         <div class="card-white" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
-            <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
+            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src=""  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{Auth::user()->name}}</p> 

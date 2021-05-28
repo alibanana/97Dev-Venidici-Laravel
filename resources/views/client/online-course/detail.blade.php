@@ -177,7 +177,7 @@
             <!-- START OF USER REVIEWS -->
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
                 <div style="display:flex">
-                    <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
+                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src=""  @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
                     <div style="margin-left:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">{{$review->user->name}}</p>
                         <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">

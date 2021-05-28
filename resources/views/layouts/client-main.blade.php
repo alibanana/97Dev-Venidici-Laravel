@@ -71,7 +71,7 @@
         @endif
       @endif
     @endif
-
+    @if(Auth::check())
     <!-- START OF POPUP -->
     <div id="notification" class="overlay">
         <div class="popup-notif">
@@ -307,6 +307,7 @@
         </div>
     </div>
     <!-- END OF POPUP -->
+    @endif
   
     @yield('content')
 
@@ -353,13 +354,14 @@
               <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
             </div>
           </div>
-
+          @if(Auth::check())
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Profile</p>
             <div>
               <a href="/dashboard" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">User Dashboard</a>
             </div>
           </div>
+          @endif
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Social</p>
