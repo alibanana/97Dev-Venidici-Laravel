@@ -65,7 +65,7 @@ Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->nam
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
 Route::get('/signup', [PagesController::class, 'signup_general_info'])->name('signup_general_info')->middleware('guest');
-/*Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest')->middleware('guest');*/
+Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest')->middleware('guest');
 Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info')->middleware('guest');
 
 /* START OF CLIENT ROUTING */

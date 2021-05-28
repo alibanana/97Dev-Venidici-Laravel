@@ -94,15 +94,17 @@ class PagesController extends Controller
 
         return response()->json($datas);
     }
-    /*
-    public function signup_interest()
+    
+    public function signup_interest(Request $request)
     {
+        if(!$request->session()->get('name'))
+            return redirect()->route('signup_general_info');
         $interests = Hashtag::all();
         $transactions=null;
         $cart_count=0;
         return view('client/auth/signup-interests', compact('interests','cart_count','transactions'));
     }
-    */
+    
 
     public function signup_general_info(){
         $transactions=null;
