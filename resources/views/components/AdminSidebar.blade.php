@@ -248,9 +248,9 @@
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/information" 
+        <a class="nav-link" href="/admin/informations" 
             aria-expanded="true" >
-            <i class="fas fa-info"></i>
+            <i class="fas fa-info-circle"></i>
             <span>Information</span>
         </a>
     </li>

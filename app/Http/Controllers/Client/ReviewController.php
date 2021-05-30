@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Assessment;
-use App\Models\Notification;
+use App\Models\Review;
 
-class AssessmentController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,21 +16,6 @@ class AssessmentController extends Controller
     public function index()
     {
         //
-    }
-    public function showAssesment($id)
-    {
-        $assessment = Assessment::findOrFail($id);
-        return view('client/online-course/assessment',compact('assessment'));
-
-    }
-
-    public function updateAssessmentTimer(Request $request, $id)
-    {
-        $assessment = Assessment::findOrFail($id);
-        $assessment->duration  =  $input['duration'];
-        $assessment->save();
-       
-        return json_encode(array('statusCode'=>200));
     }
 
     /**
@@ -52,7 +36,23 @@ class AssessmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validated = $request->validate([
+            'rating' => 'required',
+            'description' => 'required'
+        ]);
+        $review = Review::create([
+            'user_id'       => auth()->user()->id,
+            'course_id'     => $request->course_id,
+            'review'        => $request->rating,
+            'description'   => $request->description
+        ]);
+        if($review){
+            return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Review berhasil dimasukkan');
+        }
+        else{
+            return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Oops.. an error has occured');
+        }
     }
 
     /**

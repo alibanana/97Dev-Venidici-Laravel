@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use App\Models\Invoice;
 use App\Models\Promotion;   
+use App\Models\Course;   
+use App\Models\Notification;
 
 class CartController extends Controller
 {
@@ -30,9 +32,16 @@ class CartController extends Controller
         $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+        )->orderBy('created_at', 'desc')->get();
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
 
-        return view('client/cart', compact('carts','cart_count','transactions'));
+        return view('client/cart', compact('carts','cart_count','transactions','informations'));
     }
     
     public function shipment_index(Request $request)
@@ -45,8 +54,13 @@ class CartController extends Controller
                 ->where('user_id', auth()->user()->id)
                 ->count();
 
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+        )->orderBy('created_at', 'desc')->get();
         $today = Carbon::now()->addDays(1);
         $today->setTimezone('Asia/Jakarta');
         $total_price = 0;
@@ -99,13 +113,24 @@ class CartController extends Controller
         }
         $total_price = $sub_total + $shipping_cost;
 
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions'));
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations'));
     }
 
     public function store(Request $request)
     {
         $item = Cart::where('course_id', $request->course_id)->where('user_id', $request->user_id);
 
+        // handle if online course is already in cart
+        $users_cart = Cart::where('course_id', $request->course_id)->where('user_id', $request->user_id)->get();
+        foreach($users_cart as $course)
+        {
+            if($course->course->course_type_id == 1)
+                return redirect()->back()->with('success', 'Item sudah ada di cart');
+        }
+
+        
         if ($item->count()) {
             //increment quantity
             $item->increment('quantity');

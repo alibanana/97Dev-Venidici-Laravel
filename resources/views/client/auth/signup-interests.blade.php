@@ -51,7 +51,6 @@
         </div>
     </div>
 </div>
-<!-- END OF BANNER SECTION -->
 
 <script>
     function toggleInterest(id, color_code) {

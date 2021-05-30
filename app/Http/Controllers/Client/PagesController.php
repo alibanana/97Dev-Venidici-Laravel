@@ -20,6 +20,7 @@ use App\Models\City;
 use App\Models\UserHashtag;
 use App\Models\Invoice;
 use App\Models\Order;
+use App\Models\Notification;
 
 use PDF;
 
@@ -48,31 +49,48 @@ class PagesController extends Controller
         // Get 3 Online Courses
         $online_courses = Course::where('course_type_id','1')->take(3)->get();
         
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','online_courses','cart_count','transactions'));
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get(); 
+           
+            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','online_courses','cart_count','transactions','informations'));
         } else {
             $transactions=null;
             $cart_count=0;
-            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','cart_count','transactions'));
+            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','cart_count','transactions','informations'));
         }
         
     }
 
     public function community_index(){
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            return view('client/community', compact('cart_count','transactions'));
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();  
+
+            return view('client/community', compact('cart_count','transactions','informations'));
         } else {
             $transactions=null;
             $cart_count=0;
-            return view('client/community', compact('cart_count','transactions'));
+            return view('client/community', compact('cart_count','transactions','informations'));
         }
     }
 
@@ -81,18 +99,25 @@ class PagesController extends Controller
 
         return response()->json($datas);
     }
-    public function signup_interest()
+    
+    public function signup_interest(Request $request)
     {
+        if(!$request->session()->get('name'))
+            return redirect()->route('signup_general_info');
         $interests = Hashtag::all();
         $transactions=null;
         $cart_count=0;
-        return view('client/auth/signup-interests', compact('interests','cart_count','transactions'));
+        $informations = null;
+
+        return view('client/auth/signup-interests', compact('interests','cart_count','transactions','informations'));
     }
+    
 
     public function signup_general_info(){
         $transactions=null;
         $cart_count=0;
-        return view('client/auth/signup', compact('cart_count','transactions'));
+        $informations  = null;
+        return view('client/auth/signup', compact('cart_count','transactions','informations'));
     }
 
     public function storeGeneralInfo(Request $request)
@@ -136,7 +161,7 @@ class PagesController extends Controller
         }
 
         if(count($hashtag_ids) > 3)
-            return redirect()->back()->with('message','Testing');
+            return redirect()->back()->with('message','');
         
 
         $user = User::create([
@@ -167,16 +192,24 @@ class PagesController extends Controller
 
     public function course_detail($id){
         $course = Course::findOrFail($id);
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            return view('client/online-course/detail', compact('course','cart_count','transactions'));
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
+            return view('client/online-course/detail', compact('course','cart_count','transactions','informations'));
         } else {
             $transactions=null;
             $cart_count=0;
-            return view('client/online-course/detail', compact('course','cart_count','transactions'));
+            return view('client/online-course/detail', compact('course','cart_count','transactions','informations'));
         }
     }
 
@@ -187,8 +220,14 @@ class PagesController extends Controller
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-        $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
                 
+            ]
+            )->orderBy('created_at', 'desc')->get();
+        
         $orders = Order::whereHas('invoice', function ($query){
             $query->where(
                 [
@@ -197,48 +236,76 @@ class PagesController extends Controller
                 ]
             );
                 })->orderBy('orders.created_at', 'desc')->get();
-        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders'));
+
+        $interests = Hashtag::all();
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
+
+        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders','interests','informations'));
     }
 
     public function krest_index(){
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            return view('client/for-corporate/krest', compact('cart_count','transactions'));
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
+            return view('client/for-corporate/krest', compact('cart_count','transactions','informations'));
         } else {
             $transactions=null;
             $cart_count=0;
-            return view('client/for-corporate/krest', compact('cart_count','transactions'));
+            return view('client/for-corporate/krest', compact('cart_count','transactions','informations'));
         }
     }
 
     public function online_course_index(){
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            return view('client/for-public/online-course', compact('cart_count','transactions'));
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
+            return view('client/for-public/online-course', compact('cart_count','transactions','informations'));
         } else {
             $transactions=null;
             $cart_count=0;
-            return view('client/for-public/online-course', compact('cart_count','transactions'));
+            return view('client/for-public/online-course', compact('cart_count','transactions','informations'));
         }
     }
     public function woki_index(){
-        
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
-            $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            return view('client/for-public/woki', compact('cart_count','transactions'));
+            $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();            
+            return view('client/for-public/woki', compact('cart_count','transactions','informations'));
         } else {
             $transactions=null;
             $cart_count=0;
-            return view('client/for-public/woki', compact('cart_count','transactions'));
+            return view('client/for-public/woki', compact('cart_count','transactions','informations'));
         }
     }
 
@@ -248,5 +315,14 @@ class PagesController extends Controller
         
         // return $pdf->download('certificate.pdf'); //download
         return $pdf->stream(); //view
+    }
+
+    public function seeNotification(Request $request){
+        $input = $request->all();
+
+        $notification = Notification::findOrFail($input['notification_id']);
+        $notification->hasSeen = $notification->hasSeen.$input['user_id'].',';
+        $notification->save();
+        return redirect($input['link']);
     }
 }

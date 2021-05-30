@@ -23,7 +23,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="mb-0 mb-3 text-gray-800">Information Blast List</h1>
-            <a href="/admin/information/create" class="btn btn-primary btn-user p-3">Create New Info Blast</a>
+            <a href="/admin/informations/create" class="btn btn-primary btn-user p-3">Create New Info Blast</a>
 
         </div>
         
@@ -50,12 +50,13 @@
                                 </label>
                             </div>
                         </div>
+                        -->
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
                                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'oldest']) }}" @if (Request::get('sort') == 'oldest') selected @endif>Oldest</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}" @if (Request::get('sort') == 'oldest') selected @endif>Oldest</option>
                                     </select>
                                 </label>
                             </div>
@@ -73,7 +74,7 @@
                                 </label>
                             </div>
                         </div>
-                        -->
+                        
                     </div>
 
                     <!-- Main Table -->
@@ -84,33 +85,39 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>Title</th>
                                                 <th>Information</th>
+                                                <th>Link</th>
                                                 <th>Created At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($notifications as $notification)
                                             <tr>
-                                                <td>1</td>
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro beatae ab, a, eum rem cumque ullam magni et provident adipisci voluptatem molestias! Placeat ullam ad mollitia consectetur accusantium laborum quaerat.</td>
-                                                <td>20/05/2021</td>   
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$notification->title}}</td>
+                                                <td>{{$notification->description}}</td>
+                                                <td>{{$notification->link}}</td>
+                                                <td class="text-nowrap">{{$notification->created_at->toDateString()}}</td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.informations.destroy', $notification->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this information?')">Delete</button>
                                                                 </div>
                                                             </form> 
                                                       
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/information/1/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/informations/{{$notification->id}}/update">Update</a>
                                                             </div>
                                                    
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

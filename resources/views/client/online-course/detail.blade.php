@@ -120,10 +120,18 @@
             </p>
         </div>
         <!-- END OF TENTANG ONLINE COURSE -->
-
+        @if(Auth::check())
         <!-- START OF REVIEW SECTION -->
-        <form action="">
-
+            @if(session('review_message'))
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                    {{ session('review_message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- END OF ALERT MESSAGE -->
+            @endif
+        <form action="{{ route('customer.review.store') }}" id="review-section" method="POST">
+        @csrf
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4vw">
             <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px">Ulasan dari pelajar</p>
             <p onclick="openReview()" id="add-review-button" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Tambah Ulasan</p>                
@@ -141,83 +149,57 @@
                 <input type="radio" id="star1" name="rating" value="1" />
                 <label for="star1" title="text">1 star</label>
             </div>
-            <textarea class="normal-text" name="" placeholder="Masukan review anda disini" id="" style="width:100%;background: #FFFFFF;border: 2px solid #C4C4C4;box-sizing: border-box;border-radius: 5px;margin-top:1vw;padding:0.5vw" rows="4"></textarea>
+            @error('rating')
+            <br>
+                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <textarea class="normal-text" name="description" placeholder="Masukan review anda disini" id="" style="width:100%;background: #FFFFFF;border: 2px solid #C4C4C4;box-sizing: border-box;border-radius: 5px;margin-top:1vw;padding:0.5vw" rows="4"></textarea>
+            @error('description')
+                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <input type="hidden" name="course_id" value="{{$course->id}}">
             <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                 <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
                 <button type="submit" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
             </div>
         </div>
         </form>
+        @endif
 
 
         <div style="overflow:scroll;height:30vw;margin-top:3vw">
             <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;">
+            @foreach($reviews as $review)
             <!-- START OF USER REVIEWS -->
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
                 <div style="display:flex">
-                    <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
+                    
+                    <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src=""  @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
                     <div style="margin-left:1vw">
-                        <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">Grace Vieli Vidyananto</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">{{$review->user->name}}</p>
                         <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
-                            <i style="color:#F4C257" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            @for ($i = 1; $i < 6; $i++)
+                                @if($i <= $review->review)
+                                    <i style="color:#F4C257;@if($i != 1) margin-left:0.5vw @endif" class="fas fa-star sub-description"></i>
+                                @else
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                                @endif
+                            @endfor
                         </div>
                     </div>
                 </div>
-                <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">1 Mei 2021 - 09:30</p>
+                <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">{{$review->created_at->diffForHumans()}}</p>
             </div>
-            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aut facere ab facilis ipsa voluptates consequatur perspiciatis reprehenderit consectetur iusto. Fugit animi architecto distinctio quam asperiores, ullam nihil eaque vel?</p>
+            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw">{{$review->description}}</p>
     
             <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;margin-top:2vw">
     
             <!-- END OF USER REVIEWS -->
-            <!-- START OF USER REVIEWS -->
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
-                <div style="display:flex">
-                    <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
-                    <div style="margin-left:1vw">
-                        <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">Grace Vieli Vidyananto</p>
-                        <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
-                            <i style="color:#F4C257" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                        </div>
-                    </div>
-                </div>
-                <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">1 Mei 2021 - 09:30</p>
-            </div>
-            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aut facere ab facilis ipsa voluptates consequatur perspiciatis reprehenderit consectetur iusto. Fugit animi architecto distinctio quam asperiores, ullam nihil eaque vel?</p>
-    
-            <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;margin-top:2vw">
-    
-            <!-- END OF USER REVIEWS -->
-            <!-- START OF USER REVIEWS -->
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
-                <div style="display:flex">
-                    <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
-                    <div style="margin-left:1vw">
-                        <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">Grace Vieli Vidyananto</p>
-                        <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
-                            <i style="color:#F4C257" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                        </div>
-                    </div>
-                </div>
-                <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">1 Mei 2021 - 09:30</p>
-            </div>
-            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet aut facere ab facilis ipsa voluptates consequatur perspiciatis reprehenderit consectetur iusto. Fugit animi architecto distinctio quam asperiores, ullam nihil eaque vel?</p>
-    
-            <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;margin-top:2vw">
-    
-            <!-- END OF USER REVIEWS -->
+            @endforeach
 
         </div>
         <div style="background-color:#2B6CAA;height:2vw;text-align:center;border-radius:5px;margin-top:1vw">
@@ -248,13 +230,17 @@
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
             @endif
             <?php $flag = null;?>
+            @if(Auth::check())
             @foreach($transactions as $transaction)
-                @foreach($transaction->orders as $order)
+                @if($transaction->invoice->status == 'paid' || $transaction->invoice->status == 'completed')
+                @foreach($transaction->invoice->orders as $order)
                     @if($order->course->id == $course->id)
                         <?php $flag = true;?>
                     @endif
                 @endforeach
+                @endif
             @endforeach
+            @endif
             @if($flag == true)
 
             <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
@@ -268,13 +254,15 @@
                 <input type="hidden" name="quantity" value="1">
                 <input type="hidden" name="price" value="{{$course->price}}">
                 <input type="hidden" name="weight" value="0">                
-                <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Add to cart</button>
+                <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
             </form>
             @endif
-            <button class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Buy Now</button>
+            @if(!$flag)
+            <button class="normal-text  btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+            @endif
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
-                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">{{$course->total_duration}} Menit video eksklusif</span></p>
+                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">@if($course->total_duration == null) - @else {{$course->total_duration}} @endif Menit video eksklusif</span></p>
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">1 Assesment</span></p>
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Akses seumur hidup</span></p>
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Sertifikat keberhasilan</span></p>

@@ -22,7 +22,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h2 class="mb-0 mb-3 text-gray-800">New Promo Code</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">Create Information</h2>
 
         </div>
         
@@ -31,14 +31,40 @@
 
         <!-- start of form -->
         
-        <form action="/admin/trusted-companies" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.informations.store') }}" method="POST" >
         @csrf           
         <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input type="text" name="title" class="form-control form-control-user"
+                        id="title" aria-describedby="" value="{{ old('title') }}" required
+                        placeholder="Here insert information title" > 
+                    @error('title')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror               
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Link</label>
+                    <input type="text" name="link" class="form-control form-control-user"
+                        id="link" aria-describedby="" value="{{ old('link') }}" required
+                        placeholder="Here insert information link" > 
+                    @error('link')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror               
+                </div>
+            </div>
             <div class="col-12">
                 <div class="form-group">
                     <label for="">Information</label>
-                    <textarea name="name" id="" rows="10" class="form-control" placeholder="here insert information"></textarea>
-                    @error('name')
+                    <textarea name="description" id="" rows="10" class="form-control" placeholder="here insert description"></textarea>
+                    @error('description')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -47,7 +73,7 @@
             </div>
             <div class="col-12">
                 <div style="display:flex;justify-content:flex-end">
-                    <button type="submit"  class="btn btn-primary btn-user p-3">Create New Promo Code</button>
+                    <button type="submit"  class="btn btn-primary btn-user p-3">Create Information</button>
                 </div>
 
             </div>

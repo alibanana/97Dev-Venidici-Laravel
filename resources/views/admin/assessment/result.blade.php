@@ -48,16 +48,16 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td style="text-align:center">
-                                                    <i class="fas fa-times-circle"></i> <br>
-                                                    <i class="fas fa-check-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
+                                                    <i class="fas fa-check-circle" style="color:green"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
                                                 </td>
                                                 <td style="text-align:center">
-                                                    <i class="fas fa-check-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
+                                                    <i class="fas fa-check-circle" style="color:green"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
                                                 </td>
                                                 <td class="text-nowrap">
                                                         Debate and agree as a team on definition of the core problem <br>
@@ -65,22 +65,22 @@
                                                         Debate and agree as a team on definition of the core problem <br>
                                                         Debate and agree as a team on definition of the core problem <br>
                                                 </td>
-                                                <td>NO</td>
+                                                <td style="color:red">NO</td>
                                             </tr>
 
                                             <tr>
                                                 <td>2</td>
                                                 <td style="text-align:center">
-                                                    <i class="fas fa-check-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
+                                                    <i class="fas fa-check-circle" style="color:green"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
                                                 </td>
                                                 <td style="text-align:center">
-                                                    <i class="fas fa-check-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
-                                                    <i class="fas fa-times-circle"></i> <br>
+                                                    <i class="fas fa-check-circle" style="color:green"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
+                                                    <i class="fas fa-times-circle" style="color:red"></i> <br>
                                                 </td>
                                                 <td class="text-nowrap">
                                                         Debate and agree as a team on definition of the core problem <br>
@@ -88,7 +88,7 @@
                                                         Debate and agree as a team on definition of the core problem <br>
                                                         Debate and agree as a team on definition of the core problem <br>
                                                 </td>
-                                                <td>YES</td>
+                                                <td style="color:green">NO</td>
                                             </tr>
                                         </tbody>
                                     </table>

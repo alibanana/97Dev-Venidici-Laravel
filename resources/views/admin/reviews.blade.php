@@ -38,7 +38,7 @@
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
 
                     <div class="row mt-2 mb-3">
-        
+                        <!--
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Show:
@@ -48,6 +48,7 @@
                                 </label>
                             </div>
                         </div>
+                        -->
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
@@ -91,16 +92,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($reviews as $review)
                                             <tr>
-                                                <td>1</td>
+                                                <td>{{$loop->iteration}}</td>
+                                                @if($review->course->course_type_id == 1)
                                                 <td>Online Course</td>
-                                                <td>How to be funny</td>
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quo eligendi illum culpa fugiat delectus? Atque, suscipit! Hic nostrum corporis quibusdam, adipisci recusandae provident magnam voluptatum, non aliquam delectus odit!</td>
-                                                <td>4.9</td>
-                                                <td>Fernandha Dzaky</td>
+                                                @else
+                                                <td>Woki</td>
+                                                @endif
+                                                <td>{{$review->course->title}}</td>
+                                                <td>{{$review->description}}</td>
+                                                <td>{{$review->review}}</td>
+                                                <td>{{$review->user->name}}</td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                        <form action="" method="post">
+                                                        <form action="{{ route('admin.reviews.destroy', $review->id) }}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                             <div style="padding: 0px 2px">
@@ -110,6 +116,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

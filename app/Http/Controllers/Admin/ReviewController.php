@@ -1,37 +1,43 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Assessment;
-use App\Models\Notification;
+use App\Models\Review;
 
-class AssessmentController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
-    public function showAssesment($id)
-    {
-        $assessment = Assessment::findOrFail($id);
-        return view('client/online-course/assessment',compact('assessment'));
-
-    }
-
-    public function updateAssessmentTimer(Request $request, $id)
-    {
-        $assessment = Assessment::findOrFail($id);
-        $assessment->duration  =  $input['duration'];
-        $assessment->save();
-       
-        return json_encode(array('statusCode'=>200));
+        $reviews = new Review;
+    
+            if ($request->has('sort')) {
+                if ($request['sort'] == "latest") {
+                    $reviews = $reviews->orderBy('created_at', 'desc');
+                } else {
+                    $reviews = $reviews->orderBy('created_at');
+                }
+            } else {
+                $reviews = $reviews->orderBy('created_at', 'desc');
+            }
+    
+            if ($request->has('search')) {
+                if ($request->search == "") {
+                    $url = route('admin.reviews.index', request()->except('search'));
+                    return redirect($url);
+                } else {
+                    $reviews = $reviews->where('description', 'like', "%".$request->search."%");
+                }
+            }
+    
+            $reviews = $reviews->get();
+        return view('admin/reviews',compact('reviews'));
     }
 
     /**
@@ -97,6 +103,11 @@ class AssessmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $review = Review::findOrFail($id);
+        $review->delete();
+
+        $message = 'review (' . $review->description . ') has been deleted.';
+        
+        return redirect()->route('admin.reviews.index')->with('message', $message);
     }
 }

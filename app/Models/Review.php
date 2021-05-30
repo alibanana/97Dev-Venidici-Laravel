@@ -5,24 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class Review extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'invoice_id',
-        'isInformation',
-        'title',
-        'description',
-        'link',
-        'hasSeen'
+        'course_id',
+        'review',
+        'description'
     ];
 
     public function user() {
         return $this->belongsTo(User::class);
     }
-    public function invoice() {
-        return $this->belongsTo(Invoice::class);
+
+    public function course() {
+        return $this->belongsTo(Course::class);
     }
 }
+

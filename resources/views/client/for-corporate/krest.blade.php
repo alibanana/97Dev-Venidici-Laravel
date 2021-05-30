@@ -443,7 +443,7 @@ END OF OUR VALUES-->
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">What is your shipping policy?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">What is your shipping policy?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
@@ -458,7 +458,7 @@ END OF OUR VALUES-->
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Can I refund the course that i enrolled?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Can I refund the course that i enrolled?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
@@ -473,7 +473,7 @@ END OF OUR VALUES-->
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    

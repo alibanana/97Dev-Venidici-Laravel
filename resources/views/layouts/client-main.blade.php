@@ -71,7 +71,7 @@
         @endif
       @endif
     @endif
-
+    @if(Auth::check())
     <!-- START OF POPUP -->
     <div id="notification" class="overlay">
         <div class="popup-notif">
@@ -162,45 +162,60 @@
 
             <!-- START OF TRANSAKSI NOTIFICATION -->
             <div class="col-md-12 notif-content" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
-
-              @if($transactions != null)
+              @if(count($transactions) == 0)
+                <div style="">
+                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada transaksi.</p>
+                </div>
+              @else
                 @foreach($transactions as $transaction)
+                <?php
+                    $users = explode(',', $transaction->hasSeen);
+                    $hasSeen = FALSE;
+                    foreach($users as $user_id)
+                    {
+                      if($user_id == Auth::user()->id)
+                        $hasSeen = TRUE;
+                    }
+                ?>
                 <!-- ONE BLUE CARD -->
-                <a href="/transaction-detail/{{$transaction->xfers_payment_id}}" style="text-decoration:none">
-                  <div style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
+                <form action="{{ route('customer.seeNotification') }}" method="POST">
+                @csrf  
+                @method('put')  
+                @if(!$hasSeen)
+                <a href="javascript:;" onclick="parentNode.submit();"style="text-decoration:none">
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                <input type="hidden" name="notification_id" value="{{$transaction->id}}">
+                <input type="hidden" name="link" value="{{$transaction->link}}">
+                @else
+                <a  href="{{$transaction->link}}" style="text-decoration:none">
+                @endif
+                  <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                        <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+                        <div class="notification-left-blue-border">
                           <i class="fas fa-shopping-cart bigger-text" style="color:#2B6CAA"></i>
 
                         </div>
                     </div>
-                    <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                    <div class="notification-right-blue-border" @if(!$hasSeen) style="background: rgba(43, 108, 170, 0.1) @endif">
                         <div style="padding:0.6vw 1vw">
                             
-                          <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
+                          <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$transaction->title}}</p>
                           <?php
-                              $date_time = explode(' ', $transaction->created_at);
+                              $date_time = explode(' ', $transaction->updated_at->diffForHumans());
                           ?>
                           <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
                           <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
                             -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Hi, {{$transaction->user->name}}. Harap segera selesaikan pembayaranmu untuk pelatihan: 
-                            @foreach($transaction->orders as $order)
-                                @if($loop->last)
-                                dan
-                                @elseif(!$loop->first)
-                                ,
-                                @endif
-                                "{{$order->course->title}}"
-                            @endforeach
+                            -webkit-box-orient: vertical !important;">{{$transaction->description}}
                           </p>
                             <!-- Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”. -->
                         </div>
                     </div>
                   </div>
                 </a>
+                </form>
                 <!-- END OF ONE BLUE CARD -->
                 @endforeach
               @endif
@@ -209,81 +224,54 @@
 
             <!-- START OF INFORMASI NOTIFICATION -->
             <div class="col-md-12 notif-content" id="informasi-notification" style="overflow:scroll;height:20vw;display:none">
-              
+              @foreach($informations as $info)
+              <?php
+                    $info_users = explode(',', $info->hasSeen);
+                    $infoHasSeen = FALSE;
+                    foreach($info_users as $user_id)
+                    {
+                      if($user_id == Auth::user()->id)
+                        $infoHasSeen = TRUE;
+                    }
+                ?>
               <!-- ONE YELLOW CARD -->
-              <a href="" style="text-decoration:none">
-                <div style="display:flex;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+              <form action="{{ route('customer.seeNotification') }}" method="POST">
+              @csrf  
+              @method('put')  
+              @if(!$infoHasSeen)
+                <a href="javascript:;" onclick="parentNode.submit();"style="text-decoration:none">
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                <input type="hidden" name="notification_id" value="{{$info->id}}">
+                <input type="hidden" name="link" value="{{$info->link}}">
+              @else
+                <a href="{{$info->link}}" target="_blank" style="text-decoration:none">
+              @endif
+              <!-- ONE YELLOW CARD -->
+                <div class="information-notification-card" style="display:flex;@if($loop->iteration != 1) margin-top:1vw @endif" >
+                  <div   style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div class="notification-left-yellow-border" >
                         <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
 
                       </div>
                   </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                  <div class="notification-right-yellow-border" @if(!$infoHasSeen) style="background: rgba(244, 194, 87, 0.1)" @endif>
                       <div style="padding:0.6vw 1vw">
                           
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$info->title}}</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$info->created_at->diffForHumans()}}</p>
                         <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                           overflow : hidden !important;
                           text-overflow: ellipsis !important;
                           -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
+                          -webkit-box-orient: vertical !important;">{{$info->description}}</p>
                       </div>
                   </div>
                 </div>
               </a>
+              </form>
               <!-- END OF ONE YELLOW CARD -->
+              @endforeach
 
-              <!-- ONE YELLOW CARD -->
-              <a href="" style="text-decoration:none">
-                <div style="display:flex;margin-top:1vw;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
-
-                      </div>
-                  </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
-                      <div style="padding:0.6vw 1vw">
-                          
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
-                          overflow : hidden !important;
-                          text-overflow: ellipsis !important;
-                          -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
-                      </div>
-                  </div>
-                </div>
-              </a>
-              <!-- END OF ONE YELLOW CARD -->
-
-              <!-- ONE YELLOW CARD -->
-              <a href="" style="text-decoration:none">
-                <div style="display:flex;margin-top:1vw;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
-
-                      </div>
-                  </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
-                      <div style="padding:0.6vw 1vw">
-                          
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
-                          overflow : hidden !important;
-                          text-overflow: ellipsis !important;
-                          -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
-                      </div>
-                  </div>
-                </div>
-              </a>
-              <!-- END OF ONE YELLOW CARD -->
             </div>
             <!-- END OF INFORMASI NOTIFICATION -->
 
@@ -291,6 +279,7 @@
         </div>
     </div>
     <!-- END OF POPUP -->
+    @endif
   
     @yield('content')
 
@@ -337,13 +326,14 @@
               <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
             </div>
           </div>
-
+          @if(Auth::check())
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Profile</p>
             <div>
               <a href="/dashboard" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">User Dashboard</a>
             </div>
           </div>
+          @endif
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Social</p>

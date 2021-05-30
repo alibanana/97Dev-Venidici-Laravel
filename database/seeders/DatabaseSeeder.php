@@ -34,7 +34,9 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             SectionSeeder::class,
             SectionContentSeeder::class,
-            PromotionSeeder::class
+            PromotionSeeder::class,
+            ReviewSeeder::class,
+            NotificationSeeder::class
         ]);
     }
 }
