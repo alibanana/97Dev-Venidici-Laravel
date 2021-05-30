@@ -153,7 +153,7 @@ class PagesController extends Controller
         }
 
         if(count($hashtag_ids) > 3)
-            return redirect()->back()->with('message','Testing');
+            return redirect()->back()->with('message','');
         
 
         $user = User::create([
