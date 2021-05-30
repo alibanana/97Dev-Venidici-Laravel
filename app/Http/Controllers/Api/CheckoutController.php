@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
@@ -47,14 +48,21 @@ class CheckoutController extends Controller
     }
     
     public function store(Request $request){
+        $input = $request->all();
 
-        $validated = $request->validate([
+        // Remove non-numeric characters before validation.
+        if ($request->has('phone'))
+            $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
+
+        $validated = Validator::make($input, [
             'courier'               => 'required',
             'service'               => 'required',
             'cost_courier'          => 'required',
             'total_weight'          => 'required|integer',
             'name'                  => 'required',
-            'phone'                 => ['required', 'integer', new TelephoneNumber()],
+            'phone'                 => ['required', new TelephoneNumber],
+            'province'              => 'integer',
+            'city'                  => 'integer',
             'address'               => 'required',
             'shipping_notes'        => 'required',
             'grand_total'           => 'required|integer',
@@ -63,11 +71,9 @@ class CheckoutController extends Controller
             'time'                  => 'required',
             'bankShortCode'         => 'required',
             'discounted_price'      => 'required|integer'
-        ]);
+        ])->validate();
 
-        $input = $request->all();
-
-        if($input['action'] == 'checkDiscount') {
+        if($request->action == 'checkDiscount') {
             $validated = $request->validate([
                 'code' => 'required'
             ]);
@@ -101,7 +107,7 @@ class CheckoutController extends Controller
             'courier'               => $validated['courier'],
             'service'               => $validated['service'],
             'cost_courier'          => $validated['cost_courier'],
-            'total_weight'          => $validated['weight'],
+            'total_weight'          => $validated['total_weight'],
             'name'                  => $validated['name'],
             'phone'                 => $validated['phone'],
             'province'              => $validated['province'],
@@ -125,8 +131,6 @@ class CheckoutController extends Controller
             ]);
         };
 
-        $invoice_id = Invoice::latest()->first()->id;
-
         //hit xfers api to create payment order
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
             ->withHeaders([
@@ -139,7 +143,7 @@ class CheckoutController extends Controller
                         "amount" => $validated['grand_total'],
                         "referenceId" => $no_invoice,
                         "expiredAt" => $validated['date'].'T'.$validated['time'].'+07:00',
-                        "description" => "Order Number ".$invoice_id,
+                        "description" => "Order Number ".$invoice->id,
                         "paymentMethodOptions" =>[
                             "bankShortCode" => $validated['bankShortCode'],
                             "displayName" => "Venidici",
@@ -151,13 +155,14 @@ class CheckoutController extends Controller
         ); 
         
         $payment_object = json_decode($response->body(), true);
-        $invoice = Invoice::findorfail($invoice_id);
-        $invoice->xfers_payment_id  =  $payment_object['data']['id'];
+        dd($payment_object);
+        $invoice->xfers_payment_id = $payment_object['data']['id'];
         $invoice->save();
 
         foreach (auth()->user()->carts as $cart) {
             $cart->delete();
         };
+        
         $request->session()->forget('promotion_code');
 
         return redirect('/transaction-detail/'.$payment_object['data']['id']);
@@ -173,6 +178,20 @@ class CheckoutController extends Controller
             $payment_status = json_decode($response->body(), true);
             $invoice->status = $payment_status['data']['attributes']['status'];
             $invoice->save();
+
+            // If invoice's status was updated from pending to paid, this means that the user have just paid.
+            // Therefore, courses & assessments should be mapped to that particular user.
+            if ($invoice->status == 'paid') {
+                foreach ($invoice->orders as $order) {
+                    $course = $order->course;
+                    if (!auth()->user()->courses->contains($course->id)) {
+                        auth()->user()->courses()->attach($course->id);
+                        if ($course->assessment()->exists()) {
+                            auth()->user()->assessments()->attach($course->assessment->id);
+                        }
+                    }
+                }
+            }
         }
 
         $orders = Order::with('course')
@@ -190,7 +209,7 @@ class CheckoutController extends Controller
     }
 
     public function createPayment(Request $request, $id){        
-        
+
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();

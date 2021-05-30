@@ -245,7 +245,7 @@
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>
                         <input type="hidden" name="cost_courier" value="{{$shipping_cost}}">
-                        <input type="hidden" name="weight" value="1000">
+                        <input type="hidden" name="total_weight" value="1000">
                         <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">
                         @if($shipping_cost == 0)
                         -
