@@ -49,7 +49,7 @@ Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('stor
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware('auth');
 Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
 Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile');
-Route::post('/update-interest/{id}', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
+Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
 //Route::get('/dashboard', function () {
     //return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
