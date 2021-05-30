@@ -47,7 +47,7 @@
                         @else
                             <p>No attachment available.</p>
                         @endif
-                        <input type="file" name="attachment">
+                        <input type="file" name="attachment" accept=".pps,.ppt,.pptx,.xls,.xlsm,.xlsx,.doc,.docx,.pdf">
                         @error('attachment')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
