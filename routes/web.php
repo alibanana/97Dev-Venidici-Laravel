@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AssessmentController as AdminAssessmentController
 use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
+use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -43,7 +44,7 @@ use App\Http\Controllers\Api\CheckoutController;
 
 
 
-Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest')->middleware('auth');
+Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
 Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('customer.dashboard')->middleware('auth');
 Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware('auth');
 
@@ -66,7 +67,7 @@ Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
 Route::get('/signup', [PagesController::class, 'signup_general_info'])->name('signup_general_info')->middleware('guest');
 Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest')->middleware('guest');
-Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info')->middleware('guest');
+Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info');
 
 /* START OF CLIENT ROUTING */
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
@@ -86,18 +87,18 @@ Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('aut
 /* CART ROUTING */
 
 Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail')->middleware('auth');
-Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment')->middleware('auth');
-Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware('auth');
-Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware('auth');
+Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment');
+Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment');
+Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
 Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware('auth');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
 Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
 Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index')->middleware('auth');
 Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
 Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware('auth');
-Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove')->middleware('auth');
-Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll')->middleware('auth');
-Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart')->middleware('auth');
+Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove');
+Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll');
+Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart');
 Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty')->middleware('auth');
 Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty')->middleware('auth');
 
@@ -219,6 +220,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/hashtags/{id}/update', [AdminHashtagController::class, 'edit'])->name('hashtags.edit');
     Route::put('/hashtags/{id}', [AdminHashtagController::class, 'update'])->name('hashtags.update');
     Route::delete('/hashtags/{id}', [AdminHashtagController::class, 'destroy'])->name('hashtags.destroy');
+
     // PromotionController
     Route::get('/promotions', [AdminPromotionController::class, 'index'])->name('promotions.index');
     Route::get('/promotions/create', [AdminPromotionController::class, 'create'])->name('promotions.create');
@@ -230,6 +232,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     //ReviewController
     Route::get('/reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
     Route::delete('/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('reviews.destroy');
+
+    // NotificationController
+    Route::get('/informations', [AdminNotificationController::class, 'index'])->name('informations.index');
+    Route::get('/informations/create', [AdminNotificationController::class, 'create'])->name('informations.create');
+    Route::post('/informations', [AdminNotificationController::class, 'store'])->name('informations.store');
+    Route::get('/informations/{id}/update', [AdminNotificationController::class, 'edit'])->name('informations.edit');
+    Route::put('/informations/{id}', [AdminNotificationController::class, 'update'])->name('informations.update');
+    Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
 
 });
 
@@ -279,15 +289,15 @@ Route::get('/admin/reset-password', function () {
 
 
 /* START OF INFORMATION CODE*/
-Route::get('/admin/information', function () {
-    return view('admin/information/index');
-});
-Route::get('/admin/information/create', function () {
-    return view('admin/information/create');
-});
-Route::get('/admin/information/1/update', function () {
-    return view('admin/information/update');
-});
+//Route::get('/admin/information', function () {
+    //return view('admin/information/index');
+//});
+//Route::get('/admin/information/create', function () {
+    //return view('admin/information/create');
+//});
+//Route::get('/admin/information/1/update', function () {
+    //return view('admin/information/update');
+//});
 /* END OF INFORMATION CODE */
 
 /* START OF ONLINE COURSE ROUTING */

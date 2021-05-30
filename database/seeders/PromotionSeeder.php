@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
-
 use App\Models\Promotion;
+
 class PromotionSeeder extends Seeder
 {
     /**
