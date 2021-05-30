@@ -20,8 +20,6 @@ class UserDetail extends Model
         'address',
         'company',
         'occupancy',
-        'interest',
-        'response',
         'province_id',
         'city_id',
     ];

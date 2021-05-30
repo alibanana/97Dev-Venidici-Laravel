@@ -213,36 +213,7 @@ class PagesController extends Controller
         }
     }
 
-    public function dashboard_index()
-    {
-        $provinces = Province::all();
-        $cities = City::all();
-        $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-        $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-                
-            ]
-            )->orderBy('created_at', 'desc')->get();
-        
-        $orders = Order::whereHas('invoice', function ($query){
-            $query->where(
-                [
-                    ['status', '=', 'paid'],
-                    ['user_id', '=', auth()->user()->id],
-                ]
-            );
-                })->orderBy('orders.created_at', 'desc')->get();
-
-        $interests = Hashtag::all();
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
-
-        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders','interests','informations'));
-    }
+    
 
     public function krest_index(){
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();

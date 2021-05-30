@@ -25,8 +25,6 @@ class CreateUserDetailsTable extends Migration
             $table->text('address')->nullable();
             $table->string('company')->nullable();
             $table->string('occupancy')->nullable();
-            $table->text('interest')->nullable();
-            $table->text('response')->nullable();
             $table->unsignedBigInteger('province_id')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->timestamps();

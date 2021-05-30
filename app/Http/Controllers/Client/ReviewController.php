@@ -39,7 +39,6 @@ class ReviewController extends Controller
         $input = $request->all();
         $validated = $request->validate([
             'rating' => 'required',
-            'description' => 'required'
         ]);
         $review = Review::create([
             'user_id'       => auth()->user()->id,
