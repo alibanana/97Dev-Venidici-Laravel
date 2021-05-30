@@ -1100,6 +1100,7 @@ html, body {
 }
 .interest-card-active{
     background-image: none !important;
+    padding:0vw 1vw
 }
 
 /* always show scrollbars 
@@ -1490,4 +1491,10 @@ html, body {
     border-top: 2px solid #F4C257;
     border-right: 2px solid #F4C257;
     border-bottom: 2px solid #F4C257
+}
+.blue-link-underline:hover{
+    text-decoration-line: underline !important;
+    text-decoration-color: #2B6CAA !important;
+    text-underline-offset: 0.4vw;
+    text-decoration-thickness: 0.2vw;
 }

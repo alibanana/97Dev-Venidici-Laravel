@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\NotificationController as AdminNotificationContro
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
+use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\Api\CheckoutController;
 
 /*
@@ -45,9 +46,10 @@ use App\Http\Controllers\Api\CheckoutController;
 
 
 Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
-Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('customer.dashboard')->middleware('auth');
-Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware('auth');
-
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware('auth');
+Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
+Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile');
+Route::post('/update-interest/{id}', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
 //Route::get('/dashboard', function () {
     //return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
@@ -347,6 +349,10 @@ Route::get('/email/verifyUser', function () {
 });
 Route::get('/certificate', function () {
     return view('client/certificate');
+});
+
+Route::get('/completed', function () {
+    return view('client/online-course/completed');
 });
 /* START OF DOMPDF ROUTING */
 Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
