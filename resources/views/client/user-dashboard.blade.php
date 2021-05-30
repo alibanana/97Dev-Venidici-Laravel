@@ -447,7 +447,7 @@
         @endif
         @foreach($orders as $course)
         <div class="col-12 p-0">
-            <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->course->id}}/learn/lecture/1','_self');">
+            <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->course->id}}/learn/lecture/{{ $course->course->sections[0]->sectionContents[0]->id }}','_self');">
                 <div class="container-image-card">
                     <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" > @if($course->course->course_type_id == 1) Online Course @else Woki @endif</div>
@@ -469,7 +469,7 @@
                             <p style="margin-top:-3vw" class="normal-text">10%</p>
                             </div>
                         </div>
-                        <a href="/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
+                        <a href="{{ route('online-course.learn', ['id' => $course->course->id, 'detail_id' => $course->course->sections[0]->sectionContents[0]->id]) }}" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
                     </div>
                 </div> 
             </div>
