@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\UserDetail;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
@@ -61,14 +62,16 @@ class DashboardController extends Controller
     public function update_profile(Request $request, $id)
     {
         $input = $request->all();
-        $validated = $request->validate([
+        $validated = Validator::make($input,[
             'name'          => 'required',
             'telephone'     => 'required',
             'birthdate'     => 'date',
-            //'avatar'        => 'mimes:jpeg,jpg,png',
-
         ]);
 
+        if($validated->fails()) return redirect('/dashboard#edit-profile')->withErrors($validated);
+        else $validated = $validated->validate();
+        
+        
         //
 
         $user = User::findOrFail($id);
@@ -76,23 +79,26 @@ class DashboardController extends Controller
         //$user->avatar               = Helper::storeImage($request->file('avatar'), 'storage/images/users/');
         $user->save();
 
-        $user_detail                = UserDetail::findOrFail($user->userDetail->id);
-        $user_detail->telephone     = $validated['telephone'];
-        $user_detail->birthdate     = $input['birthdate'];
-        $user_detail->gender        = $input['gender'];
-        $user_detail->address       = $input['address'];
-        $user_detail->company       = $input['company'];
-        $user_detail->occupancy     = $input['occupancy'];
-        $user_detail->province_id   = $input['province'];
-        $user_detail->city_id       = $input['city'];
-        $user_detail->save();
+        $user_detail                = $user->userDetail;
+        $user_detail->update($request->except([
+            'name','telephone'
+        ]));
+
+        //$user_detail->telephone     = $validated['telephone'];
+        //$user_detail->birthdate     = $input['birthdate'];
+        //$user_detail->gender        = $input['gender'];
+        //$user_detail->address       = $input['address'];
+        //$user_detail->company       = $input['company'];
+        //$user_detail->occupancy     = $input['occupancy'];
+        //$user_detail->province_id   = $input['province_id'];
+        //$user_detail->city_id       = $input['city_id'];
+        //$user_detail->save();
 
         return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil!');
     }
 
-    public function update_interest(Request $request, $id)
+    public function update_interest(Request $request)
     {
-
         $validated = $request->validate([
             'interests' => 'required|array',
         ]);
@@ -107,10 +113,9 @@ class DashboardController extends Controller
         }
 
         if(count($hashtag_ids) > 3)
-            return redirect()->back()->with('message','');
+            return redirect('/dashboard#my-interests')->with('message','testing');
         
-        $user = User::findOrFail($id);
-        $user->hashtags()->attach($hashtag_ids);
+        auth()->user()->hashtags()->sync($hashtag_ids);
 
 
         return redirect('/dashboard#my-interests')->with('success', 'Update Profile Berhasil!');

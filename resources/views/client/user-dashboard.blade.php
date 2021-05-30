@@ -134,7 +134,7 @@
                     <div class="col-12 col-sm-6" >
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                            <select name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                 @if(Auth::user()->userDetail->province_id == null)
                                 <option value="" disabled selected>Pilih Provinsi</option>
                                 @endif
@@ -143,7 +143,7 @@
                                 @endforeach
                             </select>                    
                         </div>  
-                        @error('province')
+                        @error('province_id')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -152,7 +152,7 @@
                     <div class="col-12 col-sm-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="city" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                            <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                 @if(Auth::user()->userDetail->city_id == null)
                                 <option value=" " disabled selected>Pilih Kota</option>
                                 @endif
@@ -161,7 +161,7 @@
                                 @endforeach
                             </select>                    
                         </div>  
-                        @error('city')
+                        @error('city_id')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -277,7 +277,7 @@
             <div class="row m-0 ">
                 <div class="col-md-12 p-0">
                     <div class="white-modal-signup" style="padding-bottom:4vw !important;">
-                        <form action="{{ route('customer.update_interest', Auth::user()->id) }}" method="POST" >
+                        <form action="{{ route('customer.update_interest') }}" method="POST" >
                         @csrf
                             <div class="row m-0 page-container">
                                 <div class="col-12 p-0">
@@ -321,7 +321,7 @@
                                         margin-top:2vw">
                                             <div class="container interest-card @if($flag) interest-card-active @endif" id="interest_card_{{$interest->id}}" 
                                             style="background-image: url({{ $interest->image }});cursor:pointer; @if($flag) background-color: {{$interest->color}}; @endif" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
-                                                <input type="hidden" name="interests[{{ $interest->id }}]" value="0">
+                                                <input type="hidden" name="interests[{{ $interest->id }}]" value="@if($flag) 1 @else 0 @endif">
                                                 <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{ $interest->hashtag }}</p>
                                             </div>
                                         </div>
