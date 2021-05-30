@@ -45,8 +45,7 @@
                         <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">{{$assessment->title}}</p>
                         <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">Durasi {{floor(($assessment->duration / 60) % 60)}}:@if(strlen($assessment->duration % 60) == 1)<span>0</span>@endif{{$assessment->duration % 60}}</p>
                     </div>
-                    <button onclick="window.open('/online-course/assessment/{{$assessment->id}}','_self');" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Mulai Assesment</button>                
-
+                    <button onclick="window.open('{{ route('online-course-assesment.show', $course->id) }}','_self');" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Mulai Assesment</button>
                 </div>
                 <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Deskripsi Assesment</p>
                 <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">{{$assessment->description}}</p>

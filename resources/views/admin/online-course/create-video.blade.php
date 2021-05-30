@@ -40,18 +40,14 @@
                         @if ($content->attachment)
                             <div style="display:flex;align-items:center">
                                 <p style="margin-bottom:0px;padding-right:2vw"> <span> <a href="{{ asset($content->attachment) }}" target="_blank">click here</a> </span> to view current attachment</p>
-                                <form action="" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <div style="padding: 0px 2px">
-                                        <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Remove Attachment</button>
-                                    </div>
-                                </form> 
+                                <div style="padding: 0px 2px">
+                                    <button form="removeAttachmentForm" class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to remove this attachment?')">Remove Attachment</button>
+                                </div>
                             </div>
                         @else
                             <p>No attachment available.</p>
                         @endif
-                        <input type="file" name="attachment">
+                        <input type="file" name="attachment" accept=".pps,.ppt,.pptx,.xls,.xlsm,.xlsx,.doc,.docx,.pdf">
                         @error('attachment')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -115,13 +111,14 @@
                         <button type="submit" class="btn btn-primary btn-user p-3" onclick="return confirm('Are you sure you want to update this content?')">Update Content</button>
                     </div>
                 </div>
-
             </div>
         </form>
-
         <!-- end of form -->
     
-
+        <form id="removeAttachmentForm" action="{{ route('admin.section-contents.remove-attachment', $content->id) }}" method="post">
+            @csrf
+            @method('delete')
+        </form> 
 
     </div>
     <!-- /.container-fluid -->

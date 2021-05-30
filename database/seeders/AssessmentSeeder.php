@@ -179,5 +179,11 @@ class AssessmentSeeder extends Seeder
         foreach ($answers as $key => $value) {
             AssessmentQuestionAnswer::create($value);
         }
+
+        // $assessment2 = Assessment::findOrFail(2);
+        // $assessment2->users()->attach([3, 4, 5, 6, 7, 8, 9, 10]);
+
+        // $assessment3 = Assessment::findOrFail(3);
+        // $assessment3->users()->attach([11, 12, 13, 14, 15, 16, 17]);
     }
 }

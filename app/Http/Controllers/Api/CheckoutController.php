@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use Midtrans\Snap;
+
+use Axiom\Rules\TelephoneNumber;
+
 use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Promotion;
 use App\Models\Notification;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
 
 class CheckoutController extends Controller
 {
@@ -46,32 +50,39 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
-       
 
-        if($input['action'] == 'checkDiscount')
-        {
+        // Remove non-numeric characters before validation.
+        if ($request->has('phone'))
+            $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
+
+        $validated = Validator::make($input, [
+            'courier'               => 'required',
+            'service'               => 'required',
+            'cost_courier'          => 'required',
+            'total_weight'          => 'required|integer',
+            'name'                  => 'required',
+            'phone'                 => ['required', new TelephoneNumber],
+            'province'              => 'integer',
+            'city'                  => 'integer',
+            'address'               => 'required',
+            'grand_total'           => 'required|integer',
+            'total_order_price'     => 'required|integer',
+            'date'                  => 'required',
+            'time'                  => 'required',
+            'bankShortCode'         => 'required',
+            'discounted_price'      => 'required|integer'
+        ])->validate();
+
+        if($request->action == 'checkDiscount') {
             $validated = $request->validate([
-                'code'          => 'required'
+                'code' => 'required'
             ]);
-            $promo = Promotion::where('code',$validated['code'])->first();
+            $promo = Promotion::where('code', $validated['code'])->first();
             if(!$promo) return redirect()->back()->with('discount_not_found','Discount Code tidak ditemukan');
             
             $request->session()->put('promotion_code', $promo);
             return redirect()->back()->with('discount_found','Discount Code applied');
-
         }
-        $this->validate($request, [
-            'courier'               => 'required',
-            'weight'                => 'required',
-            'name'                  => 'required',
-            'phone'                 => 'required',
-            'address'               => 'required',
-            'grand_total'           => 'required',
-            'total_order_price'     => 'required',
-            'date'                  => 'required',
-            'time'                  => 'required',
-            'bankShortCode'         => 'required',
-        ]); 
 
         $length = 10;
         $random = '';
@@ -82,32 +93,36 @@ class CheckoutController extends Controller
         $no_invoice = 'INV-'.Str::upper($random);
 
         // kalo user udah pernah save province di user detail
-        if($input['province'] == null)
-            $input['province'] = auth()->user()->userDetail->province_id;
+        if($validated['province'] == null)
+            $validated['province'] = auth()->user()->userDetail->province_id;
 
         // kalo user udah pernah save city di user detail
-        if($input['city'] == null)
-            $input['city'] = auth()->user()->userDetail->city_id;
+        if($validated['city'] == null)
+            $validated['city'] = auth()->user()->userDetail->city_id;
         
         // create invoice
         $invoice = Invoice::create([
             'invoice_no'            => $no_invoice,
             'user_id'               => auth()->user()->id,
-            'courier'               => $input['courier'],
-            'service'               => $input['service'],
-            'cost_courier'          => $input['cost_courier'],
-            'total_weight'          => $input['weight'],
-            'name'                  => $input['name'],
-            'phone'                 => $input['phone'],
-            'province'              => $input['province'],
-            'city'                  => $input['city'],
-            'address'               => $input['address'],
-            'shipping_notes'        => $input['shipping_notes'],
-            'grand_total'           => $input['grand_total'],
+            'courier'               => $validated['courier'],
+            'service'               => $validated['service'],
+            'cost_courier'          => $validated['cost_courier'],
+            'total_weight'          => $validated['total_weight'],
+            'name'                  => $validated['name'],
+            'phone'                 => $validated['phone'],
+            'province'              => $validated['province'],
+            'city'                  => $validated['city'],
+            'address'               => $validated['address'],
+            'grand_total'           => $validated['grand_total'],
             'status'                => 'pending',
-            'total_order_price'     => $input['total_order_price'],
-            'discounted_price'      => $input['discounted_price']
+            'total_order_price'     => $validated['total_order_price'],
+            'discounted_price'      => $validated['discounted_price']
         ]);
+
+        if ($request->has('shipping_notes')) {
+            $invoice->shipping_notes = $request->shipping_notes;
+            $invoice->save();
+        }
 
         // Create order item & attach course to user.
         foreach (auth()->user()->carts as $cart) {
@@ -118,12 +133,7 @@ class CheckoutController extends Controller
                 'qty'           => $cart->quantity,
                 'price'         => $cart->price,
             ]);
-
-            if (!auth()->user()->courses->contains($cart->course_id))
-                auth()->user()->courses()->attach($cart->course_id);
         };
-
-        $invoice_id = Invoice::latest()->first()->id;
 
         //hit xfers api to create payment order
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
@@ -134,12 +144,12 @@ class CheckoutController extends Controller
                 "data" => [
                     "attributes" => [
                         "paymentMethodType" => "virtual_bank_account",
-                        "amount" => $input['grand_total'],
+                        "amount" => $validated['grand_total'],
                         "referenceId" => $no_invoice,
-                        "expiredAt" => $input['date'].'T'.$input['time'].'+07:00',
-                        "description" => "Order Number ".$invoice_id,
+                        "expiredAt" => $validated['date'].'T'.$validated['time'].'+07:00',
+                        "description" => "Order Number ".$invoice->id,
                         "paymentMethodOptions" =>[
-                            "bankShortCode" => $input['bankShortCode'],
+                            "bankShortCode" => $validated['bankShortCode'],
                             "displayName" => "Venidici",
                             "suffixNo" => ""
                         ]
@@ -149,13 +159,13 @@ class CheckoutController extends Controller
         ); 
         
         $payment_object = json_decode($response->body(), true);
-        $invoice = Invoice::findorfail($invoice_id);
-        $invoice->xfers_payment_id  =  $payment_object['data']['id'];
+        $invoice->xfers_payment_id = $payment_object['data']['id'];
         $invoice->save();
 
         foreach (auth()->user()->carts as $cart) {
             $cart->delete();
         };
+        
         $request->session()->forget('promotion_code');
 
         $courses_string = "";
@@ -173,7 +183,6 @@ class CheckoutController extends Controller
             $courses_string = $courses_string.$order->course->title;
             $x++;
         }
-
 
         // create notification
         $notification = Notification::create([
@@ -194,14 +203,25 @@ class CheckoutController extends Controller
         $invoice = Invoice::where('xfers_payment_id',$id)->first();
         $payment_status = null;
 
-        //get latest payment status if invoice status still pending
-        if($invoice->status == 'pending')
-        {
+        if ($invoice->status == 'pending') {
             $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))->get('https://sandbox-id.xfers.com/api/v4/payments/'.$id);
             $payment_status = json_decode($response->body(), true);
             $invoice->status = $payment_status['data']['attributes']['status'];
             $invoice->save();
 
+            // If invoice's status was updated from pending to paid, this means that the user have just paid.
+            // Therefore, courses & assessments should be mapped to that particular user.
+            if ($invoice->status == 'paid') {
+                foreach ($invoice->orders as $order) {
+                    $course = $order->course;
+                    if (!auth()->user()->courses->contains($course->id)) {
+                        auth()->user()->courses()->attach($course->id);
+                        if ($course->assessment()->exists()) {
+                            auth()->user()->assessments()->attach($course->assessment->id);
+                        }
+                    }
+                }
+            }
 
             // start of courses string
             $courses_string = "";
@@ -248,16 +268,16 @@ class CheckoutController extends Controller
             [   
                 ['user_id', '=', auth()->user()->id],
                 ['isInformation', '=', 0],
-                
             ]
         )->orderBy('created_at', 'desc')->get();
+
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
 
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations'));
     }
 
     public function createPayment(Request $request, $id){        
-        
+
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();

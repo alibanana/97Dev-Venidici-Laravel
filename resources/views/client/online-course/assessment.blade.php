@@ -23,14 +23,11 @@
     <!-- wow js -->
     <link rel="stylesheet" href="/WOW-master/css/libs/animate.css">
 
-
-    
-
     <title>Venidici Assesmnet</title>
 
   </head>
   <body style="padding-right:0px !important">
-    <input type="text" value="{{$assessment->duration}}" name="duration" id="duration_input">
+    <input type="hidden" value="{{$assessment->duration}}" name="duration" id="duration_input" hidden>
     <!-- START OF NAVBAR -->
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
@@ -50,14 +47,14 @@
                 <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0.5vw;margin-right:3vw;color:#2B6CAA">No. {{$loop->iteration}}</p>
                 <p class="bigger-text" style="font-family: Rubik Medium;margin-right:3vw;color:#3B3C43">{{$question->question}}</p>
                 @foreach($question->assessmentQuestionAnswers as $answer)
-                <!-- START OF ONE ANSWERS -->
-                <div class="form-check normal-text" style="margin-top:1vw">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" style="font-family: Rubik Regular" for="flexRadioDefault1">
-                        {{$answer->answer}}
-                    </label>
-                </div>
-                <!-- END OF ONE ANSWERS -->
+                    <!-- START OF ONE ANSWERS -->
+                    <div class="form-check normal-text" style="margin-top:1vw">
+                        <input class="form-check-input" type="radio" name="[questions][{{ $question->id }}][answer_id]" id="flexRadioDefault1" value="{{ $answer->id }}">
+                        <label class="form-check-label" style="font-family: Rubik Regular" for="flexRadioDefault1">
+                            {{$answer->answer}}
+                        </label>
+                    </div>
+                    <!-- END OF ONE ANSWERS -->
                 @endforeach
 
             </div>
@@ -83,6 +80,7 @@
     <script>
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
+
         setInterval(function () {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
@@ -92,50 +90,37 @@
 
             display.textContent = minutes + ":" + seconds;
             
-            if (timer > 0) 
+            if (timer > 0) {
                 --timer
-            else
-                console.log('trigger submit button');
-            document.getElementById("duration_input").value = timer+1;
 
-            
-            
-            
+                var url = "{{ route('online-course-assesment.updateAssessmentTimer', $assessment->id) }}";
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    cache: false,
+                    data:{
+                        _token:'{{ csrf_token() }}',
+                        _method:'put',
+                        duration: document.getElementById("duration_input").value
+                    },
+                    success: function(dataResult){
+                        console.log(dataResult)
+                        dataResult = JSON.parse(dataResult);
+                        console.log(dataResult);
+                    }
+                });
+            } else
+                console.log('trigger submit button');
+
+            document.getElementById("duration_input").value = timer+1;
         }, 1000);
-        var url = "{{ '/online-course/assessment/'.$assessment->id }}";
-        var id= 
-            $.ajax({
-                url: url,
-                type: "PATCH",
-                cache: false,
-                data:{
-                    _token:'{{ csrf_token() }}',
-                    duration: document.getElementById("duration_input").value
-                },
-                success: function(dataResult){
-                    console.log(dataResult)
-                    dataResult = JSON.parse(dataResult);
-                    console.log(dataResult);
-                    if(dataResult.statusCode)
-                    {
-                        window.location = "/online-course/assessment/{{$assessment->id}}";
-                    }
-                    else{
-                        alert("Internal Servers Error");
-                    }
-                        
-                }
-            })
-        ;
     }
     </script>
     <script>
     window.onload = function () {
         var display = document.querySelector('#time');
-        startTimer({{$assessment->duration}}, display);
-        
-        
-        
+        startTimer({{ $assessment->duration - $assessment_pivot->time_taken }}, display);
     };
     </script>
   </body>

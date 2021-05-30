@@ -59,6 +59,16 @@ class User extends Authenticatable
     public function courses() {
         return $this->belongsToMany(Course::class, 'user_course')->withTimestamps();
     }
+
+    public function assessments() {
+        return $this->belongsToMany(Assessment::class, 'user_assessment')
+            ->withPivot(
+                'user_data', // nullable
+                'status', // default -> pending
+                'time_taken', // nullable
+                'score' // nullable
+            )->withTimestamps();
+    }
     
     public function carts() {
         return $this->hasMany(Cart::class);

@@ -46,21 +46,17 @@ class CartController extends Controller
     
     public function shipment_index(Request $request)
     {
-        $carts = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
-        $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
+        $carts = auth()->user()->carts;
+                
+        $cart_count = count($carts->toArray());
 
         $transactions = Notification::where(
             [   
                 ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-                
+                ['isInformation', '=', 0]
             ]
         )->orderBy('created_at', 'desc')->get();
+
         $today = Carbon::now()->addDays(1);
         $today->setTimezone('Asia/Jakarta');
         $total_price = 0;
@@ -72,6 +68,7 @@ class CartController extends Controller
         {
             $sub_total += $cart->quantity * $cart->course->price;
         }
+        
         $provinces = Province::all();
 
         if ($request->has('province')) {
@@ -115,7 +112,7 @@ class CartController extends Controller
 
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
 
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations'));
+        return view('client/cart-shipping', compact('cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations'));
     }
 
     public function store(Request $request)

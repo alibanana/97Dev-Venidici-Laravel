@@ -135,10 +135,37 @@ class OnlineCourseController extends Controller
     }
 
     // Show Admin -> Online Course Detail Page
-    public function show($id) {
+    public function show(Request $request, $id) {
         $course = Course::findOrFail($id);
+        $users = $course->users();
 
-        return view('admin/online-course/detail', compact('course'));
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $users = $users->orderBy('created_at', 'desc');
+            } else {
+                $users = $users->orderBy('created_at');
+            }
+        } else {
+            $users = $users->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('admin.online-courses.show', $id, request()->except('search'));
+                return redirect($url);
+            } else {
+                $search = $request->search;
+
+                $users = $users->where(function ($query) use ($search) {
+                    $query->where([['name', 'like', "%".$search."%"]])
+                    ->orWhere([['email', 'like', "%".$search."%"]]);
+                });
+            }
+        }
+
+        $users = $users->get();
+
+        return view('admin/online-course/detail', compact('course', 'users'));
     }
 
     // Show Admin -> Create New Online Page

@@ -99,4 +99,20 @@ class SectionContentController extends Controller
             ->with('message', $message)
             ->with('page-option', 'manage-curriculum');
     }
+
+    // Remove an attachment from an existing Course's Section-Content.
+    public function removeAttachment($id) {
+        $content = SectionContent::findOrFail($id);
+
+        if (!is_null($content->attachment)) {
+            unlink($content->attachment);
+            $content->attachment = null;
+            $content->save();
+        }
+
+        $message = 'Attachment in Content (' . $content->title  . ') has been deleted from the database';
+
+        return redirect()->route('admin.section-contents.edit', $content->id)
+            ->with('message', $message);
+    }
 }
