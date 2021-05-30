@@ -56,6 +56,8 @@ class OnlineCourseController extends Controller
             }
         }
         $courses = $courses->get();
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
         if (Auth::check()) {
             $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
@@ -67,9 +69,9 @@ class OnlineCourseController extends Controller
                 
             ]
         )->orderBy('created_at', 'desc')->get();
-            return view('client/online-course/index', compact('cart_count','transactions','courses','course_categories'));
+            return view('client/online-course/index', compact('cart_count','transactions','courses','course_categories','informations'));
         } else {
-            return view('client/online-course/index',compact('course_categories','courses'));
+            return view('client/online-course/index',compact('course_categories','courses','informations'));
         }
     }
 
@@ -77,6 +79,8 @@ class OnlineCourseController extends Controller
     public function show($id){
         $course = Course::findOrFail($id);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
@@ -88,11 +92,11 @@ class OnlineCourseController extends Controller
                 
             ]
             )->orderBy('created_at', 'desc')->get();
-            return view('client/online-course/detail', compact('course','cart_count','transactions','reviews'));
+            return view('client/online-course/detail', compact('course','cart_count','transactions','reviews','informations'));
         } else {
             $transactions=null;
             $cart_count=0;
-            return view('client/online-course/detail', compact('course','cart_count','transactions','reviews'));
+            return view('client/online-course/detail', compact('course','cart_count','transactions','reviews','informations'));
         }
     }
 
@@ -112,8 +116,9 @@ class OnlineCourseController extends Controller
         $sections = Section::where('course_id',$id)->get();
         $content = SectionContent::findOrFail($detail_id);
         $assessment = Assessment::where('course_id',$id)->first();
-        
-        return view('client/online-course/learn', compact('cart_count','transactions','sections','content','assessment'));
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
+        return view('client/online-course/learn', compact('cart_count','transactions','sections','content','assessment','informations'));
     }
     
     

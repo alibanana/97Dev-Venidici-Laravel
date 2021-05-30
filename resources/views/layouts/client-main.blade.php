@@ -166,8 +166,7 @@
                 <div style="">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada transaksi.</p>
                 </div>
-              @endif
-              @if($transactions)
+              @else
                 @foreach($transactions as $transaction)
                 <?php
                     $users = explode(',', $transaction->hasSeen);
@@ -225,81 +224,54 @@
 
             <!-- START OF INFORMASI NOTIFICATION -->
             <div class="col-md-12 notif-content" id="informasi-notification" style="overflow:scroll;height:20vw;display:none">
-              
+              @foreach($informations as $info)
+              <?php
+                    $info_users = explode(',', $info->hasSeen);
+                    $infoHasSeen = FALSE;
+                    foreach($info_users as $user_id)
+                    {
+                      if($user_id == Auth::user()->id)
+                        $infoHasSeen = TRUE;
+                    }
+                ?>
               <!-- ONE YELLOW CARD -->
-              <a href="" style="text-decoration:none">
-                <div style="display:flex;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
+              <form action="{{ route('customer.seeNotification') }}" method="POST">
+              @csrf  
+              @method('put')  
+              @if(!$infoHasSeen)
+                <a href="javascript:;" onclick="parentNode.submit();"style="text-decoration:none">
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                <input type="hidden" name="notification_id" value="{{$info->id}}">
+                <input type="hidden" name="link" value="{{$info->link}}">
+              @else
+                <a href="{{$info->link}}" target="_blank" style="text-decoration:none">
+              @endif
+              <!-- ONE YELLOW CARD -->
+                <div class="information-notification-card" style="display:flex;@if($loop->iteration != 1) margin-top:1vw @endif" >
+                  <div   style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                      <div class="notification-left-yellow-border" >
                         <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
 
                       </div>
                   </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
+                  <div class="notification-right-yellow-border" @if(!$infoHasSeen) style="background: rgba(244, 194, 87, 0.1)" @endif>
                       <div style="padding:0.6vw 1vw">
                           
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$info->title}}</p>
+                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$info->created_at->diffForHumans()}}</p>
                         <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                           overflow : hidden !important;
                           text-overflow: ellipsis !important;
                           -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
+                          -webkit-box-orient: vertical !important;">{{$info->description}}</p>
                       </div>
                   </div>
                 </div>
               </a>
+              </form>
               <!-- END OF ONE YELLOW CARD -->
+              @endforeach
 
-              <!-- ONE YELLOW CARD -->
-              <a href="" style="text-decoration:none">
-                <div style="display:flex;margin-top:1vw;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
-
-                      </div>
-                  </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
-                      <div style="padding:0.6vw 1vw">
-                          
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
-                          overflow : hidden !important;
-                          text-overflow: ellipsis !important;
-                          -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
-                      </div>
-                  </div>
-                </div>
-              </a>
-              <!-- END OF ONE YELLOW CARD -->
-
-              <!-- ONE YELLOW CARD -->
-              <a href="" style="text-decoration:none">
-                <div style="display:flex;margin-top:1vw;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
-
-                      </div>
-                  </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
-                      <div style="padding:0.6vw 1vw">
-                          
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
-                          overflow : hidden !important;
-                          text-overflow: ellipsis !important;
-                          -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
-                      </div>
-                  </div>
-                </div>
-              </a>
-              <!-- END OF ONE YELLOW CARD -->
             </div>
             <!-- END OF INFORMASI NOTIFICATION -->
 

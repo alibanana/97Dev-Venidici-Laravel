@@ -39,7 +39,9 @@ class CartController extends Controller
                 
             ]
         )->orderBy('created_at', 'desc')->get();
-        return view('client/cart', compact('carts','cart_count','transactions'));
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
+        return view('client/cart', compact('carts','cart_count','transactions','informations'));
     }
     
     public function shipment_index(Request $request)
@@ -111,7 +113,9 @@ class CartController extends Controller
         }
         $total_price = $sub_total + $shipping_cost;
 
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions'));
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations'));
     }
 
     public function store(Request $request)

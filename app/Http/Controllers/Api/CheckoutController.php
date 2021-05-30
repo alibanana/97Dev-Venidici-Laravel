@@ -251,7 +251,9 @@ class CheckoutController extends Controller
                 
             ]
         )->orderBy('created_at', 'desc')->get();
-        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations'));
     }
 
     public function createPayment(Request $request, $id){        
@@ -266,7 +268,9 @@ class CheckoutController extends Controller
                     
                 ]
             )->orderBy('created_at', 'desc')->get();
-        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions'));
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations'));
     }
 
     public function cancelPayment(Request $request, $id)

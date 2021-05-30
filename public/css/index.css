@@ -1464,6 +1464,13 @@ html, body {
 .notification-right-blue-border{
     background: #FFFFFF;border-top: 2px solid rgba(43, 108, 170, 0.1);border-right: 2px solid rgba(43, 108, 170, 0.1);border-bottom: 2px solid rgba(43, 108, 170, 0.1);box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%;transition: 0.2s ease-in-out;
 }
+
+.notification-left-yellow-border{
+    border-top: 2px solid rgba(244, 194, 87, 0.2);border-left: 2px solid rgba(244, 194, 87, 0.2);border-bottom:2px solid rgba(244, 194, 87, 0.2);height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px;transition: 0.2s ease-in-out    
+}
+.notification-right-yellow-border{
+    background: #FFFFFF;border-top: 2px solid rgba(244, 194, 87, 0.2);border-right: 2px solid rgba(244, 194, 87, 0.2);border-bottom: 2px solid rgba(244, 194, 87, 0.2);box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%;transition: 0.2s ease-in-out
+}
 .transaction-notification-card:hover .notification-left-blue-border{
     border-top: 2px solid #2B6CAA;
     border-left: 2px solid #2B6CAA;
@@ -1473,4 +1480,14 @@ html, body {
     border-top: 2px solid #2B6CAA;
     border-right: 2px solid #2B6CAA;
     border-bottom: 2px solid #2B6CAA
+}
+.information-notification-card:hover .notification-left-yellow-border{
+    border-top: 2px solid #F4C257;
+    border-left: 2px solid #F4C257;
+    border-bottom: 2px solid #F4C257
+}
+.information-notification-card:hover .notification-right-yellow-border{
+    border-top: 2px solid #F4C257;
+    border-right: 2px solid #F4C257;
+    border-bottom: 2px solid #F4C257
 }
