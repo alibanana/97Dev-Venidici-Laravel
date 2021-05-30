@@ -21,7 +21,7 @@ class CreateUserAssessmentTable extends Migration
             $table->foreign('assessment_id')->references('id')->on('assessments')->onDelete('cascade');
             $table->text('user_data')->nullable();
             $table->enum('status', ['pending', 'on-going', 'finished'])->default('pending');
-            $table->unsignedInteger('time_taken')->nullable(); // in seconds
+            $table->unsignedInteger('time_taken')->default(0); // in seconds
             $table->unsignedInteger('score')->nullable();
             $table->timestamps();
         });

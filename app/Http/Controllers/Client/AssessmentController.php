@@ -4,99 +4,27 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Models\Assessment;
 use App\Models\Notification;
 
 class AssessmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-    public function showAssesment($id)
-    {
-        $assessment = Assessment::findOrFail($id);
-        return view('client/online-course/assessment',compact('assessment'));
-
+    public function show($course_id) {
+        $assessment = auth()->user()->assessments()->where('course_id', $course_id)->firstOrFail();
+        $assessment_pivot = $assessment->pivot;
+        
+        $assessment_pivot->status = "on-going";
+        $assessment_pivot->save();
+        
+        return view('client/online-course/assessment', compact('assessment', 'assessment_pivot'));
     }
 
-    public function updateAssessmentTimer(Request $request, $id)
-    {
-        $assessment = Assessment::findOrFail($id);
-        $assessment->duration  =  $input['duration'];
-        $assessment->save();
-       
-        return json_encode(array('statusCode'=>200));
-    }
+    public function updateAssessmentTimer(Request $request, $id) {
+        $assessment = auth()->user()->assessments()->where('assessments.id', $id)->firstOrFail();
+        $assessment->pivot->time_taken =  $assessment->duration - $request->duration;
+        $assessment->pivot->save();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return json_encode(array('statusCode' => 200));
     }
 }

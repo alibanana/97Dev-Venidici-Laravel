@@ -111,8 +111,8 @@ Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('c
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
 Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
-Route::get('/online-course/assessment/{id}', [AssessmentController::class, 'showAssesment'])->name('online-course-assesment.show')->middleware('auth');
-Route::patch('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
+Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware('auth');
+Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
 Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
 
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {

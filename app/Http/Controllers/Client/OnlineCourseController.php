@@ -100,25 +100,27 @@ class OnlineCourseController extends Controller
         }
     }
 
-    public function learn($id,$detail_id)
-    {
-        
+    public function learn($course_id, $section_content_id)
+    {   
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
+        
         $transactions = Notification::where(
             [   
                 ['user_id', '=', auth()->user()->id],
                 ['isInformation', '=', 0],
                 
             ]
-        )->orderBy('created_at', 'desc')->get();        
-        $sections = Section::where('course_id',$id)->get();
-        $content = SectionContent::findOrFail($detail_id);
-        $assessment = Assessment::where('course_id',$id)->first();
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+        )->orderBy('created_at', 'desc')->get();   
+        
+        $course = auth()->user()->courses()->where('user_course.course_id', $course_id)->firstOrFail();
+        $sections = $course->sections;
+        $assessment = $course->assessment;
+        $content = SectionContent::findOrFail($section_content_id);
+        $informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
 
-        return view('client/online-course/learn', compact('cart_count','transactions','sections','content','assessment','informations'));
+        return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations'));
     }
     
     
