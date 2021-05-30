@@ -50,7 +50,6 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
-       
 
         // Remove non-numeric characters before validation.
         if ($request->has('phone'))
@@ -66,7 +65,6 @@ class CheckoutController extends Controller
             'province'              => 'integer',
             'city'                  => 'integer',
             'address'               => 'required',
-            'shipping_notes'        => 'required',
             'grand_total'           => 'required|integer',
             'total_order_price'     => 'required|integer',
             'date'                  => 'required',
@@ -85,18 +83,6 @@ class CheckoutController extends Controller
             $request->session()->put('promotion_code', $promo);
             return redirect()->back()->with('discount_found','Discount Code applied');
         }
-        $this->validate($request, [
-            'courier'               => 'required',
-            'weight'                => 'required',
-            'name'                  => 'required',
-            'phone'                 => 'required',
-            'address'               => 'required',
-            'grand_total'           => 'required',
-            'total_order_price'     => 'required',
-            'date'                  => 'required',
-            'time'                  => 'required',
-            'bankShortCode'         => 'required',
-        ]); 
 
         $length = 10;
         $random = '';
@@ -127,12 +113,16 @@ class CheckoutController extends Controller
             'province'              => $validated['province'],
             'city'                  => $validated['city'],
             'address'               => $validated['address'],
-            'shipping_notes'        => $validated['shipping_notes'],
             'grand_total'           => $validated['grand_total'],
             'status'                => 'pending',
             'total_order_price'     => $validated['total_order_price'],
             'discounted_price'      => $validated['discounted_price']
         ]);
+
+        if ($request->has('shipping_notes')) {
+            $invoice->shipping_notes = $request->shipping_notes;
+            $invoice->save();
+        }
 
         // Create order item & attach course to user.
         foreach (auth()->user()->carts as $cart) {
@@ -169,7 +159,6 @@ class CheckoutController extends Controller
         ); 
         
         $payment_object = json_decode($response->body(), true);
-        dd($payment_object);
         $invoice->xfers_payment_id = $payment_object['data']['id'];
         $invoice->save();
 
@@ -194,7 +183,6 @@ class CheckoutController extends Controller
             $courses_string = $courses_string.$order->course->title;
             $x++;
         }
-
 
         // create notification
         $notification = Notification::create([
