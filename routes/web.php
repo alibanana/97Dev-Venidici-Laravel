@@ -251,6 +251,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::delete('/krest/programs/{id}', [AdminKrestProgramController::class, 'destroy'])->name('krest_programs.destroy');
     // KrestController
     Route::get('/krest/applicants', [AdminKrestController::class, 'index'])->name('krest.index');
+    Route::put('/krest/applicants/{id}', [AdminKrestController::class, 'updateStatus'])->name('krest.updateStatus');
 
 });
 

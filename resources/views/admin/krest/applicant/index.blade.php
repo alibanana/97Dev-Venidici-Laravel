@@ -50,6 +50,18 @@
                                 </label>
                             </div>
                         </div>
+                        -->
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                            <div class="dataTables_length" id="show_entries">
+                                <label class="w-100">Filter:
+                                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Pending']) }}" @if (Request::get('filter') == 'Pending') selected @endif>Pending</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Contacted']) }}" @if (Request::get('filter') == 'Contacted') selected @endif>Contacted</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Rejected']) }}" @if (Request::get('filter') == 'Rejected') selected @endif>Rejected</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
@@ -60,7 +72,7 @@
                                 </label>
                             </div>
                         </div>
-                        -->
+                        
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
@@ -90,6 +102,7 @@
                                                 <th>Krest Program</th>
                                                 <th>Subject</th>
                                                 <th>Message</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -98,27 +111,54 @@
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>
-                                                {{$applicant->name}} <br>
+                                                <b>{{$applicant->name}} </b><br>
                                                 {{$applicant->email}} <br>
                                                 {{$applicant->telephone}}
                                                 </td>
                                                 <td>{{$applicant->company}}</td>   
-                                                <td>{{$applicant->krestPrograms->program}}</td>   
+                                                <td>{{$applicant->krestProgram->program}}</td>   
                                                 <td>{{$applicant->subject}}</td>   
                                                 <td>{{$applicant->message}}</td>   
+                                                <td
+                                                @if($applicant->status == 'Contacted')
+                                                style="color:green"
+                                                @elseif($applicant->status == 'Rejected')
+
+                                                style="color:red"
+                                                @endif     
+                                                >
+                                                {{$applicant->status}}</td>   
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="{{ route('admin.promotions.destroy', $applicant->id) }}" method="post">
+                                                            @if($applicant->status == 'Pending')
+                                                            <form action="{{ route('admin.krest.updateStatus', $applicant->id) }}" method="post">
                                                                 @csrf
-                                                                @method('delete')
+                                                                @method('put')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                                                                    <input type="hidden" value="Rejected" name="status">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reject this applicant?')">Reject</button>
                                                                 </div>
                                                             </form> 
-                                                      
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promotions/{{$applicant->id}}/update">Update</a>
-                                                            </div>
+                                                            <form action="{{ route('admin.krest.updateStatus', $applicant->id) }}" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" value="Contacted" name="status">
+                                                                    <button class="d-sm-inline-block btn btn-info shadow-sm" type="submit" onclick="return confirm('Are you sure you have contacted this applicant?')">Contacted</button>
+                                                                </div>
+                                                            </form> 
+                                                            
+                                                            @endif
+                                                            @if($applicant->status == 'Rejected' || $applicant->status == 'Contacted')
+                                                            <form action="{{ route('admin.krest.updateStatus', $applicant->id) }}" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" value="Pending" name="status">
+                                                                    <button class="d-sm-inline-block btn btn-secondary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reinstate this applicant?')">Reinstate</button>
+                                                                </div>
+                                                            </form> 
+                                                            @endif
                                                    
                                                     </div>
                                                 </td>

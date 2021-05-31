@@ -76,6 +76,7 @@ class KrestController extends Controller
         $krest->krest_program_id    = $validated['krest_program_id'];
         $krest->subject             = $validated['subject'];
         $krest->message             = $validated['message'];
+        $krest->status              = 'Pending';
         $krest->save();
 
         return redirect()->back()->with('message', 'Thank you! We will get back to you as soon as possible.');

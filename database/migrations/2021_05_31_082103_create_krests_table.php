@@ -23,6 +23,7 @@ class CreateKrestsTable extends Migration
             $table->foreign('krest_program_id')->references('id')->on('krest_programs')->onDelete('set null');     
             $table->string('subject');
             $table->text('message');
+            $table->enum('status', ['Pending', 'Contacted', 'Rejected'])->default('Pending');
             $table->timestamps();
         });
     }

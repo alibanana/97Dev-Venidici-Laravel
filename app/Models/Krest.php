@@ -20,6 +20,6 @@ class Krest extends Model
     ];
 
     public function krestProgram() {
-        return $this->hasOne(KrestProgram::class);
+        return $this->hasOne(KrestProgram::class, 'id');
     }
 }

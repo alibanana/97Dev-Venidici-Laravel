@@ -29,10 +29,10 @@ class KrestController extends Controller
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route('admin.krest_programs.index', request()->except('search'));
+                $url = route('admin.krest.index', request()->except('search'));
                 return redirect($url);
             } else {
-                $applicants = $applicants->where('program', 'like', "%".$request->search."%");
+                $applicants = $applicants->where('name', 'like', "%".$request->search."%");
             }
         }
 
@@ -91,9 +91,23 @@ class KrestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateStatus(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'status' => 'required',
+        ]);
+        
+        $applicant = Krest::findOrFail($id);
+        $applicant->status = $validated['status'];
+        $applicant->save();
+
+        if ($applicant->wasChanged()) {
+            $message = 'Applicant Status  (' . $applicant->name . ') has been updated!';
+        } else {
+            $message = 'No changes was made to Applicant (' . $applicant->name . ')';
+        }
+
+        return redirect()->route('admin.krest.index')->with('message', $message);
     }
 
     /**
