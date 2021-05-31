@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\Admin\KrestController as AdminKrestController;
+use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -239,6 +241,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/informations/{id}/update', [AdminNotificationController::class, 'edit'])->name('informations.edit');
     Route::put('/informations/{id}', [AdminNotificationController::class, 'update'])->name('informations.update');
     Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
+    // KrestProgramsController
+    Route::get('/krest/programs', [AdminKrestProgramController::class, 'index'])->name('krest_programs.index');
+    Route::get('/krest/programs/create', [AdminKrestProgramController::class, 'create'])->name('krest_programs.create');
+    Route::post('/krest/programs', [AdminKrestProgramController::class, 'store'])->name('krest_programs.store');
+    Route::get('/krest/programs/{id}/update', [AdminKrestProgramController::class, 'edit'])->name('krest_programs.edit');
+    Route::put('/krest/programs/{id}', [AdminKrestProgramController::class, 'update'])->name('krest_programs.update');
+    Route::delete('/krest/programs/{id}', [AdminKrestProgramController::class, 'destroy'])->name('krest_programs.destroy');
 });
 
 /* START OF WOKI ROUTING */

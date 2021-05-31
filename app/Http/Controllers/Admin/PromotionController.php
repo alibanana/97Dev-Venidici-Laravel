@@ -15,30 +15,30 @@ class PromotionController extends Controller
      */
 
     public function index(Request $request) {
-            $promotions = new Promotion;
-    
-            if ($request->has('sort')) {
-                if ($request['sort'] == "latest") {
-                    $promotions = $promotions->orderBy('created_at', 'desc');
-                } else {
-                    $promotions = $promotions->orderBy('created_at');
-                }
-            } else {
+        $promotions = new Promotion;
+
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
                 $promotions = $promotions->orderBy('created_at', 'desc');
+            } else {
+                $promotions = $promotions->orderBy('created_at');
             }
-    
-            if ($request->has('search')) {
-                if ($request->search == "") {
-                    $url = route('admin.promotions.index', request()->except('search'));
-                    return redirect($url);
-                } else {
-                    $promotions = $promotions->where('code', 'like', "%".$request->search."%");
-                }
+        } else {
+            $promotions = $promotions->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('admin.promotions.index', request()->except('search'));
+                return redirect($url);
+            } else {
+                $promotions = $promotions->where('code', 'like', "%".$request->search."%");
             }
-    
-            $promotions = $promotions->get();
-    
-            return view('admin/promotion/index', compact('promotions'));
+        }
+
+        $promotions = $promotions->get();
+
+        return view('admin/promotion/index', compact('promotions'));
     }
 
     /**

@@ -129,19 +129,6 @@
         </div>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/hashtags') || Request::is('admin/hashtags/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link" href="/admin/hashtags" 
-            aria-expanded="true" >
-            <i class="fas fa-hashtag"></i>
-            <span>Hashtags</span>
-        </a>
-    </li>
-
    
 
     <!-- Nav Item - Pages Collapse Menu 
@@ -158,7 +145,6 @@
     </li>
     -->
 
-  
 
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/krest') || Request::is('admin/krest/*'))
@@ -166,12 +152,35 @@
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/krest" 
-            aria-expanded="true" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKrest"
+            aria-expanded="true" aria-controls="collapseKrest">
             <i class="fas fa-business-time"></i>
             <span>Krest</span>
         </a>
+
+        <div id="collapseKrest" class="collapse" aria-labelledby="" data-parent="#collapseKrest">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin/krest/applicant">Applicants</a>
+                <a class="collapse-item" href="/admin/krest/programs">Krest Programs</a>
+
+            </div>
+        </div>
     </li>
+
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/hashtags') || Request::is('admin/hashtags/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/hashtags" 
+            aria-expanded="true" >
+            <i class="fas fa-hashtag"></i>
+            <span>Hashtags</span>
+        </a>
+    </li>
+
 
     <!-- Nav Item - Pages Collapse Menu
     @if(Request::is('admin/mentoring') || Request::is('admin/mentoring/*'))
