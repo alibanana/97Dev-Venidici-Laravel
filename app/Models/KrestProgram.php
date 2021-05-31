@@ -17,6 +17,6 @@ class KrestProgram extends Model
     ];
 
     public function krest() {
-        return $this->hasMany(Krest::class);
+        return $this->belongsTo(Krest::class);
     }
 }

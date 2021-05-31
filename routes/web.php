@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Client\AssessmentController;
+use App\Http\Controllers\Client\KrestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -248,6 +249,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/krest/programs/{id}/update', [AdminKrestProgramController::class, 'edit'])->name('krest_programs.edit');
     Route::put('/krest/programs/{id}', [AdminKrestProgramController::class, 'update'])->name('krest_programs.update');
     Route::delete('/krest/programs/{id}', [AdminKrestProgramController::class, 'destroy'])->name('krest_programs.destroy');
+    // KrestController
+    Route::get('/krest/applicants', [AdminKrestController::class, 'index'])->name('krest.index');
+
 });
 
 /* START OF WOKI ROUTING */
@@ -344,7 +348,8 @@ Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('cu
 
 /* START OF FOR CORPORATE ROUTING */
 
-Route::get('/for-corporate/krest', [PagesController::class, 'krest_index'])->name('customer.krest_index');
+Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
+Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
 
 /* END OF FOR CORPORATE ROUTING*/
 

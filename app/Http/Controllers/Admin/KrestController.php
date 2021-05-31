@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Krest;
 
 class KrestController extends Controller
 {
@@ -12,9 +13,32 @@ class KrestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $applicants = new Krest;
+
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $applicants = $applicants->orderBy('created_at', 'desc');
+            } else {
+                $applicants = $applicants->orderBy('created_at');
+            }
+        } else {
+            $applicants = $applicants->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('admin.krest_programs.index', request()->except('search'));
+                return redirect($url);
+            } else {
+                $applicants = $applicants->where('program', 'like', "%".$request->search."%");
+            }
+        }
+
+        $applicants = $applicants->get();
+        return view('admin/krest/applicant/index', compact('applicants'));
+
     }
 
     /**
@@ -35,7 +59,7 @@ class KrestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

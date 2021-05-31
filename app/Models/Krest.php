@@ -19,7 +19,7 @@ class Krest extends Model
         'message'
     ];
 
-    public function krestPrograms() {
-        return $this->belongsTo(KrestProgram::class);
+    public function krestProgram() {
+        return $this->hasOne(KrestProgram::class);
     }
 }

@@ -125,7 +125,8 @@ class KrestProgramController extends Controller
         $program->description = $validated['description'];
         
         if ($request->has('thumbnail')) {
-            unlink($program->thumbnail);
+            if($program->thumbnail)
+                unlink($program->thumbnail);
             $program->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/krest-programs/');
         }
         
@@ -149,7 +150,8 @@ class KrestProgramController extends Controller
     public function destroy($id)
     {
         $program = KrestProgram::findOrFail($id);
-        unlink($program->thumbnail);
+        if($program->thumbnail)
+            unlink($program->thumbnail);
 
         $program->delete();
 

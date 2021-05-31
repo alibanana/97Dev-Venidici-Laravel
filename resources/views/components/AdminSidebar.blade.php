@@ -160,7 +160,7 @@
 
         <div id="collapseKrest" class="collapse" aria-labelledby="" data-parent="#collapseKrest">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/admin/krest/applicant">Applicants</a>
+                <a class="collapse-item" href="/admin/krest/applicants">Applicants</a>
                 <a class="collapse-item" href="/admin/krest/programs">Krest Programs</a>
 
             </div>

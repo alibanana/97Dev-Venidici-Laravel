@@ -212,29 +212,6 @@ class PagesController extends Controller
         }
     }
 
-    
-
-    public function krest_index(){
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
-        if(Auth::check()) {
-            $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-            $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-                
-            ]
-            )->orderBy('created_at', 'desc')->get();            
-            return view('client/for-corporate/krest', compact('cart_count','transactions','informations'));
-        } else {
-            $transactions=null;
-            $cart_count=0;
-            return view('client/for-corporate/krest', compact('cart_count','transactions','informations'));
-        }
-    }
 
     public function online_course_index(){
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();

@@ -85,24 +85,30 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Code</th>
-                                                <th>Discount</th>
-                                                <th>Valid From</th>
-                                                <th>Valid Until</th>
+                                                <th>Applicant</th>
+                                                <th>Company</th>
+                                                <th>Krest Program</th>
+                                                <th>Subject</th>
+                                                <th>Message</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($promotions as $promotion)
+                                            @foreach($applicants as $applicant)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                <td>{{$promotion->code}}</td>
-                                                <td>{{$promotion->discount}}%</td>   
-                                                <td>{{$promotion->start_date}}</td>   
-                                                <td>{{$promotion->finish_date}}</td>   
+                                                <td>
+                                                {{$applicant->name}} <br>
+                                                {{$applicant->email}} <br>
+                                                {{$applicant->telephone}}
+                                                </td>
+                                                <td>{{$applicant->company}}</td>   
+                                                <td>{{$applicant->krestPrograms->program}}</td>   
+                                                <td>{{$applicant->subject}}</td>   
+                                                <td>{{$applicant->message}}</td>   
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="{{ route('admin.promotions.destroy', $promotion->id) }}" method="post">
+                                                            <form action="{{ route('admin.promotions.destroy', $applicant->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
@@ -111,7 +117,7 @@
                                                             </form> 
                                                       
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promotions/{{$promotion->id}}/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promotions/{{$applicant->id}}/update">Update</a>
                                                             </div>
                                                    
                                                     </div>

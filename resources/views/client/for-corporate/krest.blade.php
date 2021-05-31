@@ -5,58 +5,109 @@
 
 <!-- Modal VA -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Hubungi Kami</p>
-                <button type="button" class="close small-heading" data-dismiss="modal" aria-label="Close" style="background:none;border:none">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
-                        <i style="color:#DAD9E2" class="fas fa-user"></i>
-                        <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" >
-                    </div>  
-                    <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
-                        <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                        <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" >
-                    </div>  
-
+    <!-- start of form -->
+    <form action="{{ route('customer.store_krest') }}" method="POST">
+    @csrf  
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Hubungi Kami</p>
+                    <button type="button" class="close small-heading" data-dismiss="modal" aria-label="Close" style="background:none;border:none">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                    <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
-                        <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                        <input type="text" name="telephone" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="No. Telp" >
-                    </div>  
-                    <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
-                        <i style="color:#DAD9E2" class="fas fa-building"></i>
-                        <input type="text" name="company" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Nama Perusahaan" >
-                    </div>  
+                @if(session('message'))
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
+                    {{ session('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <div  class="auth-input-form" style="display: flex;align-items:center;margin-top:1vw">
-                    <i style="color:#DAD9E2" class="fas fa-address-card"></i>
-                    <select name="" id=""  class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
-                        <option disabled selected>Pilih Program</option>
-                        <option value="Male" >Male</option>
-                        <option value="Female" >Female</option>
-                    </select>
-                </div>  
-                <div  class="auth-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" >
-                </div> 
-                <div class="auth-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-                    <textarea name="" id="" rows="6" class="normal-text"   style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukkan pesan anda disini"></textarea>                
-                </div>  
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
-                <button type="submit" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim</button>                
+                <!-- END OF ALERT MESSAGE -->
+                @endif
+                <div class="modal-body">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
+                            <i style="color:#DAD9E2" class="fas fa-user"></i>
+                            <input type="text" name="name" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" >
+                        </div>  
+                        <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
+                            <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                            <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" >
+                        </div>  
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        @error('email')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                        <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
+                            <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
+                            <input type="text" name="telephone" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="No. Telp" >
+                        </div> 
+                        <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
+                            <i style="color:#DAD9E2" class="fas fa-building"></i>
+                            <input type="text" name="company" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Nama Perusahaan" >
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                        
+                        @error('telephone')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror 
+                        @error('company')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror  
+                    </div>
+                    <div  class="auth-input-form" style="display: flex;align-items:center;margin-top:1vw">
+                        <i style="color:#DAD9E2" class="fas fa-address-card"></i>
+                        <select name="krest_program_id" id=""   class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
+                            <option disabled selected>Pilih Program</option>
+                            @foreach($programs as $program)
+                            <option value="{{$program->id}}" >{{$program->program}}</option>
+                            @endforeach  
+                        </select>
+                    </div>  
+                    @error('krest_program_id')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div  class="auth-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
+                        <input type="text" name="subject" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" >
+                    </div> 
+                    @error('subject')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="auth-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
+                        <textarea name="message" id="" rows="6" class="normal-text"   style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukkan pesan anda disini"></textarea>                
+                    </div>  
+                    @error('message')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
+                    <button type="submit" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim</button>                
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 <!-- END OF MODAL VA -->
 
