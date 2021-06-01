@@ -22,9 +22,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="mb-0 mb-3 text-gray-800">Promo Code</h1>
-            <a href="/admin/promotions/create" class="btn btn-primary btn-user p-3">Create New Promo Code</a>
-
+            <h1 class="mb-0 mb-3 text-gray-800">Krest Applicants</h1>
         </div>
         
         <!-- Content Row -->
@@ -58,6 +56,7 @@
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Pending']) }}" @if (Request::get('filter') == 'Pending') selected @endif>Pending</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Contacted']) }}" @if (Request::get('filter') == 'Contacted') selected @endif>Contacted</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Rejected']) }}" @if (Request::get('filter') == 'Rejected') selected @endif>Rejected</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => '']) }}" @if (!Request::has('filter')) selected @endif>None</option>
                                     </select>
                                 </label>
                             </div>

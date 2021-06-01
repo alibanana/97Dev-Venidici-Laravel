@@ -23,6 +23,15 @@ class KrestController extends Controller
     {
         $applicants = new Krest;
 
+        if ($request->has('filter')) {
+            if (!in_array($request->filter, ['Pending', 'Contacted', 'Rejected'])) {
+                $url = route('admin.krest.index', request()->except('filter'));
+                return redirect($url);
+            }
+
+            $applicants = $applicants->where('status', $request->filter);
+        }
+
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
                 $applicants = $applicants->orderBy('created_at', 'desc');
