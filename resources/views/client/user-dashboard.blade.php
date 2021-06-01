@@ -20,7 +20,7 @@
                 </div>
             </div>
             @endif
-            <form action="{{ route('customer.update_profile', Auth::user()->id) }}" method="POST" >
+            <form action="{{ route('customer.update_profile', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('put')        
 
@@ -40,9 +40,9 @@
                     </div>
                     <!-- START OF LEFT SECTION -->
                     <div class="col-12">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Display Picture</p>
-
-                        <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" />
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">@if(Auth::user()->avatar) Current @endif Display Picture</p>
+                        <img src="{{ asset(Auth::user()->avatar) }}" style="width:4vw" alt=""> <br>
+                        <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
                         <!--
                         <label id="uploadButton" for="images" style="font-family:Rubik Medium">Choose Image</label>-->
                     </div>
@@ -354,7 +354,7 @@
 <div class="row m-0 page-container" style="padding-top:1.5vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
         <div class="card-white" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
-            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src=""  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
+            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{Auth::user()->name}}</p> 
