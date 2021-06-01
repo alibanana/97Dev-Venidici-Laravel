@@ -40,7 +40,12 @@ class CartController extends Controller
             ]
         )->orderBy('created_at', 'desc')->get();
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
+        $allNotifications = Notification::where('isInformation',1)->orWhere(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ])->orderBy('created_at', 'desc')->get();
         return view('client/cart', compact('carts','cart_count','transactions','informations'));
     }
     
