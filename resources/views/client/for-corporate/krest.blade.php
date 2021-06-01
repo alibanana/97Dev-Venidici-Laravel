@@ -4,7 +4,7 @@
 @section('content')
 
 <!-- Modal VA -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalTitle" aria-hidden="true">
     <!-- start of form -->
     <form action="{{ route('customer.store_krest') }}" method="POST">
     @csrf  
@@ -351,7 +351,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
         </p>   
-        <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
+        <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
             Hubungi Kami
         </button>
     </div>
@@ -471,7 +471,7 @@ END OF OUR VALUES-->
             <p class="medium-heading" style="font-family: Rubik Bold;color:#55525B">Hubungi Kami Lebih Lanjut</p>
             <p class="sub-description" style="font-family: Rubik Regular;color:#55525B;margin-top:2vw">Tanyakan kami apapun dan kami senang membantu</p>
                 <div>
-                    <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
+                    <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
                         Kirim Pesan
                     </button>   
                 </div>
@@ -543,6 +543,8 @@ END OF OUR VALUES-->
 </div>
 <!-- END OF FAQ SECTION -->
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
 <script>
     function changePrograms(evt, categoryName) {
         var i, tabcontent, tablinks;
@@ -558,5 +560,6 @@ END OF OUR VALUES-->
         evt.currentTarget.className += " btn-blue-active";
     }
 </script>
+
 
 @endsection

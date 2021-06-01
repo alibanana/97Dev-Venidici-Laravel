@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\UserDetail;
+
 use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
@@ -76,7 +77,11 @@ class DashboardController extends Controller
 
         $user = User::findOrFail($id);
         $user->name                 = $validated['name'];
-        //$user->avatar               = Helper::storeImage($request->file('avatar'), 'storage/images/users/');
+        if ($request->has('avatar')) {
+            if($user->avatar)
+                unlink($user->avatar);
+            $user->avatar = Helper::storeImage($request->file('avatar'), 'storage/images/users/');
+        }
         $user->save();
 
         $user_detail                = $user->userDetail;

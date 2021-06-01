@@ -18,7 +18,7 @@
             
             @foreach($course->teachers as $teacher)
             <span style="font-family:Rubik Bold">
-                @if($loop->last)
+                @if($loop->last && count($cart->course->teachers) != 1)
                 dan
                 @elseif(!$loop->first)
                 ,
@@ -255,11 +255,12 @@
                 <input type="hidden" name="price" value="{{$course->price}}">
                 <input type="hidden" name="weight" value="0">                
                 <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
-            </form>
             @endif
             @if(!$flag)
-            <button class="normal-text  btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+            <button class="normal-text  btn-dark-blue" name="action" value="buyNow" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
             @endif
+            </form>
+
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">@if($course->total_duration == null) - @else {{$course->total_duration}} @endif Menit video eksklusif</span></p>
