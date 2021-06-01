@@ -83,21 +83,18 @@ class OnlineCourseController extends Controller
 
         if(Auth::check()) {
             $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-            $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-                
-            ]
-            )->orderBy('created_at', 'desc')->get();
-            return view('client/online-course/detail', compact('course','cart_count','transactions','reviews','informations'));
+                ->where('user_id', auth()->user()->id)
+                ->count();
+            $transactions = Notification::where([   
+                    ['user_id', '=', auth()->user()->id],
+                    ['isInformation', '=', 0]
+                ])->orderBy('created_at', 'desc')->get();
         } else {
-            $transactions=null;
-            $cart_count=0;
-            return view('client/online-course/detail', compact('course','cart_count','transactions','reviews','informations'));
+            $transactions = null;
+            $cart_count = 0;
         }
+
+        return view('client/online-course/detail', compact('course','cart_count','transactions','reviews','informations'));
     }
 
     public function learn($course_id, $section_content_id)
