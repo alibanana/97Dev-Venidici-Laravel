@@ -158,6 +158,8 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - SectionController
 |   - SectionContentController
 |   - CourseCategoryController
+|   - KrestController
+|   - KrestProgramController
 |   - HashtagController
 */
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
@@ -218,6 +220,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'updateQuestion'])->name('assessments.update-question');
     Route::delete('/assessments/{id}', [AdminAssessmentController::class, 'destroy'])->name('assessments.destroy');
     Route::delete('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'destroyQuestion'])->name('assessments.destroy-question');
+    // KrestController
+    Route::get('/krest/applicants', [AdminKrestController::class, 'index'])->name('krest.index');
+    Route::put('/krest/applicants/{id}', [AdminKrestController::class, 'updateStatus'])->name('krest.updateStatus');
+    // KrestProgramsController
+    Route::get('/krest/programs', [AdminKrestProgramController::class, 'index'])->name('krest_programs.index');
+    Route::get('/krest/programs/create', [AdminKrestProgramController::class, 'create'])->name('krest_programs.create');
+    Route::post('/krest/programs', [AdminKrestProgramController::class, 'store'])->name('krest_programs.store');
+    Route::get('/krest/programs/{id}/update', [AdminKrestProgramController::class, 'edit'])->name('krest_programs.edit');
+    Route::put('/krest/programs/{id}', [AdminKrestProgramController::class, 'update'])->name('krest_programs.update');
+    Route::delete('/krest/programs/{id}', [AdminKrestProgramController::class, 'destroy'])->name('krest_programs.destroy');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -242,17 +254,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/informations/{id}/update', [AdminNotificationController::class, 'edit'])->name('informations.edit');
     Route::put('/informations/{id}', [AdminNotificationController::class, 'update'])->name('informations.update');
     Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
-    // KrestProgramsController
-    Route::get('/krest/programs', [AdminKrestProgramController::class, 'index'])->name('krest_programs.index');
-    Route::get('/krest/programs/create', [AdminKrestProgramController::class, 'create'])->name('krest_programs.create');
-    Route::post('/krest/programs', [AdminKrestProgramController::class, 'store'])->name('krest_programs.store');
-    Route::get('/krest/programs/{id}/update', [AdminKrestProgramController::class, 'edit'])->name('krest_programs.edit');
-    Route::put('/krest/programs/{id}', [AdminKrestProgramController::class, 'update'])->name('krest_programs.update');
-    Route::delete('/krest/programs/{id}', [AdminKrestProgramController::class, 'destroy'])->name('krest_programs.destroy');
-    // KrestController
-    Route::get('/krest/applicants', [AdminKrestController::class, 'index'])->name('krest.index');
-    Route::put('/krest/applicants/{id}', [AdminKrestController::class, 'updateStatus'])->name('krest.updateStatus');
-
 });
 
 /* START OF WOKI ROUTING */

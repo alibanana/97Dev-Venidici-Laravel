@@ -14,12 +14,12 @@ class Krest extends Model
         'email',
         'telephone',
         'company',
-        'program_id',
+        'krest_program_id',
         'subject',
         'message'
     ];
 
     public function krestProgram() {
-        return $this->hasOne(KrestProgram::class, 'id');
+        return $this->belongsTo(KrestProgram::class);
     }
 }
