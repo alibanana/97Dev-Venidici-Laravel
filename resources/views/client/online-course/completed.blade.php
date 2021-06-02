@@ -23,14 +23,16 @@
     <!-- wow js -->
     <link rel="stylesheet" href="/WOW-master/css/libs/animate.css">
 
-
-    
-
     <title>Venidici Assesmnet</title>
 
   </head>
   <body style="padding-right:0px !important">
 
+    <form id="retryAssessmentForm" action="{{ route('online-course-assessment.reset-user-assessment', $assessment_pivot->assessment_id) }}" method="POST">
+        @csrf
+        @method('put')
+        <input type="hidden" name="redirectURL" value="{{ route('online-course-assessment.show', $course->id) }}" hidden>
+    </form>
 
     <div class="row m-0 page-container" style="padding-top:10vw;padding-bottom:10vw">
         <!-- START OF LEFT CONTENT -->
@@ -41,13 +43,18 @@
                 
             <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0.5vw;color:#3B3C43;margin-top:2vw">Nilai Assessment</p>
             <div class="progress" style="height:3vw;background-color:rgba(43, 108, 170, 0.25);border-radius:10px">
-                <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: 25%;background-color:#2B6CAA;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                @if (is_null($assessment_pivot->score))
+                    <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: 100%;background-color: rgba(43, 108, 170, 0.25);" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Assessment not completed yet..</div>
+                @elseif($assessment_pivot->score == 0)
+                    <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: 100%;background-color: rgba(43, 108, 170, 0.25);" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                @else
+                    <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: {{ $assessment_pivot->score }}%;background-color:#2B6CAA;" aria-valuenow="{{ $assessment_pivot->score }}" aria-valuemin="0" aria-valuemax="100">{{ $assessment_pivot->score }}%</div>
+                @endif
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:3vw">
                 <button class="normal-text  btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;">Unduh Sertifikat</button>
                 <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Atau</p>
-                <a href="" class="normal-text blue-link-underline" style="font-family: Rubik Medium;color:#2B6CAA;text-decoration:none">Ulang Assessment</a>
-
+                <a onclick="document.getElementById('retryAssessmentForm').submit(); return false;" class="normal-text blue-link-underline" style="font-family: Rubik Medium;color:#2B6CAA;text-decoration:none">Ulang Assessment</a>
             </div>
         </div>
         <!-- END OF LEFT CONTENT -->
