@@ -50,6 +50,7 @@ class PagesController extends Controller
         $online_courses = Course::where('course_type_id','1')->take(3)->get();
         
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+        
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
@@ -192,7 +193,7 @@ class PagesController extends Controller
     public function course_detail($id){
         $course = Course::findOrFail($id);
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
+        
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)

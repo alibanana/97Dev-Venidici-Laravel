@@ -196,7 +196,7 @@
     </li>
      -->
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Pages Collapse Menu
     @if(Request::is('admin/virtual-company-visit') || Request::is('admin/virtual-company-visit/*'))
     <li class="nav-item active">
     @else
@@ -207,6 +207,29 @@
             <i class="fas fa-building"></i>
             <span>Virtual Workshop</span>
         </a>
+    </li>
+
+    -->
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/krest') || Request::is('admin/krest/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMenjadi"
+            aria-expanded="true" aria-controls="collapseMenjadi">
+            <i class="fas fa-building"></i>
+            <span>Applicant</span>
+        </a>
+
+        <div id="collapseMenjadi" class="collapse" aria-labelledby="" data-parent="#collapseMenjadi">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin/krest/applicants">Menjadi Pengajar</a>
+                <a class="collapse-item" href="/admin/krest/programs">Menjadi Kollaborator</a>
+
+            </div>
+        </div>
     </li>
 
     <!-- Nav Item - Pages Collapse Menu

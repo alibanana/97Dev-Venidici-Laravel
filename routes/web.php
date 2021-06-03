@@ -258,6 +258,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/informations/{id}/update', [AdminNotificationController::class, 'edit'])->name('informations.edit');
     Route::put('/informations/{id}', [AdminNotificationController::class, 'update'])->name('informations.update');
     Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
+    // InstructorController
+    Route::get('/menjadi-pengajar', [InstructorController::class, 'index'])->name('instructors.index');
 });
 
 /* START OF WOKI ROUTING */

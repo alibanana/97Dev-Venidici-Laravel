@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
+use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
 {
@@ -37,15 +38,32 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $validated = $request->validate([
-            'rating' => 'required',
+        $validated = Validator::make($input,[
+            'rating' => 'required'
         ]);
-        $review = Review::create([
-            'user_id'       => auth()->user()->id,
-            'course_id'     => $request->course_id,
-            'review'        => $request->rating,
-            'description'   => $request->description
-        ]);
+
+        if($validated->fails()) return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','An error occured')->withErrors($validated);
+
+        $reviews = Review::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['course_id', '=', $request->course_id],
+                
+            ]
+        )->get();
+        if(!empty($reviews))
+        {
+            return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Anda sudah mereview course ini');
+        }
+        else
+        {
+            $review = Review::create([
+                'user_id'       => auth()->user()->id,
+                'course_id'     => $request->course_id,
+                'review'        => $request->rating,
+                'description'   => $request->description
+            ]);
+        }
         if($review){
             return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Review berhasil dimasukkan');
         }
