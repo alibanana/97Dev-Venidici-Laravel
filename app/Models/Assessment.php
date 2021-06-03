@@ -12,7 +12,7 @@ class Assessment extends Model
     protected $fillable = [
         'course_id', // nullable
         'title',
-        'duration',
+        'duration', // in minutes
         'description'
     ];
 

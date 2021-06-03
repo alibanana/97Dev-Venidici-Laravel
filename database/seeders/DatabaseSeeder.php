@@ -37,7 +37,8 @@ class DatabaseSeeder extends Seeder
             PromotionSeeder::class,
             ReviewSeeder::class,
             NotificationSeeder::class,
-            KrestProgramSeeder::class
+            KrestProgramSeeder::class,
+            KrestSeeder::class
         ]);
     }
 }

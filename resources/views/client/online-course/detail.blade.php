@@ -18,9 +18,10 @@
             
             @foreach($course->teachers as $teacher)
             <span style="font-family:Rubik Bold">
-                @if($loop->last && count($course->teachers) != 1)
+
+                @if ($loop->last && count($course->teachers) != 1)
                 dan
-                @elseif(!$loop->first)
+                @elseif (!$loop->first)
                 ,
                 @endif
                 {{$teacher->name}}

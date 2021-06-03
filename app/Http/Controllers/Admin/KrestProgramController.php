@@ -4,20 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\KrestProgram;
 use App\Helper\Helper;
 
+use App\Models\KrestProgram;
 
+/*
+|--------------------------------------------------------------------------
+| Admin KrestProgramController Class.
+|
+| Description:
+| This controller is responsible in handling the admin's Krest Programs
+| page and any additional function related to it.
+|--------------------------------------------------------------------------
+*/
 class KrestProgramController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Shows the Admin Krest Programs page. 
     public function index(Request $request)
     {
-
         $programs = new KrestProgram;
 
         if ($request->has('sort')) {
@@ -44,22 +48,13 @@ class KrestProgramController extends Controller
         return view('admin/krest/krest-program/index', compact('programs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Shows the Admin Create Krest Program page.
     public function create()
     {
         return view('admin/krest/krest-program/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Store a new Krest Program in the database.
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -79,23 +74,7 @@ class KrestProgramController extends Controller
         return redirect()->route('admin.krest_programs.index')->with('message', 'New Program has been added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Shows the Admin Update Krest Program page.
     public function edit($id)
     {
         $program = KrestProgram::findOrFail($id);
@@ -103,13 +82,7 @@ class KrestProgramController extends Controller
         return view('admin/krest/krest-program/update', compact('program'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Updates an existing Krest Program (by id) in the database.
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -141,15 +114,11 @@ class KrestProgramController extends Controller
         return redirect()->route('admin.krest_programs.index')->with('message', $message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Delets a specific Krest Program from the database.
     public function destroy($id)
     {
         $program = KrestProgram::findOrFail($id);
+
         if($program->thumbnail)
             unlink($program->thumbnail);
 

@@ -9,14 +9,16 @@ class KrestProgram extends Model
 {
     use HasFactory;
 
+    protected $table = 'krest_programs';
+
     protected $fillable = [
         'program',
         'category',
         'description',
-        'thumbnail'
+        'thumbnail' // nullable
     ];
 
-    public function krest() {
-        return $this->belongsTo(Krest::class);
+    public function krests() {
+        return $this->hasMany(Krest::class);
     }
 }

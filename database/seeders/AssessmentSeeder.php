@@ -96,6 +96,10 @@ class AssessmentSeeder extends Seeder
             [
                 'assessment_id' => 3,
                 'question' => "Based on the teacher's lecture, what should you prepare upon entering a Business Competition?"
+            ],
+            [
+                'assessment_id' => 3,
+                'question' => "'This is the third question in this assessment', is that statement true?"
             ]
         ];
 
@@ -173,6 +177,16 @@ class AssessmentSeeder extends Seeder
                 'assessment_question_id' => 5,
                 'answer' => 'Prepare this thing #4 (wrong answer)',
                 'is_correct' => false
+            ],
+            [
+                'assessment_question_id' => 6,
+                'answer' => 'True',
+                'is_correct' => false
+            ],
+            [
+                'assessment_question_id' => 6,
+                'answer' => 'false',
+                'is_correct' => true
             ],
         ];
 
