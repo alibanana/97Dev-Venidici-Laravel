@@ -118,10 +118,10 @@
     }
     </script>
     <script>
-    window.onload = function () {
-        var display = document.querySelector('#time');
-        startTimer({{ $assessment->duration - $assessment_pivot->time_taken }}, display);
-    };
+        window.onload = function () {
+            var display = document.querySelector('#time');
+            startTimer({{ $assessment->duration - $assessment_pivot->time_taken }}, display);
+        };
     </script>
   </body>
 </html>

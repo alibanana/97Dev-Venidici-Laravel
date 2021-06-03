@@ -44,7 +44,12 @@ class DashboardController extends Controller
                 [
                     ['status', '=', 'paid'],
                     ['user_id', '=', auth()->user()->id],
-                ]
+                ],
+            )->orWhere(
+                [
+                    ['status', '=', 'completed'],
+                    ['user_id', '=', auth()->user()->id],
+                ],
             );
                 })->orderBy('orders.created_at', 'desc')->get();
 

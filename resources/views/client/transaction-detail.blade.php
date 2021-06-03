@@ -217,7 +217,7 @@
                 @elseif($invoice->status == 'paid')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px"><i class="fas fa-check"></i><span style="margin-left:1vw">Pembayaran Diterima</span></p>
                 @elseif($invoice->status == 'completed')
-                <p class="bigger-text" style="font-family:Rubik Medium;color:green;margin-bottom:0px">Pembelian Selesai</p>
+                <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Pembayaran Berhasil</p>
                 
                 @elseif($invoice->status == 'cancelled')
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px"><i class="far fa-window-close"></i> <span style="margin-left:1vw">Pembelian Dibatalkan</span></p>
@@ -250,7 +250,7 @@
             
             <!-- END OF ONE PAYMENT METHOD -->  
             @endif
-
+            @if(!$noWoki)
             <!-- START OF SHIPPING ADDRESS -->
             <div style="background: #FFFFFF;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;margin-top:2vw">
                 <div style="display:flex;align-items:center">
@@ -259,7 +259,7 @@
                 </div>
             </div>
             <!-- END OF SHIPPING ADDRESS -->   
-
+            @endif
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw">Ringkasan Pembayaran</p>            
             <!-- START OF NOMINAL CARD -->
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:1vw">

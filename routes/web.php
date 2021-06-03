@@ -97,8 +97,8 @@ Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'
 Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
 Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware('auth');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
-Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
-Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index')->middleware('auth');
+Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
+//Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index')->middleware('auth');
 Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
 Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware('auth');
 Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove');
@@ -113,6 +113,7 @@ Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('c
 /* START OF ONLINE COURSE ROUTING */
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
+Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree');
 Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
 Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware('auth');
 Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
@@ -122,10 +123,6 @@ Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
 
-//Route::get('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1', function () {
-    //return view('client/online-course/learn');
-//});
-
 /* END OF ONLINE COURSE ROUTING */
 
 /* START OF WOKI ROUTING */
@@ -133,10 +130,6 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
     return view('client/woki/detail');
 });
 /* END OF WOKI ROUTING */
-
-//Route::get('/transaction-detail/1', function () {
-    //return view('client/transaction-detail');
-//});
 
 /* END OF CLIENT ROUTING */
 
@@ -285,9 +278,9 @@ Route::get('/admin/art-supply/1/update', function () {
 /* END OF art-supply ROUTING */
 
 /* START ADMIN ROUTING */
-Route::get('/admin/login', function () {
-    return view('admin/auth/login');
-});
+//Route::get('/admin/login', function () {
+    //return view('admin/auth/login');
+//});
 //Route::get('/admin/reviews', function () {
     //return view('admin/reviews');
 //});

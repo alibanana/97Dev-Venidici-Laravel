@@ -201,7 +201,12 @@
             <!-- END OF NOMINAL CARD -->
             @if(count($carts) != 0)
             <div style="text-align:center">
-                <button onclick="window.open('/shipping','_self');" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pengiriman</button>
+            
+                @if($noWoki)
+                <button onclick="window.open('/payment','_self');" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>
+                @else
+                <button onclick="window.open('/payment','_self');" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pengiriman</button>
+                @endif
             </div>
             @endif
         </div>

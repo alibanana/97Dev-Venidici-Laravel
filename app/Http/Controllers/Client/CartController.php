@@ -46,7 +46,13 @@ class CartController extends Controller
                 ['isInformation', '=', 0],
                 
             ])->orderBy('created_at', 'desc')->get();
-        return view('client/cart', compact('carts','cart_count','transactions','informations'));
+        $noWoki = TRUE;
+        foreach($carts as $cart)
+        {
+            if($cart->course->course_type_id == 2)
+                $noWoki = FALSE;
+        }
+        return view('client/cart', compact('carts','cart_count','transactions','informations','noWoki'));
     }
     
     public function shipment_index(Request $request)
@@ -116,8 +122,13 @@ class CartController extends Controller
         $total_price = $sub_total + $shipping_cost;
 
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
-        return view('client/cart-shipping', compact('cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations'));
+        $noWoki = TRUE;
+        foreach($carts as $cart)
+        {
+            if($cart->course->course_type_id == 2)
+                $noWoki = FALSE;
+        }
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations','noWoki'));
     }
 
     public function store(Request $request)
@@ -156,7 +167,9 @@ class CartController extends Controller
         }
        
         $request->session()->put('cart_count',$request->session()->get('cart_count')+1);  
-
+        if($request->action == 'buyNow') {            
+            return redirect()->route('customer.cart.index');
+        }
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 

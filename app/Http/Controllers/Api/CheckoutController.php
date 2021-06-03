@@ -47,13 +47,221 @@ class CheckoutController extends Controller
 
         return redirect()->back()->with('success', 'Coupon has been applied');
     }
-    
-    public function store(Request $request){
+
+    public function storeOnlineCourse(Request $request)
+    {
         $input = $request->all();
 
         // Remove non-numeric characters before validation.
         if ($request->has('phone'))
             $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
+
+        
+        $validated = Validator::make($input, [
+            'name'                  => 'required',
+            //'phone'                 => ['required', new TelephoneNumber],
+            'phone'                 => 'required',
+            'grand_total'           => 'required|integer',
+            'total_order_price'     => 'required|integer',
+            'date'                  => 'required',
+            'time'                  => 'required',
+            'bankShortCode'         => 'required',
+            'discounted_price'      => 'integer'
+        ])->validate();
+
+        if($request->action == 'checkDiscount') {
+            $validated = $request->validate([
+                'code' => 'required'
+            ]);
+            $promo = Promotion::where('code', $validated['code'])->first();
+            if(!$promo) return redirect()->back()->with('discount_not_found','Discount Code tidak ditemukan');
+            
+            $request->session()->put('promotion_code', $promo);
+            return redirect()->back()->with('discount_found','Discount Code applied');
+        }
+
+        $length = 10;
+        $random = '';
+        for ($i = 0; $i < $length; $i++) {
+            $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+        };
+
+        $no_invoice = 'INV-'.Str::upper($random);
+        
+        // create invoice
+        $invoice = Invoice::create([
+            'invoice_no'            => $no_invoice,
+            'user_id'               => auth()->user()->id,
+            'name'                  => $validated['name'],
+            'phone'                 => $validated['phone'],
+            'grand_total'           => $validated['grand_total'],
+            'status'                => 'pending',
+            'total_order_price'     => $validated['total_order_price'],
+            'discounted_price'      => $validated['discounted_price']
+        ]);
+
+        // Create order item & attach course to user.
+        foreach (auth()->user()->carts as $cart) {
+            // insert product ke table order
+            $invoice->orders()->create([
+                'invoice_id'    => $invoice->id,
+                'course_id'     => $cart->course_id,
+                'qty'           => $cart->quantity,
+                'price'         => $cart->price,
+            ]);
+        };
+
+        //hit xfers api to create payment order
+        $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
+            ->withHeaders([
+                'Accept' => 'application/vnd.api+json',
+                'Content-Type' => 'application/vnd.api+json'
+            ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
+                "data" => [
+                    "attributes" => [
+                        "paymentMethodType" => "virtual_bank_account",
+                        "amount" => $validated['grand_total'],
+                        "referenceId" => $no_invoice,
+                        "expiredAt" => $validated['date'].'T'.$validated['time'].'+07:00',
+                        "description" => "Order Number ".$invoice->id,
+                        "paymentMethodOptions" =>[
+                            "bankShortCode" => $validated['bankShortCode'],
+                            "displayName" => "Venidici",
+                            "suffixNo" => ""
+                        ]
+                    ]
+                ]
+            ]
+        ); 
+        
+        $payment_object = json_decode($response->body(), true);
+        $invoice->xfers_payment_id = $payment_object['data']['id'];
+        $invoice->save();
+
+        foreach (auth()->user()->carts as $cart) {
+            $cart->delete();
+        };
+        
+        $request->session()->forget('promotion_code');
+
+        $courses_string = "";
+
+        $x = 1;
+        $length = count($invoice->orders);
+        foreach($invoice->orders as $order)
+        {
+            if($x == $length && $length != 1)
+                $courses_string = $courses_string." dan ";
+            
+            elseif($x != 1)
+                $courses_string = $courses_string.", ";
+
+            $courses_string = $courses_string.$order->course->title;
+            $x++;
+        }
+
+        // create notification
+        $notification = Notification::create([
+            'user_id'           => auth()->user()->id,
+            'invoice_id'        => $invoice->id,
+            'isInformation'     => 0,
+            'title'             => 'Kami masih menunggu pembayaran kamu..   ',
+            'description'       => 'Hi, '.auth()->user()->name.'. Harap segera selesaikan pembayaranmu untuk pelatihan: '.$courses_string,
+            'link'              => '/transaction-detail/'.$payment_object['data']['id']
+        ]);
+        
+        return $payment_object['data']['id'];
+    }
+
+    
+    public function store(Request $request){
+        $input = $request->all();
+
+        $length = 10;
+        $random = '';
+        for ($i = 0; $i < $length; $i++) {
+            $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+        };
+
+        $no_invoice = 'INV-'.Str::upper($random);
+
+        if($request->action == 'createPaymentObjectWithNoWoki'){
+            $xfers_id = app('App\Http\Controllers\Api\CheckoutController')->storeOnlineCourse($request);
+            return redirect('/transaction-detail/'.$xfers_id);
+        } 
+
+        //if all item is free courses
+        if($request->action == 'createOrderFree'){
+            // create invoice
+            $invoice = Invoice::create([
+                'invoice_no'            => $no_invoice,
+                'user_id'               => auth()->user()->id,
+                'name'                  => auth()->user()->name,
+                'phone'                 => auth()->user()->userDetail->telephone,
+                'grand_total'           => 0,
+                'status'                => 'completed',
+                'total_order_price'     => 0,
+                'xfers_payment_id'      => $no_invoice,
+            ]);
+
+            // Create order item & attach course to user.
+            foreach (auth()->user()->carts as $cart) {
+                // insert product ke table order
+                $invoice->orders()->create([
+                    'invoice_id'    => $invoice->id,
+                    'course_id'     => $cart->course_id,
+                    'qty'           => $cart->quantity,
+                    'price'         => $cart->price,
+                ]);
+            };
+            foreach (auth()->user()->carts as $cart) {
+                $cart->delete();
+            };
+            $courses_string = "";
+
+            $x = 1;
+            $length = count($invoice->orders);
+            foreach($invoice->orders as $order)
+            {
+                if($x == $length && $length != 1)
+                    $courses_string = $courses_string." dan ";
+                
+                elseif($x != 1)
+                    $courses_string = $courses_string.", ";
+
+                $courses_string = $courses_string.$order->course->title;
+                $x++;
+            }
+
+            // create notification
+            $notification = Notification::create([
+                'user_id'           => auth()->user()->id,
+                'invoice_id'        => $invoice->id,
+                'isInformation'     => 0,
+                'title'             => 'Pembayaran Telah Berhasil!',
+                'description'       => 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah berhasil.',
+                'link'              => '/transaction-detail/'.$no_invoice
+            ]);
+            
+            foreach ($invoice->orders as $order) {
+                $course = $order->course;
+                if (!auth()->user()->courses->contains($course->id)) {
+                    auth()->user()->courses()->attach($course->id);
+                    if ($course->assessment()->exists()) {
+                        auth()->user()->assessments()->attach($course->assessment->id);
+                    }
+                }
+            }
+
+            return redirect('/transaction-detail/'.$no_invoice);
+        }
+        
+
+        // Remove non-numeric characters before validation.
+        if ($request->has('phone'))
+            $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
+
+        
 
         $validated = Validator::make($input, [
             'courier'               => 'required',
@@ -85,13 +293,7 @@ class CheckoutController extends Controller
             return redirect()->back()->with('discount_found','Discount Code applied');
         }
 
-        $length = 10;
-        $random = '';
-        for ($i = 0; $i < $length; $i++) {
-            $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
-        };
-
-        $no_invoice = 'INV-'.Str::upper($random);
+        
 
         // kalo user udah pernah save province di user detail
         if($validated['province'] == null)
@@ -190,7 +392,7 @@ class CheckoutController extends Controller
             'user_id'           => auth()->user()->id,
             'invoice_id'        => $invoice->id,
             'isInformation'     => 0,
-            'title'             => 'Kami masih menunggu pembayaran kamu..   ',
+            'title'             => 'Kami masih menunggu pembayaran kamu..',
             'description'       => 'Hi, '.auth()->user()->name.'. Harap segera selesaikan pembayaranmu untuk pelatihan: '.$courses_string,
             'link'              => '/transaction-detail/'.$payment_object['data']['id']
         ]);
@@ -273,8 +475,13 @@ class CheckoutController extends Controller
         )->orderBy('created_at', 'desc')->get();
 
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
-        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations'));
+        $noWoki = TRUE;
+        foreach($orders as $order)
+        {
+            if($order->course->course_type_id == 2)
+                $noWoki = FALSE;
+        }
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki'));
     }
 
     public function createPayment(Request $request, $id){        
@@ -291,7 +498,13 @@ class CheckoutController extends Controller
             )->orderBy('created_at', 'desc')->get();
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
 
-        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations'));
+        $noWoki = TRUE;
+        foreach(auth()->user()->carts as $cart)
+        {
+            if($cart->course->course_type_id == 2)
+                $noWoki = FALSE;
+        }
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki'));
     }
 
     public function cancelPayment(Request $request, $id)
@@ -360,193 +573,10 @@ class CheckoutController extends Controller
         ]); 
 
         $payment_object = json_decode($response->body(), true);
+
+        
         return redirect('/transaction-detail/'.$payment_object['data']['attributes']['targetId']);
 
     }
 
-    // public function store()
-    // {
-    //     DB::transaction(function() {
-
-    //         /**
-    //          * algorithm create no invoice
-    //          */
-    //         $length = 10;
-    //         $random = '';
-    //         for ($i = 0; $i < $length; $i++) {
-    //             $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
-    //         }
-
-    //         $no_invoice = 'INV-'.Str::upper($random);
-
-    //         $invoice = Invoice::create([
-    //             'invoice'       => $no_invoice,
-    //             'customer_id'   => auth()->guard('api')->user()->id,
-    //             'courier'       => $this->request->courier,
-    //             'service'       => $this->request->service,
-    //             'cost_courier'  => $this->request->cost,
-    //             'weight'        => $this->request->weight,
-    //             'name'          => $this->request->name,
-    //             'phone'         => $this->request->phone,
-    //             'province'      => $this->request->province,
-    //             'city'          => $this->request->city,
-    //             'address'       => $this->request->address,
-    //             'grand_total'   => $this->request->grand_total,
-    //             'status'        => 'pending',
-    //         ]);
-
-    //         foreach (Cart::where('customer_id', auth()->guard('api')->user()->id)->get() as $cart) {
-
-    //             //insert product ke table order
-    //             $invoice->orders()->create([
-    //                 'invoice_id'    => $invoice->id,
-    //                 'invoice'       => $no_invoice,    
-    //                 'product_id'    => $cart->product_id,
-    //                 'product_name'  => $cart->product->title,
-    //                 'image'         => $cart->product->image,
-    //                 'qty'           => $cart->quantity,
-    //                 'price'         => $cart->price,
-    //             ]);
-
-    //         }
-
-    //         // Buat transaksi ke midtrans kemudian save snap tokennya.
-    //         $payload = [
-    //             'transaction_details' => [
-    //                 'order_id'      => $invoice->invoice,
-    //                 'gross_amount'  => $invoice->grand_total,
-    //             ],
-    //             'customer_details' => [
-    //                 'first_name'       => $invoice->name,
-    //                 'email'            => auth()->guard('api')->user()->email,
-    //                 'phone'            => $invoice->phone,
-    //                 'shipping_address' => $invoice->address  
-    //             ]
-    //         ];
-
-    //         //create snap token
-    //         $snapToken = Snap::getSnapToken($payload);
-    //         $invoice->snap_token = $snapToken;
-    //         $invoice->save();
-
-    //         $this->response['snap_token'] = $snapToken;
-
-
-    //     });
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Order Successfully',  
-    //         $this->response
-    //     ]);
-
-    // }
-    
-    /**
-     * notificationHandler
-     *
-     * @param  mixed $request
-     * @return void
-     */
-    public function notificationHandler(Request $request)
-    {
-        $payload      = $request->getContent();
-        $notification = json_decode($payload);
-      
-        $validSignatureKey = hash("sha512", $notification->order_id . $notification->status_code . $notification->gross_amount . config('services.midtrans.serverKey'));
-
-        if ($notification->signature_key != $validSignatureKey) {
-            return response(['message' => 'Invalid signature'], 403);
-        }
-
-        $transaction  = $notification->transaction_status;
-        $type         = $notification->payment_type;
-        $orderId      = $notification->order_id;
-        $fraud        = $notification->fraud_status;
-
-        //data tranaction
-        $data_transaction = Invoice::where('invoice', $orderId)->first();
-
-        if ($transaction == 'capture') {
- 
-            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-            if ($type == 'credit_card') {
-
-              if($fraud == 'challenge') {
-                
-                /**
-                *   update invoice to pending
-                */
-                $data_transaction->update([
-                    'status' => 'pending'
-                ]);
-
-              } else {
-                
-                /**
-                *   update invoice to success
-                */
-                $data_transaction->update([
-                    'status' => 'success'
-                ]);
-
-              }
-
-            }
-
-        } elseif ($transaction == 'settlement') {
-
-            /**
-            *   update invoice to success
-            */
-            $data_transaction->update([
-                'status' => 'success'
-            ]);
-
-
-        } elseif($transaction == 'pending'){
-
-            
-            /**
-            *   update invoice to pending
-            */
-            $data_transaction->update([
-                'status' => 'pending'
-            ]);
-
-
-        } elseif ($transaction == 'deny') {
-
-            
-            /**
-            *   update invoice to failed
-            */
-            $data_transaction->update([
-                'status' => 'failed'
-            ]);
-
-
-        } elseif ($transaction == 'expire') {
-
-            
-            /**
-            *   update invoice to expired
-            */
-            $data_transaction->update([
-                'status' => 'expired'
-            ]);
-
-
-        } elseif ($transaction == 'cancel') {
-
-            /**
-            *   update invoice to failed
-            */
-            $data_transaction->update([
-                'status' => 'failed'
-            ]);
-
-        }
-
-    }
 }
