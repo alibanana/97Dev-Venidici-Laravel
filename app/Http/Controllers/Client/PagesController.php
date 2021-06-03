@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Notification;
 use App\Models\Config;
 use App\Models\TrustedCompany;
 use App\Models\FakeTestimony;
@@ -15,12 +16,6 @@ use App\Models\Hashtag;
 use App\Models\UserDetail;
 use App\Models\Course;
 use App\Models\Cart;
-use App\Models\Province;
-use App\Models\City;
-use App\Models\UserHashtag;
-use App\Models\Invoice;
-use App\Models\Order;
-use App\Models\Notification;
 
 use PDF;
 
