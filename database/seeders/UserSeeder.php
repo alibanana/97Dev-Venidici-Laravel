@@ -42,7 +42,6 @@ class UserSeeder extends Seeder
         }
 
         $genders = ['Male', 'Female'];
-        $interests = ['Photography', 'Technologies', 'Automotives', 'Martial Arts', 'Football'];
 
         $number_of_users = 80;
 
@@ -76,7 +75,6 @@ class UserSeeder extends Seeder
                 'address' => $faker->address,
                 'company' => $faker->company,
                 'occupancy' => $faker->jobTitle,
-                'interest' => $interests[rand(0, count($interests) - 1)],
                 'created_at' => $timestamp,
                 'updated_at' => $timestamp
             ]);

@@ -282,7 +282,7 @@
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
                     <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
-                    <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3">
+                    <p data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3" class="bigger-text" style="margin-bottom:0px;color:#747D88" >
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>

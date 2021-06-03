@@ -40,27 +40,34 @@ class CartController extends Controller
             ]
         )->orderBy('created_at', 'desc')->get();
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
-        return view('client/cart', compact('carts','cart_count','transactions','informations'));
-    }
-    
-    public function shipment_index(Request $request)
-    {
-        $carts = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
-        $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
-
-        $transactions = Notification::where(
+        $allNotifications = Notification::where('isInformation',1)->orWhere(
             [   
                 ['user_id', '=', auth()->user()->id],
                 ['isInformation', '=', 0],
                 
+            ])->orderBy('created_at', 'desc')->get();
+        $noWoki = TRUE;
+        foreach($carts as $cart)
+        {
+            if($cart->course->course_type_id == 2)
+                $noWoki = FALSE;
+        }
+        return view('client/cart', compact('carts','cart_count','transactions','informations','noWoki'));
+    }
+    
+    public function shipment_index(Request $request)
+    {
+        $carts = auth()->user()->carts;
+                
+        $cart_count = count($carts->toArray());
+
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0]
             ]
         )->orderBy('created_at', 'desc')->get();
+
         $today = Carbon::now()->addDays(1);
         $today->setTimezone('Asia/Jakarta');
         $total_price = 0;
@@ -72,6 +79,7 @@ class CartController extends Controller
         {
             $sub_total += $cart->quantity * $cart->course->price;
         }
+        
         $provinces = Province::all();
 
         if ($request->has('province')) {
@@ -114,8 +122,13 @@ class CartController extends Controller
         $total_price = $sub_total + $shipping_cost;
 
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations'));
+        $noWoki = TRUE;
+        foreach($carts as $cart)
+        {
+            if($cart->course->course_type_id == 2)
+                $noWoki = FALSE;
+        }
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations','noWoki'));
     }
 
     public function store(Request $request)
@@ -154,7 +167,9 @@ class CartController extends Controller
         }
        
         $request->session()->put('cart_count',$request->session()->get('cart_count')+1);  
-
+        if($request->action == 'buyNow') {            
+            return redirect()->route('customer.cart.index');
+        }
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 

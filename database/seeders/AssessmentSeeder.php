@@ -96,6 +96,10 @@ class AssessmentSeeder extends Seeder
             [
                 'assessment_id' => 3,
                 'question' => "Based on the teacher's lecture, what should you prepare upon entering a Business Competition?"
+            ],
+            [
+                'assessment_id' => 3,
+                'question' => "'This is the third question in this assessment', is that statement true?"
             ]
         ];
 
@@ -174,10 +178,26 @@ class AssessmentSeeder extends Seeder
                 'answer' => 'Prepare this thing #4 (wrong answer)',
                 'is_correct' => false
             ],
+            [
+                'assessment_question_id' => 6,
+                'answer' => 'True',
+                'is_correct' => false
+            ],
+            [
+                'assessment_question_id' => 6,
+                'answer' => 'false',
+                'is_correct' => true
+            ],
         ];
 
         foreach ($answers as $key => $value) {
             AssessmentQuestionAnswer::create($value);
         }
+
+        // $assessment2 = Assessment::findOrFail(2);
+        // $assessment2->users()->attach([3, 4, 5, 6, 7, 8, 9, 10]);
+
+        // $assessment3 = Assessment::findOrFail(3);
+        // $assessment3->users()->attach([11, 12, 13, 14, 15, 16, 17]);
     }
 }

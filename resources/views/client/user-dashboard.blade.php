@@ -20,16 +20,29 @@
                 </div>
             </div>
             @endif
-            <form action="">
+            <form action="{{ route('customer.update_profile', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('put')        
+
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
                         <p class="sub-description" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">General Information</p>
+                        @if(session('success'))
+                            <!-- ALERT MESSAGE -->
+                            <div style="text-align:center;margin-top:1vw">
+                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:0px"role="alert">
+                                {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            </div>
+                            <!-- END OF ALERT MESSAGE -->
+                        @endif
                     </div>
                     <!-- START OF LEFT SECTION -->
                     <div class="col-12">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Display Picture</p>
-
-                        <input type="file" id="images" name="images[]" accept=".jpg,.jpeg,.png" />
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">@if(Auth::user()->avatar) Current @endif Display Picture</p>
+                        <img src="{{ asset(Auth::user()->avatar) }}" style="width:4vw" alt=""> <br>
+                        <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
                         <!--
                         <label id="uploadButton" for="images" style="font-family:Rubik Medium">Choose Image</label>-->
                     </div>
@@ -38,67 +51,80 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
                             <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="John Doe" value="{{Auth::user()->name}}">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
                             <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="{{Auth::user()->userDetail->telephone}}">
-                            @error('telephone')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('telephone')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Gender</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <select name="" id=""  class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
+                            <select name="gender" id=""  class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
                                 <option disabled selected>Choose Gender</option>
                                 <option value="Male" @if(Auth::user()->userDetail->gender == 'Male') selected @endif>Male</option>
                                 <option value="Female" @if(Auth::user()->userDetail->gender == 'Female') selected @endif>Female</option>
                                 <option value="None of the above" @if(Auth::user()->userDetail->gender == 'None of the above') selected @endif>None of the above</option>
                             </select>
-                        </div>  
+                        </div> 
+                        @error('gender')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror 
                         
                     </div> 
                     <!-- END OF LEFT SECTION --> 
                     <!-- RIGHT SECTION -->
                     <div class="col-6" style="">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Birthdate</p>
-                        <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <?php
+                            if(Auth::user()->userDetail->birthdate != null)
+                            {
+                                $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
+                                $date=$birthdate[0];
+                                $time=$birthdate[1];
+                            }
+                        ?>
+                        <div class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                            <input type="date" name="birthdate" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="dd.mm.yyyy" value="{{Auth::user()->userDetail->birthdate}}">
-                            @error('birthdate')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="date" name="birthdate" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="dd.mm.yyyy" @if(Auth::user()->userDetail->birthdate != null) value="{{$date}}" @endif>
                         </div>  
+                        @error('birthdate')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Company/Institution</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
                             <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Binus University International" value="{{Auth::user()->userDetail->company}}">
-                            @error('company')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('company')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pekerjaan</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-friends"></i>
-                            <input type="text" name="referral_code" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Mahasiswa" value="{{Auth::user()->userDetail->occupancy}}">
-                            @error('referral_code')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="occupancy" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Mahasiswa" value="{{Auth::user()->userDetail->occupancy}}">
                         </div>  
+                        @error('occupancy')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
 
@@ -108,52 +134,52 @@
                     <div class="col-12 col-sm-6" >
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="province" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                            <select name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                 @if(Auth::user()->userDetail->province_id == null)
-                                <option disabled selected>Pilih Provinsi</option>
+                                <option value="" disabled selected>Pilih Provinsi</option>
                                 @endif
                                 @foreach($provinces as $province)
                                     <option value="{{$province->id}}" @if( Auth::user()->userDetail->province_id == $province->id) selected @endif>{{$province->name }}</option>
                                 @endforeach
                             </select>                    
-                            @error('province')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('province_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-12 col-sm-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="city" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                            <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                 @if(Auth::user()->userDetail->city_id == null)
-                                <option disabled selected>Pilih Kota</option>
+                                <option value=" " disabled selected>Pilih Kota</option>
                                 @endif
                                 @foreach($cities as $city)
-                                    <option value="{{$city->id}}"  @if( Auth::user()->userDetail->city_id == $city->city_id) selected @endif>{{$city->name }}</option>
+                                    <option value="{{$city->city_id}}"  @if( Auth::user()->userDetail->city_id == $city->city_id) selected @endif>{{$city->name }}</option>
                                 @endforeach
                             </select>                    
-                            @error('city')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('city_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
-                            @error('province')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <textarea name="address" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
                         </div>  
+                        @error('address')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-12" style="text-align:right;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Save</button>
+                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Profile</button>
                     </div>  
                 </div>
             </form>
@@ -251,11 +277,21 @@
             <div class="row m-0 ">
                 <div class="col-md-12 p-0">
                     <div class="white-modal-signup" style="padding-bottom:4vw !important;">
-                        <form action="{{ route('store_interest') }}" method="POST">
-                        @csrf                   
+                        <form action="{{ route('customer.update_interest') }}" method="POST" >
+                        @csrf
                             <div class="row m-0 page-container">
                                 <div class="col-12 p-0">
                                     <div style="text-align:center">
+                                        @if(session('success'))
+                                            <!-- ALERT MESSAGE -->
+                                            <div style="text-align:center;margin-top:1vw">
+                                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:0px"role="alert">
+                                                {{ session('success') }}
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            </div>
+                                            <!-- END OF ALERT MESSAGE -->
+                                        @endif
                                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                                         <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
                                         <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
@@ -285,7 +321,7 @@
                                         margin-top:2vw">
                                             <div class="container interest-card @if($flag) interest-card-active @endif" id="interest_card_{{$interest->id}}" 
                                             style="background-image: url({{ $interest->image }});cursor:pointer; @if($flag) background-color: {{$interest->color}}; @endif" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
-                                                <input type="hidden" name="interests[{{ $interest->id }}]" value="0">
+                                                <input type="hidden" name="interests[{{ $interest->id }}]" value="@if($flag) 1 @else 0 @endif">
                                                 <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{ $interest->hashtag }}</p>
                                             </div>
                                         </div>
@@ -318,7 +354,7 @@
 <div class="row m-0 page-container" style="padding-top:1.5vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
         <div class="card-white" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
-            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src=""  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
+            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{Auth::user()->name}}</p> 
@@ -447,7 +483,7 @@
         @endif
         @foreach($orders as $course)
         <div class="col-12 p-0">
-            <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->course->id}}/learn/lecture/1','_self');">
+            <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->course->id}}/learn/lecture/{{ $course->course->sections[0]->sectionContents[0]->id }}','_self');">
                 <div class="container-image-card">
                     <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" > @if($course->course->course_type_id == 1) Online Course @else Woki @endif</div>
@@ -469,7 +505,7 @@
                             <p style="margin-top:-3vw" class="normal-text">10%</p>
                             </div>
                         </div>
-                        <a href="/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
+                        <a href="{{ route('online-course.learn', ['id' => $course->course->id, 'detail_id' => $course->course->sections[0]->sectionContents[0]->id]) }}" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
                     </div>
                 </div> 
             </div>

@@ -40,7 +40,7 @@
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
 
                     <div class="row mt-2 mb-3">
-                        
+                        <!--
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Show:
@@ -50,6 +50,7 @@
                                 </label>
                             </div>
                         </div>
+                        -->
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
@@ -90,17 +91,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($subscribers as $sub)
                                             <tr>
-                                                <td>1</td>
-                                                <td>fernandhadzaky@hotmail.com</td>
-                                                <td>20/05/2021</td>   
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$sub->email}}</td>
+                                                <td>{{$sub->created_at}}</td>   
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.newsletter.destroy', $sub->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this subscriber?')">Delete</button>
                                                                 </div>
                                                             </form> 
                                                             <!--
@@ -112,6 +114,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

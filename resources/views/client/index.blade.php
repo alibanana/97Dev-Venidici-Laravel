@@ -51,17 +51,15 @@
         <a class="close" href="#closed" >&times;</a>
     
         <div class="content" style="padding:2vw">
-            @if (session()->has('error'))
+            @if (session()->has('menjadi_pengajar_message'))
             <div class="p-3 mt-2 mb-0">
-                <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                    {{ session()->get('error_validation_on_password_modal') }}     
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="alert alert-info alert-dismissible fade show m-0 normal-text" role="alert" >
+                    {{ session()->get('menjadi_pengajar_message') }}
                 </div>
             </div>
             @endif
-            <form action="">
+            <form action="{{route('menjadi_pengajar.store')}}" method="POST" enctype="multipart/form-data">
+            @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
@@ -78,22 +76,22 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
                             <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="John Doe" >
-                            @error('name')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">No. Telp</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" >
-                            @error('telephone')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="phone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" >
                         </div>  
+                        @error('phone')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                     </div> 
                     <!-- END OF LEFT SECTION --> 
@@ -103,22 +101,22 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
                             <input type="email" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="johndoe@gmail.com" >
-                            @error('email')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('email')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">LinkedIn Link Profile</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
-                            <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="https://linkedin.com/in/John" >
-                            @error('company')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="linkedIn" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="https://linkedin.com/in/John" >
                         </div>  
+                        @error('linkedIn')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                     </div>
                     <!-- END OF RIGHT SECTION -->
@@ -126,12 +124,12 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" ></textarea>
-                            @error('referral_code')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('address')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <!--
                     <div class="col-12" style="text-align:center;padding-top:3vw">
@@ -152,22 +150,22 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
                             <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="PT. Karya Anak Bangsa" >
-                            @error('company')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('company')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nama universitas terakhir kamu</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-university"></i>
                             <input type="text" name="university" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Universitas Indonesia" >
-                            @error('university')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('university')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                     </div> 
                     <!-- END OF LEFT SECTION --> 
@@ -176,29 +174,29 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pendidikan terakhir kamu</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-university"></i>
-                            <select name="province" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="education" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="" disabled selected>Pilih Pendidikan</option>
-                                <option value="">SMP</option>
-                                <option value="">SMA</option>
-                                <option value="">S1</option>
-                                <option value="">S2</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
                             </select>                           
-                            @error('email')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('education')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pekerjaan kamu saat ini</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-briefcase"></i>
-                            <input type="text" name="work" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Guru Matematika" >
-                            @error('work')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="job" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Guru Matematika" >
                         </div>  
+                        @error('job')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                     </div>
                     <!-- END OF RIGHT SECTION --> 
@@ -219,17 +217,18 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih posisi pengajar yang diinginkan</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-briefcase"></i>
-                            <select name="province" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="instructor_position_id" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="" disabled selected>Pilih Posisi</option>
-                                <option value="">Pengajar Woki</option>
-                                <option value="">Pengajar Online Course</option>
+                                @foreach($pengajar_positions as $pos)
+                                <option value="{{$pos->id}}">{{$pos->name}}</option>
+                                @endforeach
                             </select>                           
-                            @error('email')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('instructor_position_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                         
                     </div> 
@@ -239,13 +238,13 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Gaji Yang Diharapkan</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-money-check"></i>
-                            <input type="text" name="work" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="10000" >
-                            @error('work')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="salary" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="10000" >
                         </div>   
+                        @error('salary')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                     </div>
                     <!-- END OF RIGHT SECTION -->
@@ -256,10 +255,10 @@
                         <div style="padding:0vw 20vw;margin-top:1vw">
                             <div class="drop-zone">
                                 <span class="drop-zone__prompt normal-text" style="font-family:Rubik Regular;color:black;"> Drag file CV/Portfolio kamu ke sini untuk Menunggah atau <span style="color:#3F92D8" >Browse</span></span>
-                                <input type="file" name="cv_file" class="drop-zone__input" accept=".pdf">
+                                <input type="file" name="cv" class="drop-zone__input" accept=".pdf">
                             </div>
                         </div>
-                        @error('cv_file')
+                        @error('cv')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -1169,22 +1168,30 @@ END OF OUR PROGRAMS SECTION -->
     <!-- END OF PENGAJAR AND COLLABORATOR SECTION -->
 
     <!-- START OF NEWSLETTER SECTION -->
-    <div class="row m-0 page-container" style="padding-bottom:8vw">
+    <div class="row m-0 page-container" id="newsletter-section" style="padding-bottom:8vw">
+        @if (session()->has('newsletter_message'))
+        <div class="p-3 mt-2 mb-0">
+            <div class="alert alert-info alert-dismissible fade show m-0 normal-text" role="alert" >
+                {{ session()->get('newsletter_message') }}
+            </div>
+        </div>
+        @endif
+        <form action="{{route('newsletter.store')}}" method="post">
+        @csrf
         <div class="col-12" style="padding:0vw 3vw">
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
                 <div style="width:80%;margin-left:2vw">
                     <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Subscribe to our newsletter.....?</p>
                     <div style="display:flex;align-items:center">
-                        <input class="normal-text" placeholder="Type your email" name="" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
+                        <input class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
-
                     </div>
-
                 </div>
             </div> 
         </div>
+        </form>
     </div>
     <!-- END OF NEWSLETTER SECTION -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>

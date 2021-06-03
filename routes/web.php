@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Client\AssessmentController;
+use App\Http\Controllers\Client\KrestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -18,9 +19,15 @@ use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\Admin\KrestController as AdminKrestController;
+use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramController;
+use App\Http\Controllers\Admin\InstructorController as AdminInstructorController;
+use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPositionController;
+use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
+use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\Api\CheckoutController;
 
 /*
@@ -45,9 +52,10 @@ use App\Http\Controllers\Api\CheckoutController;
 
 
 Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
-Route::get('/dashboard', [PagesController::class, 'dashboard_index'])->name('customer.dashboard')->middleware('auth');
-Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware('auth');
-
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware('auth');
+Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
+Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile');
+Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
 //Route::get('/dashboard', function () {
     //return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
@@ -70,6 +78,12 @@ Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->na
 Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info');
 
 /* START OF CLIENT ROUTING */
+
+
+/*  MENJADI PENGAJAR & KOLLABORATOR*/
+Route::post('/menjadi-pengajar', [AdminInstructorController::class, 'store'])->name('menjadi_pengajar.store');
+Route::post('/add-newsletter', [AdminNewsletterController::class, 'store'])->name('newsletter.store');
+
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
 
 
@@ -92,8 +106,8 @@ Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'
 Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder');
 Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware('auth');
 Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index');
-Route::get('/shipping', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
-Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index')->middleware('auth');
+Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
+//Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index')->middleware('auth');
 Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store');
 Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware('auth');
 Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove');
@@ -106,20 +120,28 @@ Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('c
 
 
 /* START OF ONLINE COURSE ROUTING */
+// OnlineCourseController
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
+
+Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree');
 Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
-Route::get('/online-course/assessment/{id}', [AssessmentController::class, 'showAssesment'])->name('online-course-assesment.show')->middleware('auth');
-Route::patch('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
+Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware('auth');
+Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
+
 Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
+// ReviewController
+Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
+// AssessmentController
+Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assessment.show')->middleware('auth');
+Route::get('/online-course/{course_id}/assessment/completed', [AssessmentController::class, 'completedIndex'])->name('online-course-assessment.completed-index')->middleware('auth');
+Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'update'])->name('online-course-assessment.update')->middleware('auth');
+Route::put('/online-course/assessment/{id}/reset-user-assessment', [AssessmentController::class, 'resetUserAssessment'])->name('online-course-assessment.reset-user-assessment')->middleware('auth');
+Route::put('/online-course/assessment/{id}/update-assessment-timer', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assessment.updateAssessmentTimer')->middleware('auth');
 
 Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
     return view('client/online-course/detail');
 });
-
-//Route::get('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1', function () {
-    //return view('client/online-course/learn');
-//});
 
 /* END OF ONLINE COURSE ROUTING */
 
@@ -128,10 +150,6 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
     return view('client/woki/detail');
 });
 /* END OF WOKI ROUTING */
-
-//Route::get('/transaction-detail/1', function () {
-    //return view('client/transaction-detail');
-//});
 
 /* END OF CLIENT ROUTING */
 
@@ -153,6 +171,8 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - SectionController
 |   - SectionContentController
 |   - CourseCategoryController
+|   - KrestController
+|   - KrestProgramController
 |   - HashtagController
 */
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
@@ -189,6 +209,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/section-contents/{id}/update', [AdminSectionContentController::class, 'edit'])->name('section-contents.edit');
     Route::put('/section-contents/{id}', [AdminSectionContentController::class, 'update'])->name('section-contents.update');
     Route::delete('/section-contents/{id}', [AdminSectionContentController::class, 'destroy'])->name('section-contents.destroy');
+    Route::delete('/section-contents/{id}/remove-attachment', [AdminSectionContentController::class, 'removeAttachment'])->name('section-contents.remove-attachment');
     // CourseCategoryController
     Route::get('/course-categories', [AdminCourseCategoryController::class, 'index'])->name('course-categories.index');
     Route::post('/course-categories', [AdminCourseCategoryController::class, 'store'])->name('course-categories.store');
@@ -212,7 +233,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'updateQuestion'])->name('assessments.update-question');
     Route::delete('/assessments/{id}', [AdminAssessmentController::class, 'destroy'])->name('assessments.destroy');
     Route::delete('/assessments/{assessment_id}/questions/{question_id}', [AdminAssessmentController::class, 'destroyQuestion'])->name('assessments.destroy-question');
-
+    // KrestController
+    Route::get('/krest/applicants', [AdminKrestController::class, 'index'])->name('krest.index');
+    Route::put('/krest/applicants/{id}', [AdminKrestController::class, 'updateStatus'])->name('krest.updateStatus');
+    // KrestProgramsController
+    Route::get('/krest/programs', [AdminKrestProgramController::class, 'index'])->name('krest_programs.index');
+    Route::get('/krest/programs/create', [AdminKrestProgramController::class, 'create'])->name('krest_programs.create');
+    Route::post('/krest/programs', [AdminKrestProgramController::class, 'store'])->name('krest_programs.store');
+    Route::get('/krest/programs/{id}/update', [AdminKrestProgramController::class, 'edit'])->name('krest_programs.edit');
+    Route::put('/krest/programs/{id}', [AdminKrestProgramController::class, 'update'])->name('krest_programs.update');
+    Route::delete('/krest/programs/{id}', [AdminKrestProgramController::class, 'destroy'])->name('krest_programs.destroy');
     // HashtagController
     Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
     Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -220,7 +250,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/hashtags/{id}/update', [AdminHashtagController::class, 'edit'])->name('hashtags.edit');
     Route::put('/hashtags/{id}', [AdminHashtagController::class, 'update'])->name('hashtags.update');
     Route::delete('/hashtags/{id}', [AdminHashtagController::class, 'destroy'])->name('hashtags.destroy');
-
     // PromotionController
     Route::get('/promotions', [AdminPromotionController::class, 'index'])->name('promotions.index');
     Route::get('/promotions/create', [AdminPromotionController::class, 'create'])->name('promotions.create');
@@ -228,11 +257,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/promotions/{id}/update', [AdminPromotionController::class, 'edit'])->name('promotions.edit');
     Route::put('/promotions/{id}', [AdminPromotionController::class, 'update'])->name('promotions.update');
     Route::delete('/promotions/{id}', [AdminPromotionController::class, 'destroy'])->name('promotions.destroy');
-    
     //ReviewController
     Route::get('/reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
     Route::delete('/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('reviews.destroy');
-
     // NotificationController
     Route::get('/informations', [AdminNotificationController::class, 'index'])->name('informations.index');
     Route::get('/informations/create', [AdminNotificationController::class, 'create'])->name('informations.create');
@@ -240,6 +267,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/informations/{id}/update', [AdminNotificationController::class, 'edit'])->name('informations.edit');
     Route::put('/informations/{id}', [AdminNotificationController::class, 'update'])->name('informations.update');
     Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
+    // InstructorController
+    Route::get('/menjadi-pengajar', [AdminInstructorController::class, 'index'])->name('instructors.index');
+    Route::delete('/menjadi-pengajar/{id}', [AdminInstructorController::class, 'destroy'])->name('instructors.destroy');
+    // PromotionController
+    Route::get('/menjadi-pengajar/positions', [AdminInstructorPositionController::class, 'index'])->name('instructor-positions.index');
+    Route::get('/menjadi-pengajar/positions/create', [AdminInstructorPositionController::class, 'create'])->name('instructor-positions.create');
+    Route::post('/menjadi-pengajar/positions', [AdminInstructorPositionController::class, 'store'])->name('instructor-positions.store');
+    Route::get('/menjadi-pengajar/positions/{id}/update', [AdminInstructorPositionController::class, 'edit'])->name('instructor-positions.edit');
+    Route::put('/menjadi-pengajar/positions/{id}', [AdminInstructorPositionController::class, 'update'])->name('instructor-positions.update');
+    Route::delete('/menjadi-pengajar/positions/{id}', [AdminInstructorPositionController::class, 'destroy'])->name('instructor-positions.destroy');
+    Route::put('/menjadi-pengajar/positions/{id}/updateStatus', [AdminInstructorPositionController::class, 'updateStatus'])->name('instructor-positions.updateStatus');
+    //NewsletterController
+    Route::get('/newsletter', [AdminNewsletterController::class, 'index'])->name('newsletter.index');
+    Route::delete('/newsletter/{id}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
 
 });
 
@@ -273,9 +314,9 @@ Route::get('/admin/art-supply/1/update', function () {
 /* END OF art-supply ROUTING */
 
 /* START ADMIN ROUTING */
-Route::get('/admin/login', function () {
-    return view('admin/auth/login');
-});
+//Route::get('/admin/login', function () {
+    //return view('admin/auth/login');
+//});
 //Route::get('/admin/reviews', function () {
     //return view('admin/reviews');
 //});
@@ -329,11 +370,11 @@ Route::get('/admin/analytics/online-course', function () {
 /* END OF ANALYTICS ROUTING */
 
 
-/* START OF NEWS LETTER ROUTING */
+/* START OF NEWS LETTER ROUTING 
 Route::get('/admin/newsletter', function () {
     return view('admin/newsletter/index');
 });
-/* END OF NEWS LETTER ROUTING */
+ END OF NEWS LETTER ROUTING */
 
 
 /* END OF ADMIN ROUTING */
@@ -353,7 +394,8 @@ Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('cu
 
 /* START OF FOR CORPORATE ROUTING */
 
-Route::get('/for-corporate/krest', [PagesController::class, 'krest_index'])->name('customer.krest_index');
+Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
+Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
 
 /* END OF FOR CORPORATE ROUTING*/
 
@@ -364,6 +406,7 @@ Route::get('/email/verifyUser', function () {
 Route::get('/certificate', function () {
     return view('client/certificate');
 });
+
 /* START OF DOMPDF ROUTING */
 Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
 

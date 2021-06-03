@@ -4,99 +4,102 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Models\Assessment;
 use App\Models\Notification;
 
+/*
+|--------------------------------------------------------------------------
+| Admin AssessmentController Class.
+|
+| Description:
+| This controller is responsible in handling the client assessment pages,
+| assessment-completed page and additional functions needed. This controller
+| also handles ajax function required in the course's assessment page.
+|--------------------------------------------------------------------------
+*/ 
 class AssessmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-    public function showAssesment($id)
-    {
-        $assessment = Assessment::findOrFail($id);
-        return view('client/online-course/assessment',compact('assessment'));
+    // Shows the Assessment Completed page.
+    public function completedIndex(Request $request, $course_id) {
+        $course = auth()->user()->courses()->where('course_id', $course_id)->firstOrFail();
+        $assessment_pivot = auth()->user()->assessments()->where('course_id', $course_id)->firstOrFail()->pivot;
 
+        if ($assessment_pivot->status != "finished") abort(404);
+
+        return view('client/online-course/completed', compact('course', 'assessment_pivot'));
     }
 
-    public function updateAssessmentTimer(Request $request, $id)
-    {
-        $assessment = Assessment::findOrFail($id);
-        $assessment->duration  =  $input['duration'];
-        $assessment->save();
-       
-        return json_encode(array('statusCode'=>200));
+    // Shows the Assessment page itself.
+    public function show($course_id) {
+        $assessment = auth()->user()->assessments()->where('course_id', $course_id)->firstOrFail();
+        $assessment_pivot = $assessment->pivot;
+
+        if ($assessment_pivot->status == "finished")
+            return redirect()->route('online-course-assessment.completed-index', $assessment->course_id)
+                ->with('message', 'You have already completed this assessment.');
+        
+        $assessment_pivot->status = "on-going";
+        $assessment_pivot->save();
+        
+        return view('client/online-course/assessment', compact('assessment', 'assessment_pivot'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    // Updates the User-Assessment mapping pivot data in the database.
+    public function update(Request $request, $id) {
+        $validated = $request->validate([
+            'questions' => 'array'
+        ]);
+
+        $assessment = auth()->user()->assessments()->where('assessments.id', $id)->firstOrFail();
+        
+        $question_answer_data = ""; $correct_answers_count = 0;
+
+        if ($request->has('questions')) {
+            foreach ($validated['questions'] as $question_id => $answer_id) {
+                $question = $assessment->assessmentQuestions()->where('id', $question_id)->firstOrFail();
+                $answer = $question->assessmentQuestionAnswers()->where('id', $answer_id)->firstOrFail();
+                $question_answer_data = $question_answer_data . $question_id . '#' . $answer_id . ',';
+                if ($answer->is_correct) $correct_answers_count++; 
+            }
+    
+            $question_answer_data = substr($question_answer_data, 0, -1);
+        }
+
+        $assessment_pivot = $assessment->pivot;
+        $assessment_pivot->user_data = $question_answer_data;
+        $assessment_pivot->status = 'finished';
+        $assessment_pivot->score = round($correct_answers_count / count($assessment->assessmentQuestions) * 100);
+        $assessment_pivot->save();
+
+        return redirect()->route('online-course-assessment.completed-index', $assessment->course_id)
+            ->with('message', 'Conratulations, you have completed this assessment.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    // Reset the User-Assessment mapping pivot data "status" to pending.
+    public function resetUserAssessment(Request $request, $id) {
+        $validated = $request->validate([
+            'redirectURL' => 'required'
+        ]);
+
+        $assessment = auth()->user()->assessments()->where('assessments.id', $id)->firstOrFail();
+        $assessment_pivot = $assessment->pivot;
+        
+        $assessment_pivot->user_data = null;
+        $assessment_pivot->status = "pending";
+        $assessment_pivot->time_taken = 0;
+        $assessment_pivot->score = null;
+        $assessment_pivot->save();
+
+        return redirect($validated['redirectURL']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    // Updates the time_taken value of Users & Assessment mapping.
+    public function updateAssessmentTimer(Request $request, $id) {
+        $assessment = auth()->user()->assessments()->where('assessments.id', $id)->firstOrFail();
+        $assessment->pivot->time_taken =  ($assessment->duration * 60) - $request->duration;
+        $assessment->pivot->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return json_encode(array('statusCode' => 200));
     }
 }
