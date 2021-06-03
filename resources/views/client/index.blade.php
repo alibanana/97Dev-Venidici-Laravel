@@ -1168,22 +1168,30 @@ END OF OUR PROGRAMS SECTION -->
     <!-- END OF PENGAJAR AND COLLABORATOR SECTION -->
 
     <!-- START OF NEWSLETTER SECTION -->
-    <div class="row m-0 page-container" style="padding-bottom:8vw">
+    <div class="row m-0 page-container" id="newsletter-section" style="padding-bottom:8vw">
+        @if (session()->has('newsletter_message'))
+        <div class="p-3 mt-2 mb-0">
+            <div class="alert alert-info alert-dismissible fade show m-0 normal-text" role="alert" >
+                {{ session()->get('newsletter_message') }}
+            </div>
+        </div>
+        @endif
+        <form action="{{route('newsletter.store')}}" method="post">
+        @csrf
         <div class="col-12" style="padding:0vw 3vw">
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
                 <div style="width:80%;margin-left:2vw">
                     <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Subscribe to our newsletter.....?</p>
                     <div style="display:flex;align-items:center">
-                        <input class="normal-text" placeholder="Type your email" name="" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
+                        <input class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
-
                     </div>
-
                 </div>
             </div> 
         </div>
+        </form>
     </div>
     <!-- END OF NEWSLETTER SECTION -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>

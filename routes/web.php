@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\KrestController as AdminKrestController;
 use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramController;
 use App\Http\Controllers\Admin\InstructorController as AdminInstructorController;
 use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPositionController;
+use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -81,6 +82,7 @@ Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->
 
 /*  MENJADI PENGAJAR & KOLLABORATOR*/
 Route::post('/menjadi-pengajar', [AdminInstructorController::class, 'store'])->name('menjadi_pengajar.store');
+Route::post('/add-newsletter', [AdminNewsletterController::class, 'store'])->name('newsletter.store');
 
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
 
@@ -276,6 +278,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/menjadi-pengajar/positions/{id}', [AdminInstructorPositionController::class, 'update'])->name('instructor-positions.update');
     Route::delete('/menjadi-pengajar/positions/{id}', [AdminInstructorPositionController::class, 'destroy'])->name('instructor-positions.destroy');
     Route::put('/menjadi-pengajar/positions/{id}/updateStatus', [AdminInstructorPositionController::class, 'updateStatus'])->name('instructor-positions.updateStatus');
+    //NewsletterController
+    Route::get('/newsletter', [AdminNewsletterController::class, 'index'])->name('newsletter.index');
+    Route::delete('/newsletter/{id}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
 
 });
 
@@ -349,11 +354,11 @@ Route::get('/admin/analytics/online-course', function () {
 /* END OF ANALYTICS ROUTING */
 
 
-/* START OF NEWS LETTER ROUTING */
+/* START OF NEWS LETTER ROUTING 
 Route::get('/admin/newsletter', function () {
     return view('admin/newsletter/index');
 });
-/* END OF NEWS LETTER ROUTING */
+ END OF NEWS LETTER ROUTING */
 
 
 /* END OF ADMIN ROUTING */
