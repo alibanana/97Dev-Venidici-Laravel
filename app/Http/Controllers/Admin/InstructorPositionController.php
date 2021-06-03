@@ -4,17 +4,42 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\InstructorPosition;   
 
-class InstructorController extends Controller
+class InstructorPositionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $positions = new InstructorPosition;
+
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $positions = $positions->orderBy('created_at', 'desc');
+            } else {
+                $positions = $positions->orderBy('created_at');
+            }
+        } else {
+            $positions = $positions->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('admin.instructor-positions.index', request()->except('search'));
+                return redirect($url);
+            } else {
+                $positions = $positions->where('name', 'like', "%".$request->search."%");
+            }
+        }
+
+        $positions = $positions->get();
+
+        return view('admin/instructor-positions/index', compact('positions'));
+
     }
 
     /**
@@ -24,7 +49,8 @@ class InstructorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/instructor-positions/create');
+
     }
 
     /**
@@ -35,7 +61,18 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+        ]);
+
+        $position = new InstructorPosition();
+        $position->name            = $validated['name'];
+        $position->status          = 'available';
+        $position->save();
+
+        $message = 'New position (' . $position->name . ') has been added to the database.';
+
+        return redirect()->route('admin.instructor-positions.index')->with('message', $message);
     }
 
     /**
@@ -57,7 +94,10 @@ class InstructorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $position = InstructorPosition::findOrFail($id);
+
+        return view('admin/instructor-positions/update',compact('position'));
+
     }
 
     /**
@@ -69,7 +109,24 @@ class InstructorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+        ]);
+
+        $position = InstructorPosition::findOrFail($id);
+
+        $position->name            = $validated['name'];
+
+        
+        $position->save();
+
+        if ($position->wasChanged()) {
+            $message = 'position (' . $position->name . ') has been updated.';
+        } else {
+            $message = 'No changes was made to position (' . $position->name . ')';
+        }
+
+        return redirect()->route('admin.instructor-positions.index')->with('message', $message);
     }
 
     /**
@@ -81,5 +138,24 @@ class InstructorController extends Controller
     public function destroy($id)
     {
         //
+    }
+    // Updates the Position's Status in the database.
+    public function updateStatus(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'status' => 'required',
+        ]);
+        
+        $position = InstructorPosition::findOrFail($id);
+        $position->status = $validated['status'];
+        $position->save();
+
+        if ($position->wasChanged()) {
+            $message = 'Applicant Status  (' . $position->name . ') has been updated!';
+        } else {
+            $message = 'No changes was made to Applicant (' . $position->name . ')';
+        }
+
+        return redirect()->route('admin.instructor-positions.index')->with('message', $message);
     }
 }

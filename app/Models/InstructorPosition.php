@@ -10,8 +10,8 @@ class InstructorPosition extends Model
     use HasFactory;
 
     protected $fillable = [
-        'position'
-    ]
+        'name'
+    ];
 
     public function instructors(){
         return $this->hasMany(Instructor::class);

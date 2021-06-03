@@ -24,7 +24,8 @@ class CreateInstructorsTable extends Migration
             $table->enum('education', ['SMP', 'SMA', 'S1', 'S2']);
             $table->string('university');
             $table->string('job');
-            $table->string('position');
+            $table->unsignedBigInteger('instructor_position_id')->nullable();
+            $table->foreign('instructor_position_id')->references('id')->on('instructor_positions')->onDelete('set null');
             $table->integer('salary');
             $table->string('cv');
             $table->timestamps();

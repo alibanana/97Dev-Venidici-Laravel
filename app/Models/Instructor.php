@@ -22,7 +22,7 @@ class Instructor extends Model
         'instructor_position_id',
         'salary',
         'cv'
-    ]
+    ];
 
     public function instructorPosition(){
         return $this->belongsTo(InstructorPosition::class);

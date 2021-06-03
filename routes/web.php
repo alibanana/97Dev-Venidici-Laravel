@@ -21,6 +21,8 @@ use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
 use App\Http\Controllers\Admin\KrestController as AdminKrestController;
 use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramController;
+use App\Http\Controllers\Admin\InstructorController as AdminInstructorController;
+use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPositionController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -259,7 +261,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::put('/informations/{id}', [AdminNotificationController::class, 'update'])->name('informations.update');
     Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
     // InstructorController
-    Route::get('/menjadi-pengajar', [InstructorController::class, 'index'])->name('instructors.index');
+    Route::get('/menjadi-pengajar', [AdminInstructorController::class, 'index'])->name('instructors.index');
+    // PromotionController
+    Route::get('/menjadi-pengajar/positions', [AdminInstructorPositionController::class, 'index'])->name('instructor-positions.index');
+    Route::get('/menjadi-pengajar/positions/create', [AdminInstructorPositionController::class, 'create'])->name('instructor-positions.create');
+    Route::post('/menjadi-pengajar/positions', [AdminInstructorPositionController::class, 'store'])->name('instructor-positions.store');
+    Route::get('/menjadi-pengajar/positions/{id}/update', [AdminInstructorPositionController::class, 'edit'])->name('instructor-positions.edit');
+    Route::put('/menjadi-pengajar/positions/{id}', [AdminInstructorPositionController::class, 'update'])->name('instructor-positions.update');
+    Route::delete('/menjadi-pengajar/positions/{id}', [AdminInstructorPositionController::class, 'destroy'])->name('instructor-positions.destroy');
+    Route::put('/menjadi-pengajar/positions/{id}/updateStatus', [AdminInstructorPositionController::class, 'updateStatus'])->name('instructor-positions.updateStatus');
+
 });
 
 /* START OF WOKI ROUTING */

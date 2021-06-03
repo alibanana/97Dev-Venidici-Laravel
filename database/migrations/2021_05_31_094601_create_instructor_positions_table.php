@@ -15,8 +15,8 @@ class CreateInstructorPositionsTable extends Migration
     {
         Schema::create('instructor_positions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('instructor_id')->nullable();
-            $table->foreign('instructor_id')->references('id')->on('instructors')->onDelete('set null');
+            $table->string('name');
+            $table->enum('status', array('available', 'unavailable'));
             $table->timestamps();
         });
     }

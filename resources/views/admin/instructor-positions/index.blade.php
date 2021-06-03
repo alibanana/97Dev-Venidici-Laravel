@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Menjadi Pengajar')
+@section('title', 'Venidici Menjadi Pengajar Positions')
 
 @section('container')
 
@@ -22,8 +22,8 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="mb-0 mb-3 text-gray-800">Menjadi Pengajar Applicants</h1>
-            <!--<a href="/admin/promo/create" class="btn btn-primary btn-user p-3">Create New Promo Code</a>-->
+            <h1 class="mb-0 mb-3 text-gray-800">Posisi Pengajar</h1>
+            <a href="/admin/menjadi-pengajar/positions/create" class="btn btn-primary btn-user p-3">Create New Position</a>
 
         </div>
         
@@ -40,7 +40,7 @@
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
 
                     <div class="row mt-2 mb-3">
-                        
+                        <!--
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Show:
@@ -60,6 +60,7 @@
                                 </label>
                             </div>
                         </div>
+                        -->
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
@@ -84,55 +85,54 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Profile</th>
-                                                <th>LinkedIn</th>
-                                                <th>Address</th>
-                                                <th>Prev/Current Company</th>
-                                                <th>Current Degree</th>
-                                                <th>University</th>
-                                                <th>Desired Position</th>
-                                                <th>Desired Fee</th>
-                                                <th >CV</th>
+                                                <th>Position</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($positions as $position)
                                             <tr>
-                                                <td>1</td>
+                                                <td>1</td> 
+                                                <td>{{$position->name}}</td> 
+                                                <td
+                                                @if($position->status == 'available')
+                                                style="color:green"
+                                                @else
+                                                style="color:red" 
+                                                @endif
+                                                >{{$position->status}}</td> 
                                                 <td>
-                                                Fernandha Dzaky <br>
-                                                fernandhadzaky@hotmail.com <br>
-                                                08111337893 <br>
-                                                Guru Matematika
-                                                </td>
-                                                <td>LinkedIn Link</td>   
-                                                <td>Jl. Cipete 2 No.3, Jakarta Selatan</td>   
-                                                <td>PT. Jakarta Aquarium</td>   
-                                                <td>SMA</td>   
-                                                <td>Binus University International</td>   
-                                                <td>Developer</td>   
-                                                <td>Rp1,000,000</td>   
-                                                <td class="text-nowrap">
-                                                <a href="">View CV</a>
-                                                </td>   
-                                                <td>
-                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
+                                                    <div class="d-sm-flex align-items-center justify-content-center mb-2">
+                                                            
+                                                            @if($position->status == 'unavailable')
+                                                            <form action="{{ route('admin.instructor-positions.updateStatus', $position->id) }}" method="post">
                                                                 @csrf
-                                                                @method('delete')
+                                                                @method('put')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                                                                    <input type="hidden" value="available" name="status">
+                                                                    <button class="d-sm-inline-block btn btn-secondary shadow-sm" type="submit" onclick="return confirm('Are you sure you change the status to unavailable?')">Reinstate</button>
+                                                                </div>
+                                                            </form>
+                                                            @else 
+                                                            <form action="{{ route('admin.instructor-positions.updateStatus', $position->id) }}" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" value="unavailable" name="status">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you change the status to unavailable?')">Un-available</button>
                                                                 </div>
                                                             </form> 
-                                                            <!--
+                                                            @endif
+                                                      
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promo/1/update">Contacted</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/menjadi-pengajar/positions/{{$position->id}}/update">Update</a>
                                                             </div>
-                                                            -->
                                                    
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @endforeach 
                                         </tbody>
                                     </table>
                                 </div>

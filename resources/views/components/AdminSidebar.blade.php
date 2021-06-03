@@ -219,14 +219,14 @@
     @endif
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMenjadi"
             aria-expanded="true" aria-controls="collapseMenjadi">
-            <i class="fas fa-building"></i>
-            <span>Applicant</span>
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Menjadi Pengajar</span>
         </a>
 
         <div id="collapseMenjadi" class="collapse" aria-labelledby="" data-parent="#collapseMenjadi">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/admin/krest/applicants">Menjadi Pengajar</a>
-                <a class="collapse-item" href="/admin/krest/programs">Menjadi Kollaborator</a>
+                <a class="collapse-item" href="/admin/menjadi-pengajar">Applicants</a>
+                <a class="collapse-item" href="/admin/menjadi-pengajar/positions">Available Positions</a>
 
             </div>
         </div>
