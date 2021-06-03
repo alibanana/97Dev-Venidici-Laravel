@@ -77,6 +77,11 @@ Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->na
 Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info');
 
 /* START OF CLIENT ROUTING */
+
+
+/*  MENJADI PENGAJAR & KOLLABORATOR*/
+Route::post('/menjadi-pengajar', [AdminInstructorController::class, 'store'])->name('menjadi_pengajar.store');
+
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
 
 
@@ -262,6 +267,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
     // InstructorController
     Route::get('/menjadi-pengajar', [AdminInstructorController::class, 'index'])->name('instructors.index');
+    Route::delete('/menjadi-pengajar/{id}', [AdminInstructorController::class, 'destroy'])->name('instructors.destroy');
     // PromotionController
     Route::get('/menjadi-pengajar/positions', [AdminInstructorPositionController::class, 'index'])->name('instructor-positions.index');
     Route::get('/menjadi-pengajar/positions/create', [AdminInstructorPositionController::class, 'create'])->name('instructor-positions.create');

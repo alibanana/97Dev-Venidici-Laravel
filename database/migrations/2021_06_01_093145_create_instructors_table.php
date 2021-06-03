@@ -20,14 +20,14 @@ class CreateInstructorsTable extends Migration
             $table->string('phone');
             $table->string('linkedIn');
             $table->text('address');
-            $table->string('company');
+            $table->string('company')->nullable();
             $table->enum('education', ['SMP', 'SMA', 'S1', 'S2']);
             $table->string('university');
-            $table->string('job');
+            $table->string('job')->nullable();
             $table->unsignedBigInteger('instructor_position_id')->nullable();
             $table->foreign('instructor_position_id')->references('id')->on('instructor_positions')->onDelete('set null');
             $table->integer('salary');
-            $table->string('cv');
+            $table->string('cv')->nullable();
             $table->timestamps();
         });
     }

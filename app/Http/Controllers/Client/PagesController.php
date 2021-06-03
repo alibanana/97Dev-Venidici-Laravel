@@ -21,6 +21,7 @@ use App\Models\UserHashtag;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Notification;
+use App\Models\InstructorPosition;   
 
 use PDF;
 
@@ -51,6 +52,7 @@ class PagesController extends Controller
         
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         
+        $pengajar_positions = InstructorPosition::orderBy('created_at','desc')->get();
         if(Auth::check()) {
             $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
@@ -63,11 +65,11 @@ class PagesController extends Controller
             ]
             )->orderBy('created_at', 'desc')->get(); 
            
-            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','online_courses','cart_count','transactions','informations'));
+            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small','online_courses','cart_count','transactions','informations','pengajar_positions'));
         } else {
             $transactions=null;
             $cart_count=0;
-            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','cart_count','transactions','informations'));
+            return view('client/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','cart_count','transactions','informations','pengajar_positions'));
         }
         
     }
