@@ -21,7 +21,6 @@ use App\Models\City;
 use App\Models\UserHashtag;
 use App\Models\Invoice;
 use App\Models\Order;
-use App\Models\Notification;
 use App\Models\InstructorPosition;   
 
 
@@ -67,7 +66,7 @@ class PagesController extends Controller
         // Get 3 Online Courses
         $online_courses = Course::where('course_type_id','1')->take(3)->get();
         
-
+        $pengajar_positions = InstructorPosition::all();
         if(Auth::check()) {
             $this->resetNavbarData();
 
@@ -78,11 +77,11 @@ class PagesController extends Controller
 
             return view('client/index', 
                 compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
-                    'online_courses','cart_count', 'notifications', 'transactions','informations'));
+                    'online_courses','cart_count', 'notifications', 'transactions','informations','pengajar_positions'));
         }
 
         return view('client/index', 
-            compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses'));
+            compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','pengajar_positions'));
     }
 
     public function community_index(){

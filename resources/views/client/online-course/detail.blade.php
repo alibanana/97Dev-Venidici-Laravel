@@ -245,7 +245,7 @@
             @if($flag)
 
             <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
-            @else
+            @elseif($course->price != 0)
 
             <form action="{{ route('customer.cart.store') }}" method="post">
             @csrf

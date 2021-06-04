@@ -172,6 +172,7 @@ class OnlineCourseController extends Controller
             $courses_string = $courses_string.$order->course->title;
             $x++;
         }
+        $invoice = Invoice::where('xfers_payment_id',$no_invoice)->first();
 
         // create notification
         $notification = Notification::create([
@@ -183,7 +184,6 @@ class OnlineCourseController extends Controller
             'link'              => '/transaction-detail/'.$no_invoice
         ]);
 
-        $invoice = Invoice::where('xfers_payment_id',$no_invoice)->first();
         foreach ($invoice->orders as $order) {
             $course = $order->course;
             if (!auth()->user()->courses->contains($course->id)) {
@@ -193,7 +193,8 @@ class OnlineCourseController extends Controller
                 }
             }
         }
-        return redirect()->back()->with('success', 'Kelas berhasil di beli!');
+        return redirect('/transaction-detail/'.$no_invoice.'#payment-success');
+
     }
     
 }

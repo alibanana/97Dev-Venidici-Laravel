@@ -299,11 +299,6 @@
           </div>
 
           <div>
-            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Homepage</p>
-            <a href="/" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Home</a>
-          </div>
-
-          <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">For Public</p>
             <div>
               <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Online Course</a>
@@ -326,14 +321,6 @@
               <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
             </div>
           </div>
-          @if(Auth::check())
-          <div>
-            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Profile</p>
-            <div>
-              <a href="/dashboard" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">User Dashboard</a>
-            </div>
-          </div>
-          @endif
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Social</p>
@@ -344,7 +331,10 @@
               <a href="https://www.facebook.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-facebook bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Facebook</span></a>
             </div>
             <div style="margin-top:0.5vw">
-              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-instagram bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Instagram</span></a>
+              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-instagram bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Instagram</span></a>
+            </div>
+            <div style="margin-top:0.5vw">
+              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-whatsapp bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
             </div>
           </div>
           

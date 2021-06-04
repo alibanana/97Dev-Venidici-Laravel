@@ -185,9 +185,21 @@ class CheckoutController extends Controller
 
         $no_invoice = 'INV-'.Str::upper($random);
 
+        if($request->action == 'checkDiscount') {
+            $validated = $request->validate([
+                'code' => 'required'
+            ]);
+            $promo = Promotion::where('code', $validated['code'])->first();
+            if(!$promo) return redirect()->back()->with('discount_not_found','Discount Code tidak ditemukan');
+            
+            $request->session()->put('promotion_code', $promo);
+            return redirect()->back()->with('discount_found','Discount Code applied');
+        }
+
+
         if($request->action == 'createPaymentObjectWithNoWoki'){
             $xfers_id = app('App\Http\Controllers\Api\CheckoutController')->storeOnlineCourse($request);
-            return redirect('/transaction-detail/'.$xfers_id);
+            return redirect('/transaction-detail/'.$xfers_id.'#payment-created');
         } 
 
         //if all item is free courses
@@ -253,7 +265,7 @@ class CheckoutController extends Controller
                 }
             }
 
-            return redirect('/transaction-detail/'.$no_invoice);
+            return redirect('/transaction-detail/'.$no_invoice.'#payment-success');
         }
         
 
@@ -282,16 +294,6 @@ class CheckoutController extends Controller
             'discounted_price'      => 'required|integer'
         ])->validate();
 
-        if($request->action == 'checkDiscount') {
-            $validated = $request->validate([
-                'code' => 'required'
-            ]);
-            $promo = Promotion::where('code', $validated['code'])->first();
-            if(!$promo) return redirect()->back()->with('discount_not_found','Discount Code tidak ditemukan');
-            
-            $request->session()->put('promotion_code', $promo);
-            return redirect()->back()->with('discount_found','Discount Code applied');
-        }
 
         
 
@@ -398,7 +400,7 @@ class CheckoutController extends Controller
         ]);
         
 
-        return redirect('/transaction-detail/'.$payment_object['data']['id']);
+        return redirect('/transaction-detail/'.$payment_object['data']['id'].'#payment-created');
     }
     
     public function transactionDetail($id){
