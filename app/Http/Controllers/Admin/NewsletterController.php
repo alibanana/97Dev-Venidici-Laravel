@@ -16,7 +16,7 @@ class NewsletterController extends Controller
      */
     public function index(Request $request)
     {
-        $subscribers = new Newsletter;
+        $subscribers = new News;
 
 
         if ($request->has('sort')) {
@@ -63,16 +63,18 @@ class NewsletterController extends Controller
     {
         if(! Newsletter::isSubscribed($request->email)){
             Newsletter::subscribe($request->email);
-            return redirect('/#newsletter-section')->with('success', 'Thank you for subscribing to our newsletter!');
-        }
-        return redirect('/#newsletter-section')->with('failure', 'Sorry you are already subscribed');
-        // $validated = $request->validate([
-        //     'email' => 'required',
-        // ]);
 
-        // $newsletter         = new Newsletter;
-        // $newsletter->email  = $validated['email'];
-        // $newsletter->save();
+            $validated = $request->validate([
+                'email'         => 'required',
+            ]);
+
+            $news         = new News();
+            $news->email  = $validated['email'];
+            $news->save();
+            
+            return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
+        }
+        return redirect('/#newsletter-section')->with('newsletter_message', 'Sorry, you are already subscribed');
 
         // return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
     }
