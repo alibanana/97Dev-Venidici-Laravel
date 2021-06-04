@@ -4,6 +4,7 @@
 
 @section('container')
 
+
 <!-- Main Content -->
 <div id="content">
 
@@ -49,10 +50,40 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
+                    <label for="">Promo Type</label>
+                    <select name="type" id="" class="form-control">
+                        <option value="" selected disabled>Please select promo type</option>
+                        <option value="nominal">Nominal</option>
+                        <option value="percent">Percent</option>
+                    </select>
+                    @error('type')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror               
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Promo For</label>
+                    <select name="promo_for" id="" class="form-control">
+                        <option value="" selected disabled>Please select promo for</option>
+                        <option value="price">Price</option>
+                        <option value="shipping">Shipping</option>
+                    </select>
+                    @error('promo_for')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror               
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
                     <label for="">Discount</label>
                     <input type="text" name="discount" class="form-control form-control-user"
                         id="discount" aria-describedby=""
-                        placeholder="Here insert discount amount (e.g. 40%)" > 
+                        placeholder="Here insert discount amount (e.g. 40 for percent or 10000 for nominal)" > 
                     @error('discount')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>

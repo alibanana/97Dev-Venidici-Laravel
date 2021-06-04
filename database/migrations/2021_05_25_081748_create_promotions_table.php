@@ -15,8 +15,13 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->string('code');
+            $table->enum('type', ['percent', 'nominal']);
+            $table->enum('promo_for', ['shipping', 'price']);
             $table->integer('discount');
+            $table->boolean('isActive')->default(0);
             $table->date('start_date');
             $table->date('finish_date');
             $table->timestamps();

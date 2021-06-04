@@ -10,9 +10,17 @@ class Promotion extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'code',
+        'type',
+        'promo_for',
         'discount',
+        'isActive',
         'start_date',
         'finish_date'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

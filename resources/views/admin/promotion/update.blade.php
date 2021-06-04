@@ -50,6 +50,36 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
+                    <label for="">Promo Type</label>
+                    <select name="type" id="" class="form-control">
+                        <option value="" disabled>Please select promo type</option>
+                        <option value="nominal" @if($promotion->type == 'nominal') selected @endif>Nominal</option>
+                        <option value="percent" @if($promotion->type == 'percent') selected @endif>Percent</option>
+                    </select>
+                    @error('type')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror               
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Promo For</label>
+                    <select name="promo_for" id="" class="form-control">
+                        <option value=""  disabled>Please select promo for</option>
+                        <option value="price" @if($promotion->promo_for == 'price') selected @endif>Price</option>
+                        <option value="shipping" @if($promotion->promo_for == 'shipping') selected @endif>Shipping</option>
+                    </select>
+                    @error('promo_for')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror               
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
                     <label for="">Discount</label>
                     <input type="text" name="discount" class="form-control form-control-user"
                         id="discount" aria-describedby=""

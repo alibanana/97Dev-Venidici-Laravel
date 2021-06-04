@@ -85,8 +85,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>Promotion Type</th>
                                                 <th>Code</th>
                                                 <th>Discount</th>
+                                                <th>For</th>
                                                 <th>Valid From</th>
                                                 <th>Valid Until</th>
                                                 <th>Action</th>
@@ -96,8 +98,18 @@
                                             @foreach($promotions as $promotion)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
+                                                @if($promotion->user_id == null)
+                                                <td style="color:green">Global</td>
+                                                @else
+                                                <td>{{$promotion->user->name}}</td>
+                                                @endif
                                                 <td>{{$promotion->code}}</td>
-                                                <td>{{$promotion->discount}}%</td>   
+                                                @if($promotion->type == 'percent')
+                                                <td>{{$promotion->discount}}%</td>  
+                                                @else
+                                                <td>Rp{{$promotion->discount}}</td>  
+                                                @endif 
+                                                <td>{{$promotion->promo_for}}</td>   
                                                 <td>{{$promotion->start_date}}</td>   
                                                 <td>{{$promotion->finish_date}}</td>   
                                                 <td>
