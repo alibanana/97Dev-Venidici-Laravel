@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Newsletter;
+use App\Models\Newsletter as News;
+use Newsletter;
 
 class NewsletterController extends Controller
 {
@@ -60,15 +61,20 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'email' => 'required',
-        ]);
+        if(! Newsletter::isSubscribed($request->email)){
+            Newsletter::subscribe($request->email);
+            return redirect('/#newsletter-section')->with('success', 'Thank you for subscribing to our newsletter!');
+        }
+        return redirect('/#newsletter-section')->with('failure', 'Sorry you are already subscribed');
+        // $validated = $request->validate([
+        //     'email' => 'required',
+        // ]);
 
-        $newsletter         = new Newsletter;
-        $newsletter->email  = $validated['email'];
-        $newsletter->save();
+        // $newsletter         = new Newsletter;
+        // $newsletter->email  = $validated['email'];
+        // $newsletter->save();
 
-        return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
+        // return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
     }
 
     /**
