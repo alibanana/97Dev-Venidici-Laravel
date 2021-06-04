@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Midtrans\Snap;
+use Carbon\Carbon;
 
 use Axiom\Rules\TelephoneNumber;
 
@@ -73,6 +74,8 @@ class CheckoutController extends Controller
             $validated = $request->validate([
                 'code' => 'required'
             ]);
+            $today = Carbon::now()->addDays(1);
+
             $promo = Promotion::where('code', $validated['code'])->first();
             if(!$promo) return redirect()->back()->with('discount_not_found','Discount Code tidak ditemukan');
             
@@ -176,7 +179,6 @@ class CheckoutController extends Controller
     
     public function store(Request $request){
         $input = $request->all();
-
         $length = 10;
         $random = '';
         for ($i = 0; $i < $length; $i++) {
@@ -189,15 +191,69 @@ class CheckoutController extends Controller
             $validated = $request->validate([
                 'code' => 'required'
             ]);
-            $promo = Promotion::where('code', $validated['code'])->first();
-            if(!$promo) return redirect()->back()->with('discount_not_found','Discount Code tidak ditemukan');
+
+            //get current date
+            $today = explode(' ', Carbon::now());
+            $date=$today[0];
+
+            $promo = Promotion::where([   
+                ['code', '=', $validated['code']],
+                ['finish_date', '>=', $date]
+            ])->first();
+    
+
+            //1. check if promo is still valid (compare date)
+            if($promo != null)
+            {
+                //2. check if the promo is global or for the user
+                if($promo->user_id == 'null')
+                {
+                    $request->session()->put('promotion_code', $promo);
+                    return redirect()->back()->with('discount_found','Discount Code applied');
+                }
+                //if the promo is for personal user
+                else{
+                    //check whether the user has used the promo
+                    if($promo->isActive){
+                        $noWoki = TRUE;    
+                        foreach (auth()->user()->carts as $cart) {
+                            if($cart->course->course_type_id == 2) $noWoki = FALSE;
+                        }
+                        //check whether the code is for shippping and there is no woki in cart
+                        if($promo->promo_for == 'shipping' && $noWoki)
+                            return redirect()->back()->with('discount_not_found','Discount Code is for Shipping');
+
+                        //if all conditions applied
+                        else
+                        {
+                            $request->session()->put('promotion_code', $promo);
+                            return redirect()->back()->with('discount_found','Discount Code applied');
+                        }
+                    }
+                    // if the user has used the promo
+                    else{
+                        return redirect()->back()->with('discount_not_found','Discount Code telah digunakan');
+                    }
+                }
+            }
+            //if current date has pas finish_date
+            else{
+                return redirect()->back()->with('discount_not_found','Discount Code tidak ada atau telah expired');
+            }
             
-            $request->session()->put('promotion_code', $promo);
-            return redirect()->back()->with('discount_found','Discount Code applied');
         }
 
 
         if($request->action == 'createPaymentObjectWithNoWoki'){
+            if($request->session()->get('promotion_code') != null)
+            {
+                $used_promo = Promotion::findOrFail($request->session()->get('promotion_code')->id);
+                if($used_promo->user_id != 'null')
+                {
+                    $used_promo->isActive = FALSE;
+                    $used_promo->save();
+                }
+            }
             $xfers_id = app('App\Http\Controllers\Api\CheckoutController')->storeOnlineCourse($request);
             return redirect('/transaction-detail/'.$xfers_id.'#payment-created');
         } 
@@ -371,7 +427,18 @@ class CheckoutController extends Controller
             $cart->delete();
         };
         
+        if($request->session()->get('promotion_code') != null)
+            {
+                $used_promo = Promotion::findOrFail($request->session()->get('promotion_code')->id);
+                if($used_promo->user_id != 'null')
+                {
+                    $used_promo->isActive = FALSE;
+                    $used_promo->save();
+                }
+            }
+        
         $request->session()->forget('promotion_code');
+
 
         $courses_string = "";
 

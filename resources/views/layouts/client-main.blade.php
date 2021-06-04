@@ -90,7 +90,7 @@
                 <div style="display:flex;" >
                   <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+                        <i class="fas fa-info-circle bigger-text" style="color:#F4C257"></i>
 
                       </div>
                   </div>
@@ -114,7 +114,7 @@
                 <div style="display:flex;margin-top:1vw;" >
                   <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
+                        <i class="fas fa-info-circle bigger-text" style="color:#2B6CAA"></i>
 
                       </div>
                   </div>
@@ -138,7 +138,7 @@
                 <div style="display:flex;margin-top:1vw;" >
                   <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+                        <i class="fas fa-info-circle bigger-text" style="color:#F4C257"></i>
 
                       </div>
                   </div>
@@ -250,7 +250,7 @@
                 <div class="information-notification-card" style="display:flex;@if($loop->iteration != 1) margin-top:1vw @endif" >
                   <div   style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div class="notification-left-yellow-border" >
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+                        <i class="fas fa-info-circle bigger-text" style="color:#F4C257"></i>
 
                       </div>
                   </div>

@@ -386,7 +386,7 @@
                     </div>  
                 </div>
                 <div style="display:flex;align-items:center">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">10 Points</p>  
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">{{Auth::user()->email}} Points</p>  
                     <a href="#points">
                         <i  style="color:#F4C257;margin-left:1vw" class="fas fa-question-circle bigger-text"></i> 
                     </a>
@@ -477,8 +477,9 @@
     <!-- Pelatihan Aktif Content -->
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
         @if(count($orders) == 0)
-            <div style="margin-top:2vw">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;">Tidak ada pelatihan aktif.</p>
+        
+            <div style="margin-top:2vw;background: #C4C4C4;border: 3px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
         @foreach($orders as $course)
