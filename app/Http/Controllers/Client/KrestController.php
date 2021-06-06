@@ -17,27 +17,41 @@ class KrestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $notifications; // Stores combined notifications data.
+    private $informations; // Stores notification (isInformation == true) data.
+    private $transactions; // Stores notification (isInformation == false) data for a particular user.
+    private $cart_count; // Stores cart data for a particular user.
+
+    private function resetNavbarData() {
+        $this->notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $this->informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
+        $this->transactions = Notification::where([   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0]
+            ])->orderBy('created_at', 'desc')->get();
+        $this->cart_count = Cart::with('course')->where('user_id', auth()->user()->id)->count();
+    }
+
     public function index()
     {
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $programs = KrestProgram::all();
-        if(Auth::check()) {
-            $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-            $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-                
-            ]
-            )->orderBy('created_at', 'desc')->get();            
-            return view('client/for-corporate/krest', compact('cart_count','transactions','informations','programs'));
+
+        if (Auth::check()) {
+
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+            return view('client/for-corporate/krest', compact('cart_count','transactions','informations','programs','notifications'));
+            
         } else {
-            $transactions=null;
-            $cart_count=0;
-            return view('client/for-corporate/krest', compact('cart_count','transactions','informations','programs'));
+            return view('client/for-corporate/krest', compact('programs'));
         }
+
     }
 
     /**

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Newsletter;
+use App\Models\Newsletter as News;
+use Newsletter;
 
 class NewsletterController extends Controller
 {
@@ -15,7 +16,7 @@ class NewsletterController extends Controller
      */
     public function index(Request $request)
     {
-        $subscribers = new Newsletter;
+        $subscribers = new News;
 
 
         if ($request->has('sort')) {
@@ -60,15 +61,22 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'email' => 'required',
-        ]);
+        if(! Newsletter::isSubscribed($request->email)){
+            Newsletter::subscribe($request->email);
 
-        $newsletter         = new Newsletter;
-        $newsletter->email  = $validated['email'];
-        $newsletter->save();
+            $validated = $request->validate([
+                'email'         => 'required',
+            ]);
 
-        return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
+            $news         = new News();
+            $news->email  = $validated['email'];
+            $news->save();
+            
+            return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
+        }
+        return redirect('/#newsletter-section')->with('newsletter_info_message', 'Sorry, you are already subscribed');
+
+        // return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
     }
 
     /**
@@ -114,7 +122,7 @@ class NewsletterController extends Controller
     public function destroy($id)
     {
         
-        $newsletter = Newsletter::findOrFail($id);
+        $newsletter = News::findOrFail($id);
 
         $newsletter->delete();
 

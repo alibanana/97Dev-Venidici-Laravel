@@ -46,7 +46,7 @@
                 @if (is_null($assessment_pivot->score))
                     <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: 100%;background-color: rgba(43, 108, 170, 0.25);" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Assessment not completed yet..</div>
                 @elseif($assessment_pivot->score == 0)
-                    <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: 100%;background-color: rgba(43, 108, 170, 0.25);" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0/100</div>
+                    <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: 100%;background-color: rgba(43, 108, 170, 0.25);" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0/100 </div>
                 @else
                     <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: {{ $assessment_pivot->score }}%;background-color:#2B6CAA;" aria-valuenow="{{ $assessment_pivot->score }}" aria-valuemin="0" aria-valuemax="100">{{ $assessment_pivot->score }}/100</div>
                 @endif

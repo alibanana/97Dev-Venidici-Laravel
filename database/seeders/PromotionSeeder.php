@@ -16,22 +16,41 @@ class PromotionSeeder extends Seeder
     {
         $promotions = [
             [
+                'user_id' => '1',
                 'code' => 'GRX45',
-                'discount' => 10,
-                'start_date' => '2021-05-26',
-                'finish_date' => '2022-05-26'
+                'type' => 'nominal',
+                'promo_for' => 'price',
+                'discount' => 15000,
+                'isActive' => 1,
+                'start_date' => '2021-06-04',
+                'finish_date' => '2022-07-04'
             ],
             [
                 'code' => 'GRX46',
+                'type' => 'percent',
+                'promo_for' => 'price',
                 'discount' => 10,
-                'start_date' => '2021-05-26',
-                'finish_date' => '2021-05-27'
+                'isActive' => 1,
+                'start_date' => '2021-06-04',
+                'finish_date' => '2022-07-04'
             ],
             [
                 'code' => 'GRX47',
-                'discount' => 10,
-                'start_date' => '2021-05-23',
-                'finish_date' => '2022-05-24'
+                'type' => 'nominal',
+                'promo_for' => 'price',
+                'discount' => 15000,
+                'isActive' => 1,
+                'start_date' => '2021-06-04',
+                'finish_date' => '2022-07-04'
+            ],
+            [
+                'code' => 'GRX48',
+                'type' => 'percent',
+                'promo_for' => 'shipping',
+                'discount' => 100,
+                'isActive' => 1,
+                'start_date' => '2021-06-04',
+                'finish_date' => '2022-07-04'
             ],
         ];
 

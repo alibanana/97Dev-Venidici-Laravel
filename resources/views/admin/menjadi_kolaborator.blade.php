@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Promo Codes')
+@section('title', 'Venidici Menjadi Kolaborator')
 
 @section('container')
 
@@ -22,8 +22,8 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="mb-0 mb-3 text-gray-800">Promo Code</h1>
-            <a href="/admin/promotions/create" class="btn btn-primary btn-user p-3">Create New Promo Code</a>
+            <h1 class="mb-0 mb-3 text-gray-800">Menjadi Kolaborator Applicants</h1>
+            <!--<a href="/admin/promo/create" class="btn btn-primary btn-user p-3">Create New Promo Code</a>-->
 
         </div>
         
@@ -50,6 +50,7 @@
                                 </label>
                             </div>
                         </div>
+                        -->
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
@@ -60,7 +61,6 @@
                                 </label>
                             </div>
                         </div>
-                        -->
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
@@ -85,46 +85,42 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Promotion Type</th>
-                                                <th>Code</th>
-                                                <th>Discount</th>
-                                                <th>For</th>
-                                                <th>Valid From</th>
-                                                <th>Valid Until</th>
+                                                <th>Profile</th>
+                                                <th>Institusi</th>
+                                                <th>Socmed Institusi</th>
+                                                <th>Jenis Partnership</th>
+                                                <th>Notes</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($promotions as $promotion)
+                                            @foreach($collaborators as $applicant)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                @if($promotion->user_id == null)
-                                                <td style="color:green">Global</td>
-                                                @else
-                                                <td>{{$promotion->user->name}}</td>
-                                                @endif
-                                                <td>{{$promotion->code}}</td>
-                                                @if($promotion->type == 'percent')
-                                                <td>{{$promotion->discount}}%</td>  
-                                                @else
-                                                <td>Rp{{$promotion->discount}}</td>  
-                                                @endif 
-                                                <td>{{$promotion->promo_for}}</td>   
-                                                <td>{{$promotion->start_date}}</td>   
-                                                <td>{{$promotion->finish_date}}</td>   
+                                                <td>
+                                                {{$applicant->name}} <br>
+                                                {{$applicant->email}} <br>
+                                                {{$applicant->whatsapp}} <br>
+                                                </td>
+                                                <td class="text-nowrap">{{$applicant->institution}}</td>   
+                                                <td>{{$applicant->institution_socmed}}</td>   
+                                                <td class="text-nowrap">{{$applicant->collaborator_partnership}}</td>   
+                                                <td>{{$applicant->notes}}</td>     
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="{{ route('admin.promotions.destroy', $promotion->id) }}" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
-                                                                </div>
-                                                            </form> 
-                                                      
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promotions/{{$promotion->id}}/update">Update</a>
+
+                                                            <form action="{{ route('admin.collaborators.destroy', $applicant->id) }}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <div style="padding: 0px 2px">
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this applicant?')">Delete</button>
                                                             </div>
+                                                        </form> 
+                                                            <!--
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promo/1/update">Contacted</a>
+                                                            </div>
+                                                            -->
                                                    
                                                     </div>
                                                 </td>

@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Promo Codes')
+@section('title', 'Venidici Redeem Rule')
 
 @section('container')
 
@@ -22,8 +22,8 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="mb-0 mb-3 text-gray-800">Promo Code</h1>
-            <a href="/admin/promotions/create" class="btn btn-primary btn-user p-3">Create New Promo Code</a>
+            <h1 class="mb-0 mb-3 text-gray-800">Redeem Rule</h1>
+            <a href="/admin/redeems/create" class="btn btn-primary btn-user p-3">Create New Redeem Rule</a>
 
         </div>
         
@@ -60,7 +60,7 @@
                                 </label>
                             </div>
                         </div>
-                        -->
+                        
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
@@ -74,6 +74,7 @@
                                 </label>
                             </div>
                         </div>
+                        -->
                         
                     </div>
 
@@ -85,45 +86,35 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Promotion Type</th>
-                                                <th>Code</th>
+                                                <th>Stars</th>
                                                 <th>Discount</th>
                                                 <th>For</th>
-                                                <th>Valid From</th>
-                                                <th>Valid Until</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($promotions as $promotion)
+                                            @foreach($redeems as $redeem)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                @if($promotion->user_id == null)
-                                                <td style="color:green">Global</td>
+                                                <td>{{$redeem->stars}}</td>
+                                                @if($redeem->type == 'percent')
+                                                <td>{{$redeem->discount}}%</td>  
                                                 @else
-                                                <td>{{$promotion->user->name}}</td>
-                                                @endif
-                                                <td>{{$promotion->code}}</td>
-                                                @if($promotion->type == 'percent')
-                                                <td>{{$promotion->discount}}%</td>  
-                                                @else
-                                                <td>Rp{{$promotion->discount}}</td>  
+                                                <td>Rp{{$redeem->discount}}</td>  
                                                 @endif 
-                                                <td>{{$promotion->promo_for}}</td>   
-                                                <td>{{$promotion->start_date}}</td>   
-                                                <td>{{$promotion->finish_date}}</td>   
+                                                <td>{{$redeem->promo_for}}</td>    
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="{{ route('admin.promotions.destroy', $promotion->id) }}" method="post">
+                                                            <form action="{{ route('admin.redeems.destroy', $redeem->id) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this redeem rule?')">Delete</button>
                                                                 </div>
                                                             </form> 
                                                       
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/promotions/{{$promotion->id}}/update">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/redeems/{{$redeem->id}}/update">Update</a>
                                                             </div>
                                                    
                                                     </div>

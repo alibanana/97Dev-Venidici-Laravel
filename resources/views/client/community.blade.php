@@ -12,7 +12,7 @@
         with Venidici Community</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:2vw">“Veni, vidi, vici.” Saya datang, saya lihat, saya
         taklukkan.</p>
-        <a href="#" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none">Bergabung Sekarang</a>                
+        <a href="https://discord.gg/YpgRW5GU" target="_blank" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none">Bergabung Sekarang</a>                
 
     </div>
 </div>
@@ -53,7 +53,7 @@
         <p class="small-heading" style="font-family: Rubik Medium;color:#3B3C43">Join The Channel, Learn and Collaborate with us</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem cras nullam et facilisis at. Aenean suspendisse in blandit enim. Turpis nibh tempor, at arcu. Commodo velit lorem iaculis justo praesent. </p>
         <div style="margin-top:1vw">
-            <a href="#programs-section" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw">Bergabung Sekarang</a>
+            <a href="https://discord.gg/YpgRW5GU" target="_blank" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw">Bergabung Sekarang</a>
         </div>
 
     </div>

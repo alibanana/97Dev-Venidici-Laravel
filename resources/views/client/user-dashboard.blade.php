@@ -3,7 +3,6 @@
 
 @section('content')
 
-
 <!-- START OF POPUP EDIT PROFILE-->
 <div id="edit-profile" class="overlay" style="overflow:scroll">
     <div class="popup">
@@ -192,19 +191,16 @@
 <div id="change-password" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:40% !important">
         <a class="close" href="#" >&times;</a>
-    
         <div class="content" style="padding:2vw">
-            @if (session()->has('error'))
+            @if (session()->has('success'))
             <div class="p-3 mt-2 mb-0">
-                <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                    {{ session()->get('error_validation_on_password_modal') }}     
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="alert alert-success alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
+                    {{ session('success') }}
                 </div>
             </div>
             @endif
-            <form action="">
+            <form action="{{ route('customer.change-password') }}" method="post">
+                @csrf
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
                         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Change Password</p>
@@ -214,8 +210,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Old Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="current_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="John Doe" value="John Doe">
-                            @error('current_password')
+                            <input type="password" name="old_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
+                            @error('old_password')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -224,8 +220,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="new_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="62812345678">
-                            @error('new_password')
+                            <input type="password" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
+                            @error('password')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -234,7 +230,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Confirm New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="62812345678">
+                            <input type="password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -372,7 +368,10 @@
                                 <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
                             </div>
                             <div class="edit-item">
-                                <a href="#my-interests" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-heart"></i> <span style="margin-left:0.87vw">My interests</span></a>   
+                                <a href="#my-interests" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-heart"></i> <span style="margin-left:0.8vw">My interests</span></a>   
+                            </div>
+                            <div class="edit-item">
+                                <a href="/dashboard/redeem-vouchers" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-tags"></i> <span style="margin-left:0.55vw">Vouchers</span></a>   
                             </div>
                             <div class="edit-item" style="border-radius:0px 0px 10px 10px">
                                 <form action="{{ route('logout') }}" method="POST">
@@ -386,7 +385,7 @@
                     </div>  
                 </div>
                 <div style="display:flex;align-items:center">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">10 Points</p>  
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">{{Auth::user()->stars}} Stars</p>  
                     <a href="#points">
                         <i  style="color:#F4C257;margin-left:1vw" class="fas fa-question-circle bigger-text"></i> 
                     </a>
@@ -477,8 +476,9 @@
     <!-- Pelatihan Aktif Content -->
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
         @if(count($orders) == 0)
-            <div style="margin-top:2vw">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;">Tidak ada pelatihan aktif.</p>
+        
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
         @foreach($orders as $course)

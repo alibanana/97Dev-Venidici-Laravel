@@ -24,6 +24,8 @@ use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramContro
 use App\Http\Controllers\Admin\InstructorController as AdminInstructorController;
 use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPositionController;
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
+use App\Http\Controllers\Admin\RedeemController as AdminRedeemController;
+use App\Http\Controllers\Admin\CollaboratorController as AdminCollaboratorController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -42,24 +44,14 @@ use App\Http\Controllers\Api\CheckoutController;
 */
 
 
-/* DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
-
-
 Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware('auth');
 Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
 Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile');
 Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
-//Route::get('/dashboard', function () {
-    //return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
-/* END OF DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
+Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password');
+Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware('auth');
+Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo');
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +74,7 @@ Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->
 
 /*  MENJADI PENGAJAR & KOLLABORATOR*/
 Route::post('/menjadi-pengajar', [AdminInstructorController::class, 'store'])->name('menjadi_pengajar.store');
+Route::post('/menjadi-kolaborator', [AdminCollaboratorController::class, 'store'])->name('collaborators.store');
 Route::post('/add-newsletter', [AdminNewsletterController::class, 'store'])->name('newsletter.store');
 
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
@@ -281,7 +274,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     //NewsletterController
     Route::get('/newsletter', [AdminNewsletterController::class, 'index'])->name('newsletter.index');
     Route::delete('/newsletter/{id}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
-
+    // RedeemController
+    Route::get('/redeems', [AdminRedeemController::class, 'index'])->name('redeems.index');
+    Route::get('/redeems/create', [AdminRedeemController::class, 'create'])->name('redeems.create');
+    Route::post('/redeems', [AdminRedeemController::class, 'store'])->name('redeems.store');
+    Route::get('/redeems/{id}/update', [AdminRedeemController::class, 'edit'])->name('redeems.edit');
+    Route::put('/redeems/{id}', [AdminRedeemController::class, 'update'])->name('redeems.update');
+    Route::delete('/redeems/{id}', [AdminRedeemController::class, 'destroy'])->name('redeems.destroy');
+    //CollaboratorController
+    Route::get('/menjadi-kolaborator', [AdminCollaboratorController::class, 'index'])->name('collaborators.index');
+    Route::delete('/menjadi-kolaborator/{id}', [AdminCollaboratorController::class, 'destroy'])->name('collaborators.destroy');
 });
 
 /* START OF WOKI ROUTING */
@@ -409,10 +411,7 @@ Route::get('/certificate', function () {
 
 /* START OF DOMPDF ROUTING */
 Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
-
 /* END OF DOMPDF ROUTING */
-
-
 
 
 require __DIR__.'/auth.php';

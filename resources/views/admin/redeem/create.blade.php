@@ -1,8 +1,9 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Update Promo')
+@section('title', 'Venidici Create Redeem Rule')
 
 @section('container')
+
 
 <!-- Main Content -->
 <div id="content">
@@ -22,7 +23,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h2 class="mb-0 mb-3 text-gray-800">Update Promo Code</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">New Redeem Rule</h2>
 
         </div>
         
@@ -31,17 +32,16 @@
 
         <!-- start of form -->
         
-        <form action="{{ route('admin.promotions.update', $promotion->id) }}" method="POST" >
-        @csrf
-        @method('put')        
+        <form action="{{ route('admin.redeems.store') }}" method="POST" >
+        @csrf           
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <label for="">Promo Code</label>
-                    <input type="text" name="code" class="form-control form-control-user"
-                        id="code" aria-describedby=""
-                        placeholder="Here insert promo code (e.g. GRX45)" value="{{$promotion->code}}" > 
-                    @error('code')
+                    <label for="">Stars Needed</label>
+                    <input type="text" name="stars" class="form-control form-control-user"
+                        id="stars" aria-describedby=""
+                        placeholder="Here insert stars needed (e.g. 100)" > 
+                    @error('stars')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -52,9 +52,9 @@
                 <div class="form-group">
                     <label for="">Promo Type</label>
                     <select name="type" id="" class="form-control">
-                        <option value="" disabled>Please select promo type</option>
-                        <option value="nominal" @if($promotion->type == 'nominal') selected @endif>Nominal</option>
-                        <option value="percent" @if($promotion->type == 'percent') selected @endif>Percent</option>
+                        <option value="" selected disabled>Please select promo type</option>
+                        <option value="nominal">Nominal</option>
+                        <option value="percent">Percent</option>
                     </select>
                     @error('type')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -67,9 +67,11 @@
                 <div class="form-group">
                     <label for="">Promo For</label>
                     <select name="promo_for" id="" class="form-control">
-                        <option value=""  disabled>Please select promo for</option>
-                        <option value="price" @if($promotion->promo_for == 'price') selected @endif>Price</option>
-                        <option value="shipping" @if($promotion->promo_for == 'shipping') selected @endif>Shipping</option>
+                        <option value="" selected disabled>Please select promo for</option>
+                        <option value="price">Price</option>
+                        <option value="shipping">Shipping</option>
+                        <option value="charity">Charity</option>
+
                     </select>
                     @error('promo_for')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -83,34 +85,8 @@
                     <label for="">Discount</label>
                     <input type="text" name="discount" class="form-control form-control-user"
                         id="discount" aria-describedby=""
-                        placeholder="Here insert discount amount (e.g. 40%)" value="{{$promotion->discount}}" > 
+                        placeholder="Here insert discount amount (e.g. 40 for percent or 10000 for nominal)" > 
                     @error('discount')
-                    <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror               
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label for="">Start Date</label>
-                    <input type="text" name="start_date" class="form-control form-control-user"
-                        id="start_date" aria-describedby=""
-                        placeholder="Here insert date start (e.g. 20 Februari 2021)" value="{{$promotion->start_date}}"> 
-                    @error('start_date')
-                    <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror               
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label for="">Finish Date</label>
-                    <input type="text" name="finish_date" class="form-control form-control-user"
-                        id="finish_date" aria-describedby=""
-                        placeholder="Here insert date finished (e.g. 21 Februari 2021)" value="{{$promotion->finish_date}}"> 
-                    @error('finish_date')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -119,7 +95,7 @@
             </div>
             <div class="col-12">
                 <div style="display:flex;justify-content:flex-end">
-                    <button type="submit"  class="btn btn-primary btn-user p-3">Update Promo Code</button>
+                    <button type="submit"  class="btn btn-primary btn-user p-3">Create New Redeem Rule</button>
                 </div>
 
             </div>

@@ -211,8 +211,31 @@
 
     -->
 
+
     <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/krest') || Request::is('admin/krest/*'))
+    @if(Request::is('admin/redeems') || Request::is('admin/promotions') || Request::is('admin/redeems/*') || Request::is('admin/promotions/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePromotion"
+            aria-expanded="true" aria-controls="collapsePromotion">
+            <i class="fas fa-tags"></i>
+            <span>Promotion</span>
+        </a>
+
+        <div id="collapsePromotion" class="collapse" aria-labelledby="" data-parent="#collapsePromotion">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin/promotions">Promotion List</a>
+                <a class="collapse-item" href="/admin/redeems">Redeem Rule</a>
+
+            </div>
+        </div>
+    </li>
+    
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/menjadi-pengajar') || Request::is('admin/menjadi-pengajar/*'))
     <li class="nav-item active">
     @else
     <li class="nav-item">
@@ -231,35 +254,26 @@
             </div>
         </div>
     </li>
+    
 
-    <!-- Nav Item - Pages Collapse Menu
-    @if(Request::is('admin/community') || Request::is('admin/community/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link" href="/admin/community" 
-            aria-expanded="true" >
-            <i class="fas fa-handshake"></i>
-            <span>Community</span>
-        </a>
-    </li>
-    -->
+
 
 
     
     <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/promotions') || Request::is('admin/promotions/*'))
+    @if(Request::is('admin/menjadi-kolaborator') || Request::is('admin/menjadi-kolaborator/*'))
     <li class="nav-item active">
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link" href="/admin/promotions" 
+        <a class="nav-link" href="/admin/menjadi-kolaborator" 
             aria-expanded="true" >
-            <i class="fas fa-tags"></i>
-            <span>Promo</span>
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Menjadi Kolaborator</span>
         </a>
     </li>
+
+
 
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/newsletter') || Request::is('admin/newsletter/*'))
@@ -275,7 +289,7 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/information') || Request::is('admin/information/*'))
+    @if(Request::is('admin/informations') || Request::is('admin/informations/*'))
     <li class="nav-item active">
     @else
     <li class="nav-item">

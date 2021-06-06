@@ -61,14 +61,20 @@ class PromotionController extends Controller
     {
         $validated = $request->validate([
             'code'          => 'required',
+            'type'          => 'required',
+            'promo_for'     => 'required',
             'discount'      => 'required',
             'start_date'    => 'required|date_format:Y-m-d',
             'finish_date'   => 'required|date_format:Y-m-d',
         ]);
+    
 
         $promotion = new Promotion();
         $promotion->code            = $validated['code'];
+        $promotion->type            = $validated['type'];
+        $promotion->promo_for       = $validated['promo_for'];
         $promotion->discount        = $validated['discount'];
+        $promotion->isActive        = 1;
         $promotion->start_date      = $validated['start_date'];
         $promotion->finish_date     = $validated['finish_date'];
         $promotion->save();
@@ -113,6 +119,8 @@ class PromotionController extends Controller
     {   
         $validated = $request->validate([
             'code'          => 'required',
+            'type'          => 'required',
+            'promo_for'     => 'required',
             'discount'      => 'required',
             'start_date'    => 'required|date_format:Y-m-d',
             'finish_date'   => 'required|date_format:Y-m-d',
@@ -120,9 +128,11 @@ class PromotionController extends Controller
 
         $promotion = Promotion::findOrFail($id);
         $promotion->code        = $validated['code'];
+        $promotion->type        = $validated['type'];
+        $promotion->promo_for   = $validated['promo_for'];
         $promotion->discount    = $validated['discount'];
         $promotion->start_date  = $validated['start_date'];
-        $promotion->finish_date    = $validated['finish_date'];
+        $promotion->finish_date = $validated['finish_date'];
 
         
         $promotion->save();

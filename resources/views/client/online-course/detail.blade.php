@@ -232,20 +232,20 @@
             @endif
             <?php $flag = null;?>
             @if(Auth::check())
-            @foreach($transactions as $transaction)
-                @if($transaction->invoice->status == 'paid' || $transaction->invoice->status == 'completed')
-                @foreach($transaction->invoice->orders as $order)
-                    @if($order->course->id == $course->id)
-                        <?php $flag = true;?>
+                @foreach($transactions as $transaction)
+                    @if($transaction->invoice->status == 'paid' || $transaction->invoice->status == 'completed')
+                    @foreach($transaction->invoice->orders as $order)
+                        @if($order->course->id == $course->id)
+                            <?php $flag = true;?>
+                        @endif
+                    @endforeach
                     @endif
                 @endforeach
-                @endif
-            @endforeach
             @endif
             @if($flag)
 
             <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
-            @else
+            @elseif($course->price != 0)
 
             <form action="{{ route('customer.cart.store') }}" method="post">
             @csrf

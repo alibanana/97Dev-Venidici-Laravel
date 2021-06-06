@@ -52,7 +52,9 @@ class CartController extends Controller
             if($cart->course->course_type_id == 2)
                 $noWoki = FALSE;
         }
-        return view('client/cart', compact('carts','cart_count','transactions','informations','noWoki'));
+        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('client/cart', compact('carts','cart_count','transactions','informations','noWoki','notifications'));
     }
     
     public function shipment_index(Request $request)
@@ -128,7 +130,9 @@ class CartController extends Controller
             if($cart->course->course_type_id == 2)
                 $noWoki = FALSE;
         }
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations','noWoki'));
+        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations','noWoki','notifications'));
     }
 
     public function store(Request $request)

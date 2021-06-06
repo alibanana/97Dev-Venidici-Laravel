@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.5",
         "mattkingshott/axiom": "^2.1",
         "midtrans/midtrans-php": "^2.3",
+        "spatie/laravel-newsletter": "^4.10",
         "tymon/jwt-auth": "1.0.1"
     },
     "require-dev": {

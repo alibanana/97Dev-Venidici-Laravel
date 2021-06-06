@@ -3,7 +3,7 @@
 
 @section('content')
 
-<!-- START OF POPUP POINT EXPLANATION-->
+<!-- START OF POPUP VA EXPLANATION-->
 <div id="pembayaran-va" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:50% !important">
         <a class="close" href="#" >&times;</a>
@@ -21,7 +21,79 @@
         </div>
     </div>
 </div>
-<!-- END OF POPUP POINT EXPLANATION-->
+<!-- END OF POPUP VA EXPLANATION-->
+
+<!-- START OF POPUP COURSE CLAIMED -->
+<div id="payment-success" class="overlay" style="overflow:scroll">
+    <div class="popup" style="width:35% !important">
+        <a class="close" href="#" >&times;</a>
+        <div class="content" style="padding:2vw">
+            <div class="row m-0">
+                <div class="col-12" style="text-align:center;">
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Course Claimed</p>
+                    <img src="/assets/images/client/course_claimed.png" style="width:8vw" alt="">
+                    <?php 
+                    $courses_string = "";
+
+                    $x = 1;
+                    $length = count($invoice->orders);
+                    foreach($invoice->orders as $order)
+                    {
+                        if($x == $length && $length != 1)
+                            $courses_string = $courses_string." dan ";
+                        
+                        elseif($x != 1)
+                            $courses_string = $courses_string.", ";
+            
+                        $courses_string = $courses_string.$order->course->title;
+                        $x++;
+                    }
+                    
+                    ?>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:1.5vw;margin-top:2vw">Course {{$courses_string}} has been added to your dashboard. You have claimed it for @if($invoice->grand_total == 0) FREE @else Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} @endif.</p>
+                    <a href="/dashboard" class="normal-text  btn-dark-blue" style="border:none;font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;width:100%;;text-decoration:none">Go to my dashboard</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF POPUP COURSE CLAIMED -->
+
+<!-- START OF POPUP COURSE BOUGHT -->
+<div id="payment-created" class="overlay" style="overflow:scroll">
+    <div class="popup" style="width:35% !important">
+        <a class="close" href="#" >&times;</a>
+        <div class="content" style="padding:2vw">
+            <div class="row m-0">
+                <div class="col-12" style="text-align:center;">
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Terimakasih telah pesanannya!</p>
+                    <img src="/assets/images/client/course_claimed.png" style="width:8vw" alt="">
+                    <?php 
+                    $courses_string = "";
+
+                    $x = 1;
+                    $length = count($invoice->orders);
+                    foreach($invoice->orders as $order)
+                    {
+                        if($x == $length && $length != 1)
+                            $courses_string = $courses_string." dan ";
+                        
+                        elseif($x != 1)
+                            $courses_string = $courses_string.", ";
+            
+                        $courses_string = $courses_string.$order->course->title;
+                        $x++;
+                    }
+                    
+                    ?>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:1vw;margin-top:2vw">Please complete your payment for the total of Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} for Course: {{$courses_string}}.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF POPUP COURSE BOUGHT -->
 
 <div class="row m-0" style="padding-bottom:4vw;padding-top:11vw">
     <div class="col-12 p-0" style="padding-bottom:3vw">
@@ -267,17 +339,23 @@
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Sub total</p>
                     <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($invoice->total_order_price, 0, ',', ',') }}</p>
                 </div>
+                @if(!$noWoki)
+
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>
                     <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($invoice->cost_courier, 0, ',', ',') }}</p>
                 </div>
+                @endif
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>
                     <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($invoice->discounted_price, 0, ',', ',') }}</p>
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;">
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Total</p>
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($invoice->grand_total, 0, ',', ',') }}</p>
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Rp {{ number_format($invoice->grand_total, 0, ',', ',') }}</p>
+                </div>
+                <div style="display:flex;justify-content:flex-end;align-items:center;">
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0px">(+20 Stars)</p>
                 </div>
             </div>
             <!-- END OF NOMINAL CARD --> 

@@ -368,7 +368,10 @@
                 @endif
                 <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Ringkasan Pembayaran</p>
                 @if($total_price != 0)
-                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:2vw">Kode Voucher</p>
+                <div style="display:flex;align-items:center;margin-bottom:0.4vw;margin-top:2vw">
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0px">Kode Voucher</p>
+                    <a href="/dashboard/redeem-vouchers" style="text-decoration:none;color:#2B6CAA;margin-left:4vw" class="normal-text" target="_blank"><i class="fas fa-question-circle"></i></a>
+                </div>
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         
                         <div class="auth-input-form" style="display: flex;align-items:center;width:50%">
@@ -390,7 +393,12 @@
                         if(Session::get('promotion_code'))
                         {
                             $discount = Session::get('promotion_code')->discount;
-                            $discounted_price = $sub_total * ($discount/100);
+                            //check if its percent or nominal
+                            if(Session::get('promotion_code')->type == 'nominal')
+                                $discounted_price = $discount;
+                            else
+                                $discounted_price = $sub_total * ($discount/100);
+                            
                         }
                         else
                             $discounted_price = 0;
@@ -420,7 +428,15 @@
                     @endif
                     @if($total_price != 0)
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
-                        <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>
+                        @if(Session::get('promotion_code'))
+                            @if(Session::get('promotion_code')->type == 'percent')
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher ({{Session::get('promotion_code')->discount}}%) </p>
+                            @else
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher </p>
+                            @endif
+                        @else
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher </p>
+                        @endif
                         <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discounted_price, 0, ',', ',') }}</p>
                     </div>
 

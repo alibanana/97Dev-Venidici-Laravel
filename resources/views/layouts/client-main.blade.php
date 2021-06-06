@@ -61,8 +61,7 @@
             <i class="p3 fas fa-bell fa-stack-1x xfa-inverse"></i>
           </span>
         </a>
-      
-        <a class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @endif"></i></a>
+        <a class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @elseif(Request::is('dashboard/*')) navbar-item-active @endif"></i></a>
         
         @endif
         
@@ -85,78 +84,105 @@
             </div>
             <!-- START OF SEMUA NOTIFICATION -->
             <div class="col-md-12 notif-content" id="semua-notification" style="overflow:scroll;height:20vw;">
-              <!-- ONE YELLOW CARD -->
-              <a href="" style="text-decoration:none">
-                <div style="display:flex;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+              @foreach($notifications as $notif)
+                @if($notif->isInformation)
+                  <?php
+                      $info_users = explode(',', $notif->hasSeen);
+                      $infoHasSeen = FALSE;
+                      foreach($info_users as $user_id)
+                      {
+                        if($user_id == Auth::user()->id)
+                          $infoHasSeen = TRUE;
+                      }
+                  ?>
+                  <!-- ONE YELLOW CARD -->
+                  <form action="{{ route('customer.seeNotification') }}" method="POST">
+                  @csrf  
+                  @method('put')  
+                  @if(!$infoHasSeen)
+                    <a href="javascript:;" onclick="parentNode.submit();"style="text-decoration:none">
+                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                    <input type="hidden" name="notification_id" value="{{$notif->id}}">
+                    <input type="hidden" name="link" value="{{$notif->link}}">
+                  @else
+                    <a href="{{$notif->link}}" target="_blank" style="text-decoration:none">
+                  @endif
+                  <!-- ONE YELLOW CARD -->
+                    <div class="information-notification-card" style="display:flex;@if($loop->iteration != 1) margin-top:1vw @endif" >
+                      <div   style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                          <div class="notification-left-yellow-border" >
+                            <i class="fas fa-info-circle bigger-text" style="color:#F4C257"></i>
 
+                          </div>
                       </div>
-                  </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
-                      <div style="padding:0.6vw 1vw">
-                          
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
-                          overflow : hidden !important;
-                          text-overflow: ellipsis !important;
-                          -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
+                      <div class="notification-right-yellow-border" @if(!$infoHasSeen) style="background: rgba(244, 194, 87, 0.1)" @endif>
+                          <div style="padding:0.6vw 1vw">
+                              
+                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
+                            <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$notif->created_at->diffForHumans()}}</p>
+                            <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                              overflow : hidden !important;
+                              text-overflow: ellipsis !important;
+                              -webkit-line-clamp: 2 !important;
+                              -webkit-box-orient: vertical !important;">{{$notif->description}}</p>
+                          </div>
                       </div>
-                  </div>
-                </div>
-              </a>
-              <!-- END OF ONE YELLOW CARD -->
-              <!-- ONE BLUE CARD -->
-              <a href="/transaction-detail/1" style="text-decoration:none">
-                <div style="display:flex;margin-top:1vw;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #2B6CAA;border-left: 2px solid #2B6CAA;border-bottom:2px solid #2B6CAA;height:100%;background: rgba(43, 108, 170, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#2B6CAA"></i>
+                    </div>
+                  </a>
+                  </form>
+                  <!-- END OF ONE YELLOW CARD -->
+                @else
+                <?php
+                    $users = explode(',', $notif->hasSeen);
+                    $hasSeen = FALSE;
+                    foreach($users as $user_id)
+                    {
+                      if($user_id == Auth::user()->id)
+                        $hasSeen = TRUE;
+                    }
+                ?>
+                <!-- ONE BLUE CARD -->
+                <form action="{{ route('customer.seeNotification') }}" method="POST">
+                @csrf  
+                @method('put')  
+                @if(!$hasSeen)
+                <a href="javascript:;" onclick="parentNode.submit();"style="text-decoration:none">
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                <input type="hidden" name="notification_id" value="{{$notif->id}}">
+                <input type="hidden" name="link" value="{{$notif->link}}">
+                @else
+                <a  href="{{$notif->link}}" style="text-decoration:none">
+                @endif
+                  <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
+                    <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                        <div class="notification-left-blue-border">
+                          <i class="fas fa-shopping-cart bigger-text" style="color:#2B6CAA"></i>
 
-                      </div>
+                        </div>
+                    </div>
+                    <div class="notification-right-blue-border" @if(!$hasSeen) style="background: rgba(43, 108, 170, 0.1) @endif">
+                        <div style="padding:0.6vw 1vw">
+                            
+                          <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
+                          <?php
+                              $date_time = explode(' ', $notif->updated_at->diffForHumans());
+                          ?>
+                          <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
+                          <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                            overflow : hidden !important;
+                            text-overflow: ellipsis !important;
+                            -webkit-line-clamp: 2 !important;
+                            -webkit-box-orient: vertical !important;">{{$notif->description}}
+                          </p>
+                            <!-- Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”. -->
+                        </div>
+                    </div>
                   </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #2B6CAA;border-right: 2px solid #2B6CAA;border-bottom: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
-                      <div style="padding:0.6vw 1vw">
-                          
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Kami masih menunggu pembayaran kamu...</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
-                          overflow : hidden !important;
-                          text-overflow: ellipsis !important;
-                          -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Hi, Gabriel. Harap segera selesaikan pembayaran untuk pelatihan: “How to be Funny”, “Ethical Hacking 101”, dan “Self-improvement Lets Go!”.</p>
-                      </div>
-                  </div>
-                </div>
-              </a>
-              <!-- END OF ONE BLUE CARD -->
-              <!-- ONE YELLOW CARD -->
-              <a href="" style="text-decoration:none">
-                <div style="display:flex;margin-top:1vw;" >
-                  <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                      <div style="border-top: 2px solid #F4C257;border-left: 2px solid #F4C257;border-bottom:2px solid #F4C257;height:100%;background: rgba(244, 194, 87, 0.1);display: flex;flex-direction: column;justify-content: center;align-items:center;width:4vw;border-radius: 10px 0px 0px 10px">
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
-
-                      </div>
-                  </div>
-                  <div style="background: #FFFFFF;border-top: 2px solid #F4C257;border-right: 2px solid #F4C257;border-bottom: 2px solid #F4C257;box-sizing: border-box;border-radius: 0px 10px 10px 0px;width:100%">
-                      <div style="padding:0.6vw 1vw">
-                          
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">Venidici ada Sales Event baru loh!</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">Mon 02/01/21 19:30</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
-                          overflow : hidden !important;
-                          text-overflow: ellipsis !important;
-                          -webkit-line-clamp: 2 !important;
-                          -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum vitae vel justo, vel ut eros. Et magna penatibus ipsum volutpat amet eget etiam.</p>
-                      </div>
-                  </div>
-                </div>
-              </a>
-              <!-- END OF ONE YELLOW CARD -->
+                </a>
+                </form>
+                <!-- END OF ONE BLUE CARD -->
+                @endif
+              @endforeach
             </div>
             <!-- END OF SEMUA NOTIFICATION -->
 
@@ -250,7 +276,7 @@
                 <div class="information-notification-card" style="display:flex;@if($loop->iteration != 1) margin-top:1vw @endif" >
                   <div   style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                       <div class="notification-left-yellow-border" >
-                        <i class="fas fa-exclamation-triangle bigger-text" style="color:#F4C257"></i>
+                        <i class="fas fa-info-circle bigger-text" style="color:#F4C257"></i>
 
                       </div>
                   </div>
@@ -299,11 +325,6 @@
           </div>
 
           <div>
-            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Homepage</p>
-            <a href="/" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Home</a>
-          </div>
-
-          <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">For Public</p>
             <div>
               <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Online Course</a>
@@ -326,14 +347,6 @@
               <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
             </div>
           </div>
-          @if(Auth::check())
-          <div>
-            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Profile</p>
-            <div>
-              <a href="/dashboard" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">User Dashboard</a>
-            </div>
-          </div>
-          @endif
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Social</p>
@@ -344,7 +357,10 @@
               <a href="https://www.facebook.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-facebook bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Facebook</span></a>
             </div>
             <div style="margin-top:0.5vw">
-              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-instagram bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Instagram</span></a>
+              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-instagram bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Instagram</span></a>
+            </div>
+            <div style="margin-top:0.5vw">
+              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-whatsapp bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
             </div>
           </div>
           

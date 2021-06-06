@@ -4,6 +4,53 @@
 
 @section('container')
 
+<!-- password Modal-->
+<div class="modal fade" id="addStarsModal" tabindex="-1" role="dialog" aria-labelledby="addStarsModal"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addStarsModal">Give Stars To User</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			@if (session()->has('error_validation_on_add_stars'))
+			<div class="p-3 mt-2 mb-0">
+				<div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
+					{{ session()->get('error_validation_on_add_stars') }}     
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+			@endif
+
+			<form method="POST" action="">
+			@csrf
+			{{ method_field('PUT') }}
+			<div class="modal-body">
+					<input type="hidden" name="user_id" id="user_id">
+				<h6 class="modal-title" id="addStarsModal">Number of stars</h6>
+				<div class="form-group mt-2">
+					<input type="text" name="stars" class="form-control form-control-user"
+						id="exampleInputPassword" placeholder="Insert given stars">
+					@error('stars')
+						<span class="invalid-feedback" role="alert" style="display: block !important;">
+							<strong>{{ $message }}</strong>
+						</span>
+					@enderror
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+				<button class="btn btn-primary" type="submit">Confirm</button>   
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <!-- Main Content -->
 <div id="content">
 
@@ -65,6 +112,7 @@
 									<select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'active']) }}" @if (Request::get('filter') == 'active') selected @endif>Active</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'suspended']) }}" @if (Request::get('filter') == 'suspended') selected @endif>Suspended</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'birthday-today']) }}" @if (Request::get('filter') == 'birthday-today') selected @endif>Birthday Today</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'none']) }}" @if (!Request::has('filter')) selected @endif>None</option>
                                     </select>
                                 </label>
@@ -98,6 +146,7 @@
 											<th>Telephone</th>
 											<th>Referral Code</th>
 											<th>Occupancy</th>
+											<th>Stars</th>
 											<th>Status</th>
 											<th  class="text-nowrap">Signed Up At</th>
 											<th>Action</th>
@@ -118,6 +167,7 @@
 													<td>-</td>
 													<td>-</td>
 												@endif
+												<td>{{$user->stars}}</td>
 												@if ($user->status == 'active')
 													<td style="color:green">Active</td>
 												@else
@@ -140,11 +190,13 @@
 																		<button class="d-sm-inline-block btn btn-info shadow-sm" type="submit" onclick="return confirm('Are you sure you want to suspend this user?')">Suspend</button>
 																</div>
 														</form> 
-														<!--
-														<div style="padding: 0px 2px;">
-																<a class="d-sm-inline-block btn btn-info shadow-sm" href="">Update</a>
+														
+														<div style="padding: 0px 2px;" class="text-nowrap">
+															<a onclick="passUserIDandEmail({{$user->id}})" class="d-sm-inline-block btn btn-secondary shadow-sm" href="#" data-toggle="modal" data-target="#addStarsModal">
+																Add Stars
+															</a>
 														</div>
-														-->
+														
 													</div>
 												</td>
 											</tr>
@@ -169,4 +221,12 @@
     </div>
     <!-- /.container-fluid -->
 </div>
+
+<script>
+    function passUserIDandEmail(user_id) {
+
+		document.getElementById("user_id").value = user_id;
+
+    }
+</script>
 @endsection
