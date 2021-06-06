@@ -153,9 +153,7 @@
 
                     @php
                         $new_carousel_item = false;
-                        if ($card_counter == 4) {
-                            $card_counter = 0;
-                        }
+                        if ($card_counter == 4) $card_counter = 0;
                     @endphp
                 @endforeach
             </div>
