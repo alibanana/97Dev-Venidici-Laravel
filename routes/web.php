@@ -57,6 +57,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.
 Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
 Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile');
 Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
+
+Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware('auth');
+Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo');
 //Route::get('/dashboard', function () {
     //return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');

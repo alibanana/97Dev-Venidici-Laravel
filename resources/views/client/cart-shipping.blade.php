@@ -368,7 +368,10 @@
                 @endif
                 <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Ringkasan Pembayaran</p>
                 @if($total_price != 0)
-                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:2vw">Kode Voucher</p>
+                <div style="display:flex;align-items:center;margin-bottom:0.4vw;margin-top:2vw">
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0px">Kode Voucher</p>
+                    <a href="/dashboard/redeem-vouchers" style="text-decoration:none;color:#2B6CAA;margin-left:4vw" class="normal-text" target="_blank"><i class="fas fa-question-circle"></i></a>
+                </div>
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         
                         <div class="auth-input-form" style="display: flex;align-items:center;width:50%">

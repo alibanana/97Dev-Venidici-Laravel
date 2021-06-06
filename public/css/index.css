@@ -1498,3 +1498,48 @@ html, body {
     text-underline-offset: 0.4vw;
     text-decoration-thickness: 0.2vw;
 }
+
+.voucher-card-active{
+    width:23vw;display:flex;height:8vw;box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);border-radius:10px;margin-top:2vw
+}
+
+.voucher-card-active #left-bar{
+    background:#2B6CAA
+}
+.voucher-card-active #card-color{
+    border: 2px solid #2B6CAA;
+    color: #2B6CAA
+}
+
+
+.voucher-card-claimed{
+    width:23vw;display:flex;height:8vw;box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);border-radius:10px;margin-top:2vw
+}
+.voucher-card-claimed #left-bar{
+    background:#67BBA3 
+}
+.voucher-card-claimed #card-color{
+    border: 2px solid #67BBA3;
+    color: #67BBA3
+}
+
+.voucher-card-expired{
+    width:23vw;display:flex;height:8vw;box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);border-radius:10px;margin-top:2vw
+}
+.voucher-card-expired #left-bar{
+    background:#C4C4C4 
+}
+.voucher-card-expired #card-color{
+    border: 2px solid #C4C4C4;
+    color: #C4C4C4
+}
+.voucher-card-expired #card-text{
+    color:#C4C4C4 !important
+}
+
+.redeem-card-blue{
+    border: 2px solid #2B6CAA;
+    border-radius: 10px;
+    width:20.3vw
+
+}
