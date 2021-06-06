@@ -42,24 +42,12 @@ use App\Http\Controllers\Api\CheckoutController;
 */
 
 
-/* DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
-
-
 Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware('auth');
 Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
 Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile');
 Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
-//Route::get('/dashboard', function () {
-    //return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
-/* END OF DEFAULT ROUTINGS FROM LARAVEL-BREEZE */
+Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password');
 
 /*
 |--------------------------------------------------------------------------
@@ -393,10 +381,7 @@ Route::get('/certificate', function () {
 
 /* START OF DOMPDF ROUTING */
 Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
-
 /* END OF DOMPDF ROUTING */
-
-
 
 
 require __DIR__.'/auth.php';

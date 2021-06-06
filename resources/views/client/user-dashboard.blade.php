@@ -3,7 +3,6 @@
 
 @section('content')
 
-
 <!-- START OF POPUP EDIT PROFILE-->
 <div id="edit-profile" class="overlay" style="overflow:scroll">
     <div class="popup">
@@ -192,19 +191,19 @@
 <div id="change-password" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:40% !important">
         <a class="close" href="#" >&times;</a>
-    
         <div class="content" style="padding:2vw">
-            @if (session()->has('error'))
+            @if (session()->has('success'))
             <div class="p-3 mt-2 mb-0">
-                <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                    {{ session()->get('error_validation_on_password_modal') }}     
+                <div class="alert alert-success alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
+                    {{ session('success') }}     
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             </div>
             @endif
-            <form action="">
+            <form action="{{ route('customer.change-password') }}" method="post">
+                @csrf
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
                         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Change Password</p>
@@ -214,8 +213,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Old Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="current_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="John Doe" value="John Doe">
-                            @error('current_password')
+                            <input type="password" name="old_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
+                            @error('old_password')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -224,8 +223,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="new_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="62812345678">
-                            @error('new_password')
+                            <input type="password" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
+                            @error('password')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -234,7 +233,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Confirm New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
-                            <input type="password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="62812345678">
+                            <input type="password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>

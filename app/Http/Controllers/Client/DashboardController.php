@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Axiom\Rules\StrongPassword;
 use App\Helper\Helper;
 
 use App\Models\Hashtag;
@@ -19,11 +21,7 @@ use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Shows the client User Dashboard page.
     public function index()
     {
         $provinces = Province::all();
@@ -60,11 +58,7 @@ class DashboardController extends Controller
         return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders','interests','informations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Updates Users's data in the database.
     public function update_profile(Request $request, $id)
     {
         $input = $request->all();
@@ -74,35 +68,27 @@ class DashboardController extends Controller
             'birthdate'     => 'date',
         ]);
 
-        if($validated->fails()) return redirect('/dashboard#edit-profile')->withErrors($validated);
-        else $validated = $validated->validate();
+        if($validated->fails()) 
+            return redirect('/dashboard#edit-profile')->withErrors($validated);
+        else 
+            $validated = $validated->validate();
         
-        
-        //
 
         $user = User::findOrFail($id);
-        $user->name                 = $validated['name'];
+        $user->name = $validated['name'];
+
         if ($request->has('avatar')) {
             if($user->avatar)
                 unlink($user->avatar);
             $user->avatar = Helper::storeImage($request->file('avatar'), 'storage/images/users/');
         }
+
         $user->save();
 
-        $user_detail                = $user->userDetail;
+        $user_detail = $user->userDetail;
         $user_detail->update($request->except([
             'name','telephone'
         ]));
-
-        //$user_detail->telephone     = $validated['telephone'];
-        //$user_detail->birthdate     = $input['birthdate'];
-        //$user_detail->gender        = $input['gender'];
-        //$user_detail->address       = $input['address'];
-        //$user_detail->company       = $input['company'];
-        //$user_detail->occupancy     = $input['occupancy'];
-        //$user_detail->province_id   = $input['province_id'];
-        //$user_detail->city_id       = $input['city_id'];
-        //$user_detail->save();
 
         return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil!');
     }
@@ -112,7 +98,7 @@ class DashboardController extends Controller
         $validated = $request->validate([
             'interests' => 'required|array',
         ]);
-       
+
         //here store to user and user detail table
 
         $hashtag_ids= [];
@@ -127,64 +113,49 @@ class DashboardController extends Controller
         
         auth()->user()->hashtags()->sync($hashtag_ids);
 
-
         return redirect('/dashboard#my-interests')->with('success', 'Update Profile Berhasil!');
-
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // Changes the user's password in the database.
+    public function changePassword(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => ['required', 'confirmed', new StrongPassword]
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($validator->fails()) {
+            return redirect(route('customer.dashboard') . '#change-password')
+                ->withErrors($validator);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $validated = $request->only(['old_password', 'password']);
+        $user = auth()->user();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        // Check if old password matches.
+        if (!Hash::check($validated['old_password'], $user->password)) {
+            return redirect(route('customer.dashboard') . '#change-password')
+                ->withErrors([
+                    'old_password' => 'Current password does not matched..'
+                ]);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        // Check if new password is the same with old password.
+        if (Hash::check($validated['password'], $user->password)) {
+            return redirect(route('customer.dashboard') . '#change-password')
+                ->withErrors([
+                    'password' => 'New password cannot be the same..'
+                ]);
+        }
+
+        $user->password =  Hash::make($validated['password']);
+        $user->save();
+
+        if ($user->wasChanged()) {
+            $message = 'Your password has been changed.';
+        } else {
+            $message = 'Seems like something went wrong..';
+        }
+
+        return redirect(route('customer.dashboard') . '#change-password')->with('success', $message);
     }
 }
