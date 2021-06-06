@@ -189,14 +189,13 @@ class DashboardController extends Controller
 
     public function redeemPromo(Request $request)
     {
-        
         $redeem = Redeem::findOrFail($request->redeem_id);
         //check whether starsnya cukup atau enggak
         if(auth()->user()->stars > $redeem->stars)
         {
             $new_promo_id = Promotion::orderBy('created_at','desc')->first()->id +1;
             $new_name = substr(auth()->user()->name, 0,3);
-
+        
             $promo_name = 'DISC'.$new_name.$new_promo_id;
             
             //get current date
@@ -207,7 +206,6 @@ class DashboardController extends Controller
             $next_year = explode(' ', Carbon::now()->addYear(1));
             $next_year_date = $next_year[0];
             
-
             //1. buat promo khusus untuk user
             $promotion = new Promotion();
             $promotion->user_id         = auth()->user()->id;

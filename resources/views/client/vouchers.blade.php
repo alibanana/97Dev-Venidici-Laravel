@@ -72,7 +72,10 @@
 
     <!-- END OF MY VOUCHERS -->
 
-    <!-- START OF DUMMY REDEEM RULES -->
+
+
+
+    <!-- START OF REDEEM RULES -->
     <div class="col-12 p-0" style="margin-top:4vw">
         @if (session()->has('redeem_success'))
             <div class="col-12 " style="margin-bottom:1vw">
@@ -91,54 +94,6 @@
                 </div>
             </div>
         @endif
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Redeem Voucher</p>
-        <div class="row">
-            @foreach($redeem_rules as $redeem)
-            <!-- START OF ONE REDEEM  CARD -->
-            <div class="col-3" style="display:flex;justify-content:center">
-                <div class="redeem-card-blue" style="padding:1.5vw;width:20vw">
-                    <div style="text-align:center">
-                        <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
-                    </div>
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">
-                    @if($redeem->promo_for == 'charity')
-                    Donate
-                    @else
-                    Diskon
-                    @endif 
-
-                    @if($redeem->type == 'percent')
-                    {{$redeem->discount}}% 
-                    @else
-                    Rp{{ number_format($redeem->discount, 0, ',', ',') }}
-                    @endif 
-                
-                    </p>
-                    <div style="display:flex;align-items:center;margin-top:0.5vw">
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">Exp. date</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;margin-left:1vw">{{$next_year_date}}</p>
-                    </div>
-                    <hr style="height:0.2vw;background:#2B6CAA;margin:0px">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw;">
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$redeem->stars}} Stars</p>
-                        <form action="{{route('customer.redeemPromo')}}" method="post">
-                        @csrf
-                            <input type="hidden" name="redeem_id" value="{{$redeem->id}}"> 
-                            <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;padding:0.2vw 1vw !important">Redeem</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- END OF ONE  REDEEM CARD -->
-            @endforeach
-        </div>
-    </div>
-    <!-- END OF DUMMY REDEEM RULES -->
-
-
-
-    <!-- START OF REDEEM RULES -->
-    <div class="col-12 p-0" style="margin-top:4vw">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Redeem Voucher</p>
         <!-- START OF CAROUSEL -->
         <div id="redeem-carousel" style="margin-top:2vw" class="carousel slide" data-interval="5000" data-ride="carousel">
@@ -161,18 +116,31 @@
                             <div style="text-align:center">
                                 <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
                             </div>
-                            <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">Diskon Rp10,000</p>
-                            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5vw">
+                            <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">
+                            @if($rule->promo_for == 'charity')
+                            Donate
+                            @else
+                            Diskon
+                            @endif 
+
+                            @if($rule->type == 'percent')
+                            {{$rule->discount}}% 
+                            @else
+                            Rp{{ number_format($rule->discount, 0, ',', ',') }}
+                            @endif 
+                            </p>
+                            <div style="display:flex;align-items:center;margin-top:0.5vw">
                                 <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">Exp. date</p>
-                                <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">27/03/2021</p>
-                                <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;">(1y 3m 2d)</p>
+                                <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;margin-left:1vw">{{$next_year_date}}</p>
                             </div>
                             <hr style="height:0.2vw;background:#2B6CAA;margin:0px">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw;">
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{ $rule->stars }} Stars</p>
-                                <form action="">
+                                <form action="{{route('customer.redeemPromo')}}" method="post">
+                                @csrf
+                                    <input type="hidden" name="redeem_id" value="{{$rule->id}}"> 
                                     <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;padding:0.2vw 1vw !important">Redeem</button>
-                                </form>
+                                </form> 
                             </div>
                         </div>
                     </div>
