@@ -51,19 +51,19 @@
         <a class="close" href="#closed" >&times;</a>
     
         <div class="content" style="padding:2vw">
-            @if (session()->has('menjadi_pengajar_message'))
-            <div class="p-3 mt-2 mb-0">
-                <div class="alert alert-info alert-dismissible fade show m-0 normal-text" role="alert" >
-                    {{ session()->get('menjadi_pengajar_message') }}
-                </div>
-            </div>
-            @endif
             <form action="{{route('menjadi_pengajar.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                         <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Menjadi Pengajar</p>
+                        @if (session()->has('menjadi_kolaborator_message'))
+                        <div class="p-3 mt-2 mb-0">
+                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                            {{ session()->get('menjadi_kolaborator_message') }}
+                            </div>
+                        </div>
+                        @endif
                     </div>
                     <!-- START OF GENERAL INFORMATION -->
                     <div class="col-12" style="text-align:left;margin-top:1vw">
@@ -279,26 +279,25 @@
 <!-- END OF POPUP MENJADI PENGAJAR-->
 
 <!-- START OF POPUP MENJADI KOLLABORATOR-->
-<div id="menjadi-kollaborator" class="overlay" style="overflow:scroll">
+<div id="menjadi-kolaborator" class="overlay" style="overflow:scroll">
     <div class="popup">
         <a class="close" href="#closed" >&times;</a>
     
         <div class="content" style="padding:2vw">
-            @if (session()->has('error'))
-            <div class="p-3 mt-2 mb-0">
-                <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                    {{ session()->get('error_validation_on_password_modal') }}     
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-            @endif
-            <form action="">
+            
+            <form action="{{route('collaborators.store')}}" method="POST" enctype="multipart/form-data">
+            @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                         <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Menjadi Kollaborator</p>
+                        @if (session()->has('menjadi_kolaborator_message'))
+                        <div class="p-3 mt-2 mb-0">
+                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                            {{ session()->get('menjadi_kolaborator_message') }}
+                            </div>
+                        </div>
+                        @endif
                     </div>
                     <!-- START OF LEFT SECTION -->
                     <div class="col-6" style="">
@@ -306,32 +305,32 @@
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
                             <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" >
-                            @error('name')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Socmed Institusi (optional)</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-heart"></i>
-                            <input type="text" name="institusi" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Institusi" >
-                            @error('institusi')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="institution_socmed" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Institusi" >
                         </div>  
+                        @error('institution_socmed')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
                             <input type="email" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Email" >
-                            @error('email')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('email')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                     </div> 
                     <!-- END OF LEFT SECTION --> 
@@ -340,52 +339,52 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Institusi</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
-                            <input type="email" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama Institusi" >
-                            @error('email')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="institution" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama Institusi" >
                         </div>  
+                        @error('institution')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Partnership</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-hands-helping"></i>
-                            <select name="province" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="collaborator_partnership" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Partnership</option>
                                 <option value="Event Collaboration">Event Collaboration</option>
                                 <option value="Brand Activation">Brand Activation</option>
                                 <option value="ontent Collaboration">Content Collaboration</option>
                                 <option value="Other">Other</option>
                             </select>                              
-                            @error('company')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('collaborator_partnership')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Whatsapp</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Whatsapp" >
-                            @error('telephone')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" name="whatsapp" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Whatsapp" >
                         </div>  
+                        @error('whatsapp')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Notes</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan catatan" ></textarea>
-                            @error('referral_code')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <textarea name="notes" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan catatan" ></textarea>
                         </div>  
+                        @error('notes')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     
                     <div class="col-12" style="text-align:center;padding-top:3vw">
@@ -1155,7 +1154,7 @@ END OF OUR PROGRAMS SECTION -->
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">Bagikan pengalamanmu dengan mengajar bersama kami kepada generasi digital saat ini sekarang!</p>
                     </div>
                 </a>
-                <a href="#menjadi-kollaborator" style="text-decoration:none">
+                <a href="#menjadi-kolaborator" style="text-decoration:none">
                     <div class="rounded-card" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-left:2vw">
                         <p class="small-heading" id="card-title" style="color:#3B3C43;font-family:Rubik Medium">Menjadi Kolaborator</p>
                         <img src="/assets/images/client/Menjadi_Kolaborator.png" style="height:13vw;margin-top:1vw" class="img-fluid" alt="Menjadi Kolaborator">

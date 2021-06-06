@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Collaborator;
+use Illuminate\Support\Facades\Validator;
+
 
 class CollaboratorController extends Controller
 {
@@ -14,7 +16,7 @@ class CollaboratorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $collaborators = new Collaborator;
 
@@ -43,7 +45,8 @@ class CollaboratorController extends Controller
 
         $collaborators = $collaborators->get();
 
-        return view('admin/', compact('collaborators'));
+
+        return view('admin/menjadi_kolaborator', compact('collaborators'));
     }
 
     /**
@@ -67,20 +70,21 @@ class CollaboratorController extends Controller
         $input = $request->all();
         $validated = Validator::make($input,[
             'name'                          => 'required',
-            'institution'                   => 'required|email',
+            'institution'                   => 'required',
             'collaborator_partnership'      => 'required',
-            'email'                         => 'required',
+            'email'                         => 'required|email',
             'whatsapp'                      => 'required',
             'notes'                         => 'required',
         ]);
 
-        if($validated->fails()) return redirect('/#')->withErrors($validated);
+        if($validated->fails()) return redirect('/#menjadi-kolaborator')->withErrors($validated);
+        
 
         $collaborator = new Collaborator();
         $collaborator->name                         = $request->name;
         $collaborator->institution                  = $request->institution;
         if($input['institution_socmed'] != null)
-        $collaborator->institution_socmed           = $request->institution_socmed;
+            $collaborator->institution_socmed           = $request->institution_socmed;
         $collaborator->collaborator_partnership     = $request->collaborator_partnership;
         $collaborator->email                        = $request->email;
         $collaborator->whatsapp                     = $request->whatsapp;
@@ -90,7 +94,7 @@ class CollaboratorController extends Controller
 
         $message = "Thank you for applying! We'll get back tou you as soon as possible";
 
-        return redirect('/#')->with('message', $message);
+        return redirect('/#menjadi-kolaborator')->with('menjadi_kolaborator_message', $message);
     }
 
     /**

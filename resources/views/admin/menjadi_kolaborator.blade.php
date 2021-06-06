@@ -89,39 +89,31 @@
                                                 <th>Institusi</th>
                                                 <th>Socmed Institusi</th>
                                                 <th>Jenis Partnership</th>
-                                                <th>Whatsapp</th>
                                                 <th>Notes</th>
-                                                <th>Desired Position</th>
-                                                <th>Desired Fee</th>
-                                                <th >CV</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($applicants as $applicant)
+                                            @foreach($collaborators as $applicant)
                                             <tr>
-                                                <td>1</td>
+                                                <td>{{$loop->iteration}}</td>
                                                 <td>
                                                 {{$applicant->name}} <br>
                                                 {{$applicant->email}} <br>
-                                                {{$applicant->phone}} <br>
-                                                {{$applicant->job}}
+                                                {{$applicant->whatsapp}} <br>
                                                 </td>
-                                                <td>{{$applicant->linkedIn}}</td>   
-                                                <td>{{$applicant->address}}</td>   
-                                                <td>{{$applicant->company}}</td>   
-                                                <td>{{$applicant->education}}</td>      
-                                                <td class="text-nowrap">
-                                                <a href="{{ asset($applicant->cv) }}" target="_blank">View CV</a>
-                                                </td>   
+                                                <td class="text-nowrap">{{$applicant->institution}}</td>   
+                                                <td>{{$applicant->institution_socmed}}</td>   
+                                                <td class="text-nowrap">{{$applicant->collaborator_partnership}}</td>   
+                                                <td>{{$applicant->notes}}</td>     
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
 
-                                                            <form action="{{ route('admin.instructors.destroy', $applicant->id) }}" method="post">
+                                                            <form action="{{ route('admin.collaborators.destroy', $applicant->id) }}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                             <div style="padding: 0px 2px">
-                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this instructor?')">Delete</button>
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this applicant?')">Delete</button>
                                                             </div>
                                                         </form> 
                                                             <!--

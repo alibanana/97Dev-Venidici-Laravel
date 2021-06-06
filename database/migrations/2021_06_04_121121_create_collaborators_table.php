@@ -17,10 +17,10 @@ class CreateCollaboratorsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('institution');
-            $table->string('institution_socmed');
+            $table->string('institution_socmed')->nullable();
             $table->enum('collaborator_partnership', ['Event Collaboration', 'Brand Activation', 'Content Collaboration', 'Other']);
             $table->string('email');
-            $table->integer('whatsapp');
+            $table->string('whatsapp');
             $table->text('notes');
             $table->timestamps();
         });

@@ -17,5 +17,5 @@ class Collaborator extends Model
         'email',
         'whatsapp',
         'notes'
-    ]
+    ];
 }

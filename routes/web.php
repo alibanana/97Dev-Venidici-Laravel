@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\InstructorController as AdminInstructorController
 use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPositionController;
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\Admin\RedeemController as AdminRedeemController;
+use App\Http\Controllers\Admin\CollaboratorController as AdminCollaboratorController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -86,6 +87,7 @@ Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->
 
 /*  MENJADI PENGAJAR & KOLLABORATOR*/
 Route::post('/menjadi-pengajar', [AdminInstructorController::class, 'store'])->name('menjadi_pengajar.store');
+Route::post('/menjadi-kolaborator', [AdminCollaboratorController::class, 'store'])->name('collaborators.store');
 Route::post('/add-newsletter', [AdminNewsletterController::class, 'store'])->name('newsletter.store');
 
 Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
@@ -292,6 +294,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     Route::get('/redeems/{id}/update', [AdminRedeemController::class, 'edit'])->name('redeems.edit');
     Route::put('/redeems/{id}', [AdminRedeemController::class, 'update'])->name('redeems.update');
     Route::delete('/redeems/{id}', [AdminRedeemController::class, 'destroy'])->name('redeems.destroy');
+    //CollaboratorController
+    Route::get('/menjadi-kolaborator', [AdminCollaboratorController::class, 'index'])->name('collaborators.index');
+    Route::delete('/menjadi-kolaborator/{id}', [AdminCollaboratorController::class, 'destroy'])->name('collaborators.destroy');
 });
 
 /* START OF WOKI ROUTING */
