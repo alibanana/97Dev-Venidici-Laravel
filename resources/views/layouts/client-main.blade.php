@@ -61,8 +61,7 @@
             <i class="p3 fas fa-bell fa-stack-1x xfa-inverse"></i>
           </span>
         </a>
-      
-        <a class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @endif"></i></a>
+        <a class="sub-description navbar-item" href="/dashboard" style="color:#2B6CAA"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @elseif(Request::is('dashboard/*')) navbar-item-active @endif"></i></a>
         
         @endif
         

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
-use Midtrans\Snap;
 use Carbon\Carbon;
 
 use Axiom\Rules\TelephoneNumber;

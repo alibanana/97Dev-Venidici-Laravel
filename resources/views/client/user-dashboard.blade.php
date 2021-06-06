@@ -371,7 +371,10 @@
                                 <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
                             </div>
                             <div class="edit-item">
-                                <a href="#my-interests" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-heart"></i> <span style="margin-left:0.87vw">My interests</span></a>   
+                                <a href="#my-interests" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-heart"></i> <span style="margin-left:0.8vw">My interests</span></a>   
+                            </div>
+                            <div class="edit-item">
+                                <a href="/dashboard/redeem-vouchers" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-tags"></i> <span style="margin-left:0.55vw">Vouchers</span></a>   
                             </div>
                             <div class="edit-item" style="border-radius:0px 0px 10px 10px">
                                 <form action="{{ route('logout') }}" method="POST">
@@ -385,7 +388,7 @@
                     </div>  
                 </div>
                 <div style="display:flex;align-items:center">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">{{Auth::user()->email}} Points</p>  
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">{{Auth::user()->stars}} Stars</p>  
                     <a href="#points">
                         <i  style="color:#F4C257;margin-left:1vw" class="fas fa-question-circle bigger-text"></i> 
                     </a>
