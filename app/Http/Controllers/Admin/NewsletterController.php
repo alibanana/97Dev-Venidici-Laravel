@@ -74,7 +74,7 @@ class NewsletterController extends Controller
             
             return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
         }
-        return redirect('/#newsletter-section')->with('newsletter_message', 'Sorry, you are already subscribed');
+        return redirect('/#newsletter-section')->with('newsletter_info_message', 'Sorry, you are already subscribed');
 
         // return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
     }
@@ -122,7 +122,7 @@ class NewsletterController extends Controller
     public function destroy($id)
     {
         
-        $newsletter = Newsletter::findOrFail($id);
+        $newsletter = News::findOrFail($id);
 
         $newsletter->delete();
 

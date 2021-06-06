@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             KrestSeeder::class,
             InstructorPositionSeeder::class,
             NewsletterSeeder::class,
+            RedeemSeeder::class,
         ]);
     }
 }

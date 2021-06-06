@@ -478,7 +478,7 @@
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
         @if(count($orders) == 0)
         
-            <div style="margin-top:2vw;background: #C4C4C4;border: 3px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif

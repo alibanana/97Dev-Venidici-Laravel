@@ -232,15 +232,15 @@
             @endif
             <?php $flag = null;?>
             @if(Auth::check())
-            @foreach($transactions as $transaction)
-                @if($transaction->invoice->status == 'paid' || $transaction->invoice->status == 'completed')
-                @foreach($transaction->invoice->orders as $order)
-                    @if($order->course->id == $course->id)
-                        <?php $flag = true;?>
+                @foreach($transactions as $transaction)
+                    @if($transaction->invoice->status == 'paid' || $transaction->invoice->status == 'completed')
+                    @foreach($transaction->invoice->orders as $order)
+                        @if($order->course->id == $course->id)
+                            <?php $flag = true;?>
+                        @endif
+                    @endforeach
                     @endif
                 @endforeach
-                @endif
-            @endforeach
             @endif
             @if($flag)
 
