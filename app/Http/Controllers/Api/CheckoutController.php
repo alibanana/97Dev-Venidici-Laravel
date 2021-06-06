@@ -331,6 +331,18 @@ class CheckoutController extends Controller
                 }
             }
 
+            if($request->session()->get('promotion_code') != null)
+            {
+                $used_promo = Promotion::findOrFail($request->session()->get('promotion_code')->id);
+                if($used_promo->user_id != 'null')
+                {
+                    $used_promo->isActive = FALSE;
+                    $used_promo->save();
+                }
+            }
+        
+            $request->session()->forget('promotion_code');
+
             return redirect('/transaction-detail/'.$no_invoice.'#payment-success');
         }
         

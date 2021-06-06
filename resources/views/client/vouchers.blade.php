@@ -25,12 +25,25 @@
 
 
     >
-        <div class="voucher-card-active" style="">
+        <div class="
+        @if(!$promo->isActive)
+        voucher-card-claimed
+        @elseif($current_year_date > $promo->finish_date)
+        voucher-card-expired
+        @else
+        voucher-card-active
+        @endif
+        " style="">
             <div id="left-bar" style="width:1vw;border-radius:10px 0px 0px 10px">
             </div>
             <div style="width:22vw;padding:1.5vw">
                 <div style="display:flex;justify-content:space-between;align-items:center">
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43">Diskon 
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43">
+                    @if($promo->promo_for == 'charity')
+                    Donate
+                    @else
+                    Diskon
+                    @endif 
 
                     @if($promo->type == 'percent')
                     {{$promo->discount}}% 
@@ -39,10 +52,24 @@
                     @endif 
 
                     </p>              
-                    <p class="small-text" style="font-family: Rubik Regular;color:#C4C4C4;">{{$promo->finish_date}}</p>
+                    <p class="small-text" style="font-family: Rubik Regular;color:#C4C4C4;">
+                    @if(!$promo->isActive)
+                    {{$promo->updated_at->diffForHumans()}}
+                    @elseif($current_year_date > $promo->finish_date)
+                    Expired
+                    @else
+                    {{$promo->finish_date}}
+                    @endif
+                    </p>
                 </div>
                 <div style="display:flex">
-                    <p class="normal-text" id="card-color" style="font-family: Rubik Regular;border-radius:10px;padding:0.2vw 1vw">{{$promo->code}}</p>
+                    <p class="normal-text" id="card-color" style="font-family: Rubik Regular;border-radius:10px;padding:0.2vw 1vw">
+                    @if(!$promo->isActive)
+                    CLAIMED
+                    @else
+                    {{$promo->code}}
+                    @endif
+                </p>
                 </div>
             </div>
         </div>
@@ -75,7 +102,7 @@
         </div>
 
         @endif
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Dummy Redeem Voucher</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Redeem Voucher</p>
         <div class="row">
             @foreach($redeem_rules as $redeem)
             <!-- START OF ONE REDEEM  CARD -->
@@ -84,7 +111,12 @@
                     <div style="text-align:center">
                         <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
                     </div>
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">Diskon 
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">
+                    @if($redeem->promo_for == 'charity')
+                    Donate
+                    @else
+                    Diskon
+                    @endif 
 
                     @if($redeem->type == 'percent')
                     {{$redeem->discount}}% 
@@ -124,99 +156,6 @@
             <div class="carousel-inner" style="padding: 0vw 2vw;">
                 
                 <div class="carousel-item active">
-                    <div class="row m-0" style="padding:0vw 2vw">
-                        <!-- START OF ONE REDEEM  CARD -->
-                        <div class="col-3" style="display:flex;justify-content:center">
-                            <div class="redeem-card-blue" style="padding:1.5vw;width:20vw">
-                                <div style="text-align:center">
-                                    <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
-                                </div>
-                                <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">Diskon Rp10,000</p>
-                                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5vw">
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">Exp. date</p>
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">27/03/2021</p>
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;">(1y 3m 2d)</p>
-                                </div>
-                                <hr style="height:0.2vw;background:#2B6CAA;margin:0px">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw;">
-                                    <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">120 Stars</p>
-                                    <form action="">
-                                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;padding:0.2vw 1vw !important">Redeem</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END OF ONE  REDEEM CARD -->
-                        <!-- START OF ONE REDEEM  CARD -->
-                        <div class="col-3" style="display:flex;justify-content:center">
-                            <div class="redeem-card-blue" style="padding:1.5vw;width:20vw">
-                                <div style="text-align:center">
-                                    <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
-                                </div>
-                                <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">Diskon Rp10,000</p>
-                                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5vw">
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">Exp. date</p>
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">27/03/2021</p>
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;">(1y 3m 2d)</p>
-                                </div>
-                                <hr style="height:0.2vw;background:#2B6CAA;margin:0px">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw;">
-                                    <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">120 Stars</p>
-                                    <form action="">
-                                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;padding:0.2vw 1vw !important">Redeem</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END OF ONE  REDEEM CARD -->
-                        <!-- START OF ONE REDEEM  CARD -->
-                        <div class="col-3" style="display:flex;justify-content:center">
-                            <div class="redeem-card-blue" style="padding:1.5vw;width:20vw">
-                                <div style="text-align:center">
-                                    <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
-                                </div>
-                                <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">Diskon Rp10,000</p>
-                                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5vw">
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">Exp. date</p>
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">27/03/2021</p>
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;">(1y 3m 2d)</p>
-                                </div>
-                                <hr style="height:0.2vw;background:#2B6CAA;margin:0px">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw;">
-                                    <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">120 Stars</p>
-                                    <form action="">
-                                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;padding:0.2vw 1vw !important">Redeem</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END OF ONE  REDEEM CARD -->
-                        <!-- START OF ONE REDEEM  CARD -->
-                        <div class="col-3" style="display:flex;justify-content:center">
-                            <div class="redeem-card-blue" style="padding:1.5vw;width:20vw">
-                                <div style="text-align:center">
-                                    <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
-                                </div>
-                                <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">Diskon Rp10,000</p>
-                                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5vw">
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">Exp. date</p>
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">27/03/2021</p>
-                                    <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;">(1y 3m 2d)</p>
-                                </div>
-                                <hr style="height:0.2vw;background:#2B6CAA;margin:0px">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw;">
-                                    <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">120 Stars</p>
-                                    <form action="">
-                                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;padding:0.2vw 1vw !important">Redeem</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END OF ONE  REDEEM CARD -->
-
-                    </div>
-                </div>
-                <div class="carousel-item">
                     <div class="row m-0" style="padding:0vw 2vw">
                         <!-- START OF ONE REDEEM  CARD -->
                         <div class="col-3" style="display:flex;justify-content:center">

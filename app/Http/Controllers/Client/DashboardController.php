@@ -149,10 +149,14 @@ class DashboardController extends Controller
             ]
             )->orderBy('created_at', 'desc')->get();
         $redeem_rules = Redeem::orderBy('created_at','desc')->get();
-        $my_vouchers = Promotion::where('user_id',auth()->user()->id)->get();
+        $my_vouchers = Promotion::where('user_id',auth()->user()->id)->orderBy('updated_at','desc')->get();
+
         $next_year = explode(' ', Carbon::now()->addYear(1));
         $next_year_date=$next_year[0];
-        return view('client/vouchers', compact('cart_count','informations','transactions','notifications','redeem_rules','next_year_date','my_vouchers'));
+
+        $current_year = explode(' ', Carbon::now());
+        $current_year_date=$current_year[0];
+        return view('client/vouchers', compact('cart_count','informations','transactions','notifications','redeem_rules','next_year_date','current_year_date','my_vouchers'));
 
     }
 
@@ -191,17 +195,27 @@ class DashboardController extends Controller
             $promotion->type            = $redeem->type;
             $promotion->promo_for       = $redeem->promo_for;
             $promotion->discount        = $redeem->discount;
-            $promotion->isActive        = 1;
+
+            if($redeem->promo_for == 'charity')
+                $promotion->isActive        = 0;
+            else
+                $promotion->isActive        = 1;
+
             $promotion->start_date      = $current_year_date;
             $promotion->finish_date     = $next_year_date;
             $promotion->save();
 
             //2. buat notifikasi
+            if($redeem->promo_for == 'charity')
+                $description = 'Hi, '.auth()->user()->name.' terimakasih telah mendonasi sebesar Rp'.$redeem->discount;
+            else
+                $description = 'Hi, '.auth()->user()->name.'. redeem voucher '.$promo_name.' telah berhasil';
+
             $notification = Notification::create([
                 'user_id'           => auth()->user()->id,
                 'isInformation'     => 1,
                 'title'             => 'Redeem Voucher Berhasil',
-                'description'       => 'Hi, '.auth()->user()->name.'. redeem voucher '.$promo_name.' telah berhasil.',
+                'description'       => $description,
                 'link'              => '/dashboard/redeem-vouchers'
             ]);
 
