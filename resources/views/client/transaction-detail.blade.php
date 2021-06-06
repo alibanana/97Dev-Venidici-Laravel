@@ -87,7 +87,7 @@
                     }
                     
                     ?>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:1vw;margin-top:2vw">Pleas complete your payment for the total of Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} for Course: {{$courses_string}}.</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:1vw;margin-top:2vw">Please complete your payment for the total of Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} for Course: {{$courses_string}}.</p>
                 </div>
             </div>
         </div>

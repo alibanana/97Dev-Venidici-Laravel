@@ -20,22 +20,49 @@
             <div class="col-4 p-0" style="display:flex; justify-content:flex-end">
         @endif
 
-            <div class="voucher-card-active" style="">
+            <div class="
+                @if(!$promo->isActive)
+                voucher-card-claimed
+                @elseif($current_year_date > $promo->finish_date)
+                voucher-card-expired
+                @else
+                voucher-card-active
+                @endif
+            " style="">
                 <div id="left-bar" style="width:1vw;border-radius:10px 0px 0px 10px">
                 </div>
                 <div style="width:22vw;padding:1.5vw">
                     <div style="display:flex;justify-content:space-between;align-items:center">
-                        <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43">Diskon
+                        <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43">
+                        @if($promo->promo_for == 'charity')
+                        Donate
+                        @else
+                        Diskon
+                        @endif
                         @if($promo->type == 'percent')
                         {{$promo->discount}}% 
                         @else
                         Rp{{ number_format($promo->discount, 0, ',', ',') }}
                         @endif 
                         </p>              
-                        <p class="small-text" style="font-family: Rubik Regular;color:#C4C4C4;">{{$promo->finish_date}}</p>
+                        <p class="small-text" style="font-family: Rubik Regular;color:#C4C4C4;">
+                        @if(!$promo->isActive)
+                        {{$promo->updated_at->diffForHumans()}}
+                        @elseif($current_year_date > $promo->finish_date)
+                        Expired
+                        @else
+                        {{$promo->finish_date}}
+                        @endif
+                        </p>
                     </div>
                     <div style="display:flex">
-                        <p class="normal-text" id="card-color" style="font-family: Rubik Regular;border-radius:10px;padding:0.2vw 1vw">{{$promo->code}}</p>
+                        <p class="normal-text" id="card-color" style="font-family: Rubik Regular;border-radius:10px;padding:0.2vw 1vw">
+                        @if(!$promo->isActive)
+                        CLAIMED
+                        @else
+                        {{$promo->code}}
+                        @endif
+                        </p>
                     </div>
                 </div>
             </div>
@@ -64,7 +91,7 @@
                 </div>
             </div>
         @endif
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Dummy Redeem Voucher</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Redeem Voucher</p>
         <div class="row">
             @foreach($redeem_rules as $redeem)
             <!-- START OF ONE REDEEM  CARD -->
@@ -73,7 +100,12 @@
                     <div style="text-align:center">
                         <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
                     </div>
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">Diskon 
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">
+                    @if($redeem->promo_for == 'charity')
+                    Donate
+                    @else
+                    Diskon
+                    @endif 
 
                     @if($redeem->type == 'percent')
                     {{$redeem->discount}}% 
