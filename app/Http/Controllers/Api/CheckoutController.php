@@ -208,11 +208,17 @@ class CheckoutController extends Controller
                 //2. check if the promo is global or for the user
                 if($promo->user_id == 'null')
                 {
-                    $request->session()->put('promotion_code', $promo);
                     return redirect()->back()->with('discount_found','Discount Code applied');
+                    $request->session()->put('promotion_code', $promo);
                 }
                 //if the promo is for personal user
                 else{
+                    if($promo->user_id != auth()->user()->id)
+                    {
+                        $request->session()->forget('promotion_code');
+                        return redirect()->back()->with('discount_not_found','Discount Code tidak bisa digunakan');
+                    }
+
                     //check whether the user has used the promo
                     if($promo->isActive){
                         $noWoki = TRUE;    
@@ -221,7 +227,10 @@ class CheckoutController extends Controller
                         }
                         //check whether the code is for shippping and there is no woki in cart
                         if($promo->promo_for == 'shipping' && $noWoki)
+                        {
+                            $request->session()->forget('promotion_code');
                             return redirect()->back()->with('discount_not_found','Discount Code is for Shipping');
+                        }
 
                         //if all conditions applied
                         else
@@ -232,12 +241,14 @@ class CheckoutController extends Controller
                     }
                     // if the user has used the promo
                     else{
+                        $request->session()->forget('promotion_code');
                         return redirect()->back()->with('discount_not_found','Discount Code telah digunakan');
                     }
                 }
             }
             //if current date has pas finish_date
             else{
+                $request->session()->forget('promotion_code');
                 return redirect()->back()->with('discount_not_found','Discount Code tidak ada atau telah expired');
             }
             
@@ -248,7 +259,7 @@ class CheckoutController extends Controller
             if($request->session()->get('promotion_code') != null)
             {
                 $used_promo = Promotion::findOrFail($request->session()->get('promotion_code')->id);
-                if($used_promo->user_id != 'null')
+                if($used_promo->user_id != null)
                 {
                     $used_promo->isActive = FALSE;
                     $used_promo->save();
@@ -550,7 +561,9 @@ class CheckoutController extends Controller
             if($order->course->course_type_id == 2)
                 $noWoki = FALSE;
         }
-        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki'));
+        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki','notifications'));
     }
 
     public function createPayment(Request $request, $id){        
@@ -573,7 +586,9 @@ class CheckoutController extends Controller
             if($cart->course->course_type_id == 2)
                 $noWoki = FALSE;
         }
-        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki'));
+        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki','notifications'));
     }
 
     public function cancelPayment(Request $request, $id)

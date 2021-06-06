@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramContro
 use App\Http\Controllers\Admin\InstructorController as AdminInstructorController;
 use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPositionController;
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
+use App\Http\Controllers\Admin\RedeemController as AdminRedeemController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -269,7 +270,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
     //NewsletterController
     Route::get('/newsletter', [AdminNewsletterController::class, 'index'])->name('newsletter.index');
     Route::delete('/newsletter/{id}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
-
+    // RedeemController
+    Route::get('/redeems', [AdminRedeemController::class, 'index'])->name('redeems.index');
+    Route::get('/redeems/create', [AdminRedeemController::class, 'create'])->name('redeems.create');
+    Route::post('/redeems', [AdminRedeemController::class, 'store'])->name('redeems.store');
+    Route::get('/redeems/{id}/update', [AdminRedeemController::class, 'edit'])->name('redeems.edit');
+    Route::put('/redeems/{id}', [AdminRedeemController::class, 'update'])->name('redeems.update');
+    Route::delete('/redeems/{id}', [AdminRedeemController::class, 'destroy'])->name('redeems.destroy');
 });
 
 /* START OF WOKI ROUTING */

@@ -32,6 +32,23 @@ use App\Models\Promotion;
 */ 
 class OnlineCourseController extends Controller
 {
+
+    private $notifications; // Stores combined notifications data.
+    private $informations; // Stores notification (isInformation == true) data.
+    private $transactions; // Stores notification (isInformation == false) data for a particular user.
+    private $cart_count; // Stores cart data for a particular user.
+
+    private function resetNavbarData() {
+        $this->notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $this->informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
+        $this->transactions = Notification::where([   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0]
+            ])->orderBy('created_at', 'desc')->get();
+        $this->cart_count = Cart::with('course')->where('user_id', auth()->user()->id)->count();
+    }
+
+
     // Shows the Client's Main Online-Course Page.
     public function index(Request $request) {
         $course_categories = CourseCategory::all();
@@ -60,22 +77,19 @@ class OnlineCourseController extends Controller
             }
         }
         $courses = $courses->get();
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
 
         if (Auth::check()) {
-            $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
-            $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-                
-            ]
-        )->orderBy('created_at', 'desc')->get();
-            return view('client/online-course/index', compact('cart_count','transactions','courses','course_categories','informations'));
+
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/online-course/index', compact('cart_count','transactions','courses','course_categories','informations','notifications'));
         } else {
-            return view('client/online-course/index',compact('course_categories','courses','informations'));
+            return view('client/online-course/index',compact('course_categories','courses'));
         }
     }
 
@@ -83,21 +97,21 @@ class OnlineCourseController extends Controller
     public function show($id){
         $course = Course::findOrFail($id);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        if(Auth::check()) {
-            $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
-            $transactions = Notification::where([   
-                    ['user_id', '=', auth()->user()->id],
-                    ['isInformation', '=', 0]
-                ])->orderBy('created_at', 'desc')->get();
+        
+        if (Auth::check()) {
+
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications'));
         } else {
-            $transactions = null;
-            $cart_count = 0;
+            return view('client/online-course/detail', compact('course','reviews'));
         }
 
-        return view('client/online-course/detail', compact('course','cart_count','transactions','reviews','informations'));
     }
 
     public function learn($course_id, $section_content_id)
