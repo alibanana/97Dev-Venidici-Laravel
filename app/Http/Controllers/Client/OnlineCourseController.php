@@ -133,8 +133,9 @@ class OnlineCourseController extends Controller
         $assessment = $course->assessment;
         $content = SectionContent::findOrFail($section_content_id);
         $informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
+        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations'));
+        return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations', 'notifications'));
     }
 
     public function buyFree($course_id)

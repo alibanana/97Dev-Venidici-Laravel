@@ -195,10 +195,7 @@
             @if (session()->has('success'))
             <div class="p-3 mt-2 mb-0">
                 <div class="alert alert-success alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                    {{ session('success') }}     
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    {{ session('success') }}
                 </div>
             </div>
             @endif

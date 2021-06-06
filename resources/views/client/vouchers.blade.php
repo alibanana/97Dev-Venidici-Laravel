@@ -9,6 +9,12 @@
     <div class="col-12 p-0" >
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Voucher saya</p>
     </div>
+    @if(count($my_vouchers) == 0)
+        
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Voucher belum tersedia.</span></p>
+            </div>
+        @endif
 
     @foreach($my_vouchers as $promo)
         <!-- START OF ONE ACTIVE VOUCHER -->

@@ -30,16 +30,7 @@
 			@csrf
 			{{ method_field('PUT') }}
 			<div class="modal-body">
-				<h6 class="modal-title" id="addStarsModal">User's ID</h6>
-				<div class="form-group mt-2">
-					<input type="text" name="user_id" id="user_id" class="form-control form-control-user"
-						id="exampleInputPassword" placeholder="Insert user id">
-					@error('user_id')
-						<span class="invalid-feedback" role="alert" style="display: block !important;">
-							<strong>{{ $message }}</strong>
-						</span>
-					@enderror
-				</div>
+					<input type="hidden" name="user_id" id="user_id">
 				<h6 class="modal-title" id="addStarsModal">Number of stars</h6>
 				<div class="form-group mt-2">
 					<input type="text" name="stars" class="form-control form-control-user"
