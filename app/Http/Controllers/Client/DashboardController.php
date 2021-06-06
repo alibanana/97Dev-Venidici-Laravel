@@ -175,10 +175,12 @@ class DashboardController extends Controller
                 
             ]
             )->orderBy('created_at', 'desc')->get();
+
         $redeem_rules = Redeem::orderBy('created_at','desc')->get();
         $my_vouchers = Promotion::where('user_id',auth()->user()->id)->get();
         $next_year = explode(' ', Carbon::now()->addYear(1));
-        $next_year_date=$next_year[0];
+        $next_year_date = $next_year[0];
+
         return view('client/vouchers', compact('cart_count','informations','transactions','notifications','redeem_rules','next_year_date','my_vouchers'));
 
     }
