@@ -89,4 +89,8 @@ class User extends Authenticatable
     public function promotions() {
         return $this->hasMany(Promotion::class);
     }
+
+    public function stars() {
+        return $this->hasMany(Star::class);
+    }
 }
