@@ -58,6 +58,7 @@ class DashboardController extends Controller
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
+
         return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders','interests','informations','notifications'));
     }
 
@@ -95,7 +96,7 @@ class DashboardController extends Controller
 
         $user_detail = $user->userDetail;
         $user_detail->update($request->except([
-            'name','telephone'
+            'name',
         ]));
 
         //check if the user update the profile for the first time

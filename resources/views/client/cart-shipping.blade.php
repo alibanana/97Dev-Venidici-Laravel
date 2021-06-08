@@ -392,7 +392,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <!-- END OF ALERT MESSAGE -->
-
+                @elseif(session('validation_error'))
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                    {{ session('validation_error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- END OF ALERT MESSAGE -->
                 @endif
                 <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Ringkasan Pembayaran</p>
                 @if($total_price != 0)

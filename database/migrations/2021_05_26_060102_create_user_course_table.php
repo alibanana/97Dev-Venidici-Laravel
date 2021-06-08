@@ -19,6 +19,8 @@ class CreateUserCourseTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->enum('status', ['on-going', 'completed'])->default('on-going');
+
             $table->timestamps();
         });
     }

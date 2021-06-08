@@ -51,13 +51,13 @@ class CheckoutController extends Controller
     public function storeOnlineCourse(Request $request)
     {
         $input = $request->all();
-
+        
         // Remove non-numeric characters before validation.
         if ($request->has('phone'))
             $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
 
-        
-        $validated = Validator::make($input, [
+
+        $validated = Validator::make($input,[
             'name'                  => 'required',
             //'phone'                 => ['required', new TelephoneNumber],
             'phone'                 => 'required',
@@ -67,7 +67,12 @@ class CheckoutController extends Controller
             'time'                  => 'required',
             'bankShortCode'         => 'required',
             'discounted_price'      => 'integer'
-        ])->validate();
+        ]);
+
+        if($validated->fails()) 
+            return redirect()->back()->with('validation_error','Please complete your profile first.');
+        else
+            $validated = $validated->validate();
 
         if($request->action == 'checkDiscount') {
             $validated = $request->validate([
