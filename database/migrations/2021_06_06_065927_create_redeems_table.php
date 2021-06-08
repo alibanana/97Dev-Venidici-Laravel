@@ -15,6 +15,8 @@ class CreateRedeemsTable extends Migration
     {
         Schema::create('redeems', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
             $table->integer('stars');
             $table->enum('type', ['percent', 'nominal']);
             $table->integer('discount');

@@ -85,6 +85,7 @@ class PagesController extends Controller
     }
 
     public function community_index(){
+
         if(Auth::check()) {
             $this->resetNavbarData();
 

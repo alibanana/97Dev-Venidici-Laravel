@@ -51,7 +51,9 @@ class RedeemController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'stars'          => 'required',
+            'title'         => 'required',
+            'description'   => 'required',
+            'stars'         => 'required',
             'type'          => 'required',
             'promo_for'     => 'required',
             'discount'      => 'required',
@@ -59,10 +61,12 @@ class RedeemController extends Controller
     
 
         $redeem = new Redeem();
-        $redeem->stars            = $validated['stars'];
-        $redeem->type            = $validated['type'];
-        $redeem->promo_for       = $validated['promo_for'];
-        $redeem->discount        = $validated['discount'];
+        $redeem->title          = $validated['title'];
+        $redeem->description    = $validated['description'];
+        $redeem->stars          = $validated['stars'];
+        $redeem->type           = $validated['type'];
+        $redeem->promo_for      = $validated['promo_for'];
+        $redeem->discount       = $validated['discount'];
         $redeem->save();
 
         $message = 'New redeem rule has been added to the database.';
@@ -104,17 +108,21 @@ class RedeemController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'stars'          => 'required',
+            'title'         => 'required',
+            'description'   => 'required',
+            'stars'         => 'required',
             'type'          => 'required',
             'promo_for'     => 'required',
             'discount'      => 'required',
         ]);
 
         $redeem = Redeem::findOrFail($id);
-        $redeem->stars        = $validated['stars'];
-        $redeem->type        = $validated['type'];
-        $redeem->promo_for   = $validated['promo_for'];
-        $redeem->discount    = $validated['discount'];
+        $redeem->title          = $validated['title'];
+        $redeem->description    = $validated['description'];
+        $redeem->stars          = $validated['stars'];
+        $redeem->type           = $validated['type'];
+        $redeem->promo_for      = $validated['promo_for'];
+        $redeem->discount       = $validated['discount'];
 
         
         $redeem->save();

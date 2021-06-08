@@ -22,6 +22,7 @@ class CreateSectionContentsTable extends Migration
             $table->string('attachment')->nullable();
             $table->text('description')->nullable();
             $table->unsignedInteger('duration')->nullable(); // in seconds
+            $table->text('hasSeen')->nullable(); // array
             $table->timestamps();
         });
     }

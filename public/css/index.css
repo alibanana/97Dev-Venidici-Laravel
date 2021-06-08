@@ -1145,7 +1145,7 @@ html, body {
 
 .blue-link{
     background-color:#ffffff;
-    color:#2B6CAA;
+    color:#67BBA3;
     border-radius:10px;
     text-decoration:none;
     padding:0.5vw 1vw;
@@ -1153,11 +1153,11 @@ html, body {
     border:1px solid #FFFFFF
 }
 .blue-link:hover{
-    background-color:#2B6CAA;
+    background-color:#67BBA3;
     color:#FFFFFF;
 }
 .blue-link-active{
-    background-color:#2B6CAA;
+    background-color:#67BBA3;
     color:#FFFFFF;
     border-radius:10px;
     text-decoration:none;

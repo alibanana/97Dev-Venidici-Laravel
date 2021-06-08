@@ -22,7 +22,7 @@ class ConfigSeeder extends Seeder
             ],
             [
                 'key' => 'cms.homepage.top-section.sub-heading',
-                'value' => "“Veni, vidi, vici.” Saya datang, saya lihat, saya\ntaklukkan."
+                'value' => "Platform anak kekinian buat naklukin\nkarir impian!"
             ],
             [
                 'key' => 'cms.homepage.top-section.background',

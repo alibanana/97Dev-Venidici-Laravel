@@ -114,8 +114,11 @@ class OnlineCourseController extends Controller
 
     }
 
+
+
     public function learn($course_id, $section_content_id)
     {   
+
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
@@ -130,11 +133,37 @@ class OnlineCourseController extends Controller
         
         $course = auth()->user()->courses()->where('user_course.course_id', $course_id)->firstOrFail();
         $sections = $course->sections;
+        
         $assessment = $course->assessment;
         $content = SectionContent::findOrFail($section_content_id);
+
+
+        
+
+        
+        //check if user has seen the content or not
+        $info_users = explode(',', $content->hasSeen);
+        $infoHasSeen = FALSE;
+
+        foreach($info_users as $user_id)
+        {
+          // if the user has seen the content
+          if($user_id == Auth::user()->id)
+            $infoHasSeen = TRUE;
+        }        
+
+        //if user has not seen the content
+        if(!$infoHasSeen){
+            $content->hasSeen = $content->hasSeen.auth()->user()->id.',';
+            $content->save();
+        }
+
+
+
+
+                
         $informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
         return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations', 'notifications'));
     }
 

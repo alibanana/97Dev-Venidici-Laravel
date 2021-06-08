@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserDetail;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -62,9 +63,12 @@ class SocialController extends Controller
             $user->name = $data->name;
             $user->email = $data->email;
             $user->provider_id = $data->id;
-            $user->avatar = $data->avatar;
             $user->password = encrypt('password');
             $user->save();
+
+            $user_detail = new UserDetail();
+            $user_detail->user_id = $user->id;
+            $user_detail->save();
         }
 
         Auth::login($user);

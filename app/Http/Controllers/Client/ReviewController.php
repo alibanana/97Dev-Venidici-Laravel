@@ -38,11 +38,14 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+
         $validated = Validator::make($input,[
             'rating' => 'required'
         ]);
+        
 
-        if($validated->fails()) return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','An error occured')->withErrors($validated);
+        if($validated->fails() && $request->action == "completed_course") return redirect()->back()->withErrors($validated);
+        if($validated->fails() && $request->action == "course_detail_review") return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Tidak bisa review kosong.')->withErrors($validated);
 
         $reviews = Review::where(
             [   
@@ -51,9 +54,13 @@ class ReviewController extends Controller
                 
             ]
         )->get();
-        if(!empty($reviews))
+
+        if(count($reviews) != 0)
         {
-            return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Anda sudah mereview course ini');
+            if($request->action == "completed_course")
+                return redirect()->back()->with('review_message_double','Anda sudah mereview course ini');
+            else
+                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Anda sudah mereview course ini');
         }
         else
         {
@@ -65,10 +72,16 @@ class ReviewController extends Controller
             ]);
         }
         if($review){
-            return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Review berhasil dimasukkan');
+            if($request->action == "completed_course")
+                return redirect()->back()->with('review_message','Review berhasil dimasukkan');
+            else
+                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Review berhasil dimasukkan');
         }
         else{
-            return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Oops.. an error has occured');
+            if($request->action == "completed_course")
+                return redirect()->back()->with('review_message','Oops.. an error has occured');
+            else
+                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Oops.. an error has occured');
         }
     }
 

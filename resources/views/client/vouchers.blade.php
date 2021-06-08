@@ -3,11 +3,35 @@
 
 @section('content')
 
+<!-- START OF POPUP POINT EXPLANATION-->
+<div id="points" class="overlay" style="overflow:scroll">
+    <div class="popup" style="width:40% !important">
+        <a class="close" href="#" >&times;</a>
+        <div class="content" style="padding:2vw">
+            <div class="row m-0">
+                <div class="col-12" style="text-align:left;">
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Your Stars</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#F4C257;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{auth()->user()->stars}} Stars</span></p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;text-align:left !important;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">How Venidici Point System Works?</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis amet corrupti harum expedita libero cumque fugit officiis natus error explicabo deserunt doloremque ipsum, aperiam rerum possimus illum quas maiores omnis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF POPUP POINT EXPLANATION-->
+
 <div class="row m-0 page-container" style="padding-bottom:4vw;padding-top:11vw">
 
     <!-- START OF MY VOUCHERS -->
     <div class="col-12 p-0" >
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Voucher saya</p>
+        <div style="display:flex;align-items:center">
+            <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Voucher saya</p>
+            <a href="#points">
+                <i  style="color:#F4C257;margin-left:1vw" class="fas fa-question-circle small-heading"></i> 
+            </a>
+        </div>
     </div>
     @if(count($my_vouchers) == 0)
         
@@ -123,18 +147,9 @@
                                 <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
                             </div>
                             <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-top:2vw;margin-bottom:0px">
-                            @if($rule->promo_for == 'charity')
-                            Donate
-                            @else
-                            Diskon
-                            @endif 
-
-                            @if($rule->type == 'percent')
-                            {{$rule->discount}}% 
-                            @else
-                            Rp{{ number_format($rule->discount, 0, ',', ',') }}
-                            @endif 
+                            {{$rule->title}}
                             </p>
+                            <p class="small-text" style="font-family: Rubik Regular;color:#55525B;margin-top:0.5vw">{{$rule->description}}</p>
                             <div style="display:flex;align-items:center;margin-top:0.5vw">
                                 <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;">Exp. date</p>
                                 <p class="very-small-text" style="font-family: Rubik Regular;color:#55525B;margin-left:1vw">{{$next_year_date}}</p>
