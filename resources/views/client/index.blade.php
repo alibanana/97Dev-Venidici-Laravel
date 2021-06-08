@@ -511,10 +511,11 @@ END OF OUR PROGRAMS SECTION -->
 <!-- START OF INDONESIA EMAS SECTION -->
 <div class="row m-0 page-container" style="padding-bottom:8vw;padding-top:2vw">
     <div class="col-7 p-0">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line">Kami ingin...</p>
-        <p class="super-big-heading" style="font-family: Rubik Medium;color:#2B6CAA;white-space:pre-line;">Mewujudkan
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line">Yuk gotong royong...</p>
+        <p class="super-big-heading" style="font-family: Rubik Medium;color:#2B6CAA;white-space:pre-line;">Bangun
         Indonesia Emas 2045</p>
-        <p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Saya datang, saya lihat, saya taklukan!”</p>
+        <!--<p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Akselerasi keterampilan jalur pelatihan”</p>-->
+        <p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Karena bangsa yang maju berawal dari rakyatnya <br> yang berkualitas”</p>
     </div>
     <div class="col-5" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/Emas_BG.png" style="width:24vw" class="img-fluid" alt="">
@@ -1132,12 +1133,11 @@ END OF OUR PROGRAMS SECTION -->
             </div>
         </div>
         <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;">
-            <p class="medium-heading" style="font-family: Rubik Medium;color:#000000;">Our higlighted students <br> revealing</p>
-            <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. </p>
+            <p class="medium-heading" style="font-family: Rubik Medium;color:#000000;">Ga percaya kita? Tanya sama mereka</p>
+            <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;white-space:pre-line">Berhasil dapetin nilai rata-rata XX dari XX di berbagai
+            program-program sebelumnya ngebuktiin bahwa
+            Venidici siap untuk bawa masalah pendidikan dan
+            karir di Indonesia to the next level!</p>
 
         </div>
     </div>
@@ -1151,14 +1151,14 @@ END OF OUR PROGRAMS SECTION -->
                     <div class="rounded-card" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-right:2vw">
                         <p class="small-heading" id="card-title" style="color:#3B3C43;font-family:Rubik Medium">Menjadi Pengajar</p>
                         <img src="/assets/images/client/Menjadi_Pengajar.png" style="height:13vw;margin-top:1vw" class="img-fluid" alt="Menjadi Pengajar">
-                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">Bagikan pengalamanmu dengan mengajar bersama kami kepada generasi digital saat ini sekarang!</p>
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">Bawa perubahan bagi Indonesia melalui pengalaman yang kamu miliki!</p>
                     </div>
                 </a>
                 <a href="#menjadi-kolaborator" style="text-decoration:none">
                     <div class="rounded-card" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-left:2vw">
                         <p class="small-heading" id="card-title" style="color:#3B3C43;font-family:Rubik Medium">Menjadi Kolaborator</p>
                         <img src="/assets/images/client/Menjadi_Kolaborator.png" style="height:13vw;margin-top:1vw" class="img-fluid" alt="Menjadi Kolaborator">
-                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">Bagikan pengalamanmu dengan mengajar bersama kami kepada generasi digital saat ini sekarang!</p>
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">1+1=11! Mari berkembang bersama dan hasilin dampak!</p>
                     </div>
                 </a>
             </div>
@@ -1192,7 +1192,7 @@ END OF OUR PROGRAMS SECTION -->
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
                 <div style="width:80%;margin-left:2vw">
-                    <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Subscribe to our newsletter.....?</p>
+                    <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
                         <input class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>

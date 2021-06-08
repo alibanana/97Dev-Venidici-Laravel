@@ -53,7 +53,6 @@
                     @php
                     $hasSeenAll = TRUE;
                         $x = 1;
-                        
                         foreach($sections as $section){
                             foreach($section->sectionContents as $content){
                                 $all_users = explode(',', $content->hasSeen);
@@ -71,10 +70,14 @@
                             }
                         }
                     @endphp
+
                     @if($hasSeenAll)
                     <button onclick="window.open('{{ route('online-course-assessment.show', $course->id) }}','_self');" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Buka Assesment</button>
                     @else
-                    <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;color:rgba(255, 186, 0, 1);">Course Belum Selesai</p>
+                    <div style="text-align:right">
+                        <button  class="normal-text btn-grey" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw;border-radius:10px">Buka Assesment</button>
+                        <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#CE3369;margin-top:1vw">*Harap selesaikan course sebelum mulai assesment*</p>
+                    </div>
                     @endif
                 </div>
                 <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Deskripsi Assesment</p>

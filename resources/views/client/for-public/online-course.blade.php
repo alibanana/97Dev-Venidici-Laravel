@@ -6,10 +6,11 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container for-public-oc-background " style="height:55vw">
     <div class="col-6 p-0">
-        <div style="padding-top:18.5vw;margin-left:-0.5vw">
-            <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw">A look at how we put
-            the pieces together</p>
-            <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:2vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. </p>
+        <div style="padding-top:11vw;margin-left:-0.5vw">
+            <img src="/assets/images/client/Venidici_Logo_Horizontal_White.png" style="width:20vw;" class="img-fluid" alt="Image 1">
+            <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw;margin-top:1.5vw">Fun learning anytime
+            & anywhere</p>
+            <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:2vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
             <div class="row m-0">
                 <div class="col-9 p-0">
                     <div style="margin-top:0.5vw;text-align:center">
@@ -61,9 +62,8 @@
     </div>
     <div class="col-6">
         <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Apa itu Online Courses?</p>
-        <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem.
-        </p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Vendici on Demand, <br> apa tuh?</p>
+        <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici on Demand berisi kumpulan rekaman video dari course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong. </p>
         <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">Explore Our Library Now!</a>
 
     </div>
