@@ -12,7 +12,8 @@ class Star extends Model
     protected $fillable = [
         'user_id',
         'stars',
-        'valid_after'
+        'valid_until',
+        'type'
     ];
 
     public function user() {

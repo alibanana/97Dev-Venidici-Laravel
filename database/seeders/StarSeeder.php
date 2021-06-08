@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 
 use App\Models\Star;
 
@@ -16,29 +17,39 @@ class StarSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $stars = [
-            // Unusable points
-            [
+        // Unusable Points Added
+        for ($i = 0; $i < 3; $i++) {
+            $date = $faker->dateTimeBetween($startDate = '-10 months', $endDate = '-5 months')->format('Y-m-d');
+            Star::create([
                 'user_id' => 3,
-                'stars' => 10,
-                'valid_after' => $faker->dateTimeBetween($startDate = '-7 months', $endDate = '-5 months')->format('Y-m-d')
-            ],
-            // Unusable points
-            [
-                'user_id' => 3,
-                'stars' => 25,
-                'valid_after' => $faker->dateTimeBetween($startDate = '-7 months', $endDate = '-5 months')->format('Y-m-d')
-            ],
-            // Usable points
-            [
-                'user_id' => 3,
-                'stars' => 30,
-                'valid_after' => $faker->dateTimeBetween($startDate = '-3 months', $endDate = 'now')->format('Y-m-d')
-            ],
-        ];
+                'stars' => rand(10, 50),
+                'valid_until' => Carbon::createFromFormat('Y-m-d', $date)->addMonths(4),
+                'type' => 'Add',
+                'created_at' => Carbon::createFromFormat('Y-m-d', $date)
+            ]);
+        }
 
-        foreach ($stars as $key => $value) {
-            Star::create($value);
+        // Usable Points Added
+        for ($i = 0; $i < 5; $i++) {
+            $date = $faker->dateTimeBetween($startDate = '-4 months', $endDate = 'now')->format('Y-m-d');
+            Star::create([
+                'user_id' => 3,
+                'stars' => rand(10, 50),
+                'valid_until' => Carbon::createFromFormat('Y-m-d', $date)->addMonths(4),
+                'type' => 'Add',
+                'created_at' => Carbon::createFromFormat('Y-m-d', $date)
+            ]);
+        }
+
+        // Points Subtracted
+        for ($i = 0; $i < 3; $i++) {
+            $date = $faker->dateTimeBetween($startDate = '-10 months', $endDate = 'now')->format('Y-m-d');
+            Star::create([
+                'user_id' => 3,
+                'stars' => rand(10, 50),
+                'type' => 'Subtract',
+                'created_at' => Carbon::createFromFormat('Y-m-d', $date)
+            ]);
         }
     }
 }

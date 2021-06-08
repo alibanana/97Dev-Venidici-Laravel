@@ -18,7 +18,8 @@ class CreateStarsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('stars');
-            $table->date('valid_after');
+            $table->date('valid_until')->nullable();
+            $table->enum('type', ['Add', 'Subtract']);
             $table->timestamps();
         });
     }

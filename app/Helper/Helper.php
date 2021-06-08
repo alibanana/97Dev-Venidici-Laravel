@@ -4,6 +4,7 @@ namespace App\Helper;
 
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as ImageManager;
+use Carbon\Carbon;
 
 class Helper
 {
@@ -49,5 +50,31 @@ class Helper
         $file->move($destinationPath, $newName);
 
         return $destinationPath.$newName;
+    }
+
+    public static function getUsableStars($user) {
+        $substractStars = $user->stars()->where('type', 'Subtract')->get();
+        $addStars = $user->stars()->where('type', 'Add')->whereDate('valid_until', '>=', Carbon::today())->get();
+        
+        $total_stars = 0;
+        
+        foreach ($addStars as $star) 
+            $total_stars += $star->stars;
+        
+        foreach ($substractStars as $star) 
+            $total_stars -= $star->stars;
+
+        return $total_stars;
+    }
+
+    public static function getUnusableStars($user) {
+        $stars = $user->stars()->where('valid_until', '<', Carbon::today())->get();
+        
+        $total_stars = 0;
+        foreach ($stars as $star) {
+            $total_stars += $star->stars;
+        }
+
+        return $total_stars;
     }
 }

@@ -388,7 +388,7 @@
                     </div>  
                 </div>
                 <div style="display:flex;align-items:center">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">{{Auth::user()->stars}} Stars</p>  
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">{{ $usableStarsCount }} Stars</p>  
                     <a href="#points">
                         <i  style="color:#F4C257;margin-left:1vw" class="fas fa-question-circle bigger-text"></i> 
                     </a>
