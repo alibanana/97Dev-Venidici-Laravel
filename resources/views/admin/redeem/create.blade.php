@@ -37,6 +37,32 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
+                    <label for="">Title</label>
+                    <input type="text" name="title" class="form-control form-control-user"
+                        id="title" aria-describedby=""
+                        placeholder="Here insert redeem title" > 
+                    @error('title')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror               
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <input type="text" name="description" class="form-control form-control-user"
+                        id="description" aria-describedby=""
+                        placeholder="Here insert redeem description" > 
+                    @error('description')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror               
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
                     <label for="">Stars Needed</label>
                     <input type="text" name="stars" class="form-control form-control-user"
                         id="stars" aria-describedby=""

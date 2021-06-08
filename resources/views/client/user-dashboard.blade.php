@@ -40,7 +40,10 @@
                     <!-- START OF LEFT SECTION -->
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">@if(Auth::user()->avatar) Current @endif Display Picture</p>
+                        @if(Auth::user()->avatar)
                         <img src="{{ asset(Auth::user()->avatar) }}" style="width:4vw" alt=""> <br>
+                        @endif
+
                         <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
                         <!--
                         <label id="uploadButton" for="images" style="font-family:Rubik Medium">Choose Image</label>-->
@@ -255,7 +258,10 @@
         <div class="content" style="padding:2vw">
             <div class="row m-0">
                 <div class="col-12" style="text-align:left;">
-                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">How Venidici Point System Works?</p>
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Your Stars</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#F4C257;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;text-align:left !important;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">How Venidici Point System Works?</p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis amet corrupti harum expedita libero cumque fugit officiis natus error explicabo deserunt doloremque ipsum, aperiam rerum possimus illum quas maiores omnis.</p>
                 </div>
             </div>

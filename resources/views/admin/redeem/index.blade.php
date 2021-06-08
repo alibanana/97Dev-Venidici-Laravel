@@ -86,6 +86,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>Title</th>
+                                                <th>Description</th>
                                                 <th>Stars</th>
                                                 <th>Discount</th>
                                                 <th>For</th>
@@ -96,6 +98,8 @@
                                             @foreach($redeems as $redeem)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
+                                                <td>{{$redeem->title}}</td>
+                                                <td>{{$redeem->description}}</td>
                                                 <td>{{$redeem->stars}}</td>
                                                 @if($redeem->type == 'percent')
                                                 <td>{{$redeem->discount}}%</td>  

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Assessment;
 use App\Models\Notification;
 
+use App\Models\Cart;
+
+
 /*
 |--------------------------------------------------------------------------
 | Admin AssessmentController Class.
@@ -26,8 +29,21 @@ class AssessmentController extends Controller
         $assessment_pivot = auth()->user()->assessments()->where('course_id', $course_id)->firstOrFail()->pivot;
 
         if ($assessment_pivot->status != "finished") abort(404);
+        
+        $cart_count = Cart::with('course')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+        $transactions = Notification::where(
+            [   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0],
+                
+            ]
+            )->orderBy('created_at', 'desc')->get();
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('client/online-course/completed', compact('course', 'assessment_pivot'));
+        return view('client/online-course/completed', compact('cart_count','transactions','informations','notifications','course', 'assessment_pivot'));
     }
 
     // Shows the Assessment page itself.

@@ -9,6 +9,6 @@ class Redeem extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'stars', 'type','discount','promo_for'
+        'title','description','stars', 'type','discount','promo_for'
     ];
 }

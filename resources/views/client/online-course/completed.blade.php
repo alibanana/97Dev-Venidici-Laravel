@@ -1,32 +1,7 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('./layouts/client-main')
+@section('title', 'Venidici Community')
 
-    <meta name="Description" content="Anytime anywhere, Learn on your schedule from any device ">
-
-    <!-- INDEX CSS -->
-    <link rel="stylesheet"  type="text/css"  href="/css/index.css">
-
-    <!-- CSS -->
-
-    <!--load all fontawesome -->
-    <link href="/fontawesome/css/all.css" rel="stylesheet"> 
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <!-- web icon    -->
-    <link rel="shortcut icon" type="image/jpg" href="/assets/images/client/icon-transparent.png"/>
-  
-    <!-- wow js -->
-    <link rel="stylesheet" href="/WOW-master/css/libs/animate.css">
-
-    <title>Venidici Assesmnet</title>
-
-  </head>
-  <body style="padding-right:0px !important">
+@section('content')
 
     <form id="retryAssessmentForm" action="{{ route('online-course-assessment.reset-user-assessment', $assessment_pivot->assessment_id) }}" method="POST">
         @csrf
@@ -34,7 +9,7 @@
         <input type="hidden" name="redirectURL" value="{{ route('online-course-assessment.show', $course->id) }}" hidden>
     </form>
 
-    <div class="row m-0 page-container" style="padding-top:10vw;padding-bottom:10vw">
+    <div class="row m-0 page-container" style="padding-top:12vw;padding-bottom:8vw">
         <!-- START OF LEFT CONTENT -->
         <div class="col-6">
             <p class="medium-heading" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#2B6CAA">Good work!</p>
@@ -54,18 +29,56 @@
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:3vw">
                 <button class="normal-text  btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;">Unduh Sertifikat</button>
                 <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Atau</p>
-                <a onclick="document.getElementById('retryAssessmentForm').submit(); return false;" class="normal-text blue-link-underline" style="font-family: Rubik Medium;color:#2B6CAA;text-decoration:none">Ulang Assessment</a>
+                <a onclick="document.getElementById('retryAssessmentForm').submit(); return false;" class="normal-text blue-link-underline" style="font-family: Rubik Medium;color:#2B6CAA;text-decoration:none;cursor:pointer">Ulang Assessment</a>
             </div>
         </div>
         <!-- END OF LEFT CONTENT -->
 
         <!-- START OF RIGHT CONTENT -->
         <div class="col-6" style="display:flex;justify-content:flex-end">
-            <div style="background: #FFFFFF;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);border-radius: 10px;width:35vw;height:35vw;padding:4vw">
+            @if(session('review_message_double') || session('review_message'))
+
+            <div style="padding-left:5vw">
+                
+                @if(session('review_message'))
+
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                    {{ session('review_message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- END OF ALERT MESSAGE -->
+                @elseif(session('review_message_double'))
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                    {{ session('review_message_double') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- END OF ALERT MESSAGE -->
+                @endif
+                <div style="background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 10px;display:flex;height:15vw">
+                    <img src="/assets/images/client/discord_bg.png" class="img-fluid" style="width:50%" alt="">
+                    <div style="width:100%;padding:1.5vw">
+                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#3B3C43">Join our Discord: Venidici Community</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0.5vw;color:#3B3C43">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem cras nullam et facilisis at. Aenean suspendisse in blandit enim.</p>
+                    </div>
+                </div>
+                <a href="/online-course" style="text-decoration:none">
+                    <div style="margin-top:1.5vw;background: #2B6CAA;border-radius: 10px;display:flex;align-items:center;justify-content:space-between;padding:1vw">
+                        <div style="display:flex;align-items:center">
+                            <img src="/assets/images/icons/blue_bug_icon.png" style="height:2vw" class="img-fluid" alt="">
+                            <p class="bigger-text" style="font-family: Rubik Medium;margin-left:1vw;color:#3B3C43;margin-bottom:0px;color:#FFFFFF">Explore more courses on <span style="font-family:Rubik Bold">Online Course</span></p>
+                        </div>
+                        <i class="fas fa-arrow-right bigger-text" style="color:#FFFFFF"></i>
+                    </div>
+                </a>
+            </div>
+            @else
+            <div style="background: #FFFFFF;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);border-radius: 10px;width:35vw;height:24vw;padding:2vw">
+                
                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0.5vw;margin-right:3vw;color:#3B3C43">Bagaimana course ini untuk kamu?</p>
                 <form action="{{ route('customer.review.store') }}" id="review-section" method="POST">
                 @csrf
-                
                 <div  id="review-area">
                     <div class="rate" style="margin-top:1vw" >
                         <input type="radio" id="star5" name="rating" value="5" />
@@ -91,32 +104,16 @@
                         <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <input type="hidden" name="course_id" value="">
+                    <input type="hidden" name="course_id" value="{{$course->id}}">
                     <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Submit</button>
+                    <button type="submit" name="action" value="completed_course" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Submit</button>
                     </div>
                 </div>
                 </form>
             </div>
-
+            @endif
         </div>
         <!-- END OF LEFT CONTENT -->
     </div>
 
-
-    <!-- FOOTER -->
-    <!-- END OF FOOTER -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- BOOTSTRAP 5-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha512-HWlJyU4ut5HkEj0QsK/IxBCY55n5ZpskyjVlAoV9Z7XQwwkqXoYdCIC93/htL3Gu5H3R4an/S0h2NXfbZk3g7w==" crossorigin="anonymous"></script>
-    
-    <!-- BOOTSTRAP 4 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha512-HWlJyU4ut5HkEj0QsK/IxBCY55n5ZpskyjVlAoV9Z7XQwwkqXoYdCIC93/htL3Gu5H3R4an/S0h2NXfbZk3g7w==" crossorigin="anonymous"></script>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
- 
-  </body>
-</html>
+@endsection

@@ -12,6 +12,7 @@
     @endforeach
 @endforeach
 <div class="row m-0 page-container course-page-background" style="padding-top:11vw;padding-bottom:10vw">
+    
     <!-- START OF BANNER SECTION -->
     <div class="col-12 p-0">
         <p class="medium-heading" style="font-family:Rubik Medium;color:#3B3C43;">{{$content->title}}</p>
@@ -48,7 +49,33 @@
                         -->
                         <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">Durasi {{$assessment->duration}} menit</p>
                     </div>
+
+                    @php
+                    $hasSeenAll = TRUE;
+                        $x = 1;
+                        
+                        foreach($sections as $section){
+                            foreach($section->sectionContents as $content){
+                                $all_users = explode(',', $content->hasSeen);
+                                foreach($all_users as $user_id)
+                                {
+                                    if($user_id == auth()->user()->id)
+                                    {
+                                        $x=1;
+                                        break;
+                                    }
+                                    if($x == count($all_users) && $user_id != auth()->user()->id)
+                                        $hasSeenAll = FALSE;
+                                    $x++;
+                                }
+                            }
+                        }
+                    @endphp
+                    @if($hasSeenAll)
                     <button onclick="window.open('{{ route('online-course-assessment.show', $course->id) }}','_self');" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Buka Assesment</button>
+                    @else
+                    <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;color:rgba(255, 186, 0, 1);">Course Belum Selesai</p>
+                    @endif
                 </div>
                 <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Deskripsi Assesment</p>
                 <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">{{$assessment->description}}</p>
@@ -100,14 +127,36 @@
                                 <a href="/online-course/{{$section->course_id}}/learn/lecture/{{$content_detail->id}}" style="text-decoration:none">
                                     <div class="course-collapse @if($content_detail->id == $content->id) course-collapse-active @endif">
                                         <div style="display:flex;justify-content:space-between">
+                                            @php 
+
+                                            $info_users = explode(',', $content_detail->hasSeen);
+                                            $infoHasSeen = FALSE;
+                                            foreach($info_users as $user_id)
+                                            {
+                                            if($user_id == Auth::user()->id)
+                                                $infoHasSeen = TRUE;
+                                            }   
+                                            @endphp
+                                            @if($infoHasSeen)
                                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$content_detail->title}}</p>
+                                            @else
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">{{$content_detail->title}}</p>
+                                            @endif
                                             <div style="padding-left:0.5vw">
                                                 <p class="normal-text text-nowrap" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:0px">{{floor(($content_detail->duration / 60) % 60)}}:@if(strlen($content_detail->duration % 60) == 1)<span>0</span>@endif{{$content_detail->duration % 60}}</p>
                                             </div>
                                         </div>
+                                        @if($infoHasSeen)
                                         <i style="color:#E2E2E2" class="fas fa-play-circle"></i>
+                                        @else
+                                        <i style="color:#2B6CAA" class="fas fa-play-circle"></i>
+                                        @endif
                                         @if($loop->last && $flag)
-                                        <i style="color:#E2E2E2" class="fas fa-question-circle"></i>
+                                            @if($infoHasSeen)
+                                            <i style="color:#E2E2E2" class="fas fa-question-circle"></i>
+                                            @else
+                                            <i style="color:#2B6CAA" class="fas fa-question-circle"></i>
+                                            @endif
                                         @endif
                                     </div>  
                                 </a>
@@ -164,6 +213,8 @@
     </div>
     <!-- END OF LEARNING SECTION -->
 </div>
+
+    
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>
@@ -182,6 +233,7 @@
         }
          
 </script>
+
 
 @endsection
 

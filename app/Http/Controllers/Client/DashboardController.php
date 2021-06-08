@@ -69,6 +69,12 @@ class DashboardController extends Controller
             'name'          => 'required',
             'telephone'     => 'required',
             'birthdate'     => 'date',
+            'province_id'   => 'required',
+            'city_id'       => 'required',
+            'address'       => 'required',
+            'gender'        => 'required',
+            'company'       => 'required',
+            'occupancy'     => 'required',
         ]);
 
         if($validated->fails()) 
@@ -86,12 +92,21 @@ class DashboardController extends Controller
             $user->avatar = Helper::storeImage($request->file('avatar'), 'storage/images/users/');
         }
 
-        $user->save();
 
         $user_detail = $user->userDetail;
         $user_detail->update($request->except([
             'name','telephone'
         ]));
+
+        //check if the user update the profile for the first time
+        if(!$user->isProfileUpdated){
+            $user->isProfileUpdated = TRUE;
+            // here insert star reward
+
+        }
+        $user->save();
+
+
 
         return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil!');
     }

@@ -17,7 +17,8 @@ class SectionContent extends Model
         'youtube_link', // nullable
         'attachment', // nullable
         'description', // nullable
-        'duration' // nullable
+        'duration', // nullable
+        'hasSeen', // nullable
     ];
 
     public function section() {

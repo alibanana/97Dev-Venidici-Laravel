@@ -16,12 +16,16 @@ class RedeemSeeder extends Seeder
     {
         $promotions = [
             [
+                'title' => 'Diskon Hallelujah!',
+                'description' => 'Potongan Rp10,000 untuk pembelian course.',
                 'stars' => '120',
                 'type' => 'nominal',
                 'discount' => '10000',
                 'promo_for' => 'price'
             ],
             [
+                'title' => 'Diskon Hallelujah!',
+                'description' => 'Potongan Rp15,000 untuk pembelian course.',
                 'stars' => '180',
                 'type' => 'nominal',
                 'discount' => '15000',
@@ -29,6 +33,8 @@ class RedeemSeeder extends Seeder
 
             ],
             [
+                'title' => 'Diskon Hallelujah!',
+                'description' => 'Potongan Rp20,000 untuk pembelian course.',
                 'stars' => '250',
                 'type' => 'nominal',
                 'discount' => '20000',
@@ -36,12 +42,16 @@ class RedeemSeeder extends Seeder
 
             ],
             [
+                'title' => 'Charity yuk!',
+                'description' => 'Sumbang Rp10,000 ke Jalin Mimpi!',
                 'stars' => '100',
                 'type' => 'nominal',
                 'discount' => '10000',
                 'promo_for' => 'charity'
             ],
             [
+                'title' => 'Charity yuk!',
+                'description' => 'Sumbang Rp15,000 ke Jalin Mimpi!',
                 'stars' => '160',
                 'type' => 'nominal',
                 'discount' => '15000',
