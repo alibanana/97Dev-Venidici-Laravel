@@ -168,7 +168,7 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - KrestProgramController
 |   - HashtagController
 */
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function() {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(function() {
     // DashboardController
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');

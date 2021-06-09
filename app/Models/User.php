@@ -89,7 +89,11 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    public function promos() {
+    public function promotions() {
         return $this->hasMany(Promotion::class);
+    }
+
+    public function stars() {
+        return $this->hasMany(Star::class);
     }
 }

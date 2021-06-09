@@ -59,7 +59,10 @@ class DashboardController extends Controller
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
 
-        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders','interests','informations','notifications'));
+        $usableStarsCount = Helper::getUsableStars(auth()->user());
+
+        return view('client/user-dashboard',
+            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount'));
     }
 
     // Updates Users's data in the database.
@@ -200,7 +203,8 @@ class DashboardController extends Controller
         $current_year = explode(' ', Carbon::now());
         $current_year_date=$current_year[0];
 
-        return view('client/vouchers', compact('cart_count','informations','transactions','notifications','redeem_rules','next_year_date','current_year_date','my_vouchers'));
+        return view('client/vouchers',
+            compact('cart_count', 'informations', 'transactions', 'notifications', 'redeem_rules', 'next_year_date', 'current_year_date', 'my_vouchers'));
     }
 
     public function redeemPromo(Request $request)
@@ -221,7 +225,7 @@ class DashboardController extends Controller
             //get next year date
             $next_year = explode(' ', Carbon::now()->addYear(1));
             $next_year_date = $next_year[0];
-            
+
             //1. buat promo khusus untuk user
             $promotion = new Promotion();
             $promotion->user_id         = auth()->user()->id;
