@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
+use App\Http\Controllers\Admin\WokiCourseController as AdminWokiCourseController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
 use App\Http\Controllers\Admin\SectionContentController as AdminSectionContentController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
@@ -161,6 +162,7 @@ Route::get('/woki/sertifikat-menjadi-seniman', function () {
 |   - UserController
 |   - OnlineCourseController
 |   - OnlineCourseUpdateController // Update is separated because its very complex.
+|   - WokiCourseController
 |   - SectionController
 |   - SectionContentController
 |   - CourseCategoryController
@@ -193,6 +195,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     Route::put('/online-courses/{id}/update-publish-status', [AdminOnlineCourseUpdateController::class, 'updatePublishStatus'])->name('online-courses.update-publish-status');
     Route::put('/online-courses/{id}/attach-teacher', [AdminOnlineCourseUpdateController::class, 'attachTeacher'])->name('online-courses.attach-teacher');
     Route::put('/online-courses/{id}/detach-teacher', [AdminOnlineCourseUpdateController::class, 'detachTeacher'])->name('online-courses.detach-teacher');
+    // WokiCourseController
+    Route::get('/woki-courses', [AdminWokiCourseController::class, 'index'])->name('woki-courses.index');
     // SectionController
     Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
     Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');
@@ -287,9 +291,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
 });
 
 /* START OF WOKI ROUTING */
-Route::get('/admin/woki', function () {
-    return view('admin/woki/index');
-});
 Route::get('/admin/woki/1', function () {
     return view('admin/woki/detail');
 });

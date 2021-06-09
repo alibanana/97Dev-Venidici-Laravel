@@ -42,6 +42,31 @@ class CourseRequirementSeeder extends Seeder
                 'course_id' => 2,
                 'requirement' => 'Rasa penasaran yang tinggi :)'
             ],
+            // WOKI Courses
+            [
+                'course_id' => 3,
+                'requirement' => 'PC atau laptop'
+            ],
+            [
+                'course_id' => 3,
+                'requirement' => 'Koneksi Internet'
+            ],
+            [
+                'course_id' => 3,
+                'requirement' => 'Rasa penasaran yang tinggi :)'
+            ],
+            [
+                'course_id' => 4,
+                'requirement' => 'PC atau laptop'
+            ],
+            [
+                'course_id' => 4,
+                'requirement' => 'Koneksi Internet'
+            ],
+            [
+                'course_id' => 4,
+                'requirement' => 'Rasa penasaran yang tinggi :)'
+            ],
         ];
 
         foreach ($requirements as $key => $value) {

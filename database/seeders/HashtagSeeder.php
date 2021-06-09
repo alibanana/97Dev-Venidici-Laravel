@@ -140,7 +140,7 @@ class HashtagSeeder extends Seeder
         //     Hashtag::create($value);
         // }
 
-        for ($i = 0; $i < 10; $i++) { 
+        for ($i = 0; $i < 12; $i++) { 
             Hashtag::create([
                 'hashtag' => $faker->unique()->word,
                 'image' => 'assets/images/seeder/hashtag-dummy-image.png',

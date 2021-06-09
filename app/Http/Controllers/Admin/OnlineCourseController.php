@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Helper\Helper;
 
 use App\Models\CourseCategory;
+use App\Models\CourseType;
 use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
@@ -33,7 +34,7 @@ class OnlineCourseController extends Controller
             ->only(['category'])
             ->flatten()->toArray();
 
-        $courses = new Course;
+        $courses = CourseType::where('type', 'Course')->firstOrFail()->courses();
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
