@@ -15,6 +15,7 @@ class UserDetail extends Model
         'user_id',
         'telephone',
         'referral_code',
+        'with_referral_code',
         'birthdate',
         'gender',
         'address',

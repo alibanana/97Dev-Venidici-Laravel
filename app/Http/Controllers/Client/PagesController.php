@@ -159,16 +159,26 @@ class PagesController extends Controller
         if(count($hashtag_ids) > 3)
             return redirect()->back()->with('message','message');
 
-        $user = User::create([
-            'name'      => $request->session()->get('name'),
-            'email'     => $request->session()->get('email'),
-            'password'  => Hash::make($request->session()->get('password'))
-        ]);
+        // $user = User::create([
+        //     'name'      => $request->session()->get('name'),
+        //     'email'     => $request->session()->get('email'),
+        //     'password'  => Hash::make($request->session()->get('password'))
+        // ]);
+
+        // Get all Referal Codes
+        $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
+        
+        $newReferralCode = Str::random(6);
+
+        while (!in_array($newReferralCode, $referralCodes)) {
+            $newReferralCode = Str::random(6);
+        }
 
         $user_detail = UserDetail::create([
             'user_id'       => $user->id,
             'telephone'     => $request->session()->get('telephone'),
-            'referral_code' => $request->session()->get('referral_code'),
+            'referral_code' => $newReferralCode,
+            'with_referral_code' => $request->session()->get('referral_code'),
             'response'      => $request->session()->get('response')
         ]);
 
