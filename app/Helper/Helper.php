@@ -53,23 +53,26 @@ class Helper
     }
 
     public static function getUsableStars($user) {
-        $substractStars = $user->stars()->where('type', 'Subtract')->get();
-        $addStars = $user->stars()->where('type', 'Add')->whereDate('valid_until', '>=', Carbon::today())->get();
-        
+        //$substractStars = $user->stars()->where('type', 'Subtract')->get();
+        //$addStars = $user->stars()->where('type', 'Add')->whereDate('valid_until', '>=', Carbon::today())->get();
+        $userStars = $user->stars()->whereDate('valid_until', '>=', Carbon::today())->orderBy('created_at','asc')->get();
         $total_stars = 0;
-        
-        foreach ($addStars as $star) 
+        foreach($userStars as $star)
+        {
             $total_stars += $star->stars;
+        }
+        //foreach ($addStars as $star) 
+            //$total_stars += $star->stars;
         
-        foreach ($substractStars as $star) 
-            $total_stars -= $star->stars;
-
+        //foreach ($substractStars as $star) 
+            //$total_stars -= $star->stars;
         return $total_stars;
     }
 
     public static function getUnusableStars($user) {
-        $stars = $user->stars()->where('valid_until', '<', Carbon::today())->get();
-        
+        //$stars = $user->stars()->where('valid_until', '<', Carbon::today())->get();
+        $userStars = $user->stars()->whereDate('valid_until', '<=', Carbon::today())->orderBy('created_at','asc')->get();
+
         $total_stars = 0;
         foreach ($stars as $star) {
             $total_stars += $star->stars;

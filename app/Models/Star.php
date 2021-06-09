@@ -13,7 +13,7 @@ class Star extends Model
         'user_id',
         'stars',
         'valid_until',
-        'type'
+        //'type'
     ];
 
     public function user() {

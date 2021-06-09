@@ -203,15 +203,19 @@ class DashboardController extends Controller
         $current_year = explode(' ', Carbon::now());
         $current_year_date=$current_year[0];
 
+        $usableStarsCount = Helper::getUsableStars(auth()->user());
+
+
         return view('client/vouchers',
-            compact('cart_count', 'informations', 'transactions', 'notifications', 'redeem_rules', 'next_year_date', 'current_year_date', 'my_vouchers'));
+            compact('cart_count', 'informations', 'transactions', 'notifications', 'redeem_rules', 'next_year_date', 'current_year_date', 'my_vouchers', 'usableStarsCount'));
     }
 
     public function redeemPromo(Request $request)
     {
         $redeem = Redeem::findOrFail($request->redeem_id);
+        $usableStarsCount = Helper::getUsableStars(auth()->user());
         //check whether starsnya cukup atau enggak
-        if(auth()->user()->stars > $redeem->stars)
+        if($usableStarsCount > $redeem->stars)
         {
             $new_promo_id = Promotion::orderBy('created_at','desc')->first()->id +1;
             $new_name = substr(auth()->user()->name, 0,3);
@@ -258,8 +262,28 @@ class DashboardController extends Controller
             ]);
 
             //3. kurangin stars
-            auth()->user()->stars -= $redeem->stars;
-            auth()->user()->save();
+            //auth()->user()->stars -= $redeem->stars;
+            //auth()->user()->save();
+            $userStars = auth()->user()->stars()->whereDate('valid_until', '>=', Carbon::today())->orderBy('created_at','asc')->get();
+            $redeem_cost = $redeem->stars;
+            $flag = TRUE;
+            foreach($userStars as $star)
+            {
+                if($flag)
+                {
+                    if($star->stars >= $redeem_cost)
+                    {
+                        $star->stars -= $redeem_cost;
+                        $star->save();
+                        $flag = FALSE;
+                    }
+                    else{
+                        $redeem_cost -= $star->stars;
+                        $star->stars = 0;
+                        $star->save();
+                    }
+                }
+            }
 
             return redirect()->back()->with('redeem_success','Redeem stars berhasil');
         }

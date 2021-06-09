@@ -21,10 +21,10 @@ class StarSeeder extends Seeder
         for ($i = 0; $i < 3; $i++) {
             $date = $faker->dateTimeBetween($startDate = '-10 months', $endDate = '-5 months')->format('Y-m-d');
             Star::create([
-                'user_id' => 3,
+                'user_id' => 1,
                 'stars' => rand(10, 50),
                 'valid_until' => Carbon::createFromFormat('Y-m-d', $date)->addMonths(4),
-                'type' => 'Add',
+                //'type' => 'Add',
                 'created_at' => Carbon::createFromFormat('Y-m-d', $date)
             ]);
         }
@@ -33,10 +33,10 @@ class StarSeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
             $date = $faker->dateTimeBetween($startDate = '-4 months', $endDate = 'now')->format('Y-m-d');
             Star::create([
-                'user_id' => 3,
+                'user_id' => 1,
                 'stars' => rand(10, 50),
                 'valid_until' => Carbon::createFromFormat('Y-m-d', $date)->addMonths(4),
-                'type' => 'Add',
+                //'type' => 'Add',
                 'created_at' => Carbon::createFromFormat('Y-m-d', $date)
             ]);
         }
@@ -45,9 +45,9 @@ class StarSeeder extends Seeder
         for ($i = 0; $i < 3; $i++) {
             $date = $faker->dateTimeBetween($startDate = '-10 months', $endDate = 'now')->format('Y-m-d');
             Star::create([
-                'user_id' => 3,
+                'user_id' => 1,
                 'stars' => rand(10, 50),
-                'type' => 'Subtract',
+                //'type' => 'Subtract',
                 'created_at' => Carbon::createFromFormat('Y-m-d', $date)
             ]);
         }
