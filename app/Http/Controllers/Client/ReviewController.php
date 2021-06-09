@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use Illuminate\Support\Facades\Validator;
+use App\Helper\Helper;
 
 class ReviewController extends Controller
 {
@@ -72,6 +73,9 @@ class ReviewController extends Controller
             ]);
         }
         if($review){
+            // add 10 stars
+            Helper::addStars(auth()->user(),10);
+
             if($request->action == "completed_course")
                 return redirect()->back()->with('review_message','Review berhasil dimasukkan');
             else

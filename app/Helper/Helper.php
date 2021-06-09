@@ -5,6 +5,7 @@ namespace App\Helper;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as ImageManager;
 use Carbon\Carbon;
+use App\Models\Star;
 
 class Helper
 {
@@ -79,5 +80,19 @@ class Helper
         }
 
         return $total_stars;
+    }
+
+    public static function addStars($user,$star_added) {
+
+        $star               = new Star();
+        $star->user_id      = $user->id;
+        $star->stars        = $star_added;
+        $star->valid_until  = Carbon::now()->addMonths(4);
+        $star->save();
+
+        if($star)
+            return 'success';
+        else
+            return 'error';
     }
 }
