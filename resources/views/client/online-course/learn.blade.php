@@ -76,7 +76,7 @@
                     @else
                     <div style="text-align:right">
                         <button  class="normal-text btn-grey" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw;border-radius:10px">Buka Assesment</button>
-                        <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#CE3369;margin-top:1vw">*Harap selesaikan course sebelum mulai assesment*</p>
+                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#CE3369;margin-top:1vw">*Harap selesaikan course sebelum mulai assesment*</p>
                     </div>
                     @endif
                 </div>

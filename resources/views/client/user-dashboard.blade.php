@@ -481,8 +481,15 @@
 
     <!-- Pelatihan Aktif Content -->
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
-        @if(count(auth()->user()->courses) == 0)
-        
+        @php
+        $aktif_flag = FALSE;
+        foreach(auth()->user()->courses as $course_on_going)
+        {
+            if($course_on_going->pivot->status == 'on-going')
+                $flag = TRUE;
+        }
+        @endphp
+        @if(!$flag)
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
@@ -571,50 +578,73 @@
 
     <!-- Pelatihan Selesai Content -->
     <div style="padding:0px;display:none;" class="user-content" id="pelatihan-selesai">
-        <div class="col-12 p-0">
-            <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
-                <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" >Woki</div>
-                </div>           
-                <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:36.8vw">
-                        <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                        </div>
-                    </div>
-                    <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <i class="fas fa-check-circle big-heading"></i>
-                        <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</a>
-                    </div>
-                </div> 
+        @php
+        $flag = FALSE;
+        foreach(auth()->user()->courses as $ $course)
+        {
+            if($course->pivot->status == 'completed')
+                $flag = TRUE;
+        }
+        @endphp
+        @if(!$flag)
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan selesai belum tersedia.</span></p>
             </div>
-        </div>
-        <div class="col-12 p-0">
-            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
-                <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" >Workshop</div>
-                </div>           
-                <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:36.8vw">
-                        <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
+        @endif
+        @foreach(auth()->user()->courses as $course)
+        @if($course->pivot->status == 'completed')
+            @if($course->course_type_id ==1)
+            <div class="col-12 p-0">
+                <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
+                    <div class="container-image-card">
+                        <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
+                        <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Online Course @else Woki @endif</div>
+                    </div>           
+                    <div style="display:flex;justify-content:space-between">
+                        <div class="right-section" style="width:37vw">
+                            <div>
+                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
+                                <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
+                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
+                                <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
+
+                            </div>
                         </div>
-                    </div>
-                    <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <i class="fas fa-check-circle big-heading"></i>
-                        <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</a>
-                    </div>
-                </div> 
+                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                            <i class="fas fa-check-circle big-heading"></i>
+                            <a href="" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</a>
+                        </div>
+                    </div> 
+                </div>
             </div>
-        </div>
+            @else
+            <div class="col-12 p-0">
+                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
+                    <div class="container-image-card">
+                        <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
+                        <div class="top-left card-tag small-text" >Workshop</div>
+                    </div>           
+                    <div style="display:flex;justify-content:space-between">
+                        <div class="right-section" style="width:36.8vw">
+                            <div>
+                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
+                                <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
+                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
+                            </div>
+                        </div>
+                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                            <i class="fas fa-check-circle big-heading"></i>
+                            <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</a>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            @endif
+        @endif
+        @endforeach
+        
 
     </div>
     <!-- End of Pelatihan Selesai Content -->
