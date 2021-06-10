@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as ImageManager;
 use Carbon\Carbon;
 use App\Models\Star;
+use App\Models\Notification;
 
 class Helper
 {
@@ -82,7 +83,7 @@ class Helper
         return $total_stars;
     }
 
-    public static function addStars($user,$star_added) {
+    public static function addStars($user,$star_added,$case) {
 
         $star               = new Star();
         $star->user_id      = $user->id;
@@ -90,7 +91,44 @@ class Helper
         $star->valid_until  = Carbon::now()->addMonths(4);
         $star->save();
 
-        if($star)
+        // create notification
+        $notification = Notification::create([
+            'user_id'           => auth()->user()->id,
+            'isInformation'     => 1,
+            'title'             => 'Selamat! kamu mendapatkan '.$star_added.' stars.',
+            'description'       => 'Hi, '.auth()->user()->name.'. Kamu berhasil mendapat '.$star_added.' stars dari '.$case.'! Click notifikasi ini untuk melihat star kamu.',
+            'link'              => '/dashboard/redeem-vouchers'
+        ]);
+        
+
+        //update user club
+        $user_stars = Helper::getUsableStars(auth()->user());
+        $user_club = auth()->user()->club;
+        if($user_club == null)
+        {
+            if($user_stars >= 20)
+            {
+                auth()->user()->club = 'bike';
+                auth()->user()->save();
+            }
+        }
+        elseif($user_club == 'bike')
+        {
+            if($user_stars >= 100)
+            {
+                auth()->user()->club = 'car';
+                auth()->user()->save();
+            } 
+        }
+        elseif($user_club == 'car'){
+            if($user_stars >= 280)
+            {
+                auth()->user()->club = 'jet';
+                auth()->user()->save();
+            }
+        }
+
+        if($star && $notification)
             return 'success';
         else
             return 'error';

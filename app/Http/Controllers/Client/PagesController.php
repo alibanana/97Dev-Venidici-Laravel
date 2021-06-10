@@ -25,6 +25,8 @@ use App\Models\InstructorPosition;
 
 
 use PDF;
+use Illuminate\Support\Str;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -149,6 +151,17 @@ class PagesController extends Controller
             'interests' => 'required|array'
         ]);
 
+        // Get all Referal Codes
+        $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
+
+        // Check whether referral code exists
+        if($request->session()->get('referral_code'))
+        {
+            if(!in_array($request->session()->get('referral_code'), $referralCodes)){
+                return redirect('/signup')->with('message','Referral code tidak ditemukan');
+            }
+        }
+
         $hashtag_ids= [];
         foreach($validated['interests'] as $hashtag_id => $flag)
         {
@@ -165,21 +178,27 @@ class PagesController extends Controller
             'password'  => Hash::make($request->session()->get('password'))
         ]);
 
-        // Get all Referal Codes
-        $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
         
-        $newReferralCode = Str::random(6);
+        // Generate New Referral Code
+        $newReferralCode = substr($request->session()->get('name'), 0,3).Str::random(3);
         
-        while (!in_array($newReferralCode, $referralCodes)) {
-            $newReferralCode = Str::random(6);
-        }
+        // selama referralnya belom ada
+        while (in_array($newReferralCode, $referralCodes)) {
+            //buat referral baru
+            $newReferralCode = substr($request->session()->get('name'), 0,3).Str::random(3);
 
+        }
+        if($request->session()->get('referral_code'))
+            $referredByCode = $request->session()->get('referral_code');
+        else
+            $referredByCode = null;
+            
         $user_detail = UserDetail::create([
-            'user_id'       => $user->id,
-            'telephone'     => $request->session()->get('telephone'),
-            'referral_code' => $newReferralCode,
-            'with_referral_code' => $request->session()->get('referral_code'),
-            'response'      => $request->session()->get('response')
+            'user_id'               => $user->id,
+            'telephone'             => $request->session()->get('telephone'),
+            'referral_code'         => strtoupper($newReferralCode),
+            'referred_by_code'      => $referredByCode,
+            'response'              => $request->session()->get('response')
         ]);
 
         //here store to user_hashtag table

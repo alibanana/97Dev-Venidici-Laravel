@@ -16,6 +16,15 @@
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                     </div>
+                    @if (session()->has('message'))
+                    <div class="col-12" style="padding:1vw 3vw">
+                        <div class="mb-0">
+                            <div class="alert alert-warning alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                                {{ session()->get('message') }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="col-12" style="text-align:left;padding-left:5vw">
                         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0px">General Information</p>
                     </div>
@@ -57,7 +66,7 @@
                     </div> 
                     <!-- END OF LEFT SECTION --> 
                     <!-- RIGHT SECTION -->
-                    <div class="col-6" style="padding-left:5vw">
+                    <div class="col-6" style="padding-right:5vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw;width:100%">Email Address</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>

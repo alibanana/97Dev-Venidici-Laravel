@@ -355,7 +355,11 @@
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Rp {{ number_format($invoice->grand_total, 0, ',', ',') }}</p>
                 </div>
                 <div style="display:flex;justify-content:flex-end;align-items:center;">
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0px">(+20 Stars)</p>
+                    @php
+                    $star_mulitiplication = (int)($invoice->grand_total/30000);
+                    $star_added = $star_mulitiplication*12;
+                    @endphp
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0px">(+{{$star_added}} Stars)</p>
                 </div>
             </div>
             <!-- END OF NOMINAL CARD --> 

@@ -106,7 +106,10 @@ class DashboardController extends Controller
         if(!$user->isProfileUpdated){
             $user->isProfileUpdated = TRUE;
             // here insert star reward
-
+            //tambah 15 stars
+            Helper::addStars(auth()->user(),15,'Completing Personal Data');
+            $user->save();
+            return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
         }
         $user->save();
 

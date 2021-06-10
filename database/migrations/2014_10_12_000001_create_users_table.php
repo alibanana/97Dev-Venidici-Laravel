@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', ['active', 'suspended'])->default('active');
+            $table->enum('club', ['bike', 'car','jet'])->nullable();
             $table->boolean('isProfileUpdated')->default(0);
             $table->rememberToken();
             $table->timestamps();

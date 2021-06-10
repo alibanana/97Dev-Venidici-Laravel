@@ -22,7 +22,9 @@ class User extends Authenticatable
         'email',
         'provider_id',
         'password',
-        'status'
+        'status',
+        'club',
+        'isProfileUpdated',
     ];
 
     /**
