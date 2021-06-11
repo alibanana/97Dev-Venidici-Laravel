@@ -261,7 +261,7 @@
                     <img src="/assets/images/client/Stars_Illustration.png" class="img-fluid" style="width:14vw" alt="">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Venidici {{strtoupper(auth()->user()->club)}} Club</p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{$usableStarsCount}} Stars</span></p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">- Stars</span></p>
+                    <!--<p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">- Stars</span></p>-->
                     <!-- START OF VENINDICI CLUB PROGRESS BAR -->
 
                     <div class="d-flex flex-row justify-content-between align-items-center" style="margin-top:3vw">
@@ -483,12 +483,22 @@
                         </div>
                     </div>  
                 </div>
-                <div style="display:flex;align-items:center">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">{{ $usableStarsCount }} Stars</p>  
-                    <a href="#points">
-                        <i  style="color:#F4C257;margin-left:1vw" class="fas fa-question-circle bigger-text"></i> 
-                    </a>
+                <div style="display:flex;align-items:center;margin-top:0.5vw">
+                    <div style="border-top: 1.5px solid #F4C257;border-bottom: 1.5px solid #F4C257;border-left: 1.5px solid #F4C257;border-radius: 5px 0px 0px 5px;padding:0.2vw 0.5vw">
+                        <div style="display: flex;flex-direction: column;justify-content: center;">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;"> <i class="fas fa-star"></i> <span>10 Stars</span></p>
+                        </div>
+                    </div>
+                    <div style="display: flex;flex-direction: column;justify-content: center;border: 1.5px solid #F4C257;border-radius:0px 5px 5px 0px;background-color:#F4C257;padding:0.2vw" >
+                            
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;">                        
+                            <a href="#points">
+                                <i class="fas fa-question-circle normal-text" style="color:#FFFFFF;"></i>
+                            </a>
+                        </p>
+                    </div>
                 </div>
+
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->email}}</p>   
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->userDetail->occupancy}}</p>   
                 <div style="width:70%">

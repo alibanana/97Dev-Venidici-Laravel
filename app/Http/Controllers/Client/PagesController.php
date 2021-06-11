@@ -254,8 +254,8 @@ class PagesController extends Controller
 
         $pdf = PDF::loadView('client/certificate',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
         ->setPaper('A4', 'landscape');
-        //return $pdf->download('certificate.pdf'); //download
-        return $pdf->stream(); //view
+        return $pdf->download('certificate.pdf'); //download
+        //return $pdf->stream(); //view
     }
 
     public function seeNotification(Request $request){

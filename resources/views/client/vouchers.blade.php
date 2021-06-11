@@ -12,8 +12,8 @@
                 <div class="col-12" style="text-align:center;">
                     <img src="/assets/images/client/Stars_Illustration.png" class="img-fluid" style="width:14vw" alt="">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Venidici Club</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{$usableStarsCount}} Stars</span></p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{$usableStarsCount}} Stars</span></p>
+                    <!--<p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>-->
                     <!-- START OF VENINDICI CLUB PROGRESS BAR -->
 
                     <div class="d-flex flex-row justify-content-between align-items-center" style="margin-top:3vw">

@@ -440,7 +440,7 @@
 <!-- START OF TRUSTED COMPANY SECTION -->
 <div class="row m-0 page-container" style="z-index: 99;padding-bottom:5vw">
     <div class="col-12 p-0" style="margin-top:-5vw">
-        <div class="wow fadeInRight" data-wow-delay="0.5s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
+        <div class="wow fadeInRight" data-wow-delay="1s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
                 <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Trusted Companies</p>
@@ -1010,7 +1010,7 @@ END OF OUR PROGRAMS SECTION -->
 <!-- END OF FEATURE, COURSE AND TESTIMONY SECTION -->
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container" style=";background:#F6F6F6">
-        <div class="col-6  testimony-background wow flipInX" data-wow-delay="0.5s" style="padding-top:4vw;padding-bottom:4vw;">
+        <div class="col-6  testimony-background wow flipInX" data-wow-delay="1s" style="padding-top:4vw;padding-bottom:4vw;">
             <div style="display: flex;">
                 <!-- LEFT TESTIMONY -->
                 <div>
