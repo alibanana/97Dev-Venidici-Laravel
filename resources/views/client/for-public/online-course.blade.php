@@ -6,7 +6,7 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container for-public-oc-background " style="height:55vw">
     <div class="col-6 p-0">
-        <div style="padding-top:11vw;margin-left:-0.5vw">
+        <div style="padding-top:11vw;margin-left:-0.5vw" class="wow fadeInUp" data-wow-delay="0.3s">
             <img src="/assets/images/client/Venidici_Logo_Horizontal_White.png" style="width:20vw;" class="img-fluid" alt="Image 1">
             <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw;margin-top:1.5vw">Fun learning anytime
             & anywhere</p>
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-6 wow fadeInRight"data-wow-delay="0.3s">
         <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Vendici on Demand, <br> apa tuh?</p>
         <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici on Demand berisi kumpulan rekaman video dari course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong. </p>
@@ -72,7 +72,7 @@
 
 <!-- START OF KENAPA MEMILIH ONLINE COURSE -->
 <div class="row m-0 page-container" style="padding-bottom:8vw   ">
-    <div class="col-6">
+    <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Kenapa Memilih Online Courses?</p>
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
 
@@ -88,7 +88,7 @@
 
 <!-- START OF OUR MISSION -->
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
-    <div style="text-align:center">
+    <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
         <p class="sub-description" style="font-family: Rubik Medium;color:#67BBA3">Our Mission</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Painless onboarding and simple <br> process implementation</p>
     </div>
@@ -187,7 +187,7 @@
 
 <!-- START OF OUR VALUES -->
 <div class="row m-0 page-container our-values-background" style="padding-top:15vw;padding-bottom:15vw">
-    <div class="col-12 p-0">   
+    <div class="col-12 p-0 wow fadeInLeft" data-wow-delay="0.3s">   
         <p class="sub-description" style="font-family: Rubik Medium;color:#67BBA3">Our Values</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">feeding your curiosity engaged <br> on the go</p>
         <div style="width:60vw;margin-top:2vw">
@@ -202,7 +202,7 @@
 <!-- START OF HIGHLIGHTED EVENTS -->
 <div class="row m-0 page-container" style="padding-top:6vw;padding-bottom:6vw;background-color:#F6F6F6">
     <div class="col-12">
-        <p class="big-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-left:2.9vw">Highlighted <span style="font-family:Hypebeast;color:#67BBA3">Events</span> </p>
+        <p class="big-heading wow flash" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43;margin-left:2.9vw">Highlighted <span style="font-family:Hypebeast;color:#67BBA3">Events</span> </p>
     </div>
     <div class="row m-0" style="display:flex;align-items:center;padding-top:1.5vw">   
 
@@ -306,7 +306,7 @@
         <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
             <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
             <div style="width:60%;margin-left:2vw">
-                <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Curios with our Programs?</p>
+                <p class="small-heading wow fadeInUp" data-wow-delay="0.3s" style="color:#FFFFFF;font-family:Rubik Bold">Curios with our Programs?</p>
                 
                 <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore.

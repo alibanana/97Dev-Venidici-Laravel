@@ -399,10 +399,11 @@
 </div>
 <!-- END OF POPUP MENJADI KOLLABORATOR-->
 
-<div class="row m-0 banner-background page-container"
+<!-- START OF BANNER SECTION -->
+<div class="row m-0 banner-background page-container "
     style="height: 50vw; padding-top: 16vw; text-align: center;
     background-image: url({{ $configs['cms.homepage.top-section.background']->value }});">
-    <div class="col-md-12 p-0">
+    <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</p>
         <div style="display: flex;margin-top:2vw;justify-content:center;">
@@ -434,11 +435,12 @@
         </div>
     </div>
 </div>
+<!-- END OF BANNER SECTION -->
 
 <!-- START OF TRUSTED COMPANY SECTION -->
 <div class="row m-0 page-container" style="z-index: 99;padding-bottom:5vw">
     <div class="col-12 p-0" style="margin-top:-5vw">
-        <div style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
+        <div class="wow fadeInRight" data-wow-delay="0.5s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
                 <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Trusted Companies</p>
@@ -517,7 +519,7 @@ END OF OUR PROGRAMS SECTION -->
         <!--<p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Akselerasi keterampilan jalur pelatihan”</p>-->
         <p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Karena bangsa yang maju berawal dari rakyatnya <br> yang berkualitas”</p>
     </div>
-    <div class="col-5" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-5 wow bounceInRight" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/Emas_BG.png" style="width:24vw" class="img-fluid" alt="">
     </div>
 </div>
@@ -589,7 +591,7 @@ END OF OUR PROGRAMS SECTION -->
 <!-- START OF FEATURE, COURSE AND TESTIMONY SECTION -->
 <div class="row m-0 page-container feature-background" style="padding-bottom: 6vw;">
     <!-- START OF FEATURE SECTION -->
-    <div class="col-12 p-0 " style="text-align: center;">
+    <div class="col-12 p-0 wow flash" data-wow-delay="0.2s" style="text-align: center;">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:3vw">Apa yang akan kamu dapat
         dari Venidici?</p>
     </div>
@@ -1008,7 +1010,7 @@ END OF OUR PROGRAMS SECTION -->
 <!-- END OF FEATURE, COURSE AND TESTIMONY SECTION -->
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container" style=";background:#F6F6F6">
-        <div class="col-6  testimony-background" style="padding-top:4vw;padding-bottom:4vw;">
+        <div class="col-6  testimony-background wow flipInX" data-wow-delay="0.5s" style="padding-top:4vw;padding-bottom:4vw;">
             <div style="display: flex;">
                 <!-- LEFT TESTIMONY -->
                 <div>
@@ -1192,7 +1194,7 @@ END OF OUR PROGRAMS SECTION -->
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
                 <div style="width:80%;margin-left:2vw">
-                    <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
+                    <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
                         <input class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>

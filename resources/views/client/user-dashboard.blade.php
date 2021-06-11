@@ -259,9 +259,9 @@
             <div class="row m-0">
                 <div class="col-12" style="text-align:center;">
                     <img src="/assets/images/client/Stars_Illustration.png" class="img-fluid" style="width:14vw" alt="">
-                    <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Venidici Club</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{$usableStarsCount}} Stars</span></p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>
+                    <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Venidici {{strtoupper(auth()->user()->club)}} Club</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{$usableStarsCount}} Stars</span></p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">- Stars</span></p>
                     <!-- START OF VENINDICI CLUB PROGRESS BAR -->
 
                     <div class="d-flex flex-row justify-content-between align-items-center" style="margin-top:3vw">
@@ -374,6 +374,9 @@
                             <div class="row m-0 page-container">
                                 <div class="col-12 p-0">
                                     <div style="text-align:center">
+                                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
+                                        <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
+                                        <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
                                         @if(session('success'))
                                             <!-- ALERT MESSAGE -->
                                             <div style="text-align:center;margin-top:1vw">
@@ -384,9 +387,6 @@
                                             </div>
                                             <!-- END OF ALERT MESSAGE -->
                                         @endif
-                                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
-                                        <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
-                                        <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
                                     </div>
                                     @error('interests')
                                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -445,9 +445,10 @@
     </div>
     @endif
 </div>
+
 <div class="row m-0 page-container" style="padding-top:1.5vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
-        <div class="card-white" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
+        <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
             <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
@@ -512,7 +513,7 @@
 
 
 <!-- START OF MIDDLE SECTION -->
-<div class="row m-0 page-container-inner" style="padding-top:4vw;padding-bottom:4vw">
+<div class="row m-0 page-container-inner wow fadeInLeft" data-wow-delay="0.6s" style="padding-top:4vw;padding-bottom:4vw">
     <div class="col-12 p-0" style="">
         <div style="display:flex">
 
@@ -672,7 +673,7 @@
     <div style="padding:0px;display:none;" class="user-content" id="pelatihan-selesai">
         @php
         $flag = FALSE;
-        foreach(auth()->user()->courses as $ $course)
+        foreach(auth()->user()->courses as $course)
         {
             if($course->pivot->status == 'completed')
                 $flag = TRUE;
