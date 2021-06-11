@@ -447,6 +447,23 @@
                         <input type="hidden" name="total_order_price" value="{{$sub_total}}">
 
                     </div>
+                    @if(Auth::user()->club != null)
+                    @php
+                        $discount_club_price = 0;
+                        if(Auth::user()->club == 'bike')
+                            $discount_club_price = 2500;
+                        elseif(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
+                            $discount_club_price = 5000;
+                    @endphp
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
+                        <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Diskon Venidici Club</p>
+                        <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discount_club_price, 0, ',', ',') }}</p>
+                    </div>
+                    @else
+                        @php
+                        $discount_club_price = 0;
+                        @endphp
+                    @endif
                     @if(!$noWoki)
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>
@@ -459,7 +476,26 @@
                         Rp {{ number_format($shipping_cost, 0, ',', ',') }}</p>
                         @endif
                     </div>
-                    @endif
+                        @if(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
+
+                        @php
+                            $discount_club_shipping = 0;
+                            if(Auth::user()->club == 'car')
+                                $discount_club_shipping = 5000;
+                            elseif(Auth::user()->club == 'jet')
+                                $discount_club_shipping = 10000;
+                        @endphp
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Diskon Venidici Club (Shipping)</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discount_club_shipping, 0, ',', ',') }}</p>
+                        </div>
+                        @endif
+
+                    @else
+                        @php
+                            $discount_club_shipping = 0;
+                        @endphp
+                    @endif 
                     @if($total_price != 0)
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                         @if(Session::get('promotion_code'))
@@ -474,8 +510,14 @@
                         <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discounted_price, 0, ',', ',') }}</p>
                     </div>
 
-                    <?php $total_price -= $discounted_price?>
+                    <?php
+                        $total_price -= $discounted_price;
+                        $total_price -= $discount_club_shipping;
+                    ?>
                     @endif
+                    @php 
+                        $total_price -= $discount_club_price;
+                    @endphp
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;">
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Total</p>
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($total_price, 0, ',', ',') }}</p>

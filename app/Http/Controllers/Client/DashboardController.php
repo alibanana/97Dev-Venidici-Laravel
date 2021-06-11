@@ -288,6 +288,31 @@ class DashboardController extends Controller
                 }
             }
 
+            //update user club
+            $user_stars = Helper::getUsableStars(auth()->user());
+            $user_club = auth()->user()->club;
+ 
+            //kalau dibawah 20, hilangin venidici club nya
+            if($user_stars < 20)
+            {
+                auth()->user()->club = null;
+            }
+            //kalau diantara 20 - 100, ganti jadi bike
+            elseif($user_stars >= 20 && $user_stars < 100)
+            {
+                auth()->user()->club = 'bike';
+            } 
+            //kalau diantara 100 - 280, ganti jadi car
+            elseif($user_stars >= 100 && $user_stars < 280){
+                auth()->user()->club = 'car';
+            }
+            //kalau lebi dari 280, ganti jadi jet
+            elseif($user_stars >= 280){
+                auth()->user()->club = 'jet';
+            }
+            auth()->user()->save();
+
+
             return redirect()->back()->with('redeem_success','Redeem stars berhasil');
         }
         //kalau stars user gak mencukupi

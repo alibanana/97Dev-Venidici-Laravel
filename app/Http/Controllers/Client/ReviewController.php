@@ -47,15 +47,16 @@ class ReviewController extends Controller
         if($validated->fails() && $request->action == "completed_course") return redirect()->back()->withErrors($validated);
         if($validated->fails() && $request->action == "course_detail_review") return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Tidak bisa review kosong.')->withErrors($validated);
         //check whether user has completed its course or not
-        $course = auth()->user()->courses()->where('course_id',$request->course_id)->get();
-
+        $course = auth()->user()->courses()->where('course_id',$request->course_id)->first();
         //kalau user belum punya course nya
-        if(count($course) == 0)
+        if(!$course)
             return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Kamu belum punya course ini!');
-        //kalau user belum selesaikan course            
-        elseif($course->pivot->status == 'on-going' && $course->course_type_id == 1  && $request->action == "course_detail_review")
-            return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Selesaikan course terlebih dahulu!');
-
+        if($request->action == "course_detail_review")
+        {
+            //kalau user belum selesaikan course            
+            if($course->pivot->status == 'on-going' && $course->course_type_id == 1)
+                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Selesaikan course terlebih dahulu!');
+        }
         $reviews = Review::where(
             [   
                 ['user_id', '=', auth()->user()->id],

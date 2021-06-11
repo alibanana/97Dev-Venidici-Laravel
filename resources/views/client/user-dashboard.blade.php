@@ -25,23 +25,23 @@
 
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
-                        <p class="sub-description" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">General Information</p>
                         @if(session('success'))
                             <!-- ALERT MESSAGE -->
                             <div style="text-align:center;margin-top:1vw">
-                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:0px"role="alert">
+                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:1vw;width:20vw"role="alert">
                                 {{ session('success') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             </div>
                             <!-- END OF ALERT MESSAGE -->
                         @endif
+                        <p class="sub-description" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">General Information</p>
                     </div>
                     <!-- START OF LEFT SECTION -->
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">@if(Auth::user()->avatar) Current @endif Display Picture</p>
                         @if(Auth::user()->avatar)
-                        <img src="{{ asset(Auth::user()->avatar) }}" style="width:4vw" alt=""> <br>
+                        <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw" alt=""> <br>
                         @endif
 
                         <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
@@ -433,7 +433,8 @@
 <!-- END OF POPUP INTERESTS-->
 
 <!-- START OF TOP SECTION -->
-<div class="row m-0 page-container" style="padding-top:9vw">   
+<div class="row m-0 page-container" style="padding-top:9vw"> 
+    @if(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
@@ -442,6 +443,7 @@
         </div>
         <!-- END OF ALERT MESSAGE -->
     </div>
+    @endif
 </div>
 <div class="row m-0 page-container" style="padding-top:1.5vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
