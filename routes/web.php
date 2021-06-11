@@ -395,7 +395,7 @@ Route::get('/certificate', function () {
 });
 
 /* START OF DOMPDF ROUTING */
-Route::get('/certificate/pdf', [PagesController::class, 'print'])->name('print_pdf');
+Route::post('/certificate/pdf', [PagesController::class, 'print'])->name('print_certificate');
 /* END OF DOMPDF ROUTING */
 
 
