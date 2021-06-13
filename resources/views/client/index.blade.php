@@ -399,10 +399,11 @@
 </div>
 <!-- END OF POPUP MENJADI KOLLABORATOR-->
 
-<div class="row m-0 banner-background page-container"
+<!-- START OF BANNER SECTION -->
+<div class="row m-0 banner-background page-container "
     style="height: 50vw; padding-top: 16vw; text-align: center;
     background-image: url({{ $configs['cms.homepage.top-section.background']->value }});">
-    <div class="col-md-12 p-0">
+    <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</p>
         <div style="display: flex;margin-top:2vw;justify-content:center;">
@@ -418,7 +419,7 @@
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                     <select name="province" id=""  class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                         <option value="" disabled selected>Pilih Kategori</option>
-                        <option value="">Online Course</option>
+                        <option value="">On-Demand</option>
                         <option value="">Woki</option>
                     </select>                    
                     @error('province')
@@ -434,11 +435,12 @@
         </div>
     </div>
 </div>
+<!-- END OF BANNER SECTION -->
 
 <!-- START OF TRUSTED COMPANY SECTION -->
 <div class="row m-0 page-container" style="z-index: 99;padding-bottom:5vw">
     <div class="col-12 p-0" style="margin-top:-5vw">
-        <div style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
+        <div class="wow fadeInRight" data-wow-delay="1s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
                 <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Trusted Companies</p>
@@ -517,7 +519,7 @@ END OF OUR PROGRAMS SECTION -->
         <!--<p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Akselerasi keterampilan jalur pelatihan”</p>-->
         <p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Karena bangsa yang maju berawal dari rakyatnya <br> yang berkualitas”</p>
     </div>
-    <div class="col-5" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-5 wow bounceInRight" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/Emas_BG.png" style="width:24vw" class="img-fluid" alt="">
     </div>
 </div>
@@ -534,7 +536,7 @@ END OF OUR PROGRAMS SECTION -->
             <div class="our-programs-card-home" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Icon.png" style="width:5vw;" class="img-fluid" alt="">
                 <div>
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">Online Course</p>
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">On-Demand</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
                 </div>
             </div>
@@ -547,9 +549,9 @@ END OF OUR PROGRAMS SECTION -->
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Online Course</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    <a href="/online-course?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Online Course</a>
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">On-Demand</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
+                    <a href="/online-course?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Courses</a>
                 </div>
             </div>
         </a>
@@ -561,7 +563,7 @@ END OF OUR PROGRAMS SECTION -->
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">WOKI</p>
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Woki</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
                     <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Woki</a>
                 </div>
@@ -589,7 +591,7 @@ END OF OUR PROGRAMS SECTION -->
 <!-- START OF FEATURE, COURSE AND TESTIMONY SECTION -->
 <div class="row m-0 page-container feature-background" style="padding-bottom: 6vw;">
     <!-- START OF FEATURE SECTION -->
-    <div class="col-12 p-0 " style="text-align: center;">
+    <div class="col-12 p-0 wow flash" data-wow-delay="0.2s" style="text-align: center;">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:3vw">Apa yang akan kamu dapat
         dari Venidici?</p>
     </div>
@@ -637,7 +639,7 @@ END OF OUR PROGRAMS SECTION -->
 
                 <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Most Popular</p>
                 <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
-                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Online Course</p>
+                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">On-Demand</p>
                 <!--
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
@@ -742,7 +744,7 @@ END OF OUR PROGRAMS SECTION -->
                     <div class="course-card-green">
                         <div class="container">
                             <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                            <div class="top-left card-tag small-text" >Online Course</div>
+                            <div class="top-left card-tag small-text" >On-Demand</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
@@ -925,7 +927,7 @@ END OF OUR PROGRAMS SECTION -->
     </div>
     <!-- END OF WOKI -->
 
-    <!-- ONLINE COURSE -->
+    <!-- On-Demand -->
     <div class="course-content" id="course-online" style="display:none">
         <div class="row m-0 p-0">
             @foreach($online_courses as $course)
@@ -935,7 +937,7 @@ END OF OUR PROGRAMS SECTION -->
                     <div class="course-card-green">
                         <div class="container">
                             <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
-                            <div class="top-left card-tag small-text">Online Course</div>
+                            <div class="top-left card-tag small-text">On-Demand</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="height:6vw">
@@ -1000,7 +1002,7 @@ END OF OUR PROGRAMS SECTION -->
             </div>
         </div>
     </div>
-    <!-- END OF ONLINE COURSE -->
+    <!-- END OF On-Demand -->
 
     <!-- END OF CLASSES SECTION -->
     
@@ -1008,12 +1010,12 @@ END OF OUR PROGRAMS SECTION -->
 <!-- END OF FEATURE, COURSE AND TESTIMONY SECTION -->
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container" style=";background:#F6F6F6">
-        <div class="col-6  testimony-background" style="padding-top:4vw;padding-bottom:4vw;">
+        <div class="col-6  testimony-background wow flipInX" data-wow-delay="1s" style="padding-top:4vw;padding-bottom:4vw;">
             <div style="display: flex;">
                 <!-- LEFT TESTIMONY -->
                 <div>
                     <!-- BIG TESTIMONY CARD -->
-                    <div class="testimony-card" style="width: 20vw;padding:3vw !important">
+                    <div class="testimony-card" style="width: 20vw;padding:1vw !important">
                         <img src="{{ asset($fake_testimonies_big[0]->thumbnail) }}" class="img-fluid" style="width: 6vw;height:auto" alt="thumbnail not avaliable..">
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000; display: -webkit-box;
                         overflow : hidden !important;
@@ -1192,7 +1194,7 @@ END OF OUR PROGRAMS SECTION -->
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
                 <div style="width:80%;margin-left:2vw">
-                    <p class="small-heading" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
+                    <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
                         <input class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>

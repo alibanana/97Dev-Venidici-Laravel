@@ -120,10 +120,10 @@
         <a href="#programs-section" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw">Explore Krest</a>
 
     </div>
-    <div class="col-6 p-0" style="text-align:center">
+    <div class="col-6 p-0 wow fadeInRight" data-wow-delay="0.3s" style="text-align:center">
         <img src="/assets/images/client/Krest_Dummy.png" style="width:40vw;height:26vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
     </div>
-    <div class="col-12" style="padding:6vw 16vw">
+    <div class="col-12 wow fadeInUp" data-wow-delay="0.7s" style="padding:6vw 16vw">
         <div style="display:flex;justify-content:space-between;align-items:center">
             <div style="text-align:center">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">5+</p>
@@ -154,7 +154,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
 
         </p>
     </div>
-    <div class="col-6">
+    <div class="col-6 wow fadeInRight" data-wow-delay="0.3s">
         <div style="display:flex;align-items:center">
             <div>
                 <div style="background: #FFFFFF;box-shadow: 0px 0px 20px rgba(157, 157, 157, 0.15);border-radius: 10px;padding:1vw;height:22vw">
@@ -182,7 +182,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
     <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
           <img src="/assets/images/client/kenapa_online_course.png" style="width:38vw;object-fit:cover;height:25vw;border-radius: 10px" class="img-fluid" alt="Image 1">
     </div>
-    <div class="col-6">
+    <div class="col-6 wow fadeInRight" data-wow-delay="0.3s">
         <p class="medium-heading" style="font-family: Rubik Bold;color:#3B3C43">The Urgency of Soft Skills</p>
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
 
@@ -195,7 +195,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
 
 <!-- START OF OUR PROGRAMS -->
 <div class="row m-0 page-container" id="programs-section" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
-    <div style="text-align:center">
+    <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Programs</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Mengakomodasi Kebutuhan Talenta <br> Perusahaan Anda Dengan Program Venidici</p>
     </div>
@@ -395,7 +395,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Memberi Manfaat Yang Terbukti Bagi Perusahaan</p>
     </div>
     <div class="row m-0" style="padding-top:4vw">
-        <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;">
+        <div class="col-6 wow bounceIn" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;">
             <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
                 <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
                     
@@ -446,37 +446,14 @@ END OF OUR VALUES-->
 <!-- START OF CONTACT US SECTION -->
 <form action="">
     <div class="row m-0 page-container" style="padding-top:8vw;padding-bottom:8vw">
-    <!--
-        <div class="col-6">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div  class="white-input-form" style="display: flex;align-items:center;width:48%">
-                    <i style="color:#DAD9E2" class="fas fa-user"></i>
-                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" >
-                </div>  
-                <div  class="white-input-form" style="display: flex;align-items:center;width:48%">
-                    <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                    <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" >
-                </div>  
-
-            </div>
-            <div  class="white-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-                <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" >
-            </div> 
-            <div class="white-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-                <textarea name="" id="" rows="6" class="normal-text"   style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukkan pesan anda disini"></textarea>                
-            </div>  
-        </div>
-        -->
         <div class="col-12" style="text-align:center">
-            <p class="medium-heading" style="font-family: Rubik Bold;color:#55525B">Hubungi Kami Lebih Lanjut</p>
+            <p class="medium-heading wow flash" data-wow-delay="0.3s" style="font-family: Rubik Bold;color:#55525B">Hubungi Kami Lebih Lanjut</p>
             <p class="sub-description" style="font-family: Rubik Regular;color:#55525B;margin-top:2vw">Tanyakan kami apapun dan kami senang membantu</p>
                 <div>
                     <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
                         Kirim Pesan
                     </button>   
                 </div>
-
-                
             </div>
         </div>
     </div>

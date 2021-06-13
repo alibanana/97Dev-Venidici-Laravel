@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Newsletter as News;
+use App\Helper\Helper;
 use Newsletter;
 
 class NewsletterController extends Controller
@@ -71,6 +72,13 @@ class NewsletterController extends Controller
             $news         = new News();
             $news->email  = $validated['email'];
             $news->save();
+            
+            //tambah 10 point
+            if($request->email == auth()->user()->email)
+            {
+                Helper::addStars(auth()->user(),10,'Subscribing to our newsletter');
+                return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter. Anda mendapatkan 10 stars!');
+            }
             
             return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
         }

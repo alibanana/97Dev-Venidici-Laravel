@@ -59,6 +59,11 @@ class CartController extends Controller
     
     public function shipment_index(Request $request)
     {
+        if(!auth()->user()->isProfileUpdated)
+            return redirect()->back()->with('message','Please complete your profile first.');
+        elseif(count(auth()->user()->carts) == 0)
+            return redirect('/cart');
+
         $carts = auth()->user()->carts;
                 
         $cart_count = count($carts->toArray());

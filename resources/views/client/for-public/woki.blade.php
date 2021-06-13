@@ -6,7 +6,7 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container for-public-woki-background " style="height:55vw">
     <div class="col-6 p-0">
-        <div style="padding-top:10vw;margin-left:-0.5vw">
+        <div style="padding-top:10vw;margin-left:-0.5vw" class="wow fadeInUp" data-wow-delay="0.3s">
             <img src="/assets/images/client/Woki_Logo.png" style="width:19vw;margin-left:-1.3vw" class="img-fluid" alt="Image 1">
             <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw;margin-top:1vw">A look at how we put
             the pieces together</p>
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-6 wow fadeInRight" data-wow-delay="0.3s">
         <p class="small-heading" style="font-family: Rubik Medium;color:#CE3369">Our History</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Apa itu Woki?</p>
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
@@ -73,7 +73,7 @@
 
 <!-- START OF KENAPA MEMILIH ONLINE COURSE -->
 <div class="row m-0 page-container" style="padding-bottom:8vw   ">
-    <div class="col-6">
+    <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Kenapa Woki Terbuat?</p>
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
 
@@ -91,7 +91,7 @@
 <!-- START OF HIGHLIGHTED EVENTS -->
 <div class="row m-0 page-container" style="padding-top:6vw;padding-bottom:6vw;background-color:#F6F6F6">
     <div class="col-12">
-        <p class="big-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-left:2.9vw">Highlighted <span style="font-family:Hypebeast;color:#CE3369">Events</span> </p>
+        <p class="big-heading wow flash" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43;margin-left:2.9vw">Highlighted <span style="font-family:Hypebeast;color:#CE3369">Events</span> </p>
     </div>
     <div class="row m-0" style="display:flex;align-items:center;padding-top:1.5vw">   
 
@@ -143,11 +143,11 @@
         <a href="" class="normal-text btn-red-bordered btn-red-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;margin-left:5vw">Explore Our Library Now!</a>
 
     </div>
-    <div class="col-5 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-5 p-0 wow bounceIn" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <div style="text-align:center">
             <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43">Woki Toki</p>
         </div>
-        <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+        <div id="woki-toki-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
                 
                 <div class="carousel-item active" >
@@ -157,11 +157,11 @@
                     <img src="/assets/images/client/Woki_Karakter.png" style="height:20vw" class="img-fluid" alt="Image 1">
                 </div>
             </div>
-            <a class="carousel-control-prev"   data-bs-target="#feature-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+            <a class="carousel-control-prev"   data-bs-target="#woki-toki-carousel" style="width:2vw" role="button"data-bs-slide="prev">
                 <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
-            <a class="carousel-control-next"   data-bs-target="#feature-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+            <a class="carousel-control-next"   data-bs-target="#woki-toki-carousel" style="width:2vw"  role="button"data-bs-slide="next">
                 <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>
@@ -172,7 +172,7 @@
 
 <!-- START OF OUR MISSION -->
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
-    <div style="text-align:center">
+    <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
         <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Mission</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Painless onboarding and simple <br> process implementation</p>
     </div>

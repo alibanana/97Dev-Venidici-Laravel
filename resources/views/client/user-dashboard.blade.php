@@ -25,23 +25,23 @@
 
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
-                        <p class="sub-description" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">General Information</p>
                         @if(session('success'))
                             <!-- ALERT MESSAGE -->
                             <div style="text-align:center;margin-top:1vw">
-                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:0px"role="alert">
+                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:1vw;width:20vw"role="alert">
                                 {{ session('success') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             </div>
                             <!-- END OF ALERT MESSAGE -->
                         @endif
+                        <p class="sub-description" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">General Information</p>
                     </div>
                     <!-- START OF LEFT SECTION -->
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">@if(Auth::user()->avatar) Current @endif Display Picture</p>
                         @if(Auth::user()->avatar)
-                        <img src="{{ asset(Auth::user()->avatar) }}" style="width:4vw" alt=""> <br>
+                        <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw" alt=""> <br>
                         @endif
 
                         <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
@@ -214,32 +214,32 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
                             <input type="password" name="old_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
-                            @error('old_password')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('old_password')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
                             <input type="password" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('password')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Confirm New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
                             <input type="password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
-                            @error('password_confirmation')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
+                        @error('password_confirmation')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-12" style="text-align:right;padding-top:3vw">
                         <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Password</button>
@@ -253,16 +253,106 @@
 
 <!-- START OF POPUP POINT EXPLANATION-->
 <div id="points" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:40% !important">
+    <div class="popup" style="width:50% !important">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
-                <div class="col-12" style="text-align:left;">
-                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Your Stars</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#F4C257;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;text-align:left !important;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>
-                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">How Venidici Point System Works?</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis amet corrupti harum expedita libero cumque fugit officiis natus error explicabo deserunt doloremque ipsum, aperiam rerum possimus illum quas maiores omnis.</p>
+                <div class="col-12" style="text-align:center;">
+                    <img src="/assets/images/client/Stars_Illustration.png" class="img-fluid" style="width:14vw" alt="">
+                    <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Venidici {{strtoupper(auth()->user()->club)}} Club</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{$usableStarsCount}} Stars</span></p>
+                    <!--<p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">- Stars</span></p>-->
+                    <!-- START OF VENINDICI CLUB PROGRESS BAR -->
+
+                    <div class="d-flex flex-row justify-content-between align-items-center" style="margin-top:3vw">
+                        <!-- ONE CLUB -->
+                        @if($usableStarsCount >= 20)
+                        <div style="border-radius:10px;padding:1vw;background-color:#ECF6FF;display: flex;flex-direction: column;justify-content: center;align-items:center">
+                            <i class="fas fa-bicycle medium-heading" style="color:#2B6CAA"></i>
+                        @else
+                        
+                        <div style="border-radius:10px;padding:1vw;background-color:#F5F6F6;display: flex;flex-direction: column;justify-content: center;align-items:center">
+                            <i class="fas fa-bicycle medium-heading" style="color:#C4C4C4"></i>
+                        @endif
+                        </div>
+                        <!-- END OF ONE CLUB -->
+                        <!-- START OF ONE PROGRESS BAR -->
+                        <div class="d-block w-100" style="padding:0vw 1vw">
+                            @if($usableStarsCount >= 100)
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Points Left</p>
+                            <div class="progress" style="border-radius:10px !important;height:0.8vw">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #F4C257;"></div>
+                            </div>
+                            @else
+                            @php
+                                $percentCar = ( ($usableStarsCount - 20) / 80 ) * 100 ;
+                            @endphp
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 100 - $usableStarsCount}} Points Left</p>
+                            <div class="progress" style="border-radius:10px !important;height:0.8vw">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{round($percentCar)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($percentCar)}}%; background-color: #F4C257;"></div>
+                            </div>
+
+                            @endif 
+                        </div>
+                        <!-- END OF ONE PROGRESS BAR -->
+                        <!-- ONE CLUB -->
+                        @if($usableStarsCount >= 100)
+                        <div style="border-radius:10px;padding:1vw;background-color:#ECF6FF;display: flex;flex-direction: column;justify-content: center;align-items:center">
+                            <i class="fas fa-car-side medium-heading" style="color:#2B6CAA"></i>
+                        @else
+                        
+                        <div style="border-radius:10px;padding:1vw;background-color:#F5F6F6;display: flex;flex-direction: column;justify-content: center;align-items:center">
+                            <i class="fas fa-car-side medium-heading" style="color:#C4C4C4"></i>
+                        @endif
+                        </div>
+                        <!-- END OF ONE CLUB -->
+                        <!-- START OF ONE PROGRESS BAR -->
+                        <div class="d-block w-100" style="padding:0vw 1vw">
+                            @if($usableStarsCount >= 280)
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Points Left</p>
+                            <div class="progress" style="border-radius:10px !important;height:0.8vw">
+                                
+                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #F4C257;"></div>
+                            </div>
+                            @else
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 280 - $usableStarsCount}} Points Left</p>
+                            @php
+                                $percent = ( ($usableStarsCount - 100) / 180 ) * 100 ;
+                            @endphp
+                            <div class="progress" style="border-radius:10px !important;height:0.8vw">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{round($percent)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($percent)}}%; background-color: #F4C257;"></div>
+                            </div>
+
+                            @endif 
+                        </div>
+                        <!-- END OF ONE PROGRESS BAR -->
+                        <!-- ONE CLUB -->
+                        @if($usableStarsCount >= 280)
+                        <div style="border-radius:10px;padding:1vw;background-color:#ECF6FF;display: flex;flex-direction: column;justify-content: center;align-items:center">
+                            <i class="fas fa-fighter-jet medium-heading" style="color:#2B6CAA"></i>
+                        @else
+                        <div style="border-radius:10px;padding:1vw;background-color:#F5F6F6;display: flex;flex-direction: column;justify-content: center;align-items:center">
+                            <i class="fas fa-fighter-jet medium-heading" style="color:#C4C4C4"></i>
+                        @endif
+                        </div>
+                        <!-- END OF ONE CLUB -->
+                    </div>
+                    <!-- END OF VENIDICI CLUB PROGRESS BAR -->
+
+                    <div class="faq-card" style="margin-top:3vw;background-color:#F9F9F9">
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                            <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How Venidici Point System Works?</p>
+                            <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseHowItWorks" role="button" aria-expanded="false" aria-controls="collapseHowItWorks">
+                                <i class="fas fa-chevron-down"></i>
+                            </p>                                    
+                        </div>
+                        <div class="collapse" id="collapseHowItWorks" style="margin-top:1vw">
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;text-align:left !important"> 
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- END OF ONE FAQ CARD -->
                 </div>
             </div>
         </div>
@@ -284,6 +374,9 @@
                             <div class="row m-0 page-container">
                                 <div class="col-12 p-0">
                                     <div style="text-align:center">
+                                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
+                                        <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
+                                        <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
                                         @if(session('success'))
                                             <!-- ALERT MESSAGE -->
                                             <div style="text-align:center;margin-top:1vw">
@@ -294,9 +387,6 @@
                                             </div>
                                             <!-- END OF ALERT MESSAGE -->
                                         @endif
-                                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
-                                        <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
-                                        <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
                                     </div>
                                     @error('interests')
                                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -343,7 +433,8 @@
 <!-- END OF POPUP INTERESTS-->
 
 <!-- START OF TOP SECTION -->
-<div class="row m-0 page-container" style="padding-top:9vw">   
+<div class="row m-0 page-container" style="padding-top:9vw"> 
+    @if(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
@@ -352,10 +443,12 @@
         </div>
         <!-- END OF ALERT MESSAGE -->
     </div>
+    @endif
 </div>
+
 <div class="row m-0 page-container" style="padding-top:1.5vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
-        <div class="card-white" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
+        <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
             <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
@@ -390,12 +483,22 @@
                         </div>
                     </div>  
                 </div>
-                <div style="display:flex;align-items:center">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#F4C257;margin-bottom:0px">{{Auth::user()->stars}} Stars</p>  
-                    <a href="#points">
-                        <i  style="color:#F4C257;margin-left:1vw" class="fas fa-question-circle bigger-text"></i> 
-                    </a>
+                <div style="display:flex;align-items:center;margin-top:0.5vw">
+                    <div style="border-top: 1.5px solid #F4C257;border-bottom: 1.5px solid #F4C257;border-left: 1.5px solid #F4C257;border-radius: 5px 0px 0px 5px;padding:0.2vw 0.5vw">
+                        <div style="display: flex;flex-direction: column;justify-content: center;">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;"> <i class="fas fa-star"></i> <span>{{$usableStarsCount}} Stars</span></p>
+                        </div>
+                    </div>
+                    <div style="display: flex;flex-direction: column;justify-content: center;border: 1.5px solid #F4C257;border-radius:0px 5px 5px 0px;background-color:#F4C257;padding:0.2vw" >
+                            
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;">                        
+                            <a href="#points">
+                                <i class="fas fa-question-circle normal-text" style="color:#FFFFFF;"></i>
+                            </a>
+                        </p>
+                    </div>
                 </div>
+
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->email}}</p>   
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->userDetail->occupancy}}</p>   
                 <div style="width:70%">
@@ -420,7 +523,7 @@
 
 
 <!-- START OF MIDDLE SECTION -->
-<div class="row m-0 page-container-inner" style="padding-top:4vw;padding-bottom:4vw">
+<div class="row m-0 page-container-inner wow fadeInLeft" data-wow-delay="0.6s" style="padding-top:4vw;padding-bottom:4vw">
     <div class="col-12 p-0" style="">
         <div style="display:flex">
 
@@ -481,42 +584,79 @@
 
     <!-- Pelatihan Aktif Content -->
     <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
-        @if(count($orders) == 0)
-        
+        @php
+        $aktif_flag = FALSE;
+        foreach(auth()->user()->courses as $course_on_going)
+        {
+            if($course_on_going->pivot->status == 'on-going')
+                $flag = TRUE;
+        }
+        @endphp
+        @if(!$flag)
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
-        @foreach($orders as $course)
+        @foreach(auth()->user()->courses as $course)
+        @if($course->pivot->status == 'on-going')
         <div class="col-12 p-0">
-            <div class="@if($course->course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->course->id}}/learn/lecture/{{ $course->course->sections[0]->sectionContents[0]->id }}','_self');">
+            <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
                 <div class="container-image-card">
                     <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" > @if($course->course->course_type_id == 1) Online Course @else Woki @endif</div>
+                    <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Online Course @else Woki @endif</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
                     <div class="right-section" style="width:37vw">
                         <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->course->title}}</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
+                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">By 
+                            @foreach($course->teachers as $teacher)
+
+                                @if ($loop->last && count($course->teachers) != 1)
+                                dan
+                                @elseif (!$loop->first)
+                                ,
+                                @endif
+                                {{$teacher->name}}
+                            @endforeach
+                            </p>   
                             <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->course->subtitle}}</p>
-                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->course->courseCategory->category}}</a>
+                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
+                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
 
                         </div>
                     </div>
+                    @php
+                    $section_learned = 0;
+                    $number_of_section = 0;
+                    foreach($course->sections as $section){
+                        foreach($section->sectionContents as $content){
+                            $number_of_section++;
+                            $all_users = explode(',', $content->hasSeen);
+                            foreach($all_users as $user_id)
+                            {
+                                if($user_id == auth()->user()->id)
+                                {
+                                    $section_learned++;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    $percentage = ($section_learned/$number_of_section) * 100
+                    @endphp
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <div class="progress progress-bar-vertical" style="background: rgba(43, 108, 170, 0.3);">
-                            <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 10%;">
-                            <p style="margin-top:-3vw" class="normal-text">10%</p>
+                        <div class="progress progress-bar-vertical" style="background: rgba(43, 108, 170, 0.3);position:relative">
+                            <p style="position:absolute;left: @if($percentage == 100) 35% @else 40% @endif;top:35%" class="normal-text">{{round($percentage)}}%</p>
+                            <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{round($percentage)}}%;">
                             </div>
                         </div>
-                        <a href="{{ route('online-course.learn', ['id' => $course->course->id, 'detail_id' => $course->course->sections[0]->sectionContents[0]->id]) }}" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
+                        <a href="{{ route('online-course.learn', ['id' => $course->id, 'detail_id' => $course->sections[0]->sectionContents[0]->id]) }}" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
                     </div>
                 </div> 
             </div>
         </div>
-        
+        @endif
         @endforeach
         <!--
         <div class="col-12 p-0">
@@ -551,50 +691,89 @@
 
     <!-- Pelatihan Selesai Content -->
     <div style="padding:0px;display:none;" class="user-content" id="pelatihan-selesai">
-        <div class="col-12 p-0">
-            <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
-                <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" >Woki</div>
-                </div>           
-                <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:36.8vw">
-                        <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                        </div>
-                    </div>
-                    <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <i class="fas fa-check-circle big-heading"></i>
-                        <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</a>
-                    </div>
-                </div> 
+        @php
+        $flag = FALSE;
+        foreach(auth()->user()->courses as $course)
+        {
+            if($course->pivot->status == 'completed')
+                $flag = TRUE;
+        }
+        @endphp
+        @if(!$flag)
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan selesai belum tersedia.</span></p>
             </div>
-        </div>
-        <div class="col-12 p-0">
-            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
-                <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" >Workshop</div>
-                </div>           
-                <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:36.8vw">
-                        <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
+        @endif
+        @foreach(auth()->user()->courses as $course)
+        @if($course->pivot->status == 'completed')
+            @if($course->course_type_id ==1)
+            <div class="col-12 p-0">
+                <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
+                    <div class="container-image-card">
+                        <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
+                        <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Online Course @else Woki @endif</div>
+                    </div>           
+                    <div style="display:flex;justify-content:space-between">
+                        <div class="right-section" style="width:37vw">
+                            <div>
+                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">By 
+                                @foreach($course->teachers as $teacher)
+
+                                    @if ($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif (!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>   
+                                <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
+                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
+                                <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
+
+                            </div>
                         </div>
-                    </div>
-                    <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <i class="fas fa-check-circle big-heading"></i>
-                        <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</a>
-                    </div>
-                </div> 
+                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                            <i class="fas fa-check-circle big-heading"></i>
+                            <form action="{{route('print_certificate')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="name" value="{{auth()->user()->name}}">
+                            <input type="hidden" name="course_id" value="{{$course->id}}">
+                            <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
+
+                            </form>
+                        </div>
+                    </div> 
+                </div>
             </div>
-        </div>
+            @else
+            <div class="col-12 p-0">
+                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
+                    <div class="container-image-card">
+                        <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
+                        <div class="top-left card-tag small-text" >Workshop</div>
+                    </div>           
+                    <div style="display:flex;justify-content:space-between">
+                        <div class="right-section" style="width:36.8vw">
+                            <div>
+                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
+                                <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
+                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
+                            </div>
+                        </div>
+                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                            <i class="fas fa-check-circle big-heading"></i>
+                            <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</a>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            @endif
+        @endif
+        @endforeach
+        
 
     </div>
     <!-- End of Pelatihan Selesai Content -->

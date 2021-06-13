@@ -43,8 +43,8 @@
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
+        <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
-        <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <a href="/community" class="normal-text navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Log In</a>
@@ -320,51 +320,87 @@
         <div style="display:flex;justify-content:space-between">
           <div>
             <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:3vw" class="img-fluid" alt="">
-            <p class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:1vw">Copyright © 2021 Venidici. <br>
-            All rights reserved.</p>
+            <p class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:1vw">Platform anak kekinian <br>   buat naklukin karir impian!</p>
           </div>
 
           <div>
-            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">For Public</p>
-            <div>
-              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Online Course</a>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Site Map</p>
+            <div style="margin-top:1vw">
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Home Page</a>
             </div>
-            <div>
-              <a href="/for-public/woki" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Woki</a>
+            <div style="margin-top:1vw">
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Public</a>
+            </div>
+            <div style="margin-top:1vw">
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Corporate</a>
+            </div>
+            <div style="margin-top:1vw">
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
+            </div>
+            <div style="margin-top:1vw">
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Venindici On-Demand</a>
             </div>
           </div>
 
           <div>
-            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">For Corporate</p>
-            <div>
-              <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Krest</a>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Information</p>
+            <div style="margin-top:1vw">
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Corporate Programs</a>
             </div>
-          </div>
-
-          <div>
-            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Community</p>
-            <div>
-              <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
+            <div style="margin-top:1vw">
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Discord Community</a>
+            </div>
+            <div style="margin-top:1vw">
+              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Contact Us</a>
             </div>
           </div>
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Social</p>
-            <div>
+            <div style="margin-top:1vw">
               <a href="https://twitter.com/venidici_id?lang=en" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-twitter bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Twitter</span></a>
             </div>
-            <div style="margin-top:0.5vw">
+            <div style="margin-top:1vw">
               <a href="https://www.facebook.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-facebook bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Facebook</span></a>
             </div>
-            <div style="margin-top:0.5vw">
+            <div style="margin-top:1vw">
               <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-instagram bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Instagram</span></a>
             </div>
-            <div style="margin-top:0.5vw">
+            <div style="margin-top:1vw">
               <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-whatsapp bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
             </div>
           </div>
+
+          <div>
+            <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Review From our User</p>
+            <!-- START OF ONE REVIEW -->
+            <div style="margin-top:1vw;width:25vw">
+              <p class="normal-text" style="margin-bottom:0.5vw;font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;display: -webkit-box;
+                  overflow : hidden !important;
+                  text-overflow: ellipsis !important;
+                  -webkit-line-clamp: 2 !important;
+                  -webkit-box-orient: vertical !important;">
+                  “Course ini sangat bermanfaat bagi kalian yang ingin menjadi lucu” - Gabrielle </p>
+              <p class="small-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fas fa-clock"></i> <span style="margin-left:0.5vw">3 Hours ago in <span style="color:#67BBA3">Online Course - Cara Menjadi Lucu</span> </span> </p>
+            </div>
+            <!-- END OF ONE REVIEW -->
+            <!-- START OF ONE REVIEW -->
+            <div style="margin-top:1vw;width:25vw">
+              <p class="normal-text" style="margin-bottom:0.5vw;font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;display: -webkit-box;
+                  overflow : hidden !important;
+                  text-overflow: ellipsis !important;
+                  -webkit-line-clamp: 2 !important;
+                  -webkit-box-orient: vertical !important;">
+                  “Course ini sangat bermanfaat bagi kalian yang ingin menjadi lucu” - Gabrielle </p>
+              <p class="small-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fas fa-clock"></i> <span style="margin-left:0.5vw">3 Hours ago in <span style="color:#CE3369">Woki - Cara Menjadi Seniman</span> </span> </p>
+            </div>
+            <!-- END OF ONE REVIEW -->
+          </div>
           
         </div>
+      </div>
+      <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
+        <p class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:1vw">Copyright © 2021 Venidici. All rights reserved.</p>
       </div>
     </div>
     <!-- END OF FOOTER -->
@@ -372,6 +408,12 @@
       @endif
         @endif
           @endif
+
+    <!-- WOW JS -->
+    <script src="/WOW-master/dist/wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- BOOTSTRAP 5-->

@@ -25,6 +25,8 @@ use App\Models\InstructorPosition;
 
 
 use PDF;
+use Illuminate\Support\Str;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -149,6 +151,17 @@ class PagesController extends Controller
             'interests' => 'required|array'
         ]);
 
+        // Get all Referal Codes
+        $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
+
+        // Check whether referral code exists
+        if($request->session()->get('referral_code'))
+        {
+            if(!in_array($request->session()->get('referral_code'), $referralCodes)){
+                return redirect('/signup')->with('message','Referral code tidak ditemukan');
+            }
+        }
+
         $hashtag_ids= [];
         foreach($validated['interests'] as $hashtag_id => $flag)
         {
@@ -165,11 +178,27 @@ class PagesController extends Controller
             'password'  => Hash::make($request->session()->get('password'))
         ]);
 
+        
+        // Generate New Referral Code
+        $newReferralCode = substr($request->session()->get('name'), 0,3).Str::random(3);
+        
+        // selama referralnya belom ada
+        while (in_array($newReferralCode, $referralCodes)) {
+            //buat referral baru
+            $newReferralCode = substr($request->session()->get('name'), 0,3).Str::random(3);
+
+        }
+        if($request->session()->get('referral_code'))
+            $referredByCode = $request->session()->get('referral_code');
+        else
+            $referredByCode = null;
+            
         $user_detail = UserDetail::create([
-            'user_id'       => $user->id,
-            'telephone'     => $request->session()->get('telephone'),
-            'referral_code' => $request->session()->get('referral_code'),
-            'response'      => $request->session()->get('response')
+            'user_id'               => $user->id,
+            'telephone'             => $request->session()->get('telephone'),
+            'referral_code'         => strtoupper($newReferralCode),
+            'referred_by_code'      => $referredByCode,
+            'response'              => $request->session()->get('response')
         ]);
 
         //here store to user_hashtag table
@@ -212,12 +241,21 @@ class PagesController extends Controller
         return view('client/for-public/woki');
     }
 
-    public function print(){
-        $pdf = PDF::loadView('client/certificate')
-        ->setPaper('A4', 'potrait');
+    public function print(Request $request){
+        $course = Course::findOrFail($request->course_id);
+        $user_course = auth()->user()->courses()->where('course_id',$course->id)->first();
         
-        // return $pdf->download('certificate.pdf'); //download
-        return $pdf->stream(); //view
+        $name = $request->name;
+        $finish_date = $user_course->pivot->updated_at->todatestring();
+        $first_sentence = 'We hereby award this Certificate of Completion on our On-Demand Class,';
+        $second_sentence    = 'By completing this course on ';
+        $course_name = $course->title;
+        $third_sentence    = 'you have practiced and taken an initiative to develop yourself in order to take part in cometitive environment';
+
+        $pdf = PDF::loadView('client/certificate',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
+        ->setPaper('A4', 'landscape');
+        return $pdf->download('certificate.pdf'); //download
+        //return $pdf->stream(); //view
     }
 
     public function seeNotification(Request $request){

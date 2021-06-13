@@ -8,6 +8,7 @@ use App\Models\UserDetail;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class SocialController extends Controller
 {
@@ -59,6 +60,7 @@ class SocialController extends Controller
     {
         $user = User::where('email', '=', $data->email)->first();
         if (!$user) {
+            $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
             $user = new User();
             $user->name = $data->name;
             $user->email = $data->email;
@@ -66,8 +68,19 @@ class SocialController extends Controller
             $user->password = encrypt('password');
             $user->save();
 
+            // Generate New Referral Code
+            $newReferralCode = substr($data->name, 0,3).Str::random(3);
+
+            // selama referralnya belom ada
+            while (in_array($newReferralCode, $referralCodes)) {
+                //buat referral baru
+                $newReferralCode = substr($data->name, 0,3).Str::random(3);
+            }
+
+
             $user_detail = new UserDetail();
             $user_detail->user_id = $user->id;
+            $user_detail->referral_code = strtoupper($newReferralCode);
             $user_detail->save();
         }
 

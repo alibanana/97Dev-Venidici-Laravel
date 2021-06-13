@@ -58,7 +58,11 @@ class DashboardController extends Controller
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('client/user-dashboard', compact('provinces','cities','cart_count','transactions','orders','interests','informations','notifications'));
+
+        $usableStarsCount = Helper::getUsableStars(auth()->user());
+
+        return view('client/user-dashboard',
+            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount'));
     }
 
     // Updates Users's data in the database.
@@ -95,14 +99,17 @@ class DashboardController extends Controller
 
         $user_detail = $user->userDetail;
         $user_detail->update($request->except([
-            'name','telephone'
+            'name',
         ]));
 
         //check if the user update the profile for the first time
         if(!$user->isProfileUpdated){
             $user->isProfileUpdated = TRUE;
             // here insert star reward
-
+            //tambah 15 stars
+            Helper::addStars(auth()->user(),15,'Completing Personal Data');
+            $user->save();
+            return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
         }
         $user->save();
 
@@ -199,14 +206,19 @@ class DashboardController extends Controller
         $current_year = explode(' ', Carbon::now());
         $current_year_date=$current_year[0];
 
-        return view('client/vouchers', compact('cart_count','informations','transactions','notifications','redeem_rules','next_year_date','current_year_date','my_vouchers'));
+        $usableStarsCount = Helper::getUsableStars(auth()->user());
+
+
+        return view('client/vouchers',
+            compact('cart_count', 'informations', 'transactions', 'notifications', 'redeem_rules', 'next_year_date', 'current_year_date', 'my_vouchers', 'usableStarsCount'));
     }
 
     public function redeemPromo(Request $request)
     {
         $redeem = Redeem::findOrFail($request->redeem_id);
+        $usableStarsCount = Helper::getUsableStars(auth()->user());
         //check whether starsnya cukup atau enggak
-        if(auth()->user()->stars > $redeem->stars)
+        if($usableStarsCount > $redeem->stars)
         {
             $new_promo_id = Promotion::orderBy('created_at','desc')->first()->id +1;
             $new_name = substr(auth()->user()->name, 0,3);
@@ -220,7 +232,7 @@ class DashboardController extends Controller
             //get next year date
             $next_year = explode(' ', Carbon::now()->addYear(1));
             $next_year_date = $next_year[0];
-            
+
             //1. buat promo khusus untuk user
             $promotion = new Promotion();
             $promotion->user_id         = auth()->user()->id;
@@ -253,8 +265,53 @@ class DashboardController extends Controller
             ]);
 
             //3. kurangin stars
-            auth()->user()->stars -= $redeem->stars;
+            //auth()->user()->stars -= $redeem->stars;
+            //auth()->user()->save();
+            $userStars = auth()->user()->stars()->whereDate('valid_until', '>=', Carbon::today())->orderBy('created_at','asc')->get();
+            $redeem_cost = $redeem->stars;
+            $flag = TRUE;
+            foreach($userStars as $star)
+            {
+                if($flag)
+                {
+                    if($star->stars >= $redeem_cost)
+                    {
+                        $star->stars -= $redeem_cost;
+                        $star->save();
+                        $flag = FALSE;
+                    }
+                    else{
+                        $redeem_cost -= $star->stars;
+                        $star->stars = 0;
+                        $star->save();
+                    }
+                }
+            }
+
+            //update user club
+            $user_stars = Helper::getUsableStars(auth()->user());
+            $user_club = auth()->user()->club;
+ 
+            //kalau dibawah 20, hilangin venidici club nya
+            if($user_stars < 20)
+            {
+                auth()->user()->club = null;
+            }
+            //kalau diantara 20 - 100, ganti jadi bike
+            elseif($user_stars >= 20 && $user_stars < 100)
+            {
+                auth()->user()->club = 'bike';
+            } 
+            //kalau diantara 100 - 280, ganti jadi car
+            elseif($user_stars >= 100 && $user_stars < 280){
+                auth()->user()->club = 'car';
+            }
+            //kalau lebi dari 280, ganti jadi jet
+            elseif($user_stars >= 280){
+                auth()->user()->club = 'jet';
+            }
             auth()->user()->save();
+
 
             return redirect()->back()->with('redeem_success','Redeem stars berhasil');
         }

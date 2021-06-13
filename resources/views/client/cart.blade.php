@@ -190,6 +190,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <!-- END OF ALERT MESSAGE -->
+            @elseif(session('message')) 
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                    {{ session('message') }} <span> <a href="/dashboard#edit-profile">Click here</a> </span>to complete your profile
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- END OF ALERT MESSAGE -->
             @endif
             <!-- START OF NOMINAL CARD -->
             <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw">

@@ -17,6 +17,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Promotion;
 use App\Models\Notification;
+use App\Helper\Helper;
 
 class CheckoutController extends Controller
 {
@@ -51,13 +52,13 @@ class CheckoutController extends Controller
     public function storeOnlineCourse(Request $request)
     {
         $input = $request->all();
-
+        
         // Remove non-numeric characters before validation.
         if ($request->has('phone'))
             $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
 
-        
-        $validated = Validator::make($input, [
+
+        $validated = Validator::make($input,[
             'name'                  => 'required',
             //'phone'                 => ['required', new TelephoneNumber],
             'phone'                 => 'required',
@@ -67,7 +68,12 @@ class CheckoutController extends Controller
             'time'                  => 'required',
             'bankShortCode'         => 'required',
             'discounted_price'      => 'integer'
-        ])->validate();
+        ]);
+
+        if($validated->fails()) 
+            return redirect()->back()->with('validation_error','Please complete your profile first.');
+        else
+            $validated = $validated->validate();
 
         if($request->action == 'checkDiscount') {
             $validated = $request->validate([
@@ -117,7 +123,7 @@ class CheckoutController extends Controller
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
             ->withHeaders([
                 'Accept' => 'application/vnd.api+json',
-                'Content-Type' => 'application/vnd.api+json'
+                'Content-Type' => ' '
             ])->post('https://sandbox-id.xfers.com/api/v4/payments', [
                 "data" => [
                     "attributes" => [
@@ -135,7 +141,6 @@ class CheckoutController extends Controller
                 ]
             ]
         ); 
-        
         $payment_object = json_decode($response->body(), true);
         $invoice->xfers_payment_id = $payment_object['data']['id'];
         $invoice->save();
@@ -171,6 +176,9 @@ class CheckoutController extends Controller
             'description'       => 'Hi, '.auth()->user()->name.'. Harap segera selesaikan pembayaranmu untuk pelatihan: '.$courses_string,
             'link'              => '/transaction-detail/'.$payment_object['data']['id']
         ]);
+
+        
+
         
         return $payment_object['data']['id'];
     }
@@ -372,9 +380,6 @@ class CheckoutController extends Controller
             'discounted_price'      => 'required|integer'
         ])->validate();
 
-
-        
-
         // kalo user udah pernah save province di user detail
         if($validated['province'] == null)
             $validated['province'] = auth()->user()->userDetail->province_id;
@@ -505,7 +510,7 @@ class CheckoutController extends Controller
 
             // If invoice's status was updated from pending to paid, this means that the user have just paid.
             // Therefore, courses & assessments should be mapped to that particular user.
-            if ($invoice->status == 'paid') {
+            if ($invoice->status == 'paid' || $invoice->status == 'completed') {
                 foreach ($invoice->orders as $order) {
                     $course = $order->course;
                     if (!auth()->user()->courses->contains($course->id)) {
@@ -515,6 +520,11 @@ class CheckoutController extends Controller
                         }
                     }
                 }
+                // add stars to user
+                $star_mulitiplication = (int)($invoice->grand_total/30000);
+                $star_added = $star_mulitiplication*12;
+                if($star_added != 0)
+                    Helper::addStars(auth()->user(),$star_added,'Pembelian Venidici On-Demand');
             }
 
             // start of courses string

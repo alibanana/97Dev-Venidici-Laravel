@@ -22,7 +22,9 @@ class User extends Authenticatable
         'email',
         'provider_id',
         'password',
-        'status'
+        'status',
+        'club',
+        'isProfileUpdated',
     ];
 
     /**
@@ -57,7 +59,10 @@ class User extends Authenticatable
     }
 
     public function courses() {
-        return $this->belongsToMany(Course::class, 'user_course')->withTimestamps();
+        return $this->belongsToMany(Course::class, 'user_course')
+            ->withPivot(
+                'status'
+            )->withTimestamps();
     }
 
     public function assessments() {
@@ -86,7 +91,11 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    public function promos() {
+    public function promotions() {
         return $this->hasMany(Promotion::class);
+    }
+
+    public function stars() {
+        return $this->hasMany(Star::class);
     }
 }

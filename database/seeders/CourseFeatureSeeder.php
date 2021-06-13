@@ -54,6 +54,23 @@ class CourseFeatureSeeder extends Seeder
                 'course_id' => 2,
                 'feature' => 'Masih banyak lagi :)',
             ],
+            // WOKI Courses
+            [
+                'course_id' => 3,
+                'feature' => 'Bisa membedakan bahan masakan dengan benar.',
+            ],
+            [
+                'course_id' => 2,
+                'feature' => 'Basic Skills untuk memasak.',
+            ],
+            [
+                'course_id' => 3,
+                'feature' => 'Basic skills water painting.',
+            ],
+            [
+                'course_id' => 3,
+                'feature' => 'Mixing colours with water paint.',
+            ],
         ];
 
         foreach ($features as $key => $value) {

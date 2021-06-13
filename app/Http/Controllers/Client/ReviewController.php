@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use Illuminate\Support\Facades\Validator;
+use App\Helper\Helper;
 
 class ReviewController extends Controller
 {
@@ -38,7 +39,6 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-
         $validated = Validator::make($input,[
             'rating' => 'required'
         ]);
@@ -46,7 +46,17 @@ class ReviewController extends Controller
 
         if($validated->fails() && $request->action == "completed_course") return redirect()->back()->withErrors($validated);
         if($validated->fails() && $request->action == "course_detail_review") return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Tidak bisa review kosong.')->withErrors($validated);
-
+        //check whether user has completed its course or not
+        $course = auth()->user()->courses()->where('course_id',$request->course_id)->first();
+        //kalau user belum punya course nya
+        if(!$course)
+            return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Kamu belum punya course ini!');
+        if($request->action == "course_detail_review")
+        {
+            //kalau user belum selesaikan course            
+            if($course->pivot->status == 'on-going' && $course->course_type_id == 1)
+                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Selesaikan course terlebih dahulu!');
+        }
         $reviews = Review::where(
             [   
                 ['user_id', '=', auth()->user()->id],
@@ -72,10 +82,13 @@ class ReviewController extends Controller
             ]);
         }
         if($review){
+            // add 30 stars
+            Helper::addStars(auth()->user(),30,'Review Course');
+
             if($request->action == "completed_course")
-                return redirect()->back()->with('review_message','Review berhasil dimasukkan');
+                return redirect()->back()->with('review_message','Review berhasil dimasukkan, dan kamu mendapatkan 10 Stars!');
             else
-                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Review berhasil dimasukkan');
+                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Review berhasil dimasukkan, dan kamu mendapatkan 10 Stars!');
         }
         else{
             if($request->action == "completed_course")

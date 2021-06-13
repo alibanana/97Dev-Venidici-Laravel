@@ -3,6 +3,7 @@
 
 @section('content')
 
+@if($invoice->status == 'pending')
 <!-- START OF POPUP VA EXPLANATION-->
 <div id="pembayaran-va" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:50% !important">
@@ -22,7 +23,7 @@
     </div>
 </div>
 <!-- END OF POPUP VA EXPLANATION-->
-
+@endif
 <!-- START OF POPUP COURSE CLAIMED -->
 <div id="payment-success" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:35% !important">
@@ -250,25 +251,6 @@
                 @endforeach
             <!-- END OF ITEM LIST -->
 
-            <!-- START OF PAYMENT INSTRUCTION
-            <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:2vw;">
-                <div style="">
-                    <div style="display:flex;justify-content:space-between">
-                        <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Cara Pembayaran Virtual Account</p>            
-                        <p data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                <i class="fas fa-chevron-down"></i>
-                        </p>
-                    </div>
-                    <div class="collapse" id="collapseExample" style="padding-top:1vw">
-                        <div class="">
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">1. Pilih m-Transfer dan pilih BCA Virtual Account.</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">2. Masukan nomor Virtual Account <span style="font-family:Rubik Medium;color:#074EE8">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</span>  dan pilih send. </p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">3. Pastikan total tagihan dari BCA Virtual Account sesuai dengan <span style="font-family:Rubik Medium;color:#074EE8"> total pembayaran</span> di halaman ini. Pastikan juga Merchant bernama <span style="font-family:Rubik Medium;color:#074EE8">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['displayName']}}</span>. Jika semua sudah benar, pilih Yes/Ya.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             END OF PAYMENT INSTRUCTION -->
         </div>
 
     </div>  
@@ -354,9 +336,16 @@
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Total</p>
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Rp {{ number_format($invoice->grand_total, 0, ',', ',') }}</p>
                 </div>
+                @if($invoice->status == 'paid' || $invoice->status == 'completed')
+
                 <div style="display:flex;justify-content:flex-end;align-items:center;">
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0px">(+20 Stars)</p>
+                    @php
+                    $star_mulitiplication = (int)($invoice->grand_total/30000);
+                    $star_added = $star_mulitiplication*12;
+                    @endphp
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0px">(+{{$star_added}} Stars)</p>
                 </div>
+                @endif
             </div>
             <!-- END OF NOMINAL CARD --> 
 
