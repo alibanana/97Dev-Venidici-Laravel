@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Online Course')
+@section('title', 'Venidici On-Demand')
 
 @section('content')
 
@@ -17,7 +17,7 @@
                         <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;">Explore our programs </p>
                         <div style="display:flex;justify-content:center;align-items:center;">
                             <a href="/for-public/online-course" class="normal-text blue-link blue-link-active" style="font-family:Rubik Medium;margin-right:1.5vw;width:10vw">
-                                Online Course
+                                On-Demand
                             </a>
                             <a href="/for-public/woki" class="normal-text red-link" style="font-family:Rubik Medium;width:10vw">
                                 Woki
@@ -70,13 +70,11 @@
 </div>
 <!-- END OF OUR HISTORY -->
 
-<!-- START OF KENAPA MEMILIH ONLINE COURSE -->
+<!-- START OF KENAPA MEMILIH On-Demand -->
 <div class="row m-0 page-container" style="padding-bottom:8vw   ">
-    <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s">
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Kenapa Memilih Online Courses?</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
+    <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;padding-right:2vw">
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Skill Snack On-Demand</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Fun learning anytime & anywhere! Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack On-Demand berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.
         </p>
     </div>
     <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
@@ -84,13 +82,13 @@
     </div>
     
 </div>
-<!-- END OF KENAPA MEMILIH ONLINE COURSE -->
+<!-- END OF KENAPA MEMILIH On-Demand -->
 
 <!-- START OF OUR MISSION -->
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
     <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
         <p class="sub-description" style="font-family: Rubik Medium;color:#67BBA3">Our Mission</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Painless onboarding and simple <br> process implementation</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Effective Learning for You</p>
     </div>
     <div class="row m-0" style="padding-top:2vw">
         <div class="col-3">
@@ -105,13 +103,13 @@
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
+                        -webkit-box-orient: vertical !important;">Lifetime flexible access</p>
                     </div>
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                        -webkit-line-clamp: 6 !important;
+                        -webkit-box-orient: vertical !important;">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
                 </div>
             </div>
         </div>
@@ -127,13 +125,13 @@
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Materi yang padat dan jelas</p>
+                        -webkit-box-orient: vertical !important;">Learning by doing</p>
                     </div>
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                        -webkit-line-clamp: 6 !important;
+                        -webkit-box-orient: vertical !important;">Ada materi penunjang tambahan seperti case study, slides, ataupun templates untuk kamu pelajari lebih dalam lagi! Terus, uji kepahamanmu lewat quiz dan berbagai assessment.</p>
                 </div>
             </div>
         </div>
@@ -154,7 +152,7 @@
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 4 !important;
+                        -webkit-line-clamp: 6 !important;
                         -webkit-box-orient: vertical !important;">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
                 </div>
             </div>
@@ -171,13 +169,13 @@
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Materi yang padat dan jelas</p>
+                        -webkit-box-orient: vertical !important;">Credible mentors</p>
                     </div>
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                        -webkit-line-clamp: 6 !important;
+                        -webkit-box-orient: vertical !important;">Dipandu oleh mentor berpengalaman dari perusahaan ternama, pasti kamu akan dapet banyak insight!</p>
                 </div>
             </div>
         </div>
@@ -185,7 +183,7 @@
 </div>
 <!-- END OF OUR MISSION -->
 
-<!-- START OF OUR VALUES -->
+<!-- START OF OUR VALUES 
 <div class="row m-0 page-container our-values-background" style="padding-top:15vw;padding-bottom:15vw">
     <div class="col-12 p-0 wow fadeInLeft" data-wow-delay="0.3s">   
         <p class="sub-description" style="font-family: Rubik Medium;color:#67BBA3">Our Values</p>
@@ -197,7 +195,7 @@
         </div>
     </div>
 </div>
-<!-- END OF OUR VALUES-->
+ END OF OUR VALUES-->
 
 <!-- START OF HIGHLIGHTED EVENTS -->
 <div class="row m-0 page-container" style="padding-top:6vw;padding-bottom:6vw;background-color:#F6F6F6">
@@ -251,45 +249,28 @@
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">What is your shipping policy?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apakah saya bisa mendapatkan refund?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                    </p>
+                    Untuk Workshop Live terdapat money-back guarantee jika kamu merasa tidak puas dengan menghubungi kami. Tidak terdapat refund untuk program on demand                    </p>
                 </div>
             </div>
             <!-- END OF ONE FAQ CARD -->
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Can I refund the course that i enrolled?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja yang saya dapatkan di Venidici on Demand?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ2" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                    </p>
-                </div>
-            </div>
-            <!-- END OF ONE FAQ CARD -->
-            <!-- START OF ONE FAQ CARD -->
-            <div class="faq-card" style="margin-top:1vw">
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
-                    <p data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3" class="bigger-text" style="margin-bottom:0px;color:#747D88" >
-                        <i class="fas fa-chevron-down"></i>
-                    </p>                                    
-                </div>
-                <div class="collapse" id="collapseFaQ3" style="margin-top:1vw">
-                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                    </p>
+                    Kamu bisa melihat detail setiap course di page ya. Yang pasti, di setiap course, akan ada video pembelajaran, penilaian, dan sertifikat jika kamu sudah menyelesaikan semuanya!                    </p>
                 </div>
             </div>
             <!-- END OF ONE FAQ CARD -->
@@ -306,16 +287,15 @@
         <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
             <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
             <div style="width:60%;margin-left:2vw">
-                <p class="small-heading wow fadeInUp" data-wow-delay="0.3s" style="color:#FFFFFF;font-family:Rubik Bold">Curios with our Programs?</p>
+                <p class="small-heading wow fadeInUp" data-wow-delay="0.3s" style="color:#FFFFFF;font-family:Rubik Bold">Let’s learn together!</p>
                 
                 <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore.
-                </p>
+                Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin!                </p>
                 <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                 
                 
             </div>
-            <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Search Course</a>
+            <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Explore courses</a>
         </div> 
     </div>
 </div>

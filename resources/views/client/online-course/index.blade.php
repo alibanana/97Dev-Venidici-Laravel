@@ -5,10 +5,11 @@
 <!-- START OF BANNER SECTION -->
 <div class="row m-0 banner-background page-container" style="height:40vw;padding-top:16vw;text-align:center">
     <div class="col-md-12 p-0">
-        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Online Courses</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Lorem ipsum dolor sit amet, consectetur adipiscing
-        elit. Adipiscing et nunc, amet quisque velit
-        pharetra at accumsan.</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >On-Demand</p>
+        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Fun learning anytime & anywhere! Bukan zamannya
+        belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun,
+        kamu yang tentuin karena Skill Snack On-Demand berisi rekaman
+        course-course Venidici dengan rating terbaik.</p>
         
         <a href="#search-course-section" class="sub-description btn-blue-bordered btn-blue-bordered-active" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;width:100%;margin-top:5vw;padding:0.8vw 1vw">Search Courses</a>
 
@@ -159,7 +160,7 @@ END OF OUR PROGRAMS SECTION -->
 
     </div>
     <div class="col-4 p-0 " style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s Online Courses</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s On-Demand</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
 

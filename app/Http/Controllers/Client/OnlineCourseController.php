@@ -76,7 +76,7 @@ class OnlineCourseController extends Controller
                 });
             }
         }
-        $courses = $courses->get();
+        $courses = $courses->where('course_type_id',1)->get();
 
         if (Auth::check()) {
 

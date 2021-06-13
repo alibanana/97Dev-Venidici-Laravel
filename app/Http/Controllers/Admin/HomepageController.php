@@ -104,7 +104,7 @@ class HomepageController extends Controller
                 'thumbnail' => 'mimes:jpeg,jpg,png',
                 'testimony' => 'required',
                 'rating' => ['required', 'numeric', 'between:0,5', new Decimal(1, 1)],
-                'name' => 'required|alpha_spaces',
+                'name' => 'required',
                 'occupancy' => 'required'
             ]);
         } else if ($request->flag == 'false') {
