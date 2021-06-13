@@ -107,7 +107,7 @@
 
 
     <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/woki') || Request::is('admin/woki/*'))
+    @if(Request::is('admin/woki-courses') || Request::is('admin/woki-courses/*'))
     <li class="nav-item active">
     @else
     <li class="nav-item">
@@ -115,12 +115,12 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWoki"
             aria-expanded="true" aria-controls="collapseWoki">
             <i class="fas fa-palette"></i>
-            <span>Woki</span>
+            <span>Woki Courses</span>
         </a>
 
         <div id="collapseWoki" class="collapse" aria-labelledby="" data-parent="#collapseWoki">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/admin/woki">Woki Courses</a>
+                <a class="collapse-item" href="{{ route('admin.woki-courses.index') }}">Woki Courses</a>
                 <a class="collapse-item" href="/admin/art-supply">Art Supply</a>
                 <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
                 <a class="collapse-item" href="/admin/reviews">Reviews</a>

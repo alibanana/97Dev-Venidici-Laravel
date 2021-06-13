@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helper\Helper;
 use DB;
 
 use App\Models\User;
@@ -122,7 +123,12 @@ class UserController extends Controller
             'to' => $users_to,
             'total' => $users_count
         ];
+
+        $users_stars_data = [];
+        foreach ($users as $user) {
+            $users_usable_stars[$user->id] = Helper::getUsableStars($user);
+        }
         
-        return view('admin/users', compact('users', 'users_data'));
+        return view('admin/users', compact('users', 'users_data', 'users_usable_stars'));
     }
 }

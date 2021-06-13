@@ -55,41 +55,36 @@ class Helper
     }
 
     public static function getUsableStars($user) {
-        //$substractStars = $user->stars()->where('type', 'Subtract')->get();
-        //$addStars = $user->stars()->where('type', 'Add')->whereDate('valid_until', '>=', Carbon::today())->get();
         $userStars = $user->stars()->whereDate('valid_until', '>=', Carbon::today())->orderBy('created_at','asc')->get();
+        
         $total_stars = 0;
-        foreach($userStars as $star)
-        {
+        foreach($userStars as $star) {
             $total_stars += $star->stars;
         }
-        //foreach ($addStars as $star) 
-            //$total_stars += $star->stars;
-        
-        //foreach ($substractStars as $star) 
-            //$total_stars -= $star->stars;
+
         return $total_stars;
     }
 
     public static function getUnusableStars($user) {
-        //$stars = $user->stars()->where('valid_until', '<', Carbon::today())->get();
         $userStars = $user->stars()->whereDate('valid_until', '<=', Carbon::today())->orderBy('created_at','asc')->get();
 
         $total_stars = 0;
-        foreach ($stars as $star) {
+        foreach ($userStars as $star) {
             $total_stars += $star->stars;
         }
 
         return $total_stars;
     }
 
-    public static function addStars($user,$star_added,$case) {
-
+    public static function addStars($user, $star_added, $case) {
         $star               = new Star();
         $star->user_id      = $user->id;
         $star->stars        = $star_added;
         $star->valid_until  = Carbon::now()->addMonths(4);
         $star->save();
+
+        $user->userDetail->total_stars += $star_added;
+        $user->userDetail->save();
 
         // create notification
         $notification = Notification::create([
@@ -99,38 +94,35 @@ class Helper
             'description'       => 'Hi, '.auth()->user()->name.'. Kamu berhasil mendapat '.$star_added.' stars dari '.$case.'! Click notifikasi ini untuk melihat star kamu.',
             'link'              => '/dashboard/redeem-vouchers'
         ]);
-        
 
-        //update user club
-        $user_stars = Helper::getUsableStars(auth()->user());
-        $user_club = auth()->user()->club;
-        if($user_club == null)
-        {
-            if($user_stars >= 20)
-            {
-                auth()->user()->club = 'bike';
-                auth()->user()->save();
-            }
-        }
-        elseif($user_club == 'bike')
-        {
-            if($user_stars >= 100)
-            {
-                auth()->user()->club = 'car';
-                auth()->user()->save();
-            } 
-        }
-        elseif($user_club == 'car'){
-            if($user_stars >= 280)
-            {
-                auth()->user()->club = 'jet';
-                auth()->user()->save();
-            }
-        }
+        Helper::checkAndUpdateUserClub(auth()->user());
 
         if($star && $notification)
             return 'success';
         else
             return 'error';
+    }
+
+    // Function to check & update User's club status.
+    public static function checkAndUpdateUserClub($user) {
+        $user_stars = $user->userDetail->total_stars;
+        $user_club = $user->club;
+
+        if ($user_club == null) {
+            if ($user_stars >= 20) {
+                $user->club = 'bike';
+                $user->save();
+            }
+        } elseif ($user_club == 'bike') {
+            if($user_stars >= 100) {
+                $user->club = 'car';
+                $user->save();
+            } 
+        } elseif ($user_club == 'car') {
+            if ($user_stars >= 280) {
+                $user->club = 'jet';
+                $user->save();
+            }
+        }
     }
 }
