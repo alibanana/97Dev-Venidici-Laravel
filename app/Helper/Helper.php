@@ -69,19 +69,22 @@ class Helper
         $userStars = $user->stars()->whereDate('valid_until', '<=', Carbon::today())->orderBy('created_at','asc')->get();
 
         $total_stars = 0;
-        foreach ($stars as $star) {
+        foreach ($userStars as $star) {
             $total_stars += $star->stars;
         }
 
         return $total_stars;
     }
 
-    public static function addStars($user,$star_added,$case) {
+    public static function addStars($user, $star_added, $case) {
         $star               = new Star();
         $star->user_id      = $user->id;
         $star->stars        = $star_added;
         $star->valid_until  = Carbon::now()->addMonths(4);
         $star->save();
+
+        $user->userDetail->total_stars += $star_added;
+        $user->userDetail->save();
 
         // create notification
         $notification = Notification::create([
@@ -102,7 +105,7 @@ class Helper
 
     // Function to check & update User's club status.
     public static function checkAndUpdateUserClub($user) {
-        $user_stars = Helper::getUsableStars($user) + Helper::getUnusableStars($user);
+        $user_stars = $user->userDetail->total_stars;
         $user_club = $user->club;
 
         if ($user_club == null) {

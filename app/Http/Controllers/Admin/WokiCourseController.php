@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helper\CourseHelper;
 
 use App\Models\CourseCategory;
 use App\Models\CourseType;
@@ -126,5 +127,17 @@ class WokiCourseController extends Controller
         ];
 
         return view('admin/woki/index', compact('course_categories', 'courses', 'courses_data'));
+    }
+
+    // Delete Woki Course from the database.
+    public function destroy($id) {
+        $result = CourseHelper::deleteById($id);
+        return redirect()->route('admin.woki-courses.index')->with('message', $result['message']);
+    }
+
+    // Change the public status of the chosen Woki Course to its opposite.
+    public function setPublishStatusToOpposite(Request $request, $id) {
+        $result = CourseHelper::setPublishStatusToOppositeById($id);
+        return redirect()->route('admin.woki-courses.index')->with('message', $result['message']);
     }
 }
