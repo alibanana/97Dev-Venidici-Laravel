@@ -11,7 +11,7 @@ class CourseHelper {
         try {
             $course = Course::findOrFail($id);
             
-            // unlink($course->thumbnail);
+            unlink($course->thumbnail);
             $course->delete();
             
             if ($course->courseType->type == "Course") {
