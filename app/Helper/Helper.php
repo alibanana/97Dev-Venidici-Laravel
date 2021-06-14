@@ -106,23 +106,15 @@ class Helper
     // Function to check & update User's club status.
     public static function checkAndUpdateUserClub($user) {
         $user_stars = $user->userDetail->total_stars;
-        $user_club = $user->club;
 
-        if ($user_club == null) {
-            if ($user_stars >= 20) {
-                $user->club = 'bike';
-                $user->save();
-            }
-        } elseif ($user_club == 'bike') {
-            if($user_stars >= 100) {
-                $user->club = 'car';
-                $user->save();
-            } 
-        } elseif ($user_club == 'car') {
-            if ($user_stars >= 280) {
-                $user->club = 'jet';
-                $user->save();
-            }
+        if ($user_stars >= 280) {
+            $user->club = 'jet';
+        } elseif ($user_stars >= 100) {
+            $user->club = 'car';
+        } elseif ($user_stars >= 20) {
+            $user->club = 'bike';
         }
+
+        $user->save();
     }
 }
