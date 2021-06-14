@@ -438,8 +438,8 @@
 <!-- END OF BANNER SECTION -->
 
 <!-- START OF TRUSTED COMPANY SECTION -->
-<div class="row m-0 page-container" style="z-index: 99;padding-bottom:5vw">
-    <div class="col-12 p-0" style="margin-top:-5vw">
+<div class="row m-0 page-container"  style="z-index: 99;padding-bottom:5vw">
+    <div class="col-12 p-0" id="trusted-company-margin" style="margin-top:-5vw">
         <div class="wow fadeInRight" data-wow-delay="1s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
@@ -564,7 +564,7 @@ END OF OUR PROGRAMS SECTION -->
                 <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-cover" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Woki</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
                     <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Woki</a>
                 </div>
             </div>
@@ -604,17 +604,26 @@ END OF OUR PROGRAMS SECTION -->
                     <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
                         <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
-                            <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Feature number 1</p>
-                            <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Skill Penunjang Karir</p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Dapetin skill yang kamu mau dan taklukin karir impian melalui Venidici Bootcamp</p>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="card-white" style="display: flex;align-items:center;height:15vw">
+                    <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
                         <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
-                            <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Feature number 2</p>
-                            <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Healing bersama dengan teman baru!</p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Bareng woki, healing sambil berkarya dan bercerita</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                        <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
+                        <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
+                        <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
+                            <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Jangan sampai perusahaan kamu kalah saing!</p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Krest bisa bantu naikkin performa tim kamu lewat hands-on workshop yang seru</p>
                         </div>
                     </div>
                 </div>

@@ -161,4 +161,31 @@ class PromotionController extends Controller
         
         return redirect()->route('admin.promotions.index')->with('message', $message);
     }
+
+    public function donations_index(Request $request) {
+        $promotions = new Promotion;
+
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $promotions = $promotions->orderBy('created_at', 'desc');
+            } else {
+                $promotions = $promotions->orderBy('created_at');
+            }
+        } else {
+            $promotions = $promotions->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('admin.donations.index', request()->except('search'));
+                return redirect($url);
+            } else {
+                $promotions = $promotions->where('code', 'like', "%".$request->search."%");
+            }
+        }
+
+        $promotions = $promotions->where('promo_for','charity')->get();
+
+        return view('admin/donations', compact('promotions'));
+    }
 }

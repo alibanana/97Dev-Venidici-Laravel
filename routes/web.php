@@ -290,6 +290,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     //CollaboratorController
     Route::get('/menjadi-kolaborator', [AdminCollaboratorController::class, 'index'])->name('collaborators.index');
     Route::delete('/menjadi-kolaborator/{id}', [AdminCollaboratorController::class, 'destroy'])->name('collaborators.destroy');
+    //CollaboratorController
+    Route::get('/donations', [AdminPromotionController::class, 'donations_index'])->name('donations.index');
 });
 
 /* START OF WOKI ROUTING */

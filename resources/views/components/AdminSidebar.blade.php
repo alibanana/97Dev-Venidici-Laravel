@@ -228,7 +228,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/admin/promotions">Promotion List</a>
                 <a class="collapse-item" href="/admin/redeems">Redeem Rule</a>
-
+                <a class="collapse-item" href="/admin/donations">Donations</a>
             </div>
         </div>
     </li>

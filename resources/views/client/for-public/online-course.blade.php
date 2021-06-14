@@ -91,7 +91,7 @@
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Effective Learning for You</p>
     </div>
     <div class="row m-0" style="padding-top:2vw">
-        <div class="col-3">
+        <div class="col-4" style="display:flex;justify-content:center">
             <div class="our-mission-card" style="">
                 <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">1.</p>
                 <div style="">
@@ -113,7 +113,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-4" style="display:flex;justify-content:center">
             <div class="our-mission-card" style="">
                 <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">2.</p>
                 <div style="">
@@ -135,6 +135,7 @@
                 </div>
             </div>
         </div>
+        <!--
         <div class="col-3">
             <div class="our-mission-card" style="">
                 <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">3.</p>
@@ -157,9 +158,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+-->
+        <div class="col-4" style="display:flex;justify-content:center">
             <div class="our-mission-card" style="">
-                <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">4.</p>
+                <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">3.</p>
                 <div style="">
                     <div style="text-align:center">
                         <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
@@ -197,7 +199,7 @@
 </div>
  END OF OUR VALUES-->
 
-<!-- START OF HIGHLIGHTED EVENTS -->
+<!-- START OF HIGHLIGHTED EVENTS 
 <div class="row m-0 page-container" style="padding-top:6vw;padding-bottom:6vw;background-color:#F6F6F6">
     <div class="col-12">
         <p class="big-heading wow flash" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43;margin-left:2.9vw">Highlighted <span style="font-family:Hypebeast;color:#67BBA3">Events</span> </p>
@@ -236,7 +238,7 @@
         </div>
     </div>
 </div>
-<!-- END OF HIGHLIGHTED EVENTS -->
+ END OF HIGHLIGHTED EVENTS -->
 
 <!-- START OF FAQ SECTION -->
 <div class="row m-0 page-container faq-background" style="padding-top:6vw;padding-bottom:6vw">
@@ -255,9 +257,7 @@
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
-                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                    Untuk Workshop Live terdapat money-back guarantee jika kamu merasa tidak puas dengan menghubungi kami. Tidak terdapat refund untuk program on demand                    </p>
-                </div>
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;white-space:pre-line">Money-back guarantee hanya berlaku bagi Skill Snack Live. Kamu ga puas? Jangan ragu-ragu untuk menghubungi tim kami                </div>
             </div>
             <!-- END OF ONE FAQ CARD -->
             <!-- START OF ONE FAQ CARD -->
