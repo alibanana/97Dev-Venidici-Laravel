@@ -167,7 +167,7 @@
 													<td>-</td>
 													<td>-</td>
 												@endif
-												<td>{{$user->stars}}</td>
+												<td>{{ $users_usable_stars[$user->id] }}</td>
 												@if ($user->status == 'active')
 													<td style="color:green">Active</td>
 												@else

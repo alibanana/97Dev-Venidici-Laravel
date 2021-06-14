@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helper\Helper;
+use App\Helper\CourseHelper;
 
 use App\Models\CourseCategory;
 use App\Models\CourseType;
@@ -244,26 +245,13 @@ class OnlineCourseController extends Controller
 
     // Delete Online Course from the database.
     public function destroy($id) {
-        $course = Course::findOrFail($id);
-        unlink($course->thumbnail);
-        $course->delete();
-        $message = 'Online Course (' . $course->title . ') has been deleted.';
-        return redirect()->route('admin.online-courses.index')->with('message', $message);
+        $result = CourseHelper::deleteById($id);
+        return redirect()->route('admin.online-courses.index')->with('message', $result['message']);
     }
 
-    // Change the public status of the chosen Online Course to Draft.
+    // Change the public status of the chosen Online Course to its opposite.
     public function setPublishStatusToOpposite(Request $request, $id) {
-        $course = Course::findOrFail($id);
-
-        if ($course->publish_status == 'Draft') {
-            $course->publish_status = 'Published';
-        } else if ($course->publish_status == 'Published') {
-            $course->publish_status = 'Draft';
-        }
-        
-        $course->save();
-
-        $message = 'Online Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
-        return redirect()->route('admin.online-courses.index')->with('message', $message);
+        $result = CourseHelper::setPublishStatusToOppositeById($id);
+        return redirect()->route('admin.online-courses.index')->with('message', $result['message']);
     }
 }

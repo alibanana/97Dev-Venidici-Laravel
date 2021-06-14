@@ -197,6 +197,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     Route::put('/online-courses/{id}/detach-teacher', [AdminOnlineCourseUpdateController::class, 'detachTeacher'])->name('online-courses.detach-teacher');
     // WokiCourseController
     Route::get('/woki-courses', [AdminWokiCourseController::class, 'index'])->name('woki-courses.index');
+    Route::delete('/woki-course/{id}', [AdminWokiCourseController::class, 'destroy'])->name('woki-courses.destroy');
+    Route::post('/woki-courses/{id}/set-publish-status-to-opposite', [AdminWokiCourseController::class, 'setPublishStatusToOpposite'])->name('woki-courses.set-publish-status-to-opposite');
     // SectionController
     Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
     Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');

@@ -21,6 +21,7 @@ class UserDetail extends Model
         'address',
         'company',
         'occupancy',
+        'total_stars',
         'province_id',
         'city_id',
     ];
