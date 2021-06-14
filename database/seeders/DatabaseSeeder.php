@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             NewsletterSeeder::class,
             RedeemSeeder::class,
             StarSeeder::class,
+            WokiCourseDetailSeeder::class
         ]);
     }
 }

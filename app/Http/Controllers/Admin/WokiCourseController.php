@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helper\CourseHelper;
 
 use App\Models\CourseCategory;
+use App\Models\Hashtag;
 use App\Models\CourseType;
 use App\Models\Course;
 
@@ -127,6 +128,14 @@ class WokiCourseController extends Controller
         ];
 
         return view('admin/woki/index', compact('course_categories', 'courses', 'courses_data'));
+    }
+
+    // Shows Admin -> Create Woki Course Page.
+    public function create() {
+        $course_categories = CourseCategory::select('id', 'category')->get();
+        $tags = Hashtag::all();
+
+        return view('admin/woki/create', compact('course_categories', 'tags'));
     }
 
     // Delete Woki Course from the database.

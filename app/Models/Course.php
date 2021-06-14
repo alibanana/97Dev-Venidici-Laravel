@@ -42,6 +42,10 @@ class Course extends Model
         return $this->hasMany(CourseFeature::class);
     }
 
+    public function wokiCourseDetail() {
+        return $this->hasOne(WokiCourseDetail::class);
+    }
+
     public function hashtags() {
         return $this->belongsToMany(Hashtag::class, 'course_hashtag')->withTimestamps();
     }

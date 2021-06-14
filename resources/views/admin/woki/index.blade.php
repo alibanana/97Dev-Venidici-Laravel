@@ -23,7 +23,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="mb-0 mb-3 text-gray-800">Woki Courses</h1>
-            <a href="/admin/woki/create" class="btn btn-primary btn-user p-3">Create New Woki Course</a>
+            <a href="{{ route('admin.woki-courses.create') }}" class="btn btn-primary btn-user p-3">Create New Woki Course</a>
         </div>
         
         <!-- Content Row -->

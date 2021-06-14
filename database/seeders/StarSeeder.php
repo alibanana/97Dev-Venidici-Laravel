@@ -40,16 +40,5 @@ class StarSeeder extends Seeder
                 'created_at' => Carbon::createFromFormat('Y-m-d', $date)
             ]);
         }
-
-        // Points Subtracted
-        for ($i = 0; $i < 3; $i++) {
-            $date = $faker->dateTimeBetween($startDate = '-10 months', $endDate = 'now')->format('Y-m-d');
-            Star::create([
-                'user_id' => 1,
-                'stars' => rand(10, 50),
-                //'type' => 'Subtract',
-                'created_at' => Carbon::createFromFormat('Y-m-d', $date)
-            ]);
-        }
     }
 }
