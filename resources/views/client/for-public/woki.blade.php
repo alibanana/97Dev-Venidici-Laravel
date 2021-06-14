@@ -6,11 +6,10 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container for-public-woki-background " style="height:55vw">
     <div class="col-6 p-0">
-        <div style="padding-top:10vw;margin-left:-0.5vw" class="wow fadeInUp" data-wow-delay="0.3s">
+        <div style="padding-top:12vw;margin-left:-0.5vw" class="wow fadeInUp" data-wow-delay="0.3s">
             <img src="/assets/images/client/Woki_Logo.png" style="width:19vw;margin-left:-1.3vw" class="img-fluid" alt="Image 1">
-            <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw;margin-top:1vw">A look at how we put
-            the pieces together</p>
-            <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:2vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. </p>
+            <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw;margin-top:1vw">Hi! I’m Woki</p>
+            <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:2vw">Partner terbaik kamu untuk healing bareng lewat berkreasi dan berkarya! Lepasin stress kamu sambil tingkatin kreativitas dan art skill bareng Woki. #BertumbuhdanPeduli bersama Woki</p>
             <div class="row m-0">
                 <div class="col-9 p-0">
                     <div style="margin-top:0.5vw;text-align:center">
@@ -62,10 +61,13 @@
     </div>
     <div class="col-6 wow fadeInRight" data-wow-delay="0.3s">
         <p class="small-heading" style="font-family: Rubik Medium;color:#CE3369">Our History</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Apa itu Woki?</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Apa sih Woki itu?</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">WOKI (Workshop Kit by Venidici) bertujuan untuk memberi wadah dalam belajar, berkembang, serta melakukan self-healing dari permasalahan yang dihadapi dalam kehidupan kita sehari-hari. 
 
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
+Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik pembuatan kesenian serta kerajinan tangan dapat membantu menjaga kesehatan mental yang dimiliki oleh kita setiap individu.
+
+#BertumbuhDanPeduli
+
         </p>
     </div>
 </div>
@@ -74,10 +76,10 @@
 <!-- START OF KENAPA MEMILIH ONLINE COURSE -->
 <div class="row m-0 page-container" style="padding-bottom:8vw   ">
     <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s">
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Kenapa Woki Terbuat?</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Untuk apa Woki lahir?</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Banyak sekali individu yang resah dengan dirinya dan tidak mendapatkan kesempatan untuk beristirahat sejenak, menyatu dengan dirinya. Woki sadar dan melihat tersebut, sehingga mencari solusi yang kreatif, unik, dan fun agar individu dapat healing dengan tersenyum.
+        
+        Sampai akhirnya, Woki menemukan kebahagiaan sendiri disaat sedang berkreasi dengan seni dan crafting. Woki merasa art and craft bisa menjadi solusi tersebut. 
         </p>
     </div>
     <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
@@ -134,7 +136,7 @@
 <div class="row m-0 page-container our-values-background-woki" style="padding-top:10vw;padding-bottom:10vw">
     <div class="col-7 p-0">   
         <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Values</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Mengenal Nilai Woki Dari Karakter <br> Woki Toki</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Kenalan yuk dengan Woki & Toki!</p>
         <div style="margin-top:2vw;margin-bottom:3vw">
             <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
 
@@ -282,14 +284,14 @@
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">What is your shipping policy?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Link untuk registrasi ada dimana?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    Untuk pembelian kit dan registrasi workshop, bisa mendaftar di link yang ada di Bio Instagram atau masuk ke akun Shopee ‘Venidici’.
                     </p>
                 </div>
             </div>
@@ -297,14 +299,14 @@
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Can I refund the course that i enrolled?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apakah membeli kit juga mendapatkan workshop?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ2" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    Ya, kalau kamu sudah purchase kit di Shopee, kamu juga akan mendapatkan workshop.
                     </p>
                 </div>
             </div>
@@ -312,15 +314,14 @@
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Jika berhalangan hadir di Workshop bagaimana?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ3" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                    </p>
+                    Jika, kamu berhalangan hadir di Workshop, silahkan menghubungi admin baik melewati Shopee maupun WhatsApp Group yang telah dibentuk untuk workshop tersebut. Setelah itu, kami akan memberikan recording Workshops melalui E-mail.                     </p>
                 </div>
             </div>
             <!-- END OF ONE FAQ CARD -->
