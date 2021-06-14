@@ -189,10 +189,10 @@ END OF OUR PROGRAMS SECTION -->
             <!--
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
                 <select class="grey-input-form small-text" style="height:100%;padding-right:4vw" aria-label="">
-                    <option selected>Categories</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected disabled>Pilih Kategori</option>
+                    @foreach($course_categories as $category)
+                    <option value="{{$category->id}}">{{$category->category}}</option>
+                    @endforeach
                 </select>
             </div>
             <div style="margin-left: 1vw;">
@@ -224,9 +224,9 @@ END OF OUR PROGRAMS SECTION -->
     <div class="course-content" id="course-popular">
         <div class="row m-0 p-0">
             @if(count($courses) == 0)
-                <div style="margin-top:3vw;text-align:center">
-                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada online course.</p>
-                </div>
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Venidici On-Demand tidak ditemukan.</span></p>
+            </div>
             @endif
         
             @foreach($courses as $course)

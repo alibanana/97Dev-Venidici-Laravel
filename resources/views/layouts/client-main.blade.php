@@ -35,6 +35,97 @@
 
   </head>
   <body style="padding-right:0px !important">
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title sub-description" style="font-family:Rubik Bold" id="exampleModalLabel">Contact Us</h5>
+                </div>
+                <div class="modal-body">
+                  <form action="{{route('collaborators.store')}}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                    <div class="row m-0">
+                        <div class="col-12 p-0" style="text-align:center">
+                            @if (session()->has('contact_us_message'))
+                            <div class="p-3 mt-2 mb-0">
+                                <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                                {{ session()->get('contact_us_message') }}
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <!-- START OF TOP SECTION -->
+                        <div class="col-12" style="">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;">Full Name</p>
+                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                                <i style="color:#DAD9E2" class="fas fa-user"></i>
+                                <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama anda" >
+                            </div>  
+                            @error('name')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            
+                        </div> 
+                        <!-- END OF TOP SECTION --> 
+                        <!-- START OF LEFT SECTION -->
+                        <div class="col-6" style="">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Telephone</p>
+                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                                <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
+                                <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan No. Telp" >
+                            </div>  
+                            @error('telephone')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            
+                        </div> 
+                        <!-- END OF LEFT SECTION --> 
+                        <!-- RIGHT SECTION -->
+                        <div class="col-6" style="">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw"">Email</p>
+                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                                <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                                <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email" >
+                            </div>  
+                            @error('email')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            
+                            
+                        </div>
+                        <!-- END OF RIGHT SECTION -->
+                        <div class="col-12">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Inquiry</p>
+                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                                <textarea name="inquiry" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan pesan anda" ></textarea>
+                            </div>  
+                            @error('inquiry')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <div class="col-12" style="text-align:right;padding-top:1vw">
+                            <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                        </div>  
+                        
+                        <!-- END OF GENNERAL INFORMATION -->
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
   
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
@@ -326,32 +417,29 @@
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Site Map</p>
             <div style="margin-top:1vw">
-              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Home Page</a>
-            </div>
-            <div style="margin-top:1vw">
-              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Public</a>
-            </div>
-            <div style="margin-top:1vw">
-              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Corporate</a>
-            </div>
-            <div style="margin-top:1vw">
-              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Community</a>
+              <a href="/" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Home Page</a>
             </div>
             <div style="margin-top:1vw">
               <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Venindici On-Demand</a>
+            </div>
+            <div style="margin-top:1vw">
+              <a href="/for-public/woki" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Venidici Woki</a>
+            </div>
+            <div style="margin-top:1vw">
+              <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Corporate</a>
             </div>
           </div>
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Information</p>
             <div style="margin-top:1vw">
-              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Corporate Programs</a>
+              <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Corporate Programs</a>
             </div>
             <div style="margin-top:1vw">
-              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Discord Community</a>
+              <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Discord Community</a>
             </div>
             <div style="margin-top:1vw">
-              <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Contact Us</a>
+              <a href="#" data-toggle="modal" data-target="#contactUsModal" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Contact Us</a>
             </div>
           </div>
 

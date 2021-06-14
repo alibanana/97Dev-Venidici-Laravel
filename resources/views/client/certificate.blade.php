@@ -22,10 +22,10 @@
 
 <body>
 
-<p style="font-size:95px;margin-left:240px;margin-top:630px;color:#FFFFFF">{{$name}}</p>
-<div style="margin-top:-70px;padding-right:800px">
-<p style="font-size:45px;margin-left:240px;color:#FFFFFF">{{$first_sentence}} <span style="font-style:bold">{{$course_name}}</span> </p>
-<p style="font-size:45px;margin-left:240px;color:#FFFFFF">{{$second_sentence}} {{$finish_date}}, {{$third_sentence}}</p>
+<p style="font-size:2.5rem;margin-left:240px;margin-top:630px;color:#FFFFFF">{{$name}}</p>
+<div style="margin-top:-1rem;padding-right:800px">
+<p style="font-size:1.25rem;margin-left:240px;color:#FFFFFF">{{$first_sentence}} <span style="font-style:bold">{{$course_name}}</span> </p>
+<p style="font-size:1.25rem;margin-left:240px;color:#FFFFFF">{{$second_sentence}} {{$finish_date}}, {{$third_sentence}}</p>
 </div>
 
 </body>
