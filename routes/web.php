@@ -347,6 +347,22 @@ Route::get('/admin/reset-password', function () {
 /* END OF INFORMATION CODE */
 
 /* START OF ONLINE COURSE ROUTING */
+/* START OF HASHTAG*/
+Route::get('/admin/hashtags', function () {
+    return view('admin/hashtag/index');
+});
+Route::get('/admin/hashtags/create', function () {
+    return view('admin/hashtag/create');
+});
+Route::get('/admin/hashtags/1/update', function () {
+    return view('admin/hashtag/update');
+});
+/* END OF HASHTAG */
+
+/* START OF ONLINE COURSE ROUTING */
+Route::get('/admin/online-courses/create-video/1', function () {
+    return view('admin/online-course/create-video');
+});
 Route::get('/admin/online-courses/assesments/1', function () {
     return view('admin/assessment/detail');
 });

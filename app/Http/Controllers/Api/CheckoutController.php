@@ -587,6 +587,7 @@ class CheckoutController extends Controller
         return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki','notifications'));
     }
 
+
     public function createPayment(Request $request, $id){        
 
         $cart_count = Cart::with('course')

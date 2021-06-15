@@ -169,7 +169,7 @@
                                                                 <div style="padding: 0px 2px">
                                                                     <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
                                                                 </div>
-                                                            </form> 
+                                                            </form>
                                                         </div>
                                                     </td>
                                                 </tr>

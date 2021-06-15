@@ -266,7 +266,7 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center" style="margin-top:3vw">
                         <!-- ONE CLUB -->
-                        @if($usableStarsCount >= 20)
+                        @if(auth()->user()->userDetail->total_stars >= 20)
                         <div style="border-radius:10px;padding:1vw;background-color:#ECF6FF;display: flex;flex-direction: column;justify-content: center;align-items:center">
                             <i class="fas fa-bicycle medium-heading" style="color:#2B6CAA"></i>
                         @else
@@ -278,16 +278,16 @@
                         <!-- END OF ONE CLUB -->
                         <!-- START OF ONE PROGRESS BAR -->
                         <div class="d-block w-100" style="padding:0vw 1vw">
-                            @if($usableStarsCount >= 100)
+                            @if(auth()->user()->userDetail->total_stars >= 100)
                             <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Points Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #F4C257;"></div>
                             </div>
                             @else
                             @php
-                                $percentCar = ( ($usableStarsCount - 20) / 80 ) * 100 ;
+                                $percentCar = ( (auth()->user()->userDetail->total_stars - 20) / 80 ) * 100 ;
                             @endphp
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 100 - $usableStarsCount}} Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 100 - auth()->user()->userDetail->total_stars}} Points Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{round($percentCar)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($percentCar)}}%; background-color: #F4C257;"></div>
                             </div>
@@ -296,7 +296,7 @@
                         </div>
                         <!-- END OF ONE PROGRESS BAR -->
                         <!-- ONE CLUB -->
-                        @if($usableStarsCount >= 100)
+                        @if(auth()->user()->userDetail->total_stars >= 100)
                         <div style="border-radius:10px;padding:1vw;background-color:#ECF6FF;display: flex;flex-direction: column;justify-content: center;align-items:center">
                             <i class="fas fa-car-side medium-heading" style="color:#2B6CAA"></i>
                         @else
@@ -308,16 +308,16 @@
                         <!-- END OF ONE CLUB -->
                         <!-- START OF ONE PROGRESS BAR -->
                         <div class="d-block w-100" style="padding:0vw 1vw">
-                            @if($usableStarsCount >= 280)
+                            @if(auth()->user()->userDetail->total_stars >= 280)
                             <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Points Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 
                                 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #F4C257;"></div>
                             </div>
                             @else
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 280 - $usableStarsCount}} Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 280 - auth()->user()->userDetail->total_stars}} Points Left</p>
                             @php
-                                $percent = ( ($usableStarsCount - 100) / 180 ) * 100 ;
+                                $percent = ( (auth()->user()->userDetail->total_stars - 100) / 180 ) * 100 ;
                             @endphp
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{round($percent)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($percent)}}%; background-color: #F4C257;"></div>
@@ -327,7 +327,7 @@
                         </div>
                         <!-- END OF ONE PROGRESS BAR -->
                         <!-- ONE CLUB -->
-                        @if($usableStarsCount >= 280)
+                        @if(auth()->user()->userDetail->total_stars >= 280)
                         <div style="border-radius:10px;padding:1vw;background-color:#ECF6FF;display: flex;flex-direction: column;justify-content: center;align-items:center">
                             <i class="fas fa-fighter-jet medium-heading" style="color:#2B6CAA"></i>
                         @else
