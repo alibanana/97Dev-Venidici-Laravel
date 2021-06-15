@@ -1562,10 +1562,4 @@ html, body {
         padding-left:4vw;
         padding-right:4vw
     }
-    .footer-desktop{
-        display: none !important
-    }
-    .footer-mobile{
-        display: block !important
-    }
 }
