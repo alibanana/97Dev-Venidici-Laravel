@@ -367,8 +367,8 @@
         <div class="grey-input-form" style="display: flex;align-items:center;width:100%;padding:2vw">
             <input type="text" style="background:transparent;border:none;color: rgba(0, 0, 0, 0.5);font-family:Rubik Regular;font-size:3vw;width:100%" placeholder="Course Title">
         </div>
-        <div class="grey-input-form" style="display: flex;align-items:center;width:100%;padding:2vw;margin-top:3vw">
-            <select name="province" id=""  class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;font-size:3vw">
+        <div class="grey-input-form" style="display: flex;align-items:center;width:100%;margin-top:3vw">
+            <select name="province" id=""  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;font-size:3vw">
                 <option value="" disabled selected>Pilih Kategori</option>
                 <option value="">On-Demand</option>
                 <option value="">Woki</option>
