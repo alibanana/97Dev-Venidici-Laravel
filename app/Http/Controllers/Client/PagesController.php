@@ -22,6 +22,7 @@ use App\Models\UserHashtag;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\InstructorPosition;   
+use Jenssegers\Agent\Agent;
 
 
 use PDF;
@@ -80,6 +81,13 @@ class PagesController extends Controller
             return view('client/index', 
                 compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
                     'online_courses','cart_count', 'notifications', 'transactions','informations','pengajar_positions'));
+        }
+
+        $agent = new Agent();
+        if($agent->isPhone()){
+
+            return view('client/mobile/index', 
+                compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','pengajar_positions'));
         }
 
         return view('client/index', 
