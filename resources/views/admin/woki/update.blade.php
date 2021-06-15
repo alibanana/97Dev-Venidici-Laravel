@@ -22,7 +22,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h2 class="mb-0 mb-3 text-gray-800">Update Woki</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">Update Woki Course</h2>
         </div>
         <div class="d-sm-flex align-items-center mb-2">
             <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h5>
@@ -37,14 +37,14 @@
 
         <!-- START OF BASIC INFORMATION -->
         <div class="course-content" id="basic-informations">
-            <form id="online-course-update-form" action="/admin/woki/1/update" method="POST" enctype="multipart/form-data">
+            <form id="online-course-update-form" action="{{ route('admin.woki-courses.update-basic-info', $course->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf  
                 @method('put')         
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Thumbnail</label> <br>
-                            <img src="/assets/images/seeder/course-business.jpg" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
+                            <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
                             <br>
                             <br>
                             Click button below to update image
@@ -61,7 +61,7 @@
                             <label for="">Title</label>
                             <input type="text" name="title" class="form-control form-control-user"
                                 id="phone" aria-describedby="" placeholder="Enter couse title"
-                                value="Title" required> 
+                                value="{{ old('title', $course->title) }}" required> 
                             @error('title')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -73,7 +73,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Subtitle</label>
-                            <textarea name="subtitle" id="" rows="3" class="form-control" required>Subtitle</textarea> 
+                            <textarea name="subtitle" id="" rows="3" class="form-control" required>{{ old('subtitle', $course->subtitle) }}</textarea> 
                             @error('subtitle')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -85,7 +85,13 @@
                         <div class="form-group">
                             <label for="">Category</label> <br>
                             <select name="course_category_id" id="" class="form-control form-control-user" required>
-                                    <option value="1" selected>woki category</option>
+                                @foreach ($course_categories as $category)
+                                    @if ($category->id == $course->course_category_id)
+                                        <option value="{{ $course->course_category_id }}" selected>{{ $category->category }}</option>
+                                    @else
+                                        <option value="{{ $course->course_category_id }}">{{ $category->category }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                             @error('course_category_id')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -100,7 +106,7 @@
                             <label for="">Embed youtube link for preview  (src only)</label>
                             <input type="text" name="preview_video_link" class="form-control form-control-user"
                                     id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg"
-                                    value="https://www.youtube.com/embed/DSJlhjZNVpg" required>
+                                    value="{{ old('preview_video_link', $course->preview_video) }}" required>
                             @error('preview_video_link')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -110,10 +116,10 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Zoom Link</label>
-                            <input type="text" name="zoom_link" class="form-control form-control-user" value=""
+                            <label for="">Meeting Link</label>
+                            <input type="text" name="meeting_link" class="form-control form-control-user" value="{{ old('meeting_link', $course->wokiCourseDetail->meeting_link) }}"
                                     id="exampleInputPassword" placeholder="https://meet.google.com/hza-vmyh-zoo" required> 
-                            @error('zoom_link')
+                            @error('meeting_link')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -122,20 +128,23 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Date Start</label>
-                            <input type="date" name="date" class="form-control form-control-user" value=""
+                            <label for="">Event Date</label>
+                            <input type="date" name="event_date" class="form-control form-control-user" value="{{ old('event_date', $course->wokiCourseDetail->event_date) }}"
                                     id="exampleInputPassword" placeholder="dd.mm.yyyy" required> 
-                            @error('date')
+                            @error('event_date')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror               
                         </div>
                     </div>
+                    @php
+                        $startTimeConverted = \Carbon\Carbon::createFromFormat('H:i:s', $course->wokiCourseDetail->start_time)->format('H:i');
+                    @endphp
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Event Start</label>
-                            <input type="time" name="start_time" class="form-control form-control-user" value=""
+                            <input type="time" name="start_time" class="form-control form-control-user" value="{{ old('start_time', $startTimeConverted) }}"
                                     id="exampleInputPassword" placeholder="11:00" required> 
                             @error('start_time')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -144,22 +153,13 @@
                             @enderror               
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Duration (in minutes)</label>
-                            <input type="text" name="duration" class="form-control form-control-user" value=""
-                                    id="exampleInputPassword" placeholder="120" required> 
-                            @error('duration')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror               
-                        </div>
-                    </div>
+                    @php
+                        $endTimeConverted = \Carbon\Carbon::createFromFormat('H:i:s', $course->wokiCourseDetail->end_time)->format('H:i');
+                    @endphp
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Event End</label>
-                            <input type="time" name="end_time" class="form-control form-control-user" value=""
+                            <input type="time" name="end_time" class="form-control form-control-user" value="{{ old('end_time', $endTimeConverted) }}"
                                     id="exampleInputPassword" placeholder="12:00" required> 
                             @error('end_time')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -171,7 +171,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea name="description" id="" rows="5"  class="form-control form-control-user" required>woki description</textarea>
+                            <textarea name="description" id="" rows="5"  class="form-control form-control-user" required>{{ old('description', $course->description) }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -196,14 +196,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" id="requirement_duplicator1">
-                                <div class="col-md-12">
-                                    <div class="form-group" style="display:flex">
-                                        <input type="text" name="requirements[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="requirement" required>
-                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                            @foreach ($course->courseRequirements as $requirement)
+                                <div class="row" id="requirement_duplicator{{ $loop->iteration }}">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="display:flex">
+                                            <input type="text" name="requirements[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="{{ $requirement->requirement }}" required>
+                                            <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                         <button type="button" id="add_requirement" onlick="duplicateRequirement()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
                     </div>
@@ -225,14 +227,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" id="learn_duplicator1">
-                                <div class="col-md-12">
-                                    <div class="form-group d-flex">
-                                        <input type="text" name="features[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="features" required>
-                                        <button type="button" onClick="removeDiv(this, 'learn_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                            @foreach ($course->courseFeatures as $feature)
+                                <div class="row" id="learn_duplicator{{ $loop->iteration }}">
+                                    <div class="col-md-12">
+                                        <div class="form-group d-flex">
+                                            <input type="text" name="features[]" class="form-control form-control-user" id="" placeholder="e.g. Bisa melawak dengan benar dan tidak garing" value="{{ $feature->feature }}" required>
+                                            <button type="button" onClick="removeDiv(this, 'learn_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                         <button type="button" id="add_learn" onlick="duplicateLearn()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 
@@ -257,16 +261,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" id="hashtag_duplicator1">
-                                <div class="col-md-12">
-                                    <div class="form-group" style="display:flex">
-                                        <select name="hashtags[]" class="form-control form-control-user" required>
-                                                <option value="1" selected>hashtag</option>
-                                        </select>
-                                        <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                            @foreach ($course->hashtags as $hashtag)
+                                <div class="row" id="hashtag_duplicator{{ $loop->iteration }}">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="display:flex">
+                                            <select name="hashtags[]" class="form-control form-control-user" required>
+                                                @foreach ($tags as $tag)
+                                                    @if ($hashtag->hashtag == $tag->hashtag)
+                                                        <option value="{{ $tag->id }}" selected>{{ $tag->hashtag }}</option>
+                                                    @else
+                                                        <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                         <button type="button" id="add_hashtag" onlick="duplicateHashtag()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
 

@@ -30,6 +30,11 @@ class OnlineCourseUpdateController extends Controller
     // Shows the Admin Online Course Update Page.
     public function edit(Request $request, $id) {
         $course = Course::findOrFail($id);
+
+        if ($course->courseType->type != 'Course') {
+            return redirect()->route('admin.woki-courses.edit', $id);
+        }
+
         $course_categories = CourseCategory::select('id', 'category')->get();
         $available_assessments = Assessment::doesntHave('course')->get();
         $tags = Hashtag::all();
@@ -72,7 +77,6 @@ class OnlineCourseUpdateController extends Controller
         ])->validate();
 
         $course = Course::findOrFail($id);
-        $course->course_type_id = 1;
         $course->course_category_id = $validated['course_category_id'];
         $course->preview_video = $validated['preview_video_link'];
         $course->title = $validated['title'];

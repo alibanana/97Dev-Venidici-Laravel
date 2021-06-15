@@ -13,7 +13,7 @@ class WokiCourseDetail extends Model
 
     protected $fillabel = [
         'course_id',
-        'zoom_link',
+        'meeting_link',
         'event_date',
         'start_time',
         'end_time',

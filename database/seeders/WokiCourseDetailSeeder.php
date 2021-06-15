@@ -33,7 +33,7 @@ class WokiCourseDetailSeeder extends Seeder
         $course_details = [
             [
                 'course_id' => 3,
-                'zoom_link' => 'https://meet.google.com/mnd-tpqm-gbb',
+                'meeting_link' => 'https://meet.google.com/mnd-tpqm-gbb',
                 'event_date' => $event_dates[0]->format('Y-m-d'),
                 'start_time' => $start_times[0]->format('H:i:s'),
                 'end_time' => $end_times[0]->format('H:i:s'),
@@ -41,7 +41,7 @@ class WokiCourseDetailSeeder extends Seeder
             ],
             [
                 'course_id' => 4,
-                'zoom_link'=> 'https://meet.google.com/mnd-tpqm-gbb',
+                'meeting_link'=> 'https://meet.google.com/mnd-tpqm-gbb',
                 'event_date' => $event_dates[1]->format('Y-m-d'),
                 'start_time' => $start_times[1]->format('H:i:s'),
                 'end_time' => $end_times[1]->format('H:i:s'),

@@ -4,12 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use App\Helper\Helper;
 use App\Helper\CourseHelper;
 
 use App\Models\CourseCategory;
 use App\Models\Hashtag;
 use App\Models\CourseType;
 use App\Models\Course;
+use App\Models\CourseRequirement;
+use App\Models\CourseFeature;
+use App\Models\WokiCourseDetail;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,6 +142,76 @@ class WokiCourseController extends Controller
         $tags = Hashtag::all();
 
         return view('admin/woki/create', compact('course_categories', 'tags'));
+    }
+
+    // Stores new Woki Course in the database.
+    public function store(Request $request) {
+        $validated = Validator::make($request->all(), [
+            'title' => 'required',
+            'thumbnail' => 'required|mimes:jpeg,jpg,png',
+            'subtitle' => 'required',
+            'course_category_id' => 'required',
+            'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
+            'meeting_link' => 'required|starts_with:https://',
+            'event_date' => 'required|date_format:Y-m-d|after:now',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'description' => 'required',
+            'requirements' => 'required|array|min:1',
+            'features' => 'required|array|min:1',
+            'hashtags' => 'required|array|min:1'
+        ])->setAttributeNames([
+            'course_category_id' => 'category',
+            'preview_video_link' => 'video link'
+        ])->validate();
+
+        $course = new Course;
+        $course->course_type_id = 2; // 2 karna Woki
+        $course->course_category_id = $validated['course_category_id'];
+        $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/online-courses/');
+        $course->preview_video = $validated['preview_video_link'];
+        $course->title = $validated['title'];
+        $course->subtitle = $validated['subtitle'];
+        $course->description = $validated['description'];
+        $course->save();
+
+        foreach ($request->requirements as $requirement_value) {
+            if ($requirement_value != "") {
+                $new_requirement = new CourseRequirement;
+                $new_requirement->course_id = $course->id;
+                $new_requirement->requirement = $requirement_value;
+                $new_requirement->save();
+            }
+        }
+
+        foreach ($request->features as $feature_value) {
+            if ($feature_value != "") {
+                $new_feature = new CourseFeature;
+                $new_feature->course_id = $course->id;
+                $new_feature->feature = $feature_value;
+                $new_feature->save();
+            }
+        }
+
+        $added_hashtag_ids = [];
+        foreach ($request->hashtags as $tag_id) {
+            if (!in_array($tag_id, $added_hashtag_ids)) {
+                $added_hashtag_ids[] = $tag_id;
+            }
+        }
+        $course->hashtags()->attach($added_hashtag_ids);
+
+        $wokiCourseDetail = new WokiCourseDetail;
+        $wokiCourseDetail->course_id = $course->id;
+        $wokiCourseDetail->meeting_link = $validated['meeting_link'];
+        $wokiCourseDetail->event_date = $validated['event_date'];
+        $wokiCourseDetail->start_time = $validated['start_time'];
+        $wokiCourseDetail->end_time = $validated['end_time'];
+        $eventDuration = Carbon::createFromFormat('H:i', $validated['start_time'])->diffInMinutes(Carbon::createFromFormat('H:i', $validated['end_time']));
+        $wokiCourseDetail->event_duration = $eventDuration;
+        $wokiCourseDetail->save();
+
+        return redirect()->route('admin.woki-courses.index')->with('message', 'New Woki Course has been added!');
     }
 
     // Delete Woki Course from the database.

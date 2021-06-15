@@ -17,7 +17,7 @@ class CreateWokiCourseDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->string('zoom_link');
+            $table->string('meeting_link');
             $table->date('event_date');
             $table->time('start_time');
             $table->time('end_time');

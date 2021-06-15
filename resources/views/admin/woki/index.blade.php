@@ -161,7 +161,7 @@
                                                                 </div>
                                                             </form>
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.online-courses.edit', $course->id) }}">Update</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.woki-courses.edit', $course->id) }}">Update</a>
                                                             </div>
                                                             <form action="{{ route('admin.woki-courses.destroy', $course->id) }}" method="post">
                                                                 @csrf

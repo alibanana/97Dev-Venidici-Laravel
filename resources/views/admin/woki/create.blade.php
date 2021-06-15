@@ -32,8 +32,8 @@
         <!-- Content Row -->
 
         <!-- start of form -->
-        <form action="" method="POST" enctype="multipart/form-data">
-        @csrf           
+        <form action="{{ route('admin.woki-courses.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -77,6 +77,9 @@
                         <label for="">Category</label> <br>
                         <select name="course_category_id" id="" class="form-control form-control-user" required>
                             <option disabled selected>Choose Category</option>
+                            @foreach ($course_categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->category }}</option>
+                            @endforeach
                         </select>
                         @error('course_category_id')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -100,10 +103,10 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="">Zoom Link</label>
-                        <input type="text" name="zoom_link" class="form-control form-control-user" value=""
+                        <label for="">Meeting Link</label>
+                        <input type="text" name="meeting_link" class="form-control form-control-user" value="{{ old('meeting_link') }}"
                                 id="exampleInputPassword" placeholder="https://meet.google.com/hza-vmyh-zoo" required> 
-                        @error('zoom_link')
+                        @error('meeting_link')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -113,10 +116,10 @@
                 
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="">Date Start</label>
-                        <input type="date" name="date" class="form-control form-control-user" value=""
+                        <label for="">Event Date</label>
+                        <input type="date" name="event_date" class="form-control form-control-user" value="{{ old('event_date') }}"
                                 id="exampleInputPassword" placeholder="dd.mm.yyyy" required> 
-                        @error('date')
+                        @error('event_date')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -127,7 +130,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Event Start</label>
-                        <input type="time" name="start_time" class="form-control form-control-user" value=""
+                        <input type="time" name="start_time" class="form-control form-control-user" value="{{ old('start_time') }}"
                                 id="exampleInputPassword" placeholder="11:00" required> 
                         @error('start_time')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -138,20 +141,8 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="">Duration (in minutes)</label>
-                        <input type="text" name="duration" class="form-control form-control-user" value=""
-                                id="exampleInputPassword" placeholder="120" required> 
-                        @error('duration')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror               
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
                         <label for="">Event End</label>
-                        <input type="time" name="end_time" class="form-control form-control-user" value=""
+                        <input type="time" name="end_time" class="form-control form-control-user" value="{{ old('end_time') }}"
                                 id="exampleInputPassword" placeholder="12:00" required> 
                         @error('end_time')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -243,7 +234,9 @@
                         <div class="col-md-12">
                             <div class="form-group d-flex">
                                 <select class="form-control form-control-user" id="">
-                                    <option value="">#tagSatu</option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
+                                    @endforeach
                                 </select>
                                 <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                             </div>
@@ -253,7 +246,9 @@
                         <div class="col-md-12">
                             <div class="form-group d-flex">
                                 <select name="hashtags[]" class="form-control form-control-user" id="" required>
-                                    <option value="">#tagSatu</option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
+                                    @endforeach
                                 </select>
                                 <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                             </div>

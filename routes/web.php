@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\WokiCourseController as AdminWokiCourseController;
+use App\Http\Controllers\Admin\WokiCourseUpdateController as AdminWokiCourseUpdateController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
 use App\Http\Controllers\Admin\SectionContentController as AdminSectionContentController;
 use App\Http\Controllers\Admin\CourseCategoryController as AdminCourseCategoryController;
@@ -198,8 +199,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     // WokiCourseController
     Route::get('/woki-courses', [AdminWokiCourseController::class, 'index'])->name('woki-courses.index');
     Route::get('/woki-courses/create', [AdminWokiCourseController::class, 'create'])->name('woki-courses.create');
-    Route::delete('/woki-course/{id}', [AdminWokiCourseController::class, 'destroy'])->name('woki-courses.destroy');
+    Route::post('/woki-courses', [AdminWokiCourseController::class, 'store'])->name('woki-courses.store');
+    Route::delete('/woki-courses/{id}', [AdminWokiCourseController::class, 'destroy'])->name('woki-courses.destroy');
     Route::post('/woki-courses/{id}/set-publish-status-to-opposite', [AdminWokiCourseController::class, 'setPublishStatusToOpposite'])->name('woki-courses.set-publish-status-to-opposite');
+    // WokiCourseUpdateController
+    Route::get('/woki-courses/{id}/update', [AdminWokiCourseUpdateController::class, 'edit'])->name('woki-courses.edit');
+    Route::put('/woki-courses/{id}/update-basic-info', [AdminWokiCourseUpdateController::class, 'updateBasicInfo'])->name('woki-courses.update-basic-info');
     // SectionController
     Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
     Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');
@@ -301,9 +306,6 @@ Route::get('/admin/woki/1', function () {
 });
 Route::get('/admin/woki/create-video/1', function () {
     return view('admin/woki/create-video');
-});
-Route::get('/admin/woki/1/update', function () {
-    return view('admin/woki/update');
 });
 /* END OF WOKI ROUTING */
 /* START OF art-supply ROUTING */
