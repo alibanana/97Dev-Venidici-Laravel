@@ -20,6 +20,7 @@ use App\Models\CourseCategory;
 use App\Models\Review;
 use App\Models\Order;
 use App\Models\Promotion;
+use Jenssegers\Agent\Agent;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,6 +181,8 @@ class OnlineCourseController extends Controller
 
     public function buyFree($course_id)
     {
+        if(!auth()->user()->isProfileUpdated)
+            return redirect()->back()->with('message_update','Please complete your profile first.');
 
         $length = 10;
         $random = '';

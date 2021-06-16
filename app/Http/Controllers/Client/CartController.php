@@ -15,6 +15,7 @@ use App\Models\Invoice;
 use App\Models\Promotion;   
 use App\Models\Course;   
 use App\Models\Notification;
+use Jenssegers\Agent\Agent;
 
 class CartController extends Controller
 {

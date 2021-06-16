@@ -11,6 +11,7 @@ use App\Models\Notification;
 use App\Models\Cart;
 
 use App\Helper\Helper;
+use Jenssegers\Agent\Agent;
 
 
 /*

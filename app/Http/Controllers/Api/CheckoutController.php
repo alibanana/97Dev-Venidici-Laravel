@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Jenssegers\Agent\Agent;
 
 use Axiom\Rules\TelephoneNumber;
 

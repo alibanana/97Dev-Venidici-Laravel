@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\Redeem;
 use App\Models\Promotion;
+use Jenssegers\Agent\Agent;
 
 use Illuminate\Support\Facades\Validator;
 

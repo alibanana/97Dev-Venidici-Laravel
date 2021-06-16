@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use Illuminate\Support\Facades\Validator;
 use App\Helper\Helper;
+use Jenssegers\Agent\Agent;
 
 class ReviewController extends Controller
 {

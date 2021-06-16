@@ -223,6 +223,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <!-- END OF ALERT MESSAGE -->
+        @elseif(session('message_update')) 
+            <!-- ALERT MESSAGE -->
+            <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                {{ session('message_update') }} <span> <a href="/dashboard#edit-profile">Click here</a> </span>to complete your profile
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <!-- END OF ALERT MESSAGE -->
         @endif
         <div class="course-detail-card-green">
             @if($course->price == 0)
