@@ -25,12 +25,12 @@ class CreateCoursesTable extends Migration
             $table->text('subtitle');
             $table->text('description');
             $table->unsignedInteger('price')->default(0);
+            $table->unsignedInteger('priceWithArtKit')->nullable();
             $table->enum('enrollment_status', ['Open', 'Close'])->default('Open');
             $table->enum('publish_status', ['Draft', 'Published'])->default('Draft');
             $table->string('total_duration')->nullable(); // (mins), (secs)
             $table->unsignedDecimal('average_rating', 2, 1)->default(0);
             $table->boolean('isDeleted')->default(0);
-            $table->boolean('withArtOrNo')->default(0);
             $table->timestamps();
         });
     }

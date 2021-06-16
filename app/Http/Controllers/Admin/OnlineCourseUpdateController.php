@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helper\Helper;
+use App\Helper\CourseHelper;
 
 use App\Models\CourseCategory;
 use App\Models\Course;
@@ -153,7 +154,7 @@ class OnlineCourseUpdateController extends Controller
         $validated = $request->validate([
             'enrollment_status' => 'required',
             'is_free' => 'required|boolean',
-            'price' => 'integer|min:10000'
+            'price' => 'integer'
         ]);
 
         $course = Course::findOrFail($id);
@@ -178,24 +179,16 @@ class OnlineCourseUpdateController extends Controller
             ->with('page-option', 'pricing-and-enrollment');
     }
 
-    // Updates Publish Status
+    // Updates Online Course's Publish Status
     public function updatePublishStatus(Request $request, $id) {
         $validated = $request->validate([
             'publish_status' => 'required'
         ]);
 
-        $course = Course::findOrFail($id);
-        $course->publish_status = $validated['publish_status'];
-        $course->save();
-
-        if ($course->wasChanged()) {
-            $message = 'Online Course (' . $course->title . '), "Publish Status" has been updated';
-        } else {
-            $message = 'No changes was made to Online Course (' . $course->title . ')';
-        }
+        $result = Course::updatePublishStatusById($id, $validated['publish_status']);
 
         return redirect()->route('admin.online-courses.edit', $id)
-            ->with('message', $message)
+            ->with('message', $result['message'])
             ->with('page-option', 'publish-status');
     }
 

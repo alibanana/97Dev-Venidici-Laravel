@@ -205,6 +205,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     // WokiCourseUpdateController
     Route::get('/woki-courses/{id}/update', [AdminWokiCourseUpdateController::class, 'edit'])->name('woki-courses.edit');
     Route::put('/woki-courses/{id}/update-basic-info', [AdminWokiCourseUpdateController::class, 'updateBasicInfo'])->name('woki-courses.update-basic-info');
+    Route::put('/woki-courses/{id}/update-pricing-enrollment', [AdminWokiCourseUpdateController::class, 'updatePricingEnrollment'])->name('woki-courses.update-pricing-enrollment');
+    Route::put('/woki-courses/{id}/update-publish-status', [AdminWokiCourseUpdateController::class, 'updatePublishStatus'])->name('woki-courses.update-publish-status');
     // SectionController
     Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
     Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');

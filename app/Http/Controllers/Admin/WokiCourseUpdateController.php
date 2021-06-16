@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\Helper\Helper;
+use App\Helper\CourseHelper;
 
 use App\Models\CourseCategory;
 use App\Models\Course;
@@ -52,8 +53,11 @@ class WokiCourseUpdateController extends Controller
         }
 
         $teachers = $teachers->get();
+
+        $startTimeConverted = Carbon::createFromFormat('H:i:s', $course->wokiCourseDetail->start_time)->format('H:i');
+        $endTimeConverted = Carbon::createFromFormat('H:i:s', $course->wokiCourseDetail->end_time)->format('H:i');
         
-        return view('admin/woki/update', compact('course', 'course_categories', 'tags', 'teachers'));
+        return view('admin/woki/update', compact('course', 'course_categories', 'tags', 'teachers', 'startTimeConverted', 'endTimeConverted'));
     }
 
     // Updates data as seen under the Update Woki Course -> Basic Informations tab.
@@ -138,5 +142,49 @@ class WokiCourseUpdateController extends Controller
         return redirect()->route('admin.woki-courses.edit', $id)
             ->with('message', $message)
             ->with('page-option', 'basic-informations');
+    }
+
+    // Updates Woki Course's Pricing & Enrollment Status.
+    public function updatePricingEnrollment(Request $request, $id) {
+        $validated = $request->validate([
+            'enrollment_status' => 'required',
+            'is_free' => 'required|boolean',
+            'price' => 'integer',
+            'priceWithArtKit' => 'integer'
+        ]);
+
+        $course = Course::findOrFail($id);
+        $course->enrollment_status = $validated['enrollment_status'];
+
+        if ($validated['is_free'] == '1') {
+            $course->price = 0;
+        } else {
+            $course->price = $validated['price'];
+        }
+
+        $course->save();
+
+        if ($course->wasChanged()) {
+            $message = 'Woki Course (' . $course->title . '), "Pricing & Enrollment Status" has been updated';
+        } else {
+            $message = 'No changes was made to Woki Course (' . $course->title . ')';
+        }
+
+        return redirect()->route('admin.woki-courses.edit', $id)
+            ->with('message', $message)
+            ->with('page-option', 'pricing-and-enrollment');
+    }
+
+    // Updates Woki Course's Publish Status
+    public function updatePublishStatus(Request $request, $id) {
+        $validated = $request->validate([
+            'publish_status' => 'required'
+        ]);
+
+        $result = CourseHelper::updatePublishStatusById($id, $validated['publish_status']);
+
+        return redirect()->route('admin.woki-courses.edit', $id)
+            ->with('message', $result['message'])
+            ->with('page-option', 'publish-status');
     }
 }

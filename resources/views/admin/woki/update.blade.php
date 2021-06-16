@@ -138,9 +138,6 @@
                             @enderror               
                         </div>
                     </div>
-                    @php
-                        $startTimeConverted = \Carbon\Carbon::createFromFormat('H:i:s', $course->wokiCourseDetail->start_time)->format('H:i');
-                    @endphp
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Event Start</label>
@@ -153,9 +150,6 @@
                             @enderror               
                         </div>
                     </div>
-                    @php
-                        $endTimeConverted = \Carbon\Carbon::createFromFormat('H:i:s', $course->wokiCourseDetail->end_time)->format('H:i');
-                    @endphp
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Event End</label>
@@ -166,6 +160,12 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror               
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Duration (in minutes) <span style="color: orange">*Un-editable*</span></label>
+                            <input type="text" class="form-control form-control-user" value="{{ $course->wokiCourseDetail->event_duration }}" id="exampleInputPassword" placeholder="120" disabled>
                         </div>
                     </div>
                     <div class="col-12">
@@ -255,8 +255,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group" style="display:flex">
                                         <select class="form-control form-control-user">
-                                            <option value="1">hashtag</option>
-                                        </select>
+                                            @foreach ($tags as $tag)
+                                                <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
+                                            @endforeach                                        </select>
                                         <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </div>
@@ -401,7 +402,7 @@
 
         <!-- START OF PRICE AND ENROLLMENT -->
         <div class="course-content" id="pricing-enrollment" style="display:none">
-            <form action="/admin/woki/1/update" method="POST">
+            <form action="{{ route('admin.woki-courses.update-pricing-enrollment', $course->id) }}" method="POST">
             @csrf
             @method('put') 
                 <div class="row" style="margin-top:2vw">
@@ -409,13 +410,13 @@
                         <div class="form-group">
                             <h5 for="">Enrollment Scenario</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="enrollment_status" value="Open" id="enrollment_status" checked>
+                                <input class="form-check-input" type="radio" name="enrollment_status" value="Open" id="enrollment_status" @if($course->enrollment_status == 'Open') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Open Enrollment
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="enrollment_status" value="Close" id="enrollment_status" checked>
+                                <input class="form-check-input" type="radio" name="enrollment_status" value="Close" id="enrollment_status" @if($course->enrollment_status == 'Close') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Close Enrollment
                                 </label>
@@ -431,23 +432,22 @@
                         <div class="form-group">
                             <h5 for="">Pricing Options</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" onclick="disableInput()" name="is_free" value="1" id="pricing_options" checked >
+                                <input class="form-check-input" type="radio" onclick="disableInput()" name="is_free" value="1" id="pricing_options" 
+                                    @if($course->price == 0) checked @endif>
                                 <label class="form-check-label" for="pricing_options">
                                     Free
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" onclick="enableInput()" name="is_free" value="0" id="pricing_options" checked >
-                                <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.) <span style="color: orange">(Min: Rp 10,000)</span></label> <br>
+                                <input class="form-check-input" type="radio" onclick="enableInput()" name="is_free" value="0" id="pricing_options" 
+                                    @if($course->price != 0) checked @endif>
+                                <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.)</label> <br>
                                 <label class="form-check-label pt-1" for="pricing_options">Woki Only</label>
                                 <input type="number" name="price" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
-                                    id="phone" aria-describedby="" value="" min="10000"
-                                    placeholder="e.g. 10000" >
+                                    id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" placeholder="e.g. 10000" @if($course->price == 0) disabled @endif>
                                 <label class="form-check-label pt-2" for="pricing_options">Woki + Artkit</label> <br>
-                                <label class="form-check-label" for="pricing_options" style="color:orange">*Insert 0 if there is no artkit</label>
                                 <input type="number" name="price" style="margin-top:0.5vw" id="price-input-2" class="form-control form-control-user"
-                                    id="phone" aria-describedby="" value="" min="15000"
-                                    placeholder="e.g. 15000" >
+                                    id="phone" aria-describedby="" value="{{ old('price', $course->priceWithArtKit) }}" placeholder="e.g. 15000" @if($course->price == 0 || is_null($course->priceWithArtKit)) disabled @endif>
                             </div>
                             @error('price')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -459,7 +459,7 @@
                     
                     <div class="col-12">
                         <div style="display:flex;justify-content:flex-end">
-                            <button type="submit" class="btn btn-primary btn-user p-3">Update Pricing</button>
+                            <button type="submit" class="btn btn-primary btn-user p-3">Update Pricing & Enrollment</button>
                         </div>
                     </div>
                 </div>
@@ -470,22 +470,22 @@
 
         <!-- START OF PUBLISH STATUS -->
         <div class="course-content" id="publish-status" style="display:none">
-            <form action="/admin/woki/1/update" method="POST">
-            @csrf  
-            @method('put') 
+            <form action="{{ route('admin.woki-courses.update-publish-status', $course->id) }}" method="POST">
+            @csrf
+            @method('put')
                 <div class="row" style="margin-top:2vw">
                     <div class="col-6">
                         <div class="form-group">
                             <h5 for="">Publish Status</h5>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="publish_status" value="Draft" id="flexRadioDefault1" checked >
+                                <input class="form-check-input" type="radio" name="publish_status" value="Draft" id="flexRadioDefault1" @if($course->publish_status == 'Draft') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Draft <br>
                                     Students cannot purchase or enroll in this woki course. For students that are already enrolled, this woki course will not appear on their Student Dashboard.
                                 </label>
                             </div>
                             <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="publish_status" value="Published" id="flexRadioDefault2" checked>
+                                <input class="form-check-input" type="radio" name="publish_status" value="Published" id="flexRadioDefault2" @if($course->publish_status == 'Published') checked @endif>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Published <br>
                                     Students can purchase, enroll in, and access the content of this woki course. For students that are enrolled, this woki course will appear on their Student Dashboard.                            </label>
@@ -515,7 +515,7 @@
                 <div class="col-sm-12 col-md-8">
                     <div id="dataTable_filter" class="dataTables_filter">
                         <label class="w-100">Search:
-                            <form action="/admin/woki/1/update" method="GET">
+                            <form action="{{ route('admin.woki-courses.edit', $course->id) }}" method="GET">
                                 <input name="search_teacher" value="{{ Request::get('search_teacher') }}" type="search" class="form-control form-control-sm w-100" aria-controls="dataTable">
                                 <input type="submit" style="visibility: hidden;" hidden/>
                             </form>
@@ -537,26 +537,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td style="text-align:center" class="text-nowrap">
-                                        <img src="/assets/images/seeder/fake-testimony-dummy-1.png" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
-                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">name</p>
-                                    </td>
-                                    <td>description</td>  
-                                    <td>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                            <form action="" method="post">
-                                                @csrf
-                                                @method('put')
-                                                <div style="padding: 0px 2px">
-                                                    <input type="hidden" name="teacher_id" value="1" hidden>
-                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to add this teacher to the woki?')">Select Teacher</button>
+                                @foreach ($teachers as $teacher)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td style="text-align:center" class="text-nowrap">
+                                            <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
+                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }}</p>
+                                        </td>
+                                        <td>{{ $teacher->description }}</td>  
+                                        <td>
+                                            @if ($teacher->courses()->where('course_id', $course->id)->first())
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.online-courses.detach-teacher', $course->id) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}" hidden>
+                                                            <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to remove this teacher from the course?')">Un-select Teacher</button>
+                                                        </div>
+                                                    </form> 
                                                 </div>
-                                            </form> 
-                                        </div>
-                                    </td>
-                                </tr>
+                                            @else
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.online-courses.attach-teacher', $course->id) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}" hidden>
+                                                            <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to add this teacher to the course?')">Select Teacher</button>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -676,16 +691,28 @@ function duplicateHashtag() {
 </script>
 <script>
     function disableInput() {
-    document.getElementById("price-input").disabled = true;
-    document.getElementById("price-input-2").disabled = true;
-    console.log('disabled')
-    }
-    function enableInput() {
-    document.getElementById("price-input").disabled = false;
-    document.getElementById("price-input-2").disabled = false;
-    console.log('enabled')
+        document.getElementById("price-input").disabled = true;
+        document.getElementById("price-input-2").disabled = true;
+        console.log('disabled')
     }
 </script>
+@if (is_null($course->priceWithArtKit))
+    <script>
+        function enableInput() {
+            document.getElementById("price-input").disabled = false;
+            document.getElementById("price-input-2").disabled = true;
+            console.log('enabled')
+        }
+    </script>
+@else
+    <script>
+        function enableInput() {
+            document.getElementById("price-input").disabled = false;
+            document.getElementById("price-input-2").disabled = false;
+            console.log('enabled')
+        }
+    </script>
+@endif
 <script>
 function removeDiv(elem, wrapper_id){
     var parent = $(elem).parent('div').parent('div').parent('div');
