@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use Jenssegers\Agent\Agent;
 
 use App\Models\User;
 
@@ -20,18 +21,28 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }        
         // return view('auth.login');
         if(Auth::check()) {
             $cart_count = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->count();
             $transactions = Invoice::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            //if($agent->isPhone()){
+                //return view('client/mobile/login',compact('cart_count','transactions'));
+            //}
             return view('client/auth/login',compact('cart_count','transactions'));
             
         }
         else{
             $transactions=null;
             $cart_count=0;
+            if($agent->isPhone()){
+                return view('client/mobile/login',compact('cart_count','transactions'));
+            }
             return view('client/auth/login',compact('cart_count','transactions'));
         }
     }

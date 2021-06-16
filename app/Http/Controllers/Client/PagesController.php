@@ -85,9 +85,9 @@ class PagesController extends Controller
 
         $agent = new Agent();
         if($agent->isPhone()){
-
-            return view('client/mobile/index', 
-                compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','pengajar_positions'));
+            return view('client/mobile/under-construction');
+            //return view('client/mobile/index', 
+                //compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','pengajar_positions'));
         }
 
         return view('client/index', 
@@ -95,6 +95,10 @@ class PagesController extends Controller
     }
 
     public function community_index(){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
 
         if(Auth::check()) {
             $this->resetNavbarData();
@@ -117,6 +121,10 @@ class PagesController extends Controller
     
     public function signup_interest(Request $request)
     {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         if(!$request->session()->get('name')) 
             return redirect()->route('signup_general_info');
 
@@ -127,6 +135,10 @@ class PagesController extends Controller
     
 
     public function signup_general_info(){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         return view('client/auth/signup');
     }
 
@@ -220,6 +232,10 @@ class PagesController extends Controller
 
 
     public function online_course_index(){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         if(Auth::check()) {
             $this->resetNavbarData();
 
@@ -235,6 +251,10 @@ class PagesController extends Controller
     }
 
     public function woki_index(){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         if(Auth::check()) {
             $this->resetNavbarData();
 

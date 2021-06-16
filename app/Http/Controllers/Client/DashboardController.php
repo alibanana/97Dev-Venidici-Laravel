@@ -27,6 +27,10 @@ class DashboardController extends Controller
     // Shows the client User Dashboard page.
     public function index()
     {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $provinces = Province::all();
         $cities = City::all();
         $cart_count = Cart::with('course')
@@ -185,6 +189,10 @@ class DashboardController extends Controller
     }
 
     public function redeem_index(Request $request){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
