@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
 use Axiom\Rules\TelephoneNumber;
 
+use App\Mail\CheckoutMail;
 use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\Order;
@@ -177,7 +179,8 @@ class CheckoutController extends Controller
             'link'              => '/transaction-detail/'.$payment_object['data']['id']
         ]);
 
-        
+        //email if there's no woki
+        Mail::to('test@gmail.com')->send(new CheckoutMail($invoice));
 
         
         return $payment_object['data']['id'];
@@ -273,6 +276,8 @@ class CheckoutController extends Controller
                 }
             }
             $xfers_id = app('App\Http\Controllers\Api\CheckoutController')->storeOnlineCourse($request);
+
+            
             return redirect('/transaction-detail/'.$xfers_id.'#payment-created');
         } 
 
@@ -350,7 +355,9 @@ class CheckoutController extends Controller
             }
         
             $request->session()->forget('promotion_code');
-
+            dd('test');
+            //email if there's free
+            Mail::to($notification->user->email)->send(new CheckoutMail($invoice));
             return redirect('/transaction-detail/'.$no_invoice.'#payment-success');
         }
         
@@ -493,8 +500,9 @@ class CheckoutController extends Controller
             'link'              => '/transaction-detail/'.$payment_object['data']['id']
         ]);
         
-
-        return redirect('/transaction-detail/'.$payment_object['data']['id'].'#payment-created');
+        //if there's woki
+        Mail::to($notification->user->email)->send(new CheckoutMail($invoice));
+            
     }
     
     public function transactionDetail($id){
