@@ -20,6 +20,7 @@ use App\Models\CourseCategory;
 use App\Models\Review;
 use App\Models\Order;
 use App\Models\Promotion;
+use Jenssegers\Agent\Agent;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,10 @@ class OnlineCourseController extends Controller
 
     // Shows the Client's Main Online-Course Page.
     public function index(Request $request) {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $course_categories = CourseCategory::all();
         $courses = new Course;
         if ($request->has('cat')) {
@@ -95,6 +100,10 @@ class OnlineCourseController extends Controller
 
     // Shows the details for each course.
     public function show($id){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $course = Course::findOrFail($id);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         
@@ -118,7 +127,10 @@ class OnlineCourseController extends Controller
 
     public function learn($course_id, $section_content_id)
     {   
-
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
@@ -169,6 +181,8 @@ class OnlineCourseController extends Controller
 
     public function buyFree($course_id)
     {
+        if(!auth()->user()->isProfileUpdated)
+            return redirect()->back()->with('message_update','Please complete your profile first.');
 
         $length = 10;
         $random = '';

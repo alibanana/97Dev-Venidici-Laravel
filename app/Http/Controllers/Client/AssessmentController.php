@@ -11,6 +11,7 @@ use App\Models\Notification;
 use App\Models\Cart;
 
 use App\Helper\Helper;
+use Jenssegers\Agent\Agent;
 
 
 /*
@@ -27,6 +28,10 @@ class AssessmentController extends Controller
 {
     // Shows the Assessment Completed page.
     public function completedIndex(Request $request, $course_id) {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $course = auth()->user()->courses()->where('course_id', $course_id)->firstOrFail();
         $assessment_pivot = auth()->user()->assessments()->where('course_id', $course_id)->firstOrFail()->pivot;
 
@@ -58,6 +63,10 @@ class AssessmentController extends Controller
 
     // Shows the Assessment page itself.
     public function show($course_id) {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $assessment = auth()->user()->assessments()->where('course_id', $course_id)->firstOrFail();
         $assessment_pivot = $assessment->pivot;
 

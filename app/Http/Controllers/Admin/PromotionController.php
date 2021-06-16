@@ -60,7 +60,7 @@ class PromotionController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'code'          => 'required|code:unique',
+            'code'          => 'required|unique:promotions',
             'type'          => 'required',
             'promo_for'     => 'required',
             'discount'      => 'required',

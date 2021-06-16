@@ -523,7 +523,7 @@
 
 
 <!-- START OF MIDDLE SECTION -->
-<div class="row m-0 page-container-inner wow fadeInLeft" data-wow-delay="0.6s" style="padding-top:4vw;padding-bottom:4vw">
+<div class="row m-0 page-container-inner " data-wow-delay="0.6s" style="padding-top:4vw;padding-bottom:4vw">
     <div class="col-12 p-0" style="">
         <div style="display:flex">
 
@@ -533,7 +533,7 @@
         </div>
     </div>
     <!-- Live Pelatihan Content -->
-    <div style="padding:0px" class="user-content" id="live-pelatihan">
+    <div style="padding:0px" class="user-content wow fadeInLeft" id="live-pelatihan">
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
@@ -583,7 +583,7 @@
     <!-- End of Live Pelatihan Content -->
 
     <!-- Pelatihan Aktif Content -->
-    <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
+    <div style="padding:0px;display:none" class="user-content wow fadeInLeft" id="pelatihan-aktif">
         @php
         $aktif_flag = FALSE;
         foreach(auth()->user()->courses as $course_on_going)
@@ -690,7 +690,7 @@
     <!-- End of Pelatihan Aktif Content -->
 
     <!-- Pelatihan Selesai Content -->
-    <div style="padding:0px;display:none;" class="user-content" id="pelatihan-selesai">
+    <div style="padding:0px;display:none;" class="user-content wow fadeInLeft" id="pelatihan-selesai">
         @php
         $flag = FALSE;
         foreach(auth()->user()->courses as $course)

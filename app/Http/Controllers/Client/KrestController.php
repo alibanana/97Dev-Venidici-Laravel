@@ -9,6 +9,7 @@ use App\Models\Notification;
 use App\Models\KrestProgram;
 use App\Models\Krest;
 use Illuminate\Support\Facades\Auth;
+use Jenssegers\Agent\Agent;
 
 class KrestController extends Controller
 {
@@ -35,6 +36,10 @@ class KrestController extends Controller
 
     public function index()
     {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $programs = KrestProgram::all();
 

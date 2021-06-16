@@ -60,7 +60,7 @@ class SocialController extends Controller
     {
         $user = User::where('email', '=', $data->email)->first();
         if (!$user) {
-            return redirect()->route('signup_general_info');
+            //return redirect()->route('signup_general_info');
 
             $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
             $user = new User();
@@ -85,7 +85,6 @@ class SocialController extends Controller
             $user_detail->referral_code = strtoupper($newReferralCode);
             $user_detail->save();
         }
-        dd('test');
         Auth::login($user);
     }
 }

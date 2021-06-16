@@ -15,6 +15,7 @@ use App\Models\Invoice;
 use App\Models\Promotion;   
 use App\Models\Course;   
 use App\Models\Notification;
+use Jenssegers\Agent\Agent;
 
 class CartController extends Controller
 {
@@ -25,6 +26,10 @@ class CartController extends Controller
 
     public function index()
     {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $carts = Cart::with('course')
                 ->where('user_id', auth()->user()->id)
                 ->orderBy('created_at', 'desc')
@@ -59,6 +64,10 @@ class CartController extends Controller
     
     public function shipment_index(Request $request)
     {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         if(!auth()->user()->isProfileUpdated)
             return redirect()->back()->with('message','Please complete your profile first.');
         elseif(count(auth()->user()->carts) == 0)

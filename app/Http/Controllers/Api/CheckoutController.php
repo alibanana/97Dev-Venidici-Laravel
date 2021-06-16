@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Jenssegers\Agent\Agent;
 
 use Axiom\Rules\TelephoneNumber;
 
@@ -506,6 +507,10 @@ class CheckoutController extends Controller
     }
     
     public function transactionDetail($id){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         
         $invoice = Invoice::where('xfers_payment_id',$id)->first();
         $payment_status = null;
@@ -596,7 +601,11 @@ class CheckoutController extends Controller
     }
 
 
-    public function createPayment(Request $request, $id){        
+    public function createPayment(Request $request, $id){    
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }    
 
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
