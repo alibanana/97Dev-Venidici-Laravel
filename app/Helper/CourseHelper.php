@@ -65,4 +65,35 @@ class CourseHelper {
         }
     }
 
+    // Function to update course's publish status.
+    public static function updatePublishStatusById($id, $publish_status) {
+        try {
+            $course = Course::findOrFail($id);
+            $course->publish_status = $publish_status;
+            $course->save();
+
+            if ($course->courseType->type == 'Course')
+                $messageVariable = 'Online';
+            elseif ($course->courseType->type == 'Woki')
+                $messageVariable = 'Woki';
+
+            if ($course->wasChanged()) {
+                $message = $messageVariable . ' Course (' . $course->title . '), "Publish Status" has been updated';
+            } else {
+                $message = 'No changes was made to ' . $messageVariable . ' Course (' . $course->title . ')';
+            }
+
+            return [
+                'status' => 'Success',
+                'data' => $course,
+                'message' => $message
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
+    }
+
 }

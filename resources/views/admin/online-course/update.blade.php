@@ -419,10 +419,9 @@
                             </div>
                             <div class="form-check" style="margin-top:1vw">
                                 <input class="form-check-input" type="radio" onclick="enableInput()" name="is_free" value="0" id="pricing_options" @if($course->price != 0) checked @endif>
-                                <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.) <span style="color: orange">(Min: Rp 10000)</span></label>
+                                <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.)</label>
                                 <input type="number" name="price" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
-                                    id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" min="10000"
-                                    placeholder="e.g. 100000" @if($course->price == 0) disabled @endif required>
+                                    id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" placeholder="e.g. 100000" @if($course->price == 0) disabled @endif required>
                             </div>
                             @error('price')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -475,7 +474,6 @@
                         <div style="display:flex;justify-content:flex-end">
                             <button type="submit" class="btn btn-primary btn-user p-3">Update Publish Status</button>
                         </div>
-
                     </div>
                 </div>
             </form>

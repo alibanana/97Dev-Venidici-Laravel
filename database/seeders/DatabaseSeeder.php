@@ -43,7 +43,8 @@ class DatabaseSeeder extends Seeder
             NewsletterSeeder::class,
             RedeemSeeder::class,
             StarSeeder::class,
-            WokiCourseDetailSeeder::class
+            WokiCourseDetailSeeder::class,
+            ArtSupplySeeder::class
         ]);
     }
 }

@@ -18,12 +18,12 @@ class Course extends Model
         'subtitle',
         'description',
         'price', // default -> 0
+        'priceWithArtKit', // nullable
         'enrollment_status', // default -> Open
         'publish_status', // default -> Draft
         'total_duration', // nullable
         'average_rating', // default -> 0
-        'isDeleted',
-        'withArtOrNo'
+        'isDeleted'
     ];
 
     public function courseType() {
@@ -78,5 +78,9 @@ class Course extends Model
 
     public function reviews() {
         return $this->hasMany(Review::class);
+    }
+
+    public function artSupplies() {
+        return $this->belongsToMany(ArtSupply::class, 'course_art_supply')->withTimestamps();
     }
 }
