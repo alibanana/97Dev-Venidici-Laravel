@@ -68,7 +68,7 @@
         <div class="content" style="padding:2vw">
             <div class="row m-0">
                 <div class="col-12" style="text-align:center;">
-                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Terimakasih telah pesanannya!</p>
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Terimakasih atas pesanannya!</p>
                     <img src="/assets/images/client/course_claimed.png" style="width:8vw" alt="">
                     <?php 
                     $courses_string = "";

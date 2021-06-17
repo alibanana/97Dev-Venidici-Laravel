@@ -155,7 +155,7 @@ body {font-family: 'Muli', sans-serif;}
 <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="948e3f3f-5214-4721-a90e-625a47b1c957" data-mc-module-version="2019-10-22">
 <tbody>
   <tr>
-    <td style="padding:50px 30px 18px 30px; line-height:36px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content"><div><div style="font-family: 'Rubik', sans-serif; text-align: center;"><span style="font-size: 43px">Terimakasih atas pesanannya!&nbsp;</span></div><div></div></div></td>
+    <td style="padding:50px 30px 18px 30px; line-height:36px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content"><div><div style="font-family: 'Rubik', sans-serif; text-align: center;"><span style="font-size: 43px">Pembayaran diterima!&nbsp;</span></div><div></div></div></td>
   </tr>
 </tbody>
 </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="a10dcb57-ad22-4f4d-b765-1d427dfddb4e" data-mc-module-version="2019-10-22">
@@ -165,7 +165,28 @@ body {font-family: 'Muli', sans-serif;}
     <div>
         <div style=";font-family:Rubik Regular 400 Italic; text-align: center">
         
-        <span style="font-size: 18px">Please complete your payment for the total of <b>Rp{{ number_format($invoice->grand_total, 0, ',', ',') }}</b> for Course: {{$courses_string}}.</span>
+        <table style="border-collapse: collapse;width:100%;border:1px solid black">
+          <tr>
+            <td style="border:1px solid black">Qty</td>
+            <td style="border:1px solid black">Description</td>
+            <td style="border:1px solid black">Unit Price</td>
+            <td style="border:1px solid black">Amount</td>
+          </tr>
+          @foreach($invoice->orders as $order)
+          <tr>
+            <td style="border:1px solid black">{{$order->qty}}</td>
+            <td style="border:1px solid black">{{$order->course->title}}</td>
+            <td style="border:1px solid black">Rp{{ number_format($order->course->price, 0, ',', ',') }}</td>
+            <td style="border:1px solid black">Rp{{ number_format($order->price, 0, ',', ',') }}</td>
+          </tr>
+          @endforeach
+          <tr >
+            <td colspan="3"  style="border:1px solid black">Diskon</td>
+            <td style="border:1px solid black">Rp{{ number_format($invoice->discounted_price, 0, ',', ',') }}</td>
+          </tr>
+        </table>
+        <br>
+        <span style="font-size: 18px;padding-top:10px"> <b> Total: Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} </b></span>
     </div>
     <div></div></div></td>
   </tr>
@@ -180,7 +201,7 @@ body {font-family: 'Muli', sans-serif;}
           <tbody>
             <tr>
               <td align="center" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                  <a class="btnLogin" href="http://127.0.0.1:8000{{$link}}" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Lihat Pesanan</a>
+                  <a class="btnLogin" href="http://127.0.0.1:8000/dashboard" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Mulai Belajar</a>
               </td>
             </tr>
 
@@ -193,7 +214,7 @@ body {font-family: 'Muli', sans-serif;}
         <div>
           <div style="text-align: center">
           <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Having trouble accessing the button above? Use this link:</span><br>
-          <span style="color: #000000; font-size: 18px;"><a href="http://127.0.0.1:8000{{$link}}">http://127.0.0.1:8000{{$link}}</a></span>
+          <span style="color: #000000; font-size: 18px;"><a href="http://127.0.0.1:8000/dashboard">http://127.0.0.1:8000/dashboard</a></span>
         </div>
       </td>
     </tr>
