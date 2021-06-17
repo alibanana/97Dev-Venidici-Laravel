@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Jenssegers\Agent\Agent;
 
 use Axiom\Rules\TelephoneNumber;
 
 use App\Mail\CheckoutMail;
+use App\Mail\InvoiceMail;
 use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\Order;
@@ -55,12 +56,9 @@ class CheckoutController extends Controller
     public function storeOnlineCourse(Request $request)
     {
         $input = $request->all();
-        
         // Remove non-numeric characters before validation.
         if ($request->has('phone'))
-            $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
-
-
+        $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
         $validated = Validator::make($input,[
             'name'                  => 'required',
             //'phone'                 => ['required', new TelephoneNumber],
@@ -179,9 +177,9 @@ class CheckoutController extends Controller
             'description'       => 'Hi, '.auth()->user()->name.'. Harap segera selesaikan pembayaranmu untuk pelatihan: '.$courses_string,
             'link'              => '/transaction-detail/'.$payment_object['data']['id']
         ]);
-
+        $link = '/transaction-detail/'.$payment_object['data']['id'];
         //email if there's no woki
-        Mail::to('test@gmail.com')->send(new CheckoutMail($invoice));
+        Mail::to(auth()->user()->email)->send(new CheckoutMail($invoice,$courses_string,$link));
 
         
         return $payment_object['data']['id'];
@@ -356,9 +354,8 @@ class CheckoutController extends Controller
             }
         
             $request->session()->forget('promotion_code');
-            dd('test');
-            //email if there's free
-            Mail::to($notification->user->email)->send(new CheckoutMail($invoice));
+
+            //email invoice
             return redirect('/transaction-detail/'.$no_invoice.'#payment-success');
         }
         
@@ -501,8 +498,9 @@ class CheckoutController extends Controller
             'link'              => '/transaction-detail/'.$payment_object['data']['id']
         ]);
         
-        //if there's woki
-        Mail::to($notification->user->email)->send(new CheckoutMail($invoice));
+        $link = '/transaction-detail/'.$payment_object['data']['id'];
+        //email if there's no woki
+        Mail::to(auth()->user()->email)->send(new CheckoutMail($invoice,$courses_string,$link));
             
     }
     
@@ -538,6 +536,7 @@ class CheckoutController extends Controller
                 $star_added = $star_mulitiplication*12;
                 if($star_added != 0)
                     Helper::addStars(auth()->user(),$star_added,'Pembelian Venidici On-Demand');
+                Mail::to(auth()->user()->email)->send(new InvoiceMail($invoice));
             }
 
             // start of courses string

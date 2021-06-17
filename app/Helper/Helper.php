@@ -7,6 +7,9 @@ use Intervention\Image\ImageManagerStatic as ImageManager;
 use Carbon\Carbon;
 use App\Models\Star;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\LevelUp;
 
 class Helper
 {
@@ -107,12 +110,28 @@ class Helper
     public static function checkAndUpdateUserClub($user) {
         $user_stars = $user->userDetail->total_stars;
 
-        if ($user_stars >= 280) {
-            $user->club = 'jet';
-        } elseif ($user_stars >= 100) {
-            $user->club = 'car';
-        } elseif ($user_stars >= 20) {
-            $user->club = 'bike';
+
+        if ($user_club == null) {
+            if ($user_stars >= 20) {
+                $user->club = 'bike';
+                $user->save();
+                Mail::to(auth()->user()->email)->send(new LevelUp($user));
+
+            }
+        } elseif ($user_club == 'bike') {
+            if($user_stars >= 100) {
+                $user->club = 'car';
+                $user->save();
+                Mail::to(auth()->user()->email)->send(new LevelUp($user));
+
+            } 
+        } elseif ($user_club == 'car') {
+            if ($user_stars >= 280) {
+                $user->club = 'jet';
+                $user->save();
+                Mail::to(auth()->user()->email)->send(new LevelUp($user));
+
+            }
         }
 
         $user->save();

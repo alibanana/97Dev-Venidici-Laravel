@@ -412,8 +412,20 @@ Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('cu
 Route::get('/email/verifyUser', function () {
     return view('emails/verifyUser');
 });
+Route::get('/email/checkout', function () {
+    return view('emails/checkout');
+});
+Route::get('/email/invoice', function () {
+    return view('emails/invoice');
+});
+Route::get('/email/complete_course', function () {
+    return view('emails/complete_course');
+});
 Route::get('/certificate', function () {
     return view('client/certificate');
+});
+Route::get('/level_up', function () {
+    return view('emails/level_up');
 });
 
 /* START OF DOMPDF ROUTING */

@@ -7,20 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class FinishCourseMail extends Mailable
+class LevelUp extends Mailable
 {
     use Queueable, SerializesModels;
-    public $course;
-
+    public $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($course)
+    public function __construct($user)
     {
-        $this->course = $course;
+        $this->user = $user;
     }
 
     /**
@@ -30,6 +29,6 @@ class FinishCourseMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Claim your certificate')->view('emails.complete_course');
+        return $this->subject('Venidici Club Level Up!')->view('emails.level_up');
     }
 }

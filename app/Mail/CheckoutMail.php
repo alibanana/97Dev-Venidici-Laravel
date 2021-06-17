@@ -11,15 +11,20 @@ class checkoutMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $invoice;
+    public $courses_string;
+    public $link;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($invoice)
+    public function __construct($invoice,$courses_string,$link)
     {
         $this->invoice = $invoice;
+        $this->courses_string = $courses_string;
+        $this->link = $link;
+        
     }
 
     /**
@@ -29,6 +34,6 @@ class checkoutMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.verifyUser');
+        return $this->subject('Please Complete Your Payment')->view('emails.checkout');
     }
 }
