@@ -110,29 +110,19 @@ class Helper
     public static function checkAndUpdateUserClub($user) {
         $user_stars = $user->userDetail->total_stars;
 
+        if ($user_stars >= 280) {
+            $user->club = 'jet';
+            Mail::to(auth()->user()->email)->send(new LevelUp($user));
 
-        if ($user_club == null) {
-            if ($user_stars >= 20) {
-                $user->club = 'bike';
-                $user->save();
-                Mail::to(auth()->user()->email)->send(new LevelUp($user));
+        } elseif ($user_stars >= 100) {
+            $user->club = 'car';
+            Mail::to(auth()->user()->email)->send(new LevelUp($user));
 
-            }
-        } elseif ($user_club == 'bike') {
-            if($user_stars >= 100) {
-                $user->club = 'car';
-                $user->save();
-                Mail::to(auth()->user()->email)->send(new LevelUp($user));
-
-            } 
-        } elseif ($user_club == 'car') {
-            if ($user_stars >= 280) {
-                $user->club = 'jet';
-                $user->save();
-                Mail::to(auth()->user()->email)->send(new LevelUp($user));
-
-            }
+        } elseif ($user_stars >= 20) {
+            $user->club = 'bike';
+            Mail::to(auth()->user()->email)->send(new LevelUp($user));
         }
+
 
         $user->save();
     }

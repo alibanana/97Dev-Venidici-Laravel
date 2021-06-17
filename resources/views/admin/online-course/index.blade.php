@@ -62,11 +62,12 @@
                         </div>
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
-                                <label class="w-100">Category:
+                                <label class="w-100">Filter:
                                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
                                         @foreach ($course_categories as $category)
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => $category->category]) }}" @if (Request::get('filter') == $category->category) selected @endif>{{ $category->category }}</option>
                                         @endforeach
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => '']) }}" @if (Request::has('filter') == 'deleted') selected @endif>Deleted</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => '']) }}" @if (!Request::has('filter')) selected @endif>None</option>
                                     </select>
                                 </label>
@@ -147,16 +148,32 @@
                                                     @endif
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                            <form action="" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="" value"">
+                                                                    <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to feature this online course?')">Feature</button>
+                                                                </div>
+                                                            </form>
+                                                            <form action="" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="" value"">
+                                                                    <button class="d-sm-inline-block btn btn-dark shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to un-feature this online course?')">Un-Feature</button>
+                                                                </div>
+                                                            </form>
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="{{ route('admin.online-courses.show', $course->id) }}">View Detail</a>
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.online-courses.show', $course->id) }}">View Detail</a>
                                                             </div>
                                                             <form action="{{ route('admin.online-courses.set-publish-status-to-opposite', $course->id) }}" method="post">
                                                                 @csrf
                                                                 <div style="padding: 0px 2px">
                                                                     @if ($course->publish_status == 'Draft')
-                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this online course as published?')">Set as published</button>
+                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to set this online course as published?')">Set as published</button>
                                                                     @elseif ($course->publish_status == 'Published')
-                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this online course as draft?')">Set as draft</button>
+                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to set this online course as draft?')">Set as draft</button>
                                                                     @endif
                                                                 </div>
                                                             </form>

@@ -57,6 +57,10 @@ class PagesController extends Controller
 
     // Show the main landing page of the app.
     public function index(Request $request) {
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $config_keyword = 'cms.homepage';
         $configs = Config::select('key', 'value')->where([['key', 'like', "%".$config_keyword."%"]])->get()->keyBy('key');
 
@@ -83,12 +87,7 @@ class PagesController extends Controller
                     'online_courses','cart_count', 'notifications', 'transactions','informations','pengajar_positions'));
         }
 
-        $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-            //return view('client/mobile/index', 
-                //compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','pengajar_positions'));
-        }
+        
 
         return view('client/index', 
             compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','pengajar_positions'));
