@@ -131,4 +131,16 @@ class UserController extends Controller
         
         return view('admin/users', compact('users', 'users_data', 'users_usable_stars'));
     }
+
+    public function add_stars(Request $request){
+        $user_detail = UserDetail::where('user_id',$request->user_id)->first();
+        $user = User::findOrFail($request->user_id);
+        Helper::addStars($user,$request->stars,'Venidici');
+        $user_detail->total_stars += $request->stars;
+        $user_detail->save();
+
+        $message = $request->stars.' Stars has been added to '.$user_detail->user->name;
+
+        return redirect()->route('admin.users.index')->with('message', $message);
+    }
 }

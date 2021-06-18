@@ -25,6 +25,7 @@ class Invoice extends Model
         'status', 
         'total_order_price',
         'discounted_price', 
+        'club_discount', 
         'grand_total',
         'xfers_payment_id'
     ];

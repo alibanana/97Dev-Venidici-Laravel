@@ -13,10 +13,22 @@
         <!-- START OF LEFT CONTENT -->
         <div class="col-6">
             <p class="medium-heading" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#2B6CAA">Good work!</p>
-            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#3B3C43">Kamu telah menyelesaikan course ini</p>
-            <img src="/assets/images/client/Completed_Icon.svg" style="margin-top:2vw;width:23vw" class="img-fluid" alt="">
-                
-            <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0.5vw;color:#3B3C43;margin-top:2vw">Nilai Assessment</p>
+            <div style="display:flex;justify-content:space-between">
+                <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#3B3C43">Kamu telah menyelesaikan course ini</p>
+                <a onclick="document.getElementById('retryAssessmentForm').submit(); return false;" class="normal-text blue-link-underline" style="font-family: Rubik Medium;color:#2B6CAA;text-decoration:none;cursor:pointer">Ulang Assessment</a>
+            </div>
+            <div style="text-align: center;">
+                <img src="/assets/images/client/Completed_Icon.svg" style="margin-top:2vw;width:23vw" class="img-fluid" alt="">
+                <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#2B6CAA;margin-top:2vw">Score: {{ $assessment_pivot->score }}/100</p>
+                <form action="{{route('print_certificate')}}" method="post">
+                @csrf
+                    <input type="hidden" name="name" value="{{auth()->user()->name}}">
+                    <input type="hidden" name="course_id" value="{{$course->id}}">
+                    <button id="detail-button" class="normal-text text-nowrap btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Cek Sertifikat</button>
+
+                </form>
+            </div>
+            <!--             
             <div class="progress" style="height:3vw;background-color:rgba(43, 108, 170, 0.25);border-radius:10px">
                 @if (is_null($assessment_pivot->score))
                     <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: 100%;background-color: rgba(43, 108, 170, 0.25);" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Assessment not completed yet..</div>
@@ -25,12 +37,11 @@
                 @else
                     <div class="progress-bar normal-text" role="progressbar" style="font-family:Rubik Medium;width: {{ $assessment_pivot->score }}%;background-color:#2B6CAA;" aria-valuenow="{{ $assessment_pivot->score }}" aria-valuemin="0" aria-valuemax="100">{{ $assessment_pivot->score }}/100</div>
                 @endif
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:3vw">
+            </div> -->
+            <!-- <div style="display:flex;justify-content:space-between;align-items:center;margin-top:3vw">
                 <button class="normal-text  btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;">Unduh Sertifikat</button>
                 <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Atau</p>
-                <a onclick="document.getElementById('retryAssessmentForm').submit(); return false;" class="normal-text blue-link-underline" style="font-family: Rubik Medium;color:#2B6CAA;text-decoration:none;cursor:pointer">Ulang Assessment</a>
-            </div>
+            </div> -->
         </div>
         <!-- END OF LEFT CONTENT -->
 

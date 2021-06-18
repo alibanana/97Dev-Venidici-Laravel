@@ -68,7 +68,8 @@ class CheckoutController extends Controller
             'date'                  => 'required',
             'time'                  => 'required',
             'bankShortCode'         => 'required',
-            'discounted_price'      => 'integer'
+            'discounted_price'      => 'integer',
+            'club_discount'         => 'integer'
         ]);
 
         if($validated->fails()) 
@@ -106,7 +107,8 @@ class CheckoutController extends Controller
             'grand_total'           => $validated['grand_total'],
             'status'                => 'pending',
             'total_order_price'     => $validated['total_order_price'],
-            'discounted_price'      => $validated['discounted_price']
+            'discounted_price'      => $validated['discounted_price'],
+            'club_discount'         => $validated['club_discount']
         ]);
 
         // Create order item & attach course to user.
@@ -382,7 +384,8 @@ class CheckoutController extends Controller
             'date'                  => 'required',
             'time'                  => 'required',
             'bankShortCode'         => 'required',
-            'discounted_price'      => 'required|integer'
+            'discounted_price'      => 'integer',
+            'club_discount'         => 'integer'
         ])->validate();
 
         // kalo user udah pernah save province di user detail
@@ -409,7 +412,8 @@ class CheckoutController extends Controller
             'grand_total'           => $validated['grand_total'],
             'status'                => 'pending',
             'total_order_price'     => $validated['total_order_price'],
-            'discounted_price'      => $validated['discounted_price']
+            'discounted_price'      => $validated['discounted_price'],
+            'club_discount'         => $validated['club_discount']
         ]);
 
         if ($request->has('shipping_notes')) {

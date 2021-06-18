@@ -517,7 +517,10 @@
                     @endif
                     @php 
                         $total_price -= $discount_club_price;
+                        $club_discount = $discount_club_shipping + $discount_club_price;
                     @endphp
+                    <input type="hidden" value="{{$club_discount}}" name="club_discount">
+
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;">
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Total</p>
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($total_price, 0, ',', ',') }}</p>

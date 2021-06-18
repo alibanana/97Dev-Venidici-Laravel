@@ -62,7 +62,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="+62812345678" value="{{Auth::user()->userDetail->telephone}}">
+                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Insert telephone number" value="{{Auth::user()->userDetail->telephone}}">
                         </div>  
                         @error('telephone')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -377,11 +377,11 @@
                                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                                         <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
                                         <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
-                                        @if(session('success'))
+                                        @if(session('update_interest_success'))
                                             <!-- ALERT MESSAGE -->
                                             <div style="text-align:center;margin-top:1vw">
                                                 <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:0px"role="alert">
-                                                {{ session('success') }}
+                                                {{ session('update_interest_success') }}
                                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                 </div>
                                             </div>
@@ -508,11 +508,14 @@
                         -webkit-line-clamp: 2 !important;
                         -webkit-box-orient: vertical !important;">{{Auth::user()->userDetail->address}}</p>   
                 </div>
+                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Referral Code: <span style="color:#2B6CAA;font-family:Rubik Medium"> {{Auth::user()->userDetail->referral_code}}</span></p>   
+
                 <div style="display:flex;align-items:center;margin-top:0.8vw">
                     @foreach(Auth::user()->hashtags as $hashtag)
                     <p class="small-text" style="font-family:Rubik Medium;color:{{$hashtag->color}};background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;@if($loop->iteration != 1) margin-left:1vw @endif">{{$hashtag->hashtag}}</p>
                     @endforeach
                 </div>
+
 
             </div>
         </div>
@@ -738,9 +741,9 @@
                             <i class="fas fa-check-circle big-heading"></i>
                             <form action="{{route('print_certificate')}}" method="post">
                             @csrf
-                            <input type="hidden" name="name" value="{{auth()->user()->name}}">
-                            <input type="hidden" name="course_id" value="{{$course->id}}">
-                            <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
+                                <input type="hidden" name="name" value="{{auth()->user()->name}}">
+                                <input type="hidden" name="course_id" value="{{$course->id}}">
+                                <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
 
                             </form>
                         </div>

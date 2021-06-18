@@ -87,9 +87,9 @@ class ReviewController extends Controller
             Helper::addStars(auth()->user(),30,'Review Course');
 
             if($request->action == "completed_course")
-                return redirect()->back()->with('review_message','Review berhasil dimasukkan, dan kamu mendapatkan 10 Stars!');
+                return redirect()->back()->with('review_message','Review berhasil dimasukkan, dan kamu mendapatkan 30 Stars!');
             else
-                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Review berhasil dimasukkan, dan kamu mendapatkan 10 Stars!');
+                return redirect('/online-course/'.$request->course_id.'#review-section')->with('review_message','Review berhasil dimasukkan, dan kamu mendapatkan 30 Stars!');
         }
         else{
             if($request->action == "completed_course")
