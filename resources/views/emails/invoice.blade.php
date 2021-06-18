@@ -180,10 +180,18 @@ body {font-family: 'Muli', sans-serif;}
             <td style="border:1px solid black">Rp{{ number_format($order->price, 0, ',', ',') }}</td>
           </tr>
           @endforeach
+          @if($invoice->discounted_price != 0)
           <tr >
-            <td colspan="3"  style="border:1px solid black">Diskon</td>
+            <td colspan="3"  style="border:1px solid black">Diskon Voucher</td>
             <td style="border:1px solid black">Rp{{ number_format($invoice->discounted_price, 0, ',', ',') }}</td>
           </tr>
+          @endif
+          @if($invoice->club_discount != 0)
+          <tr >
+            <td colspan="3"  style="border:1px solid black">Diskon Club</td>
+            <td style="border:1px solid black">Rp{{ number_format($invoice->club_discount, 0, ',', ',') }}</td>
+          </tr>
+          @endif
         </table>
         <br>
         <span style="font-size: 18px;padding-top:10px"> <b> Total: Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} </b></span>

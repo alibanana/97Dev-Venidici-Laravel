@@ -1169,14 +1169,14 @@ END OF OUR PROGRAMS SECTION -->
         <div class="col-12 p-0">
             <div style="display:flex;align-items:center;justify-content:center">
                 <a href="#menjadi-pengajar" style="text-decoration:none">
-                    <div class="rounded-card" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-right:2vw">
+                    <div class="rounded-card rounded-card-pengajar" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-right:2vw">
                         <p class="small-heading" id="card-title" style="color:#3B3C43;font-family:Rubik Medium">Menjadi Pengajar</p>
                         <img src="/assets/images/client/Menjadi_Pengajar.png" style="height:13vw;margin-top:1vw" class="img-fluid" alt="Menjadi Pengajar">
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">Bawa perubahan bagi Indonesia melalui pengalaman yang kamu miliki!</p>
                     </div>
                 </a>
                 <a href="#menjadi-kolaborator" style="text-decoration:none">
-                    <div class="rounded-card" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-left:2vw">
+                    <div class="rounded-card rounded-card-collaborator" style="padding:2vw;height:26vw;text-align:center;width:27.5vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-left:2vw">
                         <p class="small-heading" id="card-title" style="color:#3B3C43;font-family:Rubik Medium">Menjadi Kolaborator</p>
                         <img src="/assets/images/client/Menjadi_Kolaborator.png" style="height:13vw;margin-top:1vw" class="img-fluid" alt="Menjadi Kolaborator">
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw">1+1=11! Mari berkembang bersama dan hasilin dampak!</p>
@@ -1186,24 +1186,23 @@ END OF OUR PROGRAMS SECTION -->
         </div>
     </div>
     <!-- END OF PENGAJAR AND COLLABORATOR SECTION -->
-
+    @if(Auth::check())
     <!-- START OF NEWSLETTER SECTION -->
     <div class="row m-0 page-container" id="newsletter-section" style="padding-bottom:8vw">
+
         @if (session()->has('newsletter_message'))
         <div class="col-12 " style="padding:1vw 3vw">
-            <div class="mb-0">
-                <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                    {{ session()->get('newsletter_message') }}
-                </div>
+            <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                {{ session()->get('newsletter_message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
         
         @elseif (session()->has('newsletter_info_message'))
         <div class="col-12" style="padding:1vw 3vw">
-            <div class="mb-0">
-                <div class="alert alert-warning alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                    {{ session()->get('newsletter_info_message') }}
-                </div>
+            <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                {{ session()->get('newsletter_info_message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
         @endif
@@ -1225,6 +1224,7 @@ END OF OUR PROGRAMS SECTION -->
         </form>
     </div>
     <!-- END OF NEWSLETTER SECTION -->
+    @endif
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>

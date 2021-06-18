@@ -91,14 +91,14 @@ class Helper
 
         // create notification
         $notification = Notification::create([
-            'user_id'           => auth()->user()->id,
+            'user_id'           => $user->id,
             'isInformation'     => 1,
             'title'             => 'Selamat! kamu mendapatkan '.$star_added.' stars.',
-            'description'       => 'Hi, '.auth()->user()->name.'. Kamu berhasil mendapat '.$star_added.' stars dari '.$case.'! Click notifikasi ini untuk melihat star kamu.',
+            'description'       => 'Hi, '.$user->name.'. Kamu berhasil mendapat '.$star_added.' stars dari '.$case.'! Click notifikasi ini untuk melihat star kamu.',
             'link'              => '/dashboard/redeem-vouchers'
         ]);
 
-        Helper::checkAndUpdateUserClub(auth()->user());
+        Helper::checkAndUpdateUserClub($user);
 
         if($star && $notification)
             return 'success';
@@ -110,29 +110,34 @@ class Helper
     public static function checkAndUpdateUserClub($user) {
         $user_stars = $user->userDetail->total_stars;
 
-
-        if ($user_club == null) {
-            if ($user_stars >= 20) {
-                $user->club = 'bike';
-                $user->save();
-                Mail::to(auth()->user()->email)->send(new LevelUp($user));
-
-            }
-        } elseif ($user_club == 'bike') {
-            if($user_stars >= 100) {
-                $user->club = 'car';
-                $user->save();
-                Mail::to(auth()->user()->email)->send(new LevelUp($user));
-
-            } 
-        } elseif ($user_club == 'car') {
-            if ($user_stars >= 280) {
+        if ($user_stars >= 280) {
+            if($user->club != 'jet'){
                 $user->club = 'jet';
-                $user->save();
                 Mail::to(auth()->user()->email)->send(new LevelUp($user));
+            }
+            else{
+                $user->club = 'jet';
+            }
 
+        } elseif ($user_stars >= 100) {
+            if($user->club != 'car'){
+                $user->club = 'car';
+                Mail::to(auth()->user()->email)->send(new LevelUp($user));
+            }
+            else{
+                $user->club = 'car';
+            }
+
+        } elseif ($user_stars >= 20) {
+            if($user->club != 'bike'){
+                $user->club = 'bike';
+                Mail::to(auth()->user()->email)->send(new LevelUp($user));
+            }
+            else{
+                $user->club = 'bike';
             }
         }
+
 
         $user->save();
     }

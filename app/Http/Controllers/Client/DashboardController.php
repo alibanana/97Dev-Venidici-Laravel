@@ -143,7 +143,7 @@ class DashboardController extends Controller
         
         auth()->user()->hashtags()->sync($hashtag_ids);
 
-        return redirect('/dashboard#my-interests')->with('success', 'Update Profile Berhasil!');
+        return redirect('/dashboard#my-interests')->with('update_interest_success', 'Update Profile Berhasil!');
     }
 
     // Changes the user's password in the database.

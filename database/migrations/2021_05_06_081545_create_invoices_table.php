@@ -31,6 +31,7 @@ class CreateInvoicesTable extends Migration
             $table->enum('status', array('pending', 'completed', 'failed', 'paid', 'cancelled'));
             $table->bigInteger('total_order_price');
             $table->bigInteger('discounted_price')->nullable();
+            $table->bigInteger('club_discount')->nullable();
             $table->bigInteger('grand_total');
             $table->string('xfers_payment_id')->nullable();
             $table->timestamps();

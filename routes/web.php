@@ -182,6 +182,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
     // UserController
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::put('/users', [AdminUserController::class, 'add_stars'])->name('users.add_stars');
     // OnlineCourseController
     Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
     Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');

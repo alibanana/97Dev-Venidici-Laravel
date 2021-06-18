@@ -26,15 +26,15 @@
 			</div>
 			@endif
 
-			<form method="POST" action="">
+			<form method="POST" action="{{route('admin.users.add_stars')}}">
 			@csrf
 			{{ method_field('PUT') }}
 			<div class="modal-body">
 					<input type="hidden" name="user_id" id="user_id">
 				<h6 class="modal-title" id="addStarsModal">Number of stars</h6>
 				<div class="form-group mt-2">
-					<input type="text" name="stars" class="form-control form-control-user"
-						id="exampleInputPassword" placeholder="Insert given stars">
+					<input type="text" name="stars" required class="form-control form-control-user"
+						id="" placeholder="Insert given stars">
 					@error('stars')
 						<span class="invalid-feedback" role="alert" style="display: block !important;">
 							<strong>{{ $message }}</strong>
@@ -59,12 +59,12 @@
     <div class="container-fluid">
 
         @if (session()->has('message'))
-					<div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
-						{{ session()->get('message') }}            
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
+			<div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
+				{{ session()->get('message') }}            
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
         @endif
 
         <!-- Page Heading -->

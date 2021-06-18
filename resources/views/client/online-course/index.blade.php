@@ -190,6 +190,7 @@ END OF OUR PROGRAMS SECTION -->
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
                 <select class="grey-input-form small-text" style="height:100%;padding-right:4vw" aria-label="">
                     <option selected disabled>Pilih Kategori</option>
+                    <option>None</option>
                     @foreach($course_categories as $category)
                     <option value="{{$category->id}}">{{$category->category}}</option>
                     @endforeach
@@ -201,14 +202,10 @@ END OF OUR PROGRAMS SECTION -->
         </div>
     </div>
     <!-- START OF CLASSES SECTION -->
+    <!--
     <div class="col-12 p-0" style="text-align: center;margin-top:1vw">
         <div style="padding:2vw 13.5vw 1vw 13.5vw;">
             <div style="display:flex;justify-content:space-between;align-items:center;background: #FFFFFF;border: 2px solid rgba(157, 157, 157, 0.1);border-radius: 10px;padding:0.7vw">
-            <!--
-                <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Featured</p>
-                <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Business</p>
-                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Personal Development</p>
-            -->
                 <a href="/online-course?cat=Featured#search-course-section" class="normal-text btn-blue-on-hover @if(Request::get('cat')  == 'Featured') btn-blue-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;text-decoration:none">Featured</a>
                 @foreach($course_categories as $category)
                 <a 
@@ -220,6 +217,7 @@ END OF OUR PROGRAMS SECTION -->
             </div>
         </div>
     </div>
+    -->
     <!-- MOST POPULAR -->
     <div class="course-content" id="course-popular">
         <div class="row m-0 p-0">
@@ -254,7 +252,17 @@ END OF OUR PROGRAMS SECTION -->
                             </div>
 
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
-                                <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                                <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
+                                @foreach($course->teachers as $teacher)
+
+                                    @if ($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif (!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>
                                 @if ($course->total_duration)
                                     <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">{{ $course->total_duration }} mins</p>
                                     @else

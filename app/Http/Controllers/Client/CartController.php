@@ -157,8 +157,10 @@ class CartController extends Controller
         $users_cart = Cart::where('course_id', $request->course_id)->where('user_id', $request->user_id)->get();
         foreach($users_cart as $course)
         {
-            if($course->course->course_type_id == 1)
+            if($course->course->course_type_id == 1 && $request->action != 'buyNow')
                 return redirect()->back()->with('success', 'Item sudah ada di cart');
+            elseif($course->course->course_type_id == 1 && $request->action == 'buyNow')
+                return redirect()->route('customer.cart.index');
         }
 
         
