@@ -199,18 +199,16 @@
     <div class="col-12 p-0" style="margin-top:4vw">
         @if (session()->has('redeem_success'))
             <div class="col-12 " style="margin-bottom:1vw">
-                <div class="mb-0">
-                    <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                        {{ session()->get('redeem_success') }}
-                    </div>
+                <div class="alert alert-primary alert-dismissible fade show m-0 normal-text"  tyle="font-family:Rubik Regular"role="alert">
+                    {{ session()->get('redeem_success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
         @elseif (session()->has('redeem_failed'))
             <div class="col-12 " style="margin-bottom:1vw">
-                <div class="mb-0">
-                    <div class="alert alert-warning alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                        {{ session()->get('redeem_failed') }}
-                    </div>
+                <div class="alert alert-warning alert-dismissible fade show m-0 normal-text"  tyle="font-family:Rubik Regular"role="alert">
+                    {{ session()->get('redeem_failed') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
         @endif
