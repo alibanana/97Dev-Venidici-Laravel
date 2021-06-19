@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helper\Helper;
 use DB;
+use Carbon\Carbon;
 
 use App\Models\User;
 use App\Models\UserDetail;
@@ -36,12 +37,24 @@ class UserController extends Controller
         }
 
         if ($request->has('filter')) {
-            $users_status_list = ['active', 'suspended'];
-            if (!in_array($request->filter, $users_status_list)) {
+            $available_filters = ['active', 'suspended', 'birthday-today'];
+            if (!in_array($request->filter, $available_filters)) {
                 $url = route('admin.users.index', request()->except('filter'));
                 return redirect($url);    
             }
-            $users = $users->where('status', $request->filter);
+
+            $users_status_list = ['active', 'suspended'];
+            if (in_array($request->filter, $users_status_list))
+                $users = $users->where('status', $request->filter);
+            else {
+                $userDetails = UserDetail::select(DB::raw('user_id as id'), 'birthdate');
+
+                $users = $users->joinSub($userDetails, 'details', function ($join) {
+                    $join->on('users.id', '=', 'details.id');
+                })->whereMonth('birthdate', Carbon::now()->format('m'))
+                    ->whereDay('birthdate', Carbon::now()->format('d'));
+            }
+
         }
 
         if ($request->has('search')) {
@@ -124,7 +137,7 @@ class UserController extends Controller
             'total' => $users_count
         ];
 
-        $users_stars_data = [];
+        $users_usable_stars = [];
         foreach ($users as $user) {
             $users_usable_stars[$user->id] = Helper::getUsableStars($user);
         }
