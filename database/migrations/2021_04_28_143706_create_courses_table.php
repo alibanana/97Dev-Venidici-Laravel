@@ -31,6 +31,7 @@ class CreateCoursesTable extends Migration
             $table->string('total_duration')->nullable(); // (mins), (secs)
             $table->unsignedDecimal('average_rating', 2, 1)->default(0);
             $table->boolean('isDeleted')->default(0);
+            $table->boolean('isFeatured')->default(0);
             $table->timestamps();
         });
     }

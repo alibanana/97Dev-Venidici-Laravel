@@ -220,6 +220,12 @@ class WokiCourseController extends Controller
         return redirect()->route('admin.woki-courses.index')->with('message', $result['message']);
     }
 
+    // Change the isFeatured status of the chosen Woki Course to its opposite.
+    public function setIsFeaturedStatusToOpposite(Request $request, $id) {
+        $result = CourseHelper::setIsFeaturedStatusToOppositeById($id);
+        return redirect()->route('admin.woki-courses.index')->with('message', $result['message']);
+    }
+
     // Change the public status of the chosen Woki Course to its opposite.
     public function setPublishStatusToOpposite(Request $request, $id) {
         $result = CourseHelper::setPublishStatusToOppositeById($id);

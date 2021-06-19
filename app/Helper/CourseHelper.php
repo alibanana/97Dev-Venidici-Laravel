@@ -33,7 +33,7 @@ class CourseHelper {
         }
     }
 
-    // Function to update course's publish status.
+    // Function to set course's publish status to its opposite value.
     public static function setPublishStatusToOppositeById($id) {
         try {
             $course = Course::findOrFail($id);
@@ -51,6 +51,37 @@ class CourseHelper {
             } elseif ($course->courseType->type == "Woki") {
                 $message = 'Woki Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
             }
+
+            return [
+                'status' => 'Success',
+                'data' => $course,
+                'message' => $message
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
+    }
+
+    // Function to set course's isFeatured status to its opposite value.
+    public static function setIsFeaturedStatusToOppositeById($id) {
+        try {
+            $course = Course::findOrFail($id);
+            $course->isFeatured = !$course->isFeatured;
+            $course->save();
+
+            if ($course->courseType->type == "Course") {
+                $message = 'Online Course (' . $course->title;
+            } elseif ($course->courseType->type == "Woki") {
+                $message = 'Woki Course (' . $course->title;
+            }
+
+            if ($course->isFeatured)
+                $message = $message . ') is now featured.';
+            else
+                $message = $message . ') has been un-featured.';
 
             return [
                 'status' => 'Success',

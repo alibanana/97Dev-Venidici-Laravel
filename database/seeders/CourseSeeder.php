@@ -46,7 +46,8 @@ class CourseSeeder extends Seeder
                 Dengan mengikuti course ini, kamu akan lebih paham tentang bagaimana caranya untuk memenangi business competition!',
                 'price' => 125000,
                 'publish_status' => 'Published',
-                'average_rating' => 4.3
+                'average_rating' => 4.3,
+                'isFeatured' => true
             ],
             [
                 'course_type_id' => 2,

@@ -164,20 +164,15 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.woki-courses.set-isfeatured-status-to-opposite', $course->id) }}" method="post">
                                                                 @csrf
-                                                                @method('put')
                                                                 <div style="padding: 0px 2px">
                                                                     <input type="hidden" name="" value"">
-                                                                    <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to feature this online course?')">Feature</button>
-                                                                </div>
-                                                            </form>
-                                                            <form action="" method="post">
-                                                                @csrf
-                                                                @method('put')
-                                                                <div style="padding: 0px 2px">
-                                                                    <input type="hidden" name="" value"">
-                                                                    <button class="d-sm-inline-block btn btn-dark shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to un-feature this online course?')">Un-Feature</button>
+                                                                    @if ($course->isFeatured)
+                                                                        <button class="d-sm-inline-block btn btn-dark shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to un-feature this woki course?')">Un-Feature</button>
+                                                                    @else
+                                                                        <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to feature this woki course?')">Feature</button>
+                                                                    @endif
                                                                 </div>
                                                             </form>
                                                             <div style="padding: 0px 2px;">
