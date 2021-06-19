@@ -111,34 +111,15 @@ class Helper
         $user_stars = $user->userDetail->total_stars;
 
         if ($user_stars >= 280) {
-            if($user->club != 'jet'){
-                $user->club = 'jet';
-                Mail::to(auth()->user()->email)->send(new LevelUp($user));
-            }
-            else{
-                $user->club = 'jet';
-            }
-
+            $user->club = 'jet';
         } elseif ($user_stars >= 100) {
-            if($user->club != 'car'){
-                $user->club = 'car';
-                Mail::to(auth()->user()->email)->send(new LevelUp($user));
-            }
-            else{
-                $user->club = 'car';
-            }
-
+            $user->club = 'car';
         } elseif ($user_stars >= 20) {
-            if($user->club != 'bike'){
-                $user->club = 'bike';
-                Mail::to(auth()->user()->email)->send(new LevelUp($user));
-            }
-            else{
-                $user->club = 'bike';
-            }
+            $user->club = 'bike';
         }
 
-
         $user->save();
+
+        if ($user->wasChanged()) Mail::to($user->email)->send(new LevelUp($user));
     }
 }

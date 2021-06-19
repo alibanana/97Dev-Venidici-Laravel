@@ -15,6 +15,7 @@ use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
 use App\Models\Hashtag;
 use App\Models\Teacher;
+use App\Models\ArtSupply;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +57,10 @@ class WokiCourseUpdateController extends Controller
 
         $startTimeConverted = Carbon::createFromFormat('H:i:s', $course->wokiCourseDetail->start_time)->format('H:i');
         $endTimeConverted = Carbon::createFromFormat('H:i:s', $course->wokiCourseDetail->end_time)->format('H:i');
+
+        $artSupplies = ArtSupply::all();
         
-        return view('admin/woki/update', compact('course', 'course_categories', 'tags', 'teachers', 'startTimeConverted', 'endTimeConverted'));
+        return view('admin/woki/update', compact('course', 'course_categories', 'tags', 'teachers', 'startTimeConverted', 'endTimeConverted', 'artSupplies'));
     }
 
     // Updates data as seen under the Update Woki Course -> Basic Informations tab.
@@ -90,7 +93,7 @@ class WokiCourseUpdateController extends Controller
 
         if ($request->has('thumbnail')) {
             unlink($course->thumbnail);
-            $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/online-courses/');
+            $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/woki-courses/');
         }
 
         $course->save();
@@ -160,6 +163,7 @@ class WokiCourseUpdateController extends Controller
             $course->price = 0;
         } else {
             $course->price = $validated['price'];
+            $course->priceWithArtKit = $validated['priceWithArtKit'];
         }
 
         $course->save();
@@ -186,5 +190,69 @@ class WokiCourseUpdateController extends Controller
         return redirect()->route('admin.woki-courses.edit', $id)
             ->with('message', $result['message'])
             ->with('page-option', 'publish-status');
+    }
+
+    // Attach / Detach Art Supply from a Course.
+    public function attachDetachArtSupply(Request $request, $id) {
+        $validated = $request->validate([
+            'art_supply_id' => 'required|integer'
+        ]);
+
+        $course = Course::findOrFail($id);
+        $artSupply = ArtSupply::findOrFail($validated['art_supply_id']);
+
+        if ($course->artSupplies()->where('art_supply_id', $artSupply->id)->first()){
+            $course->artSupplies()->detach($artSupply->id);
+
+            // After detaching artSupply, if no more artSupply is attached to the course, update priceWithArtKit to null.
+            if (!$course->artSupplies()->exists()) {
+                $course->priceWithArtKit = null;
+                $course->save();
+            }
+            $message = 'Art Supply (' . $artSupply->name . ') has been removed from this course.';
+        } else {
+            // If no artSupply has been attach to the course, update priceWithArtKit == price.
+            if (!$course->artSupplies()->exists()) {
+                $course->priceWithArtKit = $course->price;
+                $course->save();
+            }
+
+            $course->artSupplies()->attach($artSupply->id);
+            $message = 'Art Supply (' . $artSupply->name . ') has been added to this course.';
+        }
+
+        return redirect()->route('admin.woki-courses.edit', $id)
+            ->with('message', $message)
+            ->with('page-option', 'art-supply');
+    }
+
+    // Attach teacher to a specific course.
+    public function attachTeacher(Request $request, $course_id) {
+        $validated = $request->validate([
+            'teacher_id' => 'required'
+        ]);
+
+        $result = CourseHelper::attachTeacher(
+            Course::findOrFail($course_id),
+            Teacher::findOrFail($validated['teacher_id']));
+
+        return redirect()->route('admin.woki-courses.edit', $course_id)
+            ->with('message', $result['message'])
+            ->with('page-option', 'teacher');
+    }
+
+    // Detach teacher to a specific course.
+    public function detachTeacher(Request $request, $course_id) {
+        $validated = $request->validate([
+            'teacher_id' => 'required'
+        ]);
+
+        $result = CourseHelper::detachTeacher(
+            Course::findOrFail($course_id),
+            Teacher::findOrFail($validated['teacher_id']));
+
+        return redirect()->route('admin.woki-courses.edit', $course_id)
+            ->with('message', $result['message'])
+            ->with('page-option', 'teacher');
     }
 }

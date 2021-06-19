@@ -38,9 +38,14 @@ class SectionContentController extends Controller
         $content->title = $validated['section-' . $validated['section_id'] . '-newContentTitle'];
         $content->save();
 
-        $message = 'Section (' . $section->title  . ') has been added to the database';
+        $message = 'Section Content (' . $content->title  . ') has been added to the database';
 
-        return redirect()->route('admin.online-courses.edit', $section->course->id)
+        if ($section->course->courseType->type == 'Course')
+            $route = 'admin.online-courses.edit';
+        elseif ($section->course->courseType->type == 'Woki')
+            $route = 'admin.woki-courses.edit';
+
+        return redirect()->route($route, $section->course->id)
             ->with('message', $message)
             ->with('page-option', 'manage-curriculum');
     }
@@ -49,7 +54,12 @@ class SectionContentController extends Controller
     public function edit($id) {
         $content = SectionContent::findOrFail($id);
 
-        return view('admin/online-course/create-video', compact('content'));
+        if ($content->section->course->courseType->type == 'Course')
+            $view = 'admin/online-course/create-video';
+        elseif ($content->section->course->courseType->type == 'Woki')
+            $view = 'admin/woki/create-video';
+
+        return view($view, compact('content'));
     }
 
     // Update a specific content (based on its id) in the database.
@@ -81,7 +91,12 @@ class SectionContentController extends Controller
             $message = "No changes detected to Section's Content(" . $content->title . ")";
         }
 
-        return redirect()->route('admin.online-courses.edit', $content->section->course->id)
+        if ($content->section->course->courseType->type == 'Course')
+            $route = 'admin.online-courses.edit';
+        elseif ($content->section->course->courseType->type == 'Woki')
+            $route = 'admin.woki-courses.edit';
+
+        return redirect()->route($route, $content->section->course->id)
             ->with('message', $message)
             ->with('page-option', 'manage-curriculum');
     }
@@ -90,12 +105,19 @@ class SectionContentController extends Controller
     public function destroy($id) {
         $content = SectionContent::findOrFail($id);
 
-        if (!is_null($content->attachment)) unlink($content->attachment);
+        if (!is_null($content->attachment))
+            unlink($content->attachment);
+        
         $content->delete();
 
         $message = 'Content (' . $content->title  . ') has been deleted from the database';
 
-        return redirect()->route('admin.online-courses.edit', $content->section->course->id)
+        if ($content->section->course->courseType->type == 'Course')
+            $route = 'admin.online-courses.edit';
+        elseif ($content->section->course->courseType->type == 'Woki')
+            $route = 'admin.woki-courses.edit';
+
+        return redirect()->route($route, $content->section->course->id)
             ->with('message', $message)
             ->with('page-option', 'manage-curriculum');
     }

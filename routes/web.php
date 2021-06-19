@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\WokiCourseController as AdminWokiCourseController;
+use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
 use App\Http\Controllers\Admin\WokiCourseUpdateController as AdminWokiCourseUpdateController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
 use App\Http\Controllers\Admin\SectionContentController as AdminSectionContentController;
@@ -203,11 +204,21 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     Route::post('/woki-courses', [AdminWokiCourseController::class, 'store'])->name('woki-courses.store');
     Route::delete('/woki-courses/{id}', [AdminWokiCourseController::class, 'destroy'])->name('woki-courses.destroy');
     Route::post('/woki-courses/{id}/set-publish-status-to-opposite', [AdminWokiCourseController::class, 'setPublishStatusToOpposite'])->name('woki-courses.set-publish-status-to-opposite');
+    // ArtSupplyController
+    Route::get('/woki-courses/art-supplies', [AdminArtSupplyController::class, 'index'])->name('art-supplies.index');
+    Route::get('/woki-courses/art-supplies/create', [AdminArtSupplyController::class, 'create'])->name('art-supplies.create');
+    Route::post('/woki-courses/art-supplies', [AdminArtSupplyController::class, 'store'])->name('art-supplies.store');
+    Route::get('/woki-courses/art-supplies/{id}/update', [AdminArtSupplyController::class, 'edit'])->name('art-supplies.edit');
+    Route::put('/woki-courses/art-supplies/{id}', [AdminArtSupplyController::class, 'update'])->name('art-supplies.update');
+    Route::delete('/woki-courses/art-supplies/{id}', [AdminArtSupplyController::class, 'destroy'])->name('art-supplies.destroy');
     // WokiCourseUpdateController
     Route::get('/woki-courses/{id}/update', [AdminWokiCourseUpdateController::class, 'edit'])->name('woki-courses.edit');
     Route::put('/woki-courses/{id}/update-basic-info', [AdminWokiCourseUpdateController::class, 'updateBasicInfo'])->name('woki-courses.update-basic-info');
     Route::put('/woki-courses/{id}/update-pricing-enrollment', [AdminWokiCourseUpdateController::class, 'updatePricingEnrollment'])->name('woki-courses.update-pricing-enrollment');
     Route::put('/woki-courses/{id}/update-publish-status', [AdminWokiCourseUpdateController::class, 'updatePublishStatus'])->name('woki-courses.update-publish-status');
+    Route::put('/woki-courses/{id}/attach-detach-art-supply', [AdminWokiCourseUpdateController::class, 'attachDetachArtSupply'])->name('woki-courses.attach-detach-art-supply');
+    Route::put('/woki-courses/{id}/attach-teacher', [AdminWokiCourseUpdateController::class, 'attachTeacher'])->name('woki-courses.attach-teacher');
+    Route::put('/woki-courses/{id}/detach-teacher', [AdminWokiCourseUpdateController::class, 'detachTeacher'])->name('woki-courses.detach-teacher');
     // SectionController
     Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
     Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');
@@ -307,21 +318,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
 Route::get('/admin/woki/1', function () {
     return view('admin/woki/detail');
 });
-Route::get('/admin/woki/create-video/1', function () {
-    return view('admin/woki/create-video');
-});
 /* END OF WOKI ROUTING */
-/* START OF art-supply ROUTING */
-Route::get('/admin/art-supply', function () {
-    return view('admin/art-supply/index');
-});
-Route::get('/admin/art-supply/create', function () {
-    return view('admin/art-supply/create');
-});
-Route::get('/admin/art-supply/1/update', function () {
-    return view('admin/art-supply/update');
-});
-/* END OF art-supply ROUTING */
 
 /* START ADMIN ROUTING */
 //Route::get('/admin/login', function () {

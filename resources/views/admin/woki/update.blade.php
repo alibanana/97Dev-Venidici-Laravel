@@ -48,7 +48,7 @@
                             <br>
                             <br>
                             Click button below to update image
-                            <input type="file" name="thumbnail" aria-describedby=""> 
+                            <input type="file" name="thumbnail" aria-describedby="" accept=".jpg,,jpeg,.png"> 
                             @error('thumbnail')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -294,111 +294,104 @@
         </div>
         <!-- END OF BASIC INFORMATION-->
 
-        <!-- START OF MANAGE CURRICULUM -->
-        <div class="course-content" id="manage-curriculum" style="display:none">
-            <form action="/admin/online-courses" method="POST" enctype="multipart/form-data">
-            @csrf  
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Section</label>
-                            <input type="text" name="name" class="form-control form-control-user"
-                                id="phone" aria-describedby=""
-                                placeholder="Enter couse section" > 
-                            @error('name')
+       <!-- START OF MANAGE CURRICULUM -->
+       <div class="course-content" id="manage-curriculum" style="display:none">
+        <form action="{{ route('admin.sections.store') }}" method="POST">
+        @csrf
+            <input type="hidden" name="course_id" value="{{ $course->id }}" hidden>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Section</label>
+                        <input type="text" name="section-title" class="form-control form-control-user"
+                            id="phone" aria-describedby="" value="{{ old('section-title') }}"
+                            placeholder="Enter couse section" required> 
+                        @error('section-title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror               
-                        </div>
-                    </div>
-                    <div class="col-6" style="padding:2vw 1vw">
-                        <div style="display:flex;justify-content:flex-start">
-                            <button type="submit"  class="btn btn-primary btn-user">Add Section</button>
-                        </div>
+                        @enderror
                     </div>
                 </div>
-            </form>
-                <!-- START OF ONE MATERI -->
-                <div class="row" style="margin-top:2vw">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div style="display:flex;justify-content:space-between;align-items:center">
-                                    <div>
-                                        <input style="width:50% !important;" type="text" value="Materi">
-                                        <button type="submit"  class="btn btn-primary btn-info">Update Section</button>    
-                                    </div>
-                                    <div>
-                                        <button type="submit"  class="btn btn-primary btn-danger">Delete Section</button>
-
-                                    </div>
-                                </div>                        
-                            </div>
-                            <ul class="list-group list-group-flush">
+                <div class="col-6" style="padding:2vw 1vw">
+                    <div style="display:flex;justify-content:flex-start">
+                        <button type="submit" class="btn btn-primary btn-user">Add Section</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        @foreach ($course->sections as $section)
+            <!-- START OF ONE MATERI -->
+            <div class="row" style="margin-top:2vw">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <div>
+                                    <form action="{{ route('admin.sections.update', $section->id) }}" method="POST">
+                                    @csrf
+                                    @method('put')
+                                        <input style="width:50% !important;" type="text" name="section-title-{{ $section->id }}" 
+                                            value="{{ old('section-title-' . $section->id, $section->title) }}" required>
+                                        @error('section-title-' . $section->id)
+                                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror 
+                                        <button type="submit" class="btn btn-primary btn-info" onclick="return confirm('Are you sure you want to update this section?')">Update Section</button>    
+                                    </form>
+                                </div>
+                                <div>
+                                    <form action="{{ route('admin.sections.destroy', $section->id) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                        <button type="submit" class="btn btn-primary btn-danger" onclick="return confirm('Are you sure you want to remove this section from the course?')">Delete Section</button>
+                                    </form>
+                                </div>
+                            </div>                        
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            @foreach ($section->sectionContents as $content)
+                            <form action="{{ route('admin.section-contents.destroy', $content->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
                                 <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
-                                Introduction to Woki
+                                {{ $content->title }}
                                     <div>
                                         <!--<a href="#" data-toggle="modal" data-target="#addContentModal"  class="btn btn-primary btn-primary">
                                         Add Content
                                         </a>-->
-                                        <a href="/admin/woki/create-video/1" class="btn btn-primary btn-primary">
-                                        Add Content
+                                        <a href="{{ route('admin.section-contents.edit', $content->id) }}" class="btn btn-primary btn-primary">
+                                        Update content
                                         </a>
-
-                                        <button type="submit"  class="btn btn-primary btn-danger">Delete Content</button>
+                                        <button type="submit" class="btn btn-primary btn-danger" onclick="return confirm('Are you sure you want to remove this content?')">Delete Content</button>
                                     </div>
                                 </div>     
+                            </form>
+                            @endforeach
+                            <form action="{{ route('admin.section-contents.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="section_id" value="{{ $section->id }}" hidden>
                                 <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
-                                    <input type="text" placeholder="Enter new lecture title" style="width:80%">
-                                    <div>
-                                        <button type="submit"  class="btn btn-primary btn-info">Create Lecture</button>
-                                    </div>
-                                </div>     
-                            </ul>
-                        </div>
+                                    <input type="text" placeholder="Enter new lecture title" style="width:80%" 
+                                        name="section-{{ $section->id }}-newContentTitle" 
+                                        value="{{ old('section-' . $section->id . '-newContentTitle') }}" required>
+                                    @error('section-' . $section->id . '-newContentTitle')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror 
+                                    <button type="submit" class="btn btn-primary btn-info">Create Lecture</button>
+                                </div>
+                            </form>
+                        </ul>
                     </div>
                 </div>
-                <!-- END OF ONE MATERI -->
-                <!-- START OF ONE MATERI -->
-                <div class="row" style="margin-top:2vw">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div style="display:flex;justify-content:space-between;align-items:center">
-                                    <div>
-                                        <input style="width:50% !important" type="text" value="QnA">
-                                        <button type="submit"  class="btn btn-primary btn-info">Update Section</button>    
-                                    </div>
-                                    <div>
-                                        <button type="submit"  class="btn btn-primary btn-danger">Delete Section</button>
-
-                                    </div>
-                                </div>                        
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
-                                QnA Video Session #1 
-                                    <div>
-                                        <a href="#" data-toggle="modal" data-target="#addContentModal"  class="btn btn-primary btn-primary">
-                                        Add Content
-                                        </a>
-                                        <button type="submit"  class="btn btn-primary btn-danger">Delete Content</button>
-                                    </div>
-                                </div>     
-                                <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
-                                    <input type="text" placeholder="Enter new lecture title" style="width:80%">
-                                    <div>
-                                        <button type="submit"  class="btn btn-primary btn-info">Create Lecture</button>
-                                    </div>
-                                </div>     
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- END OF ONE MATERI -->
-        </div>
-        <!-- END OF MANAGE CURRICULUM -->
+            </div>
+            <!-- END OF ONE MATERI -->
+        @endforeach
+    </div>
+    <!-- END OF MANAGE CURRICULUM -->
 
         <!-- START OF PRICE AND ENROLLMENT -->
         <div class="course-content" id="pricing-enrollment" style="display:none">
@@ -548,7 +541,7 @@
                                         <td>
                                             @if ($teacher->courses()->where('course_id', $course->id)->first())
                                                 <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                    <form action="{{ route('admin.online-courses.detach-teacher', $course->id) }}" method="post">
+                                                    <form action="{{ route('admin.woki-courses.detach-teacher', $course->id) }}" method="post">
                                                         @csrf
                                                         @method('put')
                                                         <div style="padding: 0px 2px">
@@ -559,7 +552,7 @@
                                                 </div>
                                             @else
                                                 <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                    <form action="{{ route('admin.online-courses.attach-teacher', $course->id) }}" method="post">
+                                                    <form action="{{ route('admin.woki-courses.attach-teacher', $course->id) }}" method="post">
                                                         @csrf
                                                         @method('put')
                                                         <div style="padding: 0px 2px">
@@ -585,8 +578,8 @@
                 <div class="col-sm-12 col-md-8">
                     <div id="dataTable_filter" class="dataTables_filter">
                         <label class="w-100">Search:
-                            <form action="/admin/woki/1/update" method="GET">
-                                <input name="search_teacher" value="{{ Request::get('search_teacher') }}" type="search" class="form-control form-control-sm w-100" aria-controls="dataTable">
+                            <form action="{{ route('admin.woki-courses.edit', $course->id) }}" method="GET">
+                                <input name="search_art_supply" value="{{ Request::get('search_art_supply') }}" type="search" class="form-control form-control-sm w-100" aria-controls="dataTable">
                                 <input type="submit" style="visibility: hidden;" hidden/>
                             </form>
                         </label>
@@ -607,26 +600,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td style="text-align:center" class="text-nowrap">
-                                        <img src="/assets/images/seeder/category-tech.png" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
-                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Art Brush</p>
-                                    </td>
-                                    <td>description</td>  
-                                    <td>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                            <form action="" method="post">
-                                                @csrf
-                                                @method('put')
-                                                <div style="padding: 0px 2px">
-                                                    <input type="hidden" name="teacher_id" value="1" hidden>
-                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to add this art supply to woki?')">Select Art Supply</button>
-                                                </div>
-                                            </form> 
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach ($artSupplies as $artSupply)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td style="text-align:center" class="text-nowrap">
+                                            <img src="{{ asset($artSupply->image) }}" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
+                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $artSupply->name }}</p>
+                                        </td>
+                                        <td>{{ $artSupply->description }}</td>
+                                        <td>
+                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                <form action="{{ route('admin.woki-courses.attach-detach-art-supply', $course->id) }}" method="post">
+                                                    @csrf
+                                                    @method('put')
+                                                    <div style="padding: 0px 2px">
+                                                        <input type="hidden" name="art_supply_id" value="{{ $artSupply->id }}" hidden>
+                                                        @if ($artSupply->courses()->where('course_id', $course->id)->first())
+                                                            <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to remove this Art Supply from Woki Course?')">Remove</button>
+                                                        @else
+                                                            <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to add this Art Supply to Woki Course?')">Select Art Supply</button>
+                                                        @endif
+                                                    </div>
+                                                </form> 
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -726,12 +725,16 @@ function removeDiv(elem, wrapper_id){
 @if (Session::has('page-option'))
     @if (Session::get('page-option') == 'basic-informations')
         <script>document.getElementById('basic-information-button').click()</script>
+    @elseif (Session::get('page-option') == 'manage-curriculum')
+        <script>document.getElementById('manage-curriculum-button').click()</script>
     @elseif (Session::get('page-option') == 'pricing-and-enrollment')
         <script>document.getElementById('pricing-and-enrollment-button').click()</script>
     @elseif (Session::get('page-option') == 'publish-status')
         <script>document.getElementById('publish-status-button').click()</script>
     @elseif (Session::get('page-option') == 'teacher')
         <script>document.getElementById('teacher-button').click()</script>
+    @elseif (Session::get('page-option') == 'art-supply')
+        <script>document.getElementById('art-supply-button').click()</script>
     @endif
 @endif
 @endsection

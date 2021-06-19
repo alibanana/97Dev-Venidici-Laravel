@@ -168,7 +168,7 @@ class WokiCourseController extends Controller
         $course = new Course;
         $course->course_type_id = 2; // 2 karna Woki
         $course->course_category_id = $validated['course_category_id'];
-        $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/online-courses/');
+        $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/woki-courses/');
         $course->preview_video = $validated['preview_video_link'];
         $course->title = $validated['title'];
         $course->subtitle = $validated['subtitle'];

@@ -31,7 +31,7 @@ class ArtSupplySeeder extends Seeder
         $colourPencils = ArtSupply::create($art_supplies[0]);
         $colourPencils->courses()->attach(3);
 
-        $colourPencils = ArtSupply::create($art_supplies[0]);
+        $colourPencils = ArtSupply::create($art_supplies[1]);
         $colourPencils->courses()->attach(3);
     }
 }

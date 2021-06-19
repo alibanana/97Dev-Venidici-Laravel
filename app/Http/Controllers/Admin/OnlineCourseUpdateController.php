@@ -198,15 +198,12 @@ class OnlineCourseUpdateController extends Controller
             'teacher_id' => 'required'
         ]);
 
-        $teacher = Teacher::findOrFail($validated['teacher_id']);
-
-        $course = Course::findOrFail($course_id);
-        $course->teachers()->attach($validated['teacher_id']);
-
-        $message = $teacher->name . ' has been added to the course.';
+        $result = CourseHelper::attachTeacher(
+            Course::findOrFail($course_id),
+            Teacher::findOrFail($validated['teacher_id']));
 
         return redirect()->route('admin.online-courses.edit', $course_id)
-            ->with('message', $message)
+            ->with('message', $result['message'])
             ->with('page-option', 'teacher');
     }
 
@@ -216,15 +213,12 @@ class OnlineCourseUpdateController extends Controller
             'teacher_id' => 'required'
         ]);
 
-        $teacher = Teacher::findOrFail($validated['teacher_id']);
-
-        $course = Course::findOrFail($course_id);
-        $course->teachers()->detach($validated['teacher_id']);
-
-        $message = $teacher->name . ' has been removed from the course.';
+        $result = CourseHelper::detachTeacher(
+            Course::findOrFail($course_id),
+            Teacher::findOrFail($validated['teacher_id']));
 
         return redirect()->route('admin.online-courses.edit', $course_id)
-            ->with('message', $message)
+            ->with('message', $result['message'])
             ->with('page-option', 'teacher');
     }
 }

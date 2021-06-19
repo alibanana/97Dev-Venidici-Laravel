@@ -96,4 +96,38 @@ class CourseHelper {
         }
     }
 
+    // Function to attach teacher to a course.
+    public static function attachTeacher($course, $teacher) {
+        try {
+            $course->teachers()->attach($teacher->id);
+            $message = $teacher->name . ' has been added to the course.';
+            return [
+                'status' => 'Success',
+                'message' => $message
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
+    }
+
+    // Function to detach teacher from a course.
+    public static function detachTeacher($course, $teacher) {
+        try {
+            $course->teachers()->detach($teacher->id);
+            $message = $teacher->name . ' has been removed from the course.';
+            return [
+                'status' => 'Success',
+                'message' => $message
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
+    }
+
 }

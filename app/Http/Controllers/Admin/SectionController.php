@@ -34,9 +34,15 @@ class SectionController extends Controller
         $section->title = $validated['section-title'];
         $section->save();
 
-        $message = 'Section (' . $section->title  . ') has been added to Online Course (' . $course->title . ')';
+        if ($course->courseType->type == 'Course') {
+            $route = 'admin.online-courses.edit';
+            $message = 'Section (' . $section->title  . ') has been added to Online Course (' . $course->title . ')';
+        } elseif ($course->courseType->type == 'Woki') {
+            $route = 'admin.woki-courses.edit';
+            $message = 'Section (' . $section->title  . ') has been added to Woki Course (' . $course->title . ')';
+        }
 
-        return redirect()->route('admin.online-courses.edit', $course->id)
+        return redirect()->route($route, $course->id)
             ->with('message', $message)
             ->with('page-option', 'manage-curriculum');
     }
@@ -59,7 +65,12 @@ class SectionController extends Controller
             $message = 'No changes was made here.';
         }
 
-        return redirect()->route('admin.online-courses.edit', $section->course->id)
+        if ($section->course->courseType->type == 'Course')
+            $route = 'admin.online-courses.edit';
+        elseif ($section->course->courseType->type == 'Woki')
+            $route = 'admin.woki-courses.edit';
+
+        return redirect()->route($route, $section->course->id)
             ->with('message', $message)
             ->with('page-option', 'manage-curriculum');
     }
@@ -76,9 +87,15 @@ class SectionController extends Controller
 
         $section->delete();
 
-        $message = 'Section (' . $section->title  . ') has been deleted from Online Course (' . $section->course->title . ')';
+        if ($section->course->courseType->type == 'Course') {
+            $route = 'admin.online-courses.edit';
+            $message = 'Section (' . $section->title  . ') has been deleted from Online Course (' . $section->course->title . ')';
+        } elseif ($section->course->courseType->type == 'Woki') {
+            $route = 'admin.woki-courses.edit';
+            $message = 'Section (' . $section->title  . ') has been deleted from Woki Course (' . $section->course->title . ')';
+        }
 
-        return redirect()->route('admin.online-courses.edit', $section->course->id)
+        return redirect()->route($route, $section->course->id)
             ->with('message', $message)
             ->with('page-option', 'manage-curriculum');
     }
