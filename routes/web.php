@@ -118,7 +118,7 @@ Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('c
 /* START OF ONLINE COURSE ROUTING */
 // OnlineCourseController
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
-Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
+Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');s
 
 Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree');
 Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
@@ -319,10 +319,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
 
 
 /* START ADMIN ROUTING */
-//Route::get('/admin/reviews', function () {
-    //return view('admin/reviews');
-//});
-
 Route::get('/admin/forgot-password', function () {
     return view('admin/auth/forgot-password');
 });
@@ -330,75 +326,25 @@ Route::get('/admin/reset-password', function () {
     return view('admin/auth/reset-password');
 });
 
-
-/* START OF INFORMATION CODE*/
-//Route::get('/admin/information', function () {
-    //return view('admin/information/index');
-//});
-//Route::get('/admin/information/create', function () {
-    //return view('admin/information/create');
-//});
-//Route::get('/admin/information/1/update', function () {
-    //return view('admin/information/update');
-//});
-/* END OF INFORMATION CODE */
-
-/* START OF ONLINE COURSE ROUTING */
-/* START OF HASHTAG*/
-Route::get('/admin/hashtags', function () {
-    return view('admin/hashtag/index');
-});
-Route::get('/admin/hashtags/create', function () {
-    return view('admin/hashtag/create');
-});
-Route::get('/admin/hashtags/1/update', function () {
-    return view('admin/hashtag/update');
-});
-/* END OF HASHTAG */
-
-/* START OF ONLINE COURSE ROUTING */
-Route::get('/admin/online-courses/create-video/1', function () {
-    return view('admin/online-course/create-video');
-});
-Route::get('/admin/online-courses/assesments/1', function () {
-    return view('admin/assessment/detail');
-});
-/* END OF ONLINE COURSE ROUTING */
-
 /* START OF ANALYTICS ROUTING */
 Route::get('/admin/analytics/online-course', function () {
     return view('admin/analytics/online-course');
 });
 /* END OF ANALYTICS ROUTING */
 
-
-/* START OF NEWS LETTER ROUTING 
-Route::get('/admin/newsletter', function () {
-    return view('admin/newsletter/index');
-});
- END OF NEWS LETTER ROUTING */
-
-
-/* END OF ADMIN ROUTING */
-
 /* START OF GOOGLE AUTH */
 Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [App\Http\Controllers\SocialController::class, 'handleGoogleCallback']);
 /* END OF GOOGLE AUTH*/
 
-
 /* START OF FOR PUBLIC ROUTING */
-
 Route::get('/for-public/online-course', [PagesController::class, 'online_course_index'])->name('customer.online_course_index');
 Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
-
 /* END OF FOR PUBLIC ROUTING*/
 
 /* START OF FOR CORPORATE ROUTING */
-
 Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
 Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
-
 /* END OF FOR CORPORATE ROUTING*/
 
 
