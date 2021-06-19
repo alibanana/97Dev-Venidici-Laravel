@@ -202,6 +202,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     // WokiCourseController
     Route::get('/woki-courses', [AdminWokiCourseController::class, 'index'])->name('woki-courses.index');
     Route::get('/woki-courses/create', [AdminWokiCourseController::class, 'create'])->name('woki-courses.create');
+    Route::get('/woki-courses/{id}', [AdminWokiCourseController::class, 'show'])->name('woki-courses.show');
     Route::post('/woki-courses', [AdminWokiCourseController::class, 'store'])->name('woki-courses.store');
     Route::delete('/woki-courses/{id}', [AdminWokiCourseController::class, 'destroy'])->name('woki-courses.destroy');
     Route::post('/woki-courses/{id}/set-isfeatured-status-to-opposite', [AdminWokiCourseController::class, 'setIsFeaturedStatusToOpposite'])->name('woki-courses.set-isfeatured-status-to-opposite');
@@ -316,16 +317,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
     Route::get('/donations', [AdminPromotionController::class, 'donations_index'])->name('donations.index');
 });
 
-/* START OF WOKI ROUTING */
-Route::get('/admin/woki/1', function () {
-    return view('admin/woki/detail');
-});
-/* END OF WOKI ROUTING */
 
 /* START ADMIN ROUTING */
-//Route::get('/admin/login', function () {
-    //return view('admin/auth/login');
-//});
 //Route::get('/admin/reviews', function () {
     //return view('admin/reviews');
 //});

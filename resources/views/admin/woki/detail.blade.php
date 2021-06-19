@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Online Course Detail')
+@section('title', 'Venidici Woki Course Detail')
 
 @section('container')
 
@@ -22,17 +22,31 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between">
-            <h1 class="mb-0 mb-3 text-gray-800">woki title</h1>
+            <h1 class="mb-0 mb-3 text-gray-800">{{ $course->title }}</h1>
         </div>
-        <h4 style="">Rp. 100000</h4>
+        @if ($course->price == 0)
+            <h4 style="">FREE</h4>
+        @else
+            <h4 style="">Rp. {{ $course->price }}</h4>
+        @endif
         <div style="display: flex;font-size:1.5vw" class="mb-4">
-            4.5
+            {{ $course->average_rating }}
             <div style="margin-left:0.5vw">
-                <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star small-text"></i>
-                <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star small-text"></i>
-                <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star small-text"></i>
-                <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star small-text"></i>
+                @for ($i = 1; $i < 6; $i++)
+                    @if ($i <= $course->average_rating)
+                        @if ($i == 1)
+                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                        @else
+                            <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star"></i>
+                        @endif
+                    @else
+                        @if ($i == 1)
+                            <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                        @else
+                            <i style="margin-left:0.2vw;color:#B3B5C2" class="fas fa-star"></i>
+                        @endif
+                    @endif
+                @endfor
             </div>
             
         </div>
@@ -42,7 +56,7 @@
                     <div class="card bg-light text-black shadow">
                         <div class="card-body">
                             Total Course Sold
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">20</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($course->users) }}</div>
                         </div>
                     </div>
 
@@ -77,8 +91,8 @@
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
                                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'oldest']) }}" @if (Request::get('sort') == 'oldest') selected @endif>Oldest</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}" @if (Request::get('sort') == 'oldest') selected @endif>Oldest</option>
                                     </select>
                                 </label>
                             </div>
@@ -113,18 +127,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Fernandha Dzaky</td>
-                                                <td>Fernandhadzaky@hotmail.com</td>
-                                                <td>08111377893</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Alifio Rasyid</td>
-                                                <td>official.alifio@gmail.com</td>
-                                                <td>08123456789</td>
-                                            </tr>
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    @if ($user->userDetail()->exists() && !is_null($user->userDetail->telephone))                                                
+                                                        <td>{{ $user->userDetail->telephone }}</td>
+                                                    @else
+                                                        <td style="color: red">Phone number not available!</td>
+                                                    @endif
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

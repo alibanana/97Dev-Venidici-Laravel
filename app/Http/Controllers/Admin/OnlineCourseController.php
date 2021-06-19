@@ -139,6 +139,10 @@ class OnlineCourseController extends Controller
     // Show Admin -> Online Course Detail Page
     public function show(Request $request, $id) {
         $course = Course::findOrFail($id);
+
+        if ($course->courseType->type == 'Woki')
+            return redirect()->route('admin.woki-courses.show', $id); 
+
         $users = $course->users();
 
         if ($request->has('sort')) {

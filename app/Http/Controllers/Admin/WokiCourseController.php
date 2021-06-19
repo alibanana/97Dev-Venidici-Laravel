@@ -136,6 +136,44 @@ class WokiCourseController extends Controller
         return view('admin/woki/index', compact('course_categories', 'courses', 'courses_data'));
     }
 
+    // Show Admin -> Woki Course Detail Page
+    public function show(Request $request, $id) {
+        $course = Course::findOrFail($id);
+
+        if ($course->courseType->type == 'Course')
+            return redirect()->route('admin.online-courses.show', $id); 
+
+        $users = $course->users();
+
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $users = $users->orderBy('created_at', 'desc');
+            } else {
+                $users = $users->orderBy('created_at');
+            }
+        } else {
+            $users = $users->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('admin.woki-courses.show', $id, request()->except('search'));
+                return redirect($url);
+            } else {
+                $search = $request->search;
+
+                $users = $users->where(function ($query) use ($search) {
+                    $query->where([['name', 'like', "%".$search."%"]])
+                    ->orWhere([['email', 'like', "%".$search."%"]]);
+                });
+            }
+        }
+
+        $users = $users->get();
+
+        return view('admin/woki/detail', compact('course', 'users'));
+    }
+
     // Shows Admin -> Create Woki Course Page.
     public function create() {
         $course_categories = CourseCategory::select('id', 'category')->get();

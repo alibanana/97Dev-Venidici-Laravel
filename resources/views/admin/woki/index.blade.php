@@ -176,7 +176,7 @@
                                                                 </div>
                                                             </form>
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.online-courses.show', $course->id) }}">View Detail</a>
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.woki-courses.show', $course->id) }}">View Detail</a>
                                                             </div>
                                                             <form action="{{ route('admin.woki-courses.set-publish-status-to-opposite', $course->id) }}" method="post">
                                                                 @csrf
