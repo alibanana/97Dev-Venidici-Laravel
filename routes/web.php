@@ -118,7 +118,7 @@ Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('c
 /* START OF ONLINE COURSE ROUTING */
 // OnlineCourseController
 Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
-Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');s
+Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
 
 Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree');
 Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
