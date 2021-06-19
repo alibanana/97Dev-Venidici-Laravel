@@ -27,7 +27,7 @@
     <div class="col-8 p-0">
         <div style="margin-top:2vw">
             <iframe style="width:100%;height:35vw;border-radius:10px;display:block;object-fit: cover" 
-                src="{{$content->youtube_link}}">
+                src="{{ $content->youtube_link . '?controls=0' }}" allowfullscreen>
             </iframe>
         </div>
         <!-- START OF DESCRIPTION SECTION -->

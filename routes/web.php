@@ -121,7 +121,6 @@ Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('on
 Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
 
 Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree');
-Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
 Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware('auth');
 Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
 

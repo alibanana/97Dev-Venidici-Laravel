@@ -197,4 +197,30 @@ class CourseHelper {
         }
     }
 
+    // Calculate course's average rating.
+    public static function calculateAverageRating($id) {
+        try {
+            $course = Course::findOrFail($id);
+
+            $totalReviewScore = 0;
+            foreach ($course->reviews as $review) {
+                $totalReviewScore += $review->review;
+            }
+
+            $course->average_rating = $totalReviewScore / count($course->reviews);
+            $course->save();
+
+            return [
+                'status' => 'Success',
+                'data' => $course,
+                'message' => "Course's average rating has been updated."
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
+    }
+
 }

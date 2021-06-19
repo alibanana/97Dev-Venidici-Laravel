@@ -90,36 +90,36 @@
                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0.5vw;margin-right:3vw;color:#3B3C43">Bagaimana course ini untuk kamu?</p>
                 <form action="{{ route('customer.review.store') }}" id="review-section" method="POST">
                 @csrf
-                <div  id="review-area">
-                    <div class="rate" style="margin-top:1vw" >
-                        <input type="radio" id="star5" name="rating" value="5" />
-                        <label for="star5" title="text">5 stars</label>
-                        <input type="radio" id="star4" name="rating" value="4" />
-                        <label for="star4" title="text">4 stars</label>
-                        <input type="radio" id="star3" name="rating" value="3" />
-                        <label for="star3" title="text">3 stars</label>
-                        <input type="radio" id="star2" name="rating" value="2" />
-                        <label for="star2" title="text">2 stars</label>
-                        <input type="radio" id="star1" name="rating" value="1" />
-                        <label for="star1" title="text">1 star</label>
+                    <div  id="review-area">
+                        <div class="rate" style="margin-top:1vw" >
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        </div>
+                        @error('rating')
+                            <br>
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <textarea class="normal-text" name="description" placeholder="Masukan review anda disini" id="" style="width:100%;background: #FFFFFF;border: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 5px;margin-top:1vw;padding:0.5vw" rows="4"></textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="hidden" name="course_id" value="{{$course->id}}">
+                        <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                            <button type="submit" name="action" value="completed_course" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Submit</button>
+                        </div>
                     </div>
-                    @error('rating')
-                    <br>
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <textarea class="normal-text" name="description" placeholder="Masukan review anda disini" id="" style="width:100%;background: #FFFFFF;border: 2px solid #2B6CAA;box-sizing: border-box;border-radius: 5px;margin-top:1vw;padding:0.5vw" rows="4"></textarea>
-                    @error('description')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <input type="hidden" name="course_id" value="{{$course->id}}">
-                    <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                    <button type="submit" name="action" value="completed_course" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Submit</button>
-                    </div>
-                </div>
                 </form>
             </div>
             @endif

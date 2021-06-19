@@ -120,8 +120,9 @@
             </p>
         </div>
         <!-- END OF TENTANG ONLINE COURSE -->
-        @if(Auth::check())
+
         <!-- START OF REVIEW SECTION -->
+        @if(Auth::check())
             @if(session('review_message'))
                 <!-- ALERT MESSAGE -->
                 <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
@@ -130,44 +131,47 @@
                 </div>
                 <!-- END OF ALERT MESSAGE -->
             @endif
-        <form action="{{ route('customer.review.store') }}" id="review-section" method="POST">
-        @csrf
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4vw">
-            <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px">Ulasan dari pelajar</p>
-            <p onclick="openReview()" id="add-review-button" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Tambah Ulasan</p>                
-        </div>
-        <div style="display:none" id="review-area">
-            <div class="rate" style="margin-top:1vw" >
-                <input type="radio" id="star5" name="rating" value="5" />
-                <label for="star5" title="text">5 stars</label>
-                <input type="radio" id="star4" name="rating" value="4" />
-                <label for="star4" title="text">4 stars</label>
-                <input type="radio" id="star3" name="rating" value="3" />
-                <label for="star3" title="text">3 stars</label>
-                <input type="radio" id="star2" name="rating" value="2" />
-                <label for="star2" title="text">2 stars</label>
-                <input type="radio" id="star1" name="rating" value="1" />
-                <label for="star1" title="text">1 star</label>
-            </div>
-            @error('rating')
-            <br>
-                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-            <textarea class="normal-text" name="description" placeholder="Masukan review anda disini" id="" style="width:100%;background: #FFFFFF;border: 2px solid #C4C4C4;box-sizing: border-box;border-radius: 5px;margin-top:1vw;padding:0.5vw" rows="4"></textarea>
-            @error('description')
-                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-            <input type="hidden" name="course_id" value="{{$course->id}}">
-            <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
-                <button type="submit" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
-            </div>
-        </div>
-        </form>
+            <form action="{{ route('customer.review.store') }}" id="review-section" method="POST">
+            @csrf
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4vw">
+                    <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px">Ulasan dari pelajar</p>
+                    <p onclick="openReview()" id="add-review-button" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Tambah Ulasan</p>                
+                </div>
+                <div style="display:none" id="review-area">
+                    <div class="rate" style="margin-top:1vw" >
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label for="star1" title="text">1 star</label>
+                    </div>
+                    @error('rating')
+                        <br>
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                    <textarea class="normal-text" name="description" placeholder="Masukan review anda disini" id="" style="width:100%;background: #FFFFFF;border: 2px solid #C4C4C4;box-sizing: border-box;border-radius: 5px;margin-top:1vw;padding:0.5vw" rows="4"></textarea>
+                    @error('description')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                    <input type="hidden" name="course_id" value="{{$course->id}}">
+                    
+                    <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                        <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
+                        <button type="submit" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
+                    </div>
+                </div>
+            </form>
         @endif
 
 
@@ -205,9 +209,6 @@
         <div style="background-color:#2B6CAA;height:2vw;text-align:center;border-radius:5px;margin-top:1vw">
         <i class="fas fa-sort-down sub-description" style="color:#FFFFFF"></i>
         </div>
-        
-        
-        
         
     </div>
     <!-- END OF REVIEW SECTION -->

@@ -97,16 +97,15 @@ class OnlineCourseController extends Controller
     }
 
     // Shows the details for each course.
-    public function show($id){
+    public function show($id) {
         $agent = new Agent();
-        if($agent->isPhone()){
+        if($agent->isPhone())
             return view('client/mobile/under-construction');
-        }
+
         $course = Course::findOrFail($id);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         
         if (Auth::check()) {
-
             $this->resetNavbarData();
 
             $notifications = $this->notifications;
@@ -115,20 +114,18 @@ class OnlineCourseController extends Controller
             $cart_count = $this->cart_count;
 
             return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications'));
-        } else {
-            return view('client/online-course/detail', compact('course','reviews'));
         }
 
+        return view('client/online-course/detail', compact('course','reviews'));
     }
 
 
 
-    public function learn($course_id, $section_content_id)
-    {   
+    public function learn($course_id, $section_content_id) {
         $agent = new Agent();
-        if($agent->isPhone()){
+        if($agent->isPhone())
             return view('client/mobile/under-construction');
-        }
+        
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
@@ -146,10 +143,6 @@ class OnlineCourseController extends Controller
         
         $assessment = $course->assessment;
         $content = SectionContent::findOrFail($section_content_id);
-
-
-        
-
         
         //check if user has seen the content or not
         $info_users = explode(',', $content->hasSeen);
@@ -158,8 +151,8 @@ class OnlineCourseController extends Controller
         foreach($info_users as $user_id)
         {
           // if the user has seen the content
-          if($user_id == Auth::user()->id)
-            $infoHasSeen = TRUE;
+            if($user_id == Auth::user()->id)
+                $infoHasSeen = TRUE;
         }        
 
         //if user has not seen the content
@@ -168,10 +161,6 @@ class OnlineCourseController extends Controller
             $content->save();
         }
 
-
-
-
-                
         $informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
         return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations', 'notifications'));
