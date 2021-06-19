@@ -254,7 +254,6 @@ END OF OUR PROGRAMS SECTION -->
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                 <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
                                 @foreach($course->teachers as $teacher)
-
                                     @if ($loop->last && count($course->teachers) != 1)
                                     dan
                                     @elseif (!$loop->first)
@@ -264,10 +263,9 @@ END OF OUR PROGRAMS SECTION -->
                                 @endforeach
                                 </p>
                                 @if ($course->total_duration)
-                                    <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">{{ $course->total_duration }} mins</p>
-                                    @else
+                                    <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">{{ explode(',', $course->total_duration)[0] }} mins</p>
+                                @else
                                     <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">- mins</p>
-
                                 @endif
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">

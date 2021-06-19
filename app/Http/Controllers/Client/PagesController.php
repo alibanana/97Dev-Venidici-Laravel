@@ -87,8 +87,6 @@ class PagesController extends Controller
                     'online_courses','cart_count', 'notifications', 'transactions','informations','pengajar_positions'));
         }
 
-        
-
         return view('client/index', 
             compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','pengajar_positions'));
     }

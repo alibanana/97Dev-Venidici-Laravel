@@ -15,9 +15,7 @@
             <div style="display: flex;margin-top:2vw;">
                 <div  class="blue-input-form" style="display: flex;align-items:center">
                     <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
-                  
                     <input type="text" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);" placeholder="Course Title">
-                 
                 </div>
                 <div style="margin-left: 1vw;">
                     <select class="blue-input-form small-text" style="height:100%" aria-label="">
@@ -965,7 +963,6 @@ END OF OUR PROGRAMS SECTION -->
                             <div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                 <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
                                 @foreach($course->teachers as $teacher)
-
                                     @if ($loop->last && count($course->teachers) != 1)
                                     dan
                                     @elseif (!$loop->first)
@@ -975,10 +972,9 @@ END OF OUR PROGRAMS SECTION -->
                                 @endforeach
                                 </p>
                                 @if ($course->total_duration)
-                                    <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">{{ $course->total_duration }} mins</p>
-                                    @else
+                                    <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">{{ explode(',', $course->total_duration)[0] }} mins</p>
+                                @else
                                     <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">- mins</p>
-
                                 @endif
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">

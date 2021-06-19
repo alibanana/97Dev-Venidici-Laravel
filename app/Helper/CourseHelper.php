@@ -127,6 +127,42 @@ class CourseHelper {
         }
     }
 
+    // Function to update the course's total_duration.
+    public static function updateTotalDuration($id) {
+        try {
+            $course = Course::findOrFail($id);
+
+            $newTotalDuration = 0;
+            foreach ($course->sections as $section) {
+                foreach ($section->sectionContents as $content) {
+                    $newTotalDuration += $content->duration;
+                }
+            }
+
+            if ($newTotalDuration == 0) {
+                $course->total_duration = null;
+            } else {
+                $totalDurationMinutes = floor($newTotalDuration / 60);
+                $totalDurationSeconds = $newTotalDuration - ($totalDurationMinutes * 60);
+                $newTotalDurationConverted = $totalDurationMinutes . ',' . $totalDurationSeconds;
+                $course->total_duration = $newTotalDurationConverted;
+            }
+            
+            $course->save();
+
+            return [
+                'status' => 'Success',
+                'data' => $course,
+                'message' => "Course's total duration has been updated."
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
+    } 
+
     // Function to attach teacher to a course.
     public static function attachTeacher($course, $teacher) {
         try {

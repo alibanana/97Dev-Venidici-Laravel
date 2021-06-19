@@ -185,7 +185,7 @@ class OnlineCourseUpdateController extends Controller
             'publish_status' => 'required'
         ]);
 
-        $result = Course::updatePublishStatusById($id, $validated['publish_status']);
+        $result = CourseHelper::updatePublishStatusById($id, $validated['publish_status']);
 
         return redirect()->route('admin.online-courses.edit', $id)
             ->with('message', $result['message'])

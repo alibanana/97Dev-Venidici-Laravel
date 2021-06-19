@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Helper\CourseHelper;
 
 use App\Models\Course;
 use App\Models\Section;
@@ -86,6 +87,8 @@ class SectionController extends Controller
         }
 
         $section->delete();
+
+        $updateTotalDurationResults = CourseHelper::updateTotalDuration($section->course->id);
 
         if ($section->course->courseType->type == 'Course') {
             $route = 'admin.online-courses.edit';

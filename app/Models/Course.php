@@ -21,7 +21,7 @@ class Course extends Model
         'priceWithArtKit', // nullable
         'enrollment_status', // default -> Open
         'publish_status', // default -> Draft
-        'total_duration', // nullable
+        'total_duration', // nullable -> string format (minutes, seconds)
         'average_rating', // default -> 0
         'isDeleted', // default -> 0
         'isFeatured' // default -> 0

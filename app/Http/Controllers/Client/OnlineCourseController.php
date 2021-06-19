@@ -49,7 +49,6 @@ class OnlineCourseController extends Controller
         $this->cart_count = Cart::with('course')->where('user_id', auth()->user()->id)->count();
     }
 
-
     // Shows the Client's Main Online-Course Page.
     public function index(Request $request) {
         $agent = new Agent();
@@ -84,7 +83,6 @@ class OnlineCourseController extends Controller
         $courses = $courses->where('course_type_id',1)->get();
 
         if (Auth::check()) {
-
             $this->resetNavbarData();
 
             $notifications = $this->notifications;
@@ -93,9 +91,9 @@ class OnlineCourseController extends Controller
             $cart_count = $this->cart_count;
 
             return view('client/online-course/index', compact('cart_count','transactions','courses','course_categories','informations','notifications'));
-        } else {
-            return view('client/online-course/index',compact('course_categories','courses'));
         }
+
+        return view('client/online-course/index',compact('course_categories','courses'));
     }
 
     // Shows the details for each course.

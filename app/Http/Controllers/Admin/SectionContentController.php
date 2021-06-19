@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helper\Helper;
+use App\Helper\CourseHelper;
 
 use App\Models\Section;
 use App\Models\SectionContent;
@@ -85,6 +86,8 @@ class SectionContentController extends Controller
             $content->save();
         }
 
+        $updateTotalDurationResults = CourseHelper::updateTotalDuration($content->section->course->id);
+
         if ($content->wasChanged()) {
             $message = "Section's Content (" . $content->title  . ') has been updated';
         } else {
@@ -109,6 +112,8 @@ class SectionContentController extends Controller
             unlink($content->attachment);
         
         $content->delete();
+
+        $updateTotalDurationResults = CourseHelper::updateTotalDuration($content->section->course->id);
 
         $message = 'Content (' . $content->title  . ') has been deleted from the database';
 
