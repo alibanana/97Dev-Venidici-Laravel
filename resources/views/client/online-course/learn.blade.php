@@ -38,57 +38,57 @@
             </div>
             <div style="margin-top:2vw" class="user-content" id="deskripsi">
                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">{{$content->description}}</p>
-                @if($content->id == $last_content_id)
+                @if($content->id == $last_content_id && $course->course_type_id == 1)
                 <div>
-                <p class="bigger-text"style="font-family:Rubik Medium;text-decoration-color: #F7F7F7;margin-top:1vw;">Assessment</p>
-                <div style="display:flex;justify-content:space-between">
-                    <div>
+                    <p class="bigger-text"style="font-family:Rubik Medium;text-decoration-color: #F7F7F7;margin-top:1vw;">Assessment</p>
+                    <div style="display:flex;justify-content:space-between">
+                        <div>
                         <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">{{$assessment->title}}</p>
                         <!--
                         <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">Durasi {{floor(($assessment->duration / 60) % 60)}}:@if(strlen($assessment->duration % 60) == 1)<span>0</span>@endif{{$assessment->duration % 60}}</p>
                         -->
                         <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">Durasi {{$assessment->duration}} menit</p>
-                    </div>
+                        </div>
 
-                    @php
-                    $hasSeenAll = TRUE;
-                        $x = 1;
-                        foreach($sections as $section){
-                            foreach($section->sectionContents as $content){
-                                $all_users = explode(',', $content->hasSeen);
-                                foreach($all_users as $user_id)
-                                {
-                                    if($user_id == auth()->user()->id)
+                        @php
+                        $hasSeenAll = TRUE;
+                            $x = 1;
+                            foreach($sections as $section){
+                                foreach($section->sectionContents as $content){
+                                    $all_users = explode(',', $content->hasSeen);
+                                    foreach($all_users as $user_id)
                                     {
-                                        $x=1;
-                                        break;
+                                        if($user_id == auth()->user()->id)
+                                        {
+                                            $x=1;
+                                            break;
+                                        }
+                                        if($x == count($all_users) && $user_id != auth()->user()->id)
+                                            $hasSeenAll = FALSE;
+                                        $x++;
                                     }
-                                    if($x == count($all_users) && $user_id != auth()->user()->id)
-                                        $hasSeenAll = FALSE;
-                                    $x++;
                                 }
                             }
-                        }
-                    @endphp
+                        @endphp
 
-                    @if($hasSeenAll)
-                    <button onclick="window.open('{{ route('online-course-assessment.show', $course->id) }}','_self');" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Buka Assesment</button>
-                    @else
-                    <div style="text-align:right">
-                        <button  class="normal-text btn-grey" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw;border-radius:10px">Buka Assesment</button>
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#CE3369;margin-top:1vw">*Harap selesaikan course sebelum mulai assesment*</p>
+                        @if($hasSeenAll)
+                        <button onclick="window.open('{{ route('online-course-assessment.show', $course->id) }}','_self');" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw">Buka Assesment</button>
+                        @else
+                        <div style="text-align:right">
+                            <button  class="normal-text btn-grey" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.3vw 2vw;border-radius:10px">Buka Assesment</button>
+                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#CE3369;margin-top:1vw">*Harap selesaikan course sebelum mulai assesment*</p>
+                        </div>
+                        @endif
                     </div>
-                    @endif
-                </div>
-                <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Deskripsi Assesment</p>
-                <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">{{$assessment->description}}</p>
-                <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Persyaratan</p>
-                @foreach($assessment->assessmentRequirements as $req)
-                    <div style="display:flex;align-items:baseline;margin-top:0.5vw">
-                        <i style="color:#C4C4C4" class="fas fa-circle very-small-text"></i>
-                        <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">{{$req->requirement}}</p>
-                    </div>
-                @endforeach
+                    <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Deskripsi Assesment</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">{{$assessment->description}}</p>
+                    <p class="bigger-text" style="font-family: Rubik Medium;margin-top:2vw;margin-bottom:0px;color:#C4C4C4;">Persyaratan</p>
+                    @foreach($assessment->assessmentRequirements as $req)
+                        <div style="display:flex;align-items:baseline;margin-top:0.5vw">
+                            <i style="color:#C4C4C4" class="fas fa-circle very-small-text"></i>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">{{$req->requirement}}</p>
+                        </div>
+                    @endforeach
                 </div>
                 @endif
             </div>

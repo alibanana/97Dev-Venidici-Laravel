@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\Redeem;
 use App\Models\Promotion;
+use App\Models\Course;
 use Jenssegers\Agent\Agent;
 
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +65,20 @@ class DashboardController extends Controller
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
 
-        $usableStarsCount = Helper::getUsableStars(auth()->user());
+        $usableStarsCount = Helper::getUsableStars(auth()->user());       
+        $mytime = Carbon::now();
+        $mytime->setTimezone('Asia/Phnom_Penh');
+        $today = explode(' ', $mytime);
+        //check live woki and change status to complete if date time has passed
+        foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course){
+            if($today[0] >= $course->wokiCourseDetail->event_date && $course->wokiCourseDetail->end_time <= $today[1]){
+                $course->pivot->status = 'completed';
+                $course->pivot->save();
+
+            }
+        }
+
+
 
         return view('client/user-dashboard',
             compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount'));

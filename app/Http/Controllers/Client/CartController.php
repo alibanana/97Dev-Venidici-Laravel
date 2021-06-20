@@ -141,7 +141,7 @@ class CartController extends Controller
         $noWoki = TRUE;
         foreach($carts as $cart)
         {
-            if($cart->course->course_type_id == 2)
+            if($cart->withArtOrNo)
                 $noWoki = FALSE;
         }
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
@@ -151,19 +151,16 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        $item = Cart::where('course_id', $request->course_id)->where('user_id', $request->user_id);
-
         // handle if online course is already in cart
         $users_cart = Cart::where('course_id', $request->course_id)->where('user_id', $request->user_id)->get();
         foreach($users_cart as $course)
         {
             if($course->course->course_type_id == 1 && $request->action != 'buyNow')
-                return redirect()->back()->with('success', 'Item sudah ada di cart');
+            return redirect()->back()->with('success', 'Item sudah ada di cart');
             elseif($course->course->course_type_id == 1 && $request->action == 'buyNow')
-                return redirect()->route('customer.cart.index');
+            return redirect()->route('customer.cart.index');
         }
-
-        
+        $item = Cart::where('course_id', $request->course_id)->where('user_id', $request->user_id)->where('withArtOrNo',$request->withArtOrNo);
         if ($item->count()) {
             //increment quantity
             $item->increment('quantity');
@@ -182,7 +179,8 @@ class CartController extends Controller
                 'user_id'   => $request->user_id,
                 'quantity'      => $request->quantity,
                 'price'         => $request->price,
-                'weight'        => $request->weight
+                'weight'        => $request->weight,
+                'withArtOrNo'   => $request->withArtOrNo
             ]);
         }
        

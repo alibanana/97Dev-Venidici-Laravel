@@ -361,7 +361,6 @@ class CheckoutController extends Controller
             return redirect('/transaction-detail/'.$no_invoice.'#payment-success');
         }
         
-
         // Remove non-numeric characters before validation.
         if ($request->has('phone'))
             $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
@@ -505,7 +504,8 @@ class CheckoutController extends Controller
         $link = '/transaction-detail/'.$payment_object['data']['id'];
         //email if there's no woki
         Mail::to(auth()->user()->email)->send(new CheckoutMail($invoice,$courses_string,$link));
-            
+        return redirect('/transaction-detail/'.$payment_object['data']['id'].'#payment-created');
+
     }
     
     public function transactionDetail($id){

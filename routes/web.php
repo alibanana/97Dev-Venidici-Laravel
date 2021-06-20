@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
+use App\Http\Controllers\Client\WokiController;
 use App\Http\Controllers\Client\AssessmentController;
 use App\Http\Controllers\Client\KrestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -123,6 +124,13 @@ Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name
 Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree');
 Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware('auth');
 Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
+
+
+// WokiController
+Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
+Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');
+
+
 
 Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
 // ReviewController

@@ -38,7 +38,7 @@
                 </iframe>
             </div>
 
-            <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw;margin-bottom:0px"><i class="fas fa-user-graduate"></i> <span style="margin-left:1vw">150 Pelajar</span></p>
+            <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-top:2vw;margin-bottom:0px"><i class="fas fa-user-graduate"></i> <span style="margin-left:1vw">{{count($course->users)}} Pelajar</span></p>
             <div style="display:flex;align-items:center;margin-top:0.5vw">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                 <div style="display: flex;justify-content:center;margin-left:1vw">
@@ -174,7 +174,11 @@
             </form>
         @endif
 
-
+        @if(count($reviews) == 0)
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum ada review.</span></p>
+            </div>
+        @else
         <div style="overflow:scroll;height:30vw;margin-top:3vw">
             <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;">
             @foreach($reviews as $review)
@@ -220,6 +224,7 @@
         <div style="background-color:#2B6CAA;height:2vw;text-align:center;border-radius:5px;margin-top:1vw">
         <i class="fas fa-sort-down sub-description" style="color:#FFFFFF"></i>
         </div>
+        @endif
         
     </div>
     <!-- END OF REVIEW SECTION -->

@@ -107,7 +107,8 @@
                                 <div style="display:flex;align-items:flex-start">
                                     <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">{{$cart->course->title}}</p>
                                 </div>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">@foreach($cart->course->teachers as $teacher)
+                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">
+                                @foreach($cart->course->teachers as $teacher)
                                     <span style="font-family:Rubik Bold">
                                         @if($loop->last && count($cart->course->teachers) != 1)
                                         dan
@@ -159,87 +160,53 @@
                 <div style="display:flex;margin-top:1vw">
                     <div class="cart-card-grey">
                         <div style="display:flex;align-items:center;width:70%">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            </div>
-                            <img src="/assets/images/client/Display_Picture_Dummy.png" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                            <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
                             <div style="margin-left:1vw">
-                                <div style="display:flex;align-items:flex-start">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">Ini adalah judul pelatihan yang ada panjangnya sampe 3 baris ke bawah seperti ini</p>
-                                    <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-three" data-toggle="collapse" href="#woki-collapse-three" class="fas fa-caret-down small-heading"></i>
+                                <div style="display:flex;align-items:flex-start;width:18vw;">
+                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                    @if($cart->course->priceWithArtKit != null)
+                                    <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-{{$cart->id}}" data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
+                                    @endif
                                 </div>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Mr. Raditya Dika</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
+                                @foreach($cart->course->teachers as $teacher)
+                                <span style="font-family:Rubik Bold">
+                                    @if($loop->last && count($cart->course->teachers) != 1)
+                                    dan
+                                    @elseif(!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                </span>
+                                @endforeach
+                                </p>
                             </div>
                         </div>
                         <div style="display:flex;align-items:center">
                                 <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
-                                <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">                                    
-                                    <i class="fas fa-plus" style="margin-right:0.5vw;color:#C4C4C4"></i>
-                                </div>
-                                <input type="text" name="qty" class="qty-input normal-text" value="1" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
-                                <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
-
-                                    <i class="fas fa-minus" style="margin-left:0.5vw;color:#C4C4C4"></i>
-                                </div>
+                                <input type="text" name="qty" class="qty-input normal-text" value="{{$cart->quantity}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
                                 
                             </div>
-                            <div style="width:7.5vw">
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($course->price, 0, ',', ',') }}</p>
+                            <div style="width:7.5vw;text-align:right">
+                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
                             </div>                        
                         </div>
                     </div>
-                    <!--
-                    <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                        <div class="cart-card-blue" style="height:100%">
-                            <form action="" method="post">
-                                @csrf
-                                @method('delete')
-                                    <button style="background:none;border:none;color:#FFFFFF" class="bigger-text" type="submit" onclick="return confirm('Are you sure you want to delete this item?')"><i class="fas fa-edit"></i></button>
-                            </form> 
-                        </div>
-                        <div class="cart-card-red" style="height:100%">
-                            <form action="" method="post">
-                                @csrf
-                                @method('delete')
-                                    <button style="background:none;border:none;color:#FFFFFF" class="bigger-text" type="submit" onclick="return confirm('Are you sure you want to delete this item?')"><i class="fas fa-trash-alt"></i></button>
-                            </form> 
-                        </div>
-                    </div>
-                    -->
-                    <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                        
-                        <div class="cart-card-red" style="height:100%">
-                            <form action="" method="post">
-                                @csrf
-                                @method('delete')
-                                    <button style="background:none;border:none;color:#FFFFFF" class="bigger-text" type="submit" onclick="return confirm('Are you sure you want to delete this item?')"><i class="fas fa-trash-alt"></i></button>
-                            </form> 
-                        </div>
-                    </div>
                 </div>
-                <div class="collapse" id="woki-collapse-three" style="margin-top:1vw;margin-left:3vw">
+                <div class="collapse" id="woki-collapse-{{$cart->id}}" style="margin-top:1vw;margin-left:3vw">
+                    @foreach($cart->course->artSupplies as $supply)
                     <!-- START OF ONE ITEM COLLAPSE -->
                     <div style="display:flex;align-items:center;margin-top:1.5vw">
                         <i style="color:#2B6CAA" class="fas fa-circle normal-text"></i>
-                        <img src="/assets/images/client/Art_Supply_Dummy.png" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid" alt="COURSE THUMBNAIL">
+                        <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid" alt="COURSE THUMBNAIL">
                         <div style="margin-left:1vw">
-                            <p class="normal-text" style="font-family:Rubik Bold;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;margin-bottom:0.5vw">Art supply for the course</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">1 Book, 5 type of brushes, paint pallete</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Quantity: <span style="font-family:bold">1</span></p>
+                            <p class="normal-text" style="font-family:Rubik Bold;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;margin-bottom:0.5vw">{{$supply->name}}</p>
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{$supply->description}}</p>
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Quantity: <span style="font-family:bold">{{$cart->quantity}}</span></p>
                         </div>
                     </div>
                     <!-- END OF ONE ITEM COLLAPSE -->
-                    <!-- START OF ONE ITEM COLLAPSE -->
-                    <div style="display:flex;align-items:center;margin-top:1.5vw">
-                        <i style="color:#2B6CAA" class="fas fa-circle normal-text"></i>
-                        <img src="/assets/images/client/Art_Supply_Dummy.png" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid" alt="COURSE THUMBNAIL">
-                        <div style="margin-left:1vw">
-                            <p class="normal-text" style="font-family:Rubik Bold;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;margin-bottom:0.5vw">Art supply for the course</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">1 Book, 5 type of brushes, paint pallete</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Quantity: <span style="font-family:bold">1</span></p>
-                        </div>
-                    </div>
-                    <!-- END OF ONE ITEM COLLAPSE -->
+                    @endforeach
                 </div>
                 <!-- END OF ONE WOKI CARD -->
                 @endif
@@ -448,23 +415,24 @@
 
                     </div>
                     @if(Auth::user()->club != null)
-                    @php
-                        $discount_club_price = 0;
-                        if(Auth::user()->club == 'bike')
-                            $discount_club_price = 2500;
-                        elseif(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
-                            $discount_club_price = 5000;
-                    @endphp
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
-                        <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Diskon Venidici Club</p>
-                        <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discount_club_price, 0, ',', ',') }}</p>
-                    </div>
-                    @else
                         @php
-                        $discount_club_price = 0;
+                            $discount_club_price = 0;
+                            if(Auth::user()->club == 'bike')
+                                $discount_club_price = 2500;
+                            elseif(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
+                                $discount_club_price = 5000;
                         @endphp
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Diskon Venidici Club</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discount_club_price, 0, ',', ',') }}</p>
+                        </div>
+                    @else
+                            @php
+                            $discount_club_price = 0;
+                            @endphp
                     @endif
-                    @if(!$noWoki)
+                @if(!$noWoki)
+
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Shipping cost</p>
                         <input type="hidden" name="cost_courier" value="{{$shipping_cost}}">
@@ -476,26 +444,29 @@
                         Rp {{ number_format($shipping_cost, 0, ',', ',') }}</p>
                         @endif
                     </div>
+                        @php
+                        $discount_club_shipping = 0;
+
+                        @endphp
                         @if(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
 
-                        @php
-                            $discount_club_shipping = 0;
-                            if(Auth::user()->club == 'car')
-                                $discount_club_shipping = 5000;
-                            elseif(Auth::user()->club == 'jet')
-                                $discount_club_shipping = 10000;
-                        @endphp
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Diskon Venidici Club (Shipping)</p>
-                            <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discount_club_shipping, 0, ',', ',') }}</p>
-                        </div>
+                            @php
+                                if(Auth::user()->club == 'car')
+                                    $discount_club_shipping = 5000;
+                                elseif(Auth::user()->club == 'jet')
+                                    $discount_club_shipping = 10000;
+                            @endphp
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Diskon Venidici Club (Shipping)</p>
+                                <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discount_club_shipping, 0, ',', ',') }}</p>
+                            </div>
                         @endif
 
-                    @else
+                @else
                         @php
                             $discount_club_shipping = 0;
                         @endphp
-                    @endif 
+                @endif 
                     @if($total_price != 0)
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                         @if(Session::get('promotion_code'))
@@ -540,8 +511,20 @@
                         <input type="hidden" name="time" value="{{$time}}">
                         <input type="hidden" name="name" value="{{Auth::user()->name}}">
                         <input type="hidden" name="phone" value="{{Auth::user()->userDetail->telephone}}">
-                        <input type="hidden" name="province" value="{{Request::get('province')}}">
-                        <input type="hidden" name="city" value="{{Request::get('city')}}">
+                        <input type="hidden" name="province" value="
+                        @if(Request::get('province'))
+                            {{Request::get('province')}}
+                        @else
+                            {{auth()->user()->userDetail->province_id}}
+                        @endif
+                        ">
+                        <input type="hidden" name="city" value="
+                        @if(Request::get('city'))
+                            {{Request::get('city')}}
+                        @else
+                            {{auth()->user()->userDetail->city_id}}
+                        @endif
+                        ">
                         <input type="hidden" name="courier" value="{{Request::get('shipping')}}">
                         <input type="hidden" name="service" value="{{Request::get('tipe')}}">
                         <input type="hidden" name="bankShortCode" id="bankShortCode" value="">

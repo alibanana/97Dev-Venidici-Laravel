@@ -537,28 +537,63 @@
     </div>
     <!-- Live Pelatihan Content -->
     <div style="padding:0px" class="user-content wow fadeInLeft" id="live-pelatihan">
+        @php
+        $flag = FALSE;
+        foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course_on_going)
+        {
+            if($course_on_going->pivot->status == 'on-going')
+                $flag = TRUE;
+        }
+        @endphp
+        @if(!$flag)
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
+            </div>
+        @endif
+        @php
+            $mytime = Carbon\Carbon::now();
+            $mytime->setTimezone('Asia/Phnom_Penh');
+            $today = explode(' ', $mytime);
+        @endphp
+        @foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course)
+        <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE -->
+        @if($course->pivot->status == 'on-going' && $today[0] <= $course->wokiCourseDetail->event_date && $course->wokiCourseDetail->end_time >= $today[1])
         <div class="col-12 p-0">
-            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
+            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
+                    <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
                     <div class="top-left card-tag small-text" >Woki</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
                     <div class="right-section" style="width:37vw">
                         <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">19 August 2021  |  09:00 - 12:00</p>
+                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                            @foreach($course->teachers as $teacher)
+                                <span style="font-family:Rubik Bold">
+                                    @if($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif(!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                </span>
+                            @endforeach
+                            </p>   
+                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
+                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
                         </div>
                     </div>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw">View Details</a>
+                        <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;z-index:99">View Details</a>
                         <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
                     </div>
                 </div> 
             </div>
         </div>
+        @endif
+        @endforeach
+        <!--
         <div class="col-12 p-0">
             <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
                 <div class="container-image-card">
@@ -581,17 +616,18 @@
                 </div> 
             </div>
         </div>
-
+        -->
+                            
     </div>
     <!-- End of Live Pelatihan Content -->
 
     <!-- Pelatihan Aktif Content -->
     <div style="padding:0px;display:none" class="user-content wow fadeInLeft" id="pelatihan-aktif">
         @php
-        $aktif_flag = FALSE;
+        $flag = FALSE;
         foreach(auth()->user()->courses as $course_on_going)
         {
-            if($course_on_going->pivot->status == 'on-going')
+            if($course_on_going->pivot->status == 'on-going' && count($course_on_going->sections) != 0)
                 $flag = TRUE;
         }
         @endphp
@@ -600,13 +636,13 @@
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
-        @foreach(auth()->user()->courses as $course)
-        @if($course->pivot->status == 'on-going')
+            @foreach(auth()->user()->courses as $course)
+        @if($course->pivot->status == 'on-going' && count($course->sections) != 0)
         <div class="col-12 p-0">
             <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
                 <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Online Course @else Woki @endif</div>
+                    <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                    <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) On-Demand @else Woki @endif</div>
                 </div>           
                 <div style="display:flex;justify-content:space-between">
                     <div class="right-section" style="width:37vw">
@@ -648,6 +684,7 @@
                     }
                     $percentage = ($section_learned/$number_of_section) * 100
                     @endphp
+                    <p></p>
                     <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                         <div class="progress progress-bar-vertical" style="background: rgba(43, 108, 170, 0.3);position:relative">
                             <p style="position:absolute;left: @if($percentage == 100) 35% @else 40% @endif;top:35%" class="normal-text">{{round($percentage)}}%</p>
@@ -711,16 +748,16 @@
         @if($course->pivot->status == 'completed')
             @if($course->course_type_id ==1)
             <div class="col-12 p-0">
-                <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
+                <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
                     <div class="container-image-card">
-                        <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
+                        <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
                         <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Online Course @else Woki @endif</div>
                     </div>           
                     <div style="display:flex;justify-content:space-between">
                         <div class="right-section" style="width:37vw">
                             <div>
                                 <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">By 
+                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
                                 @foreach($course->teachers as $teacher)
 
                                     @if ($loop->last && count($course->teachers) != 1)
@@ -752,23 +789,39 @@
             </div>
             @else
             <div class="col-12 p-0">
-                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex">
+                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
                     <div class="container-image-card">
-                        <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
-                        <div class="top-left card-tag small-text" >Workshop</div>
+                        <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                        <div class="top-left card-tag small-text" >Woki</div>
                     </div>           
                     <div style="display:flex;justify-content:space-between">
                         <div class="right-section" style="width:36.8vw">
                             <div>
-                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                                <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
-                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
+                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                @foreach($course->teachers as $teacher)
+
+                                    @if ($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif (!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>   
+                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
+                                <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
                             </div>
                         </div>
                         <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                             <i class="fas fa-check-circle big-heading"></i>
-                            <a href="" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</a>
+                            <form action="{{route('print_certificate')}}" method="post">
+                            @csrf
+                                <input type="hidden" name="name" value="{{auth()->user()->name}}">
+                                <input type="hidden" name="course_id" value="{{$course->id}}">
+                                <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
+
+                            </form>
                         </div>
                     </div> 
                 </div>

@@ -444,6 +444,14 @@ html, body {
     transition: 0.3s ease-in-out;
 
 }
+.btn-pink{
+    background: #CE3369;
+    border-radius: 5px;
+    color:#FFFFFF;
+    padding:0.3vw 1vw;
+    transition: 0.3s ease-in-out;
+
+}
 .btn-blue:hover{
     background: #2B6CAA !important;
     color: #FFFFFF !important;
