@@ -93,4 +93,40 @@ class ReviewController extends Controller
             return redirect('/online-course/'.$request->course_id.'#review-section')
                 ->with('review_message', 'Oops.. an error has occured');
     }
+
+    public function destroy($id){
+        $review = Review::findOrFail($id);
+        $review->delete();
+
+        $user = auth()->user();
+
+        $userStars = $user->stars()->whereDate('valid_until', '>=', Carbon::today())->orderBy('created_at','asc')->get();
+
+        $redeem_cost = 30; $flag = TRUE;
+        foreach($userStars as $star)
+        {
+            if($flag)
+            {
+                if($star->stars >= $redeem_cost)
+                {
+                    $star->stars -= $redeem_cost;
+                    $star->save();
+                    $flag = FALSE;
+                }
+                else{
+                    $redeem_cost -= $star->stars;
+                    $star->stars = 0;
+                    $star->save();
+                }
+            }
+        }
+
+        $user->userDetail->total_stars -= 30;
+        $user->userDetail->save();
+
+        Helper::checkAndUpdateUserClub(auth()->user());
+
+        return redirect('/online-course/'.$review->course->id.'#review-section')
+                    ->with('review_message', 'Review berhasil dihapus!');
+    }
 }
