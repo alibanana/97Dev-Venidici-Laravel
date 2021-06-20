@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Assessment;
-use App\Models\Review;
 use App\Models\Notification;
 
 use App\Models\Cart;
@@ -55,24 +54,26 @@ class AssessmentController extends Controller
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
         
-        
         //change user_course status to completed
         $user_course = auth()->user()->courses()->where('course_id', $course_id)->firstOrFail();
-        if($user_course->pivot->status != 'completed')
+
+        if($user_course->pivot->status != 'completed') {
             Mail::to(auth()->user()->email)->send(new FinishCourseMail($course));
+            Helper::addStars(auth()->user(), 15, 'Penyelesaian course '.$course->title);
+        }
+
         $user_course->pivot->status = 'completed';
         $user_course->pivot->save();
-
-        //tambah 15 stars
-        Helper::addStars(auth()->user(), 15, 'Penyelesaian course '.$course->title);
 
         $reviews = Review::where([   
             ['user_id', '=', auth()->user()->id],
             ['course_id', '=', $request->course_id],    
         ])->get();
+
         $userHasReviewed = null;
-        if (count($reviews) != 0) 
+        if (count($reviews) != 0)
             $userHasReviewed = TRUE;
+        
         return view('client/online-course/completed', compact('cart_count','transactions','informations','notifications','course', 'assessment_pivot','userHasReviewed'));
     }
 

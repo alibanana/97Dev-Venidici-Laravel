@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Jenssegers\Agent\Agent;
 use App\Helper\Helper;
 use App\Helper\CourseHelper;
-use Carbon\Carbon;
 
 use App\Models\Review;
 
@@ -98,10 +97,12 @@ class ReviewController extends Controller
     public function destroy($id){
         $review = Review::findOrFail($id);
         $review->delete();
-        //3. kurangin stars
-        $userStars = auth()->user()->stars()->whereDate('valid_until', '>=', Carbon::today())->orderBy('created_at','asc')->get();
-        $redeem_cost = 30;
-        $flag = TRUE;
+
+        $user = auth()->user();
+
+        $userStars = $user->stars()->whereDate('valid_until', '>=', Carbon::today())->orderBy('created_at','asc')->get();
+
+        $redeem_cost = 30; $flag = TRUE;
         foreach($userStars as $star)
         {
             if($flag)
@@ -120,7 +121,11 @@ class ReviewController extends Controller
             }
         }
 
+        $user->userDetail->total_stars -= 30;
+        $user->userDetail->save();
+
         Helper::checkAndUpdateUserClub(auth()->user());
+
         return redirect('/online-course/'.$review->course->id.'#review-section')
                     ->with('review_message', 'Review berhasil dihapus!');
     }
