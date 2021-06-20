@@ -557,7 +557,7 @@
         @endphp
         @foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course)
         <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE -->
-        @if($course->pivot->status == 'on-going' && $today[0] <= $course->wokiCourseDetail->event_date && $course->wokiCourseDetail->end_time >= $today[1])
+        @if($course->pivot->status == 'on-going' && $today[0] <= $course->wokiCourseDetail->event_date )
         <div class="col-12 p-0">
             <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
                 <div class="container-image-card">
@@ -789,7 +789,7 @@
             </div>
             @else
             <div class="col-12 p-0">
-                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
+                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" @if(count($course->sections ) != 0) onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');" @endif>
                     <div class="container-image-card">
                         <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
                         <div class="top-left card-tag small-text" >Woki</div>

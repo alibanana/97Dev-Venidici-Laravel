@@ -93,7 +93,10 @@ class CartController extends Controller
 
         foreach($carts as $cart)
         {
-            $sub_total += $cart->quantity * $cart->course->price;
+            if($cart->withArtOrNo)
+                $sub_total += $cart->course->priceWithArtKit * $cart->quantity;
+            else
+                $sub_total += $cart->course->price * $cart->quantity;
         }
         
         $provinces = Province::all();

@@ -120,6 +120,7 @@ class CheckoutController extends Controller
                 'course_id'     => $cart->course_id,
                 'qty'           => $cart->quantity,
                 'price'         => $cart->price,
+                'withArtOrNo'   => $cart->withArtOrNo
             ]);
         };
 
@@ -318,6 +319,7 @@ class CheckoutController extends Controller
                     'course_id'     => $cart->course_id,
                     'qty'           => $cart->quantity,
                     'price'         => $cart->price,
+                    'withArtOrNo'   => $cart->withArtOrNo
                 ]);
             };
             foreach (auth()->user()->carts as $cart) {
@@ -440,6 +442,7 @@ class CheckoutController extends Controller
                 'course_id'     => $cart->course_id,
                 'qty'           => $cart->quantity,
                 'price'         => $cart->price,
+                'withArtOrNo'   => $cart->withArtOrNo
             ]);
         };
 

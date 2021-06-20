@@ -295,15 +295,15 @@
         @endif
         <div class="course-detail-card-red">
             @if($course->price == 0)
-            <p class="small-heading price-content" id="dengan-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">FREE</p>
+            <p class="small-heading price-content" id="tanpa-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
             @else
-            <p class="small-heading price-content" id="dengan-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">Rp{{ number_format($course->priceWithArtKit, 0, ',', ',') }}</p>
+            <p class="small-heading price-content" id="tanpa-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
             @endif
             @if($course->priceWithArtKit != null)
                 @if($course->priceWithArtKit == 0)
-                <p class="small-heading price-content" id="tanpa-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
+                <p class="small-heading price-content" id="dengan-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">FREE</p>
                 @else
-                <p class="small-heading price-content" id="tanpa-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                <p class="small-heading price-content" id="dengan-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">Rp{{ number_format($course->priceWithArtKit, 0, ',', ',') }}</p>
                 @endif
                 <div class="form-check" style="margin-top:0.5vw">
                     <input onclick="changePrice(event, 'tanpa-seni',{{$course->price}},0)" class="form-check-input price-links" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
@@ -318,7 +318,6 @@
                     </label>
                 </div>
             @endif
-
             
 
 

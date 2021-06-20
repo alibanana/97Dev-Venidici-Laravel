@@ -13,7 +13,9 @@ class Order extends Model
         'invoice_id', 
         'course_id', 
         'qty', 
-        'price'
+        'price',
+        'withArtOrNo'
+        
     ];
 
     public function invoice() {

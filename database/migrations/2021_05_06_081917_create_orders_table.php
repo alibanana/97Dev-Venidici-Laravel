@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
             $table->integer('qty');
             $table->integer('price');
+            $table->boolean('withArtOrNo')->default(0)->nullable();
             $table->timestamps();
         });
     }

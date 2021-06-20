@@ -22,7 +22,7 @@ class CreateCartsTable extends Migration
             $table->integer('quantity');
             $table->bigInteger('price');
             $table->bigInteger('weight');
-            $table->boolean('withArtOrNo')->default(0);
+            $table->boolean('withArtOrNo')->default(0)->nullable();
             $table->timestamps();
         });
     }
