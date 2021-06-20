@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 use Jenssegers\Agent\Agent;
 
 use Axiom\Rules\TelephoneNumber;
@@ -58,7 +58,8 @@ class CheckoutController extends Controller
         $input = $request->all();
         // Remove non-numeric characters before validation.
         if ($request->has('phone'))
-        $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
+            $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
+        
         $validated = Validator::make($input,[
             'name'                  => 'required',
             //'phone'                 => ['required', new TelephoneNumber],
@@ -72,10 +73,10 @@ class CheckoutController extends Controller
             'club_discount'         => 'integer'
         ]);
 
-        if($validated->fails()) 
+        if ($validated->fails()) 
             return redirect()->back()->with('validation_error','Please complete your profile first.');
-        else
-            $validated = $validated->validate();
+
+        $validated = $validated->validate();
 
         if($request->action == 'checkDiscount') {
             $validated = $request->validate([
@@ -122,6 +123,10 @@ class CheckoutController extends Controller
             ]);
         };
 
+        foreach (auth()->user()->carts as $cart) {
+            $cart->delete();
+        };
+
         //hit xfers api to create payment order
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
             ->withHeaders([
@@ -143,14 +148,11 @@ class CheckoutController extends Controller
                     ]
                 ]
             ]
-        ); 
+        );
+
         $payment_object = json_decode($response->body(), true);
         $invoice->xfers_payment_id = $payment_object['data']['id'];
         $invoice->save();
-
-        foreach (auth()->user()->carts as $cart) {
-            $cart->delete();
-        };
         
         $request->session()->forget('promotion_code');
 
@@ -180,9 +182,9 @@ class CheckoutController extends Controller
             'link'              => '/transaction-detail/'.$payment_object['data']['id']
         ]);
         $link = '/transaction-detail/'.$payment_object['data']['id'];
+        
         //email if there's no woki
         Mail::to(auth()->user()->email)->send(new CheckoutMail($invoice,$courses_string,$link));
-
         
         return $payment_object['data']['id'];
     }
@@ -198,7 +200,7 @@ class CheckoutController extends Controller
 
         $no_invoice = 'INV-'.Str::upper($random);
 
-        if($request->action == 'checkDiscount') {
+        if ($request->action == 'checkDiscount') {
             $validated = $request->validate([
                 'code' => 'required'
             ]);
@@ -211,7 +213,7 @@ class CheckoutController extends Controller
                 ['code', '=', $validated['code']],
                 ['finish_date', '>=', $date]
             ])->first();
-    
+
 
             //1. check if promo is still valid (compare date)
             if($promo != null)
@@ -265,19 +267,31 @@ class CheckoutController extends Controller
             
         }
 
+        // Checks if somehow the cart data does not exists.
+        // This could be caused by:
+        // [1] User submitted the request twice (on second occasion cart data has been deleted).
+        if (!auth()->user()->carts()->exists()) {
+            // Checks if the user has invoices data. If not.. simply redirect him back.
+            if (auth()->user()->invoices()->exists()) {
+                $invoice = auth()->user()->invoices()->latest()->first();
+                $invoice_created_at = Carbon::createFromFormat('Y-m-d h:i:s', $invoice->created_at);
+                // If an invoice (of this user) was created recently redirect to that invoice.
+                if ($invoice_created_at->between(Carbon::now()->subSeconds(30), Carbon::now()))
+                    return redirect()->route('customer.cart.transactionDetail', $invoice->xfers_payment_id);
+            }
+            return redirect()->back();
+        }
 
         if($request->action == 'createPaymentObjectWithNoWoki'){
-            if($request->session()->get('promotion_code') != null)
-            {
+            if($request->session()->get('promotion_code') != null) {
                 $used_promo = Promotion::findOrFail($request->session()->get('promotion_code')->id);
-                if($used_promo->user_id != null)
-                {
+                if($used_promo->user_id != null) {
                     $used_promo->isActive = FALSE;
                     $used_promo->save();
                 }
             }
-            $xfers_id = app('App\Http\Controllers\Api\CheckoutController')->storeOnlineCourse($request);
 
+            $xfers_id = app('App\Http\Controllers\Api\CheckoutController')->storeOnlineCourse($request);
             
             return redirect('/transaction-detail/'.$xfers_id.'#payment-created');
         } 
@@ -364,8 +378,6 @@ class CheckoutController extends Controller
         // Remove non-numeric characters before validation.
         if ($request->has('phone'))
             $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
-
-        
 
         $validated = Validator::make($input, [
             'courier'               => 'required',
@@ -514,7 +526,7 @@ class CheckoutController extends Controller
             return view('client/mobile/under-construction');
         }
         
-        $invoice = Invoice::where('xfers_payment_id',$id)->first();
+        $invoice = Invoice::where('xfers_payment_id', $id)->firstOrFail();
         $payment_status = null;
 
         if ($invoice->status == 'pending') {
@@ -566,30 +578,28 @@ class CheckoutController extends Controller
             {
                 foreach($invoice->notifications as $notif)
                 {
-                    if($notif->user_id == auth()->user()->id && $notif->invoice_id == $invoice->id)
-                        $newNotif = Notification::findOrFail($notif->id);
-                        $newNotif->title        = 'Pembayaran Telah Berhasil!';
-                        $newNotif->description  = 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah berhasil.';
-                        $newNotif->save();
+                    if($notif->user_id == auth()->user()->id && $notif->invoice_id == $invoice->id) {
+                        $notif->title = 'Pembayaran Telah Berhasil!';
+                        $notif->description = 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah berhasil.';
+                        $notif->save();
+                    }
                 }
             }
         }
 
         $orders = Order::with('course')
-                ->where('invoice_id', $invoice->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            ->where('invoice_id', $invoice->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $cart_count = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->count();
         
-        $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-            ]
-        )->orderBy('created_at', 'desc')->get();
+        $transactions = Notification::where([   
+            ['user_id', '=', auth()->user()->id],
+            ['isInformation', '=', 0],
+        ])->orderBy('created_at', 'desc')->get();
 
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $noWoki = TRUE;
@@ -684,7 +694,7 @@ class CheckoutController extends Controller
     }
     public function receivePayment(Request $request, $id)
     {
-        //hit xfers api to cancel payment
+        // hit xfers api to simulate payment
         $response = Http::withBasicAuth(env('XFERS_USERNAME',''),env('XFERS_PASSWORD', ''))
         ->withHeaders([
             'Accept' => 'application/vnd.api+json',

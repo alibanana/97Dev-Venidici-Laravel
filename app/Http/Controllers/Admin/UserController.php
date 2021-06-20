@@ -156,4 +156,21 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('message', $message);
     }
+
+    // Set user's status to opposite.
+    public function setStatusToOpposite($id) {
+        $user = User::findOrFail($id);
+        
+        if ($user->status == 'active'){
+            $user->status = 'suspended';
+            $message = 'User (' . $user->name . ') has been suspended.';
+        } else {
+            $user->status = 'active';
+            $message = 'User (' . $user->name . ') has been reinstated.';
+        }
+
+        $user->save();
+        
+        return redirect()->route('admin.users.index')->with('message', $message);
+    }
 }

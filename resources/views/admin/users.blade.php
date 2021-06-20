@@ -182,21 +182,22 @@
 																<div style="padding: 0px 2px">
 																		<button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
 																</div>
-														</form> 
-														<form action="" method="post">
+														</form>
+														<form action="{{ route('admin.users.set-status-to-opposite', $user->id) }}" method="post">
 																@csrf
-																@method('delete')
 																<div style="padding: 0px 2px">
-																		<button class="d-sm-inline-block btn btn-info shadow-sm" type="submit" onclick="return confirm('Are you sure you want to suspend this user?')">Suspend</button>
+																	@if ($user->status == 'suspended')
+																		<button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reinstate this user?')">Reinstate</button>
+																	@else
+																		<button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to suspend this user?')">Suspend</button>
+																	@endif
 																</div>
 														</form> 
-														
 														<div style="padding: 0px 2px;" class="text-nowrap">
 															<a onclick="passUserIDandEmail({{$user->id}})" class="d-sm-inline-block btn btn-secondary shadow-sm" href="#" data-toggle="modal" data-target="#addStarsModal">
 																Add Stars
 															</a>
 														</div>
-														
 													</div>
 												</td>
 											</tr>
