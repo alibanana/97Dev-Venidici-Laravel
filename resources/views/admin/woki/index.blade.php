@@ -114,11 +114,7 @@
                                                                 <p style="color:black;font-weight:bold;margin-bottom:0px">{{ $course->title }}</p>
                                                                 <p style="color:black;margin-bottom:0px">{{ $course->subtitle }}</p>
                                                                 <p style="color:grey;">@foreach($course->hashtags as $tag)#{{ $tag->hashtag }} @endforeach</p>
-                                                                @if ($course->price == 0)
-                                                                    <p style="margin-bottom:0px">FREE</p>
-                                                                @else
-                                                                    <p style="margin-bottom:0px">IDR {{ $course->price }}</p>
-                                                                @endif
+                                                                
                                                                 <div style="display: flex;">
                                                                     {{ $course->average_rating }}
                                                                     <div style="margin-left:0.5vw">
@@ -149,7 +145,11 @@
                                                     @endif
                                                     <td>
                                                     <b> Without Art Kit</b> <br>
-                                                    IDR{{ $course->price }}
+                                                    @if ($course->price == 0)
+                                                        <p style="margin-bottom:0px">FREE</p>
+                                                    @else
+                                                        <p style="margin-bottom:0px">IDR {{ $course->price }}</p>
+                                                    @endif
                                                     <br> <br>
                                                     @if(count($course->artSupplies) != 0)
                                                     <span style="color:blue">

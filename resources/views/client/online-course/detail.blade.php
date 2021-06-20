@@ -198,7 +198,18 @@
                 </div>
                 <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">{{$review->created_at->diffForHumans()}}</p>
             </div>
-            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw">{{$review->description}}</p>
+            <div style="display: flex;justify-content:space-between;padding-right:1vw">
+                <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw;padding-right:1vw">{{$review->description}}</p>
+                @if(Auth::check())
+                    @if($review->user_id == auth()->user()->id)
+                    <form action="{{route('customer.review.destroy', $review->id)}}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" style="background:none;border:none"><i class="fas fa-trash bigger-text" style="color:#CE3369"></i></button>
+                    </form>
+                    @endif
+                @endif
+            </div>
     
             <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;margin-top:2vw">
     

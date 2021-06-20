@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Assessment;
+use App\Models\Review;
 use App\Models\Notification;
 
 use App\Models\Cart;
@@ -65,7 +66,14 @@ class AssessmentController extends Controller
         //tambah 15 stars
         Helper::addStars(auth()->user(), 15, 'Penyelesaian course '.$course->title);
 
-        return view('client/online-course/completed', compact('cart_count','transactions','informations','notifications','course', 'assessment_pivot'));
+        $reviews = Review::where([   
+            ['user_id', '=', auth()->user()->id],
+            ['course_id', '=', $request->course_id],    
+        ])->get();
+        $userHasReviewed = null;
+        if (count($reviews) != 0) 
+            $userHasReviewed = TRUE;
+        return view('client/online-course/completed', compact('cart_count','transactions','informations','notifications','course', 'assessment_pivot','userHasReviewed'));
     }
 
     // Shows the Assessment page itself.

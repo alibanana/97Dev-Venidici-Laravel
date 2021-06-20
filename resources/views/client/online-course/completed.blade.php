@@ -47,7 +47,7 @@
 
         <!-- START OF RIGHT CONTENT -->
         <div class="col-6" style="display:flex;justify-content:flex-end">
-            @if(session('review_message_double') || session('review_message'))
+            @if($userHasReviewed != null)
 
             <div style="padding-left:5vw">
                 

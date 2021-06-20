@@ -127,6 +127,7 @@ Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'upda
 Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
 // ReviewController
 Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
+Route::delete('/delete-review/{id}', [ReviewController::class, 'destroy'])->name('customer.review.destroy')->middleware('auth');
 // AssessmentController
 Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assessment.show')->middleware('auth');
 Route::get('/online-course/{course_id}/assessment/completed', [AssessmentController::class, 'completedIndex'])->name('online-course-assessment.completed-index')->middleware('auth');
