@@ -358,6 +358,18 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/email/complete_course', function () {
         return view('emails/complete_course');
     });
+    Route::get('/email/forget_password', function () {
+        return view('emails/forget_password');
+    });
+    Route::get('/email/live_pelatihan', function () {
+        return view('emails/live_pelatihan');
+    });
+    Route::get('/email/suspend', function () {
+        return view('emails/suspend');
+    });
+    Route::get('/email/verifyUser', function () {
+        return view('emails/verifyUser');
+    });
     Route::get('/certificate', function () {
         return view('client/certificate');
     });

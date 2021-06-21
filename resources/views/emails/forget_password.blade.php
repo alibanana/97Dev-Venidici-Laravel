@@ -155,7 +155,7 @@ body {font-family: 'Muli', sans-serif;}
 <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="948e3f3f-5214-4721-a90e-625a47b1c957" data-mc-module-version="2019-10-22">
 <tbody>
   <tr>
-    <td style="padding:50px 30px 18px 30px; line-height:36px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content"><div><div style="font-family: 'Rubik', sans-serif; text-align: center;"><span style="font-size: 43px">Thanks for signing up, Fernandha Dzaky !&nbsp;</span></div><div></div></div></td>
+    <td style="padding:50px 30px 18px 30px; line-height:36px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content"><div><div style="font-family: 'Rubik', sans-serif; text-align: center;"><span style="font-size: 43px">Forgotten your Password?&nbsp;</span></div><div></div></div></td>
   </tr>
 </tbody>
 </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="a10dcb57-ad22-4f4d-b765-1d427dfddb4e" data-mc-module-version="2019-10-22">
@@ -164,13 +164,9 @@ body {font-family: 'Muli', sans-serif;}
     <td style="padding:18px 30px 18px 30px; line-height:22px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content">
     <div>
         <div style=";font-family:Rubik Regular 400 Italic; text-align: center">
-        <span style="font-size: 18px">Please verify your email address to</span>
-        <span style="color: #000000; font-size: 18px;"> start learning something new!</span>
-    </div>
-    <div style="font-family:Rubik; text-align: center;margin-top:20px">
-        <span style="color: #145CA8; font-size: 18px;">
-            <strong>Thank you!&nbsp;</strong>
-        </span>
+        
+        <span style="font-size: 18px">No worries, it happens! Down below is your new password</span> <br> <br>
+        <b style="font-size: 18px;">Bajingan23</b>
     </div>
     <div></div></div></td>
   </tr>
@@ -185,7 +181,7 @@ body {font-family: 'Muli', sans-serif;}
           <tbody>
             <tr>
               <td align="center" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                  <a class="btnLogin" href="/login" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Verify Email Now</a>
+                  <a class="btnLogin" href="http://127.0.0.1:8000/login" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Login</a>
               </td>
             </tr>
 
@@ -198,7 +194,7 @@ body {font-family: 'Muli', sans-serif;}
         <div>
           <div style="text-align: center">
           <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Having trouble accessing the button above? Use this link:</span><br>
-          <span style="color: #000000; font-size: 18px;"><a href="http://ninetysevendev-venidici-app.herokuapp.com/login">http://ninetysevendev-venidici-app.herokuapp.com/login</a></span>
+          <span style="color: #000000; font-size: 18px;"><a href="http://127.0.0.1:8000/login">http://127.0.0.1:8000/login</a></span>
         </div>
       </td>
     </tr>
