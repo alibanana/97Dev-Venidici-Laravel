@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
+use App\Http\Controllers\Client\WokiController;
 use App\Http\Controllers\Client\AssessmentController;
 use App\Http\Controllers\Client\KrestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -124,6 +125,13 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
 
     Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
+
+    // WokiController
+    Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
+    Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');
+
+    Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree');
+
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
     // AssessmentController

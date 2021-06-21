@@ -171,7 +171,15 @@ class WokiCourseController extends Controller
 
         $users = $users->get();
 
-        return view('admin/woki/detail', compact('course', 'users'));
+        $total_earnings = 0;
+        $course_sold = 0;
+        foreach($course->orders as $order)
+        {
+            $total_earnings += $order->price;
+            $course_sold += $order->qty;
+        }
+
+        return view('admin/woki/detail', compact('course', 'users','total_earnings','course_sold'));
     }
 
     // Shows Admin -> Create Woki Course Page.

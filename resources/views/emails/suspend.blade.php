@@ -155,7 +155,13 @@ body {font-family: 'Muli', sans-serif;}
 <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="948e3f3f-5214-4721-a90e-625a47b1c957" data-mc-module-version="2019-10-22">
 <tbody>
   <tr>
-    <td style="padding:50px 30px 18px 30px; line-height:36px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content"><div><div style="font-family: 'Rubik', sans-serif; text-align: center;"><span style="font-size: 43px">Ouch! your account has been suspended!&nbsp;</span></div><div></div></div></td>
+    <td style="padding:50px 30px 18px 30px; line-height:36px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content"><div><div style="font-family: 'Rubik', sans-serif; text-align: center;"><span style="font-size: 43px">
+    @if($user->status == 'suspended')
+    Ouch! your account has been suspended!
+    @elseif($user->status == 'active')
+    Yeay! your account has been re-instated!
+    @endif
+    &nbsp;</span></div><div></div></div></td>
   </tr>
 </tbody>
 </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="a10dcb57-ad22-4f4d-b765-1d427dfddb4e" data-mc-module-version="2019-10-22">
@@ -165,9 +171,15 @@ body {font-family: 'Muli', sans-serif;}
     <div>
         <div style=";font-family:Rubik Regular 400 Italic; text-align: center">
         
-        <span style="font-size: 18px">Due to your violations against our policy, your account has been suspended until further notice.</span> <br> <br>
+        <span style="font-size: 18px">
+        @if($user->status == 'suspended')
+        Due to your violations against our policy, your account has been suspended until further notice.
+        @elseif($user->status == 'active')
+        We have reviewed your activity and have reinstated your account.
+        @endif
+        </span> <br> <br>
         <span style="font-size: 18px">Feel free to email us and dispute the claim if you believe this is an error, via email</span>
-        <span style="color: #000000; font-size: 18px; font-family: arial,helvetica,sans-serif"><b>info@ppilondon.co.uk</b></span>
+        <span style="color: #000000; font-size: 18px; font-family: arial,helvetica,sans-serif"><b>info@venidici.id</b></span>
     </div>
     <div></div></div></td>
   </tr>

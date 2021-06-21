@@ -58,7 +58,7 @@
                                 <div class="card bg-light text-black shadow">
                                     <div class="card-body">
                                         Today Sales
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">2 times</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$today_online_course_sold_qty}} times</div>
                                     </div>
                                 </div>
 
@@ -67,7 +67,9 @@
                                 <div class="card bg-light text-black shadow">
                                     <div class="card-body">
                                         Today Earnings
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 150.000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        Rp{{ number_format($today_online_course_earnings, 0, ',', ',') }}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -76,7 +78,7 @@
                                 <div class="card bg-light text-black shadow">
                                     <div class="card-body">
                                         Products Sold
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">200 times</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$total_online_course_sold_qty}} times</div>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +86,7 @@
                                 <div class="card bg-light text-black shadow">
                                     <div class="card-body">
                                         Total Earnings
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 10.800.000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{number_format($total_online_course_earnings, 0, ',', ',')}}</div>
                                     </div>
                                 </div>
 
@@ -124,7 +126,7 @@
                                 <div class="card bg-light text-black shadow">
                                     <div class="card-body">
                                         Today Sales
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">2 times</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$today_woki_sold_qty}} times</div>
                                     </div>
                                 </div>
 
@@ -133,7 +135,7 @@
                                 <div class="card bg-light text-black shadow">
                                     <div class="card-body">
                                         Today Earnings
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 150.000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($today_woki_earnings, 0, ',', ',') }}</div>
                                     </div>
                                 </div>
 
@@ -142,7 +144,7 @@
                                 <div class="card bg-light text-black shadow">
                                     <div class="card-body">
                                         Products Sold
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">200 times</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$total_woki_sold_qty}} times</div>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +152,7 @@
                                 <div class="card bg-light text-black shadow">
                                     <div class="card-body">
                                         Total Earnings
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 10.800.000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{number_format($total_woki_earnings, 0, ',', ',')}}</div>
                                     </div>
                                 </div>
 
@@ -189,7 +191,7 @@
                             <div class="col mr-2">
                                 <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
                                     Online Courses</div>
-                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">{{$courses_count}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
@@ -208,7 +210,7 @@
                             <div class="col mr-2">
                                 <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
                                     Woki</div>
-                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">{{$wokis_count}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-palette fa-2x text-gray-300"></i>
@@ -227,7 +229,7 @@
                             <div class="col mr-2">
                                 <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
                                     Krest</div>
-                                <div class="h3 mb-0 font-weight-bold text-gray-800">1</div>
+                                <div class="h3 mb-0 font-weight-bold text-gray-800">{{$applicants_count}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-business-time fa-2x text-gray-300"></i>
@@ -238,7 +240,7 @@
             </div>
             <!-- End of Card -->
 
-            <!-- Card -->
+            <!-- Card 
             <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
                 <div class="card shadow h-100 py-2">
                     <div class="card-body">
@@ -255,9 +257,9 @@
                     </div>
                 </div>
             </div>
-            <!-- End of Card -->
+             End of Card -->
             
-            <!-- Card -->
+            <!-- Card 
             <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer">
                 <div class="card shadow h-100 py-2">
                     <div class="card-body">
@@ -274,7 +276,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End of Card -->
+                 End of Card -->
             
             
         </div>

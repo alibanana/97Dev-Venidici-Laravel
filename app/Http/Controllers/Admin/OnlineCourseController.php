@@ -170,8 +170,13 @@ class OnlineCourseController extends Controller
         }
 
         $users = $users->get();
+        $total_earnings = 0;
+        foreach($course->orders as $order)
+        {
+            $total_earnings += $order->price;
+        }
 
-        return view('admin/online-course/detail', compact('course', 'users'));
+        return view('admin/online-course/detail', compact('course', 'users','total_earnings'));
     }
 
     // Show Admin -> Create New Online Page
