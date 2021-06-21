@@ -171,7 +171,27 @@ class WokiCourseController extends Controller
 
         $users = $users->get();
 
-        return view('admin/woki/detail', compact('course', 'users'));
+        $total_earnings = 0; $course_sold = 0; $users_data = [];
+        foreach($course->orders as $order) {
+            $total_earnings += $order->price;
+            $course_sold += $order->qty;
+            if (!array_key_exists($order->invoice->user_id, $users_data)) {
+                $users_data[$order->invoice->user_id]['invoice_id'] = $order->invoice->id;
+                if ($order->withArtOrNo)
+                    $users_data[$order->invoice->user_id]['qtyWithArt'] = $order->qty;
+                else
+                    $users_data[$order->invoice->user_id]['qtyWithoutArt'] = $order->qty;
+            } else {
+                if (array_key_exists('qtyWithArt', $users_data[$order->invoice->user_id]))
+                    $users_data[$order->invoice->user_id]['qtyWithoutArt'] = $order->qty;
+                else
+                    $users_data[$order->invoice->user_id]['qtyWithArt'] = $order->qty;
+            }
+        }
+
+        dd($users_data);
+
+        return view('admin/woki/detail', compact('course', 'users', 'total_earnings', 'course_sold', 'users_data'));
     }
 
     // Shows Admin -> Create Woki Course Page.
