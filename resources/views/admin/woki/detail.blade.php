@@ -131,6 +131,8 @@
                                                 <th>Qty</th>
                                                 <th>With Art Kit?</th>
                                                 <th>Telephone</th>
+                                                <th>Qty</th>
+                                                <th>With Art Kit?</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -145,6 +147,8 @@
                                                     @else
                                                         <td style="color: red">Phone number not available!</td>
                                                     @endif
+                                                    <td>{{ $users_data[$user->id]['qty'] }}</td>
+                                                    <td></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
