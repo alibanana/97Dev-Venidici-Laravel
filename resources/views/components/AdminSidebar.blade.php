@@ -81,6 +81,19 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/invoices') || Request::is('admin/invoices/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="{{ route('admin.invoices.index') }}" 
+            aria-expanded="true" >
+            <i class="fas fa-file-invoice"></i>
+            <span>Invoices</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/online-courses') || Request::is('admin/online-courses/*') || Request::is('admin/course-categories') ||
     Request::is('admin/course-categories/*') || Request::is('admin/teachers') || Request::is('admin/teachers/*')|| 
     Request::is('admin/assessments') || Request::is('admin/assessments/*'))

@@ -354,7 +354,7 @@ class CheckoutController extends Controller
             foreach ($invoice->orders as $order) {
                 $course = $order->course;
                 if (!auth()->user()->courses->contains($course->id)) {
-                    auth()->user()->courses()->attach($course->id);
+                    auth()->user()->courses()->syncWithoutDetaching([$course->id]);
                     if ($course->assessment()->exists()) {
                         auth()->user()->assessments()->attach($course->assessment->id);
                     }
@@ -544,7 +544,7 @@ class CheckoutController extends Controller
                 foreach ($invoice->orders as $order) {
                     $course = $order->course;
                     if (!auth()->user()->courses->contains($course->id)) {
-                        auth()->user()->courses()->attach($course->id);
+                        auth()->user()->courses()->syncWithoutDetaching([$course->id]);
                         if ($course->assessment()->exists()) {
                             auth()->user()->assessments()->attach($course->assessment->id);
                         }

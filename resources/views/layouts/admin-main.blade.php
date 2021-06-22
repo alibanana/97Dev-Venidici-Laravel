@@ -21,6 +21,9 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- INDEX CSS -->
+    <link rel="stylesheet"  type="text/css"  href="/css/index.css">
+
     <!-- wow js -->
     <link rel="stylesheet" href="/WOW-master/css/libs/animate.css">
     <style>
