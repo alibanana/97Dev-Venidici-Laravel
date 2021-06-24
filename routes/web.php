@@ -3,12 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
+use App\Http\Controllers\Client\WokiController;
 use App\Http\Controllers\Client\AssessmentController;
 use App\Http\Controllers\Client\WokiController;
 use App\Http\Controllers\Client\KrestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\InvoiceController as AdminInvoiceController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\WokiCourseController as AdminWokiCourseController;
@@ -190,6 +192,9 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
         Route::put('/users', [AdminUserController::class, 'add_stars'])->name('users.add_stars');
         Route::post('/users/{id}/set-status-to-opposite', [AdminUserController::class, 'setStatusToOpposite'])->name('users.set-status-to-opposite');
+        // InvoiceController
+        Route::get('/invoices', [AdminInvoiceController::class, 'index'])->name('invoices.index');
+        Route::get('/invoices/{id}', [AdminInvoiceController::class, 'show'])->name('invoices.show');
         // OnlineCourseController
         Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
         Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');

@@ -25,9 +25,14 @@
             <h1 class="mb-0 mb-3 text-gray-800">{{ $course->title }}</h1>
         </div>
         @if ($course->price == 0)
-            <h4 style="">FREE</h4>
+            <h4 style="">FREE (No Art Kit)</h4>
         @else
-            <h4 style="">Rp. {{ $course->price }}</h4>
+            <h4 style="">Rp{{ $course->price }} (No Art Kit)</h4>
+        @endif
+        @if ($course->priceWithArtKit == 0)
+            <h4 style="">FREE (With Art Kit)</h4>
+        @else
+            <h4 style="">Rp{{ $course->priceWithArtKit }} (With Art Kit)</h4>
         @endif
         <div style="display: flex;font-size:1.5vw" class="mb-4">
             {{ $course->average_rating }}
@@ -56,7 +61,7 @@
                     <div class="card bg-light text-black shadow">
                         <div class="card-body">
                             Total Course Sold
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($course->users) }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $course_sold }}</div>
                         </div>
                     </div>
 
@@ -65,7 +70,7 @@
                     <div class="card bg-light text-black shadow">
                         <div class="card-body">
                             Total Earnings
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 150.000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($total_earnings, 0, ',', ',') }}</div>
                         </div>
                     </div>
 
@@ -123,6 +128,8 @@
                                                 <th>No.</th>
                                                 <th>Full Name</th>
                                                 <th>Email</th>
+                                                <th>Qty</th>
+                                                <th>With Art Kit?</th>
                                                 <th>Telephone</th>
                                                 <th>Qty</th>
                                                 <th>With Art Kit?</th>
@@ -134,6 +141,7 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->invoices()->orders()->where('course_id','=',$course->id)->get() }}</td>
                                                     @if ($user->userDetail()->exists() && !is_null($user->userDetail->telephone))                                                
                                                         <td>{{ $user->userDetail->telephone }}</td>
                                                     @else

@@ -65,7 +65,7 @@
                     <div class="card bg-light text-black shadow">
                         <div class="card-body">
                             Total Earnings
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 150.000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($total_earnings, 0, ',', ',') }}</div>
                         </div>
                     </div>
 

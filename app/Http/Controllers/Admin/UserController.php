@@ -10,6 +10,8 @@ use Carbon\Carbon;
 
 use App\Models\User;
 use App\Models\UserDetail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SuspendEmail;
 
 /*
 |--------------------------------------------------------------------------
@@ -170,6 +172,7 @@ class UserController extends Controller
         }
 
         $user->save();
+        Mail::to($user->email)->send(new SuspendEmail($user));
         
         return redirect()->route('admin.users.index')->with('message', $message);
     }
