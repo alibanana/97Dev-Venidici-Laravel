@@ -493,8 +493,11 @@ class CheckoutController extends Controller
         $response = XfersHelper::createPayment($request->only([
             'grand_total', 'date', 'time', 'bankShortCode'
         ]), $invoiceNumberResult['data'], $invoice->id);
-        if ($response['status'] == 'Failed')
+        if ($response['status'] == 'Failed') {
+            $invoice->orders()->delete();
+            $invoice->delete();
             return redirect()->back()->with('message', $response['errors']['message']);
+        }
 
         $payment_object = $response['data'];
 
