@@ -19,58 +19,53 @@ use Jenssegers\Agent\Agent;
 
 class CartController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    } 
-
-    public function index()
-    {
+    // Shows the client cart page. (/cart)
+    public function index() {
         $agent = new Agent();
-        if($agent->isPhone()){
+        if ($agent->isPhone())
             return view('client/mobile/under-construction');
-        }
+        
         $carts = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         $cart_count = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->count();
-        $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-                
-            ]
-        )->orderBy('created_at', 'desc')->get();
+            ->where('user_id', auth()->user()->id)
+            ->count();
+
+        $transactions = Notification::where([
+            ['user_id', '=', auth()->user()->id],
+            ['isInformation', '=', 0],
+        ])->orderBy('created_at', 'desc')->get();
+
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        $allNotifications = Notification::where('isInformation',1)->orWhere(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
-                
-            ])->orderBy('created_at', 'desc')->get();
+        $allNotifications = Notification::where('isInformation',1)->orWhere([   
+            ['user_id', '=', auth()->user()->id],
+            ['isInformation', '=', 0],
+        ])->orderBy('created_at', 'desc')->get();
+
         $noWoki = TRUE;
-        foreach($carts as $cart)
-        {
+        foreach ($carts as $cart) {
             if($cart->course->course_type_id == 2)
                 $noWoki = FALSE;
         }
+
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
         return view('client/cart', compact('carts','cart_count','transactions','informations','noWoki','notifications'));
     }
     
+    // Shows the client payment shipping page. (/payment)
     public function shipment_index(Request $request)
     {
         $agent = new Agent();
-        if($agent->isPhone()){
+        if ($agent->isPhone())
             return view('client/mobile/under-construction');
-        }
-        if(!auth()->user()->isProfileUpdated)
+        
+        if (!auth()->user()->isProfileUpdated)
             return redirect()->back()->with('message','Please complete your profile first.');
-        elseif(count(auth()->user()->carts) == 0)
+        elseif (count(auth()->user()->carts) == 0)
             return redirect('/cart');
 
         $carts = auth()->user()->carts;
@@ -84,8 +79,8 @@ class CartController extends Controller
             ]
         )->orderBy('created_at', 'desc')->get();
 
-        $today = Carbon::now()->addDays(1);
-        $today->setTimezone('Asia/Jakarta');
+        $tomorrow = Carbon::now()->addDays(1);
+        $tomorrow->setTimezone('Asia/Jakarta');
         $total_price = 0;
         $sub_total = 0;
         $shipping_cost = 0;
@@ -104,8 +99,7 @@ class CartController extends Controller
         if ($request->has('province')) {
             $province_id = $request['province'];
             $cities = City::where('province_id', $province_id)->get();
-        }
-        else{
+        } else{
             if(auth()->user()->userDetail->city_id != null)
                 $cities = City::get();
             else
@@ -149,7 +143,7 @@ class CartController extends Controller
         }
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','today','transactions','informations','noWoki','notifications'));
+        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','tomorrow','transactions','informations','noWoki','notifications'));
     }
 
     public function store(Request $request)
@@ -194,15 +188,13 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
-    public function getCartTotal()
-    {
+    public function getCartTotal() {
         $carts = Cart::with('course')
-                ->where('user_id', auth()->user()->id)
-                ->orderBy('created_at', 'desc')
-                ->sum('price');
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->sum('price');
         
         return redirect()->back()->with('success', 'Total Cart Price: '.$carts);
-
     }
 
     public function getCartTotalWeight()
@@ -247,20 +239,6 @@ class CartController extends Controller
 
         return redirect()->back();
     }
-
-    //public function payment_index(Request $request){
-        //return view('client/cart-payment');
-    //}
-    
-    public function checkDiscount()
-    {
-        
-
-
-
-    }
-
-
     
     /**
      * removeAllCart

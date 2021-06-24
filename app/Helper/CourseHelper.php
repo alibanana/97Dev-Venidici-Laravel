@@ -2,6 +2,8 @@
 
 namespace App\Helper;
 
+use Exception;
+
 use App\Models\Course;
 
 class CourseHelper {

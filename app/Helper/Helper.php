@@ -5,11 +5,13 @@ namespace App\Helper;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as ImageManager;
 use Carbon\Carbon;
-use App\Models\Star;
-use App\Models\Notification;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Exception;
 
 use App\Mail\LevelUp;
+use App\Models\Star;
+use App\Models\Notification;
 
 class Helper
 {
@@ -121,5 +123,26 @@ class Helper
         $user->save();
 
         if ($user->wasChanged()) Mail::to($user->email)->send(new LevelUp($user));
+    }
+
+    public static function generateInvoiceNumber($length = 10) {
+        try {
+            $random = '';
+            for ($i = 0; $i < $length; $i++) {
+                $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+            };
+    
+            $no_invoice = 'INV-'.Str::upper($random);
+
+            return [
+                'status' => 'Success',
+                'data' => $no_invoice
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
     }
 }

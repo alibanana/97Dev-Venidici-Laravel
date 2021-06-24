@@ -4,7 +4,8 @@
 @section('content')
 
 
-<form action="{{route('customer.cart.storeOrder')}}" method="POST">
+{{-- <form action="{{route('customer.cart.storeOrder')}}" method="POST"> --}}
+<form action="{{route('customer.cart.newStoreOrder')}}" method="POST">
     @csrf
     <!-- Modal VA -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,128 +92,98 @@
         
         <div class="col-8 p-0" style="">
             <div class="page-container-left" style="padding-top:11vw;padding-right:9vw">
-                @if($noWoki)
+            @if($noWoki)
                 <!-- START OF COURSES -->
                 @foreach($carts as $cart)
-
-                @if($cart->course->course_type_id == 1)
-                <!-- ONE COURSE CARD -->
-                <div style="display:flex;margin-top:1vw" class="cartpage">
-                    <input type="hidden" name="product_id" class="product_id normal-text" value="{{$cart->course_id}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
-
-                    <div class="cart-card-grey">
-                        <div style="display:flex;align-items:center;width:70%">
-                            <img src="{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
-                            <div style="margin-left:1vw">
-                                <div style="display:flex;align-items:flex-start">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">{{$cart->course->title}}</p>
+                    @if($cart->course->course_type_id == 1)
+                        <!-- ONE COURSE CARD -->
+                        <div style="display:flex;margin-top:1vw" class="cartpage">
+                            <div class="cart-card-grey">
+                                <div style="display:flex;align-items:center;width:70%">
+                                    <img src="{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                                    <div style="margin-left:1vw">
+                                        <div style="display:flex;align-items:flex-start">
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                        </div>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">
+                                        @foreach($cart->course->teachers as $teacher)
+                                            <span style="font-family:Rubik Bold">
+                                                @if($loop->last && count($cart->course->teachers) != 1)
+                                                dan
+                                                @elseif(!$loop->first)
+                                                ,
+                                                @endif
+                                                {{$teacher->name}}
+                                            </span>
+                                        @endforeach
+                                        </p>
+                                    </div>
                                 </div>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">
-                                @foreach($cart->course->teachers as $teacher)
-                                    <span style="font-family:Rubik Bold">
-                                        @if($loop->last && count($cart->course->teachers) != 1)
-                                        dan
-                                        @elseif(!$loop->first)
-                                        ,
-                                        @endif
-                                        {{$teacher->name}}
-                                    </span>
-                                    @endforeach
-                                </p>
-                            </div>
-                        </div>
-                        <div style="display:flex;align-items:center">
-                            @if($cart->course_type_id == 1)
-                            <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
-                                <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">
-                                    <form action="{{ route('customer.increaseQty') }}" method="POST">
-                                    @csrf
-                                    @method('put')
-                                        <input type="hidden" name="cart_id" value="{{$cart->id}}">
-                                        <button type="submit" style="background:none;border:none">
-                                            <i class="fas fa-plus" style="margin-right:0.5vw;color:#C4C4C4"></i>
-                                        </button>
-                                    </form>                                    
+                                <div style="display:flex;align-items:center">
+                                    <div style="width:7.5vw">
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
+                                    </div>
                                 </div>
-                                <input type="text" name="qty" class="qty-input normal-text" value="{{$cart->quantity}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
-                                <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
-                                <form action="{{ route('customer.decreaseQty') }}" method="POST">
-                                    @csrf
-                                    @method('put')
-                                        <input type="hidden" name="cart_id" value="{{$cart->id}}">
-                                        <button @if($cart->quantity == 1) disabled @endif type="submit" style="background:none;border:none">
-                                            <i class="fas fa-minus" style="margin-left:0.5vw;color:#C4C4C4"></i>
-                                        </button>
-                                    </form>  
+                            </div>
+                        </div>
+                        <!-- END OF ONE COURSE CARD -->
+                    @else
+                        <!-- ONE WOKI CARD -->
+                        <div style="display:flex;margin-top:1vw">
+                            <div class="cart-card-grey">
+                                <div style="display:flex;align-items:center;width:70%">
+                                    <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                                    <div style="margin-left:1vw">
+                                        <div style="display:flex;align-items:flex-start;width:18vw;">
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                            @if($cart->course->priceWithArtKit != null)
+                                            <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-{{$cart->id}}" data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
+                                            @endif
+                                        </div>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
+                                        @foreach($cart->course->teachers as $teacher)
+                                        <span style="font-family:Rubik Bold">
+                                            @if($loop->last && count($cart->course->teachers) != 1)
+                                            dan
+                                            @elseif(!$loop->first)
+                                            ,
+                                            @endif
+                                            {{$teacher->name}}
+                                        </span>
+                                        @endforeach
+                                        </p>
+                                    </div>
                                 </div>
-                                
-                            </div>
-                            @endif
-                            <div style="width:7.5vw">
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END OF ONE COURSE CARD -->
-                @else
-                <!-- ONE WOKI CARD -->
-                <div style="display:flex;margin-top:1vw">
-                    <div class="cart-card-grey">
-                        <div style="display:flex;align-items:center;width:70%">
-                            <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
-                            <div style="margin-left:1vw">
-                                <div style="display:flex;align-items:flex-start;width:18vw;">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;line-height: 1.4vw;">{{$cart->course->title}}</p>
-                                    @if($cart->course->priceWithArtKit != null)
-                                    <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-{{$cart->id}}" data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
-                                    @endif
+                                <div style="display:flex;align-items:center">
+                                    <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
+                                        <input type="text" class="qty-input normal-text" value="{{$cart->quantity}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw" readonly>
+                                    </div>
+                                    <div style="width:7.5vw;text-align:right">
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
+                                    </div>                        
                                 </div>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
-                                @foreach($cart->course->teachers as $teacher)
-                                <span style="font-family:Rubik Bold">
-                                    @if($loop->last && count($cart->course->teachers) != 1)
-                                    dan
-                                    @elseif(!$loop->first)
-                                    ,
-                                    @endif
-                                    {{$teacher->name}}
-                                </span>
-                                @endforeach
-                                </p>
                             </div>
                         </div>
-                        <div style="display:flex;align-items:center">
-                                <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
-                                <input type="text" name="qty" class="qty-input normal-text" value="{{$cart->quantity}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
-                                
-                            </div>
-                            <div style="width:7.5vw;text-align:right">
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
-                            </div>                        
+                        <div class="collapse" id="woki-collapse-{{$cart->id}}" style="margin-top:1vw;margin-left:3vw">
+                            @foreach($cart->course->artSupplies as $supply)
+                                <!-- START OF ONE ITEM COLLAPSE -->
+                                <div style="display:flex;align-items:center;margin-top:1.5vw">
+                                    <i style="color:#2B6CAA" class="fas fa-circle normal-text"></i>
+                                    <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid" alt="COURSE THUMBNAIL">
+                                    <div style="margin-left:1vw">
+                                        <p class="normal-text" style="font-family:Rubik Bold;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;margin-bottom:0.5vw">{{$supply->name}}</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{$supply->description}}</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Quantity: <span style="font-family:bold">{{$cart->quantity}}</span></p>
+                                    </div>
+                                </div>
+                                <!-- END OF ONE ITEM COLLAPSE -->
+                            @endforeach
                         </div>
-                    </div>
-                </div>
-                <div class="collapse" id="woki-collapse-{{$cart->id}}" style="margin-top:1vw;margin-left:3vw">
-                    @foreach($cart->course->artSupplies as $supply)
-                    <!-- START OF ONE ITEM COLLAPSE -->
-                    <div style="display:flex;align-items:center;margin-top:1.5vw">
-                        <i style="color:#2B6CAA" class="fas fa-circle normal-text"></i>
-                        <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid" alt="COURSE THUMBNAIL">
-                        <div style="margin-left:1vw">
-                            <p class="normal-text" style="font-family:Rubik Bold;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;margin-bottom:0.5vw">{{$supply->name}}</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{$supply->description}}</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Quantity: <span style="font-family:bold">{{$cart->quantity}}</span></p>
-                        </div>
-                    </div>
-                    <!-- END OF ONE ITEM COLLAPSE -->
-                    @endforeach
-                </div>
-                <!-- END OF ONE WOKI CARD -->
-                @endif
+                        <!-- END OF ONE WOKI CARD -->
+                    @endif
                 @endforeach
                 <!-- END OF COURSES -->
-                @else
+            @else
                 <!-- START OF SHIPPING -->
                 <div style="display:flex;justify-content:space-between;align-items:center">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Info Pengiriman</p>
@@ -222,7 +193,6 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
 
-                            
                             <select  onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 <option disabled >Pilih Provinsi</option>
                                 @foreach($provinces as $province)
@@ -238,7 +208,7 @@
                                     >{{$province->name }}</option>
                                 @endforeach
                             </select>            
-                              
+                                
                         </div>  
                         @error('province')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -256,17 +226,16 @@
                                     <option disabled selected>Pilih Kota</option>
 
                                     @foreach($cities as $city)
-                                    <option value="{{ request()->fullUrlWithQuery(['city' => $city->city_id]) }}" 
-
-                                        @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
-                                            @if(Auth::user()->userDetail->city_id == $city->city_id)
-                                            selected
+                                        <option value="{{ request()->fullUrlWithQuery(['city' => $city->city_id]) }}" 
+                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
+                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
+                                                    selected
+                                                @endif
+                                            @elseif (Request::get('city') == $city->city_id) 
+                                                selected 
                                             @endif
-                                        @elseif (Request::get('city') == $city->city_id) 
-                                        selected 
-                                        @endif
-                                        
-                                        >{{$city->name }}</option>
+                                            >{{$city->name }}
+                                        </option>
                                     @endforeach          
                                 @endif
                             </select>        
@@ -304,7 +273,10 @@
                                 <option disabled selected>Pilih Metode Pengiriman terlebih dahulu</option>
                                     @if($tipe_pengiriman != null)
                                         @foreach($tipe_pengiriman as $tipe)
-                                        <option value="{{ request()->fullUrlWithQuery(['tipe' =>$tipe['service']]) }}" @if (Request::get('tipe') == $tipe['service']) selected @endif>{{$tipe['service']}} - (Estimasi {{$tipe['cost'][0]['etd']}} hari) </option>
+                                            <option value="{{ request()->fullUrlWithQuery(['tipe' =>$tipe['service']]) }}" 
+                                                @if (Request::get('tipe') == $tipe['service']) selected @endif>
+                                                {{$tipe['service']}} - (Estimasi {{$tipe['cost'][0]['etd']}} hari)
+                                            </option>
                                         @endforeach
                                     @endif
                                 </select>        
@@ -322,7 +294,7 @@
                         </div>  
                         @error('shipping_notes')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
+                                <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
@@ -333,39 +305,38 @@
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
+                                <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
                 </div>
                 <!-- END OF SHIPPING -->
-                @endif
+            @endif
             </div>
         </div> 
         <div class="col-4 p-0 ">
             <div class="page-container-right" style="padding-top:11vw">
-                @if(session('discount_not_found'))
-
-                <!-- ALERT MESSAGE -->
-                <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
-                    {{ session('discount_not_found') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <!-- END OF ALERT MESSAGE -->
-                @elseif(session('discount_found'))
-                <!-- ALERT MESSAGE -->
-                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
-                    {{ session('discount_found') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <!-- END OF ALERT MESSAGE -->
-                @elseif(session('validation_error'))
-                <!-- ALERT MESSAGE -->
-                <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
-                    {{ session('validation_error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <!-- END OF ALERT MESSAGE -->
+                @if (session('discount_not_found'))
+                    <!-- ALERT MESSAGE -->
+                    <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                        {{ session('discount_not_found') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <!-- END OF ALERT MESSAGE -->
+                @elseif (session('discount_found'))
+                    <!-- ALERT MESSAGE -->
+                    <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                        {{ session('discount_found') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <!-- END OF ALERT MESSAGE -->
+                @elseif (session('validation_error'))
+                    <!-- ALERT MESSAGE -->
+                    <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                        {{ session('validation_error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <!-- END OF ALERT MESSAGE -->
                 @endif
                 <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Ringkasan Pembayaran</p>
                 @if($total_price != 0)
@@ -374,21 +345,19 @@
                     <a href="/dashboard/redeem-vouchers" style="text-decoration:none;color:#2B6CAA;margin-left:4vw" class="normal-text" target="_blank"><i class="fas fa-question-circle"></i></a>
                 </div>
                     <div style="display:flex;justify-content:space-between;align-items:center">
-                        
                         <div class="auth-input-form" style="display: flex;align-items:center;width:50%">
                             @if(Session::get('promotion_code'))
-                            <input name="code" value="{{Session::get('promotion_code')->code}}" type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukan kode promo">                   
+                                <input form="validateVoucherCodeForm" name="code" value="{{Session::get('promotion_code')->code}}" type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukan kode promo">                   
                             @else
-                            <input name="code" type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukan kode promo">                   
+                                <input form="validateVoucherCodeForm" name="code" type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukan kode promo">                   
                             @endif   
-                        </div>  
-                        
-                        <button type="submit" name="action" value="checkDiscount" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Apply</button>
+                        </div>
+                        <button form="validateVoucherCodeForm" type="submit" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Apply</button>
                     </div>
                     @error('code')
-                    <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
                     @enderror
                     <?php 
                         if(Session::get('promotion_code'))
@@ -496,21 +465,20 @@
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Total</p>
                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp {{ number_format($total_price, 0, ',', ',') }}</p>
                         <input type="hidden" name="grand_total" value="{{$total_price}}">
-
                     </div>
                 </div>
                 <!-- END OF NOMINAL CARD -->
         
                 <div style="text-align:center;margin-top:1.5vw">
                         <?php
-                            $tomorow = explode(' ', $today);
-                            $date=$tomorow[0];
-                            $time=$tomorow[1];
+                            $tomorrow_split = explode(' ', $tomorrow);
+                            $date = $tomorrow_split[0];
+                            $time = $tomorrow_split[1];
                         ?>
-                        <input type="hidden" name="date" value="{{$date}}">
-                        <input type="hidden" name="time" value="{{$time}}">
-                        <input type="hidden" name="name" value="{{Auth::user()->name}}">
-                        <input type="hidden" name="phone" value="{{Auth::user()->userDetail->telephone}}">
+                        <input type="hidden" name="date" value="{{ $date }}">
+                        <input type="hidden" name="time" value="{{ $time }}">
+                        <input type="hidden" name="name" value="{{ Auth::user()->name }}">
+                        <input type="hidden" name="phone" value="{{ Auth::user()->userDetail->telephone }}">
                         <input type="hidden" name="province" value="
                         @if(Request::get('province'))
                             {{Request::get('province')}}
@@ -519,18 +487,16 @@
                         @endif
                         ">
                         <input type="hidden" name="city" value="
-                        @if(Request::get('city'))
-                            {{Request::get('city')}}
+                        @if (Request::get('city'))
+                            {{ Request::get('city') }}
                         @else
-                            {{auth()->user()->userDetail->city_id}}
+                            {{ auth()->user()->userDetail->city_id }}
                         @endif
                         ">
                         <input type="hidden" name="courier" value="{{Request::get('shipping')}}">
                         <input type="hidden" name="service" value="{{Request::get('tipe')}}">
                         <input type="hidden" name="bankShortCode" id="bankShortCode" value="">
-                        @if($total_price == 0)
-                            <button type="submit" name="action" value="createOrderFree" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>
-                        @elseif(Request::get('tipe') || $noWoki)
+                        @if(Request::get('tipe') || $noWoki)
                             <button type="button" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>                
                         @else
                             <button type="button" data-toggle="modal" data-target="#exampleModal" class="normal-text" style="cursor:pointer;border:none;font-family: Poppins Medium;background: rgba(111, 159, 205, 0.5);border-radius: 5px;color:#FFFFFF;padding:0.5vw 2vw" disabled>Lanjut ke Pembayaran</button>                
@@ -540,6 +506,9 @@
         </div>
 
     </div>
+</form>
+<form id="validateVoucherCodeForm" action="{{ route('customer.cart.validate-voucher-code') }}" method="POST">
+@csrf
 </form>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script>
@@ -556,20 +525,12 @@
         document.getElementById(icon_id).style.display = "block";
         evt.currentTarget.className += " payment-method-card-active";
         document.getElementById("bankShortCode").value = type;
-
-
-
     }
 </script>
-
 <script>
-    function checkDiscount()
-    {
+    function checkDiscount() {
         console.log(document.getElementById('check_discount_form'))
         document.getElementById("check_discount_form").submit();
-
     }
-
 </script>
-
 @endsection

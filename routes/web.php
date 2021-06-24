@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Client\AssessmentController;
+use App\Http\Controllers\Client\WokiController;
 use App\Http\Controllers\Client\KrestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
@@ -100,6 +101,9 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment')->middleware('auth');
     Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware('auth');
     Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware('auth');
+    Route::post('/createPayment/v2', [CheckoutController::class, 'newStore'])->name('customer.cart.newStoreOrder')->middleware('auth');
+    Route::post('/validate-voucher-code', [CheckoutController::class, 'validateVoucherCode'])->name('customer.cart.validate-voucher-code')->middleware('auth');
+
     Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware('auth');
     Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware('auth');
     Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
@@ -111,7 +115,6 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart')->middleware('auth');
     Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty')->middleware('auth');
     Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty')->middleware('auth');
-
     Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount')->middleware('auth');
 
     /* START OF ONLINE COURSE ROUTING */
@@ -124,6 +127,10 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
 
     Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
+    // WokiController
+    Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
+    Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');
+    Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree');
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
     // AssessmentController

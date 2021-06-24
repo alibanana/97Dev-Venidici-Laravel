@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use App\Helper\Helper;
 
 use App\Models\Cart;
 use App\Models\Course;
@@ -166,33 +166,34 @@ class OnlineCourseController extends Controller
         return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations', 'notifications'));
     }
 
-    public function buyFree($course_id)
-    {
+    public function buyFree($course_id) {
+        // Validate if course exists;
+        $course = Course::findOrFail($course_id);
+
         if(!auth()->user()->isProfileUpdated)
             return redirect()->back()->with('message_update','Please complete your profile first.');
-
-        $length = 10;
-        $random = '';
-        for ($i = 0; $i < $length; $i++) {
-            $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
-        };
-
-        $no_invoice = 'INV-'.Str::upper($random);
         
-        // create invoice
-        $invoice = Invoice::create([
-            'invoice_no'            => $no_invoice,
-            'user_id'               => auth()->user()->id,
-            'name'                  => auth()->user()->name,
-            'phone'                 => auth()->user()->userDetail->telephone,
-            'grand_total'           => 0,
-            'status'                => 'completed',
-            'total_order_price'     => 0,
-            'xfers_payment_id'      => $no_invoice,
+        $invoiceNumberResults = Helper::generateInvoiceNumber();
 
+        // If something failed
+        if ($invoiceNumberResults['status'] == 'Failed') {
+            return redirect()->back()->with('message', $invoiceNumberResults['message']);
+        }
+
+        $invoice = Invoice::create([
+            'invoice_no' => $invoiceNumberResults['data'],
+            'user_id' => auth()->user()->id,
+            'name' => auth()->user()->name,
+            'phone' => auth()->user()->userDetail->telephone,
+            'grand_total' => 0,
+            'status' => 'completed',
+            'total_order_price' => 0,
+            'xfers_payment_id' => $invoiceNumberResults['data'],
         ]);
 
-        // Create order item & attach course to user.
+        // Check if invoice creation failed.
+        if (!$invoice->exists) abort(500);
+
         $order = Order::create([
             'invoice_id'    => $invoice->id,
             'course_id'     => $course_id,
@@ -200,46 +201,37 @@ class OnlineCourseController extends Controller
             'price'         => 0,
         ]);
 
-
-
-        $courses_string = "";
-
-        $x = 1;
-        $length = count($invoice->orders);
-        foreach($invoice->orders as $order)
-        {
-            if($x == $length && $length != 1)
-                $courses_string = $courses_string." dan ";
-            
-            elseif($x != 1)
-                $courses_string = $courses_string.", ";
-
-            $courses_string = $courses_string.$order->course->title;
-            $x++;
-        }
-        $invoice = Invoice::where('xfers_payment_id',$no_invoice)->first();
+        // Check if order creation failed.
+        if (!$order->exists) {
+            $invoice->delete();
+            abort(500);
+        };
 
         // create notification
         $notification = Notification::create([
-            'user_id'           => auth()->user()->id,
-            'invoice_id'        => $invoice->id,
-            'isInformation'     => 0,
-            'title'             => 'Pembayaran Telah Berhasil!',
-            'description'       => 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah berhasil.',
-            'link'              => '/transaction-detail/'.$no_invoice
+            'user_id' => auth()->user()->id,
+            'invoice_id' => $invoice->id,
+            'isInformation' => 0,
+            'title' => 'Pembayaran Telah Berhasil!',
+            'description' => 'Hi, '.auth()->user()->name.'. Kamu telah mendapatkan pelatihan: ' . $course->title . '.',
+            'link' => '/transaction-detail/'.$invoiceNumberResults['data']
         ]);
 
-        foreach ($invoice->orders as $order) {
-            $course = $order->course;
-            if (!auth()->user()->courses->contains($course->id)) {
-                auth()->user()->courses()->attach($course->id);
-                if ($course->assessment()->exists()) {
-                    auth()->user()->assessments()->attach($course->assessment->id);
-                }
+        // Check if notification creation failed.
+        if (!$notification->exists) {
+            $order->delete();
+            $invoice->delete();
+            abort(500);
+        }
+
+        if (!auth()->user()->courses->contains($course->id)) {
+            auth()->user()->courses()->syncWithoutDetaching([$course->id]);
+            if ($course->assessment()->exists()) {
+                auth()->user()->assessments()->syncWithoutDetaching([$course->assessment->id]);
             }
         }
-        return redirect('/transaction-detail/'.$no_invoice.'#payment-success');
 
+        return redirect('/transaction-detail/'.$invoiceNumberResults['data'].'#payment-success');
     }
     
 }

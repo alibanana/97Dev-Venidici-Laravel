@@ -96,4 +96,27 @@ class XfersHelper {
         $xfersHelper = new XfersHelper;
         return $xfersHelper->executeWithResponseValidation(self::METHOD_GET, $url);
     }
+
+    // Function to create a payment object.
+    public static function createPayment($request, $no_invoice, $invoice_id) {
+        $url = self::BASE_URL;
+        $payload = [
+            "data" => [
+                "attributes" => [
+                    "paymentMethodType" => "virtual_bank_account",
+                    "amount" => $request['grand_total'],
+                    "referenceId" => $no_invoice,
+                    "expiredAt" => $request['date'].'T'.$request['time'].'+07:00',
+                    "description" => "Order Number ".$invoice_id,
+                    "paymentMethodOptions" =>[
+                        "bankShortCode" => $request['bankShortCode'],
+                        "displayName" => "Venidici",
+                        "suffixNo" => ""
+                    ]
+                ]
+            ]
+        ];
+        $xfersHelper = new XfersHelper;
+        return $xfersHelper->executeWithResponseValidation(self::METHOD_POST, $url, $payload);
+    }
 }
