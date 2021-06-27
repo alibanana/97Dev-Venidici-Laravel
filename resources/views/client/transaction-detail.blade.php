@@ -192,12 +192,13 @@
                             </div>
                         </div>
                         <div style="display:flex;align-items:center">
-                                
-                            <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
-                                <p style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
-                                {{$cart->qty}}
-                                </p>
-                            </div>
+                            @if ($cart->withArtOrNo)
+                                <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
+                                    <p style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+                                    {{$cart->qty}}
+                                    </p>
+                                </div>
+                            @endif
                             <div style="width:7.5vw;text-align:right">
                                 @if($cart->withArtOrNo)
                                 <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
