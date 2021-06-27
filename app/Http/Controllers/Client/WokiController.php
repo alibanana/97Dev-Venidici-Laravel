@@ -103,7 +103,6 @@ class WokiController extends Controller
             $cart_count = $this->cart_count;
 
             return view('client/woki/detail', compact('course','reviews','cart_count','transactions','informations','notifications'));
-            // return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications'));
         }
 
         return view('client/woki/detail', compact('course','reviews'));
