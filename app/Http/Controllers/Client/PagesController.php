@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Jenssegers\Agent\Agent;
+use Illuminate\Support\Str;
+use App\Helper\Helper;
+use PDF;
 
 use App\Models\Notification;
 use App\Models\Config;
@@ -22,11 +26,6 @@ use App\Models\UserHashtag;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\InstructorPosition;   
-use Jenssegers\Agent\Agent;
-
-
-use PDF;
-use Illuminate\Support\Str;
 
 
 /*
@@ -46,13 +45,11 @@ class PagesController extends Controller
     private $cart_count; // Stores cart data for a particular user.
 
     private function resetNavbarData() {
-        $this->notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-        $this->informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
-        $this->transactions = Notification::where([   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0]
-            ])->orderBy('created_at', 'desc')->get();
-        $this->cart_count = Cart::with('course')->where('user_id', auth()->user()->id)->count();
+        $navbarData = Helper::getNavbarData();
+        $this->notifications = $navbarData['notifications'];
+        $this->informations = $navbarData['informations'];
+        $this->transactions = $navbarData['transactions'];
+        $this->cart_count = $navbarData['cart_count'];
     }
 
     // Show the main landing page of the app.

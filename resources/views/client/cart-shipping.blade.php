@@ -4,8 +4,7 @@
 @section('content')
 
 
-{{-- <form action="{{route('customer.cart.storeOrder')}}" method="POST"> --}}
-<form action="{{route('customer.cart.newStoreOrder')}}" method="POST">
+<form action="{{route('customer.cart.storeOrder')}}" method="POST">
     @csrf
     <!-- Modal VA -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -254,9 +253,9 @@
                                     <option disabled selected>Pilih Kota terlebih dahulu</option>
                                 @else
                                     <option disabled selected>Pilih metode pengiriman</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'jne']) }}" @if (Request::get('shipping') == 'jne') selected @endif>JNE</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'tiki']) }}" @if (Request::get('shipping') == 'tiki') selected @endif>TIKI</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'shipping' => 'pos']) }}" @if (Request::get('shipping') == 'pos') selected @endif>POS</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['shipping' => 'jne']) }}" @if (Request::get('shipping') == 'jne') selected @endif>JNE</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['shipping' => 'tiki']) }}" @if (Request::get('shipping') == 'tiki') selected @endif>TIKI</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['shipping' => 'pos']) }}" @if (Request::get('shipping') == 'pos') selected @endif>POS</option>
                                 @endif
                             </select>                    
                         </div>  

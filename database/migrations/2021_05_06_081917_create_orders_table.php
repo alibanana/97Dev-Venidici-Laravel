@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
             $table->integer('qty');
-            $table->integer('price');
+            $table->unsignedBigInteger('price');
             $table->boolean('withArtOrNo')->default(0)->nullable();
             $table->timestamps();
         });

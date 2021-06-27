@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Client;
 use Cookie;
 
-use App\Models\Cart;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Province;
-use App\Models\City;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use App\Helper\Helper;
+
+use App\Models\Cart;
+use App\Models\Province;
+use App\Models\City;
 use App\Models\Invoice;
 use App\Models\Promotion;   
 use App\Models\Course;   
@@ -19,49 +21,56 @@ use Jenssegers\Agent\Agent;
 
 class CartController extends Controller
 {
+    private $notifications; // Stores combined notifications data.
+    private $informations; // Stores notification (isInformation == true) data.
+    private $transactions; // Stores notification (isInformation == false) data for a particular user.
+    private $cart_count; // Stores cart data for a particular user.
+
+    private function resetNavbarData() {
+        $navbarData = Helper::getNavbarData();
+        $this->notifications = $navbarData['notifications'];
+        $this->informations = $navbarData['informations'];
+        $this->transactions = $navbarData['transactions'];
+        $this->cart_count = $navbarData['cart_count'];
+    }
+
     // Shows the client cart page. (/cart)
     public function index() {
-        $agent = new Agent();
-        if ($agent->isPhone())
-            return view('client/mobile/under-construction');
+        Helper::mobileViewNotReady();
+
+        $this->resetNavbarData();
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
         
         $carts = Cart::with('course')
             ->where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-
-        $transactions = Notification::where([
-            ['user_id', '=', auth()->user()->id],
-            ['isInformation', '=', 0],
-        ])->orderBy('created_at', 'desc')->get();
-
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        $allNotifications = Notification::where('isInformation',1)->orWhere([   
-            ['user_id', '=', auth()->user()->id],
-            ['isInformation', '=', 0],
-        ])->orderBy('created_at', 'desc')->get();
-
-        $noWoki = TRUE;
+        $noWoki = true; $total_price = 0;
         foreach ($carts as $cart) {
             if($cart->course->course_type_id == 2)
-                $noWoki = FALSE;
+                $noWoki = false;
+            // If cart withArtOrNo (true) -> store priceWithArtKit data. Else store normal price data.
+            $tempPriceOnly = $cart->withArtOrNo ? $cart->course->priceWithArtKit : $cart->course->price;
+            $total_price += $cart->quantity * $tempPriceOnly;
         }
 
-        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
-        return view('client/cart', compact('carts','cart_count','transactions','informations','noWoki','notifications'));
+        return view('client/cart',
+            compact('notifications', 'informations', 'transactions', 'cart_count', 'carts', 'noWoki', 'total_price'));
     }
     
     // Shows the client payment shipping page. (/payment)
-    public function shipment_index(Request $request)
-    {
-        $agent = new Agent();
-        if ($agent->isPhone())
-            return view('client/mobile/under-construction');
+    public function shipment_index(Request $request) {
+        Helper::mobileViewNotReady();
+
+        $this->resetNavbarData();
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
         
         if (!auth()->user()->isProfileUpdated)
             return redirect()->back()->with('message','Please complete your profile first.');
@@ -69,29 +78,16 @@ class CartController extends Controller
             return redirect('/cart');
 
         $carts = auth()->user()->carts;
-                
-        $cart_count = count($carts->toArray());
-
-        $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0]
-            ]
-        )->orderBy('created_at', 'desc')->get();
 
         $tomorrow = Carbon::now()->addDays(1);
         $tomorrow->setTimezone('Asia/Jakarta');
-        $total_price = 0;
-        $sub_total = 0;
-        $shipping_cost = 0;
-        $tipe_pengiriman = null;
 
-        foreach($carts as $cart)
-        {
-            if($cart->withArtOrNo)
-                $sub_total += $cart->course->priceWithArtKit * $cart->quantity;
-            else
-                $sub_total += $cart->course->price * $cart->quantity;
+        $total_price = 0; $sub_total = 0; $shipping_cost = 0; $tipe_pengiriman = null;
+
+        // Calculate sub-total.
+        foreach($carts as $cart) {
+            $sub_total_price = $cart->withArtOrNo ? $cart->course->priceWithArtKit : $cart->course->price;
+            $sub_total += $cart->quantity * $sub_total_price;
         }
         
         $provinces = Province::all();
@@ -126,65 +122,75 @@ class CartController extends Controller
 
         if ($request->has('tipe')) {
             $nama_tipe = $request['tipe'];
-            foreach($tipe_pengiriman as $tipe)
-            {
+            foreach ($tipe_pengiriman as $tipe) {
                 if($tipe['service'] == $nama_tipe)
                     $shipping_cost = $tipe['cost'][0]['value'];
             }
         }
+
         $total_price = $sub_total + $shipping_cost;
 
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        $noWoki = TRUE;
-        foreach($carts as $cart)
-        {
-            if($cart->withArtOrNo)
-                $noWoki = FALSE;
+        $noWoki = true;
+        foreach ($carts as $cart) {
+            if($cart->withArtOrNo) $noWoki = false;
         }
-        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('client/cart-shipping', compact('carts','cart_count','provinces','cities','sub_total','shipping_cost','tipe_pengiriman','total_price','tomorrow','transactions','informations','noWoki','notifications'));
+        return view('client/cart-shipping',
+            compact('notifications', 'informations', 'transactions', 'cart_count', 'carts', 'provinces',
+                'cities', 'sub_total', 'shipping_cost', 'tipe_pengiriman', 'total_price', 'tomorrow', 'noWoki'));
     }
 
-    public function store(Request $request)
-    {
-        // handle if online course is already in cart
-        $users_cart = Cart::where('course_id', $request->course_id)->where('user_id', $request->user_id)->get();
-        foreach($users_cart as $course)
-        {
-            if($course->course->course_type_id == 1 && $request->action != 'buyNow')
-            return redirect()->back()->with('success', 'Item sudah ada di cart');
-            elseif($course->course->course_type_id == 1 && $request->action == 'buyNow')
+    // Add item to cart (in the database).
+    public function store(Request $request) {
+        $validated = $request->validate([
+            'course_id' => 'required|integer',
+            'withArtOrNo' => 'required|integer'
+        ]);
+
+        // Get cart data 
+        $cart_object = auth()->user()->carts()
+            ->where('course_id', $validated['course_id'])
+            ->where('withArtOrNo', $validated['withArtOrNo'])->first();
+
+        // Whne withArtOrNo equal either 0 or 1. Handle if each cases is available on the user's cart already.
+        if ($cart_object != null) {
+            if ($validated['withArtOrNo']) {
+                $cart_object->quantity += 1;
+                $cart_object->price = $cart_object->course->priceWithArtKit * $cart_object->quantity;
+                $cart_object->save();
+                $request->session()->put('cart_count', $request->session()->get('cart_count') + 1); 
+                if ($request->action != 'buyNow')
+                    return redirect()->back()->with('success', 'Product added to cart successfully!');
+                else
+                    return redirect()->route('customer.cart.index');
+            } else {
+                if ($request->action != 'buyNow')
+                    return redirect()->back()->with('success', 'Item sudah ada di cart');
+                else
+                    return redirect()->route('customer.cart.index');
+            }
+        }
+
+        // Course given is not in the user's cart yet.
+        $course = Course::findOrFail($validated['course_id']);
+        $newCartData = [
+            'course_id' => $course->id,
+            'user_id' => auth()->user()->id,
+            'withArtOrNo'   => $validated['withArtOrNo']
+        ];
+        if ($validated['withArtOrNo'])
+            $newCartData['price'] = $course->priceWithArtKit;
+        else
+            $newCartData['price'] = $course->price;
+
+        $item = Cart::create($newCartData);
+
+        $request->session()->put('cart_count', $request->session()->get('cart_count') + 1); 
+
+        // If request action is buyNow.
+        if ($request->action == 'buyNow')
             return redirect()->route('customer.cart.index');
-        }
-        $item = Cart::where('course_id', $request->course_id)->where('user_id', $request->user_id)->where('withArtOrNo',$request->withArtOrNo);
-        if ($item->count()) {
-            //increment quantity
-            $item->increment('quantity');
-            $item = $item->first();
-            //sum price * quantity
-            $price = $request->price * $item->quantity;
-            //sum weight
-            $weight = $request->weight * $item->quantity;
-            $item->update([
-                'price' => $price,
-                'weight'=> $weight
-            ]);
-        } else {
-            $item = Cart::create([
-                'course_id'    => $request->course_id,
-                'user_id'   => $request->user_id,
-                'quantity'      => $request->quantity,
-                'price'         => $request->price,
-                'weight'        => $request->weight,
-                'withArtOrNo'   => $request->withArtOrNo
-            ]);
-        }
-       
-        $request->session()->put('cart_count',$request->session()->get('cart_count')+1);  
-        if($request->action == 'buyNow') {            
-            return redirect()->route('customer.cart.index');
-        }
+
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
@@ -218,24 +224,40 @@ class CartController extends Controller
         $cart->delete();
         return redirect()->back()->with('success', 'Item Removed');
     }
-    public function increaseQty(Request $request)
-    {
-        $cart = Cart::findOrFail($request->cart_id);
-        $cart->quantity = $cart->quantity+1;
-        $cart->price = $cart->price+$cart->price;
+
+    // Increase the quantity of a cart object.
+    public function increaseQty(Request $request) {
+        $cart = Cart::where('id', $request->cart_id)->where('withArtOrNo', true)->firstOrFail();
+        
+        $currentCoursePrice = $cart->course->priceWithArtKit;
+
+        // Update and save new quantity & price.
+        $cart->quantity += 1;
+        $cart->price = $cart->quantity * $currentCoursePrice;
         $cart->save();
-        $request->session()->put('cart_count',$request->session()->get('cart_count')+1);  
+
+        // Save new cart_count in session.
+        $request->session()->put('cart_count', $request->session()->get('cart_count') + 1);  
 
         return redirect()->back();
     }
-    public function decreaseQty(Request $request)
-    {
-        $cart = Cart::findOrFail($request->cart_id);
-        $cart->quantity = $cart->quantity-1;
-        $cart->price = $cart->price-$cart->course->price;
 
+    // Decrease the quantity of a cart object.
+    public function decreaseQty(Request $request) {
+        $cart = Cart::where('id', $request->cart_id)->where('withArtOrNo', true)->firstOrFail();
+
+        // Skip process if quantity is 1 already.
+        if ($cart->quantity == 1) return redirect()->back();
+
+        // Get latest course price data.
+        $currentCoursePrice = $cart->course->priceWithArtKit;
+
+        // Update and save new quantity & price.
+        $cart->quantity -= 1;
+        $cart->price = $cart->quantity * $currentCoursePrice;
         $cart->save();
-        $request->session()->put('cart_count',$request->session()->get('cart_count')-1);  
+
+        $request->session()->put('cart_count', $request->session()->get('cart_count') - 1);  
 
         return redirect()->back();
     }

@@ -31,9 +31,7 @@ use Jenssegers\Agent\Agent;
 | include /online-course (excluding admin pages).
 |--------------------------------------------------------------------------
 */ 
-class OnlineCourseController extends Controller
-{
-
+class OnlineCourseController extends Controller {
     private $notifications; // Stores combined notifications data.
     private $informations; // Stores notification (isInformation == true) data.
     private $transactions; // Stores notification (isInformation == false) data for a particular user.
@@ -118,8 +116,6 @@ class OnlineCourseController extends Controller
 
         return view('client/online-course/detail', compact('course','reviews'));
     }
-
-
 
     public function learn($course_id, $section_content_id) {
         $agent = new Agent();

@@ -306,20 +306,18 @@
                 <p class="small-heading price-content" id="dengan-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">Rp{{ number_format($course->priceWithArtKit, 0, ',', ',') }}</p>
                 @endif
                 <div class="form-check" style="margin-top:0.5vw">
-                    <input onclick="changePrice(event, 'tanpa-seni',{{$course->price}},0)" class="form-check-input price-links" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <input onclick="changePrice(event, 'tanpa-seni', {{ $course->price }}, 0)" class="form-check-input price-links" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                     <label class="form-check-label normal-text" style="font-family:Rubik Regular" for="flexRadioDefault2">
                         Tanpa perlengkapan seni
                     </label>
                 </div>
                 <div class="form-check" style="margin-top:1vw">
-                    <input onclick="changePrice(event, 'dengan-seni',{{$course->priceWithArtKit}},1)" class="form-check-input price-links" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
+                    <input onclick="changePrice(event, 'dengan-seni', {{ $course->priceWithArtKit }}, 1)" class="form-check-input price-links" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
                     <label class="form-check-label normal-text" style="font-family:Rubik Regular" for="flexRadioDefault1">
                         Dengan perlengkapan seni
                     </label>
                 </div>
             @endif
-            
-
 
             <?php $flag = null;?>
             @if(Auth::check())
@@ -333,43 +331,35 @@
                     @endif
                 @endforeach
             @endif
+
+            {{-- If user has bought the course. --}}
             @if($flag)
-
-            <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
-            @elseif($course->price != 0)
-
-            <form action="{{ route('customer.cart.store') }}" method="post">
-            @csrf
-                <input type="hidden" name="course_id" value="{{$course->id}}">
-                @if(Auth::check())
-                <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
+                <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered"
+                    style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
+            {{-- If user has not bought the course --}}
+            @else
+                {{-- If user has not bought the course and the price IS NOT 0. --}}
+                @if ($course->price != 0)
+                    <form action="{{ route('customer.cart.store') }}" method="post">
+                    @csrf
+                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
+                        <button type="submit" class="normal-text btn-blue-bordered"
+                            style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
+                        <button class="normal-text btn-dark-blue" name="action" value="buyNow" 
+                            style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+                    </form>
+                {{-- If user has not bought the course and the price IS 0. --}}
+                @else
+                    <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
+                    @csrf
+                        <input type="hidden" name="course_id" value="{{$course->id}}">              
+                        <button class="normal-text  btn-dark-blue"
+                            style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+                    </form>
                 @endif
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="price" id="price" value="{{$course->price}}">
-                <input type="hidden" name="weight" value="0">                
-                <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
-            @endif
-            
-            <input type="hidden" name="withArtOrNo" id="withArtOrNo" value="0">                
-
-            @if(!$flag && $course->price != 0)
-            <button class="normal-text  btn-dark-blue" name="action" value="buyNow" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
-            @endif
-            </form>
-            @if(!$flag && $course->price == 0)
-            <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
-            @csrf
-                <input type="hidden" name="course_id" value="{{$course->id}}">
-                @if(Auth::check())
-                <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
-                @endif
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="weight" value="0">                
-                <button class="normal-text  btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
-            </form>
             @endif
 
-        
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">{{ $course->wokiCourseDetail->event_duration }} Menit video eksklusif</span></p>
@@ -537,11 +527,8 @@
             tabcontent[i].style.display = "none";
         }
         document.getElementById(categoryName).style.display = "block";
-        document.getElementById("price").value = price;
         document.getElementById("withArtOrNo").value = withArtOrNo;
-
     }
-         
 </script>
 <script>
     function openReview() {
