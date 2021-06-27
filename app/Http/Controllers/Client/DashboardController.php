@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Axiom\Rules\StrongPassword;
+use Jenssegers\Agent\Agent;
 use App\Helper\Helper;
 use Carbon\Carbon;
+use Throwable;
 
 use App\Models\Hashtag;
 use App\Models\Cart;
@@ -20,9 +25,7 @@ use App\Models\UserDetail;
 use App\Models\Redeem;
 use App\Models\Promotion;
 use App\Models\Course;
-use Jenssegers\Agent\Agent;
-
-use Illuminate\Support\Facades\Validator;
+use App\Mail\PasswordChangedMail;
 
 class DashboardController extends Controller
 {
@@ -162,10 +165,19 @@ class DashboardController extends Controller
 
     // Changes the user's password in the database.
     public function changePassword(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required',
-            'password' => ['required', 'confirmed', new StrongPassword]
-        ]);
+        // Use StrongPassword validation on production.
+        if (App::environment('production'))
+            $validation_rules = [
+                'old_password' => 'required',
+                'password' => ['required', 'confirmed', new StrongPassword]
+            ];
+        else
+            $validation_rules = [
+                'old_password' => 'required',
+                'password' => ['required', 'confirmed']
+            ];
+
+        $validator = Validator::make($request->all(), $validation_rules);
 
         if ($validator->fails()) {
             return redirect(route('customer.dashboard') . '#change-password')
@@ -187,7 +199,7 @@ class DashboardController extends Controller
         if (Hash::check($validated['password'], $user->password)) {
             return redirect(route('customer.dashboard') . '#change-password')
                 ->withErrors([
-                    'password' => 'New password cannot be the same..'
+                    'password' => 'New pasword cannot be the same..'
                 ]);
         }
 
@@ -195,12 +207,24 @@ class DashboardController extends Controller
         $user->save();
 
         if ($user->wasChanged()) {
-            $message = 'Your password has been changed.';
+            $messageTopic = 'success';
+            $message = 'Your password has been changed. A notification email has been sent to your email.';
+            try {
+                Mail::to(auth()->user()->email)->send(new PasswordChangedMail());
+            } catch (Throwable $e) {
+                $user->password =  Hash::make($validated['old_password']);
+                $user->save();
+                $messageTopic = 'danger';
+                $message = 'Oops, unable to send email. Your old password has been kept.';
+                if (!App::environment('production'))
+                    $message = $e->getMessage();
+            }
         } else {
-            $message = 'Seems like something went wrong..';
+            $messageTopic = 'danger';
+            $message = 'Oops, unable to update your password.';
         }
 
-        return redirect(route('customer.dashboard') . '#change-password')->with('success', $message);
+        return redirect(route('customer.dashboard') . '#change-password')->with($messageTopic, $message);
     }
 
     public function redeem_index(Request $request){

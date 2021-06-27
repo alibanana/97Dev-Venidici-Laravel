@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Client\WokiController;
@@ -355,36 +356,39 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
     /* END OF FOR CORPORATE ROUTING*/
 
-    Route::get('/email/verifyUser', function () {
-        return view('emails/verifyUser');
-    });
-    Route::get('/email/checkout', function () {
-        return view('emails/checkout');
-    });
-    Route::get('/email/invoice', function () {
-        return view('emails/invoice');
-    });
-    Route::get('/email/complete_course', function () {
-        return view('emails/complete_course');
-    });
-    Route::get('/email/forget_password', function () {
-        return view('emails/forget_password');
-    });
-    Route::get('/email/live_pelatihan', function () {
-        return view('emails/live_pelatihan');
-    });
-    Route::get('/email/suspend', function () {
-        return view('emails/suspend');
-    });
-    Route::get('/email/verifyUser', function () {
-        return view('emails/verifyUser');
-    });
-    Route::get('/certificate', function () {
-        return view('client/certificate');
-    });
-    Route::get('/level_up', function () {
-        return view('emails/level_up');
-    });
+    // ROUTES TO CHECK EMAIL VIEWS
+    if (!App::environment('production')) {
+        Route::get('/email/verifyUser', function () {
+            return view('emails/verifyUser');
+        });
+        Route::get('/email/checkout', function () {
+            return view('emails/checkout');
+        });
+        Route::get('/email/invoice', function () {
+            return view('emails/invoice');
+        });
+        Route::get('/email/complete_course', function () {
+            return view('emails/complete_course');
+        });
+        Route::get('/email/forget_password', function () {
+            return view('emails/forget_password');
+        });
+        Route::get('/email/password_changed', function () {
+            return view('emails/passwordChanged');
+        });
+        Route::get('/email/live_pelatihan', function () {
+            return view('emails/live_pelatihan');
+        });
+        Route::get('/email/suspend', function () {
+            return view('emails/suspend');
+        });
+        Route::get('/certificate', function () {
+            return view('client/certificate');
+        });
+        Route::get('/level_up', function () {
+            return view('emails/level_up');
+        });
+    };
 
     /* START OF DOMPDF ROUTING */
     Route::post('/certificate/pdf', [PagesController::class, 'print'])->name('print_certificate');
