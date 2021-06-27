@@ -14,8 +14,8 @@
                     <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Cara Pembayaran Virtual Account</p>
                     <div >
                         <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">1. Pilih m-Transfer dan pilih BCA Virtual Account.</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">2. Masukan nomor Virtual Account <span style="font-family:Rubik Medium;color:#074EE8">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</span>  dan pilih send. </p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">3. Pastikan total tagihan dari BCA Virtual Account sesuai dengan <span style="font-family:Rubik Medium;color:#074EE8"> total pembayaran</span> di halaman ini. Pastikan juga Merchant bernama <span style="font-family:Rubik Medium;color:#074EE8">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['displayName']}}</span>. Jika semua sudah benar, pilih Yes/Ya.</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">2. Masukan nomor Virtual Account <span style="font-family:Rubik Medium;color:#074EE8">{{$payment_object['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</span>  dan pilih send. </p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">3. Pastikan total tagihan dari BCA Virtual Account sesuai dengan <span style="font-family:Rubik Medium;color:#074EE8"> total pembayaran</span> di halaman ini. Pastikan juga Merchant bernama <span style="font-family:Rubik Medium;color:#074EE8">{{$payment_object['data']['attributes']['paymentMethod']['instructions']['displayName']}}</span>. Jika semua sudah benar, pilih Yes/Ya.</p>
                     </div>                
                 </div>
             </div>
@@ -109,7 +109,7 @@
                             <div style="display:flex;align-items:center">
                                 <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
                                 <?php
-                                    $date = explode('T', $payment_status['data']['attributes']['expiredAt']);
+                                    $date = explode('T', $payment_object['data']['attributes']['expiredAt']);
                                     $time = explode('+', $date[1]);
                                 ?>
                                 <p style="margin-bottom:0px;margin-left:1vw" class="very-small-text">
@@ -192,12 +192,13 @@
                             </div>
                         </div>
                         <div style="display:flex;align-items:center">
-                                
-                            <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
-                                <p style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
-                                {{$cart->qty}}
-                                </p>
-                            </div>
+                            @if ($cart->withArtOrNo)
+                                <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
+                                    <p style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+                                    {{$cart->qty}}
+                                    </p>
+                                </div>
+                            @endif
                             <div style="width:7.5vw;text-align:right">
                                 @if($cart->withArtOrNo)
                                 <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
@@ -267,8 +268,8 @@
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
                             <div>
-                                <p class="small-text" style="margin-bottom:0.5vw;font-family:Rubik Medium;color:#3B3C43">Bank {{$payment_status['data']['attributes']['paymentMethod']['instructions']['bankShortCode']}} ( Virtual Account)</p>
-                                <p class="sub-description" style="font-family:Rubik Medium;color:#074EE8;margin-bottom:0px">{{$payment_status['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</p>
+                                <p class="small-text" style="margin-bottom:0.5vw;font-family:Rubik Medium;color:#3B3C43">Bank {{$payment_object['data']['attributes']['paymentMethod']['instructions']['bankShortCode']}} ( Virtual Account)</p>
+                                <p class="sub-description" style="font-family:Rubik Medium;color:#074EE8;margin-bottom:0px">{{$payment_object['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</p>
                             </div>
                         </div>
 

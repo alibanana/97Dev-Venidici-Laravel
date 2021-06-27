@@ -19,10 +19,10 @@ class CreateCartsTable extends Migration
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->integer('quantity');
-            $table->bigInteger('price');
-            $table->bigInteger('weight');
-            $table->boolean('withArtOrNo')->default(0)->nullable();
+            $table->unsignedInteger('quantity')->default(1);
+            $table->unsignedBigInteger('price');
+            $table->bigInteger('weight')->default(0);
+            $table->boolean('withArtOrNo')->default(0);
             $table->timestamps();
         });
     }

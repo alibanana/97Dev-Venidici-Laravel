@@ -196,11 +196,17 @@
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             @if (session()->has('success'))
-            <div class="p-3 mt-2 mb-0">
-                <div class="alert alert-success alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                    {{ session('success') }}
+                <div class="p-3 mt-2 mb-0">
+                    <div class="alert alert-success alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
+                        {{ session('success') }}
+                    </div>
                 </div>
-            </div>
+            @elseif (session()->has('danger'))
+                <div class="p-3 mt-2 mb-0">
+                    <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
+                        {{ session('danger') }}
+                    </div>
+                </div>
             @endif
             <form action="{{ route('customer.change-password') }}" method="post">
                 @csrf

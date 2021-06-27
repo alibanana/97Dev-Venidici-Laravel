@@ -5,14 +5,38 @@ namespace App\Helper;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as ImageManager;
 use Carbon\Carbon;
-use App\Models\Star;
-use App\Models\Notification;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
+use Exception;
 
 use App\Mail\LevelUp;
+use App\Models\Star;
+use App\Models\Notification;
+use App\Models\Cart;
 
 class Helper
 {
+    // Function to show under-construction page if the mobile page is not ready.
+    public static function mobileViewNotReady() {
+        $agent = new Agent();
+        return $agent->isPhone() ?
+            view('client/mobile/under-construction') : null;
+    }
+
+    // Function to get neccessary navbar data.
+    public static function getNavbarData() {
+        $notifications = Notification::where('isInformation',1)
+            ->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
+        $transactions = Notification::where([   
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 0]
+            ])->orderBy('created_at', 'desc')->get();
+        $cart_count = Cart::with('course')->where('user_id', auth()->user()->id)->count();
+        return compact('notifications', 'informations', 'transactions', 'cart_count');
+    }
+
     public static function storeImage($image, $destinationPath) {
         $ext = strtolower($image->getClientOriginalExtension());
 
@@ -121,5 +145,26 @@ class Helper
         $user->save();
 
         if ($user->wasChanged()) Mail::to($user->email)->send(new LevelUp($user));
+    }
+
+    public static function generateInvoiceNumber($length = 10) {
+        try {
+            $random = '';
+            for ($i = 0; $i < $length; $i++) {
+                $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+            };
+    
+            $no_invoice = 'INV-'.Str::upper($random);
+
+            return [
+                'status' => 'Success',
+                'data' => $no_invoice
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
     }
 }

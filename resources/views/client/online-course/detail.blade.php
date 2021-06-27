@@ -3,7 +3,6 @@
 
 @section('content')
 
-
 <div class="row m-0 page-container online-course-detail-bg" style="padding-top:11vw;padding-bottom:10vw">
     <!-- START OF LEFT SECTION -->
     <div class="col-9" >
@@ -253,6 +252,8 @@
             @else
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
             @endif
+
+            {{-- Checks if course given has been bought --}}
             <?php $flag = null;?>
             @if(Auth::check())
                 @foreach($transactions as $transaction)
@@ -265,39 +266,33 @@
                     @endif
                 @endforeach
             @endif
+
+            {{-- If user has bought the course. --}}
             @if($flag)
-
-            <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
-            @elseif($course->price != 0)
-
-            <form action="{{ route('customer.cart.store') }}" method="post">
-            @csrf
-                <input type="hidden" name="course_id" value="{{$course->id}}">
-                @if(Auth::check())
-                <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
+                <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered"
+                    style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
+            {{-- If user has not bought the course --}}
+            @else
+                {{-- If user has not bought the course and the price IS NOT 0. --}}
+                @if ($course->price != 0)
+                    <form action="{{ route('customer.cart.store') }}" method="post">
+                    @csrf
+                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
+                        <button type="submit" class="normal-text btn-blue-bordered"
+                            style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
+                        <button class="normal-text btn-dark-blue" name="action" value="buyNow" 
+                            style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+                    </form>
+                {{-- If user has not bought the course and the price IS 0. --}}
+                @else
+                    <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
+                    @csrf
+                        <input type="hidden" name="course_id" value="{{$course->id}}">              
+                        <button class="normal-text  btn-dark-blue"
+                            style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+                    </form>
                 @endif
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="price" value="{{$course->price}}">
-                <input type="hidden" name="weight" value="0">                
-                <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
-            @endif
-            
-
-            @if(!$flag && $course->price != 0)
-            <button class="normal-text  btn-dark-blue" name="action" value="buyNow" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
-            @endif
-            </form>
-            @if(!$flag && $course->price == 0)
-            <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
-            @csrf
-                <input type="hidden" name="course_id" value="{{$course->id}}">
-                @if(Auth::check())
-                <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
-                @endif
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="weight" value="0">                
-                <button class="normal-text  btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
-            </form>
             @endif
 
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>

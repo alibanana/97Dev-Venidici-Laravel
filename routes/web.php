@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Client\WokiController;
@@ -103,10 +104,11 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment')->middleware('auth');
     Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware('auth');
     Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware('auth');
+    Route::post('/validate-voucher-code', [CheckoutController::class, 'validateVoucherCode'])->name('customer.cart.validate-voucher-code')->middleware('auth');
+
     Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware('auth');
     Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware('auth');
     Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
-    //Route::get('/payment', [CartController::class, 'payment_index'])->name('customer.cart.payment_index')->middleware('auth');
     Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store')->middleware('auth');
     Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware('auth');
     Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove')->middleware('auth');
@@ -114,7 +116,6 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart')->middleware('auth');
     Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty')->middleware('auth');
     Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty')->middleware('auth');
-
     Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount')->middleware('auth');
 
     /* START OF ONLINE COURSE ROUTING */
@@ -127,13 +128,10 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
 
     Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
-
     // WokiController
     Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
     Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');
-
     Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree');
-
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
     // AssessmentController
@@ -361,36 +359,39 @@ Route::middleware(['isSuspended'])->group(function () {
 
     /* END OF FOR CORPORATE ROUTING*/
 
-    Route::get('/email/verifyUser', function () {
-        return view('emails/verifyUser');
-    });
-    Route::get('/email/checkout', function () {
-        return view('emails/checkout');
-    });
-    Route::get('/email/invoice', function () {
-        return view('emails/invoice');
-    });
-    Route::get('/email/complete_course', function () {
-        return view('emails/complete_course');
-    });
-    Route::get('/email/forget_password', function () {
-        return view('emails/forget_password');
-    });
-    Route::get('/email/live_pelatihan', function () {
-        return view('emails/live_pelatihan');
-    });
-    Route::get('/email/suspend', function () {
-        return view('emails/suspend');
-    });
-    Route::get('/email/verifyUser', function () {
-        return view('emails/verifyUser');
-    });
-    Route::get('/certificate', function () {
-        return view('client/certificate');
-    });
-    Route::get('/level_up', function () {
-        return view('emails/level_up');
-    });
+    // ROUTES TO CHECK EMAIL VIEWS
+    if (!App::environment('production')) {
+        Route::get('/email/verifyUser', function () {
+            return view('emails/verifyUser');
+        });
+        Route::get('/email/checkout', function () {
+            return view('emails/checkout');
+        });
+        Route::get('/email/invoice', function () {
+            return view('emails/invoice');
+        });
+        Route::get('/email/complete_course', function () {
+            return view('emails/complete_course');
+        });
+        Route::get('/email/forget_password', function () {
+            return view('emails/forget_password');
+        });
+        Route::get('/email/password_changed', function () {
+            return view('emails/passwordChanged');
+        });
+        Route::get('/email/live_pelatihan', function () {
+            return view('emails/live_pelatihan');
+        });
+        Route::get('/email/suspend', function () {
+            return view('emails/suspend');
+        });
+        Route::get('/certificate', function () {
+            return view('client/certificate');
+        });
+        Route::get('/level_up', function () {
+            return view('emails/level_up');
+        });
+    };
 
     /* START OF DOMPDF ROUTING */
     Route::post('/certificate/pdf', [PagesController::class, 'print'])->name('print_certificate');

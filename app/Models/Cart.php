@@ -13,9 +13,9 @@ class Cart extends Model
         'course_id', 
         'user_id', 
         'price', 
-        'quantity', 
-        'weight',
-        'withArtOrNo',
+        'quantity', // Default -> 1
+        'weight', // Default -> 0
+        'withArtOrNo', // Default -> false.
     ];
 
     public function user() {
