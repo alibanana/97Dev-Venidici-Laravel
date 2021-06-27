@@ -3,12 +3,51 @@
 @section('title', 'Venidici Log In')
 @section('content')
 
+<!-- START OF POPUP VA EXPLANATION-->
+<div id="forget-password" class="overlay" style="overflow:scroll">
+    <div class="popup" style="width:40vw">
+        <a class="close" href="#" >&times;</a>
+        <div class="content" style="padding:2vw">
+            <div class="row m-0">
+                <div class="col-12" style="text-align:left;">
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Lupa password?</p>
+                    <form action="">
+                    @csrf
+                    <div >
+                        @if(session('success'))
+                        <!-- ALERT MESSAGE -->
+                        <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
+                            {{ session('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <!-- END OF ALERT MESSAGE -->
+                        @endif
+                        <div  class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                            <i style="color:#DAD9E2" class="fas fa-user"></i>
+                            <input type="text" name="name" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Enter your registered email" >
+                        </div>  
+                        @error('telephone')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <div style="text-align:right;margin-top:1vw">
+                            <button type="submit" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim Email</button>                
+                        </div>
+                    </div>
+                    </form>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF POPUP VA EXPLANATION-->
 <div class="row m-0 auth-background">
     <!--
     <div class="col-md-12 p-0" style="background: radial-gradient(100% 313.25% at 0% 0%, #67BBA3 0%, #A24A9C 100%);backdrop-filter: blur(20px);height:100vh">
     -->
     <div class="col-12 p-0">
-
             <div class="centered white-modal" style="width:65vw;padding-bottom:4vw">
                 <div style="display:flex;justify-content:space-between">
                     <a href="/" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Home</span></a>
@@ -52,6 +91,7 @@
                                     <div style="text-align:center !important">
                                 </div>
                                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;">Belum punya akun? <span> <a href="/signup">Daftar di sini</a> </span> </p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;cursor:pointer"><span> <a href="#forget-password">Lupa Password</a> </span> </p>
                             </div>
                         </div>   
                     </div>
