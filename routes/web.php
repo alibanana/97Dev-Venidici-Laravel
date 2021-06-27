@@ -5,7 +5,7 @@ use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Client\WokiController;
 use App\Http\Controllers\Client\AssessmentController;
-use App\Http\Controllers\Client\WokiController;
+// use App\Http\Controllers\Client\WokiController;
 use App\Http\Controllers\Client\KrestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
@@ -51,7 +51,7 @@ use App\Http\Controllers\Api\CheckoutController;
 
 Route::middleware(['isSuspended'])->group(function () {
     Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware('auth');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth', 'verified']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
     Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile');
     Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
