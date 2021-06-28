@@ -18,8 +18,7 @@ use App\Models\Order;
 class InvoiceController extends Controller
 {
     // Shows the admin Invoices page.
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $invoices = new Invoice;
 
         if ($request->has('sort')) {
@@ -32,6 +31,16 @@ class InvoiceController extends Controller
             $invoices = $invoices->orderBy('created_at', 'desc');
         }
 
+        if ($request->has('filterStatus')) {
+            $available_filters = ['Pending', 'Completed', 'Failed', 'Paid', 'Cancelled'];
+            if (!in_array($request->filterStatus, $available_filters)) {
+                $url = route('admin.invoices.index', request()->except('filterStatus'));
+                return redirect($url);
+            }
+
+            $invoices = $invoices->where('status', strtolower($request->filterStatus));
+        }
+
         if ($request->has('search')) {
             if ($request->search == "") {
                 $url = route('admin.invoices.index', request()->except('search'));
@@ -41,25 +50,26 @@ class InvoiceController extends Controller
             }
         }
 
-        $invoices = $invoices->get();
+        $invoices = $invoices->paginate(50);
 
         return view('admin/invoice/index', compact('invoices'));
     }
 
     // Shows the admin Invoice Details page.
-    public function show($id)
-    {
-        $invoice = Invoice::where('xfers_payment_id',$id)->first();
+    public function show($id) {
+        $invoice = Invoice::where('xfers_payment_id',$id)->firstOrFail();
+        
         $noWoki = TRUE;
-        foreach($invoice->orders as $cart)
-        {
+        foreach($invoice->orders as $cart) {
             if($cart->course->course_type_id == 2)
                 $noWoki = FALSE;
         }
+
         $orders = Order::with('course')
             ->where('invoice_id', $invoice->id)
             ->orderBy('created_at', 'desc')
             ->get();
+
         return view('admin/invoice/detail', compact('invoice','noWoki','orders'));
     }
 }

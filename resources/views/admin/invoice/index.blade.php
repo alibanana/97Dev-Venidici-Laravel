@@ -51,13 +51,14 @@
                         -->
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
-                                <label class="w-100">Filter:
+                                <label class="w-100">Status:
                                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Pending']) }}" @if (Request::get('filter') == 'Pending') selected @endif>Pending</option>
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'Contacted']) }}" @if (Request::get('filter') == 'Contacted') selected @endif>Completed</option>
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => '2']) }}" @if (Request::get('filter') == '2') selected @endif>Woki</option>
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => '1']) }}" @if (Request::get('filter') == '1') selected @endif>Online Course</option>
-                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => '']) }}" @if (!Request::has('filter')) selected @endif>None</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filterStatus' => 'Pending']) }}" @if (Request::get('filterStatus') == 'Pending') selected @endif>Pending</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filterStatus' => 'Completed']) }}" @if (Request::get('filterStatus') == 'Completed') selected @endif>Completed</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filterStatus' => 'Failed']) }}" @if (Request::get('filterStatus') == 'Failed') selected @endif>Failed</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filterStatus' => 'Paid']) }}" @if (Request::get('filterStatus') == 'Paid') selected @endif>Paid</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filterStatus' => 'Cancelled']) }}" @if (Request::get('filterStatus') == 'Cancelled') selected @endif>Cancelled</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filterStatus' => '']) }}" @if (!Request::has('filterStatus')) selected @endif>None</option>
                                     </select>
                                 </label>
                             </div>
@@ -100,6 +101,7 @@
                                                 <th>Invoice No</th>
                                                 <th>User</th>
                                                 <th>Status</th>
+                                                <th>Total</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -109,13 +111,27 @@
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$invoice->invoice_no}}</td>
                                                 <td>{{$invoice->user->name}}</td>
-                                                <td>{{$invoice->status}}</td>
+                                                @if ($invoice->status == 'pending')
+                                                    <td style="color: orange">{{$invoice->status}}</td>
+                                                @elseif ($invoice->status == 'completed')
+                                                    <td style="color: green">{{$invoice->status}}</td>
+                                                @elseif ($invoice->status == 'failed')
+                                                    <td style="color: red">{{$invoice->status}}</td>
+                                                @elseif ($invoice->status == 'paid')
+                                                    <td style="color: green">{{$invoice->status}}</td>
+                                                @elseif ($invoice->status == 'cancelled')
+                                                    <td style="color: grey">{{$invoice->status}}</td>
+                                                @endif
+                                                @if ($invoice->status == 'paid' || $invoice->status == 'completed')
+                                                    <td>Rp {{$invoice->grand_total}}</td>
+                                                @else
+                                                    <td>-</td>
+                                                @endif
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                         <div style="padding: 0px 2px;">
                                                             <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.invoices.show', $invoice->xfers_payment_id) }}">View Detail</a>
                                                         </div>
-                                                   
                                                     </div>
                                                 </td>
                                             </tr>
@@ -124,11 +140,13 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="row mb-4">
+                                <div class="mx-auto">
+                                    {{ $invoices->appends(request()->input())->links("pagination::bootstrap-4") }}
+                                </div>
+                            </div>
                         </div>
-                        
-        
                     <!-- /.container-fluid -->
-
                 </div>
             </div>
         </div>
