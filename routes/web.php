@@ -36,6 +36,7 @@ use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
 use App\Http\Controllers\Client\DashboardController;
+use App\Http\Controllers\Client\BootcampController;
 use App\Http\Controllers\Api\CheckoutController;
 
 /*
@@ -349,11 +350,13 @@ Route::middleware(['isSuspended'])->group(function () {
     /* START OF FOR PUBLIC ROUTING */
     Route::get('/for-public/online-course', [PagesController::class, 'online_course_index'])->name('customer.online_course_index');
     Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
+    Route::get('/for-public/bootcamp', [BootcampController::class, 'index'])->name('customer.bootcamp_index');
     /* END OF FOR PUBLIC ROUTING*/
 
     /* START OF FOR CORPORATE ROUTING */
     Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
     Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
+
     /* END OF FOR CORPORATE ROUTING*/
 
     // ROUTES TO CHECK EMAIL VIEWS

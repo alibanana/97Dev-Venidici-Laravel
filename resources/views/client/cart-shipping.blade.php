@@ -365,8 +365,12 @@
                             //check if its percent or nominal
                             if(Session::get('promotion_code')->type == 'nominal')
                                 $discounted_price = $discount;
-                            else
-                                $discounted_price = $sub_total * ($discount/100);
+                            else{
+                                if(Session::get('promotion_code')->promo_for == 'price')
+                                    $discounted_price = $sub_total * ($discount/100);
+                                elseif(Session::get('promotion_code')->promo_for == 'shipping')
+                                    $discounted_price = $shipping_cost * ($discount/100);
+                            }
                             
                         }
                         else
@@ -439,12 +443,13 @@
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                         @if(Session::get('promotion_code'))
                             @if(Session::get('promotion_code')->type == 'percent')
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher ({{Session::get('promotion_code')->discount}}%) </p>
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif
+                            ({{Session::get('promotion_code')->discount}}%) </p>
                             @else
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher </p>
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif</p>
                             @endif
                         @else
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher </p>
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif</p>
                         @endif
                         <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discounted_price, 0, ',', ',') }}</p>
                     </div>
