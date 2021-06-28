@@ -52,12 +52,12 @@ use App\Http\Controllers\Api\CheckoutController;
 Route::middleware(['isSuspended'])->group(function () {
     Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth', 'verified']);
-    Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification');
-    Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile');
-    Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest');
-    Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password');
-    Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware('auth');
-    Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo');
+    Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth', 'verified']);
+    Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth', 'verified']);
+    Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth', 'verified']);
+    Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
+    Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth', 'verified']);
+    Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
 
     /*
     |--------------------------------------------------------------------------
@@ -99,46 +99,46 @@ Route::middleware(['isSuspended'])->group(function () {
     // });
     /* CART ROUTING */
 
-    Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail')->middleware('auth');
-    Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment')->middleware('auth');
-    Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware('auth');
-    Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware('auth');
-    Route::post('/validate-voucher-code', [CheckoutController::class, 'validateVoucherCode'])->name('customer.cart.validate-voucher-code')->middleware('auth');
+    Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail')->middleware(['auth', 'verified']);
+    Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment')->middleware(['auth', 'verified']);
+    Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware(['auth', 'verified']);
+    Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware(['auth', 'verified']);
+    Route::post('/validate-voucher-code', [CheckoutController::class, 'validateVoucherCode'])->name('customer.cart.validate-voucher-code')->middleware(['auth', 'verified']);
 
-    Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware('auth');
-    Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware('auth');
-    Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware('auth');
-    Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store')->middleware('auth');
-    Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware('auth');
-    Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove')->middleware('auth');
-    Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll')->middleware('auth');
-    Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart')->middleware('auth');
-    Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty')->middleware('auth');
-    Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty')->middleware('auth');
-    Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount')->middleware('auth');
+    Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware(['auth', 'verified']);
+    Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware(['auth', 'verified']);
+    Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware(['auth', 'verified']);
+    Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store')->middleware(['auth', 'verified']);
+    Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware(['auth', 'verified']);
+    Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove')->middleware(['auth', 'verified']);
+    Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll')->middleware(['auth', 'verified']);
+    Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart')->middleware(['auth', 'verified']);
+    Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty')->middleware(['auth', 'verified']);
+    Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty')->middleware(['auth', 'verified']);
+    Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount')->middleware(['auth', 'verified']);
 
     /* START OF ONLINE COURSE ROUTING */
     // OnlineCourseController
     Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
     Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
 
-    Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree');
-    Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware('auth');
-    Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware('auth');
+    Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree')->middleware(['auth', 'verified']);
+    Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware(['auth', 'verified']);
+    Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware(['auth', 'verified']);
 
-    Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware('auth');
+    Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware(['auth', 'verified']);
     // WokiController
     Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
     Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');
-    Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree');
+    Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree')->middleware(['auth', 'verified']);
     // ReviewController
-    Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware('auth');
+    Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware(['auth', 'verified']);
     // AssessmentController
-    Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assessment.show')->middleware('auth');
-    Route::get('/online-course/{course_id}/assessment/completed', [AssessmentController::class, 'completedIndex'])->name('online-course-assessment.completed-index')->middleware('auth');
-    Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'update'])->name('online-course-assessment.update')->middleware('auth');
-    Route::put('/online-course/assessment/{id}/reset-user-assessment', [AssessmentController::class, 'resetUserAssessment'])->name('online-course-assessment.reset-user-assessment')->middleware('auth');
-    Route::put('/online-course/assessment/{id}/update-assessment-timer', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assessment.updateAssessmentTimer')->middleware('auth');
+    Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assessment.show')->middleware(['auth', 'verified']);
+    Route::get('/online-course/{course_id}/assessment/completed', [AssessmentController::class, 'completedIndex'])->name('online-course-assessment.completed-index')->middleware(['auth', 'verified']);
+    Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'update'])->name('online-course-assessment.update')->middleware(['auth', 'verified']);
+    Route::put('/online-course/assessment/{id}/reset-user-assessment', [AssessmentController::class, 'resetUserAssessment'])->name('online-course-assessment.reset-user-assessment')->middleware(['auth', 'verified']);
+    Route::put('/online-course/assessment/{id}/update-assessment-timer', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assessment.updateAssessmentTimer')->middleware(['auth', 'verified']);
 
     Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
         return view('client/online-course/detail');
@@ -391,7 +391,7 @@ Route::middleware(['isSuspended'])->group(function () {
     };
 
     /* START OF DOMPDF ROUTING */
-    Route::post('/certificate/pdf', [PagesController::class, 'print'])->name('print_certificate');
+    Route::post('/certificate/pdf', [PagesController::class, 'print'])->name('print_certificate')->middleware(['auth', 'verified']);
     /* END OF DOMPDF ROUTING */
 });
 
