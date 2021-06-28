@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Order;
 
+/*
+|--------------------------------------------------------------------------
+| Admin InvoiceController Class.
+|
+| Description:
+| This controller is responsible in handling the admin's invoices pages.
+|--------------------------------------------------------------------------
+*/
 class InvoiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Shows the admin Invoices page.
     public function index(Request $request)
     {
         $invoices = new Invoice;
@@ -42,33 +46,7 @@ class InvoiceController extends Controller
         return view('admin/invoice/index', compact('invoices'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Shows the admin Invoice Details page.
     public function show($id)
     {
         $invoice = Invoice::where('xfers_payment_id',$id)->first();
@@ -83,40 +61,5 @@ class InvoiceController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
         return view('admin/invoice/detail', compact('invoice','noWoki','orders'));
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

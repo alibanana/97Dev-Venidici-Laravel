@@ -168,6 +168,7 @@ Route::middleware(['isSuspended'])->group(function () {
     |   - DashboardController
     |   - HomepageController
     |   - UserController
+    |   - InvoiceController
     |   - OnlineCourseController
     |   - OnlineCourseUpdateController // Update is separated because its very complex.
     |   - WokiCourseController

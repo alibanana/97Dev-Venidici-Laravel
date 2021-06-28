@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\App;
 use Carbon\Carbon;
 use Jenssegers\Agent\Agent;
 use App\Helper\Helper;
 use App\Helper\XfersHelper;
-use Exception;
+use Throwable;
 
 use Axiom\Rules\TelephoneNumber;
 
@@ -264,11 +265,15 @@ class CheckoutController extends Controller
                 Please save this link to update & check your payment status!");
         }
 
+        // Link to transaction detail page.
+        $link = route('customer.cart.transactionDetail', $invoice->xfers_payment_id) . '#payment-created';
+
         // Send CheckoutMail email to user.
         try {
             Mail::to(auth()->user()->email)
                 ->send(new CheckoutMail($invoice, $courses_string, $link));
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
+            if (!App::environment('production')) dd($e->getMessage());
             return redirect(
                 route('customer.cart.transactionDetail', $invoice->xfers_payment_id) . '#payment-created'
             )->with(
