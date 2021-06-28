@@ -145,7 +145,8 @@ body {font-family: 'Muli', sans-serif;}
 <tbody>
   <tr>
     <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-      <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px;width:40%" alt="" data-proportionally-constrained="true" data-responsive="false" src="http://ninetysevendev-venidici-app.herokuapp.com/assets/images/client/logo-transparent.png">
+      <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px;width:40%"
+        alt="" data-proportionally-constrained="true" data-responsive="false" src="http://ninetysevendev-venidici-app.herokuapp.com/assets/images/client/logo-transparent.png">
     </td>
   </tr>
 </tbody>

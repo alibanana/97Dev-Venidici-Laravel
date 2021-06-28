@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Str;
 use App\Helper\Helper;
@@ -194,7 +195,6 @@ class PagesController extends Controller
             'password'  => Hash::make($request->session()->get('password'))
         ]);
 
-        
         // Generate New Referral Code
         $newReferralCode = substr($request->session()->get('name'), 0,3).Str::random(3);
         
@@ -221,6 +221,9 @@ class PagesController extends Controller
         $user->hashtags()->attach($hashtag_ids);
     
         $request->session()->flush();
+        
+        event(new Registered($user));
+        
         Auth::login($user);
 
         return redirect()->route('customer.dashboard');
