@@ -21,7 +21,7 @@ use App\Mail\ForgetPasswordMail;
 */ 
 class CustomAuthController extends Controller
 {
-    // Handles the forgot-password functionality.
+    // Handles the forgot-password (reset) functionality in the login page.
     public function resetPassword(Request $request) {
         $validated = $request->validate([
             'email' => 'required|email'
