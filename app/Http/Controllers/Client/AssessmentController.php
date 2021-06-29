@@ -21,7 +21,7 @@ use App\Mail\FinishCourseMail;
 
 /*
 |--------------------------------------------------------------------------
-| Admin AssessmentController Class.
+| Client AssessmentController Class.
 |
 | Description:
 | This controller is responsible in handling the client assessment pages,
