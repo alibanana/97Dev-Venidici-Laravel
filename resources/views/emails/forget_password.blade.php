@@ -166,7 +166,7 @@ body {font-family: 'Muli', sans-serif;}
         <div style=";font-family:Rubik Regular 400 Italic; text-align: center">
         
         <span style="font-size: 18px">No worries, it happens! Down below is your new password</span> <br> <br>
-        <b style="font-size: 18px;">Bajingan23</b>
+        <b style="font-size: 18px;">{{ $newPassword ?? 'ASd8ao2nslda^%1' }}</b>
     </div>
     <div></div></div></td>
   </tr>
@@ -181,7 +181,7 @@ body {font-family: 'Muli', sans-serif;}
           <tbody>
             <tr>
               <td align="center" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                  <a class="btnLogin" href="http://127.0.0.1:8000/login" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Login</a>
+                  <a class="btnLogin" href="{{ route('login') }}" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Login</a>
               </td>
             </tr>
 
@@ -194,7 +194,7 @@ body {font-family: 'Muli', sans-serif;}
         <div>
           <div style="text-align: center">
           <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Having trouble accessing the button above? Use this link:</span><br>
-          <span style="color: #000000; font-size: 18px;"><a href="http://127.0.0.1:8000/login">http://127.0.0.1:8000/login</a></span>
+          <span style="color: #000000; font-size: 18px;"><a href="{{ route('login') }}">{{ route('login') }}</a></span>
         </div>
       </td>
     </tr>

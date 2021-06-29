@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\Client\PagesController;
 use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Client\WokiController;
@@ -59,6 +60,16 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
     Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth', 'verified']);
     Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Auth Routes
+    |
+    | These are authentication-related routes outside of the already available
+    | ones from laravel auth package.
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/reset-password', [CustomAuthController::class, 'resetPassword'])->name('custom-auth.reset-password')->middleware('guest');
 
     /*
     |--------------------------------------------------------------------------
