@@ -98,4 +98,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function stars() {
         return $this->hasMany(Star::class);
     }
+
+    public function bootcampApplications() {
+        return $this->hasMany(BootcampApplication::class);
+    }
 }

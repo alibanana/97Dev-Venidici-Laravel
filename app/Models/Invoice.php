@@ -41,4 +41,8 @@ class Invoice extends Model
     public function notifications() {
         return $this->hasMany(Notification::class);
     }
+
+    public function bootcampApplication() {
+        return $this->hasOne(BootcampApplication::class);
+    }
 }
