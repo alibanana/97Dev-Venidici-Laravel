@@ -176,20 +176,30 @@ body {font-family: 'Muli', sans-serif;}
           <tr>
             <td style="border:1px solid black">{{$order->qty}}</td>
             <td style="border:1px solid black">{{$order->course->title}}</td>
-            <td style="border:1px solid black">Rp{{ number_format($order->course->price, 0, ',', ',') }}</td>
+            @if($order->withArtOrNo)
+              <td style="border:1px solid black">Rp{{ number_format($order->course->priceWithArtKit, 0, ',', ',') }}</td>
+            @else
+              <td style="border:1px solid black">Rp{{ number_format($order->course->price, 0, ',', ',') }}</td>
+            @endif
             <td style="border:1px solid black">Rp{{ number_format($order->price, 0, ',', ',') }}</td>
           </tr>
           @endforeach
+          @if($invoice->cost_courier != null)
+          <tr >
+            <td colspan="3"  style="border:1px solid black">Shipping Cost</td>
+            <td style="border:1px solid black">Rp{{ number_format($invoice->cost_courier, 0, ',', ',') }}</td>
+          </tr>
+          @endif
           @if($invoice->discounted_price != 0)
           <tr >
             <td colspan="3"  style="border:1px solid black">Diskon Voucher</td>
-            <td style="border:1px solid black">Rp{{ number_format($invoice->discounted_price, 0, ',', ',') }}</td>
+            <td style="border:1px solid black">-Rp{{ number_format($invoice->discounted_price, 0, ',', ',') }}</td>
           </tr>
           @endif
           @if($invoice->club_discount != 0)
           <tr >
             <td colspan="3"  style="border:1px solid black">Diskon Club</td>
-            <td style="border:1px solid black">Rp{{ number_format($invoice->club_discount, 0, ',', ',') }}</td>
+            <td style="border:1px solid black">-Rp{{ number_format($invoice->club_discount, 0, ',', ',') }}</td>
           </tr>
           @endif
         </table>

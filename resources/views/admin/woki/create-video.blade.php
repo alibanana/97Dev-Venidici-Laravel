@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Update Section Content')
+@section('title', 'Venidici Create Section Content')
 
 @section('container')
 

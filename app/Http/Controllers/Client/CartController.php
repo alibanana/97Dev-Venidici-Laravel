@@ -74,6 +74,8 @@ class CartController extends Controller
         
         if (!auth()->user()->isProfileUpdated)
             return redirect()->back()->with('message','Please complete your profile first.');
+        else if (auth()->user()->email_verified_at == null)
+            return redirect()->back()->with('message','Please verify your email first.');
         elseif (count(auth()->user()->carts) == 0)
             return redirect('/cart');
 

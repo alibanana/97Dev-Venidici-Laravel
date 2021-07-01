@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Create Woki')
+@section('title', 'Venidici Create Bootcamp')
 
 @section('container')
 
@@ -22,7 +22,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h2 class="mb-0 mb-3 text-gray-800">New Woki</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">New Bootcamp</h2>
         </div>
 
         <div class="d-sm-flex align-items-center mb-2">
@@ -32,8 +32,8 @@
         <!-- Content Row -->
 
         <!-- start of form -->
-        <form action="{{ route('admin.woki-courses.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+        <form action="{{ route('admin.online-courses.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf           
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -77,9 +77,6 @@
                         <label for="">Category</label> <br>
                         <select name="course_category_id" id="" class="form-control form-control-user" required>
                             <option disabled selected>Choose Category</option>
-                            @foreach ($course_categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->category }}</option>
-                            @endforeach
                         </select>
                         @error('course_category_id')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -101,56 +98,6 @@
                         @enderror               
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="">Meeting Link</label>
-                        <input type="text" name="meeting_link" class="form-control form-control-user" value="{{ old('meeting_link') }}"
-                                id="exampleInputPassword" placeholder="https://meet.google.com/hza-vmyh-zoo" required> 
-                        @error('meeting_link')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror               
-                    </div>
-                </div>
-                
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="">Event Date</label>
-                        <input type="date" name="event_date" class="form-control form-control-user" value="{{ old('event_date') }}"
-                                id="exampleInputPassword" placeholder="dd.mm.yyyy" required> 
-                        @error('event_date')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror               
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="">Event Start</label>
-                        <input type="time" name="start_time" class="form-control form-control-user" value="{{ old('start_time') }}"
-                                id="exampleInputPassword" placeholder="11:00" required> 
-                        @error('start_time')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror               
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="">Event End</label>
-                        <input type="time" name="end_time" class="form-control form-control-user" value="{{ old('end_time') }}"
-                                id="exampleInputPassword" placeholder="12:00" required> 
-                        @error('end_time')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror               
-                    </div>
-                </div>
                 <div class="col-12">
                     <div class="form-group">
                         <label for="">Description</label>
@@ -162,6 +109,25 @@
                         @enderror
                     </div>
                 </div>
+                <!--
+                <div class="col-12">
+                    <p>Visibility Level</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            <span style="font-weight:bold">Public</span> <br>
+                            Course is share to every registered teachers in platform.   
+                        </label>
+                    </div>
+                    <div class="form-check" style="margin-top:1.5vw">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            <span style="font-weight:bold">Private</span> <br>
+                            Course is unshared with others teacher. If you want current teacher able to manage this course, course access must be granted explicitly to each teacher by inviting them.
+                        </label>
+                    </div>
+                </div>
+                -->
                 <div class="col-6" style="margin-top:3vw">
                     <label for="">Persyaratan <span style="color: orange">(At least one element must be present!)</span></label>
                     @error('requirements')
@@ -191,7 +157,7 @@
                     <button type="button" id="add_requirement" onlick="duplicateRequirement()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
                 </div>
 
-                <div class="col-6" style="margin-top:3vw">
+                <!-- <div class="col-6" style="margin-top:3vw">
                     <label for="">Apa yang akan dipelajari? <span style="color: orange">(At least one element must be present!)</span></label>
                     @error('features')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -218,9 +184,9 @@
                         </div>
                     </div>
                     <button type="button" id="add_learn" onlick="duplicateLearn()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
-                </div>
+                </div> -->
             </div>
-            <div class="col-6" style="margin-top:3vw">
+            <!-- <div class="col-6" style="margin-top:3vw">
                 <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
                 <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
                 @error('hashtags')
@@ -234,9 +200,7 @@
                         <div class="col-md-12">
                             <div class="form-group d-flex">
                                 <select class="form-control form-control-user" id="">
-                                    @foreach ($tags as $tag)
-                                        <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
-                                    @endforeach
+                                    <option value="1">hashtag</option>
                                 </select>
                                 <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                             </div>
@@ -246,9 +210,7 @@
                         <div class="col-md-12">
                             <div class="form-group d-flex">
                                 <select name="hashtags[]" class="form-control form-control-user" id="" required>
-                                    @foreach ($tags as $tag)
-                                        <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
-                                    @endforeach
+                                    <option value="1">hashtag</option>
                                 </select>
                                 <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
                             </div>
@@ -256,10 +218,10 @@
                     </div>
                 </div>
                 <button type="button" id="add_hashtag" onlick="duplicateHashtag()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
-            </div>
+            </div> -->
             <div class="col-12" style="padding:2vw 1vw">
                 <div style="display:flex;justify-content:flex-end">
-                    <button type="submit" class="btn btn-primary btn-user p-3">Create New Woki</button>
+                    <button type="submit" class="btn btn-primary btn-user p-3">Create New Bootamp</button>
                 </div>
             </div>
         </form>

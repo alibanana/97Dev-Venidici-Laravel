@@ -84,6 +84,12 @@ html, body {
     background-repeat: no-repeat;
     background-size: 5%;
 }
+.bootcamp-detail-bg{
+    background-image: url("/assets/images/client/FAQ_BG.png");
+    background-position:6.8vw 9vw;
+    background-repeat: no-repeat;
+    background-size: 5%;
+}
 .woki-detail-bg{
     background-image: url("/assets/images/client/Course_Detail_Red_BG.png");
     background-position:6.8vw 9vw;
@@ -720,6 +726,18 @@ html, body {
 }
 
 
+.blue-tag{
+    background: #FFFFFF;
+    border: 2px solid #2B6CAA;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color:#3B3C43;
+    text-decoration:none;
+    padding:0.5vw
+}
+.blue-tag:hover{
+    color:#3B3C43;
+}
 .green-tag{
     background: #FFFFFF;
     border: 2px solid #67BBA3;
@@ -746,6 +764,23 @@ html, body {
     color:#3B3C43;
 }
 
+.profil-text-blue-active{
+    text-decoration-line: underline;
+    text-decoration-color: #2B6CAA !important;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 0.2vw;
+    color:#3B3C43 !important
+}
+.profil-text-blue{
+    color: rgba(59, 60, 67, 0.5);
+    text-decoration-line: underline;
+    text-decoration-color: #FFFFFF;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 0.2vw;
+}
+.profil-text-blue:hover{
+    color:#2B6CAA
+}
 .profil-text-green-active{
     text-decoration-line: underline;
     text-decoration-color: #67BBA3 !important;
@@ -1163,6 +1198,27 @@ html, body {
   
 }
 
+.bootcamp-link{
+    background-color:#ffffff;
+    color:#2B6CAA;
+    border-radius:10px;
+    text-decoration:none;
+    padding:0.5vw 1vw;
+    transition: 0.2s ease-in-out;
+    border:1px solid #FFFFFF
+}
+.bootcamp-link:hover{
+    background-color:#2B6CAA;
+    color:#FFFFFF;
+}
+.bootcamp-link-active{
+    background-color:#2B6CAA;
+    color:#FFFFFF;
+    border-radius:10px;
+    text-decoration:none;
+    padding:0.5vw 1vw;
+    border:1px solid #FFFFFF
+}
 .blue-link{
     background-color:#ffffff;
     color:#67BBA3;

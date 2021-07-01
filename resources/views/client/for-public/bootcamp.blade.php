@@ -272,7 +272,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
     <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Career Support</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Effective Learning for You</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Bootcamp Memberi Kesempatan Untuk Memperluas Pengalaman Anda</p>
     </div>
     <div class="row m-0" style="padding-top:2vw">
         <div class="col-3" style="display:flex;justify-content:center">
@@ -367,6 +367,166 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
     </div>
 </div>
 <!-- END OF CAREER SUPPORT SECTIONN -->
+
+<!-- START OF OUR PROGRAMS -->
+<div class="row m-0 page-container" id="programs-section" style="padding-top:4vw;padding-bottom:4vw">
+    <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Mengakomodasi Kebutuhan Talenta <br> Perusahaan Anda Dengan Program Venidici</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000">
+        Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
+
+        </p>  
+    </div>
+    <div style="display: flex;justify-content:center">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;background: #FFFFFF;border: 2px solid rgba(157, 157, 157, 0.1);border-radius: 10px;padding:0.7vw;margin-top:2vw;width:70%">
+            <a href="{{ request()->fullUrlWithQuery(['cat' => 1]) }}#search-course-section" 
+            class="normal-text btn-blue-on-hover @if(Request::get('cat')  == 1) btn-blue-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;text-decoration:none">Personal Development</a>
+            <a href="{{ request()->fullUrlWithQuery(['cat' => 1]) }}#search-course-section" 
+            class="normal-text btn-blue-on-hover @if(Request::get('cat')  == 1) btn-blue-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;text-decoration:none">Data Science</a>
+            <a href="{{ request()->fullUrlWithQuery(['cat' => 1]) }}#search-course-section" 
+            class="normal-text btn-blue-on-hover @if(Request::get('cat')  == 1) btn-blue-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;text-decoration:none">Digital Marketing</a>
+            <a href="{{ request()->fullUrlWithQuery(['cat' => 1]) }}#search-course-section" 
+            class="normal-text btn-blue-on-hover @if(Request::get('cat')  == 1) btn-blue-active @endif" style="font-family: Poppins Medium;margin-bottom:0px;text-decoration:none">Software Development</a>
+        </div>
+    </div>
+
+    <div class="row m-0" style="padding-top:3vw">
+        <div class="col-4 p-0" >
+            <div style="display: flex;justify-content:center">
+                <!-- START OF ONE BLUE COURSE CARD -->
+                <div class="course-card-blue">
+                    <div class="container">
+                        <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                        <div class="top-left card-tag small-text" >Bootcamp</div>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <a href="/woki/sertifikat-menjadi-seniman" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
+                            <i style="font-size:2vw;" role="button"  aria-controls="workshop-collapse" data-toggle="collapse" href="#workshop-collapse" class="fas fa-caret-down"></i>
+                        </div>
+                        <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
+                        <div class="collapse" id="workshop-collapse" style="margin-top:1vw">
+                            <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;margin-top:2vw" >
+                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;margin-top:0.5vw" >
+                            <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Saturday, 10 November 2020</p>
+                            <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">3 Days</p>
+                        </div>
+                        <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                            <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                            <div style="display: flex;justify-content:center;margin-left:1vw">
+                                <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                            </div>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                            <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                        </div>
+        
+                    </div>
+                </div>
+                <!-- END OF ONE BLUE COURSE CARD -->
+            </div>
+        </div>
+        <div class="col-4 p-0" >
+            <div style="display: flex;justify-content:center">
+                <!-- START OF ONE BLUE COURSE CARD -->
+                <div class="course-card-blue">
+                    <div class="container">
+                        <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                        <div class="top-left card-tag small-text" >Bootcamp</div>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <a href="/woki/sertifikat-menjadi-seniman" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
+                            <i style="font-size:2vw;" role="button"  aria-controls="workshop-collapse" data-toggle="collapse" href="#workshop-collapse" class="fas fa-caret-down"></i>
+                        </div>
+                        <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
+                        <div class="collapse" id="workshop-collapse" style="margin-top:1vw">
+                            <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;margin-top:2vw" >
+                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;margin-top:0.5vw" >
+                            <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Saturday, 10 November 2020</p>
+                            <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">3 Days</p>
+                        </div>
+                        <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                            <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                            <div style="display: flex;justify-content:center;margin-left:1vw">
+                                <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                            </div>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                            <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                        </div>
+        
+                    </div>
+                </div>
+                <!-- END OF ONE BLUE COURSE CARD -->
+            </div>
+        </div>
+        <div class="col-4 p-0" >
+            <div style="display: flex;justify-content:center">
+                <!-- START OF ONE BLUE COURSE CARD -->
+                <div class="course-card-blue">
+                    <div class="container">
+                        <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
+                        <div class="top-left card-tag small-text" >Bootcamp</div>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <a href="/woki/sertifikat-menjadi-seniman" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
+                            <i style="font-size:2vw;" role="button"  aria-controls="workshop-collapse" data-toggle="collapse" href="#workshop-collapse" class="fas fa-caret-down"></i>
+                        </div>
+                        <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
+                        <div class="collapse" id="workshop-collapse" style="margin-top:1vw">
+                            <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;margin-top:2vw" >
+                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;margin-top:0.5vw" >
+                            <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Saturday, 10 November 2020</p>
+                            <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">3 Days</p>
+                        </div>
+                        <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                            <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                            <div style="display: flex;justify-content:center;margin-left:1vw">
+                                <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                            </div>
+                        </div>
+                        <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                            <a href="#" class="course-card-button normal-text">Enroll Now</a>
+                        </div>
+        
+                    </div>
+                </div>
+                <!-- END OF ONE BLUE COURSE CARD -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF OUR PROGRAMS -->
 
 
 

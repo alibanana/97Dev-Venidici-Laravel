@@ -10,6 +10,7 @@ use App\Models\KrestProgram;
 use App\Models\Krest;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Agent;
+use App\Models\Review;
 
 class BootcampController extends Controller
 {
@@ -81,8 +82,30 @@ class BootcampController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {        
+        $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
+
+
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+
+        if (Auth::check()) {
+
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+            return view('client/bootcamp/detail',compact('cart_count','transactions','informations','notifications','reviews'));
+
+        } else {
+            return view('client/bootcamp/detail',compact('reviews'));
+        }
+
     }
 
     /**

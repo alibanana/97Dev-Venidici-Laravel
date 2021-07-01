@@ -141,6 +141,28 @@
             </div>
         </div>
     </li>
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/bootcamp') || Request::is('admin/bootcamp/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootcamp"
+            aria-expanded="true" aria-controls="collapseBootcamp">
+            <i class="fas fa-campground"></i>
+            <span>Bootcamp</span>
+        </a>
+
+        <div id="collapseBootcamp" class="collapse" aria-labelledby="" data-parent="#collapseBootcamp">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a>
+                <a class="collapse-item" href="{{ route('admin.bootcamp.categories') }}">Bootcamp Categories</a>
+                <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
+                <a class="collapse-item" href="/admin/reviews">Reviews</a>
+
+            </div>
+        </div>
+    </li>
 
    
 

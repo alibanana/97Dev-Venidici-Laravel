@@ -500,12 +500,21 @@ class CheckoutController extends Controller
 
         // Check if cart object has artKit.
         $cartHasNoArtKit = $this->checkCartHasNoArtKit();
-
+        
         // If promo is meant for shipping & cart has no artKit (no shipping)
         if ($promo->promo_for == 'shipping' && $cartHasNoArtKit) {
+            if($request->shipping_cost)
             $request->session()->forget('promotion_code');
             $message_topic = 'discount_not_found';
             $message_value = 'Discount Code is for Shipping!';
+            return redirect()->back()->with($message_topic, $message_value);
+        }
+
+        // Check if shipping cost is available already.
+        if ($promo->promo_for == 'shipping' && $request->shipping_cost == 0) {
+            $request->session()->forget('promotion_code');
+            $message_topic = 'discount_not_found';
+            $message_value = 'Please choose a shipping destination first!';
             return redirect()->back()->with($message_topic, $message_value);
         }
 

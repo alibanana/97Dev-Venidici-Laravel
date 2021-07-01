@@ -362,21 +362,21 @@
                         if(Session::get('promotion_code'))
                         {
                             $discount = Session::get('promotion_code')->discount;
-                            //check if its percent or nominal
-                            if(Session::get('promotion_code')->type == 'nominal')
+                            $promoForShippingFlag = Session::get('promotion_code')->promo_for == 'shipping';
+                            $toBeDiscountedNominal = $promoForShippingFlag ? $shipping_cost : $sub_total;
+
+                            if (Session::get('promotion_code')->type == 'nominal')
                                 $discounted_price = $discount;
-                            else{
-                                if(Session::get('promotion_code')->promo_for == 'price')
-                                    $discounted_price = $sub_total * ($discount/100);
-                                elseif(Session::get('promotion_code')->promo_for == 'shipping')
-                                    $discounted_price = $shipping_cost * ($discount/100);
-                            }
-                            
+                            else
+                                $discounted_price = $toBeDiscountedNominal * ($discount/100);
+
+                            $discounted_price = ($discounted_price >= $toBeDiscountedNominal) ? $toBeDiscountedNominal : $discounted_price;
                         }
                         else
                             $discounted_price = 0;
                     ?>
                     <input type="hidden" value="{{$discounted_price}}" name="discounted_price">
+
                 @endif
                 <!-- START OF NOMINAL CARD -->
                 <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:2vw">
@@ -449,7 +449,7 @@
                             <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif</p>
                             @endif
                         @else
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif</p>
+                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>
                         @endif
                         <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">- Rp {{ number_format($discounted_price, 0, ',', ',') }}</p>
                     </div>
@@ -513,6 +513,7 @@
 </form>
 <form id="validateVoucherCodeForm" action="{{ route('customer.cart.validate-voucher-code') }}" method="POST">
 @csrf
+<input type="hidden" value="{{$shipping_cost}}" name="shipping_cost">
 </form>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script>

@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\InvoiceController as AdminInvoiceController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\WokiCourseController as AdminWokiCourseController;
+use App\Http\Controllers\Admin\BootcampController as AdminBootcampController;
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
 use App\Http\Controllers\Admin\WokiCourseUpdateController as AdminWokiCourseUpdateController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
@@ -53,7 +54,7 @@ use App\Http\Controllers\Api\CheckoutController;
 
 Route::middleware(['isSuspended'])->group(function () {
     Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth', 'verified']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth', 'verified']);
     Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth', 'verified']);
     Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth', 'verified']);
@@ -143,6 +144,9 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
     Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');
     Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree')->middleware(['auth', 'verified']);
+    // BootcampController
+    Route::get('/bootcamp/{id}', [BootcampController::class, 'show'])->name('bootcamp.show');
+
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware(['auth', 'verified']);
     // AssessmentController
@@ -229,6 +233,16 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::delete('/woki-courses/{id}', [AdminWokiCourseController::class, 'destroy'])->name('woki-courses.destroy');
         Route::post('/woki-courses/{id}/set-isfeatured-status-to-opposite', [AdminWokiCourseController::class, 'setIsFeaturedStatusToOpposite'])->name('woki-courses.set-isfeatured-status-to-opposite');
         Route::post('/woki-courses/{id}/set-publish-status-to-opposite', [AdminWokiCourseController::class, 'setPublishStatusToOpposite'])->name('woki-courses.set-publish-status-to-opposite');
+        // BootcampController
+        Route::get('/bootcamp/{id}/update', [AdminBootcampController::class, 'edit'])->name('bootcamp.edit');
+        Route::get('/bootcamp/categories', [AdminBootcampController::class, 'categories'])->name('bootcamp.categories');
+        Route::get('/bootcamp', [AdminBootcampController::class, 'index'])->name('bootcamp.index');
+        Route::get('/bootcamp/create', [AdminBootcampController::class, 'create'])->name('bootcamp.create');
+        Route::get('/bootcamp/{id}', [AdminBootcampController::class, 'show'])->name('bootcamp.show');
+        Route::post('/bootcamp', [AdminBootcampController::class, 'store'])->name('bootcamp.store');
+        Route::delete('/bootcamp/{id}', [AdminBootcampController::class, 'destroy'])->name('bootcamp.destroy');
+        Route::post('/bootcamp/{id}/set-isfeatured-status-to-opposite', [AdminBootcampController::class, 'setIsFeaturedStatusToOpposite'])->name('bootcamp.set-isfeatured-status-to-opposite');
+        Route::post('/bootcamp/{id}/set-publish-status-to-opposite', [AdminBootcampController::class, 'setPublishStatusToOpposite'])->name('bootcamp.set-publish-status-to-opposite');
         // ArtSupplyController
         Route::get('/woki-courses/art-supplies', [AdminArtSupplyController::class, 'index'])->name('art-supplies.index');
         Route::get('/woki-courses/art-supplies/create', [AdminArtSupplyController::class, 'create'])->name('art-supplies.create');
