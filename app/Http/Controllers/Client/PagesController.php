@@ -20,8 +20,9 @@ use App\Models\User;
 use App\Models\Hashtag;
 use App\Models\UserDetail;
 use App\Models\Course;
-use App\Models\Cart;
 use App\Models\Province;
+use App\Models\Review;
+use App\Models\Cart;
 use App\Models\City;
 use App\Models\UserHashtag;
 use App\Models\Invoice;
@@ -55,6 +56,8 @@ class PagesController extends Controller
 
     // Show the main landing page of the app.
     public function index(Request $request) {
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
         $agent = new Agent();
         if($agent->isPhone()){
             return view('client/mobile/under-construction');
@@ -84,11 +87,10 @@ class PagesController extends Controller
 
             return view('client/index', 
                 compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
-                    'online_courses','wokis','cart_count', 'notifications', 'transactions','informations','pengajar_positions'));
+                    'online_courses','wokis','cart_count', 'notifications', 'transactions','informations','pengajar_positions','footer_reviews'));
         }
-
         return view('client/index', 
-            compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','wokis','pengajar_positions'));
+            compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','wokis','pengajar_positions','footer_reviews'));
     }
 
     public function community_index(){
@@ -96,6 +98,7 @@ class PagesController extends Controller
         if($agent->isPhone()){
             return view('client/mobile/under-construction');
         }
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {
             $this->resetNavbarData();
@@ -105,10 +108,10 @@ class PagesController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/community', compact('cart_count', 'notifications', 'transactions','informations'));
+            return view('client/community', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
         }
         
-        return view('client/community');
+        return view('client/community',compact('footer_reviews'));
     }
 
     public function autocomplete(Request $request){
@@ -126,8 +129,9 @@ class PagesController extends Controller
             return redirect()->route('signup_general_info');
 
         $interests = Hashtag::all();
-        
-        return view('client/auth/signup-interests', compact('interests'));
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        return view('client/auth/signup-interests', compact('interests','footer_reviews'));
     }
     
 
@@ -136,7 +140,9 @@ class PagesController extends Controller
         if($agent->isPhone()){
             return view('client/mobile/under-construction');
         }
-        return view('client/auth/signup');
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        return view('client/auth/signup',compact('footer_reviews'));
     }
 
     public function storeGeneralInfo(Request $request)
@@ -235,6 +241,8 @@ class PagesController extends Controller
         if($agent->isPhone()){
             return view('client/mobile/under-construction');
         }
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
         if(Auth::check()) {
             $this->resetNavbarData();
 
@@ -243,10 +251,10 @@ class PagesController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/for-public/online-course', compact('cart_count', 'notifications', 'transactions','informations'));
+            return view('client/for-public/online-course', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
         }
         
-        return view('client/for-public/online-course');
+        return view('client/for-public/online-course',compact('footer_reviews'));
     }
 
     public function woki_index(){
@@ -254,6 +262,8 @@ class PagesController extends Controller
         if($agent->isPhone()){
             return view('client/mobile/under-construction');
         }
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
         if(Auth::check()) {
             $this->resetNavbarData();
 
@@ -262,10 +272,10 @@ class PagesController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/for-public/woki', compact('cart_count', 'notifications', 'transactions','informations'));
+            return view('client/for-public/woki', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
         }
 
-        return view('client/for-public/woki');
+        return view('client/for-public/woki',compact('footer_reviews'));
     }
 
     public function print(Request $request){

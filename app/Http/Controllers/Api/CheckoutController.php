@@ -25,6 +25,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Promotion;
 use App\Models\Notification;
+use App\Models\Review;
 
 class CheckoutController extends Controller
 {
@@ -371,9 +372,10 @@ class CheckoutController extends Controller
         $informations = $this->informations;
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         return view('client/transaction-detail',
-            compact('notifications', 'informations', 'transactions', 'cart_count', 'payment_object', 'orders', 'invoice','noWoki'));
+            compact('notifications', 'informations', 'transactions', 'cart_count', 'payment_object', 'orders', 'invoice','noWoki','footer_reviews'));
     }
 
     public function createPayment(Request $request, $id){    
@@ -398,8 +400,9 @@ class CheckoutController extends Controller
                 $noWoki = FALSE;
         }
         $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
-        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki','notifications'));
+        return view('client/transaction-detail', compact('payment_status','orders','invoice','cart_count','transactions','informations','noWoki','notifications','footer_reviews'));
     }
 
     public function cancelPayment(Request $request, $id) {

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Notification;
 use App\Models\KrestProgram;
+use App\Models\Review;
 use App\Models\Krest;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Agent;
@@ -42,6 +43,7 @@ class KrestController extends Controller
         }
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $programs = KrestProgram::all();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if (Auth::check()) {
 
@@ -51,10 +53,10 @@ class KrestController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-            return view('client/for-corporate/krest', compact('cart_count','transactions','informations','programs','notifications'));
+            return view('client/for-corporate/krest', compact('cart_count','transactions','informations','programs','notifications','footer_reviews'));
             
         } else {
-            return view('client/for-corporate/krest', compact('programs'));
+            return view('client/for-corporate/krest', compact('programs','footer_reviews'));
         }
 
     }

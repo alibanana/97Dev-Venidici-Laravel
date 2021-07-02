@@ -74,8 +74,9 @@ class AssessmentController extends Controller
         $userHasReviewed = null;
         if (count($reviews) != 0)
             $userHasReviewed = TRUE;
-        
-        return view('client/online-course/completed', compact('cart_count','transactions','informations','notifications','course', 'assessment_pivot','userHasReviewed'));
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        return view('client/online-course/completed', compact('cart_count','transactions','informations','notifications','course', 'assessment_pivot','userHasReviewed','footer_reviews'));
     }
 
     // Shows the Assessment page itself.
@@ -93,8 +94,9 @@ class AssessmentController extends Controller
         
         $assessment_pivot->status = "on-going";
         $assessment_pivot->save();
-        
-        return view('client/online-course/assessment', compact('assessment', 'assessment_pivot'));
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        return view('client/online-course/assessment', compact('assessment', 'assessment_pivot','footer_reviews'));
     }
 
     // Updates the User-Assessment mapping pivot data in the database.

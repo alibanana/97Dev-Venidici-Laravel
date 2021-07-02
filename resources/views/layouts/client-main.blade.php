@@ -461,6 +461,7 @@
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Review From our User</p>
+            @foreach($footer_reviews as $review)
             <!-- START OF ONE REVIEW -->
             <div style="margin-top:1vw;width:25vw">
               <p class="normal-text" style="margin-bottom:0.5vw;font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;display: -webkit-box;
@@ -468,11 +469,20 @@
                   text-overflow: ellipsis !important;
                   -webkit-line-clamp: 2 !important;
                   -webkit-box-orient: vertical !important;">
-                  “Course ini sangat bermanfaat bagi kalian yang ingin menjadi lucu” - Gabrielle </p>
-              <p class="small-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fas fa-clock"></i> <span style="margin-left:0.5vw">3 Hours ago in <span style="color:#67BBA3">Online Course - Cara Menjadi Lucu</span> </span> </p>
+                  “{{$review->description}}” - {{$review->user->name}} </p>
+              <p class="small-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fas fa-clock"></i> <span style="margin-left:0.5vw">{{$review->created_at->diffForHumans()}} in 
+              @if($review->course->course_type_id == 1)
+              <span style="color:#67BBA3">Online Course - {{$review->course->title}}</span> </span> 
+              @elseif($review->course->course_type_id == 1)
+              <span style="color:#CE3369">Woki - {{$review->course->title}}</span> </span> 
+              @else
+              <span style="color:#2B6CAA">{{$review->course->title}}</span> </span> 
+              @endif
+              </p>
             </div>
+            @endforeach
             <!-- END OF ONE REVIEW -->
-            <!-- START OF ONE REVIEW -->
+            <!-- START OF ONE REVIEW
             <div style="margin-top:1vw;width:25vw">
               <p class="normal-text" style="margin-bottom:0.5vw;font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;display: -webkit-box;
                   overflow : hidden !important;
@@ -482,7 +492,7 @@
                   “Course ini sangat bermanfaat bagi kalian yang ingin menjadi lucu” - Gabrielle </p>
               <p class="small-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fas fa-clock"></i> <span style="margin-left:0.5vw">3 Hours ago in <span style="color:#CE3369">Woki - Cara Menjadi Seniman</span> </span> </p>
             </div>
-            <!-- END OF ONE REVIEW -->
+           END OF ONE REVIEW -->
           </div>
           
         </div>

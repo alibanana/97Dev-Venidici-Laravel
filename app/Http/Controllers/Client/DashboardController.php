@@ -24,6 +24,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\Redeem;
 use App\Models\Promotion;
+use App\Models\Review;
 use App\Models\Course;
 use App\Mail\PasswordChangedMail;
 
@@ -82,9 +83,10 @@ class DashboardController extends Controller
         }
 
 
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         return view('client/user-dashboard',
-            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount'));
+            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount','footer_reviews'));
     }
 
     // Updates Users's data in the database.
@@ -255,9 +257,10 @@ class DashboardController extends Controller
 
         $usableStarsCount = Helper::getUsableStars(auth()->user());
 
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         return view('client/vouchers',
-            compact('cart_count', 'informations', 'transactions', 'notifications', 'redeem_rules', 'next_year_date', 'current_year_date', 'my_vouchers', 'usableStarsCount'));
+            compact('cart_count', 'informations', 'transactions', 'notifications', 'redeem_rules', 'next_year_date', 'current_year_date', 'my_vouchers', 'usableStarsCount','footer_reviews'));
     }
 
     public function redeemPromo(Request $request)

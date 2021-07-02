@@ -37,6 +37,7 @@ class BootcampController extends Controller
         }
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $programs = KrestProgram::all();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if (Auth::check()) {
 
@@ -46,10 +47,10 @@ class BootcampController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-            return view('client/for-public/bootcamp', compact('cart_count','transactions','informations','programs','notifications'));
+            return view('client/for-public/bootcamp', compact('cart_count','transactions','informations','programs','notifications','footer_reviews'));
             
         } else {
-            return view('client/for-public/bootcamp', compact('programs'));
+            return view('client/for-public/bootcamp', compact('programs','footer_reviews'));
         }
 
     }
@@ -84,6 +85,7 @@ class BootcampController extends Controller
     public function show($id)
     {        
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
 
         $agent = new Agent();
@@ -100,10 +102,10 @@ class BootcampController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-            return view('client/bootcamp/detail',compact('cart_count','transactions','informations','notifications','reviews'));
+            return view('client/bootcamp/detail',compact('cart_count','transactions','informations','notifications','reviews','footer_reviews'));
 
         } else {
-            return view('client/bootcamp/detail',compact('reviews'));
+            return view('client/bootcamp/detail',compact('reviews','footer_reviews'));
         }
 
     }

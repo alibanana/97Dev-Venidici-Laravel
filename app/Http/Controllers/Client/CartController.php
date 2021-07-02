@@ -16,6 +16,7 @@ use App\Models\City;
 use App\Models\Invoice;
 use App\Models\Promotion;   
 use App\Models\Course;   
+use App\Models\Review;
 use App\Models\Notification;
 use Jenssegers\Agent\Agent;
 
@@ -57,9 +58,10 @@ class CartController extends Controller
             $tempPriceOnly = $cart->withArtOrNo ? $cart->course->priceWithArtKit : $cart->course->price;
             $total_price += $cart->quantity * $tempPriceOnly;
         }
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         return view('client/cart',
-            compact('notifications', 'informations', 'transactions', 'cart_count', 'carts', 'noWoki', 'total_price'));
+            compact('notifications', 'informations', 'transactions', 'cart_count', 'carts', 'noWoki', 'total_price','footer_reviews'));
     }
     
     // Shows the client payment shipping page. (/payment)
@@ -136,10 +138,11 @@ class CartController extends Controller
         foreach ($carts as $cart) {
             if($cart->withArtOrNo) $noWoki = false;
         }
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         return view('client/cart-shipping',
             compact('notifications', 'informations', 'transactions', 'cart_count', 'carts', 'provinces',
-                'cities', 'sub_total', 'shipping_cost', 'tipe_pengiriman', 'total_price', 'tomorrow', 'noWoki'));
+                'cities', 'sub_total', 'shipping_cost', 'tipe_pengiriman', 'total_price', 'tomorrow', 'noWoki','footer_reviews'));
     }
 
     // Add item to cart (in the database).
