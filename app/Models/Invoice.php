@@ -23,6 +23,7 @@ class Invoice extends Model
         'address', 
         'shipping_notes', 
         'status', 
+        'promo_code',
         'total_order_price',
         'discounted_price', 
         'club_discount', 

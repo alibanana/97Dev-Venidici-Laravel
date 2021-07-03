@@ -358,7 +358,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <input type="hidden" name="promo_code" value="{{ $promo_code ?? null }}" >
+                    <input type="hidden" name="promo_code" value="{{ Session::get('promotion_code') ? Session::get('promotion_code')->code : null }}" >
                     <input type="hidden" name="discounted_price" value="{{ $discounted_price }}">
                 @endif
 
@@ -428,7 +428,7 @@
                         @if(Session::get('promotion_code'))
                             @if(Session::get('promotion_code')->type == 'percent')
                                 <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif
-                                ({{Session::get('promotion_code')->discount}}%) </p>
+                                ({{ Session::get('promotion_code')->discount }}%) </p>
                             @else
                                 <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif</p>
                             @endif

@@ -29,6 +29,7 @@ class CreateInvoicesTable extends Migration
             $table->text('address')->nullable();
             $table->text('shipping_notes')->nullable();
             $table->enum('status', array('pending', 'completed', 'failed', 'paid', 'cancelled'));
+            $table->string('promo_code')->nullable();
             $table->bigInteger('total_order_price');
             $table->bigInteger('discounted_price')->nullable();
             $table->bigInteger('club_discount')->nullable();

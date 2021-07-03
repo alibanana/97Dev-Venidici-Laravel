@@ -96,6 +96,7 @@ class CheckoutController extends Controller
             'time' => 'required',
             'bankShortCode' => 'required',
             'discounted_price' => 'required|integer',
+            'promo_code' => 'required',
             'club_discount' => 'required|integer'
         ];
 
@@ -145,6 +146,7 @@ class CheckoutController extends Controller
             'name' => $validated['name'],
             'phone' => $validated['phone'],
             'status' => 'pending',
+            'promo_code' => $validated['promo_code'],
             'total_order_price' => $validated['total_order_price'],
             'discounted_price' => $validated['discounted_price'],
             'club_discount' => $validated['club_discount'],
@@ -193,6 +195,16 @@ class CheckoutController extends Controller
 
         // Delete user's cart data.
         auth()->user()->carts()->delete();
+
+        // Handle if promo_code used is a personal promo_code. If its personal,
+        // change isActive flag to false.
+        if ($validated['promo_code']) {
+            $promoObject = Promotion::where('code', $validated['promo_code'])->first();
+            if ($promoObject->user_id) {
+                $promoObject->isActive = false;
+                $promoObject->save();
+            }
+        }
 
         // Create payment object (in xfers) & handle failed.
         $response = XfersHelper::createPayment($request->only([
@@ -266,6 +278,8 @@ class CheckoutController extends Controller
                 Please save this link to update & check your payment status!");
         }
 
+        $request->session()->forget('promotion_code');
+
         // Link to transaction detail page.
         $link = route('customer.cart.transactionDetail', $invoice->xfers_payment_id) . '#payment-created';
 
@@ -329,11 +343,9 @@ class CheckoutController extends Controller
 
             $x = 1;
             $length = count($invoice->orders);
-            foreach($invoice->orders as $order)
-            {
+            foreach ($invoice->orders as $order) {
                 if($x == $length && $length != 1)
                     $courses_string = $courses_string." dan ";
-                
                 elseif($x != 1)
                     $courses_string = $courses_string.", ";
     
@@ -374,8 +386,8 @@ class CheckoutController extends Controller
         $cart_count = $this->cart_count;
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
-        return view('client/transaction-detail',
-            compact('notifications', 'informations', 'transactions', 'cart_count', 'payment_object', 'orders', 'invoice','noWoki','footer_reviews'));
+        return view('client/transaction-detail', compact('notifications', 'informations', 'transactions', 'cart_count', 
+            'payment_object', 'orders', 'invoice','noWoki','footer_reviews'));
     }
 
     public function createPayment(Request $request, $id){    
@@ -415,16 +427,18 @@ class CheckoutController extends Controller
 
         $invoice = Invoice::where('xfers_payment_id', $id)->first();
 
-        // start of courses string
-        $courses_string = "";
+        // If promotions_code used is a personal one, change is_active back.
+        $promotion = $invoice->promo_code ? Promotion::where('code', $invoice->promo_code)->first() : null;
+        if ($promotion) {
+            $promotion->isActive = $promotion->user_id ? true : $promotion->isActive;
+            $promotion->save();
+        }
 
-        $x = 1;
-        $length = count($invoice->orders);
-        foreach($invoice->orders as $order)
-        {
+        // start of courses string
+        $courses_string = ""; $x = 1; $length = count($invoice->orders);
+        foreach($invoice->orders as $order) {
             if($x == $length && $length != 1)
                 $courses_string = $courses_string." dan ";
-            
             elseif($x != 1)
                 $courses_string = $courses_string.", ";
 
