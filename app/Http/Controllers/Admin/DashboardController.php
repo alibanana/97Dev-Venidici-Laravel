@@ -24,27 +24,19 @@ class DashboardController extends Controller
 {
     // Shows the Admin Dashboard Page 
     public function index() {
-
-        $users = User::all();
-        $users_count = $users->count();
-
-        $courses = Course::where('course_type_id',1)->get();
-        $courses_count = count($courses);
-
-        $wokis = Course::where('course_type_id',2)->get();
-        $wokis_count = count($wokis);
-
-        $applicants = Krest::all();
-        $applicants_count = count($applicants);
+        $users_count = User::all()->count();
+        $courses_count = Course::where('course_type_id', 1)->get()->count();
+        $wokis_count = Course::where('course_type_id', 2)->get()->count();
+        $applicants_count = Krest::all()->count();
 
         // start of online course data
         $today_online_course_sold = Order::
-            whereHas('course', function ($query){
-            $query->where('course_type_id', '1');
-                })
-            ->whereHas('invoice', function ($query){
+            whereHas('course', function ($query) {
+                $query->where('course_type_id', '1');
+            })->whereHas('invoice', function ($query){
                 $query->where('status', 'paid')->orWhere('status','completed');
-                    })->whereDate('updated_at',Carbon::now()->setTimezone('Asia/Jakarta'))->get();
+            })->whereDate('updated_at', Carbon::now()->setTimezone('Asia/Jakarta'))
+            ->get();
 
         $today_online_course_sold_qty = count($today_online_course_sold);
         $today_online_course_earnings = 0;
@@ -55,11 +47,10 @@ class DashboardController extends Controller
 
         $total_online_course_sold = Order::
             whereHas('course', function ($query){
-            $query->where('course_type_id', '1');
-                })
-            ->whereHas('invoice', function ($query){
+                $query->where('course_type_id', '1');
+            })->whereHas('invoice', function ($query){
                 $query->where('status', 'paid')->orWhere('status','completed');
-                    })->get();
+            })->get();
         
         $total_online_course_sold_qty = count($total_online_course_sold);
         $total_online_course_earnings = 0;
@@ -95,17 +86,15 @@ class DashboardController extends Controller
         
         $total_woki_sold_qty = 0;
         $total_woki_earnings = 0;
-        foreach($total_woki_sold as $course){
+        foreach($total_woki_sold as $course) {
             $total_woki_earnings +=  $course->price;
             $total_woki_sold_qty +=  $course->qty;
         }
-
         //end of woki data
 
-
-        return view('admin/index', compact('users_count','courses_count','wokis_count','applicants_count'
-        ,'today_online_course_sold_qty','today_online_course_earnings','total_online_course_sold_qty','total_online_course_earnings'
-        ,'today_woki_sold_qty','today_woki_earnings','total_woki_sold_qty','total_woki_earnings'
-    ));
+        return view('admin/index', compact('users_count', 'courses_count', 'wokis_count', 'applicants_count',
+            'today_online_course_sold_qty', 'today_online_course_earnings', 'total_online_course_sold_qty', 'total_online_course_earnings',
+            'today_woki_sold_qty', 'today_woki_earnings', 'total_woki_sold_qty', 'total_woki_earnings'
+        ));
     }
 }
