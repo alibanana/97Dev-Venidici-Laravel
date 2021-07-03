@@ -120,7 +120,6 @@ class CartController extends Controller
                 'weight'        => 1000, // berat barang dalam gram
                 'courier'       => $courier_type // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
             ])->get();
-            //$shipping_cost = $response[0]['costs'][0]['cost'][0]['value'];
             $tipe_pengiriman = $response[0]['costs']; // contoh ctc
         }
 
@@ -138,11 +137,17 @@ class CartController extends Controller
         foreach ($carts as $cart) {
             if($cart->withArtOrNo) $noWoki = false;
         }
+
+        // Calculate discounted price if promotion exists in the session.
+        $discounted_price = session()->get('promotion_code') ?
+            $this->getCalculatedDiscountedPrice(session()->get('promotion_code'), $shipping_cost) : 0;
+
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         return view('client/cart-shipping',
             compact('notifications', 'informations', 'transactions', 'cart_count', 'carts', 'provinces',
-                'cities', 'sub_total', 'shipping_cost', 'tipe_pengiriman', 'total_price', 'tomorrow', 'noWoki','footer_reviews'));
+                'cities', 'sub_total', 'shipping_cost', 'tipe_pengiriman', 'total_price', 'tomorrow',
+                'noWoki', 'discounted_price', 'footer_reviews'));
     }
 
     // Add item to cart (in the database).
@@ -266,20 +271,22 @@ class CartController extends Controller
 
         return redirect()->back();
     }
-    
-    /**
-     * removeAllCart
-     *
-     * @param  mixed $request
-     * @return void
-     */
-    // public function removeAllCart(Request $request)
-    // {
-    //     Cart::with('course')
-    //             ->where('user_id', auth()->guard('api')->user()->id)
-    //             ->delete();
-        
-    //     return redirect()->back()->with('success', 'Removed All Item in Cart');
 
-    // }
+    // Function to calculate discounted price.
+    private function getCalculatedDiscountedPrice(Promotion $promotionObject, $shipping_cost) {
+        // If the promotion is for shipping, discounted_price amount should be calculated from the
+        // shipping_cost, if not then its should be calculated from the sub_total. 
+        $toBeDiscountedNominal = $promotionObject->promo_for == 'shipping' ?
+            $shipping_cost : $sub_total;
+
+        // Check if the promotion is nomimal (Rp xxx) or in terms of percentage. Then calculate it
+        // accordingly.
+        $discounted_price = $promotionObject->type == 'nominal' ?
+            $promotionObject->discount : $toBeDiscountedNominal * ($promotionObject->discount/100);
+
+        // Check if the calculated discounted_price is larger than either shipping_cost or sub_total
+        // values. If so, return those nominals instead.
+        return ($discounted_price > $toBeDiscountedNominal) ?
+            $toBeDiscountedNominal : $discounted_price;
+    }
 }

@@ -358,26 +358,10 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <?php 
-                        if(Session::get('promotion_code'))
-                        {
-                            $discount = Session::get('promotion_code')->discount;
-                            $promoForShippingFlag = Session::get('promotion_code')->promo_for == 'shipping';
-                            $toBeDiscountedNominal = $promoForShippingFlag ? $shipping_cost : $sub_total;
-
-                            if (Session::get('promotion_code')->type == 'nominal')
-                                $discounted_price = $discount;
-                            else
-                                $discounted_price = $toBeDiscountedNominal * ($discount/100);
-
-                            $discounted_price = ($discounted_price >= $toBeDiscountedNominal) ? $toBeDiscountedNominal : $discounted_price;
-                        }
-                        else
-                            $discounted_price = 0;
-                    ?>
-                    <input type="hidden" value="{{$discounted_price}}" name="discounted_price">
-
+                    <input type="hidden" name="promo_code" value="{{ $promo_code ?? null }}" >
+                    <input type="hidden" name="discounted_price" value="{{ $discounted_price }}">
                 @endif
+
                 <!-- START OF NOMINAL CARD -->
                 <div style="background: #FFFFFF;box-shadow: 0px 0px 10px rgba(48, 48, 48, 0.15);border-radius: 10px;padding:1.5vw;margin-top:2vw">
                     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -443,10 +427,10 @@
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2vw;border-bottom:2px solid #2B6CAA;padding-bottom:1.5vw">
                         @if(Session::get('promotion_code'))
                             @if(Session::get('promotion_code')->type == 'percent')
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif
-                            ({{Session::get('promotion_code')->discount}}%) </p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif
+                                ({{Session::get('promotion_code')->discount}}%) </p>
                             @else
-                            <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher @if(Session::get('promotion_code')->promo_for == 'shipping') (Shipping) @endif</p>
                             @endif
                         @else
                             <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Potongan voucher</p>

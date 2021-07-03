@@ -477,6 +477,26 @@ class CheckoutController extends Controller
             return redirect()->back()->with($message_topic, $message_value);
         }
 
+        // Check if cart object has artKit. (if yes, this means order will have shipping)
+        $cartHasNoArtKit = $this->checkCartHasNoArtKit();
+
+        // Validations if the promo_code is for shipping.
+        if ($promo->promo_for =='shipping') {
+            // If cart object has no artKit. (no shipping)
+            if ($cartHasNoArtKit) {
+                $request->session()->forget('promotion_code');
+                $message_topic = 'discount_not_found';
+                $message_value = 'Discount Code is for Shipping!';
+                return redirect()->back()->with($message_topic, $message_value);
+            // If cart object has artKit (order has shippings), but its not calculated yet.
+            } else if ($request->shipping_cost == 0) {
+                $request->session()->forget('promotion_code');
+                $message_topic = 'discount_not_found';
+                $message_value = 'Please choose a shipping destination first!';
+                return redirect()->back()->with($message_topic, $message_value);
+            }
+        }
+
         // Check if promo code global -> Apply Code.
         if ($promo->user_id == null) {
             $request->session()->put('promotion_code', $promo);
@@ -498,26 +518,6 @@ class CheckoutController extends Controller
             $request->session()->forget('promotion_code');
             $message_topic = 'discount_not_found';
             $message_value = 'Discount Code telah digunakan!';
-            return redirect()->back()->with($message_topic, $message_value);
-        }
-
-        // Check if cart object has artKit.
-        $cartHasNoArtKit = $this->checkCartHasNoArtKit();
-        
-        // If promo is meant for shipping & cart has no artKit (no shipping)
-        if ($promo->promo_for == 'shipping' && $cartHasNoArtKit) {
-            if($request->shipping_cost)
-            $request->session()->forget('promotion_code');
-            $message_topic = 'discount_not_found';
-            $message_value = 'Discount Code is for Shipping!';
-            return redirect()->back()->with($message_topic, $message_value);
-        }
-
-        // Check if shipping cost is available already.
-        if ($promo->promo_for == 'shipping' && $request->shipping_cost == 0) {
-            $request->session()->forget('promotion_code');
-            $message_topic = 'discount_not_found';
-            $message_value = 'Please choose a shipping destination first!';
             return redirect()->back()->with($message_topic, $message_value);
         }
 
