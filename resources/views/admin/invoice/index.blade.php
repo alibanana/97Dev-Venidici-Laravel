@@ -130,7 +130,7 @@
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                         <div style="padding: 0px 2px;">
-                                                            <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.invoices.show', $invoice->xfers_payment_id) }}">View Detail</a>
+                                                            <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.invoices.show', $invoice->id) }}">View Detail</a>
                                                         </div>
                                                     </div>
                                                 </td>

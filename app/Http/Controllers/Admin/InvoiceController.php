@@ -57,7 +57,7 @@ class InvoiceController extends Controller
 
     // Shows the admin Invoice Details page.
     public function show($id) {
-        $invoice = Invoice::where('xfers_payment_id',$id)->firstOrFail();
+        $invoice = Invoice::findOrFail($id);
         
         $noWoki = TRUE;
         foreach($invoice->orders as $cart) {

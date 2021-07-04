@@ -61,8 +61,8 @@
         </a>
         <div id="collapseAnalytics" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseAnalytics">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/admin/analytics/online-course">Online Course</a>
-                <a class="collapse-item" href="/admin/cms/homepage">Woki</a>
+                <a class="collapse-item" href="{{ route('admin.analytics.online-course.index') }}">Online Course</a>
+                <a class="collapse-item" href="{{ route('admin.analytics.woki-course.index') }}">Woki</a>
             </div>
         </div>
     </li>

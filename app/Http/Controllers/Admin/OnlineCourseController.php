@@ -170,13 +170,16 @@ class OnlineCourseController extends Controller
         }
 
         $users = $users->get();
-        $total_earnings = 0;
-        foreach($course->orders as $order)
-        {
-            $total_earnings += $order->price;
+
+        $total_revenue = 0; $users_data = [];
+        foreach($course->orders as $order) {
+            if ($order->invoice->status == 'paid' || $order->invoice->status == 'completed') {
+                $total_revenue += $order->qty * $order->price;
+                $users_data[$order->invoice->user_id]['invoice_id'] = $order->invoice->id;
+            }
         }
 
-        return view('admin/online-course/detail', compact('course', 'users','total_earnings'));
+        return view('admin/online-course/detail', compact('course', 'users', 'total_revenue', 'users_data'));
     }
 
     // Show Admin -> Create New Online Page

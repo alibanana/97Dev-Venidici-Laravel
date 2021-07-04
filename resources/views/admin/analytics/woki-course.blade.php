@@ -22,7 +22,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="mb-0 mb-3 text-gray-800">Online Courses Analytics</h1>
+            <h1 class="mb-0 mb-3 text-gray-800">Woki Courses Analytics</h1>
         </div>
         <!-- Content Row -->
 
@@ -78,7 +78,7 @@
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
-                                    <form action="{{ route('admin.analytics.online-course.index') }}" method="GET">
+                                    <form action="{{ route('admin.analytics.woki-course.index') }}" method="GET">
                                         <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm">
                                         @if (Request::get('show'))
                                             <input name="show" value="{{ Request::get('show') }}" hidden>
@@ -141,11 +141,14 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td><span style="font-weight: 700">{{ $individualCourseSoldData[$course->id] }} Courses</span></td>
+                                                    <td>
+                                                        <span style="font-weight: 700">{{ $individualCourseSoldData[$course->id]['withoutArtKit'] }} Course Only</span><br><br>
+                                                        <span style="font-weight: 700">{{ $individualCourseSoldData[$course->id]['withArtKit'] }} with ArtKit</span>
+                                                    </td>
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.online-courses.show', $course->id) }}">View Detail</a>
+                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.woki-courses.show', $course->id) }}">View Detail</a>
                                                             </div>
                                                         </div>
                                                     </td>

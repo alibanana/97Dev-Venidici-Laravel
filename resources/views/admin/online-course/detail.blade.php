@@ -35,13 +35,13 @@
                 @for ($i = 1; $i < 6; $i++)
                     @if ($i <= $course->average_rating)
                         @if ($i == 1)
-                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                            <i style="color:#F4C257" class="fas fa-star"></i>
                         @else
                             <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star"></i>
                         @endif
                     @else
                         @if ($i == 1)
-                            <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                            <i style="color:#B3B5C2" class="fas fa-star"></i>
                         @else
                             <i style="margin-left:0.2vw;color:#B3B5C2" class="fas fa-star"></i>
                         @endif
@@ -64,8 +64,8 @@
                 <div class="col-6">
                     <div class="card bg-light text-black shadow">
                         <div class="card-body">
-                            Total Earnings
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($total_earnings, 0, ',', ',') }}</div>
+                            Total Revenue
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($total_revenue, 0, ',', ',') }}</div>
                         </div>
                     </div>
 
@@ -124,6 +124,7 @@
                                                 <th>Full Name</th>
                                                 <th>Email</th>
                                                 <th>Telephone</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -137,6 +138,7 @@
                                                     @else
                                                         <td style="color: red">Phone number not available!</td>
                                                     @endif
+                                                    <td><a href="{{ route('admin.invoices.show', $users_data[$user->id]['invoice_id']) }}">View Invoice</a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

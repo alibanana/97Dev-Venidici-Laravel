@@ -171,27 +171,32 @@ class WokiCourseController extends Controller
 
         $users = $users->get();
 
-        $total_earnings = 0; $course_sold = 0; $users_data = [];
-        foreach($course->orders as $order) {
-            $total_earnings += $order->price;
-            $course_sold += $order->qty;
-            if (!array_key_exists($order->invoice->user_id, $users_data)) {
-                $users_data[$order->invoice->user_id]['invoice_id'] = $order->invoice->id;
+        $courseDetailsData = $this->getCourseDetailsData($course);
+        $total_revenue = $courseDetailsData['total_revenue'];
+        $course_sold = $courseDetailsData['course_sold'];
+        $users_data = $courseDetailsData['users_data'];
+
+        // dd($users_data);
+
+        return view('admin/woki/detail', compact('course', 'users', 'total_revenue', 'course_sold', 'users_data'));
+    }
+
+    // Get the total course bought withArtKit and withoutArtKit for a particular course, grouped by
+    // the user's id of whoever bought it.
+    private function getCourseDetailsData($course) {
+        $total_revenue = 0; $course_sold = 0; $users_data = [];
+        foreach ($course->orders as $order) {
+            if ($order->invoice->status == 'paid' || $order->invoice->status == 'completed') {
+                $total_revenue += $order->qty * $order->price;
+                $course_sold += $order->qty;
                 if ($order->withArtOrNo)
-                    $users_data[$order->invoice->user_id]['qtyWithArt'] = $order->qty;
+                    $users_data[$order->invoice->user_id][$order->invoice->id]['qtyWithArt'] = $order->qty;
                 else
-                    $users_data[$order->invoice->user_id]['qtyWithoutArt'] = $order->qty;
-            } else {
-                if (array_key_exists('qtyWithArt', $users_data[$order->invoice->user_id]))
-                    $users_data[$order->invoice->user_id]['qtyWithoutArt'] = $order->qty;
-                else
-                    $users_data[$order->invoice->user_id]['qtyWithArt'] = $order->qty;
+                    $users_data[$order->invoice->user_id][$order->invoice->id]['qtyWithoutArt'] = $order->qty;
+                
             }
         }
-
-        dd($users_data);
-
-        return view('admin/woki/detail', compact('course', 'users', 'total_earnings', 'course_sold', 'users_data'));
+        return compact('total_revenue', 'course_sold', 'users_data');
     }
 
     // Shows Admin -> Create Woki Course Page.

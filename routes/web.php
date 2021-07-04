@@ -10,6 +10,7 @@ use App\Http\Controllers\Client\AssessmentController;
 use App\Http\Controllers\Client\KrestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
+use App\Http\Controllers\Admin\AnalyticsController as AdminAnalyticsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\InvoiceController as AdminInvoiceController;
 use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseController;
@@ -182,6 +183,7 @@ Route::middleware(['isSuspended'])->group(function () {
     | Controllers Used:
     |   - DashboardController
     |   - HomepageController
+    |   - AnalyticsController
     |   - UserController
     |   - InvoiceController
     |   - OnlineCourseController
@@ -203,6 +205,9 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/cms/homepage/trusted-company', [AdminHomepageController::class, 'updateTrustedCompany'])->name('cms.homepage.trusted-company.update');
         Route::get('/cms/homepage/testimonies/{id}/update/{flag}', [AdminHomepageController::class, 'editTestimonies'])->name('cms.homepage.testimonies.edit');
         Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
+        // AnalyticsController
+        Route::get('/analytics/online-course', [AdminAnalyticsController::class, 'onlineCourseIndex'])->name('analytics.online-course.index');
+        Route::get('/analytics/woki-course', [AdminAnalyticsController::class, 'wokiCourseIndex'])->name('analytics.woki-course.index');
         // UserController
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
         Route::put('/users', [AdminUserController::class, 'add_stars'])->name('users.add_stars');
@@ -362,11 +367,6 @@ Route::middleware(['isSuspended'])->group(function () {
         return view('admin/auth/reset-password');
     });
 
-    /* START OF ANALYTICS ROUTING */
-    Route::get('/admin/analytics/online-course', function () {
-        return view('admin/analytics/online-course');
-    });
-    /* END OF ANALYTICS ROUTING */
 
     /* START OF GOOGLE AUTH */
     Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redirectToGoogle'])->name('login.google');
