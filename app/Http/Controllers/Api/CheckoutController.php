@@ -96,7 +96,7 @@ class CheckoutController extends Controller
             'time' => 'required',
             'bankShortCode' => 'required',
             'discounted_price' => 'required|integer',
-            'promo_code' => 'required',
+            'promo_code' => '', // no validations but included for ease of access.
             'club_discount' => 'required|integer'
         ];
 
@@ -133,7 +133,7 @@ class CheckoutController extends Controller
         }
 
         // If validation passed store validated data in a variable.
-        $validated = $validator->validate(); 
+        $validated = $validator->validate();
 
         $invoiceNumberResult = Helper::generateInvoiceNumber();
         if ($invoiceNumberResult['status'] == 'Failed')
