@@ -156,7 +156,7 @@
         <div id="collapseBootcamp" class="collapse" aria-labelledby="" data-parent="#collapseBootcamp">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a>
-                <a class="collapse-item" href="{{ route('admin.bootcamp.categories') }}">Bootcamp Categories</a>
+                <!-- <a class="collapse-item" href="{{ route('admin.bootcamp.categories') }}">Bootcamp Categories</a> -->
                 <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
                 <a class="collapse-item" href="/admin/reviews">Reviews</a>
 

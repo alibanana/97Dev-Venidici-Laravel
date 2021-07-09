@@ -109,7 +109,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                         <div class="form-group">
                             <label for="">Bootcamp Date</label>
                             <input type="date" name="event_date" class="form-control form-control-user" value="21-12-2021"
@@ -120,8 +120,8 @@
                                 </span>
                             @enderror               
                         </div>
-                    </div>
-                    <div class="col-6">
+                    </div> -->
+                    <!-- <div class="col-6">
                         <div class="form-group">
                             <label for="">Bootcamp Start</label>
                             <input type="time" name="start_time" class="form-control form-control-user" value="21-12-2021"
@@ -132,8 +132,8 @@
                                 </span>
                             @enderror               
                         </div>
-                    </div>
-                    <div class="col-6">
+                    </div> -->
+                    <!-- <div class="col-6">
                         <div class="form-group">
                             <label for="">Bootcamp End</label>
                             <input type="time" name="end_time" class="form-control form-control-user" value="21-12-2021"
@@ -144,7 +144,7 @@
                                 </span>
                             @enderror               
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Description</label>
@@ -377,9 +377,9 @@
                 <div class="col-12">
                     <p>Create New Schedule</p>
                 </div>
-               <div class="col-4"><input type="date" class="form-control"></div>
-               <div class="col-4"><input type="time" class="form-control"></div>
-               <div class="col-4"><input type="text" value="title" class="form-control"></div>
+               <div class="col-6"><input type="datetime-local" class="form-control"></div>
+               <!-- <div class="col-4"><input type="time" class="form-control"></div> -->
+               <div class="col-6"><input type="text" value="title" class="form-control"></div>
                <div class="col-12 pt-3">
                    <textarea name="" id="" class="form-control" rows="3" placeholder="insert description"></textarea>
                </div>
@@ -398,8 +398,7 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
+                                    <th>Date Time</th>
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th >Action</th>
@@ -408,8 +407,8 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><input type="date" class="form-control"></td>
-                                    <td><input type="time" class="form-control"></td>
+                                    <td><input type="datetime-local" class="form-control"></td>
+                                    <!-- <td><input type="time" class="form-control"></td> -->
                                     <td><input type="text" value="title" class="form-control"></td>
                                     <td><textarea name="" id="" rows="3" class="form-control"></textarea></td>  
                                     <td>

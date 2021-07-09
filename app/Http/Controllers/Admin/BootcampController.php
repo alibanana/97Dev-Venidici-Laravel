@@ -86,8 +86,8 @@ class BootcampController extends Controller
         //
     }
 
-    public function categories(Request $request){
-        return view('admin/bootcamp/bootcamp-categories');
+    // public function categories(Request $request){
+    //     return view('admin/bootcamp/bootcamp-categories');
 
-    }
+    // }
 }
