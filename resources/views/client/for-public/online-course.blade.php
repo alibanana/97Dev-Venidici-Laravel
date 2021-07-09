@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici On-Demand')
+@section('title', 'Venidici Skill Snack')
 
 @section('content')
 
@@ -10,14 +10,14 @@
             <img src="/assets/images/client/Venidici_Logo_Horizontal_White.png" style="width:20vw;" class="img-fluid" alt="Image 1">
             <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw;margin-top:1.5vw">Fun learning anytime
             & anywhere</p>
-            <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:2vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
+            <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:2vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
             <div class="row m-0">
                 <div class="col-9 p-0">
                     <div style="margin-top:0.5vw;text-align:center">
                         <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;">Explore our programs </p>
                         <div style="display:flex;justify-content:center;align-items:center;">
                             <a href="/for-public/online-course" class="normal-text blue-link blue-link-active" style="font-family:Rubik Medium;margin-right:1.5vw;width:10vw">
-                                On-Demand
+                                Skill Snack
                             </a>
                             <a href="/for-public/woki" class="normal-text red-link" style="font-family:Rubik Medium;width:10vw">
                                 Woki
@@ -64,28 +64,31 @@
         </div>
     </div>
     <div class="col-6 wow fadeInRight"data-wow-delay="0.3s">
-        <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Vendici on Demand, <br> apa tuh?</p>
-        <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici on Demand berisi kumpulan rekaman video dari course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong. </p>
-        <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">Explore Our Library Now!</a>
+        <!-- <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p> -->
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Skill Snack Live</p>
+        <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Enjoy sesi live workshop ngomongin berbagai topik dan skill yang bisa kamu pelajari bersama expert-expert di bidangnya.</p>
+        <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">See upcoming live session</a>
 
     </div>
 </div>
 <!-- END OF OUR HISTORY -->
 
-<!-- START OF KENAPA MEMILIH On-Demand -->
+<!-- START OF KENAPA MEMILIH Skill Snack -->
 <div class="row m-0 page-container" style="padding-bottom:8vw   ">
     <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;padding-right:2vw">
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Skill Snack On-Demand</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Fun learning anytime & anywhere! Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack On-Demand berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.
-        </p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack On-Demand berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.</p>
+        <div>
+            <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">See upcoming live session</a>
+        </div>
+
     </div>
     <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
           <img src="/assets/images/client/kenapa_online_course.png" style="width:38vw;object-fit:cover;height:25vw;border-radius: 10px" class="img-fluid" alt="Image 1">
     </div>
     
 </div>
-<!-- END OF KENAPA MEMILIH On-Demand -->
+<!-- END OF KENAPA MEMILIH Skill Snack -->
 
 <!-- START OF OUR MISSION -->
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
@@ -101,7 +104,7 @@
                     <div style="text-align:center">
                         <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                     </div>
-                    <div style="height:5vw;margin-top:1vw">
+                    <div style="height:3vw;margin-top:1vw">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
@@ -123,7 +126,7 @@
                     <div style="text-align:center">
                         <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                     </div>
-                    <div style="height:5vw;margin-top:1vw">
+                    <div style="height:3vw;margin-top:1vw">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
@@ -146,7 +149,7 @@
                     <div style="text-align:center">
                         <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                     </div>
-                    <div style="height:5vw;margin-top:1vw">
+                    <div style="height:3vw;margin-top:1vw">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
@@ -169,7 +172,7 @@
                     <div style="text-align:center">
                         <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                     </div>
-                    <div style="height:5vw;margin-top:1vw">
+                    <div style="height:3vw;margin-top:1vw">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
@@ -260,7 +263,7 @@
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
-                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;white-space:pre-line">Money-back guarantee hanya berlaku bagi Skill Snack Live. Kamu ga puas? Jangan ragu-ragu untuk menghubungi tim kami                </div>
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;white-space:pre-line">Untuk Workshop Live terdapat money-back guarantee jika kamu merasa tidak puas dengan menghubungi kami. Tidak terdapat refund untuk program on demand</div>
             </div>
             <!-- END OF ONE FAQ CARD -->
             <!-- START OF ONE FAQ CARD -->
@@ -273,7 +276,8 @@
                 </div>
                 <div class="collapse" id="collapseFaQ2" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                    Kamu bisa melihat detail setiap course di page ya. Yang pasti, di setiap course, akan ada video pembelajaran, penilaian, dan sertifikat jika kamu sudah menyelesaikan semuanya!                    </p>
+                    Kamu bisa melihat detail setiap course di page ya. Yang pasti, di setiap course, akan ada video pembelajaran, penilaian, dan sertifikat jika kamu sudah menyelesaikan semuanya!
+</p>
                 </div>
             </div>
             <!-- END OF ONE FAQ CARD -->
@@ -292,8 +296,8 @@
             <div style="width:60%;margin-left:2vw">
                 <p class="small-heading wow fadeInUp" data-wow-delay="0.3s" style="color:#FFFFFF;font-family:Rubik Bold">Let’s learn together!</p>
                 
-                <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
-                Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin!                </p>
+                <!-- <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
+                Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin!                </p> -->
                 <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                 
                 

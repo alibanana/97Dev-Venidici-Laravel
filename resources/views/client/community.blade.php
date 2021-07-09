@@ -10,8 +10,7 @@
     <div class="col-md-12 p-0 wow fadeInLeft" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">Get your social widen
         with Venidici Community</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:2vw">“Veni, vidi, vici.” Saya datang, saya lihat, saya
-        taklukkan.</p>
+        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:2vw">Wadah buat anak muda penuh yang antusias membangun relasi dan <br> berkembang melalui teknologi digital dan kreativitas untuk <br> mewujudkan Generasi Emas 2045</p>
         <a href="https://discord.gg/YpgRW5GU" target="_blank" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none">Bergabung Sekarang</a>                
 
     </div>
@@ -22,23 +21,24 @@
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw">
 
     <div class="col-12 wow fadeInUp" data-wow-delay="0.7s" style="text-align:center;margin-bottom:2vw">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#2B6CAA">Venidici Community Made Easy</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw;white-space:pre-line">more than just a community, Venidici is committed to putting
-        your education sucess first</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#2B6CAA">Not just a place</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw;white-space:pre-line">Venidici Community mengajak semua anak muda menemukan jati diri mereka yang sebenarnya
+        dengan bergabung dan bertemu orang-orang dari bermacam-macam latar belakang
+        dan berbagai skill set serta passion.</p>
     </div>
 
     <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s">
         <img src="/assets/images/client/Community_Asset_1.png" class="img-fluid" style="width:35vw" alt="">
     </div>
     <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;">
-        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Get Support From Fellow Members</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#3B3C43;white-space:pre-line">Get Help to fix your problem with the course, payment, even the venidici web itself through our collaborative community</p>
+        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Everything You Need to Boost Your Career</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#3B3C43;white-space:pre-line">Vici Belajar, Vici Program, Vici Linkedin. Segudang fitur untuk bantu kamu networking, belajar hal-hal insightful baru dan bahkan cari peluang karir melalui info lowongan pekerjaan atau magang. Bagian terbaik, member Venidici Community akan secara reguler mendapat penawaran eksklusif dari program pelatihan Venidici!</p>
     </div>
 
 
     <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;margin-top:4vw;text-align:right">
-        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Instaneous Community  Join Process No Additional Fee</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#3B3C43;white-space:pre-line">our online community gather must have features such as: group call, pinned messages, channel messaging ,etc</p>
+        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Get Support from Fellow Members</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#3B3C43;white-space:pre-line">Punya pertanyaan atau masalah terkait program? Atau cuma pengen punya temen diskusi? Tim Vendici dan member keluarga Venidici yang kolaboratif selalu ada buat kamu!</p>
     </div>
     <div class="col-6 wow fadeInRight" data-wow-delay="0.3s" style="margin-top:4vw;text-align:right">
         <img src="/assets/images/client/Community_Asset_2.png" class="img-fluid" style="width:35vw" alt="">
@@ -50,10 +50,10 @@
 <!-- START OF BOTTOM SECTION -->
 <div class="row m-0 page-container" style="padding-top:8vw;padding-bottom:8vw;background-color:#F6F6F6">
     <div class="col-5" style="display: flex;flex-direction: column;justify-content: center;">
-        <p class="small-heading wow bounceIn" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43">Join The Channel, Learn and Collaborate with us</p>
-        <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem cras nullam et facilisis at. Aenean suspendisse in blandit enim. Turpis nibh tempor, at arcu. Commodo velit lorem iaculis justo praesent. </p>
-        <div style="margin-top:1vw">
-            <a href="https://discord.gg/YpgRW5GU" target="_blank" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw">Bergabung Sekarang</a>
+        <p class="small-heading wow bounceIn" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43">Gabung jadi keluarga Venidici Community dengan mengunjungi</p>
+        <a href="https://discord.gg/YpgRW5GU" class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">https://discord.gg/YpgRW5GU</a>
+        <div style="margin-top:2vw">
+            <a href="https://discord.gg/YpgRW5GU" target="_blank" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw;">Bergabung Sekarang</a>
         </div>
 
     </div>
