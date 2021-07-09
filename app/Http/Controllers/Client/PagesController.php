@@ -70,12 +70,11 @@ class PagesController extends Controller
         $fake_testimonies = FakeTestimony::orderByRaw('CHAR_LENGTH(content) DESC')->get();
         $fake_testimonies_big = $fake_testimonies->whereNotNull('thumbnail')->whereNotNull('name')->whereNotNull('occupancy')->values();
         $fake_testimonies_small = $fake_testimonies->whereNull('thumbnail')->whereNull('name')->whereNull('occupancy')->values();
-        
         // Get 3 Online Courses
         $online_courses = Course::where('course_type_id','1')->take(3)->get();
         // Get 3 wokis
         $wokis = Course::where('course_type_id','2')->take(3)->get();
-        
+        // Get 3 most popular
         $pengajar_positions = InstructorPosition::all();
         if(Auth::check()) {
             $this->resetNavbarData();

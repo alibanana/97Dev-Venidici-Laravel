@@ -105,7 +105,7 @@ class HomepageController extends Controller
                 'testimony' => 'required',
                 'rating' => ['required', 'numeric', 'between:0,5', new Decimal(1, 1)],
                 'name' => 'required',
-                'occupancy' => 'required'
+                // 'occupancy' => 'required'
             ]);
         } else if ($request->flag == 'false') {
             $validated = $request->validate([
@@ -123,7 +123,11 @@ class HomepageController extends Controller
                 $testimony->thumbnail = $filepath;
             }
             $testimony->name = $validated['name'];
-            $testimony->occupancy = $validated['occupancy'];
+            if($request->occupancy != null)
+                $testimony->occupancy = $request->occupancy;
+            else
+                $testimony->occupancy = "";
+
         }
 
         $testimony->content = $validated['testimony'];
