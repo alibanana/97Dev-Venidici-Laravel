@@ -84,4 +84,12 @@ class Course extends Model
     public function artSupplies() {
         return $this->belongsToMany(ArtSupply::class, 'course_art_supply')->withTimestamps();
     }
+
+    public function bootcampApplications() {
+        return $this->belongsTo(BootcampApplication::class);
+    }
+
+    public function bootcampSchedules() {
+        return $this->hasMany(BootcampSchedule::class);
+    }
 }
