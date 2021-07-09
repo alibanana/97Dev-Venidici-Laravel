@@ -417,7 +417,7 @@
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                     <select name="province" id=""  class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                         <option value="" disabled selected>Pilih Kategori</option>
-                        <option value="">On-Demand</option>
+                        <option value="">Skill Snack</option>
                         <option value="">Woki</option>
                     </select>                    
                     @error('province')
@@ -515,7 +515,7 @@ END OF OUR PROGRAMS SECTION -->
         <p class="super-big-heading" style="font-family: Rubik Medium;color:#2B6CAA;white-space:pre-line;">Bangun
         Indonesia Emas 2045</p>
         <!--<p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Akselerasi keterampilan jalur pelatihan”</p>-->
-        <p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Karena bangsa yang maju berawal dari rakyatnya <br> yang berkualitas”</p>
+        <p class="small-heading" style="font-family: Rubik Regular;color:#C4C4C4;white-space:pre-line">“Kita percaya, bangsa yang maju berawal dari <br> rakyatnya yang berkualitas”</p>
     </div>
     <div class="col-5 wow bounceInRight" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/Emas_BG.png" style="width:24vw" class="img-fluid" alt="">
@@ -534,7 +534,7 @@ END OF OUR PROGRAMS SECTION -->
             <div class="our-programs-card-home" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Icon.png" style="width:5vw;" class="img-fluid" alt="">
                 <div>
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">On-Demand</p>
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-top:1.5vw;">Skill Snack</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
                 </div>
             </div>
@@ -547,7 +547,7 @@ END OF OUR PROGRAMS SECTION -->
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-fit:cover" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">On-Demand</p>
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Skill Snack</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
                     <a href="/online-course?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Courses</a>
                 </div>
@@ -646,7 +646,7 @@ END OF OUR PROGRAMS SECTION -->
 
                 <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Most Popular</p>
                 <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
-                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">On-Demand</p>
+                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Skill Snack</p>
                 <!--
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
@@ -751,7 +751,7 @@ END OF OUR PROGRAMS SECTION -->
                     <div class="course-card-green">
                         <div class="container">
                             <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                            <div class="top-left card-tag small-text" >On-Demand</div>
+                            <div class="top-left card-tag small-text" >Skill Snack</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
@@ -883,7 +883,7 @@ END OF OUR PROGRAMS SECTION -->
     </div>
     <!-- END OF WOKI -->
 
-    <!-- On-Demand -->
+    <!-- Skill Snack -->
     <div class="course-content" id="course-online" style="display:none">
         <div class="row m-0 p-0">
             @foreach($online_courses as $course)
@@ -893,7 +893,7 @@ END OF OUR PROGRAMS SECTION -->
                     <div class="course-card-green">
                         <div class="container">
                             <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
-                            <div class="top-left card-tag small-text">On-Demand</div>
+                            <div class="top-left card-tag small-text">Skill Snack</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="height:6vw">
@@ -966,7 +966,7 @@ END OF OUR PROGRAMS SECTION -->
             </div>
         </div>
     </div>
-    <!-- END OF On-Demand -->
+    <!-- END OF Skill Snack -->
 
     <!-- END OF CLASSES SECTION -->
     
@@ -985,7 +985,7 @@ END OF OUR PROGRAMS SECTION -->
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 5 !important;
-                        -webkit-box-orient: vertical !important;">{{ $fake_testimonies_big[0]->content }}</p>
+                        -webkit-box-orient: vertical !important;margin-top:1vw">{{ $fake_testimonies_big[0]->content }}</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
                                 @if ($i <= $fake_testimonies_big[0]->rating)
@@ -1031,7 +1031,7 @@ END OF OUR PROGRAMS SECTION -->
                         <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;margin-bottom:0px;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 3 !important;
+                        -webkit-line-clamp: 5 !important;
                         -webkit-box-orient: vertical !important;">{{ $fake_testimonies_small[0]->content }}</p>
     
                     </div>
@@ -1071,7 +1071,11 @@ END OF OUR PROGRAMS SECTION -->
                     <!-- BIG TESTIMONY CARD -->
                     <div class="testimony-card"  style="width: 16vw;margin-top:2vw">
                         <img src="{{ asset($fake_testimonies_big[1]->thumbnail) }}" class="img-fluid" style="width: 6vw;height:auto" alt="">
-                        <p class="small-text" style="font-family: Rubik Regular;color:#000000">{{ $fake_testimonies_big[1]->content }}</p>
+                        <p class="small-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;display: -webkit-box;
+                        overflow : hidden !important;
+                        text-overflow: ellipsis !important;
+                        -webkit-line-clamp: 7 !important;
+                        -webkit-box-orient: vertical !important;">{{ $fake_testimonies_big[1]->content }}</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
                                 @if ($i <= $fake_testimonies_big[1]->rating)

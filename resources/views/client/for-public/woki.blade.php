@@ -9,14 +9,14 @@
         <div style="padding-top:12vw;margin-left:-0.5vw" class="wow fadeInUp" data-wow-delay="0.3s">
             <img src="/assets/images/client/Woki_Logo.png" style="width:19vw;margin-left:-1.3vw" class="img-fluid" alt="Image 1">
             <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:3.5vw;margin-top:1vw">Hi! I’m Woki</p>
-            <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:2vw">Partner terbaik kamu untuk healing bareng lewat berkreasi dan berkarya! Lepasin stress kamu sambil tingkatin kreativitas dan art skill bareng Woki. #BertumbuhdanPeduli bersama Woki</p>
+            <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:2vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
             <div class="row m-0">
                 <div class="col-9 p-0">
                     <div style="margin-top:0.5vw;text-align:center">
                         <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;">Explore our programs </p>
                         <div style="display:flex;justify-content:center;align-items:center;">
                             <a href="/for-public/online-course" class="normal-text blue-link" style="font-family:Rubik Medium;margin-right:1.5vw;width:10vw">
-                                Online Course
+                                Skill Snack
                             </a>
                             <a href="/for-public/woki" class="normal-text red-link red-link-active" style="font-family:Rubik Medium;width:10vw">
                                 Woki
@@ -72,11 +72,14 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
 #BertumbuhDanPeduli
 
         </p>
+        <div>
+            <a href="/woki" class="normal-text btn-pink" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">See our upcoming workshops</a>
+        </div>
     </div>
 </div>
 <!-- END OF OUR HISTORY -->
 
-<!-- START OF KENAPA MEMILIH ONLINE COURSE -->
+<!-- START OF KENAPA MEMILIH Skill Snack -->
 <div class="row m-0 page-container" style="padding-bottom:8vw   ">
     <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Untuk apa Woki lahir?</p>
@@ -90,10 +93,9 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
     </div>
     
 </div>
-<!-- END OF KENAPA MEMILIH ONLINE COURSE -->
+<!-- END OF KENAPA MEMILIH Skill Snack -->
 
-
-<!-- START OF HIGHLIGHTED EVENTS -->
+<!-- START OF HIGHLIGHTED EVENTS
 <div class="row m-0 page-container" style="padding-top:6vw;padding-bottom:6vw;background-color:#F6F6F6">
     <div class="col-12">
         <p class="big-heading wow flash" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43;margin-left:2.9vw">Highlighted <span style="font-family:Hypebeast;color:#CE3369">Events</span> </p>
@@ -132,13 +134,13 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
         </div>
     </div>
 </div>
-<!-- END OF HIGHLIGHTED EVENTS -->
+ END OF HIGHLIGHTED EVENTS -->
 
 
 <!-- START OF OUR VALUES -->
-<div class="row m-0 page-container our-values-background-woki" style="padding-top:10vw;padding-bottom:10vw">
+<div class="row m-0 page-container our-values-background-woki" style="padding-top:6vw;padding-bottom:6vw">
     <div class="col-7 p-0">   
-        <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Values</p>
+        <!-- <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Values</p> -->
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Kenalan yuk dengan Woki & Toki!</p>
         <div style="margin-top:2vw;margin-bottom:3vw">
             <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
@@ -178,8 +180,8 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
 <!-- START OF OUR MISSION -->
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
     <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
-        <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Mission</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Painless onboarding and simple <br> process implementation</p>
+        <!-- <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Mission</p> -->
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">What Will You Get</p>
     </div>
     <div class="row m-0" style="padding-top:2vw">
         <div class="col-3">
@@ -194,13 +196,13 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
+                        -webkit-box-orient: vertical !important;">E-Certificate</p>
                     </div>
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                        -webkit-box-orient: vertical !important;">Usaha kamu berarti, gimanapun hasilnya! Kamu-kamu yang udah jadi seniman baru bareng Woki, kamu bakal dapet e-certificate di setiap kelasnya.</p>
                 </div>
             </div>
         </div>
@@ -216,13 +218,13 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
+                        -webkit-box-orient: vertical !important;">Satu kit penuh makna</p>
                     </div>
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                        -webkit-box-orient: vertical !important;">Woki udah siapin semua hal yang akan kamu butuhin untuk berkarya nanti  dalam satu kit. Ga perlu lagi deh repot-repot cari bahan!</p>
                 </div>
             </div>
         </div>
@@ -238,13 +240,13 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
+                        -webkit-box-orient: vertical !important;">Enjoy rich Workshop experience</p>
                     </div>
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                        -webkit-box-orient: vertical !important;">New to art? Ga perlu takut! Pembicara-pembicara Woki yang udah expert di bidangnya akan selalu pandu kamu di step by step nya.</p>
                 </div>
             </div>
         </div>
@@ -260,13 +262,13 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Fitur Assesment sebagai pemantapan materi</p>
+                        -webkit-box-orient: vertical !important;">Healing with Woki</p>
                     </div>
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                        -webkit-box-orient: vertical !important;">Selain belajar bikin karya, kamu juga akan mendapatkan sharing and healing session bersama Woki dan temen-temen yang lain. </p>
                 </div>
             </div>
         </div>
