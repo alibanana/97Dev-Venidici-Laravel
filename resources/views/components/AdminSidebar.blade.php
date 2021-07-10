@@ -93,78 +93,66 @@
         </a>
     </li>
 
+
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/online-courses') || Request::is('admin/online-courses/*') || Request::is('admin/course-categories') ||
     Request::is('admin/course-categories/*') || Request::is('admin/teachers') || Request::is('admin/teachers/*')|| 
-    Request::is('admin/assessments') || Request::is('admin/assessments/*'))
+    Request::is('admin/assessments') || Request::is('admin/assessments/*') ||
+    Request::is('admin/woki-courses') || Request::is('admin/woki-courses/*') ||
+    Request::is('admin/bootcamp') || Request::is('admin/bootcamp/*')
+
+    )
     <li class="nav-item active">
     @else
     <li class="nav-item">
     @endif
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourse"
-            aria-expanded="true" aria-controls="collapseCourse">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForPublic"
+            aria-expanded="true" aria-controls="collapseForPublic">
             <i class="fas fa-graduation-cap"></i>
-            <span>Online Courses</span>
+            <span>For Public</span>
         </a>
-        <div id="collapseCourse" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseCourse">
+        <div id="collapseForPublic" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseForPublic">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.online-courses.index') }}">Online Courses</a>
-                <a class="collapse-item" href="{{ route('admin.course-categories.index') }}">Course Categories</a>
-                <a class="collapse-item" href="{{ route('admin.assessments.index') }}">Assesments</a>
-                <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
-                <a class="collapse-item" href="/admin/reviews">Reviews</a>
+                
+                <!-- START OF DROPDOWN -->
+                <a class="nav-link collapsed collapse-item img-fluid" href="#" data-toggle="collapse" data-target="#collapseCourse"
+                    aria-expanded="true" aria-controls="collapseCourse">
+                    <span>Online Courses</span>
+                </a>
+                <div id="collapseCourse" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseCourse">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('admin.online-courses.index') }}">Online Courses List</a>
+                        <a class="collapse-item" href="{{ route('admin.course-categories.index') }}">Course Categories</a>
+                        <a class="collapse-item" href="{{ route('admin.assessments.index') }}">Assesments</a>
+                        
 
-            </div>
-        </div>
-    </li>
+                    </div>
+                </div>
 
+                <a class="nav-link collapsed collapse-item img-fluid" href="#" data-toggle="collapse" data-target="#collapseWoki"
+                    aria-expanded="true" aria-controls="collapseWoki">
+                    <span>Woki Courses</span>
+                </a>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/woki-courses') || Request::is('admin/woki-courses/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWoki"
-            aria-expanded="true" aria-controls="collapseWoki">
-            <i class="fas fa-palette"></i>
-            <span>Woki Courses</span>
-        </a>
+                <div id="collapseWoki" class="collapse" aria-labelledby="" data-parent="#collapseWoki">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('admin.woki-courses.index') }}">Woki Courses List</a>
+                        <a class="collapse-item" href="/admin/art-supply">Art Supply</a>
+                       
 
-        <div id="collapseWoki" class="collapse" aria-labelledby="" data-parent="#collapseWoki">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.woki-courses.index') }}">Woki Courses</a>
-                <a class="collapse-item" href="/admin/art-supply">Art Supply</a>
-                <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
-                <a class="collapse-item" href="/admin/reviews">Reviews</a>
-
-            </div>
-        </div>
-    </li>
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/bootcamp') || Request::is('admin/bootcamp/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootcamp"
-            aria-expanded="true" aria-controls="collapseBootcamp">
-            <i class="fas fa-campground"></i>
-            <span>Bootcamp</span>
-        </a>
-
-        <div id="collapseBootcamp" class="collapse" aria-labelledby="" data-parent="#collapseBootcamp">
-            <div class="bg-white py-2 collapse-inner rounded">
+                    </div>
+                </div>
                 <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a>
-                <!-- <a class="collapse-item" href="{{ route('admin.bootcamp.categories') }}">Bootcamp Categories</a> -->
                 <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
                 <a class="collapse-item" href="/admin/reviews">Reviews</a>
+                <!-- END OF DROPDOWN -->
 
             </div>
         </div>
     </li>
 
-   
+
+
 
     <!-- Nav Item - Pages Collapse Menu 
     @if(Request::is('admin/bootcamp') || Request::is('admin/bootcamp/*'))
