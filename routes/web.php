@@ -370,8 +370,8 @@ Route::middleware(['isSuspended'])->group(function () {
 
 
     /* START OF GOOGLE AUTH */
-    Route::get('login/google', [App\Http\Controllers\SocialController::class, 'redirectToGoogle'])->name('login.google');
-    Route::get('login/google/callback', [App\Http\Controllers\SocialController::class, 'handleGoogleCallback']);
+    Route::get('login/google', [SocialController::class, 'redirectToGoogle'])->name('login.google');
+    Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback']);
     /* END OF GOOGLE AUTH*/
 
     /* START OF FOR PUBLIC ROUTING */
