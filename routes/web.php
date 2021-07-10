@@ -150,6 +150,7 @@ Route::middleware(['isSuspended'])->group(function () {
 
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware(['auth', 'verified']);
+    Route::delete('/deleteReview/{id}', [ReviewController::class, 'destroy'])->name('customer.review.destroy')->middleware(['auth', 'verified']);
     // AssessmentController
     Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assessment.show')->middleware(['auth', 'verified']);
     Route::get('/online-course/{course_id}/assessment/completed', [AssessmentController::class, 'completedIndex'])->name('online-course-assessment.completed-index')->middleware(['auth', 'verified']);

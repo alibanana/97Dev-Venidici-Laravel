@@ -143,24 +143,29 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
         <!-- <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Values</p> -->
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Kenalan yuk dengan Woki & Toki!</p>
         <div style="margin-top:2vw;margin-bottom:3vw">
-            <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
+            <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line">Hi, Aku Woki! Aku itu orangnya sangat suka berpetualang, overoptimistic, tapi karena kadang aku suka impulsif, mudah bosan, dan ga sabaran, aku ga punya satu hal yang bener-bener aku jagoin, kayak general aja gitu bukan spesialis. Padahal pengen banget punya 1 hal yang bener-bener aku jagoin:(
 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.</p>
+Hi, Kalau aku Toki! Kalau aku ini agak kebalikan sama Toki, aku punya self-doubt yang tinggi, lack of confidence, and I always live inside my comfort zone. Tapi satu hal yang aku sukai dari diriku, aku punya kelebihan yang sangat menonjol karena memang aku selalu cuma berkutat di sekitar hal itu.
+</p>
         </div>
-        <a href="" class="normal-text btn-red-bordered btn-red-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;margin-left:5vw">Explore Our Library Now!</a>
+        <a href="/woki" class="normal-text btn-red-bordered btn-red-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;margin-left:5vw">Explore Our Library Now!</a>
 
     </div>
     <div class="col-5 p-0 wow bounceIn" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <div style="text-align:center">
-            <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43">Woki Toki</p>
-        </div>
+        
         <div id="woki-toki-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
-                
-                <div class="carousel-item active" >
-                    <img src="/assets/images/client/Woki_Karakter.png" style="height:20vw" class="img-fluid" alt="Image 1">
+                <div class="carousel-item active">
+                    <div style="text-align:center">
+                        <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43">Woki</p>
+                    </div>
+                    <img src="/assets/images/client/Toki_Karakter.png" style="height:20vw" class="img-fluid" alt="Image 1">
                 </div>
-                <div class="carousel-item">
+                
+                <div class="carousel-item " >
+                    <div style="text-align:center">
+                        <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43">Toki</p>
+                    </div>
                     <img src="/assets/images/client/Woki_Karakter.png" style="height:20vw" class="img-fluid" alt="Image 1">
                 </div>
             </div>
@@ -289,15 +294,14 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Link untuk registrasi ada dimana?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Dimana saya bisa temuin link registrasi?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                    Untuk pembelian kit dan registrasi workshop, bisa mendaftar di link yang ada di Bio Instagram atau masuk ke akun Shopee ‘Venidici’.
-                    </p>
+                    Untuk pembelian kit dan registrasi workshop, bisa mendaftar di link yang ada di Bio Instagram atau masuk ke akun Shopee ‘Venidici’.                    </p>
                 </div>
             </div>
             <!-- END OF ONE FAQ CARD -->
