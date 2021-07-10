@@ -12,7 +12,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Hubungi Kami</p>
-                    <button type="button" class="close small-heading" data-dismiss="modal" aria-label="Close" style="background:none;border:none">
+                    <button type="button" class="close small-heading" data-dismiss="modal" aria-label="Close" onclick="closeModal()" style="background:none;border:none">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -102,7 +102,7 @@
                     @enderror
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
+                    <button  onclick="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
                     <button type="submit" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim</button>                
                 </div>
             </div>
@@ -292,7 +292,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
         </p>   
-        <button type="button" data-toggle="modal" id="contact-us-button" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;border:none;margin-top:1vw">
+        <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;border:none;margin-top:1vw">
             Hubungi Kami
         </button>
     </div>
@@ -391,7 +391,7 @@ END OF OUR VALUES-->
             <p class="medium-heading wow flash" data-wow-delay="0.3s" style="font-family: Rubik Bold;color:#55525B">Hubungi Kami Lebih Lanjut</p>
             <p class="sub-description" style="font-family: Rubik Regular;color:#55525B;margin-top:2vw">Tanyakan kami apapun dan kami senang membantu</p>
                 <div>
-                    <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
+                    <button  id="contact-us-button" type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;border:none;margin-top:1vw">
                         Kirim Pesan
                     </button>   
                 </div>
@@ -462,12 +462,18 @@ END OF OUR VALUES-->
 <!-- END OF FAQ SECTION -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-@if(session('message'))
+@if(session('message') || $errors->any())
     <script>
-        console.log('test');
-        document.getElementById('contact-us-button').click()
+        $(window).on('load', function() {
+            $('#contactModal').modal('show');
+        });
     </script>
 @endif
+<script>
+    function closeModal() {
+        $('#contactModal').modal('hide');
+    }
+</script>
 <script>
     function changePrograms(evt, categoryName) {
         var i, tabcontent, tablinks;
