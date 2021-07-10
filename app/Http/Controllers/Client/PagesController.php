@@ -59,9 +59,9 @@ class PagesController extends Controller
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $config_keyword = 'cms.homepage';
         $configs = Config::select('key', 'value')->where([['key', 'like', "%".$config_keyword."%"]])->get()->keyBy('key');
 
@@ -83,10 +83,17 @@ class PagesController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
+            if($agent->isPhone()){
+                return view('client/mobile/index',compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
+                'online_courses','wokis','cart_count', 'notifications', 'transactions','informations','pengajar_positions','footer_reviews'));
+            }
 
             return view('client/index', 
                 compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
                     'online_courses','wokis','cart_count', 'notifications', 'transactions','informations','pengajar_positions','footer_reviews'));
+        }
+        if($agent->isPhone()){
+            return view('client/mobile/index',compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','wokis','pengajar_positions','footer_reviews'));
         }
         return view('client/index', 
             compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','wokis','pengajar_positions','footer_reviews'));
@@ -94,9 +101,9 @@ class PagesController extends Controller
 
     public function community_index(){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {
@@ -106,8 +113,14 @@ class PagesController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
+            if($agent->isPhone()){
+                return view('client/community',compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+            }
 
             return view('client/community', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+        }
+        if($agent->isPhone()){
+            return view('client/community',compact('footer_reviews'));
         }
         
         return view('client/community',compact('footer_reviews'));
@@ -237,9 +250,9 @@ class PagesController extends Controller
 
     public function online_course_index(){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {
@@ -249,8 +262,14 @@ class PagesController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-
+            if($agent->isPhone()){
+                return view('client/mobile/for-public/online-course',compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+            }
+            
             return view('client/for-public/online-course', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+        }
+        if($agent->isPhone()){
+            return view('client/mobile/for-public/online-course',compact('footer_reviews'));
         }
         
         return view('client/for-public/online-course',compact('footer_reviews'));
@@ -258,9 +277,9 @@ class PagesController extends Controller
 
     public function woki_index(){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {
@@ -270,8 +289,14 @@ class PagesController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
+            if($agent->isPhone()){
+                return view('client/mobile/for-public/woki',compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+            }
 
             return view('client/for-public/woki', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+        }
+        if($agent->isPhone()){
+            return view('client/mobile/for-public/woki',compact('footer_reviews'));
         }
 
         return view('client/for-public/woki',compact('footer_reviews'));

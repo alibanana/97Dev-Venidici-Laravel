@@ -38,9 +38,9 @@ class KrestController extends Controller
     public function index()
     {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $programs = KrestProgram::all();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
@@ -53,9 +53,15 @@ class KrestController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
+            if($agent->isPhone()){
+                return view('client/mobile/for-corporate/krest',compact('cart_count','transactions','informations','programs','notifications','footer_reviews'));
+            }
             return view('client/for-corporate/krest', compact('cart_count','transactions','informations','programs','notifications','footer_reviews'));
             
         } else {
+            if($agent->isPhone()){
+                return view('client/mobile/for-corporate/krest',compact('programs','footer_reviews'));
+            }
             return view('client/for-corporate/krest', compact('programs','footer_reviews'));
         }
 
