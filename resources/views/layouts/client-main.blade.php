@@ -36,8 +36,8 @@
   </head>
   <body style="padding-right:0px !important">
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Contact Us Modal-->
+    <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -125,7 +125,87 @@
                 </div>
             </div>
         </div>
+      </div>
+    <!-- <div style="padding:4vw;background-color:#2B6CAA;z-index:99;position:fixed;width:100%" class="sticky-top" id="mobile-navbar">
+
+    </div> -->
+    <!-- START OF MOBILE NAVBAR -->
+    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none">
+      <div >
+        <!--    Made by Erik Terwan    -->
+        <!--   24th of November 2015   -->
+        <!--        MIT License        -->
+        <nav role="navigation">
+          <div id="menuToggle">
+            <!--
+            A fake / hidden checkbox is used as click reciever,
+            so you can use the :checked selector on it.
+            -->
+            <input type="checkbox" />
+            
+            <!--
+            Some spans to act as a hamburger.
+            
+            They are acting like a real hamburger,
+            not that McDonalds stuff.
+            -->
+            <span></span>
+            <span></span>
+            <span></span>
+            
+
+            <!-- <img src="/assets/Logo.png" alt="" clas> -->
+            <!--
+            Too bad the menu has to be inside of the button
+            but hey, it's pure CSS magic.
+            -->
+            <ul id="menu">
+              <div class="row m-0">
+                <div class="col-6 p-0">
+                  <div style="text-align:left">
+                  @if (!Auth::check())
+                    <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log In</a>
+                  @endif     
+                  </div>
+
+                </div>
+               
+              </div>
+              <br>
+              <!-- <a href="/login" class="btnSignUp" style="margin-bottom: 20px;">Login</a> -->
+              <table id="menuKiri">
+                <tr>
+                  <td>
+                  <a href="/" class="navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Home</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/for-public/online-course" class="navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">For Public</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/for-corporate/krest" class="navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">For Corporate</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/community" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Community</a>
+                  </td>
+                </tr>
+        
+      
+
+              </table>
+              
+            </ul>
+
+          </div>
+        </nav>
+      </div>
     </div>
+    <!-- END OF MOBILE NAVBAR -->
   
     @if(!Request::is('login'))
       @if(!Request::is('signup'))

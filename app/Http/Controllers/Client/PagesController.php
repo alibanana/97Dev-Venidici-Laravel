@@ -60,9 +60,7 @@ class PagesController extends Controller
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        
         $config_keyword = 'cms.homepage';
         $configs = Config::select('key', 'value')->where([['key', 'like', "%".$config_keyword."%"]])->get()->keyBy('key');
 
@@ -85,9 +83,17 @@ class PagesController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
+            if($agent->isPhone()){
+                return view('client/mobile/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
+                'online_courses','wokis','cart_count', 'notifications', 'transactions','informations','pengajar_positions','footer_reviews'));
+            }
+
             return view('client/index', 
                 compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
                     'online_courses','wokis','cart_count', 'notifications', 'transactions','informations','pengajar_positions','footer_reviews'));
+        }
+        if($agent->isPhone()){
+            return view('client/mobile/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','wokis','pengajar_positions','footer_reviews'));
         }
         return view('client/index', 
             compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','wokis','pengajar_positions','footer_reviews'));
@@ -115,7 +121,7 @@ class PagesController extends Controller
     }
 
     public function autocomplete(Request $request){
-        $datas = User::select('name')->where("name", "like", "%{$request->terms}%")->get();
+        $datas = User::where("name", "like", "%{$request->terms}%")->get();
         return response()->json($datas);
     }
     
