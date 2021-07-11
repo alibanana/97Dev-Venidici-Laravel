@@ -26,9 +26,15 @@ class Helper
 
     // Function to get neccessary navbar data.
     public static function getNavbarData() {
-        $notifications = Notification::where('isInformation',1)
-            ->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-        $informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
+        $notifications = Notification::where('user_id', null)
+            ->orWhere('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $informations = Notification::where([
+                ['user_id', '=', null],
+                ['isInformation', '=', 1]
+            ])->orWhere([
+                ['user_id', '=', auth()->user()->id],
+                ['isInformation', '=', 1]
+            ])->orderBy('created_at', 'desc')->get();
         $transactions = Notification::where([   
                 ['user_id', '=', auth()->user()->id],
                 ['isInformation', '=', 0]

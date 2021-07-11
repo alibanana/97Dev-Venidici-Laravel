@@ -122,13 +122,8 @@ class CustomAuthController extends Controller
         // Generate New Referral Code
         $newReferralCode = $this->generateUniqueReferralCode();
 
-        if($request->session()->get('referral_code')) {
-            $referredByCode = $request->session()->get('referral_code');
-            if (!$this->isReferralCodeCounterExists($referredByCode)) {
-                $this->storeNewReferralCodeCounter($referredByCode);
-            }
-        } else
-            $referredByCode = null;
+        $referredByCode = $request->session()->get('referral_code') ?
+            $request->session()->get('referral_code') : null;
             
         $user_detail = UserDetail::create([
             'user_id'               => $user->id,
@@ -160,22 +155,6 @@ class CustomAuthController extends Controller
         return $newReferralCode;
     }
 
-    // Method to check whether any new user has been created with a Certain Referral Code in the current month.
-    private function isReferralCodeCounterExists($refferal_code) {
-        $referralCodeCounter = ReferralCodeCounter::whereMonth('created_at', date('m'))
-            ->whereYear('created_at', date('Y'))->where('referral_code', $refferal_code)->first();
-        return $referralCodeCounter ? true : false;
-    }
-
-    // Method to create new ReferralCodeCounter.
-    private function storeNewReferralCodeCounter($refferal_code) {
-        $user_id = UserDetail::where('referral_code', $refferal_code)->first()->user_id;
-        return ReferralCodeCounter::create([
-            'user_id' => $user_id,
-            'referral_code' => $refferal_code
-        ]);
-    }
-    
     // Handles the forgot-password (reset) functionality in the login page.
     public function resetPassword(Request $request) {
         $validated = $request->validate([
