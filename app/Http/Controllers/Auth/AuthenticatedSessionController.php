@@ -22,14 +22,14 @@ class AuthenticatedSessionController extends Controller
     public function create()
     {
         $agent = new Agent();
-        if ($agent->isPhone())
-            return view('client/mobile/under-construction');
+        // if ($agent->isPhone())
+        //     return view('client/mobile/under-construction');
             
         $transactions = null;
         $cart_count = 0;
         
         if($agent->isPhone())
-            return view('client/mobile/login',compact('cart_count','transactions'));
+            return view('client/mobile/auth/login',compact('cart_count','transactions'));
 
         return view('client/auth/login',compact('cart_count','transactions'));
     }

@@ -135,25 +135,28 @@ class PagesController extends Controller
     public function signup_interest(Request $request)
     {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
         if(!$request->session()->get('name')) 
-            return redirect()->route('signup_general_info');
-
+        return redirect()->route('signup_general_info');
+        
         $interests = Hashtag::all();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
+        
+        if($agent->isPhone()){
+            return view('client/mobile/auth/signup-interests', compact('interests','footer_reviews'));
+        }
         return view('client/auth/signup-interests', compact('interests','footer_reviews'));
     }
     
 
     public function signup_general_info(){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        if($agent->isPhone()){
+            return view('client/mobile/auth/signup',compact('footer_reviews'));
+        }
 
         return view('client/auth/signup',compact('footer_reviews'));
     }
