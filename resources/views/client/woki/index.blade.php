@@ -183,22 +183,25 @@ END OF OUR PROGRAMS SECTION -->
                         <input hidden name="show" value="{{ Request::get('search') }}" type="search" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw" placeholder="Woki Title">
                     @endif
                     <input type="submit" style="visibility: hidden;" hidden/>
-                </form>
             </div>
             <div style="margin-left: 1vw;">
             <!--
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
-                <select class="grey-input-form small-text" style="height:100%;padding-right:4vw" aria-label="">
+                <select class="grey-input-form small-text" style="height:100%;padding-right:4vw" aria-label="" name="cat">
                     <option selected disabled>Pilih Kategori</option>
-                    <option>None</option>
+                    <option value="None" @if (Request::get('cat') == 'None') selected @endif>None</option>
                     @foreach($course_categories as $category)
-                    <option value="{{$category->id}}">{{$category->category}}</option>
+                    <!-- <option value="{{$category->id}}">{{$category->category}}</option> -->
+                    <option value="{{ $category->id }}" @if (Request::get('cat') == $category->id) selected @endif>{{ $category->category }}</option>
+
                     @endforeach
                 </select>
             </div>
             <div style="margin-left: 1vw;">
                 <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
             </div>
+            </form>
+
         </div>
     </div>
     <!-- START OF CLASSES SECTION -->

@@ -57,8 +57,11 @@ class OnlineCourseController extends Controller {
         $courses = new Course;
         if ($request->has('cat')) {
             if ($request['cat'] == "Featured") {
+                $courses = $courses->where('isFeatured',TRUE)->orderBy('created_at', 'desc');
+            }
+            else if($request['cat'] == "None"){
                 $courses = $courses->orderBy('created_at', 'desc');
-            } else {
+            }else {
                 $courses = $courses->where('course_category_id',$request['cat'])->orderBy('created_at','desc');
             }
         } else {
@@ -67,8 +70,7 @@ class OnlineCourseController extends Controller {
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route('online-course.index', request()->except('search'));
-                return redirect($url);            
+                $courses = $courses->orderBy('created_at', 'desc');            
             } else {
                 $search = $request->search;
 

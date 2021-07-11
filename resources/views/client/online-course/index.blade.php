@@ -5,7 +5,7 @@
 <!-- START OF BANNER SECTION -->
 <div class="row m-0 banner-background page-container" style="height:40vw;padding-top:16vw;text-align:center">
     <div class="col-md-12 p-0">
-        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >On-Demand</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Skill Snack</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Fun learning anytime & anywhere! Bukan zamannya
         belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun,
         kamu yang tentuin karena Skill Snack On-Demand berisi rekaman
@@ -160,7 +160,7 @@ END OF OUR PROGRAMS SECTION -->
 
     </div>
     <div class="col-4 p-0 " style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s On-Demand</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s Skill Snack</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
 
@@ -183,22 +183,25 @@ END OF OUR PROGRAMS SECTION -->
                         <input hidden name="show" value="{{ Request::get('search') }}" type="search" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw" placeholder="Course Title">
                     @endif
                     <input type="submit" style="visibility: hidden;" hidden/>
-                </form>
             </div>
             <div style="margin-left: 1vw;">
             <!--
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
-                <select class="grey-input-form small-text" style="height:100%;padding-right:4vw" aria-label="">
+                <select class="grey-input-form small-text" name="cat" style="height:100%;padding-right:4vw" aria-label="">
                     <option selected disabled>Pilih Kategori</option>
-                    <option>None</option>
+                    <option value="None" @if (Request::get('cat') == 'None') selected @endif>None</option>
                     @foreach($course_categories as $category)
-                    <option value="{{$category->id}}">{{$category->category}}</option>
+                    <!-- <option value="{{$category->id}}">{{$category->category}}</option> -->
+                    <option value="{{ $category->id }}" @if (Request::get('cat') == $category->id) selected @endif>{{ $category->category }}</option>
+
                     @endforeach
                 </select>
             </div>
             <div style="margin-left: 1vw;">
                 <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
             </div>
+            </form>
+
         </div>
     </div>
     <!-- START OF CLASSES SECTION -->
@@ -223,7 +226,7 @@ END OF OUR PROGRAMS SECTION -->
         <div class="row m-0 p-0">
             @if(count($courses) == 0)
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Venidici On-Demand tidak ditemukan.</span></p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Skill Snack tidak ditemukan.</span></p>
             </div>
             @endif
         
