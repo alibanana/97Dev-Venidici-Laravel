@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
-use Illuminate\Support\Str;
 use App\Helper\Helper;
 use PDF;
 
@@ -17,16 +15,8 @@ use App\Models\Config;
 use App\Models\TrustedCompany;
 use App\Models\FakeTestimony;
 use App\Models\User;
-use App\Models\Hashtag;
-use App\Models\UserDetail;
 use App\Models\Course;
-use App\Models\Province;
 use App\Models\Review;
-use App\Models\Cart;
-use App\Models\City;
-use App\Models\UserHashtag;
-use App\Models\Invoice;
-use App\Models\Order;
 use App\Models\InstructorPosition;   
 
 

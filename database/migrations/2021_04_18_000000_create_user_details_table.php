@@ -19,7 +19,7 @@ class CreateUserDetailsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('display_picture')->nullable();
             $table->string('telephone', 16)->nullable();
-            $table->string('referral_code', 6)->nullable();
+            $table->string('referral_code', 6);
             $table->string('referred_by_code', 6)->nullable();
             $table->date('birthdate')->nullable();
             $table->enum('gender', ['Male', 'Female'])->nullable();

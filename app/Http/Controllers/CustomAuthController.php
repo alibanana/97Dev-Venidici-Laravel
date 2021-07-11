@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
 use Axiom\Rules\StrongPassword;
 use Throwable;
@@ -14,6 +16,7 @@ use App\Models\User;
 use App\Models\Review;
 use App\Models\UserDetail;
 use App\Models\Hashtag;
+use App\Models\ReferralCodeCounter;
 use App\Mail\ForgetPasswordMail;
 
 /*
@@ -95,19 +98,19 @@ class CustomAuthController extends Controller
             'interests' => 'required|array'
         ]);
 
+        // Check if General Info data exists in sesion.
         if (!$request->session()->get('name') || !$request->session()->get('telephone') || !$request->session()->get('email') || 
             !$request->session()->get('password') || !$request->session()->get('response'))
             return redirect()->route('signup_general_info');
 
         $hashtag_ids= [];
-        foreach($validated['interests'] as $hashtag_id => $flag)
-        {
+        foreach ($validated['interests'] as $hashtag_id => $flag) {
             if($flag == '1') 
                 $hashtag_ids[] = $hashtag_id;
         }
 
         if(count($hashtag_ids) > 3)
-            return redirect()->back()->with('message','message');
+            return redirect()->back()->with('message', 'message');
 
         $user = User::create([
             'name'      => $request->session()->get('name'),
@@ -116,28 +119,25 @@ class CustomAuthController extends Controller
         ]);
 
         // Generate New Referral Code
-        $newReferralCode = substr($request->session()->get('name'), 0, 3).Str::random(3);
-        
-        // selama referralnya belom ada
-        while (in_array($newReferralCode, $referralCodes)) {
-            //buat referral baru
-            $newReferralCode = substr($request->session()->get('name'), 0, 3).Str::random(3);
+        $newReferralCode = $this->generateUniqueReferralCode();
 
-        }
-        if($request->session()->get('referral_code'))
+        if($request->session()->get('referral_code')) {
             $referredByCode = $request->session()->get('referral_code');
-        else
+            if (!$this->isReferralCodeCounterExists($referredByCode)) {
+                $this->storeNewReferralCodeCounter($referredByCode);
+            }
+        } else
             $referredByCode = null;
             
         $user_detail = UserDetail::create([
             'user_id'               => $user->id,
             'telephone'             => $request->session()->get('telephone'),
-            'referral_code'         => strtoupper($newReferralCode),
+            'referral_code'         => $newReferralCode,
             'referred_by_code'      => $referredByCode,
             'response'              => $request->session()->get('response')
         ]);
 
-        //here store to user_hashtag table
+        // here store to user_hashtag table
         $user->hashtags()->attach($hashtag_ids);
     
         $request->session()->flush();
@@ -147,6 +147,32 @@ class CustomAuthController extends Controller
         Auth::login($user);
 
         return redirect()->route('customer.dashboard');
+    }
+
+    // Method to generate a random new referral code.
+    private function generateUniqueReferralCode() {
+        $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
+        $newReferralCode = strtoupper(Str::random(5));
+        while (in_array($newReferralCode, $referralCodes)) {
+            $newReferralCode = strtoupper(Str::random(5));
+        }
+        return $newReferralCode;
+    }
+
+    // Method to check whether any new user has been created with a Certain Referral Code in the current month.
+    private function isReferralCodeCounterExists($refferal_code) {
+        $referralCodeCounter = ReferralCodeCounter::whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))->where('referral_code', $refferal_code)->first();
+        return $referralCodeCounter ? true : false;
+    }
+
+    // Method to create new ReferralCodeCounter.
+    private function storeNewReferralCodeCounter($refferal_code) {
+        $user_id = UserDetail::where('referral_code', $refferal_code)->first()->id;
+        return ReferralCodeCounter::create([
+            'user_id' => $user_id,
+            'referral_code' => $refferal_code
+        ]);
     }
     
     // Handles the forgot-password (reset) functionality in the login page.
@@ -161,7 +187,7 @@ class CustomAuthController extends Controller
             return redirect(route('login') . '#forget-password')->with('danger', 'Oops, email does not exists.');
 
         $currentPasswordHashed = $user->password;
-        $newPassword = $this->generatePassword(12);
+        $newPassword = $this->generateRandomString(12);
         $user->password = Hash::make($newPassword);
         $user->save();
 
@@ -187,7 +213,7 @@ class CustomAuthController extends Controller
     }
 
     // Method to generate a random password of length (input).
-    private function generatePassword($length) {
+    private function generateRandomString($length) {
         $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
         $str = '';
         $max = mb_strlen($keyspace, '8bit') - 1;
