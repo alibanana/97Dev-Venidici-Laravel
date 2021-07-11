@@ -168,7 +168,7 @@ class CustomAuthController extends Controller
 
     // Method to create new ReferralCodeCounter.
     private function storeNewReferralCodeCounter($refferal_code) {
-        $user_id = UserDetail::where('referral_code', $refferal_code)->first()->id;
+        $user_id = UserDetail::where('referral_code', $refferal_code)->first()->user_id;
         return ReferralCodeCounter::create([
             'user_id' => $user_id,
             'referral_code' => $refferal_code
