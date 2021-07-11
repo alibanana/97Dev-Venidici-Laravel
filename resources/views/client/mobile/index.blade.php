@@ -1085,7 +1085,7 @@
                 <div style="width:80%;margin-left:2vw">
                     <p class="wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold;font-size:3vw">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
-                        <input placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none;font-size:2vw">
+                        <input required placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none;font-size:2vw">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none;font-size:2vw" class="btn-blue text-nowrap" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                     </div>

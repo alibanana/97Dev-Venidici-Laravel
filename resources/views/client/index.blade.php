@@ -55,10 +55,10 @@
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                         <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Menjadi Pengajar</p>
-                        @if (session()->has('menjadi_kolaborator_message'))
+                        @if (session()->has('menjadi_pengajar_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('menjadi_kolaborator_message') }}
+                            {{ session()->get('menjadi_pengajar_message') }}
                             </div>
                         </div>
                         @endif
@@ -1163,7 +1163,7 @@ END OF OUR PROGRAMS SECTION -->
                 <div style="width:80%;margin-left:2vw">
                     <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
-                        <input class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
+                        <input required class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                     </div>
