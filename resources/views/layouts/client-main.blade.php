@@ -579,7 +579,7 @@
       new WOW().init();
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" crossorigin="anonymous"></script>    
     <!-- BOOTSTRAP 5-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
@@ -590,8 +590,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha512-HWlJyU4ut5HkEj0QsK/IxBCY55n5ZpskyjVlAoV9Z7XQwwkqXoYdCIC93/htL3Gu5H3R4an/S0h2NXfbZk3g7w==" crossorigin="anonymous"></script>
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
+    <script>
+      console.log("test");
+      var path = "{{ route('autocomplete') }}";
 
+      $('input.typeahead').typeahead({
+        source: function(terms, process){
+          return $.get(path, {terms:terms}, function(data) {
+            return process(data);
+          });
+        }
+      });
+    </script>
     <script>
         function changeNotification(evt, categoryName) {
             var i, tabcontent, tablinks;
@@ -607,18 +618,7 @@
             evt.currentTarget.className += " notif-item-active";
         }
     </script>
-    <script>
-      // 
-      var path = "{{ env('APP_URL') . route('autocomplete', [], false) }}";
-
-      $('input.typeahead').typeahead({
-        source: function(terms, process){
-          return $.get(path, {terms:terms}, function(data) {
-            return process(data);
-          });
-        }
-      });
-    </script>
+    
    
   </body>
 </html>
