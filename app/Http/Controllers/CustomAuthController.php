@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
 use Axiom\Rules\StrongPassword;
@@ -84,7 +85,7 @@ class CustomAuthController extends Controller
         
         if (!$request->session()->get('name') || !$request->session()->get('telephone') || !$request->session()->get('email') || 
             !$request->session()->get('password') || !$request->session()->get('response'))
-            return redirect()->route('signup_general_info');
+            return redirect()->route('custom-auth.signup_general_info.index');
 
         $interests = Hashtag::all();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
@@ -101,7 +102,7 @@ class CustomAuthController extends Controller
         // Check if General Info data exists in sesion.
         if (!$request->session()->get('name') || !$request->session()->get('telephone') || !$request->session()->get('email') || 
             !$request->session()->get('password') || !$request->session()->get('response'))
-            return redirect()->route('signup_general_info');
+            return redirect()->route('custom-auth.signup_general_info.index');
 
         $hashtag_ids= [];
         foreach ($validated['interests'] as $hashtag_id => $flag) {
