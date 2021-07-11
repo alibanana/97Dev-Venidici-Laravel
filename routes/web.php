@@ -54,7 +54,6 @@ use App\Http\Controllers\Api\CheckoutController;
 */
 
 Route::middleware(['isSuspended'])->group(function () {
-    Route::post('/dashboard', [PagesController::class, 'storeInterest'])->name('store_interest');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth', 'verified']);
     Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth', 'verified']);
@@ -71,6 +70,10 @@ Route::middleware(['isSuspended'])->group(function () {
     | ones from laravel auth package.
     |--------------------------------------------------------------------------
     */
+    Route::get('/signup', [CustomAuthController::class, 'signUpGeneralInfoIndex'])->name('custom-auth.signup_general_info.index')->middleware('guest');
+    Route::post('/signup', [CustomAuthController::class, 'storeGeneralInfo'])->name('custom-auth.signup_general_info.store')->middleware('guest');
+    Route::get('/signup-interests', [CustomAuthController::class, 'signUpInterestIndex'])->name('custom-auth.signup_interest.index')->middleware('guest');
+    Route::post('/register', [CustomAuthController::class, 'storeNewUser'])->name('custom-auth.register')->middleware('guest');
     Route::post('/reset-password', [CustomAuthController::class, 'resetPassword'])->name('custom-auth.reset-password')->middleware('guest');
 
     /*
@@ -85,9 +88,6 @@ Route::middleware(['isSuspended'])->group(function () {
     */
     Route::get('/', [PagesController::class, 'index'])->name('index');
     Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
-    Route::get('/signup', [PagesController::class, 'signup_general_info'])->name('signup_general_info')->middleware('guest');
-    Route::get('/signup-interests', [PagesController::class, 'signup_interest'])->name('signup_interest')->middleware('guest');
-    Route::post('/signup-interests', [PagesController::class, 'storeGeneralInfo'])->name('store_general_info');
 
     /* START OF CLIENT ROUTING */
 
