@@ -449,10 +449,10 @@
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
             Email kamu belum di verifikasi. Belum dapat email? 
-            <span>
+            <span style="display: inline-block;">
                 <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
-                <button type="submit" style="background: none;border:none">
+                <button type="submit" style="background: none;border:none;color:#2B6CAA">
                     Kirim ulang email
                 </button>
                 </form>

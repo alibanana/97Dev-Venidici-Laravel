@@ -12,7 +12,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Hubungi Kami</p>
-                    <button type="button" class="close small-heading" data-dismiss="modal" aria-label="Close" onclick="closeModal()" style="background:none;border:none">
+                    <button type="button" class="close small-heading" data-dismiss="modal" aria-label="Close" style="background:none;border:none">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -102,7 +102,7 @@
                     @enderror
                 </div>
                 <div class="modal-footer">
-                    <button  onclick="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
                     <button type="submit" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim</button>                
                 </div>
             </div>
@@ -217,19 +217,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
         <!-- START OF CAROUSEL -->
         <div id="perlengkapan-carousel" style="margin-top:2vw" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 2vw;">
-                @php $card_counter = 0; @endphp
-                @foreach ($programs as $program)
-                    @php $card_counter++; @endphp
-                    
-                    @if ($loop->first)
-                        <div class="carousel-item active">
-                            <div class="row m-0">
-                    @elseif ($card_counter == 1)
-                        <div class="carousel-item">
-                            <div class="row m-0" >
-                    @endif
+                
+                <div class="carousel-item active">
+                    <div class="row m-0">
                         <div class="col-4" style="display:flex;justify-content:center">
-                            <!-- START OF ONE KREST  CARD
+                            <!-- START OF ONE KREST  CARD -->
                             <div class="course-card-blue">
                                 <div class="container">
                                     <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
@@ -237,44 +229,111 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                                     <div style="display:flex;justify-content:space-between">
-                                        <p href="" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0.5vw;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">{{$program->program}}</p>
+                                        <p href="" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0.5vw;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">How to be funny?</p>
                                     </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$program->category}}</a>
-                                    <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">{{$program->description}}</p>
+                                    <a class="small-text" style="font-family: Rubik Regular;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development  (Krest)</a>
+                                    <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam commodo venenatis, ac quam aliquam tortor vel. Id sit egestas mauris ullamcorper elit dis.</p>
                     
                                 </div>
                             </div>
-                            END OF ONE  KREST CARD -->
+                            <!-- END OF ONE  KREST CARD -->
+                        </div>
+                        <div class="col-4" style="display:flex;justify-content:center">
+                            <!-- START OF ONE KREST  CARD -->
                             <div class="course-card-blue">
                                 <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Workshop</div>
+                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                                    <div class="top-left card-tag small-text">Krest</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center">
-                                        <a href="/woki/sertifikat-menjadi-seniman" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">{{$program->program}}</a>
+                                    <div style="display:flex;justify-content:space-between">
+                                        <p href="" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0.5vw;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">How to be funny?</p>
                                     </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$program->category}}</a>
-                                    <div style="margin-top:1vw">
-                                    <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">{{$program->description}}</p>
-                                    </div>
+                                    <a class="small-text" style="font-family: Rubik Regular;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development  (Krest)</a>
+                                    <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam commodo venenatis, ac quam aliquam tortor vel. Id sit egestas mauris ullamcorper elit dis.</p>
                     
                                 </div>
                             </div>
+                            <!-- END OF ONE  KREST CARD -->
                         </div>
-
-
-                    @if ($loop->last || $card_counter == 3)
+                        <div class="col-4" style="display:flex;justify-content:center">
+                            <!-- START OF ONE KREST  CARD -->
+                            <div class="course-card-blue">
+                                <div class="container">
+                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                                    <div class="top-left card-tag small-text">Krest</div>
+                                </div>
+                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                                    <div style="display:flex;justify-content:space-between">
+                                        <p href="" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0.5vw;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">How to be funny?</p>
+                                    </div>
+                                    <a class="small-text" style="font-family: Rubik Regular;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development  (Krest)</a>
+                                    <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam commodo venenatis, ac quam aliquam tortor vel. Id sit egestas mauris ullamcorper elit dis.</p>
+                    
+                                </div>
                             </div>
+                            <!-- END OF ONE  KREST CARD -->
                         </div>
-                    @endif
-
-                    @php
-                        $new_carousel_item = false;
-                        if ($card_counter == 3) $card_counter = 0;
-                    @endphp
-                @endforeach
-
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row m-0">
+                        <div class="col-4">
+                            <!-- START OF ONE KREST  CARD -->
+                            <div class="course-card-blue">
+                                <div class="container">
+                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                                    <div class="top-left card-tag small-text">Krest</div>
+                                </div>
+                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                                    <div style="display:flex;justify-content:space-between">
+                                        <p href="" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0.5vw;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">How to be funny?</p>
+                                    </div>
+                                    <a class="small-text" style="font-family: Rubik Regular;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development  (Krest)</a>
+                                    <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam commodo venenatis, ac quam aliquam tortor vel. Id sit egestas mauris ullamcorper elit dis.</p>
+                    
+                                </div>
+                            </div>
+                            <!-- END OF ONE  KREST CARD -->
+                        </div>
+                        <div class="col-4">
+                            <!-- START OF ONE KREST  CARD -->
+                            <div class="course-card-blue">
+                                <div class="container">
+                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                                    <div class="top-left card-tag small-text">Krest</div>
+                                </div>
+                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                                    <div style="display:flex;justify-content:space-between">
+                                        <p href="" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0.5vw;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">How to be funny?</p>
+                                    </div>
+                                    <a class="small-text" style="font-family: Rubik Regular;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development  (Krest)</a>
+                                    <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam commodo venenatis, ac quam aliquam tortor vel. Id sit egestas mauris ullamcorper elit dis.</p>
+                    
+                                </div>
+                            </div>
+                            <!-- END OF ONE  KREST CARD -->
+                        </div>
+                        <div class="col-4">
+                            <!-- START OF ONE KREST  CARD -->
+                            <div class="course-card-blue">
+                                <div class="container">
+                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                                    <div class="top-left card-tag small-text">Krest</div>
+                                </div>
+                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                                    <div style="display:flex;justify-content:space-between">
+                                        <p href="" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0.5vw;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">How to be funny?</p>
+                                    </div>
+                                    <a class="small-text" style="font-family: Rubik Regular;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development  (Krest)</a>
+                                    <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam commodo venenatis, ac quam aliquam tortor vel. Id sit egestas mauris ullamcorper elit dis.</p>
+                    
+                                </div>
+                            </div>
+                            <!-- END OF ONE  KREST CARD -->
+                        </div>
+                    </div>
+                </div>
             </div>
             <a class="carousel-control-prev"   data-bs-target="#perlengkapan-carousel" style="width:2vw" role="button"data-bs-slide="prev">
                 <i class="fas fa-arrow-left big-heading" id="carousel-control-right-menu-image" style="width:1vw;z-index:99;margin-right:0px;color:rgba(43, 108, 170, 0.5);" alt="PREV"></i>
@@ -292,7 +351,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
         </p>   
-        <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;border:none;margin-top:1vw">
+        <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
             Hubungi Kami
         </button>
     </div>
@@ -391,7 +450,7 @@ END OF OUR VALUES-->
             <p class="medium-heading wow flash" data-wow-delay="0.3s" style="font-family: Rubik Bold;color:#55525B">Hubungi Kami Lebih Lanjut</p>
             <p class="sub-description" style="font-family: Rubik Regular;color:#55525B;margin-top:2vw">Tanyakan kami apapun dan kami senang membantu</p>
                 <div>
-                    <button  id="contact-us-button" type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;border:none;margin-top:1vw">
+                    <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
                         Kirim Pesan
                     </button>   
                 </div>
@@ -462,18 +521,7 @@ END OF OUR VALUES-->
 <!-- END OF FAQ SECTION -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-@if(session('message') || $errors->any())
-    <script>
-        $(window).on('load', function() {
-            $('#contactModal').modal('show');
-        });
-    </script>
-@endif
-<script>
-    function closeModal() {
-        $('#contactModal').modal('hide');
-    }
-</script>
+
 <script>
     function changePrograms(evt, categoryName) {
         var i, tabcontent, tablinks;
@@ -489,8 +537,6 @@ END OF OUR VALUES-->
         evt.currentTarget.className += " btn-blue-active";
     }
 </script>
-
-
 
 
 @endsection

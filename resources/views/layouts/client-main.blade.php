@@ -36,8 +36,8 @@
   </head>
   <body style="padding-right:0px !important">
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Contact Us Modal-->
+    <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -125,7 +125,120 @@
                 </div>
             </div>
         </div>
+      </div>
+    <!-- <div style="padding:4vw;background-color:#2B6CAA;z-index:99;position:fixed;width:100%" class="sticky-top" id="mobile-navbar">
+
+    </div> -->
+    <!-- START OF MOBILE NAVBAR -->
+    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none">
+      <div >
+        <!--    Made by Erik Terwan    -->
+        <!--   24th of November 2015   -->
+        <!--        MIT License        -->
+        <nav role="navigation" style="display: flex;justify-content:space-between;align-items:center">
+          <div id="menuToggle">
+            <!--
+            A fake / hidden checkbox is used as click reciever,
+            so you can use the :checked selector on it.
+            -->
+            <input type="checkbox" />
+            
+            <!--
+            Some spans to act as a hamburger.
+            
+            They are acting like a real hamburger,
+            not that McDonalds stuff.
+            -->
+            <span></span>
+            <span></span>
+            <span></span>
+            
+
+            <!-- <img src="/assets/Logo.png" alt="" clas> -->
+            <!--
+            Too bad the menu has to be inside of the button
+            but hey, it's pure CSS magic.
+            -->
+            <ul id="menu">
+              <!-- @if (Auth::check())
+              <div class="row m-0">
+                <div class="col-6 p-0">
+                  <div style="text-align:left">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log Out</button>
+                    </form>
+                  </div>
+                  
+                </div>
+                
+              </div>
+              <br>
+              @endif -->
+              <!-- <a href="/login" class="btnSignUp" style="margin-bottom: 20px;">Login</a> -->
+              <table id="menuKiri">
+                <tr>
+                  <td>
+                  <a href="/" class="navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Home</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/for-public/online-course" class="navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">For Public</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/for-corporate/krest" class="navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">For Corporate</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/community" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Community</a>
+                  </td>
+                </tr>
+                @if (Auth::check())
+
+                <tr>
+                  <td  style="padding-top:4vw">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log Out</button>
+                    </form>
+                  </td>
+                </tr>
+                @endif
+        
+      
+
+              </table>
+              
+            </ul>
+
+          </div>
+          @if (Auth::check())
+
+          <div style="display: flex;">
+            <a id="cart_icon" class="navbar-item" href="/cart" style="color:#FFFFFF">
+              <span class="counter fa-stack has-badge" data-count="1">
+                <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart'))navbar-item-active @endif"></i>
+              </span>
+            </a>
+            <a id="notification_icon" class="navbar-item" href="#notification" style="color:#FFFFFF;margin-right:1.5vw">
+              <span class="counter fa-stack has-badge" data-count="">
+                <i class="p3 fas fa-bell fa-stack-1x xfa-inverse"></i>
+              </span>
+            </a>
+            <a class="navbar-item" href="/dashboard" style="color:#FFFFFF;margin-top:1vw"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @elseif(Request::is('dashboard/*')) navbar-item-active @endif"></i></a>
+
+          </div>
+          @else
+          <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log In</a>
+          @endif
+        </nav>
+      </div>
     </div>
+    <!-- END OF MOBILE NAVBAR -->
   
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
@@ -504,12 +617,12 @@
     <!-- END OF FOOTER DESKTOP-->
     <!-- START OF FOOTER MOBILE -->
     <div class="row m-0 page-container footer-mobile" style="padding-top:5vw;padding-bottom:10vw;display:none">
-      <div class="col-12 p-0">
+      <div class="col-12">
           <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:6vw" class="img-fluid" alt="">
           <p style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:3vw;font-size:3vw">Platform anak kekinian <br>   buat naklukin karir impian!</p>
       </div>
 
-      <div class="row m-0 p-0">
+      <div class="row m-0">
         <div class="col-4 p-0">
             <p style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Site Map</p>
             <div style="">
@@ -579,7 +692,7 @@
       new WOW().init();
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" crossorigin="anonymous"></script>    
     <!-- BOOTSTRAP 5-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
@@ -590,8 +703,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha512-HWlJyU4ut5HkEj0QsK/IxBCY55n5ZpskyjVlAoV9Z7XQwwkqXoYdCIC93/htL3Gu5H3R4an/S0h2NXfbZk3g7w==" crossorigin="anonymous"></script>
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
+    <script>
+      console.log("test");
+      var path = "{{ route('autocomplete') }}";
 
+      $('input.typeahead').typeahead({
+        source: function(terms, process){
+          return $.get(path, {terms:terms}, function(data) {
+            return process(data);
+          });
+        }
+      });
+    </script>
     <script>
         function changeNotification(evt, categoryName) {
             var i, tabcontent, tablinks;
@@ -607,18 +731,7 @@
             evt.currentTarget.className += " notif-item-active";
         }
     </script>
-    <script>
-      // 
-      var path = "{{ env('APP_URL') . route('autocomplete', [], false) }}";
-
-      $('input.typeahead').typeahead({
-        source: function(terms, process){
-          return $.get(path, {terms:terms}, function(data) {
-            return process(data);
-          });
-        }
-      });
-    </script>
+    
    
   </body>
 </html>

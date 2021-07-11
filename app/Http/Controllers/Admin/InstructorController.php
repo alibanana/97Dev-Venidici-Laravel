@@ -102,7 +102,6 @@ class InstructorController extends Controller
         $instructor->save();
 
         $message = "Thank you for applying! We'll get back tou you as soon as possible";
-
         return redirect('/#menjadi-pengajar')->with('menjadi_pengajar_message', $message);
     }
 

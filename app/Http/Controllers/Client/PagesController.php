@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Review;
 use App\Models\InstructorPosition;   
+use Spatie\Browsershot\Browsershot;
 
 
 /*
@@ -49,9 +50,7 @@ class PagesController extends Controller
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        
         $config_keyword = 'cms.homepage';
         $configs = Config::select('key', 'value')->where([['key', 'like', "%".$config_keyword."%"]])->get()->keyBy('key');
 
@@ -74,9 +73,17 @@ class PagesController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
+            if($agent->isPhone()){
+                return view('client/mobile/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
+                'online_courses','wokis','cart_count', 'notifications', 'transactions','informations','pengajar_positions','footer_reviews'));
+            }
+
             return view('client/index', 
                 compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
                     'online_courses','wokis','cart_count', 'notifications', 'transactions','informations','pengajar_positions','footer_reviews'));
+        }
+        if($agent->isPhone()){
+            return view('client/mobile/index', compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','wokis','pengajar_positions','footer_reviews'));
         }
         return view('client/index', 
             compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small', 'online_courses','wokis','pengajar_positions','footer_reviews'));
@@ -104,7 +111,7 @@ class PagesController extends Controller
     }
 
     public function autocomplete(Request $request){
-        $datas = User::select('name')->where("name", "like", "%{$request->terms}%")->get();
+        $datas = User::where("name", "like", "%{$request->terms}%")->get();
         return response()->json($datas);
     }
 
@@ -151,9 +158,12 @@ class PagesController extends Controller
     }
 
     public function print(Request $request){
+        // $pathToImage = 'storage/images/online-courses/';
+        // Browsershot::url('http://127.0.0.1:8000/certificate')->save('example.pdf');
+
         $course = Course::findOrFail($request->course_id);
         $user_course = auth()->user()->courses()->where('course_id',$course->id)->first();
-        
+
         $name = $request->name;
         $finish_date = $user_course->pivot->updated_at->todatestring();
         $first_sentence = 'We hereby award this Certificate of Completion on our On-Demand Class,';
@@ -161,8 +171,9 @@ class PagesController extends Controller
         $course_name = $course->title;
         $third_sentence    = 'you have practiced and taken an initiative to develop yourself in order to take part in cometitive environment';
 
+        $customPaper = array(0,0,720,500);
         $pdf = PDF::loadView('client/certificate',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
-        ->setPaper('A4', 'landscape');
+        ->setPaper($customPaper);
         return $pdf->download('certificate.pdf'); //download
         //return $pdf->stream(); //view
     }

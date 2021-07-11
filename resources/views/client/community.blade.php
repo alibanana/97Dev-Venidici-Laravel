@@ -27,10 +27,10 @@
         dan berbagai skill set serta passion.</p>
     </div>
 
-    <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s">
+    <div class="col-md-6 wow fadeInLeft" data-wow-delay="0.3s">
         <img src="/assets/images/client/Community_Asset_1.png" class="img-fluid" style="width:35vw" alt="">
     </div>
-    <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;">
+    <div class="col-md-6" style="display: flex;flex-direction: column;justify-content: center;">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Everything You Need to Boost Your Career</p>
         <p class="bigger-text" style="font-family: Rubik Regular;color:#3B3C43;white-space:pre-line">Vici Belajar, Vici Program, Vici Linkedin. Segudang fitur untuk bantu kamu networking, belajar hal-hal insightful baru dan bahkan cari peluang karir melalui info lowongan pekerjaan atau magang. Bagian terbaik, member Venidici Community akan secara reguler mendapat penawaran eksklusif dari program pelatihan Venidici!</p>
     </div>
@@ -49,7 +49,7 @@
 
 <!-- START OF BOTTOM SECTION -->
 <div class="row m-0 page-container" style="padding-top:8vw;padding-bottom:8vw;background-color:#F6F6F6">
-    <div class="col-5" style="display: flex;flex-direction: column;justify-content: center;">
+    <div class="col-md-5" style="display: flex;flex-direction: column;justify-content: center;">
         <p class="small-heading wow bounceIn" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43">Gabung jadi keluarga Venidici Community dengan mengunjungi</p>
         <a href="https://discord.gg/YpgRW5GU" class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">https://discord.gg/YpgRW5GU</a>
         <div style="margin-top:2vw">
@@ -57,7 +57,7 @@
         </div>
 
     </div>
-    <div class="col-7">
+    <div class="col-md-7">
         <img src="/assets/images/client/Community_Asset_3.png" class="img-fluid" style="width:100%;height:20vw" alt="">
 
     </div>

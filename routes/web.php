@@ -241,7 +241,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/woki-courses/{id}/set-publish-status-to-opposite', [AdminWokiCourseController::class, 'setPublishStatusToOpposite'])->name('woki-courses.set-publish-status-to-opposite');
         // BootcampController
         Route::get('/bootcamp/{id}/update', [AdminBootcampController::class, 'edit'])->name('bootcamp.edit');
-        Route::get('/bootcamp/categories', [AdminBootcampController::class, 'categories'])->name('bootcamp.categories');
+        // Route::get('/bootcamp/categories', [AdminBootcampController::class, 'categories'])->name('bootcamp.categories');
         Route::get('/bootcamp', [AdminBootcampController::class, 'index'])->name('bootcamp.index');
         Route::get('/bootcamp/create', [AdminBootcampController::class, 'create'])->name('bootcamp.create');
         Route::get('/bootcamp/{id}', [AdminBootcampController::class, 'show'])->name('bootcamp.show');

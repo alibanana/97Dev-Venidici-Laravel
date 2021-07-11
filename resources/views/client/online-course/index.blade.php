@@ -5,7 +5,7 @@
 <!-- START OF BANNER SECTION -->
 <div class="row m-0 banner-background page-container" style="height:40vw;padding-top:16vw;text-align:center">
     <div class="col-md-12 p-0">
-        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >On-Demand</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Skill Snack</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Fun learning anytime & anywhere! Bukan zamannya
         belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun,
         kamu yang tentuin karena Skill Snack On-Demand berisi rekaman
@@ -99,53 +99,59 @@ END OF OUR PROGRAMS SECTION -->
 
         <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3.5vw;">
-                
+                @if(count($user_review) == 0)
                 <div class="carousel-item active">
                     <div class="card-white" style="height:20vw;padding:2.5vw">
                         <div style="display:flex;align-items:center">   
-                            <img src="/assets/images/client/testimony-image-dummy.png" style="width:5vw" class="img-fluid" alt="">
+                            <img src="/assets/images/client/Default_Display_Picture.png" style="width:5vw;border-radius:10px" class="img-fluid" alt="">
                             <div style="margin-left:1vw">
-                                <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">Mr. Raditya Dika</p>
-                                <p class="bigger-text" style="font-family: Rubik Regular;color:#55525B;margin-top:-0.3vw;margin-bottom:0vw">Student</p>
+                                <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">@wishnumurti</p>
+                                <p class="bigger-text" style="font-family: Rubik Regular;color:#55525B;margin-top:-0.3vw;margin-bottom:0vw"></p>
                             </div>
                         </div>
                         <div style="display: flex;justify-content:flex-start;margin-top:1vw">
-                            <i style="color:#F4C257" class="fas fa-star bigger-text"></i>
-                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star bigger-text"></i>
-                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star bigger-text"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star bigger-text"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star bigger-text"></i>
+                            <i style="color:#F4C257;" class="fas fa-star sub-description"></i>
+                            <i style="color:#F4C257;" class="fas fa-star sub-description"></i>
+                            <i style="color:#F4C257;" class="fas fa-star sub-description"></i>
+                            <i style="color:#F4C257;" class="fas fa-star sub-description"></i>
+                            <i style="color:#F4C257;" class="fas fa-star sub-description"></i>
+                                    <!-- <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i> -->
                         </div>
                         <p class="normal-text" style="font-family: Rubik Regular;color:#55525B;margin-top:1vw; display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pretium id molestie suspendisse mi venenatis arcu amet scelerisque. Volutpat sit phasellus arcu, elit porttitor senectus. Ut lobortis vitae est leo ultrices pulvinar sodales. Nisl aliquam, in sit aenean vitae.</p>
+                        -webkit-box-orient: vertical !important;">In those 4 hours, I got a lot of insights about business case competition, all the details from the framework used to the way of deliver analysis & solution so that it can be presented well to the jury</p>
                     </div>
                 </div>
-                <div class="carousel-item">
+                @endif
+                @foreach($user_review as $review)
+                <div class="carousel-item @if($loop->first) active @endif">
                     <div class="card-white" style="height:20vw;padding:2.5vw">
                         <div style="display:flex;align-items:center">   
-                            <img src="/assets/images/client/testimony-image-dummy.png" style="width:5vw" class="img-fluid" alt="">
+                            <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset($review->user->avatar) }}" @endif style="width:5vw;border-radius:10px" class="img-fluid" alt="">
                             <div style="margin-left:1vw">
-                                <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">Mr. Gabriel Amileano</p>
-                                <p class="bigger-text" style="font-family: Rubik Regular;color:#55525B;margin-top:-0.3vw;margin-bottom:0vw">Student</p>
+                                <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">{{$review->user->name}}</p>
+                                <p class="bigger-text" style="font-family: Rubik Regular;color:#55525B;margin-top:-0.3vw;margin-bottom:0vw">{{$review->user->occupancy}}</p>
                             </div>
                         </div>
                         <div style="display: flex;justify-content:flex-start;margin-top:1vw">
-                            <i style="color:#F4C257" class="fas fa-star bigger-text"></i>
-                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star bigger-text"></i>
-                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star bigger-text"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star bigger-text"></i>
-                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star bigger-text"></i>
+                            @for ($i = 1; $i < 6; $i++)
+                                @if($i <= $review->review)
+                                    <i style="color:#F4C257;@if($i != 1) margin-left:0.5vw @endif" class="fas fa-star sub-description"></i>
+                                @else
+                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                                @endif
+                            @endfor
                         </div>
                         <p class="normal-text" style="font-family: Rubik Regular;color:#55525B;margin-top:1vw; display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 4 !important;
-                        -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pretium id molestie suspendisse mi venenatis arcu amet scelerisque. Volutpat sit phasellus arcu, elit porttitor senectus. Ut lobortis vitae est leo ultrices pulvinar sodales. Nisl aliquam, in sit aenean vitae.</p>
+                        -webkit-box-orient: vertical !important;">{{$review->description}}</p>
                     </div>
                 </div>
+                @endforeach
 
             </div>
             <a class="carousel-control-prev"   data-bs-target="#feature-carousel" style="width:2vw" role="button"data-bs-slide="prev">
@@ -160,7 +166,7 @@ END OF OUR PROGRAMS SECTION -->
 
     </div>
     <div class="col-4 p-0 " style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s On-Demand</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s Skill Snack</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
 
@@ -183,22 +189,25 @@ END OF OUR PROGRAMS SECTION -->
                         <input hidden name="show" value="{{ Request::get('search') }}" type="search" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw" placeholder="Course Title">
                     @endif
                     <input type="submit" style="visibility: hidden;" hidden/>
-                </form>
             </div>
             <div style="margin-left: 1vw;">
             <!--
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
-                <select class="grey-input-form small-text" style="height:100%;padding-right:4vw" aria-label="">
+                <select class="grey-input-form small-text" name="cat" style="height:100%;padding-right:4vw" aria-label="">
                     <option selected disabled>Pilih Kategori</option>
-                    <option>None</option>
+                    <option value="None" @if (Request::get('cat') == 'None') selected @endif>None</option>
                     @foreach($course_categories as $category)
-                    <option value="{{$category->id}}">{{$category->category}}</option>
+                    <!-- <option value="{{$category->id}}">{{$category->category}}</option> -->
+                    <option value="{{ $category->id }}" @if (Request::get('cat') == $category->id) selected @endif>{{ $category->category }}</option>
+
                     @endforeach
                 </select>
             </div>
             <div style="margin-left: 1vw;">
                 <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
             </div>
+            </form>
+
         </div>
     </div>
     <!-- START OF CLASSES SECTION -->
@@ -223,7 +232,7 @@ END OF OUR PROGRAMS SECTION -->
         <div class="row m-0 p-0">
             @if(count($courses) == 0)
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Venidici On-Demand tidak ditemukan.</span></p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Skill Snack tidak ditemukan.</span></p>
             </div>
             @endif
         

@@ -425,7 +425,7 @@
     <div class="col-6 p-0" style="display:flex;justify-content:center">
         <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:20vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Online-Course-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">On-Demand</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
@@ -439,7 +439,7 @@
     <div class="col-6 p-0" style="display:flex;justify-content:center">
         <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:20vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Woki-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Woki</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
@@ -453,7 +453,7 @@
     <div class="col-6 p-0" style="display:flex;justify-content:center">
         <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:20vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Krest</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
@@ -912,50 +912,50 @@
                 <div>
                     <!-- BIG TESTIMONY CARD -->
                     <div class="testimony-card" style="width: 40vw;padding:1vw !important">
-                        <img src="{{ asset($fake_testimonies_big[0]->thumbnail) }}" class="img-fluid" style="width: 20vw;height:auto" alt="thumbnail not avaliable..">
+                        <img src="{{ asset($fake_testimonies_big[0]->thumbnail) }}" class="img-fluid" style="width: 10vw;height:auto" alt="thumbnail not avaliable..">
                         <p style="font-family: Rubik Regular;color:#000000; display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 5 !important;
-                        -webkit-box-orient: vertical !important;font-size:2vw">{{ $fake_testimonies_big[0]->content }}</p>
+                        -webkit-box-orient: vertical !important;font-size:2.5vw;margin-top:2vw">{{ $fake_testimonies_big[0]->content }}</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
                                 @if ($i <= $fake_testimonies_big[0]->rating)
                                     @if ($i == 1)
-                                        <i style="font-size:2vw;color:#F4C257" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;color:#F4C257" class="fas fa-star"></i>
                                     @else
-                                        <i style="font-size:2vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
                                     @endif
                                 @else
                                     @if ($i == 1)
-                                        <i style="font-size:2vw;color:#B3B5C2" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;color:#B3B5C2" class="fas fa-star"></i>
                                     @else
-                                        <i style="font-size:2vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
                                     @endif
                                 @endif
                             @endfor
                         </div>
-                        <p style="font-family: Rubik Medium;color:#000000;margin-top:1vw;margin-bottom:0.4vw;font-size:2vw">{{ $fake_testimonies_big[0]->name }}</p>
-                        <p style="font-family: Rubik Medium;color:#808080;margin-bottom:0px;font-size:2vw">{{ $fake_testimonies_big[0]->occupancy }}</p>
+                        <p style="font-family: Rubik Medium;color:#000000;margin-top:1vw;margin-bottom:0.4vw;font-size:2.5vw">{{ $fake_testimonies_big[0]->name }}</p>
+                        <p style="font-family: Rubik Medium;color:#808080;margin-bottom:0px;font-size:2.5vw">{{ $fake_testimonies_big[0]->occupancy }}</p>
                     </div>
                     <!-- END OF BIG TESTIMONY CARD -->
     
                     <!-- SMALL TESTIMONY CARD -->
                     <div class="testimony-card" style="margin-top: 2vw;width: 35vw;float:right">
-                        <p style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw;font-size:2vw">{{ $fake_testimonies_small[0]->rating }}/5</p>
+                        <p style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw;font-size:2.5vw">{{ $fake_testimonies_small[0]->rating }}/5</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
                                 @if ($i <= $fake_testimonies_small[0]->rating)
                                     @if ($i == 1)
-                                        <i style="font-size:2vw;color:#F4C257" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;color:#F4C257" class="fas fa-star"></i>
                                     @else
-                                        <i style="font-size:2vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
                                     @endif
                                 @else
                                     @if ($i == 1)
-                                        <i style="font-size:2vw;color:#B3B5C2" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;color:#B3B5C2" class="fas fa-star"></i>
                                     @else
-                                        <i style="font-size:2vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
                                     @endif
                                 @endif
                             @endfor
@@ -964,7 +964,7 @@
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 3 !important;
-                        -webkit-box-orient: vertical !important;font-size:2vw">{{ $fake_testimonies_small[0]->content }}</p>
+                        -webkit-box-orient: vertical !important;font-size:2.5vw">{{ $fake_testimonies_small[0]->content }}</p>
     
                     </div>
                     <!-- END OF SMALL TESTIMONY CARD -->
@@ -975,20 +975,20 @@
                 <div style="margin-left: 2vw">
                      <!-- SMALL TESTIMONY CARD -->
                      <div class="testimony-card" style="width: 32vw;">
-                        <p style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw;font-size:2vw">{{ $fake_testimonies_small[1]->rating }}/5</p>
+                        <p style="font-family: Rubik Medium;color:#000000;margin-bottom:0.4vw;font-size:2.5vw">{{ $fake_testimonies_small[1]->rating }}/5</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
                                 @if ($i <= $fake_testimonies_small[1]->rating)
                                     @if ($i == 1)
-                                        <i style="font-size:2vw;color:#F4C257" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;color:#F4C257" class="fas fa-star"></i>
                                     @else
-                                        <i style="font-size:2vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
                                     @endif
                                 @else
                                     @if ($i == 1)
-                                        <i style="font-size:2vw;color:#B3B5C2" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;color:#B3B5C2" class="fas fa-star"></i>
                                     @else
-                                        <i style="font-size:2vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
                                     @endif
                                 @endif
                             @endfor
@@ -997,32 +997,32 @@
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 3 !important;
-                        -webkit-box-orient: vertical !important;font-size:2vw">{{ $fake_testimonies_small[1]->content }}</p>
+                        -webkit-box-orient: vertical !important;font-size:2.5vw">{{ $fake_testimonies_small[1]->content }}</p>
                     </div>
                     <!-- END OF SMALL TESTIMONY CARD -->
                     <!-- BIG TESTIMONY CARD -->
                     <div class="testimony-card"  style="width: 36vw;margin-top:2vw">
-                        <img src="{{ asset($fake_testimonies_big[1]->thumbnail) }}" class="img-fluid" style="width: 15vw;height:auto" alt="">
-                        <p style="font-family: Rubik Regular;color:#000000;font-size:2vw">{{ $fake_testimonies_big[1]->content }}</p>
+                        <img src="{{ asset($fake_testimonies_big[1]->thumbnail) }}" class="img-fluid" style="width: 10vw;height:auto" alt="">
+                        <p style="font-family: Rubik Regular;color:#000000;font-size:2.5vw;margin-top:2vw">{{ $fake_testimonies_big[1]->content }}</p>
                         <div style="display: flex;justify-content:center">
                             @for ($i = 1; $i < 6; $i++)
                                 @if ($i <= $fake_testimonies_big[1]->rating)
                                     @if ($i == 1)
-                                        <i style="font-size:2vw;color:#F4C257" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;color:#F4C257" class="fas fa-star"></i>
                                     @else
-                                        <i style="font-size:2vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;margin-left:0.5vw;color:#F4C257" class="fas fa-star"></i>
                                     @endif
                                 @else
                                     @if ($i == 1)
-                                        <i style="font-size:2vw;color:#B3B5C2" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;color:#B3B5C2" class="fas fa-star"></i>
                                     @else
-                                        <i style="font-size:2vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
+                                        <i style="font-size:2.5vw;margin-left:0.5vw;color:#B3B5C2" class="fas fa-star"></i>
                                     @endif
                                 @endif
                             @endfor
                         </div>
-                        <p style="font-family: Rubik Medium;color:#000000;margin-top:1vw;margin-bottom:0.4vw;font-size:2vw">{{ $fake_testimonies_big[1]->name }}</p>
-                        <p style="font-family: Rubik Medium;color:#808080;margin-bottom:0px;font-size:2vw">{{ $fake_testimonies_big[1]->occupancy }}</p>
+                        <p style="font-family: Rubik Medium;color:#000000;margin-top:1vw;margin-bottom:0.4vw;font-size:2.5vw">{{ $fake_testimonies_big[1]->name }}</p>
+                        <p style="font-family: Rubik Medium;color:#808080;margin-bottom:0px;font-size:2.5vw">{{ $fake_testimonies_big[1]->occupancy }}</p>
                     </div>
                     <!-- END OF BIG TESTIMONY CARD -->
 
@@ -1060,7 +1060,7 @@
     <!-- START OF NEWSLETTER SECTION -->
     <div class="row m-0 page-container" id="newsletter-section" style="padding-bottom:8vw">
         @if (session()->has('newsletter_message'))
-        <div class="col-12 " style="padding:1vw 3vw">
+        <div class="col-12 p-0" style="padding:1vw 3vw">
             <div class="mb-0">
                 <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
                     {{ session()->get('newsletter_message') }}
@@ -1069,7 +1069,7 @@
         </div>
         
         @elseif (session()->has('newsletter_info_message'))
-        <div class="col-12" style="padding:1vw 3vw">
+        <div class="col-12 p-0" style="padding:1vw 3vw">
             <div class="mb-0">
                 <div class="alert alert-warning alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
                     {{ session()->get('newsletter_info_message') }}
@@ -1079,13 +1079,13 @@
         @endif
         <form action="{{route('newsletter.store')}}" method="post" style="padding:0px">
         @csrf
-        <div class="col-12" style="padding:0vw 3vw">
+        <div class="col-12 " style="padding:0vw 3vw">
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:15vw" class="img-fluid" alt="Newsletter Illustration">
                 <div style="width:80%;margin-left:2vw">
                     <p class="wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold;font-size:3vw">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
-                        <input placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none;font-size:2vw">
+                        <input required placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none;font-size:2vw">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none;font-size:2vw" class="btn-blue text-nowrap" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                     </div>

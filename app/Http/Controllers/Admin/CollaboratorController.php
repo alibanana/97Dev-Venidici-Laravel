@@ -93,7 +93,7 @@ class CollaboratorController extends Controller
         $collaborator->save();
 
         $message = "Thank you for applying! We'll get back tou you as soon as possible";
-
+        
         return redirect('/#menjadi-kolaborator')->with('menjadi_kolaborator_message', $message);
     }
 
