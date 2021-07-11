@@ -1648,6 +1648,16 @@ html, body {
     .navbarMobile{
         display: block !important;
     }
+    #cart_icon .counter[data-count]:after{
+        min-width: 4vw;
+        font-size: 3vw;
+        height:4vw
+    }
+    #notification_icon .counter[data-count]:after{
+        min-width: 4vw;
+        font-size: 3vw;
+        height:4vw
+    }
 }
 
 /* MOBILE NAVBAR */

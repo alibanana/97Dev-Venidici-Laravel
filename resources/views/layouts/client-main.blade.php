@@ -135,7 +135,7 @@
         <!--    Made by Erik Terwan    -->
         <!--   24th of November 2015   -->
         <!--        MIT License        -->
-        <nav role="navigation">
+        <nav role="navigation" style="display: flex;justify-content:space-between;align-items:center">
           <div id="menuToggle">
             <!--
             A fake / hidden checkbox is used as click reciever,
@@ -160,18 +160,22 @@
             but hey, it's pure CSS magic.
             -->
             <ul id="menu">
+              @if (Auth::check())
               <div class="row m-0">
                 <div class="col-6 p-0">
                   <div style="text-align:left">
-                  @if (!Auth::check())
-                    <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log In</a>
-                  @endif     
+                    <!-- <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log Out</a> -->
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log Out</button>
+                    </form>
                   </div>
-
+                  
                 </div>
-               
+                
               </div>
               <br>
+              @endif
               <!-- <a href="/login" class="btnSignUp" style="margin-bottom: 20px;">Login</a> -->
               <table id="menuKiri">
                 <tr>
@@ -202,6 +206,25 @@
             </ul>
 
           </div>
+          @if (Auth::check())
+
+          <div style="display: flex;">
+            <a id="cart_icon" class="navbar-item" href="/cart" style="color:#FFFFFF">
+              <span class="counter fa-stack has-badge" data-count="1">
+                <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart'))navbar-item-active @endif"></i>
+              </span>
+            </a>
+            <a id="notification_icon" class="navbar-item" href="#notification" style="color:#FFFFFF;margin-right:1.5vw">
+              <span class="counter fa-stack has-badge" data-count="">
+                <i class="p3 fas fa-bell fa-stack-1x xfa-inverse"></i>
+              </span>
+            </a>
+            <a class="navbar-item" href="/dashboard" style="color:#FFFFFF;margin-top:1vw"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @elseif(Request::is('dashboard/*')) navbar-item-active @endif"></i></a>
+
+          </div>
+          @else
+          <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log In</a>
+          @endif
         </nav>
       </div>
     </div>
