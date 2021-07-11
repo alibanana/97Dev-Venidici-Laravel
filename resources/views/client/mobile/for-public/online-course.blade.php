@@ -7,6 +7,7 @@
 <div class="row m-0 page-container  " style="background-color:#67BBA3">
     <div class="col-12 p-0">
         <div style="padding-top:11vw;margin-left:-0.5vw" class="wow fadeInUp" data-wow-delay="0.3s">
+            <img src="/assets/images/client/Venidici_Logo_Horizontal_White.png" style="width:20vw;" class="img-fluid" alt="Image 1">
             <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:7vw">Fun learning anytime
             & anywhere</p>
             <p style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:3vw;font-size:3vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
