@@ -82,7 +82,7 @@ class OnlineCourseController extends Controller {
         }
         $courses = $courses->where('course_type_id',1)->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
+        $user_review = Review::where('course_id',1)->orderBy('created_at','desc')->get();
         if (Auth::check()) {
             $this->resetNavbarData();
 
@@ -91,10 +91,10 @@ class OnlineCourseController extends Controller {
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/online-course/index', compact('cart_count','transactions','courses','course_categories','informations','notifications','footer_reviews'));
+            return view('client/online-course/index', compact('cart_count','transactions','courses','course_categories','informations','notifications','footer_reviews','user_review'));
         }
 
-        return view('client/online-course/index',compact('course_categories','courses','footer_reviews'));
+        return view('client/online-course/index',compact('course_categories','courses','footer_reviews','user_review'));
     }
 
     // Shows the details for each course.

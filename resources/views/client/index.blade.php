@@ -545,7 +545,7 @@ END OF OUR PROGRAMS SECTION -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Online-Course-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Skill Snack</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
@@ -559,7 +559,7 @@ END OF OUR PROGRAMS SECTION -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Woki-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Woki</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
@@ -573,7 +573,7 @@ END OF OUR PROGRAMS SECTION -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Krest</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
