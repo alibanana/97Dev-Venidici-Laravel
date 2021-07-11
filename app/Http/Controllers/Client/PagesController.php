@@ -28,6 +28,7 @@ use App\Models\UserHashtag;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\InstructorPosition;   
+use Spatie\Browsershot\Browsershot;
 
 
 /*
@@ -303,9 +304,12 @@ class PagesController extends Controller
     }
 
     public function print(Request $request){
+        // $pathToImage = 'storage/images/online-courses/';
+        // Browsershot::url('http://127.0.0.1:8000/certificate')->save('example.pdf');
+
         $course = Course::findOrFail($request->course_id);
         $user_course = auth()->user()->courses()->where('course_id',$course->id)->first();
-        
+
         $name = $request->name;
         $finish_date = $user_course->pivot->updated_at->todatestring();
         $first_sentence = 'We hereby award this Certificate of Completion on our On-Demand Class,';
@@ -313,8 +317,9 @@ class PagesController extends Controller
         $course_name = $course->title;
         $third_sentence    = 'you have practiced and taken an initiative to develop yourself in order to take part in cometitive environment';
 
+        $customPaper = array(0,0,720,500);
         $pdf = PDF::loadView('client/certificate',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
-        ->setPaper('A4', 'landscape');
+        ->setPaper($customPaper);
         return $pdf->download('certificate.pdf'); //download
         //return $pdf->stream(); //view
     }
