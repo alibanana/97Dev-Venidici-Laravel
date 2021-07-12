@@ -268,7 +268,7 @@
     <!-- START OF POPUP -->
     <div id="notification" class="overlay">
         <div class="popup-notif">
-          <a class="close-notif medium-heading" href="#closed" style="margin-top:1vw;text-decoration:none" >&times;</a>
+          <a class="close-notif medium-heading" href="#closed" style="margin-top:1vw;text-decoration:none;" >&times;</a>
           <div class="content" >
             <div style="display:flex;align-items:center;padding-bottom:2vw">
               <p class="normal-text notif-item notif-item-active notif-links" onclick="changeNotification(event, 'semua-notification')" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;color:##3B3C43">Semua</p>

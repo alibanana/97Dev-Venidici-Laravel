@@ -1623,8 +1623,12 @@ html, body {
 }
 
 @media only screen and (max-width: 767px) {
+    /* notifaction popup mobile */
+    .popup-notif{
+        display:none !important;
+    }
     .navbar-floating{
-        display: none
+        /* display: none */
     }
     .course-card-red{
         width: 100%;
@@ -1640,7 +1644,7 @@ html, body {
         padding-right:4vw
     }
     .footer-desktop{
-        display: none !important
+        /* display: none !important */
     }
     .footer-mobile{
         display: block !important
@@ -1648,7 +1652,7 @@ html, body {
     .navbarMobile{
         display: block !important;
     }
-    #cart_icon .counter[data-count]:after{
+    /* #cart_icon .counter[data-count]:after{
         min-width: 4vw;
         font-size: 3vw;
         height:4vw
@@ -1657,7 +1661,7 @@ html, body {
         min-width: 4vw;
         font-size: 3vw;
         height:4vw
-    }
+    } */
 }
 
 /* MOBILE NAVBAR */
@@ -1818,6 +1822,8 @@ html, body {
 
 #comment:hover ~ #comment-report{
   display: none;
+
+
 }
 
 

@@ -34,9 +34,9 @@ class DashboardController extends Controller
     public function index()
     {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $provinces = Province::all();
         $cities = City::all();
         $cart_count = Cart::with('course')
@@ -84,6 +84,9 @@ class DashboardController extends Controller
 
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        if($agent->isPhone()){
+            return view('client/user-dashboard',compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount','footer_reviews'));
+        }
 
         return view('client/user-dashboard',
             compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount','footer_reviews'));
