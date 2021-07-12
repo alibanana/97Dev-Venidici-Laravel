@@ -288,7 +288,7 @@
 
             </div>
             <!-- START OF SEMUA NOTIFICATION -->
-            <div class="col-md-12 notif-content" id="semua-notification" style="overflow:scroll;height:20vw;">
+            <div class="col-md-12 notif-content notification-mobile-height " id="semua-notification" style="overflow:scroll;height:20vw;">
               @foreach($notifications as $notif)
                 @if($notif->isInformation)
                   <?php
@@ -323,9 +323,9 @@
                       <div class="notification-right-yellow-border" @if(!$infoHasSeen) style="background: rgba(244, 194, 87, 0.1)" @endif>
                           <div style="padding:0.6vw 1vw">
                               
-                            <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
+                            <p class="small-text" id="notification-title" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
                             <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$notif->created_at->diffForHumans()}}</p>
-                            <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                            <p class="very-small-text" id="notification-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                               overflow : hidden !important;
                               text-overflow: ellipsis !important;
                               -webkit-line-clamp: 2 !important;
@@ -368,12 +368,12 @@
                     <div class="notification-right-blue-border" @if(!$hasSeen) style="background: rgba(43, 108, 170, 0.1) @endif">
                         <div style="padding:0.6vw 1vw">
                             
-                          <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
+                          <p class="small-text" id="notification-title" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
                           <?php
                               $date_time = explode(' ', $notif->updated_at->diffForHumans());
                           ?>
-                          <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
-                          <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          <p class="very-small-text"  style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
+                          <p class="very-small-text" id="notification-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
                             -webkit-line-clamp: 2 !important;
@@ -392,7 +392,7 @@
             <!-- END OF SEMUA NOTIFICATION -->
 
             <!-- START OF TRANSAKSI NOTIFICATION -->
-            <div class="col-md-12 notif-content" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
+            <div class="col-md-12 notif-content notification-mobile-height" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
               @if(count($transactions) == 0)
                 <div style="">
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada transaksi.</p>
@@ -430,12 +430,12 @@
                     <div class="notification-right-blue-border" @if(!$hasSeen) style="background: rgba(43, 108, 170, 0.1) @endif">
                         <div style="padding:0.6vw 1vw">
                             
-                          <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$transaction->title}}</p>
+                          <p class="small-text" id="notification-title" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$transaction->title}}</p>
                           <?php
                               $date_time = explode(' ', $transaction->updated_at->diffForHumans());
                           ?>
                           <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
-                          <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                          <p class="very-small-text" id="notification-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
                             -webkit-line-clamp: 2 !important;
@@ -454,7 +454,7 @@
             <!-- END OF TRANSAKSI NOTIFICATION -->
 
             <!-- START OF INFORMASI NOTIFICATION -->
-            <div class="col-md-12 notif-content" id="informasi-notification" style="overflow:scroll;height:20vw;display:none">
+            <div class="col-md-12 notif-content notification-mobile-height" id="informasi-notification" style="overflow:scroll;height:20vw;display:none">
               @foreach($informations as $info)
               <?php
                     $info_users = explode(',', $info->hasSeen);
@@ -488,9 +488,9 @@
                   <div class="notification-right-yellow-border" @if(!$infoHasSeen) style="background: rgba(244, 194, 87, 0.1)" @endif>
                       <div style="padding:0.6vw 1vw">
                           
-                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$info->title}}</p>
+                        <p class="small-text" id="notification-title" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$info->title}}</p>
                         <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$info->created_at->diffForHumans()}}</p>
-                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
+                        <p class="very-small-text" id="notification-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                           overflow : hidden !important;
                           text-overflow: ellipsis !important;
                           -webkit-line-clamp: 2 !important;
