@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Axiom\Rules\StrongPassword;
 use Jenssegers\Agent\Agent;
 use App\Helper\Helper;
+use App\Helper\CourseHelper;
 use Carbon\Carbon;
 use Throwable;
 
@@ -48,9 +49,9 @@ class DashboardController extends Controller
     public function index()
     {
         $agent = new Agent();
-        // if($agent->isPhone()){
+        // if ($agent->isPhone())
         //     return view('client/mobile/under-construction');
-        // }
+
         $this->resetNavbarData();
 
         $notifications = $this->notifications;
@@ -60,18 +61,8 @@ class DashboardController extends Controller
 
         $provinces = Province::all();
         $cities = City::all();
-        // $cart_count = Cart::with('course')
-        //     ->where('user_id', auth()->user()->id)
-        //     ->count();
-        // $transactions = Notification::where(
-        //     [   
-        //         ['user_id', '=', auth()->user()->id],
-        //         ['isInformation', '=', 0],
-                
-        //     ]
-        //     )->orderBy('created_at', 'desc')->get();
         
-        $orders = Order::whereHas('invoice', function ($query){
+        $orders = Order::whereHas('invoice', function ($query) {
             $query->where(
                 [
                     ['status', '=', 'paid'],
@@ -83,35 +74,37 @@ class DashboardController extends Controller
                     ['user_id', '=', auth()->user()->id],
                 ],
             );
-                })->orderBy('orders.created_at', 'desc')->get();
+        })->orderBy('orders.created_at', 'desc')->get();
 
         $interests = Hashtag::all();
-        // $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        // $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
 
         $usableStarsCount = Helper::getUsableStars(auth()->user());       
         $mytime = Carbon::now();
         $mytime->setTimezone('Asia/Phnom_Penh');
         $today = explode(' ', $mytime);
+
         //check live woki and change status to complete if date time has passed
         foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course){
             if($today[0] >= $course->wokiCourseDetail->event_date && $course->wokiCourseDetail->end_time <= $today[1]){
                 $course->pivot->status = 'completed';
                 $course->pivot->save();
-
             }
         }
 
+        // Get courses suggestions.
+        $courseSuggestions = CourseHelper::getCourseSuggestion(3);
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
         if($agent->isPhone()){
             return view('client/user-dashboard',
-            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount','footer_reviews'));
+            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications',
+                'usableStarsCount', 'courseSuggestions', 'footer_reviews'));
         }
 
         return view('client/user-dashboard',
-            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount','footer_reviews'));
+            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications',
+                'courseSuggestions', 'usableStarsCount', 'footer_reviews'));
     }
 
     // Updates Users's data in the database.

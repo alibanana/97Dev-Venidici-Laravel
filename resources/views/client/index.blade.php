@@ -689,13 +689,13 @@ END OF OUR PROGRAMS SECTION -->
                                             <a href="/bootcamp/{{ $course->id }}" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @endif
-                                        <i style="font-size:2vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                                        <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i>
                                     </div>
                                     @foreach ($course->hashtags as $tag)
                                         <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
                                     @endforeach
                                 </div>
-                                <div class="collapse" id="woki-collapse" style="margin-top:1vw">
+                                <div class="collapse" id="courses-collapse{{ $loop->iteration }}" style="margin-top:1vw">
                                     <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
                                 </div>
                                 <div style="display: flex;justify-content:space-between;margin-top:1vw">
