@@ -15,10 +15,10 @@
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                         <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Menjadi Pengajar</p>
-                        @if (session()->has('menjadi_kolaborator_message'))
+                        @if (session()->has('menjadi_pengajar_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('menjadi_kolaborator_message') }}
+                            {{ session()->get('menjadi_pengajar_message') }}
                             </div>
                         </div>
                         @endif
@@ -440,13 +440,13 @@
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-6 p-0" style="display:flex;justify-content:center">
-        <a href="/online-course?cat=Featured" style="text-decoration:none">
+        <a href="/woki?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
                 <img src="/assets/images/client/Woki-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Woki</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
-                    <a href="/online-course?cat=Featured" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Woki</a>
+                    <a href="/woki?cat=Featured" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Woki</a>
                 </div>
             </div>
         </a>
@@ -454,13 +454,13 @@
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-6 p-0" style="display:flex;justify-content:center">
-        <a href="/online-course?cat=Featured" style="text-decoration:none">
+        <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
                 <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Krest</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
-                    <a href="/online-course?cat=Featured" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Krest</a>
+                    <a href="/for-corporate/krest" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Krest</a>
                 </div>
             </div>
         </a>
@@ -798,7 +798,7 @@
                 </div>
             </div>
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="/woki" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
+                <a href="/woki?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
 
             </div>
 
@@ -1041,15 +1041,16 @@
     <div class="row m-0 page-container pengajar-background" style="padding-top:4vw;padding-bottom:8vw">
         <div class="col-12 p-0">
             <div style="display:flex;align-items:center;justify-content:center">
+                
                 <a href="#menjadi-pengajar" style="text-decoration:none">
-                    <div class="rounded-card" style="padding:2vw;height:44vw;text-align:center;width:42vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-right:2vw">
+                    <div class="rounded-card rounded-card-pengajar" style="padding:2vw;height:44vw;text-align:center;width:42vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-right:2vw">
                         <p id="card-title" style="color:#3B3C43;font-family:Rubik Medium;font-size:3vw">Menjadi Pengajar</p>
                         <img src="/assets/images/client/Menjadi_Pengajar.png" style="height:20vw;margin-top:1vw" class="img-fluid" alt="Menjadi Pengajar">
                         <p style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw;font-size:2vw">Bawa perubahan bagi Indonesia melalui pengalaman yang kamu miliki!</p>
                     </div>
                 </a>
                 <a href="#menjadi-kolaborator" style="text-decoration:none">
-                    <div class="rounded-card" style="padding:2vw;height:44vw;text-align:center;width:42vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-left:2vw">
+                    <div class="rounded-card rounded-card-collaborator" style="padding:2vw;height:44vw;text-align:center;width:42vw;display: flex;flex-direction: column;justify-content: space-between;align-items:center;margin-right:2vw">
                         <p id="card-title" style="color:#3B3C43;font-family:Rubik Medium;font-size:3vw">Menjadi Kolaborator</p>
                         <img src="/assets/images/client/Menjadi_Kolaborator.png" style="height:20vw;margin-top:1vw" class="img-fluid" alt="Menjadi Kolaborator">
                         <p style="font-family: Rubik Regular;color:#000000;margin-bottom:0px;margin-top:1vw;font-size:2vw">1+1=11! Mari berkembang bersama dan hasilin dampak!</p>

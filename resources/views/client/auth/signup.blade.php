@@ -43,7 +43,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                            <input value="{{Session::get('telephone')}}" type="text" name="telephone" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="+62812345678">
+                            <input value="{{Session::get('telephone')}}" type="text" name="telephone" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="0812345678">
                         </div>  
                         @error('telephone')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
