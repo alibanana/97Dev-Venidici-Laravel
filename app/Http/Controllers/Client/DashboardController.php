@@ -30,25 +30,46 @@ use App\Mail\PasswordChangedMail;
 
 class DashboardController extends Controller
 {
+
+    private $notifications; // Stores combined notifications data.
+    private $informations; // Stores notification (isInformation == true) data.
+    private $transactions; // Stores notification (isInformation == false) data for a particular user.
+    private $cart_count; // Stores cart data for a particular user.
+
+    private function resetNavbarData() {
+        $navbarData = Helper::getNavbarData();
+        $this->notifications = $navbarData['notifications'];
+        $this->informations = $navbarData['informations'];
+        $this->transactions = $navbarData['transactions'];
+        $this->cart_count = $navbarData['cart_count'];
+    }
+    
     // Shows the client User Dashboard page.
     public function index()
     {
         $agent = new Agent();
-        // if($agent->isPhone()){
-        //     return view('client/mobile/under-construction');
-        // }
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
+        $this->resetNavbarData();
+
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+
         $provinces = Province::all();
         $cities = City::all();
-        $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-        $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
+        // $cart_count = Cart::with('course')
+        //     ->where('user_id', auth()->user()->id)
+        //     ->count();
+        // $transactions = Notification::where(
+        //     [   
+        //         ['user_id', '=', auth()->user()->id],
+        //         ['isInformation', '=', 0],
                 
-            ]
-            )->orderBy('created_at', 'desc')->get();
+        //     ]
+        //     )->orderBy('created_at', 'desc')->get();
         
         $orders = Order::whereHas('invoice', function ($query){
             $query->where(
@@ -65,8 +86,8 @@ class DashboardController extends Controller
                 })->orderBy('orders.created_at', 'desc')->get();
 
         $interests = Hashtag::all();
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        // $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+        // $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
 
         $usableStarsCount = Helper::getUsableStars(auth()->user());       
@@ -84,9 +105,6 @@ class DashboardController extends Controller
 
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-        if($agent->isPhone()){
-            return view('client/user-dashboard',compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount','footer_reviews'));
-        }
 
         return view('client/user-dashboard',
             compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount','footer_reviews'));
@@ -109,7 +127,9 @@ class DashboardController extends Controller
         ]);
 
         if($validated->fails()) 
-            return redirect('/dashboard#edit-profile')->withErrors($validated);
+            return redirect('/dashboard#edit-profile')
+                ->withErrors($validated)
+                ->withInput($request->all());
         else 
             $validated = $validated->validate();
         
@@ -237,18 +257,25 @@ class DashboardController extends Controller
         if($agent->isPhone()){
             return view('client/mobile/under-construction');
         }
-        $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-        $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
+        $this->resetNavbarData();
+
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+
+        // $cart_count = Cart::with('course')
+        //     ->where('user_id', auth()->user()->id)
+        //     ->count();
+        // $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+        // $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        // $transactions = Notification::where(
+        //     [   
+        //         ['user_id', '=', auth()->user()->id],
+        //         ['isInformation', '=', 0],
                 
-            ]
-            )->orderBy('created_at', 'desc')->get();
+        //     ]
+        //     )->orderBy('created_at', 'desc')->get();
 
         $redeem_rules = Redeem::orderBy('created_at','desc')->get();
         $my_vouchers = Promotion::where('user_id',auth()->user()->id)->orderBy('updated_at','desc')->get();

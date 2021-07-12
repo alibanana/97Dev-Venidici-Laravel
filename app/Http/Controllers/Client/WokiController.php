@@ -21,7 +21,7 @@ use App\Models\Review;
 use App\Models\Order;
 use App\Models\Promotion;
 use Jenssegers\Agent\Agent;
-
+use App\Helper\Helper;
 class WokiController extends Controller
 {
     private $notifications; // Stores combined notifications data.
@@ -30,13 +30,11 @@ class WokiController extends Controller
     private $cart_count; // Stores cart data for a particular user.
 
     private function resetNavbarData() {
-        $this->notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-        $this->informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
-        $this->transactions = Notification::where([   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0]
-            ])->orderBy('created_at', 'desc')->get();
-        $this->cart_count = Cart::with('course')->where('user_id', auth()->user()->id)->count();
+        $navbarData = Helper::getNavbarData();
+        $this->notifications = $navbarData['notifications'];
+        $this->informations = $navbarData['informations'];
+        $this->transactions = $navbarData['transactions'];
+        $this->cart_count = $navbarData['cart_count'];
     }
 
     public function index(Request $request) {
@@ -73,6 +71,7 @@ class WokiController extends Controller
         }
         $courses = $courses->where('course_type_id',2)->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        $user_review = Review::where('course_id',2)->orderBy('created_at','desc')->get();
 
         if (Auth::check()) {
             $this->resetNavbarData();
@@ -82,10 +81,10 @@ class WokiController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/woki/index', compact('cart_count','transactions','courses','course_categories','informations','notifications','footer_reviews'));
+            return view('client/woki/index', compact('cart_count','transactions','courses','course_categories','informations','notifications','footer_reviews','user_review'));
         }
 
-        return view('client/woki/index',compact('course_categories','courses','footer_reviews'));
+        return view('client/woki/index',compact('course_categories','courses','footer_reviews','user_review'));
     }
 
     // Shows the client woki course detail page.

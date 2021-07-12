@@ -55,10 +55,10 @@
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                         <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Menjadi Pengajar</p>
-                        @if (session()->has('menjadi_kolaborator_message'))
+                        @if (session()->has('menjadi_pengajar_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('menjadi_kolaborator_message') }}
+                            {{ session()->get('menjadi_pengajar_message') }}
                             </div>
                         </div>
                         @endif
@@ -172,7 +172,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pendidikan terakhir kamu</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-university"></i>
-                            <select name="education" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="education"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="" disabled selected>Pilih Pendidikan</option>
                                 <option value="SMP">SMP</option>
                                 <option value="SMA">SMA</option>
@@ -215,7 +215,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih posisi pengajar yang diinginkan</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-briefcase"></i>
-                            <select name="instructor_position_id" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="instructor_position_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="" disabled selected>Pilih Posisi</option>
                                 @foreach($pengajar_positions as $pos)
                                 <option value="{{$pos->id}}">{{$pos->name}}</option>
@@ -347,7 +347,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Partnership</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-hands-helping"></i>
-                            <select name="collaborator_partnership" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="collaborator_partnership"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Partnership</option>
                                 <option value="Event Collaboration">Event Collaboration</option>
                                 <option value="Brand Activation">Brand Activation</option>
@@ -404,23 +404,25 @@
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</p>
+        <form action="{{route('search_course')}}" method="post">
+        @csrf
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
                 
-                <input type="text" class="small-text typeahead" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Course Title">
+                <input type="text" name="search" class="small-text typeahead" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Course Title">
                 
             </div>
             <div style="margin-left: 1vw;">
             <!--
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                    <select name="province" id=""  class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                        <option value="" disabled selected>Pilih Kategori</option>
-                        <option value="">Skill Snack</option>
-                        <option value="">Woki</option>
+                    <select name="filter" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                        <option value="None" disabled selected>Pilih Kategori</option>
+                        <option value="Skill Snack">Skill Snack</option>
+                        <option value="Woki">Woki</option>
                     </select>                    
-                    @error('province')
+                    @error('filter')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -430,7 +432,8 @@
             <div style="margin-left: 1vw;">
                 <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
             </div>
-        </div>
+        </div>            
+        </form>
     </div>
 </div>
 <!-- END OF BANNER SECTION -->
@@ -545,7 +548,7 @@ END OF OUR PROGRAMS SECTION -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Online-Course-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Skill Snack</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
@@ -559,7 +562,7 @@ END OF OUR PROGRAMS SECTION -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/online-course?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Woki-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Woki</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
@@ -573,7 +576,7 @@ END OF OUR PROGRAMS SECTION -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Our_Programs_Card_BG_Dummy.png" style="width:100%;height:11vw;object-fit:cover" class="img-fluid" alt="">
+                <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Krest</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
@@ -1163,7 +1166,7 @@ END OF OUR PROGRAMS SECTION -->
                 <div style="width:80%;margin-left:2vw">
                     <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
-                        <input class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
+                        <input required class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
                         <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                     </div>

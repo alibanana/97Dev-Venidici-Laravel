@@ -10,19 +10,19 @@
     
         <div class="content" style="padding:2vw">
             @if (session()->has('error'))
-            <div class="p-3 mt-2 mb-0">
-                <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                    {{ session()->get('error_validation_on_password_modal') }}     
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="p-3 mt-2 mb-0">
+                    <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
+                        {{ session()->get('error_validation_on_password_modal') }}     
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
             @endif
+
             <form action="{{ route('customer.update_profile', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('put')        
-
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
                         @if(session('success'))
@@ -41,7 +41,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">@if(Auth::user()->avatar) Current @endif Display Picture</p>
                         @if(Auth::user()->avatar)
-                        <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw" alt=""> <br>
+                            <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw" alt="Failed to load user's profile image.."> <br>
                         @endif
 
                         <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
@@ -52,7 +52,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="John Doe" value="{{Auth::user()->name}}">
+                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                placeholder="John Doe" value="{{ old('name', Auth::user()->name) }}">
                         </div>  
                         @error('name')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -62,7 +63,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Insert telephone number" value="{{Auth::user()->userDetail->telephone}}">
+                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                placeholder="Insert telephone number" value="{{ old('telephone', Auth::user()->userDetail->telephone) }}">
                         </div>  
                         @error('telephone')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -72,11 +74,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Gender</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <select name="gender" id=""  class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
+                            <select name="gender" id="" class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
                                 <option disabled selected>Choose Gender</option>
-                                <option value="Male" @if(Auth::user()->userDetail->gender == 'Male') selected @endif>Male</option>
-                                <option value="Female" @if(Auth::user()->userDetail->gender == 'Female') selected @endif>Female</option>
-                                <option value="None of the above" @if(Auth::user()->userDetail->gender == 'None of the above') selected @endif>None of the above</option>
+                                <option value="Male" @if(old('gender', Auth::user()->userDetail->gender) == 'Male') selected @endif>Male</option>
+                                <option value="Female" @if(old('gender', Auth::user()->userDetail->gender) == 'Female') selected @endif>Female</option>
+                                <option value="None of the above" @if(old('gender', Auth::user()->userDetail->gender) == 'None of the above') selected @endif>None of the above</option>
                             </select>
                         </div> 
                         @error('gender')
@@ -91,16 +93,16 @@
                     <div class="col-6" style="">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Birthdate</p>
                         <?php
-                            if(Auth::user()->userDetail->birthdate != null)
-                            {
+                            if (Auth::user()->userDetail->birthdate != null) {
                                 $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
-                                $date=$birthdate[0];
-                                $time=$birthdate[1];
+                                $date = $birthdate[0];
+                                $time = $birthdate[1];
                             }
                         ?>
                         <div class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                            <input type="date" name="birthdate" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="dd.mm.yyyy" @if(Auth::user()->userDetail->birthdate != null) value="{{$date}}" @endif>
+                            <input type="date" name="birthdate" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                placeholder="dd.mm.yyyy" value="{{ old('birthdate') ?? $date ?? null }}">
                         </div>  
                         @error('birthdate')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -110,7 +112,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Company/Institution</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
-                            <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Binus University International" value="{{Auth::user()->userDetail->company}}">
+                            <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                placeholder="Binus University International" value="{{ old('company', Auth::user()->userDetail->company) }}">
                         </div>  
                         @error('company')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -120,7 +123,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pekerjaan</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-friends"></i>
-                            <input type="text" name="occupancy" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Mahasiswa" value="{{Auth::user()->userDetail->occupancy}}">
+                            <input type="text" name="occupancy" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                placeholder="Mahasiswa" value="{{ old('occupancy', Auth::user()->userDetail->occupancy )}}">
                         </div>  
                         @error('occupancy')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -132,18 +136,17 @@
 
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:2vw">Shipping Address</p>
                     
-
                     <div class="col-12 col-sm-6" >
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                 @if(Auth::user()->userDetail->province_id == null)
-                                <option value="" disabled selected>Pilih Provinsi</option>
+                                    <option value="" disabled selected>Pilih Provinsi</option>
                                 @endif
                                 @foreach($provinces as $province)
-                                    <option value="{{$province->id}}" @if( Auth::user()->userDetail->province_id == $province->id) selected @endif>{{$province->name }}</option>
+                                    <option value="{{ $province->id }}" @if( old('province_id', Auth::user()->userDetail->province_id) == $province->id) selected @endif>{{$province->name }}</option>
                                 @endforeach
-                            </select>                    
+                            </select>
                         </div>  
                         @error('province_id')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -159,7 +162,7 @@
                                 <option value=" " disabled selected>Pilih Kota</option>
                                 @endif
                                 @foreach($cities as $city)
-                                    <option value="{{$city->city_id}}"  @if( Auth::user()->userDetail->city_id == $city->city_id) selected @endif>{{$city->name }}</option>
+                                    <option value="{{ $city->city_id }}"  @if( old('city_id', Auth::user()->userDetail->city_id) == $city->city_id) selected @endif>{{$city->name }}</option>
                                 @endforeach
                             </select>                    
                         </div>  
@@ -172,7 +175,8 @@
                     <div class="col-12" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="address" id="" rows="4" class="normal-text"   style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
+                            <textarea name="address" value="{{ old('address', Auth::user()->userDetail->address) }}" rows="4" class="normal-text"
+                                style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -445,10 +449,10 @@
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
             Email kamu belum di verifikasi. Belum dapat email? 
-            <span>
+            <span style="display: inline-block;">
                 <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
-                <button type="submit" style="background: none;border:none">
+                <button type="submit" style="background: none;border:none;color:#2B6CAA">
                     Kirim ulang email
                 </button>
                 </form>

@@ -31,29 +31,48 @@ use App\Mail\FinishCourseMail;
 */ 
 class AssessmentController extends Controller
 {
+    private $notifications; // Stores combined notifications data.
+    private $informations; // Stores notification (isInformation == true) data.
+    private $transactions; // Stores notification (isInformation == false) data for a particular user.
+    private $cart_count; // Stores cart data for a particular user.
+
+    private function resetNavbarData() {
+        $navbarData = Helper::getNavbarData();
+        $this->notifications = $navbarData['notifications'];
+        $this->informations = $navbarData['informations'];
+        $this->transactions = $navbarData['transactions'];
+        $this->cart_count = $navbarData['cart_count'];
+    }
     // Shows the Assessment Completed page.
     public function completedIndex(Request $request, $course_id) {
         $agent = new Agent();
         if($agent->isPhone()){
             return view('client/mobile/under-construction');
         }
+        $this->resetNavbarData();
+
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+
         $course = auth()->user()->courses()->where('course_id', $course_id)->firstOrFail();
         $assessment_pivot = auth()->user()->assessments()->where('course_id', $course_id)->firstOrFail()->pivot;
 
         if ($assessment_pivot->status != "finished") abort(404);
         
-        $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-        $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
+        // $cart_count = Cart::with('course')
+        //     ->where('user_id', auth()->user()->id)
+        //     ->count();
+        // $transactions = Notification::where(
+        //     [   
+        //         ['user_id', '=', auth()->user()->id],
+        //         ['isInformation', '=', 0],
                 
-            ]
-            )->orderBy('created_at', 'desc')->get();
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        //     ]
+        //     )->orderBy('created_at', 'desc')->get();
+        // $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+        // $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
         
         //change user_course status to completed
         $user_course = auth()->user()->courses()->where('course_id', $course_id)->firstOrFail();

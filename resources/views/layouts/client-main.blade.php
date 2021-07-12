@@ -129,6 +129,7 @@
     <!-- <div style="padding:4vw;background-color:#2B6CAA;z-index:99;position:fixed;width:100%" class="sticky-top" id="mobile-navbar">
 
     </div> -->
+    @if( !Request::is('login') )
     <!-- START OF MOBILE NAVBAR -->
     <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none">
       <div >
@@ -160,11 +161,10 @@
             but hey, it's pure CSS magic.
             -->
             <ul id="menu">
-              @if (Auth::check())
+              <!-- @if (Auth::check())
               <div class="row m-0">
                 <div class="col-6 p-0">
                   <div style="text-align:left">
-                    <!-- <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log Out</a> -->
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log Out</button>
@@ -175,7 +175,7 @@
                 
               </div>
               <br>
-              @endif
+              @endif -->
               <!-- <a href="/login" class="btnSignUp" style="margin-bottom: 20px;">Login</a> -->
               <table id="menuKiri">
                 <tr>
@@ -198,6 +198,17 @@
                   <a href="/community" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Community</a>
                   </td>
                 </tr>
+                @if (Auth::check())
+
+                <tr>
+                  <td  style="padding-top:4vw">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log Out</button>
+                    </form>
+                  </td>
+                </tr>
+                @endif
         
       
 
@@ -229,7 +240,7 @@
       </div>
     </div>
     <!-- END OF MOBILE NAVBAR -->
-  
+    @endif
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
@@ -607,12 +618,12 @@
     <!-- END OF FOOTER DESKTOP-->
     <!-- START OF FOOTER MOBILE -->
     <div class="row m-0 page-container footer-mobile" style="padding-top:5vw;padding-bottom:10vw;display:none">
-      <div class="col-12 p-0">
+      <div class="col-12">
           <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:6vw" class="img-fluid" alt="">
           <p style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:3vw;font-size:3vw">Platform anak kekinian <br>   buat naklukin karir impian!</p>
       </div>
 
-      <div class="row m-0 p-0">
+      <div class="row m-0">
         <div class="col-4 p-0">
             <p style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Site Map</p>
             <div style="">
@@ -695,7 +706,6 @@
 
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
     <script>
-      console.log("test");
       var path = "{{ route('autocomplete') }}";
 
       $('input.typeahead').typeahead({

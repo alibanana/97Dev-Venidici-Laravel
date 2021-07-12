@@ -9,7 +9,7 @@
             <div style="display:flex;justify-content:space-between">
                 <a href="/signup" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">General Info</span></a>
             </div>
-            <form action="{{ route('store_interest') }}" method="POST">
+            <form action="{{ route('custom-auth.register') }}" method="POST">
             @csrf                   
                 <div class="row m-0 page-container">
                     <div class="col-12 p-0">
