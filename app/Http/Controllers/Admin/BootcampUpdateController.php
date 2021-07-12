@@ -13,15 +13,16 @@ use App\Models\CourseType;
 use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
+use App\Models\Teacher;
+
 
 class BootcampUpdateController extends Controller
 {
     // Shows the Admin Bootcamp Update Page.
     public function edit(Request $request, $id) {
         $course = Course::findOrFail($id);
-
-        if ($course->courseType->type != 'Course') {
-            return redirect()->route('admin.woki-courses.edit', $id);
+        if ($course->courseType->type != 'Bootcamp') {
+            return redirect()->route('admin.bootcamp.edit', $id);
         }
 
         $course_categories = CourseCategory::select('id', 'category')->get();
@@ -40,7 +41,6 @@ class BootcampUpdateController extends Controller
         }
 
         $teachers = $teachers->get();
-        
         return view('admin/bootcamp/update', compact('course', 'course_categories', 'teachers'));
     }
 
@@ -52,13 +52,11 @@ class BootcampUpdateController extends Controller
             'subtitle'              => 'required',
             'course_category_id'    => 'required',
             'preview_video_link'    => 'required|starts_with:https://www.youtube.com/embed/',
-            'assessment_id'         => 'required|integer',
             'description'           => 'required',
             'requirements'          => 'required|array|min:1',
         ])->setAttributeNames([
             'course_category_id'    => 'category',
             'preview_video_link'    => 'video link',
-            'assessment_id'         => 'assessment',
         ])->validate();
 
         $course = Course::findOrFail($id);
@@ -70,7 +68,7 @@ class BootcampUpdateController extends Controller
 
         if ($request->has('thumbnail')) {
             unlink($course->thumbnail);
-            $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/online-courses/');
+            $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/bootcamp/');
         }
 
         $course->save();
@@ -86,9 +84,9 @@ class BootcampUpdateController extends Controller
         }
 
         if ($course->wasChanged()) {
-            $message = 'Online Course (' . $course->title . ') -> Basic Information, has been updated';
+            $message = 'Bootcamp (' . $course->title . ') -> Basic Information, has been updated';
         } else {
-            $message = 'No changes was made to Online Course (' . $course->title . ')';
+            $message = 'No changes was made to Bootcamp (' . $course->title . ')';
         }
 
         return redirect()->route('admin.bootcamp.edit', $id)
@@ -116,9 +114,9 @@ class BootcampUpdateController extends Controller
         $course->save();
 
         if ($course->wasChanged()) {
-            $message = 'Online Course (' . $course->title . '), "Pricing & Enrollment Status" has been updated';
+            $message = 'Bootcamp (' . $course->title . '), "Pricing & Enrollment Status" has been updated';
         } else {
-            $message = 'No changes was made to Online Course (' . $course->title . ')';
+            $message = 'No changes was made to Bootcamp (' . $course->title . ')';
         }
 
         return redirect()->route('admin.bootcamp.edit', $id)
