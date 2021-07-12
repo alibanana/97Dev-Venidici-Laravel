@@ -560,13 +560,13 @@ END OF OUR PROGRAMS SECTION -->
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
-        <a href="/online-course?cat=Featured" style="text-decoration:none">
+        <a href="/woki?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Woki-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Woki</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
-                    <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Woki</a>
+                    <a href="/woki?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Woki</a>
                 </div>
             </div>
         </a>
@@ -877,7 +877,7 @@ END OF OUR PROGRAMS SECTION -->
             </div>
             @endforeach
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="/woki" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/woki?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
 
             </div>
 

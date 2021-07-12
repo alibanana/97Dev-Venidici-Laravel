@@ -78,7 +78,6 @@
                                 <option disabled selected>Choose Gender</option>
                                 <option value="Male" @if(old('gender', Auth::user()->userDetail->gender) == 'Male') selected @endif>Male</option>
                                 <option value="Female" @if(old('gender', Auth::user()->userDetail->gender) == 'Female') selected @endif>Female</option>
-                                <option value="None of the above" @if(old('gender', Auth::user()->userDetail->gender) == 'None of the above') selected @endif>None of the above</option>
                             </select>
                         </div> 
                         @error('gender')
@@ -113,7 +112,7 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
                             <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                                placeholder="Binus University International" value="{{ old('company', Auth::user()->userDetail->company) }}">
+                                placeholder="Universitas Indonesia" value="{{ old('company', Auth::user()->userDetail->company) }}">
                         </div>  
                         @error('company')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -133,62 +132,81 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:2vw">Shipping Address</p>
-                    
-                    <div class="col-12 col-sm-6" >
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
-                        <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                @if(Auth::user()->userDetail->province_id == null)
-                                    <option value="" disabled selected>Pilih Provinsi</option>
-                                @endif
-                                @foreach($provinces as $province)
-                                    <option value="{{ $province->id }}" @if( old('province_id', Auth::user()->userDetail->province_id) == $province->id) selected @endif>{{$province->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>  
-                        @error('province_id')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-12 col-sm-6">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
-                        <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                @if(Auth::user()->userDetail->city_id == null)
-                                <option value=" " disabled selected>Pilih Kota</option>
-                                @endif
-                                @foreach($cities as $city)
-                                    <option value="{{ $city->city_id }}"  @if( old('city_id', Auth::user()->userDetail->city_id) == $city->city_id) selected @endif>{{$city->name }}</option>
-                                @endforeach
-                            </select>                    
-                        </div>  
-                        @error('city_id')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-12" style="margin-top:1vw">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
-                        <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="address" value="{{ old('address', Auth::user()->userDetail->address) }}" rows="4" class="normal-text"
-                                style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
-                        </div>  
-                        @error('address')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
                     <div class="col-12" style="text-align:right;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Profile</button>
+                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update General Info</button>
                     </div>  
+
+                    </form>
+                    
+                            
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:2vw">Shipping Address</p>
+                    <form action="{{ route('customer.update_shipping', Auth::user()->id) }}" method="POST">
+                    @csrf
+                    @method('put') 
+                    <div class="row m-0">
+                        <div class="col-12 col-sm-6" >
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
+                            <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                                <select onchange="if (this.value) window.location.href='/dashboard?province='+this.value+'#edit-profile' " name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                    @if(Auth::user()->userDetail->province_id == null)
+                                        <option value="" disabled selected>Pilih Provinsi</option>
+                                    @endif
+                                    @foreach($provinces as $province)
+                                        <option value="{{ $province->id }}" 
+                                        @if(Auth::user()->userDetail->province_id != null && !Request::get('province'))
+                                            @if(Auth::user()->userDetail->province_id == $province->id)
+                                            selected
+                                            @endif
+                                        @elseif(Request::get('province') == $province->id) 
+                                        selected 
+                                        @endif
+                                        
+                                        >{{$province->name }}</option>                                    
+                                    @endforeach
+                                </select>
+                            </div>  
+                            @error('province_id')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
+                            <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                                <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                    @if(Auth::user()->userDetail->city_id == null)
+                                    <option value=" " disabled selected>Pilih Kota</option>
+                                    @endif
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->city_id }}"  @if( old('city_id', Auth::user()->userDetail->city_id) == $city->city_id) selected @endif>{{$city->name }}</option>
+                                    @endforeach
+                                </select>                    
+                            </div>  
+                            @error('city_id')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-12" style="margin-top:1vw">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
+                            <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                                <textarea name="address" value="{{ old('address', Auth::user()->userDetail->address) }}" rows="4" class="normal-text"
+                                    style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
+                            </div>  
+                            @error('address')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-12" style="text-align:right;padding-top:3vw">
+                            <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Shipping Address</button>
+                        </div>  
+                    </div>
+                    </form>
                 </div>
-            </form>
         </div>
     </div>
 </div>
