@@ -11,6 +11,7 @@ use App\Models\Krest;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Agent;
 use App\Models\Review;
+use App\Helper\Helper;
 
 class BootcampController extends Controller
 {
@@ -20,13 +21,11 @@ class BootcampController extends Controller
     private $cart_count; // Stores cart data for a particular user.
 
     private function resetNavbarData() {
-        $this->notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-        $this->informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
-        $this->transactions = Notification::where([   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0]
-            ])->orderBy('created_at', 'desc')->get();
-        $this->cart_count = Cart::with('course')->where('user_id', auth()->user()->id)->count();
+        $navbarData = Helper::getNavbarData();
+        $this->notifications = $navbarData['notifications'];
+        $this->informations = $navbarData['informations'];
+        $this->transactions = $navbarData['transactions'];
+        $this->cart_count = $navbarData['cart_count'];
     }
 
     public function index()

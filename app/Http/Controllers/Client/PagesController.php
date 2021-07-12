@@ -20,7 +20,6 @@ use App\Models\Review;
 use App\Models\InstructorPosition;   
 use Spatie\Browsershot\Browsershot;
 
-
 /*
 |--------------------------------------------------------------------------
 | Client PagesController Class.

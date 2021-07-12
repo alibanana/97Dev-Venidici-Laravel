@@ -38,13 +38,11 @@ class OnlineCourseController extends Controller {
     private $cart_count; // Stores cart data for a particular user.
 
     private function resetNavbarData() {
-        $this->notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-        $this->informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
-        $this->transactions = Notification::where([   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0]
-            ])->orderBy('created_at', 'desc')->get();
-        $this->cart_count = Cart::with('course')->where('user_id', auth()->user()->id)->count();
+        $navbarData = Helper::getNavbarData();
+        $this->notifications = $navbarData['notifications'];
+        $this->informations = $navbarData['informations'];
+        $this->transactions = $navbarData['transactions'];
+        $this->cart_count = $navbarData['cart_count'];
     }
 
     // Shows the Client's Main Online-Course Page.
@@ -125,18 +123,24 @@ class OnlineCourseController extends Controller {
         $agent = new Agent();
         if($agent->isPhone())
             return view('client/mobile/under-construction');
+        $this->resetNavbarData();
+
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+
+        // $cart_count = Cart::with('course')
+        //     ->where('user_id', auth()->user()->id)
+        //     ->count();
         
-        $cart_count = Cart::with('course')
-            ->where('user_id', auth()->user()->id)
-            ->count();
-        
-        $transactions = Notification::where(
-            [   
-                ['user_id', '=', auth()->user()->id],
-                ['isInformation', '=', 0],
+        // $transactions = Notification::where(
+        //     [   
+        //         ['user_id', '=', auth()->user()->id],
+        //         ['isInformation', '=', 0],
                 
-            ]
-        )->orderBy('created_at', 'desc')->get();   
+        //     ]
+        // )->orderBy('created_at', 'desc')->get();   
         
         $course = auth()->user()->courses()->where('user_course.course_id', $course_id)->firstOrFail();
         $sections = $course->sections;
@@ -161,8 +165,8 @@ class OnlineCourseController extends Controller {
             $content->save();
         }
 
-        $informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
-        $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        // $informations = Notification::where('isInformation', 1)->orderBy('created_at','desc')->get();
+        // $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations', 'notifications','footer_reviews'));
