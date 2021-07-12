@@ -83,6 +83,7 @@ Route::middleware(['isSuspended'])->group(function () {
     |   - CartController
     |--------------------------------------------------------------------------
     */
+    Route::post('/search-course', [PagesController::class, 'search_course'])->name('search_course');
     Route::get('/', [PagesController::class, 'index'])->name('index');
     Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
     Route::get('/signup', [PagesController::class, 'signup_general_info'])->name('signup_general_info')->middleware('guest');

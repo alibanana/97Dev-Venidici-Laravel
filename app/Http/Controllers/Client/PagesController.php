@@ -121,7 +121,7 @@ class PagesController extends Controller
     }
 
     public function autocomplete(Request $request){
-        $datas = User::where("name", "like", "%{$request->terms}%")->get();
+        $datas = Course::where("title", "like", "%{$request->terms}%")->get();
         return response()->json($datas);
     }
     
@@ -313,5 +313,24 @@ class PagesController extends Controller
         $notification->save();
 
         return redirect($input['link']);
+    }
+    public function search_course(Request $request){
+        if($request->search == null && !$request->has('filter')){
+            return redirect()->back();
+        }
+        // kalau ada filter
+        if($request->has('filter')){
+            if($request->filter == 'Skill Snack'){
+                return redirect('/online-course?search='.$request->search);
+            }
+            elseif($request->filter == 'Woki'){
+                return redirect('/woki?search='.$request->search);
+            }
+        }
+        // kalau search doang (gak ada filter)
+        else{
+            return redirect('/online-course?search='.$request->search);
+
+        }
     }
 }

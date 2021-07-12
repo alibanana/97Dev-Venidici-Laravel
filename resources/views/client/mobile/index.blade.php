@@ -132,7 +132,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pendidikan terakhir kamu</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-university"></i>
-                            <select name="education" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="education"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="" disabled selected>Pilih Pendidikan</option>
                                 <option value="SMP">SMP</option>
                                 <option value="SMA">SMA</option>
@@ -175,7 +175,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih posisi pengajar yang diinginkan</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-briefcase"></i>
-                            <select name="instructor_position_id" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="instructor_position_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="" disabled selected>Pilih Posisi</option>
                                 @foreach($pengajar_positions as $pos)
                                 <option value="{{$pos->id}}">{{$pos->name}}</option>
@@ -307,7 +307,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Partnership</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-hands-helping"></i>
-                            <select name="collaborator_partnership" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="collaborator_partnership"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Partnership</option>
                                 <option value="Event Collaboration">Event Collaboration</option>
                                 <option value="Brand Activation">Brand Activation</option>
@@ -361,26 +361,29 @@
 <div class="row m-0 banner-background page-container "
     style="height: 100vw; padding-top: 16vw; text-align: center;
     background-image: url({{ $configs['cms.homepage.top-section.background']->value }});    background-size: 120% 100%;">
+    <form action="{{route('search_course')}}" method="post">
+    @csrf
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <p style="font-size:7vw;line-height:7vw;font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
         <p style="font-size:4vw;line-height:5vw;font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</p>
         <div class="grey-input-form" style="display: flex;align-items:center;width:100%;padding:2vw">
-            <input type="text" style="background:transparent;border:none;color: rgba(0, 0, 0, 0.5);font-family:Rubik Regular;font-size:3vw;width:100%" placeholder="Course Title">
+            <input type="text" name="search" style="background:transparent;border:none;color: rgba(0, 0, 0, 0.5);font-family:Rubik Regular;font-size:3vw;width:100%" placeholder="Course Title">
         </div>
         <div class="grey-input-form" style="display: flex;align-items:center;width:100%;margin-top:3vw">
-            <select name="province" id=""  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;font-size:3vw">
-                <option value="" disabled selected>Pilih Kategori</option>
-                <option value="">On-Demand</option>
-                <option value="">Woki</option>
+            <select name="filter"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;font-size:3vw">
+                <option value="None" disabled selected>Pilih Kategori</option>
+                <option value="Skill Snack">Skill Snack</option>
+                <option value="Woki">Woki</option>
             </select>                    
-            @error('province')
+            @error('filter')
                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                 <strong>{{ $message }}</strong>
                 </span>
             @enderror
         </div>  
         <button type="submit" class="btn-search" style="font-size:3vw;width:100%;margin-top:3vw">Search</button>
-    </div>
+    </div>        
+    </form>
 </div>
 <!-- END OF BANNER SECTION -->
 

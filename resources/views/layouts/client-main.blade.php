@@ -129,6 +129,7 @@
     <!-- <div style="padding:4vw;background-color:#2B6CAA;z-index:99;position:fixed;width:100%" class="sticky-top" id="mobile-navbar">
 
     </div> -->
+    @if( !Request::is('login') )
     <!-- START OF MOBILE NAVBAR -->
     <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none">
       <div >
@@ -239,7 +240,7 @@
       </div>
     </div>
     <!-- END OF MOBILE NAVBAR -->
-  
+    @endif
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
@@ -705,7 +706,6 @@
 
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
     <script>
-      console.log("test");
       var path = "{{ route('autocomplete') }}";
 
       $('input.typeahead').typeahead({

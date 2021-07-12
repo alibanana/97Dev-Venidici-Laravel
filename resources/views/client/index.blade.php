@@ -172,7 +172,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pendidikan terakhir kamu</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-university"></i>
-                            <select name="education" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="education"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="" disabled selected>Pilih Pendidikan</option>
                                 <option value="SMP">SMP</option>
                                 <option value="SMA">SMA</option>
@@ -215,7 +215,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih posisi pengajar yang diinginkan</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-briefcase"></i>
-                            <select name="instructor_position_id" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="instructor_position_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="" disabled selected>Pilih Posisi</option>
                                 @foreach($pengajar_positions as $pos)
                                 <option value="{{$pos->id}}">{{$pos->name}}</option>
@@ -347,7 +347,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Partnership</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-hands-helping"></i>
-                            <select name="collaborator_partnership" id=""  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="collaborator_partnership"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Partnership</option>
                                 <option value="Event Collaboration">Event Collaboration</option>
                                 <option value="Brand Activation">Brand Activation</option>
@@ -404,23 +404,25 @@
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.sub-heading']->value }}</p>
+        <form action="{{route('search_course')}}" method="post">
+        @csrf
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
                 
-                <input type="text" class="small-text typeahead" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Course Title">
+                <input type="text" name="search" class="small-text typeahead" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Course Title">
                 
             </div>
             <div style="margin-left: 1vw;">
             <!--
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                    <select name="province" id=""  class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                        <option value="" disabled selected>Pilih Kategori</option>
-                        <option value="">Skill Snack</option>
-                        <option value="">Woki</option>
+                    <select name="filter" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                        <option value="None" disabled selected>Pilih Kategori</option>
+                        <option value="Skill Snack">Skill Snack</option>
+                        <option value="Woki">Woki</option>
                     </select>                    
-                    @error('province')
+                    @error('filter')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -430,7 +432,8 @@
             <div style="margin-left: 1vw;">
                 <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
             </div>
-        </div>
+        </div>            
+        </form>
     </div>
 </div>
 <!-- END OF BANNER SECTION -->
