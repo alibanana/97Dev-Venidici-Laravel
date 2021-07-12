@@ -26,6 +26,9 @@ use App\Models\Order;
 use App\Models\Promotion;
 use App\Models\Notification;
 use App\Models\Review;
+use App\Models\ReferralCodeCounter;
+use App\Models\User;
+use App\Models\UserDetail;
 
 class CheckoutController extends Controller
 {
@@ -315,6 +318,8 @@ class CheckoutController extends Controller
             $payment_object = $result['data'];
             $payment_status = $payment_object['data']['attributes']['status'];
 
+            $isUserFirstTransactionFlag = $this->isUserFirstTransaction();
+
             $invoice->status = $payment_status;
             $invoice->save();
 
@@ -330,11 +335,27 @@ class CheckoutController extends Controller
                         }
                     }
                 }
-                // add stars to user
-                $star_mulitiplication = (int)($invoice->grand_total/30000);
-                $star_added = $star_mulitiplication*12;
+                // Add stars to user based on how much the user paid.
+                $star_mulitiplication = (int) ($invoice->grand_total / 30000);
+                $star_added = $star_mulitiplication * 12;
                 if($star_added != 0)
-                    Helper::addStars(auth()->user(),$star_added,'Pembelian Venidici On-Demand');
+                    Helper::addStars(auth()->user(), $star_added, 'Pembelian Venidici On-Demand');
+
+                // Check if user registered with a referral code && the user has registered on the current month &&
+                // that its the user's first transaction.
+                $referred_by_code = auth()->user()->userDetail->referred_by_code;
+                if ($referred_by_code && $this->isUserCreatedAtDateValid() && $isUserFirstTransactionFlag) {
+                    // Get referral code counter for a particular referral_code for this month.
+                    $referralCodeCounter = $this->getReferralCodeCounterByReferralCode($referred_by_code);
+                    if ($referralCodeCounter->counter < 5) {
+                        $referralCodeCounter->counter += 1;
+                        $referralCodeCounter->save();
+                        // Add 60 points to the owner of the referred_by_code & to the current user.
+                        Helper::addStars(User::find($referralCodeCounter->user_id), 60, 'penggunaan Referral Code anda');
+                        Helper::addStars(auth()->user(), 60 , 'penggunaan Referral Code '. $referred_by_code);
+                    }
+                }
+
                 Mail::to(auth()->user()->email)->send(new InvoiceMail($invoice));
             }
 
@@ -542,6 +563,7 @@ class CheckoutController extends Controller
         return redirect()->back()->with($message_topic, $message_value);
     }
 
+    // Method to check if user's cart data containes artKit.
     private function checkCartHasNoArtKit() {
         foreach (auth()->user()->carts as $cart) {
             if($cart->withArtOrNo) return false;
@@ -549,6 +571,7 @@ class CheckoutController extends Controller
         return true;
     }
 
+    // Method to generate a dynamic message for transaction notification.
     private function generateDescriptionStringForNotification(Invoice $invoice) {
         $string = ""; $x = 1; $length = count($invoice->orders);
         foreach ($invoice->orders as $order) {
@@ -563,4 +586,34 @@ class CheckoutController extends Controller
         return $string;
     }
 
+    // Method to check if user has registered on the current month.
+    private function isUserCreatedAtDateValid() {
+        $createdAt = Carbon::parse(auth()->user()->created_at);
+        $createdAtPlus30Days = Carbon::parse(auth()->user()->created_at)->addDays(30);
+        return Carbon::now()->between($createdAt, $createdAtPlus30Days);
+    }
+
+    // Method to check if current transaction is the user's first transaction.
+    private function isUserFirstTransaction() {
+        $paidOrCompletedInvoices = auth()->user()->invoices()
+            ->where('status', 'paid')->orWhere('status', 'completed')->get();
+        return $paidOrCompletedInvoices->isEmpty();
+    }
+
+    // Method to get referralCodeCounter data by referralCode. If not found,
+    // create new referralCodeCounter data.
+    private function getReferralCodeCounterByReferralCode($referral_code) {
+        $referralCodeCounter = ReferralCodeCounter::where('referral_code', $referral_code)
+            ->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))->first();
+            // ->whereDate('created_at', Carbon::today())->first(); // Buat testing.
+        if (!$referralCodeCounter) {
+            $user_id = UserDetail::where('referral_code', $referral_code)->first()->user_id;
+            return ReferralCodeCounter::create([
+                'user_id' => $user_id,
+                'referral_code' => $referral_code
+            ]);
+        }
+        return $referralCodeCounter;
+    }
 }

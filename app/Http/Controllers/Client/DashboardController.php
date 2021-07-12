@@ -106,7 +106,9 @@ class DashboardController extends Controller
         ]);
 
         if($validated->fails()) 
-            return redirect('/dashboard#edit-profile')->withErrors($validated);
+            return redirect('/dashboard#edit-profile')
+                ->withErrors($validated)
+                ->withInput($request->all());
         else 
             $validated = $validated->validate();
         

@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
-use Illuminate\Support\Str;
 use App\Helper\Helper;
 use PDF;
 
@@ -17,16 +15,8 @@ use App\Models\Config;
 use App\Models\TrustedCompany;
 use App\Models\FakeTestimony;
 use App\Models\User;
-use App\Models\Hashtag;
-use App\Models\UserDetail;
 use App\Models\Course;
-use App\Models\Province;
 use App\Models\Review;
-use App\Models\Cart;
-use App\Models\City;
-use App\Models\UserHashtag;
-use App\Models\Invoice;
-use App\Models\Order;
 use App\Models\InstructorPosition;   
 use Spatie\Browsershot\Browsershot;
 
@@ -124,123 +114,6 @@ class PagesController extends Controller
         $datas = Course::where("title", "like", "%{$request->terms}%")->get();
         return response()->json($datas);
     }
-    
-    public function signup_interest(Request $request)
-    {
-        $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
-        if(!$request->session()->get('name')) 
-            return redirect()->route('signup_general_info');
-
-        $interests = Hashtag::all();
-        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
-        return view('client/auth/signup-interests', compact('interests','footer_reviews'));
-    }
-    
-
-    public function signup_general_info(){
-        $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
-        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
-        return view('client/auth/signup',compact('footer_reviews'));
-    }
-
-    public function storeGeneralInfo(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required',
-            'telephone' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'response' => 'required',
-            'referral_code' => '',
-        ]);
-
-        $request->session()->put('name', $validated['name']);
-        $request->session()->put('telephone', $validated['telephone']);
-        $request->session()->put('email', $validated['email']);
-        $request->session()->put('password', $validated['password']);
-        $request->session()->put('response', $validated['response']);
-
-        if($validated['referral_code'])
-            $request->session()->put('referral_code', $validated['referral_code']);
-
-        return redirect()->route('signup_interest');
-    }
-
-    public function storeInterest(Request $request)
-    {
-        $validated = $request->validate([
-            'interests' => 'required|array'
-        ]);
-
-        // Get all Referal Codes
-        $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
-
-        // Check whether referral code exists
-        if($request->session()->get('referral_code'))
-        {
-            if(!in_array($request->session()->get('referral_code'), $referralCodes)){
-                return redirect('/signup')->with('message','Referral code tidak ditemukan');
-            }
-        }
-
-        $hashtag_ids= [];
-        foreach($validated['interests'] as $hashtag_id => $flag)
-        {
-            if($flag == '1') 
-                $hashtag_ids[] = $hashtag_id;
-        }
-
-        if(count($hashtag_ids) > 3)
-            return redirect()->back()->with('message','message');
-
-        $user = User::create([
-            'name'      => $request->session()->get('name'),
-            'email'     => $request->session()->get('email'),
-            'password'  => Hash::make($request->session()->get('password'))
-        ]);
-
-        // Generate New Referral Code
-        $newReferralCode = substr($request->session()->get('name'), 0,3).Str::random(3);
-        
-        // selama referralnya belom ada
-        while (in_array($newReferralCode, $referralCodes)) {
-            //buat referral baru
-            $newReferralCode = substr($request->session()->get('name'), 0,3).Str::random(3);
-
-        }
-        if($request->session()->get('referral_code'))
-            $referredByCode = $request->session()->get('referral_code');
-        else
-            $referredByCode = null;
-            
-        $user_detail = UserDetail::create([
-            'user_id'               => $user->id,
-            'telephone'             => $request->session()->get('telephone'),
-            'referral_code'         => strtoupper($newReferralCode),
-            'referred_by_code'      => $referredByCode,
-            'response'              => $request->session()->get('response')
-        ]);
-
-        //here store to user_hashtag table
-        $user->hashtags()->attach($hashtag_ids);
-    
-        $request->session()->flush();
-        
-        event(new Registered($user));
-        
-        Auth::login($user);
-
-        return redirect()->route('customer.dashboard');
-    }
-
 
     public function online_course_index(){
         $agent = new Agent();
