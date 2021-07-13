@@ -22,6 +22,8 @@ use App\Models\Order;
 use App\Models\Promotion;
 use Jenssegers\Agent\Agent;
 use App\Helper\Helper;
+use App\Helper\CourseHelper;
+
 class WokiController extends Controller
 {
     private $notifications; // Stores combined notifications data.
@@ -96,7 +98,7 @@ class WokiController extends Controller
         $course = Course::findOrFail($id);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
+        
         if (Auth::check()) {
             $this->resetNavbarData();
 
@@ -104,8 +106,9 @@ class WokiController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-
-            return view('client/woki/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews'));
+            
+            $courseSuggestions = CourseHelper::getCourseSuggestion(3,'Woki');
+            return view('client/woki/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
         }
 
         return view('client/woki/detail', compact('course','reviews','footer_reviews'));

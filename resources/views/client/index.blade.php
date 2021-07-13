@@ -674,7 +674,15 @@ END OF OUR PROGRAMS SECTION -->
                             <div class="container">
                                 <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw"
                                     alt="Image not available..">
-                                <div class="top-left card-tag small-text">{{ $course->courseType->type }}</div>
+                                <div class="top-left card-tag small-text">
+                                    @if ($course->courseType->type == "Course")
+                                    Skill-Snack
+                                    @elseif ($course->courseType->type == "Woki")
+                                    Woki
+                                    @elseif ($course->courseType->type == "Bootcamp")
+                                    Bootcamp
+                                    @endif
+                                </div>
                             </div>
                             <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                                 <div style="height:6vw">
@@ -814,11 +822,22 @@ END OF OUR PROGRAMS SECTION -->
                                     {{$teacher->name}}
                                 @endforeach
                                 </p>
-                                @if ($course->wokiCourseDetail->event_duration)
-                                    <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">{{ $course->wokiCourseDetail->event_duration }} mins</p>
-                                @else
-                                    <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">- mins</p>
+                                <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
+                                @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                    @if ($course->total_duration)
+                                        {{ explode(',', $course->total_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @elseif ($course->courseType->type == 'Woki')
+                                    @if ($course->wokiCourseDetail->event_duration)
+                                        {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
                                 @endif
+                                </p>
+                                
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                 <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
@@ -902,11 +921,22 @@ END OF OUR PROGRAMS SECTION -->
                                     {{$teacher->name}}
                                 @endforeach
                                 </p>
-                                @if ($course->total_duration)
-                                    <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">{{ explode(',', $course->total_duration)[0] }} mins</p>
-                                @else
-                                    <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">- mins</p>
+                                <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
+                                @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                    @if ($course->total_duration)
+                                        {{ explode(',', $course->total_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @elseif ($course->courseType->type == 'Woki')
+                                    @if ($course->wokiCourseDetail->event_duration)
+                                        {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
                                 @endif
+                                </p>
+                                
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                 <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>

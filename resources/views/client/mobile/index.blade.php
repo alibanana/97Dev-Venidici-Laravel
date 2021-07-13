@@ -536,267 +536,216 @@
             </div>
     </div>
     <!-- MOST POPULAR -->
-    <div class="course-content" id="course-popular" style="padding:0vw">
+    <div class="course-content" id="course-popular" style="">
         <div class="row m-0 p-0">
-            <div class="col-12" style="margin-top:2vw">
+            @foreach($most_popular_courses as $course)
+            <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE COURSE CARD -->
 
-                    <!-- START OF ONE RED COURSE CARD -->
-                    <div class="course-card-red">
+                    @if ($course->courseType->type == "Course")
+                        <div class="course-card-green">
+                    @elseif ($course->courseType->type == "Woki")
+                        <div class="course-card-red">
+                    @elseif ($course->courseType->type == "Bootcamp")
+                        <div class="course-card-blue">
+                    @endif
                         <div class="container">
-                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
-                            <div class="top-left card-tag " style="font-size:2.5vw">Woki</div>
+                            <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
+                            <div class="top-left card-tag " style="font-size:2.5vw">
+                                @if ($course->courseType->type == "Course")
+                                Skill-Snack
+                                @elseif ($course->courseType->type == "Woki")
+                                Woki
+                                @elseif ($course->courseType->type == "Bootcamp")
+                                Bootcamp
+                                @endif
+                            </div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                <a href="/woki/sertifikat-menjadi-seniman" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">How to be funny?</a>
-                                <i style="font-size:4vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
+                            <div style="height:20vw">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
+                                    @if ($course->courseType->type == 'Course')
+                                        <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                    @elseif ($course->courseType->type == 'Woki')
+                                        <a href="/woki/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+
+                                    @elseif ($course->courseType->type == 'Bootcamp')
+                                        <a href="/bootcamp/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+
+                                    @endif
+                                    <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
+                                </div>
+                                @foreach ($course->hashtags as $tag)
+                                    <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">{{ $tag->hashtag }}</a>
+                                @endforeach
                             </div>
-                            <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">Personal development</a>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
-                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
+                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw">{{ $course->description }}</p>
                             </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">Mr. Raditya Dika</p>
-                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">100 mins</p>
+
+                            <div style="display: flex;justify-content:space-between;margin-top:3vw" >
+                                <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                @foreach($course->teachers as $teacher)
+
+                                    @if ($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif (!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>
+                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                    @if ($course->total_duration)
+                                        {{ explode(',', $course->total_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @elseif ($course->courseType->type == 'Woki')
+                                    @if ($course->wokiCourseDetail->event_duration)
+                                        {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @endif
+                                </p>
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">4/5</p>
+                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">{{ $course->average_rating }}/5</p>
                                 <div style="display: flex;justify-content:center;margin-left:1vw">
-                                    <i style="color:#F4C257;font-size:3vw" class="fas fa-star "></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
+                                    @for ($i = 1; $i < 6; $i++)
+                                        @if ($i <= $course->average_rating)
+                                            @if ($i == 1)
+                                                <i style="color:#F4C257;font-size:3vw" class="fas fa-star"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
+                                            @endif
+                                        @else
+                                            @if ($i == 1)
+                                                <i style="color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
+                                            @endif
+                                        @endif
+                                    @endfor
                                 </div>
                             </div>
-                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:2vw">
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp 300,000</p>
-                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button text-nowrap" style="font-size:3.5vw">Enroll Now</a>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                @if ($course->price == 0)
+                                    <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">FREE</p>
+                                @else
+                                    <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                @endif
+                                @if ($course->courseType->type == 'Course')
+                                    <a href="/online-course/{{$course->id}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                    @elseif ($course->courseType->type == 'Woki')
+                                    <a href="/woki/{{ $course->id }}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                    @elseif ($course->courseType->type == 'Bootcamp')
+                                    <a href="/bootcamp/{{ $course->id }}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                @endif
                             </div>
-
-                        </div>
-                    </div>
-                    <!-- END OF ONE RED COURSE CARD -->
-                </div>
-            </div>
-            <div class="col-12" style="margin-top:2vw">
-                <div style="display: flex;justify-content:center">
-
-                    <!-- START OF ONE BLUE COURSE CARD -->
-                    <div class="course-card-blue">
-                        <div class="container">
-                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
-                            <div class="top-left card-tag " style="font-size:2.5vw">Workshop</div>
-                        </div>
-                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                <a href="/woki/sertifikat-menjadi-seniman" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">How to be funny?</a>
-                                <i style="font-size:4vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
-                            </div>
-                            <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">Personal development</a>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
-                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">Mr. Raditya Dika</p>
-                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">100 mins</p>
-                            </div>
-                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">4/5</p>
-                                <div style="display: flex;justify-content:center;margin-left:1vw">
-                                    <i style="color:#F4C257;font-size:3vw" class="fas fa-star "></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:2vw">
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp 300,000</p>
-                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button text-nowrap" style="font-size:3.5vw">Enroll Now</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- END OF ONE BLUE COURSE CARD -->
-                </div>
-            </div>
-            <div class="col-12" style="margin-top:2vw">
-                <div style="display: flex;justify-content:center">
-                    <!-- START OF ONE GREEN COURSE CARD -->
-
-                    <div class="course-card-green">
-                        <div class="container">
-                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
-                            <div class="top-left card-tag " style="font-size:2.5vw">On-Demand</div>
-                        </div>
-                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                <a href="/woki/sertifikat-menjadi-seniman" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">How to be funny?</a>
-                                <i style="font-size:4vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
-                            </div>
-                            <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">Personal development</a>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
-                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">Mr. Raditya Dika</p>
-                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">100 mins</p>
-                            </div>
-                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">4/5</p>
-                                <div style="display: flex;justify-content:center;margin-left:1vw">
-                                    <i style="color:#F4C257;font-size:3vw" class="fas fa-star "></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:2vw">
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp 300,000</p>
-                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button text-nowrap" style="font-size:3.5vw">Enroll Now</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- END OF ONE GREEN COURSE CARD -->
-                </div>
-            </div>
             
+                        </div>
+                    </div>
+                    <!-- END OF ONE COURSE CARD -->
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
     <!-- END OF MOST POPULAR -->
     <!-- WOKI -->
     <div class="course-content" id="course-woki" style="display:none">
         <div class="row m-0 p-0">
+            @foreach($wokis as $course)
             <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
-
                     <!-- START OF ONE RED COURSE CARD -->
+
                     <div class="course-card-red">
                         <div class="container">
-                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
-                            <div class="top-left card-tag " style="font-size:2.5vw">Woki</div>
+                            <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
+                            <div class="top-left card-tag " style="font-size:2.5vw">On-Demand</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                <a href="/woki/sertifikat-menjadi-seniman" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">How to be funny?</a>
-                                <i style="font-size:4vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
-                            </div>
-                            <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">Personal development</a>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
-                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">Mr. Raditya Dika</p>
-                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">100 mins</p>
-                            </div>
-                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">4/5</p>
-                                <div style="display: flex;justify-content:center;margin-left:1vw">
-                                    <i style="color:#F4C257;font-size:3vw" class="fas fa-star "></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
+                            <div style="height:20vw">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
+                                    <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                    <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
                                 </div>
+                                @foreach ($course->hashtags as $tag)
+                                    <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">{{ $tag->hashtag }}</a>
+                                @endforeach
                             </div>
-                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:2vw">
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp 300,000</p>
-                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button text-nowrap" style="font-size:3.5vw">Enroll Now</a>
+                            <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
+                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw">{{ $course->description }}</p>
                             </div>
 
+                            <div style="display: flex;justify-content:space-between;margin-top:3vw" >
+                                <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                @foreach($course->teachers as $teacher)
+
+                                    @if ($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif (!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>
+                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                    @if ($course->total_duration)
+                                        {{ explode(',', $course->total_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @elseif ($course->courseType->type == 'Woki')
+                                    @if ($course->wokiCourseDetail->event_duration)
+                                        {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @endif
+                                </p>
+                            </div>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">{{ $course->average_rating }}/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    @for ($i = 1; $i < 6; $i++)
+                                        @if ($i <= $course->average_rating)
+                                            @if ($i == 1)
+                                                <i style="color:#F4C257;font-size:3vw" class="fas fa-star"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
+                                            @endif
+                                        @else
+                                            @if ($i == 1)
+                                                <i style="color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
+                                            @endif
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                @if ($course->price == 0)
+                                    <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">FREE</p>
+                                @else
+                                    <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                @endif
+                                <a href="/online-course/{{$course->id}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                            </div>
+            
                         </div>
                     </div>
                     <!-- END OF ONE RED COURSE CARD -->
                 </div>
             </div>
-            <div class="col-12 p-0" style="margin-top:2vw">
-                <div style="display: flex;justify-content:center">
-
-                    <!-- START OF ONE RED COURSE CARD -->
-                    <div class="course-card-red">
-                        <div class="container">
-                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
-                            <div class="top-left card-tag " style="font-size:2.5vw">Woki</div>
-                        </div>
-                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                <a href="/woki/sertifikat-menjadi-seniman" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">How to be funny?</a>
-                                <i style="font-size:4vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
-                            </div>
-                            <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">Personal development</a>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
-                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">Mr. Raditya Dika</p>
-                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">100 mins</p>
-                            </div>
-                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">4/5</p>
-                                <div style="display: flex;justify-content:center;margin-left:1vw">
-                                    <i style="color:#F4C257;font-size:3vw" class="fas fa-star "></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:2vw">
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp 300,000</p>
-                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button text-nowrap" style="font-size:3.5vw">Enroll Now</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- END OF ONE RED COURSE CARD -->
-                </div>
-            </div>
-            <div class="col-12 p-0" style="margin-top:2vw">
-                <div style="display: flex;justify-content:center">
-
-                    <!-- START OF ONE RED COURSE CARD -->
-                    <div class="course-card-red">
-                        <div class="container">
-                            <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
-                            <div class="top-left card-tag " style="font-size:2.5vw">Woki</div>
-                        </div>
-                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                <a href="/woki/sertifikat-menjadi-seniman" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">How to be funny?</a>
-                                <i style="font-size:4vw;" role="button"  aria-controls="woki-collapse" data-toggle="collapse" href="#woki-collapse" class="fas fa-caret-down"></i>
-                            </div>
-                            <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">Personal development</a>
-                            <div class="collapse" id="woki-collapse" style="margin-top:1vw">
-                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">Mr. Raditya Dika</p>
-                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">100 mins</p>
-                            </div>
-                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">4/5</p>
-                                <div style="display: flex;justify-content:center;margin-left:1vw">
-                                    <i style="color:#F4C257;font-size:3vw" class="fas fa-star "></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                    <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:2vw">
-                                <p  style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp 300,000</p>
-                                <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button text-nowrap" style="font-size:3.5vw">Enroll Now</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- END OF ONE RED COURSE CARD -->
-                </div>
-            </div>
+            @endforeach
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
                 <a href="/woki?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
 
@@ -846,12 +795,21 @@
                                     {{$teacher->name}}
                                 @endforeach
                                 </p>
-                                @if ($course->total_duration)
-                                    <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">{{ $course->total_duration }} mins</p>
+                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                    @if ($course->total_duration)
+                                        {{ explode(',', $course->total_duration)[0] }} mins
                                     @else
-                                    <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">- mins</p>
-
+                                        - mins
+                                    @endif
+                                @elseif ($course->courseType->type == 'Woki')
+                                    @if ($course->wokiCourseDetail->event_duration)
+                                        {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
                                 @endif
+                                </p>
                             </div>
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                 <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">{{ $course->average_rating }}/5</p>

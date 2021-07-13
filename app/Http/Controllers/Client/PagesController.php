@@ -203,4 +203,23 @@ class PagesController extends Controller
 
         return redirect($input['link']);
     }
+    public function search_course(Request $request){
+        if($request->search == null && !$request->has('filter')){
+            return redirect()->back();
+        }
+        // kalau ada filter
+        if($request->has('filter')){
+            if($request->filter == 'Skill Snack'){
+                return redirect('/online-course?search='.$request->search);
+            }
+            elseif($request->filter == 'Woki'){
+                return redirect('/woki?search='.$request->search);
+            }
+        }
+        // kalau search doang (gak ada filter)
+        else{
+            return redirect('/online-course?search='.$request->search);
+
+        }
+    }
 }
