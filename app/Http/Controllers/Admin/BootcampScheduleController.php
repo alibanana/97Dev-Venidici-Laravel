@@ -15,7 +15,7 @@ class BootcampScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $schedules = new BootcampSchedule;
 
@@ -59,7 +59,7 @@ class BootcampScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $validated = $request->validate([
             'date_time' => 'required',
@@ -68,6 +68,7 @@ class BootcampScheduleController extends Controller
         ]);
 
         $schedule = new BootcampSchedule();
+        $schedule->course_id    = $id;
         $schedule->date_time    = $validated['date_time'];
         $schedule->title        = $validated['title'];
         $schedule->detail       = $validated['detail'];
@@ -75,7 +76,10 @@ class BootcampScheduleController extends Controller
 
         $message = 'New Schedule (' . $schedule->title . ') has been added to the database.';
 
-        return redirect()->route('admin.bootcampschedule.index')->with('message', $message);
+        return redirect()->route('admin.bootcamp.edit', $id)
+            ->with('message', $message)
+            ->with('page-option', 'schedule-page');
+        
     }
 
     /**
@@ -95,12 +99,12 @@ class BootcampScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $schedule = BootcampSchedule::findOrFail($id);
+    // public function edit($id)
+    // {
+    //     $schedule = BootcampSchedule::findOrFail($id);
 
-        return view('admin/bootcampschedule/update', compact('schedule'));
-    }
+    //     return view('admin/bootcampschedule/update', compact('schedule'));
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -116,10 +120,10 @@ class BootcampScheduleController extends Controller
             'title'     => 'required',
             'detail'    => 'required',
         ]);
-
-        $schedule = BootcampSchedule::findOrFail($id);
-        $schedule->name = $validated['name'];
-        $schedule->description = $validated['description'];
+        $schedule = BootcampSchedule::where('course_id',$id)->first();
+        $schedule->date_time    = $validated['date_time'];
+        $schedule->title        = $validated['title'];
+        $schedule->detail       = $validated['detail'];
 
         $schedule->save();
 
@@ -129,7 +133,9 @@ class BootcampScheduleController extends Controller
             $message = 'No changes was made to Schedule (' . $schedule->title . ')';
         }
 
-        return redirect()->route('admin.bootcampschedule.index')->with('message', $message);
+        return redirect()->route('admin.bootcamp.edit', $id)
+            ->with('message', $message)
+            ->with('page-option', 'schedule-page');
     }
 
     /**
@@ -140,11 +146,13 @@ class BootcampScheduleController extends Controller
      */
     public function destroy($id)
     {
-        $schedule = BootcampSchedule::findOrFail($id);
+        $schedule = BootcampSchedule::where('course_id',$id)->first();
         $schedule->delete();
 
         $message = 'Schedule (' . $schedule->title . ') has been deleted.';
         
-        return redirect()->route('admin.bootcampschedule.index')->with('message', $message);
+        return redirect()->route('admin.bootcamp.edit', $id)
+            ->with('message', $message)
+            ->with('page-option', 'schedule-page');
     }
 }

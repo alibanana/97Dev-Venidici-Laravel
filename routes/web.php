@@ -260,12 +260,12 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/bootcamp/{id}/attach-teacher', [AdminBootcampUpdateController::class, 'attachTeacher'])->name('bootcamp.attach-teacher');
         Route::put('/bootcamp/{id}/detach-teacher', [AdminBootcampUpdateController::class, 'detachTeacher'])->name('bootcamp.detach-teacher');
         // BootcampScheduleController
-        Route::get('/bootcampschedule', [AdminTeacherController::class, 'index'])->name('bootcampschedule.index');
-        Route::get('/bootcampschedule/create', [AdminTeacherController::class, 'create'])->name('bootcampschedule.create');
-        Route::post('/bootcampschedule', [AdminTeacherController::class, 'store'])->name('bootcampschedule.store');
-        Route::get('/bootcampschedule/{id}/update', [AdminTeacherController::class, 'edit'])->name('bootcampschedule.edit');
-        Route::put('/bootcampschedule/{id}', [AdminTeacherController::class, 'update'])->name('bootcampschedule.update');
-        Route::delete('/bootcampschedule/{id}', [AdminTeacherController::class, 'destroy'])->name('bootcampschedule.destroy');
+        // Route::get('/bootcampschedule', [AdminBootcampScheduleController::class, 'index'])->name('bootcampschedule.index');
+        // Route::get('/bootcampschedule/create', [AdminBootcampScheduleController::class, 'create'])->name('bootcampschedule.create');
+        Route::post('/bootcampschedule/{id}/store', [AdminBootcampScheduleController::class, 'store'])->name('bootcampschedule.store');
+        Route::get('/bootcampschedule/{id}/update', [AdminBootcampScheduleController::class, 'edit'])->name('bootcampschedule.edit');
+        Route::put('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'update'])->name('bootcampschedule.update');
+        Route::delete('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'destroy'])->name('bootcampschedule.destroy');
         // ArtSupplyController
         Route::get('/woki-courses/art-supplies', [AdminArtSupplyController::class, 'index'])->name('art-supplies.index');
         Route::get('/woki-courses/art-supplies/create', [AdminArtSupplyController::class, 'create'])->name('art-supplies.create');

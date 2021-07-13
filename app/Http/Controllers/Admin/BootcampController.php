@@ -125,7 +125,6 @@ class BootcampController extends Controller
             'to' => $courses_to,
             'total' => $courses_count
         ];
-
         return view('admin/bootcamp/index', compact('course_categories', 'courses', 'courses_data'));
 
     }

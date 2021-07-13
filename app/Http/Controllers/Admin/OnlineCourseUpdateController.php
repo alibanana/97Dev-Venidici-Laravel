@@ -32,8 +32,11 @@ class OnlineCourseUpdateController extends Controller
     public function edit(Request $request, $id) {
         $course = Course::findOrFail($id);
 
-        if ($course->courseType->type != 'Course') {
+        if ($course->courseType->type == 'Woki') {
             return redirect()->route('admin.woki-courses.edit', $id);
+        }
+        elseif($course->courseType->type == 'Bootacmp') {
+            return redirect()->route('admin.bootcamp.edit', $id);
         }
 
         $course_categories = CourseCategory::select('id', 'category')->get();

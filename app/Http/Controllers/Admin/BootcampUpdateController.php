@@ -14,6 +14,7 @@ use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
 use App\Models\Teacher;
+use App\Models\BootcampSchedule;
 
 
 class BootcampUpdateController extends Controller
@@ -21,8 +22,11 @@ class BootcampUpdateController extends Controller
     // Shows the Admin Bootcamp Update Page.
     public function edit(Request $request, $id) {
         $course = Course::findOrFail($id);
-        if ($course->courseType->type != 'Bootcamp') {
-            return redirect()->route('admin.bootcamp.edit', $id);
+        if ($course->courseType->type == 'Woki') {
+            return redirect()->route('admin.woki-courses.edit', $id);
+        }
+        elseif($course->courseType->type == 'Course') {
+            return redirect()->route('admin.online-courses.edit', $id);
         }
 
         $course_categories = CourseCategory::select('id', 'category')->get();
@@ -41,7 +45,9 @@ class BootcampUpdateController extends Controller
         }
 
         $teachers = $teachers->get();
-        return view('admin/bootcamp/update', compact('course', 'course_categories', 'teachers'));
+        $schedules = BootcampSchedule::where('course_id',$id)->get();
+
+        return view('admin/bootcamp/update', compact('course', 'course_categories', 'teachers','schedules'));
     }
 
     // Updates data as seen under the Update Online Course -> Basic Informations tab.
@@ -58,6 +64,7 @@ class BootcampUpdateController extends Controller
             'course_category_id'    => 'category',
             'preview_video_link'    => 'video link',
         ])->validate();
+
 
         $course = Course::findOrFail($id);
         $course->course_category_id = $validated['course_category_id'];
@@ -166,4 +173,5 @@ class BootcampUpdateController extends Controller
             ->with('message', $result['message'])
             ->with('page-option', 'teacher');
     }
+    
 }

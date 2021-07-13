@@ -52,6 +52,8 @@ class CourseHelper {
                 $message = 'Online Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
             } elseif ($course->courseType->type == "Woki") {
                 $message = 'Woki Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
+            } elseif ($course->courseType->type == "Bootcamp") {
+                $message = 'Woki Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
             }
 
             return [
@@ -77,6 +79,8 @@ class CourseHelper {
             if ($course->courseType->type == "Course") {
                 $message = 'Online Course (' . $course->title;
             } elseif ($course->courseType->type == "Woki") {
+                $message = 'Woki Course (' . $course->title;
+            } elseif ($course->courseType->type == "Bootcamp") {
                 $message = 'Woki Course (' . $course->title;
             }
 
