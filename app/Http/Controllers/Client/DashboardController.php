@@ -60,18 +60,6 @@ class DashboardController extends Controller
         $informations = $this->informations;
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
-
-       
-        // $cart_count = Cart::with('course')
-        //     ->where('user_id', auth()->user()->id)
-        //     ->count();
-        // $transactions = Notification::where(
-        //     [   
-        //         ['user_id', '=', auth()->user()->id],
-        //         ['isInformation', '=', 0],
-                
-        //     ]
-        //     )->orderBy('created_at', 'desc')->get();
         
         $orders = Order::whereHas('invoice', function ($query){
             $query->where(
@@ -88,9 +76,6 @@ class DashboardController extends Controller
                 })->orderBy('orders.created_at', 'desc')->get();
 
         $interests = Hashtag::all();
-        // $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        // $notifications = Notification::where('isInformation',1)->orWhere('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
 
         $usableStarsCount = Helper::getUsableStars(auth()->user());       
         $mytime = Carbon::now();

@@ -409,9 +409,8 @@
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
-                
-                <input type="text" name="search" class="small-text typeahead" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Course Title">
-                
+                <input type="text" name="search" class="small-text typeahead" autocomplete="off"
+                    style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Course Title">
             </div>
             <div style="margin-left: 1vw;">
             <!--

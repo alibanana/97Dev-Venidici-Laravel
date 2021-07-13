@@ -716,10 +716,9 @@
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
     <script>
       var path = "{{ route('autocomplete') }}";
-
       $('input.typeahead').typeahead({
-        source: function(terms, process){
-          return $.get(path, {terms:terms}, function(data) {
+        source: function(query, process){
+          return $.get(path, { term: query }, function(data) {
             return process(data);
           });
         }

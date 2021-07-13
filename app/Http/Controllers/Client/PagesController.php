@@ -127,8 +127,9 @@ class PagesController extends Controller
     }
 
     public function autocomplete(Request $request){
-        $datas = User::where("name", "like", "%{$request->terms}%")->get();
-        return response()->json($datas);
+        return Course::select('title')
+            ->where("title", "like", "%{$request->term}%")
+            ->pluck('title');
     }
 
     public function online_course_index(){
