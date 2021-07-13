@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Axiom\Rules\StrongPassword;
 use Jenssegers\Agent\Agent;
 use App\Helper\Helper;
+use App\Helper\CourseHelper;
 use Carbon\Carbon;
 use Throwable;
 use Axiom\Rules\TelephoneNumber;
@@ -104,6 +105,8 @@ class DashboardController extends Controller
             }
         }
 
+		// Get courses suggestions.
+        $courseSuggestions = CourseHelper::getCourseSuggestion(3);
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
@@ -120,7 +123,54 @@ class DashboardController extends Controller
         }
 
         return view('client/user-dashboard',
-            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount','footer_reviews'));
+            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews'));
+    }
+
+    public function update_shipping(Request $request,$id)
+    {
+        $input = $request->all();
+        $validated = Validator::make($input,[
+            'province_id'   => 'required',
+            'city_id'       => 'required',
+            'address'       => 'required',
+        ]);
+
+        if($validated->fails()) 
+            return redirect('/dashboard#edit-profile')
+                ->withErrors($validated)
+                ->withInput($request->all());
+        else 
+            $validated = $validated->validate();
+        
+        
+        $user = User::findOrFail($id);
+
+        $user_detail = $user->userDetail;
+        $user_detail->province_id   = $validated['province_id'];
+        $user_detail->city_id       = $validated['city_id'];
+        $user_detail->address       = $validated['address'];
+        
+        //check if the user update the shipping for the first time
+        if(!$user->isShippingUpdated){
+            $user->isShippingUpdated = TRUE;
+        }
+
+    
+        //check if the user update the profile for the first time
+        if(!$user->isProfileUpdated && $user->isShippingUpdated && $user->isGeneralInfoUpdated){
+            $user->isProfileUpdated = TRUE;
+            // here insert star reward
+            //tambah 15 stars
+            Helper::addStars(auth()->user(),15,'Completing Personal Data');
+            $user_detail->save();
+            return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
+        }
+        $user_detail->save();
+
+
+
+        return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil!');
+
     }
 
     public function update_shipping(Request $request,$id)
