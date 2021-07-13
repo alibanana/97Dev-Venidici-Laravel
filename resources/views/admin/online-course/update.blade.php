@@ -86,9 +86,9 @@
                             <select name="course_category_id" id="" class="form-control form-control-user" required>
                                 @foreach ($course_categories as $category)
                                     @if ($category->id == $course->course_category_id)
-                                        <option value="{{ $course->course_category_id }}" selected>{{ $category->category }}</option>
+                                        <option value="{{ $category->id }}" selected>{{ $category->category }}</option>
                                     @else
-                                        <option value="{{ $course->course_category_id }}">{{ $category->category }}</option>
+                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -504,7 +504,7 @@
                                     <th>No.</th>
                                     <th>Teacher</th>
                                     <th>Description</th>
-                                    <th >Action</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -607,7 +607,7 @@ function duplicateHashtag() {
 </script>
 <script>
     function disableInput() {
-    document.getElementById("price-input").disabled = strue;
+    document.getElementById("price-input").disabled = true;
     console.log('disabled')
     }
     function enableInput() {

@@ -21,6 +21,7 @@ use App\Models\Review;
 use App\Models\Order;
 use App\Models\Promotion;
 use Jenssegers\Agent\Agent;
+use App\Helper\CourseHelper;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,16 +105,17 @@ class OnlineCourseController extends Controller {
         $course = Course::findOrFail($id);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
+        // Get courses suggestions.
         if (Auth::check()) {
             $this->resetNavbarData();
-
+            
             $notifications = $this->notifications;
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-
-            return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews'));
+            
+            $courseSuggestions = CourseHelper::getCourseSuggestion(3,'Course');
+            return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
         }
 
         return view('client/online-course/detail', compact('course','reviews','footer_reviews'));

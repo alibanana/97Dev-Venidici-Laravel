@@ -52,6 +52,8 @@ class CourseHelper {
                 $message = 'Online Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
             } elseif ($course->courseType->type == "Woki") {
                 $message = 'Woki Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
+            } elseif ($course->courseType->type == "Bootcamp") {
+                $message = 'Woki Course (' . $course->title . ') publish_status updated to ' . $course->publish_status;
             }
 
             return [
@@ -77,6 +79,8 @@ class CourseHelper {
             if ($course->courseType->type == "Course") {
                 $message = 'Online Course (' . $course->title;
             } elseif ($course->courseType->type == "Woki") {
+                $message = 'Woki Course (' . $course->title;
+            } elseif ($course->courseType->type == "Bootcamp") {
                 $message = 'Woki Course (' . $course->title;
             }
 
@@ -225,4 +229,20 @@ class CourseHelper {
         }
     }
 
+    // Function to get courses suggestions
+    public static function getCourseSuggestion($size, $type = null) {
+        $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
+        $courses = Course::with('hashtags')->get()->sortByDesc(function ($course) use ($userHashtags) {
+            $similarityPoint = 0;
+            foreach ($course->hashtags as $hashtag) {
+                if (in_array($hashtag->hashtag, $userHashtags))
+                    $similarityPoint++;
+            }
+            return $similarityPoint;
+        });
+
+        return $type ? $courses->filter(function ($course) use ($type) {
+            return $course->courseType->type == $type;
+        })->take($size) : $courses->take($size);
+    }
 }

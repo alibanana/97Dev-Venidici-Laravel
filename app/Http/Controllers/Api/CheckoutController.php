@@ -105,7 +105,6 @@ class CheckoutController extends Controller
 
         // Validations if orders has artKit.
         if ($request->action == 'createPaymentObject') {
-            dd('test');
             $validation_rules = array_merge($validation_rules, [
                 'courier' => 'required',
                 'service' => 'required',

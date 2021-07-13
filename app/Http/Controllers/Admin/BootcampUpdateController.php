@@ -9,45 +9,33 @@ use App\Helper\Helper;
 use App\Helper\CourseHelper;
 
 use App\Models\CourseCategory;
+use App\Models\CourseType;
 use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
-use App\Models\Hashtag;
-use App\Models\Assessment;
 use App\Models\Teacher;
+use App\Models\BootcampSchedule;
 
-/*
-|--------------------------------------------------------------------------
-| Admin OnlineCourseUpdateController Class.
-|
-| Description:
-| This controller is responsible in handling the admin's online course update
-| pages and methods related to it. It has been separated from the 
-| OnlineCourseController as it would be too complex.
-|--------------------------------------------------------------------------
-*/
-class OnlineCourseUpdateController extends Controller
+
+class BootcampUpdateController extends Controller
 {
-    // Shows the Admin Online Course Update Page.
+    // Shows the Admin Bootcamp Update Page.
     public function edit(Request $request, $id) {
         $course = Course::findOrFail($id);
-
         if ($course->courseType->type == 'Woki') {
             return redirect()->route('admin.woki-courses.edit', $id);
         }
-        elseif($course->courseType->type == 'Bootacmp') {
-            return redirect()->route('admin.bootcamp.edit', $id);
+        elseif($course->courseType->type == 'Course') {
+            return redirect()->route('admin.online-courses.edit', $id);
         }
 
         $course_categories = CourseCategory::select('id', 'category')->get();
-        $available_assessments = Assessment::doesntHave('course')->get();
-        $tags = Hashtag::all();
 
         $teachers = new Teacher;
         
         if ($request->has('search_teacher')) {
             if ($request->search_teacher == "") {
-                return redirect()->route('admin.online-courses.edit', $course->id)
+                return redirect()->route('admin.bootcamp.edit', $course->id)
                     ->with('page-option', 'teacher');
             } else {
                 $teachers = $teachers->where('name', 'like', "%".$request->search_teacher."%");
@@ -57,28 +45,26 @@ class OnlineCourseUpdateController extends Controller
         }
 
         $teachers = $teachers->get();
-        
-        return view('admin/online-course/update', compact('course', 'course_categories', 'available_assessments', 'tags', 'teachers'));
+        $schedules = BootcampSchedule::where('course_id',$id)->get();
+
+        return view('admin/bootcamp/update', compact('course', 'course_categories', 'teachers','schedules'));
     }
 
     // Updates data as seen under the Update Online Course -> Basic Informations tab.
     public function updateBasicInfo(Request $request, $id) {
         $validated = Validator::make($request->all(), [
-            'title' => 'required',
-            'thumbnail' => 'mimes:jpeg,jpg,png',
-            'subtitle' => 'required',
-            'course_category_id' => 'required',
-            'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
-            'assessment_id' => 'required|integer',
-            'description' => 'required',
-        'requirements' => 'required|array|min:1',
-            'features' => 'required|array|min:1',
-            'hashtags' => 'required|array|min:1'
+            'title'                 => 'required',
+            'thumbnail'             => 'mimes:jpeg,jpg,png',
+            'subtitle'              => 'required',
+            'course_category_id'    => 'required',
+            'preview_video_link'    => 'required|starts_with:https://www.youtube.com/embed/',
+            'description'           => 'required',
+            'requirements'          => 'required|array|min:1',
         ])->setAttributeNames([
-            'course_category_id' => 'category',
-            'preview_video_link' => 'video link',
-            'assessment_id' => 'assessment',
+            'course_category_id'    => 'category',
+            'preview_video_link'    => 'video link',
         ])->validate();
+
 
         $course = Course::findOrFail($id);
         $course->course_category_id = $validated['course_category_id'];
@@ -89,28 +75,10 @@ class OnlineCourseUpdateController extends Controller
 
         if ($request->has('thumbnail')) {
             unlink($course->thumbnail);
-            $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/online-courses/');
+            $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/bootcamp/');
         }
 
         $course->save();
-
-        $wasAssessmentChanged = false;
-
-        if ($course->assessment) {
-            if ($course->assessment->id != $validated['assessment_id']) {
-                $assessment = $course->assessment; 
-                $assessment->course_id = null;
-                $assessment->save();
-                if (!$wasAssessmentChanged) $wasAssessmentChanged = true;
-            }
-        }
-
-        if ($validated['assessment_id'] != '0') {
-            $assessment = Assessment::find($validated['assessment_id']);
-            $assessment->course_id = $course->id;
-            $assessment->save();
-            if (!$wasAssessmentChanged) $wasAssessmentChanged = true;
-        }
 
         $course->courseRequirements()->delete();
         foreach ($request->requirements as $requirement_value) {
@@ -122,32 +90,13 @@ class OnlineCourseUpdateController extends Controller
             }
         }
 
-        $course->courseFeatures()->delete();
-        foreach ($request->features as $feature_value) {
-            if ($feature_value != "") {
-                $new_feature = new CourseFeature;
-                $new_feature->course_id = $course->id;
-                $new_feature->feature = $feature_value;
-                $new_feature->save();
-            }
-        }
-
-        $course->hashtags()->detach();
-        $added_hashtag_ids = [];
-        foreach ($request->hashtags as $tag_id) {
-            if (!in_array($tag_id, $added_hashtag_ids)) {
-                $added_hashtag_ids[] = $tag_id;
-            }
-        }
-        $course->hashtags()->attach($added_hashtag_ids);
-
-        if ($course->wasChanged() || $wasAssessmentChanged) {
-            $message = 'Online Course (' . $course->title . ') -> Basic Information, has been updated';
+        if ($course->wasChanged()) {
+            $message = 'Bootcamp (' . $course->title . ') -> Basic Information, has been updated';
         } else {
-            $message = 'No changes was made to Online Course (' . $course->title . ')';
+            $message = 'No changes was made to Bootcamp (' . $course->title . ')';
         }
 
-        return redirect()->route('admin.online-courses.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $id)
             ->with('message', $message)
             ->with('page-option', 'basic-informations');
     }
@@ -172,12 +121,12 @@ class OnlineCourseUpdateController extends Controller
         $course->save();
 
         if ($course->wasChanged()) {
-            $message = 'Online Course (' . $course->title . '), "Pricing & Enrollment Status" has been updated';
+            $message = 'Bootcamp (' . $course->title . '), "Pricing & Enrollment Status" has been updated';
         } else {
-            $message = 'No changes was made to Online Course (' . $course->title . ')';
+            $message = 'No changes was made to Bootcamp (' . $course->title . ')';
         }
 
-        return redirect()->route('admin.online-courses.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $id)
             ->with('message', $message)
             ->with('page-option', 'pricing-and-enrollment');
     }
@@ -190,7 +139,7 @@ class OnlineCourseUpdateController extends Controller
 
         $result = CourseHelper::updatePublishStatusById($id, $validated['publish_status']);
 
-        return redirect()->route('admin.online-courses.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $id)
             ->with('message', $result['message'])
             ->with('page-option', 'publish-status');
     }
@@ -205,7 +154,7 @@ class OnlineCourseUpdateController extends Controller
             Course::findOrFail($course_id),
             Teacher::findOrFail($validated['teacher_id']));
 
-        return redirect()->route('admin.online-courses.edit', $course_id)
+        return redirect()->route('admin.bootcamp.edit', $course_id)
             ->with('message', $result['message'])
             ->with('page-option', 'teacher');
     }
@@ -220,8 +169,9 @@ class OnlineCourseUpdateController extends Controller
             Course::findOrFail($course_id),
             Teacher::findOrFail($validated['teacher_id']));
 
-        return redirect()->route('admin.online-courses.edit', $course_id)
+        return redirect()->route('admin.bootcamp.edit', $course_id)
             ->with('message', $result['message'])
             ->with('page-option', 'teacher');
     }
+    
 }

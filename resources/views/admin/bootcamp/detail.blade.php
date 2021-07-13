@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Woki Course Detail')
+@section('title', 'Venidici Online Course Detail')
 
 @section('container')
 
@@ -25,14 +25,9 @@
             <h1 class="mb-0 mb-3 text-gray-800">{{ $course->title }}</h1>
         </div>
         @if ($course->price == 0)
-            <h4 style="">FREE (No Art Kit)</h4>
+            <h4 style="">FREE</h4>
         @else
-            <h4 style="">Rp{{ $course->price }} (No Art Kit)</h4>
-        @endif
-        @if ($course->priceWithArtKit == 0)
-            <h4 style="">FREE (With Art Kit)</h4>
-        @else
-            <h4 style="">Rp{{ $course->priceWithArtKit }} (With Art Kit)</h4>
+            <h4 style="">Rp. {{ $course->price }}</h4>
         @endif
         <div style="display: flex;font-size:1.5vw" class="mb-4">
             {{ $course->average_rating }}
@@ -40,13 +35,13 @@
                 @for ($i = 1; $i < 6; $i++)
                     @if ($i <= $course->average_rating)
                         @if ($i == 1)
-                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                            <i style="color:#F4C257" class="fas fa-star"></i>
                         @else
                             <i style="margin-left:0.2vw;color:#F4C257" class="fas fa-star"></i>
                         @endif
                     @else
                         @if ($i == 1)
-                            <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                            <i style="color:#B3B5C2" class="fas fa-star"></i>
                         @else
                             <i style="margin-left:0.2vw;color:#B3B5C2" class="fas fa-star"></i>
                         @endif
@@ -61,7 +56,7 @@
                     <div class="card bg-light text-black shadow">
                         <div class="card-body">
                             Total Course Sold
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $course_sold }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($course->users) }}</div>
                         </div>
                     </div>
 
@@ -69,8 +64,8 @@
                 <div class="col-6">
                     <div class="card bg-light text-black shadow">
                         <div class="card-body">
-                            Total Earnings
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($total_earnings, 0, ',', ',') }}</div>
+                            Total Revenue
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($total_revenue, 0, ',', ',') }}</div>
                         </div>
                     </div>
 
@@ -128,11 +123,8 @@
                                                 <th>No.</th>
                                                 <th>Full Name</th>
                                                 <th>Email</th>
-                                                <th>Qty</th>
-                                                <th>With Art Kit?</th>
                                                 <th>Telephone</th>
-                                                <th>Qty</th>
-                                                <th>With Art Kit?</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -141,14 +133,12 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td>{{ $user->invoices()->orders()->where('course_id','=',$course->id)->get() }}</td>
                                                     @if ($user->userDetail()->exists() && !is_null($user->userDetail->telephone))                                                
                                                         <td>{{ $user->userDetail->telephone }}</td>
                                                     @else
                                                         <td style="color: red">Phone number not available!</td>
                                                     @endif
-                                                    <td>{{ $users_data[$user->id]['qty'] }}</td>
-                                                    <td></td>
+                                                    <td><a href="{{ route('admin.invoices.show', $users_data[$user->id]['invoice_id']) }}">View Invoice</a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

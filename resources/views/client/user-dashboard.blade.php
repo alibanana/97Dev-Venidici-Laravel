@@ -78,7 +78,6 @@
                                 <option disabled selected>Choose Gender</option>
                                 <option value="Male" @if(old('gender', Auth::user()->userDetail->gender) == 'Male') selected @endif>Male</option>
                                 <option value="Female" @if(old('gender', Auth::user()->userDetail->gender) == 'Female') selected @endif>Female</option>
-                                <option value="None of the above" @if(old('gender', Auth::user()->userDetail->gender) == 'None of the above') selected @endif>None of the above</option>
                             </select>
                         </div> 
                         @error('gender')
@@ -113,7 +112,7 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
                             <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                                placeholder="Binus University International" value="{{ old('company', Auth::user()->userDetail->company) }}">
+                                placeholder="Universitas Indonesia" value="{{ old('company', Auth::user()->userDetail->company) }}">
                         </div>  
                         @error('company')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -133,62 +132,81 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:2vw">Shipping Address</p>
-                    
-                    <div class="col-12 col-sm-6" >
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
-                        <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                @if(Auth::user()->userDetail->province_id == null)
-                                    <option value="" disabled selected>Pilih Provinsi</option>
-                                @endif
-                                @foreach($provinces as $province)
-                                    <option value="{{ $province->id }}" @if( old('province_id', Auth::user()->userDetail->province_id) == $province->id) selected @endif>{{$province->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>  
-                        @error('province_id')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-12 col-sm-6">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
-                        <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                @if(Auth::user()->userDetail->city_id == null)
-                                <option value=" " disabled selected>Pilih Kota</option>
-                                @endif
-                                @foreach($cities as $city)
-                                    <option value="{{ $city->city_id }}"  @if( old('city_id', Auth::user()->userDetail->city_id) == $city->city_id) selected @endif>{{$city->name }}</option>
-                                @endforeach
-                            </select>                    
-                        </div>  
-                        @error('city_id')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-12" style="margin-top:1vw">
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
-                        <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <textarea name="address" value="{{ old('address', Auth::user()->userDetail->address) }}" rows="4" class="normal-text"
-                                style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
-                        </div>  
-                        @error('address')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
                     <div class="col-12" style="text-align:right;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Profile</button>
+                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update General Info</button>
                     </div>  
+
+                    </form>
+                    
+                            
+                    <p class="bigger-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:2vw">Shipping Address</p>
+                    <form action="{{ route('customer.update_shipping', Auth::user()->id) }}" method="POST">
+                    @csrf
+                    @method('put') 
+                    <div class="row m-0">
+                        <div class="col-12 col-sm-6" >
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
+                            <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                                <select onchange="if (this.value) window.location.href='/dashboard?province='+this.value+'#edit-profile' " name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                    @if(Auth::user()->userDetail->province_id == null)
+                                        <option value="" disabled selected>Pilih Provinsi</option>
+                                    @endif
+                                    @foreach($provinces as $province)
+                                        <option value="{{ $province->id }}" 
+                                        @if(Auth::user()->userDetail->province_id != null && !Request::get('province'))
+                                            @if(Auth::user()->userDetail->province_id == $province->id)
+                                            selected
+                                            @endif
+                                        @elseif(Request::get('province') == $province->id) 
+                                        selected 
+                                        @endif
+                                        
+                                        >{{$province->name }}</option>                                    
+                                    @endforeach
+                                </select>
+                            </div>  
+                            @error('province_id')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
+                            <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                                <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                    @if(Auth::user()->userDetail->city_id == null)
+                                    <option value=" " disabled selected>Pilih Kota</option>
+                                    @endif
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->city_id }}"  @if( old('city_id', Auth::user()->userDetail->city_id) == $city->city_id) selected @endif>{{$city->name }}</option>
+                                    @endforeach
+                                </select>                    
+                            </div>  
+                            @error('city_id')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-12" style="margin-top:1vw">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat</p>
+                            <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
+                                <textarea name="address" value="{{ old('address', Auth::user()->userDetail->address) }}" rows="4" class="normal-text"
+                                    style="background:transparent;border:none;color: #3B3C43;;width:100%">{{Auth::user()->userDetail->address}}</textarea>                
+                            </div>  
+                            @error('address')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-12" style="text-align:right;padding-top:3vw">
+                            <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Shipping Address</button>
+                        </div>  
+                    </div>
+                    </form>
                 </div>
-            </form>
         </div>
     </div>
 </div>
@@ -871,171 +889,140 @@
     <div class="col-12 p-0" style="margin-top:3vw">
         <div id="saran-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3.5vw;">
-            
-                <div class="carousel-item active" >
-                    <div style="display:flex;justify-content:center">
+                @php $card_counter = 0; @endphp
+                @foreach ($courseSuggestions as $course)
+                    @php $card_counter++; @endphp
+                    
+                    @if ($loop->first)
+                        <div class="carousel-item active" >
+                            <div style="display:flex;justify-content:center">
+                    @elseif ($card_counter == 1)
+                        <div class="carousel-item" >
+                            <div style="display:flex;justify-content:center">
+                    @endif
+                
                         <div>
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green" style="margin-right:2vw">
+                            <!-- START OF ONE COURSE CARD -->
+                            @if ($course->courseType->type == "Course")
+                                <div class="course-card-green" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif" >
+                            @elseif ($course->courseType->type == "Woki")
+                                <div class="course-card-red" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif">
+                            @elseif ($course->courseType->type == "Bootcamp")
+                                <div class="course-card-blue" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif">
+                            @endif
                                 <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
+                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw"
+                                        alt="Image not available..">
+                                    <div class="top-left card-tag small-text">
+                                        @if ($course->courseType->type == "Course")
+                                        Skill-Snack
+                                        @elseif ($course->courseType->type == "Woki")
+                                        Woki
+                                        @elseif ($course->courseType->type == "Bootcamp")
+                                        Bootcamp
+                                        @endif
+                                    </div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse3" data-toggle="collapse" href="#course-collapse3" class="fas fa-caret-down"></i>
+                                    <div style="height:6vw">
+                                        <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
+                                            @if ($course->courseType->type == 'Course')
+                                                <a href="/online-course/{{ $course->id }}" class="normal-text"
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
+                                            @elseif ($course->courseType->type == 'Woki')
+                                                <a href="/woki/{{ $course->id }}" class="normal-text"
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
+                                            @elseif ($course->courseType->type == 'Bootcamp')
+                                                <a href="/bootcamp/{{ $course->id }}" class="normal-text"
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
+                                            @endif
+                                            <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i>
+                                        </div>
+                                        @foreach ($course->hashtags as $tag)
+                                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
+                                        @endforeach
                                     </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
-                                    <div class="collapse" id="course-collapse3" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                                    <div class="collapse" id="courses-collapse{{ $loop->iteration }}" style="margin-top:1vw">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
                                     </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                                        <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+                                    <div style="display: flex;justify-content:space-between;margin-top:1vw">
+                                        <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
+                                            @foreach($course->teachers as $teacher)
+                                                @if ($loop->last && count($course->teachers) != 1)
+                                                dan
+                                                @elseif (!$loop->first)
+                                                ,
+                                                @endif
+                                                {{$teacher->name}}
+                                            @endforeach
+                                            </p>
+                                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
+                                            @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                                @if ($course->total_duration)
+                                                    {{ explode(',', $course->total_duration)[0] }} mins
+                                                @else
+                                                    - mins
+                                                @endif
+                                            @elseif ($course->courseType->type == 'Woki')
+                                                @if ($course->wokiCourseDetail->event_duration)
+                                                    {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                                @else
+                                                    - mins
+                                                @endif
+                                            @endif
+                                        </p>
                                     </div>
                                     <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                            @for ($i = 1; $i < 6; $i++)
+                                                @if ($i <= $course->average_rating)
+                                                    @if ($i == 1)
+                                                        <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                                    @else
+                                                        <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                                    @endif
+                                                @else
+                                                    @if ($i == 1)
+                                                        <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                                                    @else
+                                                        <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                                    @endif
+                                                @endif
+                                            @endfor
                                         </div>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
+                                        {{-- <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                        <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a> --}}
+                                        <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
+                                        @if ($course->price == 0)
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                        @else
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                        @endif
+                                        @if ($course->courseType->type == 'Course')
+                                            <a href="/online-course/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
+                                        @elseif ($course->courseType->type == 'Woki')
+                                            <a href="/woki/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
+                                        @elseif ($course->courseType->type == 'Bootcamp')
+                                            <a href="/bootcamp/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
+                                        @endif
                                     </div>
-                    
                                 </div>
                             </div>
+                            <!-- END OF ONE COURSE CARD -->
                         </div>
-                        <div >
-                            <!-- END OF ONE GREEN COURSE CARD -->
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green" style="margin-left:2vw">
-                                <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
-                                </div>
-                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse4" data-toggle="collapse" href="#course-collapse4" class="fas fa-caret-down"></i>
-                                    </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
-                                    <div class="collapse" id="course-collapse4" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                                        <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
-                                    </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
-                                        <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                        </div>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
-                                    </div>
-                    
-                                </div>
-                            </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item" >
-                    <div style="display:flex;justify-content:center">
-                        <div>
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green" style="margin-right:2vw">
-                                <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
-                                </div>
-                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse3" data-toggle="collapse" href="#course-collapse3" class="fas fa-caret-down"></i>
-                                    </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
-                                    <div class="collapse" id="course-collapse3" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                                        <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
-                                    </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
-                                        <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                        </div>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
-                                    </div>
-                    
-                                </div>
+                        @if ($loop->last || $card_counter == 2)
                             </div>
                         </div>
-                        <div >
-                            <!-- END OF ONE GREEN COURSE CARD -->
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green" style="margin-left:2vw">
-                                <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
-                                </div>
-                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse4" data-toggle="collapse" href="#course-collapse4" class="fas fa-caret-down"></i>
-                                    </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
-                                    <div class="collapse" id="course-collapse4" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                                        <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
-                                    </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
-                                        <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                        </div>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
-                                    </div>
-                    
-                                </div>
-                            </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
-                        </div>
-                    </div>
-                </div>
+                        @endif
+
+                        @php
+                            $new_carousel_item = false;
+                            if ($card_counter == 2) $card_counter = 0;
+                        @endphp
+                    @endforeach
 
             </div>
             <a class="carousel-control-prev"   data-bs-target="#saran-carousel" style="width:2.5vw;" role="button"data-bs-slide="prev">
