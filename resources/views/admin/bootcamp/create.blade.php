@@ -32,7 +32,7 @@
         <!-- Content Row -->
 
         <!-- start of form -->
-        <form action="{{ route('admin.online-courses.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.bootcamp.store') }}" method="POST" enctype="multipart/form-data">
         @csrf           
             <div class="row">
                 <div class="col-6">
@@ -77,6 +77,9 @@
                         <label for="">Category</label> <br>
                         <select name="course_category_id" id="" class="form-control form-control-user" required>
                             <option disabled selected>Choose Category</option>
+                            @foreach ($course_categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->category }}</option>
+                            @endforeach
                         </select>
                         @error('course_category_id')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">

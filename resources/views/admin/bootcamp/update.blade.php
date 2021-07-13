@@ -37,14 +37,14 @@
 
         <!-- START OF BASIC INFORMATION -->
         <div class="course-content" id="basic-informations">
-            <form id="online-course-update-form" action="" method="POST" enctype="multipart/form-data">
+            <form id="online-course-update-form" action="{{ route('admin.bootcamp.update-basic-info', $course->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf  
                 @method('put')         
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Thumbnail</label> <br>
-                            <img src="/assets/images/client/Default_Display_Picture.png" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
+                            <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
                             <br>
                             <br>
                             Click button below to update image
@@ -61,7 +61,7 @@
                             <label for="">Title</label>
                             <input type="text" name="title" class="form-control form-control-user"
                                 id="phone" aria-describedby="" placeholder="Enter couse title"
-                                value="Title" required> 
+                                value="{{ old('title', $course->title) }}" required> 
                             @error('title')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -73,7 +73,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Subtitle</label>
-                            <textarea name="subtitle" id="" rows="3" class="form-control" required>Subtitle</textarea> 
+                            <textarea name="subtitle" id="" rows="3" class="form-control" required>{{ old('subtitle', $course->subtitle) }}</textarea> 
                             @error('subtitle')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -85,8 +85,13 @@
                         <div class="form-group">
                             <label for="">Category</label> <br>
                             <select name="course_category_id" id="" class="form-control form-control-user" required>
-                                <option value="1" selected>Category 1</option>
-                                <option value="2" selected>Category 2</option>
+                                @foreach ($course_categories as $category)
+                                    @if ($category->id == $course->course_category_id)
+                                        <option value="{{ $course->course_category_id }}" selected>{{ $category->category }}</option>
+                                    @else
+                                        <option value="{{ $course->course_category_id }}">{{ $category->category }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                             @error('course_category_id')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -101,7 +106,7 @@
                             <label for="">Embed youtube link for preview  (src only)</label>
                             <input type="text" name="preview_video_link" class="form-control form-control-user"
                                     id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg"
-                                    value="https://www.youtube.com/embed/DSJlhjZNVpg" required>
+                                    value="{{ old('preview_video_link', $course->preview_video) }}" required>
                             @error('preview_video_link')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -148,7 +153,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea name="description" id="" rows="5"  class="form-control form-control-user" required>description</textarea>
+                            <textarea name="description" id="" rows="5"  class="form-control form-control-user" required>{{ old('description', $course->description) }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -200,7 +205,7 @@
 
         <!-- START OF PRICE AND ENROLLMENT -->
         <div class="course-content" id="pricing-enrollment" style="display:none">
-            <form action="" method="POST">
+            <form action="{{ route('admin.bootcamp.update-pricing-enrollment', $course->id) }}" method="POST">
             @csrf
             @method('put') 
                 <div class="row" style="margin-top:2vw">
@@ -242,7 +247,7 @@
                                 <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.)</label> <br>
                                 <label class="form-check-label pt-1" for="pricing_options">Woki Only</label>
                                 <input type="number" name="price" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
-                                    id="phone" aria-describedby="" value="10000" placeholder="e.g. 10000" >
+                                    id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" placeholder="e.g. 10000" >
                             </div>
                             @error('price')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -265,7 +270,7 @@
 
         <!-- START OF PUBLISH STATUS -->
         <div class="course-content" id="publish-status" style="display:none">
-            <form action="" method="POST">
+            <form action="{{ route('admin.bootcamp.update-publish-status', $course->id) }}" method="POST">
             @csrf
             @method('put')
                 <div class="row" style="margin-top:2vw">
@@ -310,7 +315,7 @@
                 <div class="col-sm-12 col-md-8">
                     <div id="dataTable_filter" class="dataTables_filter">
                         <label class="w-100">Search:
-                            <form action="" method="GET">
+                            <form action="{{ route('admin.bootcamp.edit', $course->id) }}" method="GET">
                                 <input name="search_teacher" value="{{ Request::get('search_teacher') }}" type="search" class="form-control form-control-sm w-100" aria-controls="dataTable">
                                 <input type="submit" style="visibility: hidden;" hidden/>
                             </form>
@@ -328,41 +333,45 @@
                                     <th>No.</th>
                                     <th>Teacher</th>
                                     <th>Description</th>
-                                    <th >Action</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td style="text-align:center" class="text-nowrap">
-                                        <img src="/assets/images/client/Default_Display_Picture.png" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
-                                        <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">Name</p>
-                                    </td>
-                                    <td>Description</td>  
-                                    <td>
-                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                <form action="{{ route('admin.woki-courses.detach-teacher', 1) }}" method="post">
-                                                    @csrf
-                                                    @method('put')
-                                                    <div style="padding: 0px 2px">
-                                                        <input type="hidden" name="teacher_id" value="1" hidden>
-                                                        <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to remove this teacher from the course?')">Un-select Teacher</button>
-                                                    </div>
-                                                </form> 
-                                            </div>
-
-                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                <form action="{{ route('admin.woki-courses.attach-teacher', 1) }}" method="post">
-                                                    @csrf
-                                                    @method('put')
-                                                    <div style="padding: 0px 2px">
-                                                        <input type="hidden" name="teacher_id" value="1" hidden>
-                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to add this teacher to the course?')">Select Teacher</button>
-                                                    </div>
-                                                </form> 
-                                            </div>
-                                    </td>
-                                </tr>
+                                @foreach ($teachers as $teacher)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td style="text-align:center" class="text-nowrap">
+                                            <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
+                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }}</p>
+                                        </td>
+                                        <td>{{ $teacher->description }}</td>  
+                                        <td>
+                                            @if ($teacher->courses()->where('course_id', $course->id)->first())
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.bootcamp.detach-teacher', $course->id) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}" hidden>
+                                                            <button class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to remove this teacher from the course?')">Un-select Teacher</button>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            @else
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.bootcamp.attach-teacher', $course->id) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}" hidden>
+                                                            <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to add this teacher to the course?')">Select Teacher</button>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

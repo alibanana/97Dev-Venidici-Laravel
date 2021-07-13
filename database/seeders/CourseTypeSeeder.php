@@ -23,7 +23,7 @@ class CourseTypeSeeder extends Seeder
                 'type' => 'Woki'
             ],
             [
-                'type' => 'Workshop'
+                'type' => 'Bootcamp'
             ]
         ];
 
