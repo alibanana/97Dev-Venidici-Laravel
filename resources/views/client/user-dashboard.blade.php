@@ -175,12 +175,24 @@
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                             <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                                 <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                    @if(Auth::user()->userDetail->city_id == null)
-                                    <option value=" " disabled selected>Pilih Kota</option>
-                                    @endif
+                                @if($cities == null && Auth::user()->userDetail->city_id == null)
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                @else
+                                    <option disabled selected>Pilih Kota</option>
+
                                     @foreach($cities as $city)
-                                        <option value="{{ $city->city_id }}"  @if( old('city_id', Auth::user()->userDetail->city_id) == $city->city_id) selected @endif>{{$city->name }}</option>
-                                    @endforeach
+                                        <option value="{{ request()->fullUrlWithQuery(['city' => $city->city_id]) }}" 
+                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
+                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
+                                                    selected
+                                                @endif
+                                            @elseif (Request::get('city') == $city->city_id) 
+                                                selected 
+                                            @endif
+                                            >{{$city->name }}
+                                        </option>
+                                    @endforeach          
+                                @endif
                                 </select>                    
                             </div>  
                             @error('city_id')
