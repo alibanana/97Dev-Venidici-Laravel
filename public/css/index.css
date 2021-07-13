@@ -291,6 +291,13 @@ html, body {
     text-underline-offset: 0.4vw;
     text-decoration-thickness: 0.2vw;
 }
+.navbar-item-active-mobile{
+    color:#FFFFFF !important;
+    text-decoration-line: underline;
+    text-decoration-color: #FFFFFF !important;
+    text-underline-offset: 1vw;
+    text-decoration-thickness: 1vw;
+}
 .navbar-item:hover{
     color: #2B6CAA;
 

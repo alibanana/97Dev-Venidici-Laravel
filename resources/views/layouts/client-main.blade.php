@@ -180,22 +180,22 @@
               <table id="menuKiri">
                 <tr>
                   <td>
-                  <a href="/" class="navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Home</a>
+                  <a href="/" class="navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Home</a>
                   </td>
                 </tr>
                 <tr>
                   <td  style="padding-top:4vw">
-                  <a href="/for-public/online-course" class="navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">For Public</a>
+                  <a href="/for-public/online-course" class="navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">For Public</a>
                   </td>
                 </tr>
                 <tr>
                   <td  style="padding-top:4vw">
-                  <a href="/for-corporate/krest" class="navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">For Corporate</a>
+                  <a href="/for-corporate/krest" class="navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">For Corporate</a>
                   </td>
                 </tr>
                 <tr>
                   <td  style="padding-top:4vw">
-                  <a href="/community" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Community</a>
+                  <a href="/community" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Community</a>
                   </td>
                 </tr>
                 @if (Auth::check())
@@ -204,10 +204,18 @@
                   <td  style="padding-top:4vw">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log Out</button>
+                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4vw">Log Out</button>
                     </form>
                   </td>
                 </tr>
+                @else
+                <tr>
+                  <td  style="padding-top:4vw">
+                      <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw;margin-left:1.5vw">Log In</a>
+
+                  </td>
+                </tr>
+
                 @endif
         
       
@@ -222,7 +230,7 @@
           <div style="display: flex;">
             <a id="cart_icon" class="navbar-item" href="/cart" style="color:#FFFFFF">
               <span class="counter fa-stack has-badge" data-count="1">
-                <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart'))navbar-item-active @endif"></i>
+                <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart')) navbar-item-active-mobile @endif"></i>
               </span>
             </a>
             <a id="notification_icon" class="navbar-item" href="#notification" style="color:#FFFFFF;margin-right:1.5vw">
@@ -230,11 +238,12 @@
                 <i class="p3 fas fa-bell fa-stack-1x xfa-inverse"></i>
               </span>
             </a>
-            <a class="navbar-item" href="/dashboard" style="color:#FFFFFF;margin-top:1vw"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active @elseif(Request::is('dashboard/*')) navbar-item-active @endif"></i></a>
+            <a class="navbar-item" href="/dashboard" style="color:#FFFFFF;margin-top:1vw"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active-mobile @elseif(Request::is('dashboard/*')) navbar-item-active-mobile @endif"></i></a>
 
           </div>
           @else
-          <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:5vw">Log In</a>
+          <img src="/assets/images/client/Logo_white.png" style="height:6vw" class="img-fluid" alt="">
+          <!-- <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4vw">Log In</a> -->
           @endif
         </nav>
       </div>
