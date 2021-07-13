@@ -350,7 +350,7 @@ class CheckoutController extends Controller
                         $referralCodeCounter->counter += 1;
                         $referralCodeCounter->save();
                         // Add 60 points to the owner of the referred_by_code & to the current user.
-                        Helper::addStars(User::find($referralCodeCounter->user_id), 60, 'penggunaan Referral Code anda');
+                        Helper::addStars(User::find($referralCodeCounter->user_id), 60, 'penggunaan Referral Code kamu');
                         Helper::addStars(auth()->user(), 60 , 'penggunaan Referral Code '. $referred_by_code);
                     }
                 }

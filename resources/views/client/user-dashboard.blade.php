@@ -181,7 +181,7 @@
                                     <option disabled selected>Pilih Kota</option>
 
                                     @foreach($cities as $city)
-                                        <option value="{{ request()->fullUrlWithQuery(['city' => $city->city_id]) }}" 
+                                        <option value="{{ $city->city_id }}" 
                                             @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
                                                 @if(Auth::user()->userDetail->city_id == $city->city_id)
                                                     selected

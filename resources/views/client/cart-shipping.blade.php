@@ -220,7 +220,7 @@
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select  onchange="if (this.value) window.location.href=this.value" id=""  class="normal-text" name="" style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
-                                    <option disabled>Pilih Provinsi terlebih dahulu</option>
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
                                 @else
                                     <option disabled selected>Pilih Kota</option>
 
