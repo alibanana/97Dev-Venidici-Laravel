@@ -192,12 +192,16 @@ class BootcampController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $course = Course::findOrFail($id);
 
-        if ($course->courseType->type == 'Bootcamp')
-            return redirect()->route('admin.bootcamp.show', $id); 
+        if ($course->courseType->type == 'Woki') {
+            return redirect()->route('admin.bootcamp.show', $id);
+        }
+        elseif($course->courseType->type == 'Course') {
+            return redirect()->route('admin.bootcamp.show', $id);
+        }
 
         $users = $course->users();
 
