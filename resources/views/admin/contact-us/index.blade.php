@@ -88,6 +88,7 @@
                                                 <th>Full Name</th>
                                                 <th>Email</th>
                                                 <th>Inquiry</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -97,6 +98,19 @@
                                                 <td>{{$contact->name}}</td>
                                                 <td>{{$contact->email}}</td>   
                                                 <td>{{$contact->inquiry}}</td>   
+                                                <td>
+                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                            
+                                                            <form action="{{ route('admin.contact-us.destroy', $contact->id) }}" method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div style="padding: 0px 2px">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                                                                </div>
+                                                            </form> 
+                                                        
+                                                    </div>
+                                                </td> 
                                                 
                                             </tr>
                                             @endforeach

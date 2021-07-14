@@ -223,10 +223,10 @@
         <div style="background-color:#2B6CAA;height:2vw;text-align:center;border-radius:5px;margin-top:1vw">
         <i class="fas fa-sort-down sub-description" style="color:#FFFFFF"></i>
         </div>
-        @endif
+    @endif
+    <!-- END OF REVIEW SECTION -->
         
     </div>
-    <!-- END OF REVIEW SECTION -->
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->

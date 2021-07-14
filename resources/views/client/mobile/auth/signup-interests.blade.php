@@ -7,7 +7,7 @@
     <div class="col-md-12 p-0" style="height:100vh">
         <div class="" style="width:100vw;padding-bottom:4vw !important;">
             <div style="display:flex;justify-content:space-between;padding:9vw 0vw 0vw 4vw">
-                <a href="/signup" class="" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none;font-size:3vw"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">General Info</span></a>
+                <a href="/signup" class="" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none;font-size:4vw"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">General Info</span></a>
             </div>
             <form action="{{ route('store_interest') }}" method="POST">
             @csrf                   

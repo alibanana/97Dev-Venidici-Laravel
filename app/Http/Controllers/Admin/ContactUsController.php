@@ -129,6 +129,11 @@ class ContactUsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contact_us = ContactUs::findOrFail($id);
+        $contact_us->delete();
+
+        $message = 'Contact (' . $contact_us->name . ') has been deleted.';
+        
+        return redirect()->route('admin.contact-us.index')->with('message', $message);
     }
 }

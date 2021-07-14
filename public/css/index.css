@@ -1701,8 +1701,8 @@ html, body {
     /* start cart mobile */
     .btn-blue-bordered{
         width: 100%;
-        font-size: 3vw !important;
-        padding:1.5vw !important;
+        padding:1vw  2vw !important;
+
     }
     .cart-title{
         width:32vw;
@@ -1746,10 +1746,15 @@ html, body {
     
     /* end of cart mobile */
     .sub-description{
-    font-size: 4vw;
-    line-height: 4vw;
-
-}
+        font-size: 4vw;
+        line-height: 4vw;
+    }
+    .big-heading{
+        font-size: 6.5vw;
+    }
+    .small-heading{
+        font-size: 5.5vw;
+    }
     .small-heading{
         font-size: 5.5vw;
     }
@@ -1764,7 +1769,7 @@ html, body {
     }
     .normal-text{
         font-size: 2.5vw;
-        line-height: 2.7vw;
+        line-height: 5vw;
     }
     .bigger-text{
         font-size: 3vw;

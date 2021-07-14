@@ -201,14 +201,14 @@
                   <td  style="padding-top:4vw">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4vw">Log Out</button>
+                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw !important">Log Out</button>
                     </form>
                   </td>
                 </tr>
                 @else
                 <tr>
                   <td  style="padding-top:4vw">
-                      <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw;margin-left:1.5vw">Log In</a>
+                      <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw !important;margin-left:1.5vw">Log In</a>
 
                   </td>
                 </tr>

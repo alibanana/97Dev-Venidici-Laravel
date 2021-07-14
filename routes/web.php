@@ -366,6 +366,8 @@ Route::middleware(['isSuspended'])->group(function () {
         //ContactUsController
         Route::get('/contact-us', [AdminContactUsController::class, 'index'])->name('contact-us.index');
         Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('contact-us.store');
+        Route::delete('/contact-us/{id}', [AdminContactUsController::class, 'destroy'])->name('contact-us.destroy');
+
         // RedeemController
         Route::get('/redeems', [AdminRedeemController::class, 'index'])->name('redeems.index');
         Route::get('/redeems/create', [AdminRedeemController::class, 'create'])->name('redeems.create');
