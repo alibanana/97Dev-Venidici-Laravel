@@ -78,6 +78,16 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.loading-background{
+    background-image: url("/assets/images/client/Loading-Asset.png");
+    /* Full height */
+    height: 100%; 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+}
 .online-course-detail-bg{
     background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
     background-position:6.8vw 9vw;
@@ -1691,8 +1701,8 @@ html, body {
     /* start cart mobile */
     .btn-blue-bordered{
         width: 100%;
-        font-size: 3vw !important;
-        padding:1.5vw !important;
+        padding:1vw  2vw !important;
+
     }
     .cart-title{
         width:32vw;
@@ -1734,10 +1744,15 @@ html, body {
     
     /* end of cart mobile */
     .sub-description{
-    font-size: 4vw;
-    line-height: 4vw;
-
-}
+        font-size: 4vw;
+        line-height: 4vw;
+    }
+    .big-heading{
+        font-size: 6.5vw;
+    }
+    .small-heading{
+        font-size: 5.5vw;
+    }
     .small-heading{
         font-size: 5.5vw;
     }
@@ -1752,7 +1767,7 @@ html, body {
     }
     .normal-text{
         font-size: 2.5vw;
-        line-height: 2.7vw;
+        line-height: 5vw;
     }
     .bigger-text{
         font-size: 3vw;

@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPo
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\Admin\RedeemController as AdminRedeemController;
 use App\Http\Controllers\Admin\CollaboratorController as AdminCollaboratorController;
+use App\Http\Controllers\Admin\ContactUsController as AdminContactUsController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -58,9 +59,9 @@ use App\Http\Controllers\Api\CheckoutController;
 Route::middleware(['isSuspended'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth', 'verified']);
-    Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth', 'verified']);
-    Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth', 'verified']);
-    Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth', 'verified']);
+    Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);
+    Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth']);
+    Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth']);
     Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
     Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth', 'verified']);
     Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
@@ -362,6 +363,11 @@ Route::middleware(['isSuspended'])->group(function () {
         //NewsletterController
         Route::get('/newsletter', [AdminNewsletterController::class, 'index'])->name('newsletter.index');
         Route::delete('/newsletter/{id}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
+        //ContactUsController
+        Route::get('/contact-us', [AdminContactUsController::class, 'index'])->name('contact-us.index');
+        Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('contact-us.store');
+        Route::delete('/contact-us/{id}', [AdminContactUsController::class, 'destroy'])->name('contact-us.destroy');
+
         // RedeemController
         Route::get('/redeems', [AdminRedeemController::class, 'index'])->name('redeems.index');
         Route::get('/redeems/create', [AdminRedeemController::class, 'create'])->name('redeems.create');

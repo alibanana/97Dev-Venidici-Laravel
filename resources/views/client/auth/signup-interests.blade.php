@@ -3,6 +3,7 @@
 @section('title', 'Venidici Sign Up')
 @section('content')
 
+
 <div class="row m-0 auth-background">
     <div class="col-md-12 p-0" style="height:100vh">
         <div class="centered white-modal-signup" style="width:70vw;padding-bottom:4vw !important;">
@@ -44,7 +45,7 @@
                         @endforeach
                     </div>
                     <div class="col-12 p-0" style="text-align:center;margin-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
                     </div>  
                 </div>
             </form>

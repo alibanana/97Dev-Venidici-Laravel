@@ -3,6 +3,125 @@
 
 @section('content')
 
+<!-- START OF POPUP VA EXPLANATION-->
+<div id="payment" class="overlay" style="overflow:scroll">
+    <div class="popup" style="width:70% !important">
+        <a class="close" href="#" >&times;</a>
+        <div class="content" style="padding:2vw">
+            <form action="" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('put') 
+            <div class="row m-0">
+                
+                <div class="col-12" style="text-align:left;">
+                    @if(session('success'))
+                        <!-- ALERT MESSAGE -->
+                        <div style="text-align:center;margin-top:1vw">
+                            <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:1vw;width:20vw"role="alert">
+                            {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <!-- END OF ALERT MESSAGE -->
+                    @endif
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Pendaftaran</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#DAD9E2;margin-bottom:0px">Bootcamp: How to be funny?</p>
+                </div>
+                <div class="col-6" style="">
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-user"></i>
+                        <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="John Doe" value="{{ old('name', Auth::user()->name) }}">
+                    </div>  
+                    @error('name')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
+                        <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert telephone number" value="{{ old('telephone', Auth::user()->userDetail->telephone) }}">
+                    </div>  
+                    @error('telephone')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    
+                </div> 
+                <!-- END OF LEFT SECTION --> 
+                <!-- RIGHT SECTION -->
+                <div class="col-6" style="">
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                        <input type="text" name="email" value="{{ old('email', Auth::user()->email) }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert email">
+                    </div>  
+                    @error('email')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Bank and Account Number</p>
+                    <div style="display: flex;align-items:center">
+                        <div  class="auth-input-form" style="display: flex;align-items:center;width:40%">
+                            <i style="color:#DAD9E2" class="fas fa-money-check-alt"></i>
+                            <select name="bank" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option value="None" disabled selected>Pilih Bank</option>
+                                <option value="bca">BCA</option>
+                                <option value="bri">BRI</option>
+                                <option value="mandiri">Mandiri</option>
+                            </select>                    
+                            @error('bank')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>  
+                        <div  class="auth-input-form" style="display: flex;align-items:center;margin-left:1vw;width:60%">
+                            <input type="text" name="bank_account_number" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
+                                placeholder="Bank Account Number" value="">
+                        </div>  
+                        @error('bank_account_number')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                    </div>
+                    
+                </div>
+                <!-- END OF RIGHT SECTION -->
+                <div class="col-12">
+
+                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Address</p>
+                <div  class="auth-input-form" style="display: flex;align-items:center">
+                    <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
+                    <textarea type="text" name="address" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                        placeholder="Insert address">{{ old('address', Auth::user()->userDetail->address) }}</textarea>
+                </div>
+                @error('address')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                    
+                </div>
+                <div class="col-12" style="text-align:center;padding-top:3vw">
+                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>
+                </div>  
+
+            </div>                
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END OF POPUP VA EXPLANATION-->
+
 <div class="row m-0 page-container bootcamp-detail-bg" style="padding-top:11vw;padding-bottom:10vw">
     <!-- START OF LEFT SECTION -->
     <div class="col-9" >
@@ -285,9 +404,7 @@ Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing 
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
             
 
-
-            <a  class="normal-text btn-blue-bordered d-block" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;text-align:center;margin-top:1.5vw">Book Sekarang</a>
-
+            <a href="#payment" class="normal-text btn-blue-bordered d-block"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;text-align:center;margin-top:1.5vw;">Register Now</a>                
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">109 Menit video eksklusif</span></p>

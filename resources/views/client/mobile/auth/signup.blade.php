@@ -7,7 +7,7 @@
     <div class="col-12 p-0">
         <div class="" style="width:100vw;padding-bottom:4vw !important">
             <div style="display:flex;justify-content:space-between;padding:9vw 0vw 0vw 4vw">
-                <a href="/login" class="" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none;font-size:3vw"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Login</span></a>
+                <a href="/login" class="" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none;font-size:4vw"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Login</span></a>
                 <!--<a href="/signup-interests" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none">Your interests<i style="margin-left:0.5vw" class="fas fa-arrow-right"></i></a>-->
             </div>
             <form action="{{ route('custom-auth.signup_general_info.index') }}" method="POST">
@@ -53,8 +53,9 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center;padding:3vw 2vw">
                             <i style="color:#DAD9E2;font-size:4vw" class="fas fa-user-friends"></i>
                             <select name="response" id=""  class=""  style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%;font-size:4vw">
-                                <option value="Friend" @if(Session::get('response') == 'Friend')) selected @endif>Friend</option>
-                                <option value="Instagram" @if(Session::get('response') == 'Instagram')) selected @endif>Instagram</option>
+                                <option value="Friend" @if(Session::get('response') == 'Friend') selected @endif>Friend</option>
+                                <option value="Instagram" @if(Session::get('response') == 'Instagram') selected @endif>Instagram</option>
+                                <option value="Instagram" @if(Session::get('response') == 'Other') selected @endif>Other</option>
                             </select>
                         </div> 
                         @error('response')

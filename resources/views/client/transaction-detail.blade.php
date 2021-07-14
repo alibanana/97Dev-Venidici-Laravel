@@ -342,7 +342,7 @@
             <div style="text-align:center;margin-top:1vw">  
                 <form action="{{ route('customer.cart.cancelPayment', $invoice->xfers_payment_id) }}" method="POST">
                 @csrf
-                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to cancel the payment </p>
+                    <p onclick="openLoading()" class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to cancel the payment </p>
                 </form> 
             </div>
            <!-- END OF CANCEL PAYMENT -->
@@ -351,7 +351,7 @@
             <div style="text-align:center;margin-top:1vw">  
                 <form action="{{route('customer.cart.receivePayment',$invoice->xfers_payment_id)}}" method="POST">
                 @csrf
-                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to simulate payment </p>
+                    <p onclick="openLoading()" class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to simulate payment </p>
                 </form> 
             </div>
            <!-- END OF RECEIVE PAYMENT -->

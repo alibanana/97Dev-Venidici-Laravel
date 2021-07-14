@@ -3,6 +3,8 @@
 
 @section('content')
 
+
+
 <!-- START OF POPUP EDIT PROFILE-->
 <div id="edit-profile" class="overlay" style="overflow:scroll">
     <div class="popup">
@@ -133,7 +135,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12" style="text-align:right;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update General Info</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update General Info</button>
                     </div>  
 
                     </form>
@@ -175,12 +177,24 @@
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                             <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                                 <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                                    @if(Auth::user()->userDetail->city_id == null)
-                                    <option value=" " disabled selected>Pilih Kota</option>
-                                    @endif
+                                @if($cities == null && Auth::user()->userDetail->city_id == null)
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                @else
+                                    <option disabled selected>Pilih Kota</option>
+
                                     @foreach($cities as $city)
-                                        <option value="{{ $city->city_id }}"  @if( old('city_id', Auth::user()->userDetail->city_id) == $city->city_id) selected @endif>{{$city->name }}</option>
-                                    @endforeach
+                                        <option value="{{ $city->city_id }}" 
+                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
+                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
+                                                    selected
+                                                @endif
+                                            @elseif (Request::get('city') == $city->city_id) 
+                                                selected 
+                                            @endif
+                                            >{{$city->name }}
+                                        </option>
+                                    @endforeach          
+                                @endif
                                 </select>                    
                             </div>  
                             @error('city_id')
@@ -202,7 +216,7 @@
                             @enderror
                         </div>
                         <div class="col-12" style="text-align:right;padding-top:3vw">
-                            <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Shipping Address</button>
+                            <button onclick="openLoading()" type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Shipping Address</button>
                         </div>  
                     </div>
                     </form>
@@ -470,7 +484,7 @@
             <span style="display: inline-block;">
                 <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
-                <button type="submit" style="background: none;border:none;color:#2B6CAA">
+                <button type="submit" onclick="openLoading()" style="background: none;border:none;color:#2B6CAA">
                     Kirim ulang email
                 </button>
                 </form>

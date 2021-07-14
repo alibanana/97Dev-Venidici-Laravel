@@ -35,7 +35,19 @@
 
   </head>
   <body style="padding-right:0px !important">
+    <!-- Modal Loading -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body" style="text-align:center;height:20vw">
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Mohon tunggu sebentar...</p>
+                    <img src="/assets/images/client/loading.gif" style="width:4vw;height:4vw;object-fit:cover;border-radius:10px;margin-top:5vw" class="img-fluid" alt="Loading..">
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF MODAL Loading -->
     <!-- Contact Us Modal-->
     <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -45,18 +57,18 @@
                     <h5 class="modal-title sub-description" style="font-family:Rubik Bold" id="exampleModalLabel">Contact Us</h5>
                 </div>
                 <div class="modal-body">
-                  <form action="{{route('collaborators.store')}}" method="POST" enctype="multipart/form-data">
+                  <form action="{{route('admin.contact-us.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="row m-0">
                         <div class="col-12 p-0" style="text-align:center">
-                            @if (session()->has('contact_us_message'))
-                            <div class="p-3 mt-2 mb-0">
-                                <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                                {{ session()->get('contact_us_message') }}
-                                </div>
-                            </div>
-                            @endif
+                          @if (session()->has('contact_us_message'))
+                          <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                              {{ session()->get('contact_us_message') }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                          @endif
                         </div>
+                        
                         <!-- START OF TOP SECTION -->
                         <div class="col-12" style="">
                             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;">Full Name</p>
@@ -72,23 +84,8 @@
                             
                         </div> 
                         <!-- END OF TOP SECTION --> 
-                        <!-- START OF LEFT SECTION -->
-                        <div class="col-6" style="">
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Telephone</p>
-                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                                <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                                <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan No. Telp" >
-                            </div>  
-                            @error('telephone')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            
-                        </div> 
-                        <!-- END OF LEFT SECTION --> 
                         <!-- RIGHT SECTION -->
-                        <div class="col-6" style="">
+                        <div class="col-12" style="">
                             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw"">Email</p>
                             <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                 <i style="color:#DAD9E2" class="fas fa-envelope"></i>
@@ -204,14 +201,14 @@
                   <td  style="padding-top:4vw">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4vw">Log Out</button>
+                        <button type="submit" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw !important">Log Out</button>
                     </form>
                   </td>
                 </tr>
                 @else
                 <tr>
                   <td  style="padding-top:4vw">
-                      <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw;margin-left:1.5vw">Log In</a>
+                      <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw !important;margin-left:1.5vw">Log In</a>
 
                   </td>
                 </tr>
@@ -725,6 +722,18 @@
         }
       });
     </script>
+    <script>
+      function openLoading() {
+          $('#loadingModal').modal('show');
+      }
+    </script>
+    @if(session('contact_us_message') || session('contact_us_error'))
+        <script>
+            $(window).on('load', function() {
+                $('#contactUsModal').modal('show');
+            });
+        </script>
+    @endif
     <script>
         function changeNotification(evt, categoryName) {
             var i, tabcontent, tablinks;

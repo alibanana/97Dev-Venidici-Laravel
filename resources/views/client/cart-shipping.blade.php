@@ -76,15 +76,29 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
                 @if($noWoki)
-                    <button type="submit" name="action" value="createPaymentObjectWithNoWoki" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
+                    <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectWithNoWoki" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
                 @else
-                    <button type="submit" name="action" value="createPaymentObject" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
+                    <button type="submit" onclick="openLoading()" name="action" value="createPaymentObject" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
                 @endif
             </div>
             </div>
         </div>
     </div>
     <!-- END OF MODAL VA -->
+
+    <!-- Modal Loading -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body loading-background" style="text-align:center;height:20vw">
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Pembayaran Sedang Di Proses...</p>
+                    <img src="/assets/images/client/loading.gif" style="width:3vw;height:3vw;object-fit:cover;border-radius:10px;margin-top:5vw" class="img-fluid" alt="Loading..">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF MODAL Loading -->
 
     <!-- START OF PAGE CONTENT -->
     <div class="row m-0 shipping-background" style="padding-bottom:4vw">
@@ -220,7 +234,7 @@
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                             <select  onchange="if (this.value) window.location.href=this.value" id=""  class="normal-text" name="" style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
-                                    <option disabled>Pilih Provinsi terlebih dahulu</option>
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
                                 @else
                                     <option disabled selected>Pilih Kota</option>
 
@@ -500,6 +514,12 @@
 <input type="hidden" value="{{$shipping_cost}}" name="shipping_cost">
 </form>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script>
+    function openLoading() {
+        $('#loadingModal').modal('show');
+    }
+</script>
 <script>
     function togglePayment(evt, icon_id, type) {
         var i, tabcontent, tablinks;
