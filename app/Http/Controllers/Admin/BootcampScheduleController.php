@@ -120,11 +120,11 @@ class BootcampScheduleController extends Controller
             'title'     => 'required',
             'detail'    => 'required',
         ]);
-        $schedule = BootcampSchedule::where('course_id',$id)->first();
+        $schedule = BootcampSchedule::findOrFail($id);
         $schedule->date_time    = $validated['date_time'];
         $schedule->title        = $validated['title'];
         $schedule->detail       = $validated['detail'];
-
+        
         $schedule->save();
 
         if ($schedule->wasChanged()) {
@@ -133,7 +133,7 @@ class BootcampScheduleController extends Controller
             $message = 'No changes was made to Schedule (' . $schedule->title . ')';
         }
 
-        return redirect()->route('admin.bootcamp.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $schedule->course->id)
             ->with('message', $message)
             ->with('page-option', 'schedule-page');
     }

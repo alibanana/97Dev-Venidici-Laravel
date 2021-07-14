@@ -430,7 +430,7 @@
                                         $datetime = explode("+", $datetime_default);
                                     @endphp
                                     
-                                    <form action="{{route('admin.bootcampschedule.update',$course->id)}}" method="post">
+                                    <form action="{{route('admin.bootcampschedule.update',$schedule->id)}}" method="post">
                                     <td><input type="datetime-local" name="date_time" value="{{ $datetime[0]}}" class="form-control"></td>
                                     <!-- <td><input type="time" class="form-control"></td> -->
                                     <td><input type="text" value="{{$schedule->title}}" name="title" class="form-control"></td>

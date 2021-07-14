@@ -155,7 +155,7 @@
                 </iframe>
             </div>
 
-            <p class="bigger-text" style="font-family:Rubik Medium;margin-top:2vw;color:#3B3C43;;margin-bottom:0px"><i class="fas fa-calendar-week"></i> <span style="margin-left:1vw">Saturday, 10 November 2020</span></p>
+            <p class="bigger-text" style="font-family:Rubik Medium;margin-top:2vw;color:#3B3C43;;margin-bottom:0px"><i class="fas fa-calendar-week"></i> <span style="margin-left:1vw">{{date_format($schedules[0][0]->date_time,"D, d M Y")}}</span></p>
             <div style="display:flex;align-items:center;margin-top:0.5vw">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                 <div style="display: flex;justify-content:center;margin-left:1vw">
@@ -183,37 +183,32 @@
                 
                 <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active" >
+                        @foreach($schedules as $schedule)
+                        <div class="carousel-item @if($loop->first) active @endif" >
                             <div style="text-align:center;display:flex;align-items:center;justify-content:center">
                                 <i class="fas fa-arrow-left" class="carousel-control-prev" data-bs-target="#feature-carousel" role="button" data-bs-slide="prev" style="font-size:1.5vw;color:rgba(43, 108, 170, 0.5);margin-right:1vw"></i>
-                                <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Saturday, 10 November 2020</p>
+                                <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{date_format($schedule[0]->date_time,"D, d M Y")}}</p>
                                 <i class="fas fa-arrow-right" class="carousel-control-next" data-bs-target="#feature-carousel" role="button" data-bs-slide="next" style="font-size:1.5vw;color:rgba(43, 108, 170, 0.5);margin-left:1vw"></i>
                             </div>
+                            
                             <div class="row m-0" style="padding-top:2vw">
+                                @foreach($schedule as $day)
                                 <!-- START OF ONE SCHEDULE -->
                                 <div style="display: flex;">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px">10.00</p>
+                                    <p class="normal-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px">{{date_format($day->date_time,"H:i")}}</p>
                                     <div>
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-left:1vw">Chemistry</p>
-                                        <p class="small-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px;margin-left:1vw">Details: Learn to get chemistry between each other personality</p>
+                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-left:1vw">{{$day->title}}</p>
+                                        <p class="small-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px;margin-left:1vw">Details: {{$day->detail}}</p>
                                     </div>
-                            </div>
-                            <hr style="background:#B3B5C2;height:0.1vw;border-radius:10px;margin-top:1vw">
-                            <!-- END OF ONE SCHEDULE -->
-                                <!-- START OF ONE SCHEDULE -->
-                                <div style="display: flex;">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px">10.00</p>
-                                    <div>
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-left:1vw">Chemistry</p>
-                                        <p class="small-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px;margin-left:1vw">Details: Learn to get chemistry between each other personality</p>
-                                    </div>
-                            </div>
-                            <hr style="background:#B3B5C2;height:0.1vw;border-radius:10px;margin-top:1vw">
-                            <!-- END OF ONE SCHEDULE -->
+                                </div>
+                                <hr style="background:#B3B5C2;height:0.1vw;border-radius:10px;margin-top:1vw">
+                                <!-- END OF ONE SCHEDULE -->
+                                @endforeach
 
 
                             </div>
                         </div>
+                        @endforeach
                         
                     </div>
                     
@@ -396,7 +391,7 @@
         @endif
         <div class="course-detail-card-green">
             @php
-                $customformat = date_format($schedules[0][0]->date_time, "M d,Y H:i:s");
+                $customformat = date_format($schedules[0][0]->date_time,"M d,Y H:i:s");
             @endphp
             <script>
 				CountDownTimer('{{$customformat}}', 'countdown');
