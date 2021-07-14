@@ -56,7 +56,7 @@ class CourseRequirementSeeder extends Seeder
                 'requirement' => 'Rasa penasaran yang tinggi :)'
             ],
             [
-                'course_id' => 4,
+                'course_id' => 6,
                 'requirement' => 'PC atau laptop'
             ],
             [
@@ -65,6 +65,31 @@ class CourseRequirementSeeder extends Seeder
             ],
             [
                 'course_id' => 4,
+                'requirement' => 'Rasa penasaran yang tinggi :)'
+            ],
+            // Bootcamp Courses
+            [
+                'course_id' => 5,
+                'requirement' => 'PC atau laptop'
+            ],
+            [
+                'course_id' => 5,
+                'requirement' => 'Koneksi Internet'
+            ],
+            [
+                'course_id' => 5,
+                'requirement' => 'Rasa penasaran yang tinggi :)'
+            ],
+            [
+                'course_id' => 6,
+                'requirement' => 'PC atau laptop'
+            ],
+            [
+                'course_id' => 6,
+                'requirement' => 'Koneksi Internet'
+            ],
+            [
+                'course_id' => 6,
                 'requirement' => 'Rasa penasaran yang tinggi :)'
             ],
         ];

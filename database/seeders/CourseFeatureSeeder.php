@@ -60,16 +60,25 @@ class CourseFeatureSeeder extends Seeder
                 'feature' => 'Bisa membedakan bahan masakan dengan benar.',
             ],
             [
-                'course_id' => 2,
+                'course_id' => 3,
                 'feature' => 'Basic Skills untuk memasak.',
             ],
             [
-                'course_id' => 3,
+                'course_id' => 4,
                 'feature' => 'Basic skills water painting.',
             ],
             [
-                'course_id' => 3,
+                'course_id' => 4,
                 'feature' => 'Mixing colours with water paint.',
+            ],
+            // Bootcamp Courses
+            [
+                'course_id' => 5,
+                'feature' => 'Basic skills untuk public speaking',
+            ],
+            [
+                'course_id' => 6,
+                'feature' => 'Ini adalah skill yang akan didapatkan setelah anda join bootcamp ini.',
             ],
         ];
 
