@@ -99,7 +99,8 @@
     Request::is('admin/course-categories/*') || Request::is('admin/teachers') || Request::is('admin/teachers/*')|| 
     Request::is('admin/assessments') || Request::is('admin/assessments/*') ||
     Request::is('admin/woki-courses') || Request::is('admin/woki-courses/*') ||
-    Request::is('admin/bootcamp') || Request::is('admin/bootcamp/*')
+    Request::is('admin/bootcamp') || Request::is('admin/bootcamp/*') ||
+    Request::is('admin/hashtags') || Request::is('admin/hashtags/*')
 
     )
     <li class="nav-item active">
@@ -145,6 +146,8 @@
                 <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a>
                 <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
                 <a class="collapse-item" href="/admin/reviews">Reviews</a>
+                <a class="collapse-item" href="/admin/hashtags">Hashtags</a>
+
                 <!-- END OF DROPDOWN -->
 
             </div>
@@ -191,18 +194,7 @@
     </li>
 
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if(Request::is('admin/hashtags') || Request::is('admin/hashtags/*'))
-    <li class="nav-item active">
-    @else
-    <li class="nav-item">
-    @endif
-        <a class="nav-link" href="/admin/hashtags" 
-            aria-expanded="true" >
-            <i class="fas fa-hashtag"></i>
-            <span>Hashtags</span>
-        </a>
-    </li>
+    
 
 
     <!-- Nav Item - Pages Collapse Menu
@@ -308,6 +300,19 @@
             aria-expanded="true" >
             <i class="fas fa-newspaper"></i>
             <span>Newsletter</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/contact-us') || Request::is('admin/contact-us/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/contact-us" 
+            aria-expanded="true" >
+            <i class="fas fa-envelope"></i>
+            <span>Contact Us</span>
         </a>
     </li>
 

@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPo
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\Admin\RedeemController as AdminRedeemController;
 use App\Http\Controllers\Admin\CollaboratorController as AdminCollaboratorController;
+use App\Http\Controllers\Admin\ContactUsController as AdminContactUsController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ReviewController;
@@ -362,6 +363,9 @@ Route::middleware(['isSuspended'])->group(function () {
         //NewsletterController
         Route::get('/newsletter', [AdminNewsletterController::class, 'index'])->name('newsletter.index');
         Route::delete('/newsletter/{id}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
+        //ContactUsController
+        Route::get('/contact-us', [AdminContactUsController::class, 'index'])->name('contact-us.index');
+        Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('contact-us.store');
         // RedeemController
         Route::get('/redeems', [AdminRedeemController::class, 'index'])->name('redeems.index');
         Route::get('/redeems/create', [AdminRedeemController::class, 'create'])->name('redeems.create');

@@ -92,7 +92,8 @@ class CheckoutController extends Controller
         // validation rules if no artKit.
         $validation_rules = [
             'name' => 'required',
-            'phone' => ['required', new TelephoneNumber],
+            //'phone' => ['required', new TelephoneNumber],
+            'phone' => 'required',
             'grand_total' => 'required|integer',
             'total_order_price' => 'required|integer',
             'date' => 'required',

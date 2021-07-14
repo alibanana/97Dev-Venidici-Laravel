@@ -57,18 +57,18 @@
                     <h5 class="modal-title sub-description" style="font-family:Rubik Bold" id="exampleModalLabel">Contact Us</h5>
                 </div>
                 <div class="modal-body">
-                  <form action="{{route('collaborators.store')}}" method="POST" enctype="multipart/form-data">
+                  <form action="{{route('admin.contact-us.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="row m-0">
                         <div class="col-12 p-0" style="text-align:center">
-                            @if (session()->has('contact_us_message'))
-                            <div class="p-3 mt-2 mb-0">
-                                <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                                {{ session()->get('contact_us_message') }}
-                                </div>
-                            </div>
-                            @endif
+                          @if (session()->has('contact_us_message'))
+                          <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                              {{ session()->get('contact_us_message') }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                          @endif
                         </div>
+                        
                         <!-- START OF TOP SECTION -->
                         <div class="col-12" style="">
                             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;">Full Name</p>
@@ -726,7 +726,14 @@
       function openLoading() {
           $('#loadingModal').modal('show');
       }
-  </script>
+    </script>
+    @if(session('contact_us_message') || session('contact_us_error'))
+        <script>
+            $(window).on('load', function() {
+                $('#contactUsModal').modal('show');
+            });
+        </script>
+    @endif
     <script>
         function changeNotification(evt, categoryName) {
             var i, tabcontent, tablinks;
