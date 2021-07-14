@@ -80,7 +80,7 @@ class OnlineCourseController extends Controller {
             }
         }
         $courses = $courses->where('course_type_id',1)->where('enrollment_status', 'open')
-        ->where('publish_status', 'published')->get();
+        ->where('publish_status', 'published')->where('isDeleted', false)->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
         $user_review = Review::where('course_id',1)->orderBy('created_at','desc')->get();
         if (Auth::check()) {

@@ -67,10 +67,10 @@ class PagesController extends Controller
         $most_popular_courses = $this->getMostPopularCourses(3);
         // Get 3 wokis
         $wokis = Course::where('course_type_id','2')->where('enrollment_status', 'open')
-        ->where('publish_status', 'published')->take(3)->get();
+        ->where('publish_status', 'published')->where('isDeleted', false)->take(3)->get();
         // Get 3 Online Courses
         $online_courses = Course::where('course_type_id','1')->where('enrollment_status', 'open')
-        ->where('publish_status', 'published')->take(3)->get();
+        ->where('publish_status', 'published')->where('isDeleted', false)->take(3)->get();
 
 
         $pengajar_positions = InstructorPosition::all();
@@ -103,7 +103,7 @@ class PagesController extends Controller
     // Method to get the 3 most popular courses by number of courses sold.
     private function getMostPopularCourses($size) {
         return Course::with('users')->where('enrollment_status', 'open')
-            ->where('publish_status', 'published')->get()->sortBy(function ($course) {
+            ->where('publish_status', 'published')->where('isDeleted', false)->get()->sortBy(function ($course) {
                 return $course->users->count();
             })->take($size);
     }

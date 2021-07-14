@@ -128,7 +128,7 @@
     </div> -->
     @if( !Request::is('login') )
     <!-- START OF MOBILE NAVBAR -->
-    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none">
+    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;position:fixed;width:100%;z-index:999">
       <div >
         <!--    Made by Erik Terwan    -->
         <!--   24th of November 2015   -->

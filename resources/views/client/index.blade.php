@@ -659,6 +659,11 @@ END OF OUR PROGRAMS SECTION -->
     <!-- MOST POPULAR -->
     <div class="course-content" id="course-popular">
         <div class="row m-0 p-0">
+            @if(count($most_popular_courses) == 0)
+            <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+            </div>
+            @endif
             @foreach ($most_popular_courses as $course)
                 <div class="col-4 p-0" >
                     <div style="display: flex;justify-content:center">
@@ -787,6 +792,11 @@ END OF OUR PROGRAMS SECTION -->
     <!-- WOKI -->
     <div class="course-content" id="course-woki" style="display:none">
         <div class="row m-0 p-0">
+            @if(count($wokis) == 0)
+            <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+            </div>
+            @endif
             @foreach($wokis as $course)
             <div class="col-4 p-0" >
                 <div style="display: flex;justify-content:center">
@@ -873,10 +883,13 @@ END OF OUR PROGRAMS SECTION -->
                 </div>
             </div>
             @endforeach
+            @if(count($wokis) != 0)
+
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
                 <a href="/woki?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
 
             </div>
+            @endif
 
             
         </div>
@@ -886,6 +899,11 @@ END OF OUR PROGRAMS SECTION -->
     <!-- Skill Snack -->
     <div class="course-content" id="course-online" style="display:none">
         <div class="row m-0 p-0">
+            @if(count($online_courses) == 0)
+                <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
             @foreach($online_courses as $course)
             <div class="col-4 p-0" >
                 <div style="display: flex;justify-content:center">
@@ -971,9 +989,12 @@ END OF OUR PROGRAMS SECTION -->
                 </div>
             </div>
             @endforeach
+            @if(count($online_courses) != 0)
+
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
                 <a href="/online-course?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
             </div>
+            @endif
         </div>
     </div>
     <!-- END OF Skill Snack -->

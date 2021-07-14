@@ -406,7 +406,7 @@
 
 
 <!-- START OF INDONESIA EMAS SECTION -->
-<div class="row m-0 page-container" style="padding-bottom:8vw;padding-top:8vw">
+<div class="row m-0 page-container our-programs-background" style="padding-bottom:8vw;padding-top:8vw">
     <div class="col-12 wow bounceInRight" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/Emas_BG.png" style="width:40vw" class="img-fluid" alt="">
     </div>
@@ -538,6 +538,11 @@
     <!-- MOST POPULAR -->
     <div class="course-content" id="course-popular" style="">
         <div class="row m-0 p-0">
+            @if(count($most_popular_courses) == 0)
+                <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 5px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
             @foreach($most_popular_courses as $course)
             <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
@@ -659,6 +664,11 @@
     <!-- WOKI -->
     <div class="course-content" id="course-woki" style="display:none">
         <div class="row m-0 p-0">
+            @if(count($wokis) == 0)
+                <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 5px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
             @foreach($wokis as $course)
             <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
@@ -746,10 +756,12 @@
                 </div>
             </div>
             @endforeach
+            @if(count($wokis) != 0)
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
                 <a href="/woki?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
 
             </div>
+            @endif
 
             
         </div>
@@ -759,6 +771,11 @@
     <!-- On-Demand -->
     <div class="course-content" id="course-online" style="display:none">
         <div class="row m-0 p-0">
+            @if(count($online_courses) == 0)
+                <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 5px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
             @foreach($online_courses as $course)
             <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
@@ -846,9 +863,11 @@
                 </div>
             </div>
             @endforeach
+            @if(count($online_courses) != 0)
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
                 <a href="/online-course?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
             </div>
+            @endif
         </div>
     </div>
     <!-- END OF On-Demand -->
