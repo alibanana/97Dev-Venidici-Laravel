@@ -51,9 +51,9 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $this->resetNavbarData();
 
         $notifications = $this->notifications;
@@ -122,71 +122,25 @@ class DashboardController extends Controller
                 $cities = null;
         }
 
+        if($agent->isPhone()){
+            return view('client/mobile/user-dashboard',compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews'));
+        }
+
         return view('client/user-dashboard',
             compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews'));
     }
-
-    public function update_shipping(Request $request,$id)
-    {
-        $input = $request->all();
-        $validated = Validator::make($input,[
-            'province_id'   => 'required',
-            'city_id'       => 'required',
-            'address'       => 'required',
-        ]);
-
-        if($validated->fails()) 
-            return redirect('/dashboard#edit-profile')
-                ->withErrors($validated)
-                ->withInput($request->all());
-        else 
-            $validated = $validated->validate();
-        
-        
-        $user = User::findOrFail($id);
-
-        $user_detail = $user->userDetail;
-        $user_detail->province_id   = $validated['province_id'];
-        $user_detail->city_id       = $validated['city_id'];
-        $user_detail->address       = $validated['address'];
-        
-        //check if the user update the shipping for the first time
-        if(!$user->isShippingUpdated){
-            $user->isShippingUpdated = TRUE;
-        }
-
-    
-        //check if the user update the profile for the first time
-        if(!$user->isProfileUpdated && $user->isShippingUpdated && $user->isGeneralInfoUpdated){
-            $user->isProfileUpdated = TRUE;
-            // here insert star reward
-            //tambah 15 stars
-            Helper::addStars(auth()->user(),15,'Completing Personal Data');
-            $user_detail->save();
-            return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
-        }
-        $user_detail->save();
-
-
-
-        return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil!');
-
-    }
-
 
     // Updates Users's data in the database.
     public function update_profile(Request $request, $id)
     {
         $input = $request->all();
-        // Convert request input "phone" format.
-        if ($request->has('telephone'))
-            $input['telephone'] = preg_replace("/[^0-9 ]/", '', $input['telephone']);
-            
         $validated = Validator::make($input,[
             'name'          => 'required',
-            //'telephone'     => ['required', new TelephoneNumber],
             'telephone'     => 'required',
             'birthdate'     => 'date',
+            'province_id'   => 'required',
+            'city_id'       => 'required',
+            'address'       => 'required',
             'gender'        => 'required',
             'company'       => 'required',
             'occupancy'     => 'required',
@@ -212,16 +166,11 @@ class DashboardController extends Controller
 
         $user_detail = $user->userDetail;
         $user_detail->update($request->except([
-            'name','province_id','city_id','address'
+            'name',
         ]));
 
-        //check if the user update the general info for the first time
-        if(!$user->isGeneralInfoUpdated){
-            $user->isGeneralInfoUpdated = TRUE;
-        }
-
         //check if the user update the profile for the first time
-        if(!$user->isProfileUpdated && $user->isShippingUpdated && $user->isGeneralInfoUpdated){
+        if(!$user->isProfileUpdated){
             $user->isProfileUpdated = TRUE;
             // here insert star reward
             //tambah 15 stars

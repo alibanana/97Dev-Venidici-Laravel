@@ -10,7 +10,7 @@
                 <a href="/login" class="" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none;font-size:3vw"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Login</span></a>
                 <!--<a href="/signup-interests" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none">Your interests<i style="margin-left:0.5vw" class="fas fa-arrow-right"></i></a>-->
             </div>
-            <form action="{{ route('store_general_info') }}" method="POST">
+            <form action="{{ route('custom-auth.signup_general_info.index') }}" method="POST">
             @csrf   
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">

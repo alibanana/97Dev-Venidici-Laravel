@@ -33,10 +33,13 @@ class CustomAuthController extends Controller
     // Shows the Signup General Info Page.
     public function signUpGeneralInfoIndex() {
         $agent = new Agent();
-        if ($agent->isPhone())
-            return view('client/mobile/under-construction');
+        // if ($agent->isPhone())
+        //     return view('client/mobile/under-construction');
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        
+        if ($agent->isPhone())
+            return view('client/mobile/auth/signup',compact('footer_reviews'));
 
         return view('client/auth/signup', compact('footer_reviews'));
     }
@@ -80,8 +83,8 @@ class CustomAuthController extends Controller
     // Shows the Signup Interest Page.
     public function signUpInterestIndex(Request $request) {
         $agent = new Agent();
-        if ($agent->isPhone())
-            return view('client/mobile/under-construction');
+        // if ($agent->isPhone())
+        //     return view('client/mobile/under-construction');
         
         if (!$request->session()->get('name') || !$request->session()->get('telephone') || !$request->session()->get('email') || 
             !$request->session()->get('password') || !$request->session()->get('response'))
@@ -89,6 +92,9 @@ class CustomAuthController extends Controller
 
         $interests = Hashtag::all();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if ($agent->isPhone())
+            return view('client/mobile/auth/signup-interests',compact('interests','footer_reviews'));
 
         return view('client/auth/signup-interests', compact('interests','footer_reviews'));
     }

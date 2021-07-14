@@ -1705,9 +1705,7 @@ html, body {
         margin-right: 10vw !important;
     }
     .image-thumbnail{
-        width:15vw;
-        height:15vw;
-        
+        display:none;  
     }
     .cart-card-red{   
         width:5vw;
