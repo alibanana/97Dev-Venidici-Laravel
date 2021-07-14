@@ -3,7 +3,7 @@
 
 @section('content')
 
-<!-- START OF POPUP VA EXPLANATION-->
+<!-- START OF POPUP PAYMENT-->
 <div id="payment" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:70% !important">
         <a class="close" href="#" >&times;</a>
@@ -25,14 +25,14 @@
                         <!-- END OF ALERT MESSAGE -->
                     @endif
                     <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Pendaftaran</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#DAD9E2;margin-bottom:0px">Bootcamp: How to be funny?</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#DAD9E2;margin-bottom:0px">Bootcamp: {{$course->title}}</p>
                 </div>
                 <div class="col-6" style="">
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                     <div  class="auth-input-form" style="display: flex;align-items:center">
                         <i style="color:#DAD9E2" class="fas fa-user"></i>
                         <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                            placeholder="John Doe" value="{{ old('name', Auth::user()->name) }}">
+                            placeholder="John Doe" @if(Auth::check())value="{{ old('name', Auth::user()->name) }}"@endif>
                     </div>  
                     @error('name')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -43,7 +43,7 @@
                     <div  class="auth-input-form" style="display: flex;align-items:center">
                         <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
                         <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                            placeholder="Insert telephone number" value="{{ old('telephone', Auth::user()->userDetail->telephone) }}">
+                            placeholder="Insert telephone number" @if(Auth::check()) value="{{ old('telephone', Auth::user()->userDetail->telephone) }}" @endif>
                     </div>  
                     @error('telephone')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -58,7 +58,7 @@
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                     <div  class="auth-input-form" style="display: flex;align-items:center">
                         <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                        <input type="text" name="email" value="{{ old('email', Auth::user()->email) }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                        <input type="text" name="email" @if(Auth::check()) value="{{ old('email', Auth::user()->email) }}" @endif class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                             placeholder="Insert email">
                     </div>  
                     @error('email')
@@ -70,7 +70,7 @@
                     <div style="display: flex;align-items:center">
                         <div  class="auth-input-form" style="display: flex;align-items:center;width:40%">
                             <i style="color:#DAD9E2" class="fas fa-money-check-alt"></i>
-                            <select name="bank" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="bank" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;margin-left:0.5vw">
                                 <option value="None" disabled selected>Pilih Bank</option>
                                 <option value="bca">BCA</option>
                                 <option value="bri">BRI</option>
@@ -102,7 +102,7 @@
                 <div  class="auth-input-form" style="display: flex;align-items:center">
                     <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
                     <textarea type="text" name="address" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                        placeholder="Insert address">{{ old('address', Auth::user()->userDetail->address) }}</textarea>
+                        placeholder="Insert address">@if(Auth::check()) {{ old('address', Auth::user()->userDetail->address) }} @endif</textarea>
                 </div>
                 @error('address')
                     <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -120,7 +120,7 @@
         </div>
     </div>
 </div>
-<!-- END OF POPUP VA EXPLANATION-->
+<!-- END OF POPUP PAYMENT-->
 
 <div class="row m-0 page-container bootcamp-detail-bg" style="padding-top:11vw;padding-bottom:10vw">
     <!-- START OF LEFT SECTION -->
@@ -128,11 +128,21 @@
         <div style="padding-right:10vw">
             <p class="medium-heading" style="font-family:Hypebeast;color:#2B6CAA">Bootcamp</p>
 
-            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Sertifikat menjadi Seniman</p>
+            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
             
-            <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">Need to be funny fast? This is the course for people that find it hard to be funny.</p>
+            <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">{{$course->subtitle}}</p>
             <!-- <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;"></a> -->
-            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh Mr. Raditya Dika
+            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh
+            @foreach($course->teachers as $teacher)
+            <span style="font-family:Rubik Bold">
+                @if ($loop->last && count($course->teachers) != 1)
+                dan
+                @elseif (!$loop->first)
+                ,
+                @endif
+                {{$teacher->name}}
+            </span>
+            @endforeach
             </p>
             <!--<video style="width:42vw;height:20vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px"  controls="false" >
                 <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
@@ -141,18 +151,29 @@
             </video> -->
             <div style="margin-top:2vw">
                 <iframe style="width:42vw;height:25vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px" 
-                    src="https://www.youtube.com/embed/dEEUWdh-6ek">
+                    src="{{$course->preview_video}}">
                 </iframe>
             </div>
 
             <p class="bigger-text" style="font-family:Rubik Medium;margin-top:2vw;color:#3B3C43;;margin-bottom:0px"><i class="fas fa-calendar-week"></i> <span style="margin-left:1vw">Saturday, 10 November 2020</span></p>
             <div style="display:flex;align-items:center;margin-top:0.5vw">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                 <div style="display: flex;justify-content:center;margin-left:1vw">
-                    <i style="color:#B3B5C2" class="fas fa-star sub-description"></i>
-                    <i style="color:#B3B5C2" class="fas fa-star sub-description"></i>
-                    <i style="color:#B3B5C2" class="fas fa-star sub-description"></i>
-                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                    @for ($i = 1; $i < 6; $i++)
+                        @if ($i <= $course->average_rating)
+                            @if ($i == 1)
+                                <i style="color:#F4C257" class="fas fa-star sub-description"></i>
+                            @else
+                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
+                            @endif
+                        @else
+                            @if ($i == 1)
+                                <i style="color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            @else
+                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
+                            @endif
+                        @endif
+                    @endfor
                 </div>
             </div>
             
@@ -162,39 +183,7 @@
                 
                 <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
                     <div class="carousel-inner">
-                        
                         <div class="carousel-item active" >
-                            <div style="text-align:center;display:flex;align-items:center;justify-content:center">
-                                <i class="fas fa-arrow-left" class="carousel-control-prev" data-bs-target="#feature-carousel" role="button" data-bs-slide="prev" style="font-size:1.5vw;color:rgba(43, 108, 170, 0.5);margin-right:1vw"></i>
-                                <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Saturday, 10 November 2020</p>
-                                <i class="fas fa-arrow-right" class="carousel-control-next" data-bs-target="#feature-carousel" role="button" data-bs-slide="next" style="font-size:1.5vw;color:rgba(43, 108, 170, 0.5);margin-left:1vw"></i>
-                            </div>
-                            <div class="row m-0" style="padding-top:2vw">
-                                <!-- START OF ONE SCHEDULE -->
-                                <div style="display: flex;">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px">10.00</p>
-                                    <div>
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-left:1vw">Chemistry</p>
-                                        <p class="small-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px;margin-left:1vw">Details: Learn to get chemistry between each other personality</p>
-                                    </div>
-                            </div>
-                            <hr style="background:#B3B5C2;height:0.1vw;border-radius:10px;margin-top:1vw">
-                            <!-- END OF ONE SCHEDULE -->
-                                <!-- START OF ONE SCHEDULE -->
-                                <div style="display: flex;">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px">10.00</p>
-                                    <div>
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-left:1vw">Chemistry</p>
-                                        <p class="small-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px;margin-left:1vw">Details: Learn to get chemistry between each other personality</p>
-                                    </div>
-                            </div>
-                            <hr style="background:#B3B5C2;height:0.1vw;border-radius:10px;margin-top:1vw">
-                            <!-- END OF ONE SCHEDULE -->
-
-
-                            </div>
-                        </div>
-                        <div class="carousel-item" >
                             <div style="text-align:center;display:flex;align-items:center;justify-content:center">
                                 <i class="fas fa-arrow-left" class="carousel-control-prev" data-bs-target="#feature-carousel" role="button" data-bs-slide="prev" style="font-size:1.5vw;color:rgba(43, 108, 170, 0.5);margin-right:1vw"></i>
                                 <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Saturday, 10 November 2020</p>
@@ -236,8 +225,11 @@
         <!-- START OF PERSYARATAN SECTION -->
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:4vw">Persyaratan</p>
         
-        <div style="display:flex;align-items:center;flex-wrap:wrap;padding-top:1vw">   
-            <a class="blue-tag normal-text" style="margin-top:1vw;">Muka lucu dan unik</a>
+        <div style="display:flex;align-items:center;flex-wrap:wrap;padding-top:1vw">  
+            @foreach($course->courseRequirements as $req)
+ 
+            <a class="blue-tag normal-text" style="margin-top:1vw;@if($loop->iteration != 1) margin-left:1vw @endif">{{$req->requirement}}</a>
+            @endforeach
         </div>
         <!-- END OF PERSYARATAN SECTION -->
 
@@ -252,24 +244,26 @@
         <!-- START OF PROFIL PEMBICARA SECTION -->
         <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw;color:#3B3C43">Profil Pembicara</p>
 
-            <!-- START OF ONE LECTURE -->
-            <div style="display:flex;margin-top:2vw;align-items:flex-start">
-                <img src="/assets/images/client/Default_Display_Picture.png" style="width:5vw;height:5vw;object-fit:cover;filter: drop-shadow(0px 10px 20px rgba(31, 32, 65, 0.1));border-radius:10px;border:2px solid #F2F2F2" class="img-fluid" alt="">
-                <div style="margin-left:1vw">
-                    <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">Mr. Raditya Dika</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#000000">Berpengalaman sebagai Consumer Insight Lead di LinkAja, REA Group Asia, Garudafood, dan menjadi Head of Research And Development di IdEA. Kak Irfan juga sering diundang oleh TV besar di indonesia sebagai Consumer Behavior Expert dan saat ini juga menjadi Co-Owner dari Waroeng Ondel Ondel Betawi di Leiden, Netherlands.</p>
-                </div>
+        @foreach($course->teachers as $teacher)
 
+        <!-- START OF ONE LECTURE -->
+        <div style="display:flex;margin-top:2vw;align-items:flex-start">
+            <img src="{{ asset($teacher->image) }}" style="width:5vw;height:5vw;object-fit:cover;filter: drop-shadow(0px 10px 20px rgba(31, 32, 65, 0.1));border-radius:10px;border:2px solid #F2F2F2" class="img-fluid" alt="">
+            <div style="margin-left:1vw">
+                <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">{{$teacher->name}}</p>
+                <p class="normal-text" style="font-family:Rubik Regular;color:#000000">{{$teacher->description}}</p>
             </div>
-            <!-- END OF ONE LECTURE -->
+
+        </div>
+        <!-- END OF ONE LECTURE -->
+        @endforeach
 
         <!-- END OF PROFIL PEMBICARA SECTION -->
         <!-- START OF TENTANG ONLINE COURSE -->
         <p class="sub-description profil-text-blue profil-text-blue-active profil-links" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw">Tetang <span style="font-family:Hypebeast;color:#2B6CAA">BOOTCAMP</span> ini</p>
         <div  class="bigger-text profil-content" id="tentang-course"  style="margin-top:1vw">
             <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet tortor gravida ut nam. Sapien duis feugiat feugiat nunc. Nunc cras dolor risus magnis facilisis elementum pharetra. Nunc dolor lacus, accumsan, vestibulum, faucibus libero, vulputate vitae, mauris.
-Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing pharetra sit faucibus justo, faucibus gravida. Fringilla ipsum, commodo, sem arcu. Netus aliquet sit malesuada vel velit in rhoncus, ac pellentesque. Facilisis tortor senectus facilisis sit. Posuere quis massa purus, molestie convallis viverra ligula euismod sapien. Sollicitudin euismod molestie adipiscing mauris
+                {{$course->description}}
             </p>
         </div>
         <!-- END OF TENTANG ONLINE COURSE -->
@@ -317,11 +311,11 @@ Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing 
                         </span>
                     @enderror
 
-                    <input type="hidden" name="course_id" value="1">
+                    <input type="hidden" name="course_id" value="{{$course->id}}">
                     
                     <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
-                        <button type="submit" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
+                        <button type="submit" onclick="openLoading()" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
                     </div>
                 </div>
             </form>
@@ -339,7 +333,7 @@ Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing 
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
                 <div style="display:flex">
                     
-                    <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src=""  @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
+                    <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
                     <div style="margin-left:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">{{$review->user->name}}</p>
                         <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
@@ -377,10 +371,10 @@ Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing 
         <div style="background-color:#2B6CAA;height:2vw;text-align:center;border-radius:5px;margin-top:1vw">
         <i class="fas fa-sort-down sub-description" style="color:#FFFFFF"></i>
         </div>
-        @endif
+    @endif
+    <!-- END OF REVIEW SECTION -->
         
     </div>
-    <!-- END OF REVIEW SECTION -->
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
@@ -401,8 +395,46 @@ Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing 
             <!-- END OF ALERT MESSAGE -->
         @endif
         <div class="course-detail-card-green">
+            @php
+                $customformat = date_format($course->created_at,"M d,Y H:i:s");
+            @endphp
+            <script>
+				CountDownTimer('{{$customformat}}', 'countdown');
+				function CountDownTimer(dt,id)
+				{
+					var end = new Date(dt);
+					var _second = 1000;
+					var _minute = _second * 60;
+					var _hour = _minute * 60;
+					var _day = _hour * 24;
+					var timer;
+					function showRemaining() {
+						var now = new Date();
+						var distance = end - now;
+						if (distance < 0) {
+
+							clearInterval(timer);
+							document.getElementById('countdown-card').style.display = "none";
+							return;
+						}
+						var days = Math.floor(distance / _day);
+						var hours = Math.floor((distance % _day) / _hour);
+						var minutes = Math.floor((distance % _hour) / _minute);
+						var seconds = Math.floor((distance % _minute) / _second);
+
+						document.getElementById('days').innerHTML = days;
+						document.getElementById('hours').innerHTML = hours ;
+						document.getElementById('minutes').innerHTML = minutes ;
+					}
+					timer = setInterval(showRemaining, 1000);
+				}
+            </script>
+			</td>
+            @if($course->price == 0)
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
-            
+            @else
+            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+            @endif            
 
             <a href="#payment" class="normal-text btn-blue-bordered d-block"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;text-align:center;margin-top:1.5vw;">Register Now</a>                
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
@@ -418,6 +450,25 @@ Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing 
             </div>
 
         </div>
+        <!-- START COUNT DOWN CARD -->
+        <div class="course-detail-card-green" id="countdown-card" style="margin-top:2vw">
+            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Countdown Registration:</p>
+            <div style="border:2px solid #2B6CAA;padding:1vw;display:flex;align-items:center;justify-content:space-between;border-radius:10px;margin-top:1vw">
+                <div style="text-align:center">
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Days</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="days"></p>
+                </div>
+                <div style="text-align:center">
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Hours</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="hours"></p>
+                </div>
+                <div style="text-align:center">
+                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Minutes</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="minutes"></p>
+                </div>
+            </div>
+        </div>
+        <!-- END OF COUNT DOWN CARD -->
         <div style="padding:2vw;background:#FFFFFF">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Ada <span style="font-family:Hypebeast">Pertanyaan?</span> </p>
             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
@@ -426,140 +477,104 @@ Lectus pretium platea hendrerit dignissim blandit nunc tortor. Nisi, adipiscing 
         </div>
     </div>
     <!-- END OF RIGHT SECTION -->
+    @if(Auth::check())
     <!-- START OF RECOMMENDED SECTION -->
     <div class="col-12" style="margin-top:8vw">
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;">Pilihan kelas lainnya untuk kamu</p>
         <!-- ONLINE COURSE -->
         <div class="course-content" id="course-online" style="margin-top:2vw">
                 <div class="row m-0 p-0">
+                    @foreach($courseSuggestions as $course)
                     <div class="col-4 p-0" >
-                        <div style="display: flex;justify-content:flex-start">
+                        <div style="display: flex;@if($loop->iteration % 3 == 1) justify-content:flex-start @elseif ($loop->iteration % 3 == 2)justify-content:center @elseif ($loop->iteration % 3 == 0) justify-content:flex-end @endif">
                             <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green">
+                            <div class="course-card-blue">
                                 <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
+                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                                    <div class="top-left card-tag small-text">Bootcamp</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse1" data-toggle="collapse" href="#course-collapse1" class="fas fa-caret-down"></i>
+                                    <div style="height:6vw">
+                                        <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
+                                            <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
+                                            <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
+                                        </div>
+                                        @foreach ($course->hashtags as $tag)
+                                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
+                                        @endforeach
                                     </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
-                                    <div class="collapse" id="course-collapse1" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                                    <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
                                     </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                                        <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
+
+                                    <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                        <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
+                                        @foreach($course->teachers as $teacher)
+                                            @if ($loop->last && count($course->teachers) != 1)
+                                            dan
+                                            @elseif (!$loop->first)
+                                            ,
+                                            @endif
+                                            {{$teacher->name}}
+                                        @endforeach
+                                        </p>
+                                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
+                                        @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                            @if ($course->total_duration)
+                                                {{ explode(',', $course->total_duration)[0] }} mins
+                                            @else
+                                                - mins
+                                            @endif
+                                        @elseif ($course->courseType->type == 'Woki')
+                                            @if ($course->wokiCourseDetail->event_duration)
+                                                {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                            @else
+                                                - mins
+                                            @endif
+                                        @endif
+                                        </p>
+                                        
                                     </div>
                                     <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                            @for ($i = 1; $i < 6; $i++)
+                                                @if ($i <= $course->average_rating)
+                                                    @if ($i == 1)
+                                                        <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                                    @else
+                                                        <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                                    @endif
+                                                @else
+                                                    @if ($i == 1)
+                                                        <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                                                    @else
+                                                        <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                                    @endif
+                                                @endif
+                                            @endfor
                                         </div>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
+                                        @if ($course->price == 0)
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                        @else
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                        @endif
+                                        <a href="/online-course/{{$course->id}}" class="course-card-button normal-text">Enroll Now</a>
                                     </div>
-                    
                                 </div>
                             </div>
                             <!-- END OF ONE GREEN COURSE CARD -->
                         </div>
                     </div>
-                    <div class="col-4 p-0" >
-                        <div style="display: flex;justify-content:center">
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green">
-                                <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
-                                </div>
-                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse2" data-toggle="collapse" href="#course-collapse2" class="fas fa-caret-down"></i>
-                                    </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
-                                    <div class="collapse" id="course-collapse2" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                                        <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
-                                    </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
-                                        <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                        </div>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
-                                    </div>
-                    
-                                </div>
-                            </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
-                        </div>
-                    </div>
-                    <div class="col-4 p-0" >
-                        <div style="display: flex;justify-content:flex-end">
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-green">
-                                <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Snow">
-                                    <div class="top-left card-tag small-text" >Online Course</div>
-                                </div>
-                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5vw">
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="sub-description" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none">How to be funny?</a>
-                                        <i style="font-size:2vw;" role="button"  aria-controls="course-collapse3" data-toggle="collapse" href="#course-collapse3" class="fas fa-caret-down"></i>
-                                    </div>
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">Personal development</a>
-                                    <div class="collapse" id="course-collapse3" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">sAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:2vw" >
-                                        <p class="small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Mr. Raditya Dika</p>
-                                        <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">100 mins</p>
-                                    </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">4/5</p>
-                                        <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                            <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                        </div>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" class="course-card-button normal-text">Enroll Now</a>
-                                    </div>
-                    
-                                </div>
-                            </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <!-- END OF ONLINE COURSE -->
     </div>
     <!-- END OF RECOMMENDED SECTION -->
+    @endif
 </div>
 <!-- END OF BANNER SECTION -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>

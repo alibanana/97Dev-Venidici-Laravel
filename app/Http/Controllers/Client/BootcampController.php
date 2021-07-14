@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Notification;
-use App\Models\KrestProgram;
-use App\Models\Krest;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Agent;
 use App\Models\Review;
 use App\Helper\Helper;
+use App\Models\Course;
+use App\Helper\CourseHelper;
 
 class BootcampController extends Controller
 {
@@ -35,7 +35,6 @@ class BootcampController extends Controller
             return view('client/mobile/under-construction');
         }
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-        $programs = KrestProgram::all();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if (Auth::check()) {
@@ -81,32 +80,29 @@ class BootcampController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {        
+    // Shows the details for each course.
+    public function show($id) {
+        $agent = new Agent();
+        if($agent->isPhone())
+            return view('client/mobile/under-construction');
+
+        $course = Course::findOrFail($id);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
-
-        $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
-        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
-
+        // Get courses suggestions.
         if (Auth::check()) {
-
             $this->resetNavbarData();
-
+            
             $notifications = $this->notifications;
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-            return view('client/bootcamp/detail',compact('cart_count','transactions','informations','notifications','reviews','footer_reviews'));
-
-        } else {
-            return view('client/bootcamp/detail',compact('reviews','footer_reviews'));
+            
+            $courseSuggestions = CourseHelper::getCourseSuggestion(3,'Bootcamp');
+            return view('client/bootcamp/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
         }
 
+        return view('client/bootcamp/detail', compact('course','reviews','footer_reviews'));
     }
 
     /**
