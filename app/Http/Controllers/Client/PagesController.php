@@ -100,9 +100,10 @@ class PagesController extends Controller
 
     // Method to get the 3 most popular courses by number of courses sold.
     private function getMostPopularCourses($size) {
-        return Course::with('users')->get()->sortBy(function ($course) {
-            return $course->users->count();
-        })->take($size);
+        return Course::with('users')->where('enrollment_status', 'open')
+            ->where('publish_status', 'published')->get()->sortBy(function ($course) {
+                return $course->users->count();
+            })->take($size);
     }
 
     public function community_index(){
