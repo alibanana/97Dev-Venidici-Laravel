@@ -35,7 +35,19 @@
 
   </head>
   <body style="padding-right:0px !important">
+    <!-- Modal Loading -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body" style="text-align:center;height:20vw">
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Mohon tunggu sebentar...</p>
+                    <img src="/assets/images/client/loading.gif" style="width:4vw;height:4vw;object-fit:cover;border-radius:10px;margin-top:5vw" class="img-fluid" alt="Loading..">
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF MODAL Loading -->
     <!-- Contact Us Modal-->
     <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -72,23 +84,8 @@
                             
                         </div> 
                         <!-- END OF TOP SECTION --> 
-                        <!-- START OF LEFT SECTION -->
-                        <div class="col-6" style="">
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Telephone</p>
-                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                                <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                                <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan No. Telp" >
-                            </div>  
-                            @error('telephone')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            
-                        </div> 
-                        <!-- END OF LEFT SECTION --> 
                         <!-- RIGHT SECTION -->
-                        <div class="col-6" style="">
+                        <div class="col-12" style="">
                             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw"">Email</p>
                             <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                 <i style="color:#DAD9E2" class="fas fa-envelope"></i>
@@ -725,6 +722,11 @@
         }
       });
     </script>
+    <script>
+      function openLoading() {
+          $('#loadingModal').modal('show');
+      }
+  </script>
     <script>
         function changeNotification(evt, categoryName) {
             var i, tabcontent, tablinks;

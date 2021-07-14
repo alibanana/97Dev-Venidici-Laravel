@@ -78,6 +78,16 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.loading-background{
+    background-image: url("/assets/images/client/Loading-Asset.png");
+    /* Full height */
+    height: 100%; 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+}
 .online-course-detail-bg{
     background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
     background-position:6.8vw 9vw;

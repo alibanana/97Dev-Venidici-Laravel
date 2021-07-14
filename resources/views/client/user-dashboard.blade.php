@@ -3,6 +3,8 @@
 
 @section('content')
 
+
+
 <!-- START OF POPUP EDIT PROFILE-->
 <div id="edit-profile" class="overlay" style="overflow:scroll">
     <div class="popup">
@@ -133,7 +135,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12" style="text-align:right;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update General Info</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update General Info</button>
                     </div>  
 
                     </form>
@@ -214,7 +216,7 @@
                             @enderror
                         </div>
                         <div class="col-12" style="text-align:right;padding-top:3vw">
-                            <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Shipping Address</button>
+                            <button onclick="openLoading()" type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Shipping Address</button>
                         </div>  
                     </div>
                     </form>
@@ -482,7 +484,7 @@
             <span style="display: inline-block;">
                 <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
-                <button type="submit" style="background: none;border:none;color:#2B6CAA">
+                <button type="submit" onclick="openLoading()" style="background: none;border:none;color:#2B6CAA">
                     Kirim ulang email
                 </button>
                 </form>

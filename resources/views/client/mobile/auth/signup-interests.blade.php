@@ -42,7 +42,7 @@
                         @endforeach
                     </div>
                     <div class="col-12 p-0" style="text-align:center;margin-top:65vw">
-                        <button type="submit" class="btn-blue-bordered w-100" style="font-family: Poppins Medium;margin-bottom:0px;font-size:4vw">Submit</button>
+                        <button type="submit" onclick="openLoading()" class="btn-blue-bordered w-100" style="font-family: Poppins Medium;margin-bottom:0px;font-size:4vw">Submit</button>
                     </div>  
                 </div>
             </form>

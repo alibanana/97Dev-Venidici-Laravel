@@ -53,8 +53,9 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center;padding:3vw 2vw">
                             <i style="color:#DAD9E2;font-size:4vw" class="fas fa-user-friends"></i>
                             <select name="response" id=""  class=""  style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%;font-size:4vw">
-                                <option value="Friend" @if(Session::get('response') == 'Friend')) selected @endif>Friend</option>
-                                <option value="Instagram" @if(Session::get('response') == 'Instagram')) selected @endif>Instagram</option>
+                                <option value="Friend" @if(Session::get('response') == 'Friend') selected @endif>Friend</option>
+                                <option value="Instagram" @if(Session::get('response') == 'Instagram') selected @endif>Instagram</option>
+                                <option value="Instagram" @if(Session::get('response') == 'Other') selected @endif>Other</option>
                             </select>
                         </div> 
                         @error('response')

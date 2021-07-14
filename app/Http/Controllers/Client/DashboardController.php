@@ -153,9 +153,12 @@ class DashboardController extends Controller
         //check if the user update the shipping for the first time
         if(!$user->isShippingUpdated){
             $user->isShippingUpdated = TRUE;
+            $user->save();
+        }else{
+            $user->save();
+            $user_detail->save();
         }
 
-    
         //check if the user update the profile for the first time
         if(!$user->isProfileUpdated && $user->isShippingUpdated && $user->isGeneralInfoUpdated){
             $user->isProfileUpdated = TRUE;
@@ -163,6 +166,7 @@ class DashboardController extends Controller
             //tambah 15 stars
             Helper::addStars(auth()->user(),15,'Completing Personal Data');
             $user_detail->save();
+            $user->save();
             return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
         }
         $user_detail->save();
@@ -218,6 +222,10 @@ class DashboardController extends Controller
         //check if the user update the general info for the first time
         if(!$user->isGeneralInfoUpdated){
             $user->isGeneralInfoUpdated = TRUE;
+            $user->save();
+        }else{
+            $user->save();
+            $user_detail->save();
         }
 
         //check if the user update the profile for the first time
@@ -227,9 +235,9 @@ class DashboardController extends Controller
             //tambah 15 stars
             Helper::addStars(auth()->user(),15,'Completing Personal Data');
             $user->save();
+            $user_detail->save();
             return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
         }
-        $user->save();
 
 
 
