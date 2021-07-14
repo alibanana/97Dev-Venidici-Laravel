@@ -175,6 +175,9 @@ Route::middleware(['isSuspended'])->group(function () {
     });
     /* END OF WOKI ROUTING */
 
+    Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('admin.contact-us.store');
+
+
     /* END OF CLIENT ROUTING */
 
     /*
@@ -365,7 +368,6 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::delete('/newsletter/{id}', [AdminNewsletterController::class, 'destroy'])->name('newsletter.destroy');
         //ContactUsController
         Route::get('/contact-us', [AdminContactUsController::class, 'index'])->name('contact-us.index');
-        Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('contact-us.store');
         Route::delete('/contact-us/{id}', [AdminContactUsController::class, 'destroy'])->name('contact-us.destroy');
 
         // RedeemController

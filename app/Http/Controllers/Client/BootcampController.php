@@ -68,7 +68,6 @@ class BootcampController extends Controller
 
         // Get Schedules Data orderBy DateTime & groupBy Date.
         $schedules = $this->getSchedulesGroupByDate($course);
-
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
