@@ -50,36 +50,8 @@ class BootcampController extends Controller
         } else {
             return view('client/for-public/bootcamp', compact('programs','footer_reviews'));
         }
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     // Shows the details for each course.
     public function show($id) {
         $agent = new Agent();
@@ -87,8 +59,19 @@ class BootcampController extends Controller
             return view('client/mobile/under-construction');
 
         $course = Course::findOrFail($id);
+
+        if ($course->courseType->type == 'Course') {
+            return redirect()->route('online-course.show', $course->id);
+        } elseif ($course->courseType->type == 'Woki') {
+            return redirect()->route('woki.show', $course->id);
+        }
+
+        // Get Schedules Data orderBy DateTime & groupBy Date.
+        $schedules = $this->getSchedulesGroupByDate($course);
+
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
         // Get courses suggestions.
         if (Auth::check()) {
             $this->resetNavbarData();
@@ -99,43 +82,21 @@ class BootcampController extends Controller
             $cart_count = $this->cart_count;
             
             $courseSuggestions = CourseHelper::getCourseSuggestion(3,'Bootcamp');
-            return view('client/bootcamp/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
+            return view('client/bootcamp/detail', compact('course', 'schedules', 'reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
         }
 
-        return view('client/bootcamp/detail', compact('course','reviews','footer_reviews'));
+        return view('client/bootcamp/detail', compact('course', 'schedules', 'reviews','footer_reviews'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    private function getSchedulesGroupByDate($course) {
+        $bootcampSchedules = $course->bootcampSchedules()->orderBy('date_time')->get()
+            ->groupBy(function ($schedule) {
+                return $schedule->date_time->format('Y-m-d');
+            });
+        $result = []; 
+        foreach ($bootcampSchedules as $key => $value) {
+            $result[] = $value;
+        }
+        return $result;
     }
 }

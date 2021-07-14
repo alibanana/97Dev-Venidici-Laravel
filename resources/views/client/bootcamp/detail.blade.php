@@ -396,7 +396,7 @@
         @endif
         <div class="course-detail-card-green">
             @php
-                $customformat = date_format($course->created_at,"M d,Y H:i:s");
+                $customformat = date_format($schedules[0][0]->date_time, "M d,Y H:i:s");
             @endphp
             <script>
 				CountDownTimer('{{$customformat}}', 'countdown');

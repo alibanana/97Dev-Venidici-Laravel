@@ -15,6 +15,10 @@ class BootcampSchedule extends Model
         'detail',
     ];
 
+    protected $casts = [
+        'date_time' => 'datetime',
+    ];
+
     public function course() {
         return $this->belongsTo(Course::class);
     }
