@@ -37,7 +37,7 @@
                                 </span>
                             @enderror
                             <div style="text-align:right;margin-top:1vw">
-                                <button type="submit" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim Email</button>                
+                                <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim Email</button>                
                             </div>
                         </div>
                     </form>

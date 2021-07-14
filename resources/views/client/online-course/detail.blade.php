@@ -167,7 +167,7 @@
                     
                     <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
-                        <button type="submit" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
+                        <button type="submit" onclick="openLoading()" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
                     </div>
                 </div>
             </form>
@@ -223,10 +223,10 @@
         <div style="background-color:#2B6CAA;height:2vw;text-align:center;border-radius:5px;margin-top:1vw">
         <i class="fas fa-sort-down sub-description" style="color:#FFFFFF"></i>
         </div>
-        @endif
+    @endif
+    <!-- END OF REVIEW SECTION -->
         
     </div>
-    <!-- END OF REVIEW SECTION -->
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->

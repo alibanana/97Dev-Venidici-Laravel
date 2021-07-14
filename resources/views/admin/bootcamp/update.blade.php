@@ -392,7 +392,7 @@
                 </div>
                <!-- <div class="col-4"><input type="time" class="form-control"></div> -->
                <div class="col-6">
-                   <input type="text" name="title" class="form-control">
+                   <input type="text" name="title" placeholder="title" class="form-control">
                 </div>
                <div class="col-12 pt-3">
                    <textarea name="detail" id="" class="form-control" rows="3" placeholder="insert description"></textarea>

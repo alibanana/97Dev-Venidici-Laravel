@@ -3,7 +3,7 @@
 @section('title', 'Venidici Log In')
 @section('content')
 
-<!-- START OF POPUP VA EXPLANATION-->
+<!-- START OF POPUP LUPA PASSWORD-->
 <div id="forget-password" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:90vw">
         <a class="close" href="#" style="font-size:4vw;" >&times;</a>
@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-<!-- END OF POPUP VA EXPLANATION-->
+<!-- END OF POPUP LUPA PASSWORD-->
 
 <div class="row m-0">
     <!--
@@ -59,7 +59,7 @@
                 <div class="col-12" style="padding:2vw 4vw;display: flex;flex-direction: column;justify-content: center;">
                     <div style="text-align:center">
                         <div style="display:flex;justify-content:space-between;padding-top:7vw">
-                            <a href="/"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none;font-size:3vw"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Home</span></a>
+                            <a href="/"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none;font-size:4vw"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Home</span></a>
                         </div>
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:25vw;padding-top:6vw" alt="LOGO">
                         <p style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:3vw;font-size:4vw">Email Address</p>
@@ -86,11 +86,11 @@
                             <button type="submit" class="btn-blue-bordered w-100" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw;font-size:4vw">Login</button>
                         </div>
                         <p  style="font-family:Rubik Medium;color:#5F5D70;margin-bottom:0.4vw;margin-top:3vw;margin-bottom:1vw;font-size:4vw">OR</p>
-                        <a href="{{ route('login.google') }}"  style="font-family: Poppins Medium;margin-bottom:0px;margin-top:3vw;width:100%;display:inline-block;background-color:#67BBA3;border:none;color:#FFFFFF;border-radius:5px;padding:0.5vw 2vw;text-decoration:none;font-size:4vw"> <i class="fab fa-google"></i> <span style="margin-left:0.5vw">Login with Google Account</span></a>
+                        <a href="{{ route('login.google') }}"  style="font-family: Poppins Medium;margin-bottom:2vw;margin-top:3vw;width:100%;display:inline-block;background-color:#67BBA3;border:none;color:#FFFFFF;border-radius:5px;padding:0.5vw 2vw;text-decoration:none;font-size:4vw"> <i class="fab fa-google"></i> <span style="margin-left:0.5vw">Login with Google Account</span></a>
                             <div style="text-align:center !important">
                         </div>
-                        <p style="font-family: Rubik Regular;margin-bottom:0px;margin-top:3vw;text-decoration:none;color: #3B3C43;font-size:3vw">Belum punya akun? <span> <a href="/signup">Daftar di sini</a> </span> </p>
-                        <p style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;cursor:pointer;font-size:3vw"><span> <a href="#forget-password">Lupa Password</a> </span> </p>
+                        <p style="font-family: Rubik Regular;margin-bottom:0px;margin-top:3vw;text-decoration:none;color: #3B3C43;font-size:4vw">Belum punya akun? <span> <a href="/signup">Daftar di sini</a> </span> </p>
+                        <p style="font-family: Rubik Regular;margin-bottom:0px;margin-top:2vw;text-decoration:none;color: #3B3C43;cursor:pointer;font-size:4vw"><span> <a href="#forget-password">Lupa Password</a> </span> </p>
                     </div>
                 </div>   
             </div>

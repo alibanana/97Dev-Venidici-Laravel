@@ -26,7 +26,7 @@
                     </select>
                 </div>
                 <div style="margin-left: 1vw;">
-                    <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
+                    <button type="submit" onclick="openLoading()" class="btn-search small-text"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@
                     </div>
                     <!--
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
                     </div>  
                     -->
                     <!-- END OF GENNERAL INFORMATION -->
@@ -200,7 +200,7 @@
                     <!-- END OF RIGHT SECTION --> 
                     <!--
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
                     </div>  
                     -->
                     <!-- END OF CAREER INFORMATION -->
@@ -265,7 +265,7 @@
                     <!-- end of drag and drop -->
                     
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
                     </div>  
                     <!-- END OF PREFERRED JOB SECTION -->
 
@@ -386,7 +386,7 @@
                     </div>
                     
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
                     </div>  
                     
                     <!-- END OF GENNERAL INFORMATION -->
@@ -429,7 +429,7 @@
                 </div>  
             </div>
             <div style="margin-left: 1vw;">
-                <button type="submit" class="btn-search small-text"><i class="fas fa-search"></i></button>
+                <button type="submit" onclick="openLoading()" class="btn-search small-text"><i class="fas fa-search"></i></button>
             </div>
         </div>            
         </form>
@@ -1174,7 +1174,7 @@ END OF OUR PROGRAMS SECTION -->
                     <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
                         <input required class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
-                        <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
+                        <button type="submit" onclick="openLoading()" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                     </div>
                 </div>

@@ -91,7 +91,7 @@
                     </div>
                     <!--
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
                     </div>  
                     -->
                     <!-- END OF GENNERAL INFORMATION -->
@@ -160,7 +160,7 @@
                     <!-- END OF RIGHT SECTION --> 
                     <!--
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
                     </div>  
                     -->
                     <!-- END OF CAREER INFORMATION -->
@@ -225,7 +225,7 @@
                     <!-- end of drag and drop -->
                     
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
                     </div>  
                     <!-- END OF PREFERRED JOB SECTION -->
 
@@ -346,7 +346,7 @@
                     </div>
                     
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
                     </div>  
                     
                     <!-- END OF GENNERAL INFORMATION -->
@@ -381,14 +381,14 @@
                 </span>
             @enderror
         </div>  
-        <button type="submit" class="btn-search" style="font-size:3vw;width:100%;margin-top:3vw">Search</button>
+        <button type="submit" onclick="openLoading()" class="btn-search" style="font-size:3vw;width:100%;margin-top:3vw">Search</button>
     </div>        
     </form>
 </div>
 <!-- END OF BANNER SECTION -->
 
 <!-- START OF TRUSTED COMPANY SECTION -->
-<div class="row m-0 page-container"  style="z-index: 99;padding-bottom:5vw">
+<div class="row m-0 page-container"  style="z-index: 99;padding-bottom:5vw;display:none">
     <div class="col-12 p-0" id="trusted-company-margin" style="margin-top:-5vw">
         <div class="wow fadeInRight" data-wow-delay="1s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
             <div style="text-align: center;">
@@ -406,7 +406,7 @@
 
 
 <!-- START OF INDONESIA EMAS SECTION -->
-<div class="row m-0 page-container" style="padding-bottom:8vw;padding-top:2vw">
+<div class="row m-0 page-container" style="padding-bottom:8vw;padding-top:8vw">
     <div class="col-12 wow bounceInRight" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/Emas_BG.png" style="width:40vw" class="img-fluid" alt="">
     </div>
@@ -563,7 +563,7 @@
                             </div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="height:20vw">
+                            <div style="height:17vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                     @if ($course->courseType->type == 'Course')
                                         <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
@@ -670,7 +670,7 @@
                             <div class="top-left card-tag " style="font-size:2.5vw">On-Demand</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="height:20vw">
+                            <div style="height:17vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                     <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                     <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
@@ -770,7 +770,7 @@
                             <div class="top-left card-tag " style="font-size:2.5vw">On-Demand</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="height:20vw">
+                            <div style="height:17vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                     <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                     <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
@@ -1048,7 +1048,7 @@
                     <p class="wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold;font-size:3vw">Beneran rela ketinggalan info…?</p>
                     <div style="display:flex;align-items:center">
                         <input required placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none;font-size:2vw">
-                        <button type="submit" style="font-family:Rubik Regular;margin-left:2vw;border:none;font-size:2vw" class="btn-blue text-nowrap" >Subscribe Now</button>
+                        <button type="submit" onclick="openLoading()" style="font-family:Rubik Regular;margin-left:2vw;border:none;font-size:2vw" class="btn-blue text-nowrap" >Subscribe Now</button>
                         <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                     </div>
                 </div>
@@ -1057,6 +1057,23 @@
         </form>
     </div>
     <!-- END OF NEWSLETTER SECTION -->
+    <div class="row m-0 page-container"  style="padding-top:5vw;padding-bottom:8vw;">
+        <div class="col-12 p-0">
+            <div class="wow fadeInRight">
+                <div style="text-align: center;">
+                    <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
+                    <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-top:2vw;margin-bottom:0px">Trusted Companies</p>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;flex-wrap: wrap;">
+                    @foreach ($trusted_companies as $company)
+                        <div style="padding:0vw 4vw">
+                            <img src="{{ asset($company->image) }}" style="max-height:8vw;margin-top:5vw" class="img-fluid" alt="Image not available..">                
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>

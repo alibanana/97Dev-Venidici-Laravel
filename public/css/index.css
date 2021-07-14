@@ -78,6 +78,16 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.loading-background{
+    background-image: url("/assets/images/client/Loading-Asset.png");
+    /* Full height */
+    height: 100%; 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+}
 .online-course-detail-bg{
     background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
     background-position:6.8vw 9vw;
@@ -249,6 +259,7 @@ html, body {
 }
 .normal-text{
     font-size: 1.05vw;
+    line-height:1.4vw;
 }
 .small-text{
     font-size: 0.9vw;
@@ -1629,6 +1640,20 @@ html, body {
 
 
 }
+.image-thumbnail{
+    width:7vw;
+    height:7vw;
+    object-fit:cover;
+    border-radius:10px;
+}
+.cart-title{
+    display:flex;
+    align-items:flex-start;
+    width:18vw;
+}
+.display{
+    display: block;
+}
 
 
 @media only screen and (max-width: 767px) {
@@ -1673,17 +1698,78 @@ html, body {
         right: 5px;
     }
     /* end of notifaction popup mobile */
+    /* start cart mobile */
+    .btn-blue-bordered{
+        width: 100%;
+        padding:1vw  2vw !important;
+
+    }
+    .cart-title{
+        width:32vw;
+    }
+    .cart-card-grey{
+        width:86vw;
+        height:20vw
+    }
+    .margin-right{
+        margin-right: 10vw !important;
+    }
+    .image-thumbnail{
+        width:15vw;
+        height:15vw;
+        
+    }
+    .cart-card-red{   
+        width:5vw;
+    }
+    .page-container-right{
+        padding-right:4vw !important;
+        padding:0vw 4vw;
+    }
+    .page-container-left{
+        padding-left:4vw !important;
+        padding:0vw 3vw;
+    }
+    .page-container{
+        padding-left:4vw !important;
+        padding-right:4vw !important
+    }
+    .display{
+        display: none;
+    }
+    .mobile-cart-display{
+        display: block;
+    }
+    .qty-width{
+        width:4.5vw !important;
+    }
+    
+    /* end of cart mobile */
+    .sub-description{
+        font-size: 4vw;
+        line-height: 4vw;
+    }
+    .big-heading{
+        font-size: 6.5vw;
+    }
+    .small-heading{
+        font-size: 5.5vw;
+    }
+    .small-heading{
+        font-size: 5.5vw;
+    }
 
     .medium-heading{
         font-size: 6vw;
         line-height: 6vw;
     }
     .small-text{
-        font-size: 1.8vw;
-        line-height: 1.8vw;
+        font-size: 1.9vw;
+        line-height: 1.9vw;
     }
     .normal-text{
         font-size: 2.5vw;
+        line-height: 5vw;
     }
     .bigger-text{
         font-size: 3vw;
@@ -1775,7 +1861,7 @@ html, body {
    position: absolute;
    top: -7px;
    left: -5px;
-   
+
    cursor: pointer;
    
    opacity: 0; /* hide this */
