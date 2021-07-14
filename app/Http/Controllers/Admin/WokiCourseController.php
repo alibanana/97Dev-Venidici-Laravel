@@ -277,9 +277,15 @@ class WokiCourseController extends Controller
         return redirect()->route('admin.woki-courses.index')->with('message', 'New Woki Course has been added!');
     }
 
-    // Delete Woki Course from the database.
-    public function destroy($id) {
-        $result = CourseHelper::deleteById($id);
+    // Archive (isDeleted -> true) Woki Course from the database.
+    public function archive($id) {
+        $result = CourseHelper::makeIsDeletedTrueById($id);
+        return redirect()->route('admin.woki-courses.index')->with('message', $result['message']);
+    }
+
+    // UnArchive (isDeleted -> false) Woki Course from the database.wo
+    public function unArchive($id) {
+        $result = CourseHelper::makeIsDeletedFalseById($id);
         return redirect()->route('admin.woki-courses.index')->with('message', $result['message']);
     }
 

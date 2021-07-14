@@ -96,6 +96,13 @@ class WokiController extends Controller
             return view('client/mobile/under-construction');
 
         $course = Course::findOrFail($id);
+
+        if ($course->courseType->type == 'Course') {
+            return redirect()->route('online-course.show', $course->id);
+        } elseif ($course->courseType->type == 'Bootcamp') {
+            return redirect()->route('bootcamp.show', $course->id);
+        }
+
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
         

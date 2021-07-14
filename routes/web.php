@@ -226,7 +226,8 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
         Route::get('/online-courses/{id}', [AdminOnlineCourseController::class, 'show'])->name('online-courses.show');
         Route::post('/online-courses', [AdminOnlineCourseController::class, 'store'])->name('online-courses.store');
-        Route::delete('/online-course/{id}', [AdminOnlineCourseController::class, 'destroy'])->name('online-courses.destroy');
+        Route::put('/online-course/{id}/archive', [AdminOnlineCourseController::class, 'archive'])->name('online-courses.archive');
+        Route::put('/online-course/{id}/un-archive', [AdminOnlineCourseController::class, 'unArchive'])->name('online-courses.unArchive');
         Route::post('/online-courses/{id}/set-isfeatured-status-to-opposite', [AdminOnlineCourseController::class, 'setIsFeaturedStatusToOpposite'])->name('online-courses.set-isfeatured-status-to-opposite');
         Route::post('/online-courses/{id}/set-publish-status-to-opposite', [AdminOnlineCourseController::class, 'setPublishStatusToOpposite'])->name('online-courses.set-publish-status-to-opposite');
         // OnlineCourseUpdateController
@@ -242,6 +243,8 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/woki-courses/{id}', [AdminWokiCourseController::class, 'show'])->name('woki-courses.show');
         Route::post('/woki-courses', [AdminWokiCourseController::class, 'store'])->name('woki-courses.store');
         Route::delete('/woki-courses/{id}', [AdminWokiCourseController::class, 'destroy'])->name('woki-courses.destroy');
+        Route::put('/woki-course/{id}/archive', [AdminWokiCourseController::class, 'archive'])->name('woki-courses.archive');
+        Route::put('/woki-course/{id}/un-archive', [AdminWokiCourseController::class, 'unArchive'])->name('woki-courses.unArchive');
         Route::post('/woki-courses/{id}/set-isfeatured-status-to-opposite', [AdminWokiCourseController::class, 'setIsFeaturedStatusToOpposite'])->name('woki-courses.set-isfeatured-status-to-opposite');
         Route::post('/woki-courses/{id}/set-publish-status-to-opposite', [AdminWokiCourseController::class, 'setPublishStatusToOpposite'])->name('woki-courses.set-publish-status-to-opposite');
         // BootcampController
@@ -250,7 +253,8 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/bootcamp/create', [AdminBootcampController::class, 'create'])->name('bootcamp.create');
         Route::get('/bootcamp/{id}', [AdminBootcampController::class, 'show'])->name('bootcamp.show');
         Route::post('/bootcamp', [AdminBootcampController::class, 'store'])->name('bootcamp.store');
-        Route::delete('/bootcamp/{id}', [AdminBootcampController::class, 'destroy'])->name('bootcamp.destroy');
+        Route::put('/bootcamp/{id}/archive', [AdminBootcampController::class, 'archive'])->name('bootcamp.archive');
+        Route::put('/bootcamp/{id}/un-archive', [AdminBootcampController::class, 'unArchive'])->name('bootcamp.unArchive');
         Route::post('/bootcamp/{id}/set-isfeatured-status-to-opposite', [AdminBootcampController::class, 'setIsFeaturedStatusToOpposite'])->name('bootcamp.set-isfeatured-status-to-opposite');
         Route::post('/bootcamp/{id}/set-publish-status-to-opposite', [AdminBootcampController::class, 'setPublishStatusToOpposite'])->name('bootcamp.set-publish-status-to-opposite');
         // BootcampUpdateController

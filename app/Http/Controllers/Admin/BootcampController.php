@@ -242,28 +242,20 @@ class BootcampController extends Controller
         return view('admin/bootcamp/detail', compact('course', 'users', 'total_revenue', 'users_data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         return view('admin/bootcamp/update');
-
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // Delete Online Course from the database.
-    public function destroy($id) {
-        $result = CourseHelper::deleteById($id);
+    // Archive (isDeleted -> true) Bootcamp Course from the database.
+    public function archive($id) {
+        $result = CourseHelper::makeIsDeletedTrueById($id);
+        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+    }
+
+    // UnArchive (isDeleted -> false) Bootcamp Course from the database.wo
+    public function unArchive($id) {
+        $result = CourseHelper::makeIsDeletedFalseById($id);
         return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
     }
 
