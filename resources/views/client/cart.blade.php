@@ -6,13 +6,14 @@
 
 <div class="row m-0" style="padding-bottom:4vw">
     
-    <div class="col-8 p-0" style="">
-        <div class="page-container-left" style="padding-top:11vw;padding-right:5vw">
-            <div style="display:flex;justify-content:space-between;align-items:center">
+    <div class="col-md-8 col-xs-12 p-0" style="">
+        <div class="page-container-left " style="padding-top:11vw;padding-right:5vw">
+            <div class="" style="display:flex;justify-content:space-between;align-items:center">
                 <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Keranjang</p>
-                <p class="small-text" style="font-family:Rubik Regular;color:#CE3369;">*Please check your cart and complete the Shipping Details form before payment</p>
-
+                <p class="small-text display" style="font-family:Rubik Regular;color:#CE3369;">*Please check your cart and complete the Shipping Details form before payment</p>
             </div>
+            <p class="small-text mobile-cart-display" style="font-family:Rubik Regular;color:#CE3369;">*Please check your cart and complete the Shipping Details form before payment</p>
+
             <!-- ITEM SECTION -->
             @if(count($carts) == 0)
                 <div>
@@ -30,7 +31,7 @@
                                 <img src="{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
                                 <div style="margin-left:1vw">
                                     <div style="display:flex;align-items:flex-start">
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;">{{$cart->course->title}}</p>
                                     </div>
                                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
                                     @foreach($cart->course->teachers as $teacher)
@@ -47,7 +48,7 @@
                                 </div>
                             </div>
                             <div style="display:flex;align-items:center">
-                                <div style="width:7.5vw;text-align:right">
+                                <div  style="width:7.5vw;text-align:right">`
                                     <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
                                 </div>
                             </div>
@@ -70,10 +71,10 @@
                         <div class="cart-card-grey">
                             <div style="display:flex;align-items:center;width:70%">
                                 
-                                <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                                <img src="{{asset($cart->course->thumbnail)}}" style="" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                                 <div style="margin-left:1vw">
-                                    <div style="display:flex;align-items:flex-start;width:18vw;">
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                    <div class="cart-title" style="">
+                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
                                         @if($cart->withArtOrNo)
                                             <i style="color:#2B6CAA;margin-left:1vw" role="button" aria-controls="woki-collapse-{{$cart->id}}" 
                                                 data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
@@ -106,7 +107,7 @@
                                                 </button>
                                             </form>                                    
                                         </div>
-                                        <input type="text" name="qty" class="qty-input normal-text" value="{{$cart->quantity}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+                                        <input type="text" name="qty" class="qty-input normal-text qty-width" value="{{$cart->quantity}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
                                         <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
                                         <form action="{{ route('customer.decreaseQty') }}" method="POST">
                                             @csrf
@@ -119,8 +120,8 @@
                                         </div>
                                     </div>
                                 @endif
-                                <div style="width:7.5vw;text-align:right">
-                                    <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
+                                <div class="margin-right" style="width:7.5vw;text-align:right;">
+                                    <p class="bigger-text text-nowrap mb-0"  style="font-family:Rubik Medium;color:#3B3C43;">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
                                 </div>                        
                             </div>
                         </div>
@@ -173,7 +174,7 @@
             <!-- END OF ITEM SECTION -->
         </div>
     </div>  
-    <div class="col-4 p-0 cart-background">
+    <div class="col-md-4 p-0 cart-background">
         <div class="page-container-right" style="padding-top:11vw">
 
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Ringkasan Pembayaran</p>
