@@ -457,13 +457,13 @@
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-6 p-0" style="display:flex;justify-content:center">
-        <a href="/for-public/bootcamp" style="text-decoration:none">
+        <a href="/bootcamp?cat=Featured" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
                 <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Bootcamp</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam porro blanditiis cupiditate in soluta iste eveniet, veritatis architecto pariatur numquam. Placeat praesentium officiis, assumenda ducimus ratione delectus quia dolore? Laboriosam?</p>
-                    <a href="/for-public/bootcamp" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
+                    <a href="/bootcamp?cat=Featured" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
                 </div>
             </div>
         </a>

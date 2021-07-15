@@ -12,6 +12,7 @@ use App\Models\Review;
 use App\Helper\Helper;
 use App\Models\Course;
 use App\Helper\CourseHelper;
+use Carbon\Carbon;
 
 class BootcampController extends Controller
 {
@@ -81,6 +82,7 @@ class BootcampController extends Controller
 
     // Shows the details for each course.
     public function show($id) {
+
         $agent = new Agent();
         if($agent->isPhone())
             return view('client/mobile/under-construction');
@@ -97,6 +99,8 @@ class BootcampController extends Controller
         $schedules = $this->getSchedulesGroupByDate($course);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        $tomorrow = Carbon::now()->addDays(1);
+        $tomorrow->setTimezone('Asia/Jakarta');
         // Get courses suggestions.
         if (Auth::check()) {
             $this->resetNavbarData();
@@ -107,10 +111,11 @@ class BootcampController extends Controller
             $cart_count = $this->cart_count;
             
             $courseSuggestions = CourseHelper::getCourseSuggestion(3,'Bootcamp');
-            return view('client/bootcamp/detail', compact('course', 'schedules', 'reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
+            return view('client/bootcamp/detail', compact('course', 'schedules', 'reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions','tomorrow'));
         }
+        
 
-        return view('client/bootcamp/detail', compact('course', 'schedules', 'reviews','footer_reviews'));
+        return view('client/bootcamp/detail', compact('course', 'schedules', 'reviews','footer_reviews','tomorrow'));
     }
 
     private function getSchedulesGroupByDate($course) {

@@ -8,9 +8,8 @@
     <div class="popup" style="width:70% !important">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route('customer.cart.storeOrder')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('put') 
             <div class="row m-0">
                 
                 <div class="col-12" style="text-align:left;">
@@ -42,10 +41,10 @@
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                     <div  class="auth-input-form" style="display: flex;align-items:center">
                         <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                        <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                            placeholder="Insert telephone number" @if(Auth::check()) value="{{ old('telephone', Auth::user()->userDetail->telephone) }}" @endif>
+                        <input type="text" name="phone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert phone number" @if(Auth::check()) value="{{ old('phone', Auth::user()->userDetail->telephone) }}" @endif>
                     </div>  
-                    @error('telephone')
+                    @error('phone')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -66,26 +65,30 @@
                         <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                    @if ($course->price != 0)
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Bank and Account Number</p>
                     <div style="display: flex;align-items:center">
                         <div  class="auth-input-form" style="display: flex;align-items:center;width:40%">
                             <i style="color:#DAD9E2" class="fas fa-money-check-alt"></i>
-                            <select name="bank" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;margin-left:0.5vw">
+                            <select name="bankShortCode" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;margin-left:0.5vw">
                                 <option value="None" disabled selected>Pilih Bank</option>
                                 <option value="bca">BCA</option>
                                 <option value="bri">BRI</option>
                                 <option value="mandiri">Mandiri</option>
                             </select>                    
-                            @error('bank')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
                         <div  class="auth-input-form" style="display: flex;align-items:center;margin-left:1vw;width:60%">
                             <input type="text" name="bank_account_number" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
-                                placeholder="Bank Account Number" value="">
-                        </div>  
+                                placeholder="Bank Account Number">
+                        </div>
+                    </div>
+                    <div style="display: flex;align-items:center">
+                         
+                        @error('bankShortCode')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         @error('bank_account_number')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
@@ -93,7 +96,7 @@
                         @enderror
 
                     </div>
-                    
+                    @endif
                 </div>
                 <!-- END OF RIGHT SECTION -->
                 <div class="col-12">
@@ -112,7 +115,33 @@
                     
                 </div>
                 <div class="col-12" style="text-align:center;padding-top:3vw">
-                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>
+                    <input type="hidden" name="grand_total" value="{{$course->price}}">
+                    <input type="hidden" name="total_order_price" value="{{$course->price}}">
+                    <?php
+                        $tomorrow_split = explode(' ', $tomorrow);
+                        $date = $tomorrow_split[0];
+                        $time = $tomorrow_split[1];
+                    ?>
+                    <input type="hidden" name="date" value="{{ $date }}">
+                    <input type="hidden" name="time" value="{{ $time }}">
+                    <input type="hidden" name="course_id" value="{{ $course->id }}">
+                    @if(Auth::user()->club != null)
+                        @php
+                            $discount_club_price = 0;
+                            if(Auth::user()->club == 'bike')
+                                $discount_club_price = 2500;
+                            elseif(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
+                                $discount_club_price = 5000;
+                        @endphp
+                    @else
+                        @php
+                        $discount_club_price = 0;
+                        @endphp
+                    @endif
+                    <input type="hidden" value="{{$discount_club_price}}" name="club_discount">
+                    <input type="hidden" name="discounted_price" value="0">
+                    <input type="hidden" name="promo_code" value="0">
+                    <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>
                 </div>  
 
             </div>                
@@ -126,7 +155,9 @@
     <!-- START OF LEFT SECTION -->
     <div class="col-9" >
         <div style="padding-right:10vw">
-            <p class="medium-heading" style="font-family:Hypebeast;color:#2B6CAA">Bootcamp</p>
+        <p>{{$discount_club_price}}</p>
+
+            <p class="medium-heading" style="font-family:Hypebeast;color:#2B6CAA">Bootcamp </p>
 
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
             
@@ -376,7 +407,7 @@
 
     <!-- START OF RIGHT SECTION -->
     <div class="col-3 p-0" >
-        @if(session('success'))
+        @if(session('success') || session('message'))
             <!-- ALERT MESSAGE -->
             <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
                 {{ session('success') }}
