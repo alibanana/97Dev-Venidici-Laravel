@@ -160,6 +160,44 @@
                     <button type="button" id="add_requirement" onlick="duplicateRequirement()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
                 </div>
 
+                <div class="col-6" style="margin-top:3vw">
+                <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
+                <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
+                @error('hashtags')
+                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <div id="hashtag_duplicator_wrapper">
+                    {{-- Element to be duplicated --}}
+                    <div class="row" id="hashtag_duplicator" style="display:none">
+                        <div class="col-md-12">
+                            <div class="form-group d-flex">
+                                <select class="form-control form-control-user" id="">
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="hashtag_duplicator1">
+                        <div class="col-md-12">
+                            <div class="form-group d-flex">
+                                <select name="hashtags[]" class="form-control form-control-user" id="" required>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" onClick="removeDiv(this, 'hashtag_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="add_hashtag" onlick="duplicateHashtag()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+            </div>
+
                 <!-- <div class="col-6" style="margin-top:3vw">
                     <label for="">Apa yang akan dipelajari? <span style="color: orange">(At least one element must be present!)</span></label>
                     @error('features')
