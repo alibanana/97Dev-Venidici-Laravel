@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Community')
+@section('title', 'Venidici Assessment Completed')
 
 @section('content')
 

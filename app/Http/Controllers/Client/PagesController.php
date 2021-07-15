@@ -11,7 +11,7 @@ use Jenssegers\Agent\Agent;
 use Illuminate\Support\Str;
 use App\Helper\Helper;
 use PDF;
-use Spatie\Browsershot\Browsershot;
+use App\Models\CourseCategory;
 
 use App\Models\Notification;
 use App\Models\Config;
@@ -180,6 +180,79 @@ class PagesController extends Controller
         return view('client/for-public/woki',compact('footer_reviews'));
     }
 
+    public function bootcamp_index(){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if (Auth::check()) {
+
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+            return view('client/for-public/bootcamp', compact('cart_count','transactions','informations','notifications','footer_reviews'));
+            
+        } else {
+            return view('client/for-public/bootcamp', compact('footer_reviews'));
+        }
+    }
+
+    public function pelatihan_venidici_index(Request $request){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
+        $course_categories = CourseCategory::all();
+        $courses = new Course;
+        if ($request->has('cat')) {
+            if ($request['cat'] == "Featured") {
+                $courses = $courses->where('isFeatured',TRUE)->orderBy('created_at', 'desc');
+            }
+            else if($request['cat'] == "None"){
+                $courses = $courses->orderBy('created_at', 'desc');
+            }else {
+                $courses = $courses->where('course_category_id',$request['cat'])->orderBy('created_at','desc');
+            }
+        } else {
+            $courses = $courses->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $courses = $courses->orderBy('created_at', 'desc');            
+            } else {
+                $search = $request->search;
+
+                $courses = $courses->where(function ($query) use ($search) {
+                    $query->where([['title', 'like', "%".$search."%"]])
+                    ->orWhere([['subtitle', 'like', "%".$search."%"]]);
+                });
+            }
+        }
+        $courses = $courses->where('enrollment_status', 'open')
+        ->where('publish_status', 'published')->where('isDeleted', false)->get();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        $user_review = Review::orderBy('created_at','desc')->get();
+        if (Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/pelatihan-venidici', compact('cart_count','transactions','courses','course_categories','informations','notifications','footer_reviews','user_review'));
+        }
+
+        return view('client/pelatihan-venidici',compact('course_categories','courses','footer_reviews','user_review'));
+    }
+
     public function print(Request $request){
         // $pathToImage = 'storage/images/online-courses/';
         // Browsershot::url('http://127.0.0.1:8000/certificate')->save('example.pdf');
@@ -230,15 +303,15 @@ class PagesController extends Controller
         // kalau ada filter
         if($request->has('filter')){
             if($request->filter == 'Skill Snack'){
-                return redirect('/online-course?search='.$request->search);
+                return redirect('/online-course?search='.$request->search.'#search-course-section');
             }
             elseif($request->filter == 'Woki'){
-                return redirect('/woki?search='.$request->search);
+                return redirect('/woki?search='.$request->search.'#search-course-section');
             }
         }
         // kalau search doang (gak ada filter)
         else{
-            return redirect('/online-course?search='.$request->search);
+            return redirect('/pelatihan-venidici?search='.$request->search.'#search-course-section');
 
         }
     }

@@ -1,15 +1,12 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Skill Snack')
+@section('title', 'Pelatihan Venidici')
 
 @section('content')
 <!-- START OF BANNER SECTION -->
 <div class="row m-0 banner-background page-container" style="height:40vw;padding-top:16vw;text-align:center">
     <div class="col-md-12 p-0">
-        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Skill Snack</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Fun learning anytime & anywhere! Bukan zamannya
-        belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun,
-        kamu yang tentuin karena Skill Snack On-Demand berisi rekaman
-        course-course Venidici dengan rating terbaik.</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Pelatihan Venidici</p>
+        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum distinctio, consequatur sapiente doloribus dignissimos ipsum modi, illo facere quod voluptatem nemo dolorum reprehenderit sed aut et cumque corrupti beatae ea?</p>
         
         <a href="#search-course-section" class="sub-description btn-blue-bordered btn-blue-bordered-active" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;width:100%;margin-top:5vw;padding:0.8vw 1vw">Search Courses</a>
 
@@ -18,77 +15,6 @@
 
 <!-- END OF BANNER SECTION -->
 
-<!-- START OF OUR PROGRAMS SECTION 
-<div class="row m-0 page-container enroll-background" style="padding-bottom:8vw;padding-top:6vw">
-    <div class="col-12 p-0">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Why enroll in Venidici's<span class="big-heading" style="font-family:Hypebeast;margin-left:1vw;color:#2B6CAA" >ONLINE COURSE</span></p>
-    </div>
-    <div class="col-6 p-0">
-        <a href="" style="text-decoration:none">
-            <div class="our-programs-card" style="margin-top:2.5vw">
-                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-                <div class="right-section" >
-                    <div>
-                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Reason 1</p>
-                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    </div>
-                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Reason 1</a>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-6 p-0" style="display:flex;justify-content:flex-end;margin-top:2.5vw">
-        <a href="" style="text-decoration:none">
-            <div class="our-programs-card">
-                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-                <div class="right-section" >
-                    <div>
-                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Reason 1</p>
-                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    </div>
-                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Reason 1</a>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-6 p-0">
-        <a href="" style="text-decoration:none">
-            <div class="our-programs-card" style="margin-top:2.5vw">
-                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-                <div class="right-section" >
-                    <div>
-                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Reason 1</p>
-                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    </div>
-                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Reason 1</a>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-6 p-0" style="display:flex;justify-content:flex-end;margin-top:2.5vw">
-        <a href="" style="text-decoration:none">
-            <div class="our-programs-card">
-                <img src="/assets/images/client/our-programs-card-dummy.png" alt="">
-                <div class="right-section" >
-                    <div>
-                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Reason 1</p>
-                        <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    </div>
-                    <div style="order: 1;flex: 0 1 auto;align-self: flex-end;">
-                        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Reason 1</a>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
-END OF OUR PROGRAMS SECTION -->
 <div style="padding-bottom:5vw">
 </div>
 <!-- START OF TESTIMONY SECTION -->
@@ -166,7 +92,7 @@ END OF OUR PROGRAMS SECTION -->
 
     </div>
     <div class="col-4 p-0 " style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s Skill Snack</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
 
@@ -177,7 +103,7 @@ END OF OUR PROGRAMS SECTION -->
 <!-- START OF COURSE LIST SECTION -->
 <div class="row m-0 page-container" id="search-course-section" style="padding-top:4vw;padding-bottom:8vw">   
     <div class="col-12 p-0" style="text-align:center">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Find your online course here!</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Find your Courses here!</p>
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
@@ -241,11 +167,25 @@ END OF OUR PROGRAMS SECTION -->
 
             <div class="col-4 p-0" style="margin-top:3vw">
                 <div style="display: flex;justify-content:center">
-                    <!-- START OF ONE GREEN COURSE CARD -->
+                    <!-- START OF ONE BLUE COURSE CARD -->
+                    @if ($course->courseType->type == "Course")
                     <div class="course-card-green">
+                    @elseif ($course->courseType->type == "Woki")
+                    <div class="course-card-red">
+                    @elseif ($course->courseType->type == "Bootcamp")
+                    <div class="course-card-blue">
+                    @endif
                         <div class="container">
                             <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
-                            <div class="top-left card-tag small-text">Online Course</div>
+                            <div class="top-left card-tag small-text">
+                            @if ($course->courseType->type == "Course")
+                            Skill-Snack
+                            @elseif ($course->courseType->type == "Woki")
+                            Woki
+                            @elseif ($course->courseType->type == "Bootcamp")
+                            Bootcamp
+                            @endif
+                            </div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="height:6vw">
@@ -304,12 +244,12 @@ END OF OUR PROGRAMS SECTION -->
                                 @else
                                     <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                 @endif
-                                <a href="/online-course/{{$course->id}}" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/bootcamp/{{$course->id}}" class="course-card-button normal-text">Enroll Now</a>
                             </div>
             
                         </div>
                     </div>
-                    <!-- END OF ONE GREEN COURSE CARD -->
+                    <!-- END OF ONE BLUE COURSE CARD -->
                 </div>
             </div>
             @endforeach

@@ -151,6 +151,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');
     Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree')->middleware(['auth', 'verified']);
     // BootcampController
+    Route::get('/bootcamp', [BootcampController::class, 'index'])->name('bootcamp.index');
     Route::get('/bootcamp/{id}', [BootcampController::class, 'show'])->name('bootcamp.show');
 
     // ReviewController
@@ -402,7 +403,8 @@ Route::middleware(['isSuspended'])->group(function () {
     /* START OF FOR PUBLIC ROUTING */
     Route::get('/for-public/online-course', [PagesController::class, 'online_course_index'])->name('customer.online_course_index');
     Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
-    Route::get('/for-public/bootcamp', [BootcampController::class, 'index'])->name('customer.bootcamp_index');
+    Route::get('/for-public/bootcamp', [PagesController::class, 'bootcamp_index'])->name('customer.bootcamp_index');
+    Route::get('/pelatihan-venidici', [PagesController::class, 'pelatihan_venidici_index'])->name('customer.pelatihan_venidici_index');
     /* END OF FOR PUBLIC ROUTING*/
 
     /* START OF FOR CORPORATE ROUTING */

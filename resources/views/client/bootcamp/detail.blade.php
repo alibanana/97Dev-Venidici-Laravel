@@ -154,8 +154,9 @@
                     src="{{$course->preview_video}}">
                 </iframe>
             </div>
-
+            @if(count($schedules) != 0)
             <p class="bigger-text" style="font-family:Rubik Medium;margin-top:2vw;color:#3B3C43;;margin-bottom:0px"><i class="fas fa-calendar-week"></i> <span style="margin-left:1vw">{{date_format($schedules[0][0]->date_time,"D, d M Y")}}</span></p>
+            @endif
             <div style="display:flex;align-items:center;margin-top:0.5vw">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                 <div style="display: flex;justify-content:center;margin-left:1vw">
@@ -176,7 +177,7 @@
                     @endfor
                 </div>
             </div>
-            
+            @if(count($schedules) != 0)
             <!-- WHAT YOU WILL LEARN SECTION -->
             <div style="background: #EBF5FF;border-radius: 10px;padding:1.5vw;margin-top:2vw">
                 
@@ -216,6 +217,7 @@
                 </div>  
             </div>
             <!-- END OF WHAT YOU WILL LEARN SECTION -->
+            @endif
         </div>
         <!-- START OF PERSYARATAN SECTION -->
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:4vw">Persyaratan</p>
@@ -389,7 +391,9 @@
             </div>
             <!-- END OF ALERT MESSAGE -->
         @endif
+
         <div class="course-detail-card-green">
+            @if(count($schedules) != 0)
             @php
                 $customformat = date_format($schedules[0][0]->date_time,"M d,Y H:i:s");
             @endphp
@@ -424,7 +428,7 @@
 					timer = setInterval(showRemaining, 1000);
 				}
             </script>
-			</td>
+            @endif
             @if($course->price == 0)
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
             @else
@@ -445,6 +449,8 @@
             </div>
 
         </div>
+        @if(count($schedules) != 0)
+
         <!-- START COUNT DOWN CARD -->
         <div class="course-detail-card-green" id="countdown-card" style="margin-top:2vw">
             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Countdown Registration:</p>
@@ -464,6 +470,8 @@
             </div>
         </div>
         <!-- END OF COUNT DOWN CARD -->
+        @endif
+
         <div style="padding:2vw;background:#FFFFFF">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Ada <span style="font-family:Hypebeast">Pertanyaan?</span> </p>
             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
