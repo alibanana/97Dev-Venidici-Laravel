@@ -99,8 +99,8 @@ class OnlineCourseController extends Controller {
     // Shows the details for each course.
     public function show($id) {
         $agent = new Agent();
-        if($agent->isPhone())
-            return view('client/mobile/under-construction');
+        // if($agent->isPhone())
+        //     return view('client/mobile/under-construction');
 
         $course = Course::findOrFail($id);
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
@@ -115,9 +115,15 @@ class OnlineCourseController extends Controller {
             $cart_count = $this->cart_count;
             
             $courseSuggestions = CourseHelper::getCourseSuggestion(3,'Course');
+            if($agent->isPhone()){
+                return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
+            }
+            
             return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
         }
-
+        if($agent->isPhone()){
+            return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
+        }
         return view('client/online-course/detail', compact('course','reviews','footer_reviews'));
     }
 

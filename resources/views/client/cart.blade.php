@@ -28,10 +28,10 @@
                         <input type="hidden" name="product_id" class="product_id normal-text" value="{{$cart->course_id}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
                         <div class="cart-card-grey">
                             <div style="display:flex;align-items:center;width:70%">
-                                <img src="{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                                <img src="{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                                 <div style="margin-left:1vw">
                                     <div style="display:flex;align-items:flex-start">
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;">{{$cart->course->title}}</p>
+                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
                                     </div>
                                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
                                     @foreach($cart->course->teachers as $teacher)
@@ -47,9 +47,9 @@
                                     </p>
                                 </div>
                             </div>
-                            <div style="display:flex;align-items:center">
-                                <div  style="width:7.5vw;text-align:right">`
-                                    <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
+                            <div class="margin-right" style="display:flex;align-items:center">
+                                <div  style="width:7.5vw;text-align:right">
+                                    <p class="bigger-text text-nowrap mb-0"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                             <!-- START OF ONE ITEM COLLAPSE -->
                             <div style="display:flex;align-items:center;margin-top:1.5vw">
                                 <i style="color:#2B6CAA" class="fas fa-circle normal-text"></i>
-                                <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid" alt="COURSE THUMBNAIL">
+                                <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                                 <div style="margin-left:1vw">
                                     <p class="normal-text" style="font-family:Rubik Bold;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;margin-bottom:0.5vw">{{$supply->name}}</p>
                                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{$supply->description}}</p>
@@ -207,9 +207,9 @@
             <div style="text-align:center">
             
                 @if($noWoki)
-                <button onclick="window.open('/payment','_self');" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>
+                <button onclick="window.open('/payment','_self');" class="normal-text btn-blue-bordered btn-blue-bordered-active full-width-button" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>
                 @else
-                <button onclick="window.open('/payment','_self');" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pengiriman</button>
+                <button onclick="window.open('/payment','_self');" class="normal-text btn-blue-bordered btn-blue-bordered-active full-width-button" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1.5vw;padding:0.5vw 2vw">Lanjut ke Pengiriman</button>
                 @endif
             </div>
             @endif

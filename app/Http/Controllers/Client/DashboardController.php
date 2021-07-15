@@ -51,9 +51,9 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $this->resetNavbarData();
 
         $notifications = $this->notifications;
@@ -120,6 +120,9 @@ class DashboardController extends Controller
                 $cities = City::get();
             else
                 $cities = null;
+        }
+        if($agent->isPhone()){
+            return view('client/mobile/user-dashboard',compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews'));
         }
 
         return view('client/user-dashboard',

@@ -218,7 +218,9 @@ html, body {
 
 /* start of page padding */
 .page-container-left{
-    padding-left:8.5vw
+    padding-left:8.5vw;
+    padding-top:11vw;
+    padding-right:9vw
 }
 .page-container-right{
     padding-right:8.5vw
@@ -1129,9 +1131,9 @@ html, body {
     margin: 40vw auto;
     background: #ffffff;
     border-radius: 10px;
-    width: 80%;
     position: relative;
     transition: all 1s ease-in-out;
+    width:35% !important;
   
   }
 
@@ -1702,6 +1704,7 @@ html, body {
     .btn-blue-bordered{
         width: 100%;
         padding:1vw  2vw !important;
+        
 
     }
     .cart-title{
@@ -1727,6 +1730,7 @@ html, body {
     .page-container-left{
         padding-left:4vw !important;
         padding:0vw 3vw;
+        padding-top:11vw;
     }
     .page-container{
         padding-left:4vw !important;
@@ -1743,6 +1747,65 @@ html, body {
     }
     
     /* end of cart mobile */
+    /* start mobile cart_shipment  */
+
+    .full-width{
+        width:100vw !important;
+        padding:0vw !important;
+    }
+    .full-width-button{
+        width:100%;
+        padding:1vw  2vw !important;
+        font-size:3.5vw !important;
+    }
+    .margin-bot{
+        margin-bottom:4vw !important;
+    }
+    .margin-right-shipment{
+        margin-right: 15vw !important;
+    }
+    .half-width-button{
+        width:50%;
+        padding:1vw  2vw !important;
+    }
+    .no-padding{
+        --bs-gutter-x:0rem !important;
+    }
+    
+
+    /* end of mobile cart_shipment */
+    /* metode pembayaran mobile */
+    .payment-method-card{
+        padding:3vw;
+        
+    }
+    .image-bank{
+        width:20vw !important;
+        height:10vw !important;
+        object-fit:contain !important;
+    }
+    /* end of metode pembayaran mobile */
+    /* start transcation detail mobile popup */
+    .popup {
+        width:80% !important;
+        margin-right:17vw ;
+      
+      }
+    .course-claim-margin{
+        margin-right:12vw !important; 
+    }
+    .popup .content {
+        max-height: 50%;
+        overflow: auto;
+        width:100%;
+    }
+    .popup .close {
+        top: -10px; 
+      }
+    .popup-image-mobile{
+        width:15vw !important;
+    }
+    /* end of transcation detail mobile popup */
     .sub-description{
         font-size: 4vw;
         line-height: 4vw;
@@ -1756,6 +1819,7 @@ html, body {
     .small-heading{
         font-size: 5.5vw;
     }
+    
 
     .medium-heading{
         font-size: 6vw;
