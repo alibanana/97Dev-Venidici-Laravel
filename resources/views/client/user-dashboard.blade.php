@@ -936,9 +936,12 @@
                                         Bootcamp
                                         @endif
                                     </div>
+                                    <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                                    </div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="height:6vw">
+                                    <div style="height:4.5vw">
                                         <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                             @if ($course->courseType->type == 'Course')
                                                 <a href="/online-course/{{ $course->id }}" class="normal-text"
@@ -950,7 +953,7 @@
                                                 <a href="/bootcamp/{{ $course->id }}" class="normal-text"
                                                     style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                             @endif
-                                            <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i>
+                                            <!-- <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i> -->
                                         </div>
                                         @foreach ($course->hashtags as $tag)
                                             <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
