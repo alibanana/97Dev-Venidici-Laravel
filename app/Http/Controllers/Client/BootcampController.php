@@ -45,10 +45,10 @@ class BootcampController extends Controller
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-            return view('client/for-public/bootcamp', compact('cart_count','transactions','informations','programs','notifications','footer_reviews'));
+            return view('client/for-public/bootcamp', compact('cart_count','transactions','informations','notifications','footer_reviews'));
             
         } else {
-            return view('client/for-public/bootcamp', compact('programs','footer_reviews'));
+            return view('client/for-public/bootcamp', compact('footer_reviews'));
         }
     }
 

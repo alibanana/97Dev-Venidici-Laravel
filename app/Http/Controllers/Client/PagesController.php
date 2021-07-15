@@ -71,6 +71,9 @@ class PagesController extends Controller
         // Get 3 Online Courses
         $online_courses = Course::where('course_type_id','1')->where('enrollment_status', 'open')
         ->where('publish_status', 'published')->where('isDeleted', false)->take(3)->get();
+        // Get 3 Bootcamp
+        $bootcamps = Course::where('course_type_id','3')->where('enrollment_status', 'open')
+        ->where('publish_status', 'published')->where('isDeleted', false)->take(3)->get();
 
 
         $pengajar_positions = InstructorPosition::all();
@@ -88,7 +91,7 @@ class PagesController extends Controller
                 $view = 'client/mobile/index';
 
             return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
-                'most_popular_courses', 'online_courses', 'wokis', 'cart_count', 'notifications', 'transactions',
+                'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'cart_count', 'notifications', 'transactions',
                 'informations', 'pengajar_positions','footer_reviews'));
         }
 
@@ -97,13 +100,13 @@ class PagesController extends Controller
             $view = 'client/mobile/index';
 
         return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
-            'most_popular_courses', 'online_courses', 'wokis', 'pengajar_positions', 'footer_reviews'));
+            'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'pengajar_positions', 'footer_reviews'));
     }
 
     // Method to get the 3 most popular courses by number of courses sold.
     private function getMostPopularCourses($size) {
         return Course::with('users')->where('enrollment_status', 'open')
-            ->where('publish_status', 'published')->where('isDeleted', false)->get()->sortBy(function ($course) {
+            ->where('publish_status', 'published')->where('isDeleted', false)->where('course_type_id',"!=", 3)->get()->sortBy(function ($course) {
                 return $course->users->count();
             })->take($size);
     }
@@ -186,16 +189,29 @@ class PagesController extends Controller
 
         $name = $request->name;
         $finish_date = $user_course->pivot->updated_at->todatestring();
-        $first_sentence = 'We hereby award this Certificate of Completion on our On-Demand Class,';
-        $second_sentence    = 'By completing this course on ';
         $course_name = $course->title;
-        $third_sentence    = 'you have practiced and taken an initiative to develop yourself in order to take part in cometitive environment';
+        
 
         $customPaper = array(0,0,720,500);
-        $pdf = PDF::loadView('client/certificate',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
-        ->setPaper($customPaper);
-        return $pdf->download('certificate.pdf'); //download
+        if($course->course_type_id == 1){
+
+            $first_sentence = 'We hereby award this Certificate of Completion on our On-Demand Class,';
+            $second_sentence    = 'By completing this course on ';
+            $third_sentence    = 'you have practiced and taken an initiative to develop yourself in order to take part in cometitive environment';
+            $pdf = PDF::loadView('client/certificate',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
+            ->setPaper($customPaper);
+
+        }elseif($course->course_type_id == 2){
+
+            $first_sentence = 'We hereby award this Certificate of Participation in your attendance of our virtual workshop,';
+            $second_sentence    = 'By attending this event on ';
+            $third_sentence    = 'you have practiced and taken an initiative to express yourself through art';
+            $pdf = PDF::loadView('client/certificate-woki',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
+            ->setPaper($customPaper);
+
+        }
         //return $pdf->stream(); //view
+        return $pdf->download('Certificate-'.$course->title.'.pdf'); //download
     }
 
     public function seeNotification(Request $request){

@@ -649,6 +649,7 @@ END OF OUR PROGRAMS SECTION -->
                 <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Most Popular</p>
                 <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
                 <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Skill Snack</p>
+                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'bootcamp')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <!--
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
@@ -911,7 +912,7 @@ END OF OUR PROGRAMS SECTION -->
                     <div class="course-card-green">
                         <div class="container">
                             <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
-                            <div class="top-left card-tag small-text">Skill Snack</div>
+                            <div class="top-left card-tag small-text">Skill-Snack</div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="height:6vw">
@@ -998,6 +999,108 @@ END OF OUR PROGRAMS SECTION -->
         </div>
     </div>
     <!-- END OF Skill Snack -->
+    <!-- Bootcamp -->
+    <div class="course-content" id="bootcamp" style="display:none">
+        <div class="row m-0 p-0">
+            @if(count($bootcamps) == 0)
+                <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
+            @foreach($bootcamps as $course)
+            <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE BLUE COURSE CARD -->
+                    <div class="course-card-blue">
+                        <div class="container">
+                            <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                            <div class="top-left card-tag small-text">Bootcamp</div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="height:3vw">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
+                                    <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
+                                    <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
+                                </div>
+                                @foreach ($course->hashtags as $tag)
+                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
+                                @endforeach
+                            </div>
+                            <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
+                            </div>
+
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
+                                @foreach($course->teachers as $teacher)
+                                    @if ($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif (!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>
+                                <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
+                                @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                    @if ($course->total_duration)
+                                        {{ explode(',', $course->total_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @elseif ($course->courseType->type == 'Woki')
+                                    @if ($course->wokiCourseDetail->event_duration)
+                                        {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @endif
+                                </p>
+                                
+                            </div>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    @for ($i = 1; $i < 6; $i++)
+                                        @if ($i <= $course->average_rating)
+                                            @if ($i == 1)
+                                                <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                            @endif
+                                        @else
+                                            @if ($i == 1)
+                                                <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                            @endif
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                @if ($course->price == 0)
+                                    <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                @else
+                                    <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                @endif
+                                <a href="/online-course/{{$course->id}}" class="course-card-button normal-text">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OF ONE BLUE COURSE CARD -->
+                </div>
+            </div>
+            @endforeach
+            @if(count($bootcamps) != 0)
+
+            <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
+                <a href="/online-course?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+            </div>
+            @endif
+        </div>
+    </div>
+    <!-- END OF Bootcamp -->
 
     <!-- END OF CLASSES SECTION -->
     

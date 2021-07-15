@@ -27,13 +27,26 @@
 
   </head>
   <body style="padding-right:0px !important">
+    <!-- Modal Loading -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body" style="text-align:center;height:20vw">
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Mohon tunggu sebentar...</p>
+                    <img src="/assets/images/client/loading.gif" style="width:4vw;height:4vw;object-fit:cover;border-radius:10px;margin-top:5vw" class="img-fluid" alt="Loading..">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF MODAL Loading -->
     <input type="hidden" value="{{$assessment->duration}}" name="duration" id="duration_input" hidden>
     <!-- START OF NAVBAR -->
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
         <div style="display:flex;align-items:center">
             <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;margin-right:3vw">Sisa Waktu <span id="time" style="color:#2B6CAA;margin-left:0.5vw">{{ $assessment->duration }} minutes</span></p>
-            <button type="submit" form="updateOnlineCourseAssessmentForm" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Submit</button>
+            <button type="submit" onclick="openLoading()" form="updateOnlineCourseAssessmentForm" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Submit</button>
         </div>
     </div>
     <!-- END OF NAVBAR -->
@@ -126,6 +139,13 @@
         var display = document.querySelector('#time');
         startTimer({{ ($assessment->duration * 60) - $assessment_pivot->time_taken }}, display);
     };
+    </script>
+    <script>
+      function openLoading() {
+          console.log('test');
+          $('#loadingModal').modal({backdrop: 'static', keyboard: false});
+          $('#loadingModal').modal('show');
+      }
     </script>
   </body>
 </html>

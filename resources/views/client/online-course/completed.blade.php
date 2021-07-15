@@ -117,7 +117,7 @@
                         @enderror
                         <input type="hidden" name="course_id" value="{{$course->id}}">
                         <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                            <button type="submit" name="action" value="completed_course" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Submit</button>
+                            <button type="submit" onclick="openLoading()" name="action" value="completed_course" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Submit</button>
                         </div>
                     </div>
                 </form>
