@@ -308,6 +308,9 @@ class PagesController extends Controller
             elseif($request->filter == 'Woki'){
                 return redirect('/woki?search='.$request->search.'#search-course-section');
             }
+            elseif($request->filter == 'Bootcamp'){
+                return redirect('/bootcamp?search='.$request->search.'#search-course-section');
+            }
         }
         // kalau search doang (gak ada filter)
         else{

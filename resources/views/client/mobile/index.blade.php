@@ -375,6 +375,8 @@
                 <option value="Skill Snack">Skill Snack</option>
                 <option value="Woki">Woki</option>
                 <option value="Bootcamp">Bootcamp</option>
+                <option value="All">All</option>
+
             </select>                    
             @error('filter')
                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -448,6 +450,20 @@
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Woki</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
                     <a href="/woki?cat=Featured" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Woki</a>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- END OF ONE PROGRAMS -->
+    <!-- START OF ONE PROGRAMS -->
+    <div class="col-6 p-0" style="display:flex;justify-content:center">
+        <a href="/for-public/bootcamp" style="text-decoration:none">
+            <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
+                <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
+                <div style="padding:1.5vw">
+                    <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Bootcamp</p>
+                    <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam porro blanditiis cupiditate in soluta iste eveniet, veritatis architecto pariatur numquam. Placeat praesentium officiis, assumenda ducimus ratione delectus quia dolore? Laboriosam?</p>
+                    <a href="/for-public/bootcamp" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
                 </div>
             </div>
         </a>
