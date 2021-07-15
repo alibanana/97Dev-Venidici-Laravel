@@ -120,7 +120,7 @@ class CustomAuthController extends Controller
         ]);
 
         // Generate New Referral Code
-        $newReferralCode = $this->generateUniqueReferralCode($request->session()->get('name'));
+        $newReferralCode = $this->generateUniqueReferralCode();
 
         $referredByCode = $request->session()->get('referral_code') ?
             $request->session()->get('referral_code') : null;
@@ -146,13 +146,13 @@ class CustomAuthController extends Controller
     }
 
     // Method to generate a random new referral code.
-    private function generateUniqueReferralCode($name) {
+    private function generateUniqueReferralCode() {
         $referralCodes = UserDetail::select('referral_code')->get()->pluck('referral_code')->toArray();
-        $first_name = strtoupper(substr($name, 0, 3));
+        // $first_name = strtoupper(substr($name, 0, 3));
         
-        $newReferralCode = $first_name.strtoupper(Str::random(2));
+        $newReferralCode = strtoupper(Str::random(5));
         while (in_array($newReferralCode, $referralCodes)) {
-            $newReferralCode = $first_name.strtoupper(Str::random(2));
+            $newReferralCode = strtoupper(Str::random(5));
         }
         return $newReferralCode;
     }
