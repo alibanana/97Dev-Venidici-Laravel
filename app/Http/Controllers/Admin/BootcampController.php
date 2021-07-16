@@ -13,6 +13,7 @@ use App\Models\CourseType;
 use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
+use App\Models\Hashtag;
 
 class BootcampController extends Controller
 {
@@ -137,8 +138,9 @@ class BootcampController extends Controller
     public function create()
     {
         $course_categories = CourseCategory::select('id', 'category')->get();
+        $tags = Hashtag::all();
 
-        return view('admin/bootcamp/create', compact('course_categories'));
+        return view('admin/bootcamp/create', compact('course_categories','tags'));
 
     }
 
@@ -159,6 +161,8 @@ class BootcampController extends Controller
             'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
             'description' => 'required',
             'requirements' => 'required|array|min:1',
+            'hashtags' => 'required|array|min:1'
+
         ])->setAttributeNames([
             'course_category_id' => 'category',
             'preview_video_link' => 'video link',
@@ -182,6 +186,14 @@ class BootcampController extends Controller
                 $new_requirement->save();
             }
         }
+
+        $added_hashtag_ids = [];
+        foreach ($request->hashtags as $tag_id) {
+            if (!in_array($tag_id, $added_hashtag_ids)) {
+                $added_hashtag_ids[] = $tag_id;
+            }
+        }
+        $course->hashtags()->attach($added_hashtag_ids);
 
         return redirect()->route('admin.bootcamp.index')->with('message', 'New Online Course has been added!');
     }

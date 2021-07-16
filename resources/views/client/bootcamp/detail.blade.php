@@ -8,9 +8,8 @@
     <div class="popup" style="width:70% !important">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route('customer.cart.storeOrder')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('put') 
             <div class="row m-0">
                 
                 <div class="col-12" style="text-align:left;">
@@ -42,10 +41,10 @@
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                     <div  class="auth-input-form" style="display: flex;align-items:center">
                         <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                        <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                            placeholder="Insert telephone number" @if(Auth::check()) value="{{ old('telephone', Auth::user()->userDetail->telephone) }}" @endif>
+                        <input type="text" name="phone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert phone number" @if(Auth::check()) value="{{ old('phone', Auth::user()->userDetail->telephone) }}" @endif>
                     </div>  
-                    @error('telephone')
+                    @error('phone')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -66,26 +65,30 @@
                         <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                    @if ($course->price != 0)
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Bank and Account Number</p>
                     <div style="display: flex;align-items:center">
                         <div  class="auth-input-form" style="display: flex;align-items:center;width:40%">
                             <i style="color:#DAD9E2" class="fas fa-money-check-alt"></i>
-                            <select name="bank" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;margin-left:0.5vw">
+                            <select name="bankShortCode" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;margin-left:0.5vw">
                                 <option value="None" disabled selected>Pilih Bank</option>
                                 <option value="bca">BCA</option>
                                 <option value="bri">BRI</option>
                                 <option value="mandiri">Mandiri</option>
                             </select>                    
-                            @error('bank')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>  
                         <div  class="auth-input-form" style="display: flex;align-items:center;margin-left:1vw;width:60%">
                             <input type="text" name="bank_account_number" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
-                                placeholder="Bank Account Number" value="">
-                        </div>  
+                                placeholder="Bank Account Number">
+                        </div>
+                    </div>
+                    <div style="display: flex;align-items:center">
+                         
+                        @error('bankShortCode')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         @error('bank_account_number')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
@@ -93,30 +96,74 @@
                         @enderror
 
                     </div>
-                    
+                    @endif
                 </div>
                 <!-- END OF RIGHT SECTION -->
                 <div class="col-12">
 
-                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Address</p>
-                <div  class="auth-input-form" style="display: flex;align-items:center">
-                    <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                    <textarea type="text" name="address" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                        placeholder="Insert address">@if(Auth::check()) {{ old('address', Auth::user()->userDetail->address) }} @endif</textarea>
-                </div>
-                @error('address')
-                    <span class="invalid-feedback" role="alert" style="display: block !important;">
-                    <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Address</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
+                        <textarea type="text" name="address" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert address">@if(Auth::check()) {{ old('address', Auth::user()->userDetail->address) }} @endif</textarea>
+                    </div>
+                    @error('address')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     
                 </div>
                 <div class="col-12" style="text-align:center;padding-top:3vw">
-                    <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>
+                    <input type="hidden" name="total_order_price" value="{{$course->price}}">
+                    
+                    <?php
+                        $tomorrow_split = explode(' ', $tomorrow);
+                        $date = $tomorrow_split[0];
+                        $time = $tomorrow_split[1];
+                    ?>
+                    <input type="hidden" name="date" value="{{ $date }}">
+                    <input type="hidden" name="time" value="{{ $time }}">
+                    <input type="hidden" name="course_id" value="{{ $course->id }}">
+                    @if(Auth::user()->club != null)
+                        @php
+                            $discount_club_price = 0;
+                            if(Auth::user()->club == 'bike')
+                                $discount_club_price = 2500;
+                            elseif(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
+                                $discount_club_price = 5000;
+                        @endphp
+                    @else
+                        @php
+                        $discount_club_price = 0;
+                        @endphp
+                    @endif
+                    <input type="hidden" value="{{$discount_club_price}}" name="club_discount">
+                    <input type="hidden" name="discounted_price" value="0">
+                    <input type="hidden" name="promo_code" value="0">
+                    @php
+                        $grand_total = $course->price - $discount_club_price;
+                    @endphp
+                    <input type="hidden" name="grand_total" value="{{$grand_total}}">
+                    @if($course->price != 0)
+                    <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>
+                    @endif
+                    <!--<button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>-->
                 </div>  
 
             </div>                
             </form>
+
+            <div class="col-12" style="text-align:center">
+                {{-- If user has not bought the course and user has not bought the course and the price IS 0. --}}
+                @if($course->price == 0)
+                    <form action="{{ route('bootcamp.buyFree', $course->id) }}" method="post">
+                    @csrf
+                        <input type="hidden" name="course_id" value="{{$course->id}}">              
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Daftar Sekarang</button>
+                    </form>
+                @endif
+            </div>
         </div>
     </div>
 </div>
@@ -126,7 +173,7 @@
     <!-- START OF LEFT SECTION -->
     <div class="col-9" >
         <div style="padding-right:10vw">
-            <p class="medium-heading" style="font-family:Hypebeast;color:#2B6CAA">Bootcamp</p>
+            <p class="medium-heading" style="font-family:Hypebeast;color:#2B6CAA">Bootcamp </p>
 
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
             
@@ -154,8 +201,9 @@
                     src="{{$course->preview_video}}">
                 </iframe>
             </div>
-
+            @if(count($schedules) != 0)
             <p class="bigger-text" style="font-family:Rubik Medium;margin-top:2vw;color:#3B3C43;;margin-bottom:0px"><i class="fas fa-calendar-week"></i> <span style="margin-left:1vw">{{date_format($schedules[0][0]->date_time,"D, d M Y")}}</span></p>
+            @endif
             <div style="display:flex;align-items:center;margin-top:0.5vw">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                 <div style="display: flex;justify-content:center;margin-left:1vw">
@@ -176,7 +224,7 @@
                     @endfor
                 </div>
             </div>
-            
+            @if(count($schedules) != 0)
             <!-- WHAT YOU WILL LEARN SECTION -->
             <div style="background: #EBF5FF;border-radius: 10px;padding:1.5vw;margin-top:2vw">
                 
@@ -216,6 +264,7 @@
                 </div>  
             </div>
             <!-- END OF WHAT YOU WILL LEARN SECTION -->
+            @endif
         </div>
         <!-- START OF PERSYARATAN SECTION -->
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:4vw">Persyaratan</p>
@@ -374,7 +423,7 @@
 
     <!-- START OF RIGHT SECTION -->
     <div class="col-3 p-0" >
-        @if(session('success'))
+        @if(session('success') || session('message'))
             <!-- ALERT MESSAGE -->
             <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
                 {{ session('success') }}
@@ -389,7 +438,9 @@
             </div>
             <!-- END OF ALERT MESSAGE -->
         @endif
+
         <div class="course-detail-card-green">
+            @if(count($schedules) != 0)
             @php
                 $customformat = date_format($schedules[0][0]->date_time,"M d,Y H:i:s");
             @endphp
@@ -424,14 +475,18 @@
 					timer = setInterval(showRemaining, 1000);
 				}
             </script>
-			</td>
+            @endif
             @if($course->price == 0)
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
             @else
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
-            @endif            
+            @endif          
+                
 
-            <a href="#payment" class="normal-text btn-blue-bordered d-block"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;text-align:center;margin-top:1.5vw;">Register Now</a>                
+            <a href="#payment" class="normal-text btn-blue-bordered d-block"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;text-align:center;margin-top:1.5vw;">Register Now</a>             
+
+
+            
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">109 Menit video eksklusif</span></p>
@@ -445,6 +500,8 @@
             </div>
 
         </div>
+        @if(count($schedules) != 0)
+
         <!-- START COUNT DOWN CARD -->
         <div class="course-detail-card-green" id="countdown-card" style="margin-top:2vw">
             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Countdown Registration:</p>
@@ -464,6 +521,8 @@
             </div>
         </div>
         <!-- END OF COUNT DOWN CARD -->
+        @endif
+
         <div style="padding:2vw;background:#FFFFFF">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Ada <span style="font-family:Hypebeast">Pertanyaan?</span> </p>
             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
@@ -487,12 +546,15 @@
                                 <div class="container">
                                     <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
                                     <div class="top-left card-tag small-text">Bootcamp</div>
+                                    <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                                    </div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="height:6vw">
+                                    <div style="height:4.5vw">
                                         <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                             <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
-                                            <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
+                                            <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                         </div>
                                         @foreach ($course->hashtags as $tag)
                                             <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>

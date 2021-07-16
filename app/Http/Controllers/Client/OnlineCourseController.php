@@ -80,9 +80,11 @@ class OnlineCourseController extends Controller {
             }
         }
         $courses = $courses->where('course_type_id',1)->where('enrollment_status', 'open')
-        ->where('publish_status', 'published')->get();
+        ->where('publish_status', 'published')->where('isDeleted', false)->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-        $user_review = Review::where('course_id',1)->orderBy('created_at','desc')->get();
+        $user_review = Review::whereHas('course', function ($query){
+            $query->where('course_type_id', 1);
+                })->orderBy('reviews.created_at', 'desc')->get();
         if (Auth::check()) {
             $this->resetNavbarData();
 
@@ -102,7 +104,7 @@ class OnlineCourseController extends Controller {
         $agent = new Agent();
         if($agent->isPhone())
             return view('client/mobile/under-construction');
-
+        
         $course = Course::findOrFail($id);
 
         if ($course->courseType->type == 'Bootcamp') {
@@ -110,7 +112,7 @@ class OnlineCourseController extends Controller {
         } elseif ($course->courseType->type == 'Woki') {
             return redirect()->route('woki.show', $course->id);
         }
-
+        
         $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
         // Get courses suggestions.

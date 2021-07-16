@@ -11,7 +11,7 @@ use Jenssegers\Agent\Agent;
 use Illuminate\Support\Str;
 use App\Helper\Helper;
 use PDF;
-use Spatie\Browsershot\Browsershot;
+use App\Models\CourseCategory;
 
 use App\Models\Notification;
 use App\Models\Config;
@@ -67,10 +67,13 @@ class PagesController extends Controller
         $most_popular_courses = $this->getMostPopularCourses(3);
         // Get 3 wokis
         $wokis = Course::where('course_type_id','2')->where('enrollment_status', 'open')
-        ->where('publish_status', 'published')->take(3)->get();
+        ->where('publish_status', 'published')->where('isDeleted', false)->take(3)->get();
         // Get 3 Online Courses
         $online_courses = Course::where('course_type_id','1')->where('enrollment_status', 'open')
-        ->where('publish_status', 'published')->take(3)->get();
+        ->where('publish_status', 'published')->where('isDeleted', false)->take(3)->get();
+        // Get 3 Bootcamp
+        $bootcamps = Course::where('course_type_id','3')->where('enrollment_status', 'open')
+        ->where('publish_status', 'published')->where('isDeleted', false)->take(3)->get();
 
 
         $pengajar_positions = InstructorPosition::all();
@@ -88,7 +91,7 @@ class PagesController extends Controller
                 $view = 'client/mobile/index';
 
             return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
-                'most_popular_courses', 'online_courses', 'wokis', 'cart_count', 'notifications', 'transactions',
+                'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'cart_count', 'notifications', 'transactions',
                 'informations', 'pengajar_positions','footer_reviews'));
         }
 
@@ -97,13 +100,13 @@ class PagesController extends Controller
             $view = 'client/mobile/index';
 
         return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
-            'most_popular_courses', 'online_courses', 'wokis', 'pengajar_positions', 'footer_reviews'));
+            'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'pengajar_positions', 'footer_reviews'));
     }
 
     // Method to get the 3 most popular courses by number of courses sold.
     private function getMostPopularCourses($size) {
         return Course::with('users')->where('enrollment_status', 'open')
-            ->where('publish_status', 'published')->get()->sortBy(function ($course) {
+            ->where('publish_status', 'published')->where('isDeleted', false)->where('course_type_id',"!=", 3)->get()->sortBy(function ($course) {
                 return $course->users->count();
             })->take($size);
     }
@@ -177,6 +180,79 @@ class PagesController extends Controller
         return view('client/for-public/woki',compact('footer_reviews'));
     }
 
+    public function bootcamp_index(){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
+        $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if (Auth::check()) {
+
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+            return view('client/for-public/bootcamp', compact('cart_count','transactions','informations','notifications','footer_reviews'));
+            
+        } else {
+            return view('client/for-public/bootcamp', compact('footer_reviews'));
+        }
+    }
+
+    public function pelatihan_venidici_index(Request $request){
+        $agent = new Agent();
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
+        $course_categories = CourseCategory::all();
+        $courses = new Course;
+        if ($request->has('cat')) {
+            if ($request['cat'] == "Featured") {
+                $courses = $courses->where('isFeatured',TRUE)->orderBy('created_at', 'desc');
+            }
+            else if($request['cat'] == "None"){
+                $courses = $courses->orderBy('created_at', 'desc');
+            }else {
+                $courses = $courses->where('course_category_id',$request['cat'])->orderBy('created_at','desc');
+            }
+        } else {
+            $courses = $courses->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $courses = $courses->orderBy('created_at', 'desc');            
+            } else {
+                $search = $request->search;
+
+                $courses = $courses->where(function ($query) use ($search) {
+                    $query->where([['title', 'like', "%".$search."%"]])
+                    ->orWhere([['subtitle', 'like', "%".$search."%"]]);
+                });
+            }
+        }
+        $courses = $courses->where('enrollment_status', 'open')
+        ->where('publish_status', 'published')->where('isDeleted', false)->get();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        $user_review = Review::orderBy('created_at','desc')->get();
+        if (Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/pelatihan-venidici', compact('cart_count','transactions','courses','course_categories','informations','notifications','footer_reviews','user_review'));
+        }
+
+        return view('client/pelatihan-venidici',compact('course_categories','courses','footer_reviews','user_review'));
+    }
+
     public function print(Request $request){
         // $pathToImage = 'storage/images/online-courses/';
         // Browsershot::url('http://127.0.0.1:8000/certificate')->save('example.pdf');
@@ -186,16 +262,29 @@ class PagesController extends Controller
 
         $name = $request->name;
         $finish_date = $user_course->pivot->updated_at->todatestring();
-        $first_sentence = 'We hereby award this Certificate of Completion on our On-Demand Class,';
-        $second_sentence    = 'By completing this course on ';
         $course_name = $course->title;
-        $third_sentence    = 'you have practiced and taken an initiative to develop yourself in order to take part in cometitive environment';
+        
 
         $customPaper = array(0,0,720,500);
-        $pdf = PDF::loadView('client/certificate',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
-        ->setPaper($customPaper);
-        return $pdf->download('certificate.pdf'); //download
+        if($course->course_type_id == 1){
+
+            $first_sentence = 'We hereby award this Certificate of Completion on our On-Demand Class,';
+            $second_sentence    = 'By completing this course on ';
+            $third_sentence    = 'you have practiced and taken an initiative to develop yourself in order to take part in cometitive environment';
+            $pdf = PDF::loadView('client/certificate',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
+            ->setPaper($customPaper);
+
+        }elseif($course->course_type_id == 2){
+
+            $first_sentence = 'We hereby award this Certificate of Participation in your attendance of our virtual workshop,';
+            $second_sentence    = 'By attending this event on ';
+            $third_sentence    = 'you have practiced and taken an initiative to express yourself through art';
+            $pdf = PDF::loadView('client/certificate-woki',compact('name','finish_date','first_sentence','second_sentence','course_name','third_sentence'))
+            ->setPaper($customPaper);
+
+        }
         //return $pdf->stream(); //view
+        return $pdf->download('Certificate-'.$course->title.'.pdf'); //download
     }
 
     public function seeNotification(Request $request){
@@ -214,15 +303,21 @@ class PagesController extends Controller
         // kalau ada filter
         if($request->has('filter')){
             if($request->filter == 'Skill Snack'){
-                return redirect('/online-course?search='.$request->search);
+                return redirect('/online-course?search='.$request->search.'#search-course-section');
             }
             elseif($request->filter == 'Woki'){
-                return redirect('/woki?search='.$request->search);
+                return redirect('/woki?search='.$request->search.'#search-course-section');
+            }
+            elseif($request->filter == 'Bootcamp'){
+                return redirect('/bootcamp?search='.$request->search.'#search-course-section');
+            }
+            elseif($request->filter == 'All'){
+                return redirect('/pelatihan-venidici?search='.$request->search.'#search-course-section');
             }
         }
         // kalau search doang (gak ada filter)
         else{
-            return redirect('/online-course?search='.$request->search);
+            return redirect('/pelatihan-venidici?search='.$request->search.'#search-course-section');
 
         }
     }

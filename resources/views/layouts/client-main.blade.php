@@ -128,7 +128,7 @@
     </div> -->
     @if( !Request::is('login') )
     <!-- START OF MOBILE NAVBAR -->
-    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none">
+    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;position:fixed;width:100%;z-index:999">
       <div >
         <!--    Made by Erik Terwan    -->
         <!--   24th of November 2015   -->
@@ -559,7 +559,7 @@
               <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Discord Community</a>
             </div>
             <div style="margin-top:1vw">
-              <a href="#" data-toggle="modal" data-target="#contactUsModal" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Contact Us</a>
+              <a  data-toggle="modal" data-target="#contactUsModal" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;cursor:pointer">Contact Us</a>
             </div>
           </div>
 
@@ -656,7 +656,7 @@
                 <a href="/community"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Discord Community</a>
               </div>
               <div style="">
-                <a href="#" data-toggle="modal" data-target="#contactUsModal"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Contact Us</a>
+                <a  data-toggle="modal"  data-target="#contactUsModal"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Contact Us</a>
               </div>
             </div>
         </div>
@@ -723,6 +723,8 @@
     </script>
     <script>
       function openLoading() {
+          console.log('test');
+          $('#loadingModal').modal({backdrop: 'static', keyboard: false});
           $('#loadingModal').modal('show');
       }
     </script>

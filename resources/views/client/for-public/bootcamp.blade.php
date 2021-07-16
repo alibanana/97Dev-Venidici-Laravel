@@ -3,113 +3,6 @@
 
 @section('content')
 
-<!-- Modal VA -->
-<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalTitle" aria-hidden="true">
-    <!-- start of form -->
-    <form action="{{ route('customer.store_krest') }}" method="POST">
-    @csrf  
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Hubungi Kami</p>
-                    <button type="button" class="close small-heading" data-dismiss="modal" aria-label="Close" style="background:none;border:none">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @if(session('message'))
-                <!-- ALERT MESSAGE -->
-                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
-                    {{ session('message') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <!-- END OF ALERT MESSAGE -->
-                @endif
-                <div class="modal-body">
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
-                            <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <input type="text" name="name" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Full Name" >
-                        </div>  
-                        <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
-                            <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                            <input type="email" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Email" >
-                        </div>  
-                    </div>
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        @error('name')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        @error('email')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                        <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
-                            <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                            <input type="text" name="telephone" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="No. Telp" >
-                        </div> 
-                        <div  class="auth-input-form" style="display: flex;align-items:center;width:48%">
-                            <i style="color:#DAD9E2" class="fas fa-building"></i>
-                            <input type="text" name="company" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Nama Perusahaan" >
-                        </div>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                        
-                        @error('telephone')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror 
-                        @error('company')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror  
-                    </div>
-                    <div  class="auth-input-form" style="display: flex;align-items:center;margin-top:1vw">
-                        <i style="color:#DAD9E2" class="fas fa-address-card"></i>
-                        <select name="krest_program_id" id=""   class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
-                            <option disabled selected>Pilih Program</option>
-                            @foreach($programs as $program)
-                            <option value="{{$program->id}}" >{{$program->program}}</option>
-                            @endforeach  
-                        </select>
-                    </div>  
-                    @error('krest_program_id')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <div  class="auth-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-                        <input type="text" name="subject" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;width:100%" placeholder="Subject" >
-                    </div> 
-                    @error('subject')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <div class="auth-input-form" style="display: flex;align-items:center;width:100%;margin-top:1.5vw">
-                        <textarea name="message" id="" rows="6" class="normal-text"   style="font-family:Rubik Regular;background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukkan pesan anda disini"></textarea>                
-                    </div>  
-                    @error('message')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
-                    <button type="submit" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim</button>                
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-<!-- END OF MODAL VA -->
 
 <!-- START OF TOP SECTION -->
 <div class="row page-container m-0 krest-background" style="padding-top:10vw;display:flex;align-items:center">
@@ -580,7 +473,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
             <p class="medium-heading wow flash" data-wow-delay="0.3s" style="font-family: Rubik Bold;color:#55525B">Hubungi Kami Lebih Lanjut</p>
             <p class="sub-description" style="font-family: Rubik Regular;color:#55525B;margin-top:2vw">Tanyakan kami apapun dan kami senang membantu</p>
                 <div>
-                    <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
+                    <button type="button" data-toggle="modal" data-target="#contactUsModal"  class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;100%;border:none;margin-top:1vw">
                         Kirim Pesan
                     </button>   
                 </div>

@@ -237,6 +237,14 @@
     </div>  
     <div class="col-4 p-0 ">
         <div class="page-container-right" style="padding-top:3vw"> 
+            @if (session('message'))
+                <!-- ALERT MESSAGE -->
+                <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                    {{ session('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- END OF ALERT MESSAGE -->
+            @endif
             <div style="display:flex;align-items:center">
                 <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Status</p>   
                 <a href="">

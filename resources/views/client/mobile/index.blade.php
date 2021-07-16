@@ -374,6 +374,9 @@
                 <option value="None" disabled selected>Pilih Kategori</option>
                 <option value="Skill Snack">Skill Snack</option>
                 <option value="Woki">Woki</option>
+                <option value="Bootcamp">Bootcamp</option>
+                <option value="All">All</option>
+
             </select>                    
             @error('filter')
                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -406,7 +409,7 @@
 
 
 <!-- START OF INDONESIA EMAS SECTION -->
-<div class="row m-0 page-container" style="padding-bottom:8vw;padding-top:8vw">
+<div class="row m-0 page-container our-programs-background" style="padding-bottom:8vw;padding-top:8vw">
     <div class="col-12 wow bounceInRight" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/Emas_BG.png" style="width:40vw" class="img-fluid" alt="">
     </div>
@@ -447,6 +450,20 @@
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Woki</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
                     <a href="/woki?cat=Featured" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Woki</a>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- END OF ONE PROGRAMS -->
+    <!-- START OF ONE PROGRAMS -->
+    <div class="col-6 p-0" style="display:flex;justify-content:center">
+        <a href="/bootcamp?cat=Featured" style="text-decoration:none">
+            <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
+                <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
+                <div style="padding:1.5vw">
+                    <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Bootcamp</p>
+                    <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam porro blanditiis cupiditate in soluta iste eveniet, veritatis architecto pariatur numquam. Placeat praesentium officiis, assumenda ducimus ratione delectus quia dolore? Laboriosam?</p>
+                    <a href="/bootcamp?cat=Featured" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
                 </div>
             </div>
         </a>
@@ -529,6 +546,7 @@
                 <p class=" btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Most Popular</p>
                 <p class=" btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Woki</p>
                 <p class=" btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Skill Snack</p>
+                <p class=" btn-blue-on-hover course-links" onclick="changeCourse(event, 'bootcamp')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Bootcamp</p>
                 <!--
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
@@ -538,6 +556,11 @@
     <!-- MOST POPULAR -->
     <div class="course-content" id="course-popular" style="">
         <div class="row m-0 p-0">
+            @if(count($most_popular_courses) == 0)
+                <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 5px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
             @foreach($most_popular_courses as $course)
             <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
@@ -551,7 +574,7 @@
                         <div class="course-card-blue">
                     @endif
                         <div class="container">
-                            <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
+                            <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw;" alt="Snow">
                             <div class="top-left card-tag " style="font-size:2.5vw">
                                 @if ($course->courseType->type == "Course")
                                 Skill-Snack
@@ -561,20 +584,23 @@
                                 Bootcamp
                                 @endif
                             </div>
+                            <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                            </div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="height:17vw">
+                            <div style="height:10vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                     @if ($course->courseType->type == 'Course')
-                                        <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                        <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                     @elseif ($course->courseType->type == 'Woki')
-                                        <a href="/woki/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                        <a href="/woki/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
 
                                     @elseif ($course->courseType->type == 'Bootcamp')
-                                        <a href="/bootcamp/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                        <a href="/bootcamp/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
 
                                     @endif
-                                    <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
+                                    <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                 </div>
                                 @foreach ($course->hashtags as $tag)
                                     <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">{{ $tag->hashtag }}</a>
@@ -659,6 +685,11 @@
     <!-- WOKI -->
     <div class="course-content" id="course-woki" style="display:none">
         <div class="row m-0 p-0">
+            @if(count($wokis) == 0)
+                <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 5px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
             @foreach($wokis as $course)
             <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
@@ -667,13 +698,16 @@
                     <div class="course-card-red">
                         <div class="container">
                             <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
-                            <div class="top-left card-tag " style="font-size:2.5vw">On-Demand</div>
+                            <div class="top-left card-tag " style="font-size:2.5vw">Skill-Snack</div>
+                            <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                            </div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="height:17vw">
+                            <div style="height:10vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                    <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
-                                    <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
+                                    <a href="/woki/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                    <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                 </div>
                                 @foreach ($course->hashtags as $tag)
                                     <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">{{ $tag->hashtag }}</a>
@@ -737,7 +771,7 @@
                                 @else
                                     <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                 @endif
-                                <a href="/online-course/{{$course->id}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                <a href="/woki/{{$course->id}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                             </div>
             
                         </div>
@@ -746,19 +780,26 @@
                 </div>
             </div>
             @endforeach
+            @if(count($wokis) != 0)
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
                 <a href="/woki?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
 
             </div>
+            @endif
 
             
         </div>
     </div>
     <!-- END OF WOKI -->
 
-    <!-- On-Demand -->
+    <!-- Skill-Snack -->
     <div class="course-content" id="course-online" style="display:none">
         <div class="row m-0 p-0">
+            @if(count($online_courses) == 0)
+                <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 5px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
             @foreach($online_courses as $course)
             <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
@@ -767,13 +808,16 @@
                     <div class="course-card-green">
                         <div class="container">
                             <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
-                            <div class="top-left card-tag " style="font-size:2.5vw">On-Demand</div>
+                            <div class="top-left card-tag " style="font-size:2.5vw">Skill-Snack</div>
+                            <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                            </div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="height:17vw">
+                            <div style="height:10vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                    <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
-                                    <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i>
+                                    <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                    <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                 </div>
                                 @foreach ($course->hashtags as $tag)
                                     <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">{{ $tag->hashtag }}</a>
@@ -846,12 +890,121 @@
                 </div>
             </div>
             @endforeach
+            @if(count($online_courses) != 0)
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
                 <a href="/online-course?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
             </div>
+            @endif
         </div>
     </div>
-    <!-- END OF On-Demand -->
+    <!-- END OF Skill-Snack -->
+
+    <!-- Bootcamp -->
+    <div class="course-content" id="bootcamp" style="display:none">
+        <div class="row m-0 p-0">
+            @if(count($bootcamps) == 0)
+                <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 5px;padding:1vw;text-align:center">
+                    <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                </div>
+            @endif
+            @foreach($bootcamps as $course)
+            <div class="col-12 p-0" style="margin-top:2vw">
+                <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE BLUE COURSE CARD -->
+
+                    <div class="course-card-blue">
+                        <div class="container">
+                            <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw" alt="Snow">
+                            <div class="top-left card-tag " style="font-size:2.5vw">Bootcamp</div>
+                            <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                            </div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="height:10vw">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
+                                    <a href="/bootcamp/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                    <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
+                                </div>
+                                @foreach ($course->hashtags as $tag)
+                                    <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">{{ $tag->hashtag }}</a>
+                                @endforeach
+                            </div>
+                            <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
+                                <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw">{{ $course->description }}</p>
+                            </div>
+
+                            <div style="display: flex;justify-content:space-between;margin-top:3vw" >
+                                <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                @foreach($course->teachers as $teacher)
+
+                                    @if ($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif (!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>
+                                <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                    @if ($course->total_duration)
+                                        {{ explode(',', $course->total_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @elseif ($course->courseType->type == 'Woki')
+                                    @if ($course->wokiCourseDetail->event_duration)
+                                        {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @endif
+                                </p>
+                            </div>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">{{ $course->average_rating }}/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    @for ($i = 1; $i < 6; $i++)
+                                        @if ($i <= $course->average_rating)
+                                            @if ($i == 1)
+                                                <i style="color:#F4C257;font-size:3vw" class="fas fa-star"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
+                                            @endif
+                                        @else
+                                            @if ($i == 1)
+                                                <i style="color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
+                                            @endif
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                @if ($course->price == 0)
+                                    <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">FREE</p>
+                                @else
+                                    <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                @endif
+                                <a href="/bootcamp/{{$course->id}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                            </div>
+            
+                        </div>
+                    </div>
+                    <!-- END OF ONE BLUE COURSE CARD -->
+                </div>
+            </div>
+            @endforeach
+            @if(count($bootcamps) != 0)
+            <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
+                <a href="/bootcamp?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
+            </div>
+            @endif
+        </div>
+    </div>
+    <!-- END OF Bootcamp -->
 
     <!-- END OF CLASSES SECTION -->
     

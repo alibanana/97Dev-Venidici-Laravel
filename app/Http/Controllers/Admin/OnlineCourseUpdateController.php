@@ -35,7 +35,7 @@ class OnlineCourseUpdateController extends Controller
         if ($course->courseType->type == 'Woki') {
             return redirect()->route('admin.woki-courses.edit', $id);
         }
-        elseif($course->courseType->type == 'Bootacmp') {
+        elseif($course->courseType->type == 'Bootcamp') {
             return redirect()->route('admin.bootcamp.edit', $id);
         }
 

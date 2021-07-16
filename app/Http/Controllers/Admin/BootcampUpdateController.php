@@ -15,6 +15,7 @@ use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
 use App\Models\Teacher;
 use App\Models\BootcampSchedule;
+use App\Models\Hashtag;
 
 
 class BootcampUpdateController extends Controller
@@ -32,7 +33,8 @@ class BootcampUpdateController extends Controller
         $course_categories = CourseCategory::select('id', 'category')->get();
 
         $teachers = new Teacher;
-        
+        $tags = Hashtag::all();
+
         if ($request->has('search_teacher')) {
             if ($request->search_teacher == "") {
                 return redirect()->route('admin.bootcamp.edit', $course->id)
@@ -47,7 +49,7 @@ class BootcampUpdateController extends Controller
         $teachers = $teachers->get();
         $schedules = BootcampSchedule::where('course_id',$id)->get();
 
-        return view('admin/bootcamp/update', compact('course', 'course_categories', 'teachers','schedules'));
+        return view('admin/bootcamp/update', compact('course', 'course_categories', 'teachers','schedules','tags'));
     }
 
     // Updates data as seen under the Update Online Course -> Basic Informations tab.
@@ -60,6 +62,7 @@ class BootcampUpdateController extends Controller
             'preview_video_link'    => 'required|starts_with:https://www.youtube.com/embed/',
             'description'           => 'required',
             'requirements'          => 'required|array|min:1',
+            'hashtags'              => 'required|array|min:1'
         ])->setAttributeNames([
             'course_category_id'    => 'category',
             'preview_video_link'    => 'video link',
@@ -89,6 +92,15 @@ class BootcampUpdateController extends Controller
                 $new_requirement->save();
             }
         }
+
+        $course->hashtags()->detach();
+        $added_hashtag_ids = [];
+        foreach ($request->hashtags as $tag_id) {
+            if (!in_array($tag_id, $added_hashtag_ids)) {
+                $added_hashtag_ids[] = $tag_id;
+            }
+        }
+        $course->hashtags()->attach($added_hashtag_ids);
 
         if ($course->wasChanged()) {
             $message = 'Bootcamp (' . $course->title . ') -> Basic Information, has been updated';

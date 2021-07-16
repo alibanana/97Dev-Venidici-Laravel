@@ -22,8 +22,8 @@ class CreateBootcampApplicationsTable extends Migration
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->string('name');
-            $table->integer('phone_no');
-            $table->integer('bank_account_number');
+            $table->string('phone_no');
+            $table->string('bank_account_number')->nullable();
             $table->timestamps();
         });
     }

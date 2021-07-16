@@ -145,7 +145,7 @@ Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik
         <div style="margin-top:2vw;margin-bottom:3vw">
             <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line">Hi, Aku Woki! Aku itu orangnya sangat suka berpetualang, overoptimistic, tapi karena kadang aku suka impulsif, mudah bosan, dan ga sabaran, aku ga punya satu hal yang bener-bener aku jagoin, kayak general aja gitu bukan spesialis. Padahal pengen banget punya 1 hal yang bener-bener aku jagoin:(
 
-Hi, Kalau aku Toki! Kalau aku ini agak kebalikan sama Toki, aku punya self-doubt yang tinggi, lack of confidence, and I always live inside my comfort zone. Tapi satu hal yang aku sukai dari diriku, aku punya kelebihan yang sangat menonjol karena memang aku selalu cuma berkutat di sekitar hal itu.
+Hi, kalau aku Toki! Aku ini agak kebalikan sama Toki, aku punya self-doubt yang tinggi, lack of confidence, and I always live inside my comfort zone. Tapi satu hal yang aku sukai dari diriku, aku punya kelebihan yang sangat menonjol karena memang aku selalu cuma berkutat di sekitar hal itu.
 </p>
         </div>
         <a href="/woki" class="normal-text btn-red-bordered btn-red-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;margin-left:5vw">Explore Our Library Now!</a>

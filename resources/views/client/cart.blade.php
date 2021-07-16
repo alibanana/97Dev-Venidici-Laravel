@@ -10,9 +10,9 @@
         <div class="page-container-left " style="padding-top:11vw;padding-right:5vw">
             <div class="" style="display:flex;justify-content:space-between;align-items:center">
                 <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Keranjang</p>
-                <p class="small-text display" style="font-family:Rubik Regular;color:#CE3369;">*Please check your cart and complete the Shipping Details form before payment</p>
+                <p class="small-text" style="font-family:Rubik Regular;color:#CE3369;">*Please check your cart and complete the Shipping Details form before payment</p>
             </div>
-            <p class="small-text mobile-cart-display" style="font-family:Rubik Regular;color:#CE3369;">*Please check your cart and complete the Shipping Details form before payment</p>
+            <p class="small-text mobile-cart-display" style="font-family:Rubik Regular;color:#CE3369;display:none">*Please check your cart and complete the Shipping Details form before payment</p>
 
             <!-- ITEM SECTION -->
             @if(count($carts) == 0)

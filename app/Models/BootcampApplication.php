@@ -10,6 +10,9 @@ class BootcampApplication extends Model
     use HasFactory;
 
     protected $fillable = [
+        'course_id',
+        'user_id',
+        'invoice_id',
         'name', 
         'phone_no', 
         'bank_account_number', 
