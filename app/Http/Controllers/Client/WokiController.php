@@ -74,8 +74,9 @@ class WokiController extends Controller
         $courses = $courses->where('course_type_id',2)->where('enrollment_status', 'open')
         ->where('publish_status', 'published')->where('isDeleted', false)->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-        $user_review = Review::where('course_id',2)->orderBy('created_at','desc')->get();
-
+        $user_review = Review::whereHas('course', function ($query){
+            $query->where('course_type_id', 2);
+                })->orderBy('reviews.created_at', 'desc')->get();
         if (Auth::check()) {
             $this->resetNavbarData();
 
