@@ -3,6 +3,68 @@
 
 @section('content')
 
+<!-- START OF POP UP BOOTCAMP-->
+<div id="bootcamp-detail" class="overlay" style="overflow:scroll">
+    <div class="popup" style="width:70% !important">
+        <a class="close" href="#closed" >&times;</a>
+        <div class="content" style="padding:2vw">
+            <div class="row m-0">
+                
+                <div class="col-6" style="">
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-user"></i>
+                        <input type="text" id="bootcamp-name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="John Doe" value="Fernandha Dzaky" readonly >
+                    </div>  
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
+                        <input type="text" id="bootcamp-phone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert phone number" value="08111377893" readonly >
+                    </div>  
+                    
+                </div> 
+                <!-- END OF LEFT SECTION --> 
+                <!-- RIGHT SECTION -->
+                <div class="col-6" >
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                        <input type="text" id="bootcamp-email" value="admin@gmail.com" readonly  class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert email">
+                    </div>
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Bank and Account Number</p>
+                    <div style="display: flex;align-items:center">
+                        <div  class="auth-input-form" style="display: flex;align-items:center;width:40%">
+                            <i style="color:#DAD9E2" class="fas fa-money-check-alt"></i>
+                            <input type="text" value="BCA" readonly id="bootcamp-bank" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            >                  
+                        </div>  
+                        <div  class="auth-input-form" style="display: flex;align-items:center;margin-left:1vw;width:60%">
+                            <input type="text" id="bootcamp-bank_account_number" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
+                                placeholder="Bank Account Number" value="2068231197" readonly>
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF RIGHT SECTION -->
+                <div class="col-12">
+
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Address</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
+                        <textarea type="text" id="bootcamp-address" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert address" readonly>257 Rosenbaum Rue Suite 056
+                            New Darrel, WA 08480-4910 </textarea>
+                    </div>
+                    
+                </div> 
+            </div>       
+        </div>
+    </div>
+</div>
+<!-- END OF POP UP BOOTCAMP-->
+
 
 
 <!-- START OF POPUP EDIT PROFILE-->
@@ -560,13 +622,13 @@
 
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->email}}</p>   
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->userDetail->occupancy}}</p>   
-                <div style="width:70%">
+                <!-- <div style="width:70%">
                     <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 2 !important;
+                        -webkit-line-clamp: 1 !important;
                         -webkit-box-orient: vertical !important;">{{Auth::user()->userDetail->address}}</p>   
-                </div>
+                </div> -->
                 <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Referral Code: <span style="color:#2B6CAA;font-family:Rubik Medium"> {{Auth::user()->userDetail->referral_code}}</span></p>   
 
                 <div style="display:flex;align-items:center;margin-top:0.8vw">
@@ -646,7 +708,7 @@
                         </div>
                         <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                             <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
-                            <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
+                            <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
                         </div>
                     </div> 
                 </div>
@@ -660,7 +722,7 @@
                 <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE AND THE COURSE IS WOKI -->
                 @if($course->pivot->status == 'on-going' && $today[0] <= $date[0])
                 <div class="col-12 p-0">
-                    <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer"  onclick="window.open('/bootcamp/{{$course->id}}','_blank');">
+                    <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
                         <div class="container-image-card">
                             <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
                             <div class="top-left card-tag small-text" >Bootcamp</div>
@@ -681,14 +743,36 @@
                                         </span>
                                     @endforeach
                                     </p>   
-                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
-                                    
-                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span></p>
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">
+                                    @if($course->price == 0)
+                                    FREE
+                                    @else
+                                    Rp. {{ number_format($course->price, 0, ',', ',') }}
+                                    @endif
+                                    </p>
+                                    <div style="display: flex;align-items:center">
+                                        <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">
+                                        Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span> for
+                                        <span style="font-family: Rubik Medium;">{{$bootcamp->name}}</span>
+                                        </p>
+                                        <a href="#bootcamp-detail" style="margin-left: 0.5vw;">
+                                            <i class="fas fa-question-circle normal-text"
+                                            @if($course->price == 0)
+                                            onclick="passBootcampData('{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','-','-','lorem')" 
+                                            @else
+                                            onclick="passBootcampData('{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','BCA','{{$bootcamp->bank_account_number}}','lorem')" 
+                                            @endif
+                                            
+                                            style="color:#2B6CAA;"></i>
+                                        </a>
+
+                                    </div>
+
                                 </div>
                             </div>
-                            <div style=" display: flex;flex-direction: column;justify-content: flex-end;align-items: center;padding:0vw 2vw;" >
+                            <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                                 <a href="/bootcamp/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Detail</a>
-                                <!-- <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a> -->
+                                <a href="/dashboard" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
                             </div>
                         </div> 
                     </div>
@@ -740,7 +824,7 @@
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
-            @foreach(auth()->user()->courses as $course)
+        @foreach(auth()->user()->courses as $course)
         @if($course->pivot->status == 'on-going' && count($course->sections) != 0)
         <div class="col-12 p-0">
             <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
@@ -1133,6 +1217,18 @@
             $(element).find("input[type=hidden]").val('0');
             element.style.backgroundColor = '';
         }
+    }
+</script>
+
+<script>
+    function passBootcampData(name,email,phone,bank,bank_account_number, address) {
+        console.log('test');
+		document.getElementById("bootcamp-name").value = name;
+		document.getElementById("bootcamp-email").value = email;
+		document.getElementById("bootcamp-phone").value = phone;
+		document.getElementById("bootcamp-bank").value = bank;
+		document.getElementById("bootcamp-bank_account_number").value = bank_account_number;
+		document.getElementById("bootcamp-address").value = address;
     }
 </script>
 @endsection
