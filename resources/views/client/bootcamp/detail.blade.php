@@ -101,22 +101,22 @@
                 <!-- END OF RIGHT SECTION -->
                 <div class="col-12">
 
-                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Address</p>
-                <div  class="auth-input-form" style="display: flex;align-items:center">
-                    <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                    <textarea type="text" name="address" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                        placeholder="Insert address">@if(Auth::check()) {{ old('address', Auth::user()->userDetail->address) }} @endif</textarea>
-                </div>
-                @error('address')
-                    <span class="invalid-feedback" role="alert" style="display: block !important;">
-                    <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Address</p>
+                    <div  class="auth-input-form" style="display: flex;align-items:center">
+                        <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
+                        <textarea type="text" name="address" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                            placeholder="Insert address">@if(Auth::check()) {{ old('address', Auth::user()->userDetail->address) }} @endif</textarea>
+                    </div>
+                    @error('address')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     
                 </div>
                 <div class="col-12" style="text-align:center;padding-top:3vw">
-                    <input type="hidden" name="grand_total" value="{{$course->price}}">
                     <input type="hidden" name="total_order_price" value="{{$course->price}}">
+                    
                     <?php
                         $tomorrow_split = explode(' ', $tomorrow);
                         $date = $tomorrow_split[0];
@@ -141,11 +141,29 @@
                     <input type="hidden" value="{{$discount_club_price}}" name="club_discount">
                     <input type="hidden" name="discounted_price" value="0">
                     <input type="hidden" name="promo_code" value="0">
+                    @php
+                        $grand_total = $course->price - $discount_club_price;
+                    @endphp
+                    <input type="hidden" name="grand_total" value="{{$grand_total}}">
+                    @if($course->price != 0)
                     <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>
+                    @endif
+                    <!--<button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>-->
                 </div>  
 
             </div>                
             </form>
+
+            <div class="col-12" style="text-align:center">
+                {{-- If user has not bought the course and user has not bought the course and the price IS 0. --}}
+                @if($course->price == 0)
+                    <form action="{{ route('bootcamp.buyFree', $course->id) }}" method="post">
+                    @csrf
+                        <input type="hidden" name="course_id" value="{{$course->id}}">              
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Daftar Sekarang</button>
+                    </form>
+                @endif
+            </div>
         </div>
     </div>
 </div>
@@ -155,8 +173,6 @@
     <!-- START OF LEFT SECTION -->
     <div class="col-9" >
         <div style="padding-right:10vw">
-        <p>{{$discount_club_price}}</p>
-
             <p class="medium-heading" style="font-family:Hypebeast;color:#2B6CAA">Bootcamp </p>
 
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
@@ -464,9 +480,13 @@
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
             @else
             <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
-            @endif            
+            @endif          
+                
 
-            <a href="#payment" class="normal-text btn-blue-bordered d-block"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;text-align:center;margin-top:1.5vw;">Register Now</a>                
+            <a href="#payment" class="normal-text btn-blue-bordered d-block"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;text-align:center;margin-top:1.5vw;">Register Now</a>             
+
+
+            
             <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
             <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
                 <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">109 Menit video eksklusif</span></p>

@@ -13,6 +13,10 @@ use App\Helper\Helper;
 use App\Models\Course;
 use App\Helper\CourseHelper;
 use Carbon\Carbon;
+use App\Models\Invoice;
+use App\Models\Order;
+use App\Models\BootcampApplication;
+use App\Models\Notification;
 
 class BootcampController extends Controller
 {
@@ -128,5 +132,82 @@ class BootcampController extends Controller
             $result[] = $value;
         }
         return $result;
+    }
+
+    public function buyFree($course_id) {
+        // Validate if course exists;
+        $course = Course::findOrFail($course_id);
+
+        if(!auth()->user()->isProfileUpdated)
+            return redirect()->back()->with('message_update','Please complete your profile first.');
+        
+        $invoiceNumberResults = Helper::generateInvoiceNumber();
+
+        // If something failed
+        if ($invoiceNumberResults['status'] == 'Failed') {
+            return redirect()->back()->with('message', $invoiceNumberResults['message']);
+        }
+
+        $invoice = Invoice::create([
+            'invoice_no' => $invoiceNumberResults['data'],
+            'user_id' => auth()->user()->id,
+            'name' => auth()->user()->name,
+            'phone' => auth()->user()->userDetail->telephone,
+            'grand_total' => 0,
+            'status' => 'completed',
+            'total_order_price' => 0,
+            'xfers_payment_id' => $invoiceNumberResults['data'],
+        ]);
+
+        // Check if invoice creation failed.
+        if (!$invoice->exists) abort(500);
+
+        $order = Order::create([
+            'invoice_id'    => $invoice->id,
+            'course_id'     => $course_id,
+            'qty'           => 1,
+            'price'         => 0,
+        ]);
+
+        // Check if order creation failed.
+        if (!$order->exists) {
+            $invoice->delete();
+            abort(500);
+        };
+
+        //create bootcamp applications
+        $bootcamp_applications      = BootcampApplication::create([
+            'course_id'             => $course_id,
+            'user_id'               => auth()->user()->id,
+            'invoice_id'            => $invoice->id,
+            'name'                  => auth()->user()->name,
+            'phone_no'              => auth()->user()->userDetail->telephone,
+        ]);
+
+        // create notification
+        $notification = Notification::create([
+            'user_id' => auth()->user()->id,
+            'invoice_id' => $invoice->id,
+            'isInformation' => 0,
+            'title' => 'Pembayaran Telah Berhasil!',
+            'description' => 'Hi, '.auth()->user()->name.'. Kamu telah mendapatkan pelatihan: ' . $course->title . '.',
+            'link' => '/transaction-detail/'.$invoiceNumberResults['data']
+        ]);
+
+        // Check if notification creation failed.
+        if (!$notification->exists) {
+            $order->delete();
+            $invoice->delete();
+            abort(500);
+        }
+
+        if (!auth()->user()->courses->contains($course->id)) {
+            auth()->user()->courses()->syncWithoutDetaching([$course->id]);
+            if ($course->assessment()->exists()) {
+                auth()->user()->assessments()->syncWithoutDetaching([$course->assessment->id]);
+            }
+        }
+
+        return redirect('/transaction-detail/'.$invoiceNumberResults['data'].'#payment-success');
     }
 }

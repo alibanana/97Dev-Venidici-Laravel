@@ -524,7 +524,6 @@ class CheckoutController extends Controller
 
     public function cancelPayment(Request $request, $id) {
         $result = XfersHelper::cancelPayment($id);
-
         if ($result['status'] == 'Failed')
             return redirect()->back()->with('message', $result['errors']['message']);
 

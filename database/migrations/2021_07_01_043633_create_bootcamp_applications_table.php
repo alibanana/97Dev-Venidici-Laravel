@@ -23,7 +23,7 @@ class CreateBootcampApplicationsTable extends Migration
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->string('name');
             $table->string('phone_no');
-            $table->string('bank_account_number');
+            $table->string('bank_account_number')->nullable();
             $table->timestamps();
         });
     }
