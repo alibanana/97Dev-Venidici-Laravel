@@ -3,14 +3,15 @@
 
 @section('content')
 
-
 <!-- START OF POP UP BOOTCAMP-->
 <div id="bootcamp-detail" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:70% !important">
+    <div class="popup" style="width:50%">
         <a class="close" href="#closed" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
-                
+                <div class="col-12" style="text-align:left;">
+                    <p class="sub-description" id="bootcamp-title" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Bootcamp: Abcd</p>
+                </div>
                 <div class="col-6" style="">
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                     <div  class="auth-input-form" style="display: flex;align-items:center">
@@ -750,9 +751,9 @@
                                         <a href="#bootcamp-detail" style="margin-left: 0.5vw;">
                                             <i class="fas fa-question-circle normal-text"
                                             @if($course->price == 0)
-                                            onclick="passBootcampData('{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','-','-','lorem')" 
+                                            onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','-','-','lorem')" 
                                             @else
-                                            onclick="passBootcampData('{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','BCA','{{$bootcamp->bank_account_number}}','lorem')" 
+                                            onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','BCA','{{$bootcamp->bank_account_number}}','lorem')" 
                                             @endif
                                             
                                             style="color:#2B6CAA;"></i>
@@ -1209,14 +1210,14 @@
     }
 </script>
 <script>
-    function passBootcampData(name,email,phone,bank,bank_account_number, address) {
-        console.log('test');
-		document.getElementById("bootcamp-name").value = name;
-		document.getElementById("bootcamp-email").value = email;
-		document.getElementById("bootcamp-phone").value = phone;
-		document.getElementById("bootcamp-bank").value = bank;
-		document.getElementById("bootcamp-bank_account_number").value = bank_account_number;
-		document.getElementById("bootcamp-address").value = address;
+    function passBootcampData(title,name,email,phone,bank,bank_account_number, address) {     
+		document.getElementById("bootcamp-title").innerHTML             = title;
+		document.getElementById("bootcamp-name").value                  = name;
+		document.getElementById("bootcamp-email").value                 = email;
+		document.getElementById("bootcamp-phone").value                 = phone;
+		document.getElementById("bootcamp-bank").value                  = bank;
+		document.getElementById("bootcamp-bank_account_number").value   = bank_account_number;
+		document.getElementById("bootcamp-address").value               = address;
     }
 </script>
 @endsection

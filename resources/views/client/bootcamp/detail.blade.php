@@ -5,7 +5,7 @@
 
 <!-- START OF POPUP PAYMENT-->
 <div id="payment" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:70% !important">
+    <div class="popup" style="width:50%">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <form action="{{route('customer.cart.storeOrder')}}" method="POST" enctype="multipart/form-data">
