@@ -196,7 +196,7 @@ END OF OUR PROGRAMS SECTION -->
                 <select class="grey-input-form small-text" name="cat" style="height:100%;padding-right:4vw" aria-label="">
                     <option selected disabled>Pilih Kategori</option>
                     <option value="Featured" @if (Request::get('cat') == 'Featured') selected @endif>Featured</option>
-                    <option value="None" @if (Request::get('cat') == 'None') selected @endif>None</option>
+                    <option value="None" @if (Request::get('cat') == 'None') selected @endif>All</option>
                     @foreach($course_categories as $category)
                     <!-- <option value="{{$category->id}}">{{$category->category}}</option> -->
                     <option value="{{ $category->id }}" @if (Request::get('cat') == $category->id) selected @endif>{{ $category->category }}</option>

@@ -311,6 +311,9 @@ class PagesController extends Controller
             elseif($request->filter == 'Bootcamp'){
                 return redirect('/bootcamp?search='.$request->search.'#search-course-section');
             }
+            elseif($request->filter == 'All'){
+                return redirect('/pelatihan-venidici?search='.$request->search.'#search-course-section');
+            }
         }
         // kalau search doang (gak ada filter)
         else{

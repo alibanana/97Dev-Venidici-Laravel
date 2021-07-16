@@ -198,7 +198,7 @@ END OF OUR PROGRAMS SECTION -->
                     <option selected disabled>Pilih Kategori</option>
                     <option value="Featured" @if (Request::get('cat') == 'Featured') selected @endif>Featured</option>
 
-                    <option value="None" @if (Request::get('cat') == 'None') selected @endif>None</option>
+                    <option value="None" @if (Request::get('cat') == 'None') selected @endif>All</option>
                     @foreach($course_categories as $category)
                     <!-- <option value="{{$category->id}}">{{$category->category}}</option> -->
                     <option value="{{ $category->id }}" @if (Request::get('cat') == $category->id) selected @endif>{{ $category->category }}</option>
@@ -235,7 +235,7 @@ END OF OUR PROGRAMS SECTION -->
         <div class="row m-0 p-0">
             @if(count($courses) == 0)
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Venidici On-Demand tidak ditemukan.</span></p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Woki tidak ditemukan.</span></p>
             </div>
             @endif
         
