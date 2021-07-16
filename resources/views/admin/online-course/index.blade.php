@@ -141,7 +141,9 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    @if ($course->publish_status == 'Published')
+                                                    @if ($course->isDeleted)
+                                                        <td style="color:red">Archived</td>
+                                                    @elseif ($course->publish_status == 'Published')
                                                         <td style="color:green">Published</td>
                                                     @else
                                                         <td>DRAFT</td>
@@ -175,13 +177,23 @@
                                                             <div style="padding: 0px 2px;">
                                                                 <a class="d-sm-inline-block btn btn-info shadow-sm" href="{{ route('admin.online-courses.edit', $course->id) }}">Update</a>
                                                             </div>
-                                                            <form action="{{ route('admin.online-courses.destroy', $course->id) }}" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this online course?')">Delete</button>
-                                                                </div>
-                                                            </form>
+                                                            @if ($course->isDeleted)
+                                                                <form action="{{ route('admin.online-courses.unArchive', $course->id) }}" method="post">
+                                                                    @csrf
+                                                                    @method('put')
+                                                                    <div style="padding: 0px 2px">
+                                                                        <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to un-archive this online course?')">Un-Archive</button>
+                                                                    </div>
+                                                                </form>
+                                                            @else
+                                                                <form action="{{ route('admin.online-courses.archive', $course->id) }}" method="post">
+                                                                    @csrf
+                                                                    @method('put')
+                                                                    <div style="padding: 0px 2px">
+                                                                        <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to archive this online course?')">Archive</button>
+                                                                    </div>
+                                                                </form>
+                                                            @endif
                                                         </div>
                                                     </td>
                                                 </tr>

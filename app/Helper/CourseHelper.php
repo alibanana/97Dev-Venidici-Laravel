@@ -8,18 +8,72 @@ use App\Models\Course;
 
 class CourseHelper {
 
-    // Function to delete Course by a course object.
-    public static function deleteById($id) {
+    // Function to archive Course by a course id.
+    public static function makeIsDeletedTrueById($id) {
         try {
             $course = Course::findOrFail($id);
-            
-            unlink($course->thumbnail);
-            $course->delete();
+
+            // Check if course has been bought.
+            $courseHasBeenBought = !$course->users->isEmpty();
+
+            // Check if a user has checkout with the given course.
+            $courseIsInPendingInvoice = false;
+            foreach ($course->orders as $order) {
+                $invoice = $order->invoice;
+                if ($invoice->status == 'pending') {
+                    $courseIsInPendingInvoice = true;
+                    break;
+                }
+            }
+
+            if (!$courseHasBeenBought && !$courseIsInPendingInvoice) {
+                // Delete cart data that has course in it.
+                if (!$course->carts->isEmpty()) {
+                    $course->carts()->delete();
+                }
+
+                $course->isDeleted = true;
+                $course->save();
+
+                if ($course->courseType->type == "Course") {
+                    $message = 'Online Course (' . $course->title . ') has been archived.';
+                } elseif ($course->courseType->type == "Woki") {
+                    $message = 'Woki Course (' . $course->title . ') has been archived.';
+                } elseif ($course->courseType->type == "Bootcamp") {
+                    $message = 'Bootcamp Course (' . $course->title . ') has been archived.';
+                }
+            } elseif ($courseHasBeenBought) {
+                $message = 'Cannot archive courses that have been bought!';
+            } elseif ($courseIsInPendingInvoice) {
+                $message = 'Cannot archive courses that is available in a pending invoice!';
+            }
+
+            return [
+                'status' => 'Success',
+                'data' => $course,
+                'message' => $message
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
+    }
+
+    // Function to un-archive Course by a course id.
+    public static function makeIsDeletedFalseById($id) {
+        try {
+            $course = Course::findOrFail($id);
+            $course->isDeleted = false;
+            $course->save();
             
             if ($course->courseType->type == "Course") {
-                $message = 'Online Course (' . $course->title . ') has been deleted.';
+                $message = 'Online Course (' . $course->title . ') has been un-archived.';
             } elseif ($course->courseType->type == "Woki") {
-                $message = 'Woki Course (' . $course->title . ') has been deleted.';
+                $message = 'Woki Course (' . $course->title . ') has been un-archived.';
+            } elseif ($course->courseType->type == "Bootcamp") {
+                $message = 'Bootcamp Course (' . $course->title . ') has been un-archived.';
             }
 
             return [

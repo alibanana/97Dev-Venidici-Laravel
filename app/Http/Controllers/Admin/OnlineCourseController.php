@@ -255,9 +255,15 @@ class OnlineCourseController extends Controller
         return redirect()->route('admin.online-courses.index')->with('message', 'New Online Course has been added!');
     }
 
-    // Delete Online Course from the database.
-    public function destroy($id) {
-        $result = CourseHelper::deleteById($id);
+    // Archive (isDeleted -> true) Online Course from the database.
+    public function archive($id) {
+        $result = CourseHelper::makeIsDeletedTrueById($id);
+        return redirect()->route('admin.online-courses.index')->with('message', $result['message']);
+    }
+
+    // UnArchive (isDeleted -> false) Online Course from the database.wo
+    public function unArchive($id) {
+        $result = CourseHelper::makeIsDeletedFalseById($id);
         return redirect()->route('admin.online-courses.index')->with('message', $result['message']);
     }
 
