@@ -213,7 +213,7 @@
                         <div class="col-12 col-sm-6" >
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                             <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                                <select onchange="if (this.value) window.location.href='/dashboard?province='+this.value+'#edit-profile' " name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                <select onchange="if (this.value){ openLoading(); window.location.href='/dashboard?province='+this.value+'#edit-profile'}" name="province_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                     @if(Auth::user()->userDetail->province_id == null)
                                         <option value="" disabled selected>Pilih Provinsi</option>
                                     @endif
