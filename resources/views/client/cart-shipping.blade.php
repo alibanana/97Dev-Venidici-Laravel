@@ -21,7 +21,7 @@
                 <div class="payment-method-card bank-links" style="" id="payment_method_1"  onclick="togglePayment(event, 'checked_icon_1','bca')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
-                            <img src="/assets/images/client/BCA_LOGO.png" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
+                            <img src="/assets/images/client/BCA_LOGO.png" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid image-bank" alt="">
                             <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw;">Bank BCA ( Virtual Account )</p>
                         </div>
                         <div id="checked_icon_1" class="bank-content" style="display:none">
@@ -35,7 +35,7 @@
                 <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_2"  onclick="togglePayment(event, 'checked_icon_2','bri')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
-                            <img src="/assets/images/client/bri_logo.png" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
+                            <img src="/assets/images/client/bri_logo.png" style="width:4vw;height:3vw;object-fit:contain;border-radius:10px" class="img-fluid image-bank" alt="">
                             <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank BRI ( Virtual Account )</p>
                         </div>
                         <div id="checked_icon_2" class="bank-content" style="display:none">
@@ -63,7 +63,7 @@
                 <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_2"  onclick="togglePayment(event, 'checked_icon_4','mandiri')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
-                            <img src="/assets/images/client/mandiri_logo.png" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="">
+                            <img src="/assets/images/client/mandiri_logo.png" style="width:4vw;height:3vw;object-fit:contain;border-radius:10px" class="img-fluid image-bank" alt="">
                             <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">Bank Mandiri ( Virtual Account )</p>
                         </div>
                         <div id="checked_icon_4" class="bank-content" style="display:none">
@@ -74,11 +74,12 @@
                 <!-- END OF ONE PAYMENT METHOD -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
+                <button type="button" class="btn btn-secondary full-width-button" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
                 @if($noWoki)
                     <button type="submit" onclick="openLoadingShipping()" name="action" value="createPaymentObjectWithNoWoki" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
                 @else
                     <button type="submit" onclick="openLoadingShipping()" name="action" value="createPaymentObject" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
+
                 @endif
             </div>
             </div>
@@ -103,20 +104,20 @@
     <!-- START OF PAGE CONTENT -->
     <div class="row m-0 shipping-background" style="padding-bottom:4vw">
         
-        <div class="col-8 p-0" style="">
-            <div class="page-container-left" style="padding-top:11vw;padding-right:9vw">
+        <div class="col-md-8 col-xs-12 p-0" style="">
+            <div class="page-container-left " style="">
             @if($noWoki)
                 <!-- START OF COURSES -->
                 @foreach($carts as $cart)
                     @if($cart->course->course_type_id == 1)
                         <!-- ONE COURSE CARD -->
                         <div style="display:flex;margin-top:1vw" class="cartpage">
-                            <div class="cart-card-grey">
+                            <div class="cart-card-grey full-width">
                                 <div style="display:flex;align-items:center;width:70%">
-                                    <img src="{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                                    <img src="{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                                     <div style="margin-left:1vw">
-                                        <div style="display:flex;align-items:flex-start">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;width:18vw;    line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                        <div class="cart-title">
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
                                         </div>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">
                                         @foreach($cart->course->teachers as $teacher)
@@ -132,7 +133,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div style="display:flex;align-items:center">
+                                <div class="margin-right-shipment" style="display:flex;align-items:center">
                                     <div style="width:7.5vw">
                                         <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
                                     </div>
@@ -142,13 +143,13 @@
                         <!-- END OF ONE COURSE CARD -->
                     @else
                         <!-- ONE WOKI CARD -->
-                        <div style="display:flex;margin-top:1vw">
-                            <div class="cart-card-grey">
+                        <div class="margin-bot" style="display:flex;margin-top:1vw">
+                            <div class="cart-card-grey full-width">
                                 <div style="display:flex;align-items:center;width:70%">
-                                    <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                                    <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                                     <div style="margin-left:1vw">
-                                        <div style="display:flex;align-items:flex-start;width:18vw;">
-                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                        <div class="cart-title">
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
                                             @if($cart->course->priceWithArtKit != null)
                                             <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-{{$cart->id}}" data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
                                             @endif
@@ -169,9 +170,9 @@
                                 </div>
                                 <div style="display:flex;align-items:center">
                                     <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
-                                        <input type="text" class="qty-input normal-text" value="{{$cart->quantity}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw" readonly>
+                                        <input type="text" class="qty-input normal-text qty-width" value="{{$cart->quantity}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw" readonly>
                                     </div>
-                                    <div style="width:7.5vw;text-align:right">
+                                    <div class="margin-right-shipment" style="width:7.5vw;text-align:right">
                                         <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
                                     </div>                        
                                 </div>
@@ -182,7 +183,7 @@
                                 <!-- START OF ONE ITEM COLLAPSE -->
                                 <div style="display:flex;align-items:center;margin-top:1.5vw">
                                     <i style="color:#2B6CAA" class="fas fa-circle normal-text"></i>
-                                    <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid" alt="COURSE THUMBNAIL">
+                                    <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                                     <div style="margin-left:1vw">
                                         <p class="normal-text" style="font-family:Rubik Bold;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;margin-bottom:0.5vw">{{$supply->name}}</p>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{$supply->description}}</p>
@@ -201,7 +202,7 @@
                 <div style="display:flex;justify-content:space-between;align-items:center">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Info Pengiriman</p>
                 </div>
-                <div class="row m-0">
+                <div class="row m-0 no-padding">
                     <div class="col-12 col-sm-6" >
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Provinsi</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
@@ -327,7 +328,7 @@
             @endif
             </div>
         </div> 
-        <div class="col-4 p-0 ">
+        <div class="col-md-4 p-0 ">
             <div class="page-container-right" style="padding-top:11vw">
                 @if (session('discount_not_found'))
                     <!-- ALERT MESSAGE -->
@@ -365,7 +366,7 @@
                                 <input form="validateVoucherCodeForm" name="code" type="text" class="normal-text" style="background:transparent;border:none;color: #5F5D70;;width:100%" placeholder="Masukan kode promo">                   
                             @endif   
                         </div>
-                        <button form="validateVoucherCodeForm" type="submit" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Apply</button>
+                        <button form="validateVoucherCodeForm" type="submit" class="normal-text btn-dark-blue half-width-button" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Apply</button>
                     </div>
                     @error('code')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -499,9 +500,9 @@
                         <input type="hidden" name="service" value="{{Request::get('tipe')}}">
                         <input type="hidden" name="bankShortCode" id="bankShortCode" value="">
                         @if(Request::get('tipe') || $noWoki)
-                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>                
+                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-dark-blue full-width-button" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Lanjut ke Pembayaran</button>                
                         @else
-                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="normal-text" style="cursor:pointer;border:none;font-family: Poppins Medium;background: rgba(111, 159, 205, 0.5);border-radius: 5px;color:#FFFFFF;padding:0.5vw 2vw" disabled>Lanjut ke Pembayaran</button>                
+                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="normal-text full-width-button" style="cursor:pointer;border:none;font-family: Poppins Medium;background: rgba(111, 159, 205, 0.5);border-radius: 5px;color:#FFFFFF;padding:0.5vw 2vw" disabled>Lanjut ke Pembayaran</button>                
                         @endif
                 </div>
             </div>

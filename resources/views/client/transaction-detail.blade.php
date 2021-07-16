@@ -6,7 +6,7 @@
 @if($invoice->status == 'pending')
 <!-- START OF POPUP VA EXPLANATION-->
 <div id="pembayaran-va" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:50% !important">
+    <div class="popup">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
@@ -26,13 +26,13 @@
 @endif
 <!-- START OF POPUP COURSE CLAIMED -->
 <div id="payment-success" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:35% !important">
+    <div class="popup course-claim-margin">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
                 <div class="col-12" style="text-align:center;">
                     <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Course Claimed</p>
-                    <img src="/assets/images/client/course_claimed.png" style="width:8vw" alt="">
+                    <img src="/assets/images/client/course_claimed.png" style="width:8vw" class="popup-image-mobile" alt="">
                     <?php 
                     $courses_string = "";
 
@@ -52,7 +52,8 @@
                     
                     ?>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:1.5vw;margin-top:2vw">Course {{$courses_string}} has been added to your dashboard. You have claimed it for @if($invoice->grand_total == 0) FREE @else Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} @endif.</p>
-                    <a href="/dashboard" class="normal-text  btn-dark-blue" style="border:none;font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;width:100%;;text-decoration:none">Go to my dashboard</a>
+                    <!-- <a href="/dashboard" class="normal-text  btn-dark-blue full-width-button" style="border:none;font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;text-decoration:none"> Go to my dashboard</a> -->
+                    <button class="normal-text  btn-dark-blue full-width-button" style="border:none;font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;text-decoration:none"> <a href="/dashboard" style="color:white;text-decoration:none"> Go to my Dashboard</a> </button>
 
                 </div>
             </div>
@@ -63,13 +64,13 @@
 
 <!-- START OF POPUP COURSE BOUGHT -->
 <div id="payment-created" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:35% !important">
+    <div class="popup">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
                 <div class="col-12" style="text-align:center;">
                     <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Terimakasih atas pesanannya!</p>
-                    <img src="/assets/images/client/course_claimed.png" style="width:8vw" alt="">
+                    <img src="/assets/images/client/course_claimed.png" style="width:8vw" class="popup-image-mobile" alt="">
                     <?php 
                     $courses_string = "";
 
