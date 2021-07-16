@@ -26,7 +26,7 @@
 @endif
 <!-- START OF POPUP COURSE CLAIMED -->
 <div id="payment-success" class="overlay" style="overflow:scroll">
-    <div class="popup course-claim-margin">
+    <div class="popup course-claim-margin" style="width: 35%;">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
@@ -64,7 +64,7 @@
 
 <!-- START OF POPUP COURSE BOUGHT -->
 <div id="payment-created" class="overlay" style="overflow:scroll">
-    <div class="popup">
+    <div class="popup" style="width: 35%;">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
