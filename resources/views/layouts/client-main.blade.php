@@ -723,7 +723,6 @@
     </script>
     <script>
       function openLoading() {
-          console.log('test');
           $('#loadingModal').modal({backdrop: 'static', keyboard: false});
           $('#loadingModal').modal('show');
       }

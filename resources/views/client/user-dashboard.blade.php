@@ -615,41 +615,86 @@
             $today = explode(' ', $mytime);
         @endphp
         @foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course)
-        <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE -->
-        @if($course->pivot->status == 'on-going' && $today[0] <= $course->wokiCourseDetail->event_date )
-        <div class="col-12 p-0">
-            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
-                <div class="container-image-card">
-                    <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" >Woki</div>
-                </div>           
-                <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:37vw">
-                        <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                            @foreach($course->teachers as $teacher)
-                                <span style="font-family:Rubik Bold">
-                                    @if($loop->last && count($course->teachers) != 1)
-                                    dan
-                                    @elseif(!$loop->first)
-                                    ,
-                                    @endif
-                                    {{$teacher->name}}
-                                </span>
-                            @endforeach
-                            </p>   
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+        @if($course->course_type_id == 2)
+            <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE AND THE COURSE IS WOKI -->
+            @if($course->pivot->status == 'on-going' && $today[0] <= $course->wokiCourseDetail->event_date)
+            <div class="col-12 p-0">
+                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
+                    <div class="container-image-card">
+                        <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                        <div class="top-left card-tag small-text" >Woki</div>
+                    </div>           
+                    <div style="display:flex;justify-content:space-between">
+                        <div class="right-section" style="width:37vw">
+                            <div>
+                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                @foreach($course->teachers as $teacher)
+                                    <span style="font-family:Rubik Bold">
+                                        @if($loop->last && count($course->teachers) != 1)
+                                        dan
+                                        @elseif(!$loop->first)
+                                        ,
+                                        @endif
+                                        {{$teacher->name}}
+                                    </span>
+                                @endforeach
+                                </p>   
+                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
+                                <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
-                        <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
-                    </div>
-                </div> 
+                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                            <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
+                            <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
+                        </div>
+                    </div> 
+                </div>
             </div>
-        </div>
+            @endif
+        @elseif($course->course_type_id == 3 && count($course->bootcampSchedules) != 0)
+            @foreach($bootcamp_applications->where('course_id',$course->id) as $bootcamp)
+                @php
+                $date = explode(' ', $course->bootcampSchedules[0]->date_time);
+                @endphp
+                <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE AND THE COURSE IS WOKI -->
+                @if($course->pivot->status == 'on-going' && $today[0] <= $date[0])
+                <div class="col-12 p-0">
+                    <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer"  onclick="window.open('/bootcamp/{{$course->id}}','_blank');">
+                        <div class="container-image-card">
+                            <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                            <div class="top-left card-tag small-text" >Bootcamp</div>
+                        </div>           
+                        <div style="display:flex;justify-content:space-between">
+                            <div class="right-section" style="width:37vw">
+                                <div>
+                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                    @foreach($course->teachers as $teacher)
+                                        <span style="font-family:Rubik Bold">
+                                            @if($loop->last && count($course->teachers) != 1)
+                                            dan
+                                            @elseif(!$loop->first)
+                                            ,
+                                            @endif
+                                            {{$teacher->name}}
+                                        </span>
+                                    @endforeach
+                                    </p>   
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
+                                    
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span></p>
+                                </div>
+                            </div>
+                            <div style=" display: flex;flex-direction: column;justify-content: flex-end;align-items: center;padding:0vw 2vw;" >
+                                <a href="/bootcamp/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Detail</a>
+                                <!-- <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a> -->
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                @endif
+                @endforeach
         @endif
         @endforeach
         <!--

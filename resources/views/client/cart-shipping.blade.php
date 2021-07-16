@@ -76,9 +76,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
                 @if($noWoki)
-                    <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectWithNoWoki" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
+                    <button type="submit" onclick="openLoadingShipping()" name="action" value="createPaymentObjectWithNoWoki" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
                 @else
-                    <button type="submit" onclick="openLoading()" name="action" value="createPaymentObject" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
+                    <button type="submit" onclick="openLoadingShipping()" name="action" value="createPaymentObject" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Konfirmasi</button>                
                 @endif
             </div>
             </div>
@@ -87,7 +87,7 @@
     <!-- END OF MODAL VA -->
 
     <!-- Modal Loading -->
-    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModal" aria-hidden="true">
+    <div class="modal fade" id="loadingModalShipping" tabindex="-1" role="dialog" aria-labelledby="loadingModalShipping" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body loading-background" style="text-align:center;height:20vw">
@@ -516,8 +516,10 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>
-    function openLoading() {
-        $('#loadingModal').modal('show');
+    function openLoadingShipping() {
+        $('#loadingModalShipping').modal({backdrop: 'static', keyboard: false});
+
+        $('#loadingModalShipping').modal('show');
     }
 </script>
 <script>

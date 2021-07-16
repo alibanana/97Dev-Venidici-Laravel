@@ -30,6 +30,7 @@ use App\Models\Promotion;
 use App\Models\Review;
 use App\Models\Course;
 use App\Mail\PasswordChangedMail;
+use App\Models\BootcampApplication;
 
 class DashboardController extends Controller
 {
@@ -74,7 +75,9 @@ class DashboardController extends Controller
                 ],
             );
                 })->orderBy('orders.created_at', 'desc')->get();
-
+        $bootcamp_applications = BootcampApplication::whereHas('invoice', function($query){
+            $query->where('status', 'paid')->orWhere('status', 'completed');
+        })->orderBy('bootcamp_applications.created_at','desc')->get();
         $interests = Hashtag::all();
 
         $usableStarsCount = Helper::getUsableStars(auth()->user());       
@@ -82,7 +85,7 @@ class DashboardController extends Controller
         $mytime->setTimezone('Asia/Phnom_Penh');
         $today = explode(' ', $mytime);
         //check live woki and change status to complete if date time has passed
-        foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course){
+        foreach(auth()->user()->courses->where('course_type_id',2) as $course){
             if($today[0] >= $course->wokiCourseDetail->event_date && $course->wokiCourseDetail->end_time <= $today[1]){
                 $course->pivot->status = 'completed';
                 $course->pivot->save();
@@ -108,7 +111,7 @@ class DashboardController extends Controller
         }
 
         return view('client/user-dashboard',
-            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews'));
+            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews','bootcamp_applications'));
     }
 
     public function update_shipping(Request $request,$id)
