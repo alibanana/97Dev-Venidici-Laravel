@@ -159,6 +159,7 @@ class BootcampController extends Controller
             'subtitle' => 'required',
             'course_category_id' => 'required',
             'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
+            'link' => '',
             'description' => 'required',
             'requirements' => 'required|array|min:1',
             'hashtags' => 'required|array|min:1'
@@ -176,6 +177,7 @@ class BootcampController extends Controller
         $course->title = $validated['title'];
         $course->subtitle = $validated['subtitle'];
         $course->description = $validated['description'];
+        $course->link = $validated['link'];
         $course->save();
 
         foreach ($request->requirements as $requirement_value) {

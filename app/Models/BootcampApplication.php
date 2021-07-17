@@ -14,8 +14,11 @@ class BootcampApplication extends Model
         'user_id',
         'invoice_id',
         'name', 
+        'email', 
         'phone_no', 
+        'bank', 
         'bank_account_number', 
+        'address' 
     ];
 
     public function course() {

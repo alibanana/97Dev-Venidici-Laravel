@@ -149,8 +149,10 @@ class CheckoutController extends Controller
         }
 
 
+
         // If validation passed store validated data in a variable.
         $validated = $validator->validate();
+
         $invoiceNumberResult = Helper::generateInvoiceNumber();
         if ($invoiceNumberResult['status'] == 'Failed'){
             if ($request->action == 'createPaymentObjectBootcamp')
@@ -226,13 +228,16 @@ class CheckoutController extends Controller
             }
 
             // Create bootcamp_application object.
-            $bootcamp_application = BootcampApplication::create([
+            $bootcamp_applications = BootcampApplication::create([
                 'course_id' => $validated['course_id'],
                 'user_id' => auth()->user()->id,
                 'invoice_id' => $invoice->id,
                 'name' => $validated['name'],
+                'email' => $validated['email'],
                 'phone_no' => $validated['phone'],
-                'bank_account_number' => $validated['bank_account_number']
+                'bank' => $validated['bankShortCode'],
+                'bank_account_number' => $validated['bank_account_number'],
+                'address' => $validated['address']
             ]);
 
             // Handle if bootcamp_application creation failed.

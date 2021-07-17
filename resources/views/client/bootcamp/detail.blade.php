@@ -8,7 +8,11 @@
     <div class="popup" style="width:50%">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
+            @if($course->price == 0)
+            <form action="{{ route('bootcamp.buyFree', $course->id) }}" method="post">
+            @else
             <form action="{{route('customer.cart.storeOrder')}}" method="POST" enctype="multipart/form-data">
+            @endif
             @csrf
             <div class="row m-0">
                 
@@ -147,6 +151,9 @@
                     <input type="hidden" name="grand_total" value="{{$grand_total}}">
                     @if($course->price != 0)
                     <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>
+                    @else
+                    <input type="hidden" name="course_id" value="{{$course->id}}">              
+                    <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Daftar Sekarang</button>
                     @endif
                     <!--<button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>-->
                 </div>  
@@ -154,16 +161,15 @@
             </div>                
             </form>
 
-            <div class="col-12" style="text-align:center">
+            <!-- <div class="col-12" style="text-align:center">
                 {{-- If user has not bought the course and user has not bought the course and the price IS 0. --}}
                 @if($course->price == 0)
                     <form action="{{ route('bootcamp.buyFree', $course->id) }}" method="post">
                     @csrf
-                        <input type="hidden" name="course_id" value="{{$course->id}}">              
-                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Daftar Sekarang</button>
+                        
                     </form>
                 @endif
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

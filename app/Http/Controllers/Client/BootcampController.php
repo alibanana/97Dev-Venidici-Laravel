@@ -136,7 +136,8 @@ class BootcampController extends Controller
         return $result;
     }
 
-    public function buyFree($course_id) {
+    public function buyFree(Request $request,$course_id) {
+        $input = $request->all();
         // Validate if course exists;
         $course = Course::findOrFail($course_id);
 
@@ -153,8 +154,8 @@ class BootcampController extends Controller
         $invoice = Invoice::create([
             'invoice_no' => $invoiceNumberResults['data'],
             'user_id' => auth()->user()->id,
-            'name' => auth()->user()->name,
-            'phone' => auth()->user()->userDetail->telephone,
+            'name' => $input['name'],
+            'phone' => $input['phone'],
             'grand_total' => 0,
             'status' => 'completed',
             'total_order_price' => 0,
@@ -182,8 +183,10 @@ class BootcampController extends Controller
             'course_id'             => $course_id,
             'user_id'               => auth()->user()->id,
             'invoice_id'            => $invoice->id,
-            'name'                  => auth()->user()->name,
-            'phone_no'              => auth()->user()->userDetail->telephone,
+            'name'                  => $input['name'],
+            'email'                 => $input['email'],
+            'phone_no'              => $input['phone'],
+            'address'               => $input['address']
         ]);
 
         // create notification

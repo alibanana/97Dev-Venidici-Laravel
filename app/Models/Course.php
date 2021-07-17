@@ -23,6 +23,7 @@ class Course extends Model
         'publish_status', // default -> Draft
         'total_duration', // nullable -> string format (minutes, seconds)
         'average_rating', // default -> 0
+        'link', // nullable
         'isDeleted', // default -> 0
         'isFeatured' // default -> 0
     ];
