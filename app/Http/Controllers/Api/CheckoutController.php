@@ -69,12 +69,10 @@ class CheckoutController extends Controller
     }
 
     public function store(Request $request) {
-        
-        
         // Checks if somehow the cart data does not exists.
         // This could be caused by:
         // [1] User submitted the request twice (on second occasion cart data has been deleted).
-        if (!auth()->user()->carts()->exists() && $request->action != 'createPaymentObjectBootcamp' ) {
+        if (!auth()->user()->carts()->exists() && $request->action != 'createPaymentObjectBootcamp') {
             // Checks if the user has invoices data. If not.. simply redirect him back.
             if (auth()->user()->invoices()->exists()) {
                 $invoice = auth()->user()->invoices()->latest()->first();
@@ -91,42 +89,23 @@ class CheckoutController extends Controller
         if ($request->has('phone'))
             $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
 
-        // if user buys a bootcamp
-        if ($request->action == 'createPaymentObjectBootcamp') {
-            $validation_rules = [
-                'name'                  => 'required',
-                //'phone' => ['required', new TelephoneNumber],
-                'phone'                 => 'required',
-                'grand_total'           => 'required|integer',
-                'total_order_price'     => 'required|integer',
-                'date'                  => 'required',
-                'time'                  => 'required',
-                'bankShortCode'         => 'required',
-                'discounted_price'      => 'required|integer',
-                'promo_code'            => '', // no validations but included for ease of access.
-                'club_discount'         => 'required|integer',
-                'course_id'             => '', // no validations but included for ease of access.
-                'bank_account_number'   => 'required|integer', 
-            ];
-        //if user does not buy a bootcamp
-        }else{
-            // validation rules if no artKit.
-            $validation_rules = [
-                'name'              => 'required',
-                //'phone' => ['required', new TelephoneNumber],
-                'phone'             => 'required',
-                'grand_total'       => 'required|integer',
-                'total_order_price' => 'required|integer',
-                'date'              => 'required',
-                'time'              => 'required',
-                'bankShortCode'     => 'required',
-                'discounted_price'  => 'required|integer',
-                'promo_code'        => '', // no validations but included for ease of access.
-                'club_discount'     => 'required|integer',
-            ];
-        }
+        // Validation rules that exists on all validation conditions. (noArtKit, hasArtKit & bootcamp)
+        $validation_rules = [
+            'name' => 'required',
+            //'phone' => ['required', new TelephoneNumber],
+            'phone' => 'required',
+            'grand_total' => 'required|integer',
+            'total_order_price' => 'required|integer',
+            'date' => 'required',
+            'time' => 'required',
+            'bankShortCode' => 'required',
+            'discounted_price' => 'required|integer',
+            'promo_code' => '', // no validations but included for ease of access.
+            'club_discount' => 'required|integer',
+            'course_id' => '', // no validations but included for ease of access.
+        ];
 
-        // Validations if orders has artKit.
+        // Extra validation rules if orders has artKit.
         if ($request->action == 'createPaymentObject') {
             $validation_rules = array_merge($validation_rules, [
                 'courier' => 'required',
@@ -136,6 +115,11 @@ class CheckoutController extends Controller
                 'province' => 'required|integer',
                 'city' => 'required|integer',
                 'address' => 'required'
+            ]);
+        // Extra validation rules for bootcamp payments.
+        } elseif ($request->action == 'createPaymentObjectBootcamp') {
+            $validation_rules = array_merge($validation_rules, [
+                'bank_account_number' => 'required|integer'
             ]);
         }
 
@@ -159,8 +143,9 @@ class CheckoutController extends Controller
                 // Kalau error field lainnya.
                 return redirect()->back()->withErrors($validator);
             }
+
             // Kalau error field lainnya dan user buys a bootcamp
-            return redirect('bootcamp/'.$input['course_id'].'#payment')->withErrors($validator);
+            return redirect(route('bootcamp.show', $input['course_id']) . '#payment')->withErrors($validator);
         }
 
 
@@ -168,10 +153,9 @@ class CheckoutController extends Controller
         $validated = $validator->validate();
         $invoiceNumberResult = Helper::generateInvoiceNumber();
         if ($invoiceNumberResult['status'] == 'Failed'){
-            //if user buys a bootcamp
             if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect('bootcamp/'.$input['course_id'])->with('message', $invoiceNumberResult['message']);
-            //if user does not buy a bootcamp
+                return redirect()->route('bootcamp.show', $validated['course_id'])
+                    ->with('message', $invoiceNumberResult['message']);
             else
                 return redirect()->back()->with('message', $invoiceNumberResult['message']);
         }
@@ -211,45 +195,61 @@ class CheckoutController extends Controller
         // Create Invoice object and validate if it failed.
         $invoice = Invoice::create($invoice_data);
         if (!$invoice->exists){
-            //if user buys a bootcamp
             if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect('bootcamp/'.$input['course_id'])->back()->with('message', 'Oops, something went wrong..');
-            //if user does not buy a bootcamp
+                return redirect()->route('bootcamp.show', $validated['course_id'])
+                    ->with('message', 'Oops, something went wrong..');
             else
                 return redirect()->back()->with('message', 'Oops, something went wrong..');
         }
         
-
-        //if user buy a bootcamp
-        if($request->action == 'createPaymentObjectBootcamp'){
+        /* 
+        * Handle order (or orders) object creation, as well as additional steps after order creation.
+        * For Bootcamp payments :
+        *  - Create 1 order object with data directly taken from the request.
+        *  - Validate if order creation success -> create bootcamp_application object.
+        *  - Validate if bootcamp_application creation success.
+        */
+        if ($request->action == 'createPaymentObjectBootcamp') {
             $order = Order::create([
-                'invoice_id'    => $invoice->id,
-                'course_id'     => $validated['course_id'],
-                'qty'           => 1,
-                'price'         => $validated['total_order_price'],
-                'withArtOrNo'   => 0
+                'invoice_id' => $invoice->id,
+                'course_id' => $validated['course_id'],
+                'qty' => 1,
+                'price' => $validated['total_order_price']
             ]);
 
             // Handle if order creation failed.
             if (!$order->exists) {
                 $invoice->orders()->delete();
                 $invoice->delete();
-                return redirect('bootcamp/'.$input['course_id'])
+                return redirect()->route('bootcamp.show', $validated['course_id'])
                     ->with('message', 'Oops, something went wrong..');
             }
 
-            //create bootcamp applications
-            $bootcamp_applications      = BootcampApplication::create([
-                'course_id'             => $validated['course_id'],
-                'user_id'               => auth()->user()->id,
-                'invoice_id'            => $invoice->id,
-                'name'                  => $validated['name'],
-                'phone_no'              => $validated['phone'],
-                'bank_account_number'   => $validated['bank_account_number']
+            // Create bootcamp_application object.
+            $bootcamp_application = BootcampApplication::create([
+                'course_id' => $validated['course_id'],
+                'user_id' => auth()->user()->id,
+                'invoice_id' => $invoice->id,
+                'name' => $validated['name'],
+                'phone_no' => $validated['phone'],
+                'bank_account_number' => $validated['bank_account_number']
             ]);
-        }
-        //if user does not buy a bootcamp
-        else{
+
+            // Handle if bootcamp_application creation failed.
+            if (!$bootcamp_application->exists) {
+                $invoice->orders()->delete();
+                $invoice->bootcampApplication()->delete();
+                $invoice->delete();
+                return redirect()->route('bootcamp.show', $validated['course_id'])
+                    ->with('message', 'Oops, something went wrong..');
+            }
+        /* 
+        * For Non-Bootcamp payments :
+        *  - Create orders object from user's carts data & validate if order creation success.
+        *  - Delete user's carts data after object creation.
+        *  - Handle personal promocode usage.
+        */
+        } else {
             // Create order items.
             foreach (auth()->user()->carts as $cart) {
                 $order = Order::create([
@@ -285,15 +285,14 @@ class CheckoutController extends Controller
 
         // Create payment object (in xfers) & handle failed.
         $response = XfersHelper::createPayment($request->only([
-            'grand_total', 'date', 'time', 'bankShortCode'
-        ]), $invoiceNumberResult['data'], $invoice->id);
+                'grand_total', 'date', 'time', 'bankShortCode'
+            ]), $invoiceNumberResult['data'], $invoice->id);
         if ($response['status'] == 'Failed') {
             $invoice->orders()->delete();
             $invoice->delete();
-            //if user buys a bootcamp
             if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect('bootcamp/'.$input['course_id'])->back()->with('message', $response['errors']['message']);
-            //if user does not buy a bootcamp
+                return redirect()->route('bootcamp.show', $validated['course_id'])
+                    ->with('message', $response['errors']['message']);
             else
                 return redirect()->back()->with('message', $response['errors']['message']);
         }
