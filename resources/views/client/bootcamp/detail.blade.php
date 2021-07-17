@@ -143,6 +143,10 @@
                             $discount_club_price = 0;
                             @endphp
                         @endif
+                    @else
+                        @php
+                            $discount_club_price = 0;
+                        @endphp
                     @endif
                     <input type="hidden" value="{{$discount_club_price}}" name="club_discount">
                     <input type="hidden" name="discounted_price" value="0">
