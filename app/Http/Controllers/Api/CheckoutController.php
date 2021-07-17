@@ -119,6 +119,8 @@ class CheckoutController extends Controller
         // Extra validation rules for bootcamp payments.
         } elseif ($request->action == 'createPaymentObjectBootcamp') {
             $validation_rules = array_merge($validation_rules, [
+                'email' => 'required',
+                'address' => 'required',
                 'bank_account_number' => 'required|integer'
             ]);
         }
@@ -228,7 +230,7 @@ class CheckoutController extends Controller
             }
 
             // Create bootcamp_application object.
-            $bootcamp_applications = BootcampApplication::create([
+            $bootcamp_application = BootcampApplication::create([
                 'course_id' => $validated['course_id'],
                 'user_id' => auth()->user()->id,
                 'invoice_id' => $invoice->id,
