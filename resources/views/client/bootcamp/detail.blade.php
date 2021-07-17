@@ -129,18 +129,20 @@
                     <input type="hidden" name="date" value="{{ $date }}">
                     <input type="hidden" name="time" value="{{ $time }}">
                     <input type="hidden" name="course_id" value="{{ $course->id }}">
-                    @if(Auth::user()->club != null)
-                        @php
+                    @if(Auth::check())
+                        @if(Auth::user()->club != null)
+                            @php
+                                $discount_club_price = 0;
+                                if(Auth::user()->club == 'bike')
+                                    $discount_club_price = 2500;
+                                elseif(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
+                                    $discount_club_price = 5000;
+                            @endphp
+                        @else
+                            @php
                             $discount_club_price = 0;
-                            if(Auth::user()->club == 'bike')
-                                $discount_club_price = 2500;
-                            elseif(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
-                                $discount_club_price = 5000;
-                        @endphp
-                    @else
-                        @php
-                        $discount_club_price = 0;
-                        @endphp
+                            @endphp
+                        @endif
                     @endif
                     <input type="hidden" value="{{$discount_club_price}}" name="club_discount">
                     <input type="hidden" name="discounted_price" value="0">

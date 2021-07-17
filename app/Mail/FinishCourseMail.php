@@ -11,6 +11,7 @@ class FinishCourseMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $course;
+    public $link;
 
 
     /**
@@ -18,9 +19,10 @@ class FinishCourseMail extends Mailable
      *
      * @return void
      */
-    public function __construct($course)
+    public function __construct($course,$link)
     {
-        $this->course = $course;
+        $this->course   = $course;
+        $this->link     = $link;
     }
 
     /**
