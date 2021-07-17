@@ -86,10 +86,11 @@ class DashboardController extends Controller
         $today = explode(' ', $mytime);
         //check live woki and change status to complete if date time has passed
         foreach(auth()->user()->courses->where('course_type_id',2) as $course){
-            if($today[0] >= $course->wokiCourseDetail->event_date && $course->wokiCourseDetail->end_time <= $today[1]){
+            $woki_date = $course->wokiCourseDetail->event_date . ' ' .$course->wokiCourseDetail->end_time;
+
+            if ($mytime >= $woki_date) {
                 $course->pivot->status = 'completed';
                 $course->pivot->save();
-
             }
         }
 

@@ -246,6 +246,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/woki-courses', [AdminWokiCourseController::class, 'index'])->name('woki-courses.index');
         Route::get('/woki-courses/create', [AdminWokiCourseController::class, 'create'])->name('woki-courses.create');
         Route::get('/woki-courses/{id}', [AdminWokiCourseController::class, 'show'])->name('woki-courses.show');
+        Route::post('/woki-courses/{id}/set-isabsent-status-to-opposite', [AdminWokiCourseController::class, 'setIsAbsentStatusToOpposite'])->name('woki-courses.set-isabsent-status-to-opposite');
         Route::post('/woki-courses', [AdminWokiCourseController::class, 'store'])->name('woki-courses.store');
         Route::delete('/woki-courses/{id}', [AdminWokiCourseController::class, 'destroy'])->name('woki-courses.destroy');
         Route::put('/woki-course/{id}/archive', [AdminWokiCourseController::class, 'archive'])->name('woki-courses.archive');

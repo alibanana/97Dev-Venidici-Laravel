@@ -5,6 +5,7 @@ namespace App\Helper;
 use Exception;
 
 use App\Models\Course;
+use App\Models\User;
 
 class CourseHelper {
 
@@ -146,6 +147,36 @@ class CourseHelper {
             return [
                 'status' => 'Success',
                 'data' => $course,
+                'message' => $message
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'Failed',
+                'message' => "Caught exception: " . $e->getMessage()
+            ];
+        }
+    }
+
+    // Function to set user_course isAbsent status to its opposite value.
+    public static function setIsAbsentStatusToOpposite($course_id, $user_id) {
+        try {
+
+            $user =  User::findOrFail($user_id);   
+
+            $user_course = $user->courses->where('id',$course_id)->first()->pivot;
+            $user_course->isAbsent = !$user_course->isAbsent;
+            
+            $user_course->save();
+
+
+            if ($user_course->isAbsent)
+                $message = $user->name .' tidak hadir di kelas woki' ;
+            else
+                $message = $user->name .' hadir hadir di kelas woki' ;
+
+            return [
+                'status' => 'Success',
+                'data' => $user_course,
                 'message' => $message
             ];
         } catch (Exception $e) {

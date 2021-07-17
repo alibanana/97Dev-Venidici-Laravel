@@ -67,6 +67,8 @@
 </div>
 <!-- END OF POP UP BOOTCAMP-->
 
+
+
 <!-- START OF POPUP EDIT PROFILE-->
 <div id="edit-profile" class="overlay" style="overflow:scroll">
     <div class="popup">
@@ -537,12 +539,11 @@
 <!-- END OF POPUP INTERESTS-->
 
 <!-- START OF TOP SECTION -->
-<div class="m-0 page-container pb-0" style="background-color:#2B6CAA"> 
-    <div class="" style="color:white;font-family: Helvetica Bold;font-size:5vw;">User Dashboard</div>
+<div class="row m-0 page-container" style="padding-top:9vw"> 
     @if(Auth::user()->email_verified_at == null)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
-        <div class="alert alert-warning alert-dismissible fade show "  style="width:100%;text-align:center;margin-bottom:0px;font-size:2.5vw;padding-top:2vw;height:10vw"role="alert">
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
             Email kamu belum di verifikasi. Belum dapat email? 
             <span style="display: inline-block;">
                 <form method="POST" action="{{ route('verification.send') }}">
@@ -552,7 +553,7 @@
                 </button>
                 </form>
             </span>
-            <button type="button" style="top: -3vw !important;;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
     </div>
@@ -568,33 +569,33 @@
     @endif
 </div>
 
-<div class="row m-0 page-container" style="background-color:#2B6CAA;padding:9vw 0vw">
+<div class="row m-0 page-container" style="padding-top:1.5vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
-        <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:35vw;padding:3vw 1.5vw;width:92vw;display:flex;align-items:center">
-            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:27vw;height:27vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
+        <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
+            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
-                <div style="display:flex;justify-content:space-between;align-items:">
+                <div style="display:flex;justify-content:space-between;">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{Auth::user()->name}}</p> 
-                    <div class="dropdown show p-0" >
+                    <div class="dropdown show">
                         
-                        <a class="small-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                        <a class="small-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
                         <!--<a class="small-heading" style="color:grey;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>-->
 
 
-                        <div class="dropdown-menu "  aria-labelledby="editDropdown" style="border-radius:10px;padding:0px;min-width:35vw !important;margin-right:27vw">
-                            <div class="edit-item" style="border-radius:10px 10px 0px 0px;padding:0vw 3vw !important" >
+                        <div class="dropdown-menu" aria-labelledby="editDropdown" style="border-radius:10px;padding:0px;width:14vw">
+                            <div class="edit-item" style="border-radius:10px 10px 0px 0px">
                                 <a href="#edit-profile" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Edit Profile</span></a>   
                             </div>
-                            <div class="edit-item" style="padding:0vw 3vw !important">
+                            <div class="edit-item">
                                 <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
                             </div>
-                            <div class="edit-item" style="padding:0vw 3vw !important">
+                            <div class="edit-item">
                                 <a href="#my-interests" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-heart"></i> <span style="margin-left:0.8vw">My interests</span></a>   
                             </div>
-                            <div class="edit-item" style="padding:0vw 3vw !important">
+                            <div class="edit-item">
                                 <a href="/dashboard/redeem-vouchers" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-tags"></i> <span style="margin-left:0.55vw">Vouchers</span></a>   
                             </div>
-                            <div class="edit-item" style="border-radius:0px 0px 10px 10px;padding:0vw 3vw !important">
+                            <div class="edit-item" style="border-radius:0px 0px 10px 10px">
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" style="background:none;border:none">
@@ -605,15 +606,15 @@
                         </div>
                     </div>  
                 </div>
-                <div style="display:flex;align-items:center;">
+                <div style="display:flex;align-items:center;margin-top:0.5vw">
                     <div style="border-top: 1.5px solid #F4C257;border-bottom: 1.5px solid #F4C257;border-left: 1.5px solid #F4C257;border-radius: 5px 0px 0px 5px;padding:0.2vw 0.5vw">
                         <div style="display: flex;flex-direction: column;justify-content: center;">
-                            <p style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;line-height: 2vw !important;font-size:2.5vw"> <i class="fas fa-star" style=""></i> <span>{{$usableStarsCount}} Stars</span></p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;"> <i class="fas fa-star"></i> <span>{{$usableStarsCount}} Stars</span></p>
                         </div>
                     </div>
                     <div style="display: flex;flex-direction: column;justify-content: center;border: 1.5px solid #F4C257;border-radius:0px 5px 5px 0px;background-color:#F4C257;padding:0.2vw" >
                             
-                        <p style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;line-height: 2vw !important;font-size:2.5vw">                        
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;">                        
                             <a href="#points">
                                 <i class="fas fa-question-circle normal-text" style="color:#FFFFFF;"></i>
                             </a>
@@ -621,12 +622,20 @@
                     </div>
                 </div>
 
-                <p style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:2vw;font-size:2.5vw">{{Auth::user()->email}}</p>   
-                <p style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.2vw;font-size:2.5vw">Referral Code: <span style="color:#2B6CAA;font-family:Rubik Medium"> {{Auth::user()->userDetail->referral_code}}</span></p>   
+                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->email}}</p>   
+                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{Auth::user()->userDetail->occupancy}}</p>   
+                <!-- <div style="width:70%">
+                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw;display: -webkit-box;
+                        overflow : hidden !important;
+                        text-overflow: ellipsis !important;
+                        -webkit-line-clamp: 1 !important;
+                        -webkit-box-orient: vertical !important;">{{Auth::user()->userDetail->address}}</p>   
+                </div> -->
+                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Referral Code: <span style="color:#2B6CAA;font-family:Rubik Medium"> {{Auth::user()->userDetail->referral_code}}</span></p>   
 
-                <div style="display:flex;align-items:center;margin-top:2vw">
+                <div style="display:flex;align-items:center;margin-top:0.8vw">
                     @foreach(Auth::user()->hashtags as $hashtag)
-                    <p style="font-family:Rubik Medium;color:{{$hashtag->color}};background-color:#EEEEEE;border-radius:10px;font-size:2.5vw;padding:0.5vw 1.5vw;margin-bottom:0px;@if($loop->iteration != 1) margin-left:1vw @endif">{{$hashtag->hashtag}}</p>
+                    <p class="small-text" style="font-family:Rubik Medium;color:{{$hashtag->color}};background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;@if($loop->iteration != 1) margin-left:1vw @endif">{{$hashtag->hashtag}}</p>
                     @endforeach
                 </div>
 
@@ -664,12 +673,12 @@
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
+
         @php
             $mytime = Carbon\Carbon::now();
             $mytime->setTimezone('Asia/Phnom_Penh');
             $today = explode(' ', $mytime);
         @endphp
-
         @foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course)
             <!-- IF WOKI -->
             @if($course->course_type_id == 2)
@@ -711,11 +720,16 @@
                 @endif
             <!-- IF BOOTCAMP -->
             @elseif($course->course_type_id == 3 && count($course->bootcampSchedules) != 0)
-            
+               
                 @foreach($bootcamp_applications->where('course_id',$course->id) as $bootcamp)
-                
                     @php
                     $date = explode(' ', $course->bootcampSchedules[0]->date_time);
+                    if($loop->last){
+                        $date_end = explode(' ', $course->bootcampSchedules[0]->date_time);
+                        echo $date_end[0];
+                        echo $course->title;
+
+                    }
                     @endphp
                     <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE AND THE COURSE IS BOOTCAMP -->
                     @if($today[0] <= $date[0])
@@ -750,15 +764,16 @@
                                         </p>
                                         <div style="display: flex;align-items:center">
                                             <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">
-                                            Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span> atas nama
+                                            Mulai dari <span style="font-family: Rubik Medium;"> {{$date[0]}}</span> 
+                                            atas nama
                                             <span style="font-family: Rubik Medium;">{{$bootcamp->name}}</span>
                                             </p>
                                             <a href="#bootcamp-detail" style="margin-left: 0.5vw;">
                                                 <i class="fas fa-question-circle normal-text"
                                                 @if($course->price == 0)
-                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','-','-','lorem')" 
+                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , '{{$bootcamp->email}}','{{$bootcamp->phone_no}}','-','-','{{$bootcamp->address}}')" 
                                                 @else
-                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','BCA','{{$bootcamp->bank_account_number}}','lorem')" 
+                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , '{{$bootcamp->email}}','{{$bootcamp->phone_no}}','{{$bootcamp->bank}}','{{$bootcamp->bank_account_number}}','{{$bootcamp->address}}')" 
                                                 @endif
                                                 
                                                 style="color:#2B6CAA;"></i>
@@ -770,7 +785,7 @@
                                 </div>
                                 <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                                     <a href="/bootcamp/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Detail</a>
-                                    <a href="/dashboard" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
+                                    <a href="{{$course->link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
                                 </div>
                             </div> 
                         </div>
@@ -802,8 +817,7 @@
                 </div> 
             </div>
         </div>
-        -->
-                            
+        -->          
     </div>
     <!-- End of Live Pelatihan Content -->
 
@@ -1022,7 +1036,6 @@
 </div>
 <!-- END OF MIDDLE SECTION -->
 
-
 <!-- START OF SARAN KAMI SECTION -->
 <div class="row m-0 page-container-inner" style="padding-top:2vw;padding-bottom:6vw">
     <div class="col-12 p-0" style="text-align:center">
@@ -1064,9 +1077,12 @@
                                         Bootcamp
                                         @endif
                                     </div>
+                                    <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                                    </div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="height:6vw">
+                                    <div style="height:4.5vw">
                                         <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                             @if ($course->courseType->type == 'Course')
                                                 <a href="/online-course/{{ $course->id }}" class="normal-text"
@@ -1078,7 +1094,7 @@
                                                 <a href="/bootcamp/{{ $course->id }}" class="normal-text"
                                                     style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                             @endif
-                                            <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i>
+                                            <!-- <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i> -->
                                         </div>
                                         @foreach ($course->hashtags as $tag)
                                             <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
@@ -1215,8 +1231,10 @@
         }
     }
 </script>
+
 <script>
-    function passBootcampData(title,name,email,phone,bank,bank_account_number, address) {     
+    function passBootcampData(title,name,email,phone,bank,bank_account_number, address) {
+        
 		document.getElementById("bootcamp-title").innerHTML             = title;
 		document.getElementById("bootcamp-name").value                  = name;
 		document.getElementById("bootcamp-email").value                 = email;
