@@ -110,7 +110,7 @@ class DashboardController extends Controller
                 $cities = null;
         }
         if($agent->isPhone()){
-            return view('client/mobile/user-dashboard',compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews'));
+            return view('client/mobile/user-dashboard',compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews','bootcamp_applications'));
         }
 
         return view('client/user-dashboard',

@@ -21,7 +21,7 @@
                 <div class="payment-method-card bank-links" style="" id="payment_method_1"  onclick="togglePayment(event, 'checked_icon_1','bca')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
-                            <img src="/assets/images/client/BCA_LOGO.png" style="width:4vw;height:3vw;object-fit:cover;border-radius:10px" class="img-fluid image-bank" alt="">
+                            <img src="/assets/images/client/BCA_LOGO.png" style="width:4vw;height:3vw;object-fit:contain;border-radius:10px" class="img-fluid image-bank" alt="">
                             <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw;">Bank BCA ( Virtual Account )</p>
                         </div>
                         <div id="checked_icon_1" class="bank-content" style="display:none">
@@ -93,8 +93,7 @@
             <div class="modal-content">
                 <div class="modal-body loading-background" style="text-align:center;height:20vw">
                     <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Pembayaran Sedang Di Proses...</p>
-                    <img src="/assets/images/client/loading.gif" style="width:3vw;height:3vw;object-fit:cover;border-radius:10px;margin-top:5vw" class="img-fluid" alt="Loading..">
-
+                    <img src="/assets/images/client/loading.gif" style="width:3vw;height:3vw;object-fit:contain;border-radius:10px;margin-top:5vw" class="img-fluid" alt="Loading..">
                 </div>
             </div>
         </div>

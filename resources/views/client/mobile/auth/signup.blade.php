@@ -95,7 +95,7 @@
                         @enderror
                     </div>         
                     <div class="col-12 p-0" style="text-align:center;margin-top:3vw">
-                        <button type="submit"  class="btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;font-size:4vw;width:90%">Next</button>
+                        <button type="submit" onclick="openLoading()" class="btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;font-size:4vw;width:90%">Next</button>
                     </div>  
                     <!-- END OF RIGHT SECTION -->
                 </div>
