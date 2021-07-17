@@ -262,7 +262,7 @@
                     <div class="col-12 col-sm-6" style="margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Metode Pengiriman</p>
                         <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                            <select  onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                            <select  onchange="if (this.value){ openLoading(); window.location.href=this.value}" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 @if(Request::get('city') == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Kota terlebih dahulu</option>
                                 @else
@@ -282,7 +282,7 @@
                         <div class="col-12 col-sm-6" style="margin-top:1vw">
                             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Tipe Pengiriman</p>
                             <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
-                                <select  onchange="if (this.value) window.location.href=this.value" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
+                                <select  onchange="if (this.value){openLoading(); window.location.href=this.value}" name="" id=""  class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%">
                                 <option disabled selected>Pilih Metode Pengiriman terlebih dahulu</option>
                                     @if($tipe_pengiriman != null)
                                         @foreach($tipe_pengiriman as $tipe)

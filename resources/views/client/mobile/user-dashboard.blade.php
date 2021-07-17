@@ -750,7 +750,7 @@
                                         </p>
                                         <div style="display: flex;align-items:center">
                                             <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">
-                                            Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span> for
+                                            Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span> atas nama
                                             <span style="font-family: Rubik Medium;">{{$bootcamp->name}}</span>
                                             </p>
                                             <a href="#bootcamp-detail" style="margin-left: 0.5vw;">

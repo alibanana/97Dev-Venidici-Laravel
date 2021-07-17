@@ -96,7 +96,9 @@ class CheckoutController extends Controller
             $validation_rules = [
                 'name'                  => 'required',
                 //'phone' => ['required', new TelephoneNumber],
+                'email'                 => 'required',
                 'phone'                 => 'required',
+                'address'               => 'required',
                 'grand_total'           => 'required|integer',
                 'total_order_price'     => 'required|integer',
                 'date'                  => 'required',
@@ -164,8 +166,10 @@ class CheckoutController extends Controller
         }
 
 
+
         // If validation passed store validated data in a variable.
         $validated = $validator->validate();
+
         $invoiceNumberResult = Helper::generateInvoiceNumber();
         if ($invoiceNumberResult['status'] == 'Failed'){
             //if user buys a bootcamp
@@ -244,8 +248,11 @@ class CheckoutController extends Controller
                 'user_id'               => auth()->user()->id,
                 'invoice_id'            => $invoice->id,
                 'name'                  => $validated['name'],
+                'email'                 => $validated['email'],
                 'phone_no'              => $validated['phone'],
-                'bank_account_number'   => $validated['bank_account_number']
+                'bank'                  => $validated['bankShortCode'],
+                'bank_account_number'   => $validated['bank_account_number'],
+                'address'               => $validated['address']
             ]);
         }
         //if user does not buy a bootcamp

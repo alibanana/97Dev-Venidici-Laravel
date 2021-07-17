@@ -673,13 +673,15 @@
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
+
         @php
             $mytime = Carbon\Carbon::now();
             $mytime->setTimezone('Asia/Phnom_Penh');
             $today = explode(' ', $mytime);
         @endphp
-
         @foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course)
+            
+
             <!-- IF WOKI -->
             @if($course->course_type_id == 2)
                 <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE AND THE COURSE IS WOKI -->
@@ -720,9 +722,7 @@
                 @endif
             <!-- IF BOOTCAMP -->
             @elseif($course->course_type_id == 3 && count($course->bootcampSchedules) != 0)
-            
                 @foreach($bootcamp_applications->where('course_id',$course->id) as $bootcamp)
-                
                     @php
                     $date = explode(' ', $course->bootcampSchedules[0]->date_time);
                     @endphp
@@ -759,15 +759,15 @@
                                         </p>
                                         <div style="display: flex;align-items:center">
                                             <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">
-                                            Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span> for
+                                            Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span> atas nama
                                             <span style="font-family: Rubik Medium;">{{$bootcamp->name}}</span>
                                             </p>
                                             <a href="#bootcamp-detail" style="margin-left: 0.5vw;">
                                                 <i class="fas fa-question-circle normal-text"
                                                 @if($course->price == 0)
-                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','-','-','lorem')" 
+                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , '{{$bootcamp->email}}','{{$bootcamp->phone_no}}','-','-','{{$bootcamp->address}}')" 
                                                 @else
-                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , 'fernndzaky23@gmail.com','{{$bootcamp->phone_no}}','BCA','{{$bootcamp->bank_account_number}}','lorem')" 
+                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , '{{$bootcamp->email}}','{{$bootcamp->phone_no}}','{{$bootcamp->bank}}','{{$bootcamp->bank_account_number}}','{{$bootcamp->address}}')" 
                                                 @endif
                                                 
                                                 style="color:#2B6CAA;"></i>

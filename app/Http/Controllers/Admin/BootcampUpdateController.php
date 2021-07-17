@@ -60,6 +60,7 @@ class BootcampUpdateController extends Controller
             'subtitle'              => 'required',
             'course_category_id'    => 'required',
             'preview_video_link'    => 'required|starts_with:https://www.youtube.com/embed/',
+            'link'                  => '',
             'description'           => 'required',
             'requirements'          => 'required|array|min:1',
             'hashtags'              => 'required|array|min:1'
@@ -72,6 +73,7 @@ class BootcampUpdateController extends Controller
         $course = Course::findOrFail($id);
         $course->course_category_id = $validated['course_category_id'];
         $course->preview_video = $validated['preview_video_link'];
+        $course->link = $validated['link'];
         $course->title = $validated['title'];
         $course->subtitle = $validated['subtitle'];
         $course->description = $validated['description'];
