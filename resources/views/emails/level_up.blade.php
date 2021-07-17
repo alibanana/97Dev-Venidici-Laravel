@@ -180,7 +180,7 @@ body {font-family: 'Muli', sans-serif;}
           <tbody>
             <tr>
               <td align="center" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                  <a class="btnLogin" href="http://127.0.0.1:8000/dashboard#points" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Check my points</a>
+                  <a class="btnLogin" href="{{route('customer.dashboard')}}#points" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Check my points</a>
               </td>
             </tr>
 
@@ -193,7 +193,7 @@ body {font-family: 'Muli', sans-serif;}
         <div>
           <div style="text-align: center">
           <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Having trouble accessing the button above? Use this link:</span><br>
-          <span style="color: #000000; font-size: 18px;"><a href="http://127.0.0.1:8000/dashboard#points">http://127.0.0.1:8000/dashboard#points</a></span>
+          <span style="color: #000000; font-size: 18px;"><a href="{{route('customer.dashboard')}}#points">{{route('customer.dashboard')}}#points</a></span>
         </div>
       </td>
     </tr>

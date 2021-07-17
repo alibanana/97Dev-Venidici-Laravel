@@ -76,9 +76,10 @@ class AssessmentController extends Controller
         
         //change user_course status to completed
         $user_course = auth()->user()->courses()->where('course_id', $course_id)->firstOrFail();
+        $link = route('customer.dashboard');
 
         if($user_course->pivot->status != 'completed') {
-            Mail::to(auth()->user()->email)->send(new FinishCourseMail($course));
+            Mail::to(auth()->user()->email)->send(new FinishCourseMail($course,$link));
             Helper::addStars(auth()->user(), 15, 'Penyelesaian course '.$course->title);
         }
 

@@ -185,7 +185,7 @@ body {font-family: 'Muli', sans-serif;}
           <tbody>
             <tr>
               <td align="center" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                  <a class="btnLogin" href="/login" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Verify Email Now</a>
+                  <a class="btnLogin" href="{{route('login')}}" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Verify Email Now</a>
               </td>
             </tr>
 
@@ -198,7 +198,7 @@ body {font-family: 'Muli', sans-serif;}
         <div>
           <div style="text-align: center">
           <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Having trouble accessing the button above? Use this link:</span><br>
-          <span style="color: #000000; font-size: 18px;"><a href="http://ninetysevendev-venidici-app.herokuapp.com/login">http://ninetysevendev-venidici-app.herokuapp.com/login</a></span>
+          <span style="color: #000000; font-size: 18px;"><a href="{{route('login')}}">{{route('login')}}</a></span>
         </div>
       </td>
     </tr>
