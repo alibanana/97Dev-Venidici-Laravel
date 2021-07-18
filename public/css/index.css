@@ -2070,24 +2070,24 @@ html, body {
 
 
 /* START OF PAGINATION */
-.pagination {
+.pagination-client {
     display: inline-block;
-  }
+}
   
-  .pagination a {
+  .pagination-client a {
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
   }
   
-  .pagination a.active {
+  .pagination-client a.active {
     background-color: #2B6CAA;
     color: white;
     border-radius: 5px;
   }
   
-  .pagination a:hover:not(.active) {
+  .pagination-client a:hover:not(.active) {
     background-color: #ddd;
     border-radius: 5px;
   }

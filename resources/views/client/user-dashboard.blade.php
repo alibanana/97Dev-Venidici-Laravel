@@ -931,7 +931,7 @@
         @endforeach
         
         <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-            <div class="pagination">
+            <div class="pagination-client">
                 <a href="#"><i class="fas fa-angle-left"></i></a>
                 <a href="#">1</a>
                 <a href="#" class="active">2</a>
