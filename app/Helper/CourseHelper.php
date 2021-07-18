@@ -318,7 +318,9 @@ class CourseHelper {
     public static function getCourseSuggestion($size, $type = null) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
         $courses = Course::with('hashtags')
-            ->where('enrollment_status', 'open')->where('publish_status', 'published')->where('isDeleted', false)->get()
+            ->where('enrollment_status', 'open')
+            ->where('publish_status', 'published')
+            ->where('isDeleted', false)->get()
             ->sortByDesc(function ($course) use ($userHashtags) {
                 $similarityPoint = 0;
                 foreach ($course->hashtags as $hashtag) {
@@ -328,8 +330,20 @@ class CourseHelper {
                 return $similarityPoint;
             });
 
-        return $type ? $courses->filter(function ($course) use ($type) {
-            return $course->courseType->type == $type;
-        })->take($size) : $courses->take($size);
+        if ($type)
+            $courses = $courses->filter(function ($course) use ($type) {
+                return $course->courseType->type == $type;
+            });
+
+        return $courses->filter(fn($course) => !CourseHelper::hasUserBoughtCourse($course))->take($size);
+    }
+
+    // Private function to check if user's has bought the course.
+    private static function hasUserBoughtCourse($course) {
+        foreach (auth()->user()->courses as $userCourse) {
+            if ($userCourse->id == $course->id)
+                return true;
+        }
+        return false;
     }
 }
