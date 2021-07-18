@@ -376,7 +376,6 @@ Route::middleware(['isSuspended'])->group(function () {
         //ContactUsController
         Route::get('/contact-us', [AdminContactUsController::class, 'index'])->name('contact-us.index');
         Route::delete('/contact-us/{id}', [AdminContactUsController::class, 'destroy'])->name('contact-us.destroy');
-
         // RedeemController
         Route::get('/redeems', [AdminRedeemController::class, 'index'])->name('redeems.index');
         Route::get('/redeems/create', [AdminRedeemController::class, 'create'])->name('redeems.create');
@@ -391,7 +390,6 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/donations', [AdminPromotionController::class, 'donations_index'])->name('donations.index');
     });
 
-
     /* START ADMIN ROUTING */
     Route::get('/admin/forgot-password', function () {
         return view('admin/auth/forgot-password');
@@ -399,7 +397,6 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/admin/reset-password', function () {
         return view('admin/auth/reset-password');
     });
-
 
     /* START OF GOOGLE AUTH */
     Route::get('login/google', [SocialController::class, 'redirectToGoogle'])->name('login.google');
