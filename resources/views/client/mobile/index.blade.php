@@ -457,19 +457,19 @@
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-6 p-0" style="display:flex;justify-content:center">
-        <a href="/bootcamp?cat=Featured" style="text-decoration:none">
+        <a href="" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
                 <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Bootcamp</p>
                     <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam porro blanditiis cupiditate in soluta iste eveniet, veritatis architecto pariatur numquam. Placeat praesentium officiis, assumenda ducimus ratione delectus quia dolore? Laboriosam?</p>
-                    <a href="/bootcamp?cat=Featured" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
+                    <a href="" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
                 </div>
             </div>
         </a>
     </div>
     <!-- END OF ONE PROGRAMS -->
-    <!-- START OF ONE PROGRAMS -->
+    <!-- START OF ONE PROGRAMS 
     <div class="col-6 p-0" style="display:flex;justify-content:center">
         <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
@@ -482,7 +482,7 @@
             </div>
         </a>
     </div>
-    <!-- END OF ONE PROGRAMS -->
+     END OF ONE PROGRAMS -->
 </div>
 <!-- END OF OUR PROGRAMS SECTION -->
 
@@ -546,7 +546,7 @@
                 <p class=" btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Most Popular</p>
                 <p class=" btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Woki</p>
                 <p class=" btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Skill Snack</p>
-                <p class=" btn-blue-on-hover course-links" onclick="changeCourse(event, 'bootcamp')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Bootcamp</p>
+                <!--<p class=" btn-blue-on-hover course-links" onclick="changeCourse(event, 'bootcamp')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;font-size:3vw">Bootcamp</p>-->
                 <!--
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
@@ -899,7 +899,7 @@
     </div>
     <!-- END OF Skill-Snack -->
 
-    <!-- Bootcamp -->
+    <!-- Bootcamp 
     <div class="course-content" id="bootcamp" style="display:none">
         <div class="row m-0 p-0">
             @if(count($bootcamps) == 0)
@@ -910,7 +910,7 @@
             @foreach($bootcamps as $course)
             <div class="col-12 p-0" style="margin-top:2vw">
                 <div style="display: flex;justify-content:center">
-                    <!-- START OF ONE BLUE COURSE CARD -->
+                    <!-- START OF ONE BLUE COURSE CARD
 
                     <div class="course-card-blue">
                         <div class="container">
@@ -924,7 +924,7 @@
                             <div style="height:10vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                     <a href="/bootcamp/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
-                                    <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
+                                    <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> 
                                 </div>
                                 @foreach ($course->hashtags as $tag)
                                     <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">{{ $tag->hashtag }}</a>
@@ -993,7 +993,7 @@
             
                         </div>
                     </div>
-                    <!-- END OF ONE BLUE COURSE CARD -->
+                    <!-- END OF ONE BLUE COURSE CARD 
                 </div>
             </div>
             @endforeach
@@ -1004,7 +1004,7 @@
             @endif
         </div>
     </div>
-    <!-- END OF Bootcamp -->
+     END OF Bootcamp -->
 
     <!-- END OF CLASSES SECTION -->
     

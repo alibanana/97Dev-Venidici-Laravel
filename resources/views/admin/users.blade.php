@@ -206,19 +206,20 @@
 								</table>
 							</div>
 						</div>
-						@unless (Request::get("show") == "All")
-							<div class="row mb-4">
-								<div class="mx-auto">
-									{{ $users->appends(request()->input())->links("pagination::bootstrap-4") }}
-								</div>
-							</div>
-						@endunless
 					</div>
 					<!-- /.container-fluid -->
+					
                 </div>
             </div>
         </div>
         <!-- end of table -->
+		@unless (Request::get("show") == "All")
+			<div class="row mb-4">
+				<div class="" style="display:flex;align-items:center">
+					{{ $users->appends(request()->input())->links(	"pagination::bootstrap-4") }}
+				</div>
+			</div>
+		@endunless
     </div>
     <!-- /.container-fluid -->
 </div>

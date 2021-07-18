@@ -185,11 +185,13 @@
                   <a href="/for-public/online-course" class="navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">For Public</a>
                   </td>
                 </tr>
+                <!--
                 <tr>
                   <td  style="padding-top:4vw">
                   <a href="/for-corporate/krest" class="navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">For Corporate</a>
                   </td>
                 </tr>
+                -->
                 <tr>
                   <td  style="padding-top:4vw">
                   <a href="/community" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Community</a>
@@ -255,7 +257,7 @@
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
         <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') || Request::is('bootcamp') || Request::is('bootcamp/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
-        <a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
+        <!--<a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>-->
         <a href="/community" class="normal-text navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Log In</a>
@@ -526,7 +528,7 @@
         @if(!Request::is('signup-interests'))
           @if(!Request::is('cart'))
     <!-- FOOTER DESKTOP-->
-    <div class="row m-0 page-container footer-desktop" style="padding-top:5vw;padding-bottom:5vw">
+    <div class="row m-0 page-container footer-desktop" style="padding-top:5vw;padding-bottom:2vw">
       <div class="col-12 p-0">
         <div style="display:flex;justify-content:space-between">
           <div>
@@ -545,16 +547,16 @@
             <div style="margin-top:1vw">
               <a href="/for-public/woki" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Woki</a>
             </div>
-            <div style="margin-top:1vw">
+            <!--<div style="margin-top:1vw">
               <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Corporate</a>
-            </div>
+            </div>-->
           </div>
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Information</p>
-            <div style="margin-top:1vw">
+            <!--<div style="margin-top:1vw">
               <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Corporate Programs</a>
-            </div>
+            </div>-->
             <div style="margin-top:1vw">
               <a href="/community" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Discord Community</a>
             </div>
@@ -581,6 +583,11 @@
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Review From our User</p>
+            @if(count($footer_reviews) == 0)
+              <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:0.5vw;text-align:center">
+                  <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum ada review.</span></p>
+              </div>
+            @endif
             @foreach($footer_reviews as $review)
             <!-- START OF ONE REVIEW -->
             <div style="margin-top:1vw;width:25vw">
@@ -623,7 +630,7 @@
     </div>
     <!-- END OF FOOTER DESKTOP-->
     <!-- START OF FOOTER MOBILE -->
-    <div class="row m-0 page-container footer-mobile" style="padding-top:5vw;padding-bottom:10vw;display:none">
+    <div class="row m-0 page-container footer-mobile" style="padding-top:5vw;padding-bottom:8vw;display:none">
       <div class="col-12">
           <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:6vw" class="img-fluid" alt="">
           <p style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:3vw;font-size:3vw">Platform anak kekinian <br>   buat naklukin karir impian!</p>
@@ -641,17 +648,17 @@
             <div style="">
               <a href="/for-public/woki" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Woki</a>
             </div>
-            <div style="">
+            <!--<div style="">
               <a href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">For Corporate</a>
-            </div>
+            </div>-->
         </div>
   
         <div class="col-4 p-0" style="display:flex;justify-content:center">
             <div>
               <p  style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Information</p>
-              <div style="">
+              <!--<div style="">
                 <a href="/for-corporate/krest"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Corporate Programs</a>
-              </div>
+              </div>-->
               <div style="">
                 <a href="/community"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Discord Community</a>
               </div>

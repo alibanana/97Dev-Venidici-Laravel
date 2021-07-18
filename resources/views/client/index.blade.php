@@ -575,19 +575,19 @@ END OF OUR PROGRAMS SECTION -->
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
-        <a href="/bootcamp?cat=Featured" style="text-decoration:none">
+        <a href="" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Bootcamp</p>
                     <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
-                    <a href="/bootcamp?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Bootcamp</a>
+                    <a href="" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Bootcamp</a>
                 </div>
             </div>
         </a>
     </div>
     <!-- END OF ONE PROGRAMS -->
-    <!-- START OF ONE PROGRAMS -->
+    <!-- START OF ONE PROGRAMS
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
@@ -600,7 +600,7 @@ END OF OUR PROGRAMS SECTION -->
             </div>
         </a>
     </div>
-    <!-- END OF ONE PROGRAMS -->
+    END OF ONE PROGRAMS -->
 </div>
 <!-- END OF OUR PROGRAMS SECTION -->
 
@@ -665,7 +665,7 @@ END OF OUR PROGRAMS SECTION -->
                 <p class="normal-text btn-blue-on-hover btn-blue-active course-links" onclick="changeCourse(event, 'course-popular')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Most Popular</p>
                 <p class="normal-text btn-blue-on-hover course-links"  onclick="changeCourse(event, 'course-woki')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Woki</p>
                 <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'course-online')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Skill Snack</p>
-                <p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'bootcamp')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
+                <!--<p class="normal-text btn-blue-on-hover course-links" onclick="changeCourse(event, 'bootcamp')" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>-->
                 <!--
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Bootcamp</p>
                 <p class="normal-text btn-blue-on-hover" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer">Workshop</p>
@@ -1024,7 +1024,7 @@ END OF OUR PROGRAMS SECTION -->
         </div>
     </div>
     <!-- END OF Skill Snack -->
-    <!-- Bootcamp -->
+    <!-- Bootcamp 
     <div class="course-content" id="bootcamp" style="display:none">
         <div class="row m-0 p-0">
             @if(count($bootcamps) == 0)
@@ -1035,7 +1035,7 @@ END OF OUR PROGRAMS SECTION -->
             @foreach($bootcamps as $course)
             <div class="col-4 p-0" >
                 <div style="display: flex;justify-content:center">
-                    <!-- START OF ONE BLUE COURSE CARD -->
+                    <!-- START OF ONE BLUE COURSE CARD 
                     <div class="course-card-blue">
                         <div class="container">
                             <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
@@ -1048,7 +1048,7 @@ END OF OUR PROGRAMS SECTION -->
                             <div style="height:4.5vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                     <a href="/bootcamp/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
-                                    <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
+                                    <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> 
                                 </div>
                                 @foreach ($course->hashtags as $tag)
                                     <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
@@ -1116,7 +1116,7 @@ END OF OUR PROGRAMS SECTION -->
                             </div>
                         </div>
                     </div>
-                    <!-- END OF ONE BLUE COURSE CARD -->
+                    <!-- END OF ONE BLUE COURSE CARD 
                 </div>
             </div>
             @endforeach
@@ -1128,7 +1128,7 @@ END OF OUR PROGRAMS SECTION -->
             @endif
         </div>
     </div>
-    <!-- END OF Bootcamp -->
+     END OF Bootcamp -->
 
     <!-- END OF CLASSES SECTION -->
     

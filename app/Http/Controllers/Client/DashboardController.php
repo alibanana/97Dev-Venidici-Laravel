@@ -94,37 +94,6 @@ class DashboardController extends Controller
             }
         }
 
-        //check skill snack and change status to complete if user has completed the course, but there is no assessment
-        foreach(auth()->user()->courses->where('course_type_id',1) as $course){
-            //check whether the course has a materi
-            if(count($course->sections) != 0){
-                $section_learned = 0;
-                $number_of_section = 0;
-                foreach($course->sections as $section){
-                    foreach($section->sectionContents as $content){
-                        $number_of_section++;
-                        $all_users = explode(',', $content->hasSeen);
-                        foreach($all_users as $user_id)
-                        {
-                            if($user_id == auth()->user()->id)
-                            {
-                                $section_learned++;
-                                break;
-                            }
-                        }
-                    }
-                }
-                $percentage = ($section_learned/$number_of_section) * 100;
-
-                //if the user has watched all videos, but theres no assessment, change the status of the course to completed
-                if(round($percentage) == 100 && $course->assessment == null){
-                    $course->pivot->status = 'completed';
-                    $course->pivot->save();
-                }
-
-            }
-        }
-
 		// Get courses suggestions.
         $courseSuggestions = CourseHelper::getCourseSuggestion(4);
 
