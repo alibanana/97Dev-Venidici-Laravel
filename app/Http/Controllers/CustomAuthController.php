@@ -116,8 +116,11 @@ class CustomAuthController extends Controller
                 $hashtag_ids[] = $hashtag_id;
         }
 
+        if(count($hashtag_ids) < 1)
+            return redirect()->back()->with('message', 'Minimal 1 pilihan');
+
         if(count($hashtag_ids) > 3)
-            return redirect()->back()->with('message', 'message');
+            return redirect()->back()->with('message', 'Maksimal 3 pilihan');
 
         $user = User::create([
             'name'      => $request->session()->get('name'),

@@ -245,14 +245,16 @@ class DashboardController extends Controller
         //here store to user and user detail table
 
         $hashtag_ids= [];
-        foreach($validated['interests'] as $hashtag_id => $flag)
-        {
+        foreach($validated['interests'] as $hashtag_id => $flag) {
             if($flag == '1') 
                 $hashtag_ids[] = $hashtag_id;
         }
 
+        if(count($hashtag_ids) < 1)
+            return redirect('/dashboard#my-interests')->with('message','Minimal 1 pilihan');
+
         if(count($hashtag_ids) > 3)
-            return redirect('/dashboard#my-interests')->with('message','testing');
+            return redirect('/dashboard#my-interests')->with('message', 'Maksimal 3 pilihan');
         
         auth()->user()->hashtags()->sync($hashtag_ids);
 
