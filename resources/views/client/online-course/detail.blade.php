@@ -7,7 +7,7 @@
     <!-- START OF LEFT SECTION -->
     <div class="col-9" >
         <div style="padding-right:10vw">
-            <p class="medium-heading" style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</p>
+            <p class="medium-heading" style="font-family:Hypebeast;color:#67BBA3">SKILL SNACK</p>
 
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
             
@@ -112,7 +112,7 @@
 
         <!-- END OF PROFIL PEMBICARA SECTION -->
         <!-- START OF TENTANG ONLINE COURSE -->
-        <p class="sub-description profil-text-green profil-text-green-active profil-links" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw">Tetang <span style="font-family:Hypebeast;color:#67BBA3">ONLINE COURSE</span> ini</p>
+        <p class="sub-description profil-text-green profil-text-green-active profil-links" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw">Tetang <span style="font-family:Hypebeast;color:#67BBA3">SKILL SNACK</span> ini</p>
         <div  class="bigger-text profil-content" id="tentang-course"  style="margin-top:1vw">
             <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
                 {{$course->description}}

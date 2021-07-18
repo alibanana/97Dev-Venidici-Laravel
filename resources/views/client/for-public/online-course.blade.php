@@ -22,9 +22,9 @@
                             <a href="/for-public/woki" class="normal-text red-link" style="font-family:Rubik Medium;width:10vw">
                                 Woki
                             </a>
-                            <a href="/for-public/bootcamp" class="normal-text bootcamp-link" style="font-family:Rubik Medium;width:10vw;margin-left:1.5vw;">
+                            <!-- <a href="/for-public/bootcamp" class="normal-text bootcamp-link" style="font-family:Rubik Medium;width:10vw;margin-left:1.5vw;">
                                 Bootcamp
-                            </a>
+                            </a> -->
                             <!--
                             <a href="#" class="normal-text yellow-link" style="font-family:Rubik Medium;margin-left:1.5vw">
                                 Sharing Session
