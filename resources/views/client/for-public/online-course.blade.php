@@ -77,7 +77,7 @@
 <div class="row m-0 page-container" style="padding-bottom:8vw   ">
     <div class="col-6 wow fadeInLeft" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;padding-right:2vw">
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Skill Snack On-Demand</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack On-Demand berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.</p>
         <div>
             <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">See upcoming live session</a>
         </div>
@@ -263,13 +263,13 @@
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
-                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;white-space:pre-line">Untuk Workshop Live terdapat money-back guarantee jika kamu merasa tidak puas dengan menghubungi kami. Tidak terdapat refund untuk program on demand</div>
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;white-space:pre-line">Untuk Workshop Live terdapat money-back guarantee jika kamu merasa tidak puas dengan menghubungi kami. Tidak terdapat refund untuk program Skill Snack</div>
             </div>
             <!-- END OF ONE FAQ CARD -->
             <!-- START OF ONE FAQ CARD -->
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja yang saya dapatkan di Venidici on Demand?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja yang saya dapatkan di Venidici Skill Snack?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    

@@ -297,6 +297,8 @@
                 <div class="p-3 mt-2 mb-0">
                     <div class="alert alert-success alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
                         {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
                     </div>
                 </div>
             @elseif (session()->has('danger'))
@@ -383,7 +385,7 @@
                         <!-- START OF ONE PROGRESS BAR -->
                         <div class="d-block w-100" style="padding:0vw 1vw">
                             @if(auth()->user()->userDetail->total_stars >= 100)
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Star Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #F4C257;"></div>
                             </div>
@@ -391,7 +393,7 @@
                             @php
                                 $percentCar = ( (auth()->user()->userDetail->total_stars - 20) / 80 ) * 100 ;
                             @endphp
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 100 - auth()->user()->userDetail->total_stars}} Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 100 - auth()->user()->userDetail->total_stars}} Stars Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{round($percentCar)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($percentCar)}}%; background-color: #F4C257;"></div>
                             </div>
@@ -413,13 +415,13 @@
                         <!-- START OF ONE PROGRESS BAR -->
                         <div class="d-block w-100" style="padding:0vw 1vw">
                             @if(auth()->user()->userDetail->total_stars >= 280)
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Star Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 
                                 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #F4C257;"></div>
                             </div>
                             @else
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 280 - auth()->user()->userDetail->total_stars}} Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 280 - auth()->user()->userDetail->total_stars}} Stars Left</p>
                             @php
                                 $percent = ( (auth()->user()->userDetail->total_stars - 100) / 180 ) * 100 ;
                             @endphp
@@ -445,7 +447,7 @@
 
                     <div class="faq-card" style="margin-top:3vw;background-color:#F9F9F9">
                         <div style="display:flex;align-items:center;justify-content:space-between;">
-                            <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How Venidici Point System Works?</p>
+                            <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How Venidici Star System Works?</p>
                             <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseHowItWorks" role="button" aria-expanded="false" aria-controls="collapseHowItWorks">
                                 <i class="fas fa-chevron-down"></i>
                             </p>                                    
