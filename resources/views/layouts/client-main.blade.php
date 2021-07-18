@@ -128,7 +128,8 @@
     </div> -->
     @if( !Request::is('login') )
     <!-- START OF MOBILE NAVBAR -->
-    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999">
+    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;position: sticky;
+  top: 0;z-index: 10;">
       <div >
         <!--    Made by Erik Terwan    -->
         <!--   24th of November 2015   -->
@@ -233,7 +234,7 @@
 
           <div style="display: flex;">
             <a id="cart_icon" class="navbar-item" href="/cart" style="color:#FFFFFF">
-              <span class="counter fa-stack has-badge" data-count="1">
+              <span class="counter fa-stack has-badge" data-count="{{$cart_count}}">
                 <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart')) navbar-item-active-mobile @endif"></i>
               </span>
             </a>
