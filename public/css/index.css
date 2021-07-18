@@ -2067,3 +2067,28 @@ html, body {
 /* CARD DESCRIPTION ON HOVER */
 
 /* END OF CARD DESCRIPTION ON HOVER */
+
+
+/* START OF PAGINATION */
+.pagination-client {
+    display: inline-block;
+}
+  
+  .pagination-client a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  .pagination-client a.active {
+    background-color: #2B6CAA;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .pagination-client a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+  }
+/* END OF PAGINATION */

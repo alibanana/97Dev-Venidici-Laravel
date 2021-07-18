@@ -129,6 +129,8 @@
                                                 <th>Email</th>
                                                 <th>Invoice Details</th>
                                                 <th>Telephone</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -166,6 +168,27 @@
                                                     @else
                                                         <td style="color: red">Phone number not available!</td>
                                                     @endif
+                                                    @if($user->courses->where('id',$course->id)->first()->pivot->isAbsent == 1)
+                                                    <td style="color: orange">Belum Hadir</td>
+                                                    @else
+                                                    <td style="color: green">Hadir</td>
+                                                    @endif
+
+                                                    <td>
+                                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">       
+                                                            <form action="{{ route('admin.woki-courses.set-isabsent-status-to-opposite', $course->id) }}" method="post">
+                                                                @csrf
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="user_id" value="{{$user->id}}">
+                                                                        @if($user->courses->where('id',$course->id)->first()->pivot->isAbsent == TRUE)
+                                                                            <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to make this user present?')">Hadir</button>
+                                                                        @else
+                                                                            <button class="d-sm-inline-block btn btn-dark shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to make this user absent?')">Reinstate</button>
+                                                                        @endif
+                                                                </div>
+                                                            </form>                                                                         
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

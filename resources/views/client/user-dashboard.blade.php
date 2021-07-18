@@ -348,7 +348,7 @@
                         @enderror
                     </div>
                     <div class="col-12" style="text-align:right;padding-top:3vw">
-                        <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Password</button>
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Update Password</button>
                     </div>  
                 </div>
             </form>
@@ -680,8 +680,6 @@
             $today = explode(' ', $mytime);
         @endphp
         @foreach(auth()->user()->courses->where('course_type_id','!=',1) as $course)
-            
-
             <!-- IF WOKI -->
             @if($course->course_type_id == 2)
                 <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE AND THE COURSE IS WOKI -->
@@ -720,99 +718,19 @@
                     </div>
                 </div>
                 @endif
-            <!-- IF BOOTCAMP -->
-            @elseif($course->course_type_id == 3 && count($course->bootcampSchedules) != 0)
-                @foreach($bootcamp_applications->where('course_id',$course->id) as $bootcamp)
-                    @php
-                    $date = explode(' ', $course->bootcampSchedules[0]->date_time);
-                    @endphp
-                    <!-- IF CURRENT DATE HAS NOT PASSED EVENT DATE AND THE COURSE IS BOOTCAMP -->
-                    @if($today[0] <= $date[0])
-                    <div class="col-12 p-0">
-                        <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex">
-                            <div class="container-image-card">
-                                <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                                <div class="top-left card-tag small-text" >Bootcamp</div>
-                            </div>           
-                            <div style="display:flex;justify-content:space-between">
-                                <div class="right-section" style="width:37vw">
-                                    <div>
-                                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                                        @foreach($course->teachers as $teacher)
-                                            <span style="font-family:Rubik Bold">
-                                                @if($loop->last && count($course->teachers) != 1)
-                                                dan
-                                                @elseif(!$loop->first)
-                                                ,
-                                                @endif
-                                                {{$teacher->name}}
-                                            </span>
-                                        @endforeach
-                                        </p>   
-                                        <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">
-                                        @if($course->price == 0)
-                                        FREE
-                                        @else
-                                        Rp. {{ number_format($course->price, 0, ',', ',') }}
-                                        @endif
-                                        </p>
-                                        <div style="display: flex;align-items:center">
-                                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">
-                                            Start on <span style="font-family: Rubik Medium;"> {{$date[0]}}</span> atas nama
-                                            <span style="font-family: Rubik Medium;">{{$bootcamp->name}}</span>
-                                            </p>
-                                            <a href="#bootcamp-detail" style="margin-left: 0.5vw;">
-                                                <i class="fas fa-question-circle normal-text"
-                                                @if($course->price == 0)
-                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , '{{$bootcamp->email}}','{{$bootcamp->phone_no}}','-','-','{{$bootcamp->address}}')" 
-                                                @else
-                                                onclick="passBootcampData('{{$bootcamp->course->title}}','{{$bootcamp->name}}' , '{{$bootcamp->email}}','{{$bootcamp->phone_no}}','{{$bootcamp->bank}}','{{$bootcamp->bank_account_number}}','{{$bootcamp->address}}')" 
-                                                @endif
-                                                
-                                                style="color:#2B6CAA;"></i>
-                                            </a>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                                    <a href="/bootcamp/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Detail</a>
-                                    <a href="/dashboard" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                    @endif
-                @endforeach
-        @endif
+            @endif
         @endforeach
-        <!--
-        <div class="col-12 p-0">
-            <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu','_self');">
-                <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" >Workshop</div>
-                </div>           
-                <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:37vw">
-                        <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">19 August 2021  |  09:00 - 12:00</p>
-                        </div>
-                    </div>
-                    <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <a href="/online-course/sertifikat-menjadi-komedian-lucu" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw">View Details</a>
-                        <a href="" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
-                    </div>
-                </div> 
+        
+        <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+            <div class="pagination">
+                <a href="#"><i class="fas fa-angle-left"></i></a>
+                <a href="#">1</a>
+                <a href="#" class="active">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#"><i class="fas fa-angle-right"></i></a>
             </div>
         </div>
-        -->
-                            
     </div>
     <!-- End of Live Pelatihan Content -->
 
@@ -893,34 +811,16 @@
         </div>
         @endif
         @endforeach
-        <!--
-        <div class="col-12 p-0">
-            <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1','_self');">
-                <div class="container-image-card">
-                    <img src="/assets/images/client/our-programs-card-dummy.png" style="width:15vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" >Workshop</div>
-                </div>           
-                <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:70%">
-                        <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How to be funny</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Mr. Raditya Dika</p>   
-                            <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;margin-bottom:0px;">This is a description for the lesson and this is a brief description. The maximum length has been set accordingly.</p>
-                        </div>
-                    </div>
-                    <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <div class="progress progress-bar-vertical">
-                            <div class="progress-bar-red" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 50%;">
-                            50%
-                            </div>
-                        </div>
-                        <a href="/online-course/sertifikat-menjadi-komedian-lucu/learn/lecture/1" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
-                    </div>
-                </div> 
+        <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+            <div class="pagination">
+                <a href="#"><i class="fas fa-angle-left"></i></a>
+                <a href="#">1</a>
+                <a href="#" class="active">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#"><i class="fas fa-angle-right"></i></a>
             </div>
         </div>
-        -->
     </div>
     <!-- End of Pelatihan Aktif Content -->
 
@@ -982,7 +882,7 @@
                     </div> 
                 </div>
             </div>
-            @else
+            @elseif($course->course_type_id ==2)
             <div class="col-12 p-0">
                 <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" @if(count($course->sections ) != 0) onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');" @endif>
                     <div class="container-image-card">
@@ -1010,6 +910,7 @@
                         </div>
                         <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                             <i class="fas fa-check-circle big-heading"></i>
+                            @if(!$course->pivot->isAbsent)
                             <form action="{{route('print_certificate')}}" method="post">
                             @csrf
                                 <input type="hidden" name="name" value="{{auth()->user()->name}}">
@@ -1017,6 +918,10 @@
                                 <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
 
                             </form>
+                            @else
+                            <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Kelas Selesai</button>
+
+                            @endif
                         </div>
                     </div> 
                 </div>
@@ -1025,7 +930,16 @@
         @endif
         @endforeach
         
-
+        <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+            <div class="pagination-client">
+                <a href="#"><i class="fas fa-angle-left"></i></a>
+                <a href="#">1</a>
+                <a href="#" class="active">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#"><i class="fas fa-angle-right"></i></a>
+            </div>
+        </div>
     </div>
     <!-- End of Pelatihan Selesai Content -->
 </div>

@@ -300,4 +300,11 @@ class WokiCourseController extends Controller
         $result = CourseHelper::setPublishStatusToOppositeById($id);
         return redirect()->route('admin.woki-courses.index')->with('message', $result['message']);
     }
+
+    // Change the isabsent status of the users to its opposite.
+    public function setIsAbsentStatusToOpposite(Request $request, $course_id) {
+        $user_id = $request->user_id;
+        $result = CourseHelper::setIsAbsentStatusToOpposite($course_id,$user_id);
+        return redirect()->route('admin.woki-courses.show',$course_id)->with('message', $result['message']);
+    }
 }
