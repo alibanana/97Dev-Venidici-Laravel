@@ -128,7 +128,8 @@
     </div> -->
     @if( !Request::is('login') )
     <!-- START OF MOBILE NAVBAR -->
-    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999">
+    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;position: sticky;
+  top: 0;z-index: 10;">
       <div >
         <!--    Made by Erik Terwan    -->
         <!--   24th of November 2015   -->
@@ -233,7 +234,7 @@
 
           <div style="display: flex;">
             <a id="cart_icon" class="navbar-item" href="/cart" style="color:#FFFFFF">
-              <span class="counter fa-stack has-badge" data-count="1">
+              <span class="counter fa-stack has-badge" data-count="{{$cart_count}}">
                 <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart')) navbar-item-active-mobile @endif"></i>
               </span>
             </a>
@@ -573,17 +574,23 @@
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Social</p>
+            
+            
             <div style="margin-top:1vw">
-              <a href="https://twitter.com/venidici_id?lang=en" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-twitter bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Twitter</span></a>
+              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-instagram-square bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Instagram</span></a>
+            </div>
+            
+            <div style="margin-top:1vw">
+              <a href="https://www.tiktok.com/@venidici.id" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-tiktok bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Tiktok</span></a>
             </div>
             <div style="margin-top:1vw">
-              <a href="https://www.facebook.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-facebook bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Facebook</span></a>
+              <a href="https://twitter.com/venidici_id" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-twitter bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Twitter</span></a>
             </div>
             <div style="margin-top:1vw">
-              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-instagram bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Instagram</span></a>
+              <a href="https://www.linkedin.com/company/venidiciindonesia/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-linkedin bigger-text" style="color:#0879C0"></i><span style="margin-left:1vw">Linkedin</span></a>
             </div>
             <div style="margin-top:1vw">
-              <a href="https://www.instagram.com/venidici.id/" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-whatsapp bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
+              <a href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none"><i class="fab fa-whatsapp-square bigger-text" style="color:#0879C0"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
             </div>
           </div>
 
@@ -635,6 +642,8 @@
       </div>
     </div>
     <!-- END OF FOOTER DESKTOP-->
+
+
     <!-- START OF FOOTER MOBILE -->
     <div class="row m-0 page-container footer-mobile" style="padding-top:5vw;padding-bottom:8vw;display:none">
       <div class="col-12">
@@ -678,17 +687,23 @@
           <div>
 
             <p style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Social</p>
+            
+
             <div style="">
-              <a href="https://twitter.com/venidici_id?lang=en" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-twitter " style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Twitter</span></a>
+              <a href="https://www.instagram.com/venidici.id/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-instagram-square bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1.15vw">Instagram</span></a>
+            </div>
+            
+            <div style="">
+              <a href="https://www.tiktok.com/@venidici.id" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-tiktok bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Tiktok</span></a>
             </div>
             <div style="">
-              <a href="https://www.facebook.com/venidici.id/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-facebook " style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Facebook</span></a>
+              <a href="https://twitter.com/venidici_id" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-twitter bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Twitter</span></a>
             </div>
             <div style="">
-              <a href="https://www.instagram.com/venidici.id/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-instagram " style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1.15vw">Instagram</span></a>
+              <a href="https://www.linkedin.com/company/venidiciindonesia/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-linkedin bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Linkedin</span></a>
             </div>
             <div style="">
-              <a href="https://www.instagram.com/venidici.id/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-whatsapp " style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
+              <a href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-whatsapp-square bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
             </div>
           </div>
         </div>

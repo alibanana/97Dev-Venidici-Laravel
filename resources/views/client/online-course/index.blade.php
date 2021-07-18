@@ -177,7 +177,7 @@ END OF OUR PROGRAMS SECTION -->
 <!-- START OF COURSE LIST SECTION -->
 <div class="row m-0 page-container" id="search-course-section" style="padding-top:4vw;padding-bottom:8vw">   
     <div class="col-12 p-0" style="text-align:center">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Find your online course here!</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Find your Skill Snacks here!</p>
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">

@@ -78,7 +78,7 @@
                     <div style="margin-top:1.5vw;background: #2B6CAA;border-radius: 10px;display:flex;align-items:center;justify-content:space-between;padding:1vw">
                         <div style="display:flex;align-items:center">
                             <img src="/assets/images/icons/blue_bug_icon.png" style="height:2vw" class="img-fluid" alt="">
-                            <p class="bigger-text" style="font-family: Rubik Medium;margin-left:1vw;color:#3B3C43;margin-bottom:0px;color:#FFFFFF">Explore more courses on <span style="font-family:Rubik Bold">Online Course</span></p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;margin-left:1vw;color:#3B3C43;margin-bottom:0px;color:#FFFFFF">Explore more courses on <span style="font-family:Rubik Bold">Skill Snack</span></p>
                         </div>
                         <i class="fas fa-arrow-right bigger-text" style="color:#FFFFFF"></i>
                     </div>
