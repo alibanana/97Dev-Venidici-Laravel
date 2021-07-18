@@ -194,6 +194,11 @@
                 -->
                 <tr>
                   <td  style="padding-top:4vw">
+                  <a href="/" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Bootcamp</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
                   <a href="/community" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Community</a>
                   </td>
                 </tr>
@@ -258,6 +263,7 @@
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
         <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') || Request::is('bootcamp') || Request::is('bootcamp/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <!--<a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>-->
+        <a href="/" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Bootcamp</a>
         <a href="/community" class="normal-text navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Log In</a>
