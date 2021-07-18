@@ -55,6 +55,7 @@ class DashboardController extends Controller
         // if($agent->isPhone()){
         //     return view('client/mobile/under-construction');
         // }
+
         $this->resetNavbarData();
 
         $notifications = $this->notifications;
@@ -62,37 +63,44 @@ class DashboardController extends Controller
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
         
-        $orders = Order::whereHas('invoice', function ($query){
-            $query->where(
-                [
-                    ['status', '=', 'paid'],
-                    ['user_id', '=', auth()->user()->id],
-                ],
-            )->orWhere(
-                [
-                    ['status', '=', 'completed'],
-                    ['user_id', '=', auth()->user()->id],
-                ],
-            );
-                })->orderBy('orders.created_at', 'desc')->get();
-        $bootcamp_applications = BootcampApplication::whereHas('invoice', function($query){
-            $query->where('status', 'paid')->orWhere('status', 'completed');
-        })->orderBy('bootcamp_applications.created_at','desc')->get();
+        // $orders = Order::whereHas('invoice', function ($query){
+        //     $query->where(
+        //         [
+        //             ['status', '=', 'paid'],
+        //             ['user_id', '=', auth()->user()->id],
+        //         ],
+        //     )->orWhere(
+        //         [
+        //             ['status', '=', 'completed'],
+        //             ['user_id', '=', auth()->user()->id],
+        //         ],
+        //     );
+        //         })->orderBy('orders.created_at', 'desc')->get();
+                
+        // *Bootcamp not included for now*
+        // $bootcamp_applications = BootcampApplication::whereHas('invoice', function($query){
+        //     $query->where('status', 'paid')->orWhere('status', 'completed');
+        // })->orderBy('bootcamp_applications.created_at','desc')->get();
+
         $interests = Hashtag::all();
+        $usableStarsCount = Helper::getUsableStars(auth()->user());     
 
-        $usableStarsCount = Helper::getUsableStars(auth()->user());       
-        $mytime = Carbon::now();
-        $mytime->setTimezone('Asia/Phnom_Penh');
-        $today = explode(' ', $mytime);
-        //check live woki and change status to complete if date time has passed
-        foreach(auth()->user()->courses->where('course_type_id',2) as $course){
+        $mytime = Carbon::now()->setTimezone('Asia/Phnom_Penh');
+
+        // Check live woki and change status to complete if date time has passed
+        foreach (auth()->user()->courses->where('course_type_id', 2) as $course) {
             $woki_date = $course->wokiCourseDetail->event_date . ' ' .$course->wokiCourseDetail->end_time;
-
             if ($mytime >= $woki_date) {
                 $course->pivot->status = 'completed';
                 $course->pivot->save();
             }
         }
+
+        // Get dashboardLiveWorkshopData
+        $liveWorkshopAmountPerPage = 4;
+        $liveWorkshopPage = $request->has('liveWorkshopPage') ? $request->liveWorkshopPage : 1;
+        $liveWorkshopPaginationData =
+            CourseHelper::getDashboardLiveCoursesDataWithPagination($liveWorkshopAmountPerPage, $liveWorkshopPage);
 
 		// Get courses suggestions.
         $courseSuggestions = CourseHelper::getCourseSuggestion(4);
@@ -110,12 +118,15 @@ class DashboardController extends Controller
             else
                 $cities = null;
         }
-        if($agent->isPhone()){
-            return view('client/mobile/user-dashboard',compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews','bootcamp_applications'));
-        }
+
+        if($agent->isPhone())
+            return view('client/mobile/user-dashboard',
+                compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications',
+                    'usableStarsCount', 'liveWorkshopPaginationData', 'courseSuggestions', 'footer_reviews'));
 
         return view('client/user-dashboard',
-            compact('provinces', 'cities', 'cart_count', 'transactions', 'orders', 'interests', 'informations', 'notifications', 'usableStarsCount', 'courseSuggestions', 'footer_reviews','bootcamp_applications'));
+            compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications',
+                'usableStarsCount', 'liveWorkshopPaginationData', 'courseSuggestions', 'footer_reviews'));
     }
 
     public function update_shipping(Request $request,$id)

@@ -314,6 +314,26 @@ class CourseHelper {
         }
     }
 
+    // Function to get live workshop courses in dashboard page. (with pagination)
+    public static function getDashboardLiveCoursesDataWithPagination($amountPerPage, $page) {
+        $liveCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 1)->get()->filter(function ($course) {
+            return $course->pivot->status == 'on-going';
+        })->chunk($amountPerPage);
+
+        $totalPageAmount = $liveCoursesData->count();
+        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
+        $isFirstPage = $page == 1;
+        $isLastPage = $page == $totalPageAmount;
+
+        return [
+            'data' => $isNumberOfPageExceedTotalPageAmount ? $liveCoursesData[0] : $liveCoursesData[$page - 1],
+            'total_page_amount' => $totalPageAmount,
+            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
+            'previous_page' => $isFirstPage ? $page : $page - 1,
+            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
+        ]; 
+    }
+
     // Function to get courses suggestions
     public static function getCourseSuggestion($size, $type = null) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
