@@ -314,46 +314,6 @@ class CourseHelper {
         }
     }
 
-    // Function to get completed course in dashboard page. (with pagination)
-    public static function getDashboardCompletedDataWithPagination($amountPerPage, $page) {
-        $completedData = auth()->user()->courses()->get()->filter(function ($course) {
-            return $course->pivot->status == 'completed';
-        })->chunk($amountPerPage);
-        
-
-        $totalPageAmount = $completedData->count();
-        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
-        $isFirstPage = $page == 1;
-        $isLastPage = $page == $totalPageAmount;
-        return [
-            'data' => $isNumberOfPageExceedTotalPageAmount ? $completedData[0] : $completedData[$page - 1],
-            'total_page_amount' => $totalPageAmount,
-            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
-            'previous_page' => $isFirstPage ? $page : $page - 1,
-            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
-        ]; 
-    }
-
-    // Function to get skill snacks courses in dashboard page. (with pagination)
-    public static function getDashboardSkillSnacksDataWithPagination($amountPerPage, $page) {
-        $skillSnacksData = auth()->user()->courses()->where('course_type_id', 1)->get()->filter(function ($course) {
-            return $course->pivot->status == 'on-going';
-        })->chunk($amountPerPage);
-        
-
-        $totalPageAmount = $skillSnacksData->count();
-        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
-        $isFirstPage = $page == 1;
-        $isLastPage = $page == $totalPageAmount;
-        return [
-            'data' => $isNumberOfPageExceedTotalPageAmount ? $skillSnacksData[0] : $skillSnacksData[$page - 1],
-            'total_page_amount' => $totalPageAmount,
-            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
-            'previous_page' => $isFirstPage ? $page : $page - 1,
-            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
-        ]; 
-    }
-
     // Function to get live workshop courses in dashboard page. (with pagination)
     public static function getDashboardLiveCoursesDataWithPagination($amountPerPage, $page) {
         $liveCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 1)->get()->filter(function ($course) {
@@ -369,6 +329,52 @@ class CourseHelper {
         $isLastPage = $page == $totalPageAmount;
         return [
             'data' => $isNumberOfPageExceedTotalPageAmount ? $liveCoursesData[0] : $liveCoursesData[$page - 1],
+            'total_page_amount' => $totalPageAmount,
+            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
+            'previous_page' => $isFirstPage ? $page : $page - 1,
+            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
+        ]; 
+    }
+
+    // Function to get skill on-going courses in dashboard page. (with pagination)
+    public static function getDashboardOnGoingCoursesDataWithPagination($amountPerPage, $page) {
+        $onGoingCoursesData = auth()->user()->courses()->where('course_type_id', 1)->get()->filter(function ($course) {
+            return $course->pivot->status == 'on-going';
+        })->chunk($amountPerPage);
+        
+        if ($onGoingCoursesData->isEmpty()) 
+            return ['data' => null];
+
+        $totalPageAmount = $onGoingCoursesData->count();
+        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
+        $isFirstPage = $page == 1;
+        $isLastPage = $page == $totalPageAmount;
+
+        return [
+            'data' => $isNumberOfPageExceedTotalPageAmount ? $onGoingCoursesData[0] : $onGoingCoursesData[$page - 1],
+            'total_page_amount' => $totalPageAmount,
+            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
+            'previous_page' => $isFirstPage ? $page : $page - 1,
+            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
+        ]; 
+    }
+
+    // Function to get completed course in dashboard page. (with pagination)
+    public static function getDashboardCompletedCoursesDataWithPagination($amountPerPage, $page) {
+        $completedCoursesData = auth()->user()->courses()->get()->filter(function ($course) {
+            return $course->pivot->status == 'completed';
+        })->chunk($amountPerPage);
+
+        if ($completedCoursesData->isEmpty()) 
+            return ['data' => null];
+
+        $totalPageAmount = $completedCoursesData->count();
+        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
+        $isFirstPage = $page == 1;
+        $isLastPage = $page == $totalPageAmount;
+
+        return [
+            'data' => $isNumberOfPageExceedTotalPageAmount ? $completedCoursesData[0] : $completedCoursesData[$page - 1],
             'total_page_amount' => $totalPageAmount,
             'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
             'previous_page' => $isFirstPage ? $page : $page - 1,
