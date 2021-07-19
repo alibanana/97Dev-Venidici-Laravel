@@ -126,12 +126,12 @@ class CourseSeeder extends Seeder
         $course4->teachers()->attach([3]);
 
         // Bootcamp Courses
-        $course5 = Course::create($courses[4]);
-        $course5->hashtags()->attach([9, 2, 3]);
-        $course5->teachers()->attach([1]);
+        // $course5 = Course::create($courses[4]);
+        // $course5->hashtags()->attach([9, 2, 3]);
+        // $course5->teachers()->attach([1]);
 
-        $course6 = Course::create($courses[5]);
-        $course6->hashtags()->attach([5, 7, 2]);
-        $course6->teachers()->attach([2, 3]);
+        // $course6 = Course::create($courses[5]);
+        // $course6->hashtags()->attach([5, 7, 2]);
+        // $course6->teachers()->attach([2, 3]);
     }
 }
