@@ -291,18 +291,18 @@ class CheckoutController extends Controller
         }
 
         // Create payment object (in xfers) & handle failed.
-        $response = XfersHelper::createPayment($request->only([
-                'grand_total', 'date', 'time', 'bankShortCode'
-            ]), $invoiceNumberResult['data'], $invoice->id);
-        if ($response['status'] == 'Failed') {
-            $invoice->orders()->delete();
-            $invoice->delete();
-            if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect()->route('bootcamp.show', $validated['course_id'])
-                    ->with('message', $response['errors']['message']);
-            else
-                return redirect()->back()->with('message', $response['errors']['message']);
-        }
+        $response = $validated['bankShortCode'] == 'qris' ?
+            XfersHelper::createQRISPayment($request->only(['grand_total', 'date', 'time']), $invoiceNumberResult['data'], $invoice->id) :
+            XfersHelper::createPayment($request->only(['grand_total', 'date', 'time', 'bankShortCode']), $invoiceNumberResult['data'], $invoice->id);
+            if ($response['status'] == 'Failed') {
+                $invoice->orders()->delete();
+                $invoice->delete();
+                if ($request->action == 'createPaymentObjectBootcamp')
+                    return redirect()->route('bootcamp.show', $validated['course_id'])
+                        ->with('message', $response['errors']['message']);
+                else
+                    return redirect()->back()->with('message', $response['errors']['message']);
+        } 
 
         $payment_object = $response['data'];
 
