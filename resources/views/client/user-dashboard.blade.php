@@ -732,8 +732,8 @@
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
-        @foreach(auth()->user()->courses as $course)
-        @if($course->pivot->status == 'on-going' && count($course->sections) != 0)
+        @foreach($skillSnackPaginationData['data'] as $course)
+        @if(count($course->sections) != 0)
         <div class="col-12 p-0">
             <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
                 <div class="container-image-card">
@@ -794,16 +794,18 @@
         </div>
         @endif
         @endforeach
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-            <div class="pagination-client">
-                <a href="#"><i class="fas fa-angle-left"></i></a>
-                <a href="#">1</a>
-                <a href="#" class="active">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#"><i class="fas fa-angle-right"></i></a>
+        @if ($skillSnackPaginationData['total_page_amount'] > 1)
+            <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                <div class="pagination-client">
+                    <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $skillSnackPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                    @for ($i = 1; $i <= $skillSnackPaginationData['total_page_amount']; $i++)
+                        <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $i]) }}"
+                            @if($i == $skillSnackPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                    @endfor
+                    <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $skillSnackPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
     <!-- End of Pelatihan Aktif Content -->
 
@@ -817,13 +819,12 @@
                 $flag = TRUE;
         }
         @endphp
-        @if(!$flag)
+        @if(!$completedPaginationData['data'])
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan selesai belum tersedia.</span></p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
-        @foreach(auth()->user()->courses as $course)
-        @if($course->pivot->status == 'completed')
+        @foreach($completedPaginationData['data'] as $course)
             @if($course->course_type_id ==1)
             <div class="col-12 p-0">
                 <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
@@ -910,19 +911,20 @@
                 </div>
             </div>
             @endif
-        @endif
         @endforeach
         
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-            <div class="pagination-client">
-                <a href="#"><i class="fas fa-angle-left"></i></a>
-                <a href="#">1</a>
-                <a href="#" class="active">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#"><i class="fas fa-angle-right"></i></a>
+        @if ($completedPaginationData['total_page_amount'] > 1)
+            <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                <div class="pagination-client">
+                    <a href="{{ request()->fullUrlWithQuery(['completedPage' => $completedPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                    @for ($i = 1; $i <= $completedPaginationData['total_page_amount']; $i++)
+                        <a href="{{ request()->fullUrlWithQuery(['completedPage' => $i]) }}"
+                            @if($i == $completedPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                    @endfor
+                    <a href="{{ request()->fullUrlWithQuery(['completedPage' => $completedPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
     <!-- End of Pelatihan Selesai Content -->
 </div>

@@ -314,6 +314,46 @@ class CourseHelper {
         }
     }
 
+    // Function to get completed course in dashboard page. (with pagination)
+    public static function getDashboardCompletedDataWithPagination($amountPerPage, $page) {
+        $completedData = auth()->user()->courses()->get()->filter(function ($course) {
+            return $course->pivot->status == 'completed';
+        })->chunk($amountPerPage);
+        
+
+        $totalPageAmount = $completedData->count();
+        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
+        $isFirstPage = $page == 1;
+        $isLastPage = $page == $totalPageAmount;
+        return [
+            'data' => $isNumberOfPageExceedTotalPageAmount ? $completedData[0] : $completedData[$page - 1],
+            'total_page_amount' => $totalPageAmount,
+            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
+            'previous_page' => $isFirstPage ? $page : $page - 1,
+            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
+        ]; 
+    }
+
+    // Function to get skill snacks courses in dashboard page. (with pagination)
+    public static function getDashboardSkillSnacksDataWithPagination($amountPerPage, $page) {
+        $skillSnacksData = auth()->user()->courses()->where('course_type_id', 1)->get()->filter(function ($course) {
+            return $course->pivot->status == 'on-going';
+        })->chunk($amountPerPage);
+        
+
+        $totalPageAmount = $skillSnacksData->count();
+        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
+        $isFirstPage = $page == 1;
+        $isLastPage = $page == $totalPageAmount;
+        return [
+            'data' => $isNumberOfPageExceedTotalPageAmount ? $skillSnacksData[0] : $skillSnacksData[$page - 1],
+            'total_page_amount' => $totalPageAmount,
+            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
+            'previous_page' => $isFirstPage ? $page : $page - 1,
+            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
+        ]; 
+    }
+
     // Function to get live workshop courses in dashboard page. (with pagination)
     public static function getDashboardLiveCoursesDataWithPagination($amountPerPage, $page) {
         $liveCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 1)->get()->filter(function ($course) {
@@ -324,7 +364,6 @@ class CourseHelper {
         $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
         $isFirstPage = $page == 1;
         $isLastPage = $page == $totalPageAmount;
-
         return [
             'data' => $isNumberOfPageExceedTotalPageAmount ? $liveCoursesData[0] : $liveCoursesData[$page - 1],
             'total_page_amount' => $totalPageAmount,
@@ -337,25 +376,18 @@ class CourseHelper {
     // Function to get courses suggestions
     public static function getCourseSuggestion($size, $type = null) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
-        $courses = Course::with('hashtags')
-            ->where('enrollment_status', 'open')
-            ->where('publish_status', 'published')
-            ->where('isDeleted', false)->get()
-            ->sortByDesc(function ($course) use ($userHashtags) {
-                $similarityPoint = 0;
-                foreach ($course->hashtags as $hashtag) {
-                    if (in_array($hashtag->hashtag, $userHashtags))
-                        $similarityPoint++;
-                }
-                return $similarityPoint;
-            });
+        $courses = Course::with('hashtags')->get()->sortByDesc(function ($course) use ($userHashtags) {
+            $similarityPoint = 0;
+            foreach ($course->hashtags as $hashtag) {
+                if (in_array($hashtag->hashtag, $userHashtags))
+                    $similarityPoint++;
+            }
+            return $similarityPoint;
+        });
 
-        if ($type)
-            $courses = $courses->filter(function ($course) use ($type) {
-                return $course->courseType->type == $type;
-            });
-
-        return $courses->filter(fn($course) => !CourseHelper::hasUserBoughtCourse($course))->take($size);
+        return $type ? $courses->filter(function ($course) use ($type) {
+            return $course->courseType->type == $type;
+        })->take($size) : $courses->take($size);
     }
 
     // Private function to check if user's has bought the course.
