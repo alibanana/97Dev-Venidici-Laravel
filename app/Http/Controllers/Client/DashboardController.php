@@ -96,23 +96,27 @@ class DashboardController extends Controller
             }
         }
 
-        // Get dashboardSkillSnacksData
-        $completedAmountPerPage = 1;
-        $completedPage = $request->has('completedPage') ? $request->completedPage : 1;
-        $completedPaginationData =
-            CourseHelper::getDashboardCompletedDataWithPagination($completedAmountPerPage, $completedPage);
-
-        // Get dashboardSkillSnacksData
-        $skillSnacksAmountPerPage = 1;
-        $skillSnackPage = $request->has('skillSnackPage') ? $request->skillSnackPage : 1;
-        $skillSnackPaginationData =
-            CourseHelper::getDashboardSkillSnacksDataWithPagination($skillSnacksAmountPerPage, $skillSnackPage);
-
-        // Get dashboardLiveWorkshopData
-        $liveWorkshopAmountPerPage = 1;
+        // Get dashboardLiveWorkshopData from CourseHelper
+        $liveWorkshopAmountPerPage = 4;
         $liveWorkshopPage = $request->has('liveWorkshopPage') ? $request->liveWorkshopPage : 1;
         $liveWorkshopPaginationData =
             CourseHelper::getDashboardLiveCoursesDataWithPagination($liveWorkshopAmountPerPage, $liveWorkshopPage);
+
+        // Get onGoingCoursesPaginationData from CourseHelper
+        $onGoingCoursesAmountPerPage = 4;
+        $onGoingCoursesPage = $request->has('onGoingCoursesPage') ? $request->onGoingCoursesPage : 1;
+        $onGoingCoursesPaginationData =
+            CourseHelper::getDashboardOnGoingCoursesDataWithPagination($onGoingCoursesAmountPerPage, $onGoingCoursesPage);
+
+        // Get completedCoursesPaginationData from CourseHelper
+        $completedCoursesAmountPerPage = 4;
+        $completedCoursesPage = $request->has('completedCoursesPage') ? $request->completedCoursesPage : 1;
+        $completedCoursesPaginationData =
+            CourseHelper::getDashboardCompletedCoursesDataWithPagination($completedCoursesAmountPerPage, $completedCoursesPage);
+
+        // Get userCourseProgressInPercentage from CourseHelper (On-Progress).
+        $userCourseProgress = CourseHelper::calculateUserOnlineCoursesProgress();
+
 		// Get courses suggestions.
         $courseSuggestions = CourseHelper::getCourseSuggestion(4);
 
@@ -130,14 +134,14 @@ class DashboardController extends Controller
                 $cities = null;
         }
 
-        if($agent->isPhone())
-            return view('client/mobile/user-dashboard',
-                compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications',
-                    'usableStarsCount', 'liveWorkshopPaginationData','skillSnackPaginationData','completedPaginationData' ,'courseSuggestions', 'footer_reviews'));
+        $viewData = compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications', 'usableStarsCount',
+            'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
+            'footer_reviews');
 
-        return view('client/user-dashboard',
-            compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications',
-                'usableStarsCount', 'liveWorkshopPaginationData','skillSnackPaginationData','completedPaginationData', 'courseSuggestions', 'footer_reviews'));
+        if($agent->isPhone())
+            return view('client/mobile/user-dashboard', $viewData);
+
+        return view('client/user-dashboard', $viewData);
     }
 
     public function update_shipping(Request $request,$id)
@@ -190,7 +194,6 @@ class DashboardController extends Controller
         return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil!');
 
     }
-
 
     // Updates Users's data in the database.
     public function update_profile(Request $request, $id)

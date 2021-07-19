@@ -665,265 +665,221 @@
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
-        @endif
-        @foreach($liveWorkshopPaginationData['data'] as $course)
-            <div class="col-12 p-0">
-                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
-                    <div class="container-image-card">
-                        <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                        <div class="top-left card-tag small-text" >Woki</div>
-                    </div>           
-                    <div style="display:flex;justify-content:space-between">
-                        <div class="right-section" style="width:37vw">
-                            <div>
-                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                                @foreach($course->teachers as $teacher)
-                                    <span style="font-family:Rubik Bold">
-                                        @if($loop->last && count($course->teachers) != 1)
-                                        dan
-                                        @elseif(!$loop->first)
-                                        ,
-                                        @endif
-                                        {{$teacher->name}}
-                                    </span>
-                                @endforeach
-                                </p>   
-                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
-                                <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+        @else
+            @foreach($liveWorkshopPaginationData['data'] as $course)
+                <div class="col-12 p-0">
+                    <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
+                        <div class="container-image-card">
+                            <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                            <div class="top-left card-tag small-text" >Woki</div>
+                        </div>           
+                        <div style="display:flex;justify-content:space-between">
+                            <div class="right-section" style="width:37vw">
+                                <div>
+                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                    @foreach($course->teachers as $teacher)
+                                        <span style="font-family:Rubik Bold">
+                                            @if($loop->last && count($course->teachers) != 1)
+                                            dan
+                                            @elseif(!$loop->first)
+                                            ,
+                                            @endif
+                                            {{$teacher->name}}
+                                        </span>
+                                    @endforeach
+                                    </p>   
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
+                                    <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                            <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
-                            <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
-                        </div>
-                    </div> 
+                            <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
+                                <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
-            </div>
-        @endforeach
-
-        @if ($liveWorkshopPaginationData['total_page_amount'] > 1)
-            <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-                <div class="pagination-client">
-                    <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
-                    @for ($i = 1; $i <= $liveWorkshopPaginationData['total_page_amount']; $i++)
-                        <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $i]) }}"
-                            @if($i == $liveWorkshopPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
-                    @endfor
-                    <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+            @endforeach
+            @if ($liveWorkshopPaginationData['total_page_amount'] > 1)
+                <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                    <div class="pagination-client">
+                        <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                        @for ($i = 1; $i <= $liveWorkshopPaginationData['total_page_amount']; $i++)
+                            <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $i]) }}"
+                                @if($i == $liveWorkshopPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                        @endfor
+                        <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                    </div>
                 </div>
-            </div>
+            @endif
         @endif
+        
     </div>
     <!-- End of Live Pelatihan Content -->
 
     <!-- Pelatihan Aktif Content -->
     <div style="padding:0px;display:none" class="user-content wow fadeInLeft" id="pelatihan-aktif">
-        @php
-        $flag = FALSE;
-        foreach(auth()->user()->courses as $course_on_going)
-        {
-            if($course_on_going->pivot->status == 'on-going' && count($course_on_going->sections) != 0)
-                $flag = TRUE;
-        }
-        @endphp
-        @if(!$flag)
+        @if(!$onGoingCoursesPaginationData['data'])
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
-        @endif
-        @foreach($skillSnackPaginationData['data'] as $course)
-        @if(count($course->sections) != 0)
-        <div class="col-12 p-0">
-            <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
-                <div class="container-image-card">
-                    <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                    <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill-Snack @else Woki @endif</div>
-                </div>           
-                <div style="display:flex;justify-content:space-between">
-                    <div class="right-section" style="width:37vw">
-                        <div>
-                            <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                            <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">By 
-                            @foreach($course->teachers as $teacher)
-
-                                @if ($loop->last && count($course->teachers) != 1)
-                                dan
-                                @elseif (!$loop->first)
-                                ,
-                                @endif
-                                {{$teacher->name}}
-                            @endforeach
-                            </p>   
-                            <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
-                            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
-                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
-
-                        </div>
-                    </div>
-                    @php
-                    $section_learned = 0;
-                    $number_of_section = 0;
-                    foreach($course->sections as $section){
-                        foreach($section->sectionContents as $content){
-                            $number_of_section++;
-                            $all_users = explode(',', $content->hasSeen);
-                            foreach($all_users as $user_id)
-                            {
-                                if($user_id == auth()->user()->id)
-                                {
-                                    $section_learned++;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    $percentage = ($section_learned/$number_of_section) * 100
-                    @endphp
-                    <p></p>
-                    <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                        <div class="progress progress-bar-vertical" style="background: rgba(43, 108, 170, 0.3);position:relative">
-                            <p style="position:absolute;left: @if($percentage == 100) 35% @else 40% @endif;top:35%" class="normal-text">{{round($percentage)}}%</p>
-                            <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{round($percentage)}}%;">
+        @else
+            @foreach($onGoingCoursesPaginationData['data'] as $course)
+                <div class="col-12 p-0">
+                    <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
+                        <div class="container-image-card">
+                            <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                            <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill-Snack @else Woki @endif</div>
+                        </div>           
+                        <div style="display:flex;justify-content:space-between">
+                            <div class="right-section" style="width:37vw">
+                                <div>
+                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">By 
+                                    @foreach($course->teachers as $teacher)
+                                        @if ($loop->last && count($course->teachers) != 1)
+                                        dan
+                                        @elseif (!$loop->first)
+                                        ,
+                                        @endif
+                                        {{$teacher->name}}
+                                    @endforeach
+                                    </p>   
+                                    <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
+                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
+                                </div>
                             </div>
-                        </div>
-                        <a href="{{ route('online-course.learn', ['id' => $course->id, 'detail_id' => $course->sections[0]->sectionContents[0]->id]) }}" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
+                            <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                <div class="progress progress-bar-vertical" style="background: rgba(43, 108, 170, 0.3);position:relative">
+                                    <p style="position:absolute;left: @if($userCourseProgress[$course->id] == 100) 35% @else 40% @endif;top:35%" class="normal-text">{{ $userCourseProgress[$course->id] }}%</p>
+                                    <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ $userCourseProgress[$course->id] }}%;">
+                                    </div>
+                                </div>
+                                <a href="{{ route('online-course.learn', ['id' => $course->id, 'detail_id' => $course->sections[0]->sectionContents[0]->id]) }}" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
+                            </div>
+                        </div> 
                     </div>
-                </div> 
-            </div>
-        </div>
-        @endif
-        @endforeach
-        @if ($skillSnackPaginationData['total_page_amount'] > 1)
-            <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-                <div class="pagination-client">
-                    <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $skillSnackPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
-                    @for ($i = 1; $i <= $skillSnackPaginationData['total_page_amount']; $i++)
-                        <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $i]) }}"
-                            @if($i == $skillSnackPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
-                    @endfor
-                    <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $skillSnackPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
                 </div>
-            </div>
+            @endforeach
+            @if ($onGoingCoursesPaginationData['total_page_amount'] > 1)
+                <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                    <div class="pagination-client">
+                        <a href="{{ request()->fullUrlWithQuery(['onGoingCoursesPage' => $onGoingCoursesPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                        @for ($i = 1; $i <= $onGoingCoursesPaginationData['total_page_amount']; $i++)
+                            <a href="{{ request()->fullUrlWithQuery(['onGoingCoursesPage' => $i]) }}"
+                                @if($i == $onGoingCoursesPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                        @endfor
+                        <a href="{{ request()->fullUrlWithQuery(['onGoingCoursesPage' => $onGoingCoursesPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                    </div>
+                </div>
+            @endif
         @endif
     </div>
     <!-- End of Pelatihan Aktif Content -->
 
     <!-- Pelatihan Selesai Content -->
     <div style="padding:0px;display:none;" class="user-content wow fadeInLeft" id="pelatihan-selesai">
-        @php
-        $flag = FALSE;
-        foreach(auth()->user()->courses as $course)
-        {
-            if($course->pivot->status == 'completed')
-                $flag = TRUE;
-        }
-        @endphp
-        @if(!$completedPaginationData['data'])
+        @if(!$completedCoursesPaginationData['data'])
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
-        @endif
-        @foreach($completedPaginationData['data'] as $course)
-            @if($course->course_type_id ==1)
-            <div class="col-12 p-0">
-                <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
-                    <div class="container-image-card">
-                        <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                        <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill Snack @else Woki @endif</div>
-                    </div>           
-                    <div style="display:flex;justify-content:space-between">
-                        <div class="right-section" style="width:37vw">
-                            <div>
-                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                                @foreach($course->teachers as $teacher)
-
-                                    @if ($loop->last && count($course->teachers) != 1)
-                                    dan
-                                    @elseif (!$loop->first)
-                                    ,
+        @else
+            @foreach($completedCoursesPaginationData['data'] as $course)
+                @if($course->course_type_id ==1)
+                    <div class="col-12 p-0">
+                        <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
+                            <div class="container-image-card">
+                                <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                                <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill Snack @else Woki @endif</div>
+                            </div>           
+                            <div style="display:flex;justify-content:space-between">
+                                <div class="right-section" style="width:37vw">
+                                    <div>
+                                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                        @foreach($course->teachers as $teacher)
+                                            @if ($loop->last && count($course->teachers) != 1)
+                                            dan
+                                            @elseif (!$loop->first)
+                                            ,
+                                            @endif
+                                            {{$teacher->name}}
+                                        @endforeach
+                                        </p>   
+                                        <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
+                                        <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
+                                        <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
+                                    </div>
+                                </div>
+                                <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                    <i class="fas fa-check-circle big-heading"></i>
+                                    <form action="{{route('print_certificate')}}" method="post">
+                                    @csrf
+                                        <input type="hidden" name="name" value="{{auth()->user()->name}}">
+                                        <input type="hidden" name="course_id" value="{{$course->id}}">
+                                        <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
+                                    </form>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                @elseif($course->course_type_id ==2)
+                    <div class="col-12 p-0">
+                        <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" @if(count($course->sections ) != 0) onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');" @endif>
+                            <div class="container-image-card">
+                                <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                                <div class="top-left card-tag small-text" >Woki</div>
+                            </div>           
+                            <div style="display:flex;justify-content:space-between">
+                                <div class="right-section" style="width:36.8vw">
+                                    <div>
+                                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                        @foreach($course->teachers as $teacher)
+                                            @if ($loop->last && count($course->teachers) != 1)
+                                            dan
+                                            @elseif (!$loop->first)
+                                            ,
+                                            @endif
+                                            {{$teacher->name}}
+                                        @endforeach
+                                        </p>   
+                                        <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
+                                        <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
+                                    </div>
+                                </div>
+                                <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                    <i class="fas fa-check-circle big-heading"></i>
+                                    @if(!$course->pivot->isAbsent)
+                                    <form action="{{route('print_certificate')}}" method="post">
+                                    @csrf
+                                        <input type="hidden" name="name" value="{{auth()->user()->name}}">
+                                        <input type="hidden" name="course_id" value="{{$course->id}}">
+                                        <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
+                                    </form>
+                                    @else
+                                    <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Kelas Selesai</button>
                                     @endif
-                                    {{$teacher->name}}
-                                @endforeach
-                                </p>   
-                                <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
-                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
-                                <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
-
-                            </div>
+                                </div>
+                            </div> 
                         </div>
-                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                            <i class="fas fa-check-circle big-heading"></i>
-                            <form action="{{route('print_certificate')}}" method="post">
-                            @csrf
-                                <input type="hidden" name="name" value="{{auth()->user()->name}}">
-                                <input type="hidden" name="course_id" value="{{$course->id}}">
-                                <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
-
-                            </form>
-                        </div>
-                    </div> 
+                    </div>
+                @endif
+            @endforeach
+            @if ($completedCoursesPaginationData['total_page_amount'] > 1)
+                <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                    <div class="pagination-client">
+                        <a href="{{ request()->fullUrlWithQuery(['completedCoursesPage' => $completedCoursesPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                        @for ($i = 1; $i <= $completedCoursesPaginationData['total_page_amount']; $i++)
+                            <a href="{{ request()->fullUrlWithQuery(['completedCoursesPage' => $i]) }}"
+                                @if($i == $completedCoursesPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                        @endfor
+                        <a href="{{ request()->fullUrlWithQuery(['completedCoursesPage' => $completedCoursesPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                    </div>
                 </div>
-            </div>
-            @elseif($course->course_type_id ==2)
-            <div class="col-12 p-0">
-                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" @if(count($course->sections ) != 0) onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');" @endif>
-                    <div class="container-image-card">
-                        <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                        <div class="top-left card-tag small-text" >Woki</div>
-                    </div>           
-                    <div style="display:flex;justify-content:space-between">
-                        <div class="right-section" style="width:36.8vw">
-                            <div>
-                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                                @foreach($course->teachers as $teacher)
-
-                                    @if ($loop->last && count($course->teachers) != 1)
-                                    dan
-                                    @elseif (!$loop->first)
-                                    ,
-                                    @endif
-                                    {{$teacher->name}}
-                                @endforeach
-                                </p>   
-                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
-                                <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
-                            </div>
-                        </div>
-                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                            <i class="fas fa-check-circle big-heading"></i>
-                            @if(!$course->pivot->isAbsent)
-                            <form action="{{route('print_certificate')}}" method="post">
-                            @csrf
-                                <input type="hidden" name="name" value="{{auth()->user()->name}}">
-                                <input type="hidden" name="course_id" value="{{$course->id}}">
-                                <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
-
-                            </form>
-                            @else
-                            <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Kelas Selesai</button>
-
-                            @endif
-                        </div>
-                    </div> 
-                </div>
-            </div>
             @endif
-        @endforeach
-        
-        @if ($completedPaginationData['total_page_amount'] > 1)
-            <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-                <div class="pagination-client">
-                    <a href="{{ request()->fullUrlWithQuery(['completedPage' => $completedPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
-                    @for ($i = 1; $i <= $completedPaginationData['total_page_amount']; $i++)
-                        <a href="{{ request()->fullUrlWithQuery(['completedPage' => $i]) }}"
-                            @if($i == $completedPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
-                    @endfor
-                    <a href="{{ request()->fullUrlWithQuery(['completedPage' => $completedPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
-                </div>
-            </div>
         @endif
     </div>
     <!-- End of Pelatihan Selesai Content -->
