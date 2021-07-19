@@ -96,12 +96,23 @@ class DashboardController extends Controller
             }
         }
 
+        // Get dashboardSkillSnacksData
+        $completedAmountPerPage = 1;
+        $completedPage = $request->has('completedPage') ? $request->completedPage : 1;
+        $completedPaginationData =
+            CourseHelper::getDashboardCompletedDataWithPagination($completedAmountPerPage, $completedPage);
+
+        // Get dashboardSkillSnacksData
+        $skillSnacksAmountPerPage = 1;
+        $skillSnackPage = $request->has('skillSnackPage') ? $request->skillSnackPage : 1;
+        $skillSnackPaginationData =
+            CourseHelper::getDashboardSkillSnacksDataWithPagination($skillSnacksAmountPerPage, $skillSnackPage);
+
         // Get dashboardLiveWorkshopData
-        $liveWorkshopAmountPerPage = 4;
+        $liveWorkshopAmountPerPage = 1;
         $liveWorkshopPage = $request->has('liveWorkshopPage') ? $request->liveWorkshopPage : 1;
         $liveWorkshopPaginationData =
             CourseHelper::getDashboardLiveCoursesDataWithPagination($liveWorkshopAmountPerPage, $liveWorkshopPage);
-
 		// Get courses suggestions.
         $courseSuggestions = CourseHelper::getCourseSuggestion(4);
 
@@ -122,11 +133,11 @@ class DashboardController extends Controller
         if($agent->isPhone())
             return view('client/mobile/user-dashboard',
                 compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications',
-                    'usableStarsCount', 'liveWorkshopPaginationData', 'courseSuggestions', 'footer_reviews'));
+                    'usableStarsCount', 'liveWorkshopPaginationData','skillSnackPaginationData','completedPaginationData' ,'courseSuggestions', 'footer_reviews'));
 
         return view('client/user-dashboard',
             compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications',
-                'usableStarsCount', 'liveWorkshopPaginationData', 'courseSuggestions', 'footer_reviews'));
+                'usableStarsCount', 'liveWorkshopPaginationData','skillSnackPaginationData','completedPaginationData', 'courseSuggestions', 'footer_reviews'));
     }
 
     public function update_shipping(Request $request,$id)

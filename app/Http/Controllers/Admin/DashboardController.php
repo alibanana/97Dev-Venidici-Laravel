@@ -12,6 +12,9 @@ use App\Models\Invoice;
 use App\Models\Order;
 use Carbon\Carbon;
 
+use App\Models\UserDetail;
+use App\Models\Hashtag;
+
 /*
 |--------------------------------------------------------------------------
 | Admin PagesController Class.
@@ -96,5 +99,21 @@ class DashboardController extends Controller
             'today_online_course_sold_qty', 'today_online_course_earnings', 'total_online_course_sold_qty', 'total_online_course_earnings',
             'today_woki_sold_qty', 'today_woki_earnings', 'total_woki_sold_qty', 'total_woki_earnings'
         ));
+    }
+
+    public function signUpGeneralInfoIndex(){
+    
+        return view('admin/auth/signup');
+    }
+
+    public function signUpInterestIndex(Request $request){
+
+        
+
+        $interests = Hashtag::all();
+
+
+        return view('admin/auth/signup-interests' , compact('interests'));
+
     }
 }

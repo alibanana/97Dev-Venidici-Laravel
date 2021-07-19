@@ -6,7 +6,7 @@
 @if($invoice->status == 'pending')
 <!-- START OF POPUP VA EXPLANATION-->
 <div id="pembayaran-va" class="overlay" style="overflow:scroll">
-    <div class="popup">
+    <div class="popup" style="width: 50%;">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
@@ -293,6 +293,27 @@
             </div>
             
             <!-- END OF ONE PAYMENT METHOD -->  
+
+            <!-- START OF QR PAYMENT METHOD
+            <div style="display:flex;margin-top:2vw">
+
+                <div class="payment-method-card-active-left" style="width:100%" >
+                    <div>
+                        <p class="small-text" style="margin-bottom:0.5vw;font-family:Rubik Medium;color:#3B3C43">QRIS Payment</p>
+                        <div style="display:flex;justify-content:center">
+                            <img src="/assets/images/client/QR_Code.png" style="width:10vw" alt="" class="img-fluid">                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-method-card-active-right" style="display: flex;flex-direction: column;justify-content: center;" >
+                    <a href="#pembayaran-va">
+                        <i class="fas fa-question-circle sub-description" style="color:#FFFFFF;"></i>
+                    </a>
+                </div>
+                
+            </div>
+            
+            END OF QR PAYMENT METHOD -->  
             @endif
             @if($cart->withArtOrNo)
             <!-- START OF SHIPPING ADDRESS -->

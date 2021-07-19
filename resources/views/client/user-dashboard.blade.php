@@ -297,8 +297,9 @@
         <div class="content" style="padding:2vw">
             @if (session()->has('success'))
                 <div class="p-3 mt-2 mb-0">
-                    <div class="alert alert-success alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
-                        {{ session('success') }}
+                    <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:1vw;width:20vw"role="alert">
+                    {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
             @elseif (session()->has('danger'))
@@ -385,7 +386,7 @@
                         <!-- START OF ONE PROGRESS BAR -->
                         <div class="d-block w-100" style="padding:0vw 1vw">
                             @if(auth()->user()->userDetail->total_stars >= 100)
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Star Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #F4C257;"></div>
                             </div>
@@ -393,7 +394,7 @@
                             @php
                                 $percentCar = ( (auth()->user()->userDetail->total_stars - 20) / 80 ) * 100 ;
                             @endphp
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 100 - auth()->user()->userDetail->total_stars}} Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 100 - auth()->user()->userDetail->total_stars}} Stars Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{round($percentCar)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($percentCar)}}%; background-color: #F4C257;"></div>
                             </div>
@@ -415,13 +416,13 @@
                         <!-- START OF ONE PROGRESS BAR -->
                         <div class="d-block w-100" style="padding:0vw 1vw">
                             @if(auth()->user()->userDetail->total_stars >= 280)
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">0 Star Left</p>
                             <div class="progress" style="border-radius:10px !important;height:0.8vw">
                                 
                                 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; background-color: #F4C257;"></div>
                             </div>
                             @else
-                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 280 - auth()->user()->userDetail->total_stars}} Points Left</p>
+                            <p class="small-text" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:1vw">{{ 280 - auth()->user()->userDetail->total_stars}} Stars Left</p>
                             @php
                                 $percent = ( (auth()->user()->userDetail->total_stars - 100) / 180 ) * 100 ;
                             @endphp
@@ -447,7 +448,7 @@
 
                     <div class="faq-card" style="margin-top:3vw;background-color:#F9F9F9">
                         <div style="display:flex;align-items:center;justify-content:space-between;">
-                            <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How Venidici Point System Works?</p>
+                            <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How Venidici Star System Works?</p>
                             <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseHowItWorks" role="button" aria-expanded="false" aria-controls="collapseHowItWorks">
                                 <i class="fas fa-chevron-down"></i>
                             </p>                                    
@@ -732,8 +733,8 @@
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
-        @foreach(auth()->user()->courses as $course)
-        @if($course->pivot->status == 'on-going' && count($course->sections) != 0)
+        @foreach($skillSnackPaginationData['data'] as $course)
+        @if(count($course->sections) != 0)
         <div class="col-12 p-0">
             <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
                 <div class="container-image-card">
@@ -794,16 +795,18 @@
         </div>
         @endif
         @endforeach
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-            <div class="pagination">
-                <a href="#"><i class="fas fa-angle-left"></i></a>
-                <a href="#">1</a>
-                <a href="#" class="active">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#"><i class="fas fa-angle-right"></i></a>
+        @if ($skillSnackPaginationData['total_page_amount'] > 1)
+            <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                <div class="pagination-client">
+                    <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $skillSnackPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                    @for ($i = 1; $i <= $skillSnackPaginationData['total_page_amount']; $i++)
+                        <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $i]) }}"
+                            @if($i == $skillSnackPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                    @endfor
+                    <a href="{{ request()->fullUrlWithQuery(['skillSnackPage' => $skillSnackPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
     <!-- End of Pelatihan Aktif Content -->
 
@@ -817,13 +820,12 @@
                 $flag = TRUE;
         }
         @endphp
-        @if(!$flag)
+        @if(!$completedPaginationData['data'])
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan selesai belum tersedia.</span></p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
         @endif
-        @foreach(auth()->user()->courses as $course)
-        @if($course->pivot->status == 'completed')
+        @foreach($completedPaginationData['data'] as $course)
             @if($course->course_type_id ==1)
             <div class="col-12 p-0">
                 <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->id}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->id }}','_self');">
@@ -910,19 +912,20 @@
                 </div>
             </div>
             @endif
-        @endif
         @endforeach
         
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-            <div class="pagination-client">
-                <a href="#"><i class="fas fa-angle-left"></i></a>
-                <a href="#">1</a>
-                <a href="#" class="active">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#"><i class="fas fa-angle-right"></i></a>
+        @if ($completedPaginationData['total_page_amount'] > 1)
+            <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                <div class="pagination-client">
+                    <a href="{{ request()->fullUrlWithQuery(['completedPage' => $completedPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                    @for ($i = 1; $i <= $completedPaginationData['total_page_amount']; $i++)
+                        <a href="{{ request()->fullUrlWithQuery(['completedPage' => $i]) }}"
+                            @if($i == $completedPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                    @endfor
+                    <a href="{{ request()->fullUrlWithQuery(['completedPage' => $completedPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
     <!-- End of Pelatihan Selesai Content -->
 </div>
