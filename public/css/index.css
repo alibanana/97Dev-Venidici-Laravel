@@ -1679,6 +1679,7 @@ html, body {
     width:18vw;
 }
 
+
 @media only screen and (max-width: 767px) {
     /* notifaction popup mobile */
     .popup-notif{
@@ -1760,9 +1761,13 @@ html, body {
     .display{
         display: none;
     }
-    .mobile-cart-display{
-        display: block;
+    .mobile-display{
+        display: block !important;
     }
+    .desktop-display{
+        display:  none !important;
+    }
+
     .qty-width{
         width:4.5vw !important;
     }
