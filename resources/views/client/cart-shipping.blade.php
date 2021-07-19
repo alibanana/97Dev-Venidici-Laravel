@@ -73,7 +73,7 @@
                 </div>
                 <!-- END OF ONE PAYMENT METHOD -->
                 <!-- START OF ONE PAYMENT METHOD -->
-                <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_5"  onclick="togglePayment(event, 'checked_icon_5','q')">
+                <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_5"  onclick="togglePayment(event, 'checked_icon_5','qris')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
                             <img src="/assets/images/client/QRIS_LOGO.png" style="width:4vw;height:3vw;object-fit:contain;border-radius:10px" class="img-fluid image-bank" alt="">
