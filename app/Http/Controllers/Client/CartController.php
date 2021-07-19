@@ -140,7 +140,7 @@ class CartController extends Controller
 
         // Calculate discounted price if promotion exists in the session.
         $discounted_price = session()->get('promotion_code') ?
-            $this->getCalculatedDiscountedPrice(session()->get('promotion_code'), $shipping_cost) : 0;
+            $this->getCalculatedDiscountedPrice(session()->get('promotion_code'), $shipping_cost, $sub_total) : 0;
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
@@ -273,7 +273,7 @@ class CartController extends Controller
     }
 
     // Function to calculate discounted price.
-    private function getCalculatedDiscountedPrice(Promotion $promotionObject, $shipping_cost) {
+    private function getCalculatedDiscountedPrice(Promotion $promotionObject, $shipping_cost, $sub_total) {
         // If the promotion is for shipping, discounted_price amount should be calculated from the
         // shipping_cost, if not then its should be calculated from the sub_total. 
         $toBeDiscountedNominal = $promotionObject->promo_for == 'shipping' ?

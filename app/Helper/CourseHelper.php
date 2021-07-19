@@ -314,11 +314,33 @@ class CourseHelper {
         }
     }
 
+    // Function to get live workshop courses in dashboard page. (with pagination)
+    public static function getDashboardLiveCoursesDataWithPagination($amountPerPage, $page) {
+        $liveCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 1)->get()->filter(function ($course) {
+            return $course->pivot->status == 'on-going';
+        })->chunk($amountPerPage);
+
+        $totalPageAmount = $liveCoursesData->count();
+        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
+        $isFirstPage = $page == 1;
+        $isLastPage = $page == $totalPageAmount;
+
+        return [
+            'data' => $isNumberOfPageExceedTotalPageAmount ? $liveCoursesData[0] : $liveCoursesData[$page - 1],
+            'total_page_amount' => $totalPageAmount,
+            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
+            'previous_page' => $isFirstPage ? $page : $page - 1,
+            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
+        ]; 
+    }
+
     // Function to get courses suggestions
     public static function getCourseSuggestion($size, $type = null) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
         $courses = Course::with('hashtags')
-            ->where('enrollment_status', 'open')->where('publish_status', 'published')->where('isDeleted', false)->get()
+            ->where('enrollment_status', 'open')
+            ->where('publish_status', 'published')
+            ->where('isDeleted', false)->get()
             ->sortByDesc(function ($course) use ($userHashtags) {
                 $similarityPoint = 0;
                 foreach ($course->hashtags as $hashtag) {
@@ -328,8 +350,20 @@ class CourseHelper {
                 return $similarityPoint;
             });
 
-        return $type ? $courses->filter(function ($course) use ($type) {
-            return $course->courseType->type == $type;
-        })->take($size) : $courses->take($size);
+        if ($type)
+            $courses = $courses->filter(function ($course) use ($type) {
+                return $course->courseType->type == $type;
+            });
+
+        return $courses->filter(fn($course) => !CourseHelper::hasUserBoughtCourse($course))->take($size);
+    }
+
+    // Private function to check if user's has bought the course.
+    private static function hasUserBoughtCourse($course) {
+        foreach (auth()->user()->courses as $userCourse) {
+            if ($userCourse->id == $course->id)
+                return true;
+        }
+        return false;
     }
 }
