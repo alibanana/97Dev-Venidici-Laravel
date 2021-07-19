@@ -358,7 +358,9 @@ class CourseHelper {
                 return $course->courseType->type == $type;
             });
 
-        return $courses->filter(fn($course) => !CourseHelper::hasUserBoughtCourse($course))->take($size);
+        return $courses->filter(function ($course) {
+            return !CourseHelper::hasUserBoughtCourse($course);
+        })->take($size);
     }
 
     // Private function to check if user's has bought the course.
