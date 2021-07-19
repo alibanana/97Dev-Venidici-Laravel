@@ -382,6 +382,34 @@ class CourseHelper {
         ]; 
     }
 
+    // Calculate user's online-course progress in percentage.
+    public static function calculateUserOnlineCoursesProgress() {
+        $onGoingCourses = auth()->user()->courses()->where('course_type_id', 1)->get()->filter(function ($course) {
+            return $course->pivot->status == 'on-going';
+        });
+
+        $userCourseProgressByCourseIds = [];
+        foreach ($onGoingCourses as $course) {
+            $userCourseProgressByCourseIds[$course->id] = CourseHelper::calculateUserCourseProgress($course);
+        }
+
+        return $userCourseProgressByCourseIds;
+    }
+
+    // Private function to calculate user's online-course progress for a specific course by course object.
+    private static function calculateUserCourseProgress($course) {
+        $totalNumberOfContents = 0; $contentsWatched = 0;
+        foreach ($course->sections as $section) {
+            $totalNumberOfContents += $section->sectionContents->count();
+            foreach ($section->sectionContents as $content) {
+                $contentUserIds = explode(',', $content->hasSeen);
+                if (in_array(auth()->user()->id, $contentUserIds))
+                    $contentsWatched++;
+            }
+        }
+        return round(($contentsWatched / $totalNumberOfContents) * 100);
+    }
+
     // Function to get courses suggestions
     public static function getCourseSuggestion($size, $type = null) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();

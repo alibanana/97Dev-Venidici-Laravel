@@ -102,19 +102,20 @@ class DashboardController extends Controller
         $liveWorkshopPaginationData =
             CourseHelper::getDashboardLiveCoursesDataWithPagination($liveWorkshopAmountPerPage, $liveWorkshopPage);
 
-        // Get dashboardSkillSnacksData from CourseHelper
+        // Get onGoingCoursesPaginationData from CourseHelper
         $onGoingCoursesAmountPerPage = 4;
         $onGoingCoursesPage = $request->has('onGoingCoursesPage') ? $request->onGoingCoursesPage : 1;
         $onGoingCoursesPaginationData =
             CourseHelper::getDashboardOnGoingCoursesDataWithPagination($onGoingCoursesAmountPerPage, $onGoingCoursesPage);
 
-        // Get dashboardSkillSnacksData from CourseHelper
+        // Get completedCoursesPaginationData from CourseHelper
         $completedCoursesAmountPerPage = 4;
         $completedCoursesPage = $request->has('completedCoursesPage') ? $request->completedCoursesPage : 1;
         $completedCoursesPaginationData =
             CourseHelper::getDashboardCompletedCoursesDataWithPagination($completedCoursesAmountPerPage, $completedCoursesPage);
 
         // Get userCourseProgressInPercentage from CourseHelper (On-Progress).
+        $userCourseProgress = CourseHelper::calculateUserOnlineCoursesProgress();
 
 		// Get courses suggestions.
         $courseSuggestions = CourseHelper::getCourseSuggestion(4);
@@ -134,7 +135,8 @@ class DashboardController extends Controller
         }
 
         $viewData = compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications', 'usableStarsCount',
-            'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData' , 'courseSuggestions', 'footer_reviews');
+            'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
+            'footer_reviews');
 
         if($agent->isPhone())
             return view('client/mobile/user-dashboard', $viewData);
@@ -192,7 +194,6 @@ class DashboardController extends Controller
         return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil!');
 
     }
-
 
     // Updates Users's data in the database.
     public function update_profile(Request $request, $id)

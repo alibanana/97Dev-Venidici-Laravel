@@ -749,33 +749,12 @@
                                     <!--<p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Lesson number and title</p>-->
                                     <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:0.5vw;">{{$course->subtitle}}</p>
                                     <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$course->courseCategory->category}}</a>
-
                                 </div>
                             </div>
-                            @php
-                            $section_learned = 0;
-                            $number_of_section = 0;
-                            foreach($course->sections as $section){
-                                foreach($section->sectionContents as $content){
-                                    $number_of_section++;
-                                    $all_users = explode(',', $content->hasSeen);
-                                    foreach($all_users as $user_id)
-                                    {
-                                        if($user_id == auth()->user()->id)
-                                        {
-                                            $section_learned++;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            $percentage = ($section_learned / $number_of_section) * 100
-                            @endphp
-                            <p></p>
                             <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                                 <div class="progress progress-bar-vertical" style="background: rgba(43, 108, 170, 0.3);position:relative">
-                                    <p style="position:absolute;left: @if($percentage == 100) 35% @else 40% @endif;top:35%" class="normal-text">{{round($percentage)}}%</p>
-                                    <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{round($percentage)}}%;">
+                                    <p style="position:absolute;left: @if($userCourseProgress[$course->id] == 100) 35% @else 40% @endif;top:35%" class="normal-text">{{ $userCourseProgress[$course->id] }}%</p>
+                                    <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ $userCourseProgress[$course->id] }}%;">
                                     </div>
                                 </div>
                                 <a href="{{ route('online-course.learn', ['id' => $course->id, 'detail_id' => $course->sections[0]->sectionContents[0]->id]) }}" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
@@ -841,7 +820,6 @@
                                         <input type="hidden" name="name" value="{{auth()->user()->name}}">
                                         <input type="hidden" name="course_id" value="{{$course->id}}">
                                         <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
-
                                     </form>
                                 </div>
                             </div> 
@@ -880,7 +858,6 @@
                                         <input type="hidden" name="name" value="{{auth()->user()->name}}">
                                         <input type="hidden" name="course_id" value="{{$course->id}}">
                                         <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
-
                                     </form>
                                     @else
                                     <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Kelas Selesai</button>
