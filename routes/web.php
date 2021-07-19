@@ -209,6 +209,14 @@ Route::middleware(['isSuspended'])->group(function () {
     */
     Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(function() {
         // DashboardController
+
+        Route::get('/signup', [AdminDashboardController::class, 'signUpGeneralInfoIndex'])->name('dashboard.signUpGeneralInfoIndex');
+        Route::post('/signup', [CustomAuthController::class, 'storeGeneralInfo'])->name('custom-auth.signup_general_info.store')->middleware('guest');
+        Route::get('/signup-interests', [AdminDashboardController::class, 'signUpInterestIndex'])->name('admin.signup_interest');
+        Route::post('/register', [CustomAuthController::class, 'storeNewUser'])->name('custom-auth.register')->middleware('guest');
+
+
+
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
         Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
         // HomepageController
