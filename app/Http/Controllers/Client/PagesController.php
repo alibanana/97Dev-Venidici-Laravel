@@ -140,9 +140,9 @@ class PagesController extends Controller
 
     public function online_course_index(){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {
@@ -155,6 +155,7 @@ class PagesController extends Controller
 
             return view('client/for-public/online-course', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
         }
+
         
         return view('client/for-public/online-course',compact('footer_reviews'));
     }

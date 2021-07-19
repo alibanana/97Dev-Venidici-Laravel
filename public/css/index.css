@@ -1202,6 +1202,8 @@ html, body {
     padding:0vw 1vw
 }
 
+
+
 /* always show scrollbars 
 
 ::-webkit-scrollbar {
@@ -1678,6 +1680,9 @@ html, body {
     align-items:flex-start;
     width:18vw;
 }
+.xfers-image{
+    width:15vw;
+}
 
 
 @media only screen and (max-width: 767px) {
@@ -1722,6 +1727,11 @@ html, body {
         right: 5px;
     }
     /* end of notifaction popup mobile */
+    /* xfers photo */
+    .xfers-image{
+        width:50vw;
+        margin-bottom:2vw
+    }
     /* start cart mobile */
     .btn-blue-bordered{
         width: 100%;
@@ -1750,7 +1760,7 @@ html, body {
         padding:0vw 4vw;
     }
     .page-container-left{
-        padding-left:4vw !important;
+        padding-left:vw !important;
         padding:0vw 3vw;
         padding-top:11vw;
     }
@@ -1765,7 +1775,7 @@ html, body {
         display: block !important;
     }
     .desktop-display{
-        display:  none !important;
+        display: none !important;
     }
 
     .qty-width{
@@ -1812,11 +1822,25 @@ html, body {
     }
     /* end of metode pembayaran mobile */
     /* start transcation detail mobile popup */
-    .popup {
+    /* .popup {
         width:80% !important;
         margin-right:17vw ;
       
-      }
+      } */
+    #popup-payment-created{
+        width:80% !important;
+        margin-right:10vw ;
+      
+    }
+    #popup-payment-close-button{
+        right:10px;
+    }
+    #popup-pembayaran-va{
+        width:80% !important;
+    }
+    #popup-pembayaran-va-close-button{
+        right:10px;
+    }
     .course-claim-margin{
         margin-right:12vw !important; 
     }
@@ -1863,8 +1887,8 @@ html, body {
         font-size: 3vw;
     }
     .very-small-text{
-        font-size: 1.5vw;
-        line-height: 1.5vw;
+        font-size: 1.8vw;
+        line-height: 2.4vw;
     }
     .navbar-floating{
         display: none

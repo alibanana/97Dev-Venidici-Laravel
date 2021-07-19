@@ -338,9 +338,9 @@ class DashboardController extends Controller
 
     public function redeem_index(Request $request){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $this->resetNavbarData();
 
         $notifications = $this->notifications;
@@ -372,6 +372,11 @@ class DashboardController extends Controller
         $usableStarsCount = Helper::getUsableStars(auth()->user());
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if($agent->isPhone()){
+            return view('client/vouchers',
+            compact('cart_count', 'informations', 'transactions', 'notifications', 'redeem_rules', 'next_year_date', 'current_year_date', 'my_vouchers', 'usableStarsCount','footer_reviews'));
+        }
 
         return view('client/vouchers',
             compact('cart_count', 'informations', 'transactions', 'notifications', 'redeem_rules', 'next_year_date', 'current_year_date', 'my_vouchers', 'usableStarsCount','footer_reviews'));

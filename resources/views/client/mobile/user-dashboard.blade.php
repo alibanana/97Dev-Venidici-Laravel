@@ -69,8 +69,8 @@
 
 <!-- START OF POPUP EDIT PROFILE-->
 <div id="edit-profile" class="overlay" style="overflow:scroll">
-    <div class="popup">
-        <a class="close" href="#" >&times;</a>
+    <div class="popup " style="width:80% !important; margin-right:10vw !important">
+        <a class="close" style="right:20px !important" href="#" >&times;</a>
     
         <div class="content" style="padding:2vw">
             @if (session()->has('error'))
@@ -92,7 +92,7 @@
                         @if(session('success'))
                             <!-- ALERT MESSAGE -->
                             <div style="text-align:center;margin-top:1vw">
-                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:1vw;width:20vw"role="alert">
+                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:1vw;width:100%"role="alert">
                                 {{ session('success') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
@@ -105,10 +105,10 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">@if(Auth::user()->avatar) Current @endif Display Picture</p>
                         @if(Auth::user()->avatar)
-                            <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw" alt="Failed to load user's profile image.."> <br>
+                            <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw;font-size:2vw" alt="Failed to load user's profile image.."> <br>
                         @endif
 
-                        <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
+                        <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw;font-size:3vw"/>
                         <!--
                         <label id="uploadButton" for="images" style="font-family:Rubik Medium">Choose Image</label>-->
                     </div>
@@ -290,7 +290,7 @@
 
 <!-- START OF POPUP CHANGE PASSWORD-->
 <div id="change-password" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:40% !important">
+    <div class="popup" style="width:80% !important; margin-right:10vw !important">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             @if (session()->has('success'))
@@ -359,7 +359,7 @@
 
 <!-- START OF POPUP POINT EXPLANATION-->
 <div id="points" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:50% !important">
+    <div class="popup" style="width:80% !important; margin-right:10vw !important">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
@@ -447,7 +447,7 @@
 
                     <div class="faq-card" style="margin-top:3vw;background-color:#F9F9F9">
                         <div style="display:flex;align-items:center;justify-content:space-between;">
-                            <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">How Venidici Star System Works?</p>
+                            <p style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;font-size:2.5vw">How Venidici Point System Works?</p>
                             <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseHowItWorks" role="button" aria-expanded="false" aria-controls="collapseHowItWorks">
                                 <i class="fas fa-chevron-down"></i>
                             </p>                                    
@@ -468,7 +468,7 @@
 
 <!-- START OF POPUP INTERESTS-->
 <div id="my-interests" class="overlay" style="overflow:scroll">
-    <div class="popup" style="">
+    <div class="popup" style=" width:80% !important; margin-right:10vw !important">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
 
@@ -561,9 +561,9 @@
     @elseif(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
-        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
             Kamu belum melengkapi profile. <strong><a href="#edit-profile">Klik disini</a></strong> untuk melengkapi.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" style="top:-13px" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
     </div>
