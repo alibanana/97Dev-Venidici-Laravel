@@ -176,4 +176,22 @@ class UserController extends Controller
         
         return redirect()->route('admin.users.index')->with('message', $message);
     }
+
+    // Set user's status to opposite.
+    public function setRoleToOpposite($id) {
+        $user = User::findOrFail($id);
+        
+        // if normal user
+        if ($user->user_role_id == 1){
+            $user->user_role_id = 2;
+            $message = 'User (' . $user->name . ') has been changed to admin.';
+        } else {
+            $user->user_role_id = 1;
+            $message = 'User (' . $user->name . ') has been reinstated to user.';
+        }
+
+        $user->save();
+        
+        return redirect()->route('admin.users.index')->with('message', $message);
+    }
 }

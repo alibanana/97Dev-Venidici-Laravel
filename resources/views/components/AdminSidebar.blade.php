@@ -61,7 +61,7 @@
         </a>
         <div id="collapseAnalytics" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseAnalytics">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.analytics.online-course.index') }}">Online Course</a>
+                <a class="collapse-item" href="{{ route('admin.analytics.online-course.index') }}">Skill Snack</a>
                 <a class="collapse-item" href="{{ route('admin.analytics.woki-course.index') }}">Woki</a>
             </div>
         </div>
@@ -118,11 +118,11 @@
                 <!-- START OF DROPDOWN -->
                 <a class="nav-link collapsed collapse-item img-fluid" href="#" data-toggle="collapse" data-target="#collapseCourse"
                     aria-expanded="true" aria-controls="collapseCourse">
-                    <span>Online Courses</span>
+                    <span>Skill Snacks</span>
                 </a>
                 <div id="collapseCourse" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseCourse">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('admin.online-courses.index') }}">Online Courses List</a>
+                        <a class="collapse-item" href="{{ route('admin.online-courses.index') }}">Skill Snack List</a>
                         <a class="collapse-item" href="{{ route('admin.course-categories.index') }}">Course Categories</a>
                         <a class="collapse-item" href="{{ route('admin.assessments.index') }}">Assesments</a>
                         
@@ -143,7 +143,7 @@
 
                     </div>
                 </div>
-                <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a>
+                <!-- <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a> -->
                 <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
                 <a class="collapse-item" href="/admin/reviews">Reviews</a>
                 <a class="collapse-item" href="/admin/hashtags">Hashtags</a>

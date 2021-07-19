@@ -36,10 +36,10 @@
             <div class="col-md-12">
                 <!-- Begin Page Content -->
                 <div class="container-fluid p-0 mt-3">
-                <!--
+                
                 <form action="{{ route('custom-auth.signup_general_info.store') }}" method="POST">
                 @csrf  
-                --> 
+                
                     <div class="row m-0">
                         @if (session()->has('message'))
                         <div class="col-12" style="padding:1vw 3vw  ">
@@ -125,8 +125,8 @@
                             @enderror
                         </div>
                         <div class="col-12 p-0" style="text-align:center;margin-top:3vw">
-                            <!--<button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>-->
-                            <a href="/admin/signup-interests">Next</a>
+                            <button name="action" value="create_admin" type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Next</button>
+                            <!-- <a href="/admin/signup-interests">Next</a> -->
                         </div>  
                         <!-- END OF RIGHT SECTION -->
                     </div>
