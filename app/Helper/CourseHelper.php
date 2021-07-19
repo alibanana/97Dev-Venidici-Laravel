@@ -319,6 +319,9 @@ class CourseHelper {
         $liveCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 1)->get()->filter(function ($course) {
             return $course->pivot->status == 'on-going';
         })->chunk($amountPerPage);
+        
+        if ($liveCoursesData->isEmpty()) 
+            return ['data' => null];
 
         $totalPageAmount = $liveCoursesData->count();
         $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;

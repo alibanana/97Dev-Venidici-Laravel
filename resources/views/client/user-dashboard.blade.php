@@ -664,55 +664,56 @@
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
             </div>
-        @endif
-        @foreach($liveWorkshopPaginationData['data'] as $course)
-            <div class="col-12 p-0">
-                <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
-                    <div class="container-image-card">
-                        <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                        <div class="top-left card-tag small-text" >Woki</div>
-                    </div>           
-                    <div style="display:flex;justify-content:space-between">
-                        <div class="right-section" style="width:37vw">
-                            <div>
-                                <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                                <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                                @foreach($course->teachers as $teacher)
-                                    <span style="font-family:Rubik Bold">
-                                        @if($loop->last && count($course->teachers) != 1)
-                                        dan
-                                        @elseif(!$loop->first)
-                                        ,
-                                        @endif
-                                        {{$teacher->name}}
-                                    </span>
-                                @endforeach
-                                </p>   
-                                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
-                                <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+        @else
+            @foreach($liveWorkshopPaginationData['data'] as $course)
+                <div class="col-12 p-0">
+                    <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
+                        <div class="container-image-card">
+                            <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                            <div class="top-left card-tag small-text" >Woki</div>
+                        </div>           
+                        <div style="display:flex;justify-content:space-between">
+                            <div class="right-section" style="width:37vw">
+                                <div>
+                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                    @foreach($course->teachers as $teacher)
+                                        <span style="font-family:Rubik Bold">
+                                            @if($loop->last && count($course->teachers) != 1)
+                                            dan
+                                            @elseif(!$loop->first)
+                                            ,
+                                            @endif
+                                            {{$teacher->name}}
+                                        </span>
+                                    @endforeach
+                                    </p>   
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
+                                    <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                            <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
-                            <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
-                        </div>
-                    </div> 
+                            <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
+                                <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
-            </div>
-        @endforeach
-        
-        @if ($liveWorkshopPaginationData['total_page_amount'] > 1)
-            <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-                <div class="pagination-client">
-                    <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
-                    @for ($i = 1; $i <= $liveWorkshopPaginationData['total_page_amount']; $i++)
-                        <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $i]) }}"
-                            @if($i == $liveWorkshopPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
-                    @endfor
-                    <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+            @endforeach
+            @if ($liveWorkshopPaginationData['total_page_amount'] > 1)
+                <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                    <div class="pagination-client">
+                        <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                        @for ($i = 1; $i <= $liveWorkshopPaginationData['total_page_amount']; $i++)
+                            <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $i]) }}"
+                                @if($i == $liveWorkshopPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                        @endfor
+                        <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                    </div>
                 </div>
-            </div>
+            @endif
         @endif
+        
     </div>
     <!-- End of Live Pelatihan Content -->
 
