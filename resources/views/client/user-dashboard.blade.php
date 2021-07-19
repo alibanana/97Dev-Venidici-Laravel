@@ -653,10 +653,9 @@
 <div class="row m-0 page-container-inner " data-wow-delay="0.6s" style="padding-top:4vw;padding-bottom:4vw">
     <div class="col-12 p-0" style="">
         <div style="display:flex">
-
-            <p class="sub-description blue-text-underline blue-text-underline-active user-links" onclick="changeContent(event, 'live-pelatihan')"  style="font-family:Rubik Medium;cursor:pointer;margin-bottom:0px">Jadwal Live Workshop</p>
-            <p class="sub-description blue-text-underline user-links" onclick="changeContent(event, 'pelatihan-aktif')" style="font-family:Rubik Medium;margin-left:3vw;cursor:pointer;margin-bottom:0px">Pelatihan Aktif</p>
-            <p class="sub-description blue-text-underline user-links" onclick="changeContent(event, 'pelatihan-selesai')" style="font-family:Rubik Medium;margin-left:3vw;cursor:pointer;margin-bottom:0px">Pelatihan Selesai</p>
+            <p id="JadwalLivePelatihanButton" class="sub-description blue-text-underline blue-text-underline-active user-links" onclick="changeContent(event, 'live-pelatihan')"  style="font-family:Rubik Medium;cursor:pointer;margin-bottom:0px">Jadwal Live Workshop</p>
+            <p id="PelatihanAktifButton" class="sub-description blue-text-underline user-links" onclick="changeContent(event, 'pelatihan-aktif')" style="font-family:Rubik Medium;margin-left:3vw;cursor:pointer;margin-bottom:0px">Pelatihan Aktif</p>
+            <p id="PelatihanSelesaiButton" class="sub-description blue-text-underline user-links" onclick="changeContent(event, 'pelatihan-selesai')" style="font-family:Rubik Medium;margin-left:3vw;cursor:pointer;margin-bottom:0px">Pelatihan Selesai</p>
         </div>
     </div>
     <!-- Live Pelatihan Content -->
@@ -704,17 +703,22 @@
             @if ($liveWorkshopPaginationData['total_page_amount'] > 1)
                 <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
                     <div class="pagination-client">
-                        <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                        <a href="{{ request()->fullUrlWithQuery([
+                            'liveWorkshopPage' => $liveWorkshopPaginationData['previous_page'],
+                            'coursesTab' => 'liveWorkshop'
+                        ]) }}"><i class="fas fa-angle-left"></i></a>
                         @for ($i = 1; $i <= $liveWorkshopPaginationData['total_page_amount']; $i++)
-                            <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $i]) }}"
+                            <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $i, 'coursesTab' => 'liveWorkshop']) }}"
                                 @if($i == $liveWorkshopPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
                         @endfor
-                        <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $liveWorkshopPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                        <a href="{{ request()->fullUrlWithQuery([
+                            'liveWorkshopPage' => $liveWorkshopPaginationData['next_page'],
+                            'coursesTab' => 'liveWorkshop'
+                        ]) }}"><i class="fas fa-angle-right"></i></a>
                     </div>
                 </div>
             @endif
         @endif
-        
     </div>
     <!-- End of Live Pelatihan Content -->
 
@@ -766,12 +770,18 @@
             @if ($onGoingCoursesPaginationData['total_page_amount'] > 1)
                 <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
                     <div class="pagination-client">
-                        <a href="{{ request()->fullUrlWithQuery(['onGoingCoursesPage' => $onGoingCoursesPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                        <a href="{{ request()->fullUrlWithQuery([
+                            'onGoingCoursesPage' => $onGoingCoursesPaginationData['previous_page'],
+                            'coursesTab' => 'onGoingCourses'
+                        ]) }}"><i class="fas fa-angle-left"></i></a>
                         @for ($i = 1; $i <= $onGoingCoursesPaginationData['total_page_amount']; $i++)
-                            <a href="{{ request()->fullUrlWithQuery(['onGoingCoursesPage' => $i]) }}"
+                            <a href="{{ request()->fullUrlWithQuery(['onGoingCoursesPage' => $i, 'coursesTab' => 'onGoingCourses']) }}"
                                 @if($i == $onGoingCoursesPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
                         @endfor
-                        <a href="{{ request()->fullUrlWithQuery(['onGoingCoursesPage' => $onGoingCoursesPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                        <a href="{{ request()->fullUrlWithQuery([
+                            'onGoingCoursesPage' => $onGoingCoursesPaginationData['next_page'],
+                            'coursesTab' => 'onGoingCourses'
+                        ]) }}"><i class="fas fa-angle-right"></i></a>
                     </div>
                 </div>
             @endif
@@ -871,12 +881,18 @@
             @if ($completedCoursesPaginationData['total_page_amount'] > 1)
                 <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
                     <div class="pagination-client">
-                        <a href="{{ request()->fullUrlWithQuery(['completedCoursesPage' => $completedCoursesPaginationData['previous_page']]) }}"><i class="fas fa-angle-left"></i></a>
+                        <a href="{{ request()->fullUrlWithQuery([
+                            'completedCoursesPage' => $completedCoursesPaginationData['previous_page'],
+                            'coursesTab' => 'completedCourses'
+                        ]) }}"><i class="fas fa-angle-left"></i></a>
                         @for ($i = 1; $i <= $completedCoursesPaginationData['total_page_amount']; $i++)
-                            <a href="{{ request()->fullUrlWithQuery(['completedCoursesPage' => $i]) }}"
+                            <a href="{{ request()->fullUrlWithQuery(['completedCoursesPage' => $i, 'coursesTab' => 'completedCourses']) }}"
                                 @if($i == $completedCoursesPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
                         @endfor
-                        <a href="{{ request()->fullUrlWithQuery(['completedCoursesPage' => $completedCoursesPaginationData['next_page']]) }}"><i class="fas fa-angle-right"></i></a>
+                        <a href="{{ request()->fullUrlWithQuery([
+                            'completedCoursesPage' => $completedCoursesPaginationData['next_page'],
+                            'coursesTab' => 'completedCourses'
+                        ]) }}"><i class="fas fa-angle-right"></i></a>
                     </div>
                 </div>
             @endif
@@ -1051,19 +1067,18 @@
 
 <script>
     function changeContent(evt, categoryName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("user-content")
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("user-links");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("blue-text-underline-active", "blue-text-underline");
-            }
-            document.getElementById(categoryName).style.display = "block";
-            evt.currentTarget.className += " blue-text-underline-active";
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("user-content")
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
-         
+        tablinks = document.getElementsByClassName("user-links");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace("blue-text-underline-active", "blue-text-underline");
+        }
+        document.getElementById(categoryName).style.display = "block";
+        evt.currentTarget.className += " blue-text-underline-active";
+    }
 </script>
 <script>
     function toggleInterest(id, color_code) {
@@ -1081,17 +1096,24 @@
         }
     }
 </script>
-
 <script>
-    function passBootcampData(title,name,email,phone,bank,bank_account_number, address) {
-        
-		document.getElementById("bootcamp-title").innerHTML             = title;
-		document.getElementById("bootcamp-name").value                  = name;
-		document.getElementById("bootcamp-email").value                 = email;
-		document.getElementById("bootcamp-phone").value                 = phone;
-		document.getElementById("bootcamp-bank").value                  = bank;
-		document.getElementById("bootcamp-bank_account_number").value   = bank_account_number;
-		document.getElementById("bootcamp-address").value               = address;
+    function passBootcampData(title, name, email, phone, bank, bank_account_number, address) {
+		document.getElementById("bootcamp-title").innerHTML = title;
+		document.getElementById("bootcamp-name").value = name;
+		document.getElementById("bootcamp-email").value = email;
+		document.getElementById("bootcamp-phone").value = phone;
+		document.getElementById("bootcamp-bank").value = bank;
+		document.getElementById("bootcamp-bank_account_number").value = bank_account_number;
+		document.getElementById("bootcamp-address").value = address;
     }
 </script>
+@if ( request()->get('coursesTab'))
+    @if (request()->get('coursesTab') == 'liveWorkshop')
+        <script>document.getElementById('JadwalLivePelatihanButton').click()</script>
+    @elseif (request()->get('coursesTab') == 'onGoingCourses')
+        <script>document.getElementById('PelatihanAktifButton').click()</script>
+    @elseif (request()->get('coursesTab') == 'completedCourses')
+        <script>document.getElementById('PelatihanSelesaiButton').click()</script>
+    @endif
+@endif
 @endsection

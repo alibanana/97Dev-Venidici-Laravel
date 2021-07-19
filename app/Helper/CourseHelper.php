@@ -422,9 +422,15 @@ class CourseHelper {
             return $similarityPoint;
         });
 
-        return $type ? $courses->filter(function ($course) use ($type) {
-            return $course->courseType->type == $type;
-        })->take($size) : $courses->take($size);
+        if ($type) {
+            $courses = $courses->filter(function ($course) use ($type) {
+                return $course->courseType->type == $type;
+            });
+        }
+
+        return $courses->filter(function ($course) {
+            return !CourseHelper::hasUserBoughtCourse($course);
+        })->take($size);
     }
 
     // Private function to check if user's has bought the course.
