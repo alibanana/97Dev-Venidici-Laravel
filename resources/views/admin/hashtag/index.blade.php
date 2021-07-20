@@ -108,7 +108,7 @@
                                                     </td>
                                                     <td><img src="{{ asset($tag->image) }}" class="img-fluid" style="width:5vw;height:5vw;border-radius:10px" alt="Image not available.."></td>   
                                                     @if ($tag->color)
-                                                        <td>{{ $tag->color }}</td>   
+                                                        <td style="color: {{ $tag->color }}">{{ $tag->color }}</td>   
                                                     @else
                                                         <td style="color: lightgrey">Color code not available..</td>
                                                     @endif
