@@ -178,13 +178,14 @@ class OnlineCourseController extends Controller {
 
 
 
+
         //check skill snack and change status to complete if user has completed the course, but there is no assessment
         $section_learned = 0;
         $number_of_section = 0;
         foreach($course->sections as $section){
-            foreach($section->sectionContents as $content){
+            foreach($section->sectionContents as $contentDetail){
                 $number_of_section++;
-                $all_users = explode(',', $content->hasSeen);
+                $all_users = explode(',', $contentDetail->hasSeen);
                 foreach($all_users as $user_id)
                 {
                     if($user_id == auth()->user()->id)
@@ -207,11 +208,9 @@ class OnlineCourseController extends Controller {
         }
 
         
-        
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
-        
 
         return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations', 'notifications','footer_reviews'));
     }
