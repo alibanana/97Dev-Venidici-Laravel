@@ -667,7 +667,7 @@
         @else
             @foreach($liveWorkshopPaginationData['data'] as $course)
                 <div class="col-12 p-0">
-                    <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('{{$course->wokiCourseDetail->meeting_link}}','_blank');">
+                    <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
                         <div class="container-image-card">
                             <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
                             <div class="top-left card-tag small-text" >Woki</div>
@@ -693,7 +693,7 @@
                                 </div>
                             </div>
                             <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                                <a href="/woki/{{$course->id}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
+                                <a href="/woki/{{$course->title}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
                                 <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
                             </div>
                         </div> 
@@ -951,10 +951,10 @@
                                     <div style="height:4.5vw">
                                         <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                             @if ($course->courseType->type == 'Course')
-                                                <a href="/online-course/{{ $course->id }}" class="normal-text"
+                                                <a href="/online-course/{{ $course->title }}" class="normal-text"
                                                     style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                             @elseif ($course->courseType->type == 'Woki')
-                                                <a href="/woki/{{ $course->id }}" class="normal-text"
+                                                <a href="/woki/{{ $course->title }}" class="normal-text"
                                                     style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                             @elseif ($course->courseType->type == 'Bootcamp')
                                                 <a href="/bootcamp/{{ $course->id }}" class="normal-text"
@@ -1026,9 +1026,9 @@
                                             <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                         @endif
                                         @if ($course->courseType->type == 'Course')
-                                            <a href="/online-course/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
+                                            <a href="/online-course/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                         @elseif ($course->courseType->type == 'Woki')
-                                            <a href="/woki/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
+                                            <a href="/woki/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                         @elseif ($course->courseType->type == 'Bootcamp')
                                             <a href="/bootcamp/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
                                         @endif

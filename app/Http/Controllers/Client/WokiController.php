@@ -92,12 +92,12 @@ class WokiController extends Controller
     }
 
     // Shows the client woki course detail page.
-    public function show($id) {
+    public function show($course_title) {
         $agent = new Agent();
         if($agent->isPhone())
             return view('client/mobile/under-construction');
 
-        $course = Course::findOrFail($id);
+            $course = Course::where('title', $course_title)->firstOrFail();
 
         if ($course->courseType->type == 'Course') {
             return redirect()->route('online-course.show', $course->id);
@@ -105,7 +105,7 @@ class WokiController extends Controller
             return redirect()->route('bootcamp.show', $course->id);
         }
         
-        $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
+        $reviews = Review::where('course_id',$course->id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
         
         if (Auth::check()) {

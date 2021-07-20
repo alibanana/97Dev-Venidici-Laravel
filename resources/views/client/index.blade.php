@@ -712,10 +712,10 @@ END OF OUR PROGRAMS SECTION -->
                                 <div style="height:4.5vw">
                                     <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                         @if ($course->courseType->type == 'Course')
-                                            <a href="/online-course/{{ $course->id }}" class="normal-text"
+                                            <a href="/online-course/{{ $course->title }}" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @elseif ($course->courseType->type == 'Woki')
-                                            <a href="/woki/{{ $course->id }}" class="normal-text"
+                                            <a href="/woki/{{ $course->title }}" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @elseif ($course->courseType->type == 'Bootcamp')
                                             <a href="/bootcamp/{{ $course->id }}" class="normal-text"
@@ -787,9 +787,9 @@ END OF OUR PROGRAMS SECTION -->
                                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                     @endif
                                     @if ($course->courseType->type == 'Course')
-                                        <a href="/online-course/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/online-course/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Woki')
-                                        <a href="/woki/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/woki/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Bootcamp')
                                         <a href="/bootcamp/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
                                     @endif
