@@ -136,7 +136,7 @@ class OnlineCourseController extends Controller {
             return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
         }
         if($agent->isPhone()){
-            return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
+            return view('client/online-course/detail', compact('course','reviews','footer_reviews'));
         }
         return view('client/online-course/detail', compact('course','reviews','footer_reviews'));
     }
