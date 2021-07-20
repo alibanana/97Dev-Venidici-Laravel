@@ -203,6 +203,11 @@ class OnlineCourseUpdateController extends Controller
 
         $validated = $validator->validate();
 
+        if ($validated['publish_status'] == 'Published' && CourseHelper::isCourseSectionContentEmpty($id))
+            return redirect()->back()->with('page-option', 'publish-status')->withErrors([
+                'course_section_content_empty' => "Oops, cannot publish course.. Course's content is missing!"
+            ]);
+
         $result = CourseHelper::updatePublishStatusById($id, $validated['publish_status']);
 
         return redirect()->route('admin.online-courses.edit', $id)

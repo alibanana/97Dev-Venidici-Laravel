@@ -188,7 +188,7 @@ class CourseHelper {
         }
     }
 
-    // Function to update course's publish status.
+    // Update course's publish status.
     public static function updatePublishStatusById($id, $publish_status) {
         try {
             $course = Course::findOrFail($id);
@@ -219,7 +219,22 @@ class CourseHelper {
         }
     }
 
-    // Function to update the course's total_duration.
+    public static function isCourseSectionContentEmpty($course_id) {
+        $course = Course::findOrFail($course_id);
+        if ($course->sections->isEmpty())
+            return true;
+        foreach ($course->sections as $section) {
+            if ($section->sectionContents->isEmpty())
+                return true;
+            foreach ($section->sectionContents as $content) {
+                if ($content->title == null || $content->youtube_link == null || $content->duration == null)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    // Update the course's total_duration.
     public static function updateTotalDuration($id) {
         try {
             $course = Course::findOrFail($id);

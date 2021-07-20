@@ -12,13 +12,22 @@
     <div class="container-fluid">
 
         @if (session()->has('message'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
-            {{ session()->get('message') }}            
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
+                {{ session()->get('message') }}            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
+
+        @error('course_section_content_empty')
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 18px">
+                {{ $message }}            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @enderror
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
@@ -467,7 +476,7 @@
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror               
+                            @enderror
                         </div>
                     </div>
                     <div class="col-12">
