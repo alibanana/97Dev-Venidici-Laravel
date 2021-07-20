@@ -123,6 +123,7 @@
                 @endif
                 </div>
             </div>
+            @if($invoice->status == 'pending')
             <div class="alert alert-dismissible fade show mobile-display"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF;display:none"role="alert">
                 <div style="display:flex;align-items:center">
                     <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
@@ -134,6 +135,7 @@
                     Selesaikan pembayaran anda sebelum  {{$date[0]}} {{$time[0]}} atau proses pembayaran akan ditutup.
                 </p>
             </div>
+            @endif
         </div>
     </div>
     <div class="col-md-8 p-0" style="">

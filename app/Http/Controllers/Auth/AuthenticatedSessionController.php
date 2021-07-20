@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $cart_count = 0;
         
         if($agent->isPhone())
-            return view('client/auth/login',compact('cart_count','transactions'));
+            return view('client/mobile/auth/login',compact('cart_count','transactions'));
 
         return view('client/auth/login',compact('cart_count','transactions'));
     }
