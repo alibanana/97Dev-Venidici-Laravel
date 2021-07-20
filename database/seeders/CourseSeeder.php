@@ -57,7 +57,7 @@ class CourseSeeder extends Seeder
                 'course_category_id' => 2,
                 'thumbnail' => 'assets/images/seeder/woki-contoh-pertama.jpg',
                 'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
-                'title' => 'Contoh Course Woki #1',
+                'title' => 'Contoh Course Woki 1',
                 'subtitle' => 'Course Woki',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, quam nec malesuada placerat, nisi massa lobortis nibh, ac pretium velit tellus aliquet enim. Maecenas nec sodales mi. Proin vitae est ante. Vestibulum ut viverra erat. Duis ligula ex, aliquam eu tincidunt lacinia, imperdiet vulputate erat. Suspendisse rutrum, neque id sagittis pharetra, urna justo volutpat nibh, a porttitor lectus enim ac quam. Ut imperdiet id mauris vel ultrices.
 

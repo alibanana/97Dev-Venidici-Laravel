@@ -162,9 +162,7 @@
                                     <div style="margin-left:1vw">
                                         <div class="cart-title">
                                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
-                                            @if($cart->course->priceWithArtKit != null)
-                                            <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-{{$cart->id}}" data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
-                                            @endif
+                                            
                                         </div>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
                                         @foreach($cart->course->teachers as $teacher)

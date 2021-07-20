@@ -139,7 +139,7 @@ Route::middleware(['isSuspended'])->group(function () {
     /* START OF ONLINE COURSE ROUTING */
     // OnlineCourseController
     Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
-    Route::get('/online-course/{id}', [OnlineCourseController::class, 'show'])->name('online-course.show');
+    Route::get('/online-course/{course_title}', [OnlineCourseController::class, 'show'])->name('online-course.show');
 
     Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree')->middleware(['auth', 'verified']);
     Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware(['auth', 'verified']);
@@ -148,7 +148,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('online-course/{course_title}/learn/lecture/{content_title}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware(['auth', 'verified']);
     // WokiController
     Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
-    Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');
+    Route::get('/woki/{course_title}', [WokiController::class, 'show'])->name('woki.show');
     Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree')->middleware(['auth', 'verified']);
     // BootcampController
     Route::get('/bootcamp', [BootcampController::class, 'index'])->name('bootcamp.index');

@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-sm-12 col-md-8">
+                        <div class="col-sm-12 col-md-6">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
                                     <form action="" method="GET">
@@ -86,6 +86,13 @@
                                     </form>
                                 </label>
                             </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2">
+                            <div style="margin-top:1.2vw" class="text-nowrap">
+                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="#" data-toggle="modal" data-target="#addStarsModal">
+                                    Refresh
+                                </a>
+                            </div> 
                         </div>
                         
                     </div>

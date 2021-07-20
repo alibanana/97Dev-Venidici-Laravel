@@ -592,9 +592,9 @@
                             <div style="height:10vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                     @if ($course->courseType->type == 'Course')
-                                        <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                        <a href="/online-course/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                     @elseif ($course->courseType->type == 'Woki')
-                                        <a href="/woki/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                        <a href="/woki/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
 
                                     @elseif ($course->courseType->type == 'Bootcamp')
                                         <a href="/bootcamp/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
@@ -665,7 +665,7 @@
                                     <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                 @endif
                                 @if ($course->courseType->type == 'Course')
-                                    <a href="/online-course/{{$course->id}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                    <a href="/online-course/{{$course->title}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Woki')
                                     <a href="/woki/{{ $course->id }}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Bootcamp')
@@ -706,7 +706,7 @@
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="height:10vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                    <a href="/woki/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                    <a href="/woki/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                     <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                 </div>
                                 @foreach ($course->hashtags as $tag)
@@ -771,7 +771,7 @@
                                 @else
                                     <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                 @endif
-                                <a href="/woki/{{$course->id}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                <a href="/woki/{{$course->title}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                             </div>
             
                         </div>
@@ -816,7 +816,7 @@
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                             <div style="height:10vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                    <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                    <a href="/online-course/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                     <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                 </div>
                                 @foreach ($course->hashtags as $tag)
@@ -881,7 +881,7 @@
                                 @else
                                     <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                 @endif
-                                <a href="/online-course/{{$course->id}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                <a href="/online-course/{{$course->title}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                             </div>
             
                         </div>

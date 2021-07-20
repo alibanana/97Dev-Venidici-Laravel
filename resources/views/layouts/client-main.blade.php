@@ -70,7 +70,7 @@
                         </div>
                         
                         <!-- START OF TOP SECTION -->
-                        <div class="col-12" style="">
+                        <div class="col-12">
                             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;">Full Name</p>
                             <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                 <i style="color:#DAD9E2" class="fas fa-user"></i>
@@ -85,7 +85,7 @@
                         </div> 
                         <!-- END OF TOP SECTION --> 
                         <!-- RIGHT SECTION -->
-                        <div class="col-12" style="">
+                        <div class="col-12">
                             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw"">Email</p>
                             <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                 <i style="color:#DAD9E2" class="fas fa-envelope"></i>
@@ -304,6 +304,11 @@
             </div>
             <!-- START OF SEMUA NOTIFICATION -->
             <div class="col-md-12 notif-content notification-mobile-height " id="semua-notification" style="overflow:scroll;height:20vw;">
+              @if(count($notifications) == 0)
+                <div>
+                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada notifikasi.</p>
+                </div>
+              @else
               @foreach($notifications as $notif)
                 @if($notif->isInformation)
                   <?php
@@ -403,13 +408,14 @@
                 <!-- END OF ONE BLUE CARD -->
                 @endif
               @endforeach
+              @endif
             </div>
             <!-- END OF SEMUA NOTIFICATION -->
 
             <!-- START OF TRANSAKSI NOTIFICATION -->
             <div class="col-md-12 notif-content notification-mobile-height" id="transaksi-notification" style="overflow:scroll;height:20vw;display:none">
               @if(count($transactions) == 0)
-                <div style="">
+                <div>
                     <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada transaksi.</p>
                 </div>
               @else
@@ -470,6 +476,11 @@
 
             <!-- START OF INFORMASI NOTIFICATION -->
             <div class="col-md-12 notif-content notification-mobile-height" id="informasi-notification" style="overflow:scroll;height:20vw;display:none">
+              @if(count($informations) == 0)
+                <div>
+                    <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;">Belum ada informasi.</p>
+                </div>
+              @else
               @foreach($informations as $info)
               <?php
                     $info_users = explode(',', $info->hasSeen);
@@ -517,6 +528,7 @@
               </form>
               <!-- END OF ONE YELLOW CARD -->
               @endforeach
+              @endif
 
             </div>
             <!-- END OF INFORMASI NOTIFICATION -->
@@ -654,16 +666,16 @@
       <div class="row m-0">
         <div class="col-4 p-0">
             <p style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Site Map</p>
-            <div style="">
+            <div>
               <a href="/" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Home Page</a>
             </div>
-            <div style="">
+            <div>
               <a href="/for-public/online-course" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">On-Demand</a>
             </div>
-            <div style="">
+            <div>
               <a href="/for-public/woki" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Woki</a>
             </div>
-            <!--<div style="">
+            <!--<div>
               <a href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">For Corporate</a>
             </div>-->
         </div>
@@ -671,13 +683,13 @@
         <div class="col-4 p-0" style="display:flex;justify-content:center">
             <div>
               <p  style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Information</p>
-              <!--<div style="">
+              <!--<div>
                 <a href="/for-corporate/krest"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Corporate Programs</a>
               </div>-->
-              <div style="">
+              <div>
                 <a href="/community"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Discord Community</a>
               </div>
-              <div style="">
+              <div>
                 <a  data-toggle="modal"  data-target="#contactUsModal"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Contact Us</a>
               </div>
             </div>
@@ -689,20 +701,20 @@
             <p style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Social</p>
             
 
-            <div style="">
+            <div>
               <a href="https://www.instagram.com/venidici.id/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-instagram-square bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1.15vw">Instagram</span></a>
             </div>
             
-            <div style="">
+            <div>
               <a href="https://www.tiktok.com/@venidici.id" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-tiktok bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Tiktok</span></a>
             </div>
-            <div style="">
+            <div>
               <a href="https://twitter.com/venidici_id" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-twitter bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Twitter</span></a>
             </div>
-            <div style="">
+            <div>
               <a href="https://www.linkedin.com/company/venidiciindonesia/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-linkedin bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Linkedin</span></a>
             </div>
-            <div style="">
+            <div>
               <a href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-whatsapp-square bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
             </div>
           </div>

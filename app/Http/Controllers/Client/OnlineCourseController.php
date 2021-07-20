@@ -102,13 +102,14 @@ class OnlineCourseController extends Controller {
     }
 
     // Shows the details for each course.
-    public function show($id) {
+    public function show($course_title) {
         $agent = new Agent();
 
         // if($agent->isPhone())
         //     return view('client/mobile/under-construction');
 
-        $course = Course::findOrFail($id);
+        // $course = Course::findOrFail($id);
+        $course = Course::where('title', $course_title)->firstOrFail();
 
         if ($course->courseType->type == 'Bootcamp') {
             return redirect()->route('bootcamp.show', $course->id);
@@ -116,7 +117,7 @@ class OnlineCourseController extends Controller {
             return redirect()->route('woki.show', $course->id);
         }
         
-        $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
+        $reviews = Review::where('course_id',$course->id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
         // Get courses suggestions.
         if (Auth::check()) {
@@ -135,7 +136,7 @@ class OnlineCourseController extends Controller {
             return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
         }
         if($agent->isPhone()){
-            return view('client/online-course/detail', compact('course','reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions'));
+            return view('client/online-course/detail', compact('course','reviews','footer_reviews'));
         }
         return view('client/online-course/detail', compact('course','reviews','footer_reviews'));
     }
