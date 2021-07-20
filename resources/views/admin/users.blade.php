@@ -113,6 +113,9 @@
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'active']) }}" @if (Request::get('filter') == 'active') selected @endif>Active</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'suspended']) }}" @if (Request::get('filter') == 'suspended') selected @endif>Suspended</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'birthday-today']) }}" @if (Request::get('filter') == 'birthday-today') selected @endif>Birthday Today</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'admin']) }}" @if (Request::get('filter') == 'admin') selected @endif>Admin</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'super-admin']) }}" @if (Request::get('filter') == 'super-admin') selected @endif>Super Admin</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'normal-user']) }}" @if (Request::get('filter') == 'normal-user') selected @endif>Normal User</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'none']) }}" @if (!Request::has('filter')) selected @endif>None</option>
                                     </select>
                                 </label>

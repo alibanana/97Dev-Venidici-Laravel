@@ -39,15 +39,24 @@ class UserController extends Controller
         }
 
         if ($request->has('filter')) {
-            $available_filters = ['active', 'suspended', 'birthday-today'];
+            $available_filters = ['active', 'suspended', 'birthday-today', 'admin', 'super-admin', 'normal-user'];
             if (!in_array($request->filter, $available_filters)) {
                 $url = route('admin.users.index', request()->except('filter'));
                 return redirect($url);    
             }
 
             $users_status_list = ['active', 'suspended'];
+            $users_role_list = ['admin', 'super-admin', 'normal-user'];
             if (in_array($request->filter, $users_status_list))
                 $users = $users->where('status', $request->filter);
+            elseif (in_array($request->filter, $users_role_list)){
+                if($request->filter == 'admin')
+                    $users = $users->where('user_role_id', 2);
+                elseif($request->filter == 'super-admin')
+                    $users = $users->where('user_role_id', 3);
+                elseif($request->filter == 'normal-user')
+                    $users = $users->where('user_role_id', 1);
+            }
             else {
                 $userDetails = UserDetail::select(DB::raw('user_id as id'), 'birthdate');
 

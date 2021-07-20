@@ -146,7 +146,7 @@
                 <!-- <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a> -->
                 <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
                 <a class="collapse-item" href="/admin/reviews">Reviews</a>
-                <a class="collapse-item" href="/admin/hashtags">Hashtags</a>
+                <a class="collapse-item" href="/admin/hashtags">Interests</a>
 
                 <!-- END OF DROPDOWN -->
 
