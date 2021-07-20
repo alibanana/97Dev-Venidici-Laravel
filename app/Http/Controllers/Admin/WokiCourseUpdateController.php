@@ -168,7 +168,6 @@ class WokiCourseUpdateController extends Controller
             return redirect()->back()->with('page-option', 'pricing-and-enrollment')->withErrors($validator);
 
         $validated = $validator->validate();
-
         $course = Course::findOrFail($id);
         $course->enrollment_status = $validated['enrollment_status'];
 
@@ -176,7 +175,8 @@ class WokiCourseUpdateController extends Controller
             $course->price = 0;
         } else {
             $course->price = $validated['price'];
-            $course->priceWithArtKit = $validated['priceWithArtKit'];
+            if(array_key_exists('priceWithArtKit', $validated))
+                $course->priceWithArtKit = $validated['priceWithArtKit'];
         }
 
         $course->save();

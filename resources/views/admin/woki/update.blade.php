@@ -439,8 +439,8 @@
                                 <input type="number" name="price" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
                                     id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" placeholder="e.g. 10000" @if($course->price == 0) disabled @endif>
                                 <label class="form-check-label pt-2" for="pricing_options">Woki + Artkit</label> <br>
-                                <input type="number" name="price" style="margin-top:0.5vw" id="price-input-2" class="form-control form-control-user"
-                                    id="phone" aria-describedby="" value="{{ old('price', $course->priceWithArtKit) }}" placeholder="e.g. 15000" @if($course->price == 0 || is_null($course->priceWithArtKit)) disabled @endif>
+                                <input type="number" name="priceWithArtKit" style="margin-top:0.5vw" id="price-input-2" class="form-control form-control-user"
+                                    id="phone" aria-describedby="" value="{{ old('priceWithArtKit', $course->priceWithArtKit) }}" placeholder="e.g. 15000" @if($course->price == 0 || is_null($course->priceWithArtKit)) disabled @endif>
                             </div>
                             @error('price')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">

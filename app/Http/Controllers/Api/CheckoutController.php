@@ -565,9 +565,9 @@ class CheckoutController extends Controller
 
         foreach ($invoice->notifications as $notif) {
             if($notif->user_id == auth()->user()->id && $notif->invoice_id == $invoice->id)
-                $newNotif->title        = 'Pembayaran Telah Dibatalkan!';
-                $newNotif->description  = 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah dibatalkan.';
-                $newNotif->save();
+                $notif->title        = 'Pembayaran Telah Dibatalkan!';
+                $notif->description  = 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah dibatalkan.';
+                $notif->save();
         }
 
         return redirect('/transaction-detail/'.$payment_object['data']['attributes']['targetId']);
