@@ -141,9 +141,12 @@
                         </div>
                         <div class="col-sm-12 col-md-2">
                             <div style="margin-top:1.2vw" class="text-nowrap">
-                                <a class="d-sm-inline-block btn btn-warning shadow-sm" href="#" data-toggle="modal" data-target="#addStarsModal">
-                                    Refresh
-                                </a>
+                                <form action="{{ route('admin.invoices.refresh') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="d-sm-inline-block btn btn-warning shadow-sm">
+                                        Refresh
+                                    </button>
+                                </form>
                             </div> 
                         </div>
                         
