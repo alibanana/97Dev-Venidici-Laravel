@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Online Courses')
+@section('title', 'Venidici Skill Snacks')
 
 @section('container')
 
@@ -22,8 +22,8 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="mb-0 mb-3 text-gray-800">Online Courses</h1>
-            <a href="/admin/online-courses/create" class="btn btn-primary btn-user p-3">Create New Course</a>
+            <h1 class="mb-0 mb-3 text-gray-800">Skill Snacks</h1>
+            <a href="/admin/online-courses/create" class="btn btn-primary btn-user p-3">Create New Skill Snack</a>
         </div>
         
         <!-- Content Row -->

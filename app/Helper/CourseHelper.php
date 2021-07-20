@@ -5,6 +5,7 @@ namespace App\Helper;
 use Exception;
 
 use App\Models\Course;
+use App\Models\SectionContent;
 use App\Models\User;
 
 class CourseHelper {
@@ -187,7 +188,7 @@ class CourseHelper {
         }
     }
 
-    // Function to update course's publish status.
+    // Update course's publish status.
     public static function updatePublishStatusById($id, $publish_status) {
         try {
             $course = Course::findOrFail($id);
@@ -218,7 +219,22 @@ class CourseHelper {
         }
     }
 
-    // Function to update the course's total_duration.
+    public static function isCourseSectionContentEmpty($course_id) {
+        $course = Course::findOrFail($course_id);
+        if ($course->sections->isEmpty())
+            return true;
+        foreach ($course->sections as $section) {
+            if ($section->sectionContents->isEmpty())
+                return true;
+            foreach ($section->sectionContents as $content) {
+                if ($content->title == null || $content->youtube_link == null || $content->duration == null)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    // Update the course's total_duration.
     public static function updateTotalDuration($id) {
         try {
             $course = Course::findOrFail($id);
@@ -319,12 +335,14 @@ class CourseHelper {
         $liveCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 1)->get()->filter(function ($course) {
             return $course->pivot->status == 'on-going';
         })->chunk($amountPerPage);
+        
+        if ($liveCoursesData->isEmpty()) 
+            return ['data' => null];
 
         $totalPageAmount = $liveCoursesData->count();
         $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
         $isFirstPage = $page == 1;
         $isLastPage = $page == $totalPageAmount;
-
         return [
             'data' => $isNumberOfPageExceedTotalPageAmount ? $liveCoursesData[0] : $liveCoursesData[$page - 1],
             'total_page_amount' => $totalPageAmount,
@@ -334,28 +352,101 @@ class CourseHelper {
         ]; 
     }
 
-    // Function to get courses suggestions
+    // Function to get skill on-going courses in dashboard page. (with pagination)
+    public static function getDashboardOnGoingCoursesDataWithPagination($amountPerPage, $page) {
+        $onGoingCoursesData = auth()->user()->courses()->where('course_type_id', 1)->get()->filter(function ($course) {
+            return $course->pivot->status == 'on-going';
+        })->chunk($amountPerPage);
+        
+        if ($onGoingCoursesData->isEmpty()) 
+            return ['data' => null];
+
+        $totalPageAmount = $onGoingCoursesData->count();
+        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
+        $isFirstPage = $page == 1;
+        $isLastPage = $page == $totalPageAmount;
+
+        return [
+            'data' => $isNumberOfPageExceedTotalPageAmount ? $onGoingCoursesData[0] : $onGoingCoursesData[$page - 1],
+            'total_page_amount' => $totalPageAmount,
+            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
+            'previous_page' => $isFirstPage ? $page : $page - 1,
+            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
+        ]; 
+    }
+
+    // Function to get completed course in dashboard page. (with pagination)
+    public static function getDashboardCompletedCoursesDataWithPagination($amountPerPage, $page) {
+        $completedCoursesData = auth()->user()->courses()->get()->filter(function ($course) {
+            return $course->pivot->status == 'completed';
+        })->chunk($amountPerPage);
+
+        if ($completedCoursesData->isEmpty()) 
+            return ['data' => null];
+
+        $totalPageAmount = $completedCoursesData->count();
+        $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
+        $isFirstPage = $page == 1;
+        $isLastPage = $page == $totalPageAmount;
+
+        return [
+            'data' => $isNumberOfPageExceedTotalPageAmount ? $completedCoursesData[0] : $completedCoursesData[$page - 1],
+            'total_page_amount' => $totalPageAmount,
+            'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
+            'previous_page' => $isFirstPage ? $page : $page - 1,
+            'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
+        ]; 
+    }
+
+    // Calculate user's online-course progress in percentage.
+    public static function calculateUserOnlineCoursesProgress() {
+        $onGoingCourses = auth()->user()->courses()->where('course_type_id', 1)->get()->filter(function ($course) {
+            return $course->pivot->status == 'on-going';
+        });
+
+        $userCourseProgressByCourseIds = [];
+        foreach ($onGoingCourses as $course) {
+            $userCourseProgressByCourseIds[$course->id] = CourseHelper::calculateUserCourseProgressByCourseObject($course);
+        }
+
+        return $userCourseProgressByCourseIds;
+    }
+
+    // Calculate user's online-course progress for a specific course by course object.
+    public static function calculateUserCourseProgressByCourseObject($course) {
+        $totalNumberOfContents = 0; $contentsWatched = 0;
+        foreach ($course->sections as $section) {
+            $totalNumberOfContents += $section->sectionContents->count();
+            foreach ($section->sectionContents as $content) {
+                $contentUserIds = explode(',', $content->hasSeen);
+                if (in_array(auth()->user()->id, $contentUserIds))
+                    $contentsWatched++;
+            }
+        }
+        return round(($contentsWatched / $totalNumberOfContents) * 100);
+    }
+
+    // Get courses suggestions
     public static function getCourseSuggestion($size, $type = null) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
-        $courses = Course::with('hashtags')
-            ->where('enrollment_status', 'open')
-            ->where('publish_status', 'published')
-            ->where('isDeleted', false)->get()
-            ->sortByDesc(function ($course) use ($userHashtags) {
-                $similarityPoint = 0;
-                foreach ($course->hashtags as $hashtag) {
-                    if (in_array($hashtag->hashtag, $userHashtags))
-                        $similarityPoint++;
-                }
-                return $similarityPoint;
-            });
+        $courses = Course::with('hashtags')->get()->sortByDesc(function ($course) use ($userHashtags) {
+            $similarityPoint = 0;
+            foreach ($course->hashtags as $hashtag) {
+                if (in_array($hashtag->hashtag, $userHashtags))
+                    $similarityPoint++;
+            }
+            return $similarityPoint;
+        });
 
-        if ($type)
+        if ($type) {
             $courses = $courses->filter(function ($course) use ($type) {
                 return $course->courseType->type == $type;
             });
+        }
 
-        return $courses->filter(fn($course) => !CourseHelper::hasUserBoughtCourse($course))->take($size);
+        return $courses->filter(function ($course) {
+            return !CourseHelper::hasUserBoughtCourse($course);
+        })->take($size);
     }
 
     // Private function to check if user's has bought the course.
@@ -365,5 +456,29 @@ class CourseHelper {
                 return true;
         }
         return false;
+    }
+
+    // Get validated (user has bought) course object by its title.
+    public static function getUserValidatedCourseByTitle($course_title) {
+        $course = Course::where('title', $course_title)->firstOrFail();
+        return in_array($course->id, auth()->user()->courses()->pluck('user_course.course_id')->toArray()) ?
+            $course : null;
+    }
+
+    // Get sectionContent by course_id & content_title.
+    public static function getSectionContentByCourseIdAndTitle($course_id, $title) {
+        $content = SectionContent::where('title', $title)->get()->filter(function ($content) use ($course_id) {
+            return $content->section->course_id == $course_id;
+        })->take(1);
+        return $content->isEmpty() ? null : $content[0];
+    }
+
+    // Check if content's title is unique in course level.
+    public static function isSectionContentTitleUniqueByCourseObjectAndTitle($course, $title) {
+        foreach ($course->sections as $section) {
+            if ($section->sectionContents()->where('title', $title)->first())
+                return false;
+        }
+        return true;
     }
 }

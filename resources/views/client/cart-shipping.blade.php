@@ -73,7 +73,7 @@
                 </div>
                 <!-- END OF ONE PAYMENT METHOD -->
                 <!-- START OF ONE PAYMENT METHOD -->
-                <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_5"  onclick="togglePayment(event, 'checked_icon_5','q')">
+                <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_5"  onclick="togglePayment(event, 'checked_icon_5','qris')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
                             <img src="/assets/images/client/QRIS_LOGO.png" style="width:4vw;height:3vw;object-fit:contain;border-radius:10px" class="img-fluid image-bank" alt="">
@@ -162,9 +162,7 @@
                                     <div style="margin-left:1vw">
                                         <div class="cart-title">
                                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
-                                            @if($cart->course->priceWithArtKit != null)
-                                            <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-{{$cart->id}}" data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
-                                            @endif
+                                            
                                         </div>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
                                         @foreach($cart->course->teachers as $teacher)

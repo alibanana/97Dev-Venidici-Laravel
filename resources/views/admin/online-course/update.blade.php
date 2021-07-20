@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Update Online Course')
+@section('title', 'Venidici Update Skill Snack')
 
 @section('container')
 
@@ -12,17 +12,26 @@
     <div class="container-fluid">
 
         @if (session()->has('message'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
-            {{ session()->get('message') }}            
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
+                {{ session()->get('message') }}            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
+
+        @error('course_section_content_empty')
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 18px">
+                {{ $message }}            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @enderror
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h2 class="mb-0 mb-3 text-gray-800">Update Online Course</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">Update Skill Snack</h2>
         </div>
         <div class="d-sm-flex align-items-center mb-2">
             <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h5>
@@ -363,16 +372,16 @@
                                         <input type="text" placeholder="Enter new lecture title" style="width:80%" 
                                             name="section-{{ $section->id }}-newContentTitle" 
                                             value="{{ old('section-' . $section->id . '-newContentTitle') }}" required>
-                                        @error('section-' . $section->id . '-newContentTitle')
-                                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror 
                                         <button type="submit" class="btn btn-primary btn-info">Create Lecture</button>
                                     </div>
                                 </form>
                             </ul>
                         </div>
+                        @error('section-' . $section->id . '-newContentTitle')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <!-- END OF ONE MATERI -->
@@ -467,7 +476,7 @@
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror               
+                            @enderror
                         </div>
                     </div>
                     <div class="col-12">

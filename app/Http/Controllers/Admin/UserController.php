@@ -39,15 +39,24 @@ class UserController extends Controller
         }
 
         if ($request->has('filter')) {
-            $available_filters = ['active', 'suspended', 'birthday-today'];
+            $available_filters = ['active', 'suspended', 'birthday-today', 'admin', 'super-admin', 'normal-user'];
             if (!in_array($request->filter, $available_filters)) {
                 $url = route('admin.users.index', request()->except('filter'));
                 return redirect($url);    
             }
 
             $users_status_list = ['active', 'suspended'];
+            $users_role_list = ['admin', 'super-admin', 'normal-user'];
             if (in_array($request->filter, $users_status_list))
                 $users = $users->where('status', $request->filter);
+            elseif (in_array($request->filter, $users_role_list)){
+                if($request->filter == 'admin')
+                    $users = $users->where('user_role_id', 2);
+                elseif($request->filter == 'super-admin')
+                    $users = $users->where('user_role_id', 3);
+                elseif($request->filter == 'normal-user')
+                    $users = $users->where('user_role_id', 1);
+            }
             else {
                 $userDetails = UserDetail::select(DB::raw('user_id as id'), 'birthdate');
 
@@ -173,6 +182,24 @@ class UserController extends Controller
 
         $user->save();
         Mail::to($user->email)->send(new SuspendEmail($user));
+        
+        return redirect()->route('admin.users.index')->with('message', $message);
+    }
+
+    // Set user's status to opposite.
+    public function setRoleToOpposite($id) {
+        $user = User::findOrFail($id);
+        
+        // if normal user
+        if ($user->user_role_id == 1){
+            $user->user_role_id = 2;
+            $message = 'User (' . $user->name . ') has been changed to admin.';
+        } else {
+            $user->user_role_id = 1;
+            $message = 'User (' . $user->name . ') has been reinstated to user.';
+        }
+
+        $user->save();
         
         return redirect()->route('admin.users.index')->with('message', $message);
     }

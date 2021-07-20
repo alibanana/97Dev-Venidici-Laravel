@@ -113,6 +113,9 @@
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'active']) }}" @if (Request::get('filter') == 'active') selected @endif>Active</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'suspended']) }}" @if (Request::get('filter') == 'suspended') selected @endif>Suspended</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'birthday-today']) }}" @if (Request::get('filter') == 'birthday-today') selected @endif>Birthday Today</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'admin']) }}" @if (Request::get('filter') == 'admin') selected @endif>Admin</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'super-admin']) }}" @if (Request::get('filter') == 'super-admin') selected @endif>Super Admin</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'normal-user']) }}" @if (Request::get('filter') == 'normal-user') selected @endif>Normal User</option>
                                         <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'none']) }}" @if (!Request::has('filter')) selected @endif>None</option>
                                     </select>
                                 </label>
@@ -148,6 +151,7 @@
 											<th>Occupancy</th>
 											<th>Stars</th>
 											<th>Status</th>
+											<th>User Role</th>
 											<th  class="text-nowrap">Signed Up At</th>
 											<th>Action</th>
 										</tr>
@@ -173,7 +177,17 @@
 												@else
 													<td style="color:red">Suspended</td>
 												@endif
+												<td class="text-nowrap">
+													@if($user->user_role_id == 1)
+														User
+													@elseif($user->user_role_id == 2)
+														Admin
+													@else	
+														Super Admin
+													@endif
+												</td>
 												<td class="text-nowrap">{{ $user->created_at->diffForHumans() }}</td>
+
 												<td>
 													<div class="d-sm-flex align-items-center justify-content-center mb-4">
 														<form action="" method="post">
@@ -198,6 +212,19 @@
 																Add Stars
 															</a>
 														</div>
+														<!-- IF USER IS SUPER ADMIN -->
+														@if(auth()->user()->user_role_id == 3)
+														<form action="{{ route('admin.users.set-role-to-opposite', $user->id) }}" method="post">
+																@csrf
+																<div style="padding: 0px 2px">
+																	@if ($user->user_role_id == 1)
+																		<button class="d-sm-inline-block btn btn-info shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to set this user as admin?')">Set As Admin</button>
+																	@else
+																		<button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this admin as user?')">Set As User</button>
+																	@endif
+																</div>
+														</form>
+														@endif 
 													</div>
 												</td>
 											</tr>

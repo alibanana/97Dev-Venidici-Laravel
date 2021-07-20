@@ -269,7 +269,10 @@
 
             {{-- If user has bought the course. --}}
             @if($flag)
-                <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered"
+                <button onclick="window.open('{{ $course->sections->isEmpty() ? '' : route('online-course.learn', [
+                    'course_title' => $course->title,
+                    'content_title' => $course->sections[0]->sectionContents[0]->title
+                ]) }}', '_self');" class="normal-text btn-blue-bordered"
                     style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
             {{-- If user has not bought the course --}}
             @else
@@ -319,7 +322,7 @@
     </div>
     <!-- END OF RIGHT SECTION -->
 
-    @if(Auth::check())
+    @if(Auth::check() && count($courseSuggestions) != 0)
     <!-- START OF RECOMMENDED SECTION -->
     <div class="col-12" style="margin-top:8vw">
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;">Pilihan kelas lainnya untuk kamu</p>
@@ -341,7 +344,7 @@
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
                                     <div style="height:4.5vw">
                                         <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                            <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
+                                            <a href="/online-course/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
                                             <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                         </div>
                                         @foreach ($course->hashtags as $tag)
@@ -406,7 +409,7 @@
                                         @else
                                             <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                         @endif
-                                        <a href="/online-course/{{$course->id}}" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/online-course/{{$course->title}}" class="course-card-button normal-text">Enroll Now</a>
                                     </div>
                                 </div>
                             </div>
