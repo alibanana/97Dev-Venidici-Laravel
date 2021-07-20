@@ -5,6 +5,7 @@ namespace App\Helper;
 use Exception;
 
 use App\Models\Course;
+use App\Models\SectionContent;
 use App\Models\User;
 
 class CourseHelper {
@@ -390,14 +391,14 @@ class CourseHelper {
 
         $userCourseProgressByCourseIds = [];
         foreach ($onGoingCourses as $course) {
-            $userCourseProgressByCourseIds[$course->id] = CourseHelper::calculateUserCourseProgress($course);
+            $userCourseProgressByCourseIds[$course->id] = CourseHelper::calculateUserCourseProgressByCourseObject($course);
         }
 
         return $userCourseProgressByCourseIds;
     }
 
-    // Private function to calculate user's online-course progress for a specific course by course object.
-    private static function calculateUserCourseProgress($course) {
+    // Function to calculate user's online-course progress for a specific course by course object.
+    public static function calculateUserCourseProgressByCourseObject($course) {
         $totalNumberOfContents = 0; $contentsWatched = 0;
         foreach ($course->sections as $section) {
             $totalNumberOfContents += $section->sectionContents->count();
@@ -440,5 +441,20 @@ class CourseHelper {
                 return true;
         }
         return false;
+    }
+
+    // Function to get validated (user has bought) course object by its title.
+    public static function getUserValidatedCourseByTitle($course_title) {
+        $course = Course::where('title', $course_title)->firstOrFail();
+        return in_array($course->id, auth()->user()->courses()->pluck('user_course.course_id')->toArray()) ?
+            $course : null;
+    }
+
+    // Function to get sectionContent by course_id & content_title.
+    public static function getSectionContentByCourseIdAndTitle($course_id, $title) {
+        $content = SectionContent::where('title', $title)->get()->filter(function ($content) use ($course_id) {
+            return $content->section->course_id == $course_id;
+        })->take(1);
+        return $content->isEmpty() ? null : $content[0];
     }
 }

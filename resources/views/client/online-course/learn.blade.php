@@ -129,7 +129,7 @@
                                 @foreach($section->sectionContents as $content_detail)
                                 <?php $last_content_id++; ?>
                                 <!-- START OF ONE COURSE -->
-                                <a href="/online-course/{{$section->course_id}}/learn/lecture/{{$content_detail->id}}" style="text-decoration:none">
+                                <a href="/online-course/{{$section->course->title}}/learn/lecture/{{$content_detail->title}}" style="text-decoration:none">
                                     <div class="course-collapse @if($content_detail->id == $content->id) course-collapse-active @endif">
                                         <div style="display:flex;justify-content:space-between">
                                             @php 

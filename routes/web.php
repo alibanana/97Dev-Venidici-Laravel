@@ -145,7 +145,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware(['auth', 'verified']);
     Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware(['auth', 'verified']);
 
-    Route::get('online-course/{id}/learn/lecture/{detail_id}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware(['auth', 'verified']);
+    Route::get('online-course/{course_title}/learn/lecture/{content_title}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware(['auth', 'verified']);
     // WokiController
     Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
     Route::get('/woki/{id}', [WokiController::class, 'show'])->name('woki.show');

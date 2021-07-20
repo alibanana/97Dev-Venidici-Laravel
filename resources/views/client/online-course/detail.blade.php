@@ -269,7 +269,10 @@
 
             {{-- If user has bought the course. --}}
             @if($flag)
-                <button onclick="window.open('/online-course/{{$course->id}}/learn/lecture/1','_self');" class="normal-text btn-blue-bordered"
+                <button onclick="window.open('{{ $course->sections->isEmpty() ? '' : route('online-course.learn', [
+                    'course_title' => $course->title,
+                    'content_title' => $course->sections[0]->sectionContents[0]->title
+                ]) }}', '_self');" class="normal-text btn-blue-bordered"
                     style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
             {{-- If user has not bought the course --}}
             @else

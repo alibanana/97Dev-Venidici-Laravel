@@ -140,65 +140,36 @@ class OnlineCourseController extends Controller {
         return view('client/online-course/detail', compact('course','reviews','footer_reviews'));
     }
 
-    public function learn($course_id, $section_content_id) {
+    public function learn($course_title, $content_title) {
         $agent = new Agent();
 
         if($agent->isPhone())
             return view('client/mobile/under-construction');
         
+        // Get Navbar data.
         $this->resetNavbarData();
-
         $notifications = $this->notifications;
         $informations = $this->informations;
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
-        
-        $course = auth()->user()->courses()->where('user_course.course_id', $course_id)->firstOrFail();
+
+        // Get Courses related data.
+        $course = CourseHelper::getUserValidatedCourseByTitle($course_title);
         $sections = $course->sections;
-        
         $assessment = $course->assessment;
-        $content = SectionContent::findOrFail($section_content_id);
+        $content = CourseHelper::getSectionContentByCourseIdAndTitle($course->id, $content_title);
         
-        //check if user has seen the content or not
+        // Checks if user has seen the content or not
         $info_users = explode(',', $content->hasSeen);
-        $infoHasSeen = FALSE;
-
-        foreach($info_users as $user_id)
-        {
-          // if the user has seen the content
-            if($user_id == Auth::user()->id)
-                $infoHasSeen = TRUE;
-        }        
-
-        //if user has not seen the content
-        if(!$infoHasSeen){
-            $content->hasSeen = $content->hasSeen.auth()->user()->id.',';
+        if (!in_array(Auth::user()->id, $info_users)) {
+            $content->hasSeen = $content->hasSeen . auth()->user()->id . ',';
             $content->save();
         }
 
-
-
-        //check skill snack and change status to complete if user has completed the course, but there is no assessment
-        $section_learned = 0;
-        $number_of_section = 0;
-        foreach($course->sections as $section){
-            foreach($section->sectionContents as $content){
-                $number_of_section++;
-                $all_users = explode(',', $content->hasSeen);
-                foreach($all_users as $user_id)
-                {
-                    if($user_id == auth()->user()->id)
-                    {
-                        $section_learned++;
-                        break;
-                    }
-                }
-            }
-        }
-        $percentage = ($section_learned/$number_of_section) * 100;
+        $percentage = CourseHelper::calculateUserCourseProgressByCourseObject($course);
 
         //if the user has watched all videos, but theres no assessment, change the status of the course to completed
-        if(round($percentage) == 100 && $course->assessment == null && $course->pivot->status == 'on-going'){
+        if($percentage == 100 && $course->assessment == null && $course->pivot->status == 'on-going'){
             $course->pivot->status = 'completed';
             $course->pivot->save();
             $link = route('customer.dashboard');
@@ -206,14 +177,10 @@ class OnlineCourseController extends Controller {
             Helper::addStars(auth()->user(), 15, 'Penyelesaian course '.$course->title);
         }
 
-        
-        
-
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
-        
-
-        return view('client/online-course/learn', compact('cart_count','transactions', 'course', 'sections', 'content', 'assessment', 'informations', 'notifications','footer_reviews'));
+        return view('client/online-course/learn', compact('notifications', 'informations', 'transactions', 'cart_count',
+            'course', 'sections', 'assessment', 'content', 'footer_reviews'));
     }
 
     public function buyFree($course_id) {
