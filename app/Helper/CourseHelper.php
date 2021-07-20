@@ -188,7 +188,7 @@ class CourseHelper {
         }
     }
 
-    // Function to update course's publish status.
+    // Update course's publish status.
     public static function updatePublishStatusById($id, $publish_status) {
         try {
             $course = Course::findOrFail($id);
@@ -219,7 +219,22 @@ class CourseHelper {
         }
     }
 
-    // Function to update the course's total_duration.
+    public static function isCourseSectionContentEmpty($course_id) {
+        $course = Course::findOrFail($course_id);
+        if ($course->sections->isEmpty())
+            return true;
+        foreach ($course->sections as $section) {
+            if ($section->sectionContents->isEmpty())
+                return true;
+            foreach ($section->sectionContents as $content) {
+                if ($content->title == null || $content->youtube_link == null || $content->duration == null)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    // Update the course's total_duration.
     public static function updateTotalDuration($id) {
         try {
             $course = Course::findOrFail($id);
@@ -397,7 +412,7 @@ class CourseHelper {
         return $userCourseProgressByCourseIds;
     }
 
-    // Function to calculate user's online-course progress for a specific course by course object.
+    // Calculate user's online-course progress for a specific course by course object.
     public static function calculateUserCourseProgressByCourseObject($course) {
         $totalNumberOfContents = 0; $contentsWatched = 0;
         foreach ($course->sections as $section) {
@@ -411,7 +426,7 @@ class CourseHelper {
         return round(($contentsWatched / $totalNumberOfContents) * 100);
     }
 
-    // Function to get courses suggestions
+    // Get courses suggestions
     public static function getCourseSuggestion($size, $type = null) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
         $courses = Course::with('hashtags')->get()->sortByDesc(function ($course) use ($userHashtags) {
@@ -443,18 +458,27 @@ class CourseHelper {
         return false;
     }
 
-    // Function to get validated (user has bought) course object by its title.
+    // Get validated (user has bought) course object by its title.
     public static function getUserValidatedCourseByTitle($course_title) {
         $course = Course::where('title', $course_title)->firstOrFail();
         return in_array($course->id, auth()->user()->courses()->pluck('user_course.course_id')->toArray()) ?
             $course : null;
     }
 
-    // Function to get sectionContent by course_id & content_title.
+    // Get sectionContent by course_id & content_title.
     public static function getSectionContentByCourseIdAndTitle($course_id, $title) {
         $content = SectionContent::where('title', $title)->get()->filter(function ($content) use ($course_id) {
             return $content->section->course_id == $course_id;
         })->take(1);
         return $content->isEmpty() ? null : $content[0];
+    }
+
+    // Check if content's title is unique in course level.
+    public static function isSectionContentTitleUniqueByCourseObjectAndTitle($course, $title) {
+        foreach ($course->sections as $section) {
+            if ($section->sectionContents()->where('title', $title)->first())
+                return false;
+        }
+        return true;
     }
 }

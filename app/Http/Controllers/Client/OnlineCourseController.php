@@ -155,9 +155,13 @@ class OnlineCourseController extends Controller {
 
         // Get Courses related data.
         $course = CourseHelper::getUserValidatedCourseByTitle($course_title);
+        if ($course == null) abort(404);
+
         $sections = $course->sections;
         $assessment = $course->assessment;
+        
         $content = CourseHelper::getSectionContentByCourseIdAndTitle($course->id, $content_title);
+        if ($content == null) abort (404);
         
         // Checks if user has seen the content or not
         $info_users = explode(',', $content->hasSeen);

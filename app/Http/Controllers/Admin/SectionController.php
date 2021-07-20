@@ -23,10 +23,15 @@ class SectionController extends Controller
 {
     // Store a new Section (of a curricullum) in the database.
     public function store(Request $request) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'course_id' => 'required|integer',
             'section-title' => 'required'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'manage-curriculum'])->withErrors($validator);
+
+        $validated = $validator->validate();
         
         $course = Course::findOrFail($validated['course_id']);
 
@@ -50,11 +55,16 @@ class SectionController extends Controller
 
     // Update a specific section in the database.
     public function update(Request $request, $id) {
-        $validated = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'section-title-' . $id => 'required'
         ])->setAttributeNames([
             'section-title-' . $id => 'section-title'
-        ])->validate();
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'manage-curriculum'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $section = Section::findOrFail($id);
         $section->title = $validated['section-title-' . $id];

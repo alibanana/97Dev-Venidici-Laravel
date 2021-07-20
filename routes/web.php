@@ -244,6 +244,13 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/online-courses/{id}/update-publish-status', [AdminOnlineCourseUpdateController::class, 'updatePublishStatus'])->name('online-courses.update-publish-status');
         Route::put('/online-courses/{id}/attach-teacher', [AdminOnlineCourseUpdateController::class, 'attachTeacher'])->name('online-courses.attach-teacher');
         Route::put('/online-courses/{id}/detach-teacher', [AdminOnlineCourseUpdateController::class, 'detachTeacher'])->name('online-courses.detach-teacher');
+        // ArtSupplyController
+        Route::get('/woki-courses/art-supplies', [AdminArtSupplyController::class, 'index'])->name('art-supplies.index');
+        Route::get('/woki-courses/art-supplies/create', [AdminArtSupplyController::class, 'create'])->name('art-supplies.create');
+        Route::post('/woki-courses/art-supplies', [AdminArtSupplyController::class, 'store'])->name('art-supplies.store');
+        Route::get('/woki-courses/art-supplies/{id}/update', [AdminArtSupplyController::class, 'edit'])->name('art-supplies.edit');
+        Route::put('/woki-courses/art-supplies/{id}', [AdminArtSupplyController::class, 'update'])->name('art-supplies.update');
+        Route::delete('/woki-courses/art-supplies/{id}', [AdminArtSupplyController::class, 'destroy'])->name('art-supplies.destroy');
         // WokiCourseController
         Route::get('/woki-courses', [AdminWokiCourseController::class, 'index'])->name('woki-courses.index');
         Route::get('/woki-courses/create', [AdminWokiCourseController::class, 'create'])->name('woki-courses.create');
@@ -255,6 +262,14 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/woki-course/{id}/un-archive', [AdminWokiCourseController::class, 'unArchive'])->name('woki-courses.unArchive');
         Route::post('/woki-courses/{id}/set-isfeatured-status-to-opposite', [AdminWokiCourseController::class, 'setIsFeaturedStatusToOpposite'])->name('woki-courses.set-isfeatured-status-to-opposite');
         Route::post('/woki-courses/{id}/set-publish-status-to-opposite', [AdminWokiCourseController::class, 'setPublishStatusToOpposite'])->name('woki-courses.set-publish-status-to-opposite');
+        // WokiCourseUpdateController
+        Route::get('/woki-courses/{id}/update', [AdminWokiCourseUpdateController::class, 'edit'])->name('woki-courses.edit');
+        Route::put('/woki-courses/{id}/update-basic-info', [AdminWokiCourseUpdateController::class, 'updateBasicInfo'])->name('woki-courses.update-basic-info');
+        Route::put('/woki-courses/{id}/update-pricing-enrollment', [AdminWokiCourseUpdateController::class, 'updatePricingEnrollment'])->name('woki-courses.update-pricing-enrollment');
+        Route::put('/woki-courses/{id}/update-publish-status', [AdminWokiCourseUpdateController::class, 'updatePublishStatus'])->name('woki-courses.update-publish-status');
+        Route::put('/woki-courses/{id}/attach-detach-art-supply', [AdminWokiCourseUpdateController::class, 'attachDetachArtSupply'])->name('woki-courses.attach-detach-art-supply');
+        Route::put('/woki-courses/{id}/attach-teacher', [AdminWokiCourseUpdateController::class, 'attachTeacher'])->name('woki-courses.attach-teacher');
+        Route::put('/woki-courses/{id}/detach-teacher', [AdminWokiCourseUpdateController::class, 'detachTeacher'])->name('woki-courses.detach-teacher');
         // BootcampController
         Route::get('/bootcamp/categories', [AdminBootcampController::class, 'categories'])->name('bootcamp.categories');
         Route::get('/bootcamp', [AdminBootcampController::class, 'index'])->name('bootcamp.index');
@@ -279,21 +294,6 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/bootcampschedule/{id}/update', [AdminBootcampScheduleController::class, 'edit'])->name('bootcampschedule.edit');
         Route::put('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'update'])->name('bootcampschedule.update');
         Route::delete('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'destroy'])->name('bootcampschedule.destroy');
-        // ArtSupplyController
-        Route::get('/woki-courses/art-supplies', [AdminArtSupplyController::class, 'index'])->name('art-supplies.index');
-        Route::get('/woki-courses/art-supplies/create', [AdminArtSupplyController::class, 'create'])->name('art-supplies.create');
-        Route::post('/woki-courses/art-supplies', [AdminArtSupplyController::class, 'store'])->name('art-supplies.store');
-        Route::get('/woki-courses/art-supplies/{id}/update', [AdminArtSupplyController::class, 'edit'])->name('art-supplies.edit');
-        Route::put('/woki-courses/art-supplies/{id}', [AdminArtSupplyController::class, 'update'])->name('art-supplies.update');
-        Route::delete('/woki-courses/art-supplies/{id}', [AdminArtSupplyController::class, 'destroy'])->name('art-supplies.destroy');
-        // WokiCourseUpdateController
-        Route::get('/woki-courses/{id}/update', [AdminWokiCourseUpdateController::class, 'edit'])->name('woki-courses.edit');
-        Route::put('/woki-courses/{id}/update-basic-info', [AdminWokiCourseUpdateController::class, 'updateBasicInfo'])->name('woki-courses.update-basic-info');
-        Route::put('/woki-courses/{id}/update-pricing-enrollment', [AdminWokiCourseUpdateController::class, 'updatePricingEnrollment'])->name('woki-courses.update-pricing-enrollment');
-        Route::put('/woki-courses/{id}/update-publish-status', [AdminWokiCourseUpdateController::class, 'updatePublishStatus'])->name('woki-courses.update-publish-status');
-        Route::put('/woki-courses/{id}/attach-detach-art-supply', [AdminWokiCourseUpdateController::class, 'attachDetachArtSupply'])->name('woki-courses.attach-detach-art-supply');
-        Route::put('/woki-courses/{id}/attach-teacher', [AdminWokiCourseUpdateController::class, 'attachTeacher'])->name('woki-courses.attach-teacher');
-        Route::put('/woki-courses/{id}/detach-teacher', [AdminWokiCourseUpdateController::class, 'detachTeacher'])->name('woki-courses.detach-teacher');
         // SectionController
         Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
         Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');
