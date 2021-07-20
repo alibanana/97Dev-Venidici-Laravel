@@ -903,6 +903,7 @@
 <!-- END OF MIDDLE SECTION -->
 
 <!-- START OF SARAN KAMI SECTION -->
+@if(count($courseSuggestions) != 0)
 <div class="row m-0 page-container-inner" style="padding-top:2vw;padding-bottom:6vw">
     <div class="col-12 p-0" style="text-align:center">
         <p class="small-heading" style="font-family:Rubik Medium;margin-bottom:0px;color:#3B3C43">Saran kelas dari kami</p>
@@ -1061,6 +1062,7 @@
 
     </div>
 </div>
+@endif
 <!-- END OF SARAN KAMI SECTION -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>

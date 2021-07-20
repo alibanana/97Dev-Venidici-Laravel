@@ -213,6 +213,11 @@
             </div>
         @endif
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Redeem Voucher</p>
+        @if(count($redeem_rules) == 0)
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Redeem Rule belum tersedia.</span></p>
+            </div>
+        @else
         <!-- START OF CAROUSEL -->
         <div id="redeem-carousel" style="margin-top:2vw" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 2vw;">
@@ -277,6 +282,7 @@
             </a>
         </div> 
         <!-- END OF CAROUSEL -->
+        @endif
     </div>
     <!-- END OF REDEEM RULES -->
 </div>
