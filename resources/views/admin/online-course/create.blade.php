@@ -116,7 +116,7 @@
                             </span>
                         @enderror               
                     </div>
-                    <p> <span> <a href="/admin/online-courses/assesments" target="_blank">Click here</a> </span> to add new assesment</p>
+                    <p> <span> <a href="/admin/assessments" target="_blank">Click here</a> </span> to add new assesment</p>
                 </div>
                 <div class="col-12">
                     <div class="form-group">

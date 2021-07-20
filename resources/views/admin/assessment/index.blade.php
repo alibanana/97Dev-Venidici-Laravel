@@ -112,9 +112,9 @@
                                                                     <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this Assessment?')">Delete</button>
                                                                 </div>
                                                             </form>
-                                                            <div style="padding: 0px 2px;" class="text-nowrap">
+                                                            <!-- <div style="padding: 0px 2px;" class="text-nowrap">
                                                                 <a class="d-sm-inline-block btn btn-primary shadow-sm" href="/admin/online-courses/assesments/1">View Result</a>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </td>
                                                 </tr>

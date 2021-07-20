@@ -138,7 +138,7 @@
                 <div id="collapseWoki" class="collapse" aria-labelledby="" data-parent="#collapseWoki">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('admin.woki-courses.index') }}">Woki Courses List</a>
-                        <a class="collapse-item" href="/admin/art-supply">Art Supply</a>
+                        <a class="collapse-item" href="{{ route('admin.art-supplies.index') }}">Art Supply</a>
                        
 
                     </div>
