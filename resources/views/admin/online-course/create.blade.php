@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Create Online Course')
+@section('title', 'Venidici Create Skill Snack')
 
 @section('container')
 
@@ -22,7 +22,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h2 class="mb-0 mb-3 text-gray-800">New Online Course</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">New Skill Snack</h2>
         </div>
 
         <div class="d-sm-flex align-items-center mb-2">
@@ -245,7 +245,7 @@
             </div>
             <div class="col-12" style="padding:2vw 1vw">
                 <div style="display:flex;justify-content:flex-end">
-                    <button type="submit" class="btn btn-primary btn-user p-3">Create New Course</button>
+                    <button type="submit" class="btn btn-primary btn-user p-3">Create New Skill Snack</button>
                 </div>
             </div>
         </form>

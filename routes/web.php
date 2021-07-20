@@ -210,13 +210,6 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(function() {
         // DashboardController
 
-        Route::get('/signup', [AdminDashboardController::class, 'signUpGeneralInfoIndex'])->name('dashboard.signUpGeneralInfoIndex');
-        Route::post('/signup', [CustomAuthController::class, 'storeGeneralInfo'])->name('custom-auth.signup_general_info.store')->middleware('guest');
-        Route::get('/signup-interests', [AdminDashboardController::class, 'signUpInterestIndex'])->name('admin.signup_interest');
-        Route::post('/register', [CustomAuthController::class, 'storeNewUser'])->name('custom-auth.register')->middleware('guest');
-
-
-
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
         Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
         // HomepageController
@@ -231,6 +224,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
         Route::put('/users', [AdminUserController::class, 'add_stars'])->name('users.add_stars');
         Route::post('/users/{id}/set-status-to-opposite', [AdminUserController::class, 'setStatusToOpposite'])->name('users.set-status-to-opposite');
+        Route::post('/users/{id}/set-role-to-opposite', [AdminUserController::class, 'setRoleToOpposite'])->name('users.set-role-to-opposite');
         // InvoiceController
         Route::get('/invoices', [AdminInvoiceController::class, 'index'])->name('invoices.index');
         Route::get('/invoices/{id}', [AdminInvoiceController::class, 'show'])->name('invoices.show');

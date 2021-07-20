@@ -27,7 +27,8 @@ class CourseSeeder extends Seeder
                 'preview_video' => 'https://www.youtube.com/embed/aLqZYlmzNCY',
                 'title' => 'Emotional Intelligence',
                 'subtitle' => 'Recorded Webinar',
-                'description' => 'Pesatnya perkembangan teknologi saat ini sudah banyak menggeser manusia dari berbagai pekerjaan. Di masa yang akan datang, kemampuan dalam me-manage manusialah yang diprediksi akan terus eksis dan justru meningkat dalam permintaan. Era baru pekerjaan itu kini hampir di depan mata, sudah siapkah kamu?'
+                'description' => 'Pesatnya perkembangan teknologi saat ini sudah banyak menggeser manusia dari berbagai pekerjaan. Di masa yang akan datang, kemampuan dalam me-manage manusialah yang diprediksi akan terus eksis dan justru meningkat dalam permintaan. Era baru pekerjaan itu kini hampir di depan mata, sudah siapkah kamu?',
+                'publish_status' => 'Published'
             ],
             [
                 'course_type_id' => 1,
@@ -61,6 +62,7 @@ class CourseSeeder extends Seeder
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, quam nec malesuada placerat, nisi massa lobortis nibh, ac pretium velit tellus aliquet enim. Maecenas nec sodales mi. Proin vitae est ante. Vestibulum ut viverra erat. Duis ligula ex, aliquam eu tincidunt lacinia, imperdiet vulputate erat. Suspendisse rutrum, neque id sagittis pharetra, urna justo volutpat nibh, a porttitor lectus enim ac quam. Ut imperdiet id mauris vel ultrices.
 
                 Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque mollis nulla vulputate, scelerisque leo et, vestibulum erat. Sed id ultrices elit, ac congue nibh. Donec eu augue mi. Ut in purus in ex maximus facilisis a id dolor. Nunc maximus ac massa sit amet fringilla. Sed quam velit, sagittis eget augue eu, rhoncus facilisis quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sollicitudin nunc id eros scelerisque lobortis. Etiam justo leo, pharetra at nibh in, bibendum tincidunt libero. Praesent convallis leo at ligula convallis rutrum. Quisque a eros a dolor euismod varius in eget mauris. Nam faucibus leo eget nisi viverra molestie. Nullam maximus risus non est euismod venenatis.',
+                'publish_status' => 'Published',
                 'price' => 75000,
                 'priceWithArtKit' => 100000
             ],
@@ -74,6 +76,7 @@ class CourseSeeder extends Seeder
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, quam nec malesuada placerat, nisi massa lobortis nibh, ac pretium velit tellus aliquet enim. Maecenas nec sodales mi. Proin vitae est ante. Vestibulum ut viverra erat. Duis ligula ex, aliquam eu tincidunt lacinia, imperdiet vulputate erat. Suspendisse rutrum, neque id sagittis pharetra, urna justo volutpat nibh, a porttitor lectus enim ac quam. Ut imperdiet id mauris vel ultrices.
 
                 Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque mollis nulla vulputate, scelerisque leo et, vestibulum erat. Sed id ultrices elit, ac congue nibh. Donec eu augue mi. Ut in purus in ex maximus facilisis a id dolor. Nunc maximus ac massa sit amet fringilla. Sed quam velit, sagittis eget augue eu, rhoncus facilisis quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sollicitudin nunc id eros scelerisque lobortis. Etiam justo leo, pharetra at nibh in, bibendum tincidunt libero. Praesent convallis leo at ligula convallis rutrum. Quisque a eros a dolor euismod varius in eget mauris. Nam faucibus leo eget nisi viverra molestie. Nullam maximus risus non est euismod venenatis.',
+                'publish_status' => 'Published',
                 'price' => 149000
             ],
             // Bootcamp Workshop

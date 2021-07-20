@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Update Online Course')
+@section('title', 'Venidici Update Skill Snack')
 
 @section('container')
 
@@ -22,7 +22,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h2 class="mb-0 mb-3 text-gray-800">Update Online Course</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">Update Skill Snack</h2>
         </div>
         <div class="d-sm-flex align-items-center mb-2">
             <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h5>

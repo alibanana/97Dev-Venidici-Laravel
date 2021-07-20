@@ -119,4 +119,24 @@ class XfersHelper {
         $xfersHelper = new XfersHelper;
         return $xfersHelper->executeWithResponseValidation(self::METHOD_POST, $url, $payload);
     }
+
+    public static function createQRISPayment($request, $no_invoice, $invoice_id) {
+        $url = self::BASE_URL;
+        $payload = [
+            "data" => [
+                "attributes" => [
+                    "paymentMethodType" => "qris",
+                    "amount" => $request['grand_total'],
+                    "referenceId" => $no_invoice,
+                    "expiredAt" => $request['date'].'T'.$request['time'].'+07:00',
+                    "description" => "Order Number ".$invoice_id,
+                    "paymentMethodOptions" =>[
+                        "displayName" => "Venidici",
+                    ]
+                ]
+            ]
+        ];
+        $xfersHelper = new XfersHelper;
+        return $xfersHelper->executeWithResponseValidation(self::METHOD_POST, $url, $payload);
+    }
 }
