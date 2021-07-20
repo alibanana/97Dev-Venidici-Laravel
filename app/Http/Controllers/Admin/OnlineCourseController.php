@@ -194,7 +194,7 @@ class OnlineCourseController extends Controller
     // Store New Online Course on the database.
     public function store(Request $request) {
         $validated = Validator::make($request->all(), [
-            'title' => 'required',
+            'title' => 'required|alpha_spaces',
             'thumbnail' => 'required|mimes:jpeg,jpg,png',
             'subtitle' => 'required',
             'course_category_id' => 'required',

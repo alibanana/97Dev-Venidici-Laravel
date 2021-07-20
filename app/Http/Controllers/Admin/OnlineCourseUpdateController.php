@@ -64,7 +64,7 @@ class OnlineCourseUpdateController extends Controller
     // Updates data as seen under the Update Online Course -> Basic Informations tab.
     public function updateBasicInfo(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
+            'title' => 'required|alpha_spaces',
             'thumbnail' => 'mimes:jpeg,jpg,png',
             'subtitle' => 'required',
             'course_category_id' => 'required',

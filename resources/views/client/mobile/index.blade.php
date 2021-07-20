@@ -667,7 +667,7 @@
                                 @if ($course->courseType->type == 'Course')
                                     <a href="/online-course/{{$course->title}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Woki')
-                                    <a href="/woki/{{ $course->id }}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                    <a href="/woki/{{ $course->title }}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Bootcamp')
                                     <a href="/bootcamp/{{ $course->id }}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                                 @endif
