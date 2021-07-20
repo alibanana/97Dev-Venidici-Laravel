@@ -363,16 +363,16 @@
                                         <input type="text" placeholder="Enter new lecture title" style="width:80%" 
                                             name="section-{{ $section->id }}-newContentTitle" 
                                             value="{{ old('section-' . $section->id . '-newContentTitle') }}" required>
-                                        @error('section-' . $section->id . '-newContentTitle')
-                                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror 
                                         <button type="submit" class="btn btn-primary btn-info">Create Lecture</button>
                                     </div>
                                 </form>
                             </ul>
                         </div>
+                        @error('section-' . $section->id . '-newContentTitle')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <!-- END OF ONE MATERI -->

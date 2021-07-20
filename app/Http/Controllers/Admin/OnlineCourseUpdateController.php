@@ -63,7 +63,7 @@ class OnlineCourseUpdateController extends Controller
 
     // Updates data as seen under the Update Online Course -> Basic Informations tab.
     public function updateBasicInfo(Request $request, $id) {
-        $validated = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'thumbnail' => 'mimes:jpeg,jpg,png',
             'subtitle' => 'required',
@@ -71,14 +71,19 @@ class OnlineCourseUpdateController extends Controller
             'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
             'assessment_id' => 'required|integer',
             'description' => 'required',
-        'requirements' => 'required|array|min:1',
+            'requirements' => 'required|array|min:1',
             'features' => 'required|array|min:1',
             'hashtags' => 'required|array|min:1'
         ])->setAttributeNames([
             'course_category_id' => 'category',
             'preview_video_link' => 'video link',
             'assessment_id' => 'assessment',
-        ])->validate();
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'basic-informations'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $course = Course::findOrFail($id);
         $course->course_category_id = $validated['course_category_id'];
@@ -154,11 +159,16 @@ class OnlineCourseUpdateController extends Controller
 
     // Updates Course's Pricing & Enrollment Status.
     public function updatePricingEnrollment(Request $request, $id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'enrollment_status' => 'required',
             'is_free' => 'required|boolean',
             'price' => 'integer'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'pricing-and-enrollment')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $course = Course::findOrFail($id);
         $course->enrollment_status = $validated['enrollment_status'];
@@ -184,9 +194,14 @@ class OnlineCourseUpdateController extends Controller
 
     // Updates Online Course's Publish Status
     public function updatePublishStatus(Request $request, $id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'publish_status' => 'required'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'publish-status')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $result = CourseHelper::updatePublishStatusById($id, $validated['publish_status']);
 
@@ -197,9 +212,14 @@ class OnlineCourseUpdateController extends Controller
 
     // Attach teacher to a specific course.
     public function attachTeacher(Request $request, $course_id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'teacher_id' => 'required'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'teacher')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $result = CourseHelper::attachTeacher(
             Course::findOrFail($course_id),
@@ -212,9 +232,14 @@ class OnlineCourseUpdateController extends Controller
 
     // Detach teacher to a specific course.
     public function detachTeacher(Request $request, $course_id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'teacher_id' => 'required'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'teacher')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $result = CourseHelper::detachTeacher(
             Course::findOrFail($course_id),

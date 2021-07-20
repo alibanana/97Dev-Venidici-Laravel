@@ -68,7 +68,7 @@ class WokiCourseUpdateController extends Controller
 
     // Updates data as seen under the Update Woki Course -> Basic Informations tab.
     public function updateBasicInfo(Request $request, $id) {
-        $validated = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'thumbnail' => 'mimes:jpeg,jpg,png',
             'subtitle' => 'required',
@@ -85,7 +85,12 @@ class WokiCourseUpdateController extends Controller
         ])->setAttributeNames([
             'course_category_id' => 'category',
             'preview_video_link' => 'video link'
-        ])->validate();
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'basic-informations'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $course = Course::findOrFail($id);
         $course->course_category_id = $validated['course_category_id'];
@@ -152,12 +157,17 @@ class WokiCourseUpdateController extends Controller
 
     // Updates Woki Course's Pricing & Enrollment Status.
     public function updatePricingEnrollment(Request $request, $id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'enrollment_status' => 'required',
             'is_free' => 'required|boolean',
             'price' => 'integer',
             'priceWithArtKit' => 'integer'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'pricing-and-enrollment')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $course = Course::findOrFail($id);
         $course->enrollment_status = $validated['enrollment_status'];
@@ -184,9 +194,14 @@ class WokiCourseUpdateController extends Controller
 
     // Updates Woki Course's Publish Status
     public function updatePublishStatus(Request $request, $id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'publish_status' => 'required'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'publish-status')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $result = CourseHelper::updatePublishStatusById($id, $validated['publish_status']);
 
@@ -197,9 +212,14 @@ class WokiCourseUpdateController extends Controller
 
     // Attach / Detach Art Supply from a Course.
     public function attachDetachArtSupply(Request $request, $id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'art_supply_id' => 'required|integer'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'art-supply')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $course = Course::findOrFail($id);
         $artSupply = ArtSupply::findOrFail($validated['art_supply_id']);
@@ -231,9 +251,14 @@ class WokiCourseUpdateController extends Controller
 
     // Attach teacher to a specific course.
     public function attachTeacher(Request $request, $course_id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'teacher_id' => 'required'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'teacher')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $result = CourseHelper::attachTeacher(
             Course::findOrFail($course_id),
@@ -246,9 +271,14 @@ class WokiCourseUpdateController extends Controller
 
     // Detach teacher to a specific course.
     public function detachTeacher(Request $request, $course_id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'teacher_id' => 'required'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('page-option', 'teacher')->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $result = CourseHelper::detachTeacher(
             Course::findOrFail($course_id),
