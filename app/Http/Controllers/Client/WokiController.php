@@ -97,7 +97,7 @@ class WokiController extends Controller
         if($agent->isPhone())
             return view('client/mobile/under-construction');
 
-            $course = Course::where('title', $course_title)->firstOrFail();
+        $course = Course::where('title', $course_title)->firstOrFail();
 
         if ($course->courseType->type == 'Course') {
             return redirect()->route('online-course.show', $course->id);
