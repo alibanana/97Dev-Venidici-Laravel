@@ -52,7 +52,24 @@ class InvoiceController extends Controller
 
         $invoices = $invoices->paginate(50);
 
-        return view('admin/invoice/index', compact('invoices'));
+        // Get Cards data.
+        $invoicesCountByStatus = []; $invoicesTotalByStatus = [];
+        foreach (Invoice::all() as $invoice) {
+            if (array_key_exists($invoice->status, $invoicesCountByStatus)) {
+                $invoicesCountByStatus[$invoice->status] += 1;
+                $invoicesTotalByStatus[$invoice->status] += $invoice->grand_total;
+            } else {
+                $invoicesCountByStatus[$invoice->status] = 1;
+                $invoicesTotalByStatus[$invoice->status] = $invoice->grand_total;
+            }
+        }
+
+        // Format invoicesTotalByStatus data
+        foreach ($invoicesTotalByStatus as $key => $value) {
+            $invoicesTotalByStatus[$key] = number_format($value, 2, ',', '.'); 
+        }
+
+        return view('admin/invoice/index', compact('invoices', 'invoicesCountByStatus', 'invoicesTotalByStatus'));
     }
 
     // Shows the admin Invoice Details page.
