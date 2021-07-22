@@ -69,7 +69,7 @@ class WokiCourseUpdateController extends Controller
     // Updates data as seen under the Update Woki Course -> Basic Informations tab.
     public function updateBasicInfo(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
+            'title' => 'required|alpha_spaces',
             'thumbnail' => 'mimes:jpeg,jpg,png',
             'subtitle' => 'required',
             'course_category_id' => 'required',
@@ -168,7 +168,6 @@ class WokiCourseUpdateController extends Controller
             return redirect()->back()->with('page-option', 'pricing-and-enrollment')->withErrors($validator);
 
         $validated = $validator->validate();
-
         $course = Course::findOrFail($id);
         $course->enrollment_status = $validated['enrollment_status'];
 
@@ -176,7 +175,8 @@ class WokiCourseUpdateController extends Controller
             $course->price = 0;
         } else {
             $course->price = $validated['price'];
-            $course->priceWithArtKit = $validated['priceWithArtKit'];
+            if(array_key_exists('priceWithArtKit', $validated))
+                $course->priceWithArtKit = $validated['priceWithArtKit'];
         }
 
         $course->save();

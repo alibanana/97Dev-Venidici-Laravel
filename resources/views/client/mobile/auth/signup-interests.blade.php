@@ -16,7 +16,7 @@
                         <div style="text-align:center;margin-top:2vw">
                             <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:25vw;padding-top:2vw" alt="LOGO">
                             <p style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw;font-size:5.5vw">Ketertarikan anda</p>
-                            <p style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:3vw;font-size:3vw">Maksimal 3 pilihan</p>
+                            <p style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:3vw;font-size:3vw">{{ session('message') ?? 'Maksimal 3 pilihan' }}</p>
                         </div>
                         @error('interests')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">

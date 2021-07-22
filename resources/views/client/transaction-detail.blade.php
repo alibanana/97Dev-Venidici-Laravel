@@ -277,6 +277,12 @@
                 @elseif($invoice->status == 'completed')
                 <p class="bigger-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">Pembayaran Berhasil</p>
                 
+                @elseif($invoice->status == 'failed')
+                <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px"><i class="far fa-window-close"></i> <span style="margin-left:1vw">Pembelian Gagal</span></p>
+                
+                @elseif($invoice->status == 'expired')
+                <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px"><i class="far fa-window-close"></i> <span style="margin-left:1vw">Pembelian Kadaluarsa</span></p>
+                
                 @elseif($invoice->status == 'cancelled')
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px"><i class="far fa-window-close"></i> <span style="margin-left:1vw">Pembelian Dibatalkan</span></p>
                 @endif

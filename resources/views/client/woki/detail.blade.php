@@ -87,6 +87,11 @@
 
         <!-- START OF PERLENGKAPAN SENI SECTION -->
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:3vw">Perlengkapan Seni</p>
+        @if(count($course->artSupplies) == 0)
+            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum ada perlengkapan seni.</span></p>
+            </div>
+        @else
         <div id="perlengkapan-carousel" style="margin-top:2vw" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 2vw;">
                 @php $card_counter = 0; @endphp
@@ -136,6 +141,7 @@
             </a>
         </div> 
         <!-- END OF PERLENGKAPAN SENI SECTION -->
+        @endif
 
 
         <!-- START OF PROFIL PEMBICARA SECTION -->

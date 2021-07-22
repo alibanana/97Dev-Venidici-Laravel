@@ -460,9 +460,7 @@ class CourseHelper {
 
     // Get validated (user has bought) course object by its title.
     public static function getUserValidatedCourseByTitle($course_title) {
-        $course = Course::where('title', $course_title)->firstOrFail();
-        return in_array($course->id, auth()->user()->courses()->pluck('user_course.course_id')->toArray()) ?
-            $course : null;
+        return auth()->user()->courses()->where('title', $course_title)->firstOrFail();
     }
 
     // Get sectionContent by course_id & content_title.
@@ -470,7 +468,7 @@ class CourseHelper {
         $content = SectionContent::where('title', $title)->get()->filter(function ($content) use ($course_id) {
             return $content->section->course_id == $course_id;
         })->take(1);
-        return $content->isEmpty() ? null : $content[0];
+        return $content->isEmpty() ? null : $content->first();
     }
 
     // Check if content's title is unique in course level.

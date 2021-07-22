@@ -172,7 +172,7 @@
     -->
 
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Pages Collapse Menu
     @if(Request::is('admin/krest') || Request::is('admin/krest/*'))
     <li class="nav-item active">
     @else
@@ -191,7 +191,7 @@
 
             </div>
         </div>
-    </li>
+    </li> -->
 
 
     

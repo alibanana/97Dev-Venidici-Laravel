@@ -47,7 +47,7 @@
     <div style="text-align:center;margin-top:30vw">
         <img src="/assets/images/client/Logo_white.png" class="img-fluid" style="width:20vw" alt="">
         <p style="font-family:Rubik Bold;color:#FFFFFF;font-size:8vw;margin-top:10vw">Our mobile view is under maintenance..</p>
-        <p style="font-family:Rubik Regular;color:#FFFFFF;font-size:5vw;margin-top:4vw">Please open this page in your tablet or desktop devices.</p>
+        <p style="font-family:Rubik Regular;color:#FFFFFF;font-size:5vw;margin-top:4vw">Please open this page in your desktop devices.</p>
 
     </div>
 </body>

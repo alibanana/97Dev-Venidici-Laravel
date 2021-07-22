@@ -26,7 +26,7 @@ class SectionContentController extends Controller
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
             'section_id' => 'bail|required|integer',
-            'section-' . $request->section_id . '-newContentTitle' => 'required'
+            'section-' . $request->section_id . '-newContentTitle' => 'required|alpha_spaces'
         ])->setAttributeNames([
             'section-' . $request->section_id . '-newContentTitle' => 'content-title'
         ]);
@@ -82,7 +82,7 @@ class SectionContentController extends Controller
     public function update(Request $request, $id) {
         $validated = $request->validate([
             'attachment' => 'mimes:pps,ppt,pptx,xls,xlsm,xlsx,doc,docx,pdf',
-            'title' => 'required',
+            'title' => 'required|alpha_spaces',
             'youtube_link' => 'required|starts_with:https://www.youtube.com/embed/',
             'description' => 'required',
             'duration' => 'required|integer|min:1'

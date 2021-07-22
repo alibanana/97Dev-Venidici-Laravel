@@ -27,10 +27,62 @@
         
         <!-- Content Row -->
 
-
         <!-- start of table -->
-        
         <div class="row">
+            <div class="col-2">
+                <div class="card bg-light text-black shadow">
+                    <div class="card-body">
+                        <span style="color: orange">Pending Invoices</span><br>
+                        <span>Count: </span><span class="font-weight-bold">{{ $invoicesCountByStatus['pending'] ?? '-' }}</span><br>
+                        <span>Total: </span><span class="font-weight-bold">Rp {{ $invoicesTotalByStatus['pending'] ?? '-' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card bg-light text-black shadow">
+                    <div class="card-body">
+                        <span style="color: green">Paid Invoices</span><br>
+                        <span>Count: </span><span class="font-weight-bold">{{ $invoicesCountByStatus['paid'] ?? '-' }}</span><br>
+                        <span>Total: </span><span class="font-weight-bold">Rp {{ $invoicesTotalByStatus['paid'] ?? '-' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card bg-light text-black shadow">
+                    <div class="card-body">
+                        <span style="color: green">Completed Invoices</span><br>
+                        <span>Count: </span><span class="font-weight-bold">{{ $invoicesCountByStatus['completed'] ?? '-' }}</span><br>
+                        <span>Total: </span><span class="font-weight-bold">Rp {{ $invoicesTotalByStatus['completed'] ?? '-' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card bg-light text-black shadow">
+                    <div class="card-body">
+                        <span style="color: red">Failed Invoices</span><br>
+                        <span>Count: </span><span class="font-weight-bold">{{ $invoicesCountByStatus['failed'] ?? '-' }}</span><br>
+                        <span>Total: </span><span class="font-weight-bold">Rp {{ $invoicesTotalByStatus['failed'] ?? '-' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card bg-light text-black shadow">
+                    <div class="card-body">
+                        <span style="color: grey">Cancelled Invoices</span><br>
+                        <span>Count: </span><span class="font-weight-bold">{{ $invoicesCountByStatus['cancelled'] ?? '-' }}</span><br>
+                        <span>Total: </span><span class="font-weight-bold">Rp {{ $invoicesTotalByStatus['cancelled'] ?? '-' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card bg-light text-black shadow">
+                    <div class="card-body">
+                        <span style="color: grey">Expired Invoices</span><br>
+                        <span>Count: </span><span class="font-weight-bold">{{ $invoicesCountByStatus['expired'] ?? '-' }}</span><br>
+                        <span>Total: </span><span class="font-weight-bold">Rp {{ $invoicesTotalByStatus['expired'] ?? '-' }}</span>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-12">
                 <!-- Begin Page Content -->
                 <div class="container-fluid p-0 mt-3">
@@ -89,9 +141,12 @@
                         </div>
                         <div class="col-sm-12 col-md-2">
                             <div style="margin-top:1.2vw" class="text-nowrap">
-                                <a class="d-sm-inline-block btn btn-secondary shadow-sm" href="#" data-toggle="modal" data-target="#addStarsModal">
-                                    Refresh
-                                </a>
+                                <form action="{{ route('admin.invoices.refresh') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="d-sm-inline-block btn btn-warning shadow-sm">
+                                        Refresh
+                                    </button>
+                                </form>
                             </div> 
                         </div>
                         

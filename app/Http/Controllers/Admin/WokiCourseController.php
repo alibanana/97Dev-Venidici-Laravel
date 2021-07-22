@@ -210,7 +210,7 @@ class WokiCourseController extends Controller
     // Stores new Woki Course in the database.
     public function store(Request $request) {
         $validated = Validator::make($request->all(), [
-            'title' => 'required',
+            'title' => 'required|alpha_spaces',
             'thumbnail' => 'required|mimes:jpeg,jpg,png',
             'subtitle' => 'required',
             'course_category_id' => 'required',

@@ -228,6 +228,7 @@ Route::middleware(['isSuspended'])->group(function () {
         // InvoiceController
         Route::get('/invoices', [AdminInvoiceController::class, 'index'])->name('invoices.index');
         Route::get('/invoices/{id}', [AdminInvoiceController::class, 'show'])->name('invoices.show');
+        Route::post('/invoices/refresh', [AdminInvoiceController::class, 'refresh'])->name('invoices.refresh');
         // OnlineCourseController
         Route::get('/online-courses', [AdminOnlineCourseController::class, 'index'])->name('online-courses.index');
         Route::get('/online-courses/create', [AdminOnlineCourseController::class, 'create'])->name('online-courses.create');
