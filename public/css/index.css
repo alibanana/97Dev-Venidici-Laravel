@@ -87,6 +87,7 @@ html, body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 40%;
+    
 }
 .online-course-detail-bg{
     background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
@@ -1683,9 +1684,33 @@ html, body {
 .xfers-image{
     width:15vw;
 }
+#course-claim-margin{
+    width:35% ;
+    
+}
+.quantity{
+    width:3vw;
+}
+.image-qris{
+    width:12vw !important
+}
+.online-course-image{
+    width:100% !important;
+    height:14vw;
+}
+.normal-text-card{
+    font-size: 1.05vw;
+    line-height:1.4vw;
+}
+.height-online-card{
+    height:4.5vw ;
+}
 
 
 @media only screen and (max-width: 767px) {
+    .image-qris{
+        width:40vw !important
+    }
     /* notifaction popup mobile */
     .popup-notif{
         margin: 40vw 5vw;        
@@ -1784,7 +1809,10 @@ html, body {
     
     /* end of cart mobile */
     /* start mobile cart_shipment  */
-
+    .loading-background{
+        height:50vw !important;
+        
+    }
     .full-width{
         width:100vw !important;
         padding:0vw !important;
@@ -1841,9 +1869,10 @@ html, body {
     #popup-pembayaran-va-close-button{
         right:10px;
     }
-    .course-claim-margin{
-        margin-right:12vw !important; 
-    }
+    #course-claim-margin{
+        width:80% !important;
+        margin-right:10vw !important; 
+    }   
     .popup .content {
         max-height: 50%;
         overflow: auto;
@@ -1855,7 +1884,19 @@ html, body {
     .popup-image-mobile{
         width:15vw !important;
     }
+    .quantity{
+        width:5vw !important;
+    }
     /* end of transcation detail mobile popup */
+    /* online course detail card */
+    .online-course-image{
+        width:100% !important;
+        height:30vw !important;
+    }
+    .height-online-card{
+        height:10vw !important;
+    }
+    /* end of online coursee detail card */
     .sub-description{
         font-size: 4vw;
         line-height: 4vw;
@@ -1876,12 +1917,16 @@ html, body {
         line-height: 6vw;
     }
     .small-text{
-        font-size: 1.9vw;
-        line-height: 1.9vw;
+        font-size: 2.5vw;
+        line-height: 2.9vw;
     }
     .normal-text{
         font-size: 2.5vw;
         line-height: 5vw;
+    }
+    .normal-text-card{
+        font-size: 4vw;
+        line-height:4vw;
     }
     .bigger-text{
         font-size: 3vw;

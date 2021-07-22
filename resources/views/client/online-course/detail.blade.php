@@ -3,11 +3,16 @@
 
 @section('content')
 
-<div class="row m-0 page-container online-course-detail-bg" style="padding-top:11vw;padding-bottom:10vw">
+<div class="row m-0 page-container online-course-detail-bg no-padding" style="padding-top:11vw;padding-bottom:10vw">
     <!-- START OF LEFT SECTION -->
-    <div class="col-9" >
-        <div style="padding-right:10vw">
+    <div class="col-12 col-md-9 pr-0" >
+        <div style="">
             <p class="medium-heading" style="font-family:Hypebeast;color:#67BBA3">SKILL SNACK</p>
+            <div style="margin-top:2vw;display:none" class="mobile-display">
+                <iframe style="width:92vw;height:50vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px" 
+                    src="{{$course->preview_video}}">
+                </iframe>
+            </div>
 
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
             
@@ -31,7 +36,7 @@
                 <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
                 Your browser does not support HTML video.
             </video> -->
-            <div style="margin-top:2vw">
+            <div style="margin-top:2vw" class="desktop-display">
                 <iframe style="width:42vw;height:25vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px" 
                     src="{{$course->preview_video}}">
                 </iframe>
@@ -58,6 +63,98 @@
                     @endfor
                 </div>
             </div>
+            <!-- MOBILE CART -->
+            <div class="col-md-12 p-0 mobile-display "style="display:none;width:100%;margin-top:4vw">
+                @if(session('success'))
+                    <!-- ALERT MESSAGE -->
+                    <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <!-- END OF ALERT MESSAGE -->
+                @elseif(session('message_update')) 
+                    <!-- ALERT MESSAGE -->
+                    <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+                        {{ session('message_update') }} <span> <a href="/dashboard#edit-profile">Click here</a> </span>to complete your profile
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <!-- END OF ALERT MESSAGE -->
+                @endif
+                <div class="course-detail-card-green">
+                    @if($course->price == 0)
+                    <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
+                    @else
+                    <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                    @endif
+
+                    {{-- Checks if course given has been bought --}}
+                    <?php $flag = null;?>
+                    @if(Auth::check())
+                        @foreach($transactions as $transaction)
+                            @if($transaction->invoice->status == 'paid' || $transaction->invoice->status == 'completed')
+                            @foreach($transaction->invoice->orders as $order)
+                                @if($order->course->id == $course->id)
+                                    <?php $flag = true;?>
+                                @endif
+                            @endforeach
+                            @endif
+                        @endforeach
+                    @endif
+
+                    {{-- If user has bought the course. --}}
+                    @if($flag)
+                        <button onclick="window.open('{{ $course->sections->isEmpty() ? '' : route('online-course.learn', [
+                            'course_title' => $course->title,
+                            'content_title' => $course->sections[0]->sectionContents[0]->title
+                        ]) }}', '_self');" class="normal-text btn-blue-bordered"
+                            style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Mulai Belajar</button>
+                    {{-- If user has not bought the course --}}
+                    @else
+                        {{-- If user has not bought the course and the price IS NOT 0. --}}
+                        @if ($course->price != 0)
+                            <form action="{{ route('customer.cart.store') }}" method="post">
+                            @csrf
+                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
+                                <button type="submit" class="normal-text btn-blue-bordered"
+                                    style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
+                                <button class="normal-text btn-dark-blue" name="action" value="buyNow" 
+                                    style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+                            </form>
+                        {{-- If user has not bought the course and the price IS 0. --}}
+                        @else
+                            <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
+                            @csrf
+                                <input type="hidden" name="course_id" value="{{$course->id}}">              
+                                <button class="normal-text  btn-dark-blue"
+                                    style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+                            </form>
+                        @endif
+                    @endif
+
+                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
+                    <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
+                        <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">@if($course->total_duration == null) - @else {{ explode(',', $course->total_duration)[0] }} @endif Menit video eksklusif</span></p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">1 Assesment</span></p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Akses seumur hidup</span></p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Sertifikat keberhasilan</span></p>
+                    </div>
+                    <!--
+                    <p class="small-text" style="font-family:Rubik Medium;color: #3B3C43;margin-bottom:2vw;margin-top:2vw;">Butuh pelatihan untuk perusahaan Anda?</p>
+                    <div style="text-align:center">
+                        <a href="/for-corporate/krest" class="small-text btn-purple-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Program Krest</a>
+                    </div>
+                    -->
+
+                </div>
+                <div style="padding:2vw;background:#FFFFFF">
+                    <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Ada <span style="font-family:Hypebeast">Pertanyaan?</span> </p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
+                    <a  href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;"><i class="fab fa-whatsapp"></i> <span style="margin-left:0.5vw">+628112345678</span></a>
+
+                </div>
+            </div>
+            <!-- END OF MOBILE CART -->
             <!-- WHAT YOU WILL LEARN SECTION -->
             <div style="background: rgba(103, 187, 163, 0.1);border-radius: 10px;padding:1.5vw;margin-top:2vw">
                 <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Apa saja yang akan dipelajari</p>
@@ -230,7 +327,7 @@
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
-    <div class="col-3 p-0" >
+    <div class="col-3 p-0 desktop-display">
         @if(session('success'))
             <!-- ALERT MESSAGE -->
             <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
@@ -330,21 +427,35 @@
         <div class="course-content" id="course-online" style="margin-top:2vw">
                 <div class="row m-0 p-0">
                     @foreach($courseSuggestions as $course)
-                    <div class="col-4 p-0" >
+                    <div class="col-12 col-md-4 p-0" >
                         <div style="display: flex;@if($loop->iteration % 3 == 1) justify-content:flex-start @elseif ($loop->iteration % 3 == 2)justify-content:center @elseif ($loop->iteration % 3 == 0) justify-content:flex-end @endif">
                             <!-- START OF ONE GREEN COURSE CARD -->
+                            @if ($course->courseType->type == "Course")
                             <div class="course-card-green">
+                            @elseif ($course->courseType->type == "Woki")
+                                <div class="course-card-red">
+                            @elseif ($course->courseType->type == "Bootcamp")
+                                <div class="course-card-blue">
+                            @endif
                                 <div class="container">
-                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
-                                    <div class="top-left card-tag small-text">Skill Snack</div>
+                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid online-course-image"  style="object-fit:cover;border-radius:10px 10px 0px 0px;" alt="Course's thumbnail not available..">
+                                    <div class="top-left card-tag small-text">
+                                    @if ($course->courseType->type == "Course")
+                                    Skill-Snack
+                                    @elseif ($course->courseType->type == "Woki")
+                                    Woki
+                                    @elseif ($course->courseType->type == "Bootcamp")
+                                    Bootcamp
+                                    @endif
+                                    </div>
                                     <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
                                         <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
                                     </div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="height:4.5vw">
+                                    <div class="height-online-card">
                                         <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                            <a href="/online-course/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
+                                            <a href="/online-course/{{$course->title}}" class="normal-text-card" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
                                             <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                         </div>
                                         @foreach ($course->hashtags as $tag)

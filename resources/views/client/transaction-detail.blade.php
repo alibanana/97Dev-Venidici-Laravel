@@ -26,7 +26,7 @@
 @endif
 <!-- START OF POPUP COURSE CLAIMED -->
 <div id="payment-success" class="overlay" style="overflow:scroll">
-    <div class="popup course-claim-margin" style="width: 35%;">
+    <div class="popup " id="course-claim-margin" style=>
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
@@ -184,12 +184,12 @@
                 @else
                 <!-- ONE WOKI CARD -->
                 <div style="display:flex;margin-top:1vw">
-                    <div class="cart-card-grey">
+                    <div class="cart-card-grey full-width">
                         <div style="display:flex;align-items:center;width:70%">
-                            <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                            <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                             <div style="margin-left:1vw">
-                                <div style="display:flex;align-items:flex-start;width:18vw; ">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                <div class="cart-title" >
+                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
                                     @if($cart->withArtOrNo)
                                     <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-{{$cart->id}}" data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
                                     @endif
@@ -208,13 +208,13 @@
                         </div>
                         <div style="display:flex;align-items:center">
                             @if ($cart->withArtOrNo)
-                                <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
-                                    <p style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+                                <div style="display:flex;align-items:center;margin-right:2vw" >
+                                    <p class="quantity"  style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;padding-left:1vw">
                                     {{$cart->qty}}
                                     </p>
                                 </div>
                             @endif
-                            <div style="width:7.5vw;text-align:right">
+                            <div class="margin-right-shipment" style="width:7.5vw;text-align:right">
                                 @if($cart->withArtOrNo)
                                 <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
 
@@ -317,7 +317,7 @@
                         <div style="text-align: center;">
                             <p class="small-text" style="margin-bottom:1vw;font-family:Rubik Medium;color:#3B3C43">QRIS Payment</p>
                             <div style="display:flex;justify-content:center">
-                                <img src="{{$payment_object['data']['attributes']['paymentMethod']['instructions']['imageUrl']}}" style="width:12vw" alt="" class="img-fluid">                                    
+                                <img src="{{$payment_object['data']['attributes']['paymentMethod']['instructions']['imageUrl']}}" alt="" class="img-fluid image-qris">                                    
                             </div>
                         </div>
                     </div>
