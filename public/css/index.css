@@ -1714,6 +1714,14 @@ html, body {
     z-index:99;
     margin-left:0px
 }
+.review-completed-course{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+    border-radius: 10px;
+    width:35vw;
+    height:24vw;
+    padding:2vw
+}
 
 
 
@@ -2024,6 +2032,20 @@ html, body {
         
     }
     /* END OF LEARN MOBILE VIEW */
+
+    /* START MOBILE COMPLETED REVIEW SECTION */
+    .review-completed-course{
+        background: #FFFFFF;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+        border-radius: 10px;
+        width:90vw;
+        height:60vw;
+        padding:2vw
+    }
+    #pt-review-completed-course{
+        padding-top: 3vw;
+    }
+    /* END OF MOBILE COMPLETED REVIEW SECTION */
     #card-tag-fontsize{
         font-size:3vw;
     }

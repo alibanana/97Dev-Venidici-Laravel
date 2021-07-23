@@ -46,9 +46,9 @@ class AssessmentController extends Controller
     // Shows the Assessment Completed page.
     public function completedIndex(Request $request, $course_id) {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $this->resetNavbarData();
 
         $notifications = $this->notifications;

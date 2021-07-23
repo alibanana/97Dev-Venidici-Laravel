@@ -11,7 +11,7 @@
 
     <div class="row m-0 page-container" style="padding-top:12vw;padding-bottom:8vw">
         <!-- START OF LEFT CONTENT -->
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <p class="medium-heading" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#2B6CAA">Good work!</p>
             <div style="display:flex;justify-content:space-between">
                 <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#3B3C43">Kamu telah menyelesaikan course ini</p>
@@ -46,7 +46,7 @@
         <!-- END OF LEFT CONTENT -->
 
         <!-- START OF RIGHT CONTENT -->
-        <div class="col-6" style="display:flex;justify-content:flex-end">
+        <div class="col-12 col-md-6" id="pt-review-completed-course" style="display:flex;justify-content:flex-end">
             @if($userHasReviewed != null)
 
             <div style="padding-left:5vw">
@@ -85,7 +85,7 @@
                 </a>
             </div>
             @else
-            <div style="background: #FFFFFF;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);border-radius: 10px;width:35vw;height:24vw;padding:2vw">
+            <div class="review-completed-course" >
                 
                 <p class="sub-description" style="font-family: Rubik Medium;margin-bottom:0.5vw;margin-right:3vw;color:#3B3C43">Bagaimana course ini untuk kamu?</p>
                 <form action="{{ route('customer.review.store') }}" id="review-section" method="POST">
