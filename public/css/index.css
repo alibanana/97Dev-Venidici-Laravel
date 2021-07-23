@@ -1892,14 +1892,14 @@ html, body {
         display: block !important;
     }
     #cart_icon .counter[data-count]:after{
-        min-width: 4vw;
-        font-size: 3vw;
-        height:4vw
+        min-width: 3vw;
+        font-size: 2.5vw;
+        height:3vw
     }
     #notification_icon .counter[data-count]:after{
-        min-width: 4vw;
-        font-size: 3vw;
-        height:4vw
+        min-width: 3vw;
+        font-size: 2.5vw;
+        height:3vw
     }
 }
 
