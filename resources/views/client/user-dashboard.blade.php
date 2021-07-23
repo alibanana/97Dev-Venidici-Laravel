@@ -360,7 +360,7 @@
 
 <!-- START OF POPUP POINT EXPLANATION-->
 <div id="points" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:50% !important">
+    <div class="popup" id="voucher-dashboard" style="width:50%">
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
@@ -540,7 +540,7 @@
 <!-- END OF POPUP INTERESTS-->
 
 <!-- START OF TOP SECTION -->
-<div class="row m-0 page-container" style="padding-top:9vw"> 
+<div class="row m-0 page-container desktop-display" style="padding-top:9vw"> 
     @if(Auth::user()->email_verified_at == null)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
@@ -570,7 +570,7 @@
     @endif
 </div>
 
-<div class="row m-0 page-container" style="padding-top:1.5vw;">
+<div class="row m-0 page-container desktop-display" style="padding-top:1.5vw;">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
         <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
             <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
@@ -648,9 +648,110 @@
 </div>
 <!-- END OF TOP SECTION -->
 
+<!-- START MOBILE TOP SECTION -->
+<div class="m-0 page-container pb-0 mobile-display" style="background-color:#2B6CAA;display:none"> 
+    <div class="" style="color:white;font-family: Helvetica Bold;font-size:5vw;">User Dashboard</div>
+    @if(Auth::user()->email_verified_at == null)
+    <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
+        <!-- ALERT MESSAGE -->
+        <div class="alert alert-warning alert-dismissible fade show "  style="width:100%;text-align:center;margin-bottom:0px;font-size:2.5vw;padding-top:2vw;height:10vw"role="alert">
+            Email kamu belum di verifikasi. Belum dapat email? 
+            <span style="display: inline-block;">
+                <form method="POST" action="{{ route('verification.send') }}">
+                @csrf
+                <button type="submit" onclick="openLoading()" style="background: none;border:none;color:#2B6CAA">
+                    Kirim ulang email
+                </button>
+                </form>
+            </span>
+            <button type="button" style="top: -3vw !important;;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!-- END OF ALERT MESSAGE -->
+    </div>
+    @elseif(!Auth::user()->isProfileUpdated)
+    <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
+        <!-- ALERT MESSAGE -->
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+            Kamu belum melengkapi profile. <strong><a href="#edit-profile">Klik disini</a></strong> untuk melengkapi.
+            <button type="button" style="top:-13px" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!-- END OF ALERT MESSAGE -->
+    </div>
+    @endif
+</div>
+
+<div class="row m-0 page-container mobile-display" style="background-color:#2B6CAA;padding:9vw 0vw;display:none">
+    <div class="col-12 p-0" style="display:flex;justify-content:center">
+        <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:35vw;padding:3vw 1.5vw;width:92vw;display:flex;align-items:center">
+            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:27vw;height:27vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
+            <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
+                <div style="display:flex;justify-content:space-between;align-items:">
+                    <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{Auth::user()->name}}</p> 
+                    <div class="dropdown show p-0" >
+                        
+                        <a class="small-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                        <!--<a class="small-heading" style="color:grey;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>-->
+
+
+                        <div class="dropdown-menu "  aria-labelledby="editDropdown" style="border-radius:10px;padding:0px;min-width:35vw !important;margin-right:27vw">
+                            <div class="edit-item" style="border-radius:10px 10px 0px 0px;padding:0vw 3vw !important" >
+                                <a href="#edit-profile" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Edit Profile</span></a>   
+                            </div>
+                            <div class="edit-item" style="padding:0vw 3vw !important">
+                                <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
+                            </div>
+                            <div class="edit-item" style="padding:0vw 3vw !important">
+                                <a href="#my-interests" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-heart"></i> <span style="margin-left:0.8vw">My interests</span></a>   
+                            </div>
+                            <div class="edit-item" style="padding:0vw 3vw !important">
+                                <a href="/dashboard/redeem-vouchers" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-tags"></i> <span style="margin-left:0.55vw">Vouchers</span></a>   
+                            </div>
+                            <div class="edit-item" style="border-radius:0px 0px 10px 10px;padding:0vw 3vw !important">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" style="background:none;border:none">
+                                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-sign-out-alt"></i> <span style="margin-left:0.84vw">Log out</span></p>   
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <div style="border-top: 1.5px solid #F4C257;border-bottom: 1.5px solid #F4C257;border-left: 1.5px solid #F4C257;border-radius: 5px 0px 0px 5px;padding:0.2vw 0.5vw">
+                        <div style="display: flex;flex-direction: column;justify-content: center;">
+                            <p style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;line-height: 2vw !important;font-size:2.5vw"> <i class="fas fa-star" style=""></i> <span>{{$usableStarsCount}} Stars</span></p>
+                        </div>
+                    </div>
+                    <div style="display: flex;flex-direction: column;justify-content: center;border: 1.5px solid #F4C257;border-radius:0px 5px 5px 0px;background-color:#F4C257;padding:0.2vw" >
+                            
+                        <p style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;color:#F4C257;line-height: 2vw !important;font-size:2.5vw">                        
+                            <a href="#points">
+                                <i class="fas fa-question-circle normal-text" style="color:#FFFFFF;"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <p style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:2vw;font-size:2.5vw">{{Auth::user()->email}}</p>   
+                <p style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.2vw;font-size:2.5vw">Referral Code: <span style="color:#2B6CAA;font-family:Rubik Medium"> {{Auth::user()->userDetail->referral_code}}</span></p>   
+
+                <div style="display:flex;align-items:center;margin-top:2vw">
+                    @foreach(Auth::user()->hashtags as $hashtag)
+                    <p style="font-family:Rubik Medium;color:{{$hashtag->color}};background-color:#EEEEEE;border-radius:10px;font-size:2.5vw;padding:0.5vw 1.5vw;margin-bottom:0px;@if($loop->iteration != 1) margin-left:1vw @endif">{{$hashtag->hashtag}}</p>
+                    @endforeach
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- END OF MOBILE TOP SECTION -->
 
 <!-- START OF MIDDLE SECTION -->
-<div class="row m-0 page-container-inner " data-wow-delay="0.6s" style="padding-top:4vw;padding-bottom:4vw">
+<div class="row m-0 page-container-inner" data-wow-delay="0.6s" >
     <div class="col-12 p-0" style="">
         <div style="display:flex">
             <p id="JadwalLivePelatihanButton" class="sub-description blue-text-underline blue-text-underline-active user-links" onclick="changeContent(event, 'live-pelatihan')"  style="font-family:Rubik Medium;cursor:pointer;margin-bottom:0px">Jadwal Live Workshop</p>
@@ -756,7 +857,7 @@
                                 </div>
                             </div>
                             <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                                <div class="progress progress-bar-vertical" style="background: rgba(43, 108, 170, 0.3);position:relative">
+                                <div class="progress progress-bar-vertical" id="progress-pelatihan" style="background: rgba(43, 108, 170, 0.3);position:relative">
                                     <p style="position:absolute;left: @if($userCourseProgress[$course->id] == 100) 35% @else 40% @endif;top:35%" class="normal-text">{{ $userCourseProgress[$course->id] }}%</p>
                                     <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ $userCourseProgress[$course->id] }}%;">
                                     </div>
@@ -904,7 +1005,7 @@
 
 <!-- START OF SARAN KAMI SECTION -->
 @if(count($courseSuggestions) != 0)
-<div class="row m-0 page-container-inner" style="padding-top:2vw;padding-bottom:6vw">
+<div class="row m-0 page-container-inner desktop-display" >
     <div class="col-12 p-0" style="text-align:center">
         <p class="small-heading" style="font-family:Rubik Medium;margin-bottom:0px;color:#3B3C43">Saran kelas dari kami</p>
     </div>
@@ -933,7 +1034,7 @@
                                 <div class="course-card-blue" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif">
                             @endif
                                 <div class="container">
-                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw"
+                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid online-course-image" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw"
                                         alt="Image not available..">
                                     <div class="top-left card-tag small-text">
                                         @if ($course->courseType->type == "Course")
@@ -958,7 +1059,7 @@
                                                 <a href="/woki/{{ $course->title }}" class="normal-text"
                                                     style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                             @elseif ($course->courseType->type == 'Bootcamp')
-                                                <a href="/bootcamp/{{ $course->id }}" class="normal-text"
+                                                <a href="/bootcamp/{{ $course->title }}" class="normal-text"
                                                     style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                             @endif
                                             <!-- <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i> -->
@@ -1031,7 +1132,7 @@
                                         @elseif ($course->courseType->type == 'Woki')
                                             <a href="/woki/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                         @elseif ($course->courseType->type == 'Bootcamp')
-                                            <a href="/bootcamp/{{ $course->id }}" class="course-card-button normal-text">Enroll Now</a>
+                                            <a href="/bootcamp/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                         @endif
                                     </div>
                                 </div>
@@ -1051,7 +1152,7 @@
 
             </div>
             <a class="carousel-control-prev"   data-bs-target="#saran-carousel" style="width:2.5vw;" role="button"data-bs-slide="prev">
-                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image " style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
             <a class="carousel-control-next"   data-bs-target="#saran-carousel" style="width:2.5vw;"  role="button"data-bs-slide="next">
@@ -1064,6 +1165,164 @@
 </div>
 @endif
 <!-- END OF SARAN KAMI SECTION -->
+
+<!-- START MOBILE SARAN KAMI SECTION -->
+<div class="row m-0 mobile-display" style="padding-top:2vw 5vw;display:none">
+    <div class="col-12 p-0" style="text-align:center">
+        <p class="small-heading" style="font-family:Rubik Medium;margin-bottom:0px;color:#3B3C43">Saran kelas dari kami</p>
+    </div>
+    <div class="col-12 p-0" style="margin-top:3vw">
+        <div id="saran-carousel-mobile" class="carousel slide" data-interval="5000" data-ride="carousel">
+            <div class="carousel-inner" style="padding: 0vw 3.5vw;">
+                @php $card_counter = 0; @endphp
+                @foreach ($courseSuggestions as $course)
+                    @php $card_counter++; @endphp
+                    
+                    @if ($loop->first)
+                        <div class="carousel-item active" >
+                            <div style="display:flex;justify-content:center">
+                    @elseif ($card_counter == 1)
+                        <div class="carousel-item" >
+                            <div style="display:flex;justify-content:center">
+                    @endif
+                
+                        <div>
+                            <!-- START OF ONE COURSE CARD -->
+                            @if ($course->courseType->type == "Course")
+                                <div class="course-card-green" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif" >
+                            @elseif ($course->courseType->type == "Woki")
+                                <div class="course-card-red" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif">
+                            @elseif ($course->courseType->type == "Bootcamp")
+                                <div class="course-card-blue" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif">
+                            @endif
+                                <div class="container">
+                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw"
+                                        alt="Image not available..">
+                                    <div class="top-left card-tag small-text">
+                                        @if ($course->courseType->type == "Course")
+                                        Skill-Snack
+                                        @elseif ($course->courseType->type == "Woki")
+                                        Woki
+                                        @elseif ($course->courseType->type == "Bootcamp")
+                                        Bootcamp
+                                        @endif
+                                    </div>
+                                </div>
+                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                                    <div style="height:15vw">
+                                        <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
+                                            @if ($course->courseType->type == 'Course')
+                                                <a href="/online-course/{{ $course->title }}" class=""
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                            @elseif ($course->courseType->type == 'Woki')
+                                                <a href="/woki/{{ $course->title }}" class=""
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                            @elseif ($course->courseType->type == 'Bootcamp')
+                                                <a href="/bootcamp/{{ $course->id }}" class=""
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                            @endif
+                                            <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i>
+                                        </div>
+                                        @foreach ($course->hashtags as $tag)
+                                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
+                                        @endforeach
+                                    </div>
+                                    <div class="collapse" id="courses-collapse{{ $loop->iteration }}" style="margin-top:1vw">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
+                                    </div>
+                                    <div style="display: flex;justify-content:space-between;margin-top:1vw">
+                                        <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
+                                            @foreach($course->teachers as $teacher)
+                                                @if ($loop->last && count($course->teachers) != 1)
+                                                dan
+                                                @elseif (!$loop->first)
+                                                ,
+                                                @endif
+                                                {{$teacher->name}}
+                                            @endforeach
+                                            </p>
+                                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
+                                            @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                                @if ($course->total_duration)
+                                                    {{ explode(',', $course->total_duration)[0] }} mins
+                                                @else
+                                                    - mins
+                                                @endif
+                                            @elseif ($course->courseType->type == 'Woki')
+                                                @if ($course->wokiCourseDetail->event_duration)
+                                                    {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                                @else
+                                                    - mins
+                                                @endif
+                                            @endif
+                                        </p>
+                                    </div>
+                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
+                                        <div style="display: flex;justify-content:center;margin-left:1vw">
+                                            @for ($i = 1; $i < 6; $i++)
+                                                @if ($i <= $course->average_rating)
+                                                    @if ($i == 1)
+                                                        <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                                    @else
+                                                        <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                                    @endif
+                                                @else
+                                                    @if ($i == 1)
+                                                        <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                                                    @else
+                                                        <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                                    @endif
+                                                @endif
+                                            @endfor
+                                        </div>
+                                    </div>
+                                    <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                        {{-- <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                        <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a> --}}
+                                        <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
+                                        @if ($course->price == 0)
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                        @else
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                        @endif
+                                        @if ($course->courseType->type == 'Course')
+                                            <a href="/online-course/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
+                                        @elseif ($course->courseType->type == 'Woki')
+                                            <a href="/woki/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
+                                        @elseif ($course->courseType->type == 'Bootcamp')
+                                            <a href="/bootcamp/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END OF ONE COURSE CARD -->
+                        </div>
+                        @if ($loop->last || $card_counter == 1)
+                            </div>
+                        </div>
+                        @endif
+
+                        @php
+                            $new_carousel_item = false;
+                            if ($card_counter == 1) $card_counter = 0;
+                        @endphp
+                    @endforeach
+
+            </div>
+            <a class="carousel-control-prev"   data-bs-target="#saran-carousel-mobile" style="width:2.5vw;" role="button"data-bs-slide="prev">
+                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image " class="carousel-fontsize-left"  alt="NEXT">
+                <span class="visually-hidden">Prev</span>
+            </a>
+            <a class="carousel-control-next"   data-bs-target="#saran-carousel-mobile" style="width:2.5vw;"  role="button"data-bs-slide="next">
+                <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" class="carousel-fontsize-right"  alt="NEXT">
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>  
+
+    </div>
+</div>
+<!-- END OF MOBILE SARAN KAMI SECTION -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 

@@ -359,21 +359,21 @@
 <!-- start mobile woki section -->
 <div class="mobile-display" style="display:none">
     <!-- START OF TOP SECTION -->
-    <div class="row m-0 page-container" style="background-color:#CE3369">
+    <div class="row m-0 page-container" style="background-color:white">
         <div class="col-12 p-0">
             <div style="padding-top:12vw;margin-left:-0.5vw" class="wow fadeInUp" data-wow-delay="0.3s">
                 <img src="/assets/images/client/Woki_Logo.png" style="width:19vw;margin-left:-1.3vw" class="img-fluid" alt="Image 1">
-                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1vw;font-size:7vw">Hi! I’m Woki</p>
-                <p style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:3vw;font-size:3vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
+                <p style="font-family: Rubik Bold;color:#CE3369;white-space:pre-line;line-height:6vw;margin-top:1vw;font-size:7vw">Hi! I’m Woki</p>
+                <p style="font-family: Rubik Medium;color:#CE3369;white-space:pre-line;padding-top:0vw;line-height:3vw;font-size:3vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
                 <div class="row m-0">
                     <div class="col-12 p-0">
-                        <div style="margin-top:0.5vw;text-align:center;padding-bottom:12vw">
-                            <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;font-size:3vw">Explore our programs </p>
-                            <div style="display:flex;justify-content:center;align-items:center;">
+                        <div style="margin-top:0.5vw;text-align:left;padding-bottom:12vw">
+                            <p class="bigger-text" style="font-family: Rubik Bold;color:#CE3369;font-size:3vw">Explore our programs </p>
+                            <div style="display:flex;justify-content:flex-start;align-items:center;">
                                 <a href="/for-public/online-course" class="normal-text blue-link" style="font-family:Rubik Medium;margin-right:1.5vw;width:20vw;font-size:3.2vw">
                                     Skill Snack
                                 </a>
-                                <a href="/for-public/woki" class="normal-text red-link red-link-active" style="font-family:Rubik Medium;width:20vw;font-size:3.2vw">
+                                <a href="/for-public/woki" class="normal-text red-link red-link-active" style="font-family:Rubik Medium;width:20vw;font-size:3.2vw;text-align:center">
                                     Woki
                                 </a>
                                 <!-- <a href="/for-public/bootcamp" class="normal-text bootcamp-link" style="font-family:Rubik Medium;width:20vw;margin-left:1.5vw;font-size:3.2vw">

@@ -98,7 +98,7 @@
 <!-- END OF POPUP COURSE BOUGHT -->
 
 <div class="row m-0" style="padding-bottom:4vw;padding-top:11vw">
-    <div class="col-md-12 p-0" style="padding-bottom:3vw">
+    <div class="col-12 p-0" style="padding-bottom:3vw">
         <div class="page-container">
             <div style="display:flex;align-items:center">
                 <img src="/assets/images/client/xfers_logo_alt.png" class="img-fluid xfers-image" style="" alt="">
@@ -119,27 +119,31 @@
                             </div>
                         </div>
                         <!-- END OF ALERT MESSAGE -->
+                        
                     </div>
                 @endif
-                </div>
             </div>
-            @if($invoice->status == 'pending')
-            <div class="alert alert-dismissible fade show mobile-display"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF;display:none"role="alert">
-                <div style="display:flex;align-items:center">
-                    <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
-                    <?php
-                    $date = explode('T', $payment_object['data']['attributes']['expiredAt']);
-                    $time = explode('+', $date[1]);
-                    ?>
+            
+            
+            
+        </div>
+    </div>
+    <div class="col-12 mobile-display" style="padding-bottom:3vw;display:none">
+        <div class="alert alert-dismissible fade show"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
+            <div style="display:flex;align-items:center">
+                <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
+                <?php
+                $date = explode('T', $payment_object['data']['attributes']['expiredAt']);
+                $time = explode('+', $date[1]);
+                ?>
                 <p style="margin-bottom:0px;margin-left:1vw" class="very-small-text">
                     Selesaikan pembayaran anda sebelum  {{$date[0]}} {{$time[0]}} atau proses pembayaran akan ditutup.
                 </p>
             </div>
-            @endif
         </div>
     </div>
-    <div class="col-md-8 p-0" style="">
-        <div class="page-container-left" style="">
+    <div class="col-md-8 col-xs-12 p-0" style="">
+        <div class="page-container-left" style="padding-top:3vw;paading-right:9vw">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Isi Keranjang</p>
             <!-- START OF ITEM LIST -->
 
@@ -250,7 +254,7 @@
         </div>
 
     </div>  
-    <div class="col-md-4 p-0 ">
+    <div class="col-md-4 col-xs-12 p-0 ">
         <div class="page-container-right" style="padding-top:3vw"> 
             @if (session('message'))
                 <!-- ALERT MESSAGE -->

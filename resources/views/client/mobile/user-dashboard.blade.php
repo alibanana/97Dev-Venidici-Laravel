@@ -642,7 +642,7 @@
 
 
 <!-- START OF MIDDLE SECTION -->
-<div class="row m-0 page-container-inner " data-wow-delay="0.6s" style="padding-top:4vw;padding-bottom:4vw">
+<div class="row m-0  " data-wow-delay="0.6s" style="padding:4vw 5vw">
     <div class="col-12 p-0" style="">
         <div style="display:flex">
 
@@ -1026,7 +1026,7 @@
 
 
 <!-- START OF SARAN KAMI SECTION -->
-<div class="row m-0 page-container-inner" style="padding-top:2vw;padding-bottom:6vw">
+<div class="row m-0 " style="padding-top:2vw 5vw">
     <div class="col-12 p-0" style="text-align:center">
         <p class="small-heading" style="font-family:Rubik Medium;margin-bottom:0px;color:#3B3C43">Saran kelas dari kami</p>
     </div>
@@ -1068,17 +1068,17 @@
                                     </div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="height:6vw">
+                                    <div style="height:15vw">
                                         <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                             @if ($course->courseType->type == 'Course')
-                                                <a href="/online-course/{{ $course->id }}" class="normal-text"
-                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
+                                                <a href="/online-course/{{ $course->id }}" class=""
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                             @elseif ($course->courseType->type == 'Woki')
-                                                <a href="/woki/{{ $course->id }}" class="normal-text"
-                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
+                                                <a href="/woki/{{ $course->id }}" class=""
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                             @elseif ($course->courseType->type == 'Bootcamp')
-                                                <a href="/bootcamp/{{ $course->id }}" class="normal-text"
-                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
+                                                <a href="/bootcamp/{{ $course->id }}" class=""
+                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                             @endif
                                             <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i>
                                         </div>
@@ -1157,14 +1157,14 @@
                             </div>
                             <!-- END OF ONE COURSE CARD -->
                         </div>
-                        @if ($loop->last || $card_counter == 2)
+                        @if ($loop->last || $card_counter == 1)
                             </div>
                         </div>
                         @endif
 
                         @php
                             $new_carousel_item = false;
-                            if ($card_counter == 2) $card_counter = 0;
+                            if ($card_counter == 1) $card_counter = 0;
                         @endphp
                     @endforeach
 

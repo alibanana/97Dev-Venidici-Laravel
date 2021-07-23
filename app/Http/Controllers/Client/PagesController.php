@@ -88,7 +88,7 @@ class PagesController extends Controller
 
             $view = 'client/index';
             if ($agent->isPhone() || $agent->isTablet())
-                $view = 'client/mobile/under-construction';
+                $view = 'client/mobile/index';
 
             return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
                 'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'cart_count', 'notifications', 'transactions',
@@ -97,7 +97,7 @@ class PagesController extends Controller
 
         $view = 'client/index';
         if ($agent->isPhone() || $agent->isTablet())
-            $view = 'client/mobile/under-construction';
+            $view = 'client/mobile/index';
 
         return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
             'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'pengajar_positions', 'footer_reviews'));

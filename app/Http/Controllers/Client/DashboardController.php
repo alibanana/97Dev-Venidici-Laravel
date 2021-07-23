@@ -51,7 +51,7 @@ class DashboardController extends Controller
     // Shows the client User Dashboard page.
     public function index(Request $request)
     {
-        $agent = new Agent();
+        // $agent = new Agent();
         // if($agent->isPhone()){
         //     return view('client/mobile/under-construction');
         // }
@@ -138,8 +138,7 @@ class DashboardController extends Controller
             'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
             'footer_reviews');
 
-        if($agent->isPhone())
-            return view('client/mobile/user-dashboard', $viewData);
+        
 
         return view('client/user-dashboard', $viewData);
     }

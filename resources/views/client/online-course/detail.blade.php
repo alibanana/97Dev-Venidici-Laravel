@@ -161,7 +161,7 @@
                 <div class="row m-0" style="padding-top:2vw">
                     @foreach($course->courseFeatures as $features)
 
-                    <div class="col-6" style="@if($loop->iteration > 2) margin-top:1vw @endif">
+                    <div class="col-12 col-md-6" style="@if($loop->iteration > 2) margin-top:1vw @endif">
                         <div style="display:flex;align-items:baseline">
                             <i style="color:#67BBA3" class="fas fa-check-circle normal-text"></i>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-left:0.5vw;margin-bottom:0px">{{$features->feature}}</p>
@@ -197,7 +197,7 @@
 
             <!-- START OF ONE LECTURE -->
             <div style="display:flex;margin-top:2vw;align-items:flex-start">
-                <img src="{{ asset($teacher->image) }}" style="width:5vw;height:5vw;object-fit:cover;filter: drop-shadow(0px 10px 20px rgba(31, 32, 65, 0.1));border-radius:10px;border:2px solid #F2F2F2" class="img-fluid" alt="">
+                <img src="{{ asset($teacher->image) }}" id="image-mobile-lecture" style="width:5vw;height:5vw;object-fit:cover;filter: drop-shadow(0px 10px 20px rgba(31, 32, 65, 0.1));border-radius:10px;border:2px solid #F2F2F2" class="img-fluid" alt="">
                 <div style="margin-left:1vw">
                     <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">{{$teacher->name}}</p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#000000">{{$teacher->description}}</p>
@@ -421,7 +421,7 @@
 
     @if(Auth::check() && count($courseSuggestions) != 0)
     <!-- START OF RECOMMENDED SECTION -->
-    <div class="col-12" style="margin-top:8vw">
+    <div class="col-12 p-2" style="margin-top:8vw">
         <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;">Pilihan kelas lainnya untuk kamu</p>
         <!-- ONLINE COURSE -->
         <div class="course-content" id="course-online" style="margin-top:2vw">
@@ -459,7 +459,7 @@
                                             <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                         </div>
                                         @foreach ($course->hashtags as $tag)
-                                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
+                                            <a class="small-text" id="card-tag-fontsize" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
                                         @endforeach
                                     </div>
                                     <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">

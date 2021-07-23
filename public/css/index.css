@@ -231,8 +231,7 @@ html, body {
     padding-right:8.5vw
 }
 .page-container-inner{
-    padding-left:18vw;
-    padding-right:18vw
+    padding:4vw 18vw !important;
 }
 /* end of page padding */
 
@@ -1705,9 +1704,21 @@ html, body {
 .height-online-card{
     height:4.5vw ;
 }
+.carousel-fontsize-right{
+    width:2vw ;
+    z-index:99;
+    margin-right:0px
+}
+.carousel-fontsize-left{
+    width:2vw ;
+    z-index:99;
+    margin-left:0px
+}
+
 
 
 @media only screen and (max-width: 767px) {
+
     .image-qris{
         width:40vw !important
     }
@@ -1888,17 +1899,136 @@ html, body {
         width:5vw !important;
     }
     /* end of transcation detail mobile popup */
+
     /* online course detail card */
     .online-course-image{
         width:100% !important;
-        height:30vw !important;
+        height:35vw !important;
     }
     .height-online-card{
         height:10vw !important;
     }
+    .course-detail-card-green{
+        padding:2vw 4vw
+    }
+    #image-mobile-lecture{
+        min-width: 11vw !important;
+        height: 11vw !important
+    }
     /* end of online coursee detail card */
+
+    /* start of woki detail mobile */
+    .perlengkapan-card-red{
+        
+        height:34vw;
+        width:45vw
+    }
+    .course-detail-card-red{
+        
+        padding:2vw 4vw
+    }
+    /* end of woki detail mobile */
+
+    /* start mobile dashboard voucher */
+    .voucher-card-active{
+        width:48vw;
+        height:24vw;
+    }
+    .voucher-card-expired{
+        width:48vw;
+        height:24vw;    
+    }
+    .voucher-card-claimed{
+        width:48vw;
+        height:24vw; 
+        }
+    #padding-left-voucher{
+        padding-left:9vw;
+    }
+    /* end of mobile dashboard voucher */
+
+    /* START MOBILE DASHBOARD */
+    .page-container-inner{
+        padding:4vw 5vw !important;
+    }
+    .course-card-red{
+        border: 2px solid #CE3369;
+        border-radius: 10px;
+        width:86vw !important
+    }
+    .course-card-green{
+        border: 2px solid #67BBA3;
+        border-radius: 10px;
+        width:86vw !important
+    }
+    .course-card-blue{
+        border: 2px solid #2B6CAA;
+        border-radius: 10px;
+        width:86vw !important
+    
+    }
+    #voucher-dashboard{
+        width:80% !important;
+
+    }
+    
+    /* END OF MOBILE DASHBOARD */
+    
+    /* START MOBILE PELATIHAN AKTIF SECTION */
+    .blue-bordered-card{
+        height:27vw;
+    
+    }
+    .blue-bordered-card img{
+        height: 100%;
+        width:30vw !important;
+        
+    }
+    .red-bordered-card{
+        height:27vw;
+    }
+    .red-bordered-card img{
+        height: 100%;
+        width:30vw !important;
+        
+     }
+    #progress-pelatihan{
+        height:3.7rem !important
+    }
+    .progress-bar-vertical {
+        width: 18.4vw;
+        
+      }
+
+    /* END OF MOBILE PELATIHAN AKTIF SECTION */
+
+    /* START MOBILE SARAN KELAS DARI KAMI SECTION */
+    .carousel-fontsize-left{
+        width:7vw ;
+        padding-left:3vw;
+        z-index:99;
+        margin-right:0px
+    }
+    .carousel-fontsize-right{
+        width:7vw ;
+        padding-right:3vw;
+        z-index:99;
+        margin-right:0px
+    }
+    /* END OF MOBILE SARAN KELAS DARI KAMI SECTION */
+
+    /* START LEARN MOBILE VIEW */
+    .learn-mobile-video{
+        
+        width:100%;height:60vw;border-radius:10px;display:block;object-fit: cover
+        
+    }
+    /* END OF LEARN MOBILE VIEW */
+    #card-tag-fontsize{
+        font-size:3vw;
+    }
     .sub-description{
-        font-size: 4vw;
+        font-size: 3vw;
         line-height: 4vw;
     }
     .big-heading{
@@ -1917,7 +2047,7 @@ html, body {
         line-height: 6vw;
     }
     .small-text{
-        font-size: 2.5vw;
+        font-size: 3vw;
         line-height: 2.9vw;
     }
     .normal-text{

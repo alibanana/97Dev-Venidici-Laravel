@@ -102,9 +102,9 @@ class AssessmentController extends Controller
     // Shows the Assessment page itself.
     public function show($course_id) {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $assessment = auth()->user()->assessments()->where('course_id', $course_id)->firstOrFail();
         $assessment_pivot = $assessment->pivot;
 

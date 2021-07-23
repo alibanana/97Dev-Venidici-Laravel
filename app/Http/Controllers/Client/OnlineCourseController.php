@@ -144,8 +144,8 @@ class OnlineCourseController extends Controller {
     public function learn($course_title, $content_title) {
         $agent = new Agent();
 
-        if($agent->isPhone())
-            return view('client/mobile/under-construction');
+        // if($agent->isPhone())
+        //     return view('client/mobile/under-construction');
         
         // Get Navbar data.
         $this->resetNavbarData();
