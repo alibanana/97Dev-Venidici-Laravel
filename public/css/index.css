@@ -2045,6 +2045,10 @@ html, body {
     #pt-review-completed-course{
         padding-top: 3vw;
     }
+    .discord-completed-course{
+        height:40vw !important;
+        width:85vw !important
+    }
     /* END OF MOBILE COMPLETED REVIEW SECTION */
     #card-tag-fontsize{
         font-size:3vw;

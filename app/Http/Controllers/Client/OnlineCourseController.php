@@ -51,9 +51,9 @@ class OnlineCourseController extends Controller {
     // Shows the Client's Main Online-Course Page.
     public function index(Request $request) {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $course_categories = CourseCategory::all();
         $courses = new Course;
         if ($request->has('cat')) {

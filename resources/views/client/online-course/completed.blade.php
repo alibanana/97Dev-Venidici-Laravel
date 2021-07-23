@@ -67,7 +67,7 @@
                 </div>
                 <!-- END OF ALERT MESSAGE -->
                 @endif
-                <div style="background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 10px;display:flex;height:15vw">
+                <div class="discord-completed-course" style="background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 10px;display:flex;height:15vw">
                     <img src="/assets/images/client/discord_bg.png" class="img-fluid" style="width:50%" alt="">
                     <div style="width:100%;padding:1.5vw">
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#3B3C43">Join our Discord: Venidici Community</p>
