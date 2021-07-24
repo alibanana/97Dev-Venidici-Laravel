@@ -6,8 +6,8 @@
 @if($invoice->status == 'pending' && $payment_object['data']['attributes']['paymentMethod']['type'] != 'qris')
 <!-- START OF POPUP VA EXPLANATION-->
 <div id="pembayaran-va" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width: 50%;">
-        <a class="close" href="#" >&times;</a>
+    <div class="popup " id="popup-pembayaran-va" style="width: 50%;">
+        <a class="close" id="popup-pembayaran-va-close-button" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
                 <div class="col-12" style="text-align:left;">
@@ -26,7 +26,7 @@
 @endif
 <!-- START OF POPUP COURSE CLAIMED -->
 <div id="payment-success" class="overlay" style="overflow:scroll">
-    <div class="popup course-claim-margin" style="width: 35%;">
+    <div class="popup " id="course-claim-margin" style=>
         <a class="close" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
@@ -64,8 +64,8 @@
 
 <!-- START OF POPUP COURSE BOUGHT -->
 <div id="payment-created" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width: 35%;">
-        <a class="close" href="#" >&times;</a>
+    <div class="popup " id="popup-payment-created" style="width: 35%;">
+        <a class="close" id="popup-payment-close-button" href="#" >&times;</a>
         <div class="content" style="padding:2vw">
             <div class="row m-0">
                 <div class="col-12" style="text-align:center;">
@@ -101,12 +101,12 @@
     <div class="col-12 p-0" style="padding-bottom:3vw">
         <div class="page-container">
             <div style="display:flex;align-items:center">
-                <img src="/assets/images/client/xfers_logo_alt.png" class="img-fluid" style="width:15vw" alt="">
+                <img src="/assets/images/client/xfers_logo_alt.png" class="img-fluid xfers-image" style="" alt="">
                 @if($invoice->status == 'pending')
          
                     <div style="margin-left:4vw">
                         <!-- ALERT MESSAGE -->
-                        <div class="alert alert-dismissible fade show"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
+                        <div class="alert alert-dismissible fade show desktop-display"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
                             <div style="display:flex;align-items:center">
                                 <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
                                 <?php
@@ -119,13 +119,31 @@
                             </div>
                         </div>
                         <!-- END OF ALERT MESSAGE -->
+                        
                     </div>
                 @endif
             </div>
+            
+            
+            
         </div>
     </div>
-    <div class="col-8 p-0" style="">
-        <div class="page-container-left" style="padding-top:3vw;padding-right:9vw">
+    <div class="col-12 mobile-display" style="padding-bottom:3vw;display:none">
+        <div class="alert alert-dismissible fade show"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
+            <div style="display:flex;align-items:center">
+                <i class="fas fa-exclamation-triangle sub-description" style="color:#CE3369"></i>
+                <?php
+                $date = explode('T', $payment_object['data']['attributes']['expiredAt']);
+                $time = explode('+', $date[1]);
+                ?>
+                <p style="margin-bottom:0px;margin-left:1vw" class="very-small-text">
+                    Selesaikan pembayaran anda sebelum  {{$date[0]}} {{$time[0]}} atau proses pembayaran akan ditutup.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-xs-12 p-0" style="">
+        <div class="page-container-left" style="padding-top:3vw;paading-right:9vw">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Isi Keranjang</p>
             <!-- START OF ITEM LIST -->
 
@@ -136,12 +154,12 @@
                 <div style="display:flex;margin-top:1vw" class="cartpage">
                     <input type="hidden" name="product_id" class="product_id normal-text" value="{{$cart->course_id}}" style="font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
 
-                    <div class="cart-card-grey">
+                    <div class="cart-card-grey full-width">
                         <div style="display:flex;align-items:center;width:70%">
-                            <img src="/{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                            <img src="/{{$cart->course->thumbnail}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                             <div style="margin-left:1vw">
-                                <div style="display:flex;align-items:flex-start;width:18vw; ">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;   line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                <div class="cart-title" ">
+                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
                                 </div>
                                 <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px">Kelas oleh
                                 @foreach($cart->course->teachers as $teacher)
@@ -155,7 +173,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div style="display:flex;align-items:center">
+                        <div class="margin-right-shipment" style="display:flex;align-items:center">
                             <div style="width:7.5vw;text-align:right">
                                 @if($cart->course->price == 0)
                                 <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
@@ -170,12 +188,12 @@
                 @else
                 <!-- ONE WOKI CARD -->
                 <div style="display:flex;margin-top:1vw">
-                    <div class="cart-card-grey">
+                    <div class="cart-card-grey full-width">
                         <div style="display:flex;align-items:center;width:70%">
-                            <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid" alt="COURSE THUMBNAIL">
+                            <img src="{{asset($cart->course->thumbnail)}}" style="width:7vw;height:7vw;object-fit:cover;border-radius:10px;" class="img-fluid image-thumbnail" alt="COURSE THUMBNAIL">
                             <div style="margin-left:1vw">
-                                <div style="display:flex;align-items:flex-start;width:18vw; ">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;line-height: 1.4vw;">{{$cart->course->title}}</p>
+                                <div class="cart-title" >
+                                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$cart->course->title}}</p>
                                     @if($cart->withArtOrNo)
                                     <i style="color:#2B6CAA;margin-left:1vw" role="button"  aria-controls="woki-collapse-{{$cart->id}}" data-toggle="collapse" href="#woki-collapse-{{$cart->id}}" class="fas fa-caret-down small-heading"></i>
                                     @endif
@@ -194,13 +212,13 @@
                         </div>
                         <div style="display:flex;align-items:center">
                             @if ($cart->withArtOrNo)
-                                <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
-                                    <p style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;width:3vw;padding-left:1vw">
+                                <div style="display:flex;align-items:center;margin-right:2vw" >
+                                    <p class="quantity"  style="margin-bottom:0px;font-family:Rubik Medium;color:#3B3C43;background: #FFFFFF;border: 2px solid #2B6CAA;border-radius: 5px;padding-left:1vw">
                                     {{$cart->qty}}
                                     </p>
                                 </div>
                             @endif
-                            <div style="width:7.5vw;text-align:right">
+                            <div class="margin-right-shipment" style="width:7.5vw;text-align:right">
                                 @if($cart->withArtOrNo)
                                 <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
 
@@ -236,7 +254,7 @@
         </div>
 
     </div>  
-    <div class="col-4 p-0 ">
+    <div class="col-md-4 col-xs-12 p-0 ">
         <div class="page-container-right" style="padding-top:3vw"> 
             @if (session('message'))
                 <!-- ALERT MESSAGE -->
@@ -309,7 +327,7 @@
                         <div style="text-align: center;">
                             <p class="small-text" style="margin-bottom:1vw;font-family:Rubik Medium;color:#3B3C43">QRIS Payment</p>
                             <div style="display:flex;justify-content:center">
-                                <img src="{{$payment_object['data']['attributes']['paymentMethod']['instructions']['imageUrl']}}" style="width:12vw" alt="" class="img-fluid">                                    
+                                <img src="{{$payment_object['data']['attributes']['paymentMethod']['instructions']['imageUrl']}}" alt="" class="img-fluid image-qris">                                    
                             </div>
                         </div>
                     </div>
@@ -373,7 +391,7 @@
             @if($invoice->status == 'pending')
 
             <!-- CANCEL PAYMENT -->
-            <div style="text-align:center;margin-top:1vw">  
+            <div style="text-align:center;margin-top:3vw">  
                 <form action="{{ route('customer.cart.cancelPayment', $invoice->xfers_payment_id) }}" method="POST">
                 @csrf
                     <p onclick="openLoading()" class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to cancel the payment </p>

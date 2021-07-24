@@ -94,8 +94,8 @@ class WokiController extends Controller
     // Shows the client woki course detail page.
     public function show($course_title) {
         $agent = new Agent();
-        if($agent->isPhone())
-            return view('client/mobile/under-construction');
+        // if($agent->isPhone())
+        //     return view('client/mobile/under-construction');
 
         $course = Course::where('title', $course_title)->firstOrFail();
 

@@ -87,6 +87,7 @@ html, body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 40%;
+    
 }
 .online-course-detail-bg{
     background-image: url("/assets/images/client/Course_Detail_Green_BG.png");
@@ -230,8 +231,7 @@ html, body {
     padding-right:8.5vw
 }
 .page-container-inner{
-    padding-left:18vw;
-    padding-right:18vw
+    padding:4vw 18vw !important;
 }
 /* end of page padding */
 
@@ -1202,6 +1202,8 @@ html, body {
     padding:0vw 1vw
 }
 
+
+
 /* always show scrollbars 
 
 ::-webkit-scrollbar {
@@ -1678,9 +1680,56 @@ html, body {
     align-items:flex-start;
     width:18vw;
 }
+.xfers-image{
+    width:15vw;
+}
+#course-claim-margin{
+    width:35% ;
+    
+}
+.quantity{
+    width:3vw;
+}
+.image-qris{
+    width:12vw !important
+}
+.online-course-image{
+    width:100% !important;
+    height:14vw;
+}
+.normal-text-card{
+    font-size: 1.05vw;
+    line-height:1.4vw;
+}
+.height-online-card{
+    height:4.5vw ;
+}
+.carousel-fontsize-right{
+    width:2vw ;
+    z-index:99;
+    margin-right:0px
+}
+.carousel-fontsize-left{
+    width:2vw ;
+    z-index:99;
+    margin-left:0px
+}
+.review-completed-course{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+    border-radius: 10px;
+    width:35vw;
+    height:24vw;
+    padding:2vw
+}
+
 
 
 @media only screen and (max-width: 767px) {
+
+    .image-qris{
+        width:40vw !important
+    }
     /* notifaction popup mobile */
     .popup-notif{
         margin: 40vw 5vw;        
@@ -1722,6 +1771,11 @@ html, body {
         right: 5px;
     }
     /* end of notifaction popup mobile */
+    /* xfers photo */
+    .xfers-image{
+        width:50vw;
+        margin-bottom:2vw
+    }
     /* start cart mobile */
     .btn-blue-bordered{
         width: 100%;
@@ -1750,7 +1804,7 @@ html, body {
         padding:0vw 4vw;
     }
     .page-container-left{
-        padding-left:4vw !important;
+        padding-left:vw !important;
         padding:0vw 3vw;
         padding-top:11vw;
     }
@@ -1765,7 +1819,7 @@ html, body {
         display: block !important;
     }
     .desktop-display{
-        display:  none !important;
+        display: none !important;
     }
 
     .qty-width{
@@ -1774,7 +1828,10 @@ html, body {
     
     /* end of cart mobile */
     /* start mobile cart_shipment  */
-
+    .loading-background{
+        height:50vw !important;
+        
+    }
     .full-width{
         width:100vw !important;
         padding:0vw !important;
@@ -1812,14 +1869,29 @@ html, body {
     }
     /* end of metode pembayaran mobile */
     /* start transcation detail mobile popup */
-    .popup {
+    /* .popup {
         width:80% !important;
         margin-right:17vw ;
       
-      }
-    .course-claim-margin{
-        margin-right:12vw !important; 
+      } */
+    #popup-payment-created{
+        width:80% !important;
+        margin-right:10vw ;
+      
     }
+    #popup-payment-close-button{
+        right:10px;
+    }
+    #popup-pembayaran-va{
+        width:80% !important;
+    }
+    #popup-pembayaran-va-close-button{
+        right:10px;
+    }
+    #course-claim-margin{
+        width:80% !important;
+        margin-right:10vw !important; 
+    }   
     .popup .content {
         max-height: 50%;
         overflow: auto;
@@ -1831,9 +1903,158 @@ html, body {
     .popup-image-mobile{
         width:15vw !important;
     }
+    .quantity{
+        width:5vw !important;
+    }
     /* end of transcation detail mobile popup */
+
+    /* online course detail card */
+    .online-course-image{
+        width:100% !important;
+        height:35vw !important;
+    }
+    .height-online-card{
+        height:10vw !important;
+    }
+    .course-detail-card-green{
+        padding:2vw 4vw
+    }
+    #image-mobile-lecture{
+        min-width: 11vw !important;
+        height: 11vw !important
+    }
+    /* end of online coursee detail card */
+
+    /* start of woki detail mobile */
+    .perlengkapan-card-red{
+        
+        height:34vw;
+        width:45vw
+    }
+    .course-detail-card-red{
+        
+        padding:2vw 4vw
+    }
+    /* end of woki detail mobile */
+
+    /* start mobile dashboard voucher */
+    .voucher-card-active{
+        width:48vw;
+        height:24vw;
+    }
+    .voucher-card-expired{
+        width:48vw;
+        height:24vw;    
+    }
+    .voucher-card-claimed{
+        width:48vw;
+        height:24vw; 
+        }
+    #padding-left-voucher{
+        padding-left:9vw;
+    }
+    /* end of mobile dashboard voucher */
+
+    /* START MOBILE DASHBOARD */
+    .page-container-inner{
+        padding:4vw 5vw !important;
+    }
+    .course-card-red{
+        border: 2px solid #CE3369;
+        border-radius: 10px;
+        width:86vw !important
+    }
+    .course-card-green{
+        border: 2px solid #67BBA3;
+        border-radius: 10px;
+        width:86vw !important
+    }
+    .course-card-blue{
+        border: 2px solid #2B6CAA;
+        border-radius: 10px;
+        width:86vw !important
+    
+    }
+    #voucher-dashboard{
+        width:80% !important;
+
+    }
+    
+    /* END OF MOBILE DASHBOARD */
+    
+    /* START MOBILE PELATIHAN AKTIF SECTION */
+    .blue-bordered-card{
+        height:27vw;
+    
+    }
+    .blue-bordered-card img{
+        height: 100%;
+        width:30vw !important;
+        
+    }
+    .red-bordered-card{
+        height:27vw;
+    }
+    .red-bordered-card img{
+        height: 100%;
+        width:30vw !important;
+        
+     }
+    #progress-pelatihan{
+        height:3.7rem !important
+    }
+    .progress-bar-vertical {
+        width: 18.4vw;
+        
+      }
+
+    /* END OF MOBILE PELATIHAN AKTIF SECTION */
+
+    /* START MOBILE SARAN KELAS DARI KAMI SECTION */
+    .carousel-fontsize-left{
+        width:7vw ;
+        padding-left:3vw;
+        z-index:99;
+        margin-right:0px
+    }
+    .carousel-fontsize-right{
+        width:7vw ;
+        padding-right:3vw;
+        z-index:99;
+        margin-right:0px
+    }
+    /* END OF MOBILE SARAN KELAS DARI KAMI SECTION */
+
+    /* START LEARN MOBILE VIEW */
+    .learn-mobile-video{
+        
+        width:100%;height:60vw;border-radius:10px;display:block;object-fit: cover
+        
+    }
+    /* END OF LEARN MOBILE VIEW */
+
+    /* START MOBILE COMPLETED REVIEW SECTION */
+    .review-completed-course{
+        background: #FFFFFF;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+        border-radius: 10px;
+        width:90vw;
+        height:60vw;
+        padding:2vw
+    }
+    #pt-review-completed-course{
+        padding-top: 3vw;
+    }
+    .discord-completed-course{
+        height:40vw !important;
+        width:85vw !important
+    }
+    /* END OF MOBILE COMPLETED REVIEW SECTION */
+    #card-tag-fontsize{
+        font-size:3vw;
+    }
     .sub-description{
-        font-size: 4vw;
+        font-size: 3vw;
         line-height: 4vw;
     }
     .big-heading{
@@ -1852,19 +2073,23 @@ html, body {
         line-height: 6vw;
     }
     .small-text{
-        font-size: 1.9vw;
-        line-height: 1.9vw;
+        font-size: 3vw;
+        line-height: 2.9vw;
     }
     .normal-text{
         font-size: 2.5vw;
         line-height: 5vw;
     }
+    .normal-text-card{
+        font-size: 4vw;
+        line-height:4vw;
+    }
     .bigger-text{
         font-size: 3vw;
     }
     .very-small-text{
-        font-size: 1.5vw;
-        line-height: 1.5vw;
+        font-size: 1.8vw;
+        line-height: 2.4vw;
     }
     .navbar-floating{
         display: none

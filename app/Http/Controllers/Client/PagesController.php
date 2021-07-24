@@ -88,7 +88,7 @@ class PagesController extends Controller
 
             $view = 'client/index';
             if ($agent->isPhone() || $agent->isTablet())
-                $view = 'client/mobile/under-construction';
+                $view = 'client/mobile/index';
 
             return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
                 'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'cart_count', 'notifications', 'transactions',
@@ -97,7 +97,7 @@ class PagesController extends Controller
 
         $view = 'client/index';
         if ($agent->isPhone() || $agent->isTablet())
-            $view = 'client/mobile/under-construction';
+            $view = 'client/mobile/index';
 
         return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
             'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'pengajar_positions', 'footer_reviews'));
@@ -140,9 +140,9 @@ class PagesController extends Controller
 
     public function online_course_index(){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {
@@ -155,15 +155,16 @@ class PagesController extends Controller
 
             return view('client/for-public/online-course', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
         }
+
         
         return view('client/for-public/online-course',compact('footer_reviews'));
     }
 
     public function woki_index(){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {

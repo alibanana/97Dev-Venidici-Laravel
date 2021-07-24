@@ -68,7 +68,7 @@
             <div style="text-align:center;margin-top:2vw">
                 <form action="" method="POST">
                     @csrf
-                    <button type="submit" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Konfirmasi Metode Pembayaran</button>                
+                    <button type="submit" class="normal-text btn-blue-bordered btn-blue-bordered-active full-width-button" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Konfirmasi Metode Pembayaran</button>                
                 </form>
             </div>
         </div>

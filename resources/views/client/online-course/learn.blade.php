@@ -12,8 +12,83 @@
     @endforeach
 @endforeach
 <div class="row m-0 page-container course-page-background" style="padding-top:11vw;padding-bottom:10vw">
-    
-    <!-- START OF BANNER SECTION -->
+    <!-- START OF MOBILE DAFTAR PELATIHAN SECTION -->
+    <div class="col-12 p-0 mobile-display" style="margin-top:2vw;display:none;margin-bottom:4vw">
+        <div style="display:flex;justify-content:flex-end">
+            <div class="rounded-card" style="width:100%;height:auto">
+                <div style="padding:1.5vw">
+                    <p class="small-heading" id="card-title" style="color:#3B3C43;font-family:Rubik Medium">Daftar Pelatihan</p>
+                </div>
+                @foreach($sections as $section)
+                <!-- START OF ONE ACCORDION -->
+                <div class="accordion" id="accordion{{$section->id}}">
+                    <div class="accordion-item" >
+                        <h2 class="accordion-header" id="heading{{$section->id}}" style="background: rgba(111, 159, 205, 0.1)">
+                        <button class="accordion-button bigger-text @if($content->section_id != $section->id) collapsed @endif" style="border:none;border-radius:0px;font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$section->id}}" aria-expanded="@if($content->section_id == $section->id) true @else false @endif" aria-controls="collapse{{$section->id}}">
+                            <span class="bigger-text">{{$section->title}}</span>
+                        </button>
+                        </h2>
+
+                        <?php 
+                        $flag=null;
+                        if($loop->last) $flag = true;
+                        ?>
+                        <div id="collapse{{$section->id}}" class="accordion-collapse @if($content->section_id != $section->id) collapse @endif" aria-labelledby="heading{{$section->id}}" data-bs-parent="#accordion{{$section->id}}">
+                            <div class="accordion-body" style="padding:0vw;border:none !important">
+                                @foreach($section->sectionContents as $content_detail)
+                                
+                                <!-- START OF ONE COURSE -->
+                                <a href="/online-course/{{$section->course->title}}/learn/lecture/{{$content_detail->title}}" style="text-decoration:none">
+                                    <div class="course-collapse @if($content_detail->id == $content->id) course-collapse-active @endif">
+                                        <div style="display:flex;justify-content:space-between">
+                                            @php 
+
+                                            $info_users = explode(',', $content_detail->hasSeen);
+                                            $infoHasSeen = FALSE;
+                                            foreach($info_users as $user_id)
+                                            {
+                                            if($user_id == Auth::user()->id)
+                                                $infoHasSeen = TRUE;
+                                            }   
+                                            @endphp
+                                            @if($infoHasSeen)
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$content_detail->title}}</p>
+                                            @else
+                                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">{{$content_detail->title}}</p>
+                                            @endif
+                                            <div style="padding-left:0.5vw">
+                                                <p class="normal-text text-nowrap" style="font-family:Rubik Medium;color:#B3B5C2;margin-bottom:0px">{{floor(($content_detail->duration / 60) % 60)}}:@if(strlen($content_detail->duration % 60) == 1)<span>0</span>@endif{{$content_detail->duration % 60}}</p>
+                                            </div>
+                                        </div>
+                                        @if($infoHasSeen)
+                                        <i style="color:#E2E2E2" class="fas fa-play-circle"></i>
+                                        @else
+                                        <i style="color:#2B6CAA" class="fas fa-play-circle"></i>
+                                        @endif
+                                        @if($loop->last && $flag)
+                                            @if($infoHasSeen)
+                                            <i style="color:#E2E2E2" class="fas fa-question-circle"></i>
+                                            @else
+                                            <i style="color:#2B6CAA" class="fas fa-question-circle"></i>
+                                            @endif
+                                        @endif
+                                    </div>  
+                                </a>
+                                <!-- END OF ONE COURSE -->
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF ONE ACCORDION -->
+                @endforeach
+                
+            </div>
+        </div>
+    </div>
+    <!-- END OF MOBILE DAFTAR PELATIHAN SECTION -->
+
+    <!-- START OF BANNER SECTION -->    
     <div class="col-12 p-0">
         <p class="medium-heading" style="font-family:Rubik Medium;color:#3B3C43;">{{$content->title}}</p>
         <!--<div style="padding-right:6vw">
@@ -24,10 +99,17 @@
     <!-- END OF BANNER SECTION -->
 
     <!-- START OF LEARNING SECTION -->
-    <div class="col-8 p-0">
-        <div style="margin-top:2vw">
+    <div class="col-12 col-md-8 p-0">
+        <div style="margin-top:2vw" class="desktop-display">
             @if ($content->youtube_link)
                 <iframe style="width:100%;height:35vw;border-radius:10px;display:block;object-fit: cover" 
+                    src="{{ $content->youtube_link . '?controls=0' }}" allowfullscreen>
+                </iframe>
+            @endif
+        </div>
+        <div style="margin-top:2vw;display:none" class="mobile-display">
+            @if ($content->youtube_link)
+                <iframe style="width:100%;height:60vw;border-radius:10px;display:block;object-fit: cover" 
                     src="{{ $content->youtube_link . '?controls=0' }}" allowfullscreen>
                 </iframe>
             @endif
@@ -41,7 +123,8 @@
             <div style="margin-top:2vw" class="user-content" id="deskripsi">
                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;">{{$content->description}}</p>
                 @if($assessment != null)
-                    @if($content->id == $last_content_id && $course->course_type_id == 1)
+                    
+                @if($content->id == $last_content_id && $course->course_type_id == 1)
                     <div>
                         <p class="bigger-text"style="font-family:Rubik Medium;text-decoration-color: #F7F7F7;margin-top:1vw;">Assessment</p>
                         <div style="display:flex;justify-content:space-between">
@@ -106,7 +189,7 @@
         </div>
         <!-- END OF DESCRIPTION SECTION -->
     </div>
-    <div class="col-4 p-0" style="margin-top:2vw">
+    <div class="col-4 p-0 desktop-display" style="margin-top:2vw">
         <div style="display:flex;justify-content:flex-end">
             <div class="rounded-card" style="width:23vw;height:auto">
                 <div style="padding:1.5vw">
@@ -129,7 +212,7 @@
                         <div id="collapse{{$section->id}}" class="accordion-collapse @if($content->section_id != $section->id) collapse @endif" aria-labelledby="heading{{$section->id}}" data-bs-parent="#accordion{{$section->id}}">
                             <div class="accordion-body" style="padding:0vw;border:none !important">
                                 @foreach($section->sectionContents as $content_detail)
-                                <?php $last_content_id++; ?>
+                                
                                 <!-- START OF ONE COURSE -->
                                 <a href="/online-course/{{$section->course->title}}/learn/lecture/{{$content_detail->title}}" style="text-decoration:none">
                                     <div class="course-collapse @if($content_detail->id == $content->id) course-collapse-active @endif">

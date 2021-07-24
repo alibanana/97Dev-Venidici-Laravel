@@ -386,7 +386,7 @@
                         </div>
                     </div>
                     <div class="notification-right-blue-border" @if(!$hasSeen) style="background: rgba(43, 108, 170, 0.1) @endif">
-                        <div style="padding:0.6vw 1vw">
+                        <div style="padding:0vw 1vw">
                             
                           <p class="small-text" id="notification-title" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
                           <?php
