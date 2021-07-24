@@ -358,40 +358,31 @@
 
 <!-- start mobile woki section -->
 <div class="mobile-display" style="display:none">
+
     <!-- START OF TOP SECTION -->
-    <div class="row m-0 page-container" style="background-color:white">
-        <div class="col-12 p-0">
-            <div style="padding-top:12vw;margin-left:-0.5vw" class="wow fadeInUp" data-wow-delay="0.3s">
-                <img src="/assets/images/client/Woki_Logo.png" style="width:19vw;margin-left:-1.3vw" class="img-fluid" alt="Image 1">
-                <p style="font-family: Rubik Bold;color:#CE3369;white-space:pre-line;line-height:6vw;margin-top:1vw;font-size:7vw">Hi! I’m Woki</p>
-                <p style="font-family: Rubik Medium;color:#CE3369;white-space:pre-line;padding-top:0vw;line-height:3vw;font-size:3vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
-                <div class="row m-0">
-                    <div class="col-12 p-0">
-                        <div style="margin-top:0.5vw;text-align:left;padding-bottom:12vw">
-                            <p class="bigger-text" style="font-family: Rubik Bold;color:#CE3369;font-size:3vw">Explore our programs </p>
-                            <div style="display:flex;justify-content:flex-start;align-items:center;">
-                                <a href="/for-public/online-course" class="normal-text blue-link" style="font-family:Rubik Medium;margin-right:1.5vw;width:20vw;font-size:3.2vw">
-                                    Skill Snack
-                                </a>
-                                <a href="/for-public/woki" class="normal-text red-link red-link-active" style="font-family:Rubik Medium;width:20vw;font-size:3.2vw;text-align:center">
-                                    Woki
-                                </a>
-                                <!-- <a href="/for-public/bootcamp" class="normal-text bootcamp-link" style="font-family:Rubik Medium;width:20vw;margin-left:1.5vw;font-size:3.2vw">
-                                    Bootcamp
-                                </a> -->
-                                <!--
-                                <a href="#" class="normal-text yellow-link" style="font-family:Rubik Medium;margin-left:1.5vw">
-                                    Sharing Session
-                                </a>
-                                -->
-                            </div>
-                        </div>
-                    </div>
+    <div class="row m-0 page-container"  style="background-color:white;">
+        <div class="col-12 p-0" style="margin-top:5vw">
+            <img src="/assets/images/client/Woki_Pink_Logo.png" style="width:40vw;" class="img-fluid" alt="Image 1">
+            <div style="margin-top:4vw;border-radius:5px;background-color:#CE3369;padding:7vw 5vw" class="woki-fb-bg">
+                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:6vw">Hi! I’m Woki</p>
+                <div style="width:70%">
+                    <p style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:4vw;font-size:3vw;margin-bottom:4vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
                 </div>
-    
+                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:4vw">Explore our programs</p>
+
+                <button onclick="window.location.href='/for-public/online-course';" class="blue-link " style="font-family:Rubik Medium;margin-right:1.5vw;min-width:25vw;font-size:3vw;">
+                    Skill Snack
+                </button> <br>
+                <div style="margin-top:3vw">
+                    <button onclick="window.location.href='/for-public/woki';"class="red-link red-link-active" style="font-family:Rubik Medium;min-width:25vw;font-size:3vw">
+                        Woki
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
+    <!-- END OF TOP SECTION -->
     
     <!-- END OF TOP SECTION -->
     
@@ -418,17 +409,16 @@
             </div>
         </div>
         <div class="col-12 wow fadeInRight" data-wow-delay="0.3s">
-            <p style="font-family: Rubik Medium;color:#CE3369;font-size:5.5vw">Our History</p>
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:7vw">Apa sih Woki itu?</p>
+            <p style="font-family: Rubik Medium;color:#CE3369;font-size:5.5vw;margin-top:4vw;margin-bottom:0px">Our History</p>
+            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw">Apa sih Woki itu?</p>
             <p style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;font-size:3vw">WOKI (Workshop Kit by Venidici) bertujuan untuk memberi wadah dalam belajar, berkembang, serta melakukan self-healing dari permasalahan yang dihadapi dalam kehidupan kita sehari-hari. 
     
     Bersama-sama, kami ingin menumbuhkan kesadaran di dalam masyarakat bahwa praktik pembuatan kesenian serta kerajinan tangan dapat membantu menjaga kesehatan mental yang dimiliki oleh kita setiap individu.
     
     #BertumbuhDanPeduli
-    
             </p>
             <div>
-                <a href="/woki" class="btn-pink" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;font-size:2.5vw">See our upcoming workshops</a>
+                <a href="/woki" class="btn-pink" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;font-size:4vw">See our upcoming workshops</a>
             </div>
         </div>
     </div>
@@ -437,7 +427,7 @@
     <!-- START OF KENAPA MEMILIH Skill Snack -->
     <div class="row m-0 page-container" style="padding-bottom:8vw   ">
         <div class="col-12 wow fadeInLeft" data-wow-delay="0.3s">
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:7vw">Untuk apa Woki lahir?</p>
+            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw;margin-top:5vw">Untuk apa Woki lahir?</p>
             <p style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;dont-size:3vw">Banyak sekali individu yang resah dengan dirinya dan tidak mendapatkan kesempatan untuk beristirahat sejenak, menyatu dengan dirinya. Woki sadar dan melihat tersebut, sehingga mencari solusi yang kreatif, unik, dan fun agar individu dapat healing dengan tersenyum.
             
             Sampai akhirnya, Woki menemukan kebahagiaan sendiri disaat sedang berkreasi dengan seni dan crafting. Woki merasa art and craft bisa menjadi solusi tersebut. 
@@ -524,14 +514,14 @@
         </div>
         <div class="col-12 p-0">   
             <!-- <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Values</p> -->
-            <p style="font-family: Rubik Bold;color:#3B3C43;padding-top:3vw;font-size:7vw">Kenalan yuk dengan Woki & Toki!</p>
+            <p style="font-family: Rubik Bold;color:#3B3C43;padding-top:3vw;font-size:6vw">Kenalan yuk dengan Woki & Toki!</p>
             <div style="margin-top:2vw;margin-bottom:3vw">
                 <p style="font-family: Rubik Regular;color:#000000;white-space:pre-line;font-size:3vw">Hi, Aku Woki! Aku itu orangnya sangat suka berpetualang, overoptimistic, tapi karena kadang aku suka impulsif, mudah bosan, dan ga sabaran, aku ga punya satu hal yang bener-bener aku jagoin, kayak general aja gitu bukan spesialis. Padahal pengen banget punya 1 hal yang bener-bener aku jagoin:(
     
     Hi, kalau aku Toki! Aku ini agak kebalikan sama Toki, aku punya self-doubt yang tinggi, lack of confidence, and I always live inside my comfort zone. Tapi satu hal yang aku sukai dari diriku, aku punya kelebihan yang sangat menonjol karena memang aku selalu cuma berkutat di sekitar hal itu.
     </p>
             </div>
-            <a href="/woki" class="btn-red-bordered btn-red-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;margin-left:5vw;font-size:2.7vw ">Explore Our Library Now!</a>
+            <a href="/woki" class="btn-red-bordered btn-red-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;font-size:4vw ">Explore Our Library Now!</a>
     
         </div>
     </div>
@@ -541,7 +531,7 @@
     <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
         <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
             <!-- <p class="sub-description" style="font-family: Rubik Medium;color:#CE3369">Our Mission</p> -->
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:7vw">What Will You Get</p>
+            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw">What Will You Get</p>
         </div>
         <div class="row m-0" style="padding-top:2vw">
             <div class="col-6">
@@ -641,7 +631,7 @@
     <!-- START OF FAQ SECTION -->
     <div class="row m-0 page-container faq-background" style="padding-top:6vw;padding-bottom:6vw">
         <div class="col-12 p-0" style="text-align:center">
-            <p style="font-family: Rubik Medium;color:#3B3C43;font-size:7vw">Frequently Asked <span style="font-family:Hypebeast;color:#CE3369">Questions</span> </p>
+            <p style="font-family: Rubik Medium;color:#3B3C43;font-size:6vw">Frequently Asked <span style="font-family:Hypebeast;color:#CE3369">Questions</span> </p>
         </div>
         <!-- START OF QUESTION SECTION -->
         <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:1.5vw">

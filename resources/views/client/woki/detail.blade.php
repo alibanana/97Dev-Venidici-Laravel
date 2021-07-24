@@ -82,24 +82,24 @@
                 @endif
                 <div class="course-detail-card-red" >
                     @if($course->price == 0)
-                    <p class="small-heading price-content" id="tanpa-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
+                    <p class="small-heading price-content" id="tanpa-seni-mobile" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
                     @else
-                    <p class="small-heading price-content" id="tanpa-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                    <p class="small-heading price-content" id="tanpa-seni-mobile" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                     @endif
                     @if($course->priceWithArtKit != null)
                         @if($course->priceWithArtKit == 0)
-                        <p class="small-heading price-content" id="dengan-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">FREE</p>
+                        <p class="small-heading price-content" id="dengan-seni-mobile" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">FREE</p>
                         @else
-                        <p class="small-heading price-content" id="dengan-seni" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">Rp{{ number_format($course->priceWithArtKit, 0, ',', ',') }}</p>
+                        <p class="small-heading price-content" id="dengan-seni-mobile" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;display:none">Rp{{ number_format($course->priceWithArtKit, 0, ',', ',') }}</p>
                         @endif
                         <div class="form-check" style="margin-top:0.5vw">
-                            <input onclick="changePrice(event, 'tanpa-seni', {{ $course->price }}, 0)" class="form-check-input price-links" type="radio" name="flexRadioDefaultMobile" id="flexRadioDefault2" checked>
+                            <input onclick="changePriceMobile(event, 'tanpa-seni-mobile', {{ $course->price }}, 0)" class="form-check-input price-links" type="radio" name="flexRadioDefaultMobile" id="flexRadioDefault2" checked>
                             <label class="form-check-label normal-text" style="font-family:Rubik Regular" for="flexRadioDefault2">
                                 Tanpa perlengkapan seni
                             </label>
                         </div>
                         <div class="form-check" style="margin-top:1vw">
-                            <input onclick="changePrice(event, 'dengan-seni', {{ $course->priceWithArtKit }}, 1)" class="form-check-input price-links" type="radio" name="flexRadioDefaultMobile" id="flexRadioDefault1" >
+                            <input onclick="changePriceMobile(event, 'dengan-seni-mobile', {{ $course->priceWithArtKit }}, 1)" class="form-check-input price-links" type="radio" name="flexRadioDefaultMobile" id="flexRadioDefault1" >
                             <label class="form-check-label normal-text" style="font-family:Rubik Regular" for="flexRadioDefault1">
                                 Dengan perlengkapan seni
                             </label>
@@ -653,6 +653,15 @@
         }
         document.getElementById(categoryName).style.display = "block";
         document.getElementById("withArtOrNo").value = withArtOrNo;
+    }
+    function changePriceMobile(evt, categoryName, price, withArtOrNo) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("price-content")
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        document.getElementById(categoryName).style.display = "block";
+        document.getElementById("withArtOrNoMobile").value = withArtOrNo;
     }
 </script>
 <script>
