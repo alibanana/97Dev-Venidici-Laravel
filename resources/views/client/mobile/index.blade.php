@@ -374,7 +374,6 @@
                 <option value="None" disabled selected>Pilih Kategori</option>
                 <option value="Skill Snack">Skill Snack</option>
                 <option value="Woki">Woki</option>
-                <option value="Bootcamp">Bootcamp</option>
                 <option value="All">All</option>
 
             </select>                    
