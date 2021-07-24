@@ -736,7 +736,7 @@ html, body {
 }
 
 .btn-blue-bordered:hover{
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     background-color: #2B6CAA !important;
 }
 
