@@ -1151,6 +1151,26 @@ html, body {
     visibility: visible;
     opacity: 1;
   }
+  .popup-change-pass {
+    margin: 40vw auto;
+    background: #ffffff;
+    border-radius: 10px;
+    position: relative;
+    transition: all 1s ease-in-out;
+    width:40% ;
+  
+  }
+  .popup-change-pass .close{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 0.2s;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #2B6CAA;
+  
+  }
   
   .popup {
     margin: 40vw auto;
@@ -1722,6 +1742,10 @@ html, body {
     height:24vw;
     padding:2vw
 }
+#change-pass-mobile{
+    width:40% !important;
+}
+
 
 
 
@@ -1907,6 +1931,58 @@ html, body {
         width:5vw !important;
     }
     /* end of transcation detail mobile popup */
+
+    /* START MOBILE USERDASHBOARD POPUP */
+    .popup-change-pass {
+        
+        width:80% !important ;
+      
+      }
+    .popup-change-pass .close{
+        right:15px !important;
+        top:-10px !important
+      
+      }
+    /* END OF USERDASHBOARD POPUP */
+
+    /* MOBILE WOKI SECTION */
+    .woki-mobile-container{
+        height:60vw !important;
+    }
+    #pt-feature-section{
+        padding-top:5vw !important;
+        padding-left:5vw !important
+    }
+    .card-woki-mobile-height{
+        height: 12.5vw !important;
+    }
+    .btn-pink{
+        background: #CE3369;
+        border-radius: 3px;
+        color:#FFFFFF;
+        padding:1.8vw 3vw !important;
+        transition: 0.3s ease-in-out;
+    
+    }
+    /* END OF MOBILE WOKI SECTION */
+
+    /* START ONLINE COURSE MOBILE SECTION */
+    .online-course-mobile-container{
+        height:60vw !important;
+    }
+    .card-online-course-mobile-height{
+        height: 12.5vw !important;
+    }
+    /* END OF ONLINE COURSE MOBILE SECTION */
+
+    /* START MOBILE PELATIHAN VENIDICI */
+    .pelatihan-venidici-mobile-container{
+        height:60vw !important;
+    }
+    .card-pelatihan-venidici-mobile-height{
+        height: 12.5vw !important;
+    }
+    /* END OF MOBILE PELATIHAN VENIDICI */
 
     /* online course detail card */
     .online-course-image{

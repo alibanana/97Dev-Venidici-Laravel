@@ -41,9 +41,9 @@ class WokiController extends Controller
 
     public function index(Request $request) {
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $course_categories = CourseCategory::all();
         $courses = new Course;
         if ($request->has('cat')) {

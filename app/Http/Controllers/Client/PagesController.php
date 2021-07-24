@@ -206,9 +206,9 @@ class PagesController extends Controller
 
     public function pelatihan_venidici_index(Request $request){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $course_categories = CourseCategory::all();
         $courses = new Course;
         if ($request->has('cat')) {

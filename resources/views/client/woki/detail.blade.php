@@ -134,9 +134,9 @@
                             @csrf
                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
                                 <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
-                                <button type="submit" class="normal-text btn-blue-bordered"
+                                <button type="submit" class="normal-text btn-blue-bordered full-width-button"
                                     style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
-                                <button class="normal-text btn-dark-blue" name="action" value="buyNow" 
+                                <button class="normal-text btn-dark-blue full-width-button" name="action" value="buyNow" 
                                     style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
                             </form>
                         {{-- If user has not bought the course and the price IS 0. --}}

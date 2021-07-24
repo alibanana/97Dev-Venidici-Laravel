@@ -315,17 +315,17 @@
 <!-- START OF TOP SECTION -->
 <div style="display:none" class="mobile-display">
 
-    <div class="row m-0 page-container "  style="background-color:white;">
+    <div class="row m-0 page-container for-public-mobile-background"  style="background-color:white;">
         <div class="col-12 p-0">
             <div style="padding-top:11vw;margin-left:-0.5vw;color:#67BBA3" class="wow fadeInUp" data-wow-delay="0.3s">
                 <img src="/assets/images/client/Venidici_Logo_Horizontal_White.png" style="width:20vw;" class="img-fluid" alt="Image 1">
-                <p style="font-family: Rubik Bold;color:##67BBA3;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:7vw">Fun learning anytime
+                <p style="font-family: Rubik Bold;color:#67BBA3;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:7vw">Fun learning anytime
                 & anywhere</p>
-                <p style="font-family: Rubik Medium;color:##67BBA3;white-space:pre-line;padding-top:0vw;line-height:3vw;font-size:3vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
+                <p style="font-family: Rubik Medium;color:#67BBA3;white-space:pre-line;padding-top:0vw;line-height:3vw;font-size:3vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
                 <div class="row m-0">
                     <div class="col-12 p-0">
                         <div style="margin-top:0.5vw;text-align:left;padding-bottom:11vw">
-                            <p style="font-family: Rubik Bold;color:##67BBA3;font-size:3vw">Explore our programs </p>
+                            <p style="font-family: Rubik Bold;color:#67BBA3;font-size:3vw">Explore our programs </p>
                             <div style="display:flex;justify-content:flex-start;align-items:center;">
                                 <a href="/for-public/online-course" class="blue-link blue-link-active text-nowrap" style="font-family:Rubik Medium;margin-right:1.5vw;width:20vw;font-size:3.2vw">
                                     Skill Snack

@@ -3,7 +3,8 @@
 
 @section('content')
 <!-- START OF BANNER SECTION -->
-<div class="row m-0 banner-background page-container" style="height:40vw;padding-top:16vw;text-align:center">
+<div class="row m-0 banner-background page-container woki-mobile-container  " style="height:40vw;padding-top:16vw;text-align:center">
+    
     <div class="col-md-12 p-0">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Woki</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Partner terbaik kamu untuk healing bareng lewat
@@ -94,8 +95,16 @@ END OF OUR PROGRAMS SECTION -->
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container review-course-background" style="padding-bottom: 8vw;padding-top:4vw">
     <!-- START OF FEATURE SECTION -->
+    <!-- mobile section  -->
+    <div class="col-12 col-md-4 p-0 mobile-display" id="pt-feature-section" style="display: flex;flex-direction: column;justify-content: center;align-items:center;display:none">
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s On-Demand</p>
+        <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
+        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
+
+    </div>
+    <!-- end of mobile section -->
     
-    <div class="col-8" style="padding-left:0vw;padding-right:4vw">
+    <div class="col-12 col-md-8" style="padding-left:0vw;padding-right:4vw">
 
         <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3.5vw;">
@@ -166,7 +175,7 @@ END OF OUR PROGRAMS SECTION -->
         </div>  
 
     </div>
-    <div class="col-4 p-0 " style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-12 col-md-4 p-0 desktop-display" id="pt-feature-section" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s On-Demand</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
@@ -241,7 +250,7 @@ END OF OUR PROGRAMS SECTION -->
         
             @foreach($courses as $course)
 
-            <div class="col-4 p-0" style="margin-top:3vw">
+            <div class="col-12 col-md-4 p-0" style="margin-top:3vw">
                 <div style="display: flex;justify-content:center">
                     <!-- START OF ONE RED COURSE CARD -->
                     <div class="course-card-red">
@@ -253,9 +262,9 @@ END OF OUR PROGRAMS SECTION -->
                             </div>
                         </div>
                         <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                            <div style="height:4.5vw">
+                            <div class="card-woki-mobile-height" style="height:4.5vw">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                    <a href="/woki/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
+                                    <a href="/woki/{{$course->title}}" class="normal-text-card" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
                                     <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                 </div>
                                 @foreach ($course->hashtags as $tag)
