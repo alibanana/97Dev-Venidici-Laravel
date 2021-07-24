@@ -738,6 +738,7 @@ html, body {
 .btn-blue-bordered:hover{
     color: #FFFFFF !important;
     background-color: #2B6CAA !important;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .btn-yellow-bordered{
