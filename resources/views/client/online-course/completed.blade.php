@@ -18,7 +18,7 @@
                 <a onclick="document.getElementById('retryAssessmentForm').submit(); return false;" class="normal-text blue-link-underline" style="font-family: Rubik Medium;color:#2B6CAA;text-decoration:none;cursor:pointer">Ulang Assessment</a>
             </div>
             <div style="text-align: center;">
-                <img src="/assets/images/client/Completed_Icon.svg" style="margin-top:2vw;width:23vw" class="img-fluid" alt="">
+                <img src="/assets/images/client/Completed_Icon.svg" id="completed-icon" style="margin-top:2vw;width:23vw" class="img-fluid" alt="">
                 <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0.5vw;color:#2B6CAA;margin-top:2vw">Score: {{ $assessment_pivot->score }}/100</p>
                 <form action="{{route('print_certificate')}}" method="post">
                 @csrf

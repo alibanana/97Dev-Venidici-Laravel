@@ -96,7 +96,7 @@
                             </div>
                             <div style="display:flex;align-items:center">
                                 @if ($cart->withArtOrNo)
-                                    <div style="display:flex;align-items:center;margin-right:2vw" class="quantity">
+                                    <div style="display:flex;align-items:center;margin-right:5vw" class="quantity">
                                         <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">
                                             <form action="{{ route('customer.increaseQty') }}" method="POST">
                                             @csrf

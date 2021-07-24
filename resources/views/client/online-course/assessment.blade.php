@@ -49,6 +49,16 @@
             <button type="submit" onclick="openLoading()" form="updateOnlineCourseAssessmentForm" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Submit</button>
         </div>
     </div>
+    <div class="mobile-display" style="display:none;padding:8vw 7vw 0vw 7vw">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="width:50%">
+                <p class="normal-text" style="font-family: Rubik Medium;margin-bottom:0px;margin-right:3vw">Sisa Waktu <span id="time" style="color:#2B6CAA;margin-left:0.5vw">{{ $assessment->duration }} minutes</span></p>
+            </div>
+            <div style="width:50%">
+                <button type="submit" onclick="openLoading()" form="updateOnlineCourseAssessmentForm" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Submit</button>
+            </div>
+        </div>
+    </div>
     <!-- END OF NAVBAR -->
 
     <div class="row m-0 page-container" style="padding-top:11vw;padding-bottom:10vw">

@@ -215,6 +215,19 @@ html, body {
     background-repeat: no-repeat;
     background-size: 5%;
 }
+
+.skill-snack-fb-bg{
+    background-image: url("/assets/images/client/Skill-Snack-Background.png");
+    background-position:bottom right;
+    background-repeat: no-repeat;
+    background-size: 30%;
+}
+.woki-fb-bg{
+    background-image: url("/assets/images/client/Woki-Background.png");
+    background-position:bottom right;
+    background-repeat: no-repeat;
+    background-size: 30%;
+}
 /* end of background images*/
 
 /* start of page padding */
@@ -1905,6 +1918,7 @@ html, body {
     }
     .quantity{
         width:5vw !important;
+        margin-right:10vw !important
     }
     /* end of transcation detail mobile popup */
 
@@ -2128,6 +2142,9 @@ html, body {
     }
     .navbar-item{
         font-size: 3.5vw;
+    }
+    #completed-icon{
+        width:50vw !important
     }
 }
 

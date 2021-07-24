@@ -312,44 +312,32 @@
 
 
 <!-- start of mobile view -->
-<!-- START OF TOP SECTION -->
 <div style="display:none" class="mobile-display">
 
-    <div class="row m-0 page-container "  style="background-color:white;">
-        <div class="col-12 p-0">
-            <div style="padding-top:11vw;margin-left:-0.5vw;color:#67BBA3" class="wow fadeInUp" data-wow-delay="0.3s">
-                <img src="/assets/images/client/Venidici_Logo_Horizontal_White.png" style="width:20vw;" class="img-fluid" alt="Image 1">
-                <p style="font-family: Rubik Bold;color:##67BBA3;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:7vw">Fun learning anytime
+    <!-- START OF TOP SECTION -->
+    <div class="row m-0 page-container"  style="background-color:white;">
+        <div class="col-12 p-0" style="margin-top:5vw">
+            <img src="/assets/images/client/Skill-Snack-Green-Logo.png" style="width:40vw;" class="img-fluid" alt="Image 1">
+            <div style="margin-top:4vw;border-radius:5px;background-color:#67BBA3;padding:7vw 5vw" class="skill-snack-fb-bg">
+                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:6vw">Fun learning anytime
                 & anywhere</p>
-                <p style="font-family: Rubik Medium;color:##67BBA3;white-space:pre-line;padding-top:0vw;line-height:3vw;font-size:3vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
-                <div class="row m-0">
-                    <div class="col-12 p-0">
-                        <div style="margin-top:0.5vw;text-align:left;padding-bottom:11vw">
-                            <p style="font-family: Rubik Bold;color:##67BBA3;font-size:3vw">Explore our programs </p>
-                            <div style="display:flex;justify-content:flex-start;align-items:center;">
-                                <a href="/for-public/online-course" class="blue-link blue-link-active text-nowrap" style="font-family:Rubik Medium;margin-right:1.5vw;width:20vw;font-size:3.2vw">
-                                    Skill Snack
-                                </a>
-                                <a href="/for-public/woki" class="red-link text-nowrap" style="font-family:Rubik Medium;width:20vw;font-size:3.2vw;text-align:center">
-                                    Woki
-                                </a>
-                                <!-- <a href="/for-public/bootcamp" class="bootcamp-link text-nowrap" style="font-family:Rubik Medium;width:20vw;margin-left:1.5vw;font-size:3.2vw">
-                                    Bootcamp
-                                </a> -->
-                                <!--
-                                <a href="#" class="normal-text yellow-link" style="font-family:Rubik Medium;margin-left:1.5vw">
-                                    Sharing Session
-                                </a>
-                                -->
-                            </div>
-                        </div>
-                    </div>
+                <div style="width:70%">
+                    <p style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:4vw;font-size:3vw;margin-bottom:4vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
                 </div>
-    
+                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:4vw">Explore our programs</p>
+
+                <button onclick="window.location.href='/for-public/online-course';" class="blue-link blue-link-active" style="font-family:Rubik Medium;margin-right:1.5vw;min-width:25vw;font-size:3vw;">
+                    Skill Snack
+                </button> <br>
+                <div style="margin-top:3vw">
+                    <button onclick="window.location.href='/for-public/woki';"class="red-link" style="font-family:Rubik Medium;min-width:25vw;font-size:3vw">
+                        Woki
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
-    
     <!-- END OF TOP SECTION -->
     
     <!-- START OF OUR HISTORY -->
@@ -376,7 +364,7 @@
         </div>
         <div class="col-12 wow fadeInRight"data-wow-delay="0.3s">
             <!-- <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p> -->
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:7vw">Skill Snack Live</p>
+            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw;margin-top:4vw">Skill Snack Live</p>
             <p style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;font-size:3vw">Enjoy sesi live workshop ngomongin berbagai topik dan skill yang bisa kamu pelajari bersama expert-expert di bidangnya.</p>
             <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;font-size:3vw">See upcoming live session</a>
     
@@ -387,7 +375,7 @@
     <!-- START OF KENAPA MEMILIH Skill Snack -->
     <div class="row m-0 page-container" style="padding-bottom:8vw   ">
         <div class="col-12 wow fadeInLeft" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;padding-right:2vw">
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:7vw">Skill Snack On-Demand</p>
+            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw;margin-top:4vw">Skill Snack On-Demand</p>
             <p style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;font-size:3vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack On-Demand berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.</p>
             <div>
                 <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;font-size:3vw">See upcoming live session</a>
@@ -404,8 +392,8 @@
     <!-- START OF OUR MISSION -->
     <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
         <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
-            <p style="font-family: Rubik Medium;color:#67BBA3;font-size:4vw">Our Mission</p>
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:7vw">Effective Learning for You</p>
+            <p style="font-family: Rubik Medium;color:#67BBA3;font-size:4vw;margin-bottom:0px">Our Mission</p>
+            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw">Effective Learning for You</p>
         </div>
         <div class="row m-0" style="padding-top:2vw">
             <div class="col-6" style="display:flex;justify-content:center">
@@ -561,7 +549,7 @@
     <!-- START OF FAQ SECTION -->
     <div class="row m-0 page-container faq-background" style="padding-top:6vw;padding-bottom:6vw">
         <div class="col-12 p-0" style="text-align:center">
-            <p style="font-family: Rubik Medium;color:#3B3C43;font-size:7vw">Frequently Asked <span style="font-family:Hypebeast;color:#67BBA3">Questions</span> </p>
+            <p style="font-family: Rubik Medium;color:#3B3C43;font-size:6vw">Frequently Asked <span style="font-family:Hypebeast;color:#67BBA3">Questions</span> </p>
         </div>
         <!-- START OF QUESTION SECTION -->
         <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:1.5vw">
@@ -606,7 +594,7 @@
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
                 <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
                 <div style="width:60%;margin-left:2vw">
-                    <p class=" wow fadeInUp" data-wow-delay="0.3s" style="color:#FFFFFF;font-family:Rubik Bold;font-size:5vw">Let’s learn together!</p>
+                    <p class=" wow fadeInUp" data-wow-delay="0.3s" style="color:#FFFFFF;font-family:Rubik Bold;font-size:4vw">Let’s learn together!</p>
                     
                     <!-- <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
                     Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin!                </p> -->
@@ -614,7 +602,7 @@
                     
                     
                 </div>
-                <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none;font-size:2.7vw;text-align:centerpap" class="btn-blue " >Explore courses</a>
+                <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none;font-size:2.7vw;text-align:centerpap" class="btn-blue text-nowrap" >Explore courses</a>
             </div> 
         </div>
     </div>
