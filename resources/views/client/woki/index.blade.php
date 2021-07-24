@@ -97,7 +97,7 @@ END OF OUR PROGRAMS SECTION -->
     <!-- START OF FEATURE SECTION -->
     <!-- mobile section  -->
     <div class="col-12 col-md-4 p-0 mobile-display" id="pt-feature-section" style="display: flex;flex-direction: column;justify-content: center;align-items:center;display:none">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s On-Demand</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Woki</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
 
@@ -176,7 +176,7 @@ END OF OUR PROGRAMS SECTION -->
 
     </div>
     <div class="col-12 col-md-4 p-0 desktop-display" id="pt-feature-section" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s On-Demand</p>
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Woki</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
 
