@@ -179,7 +179,7 @@ body {font-family: 'Muli', sans-serif;}
         @endif
         </span> <br> <br>
         <span style="font-size: 18px">Feel free to email us and dispute the claim if you believe this is an error, via email</span>
-        <span style="color: #000000; font-size: 18px; font-family: arial,helvetica,sans-serif"><b>info@venidici.id</b></span>
+        <span style="color: #000000; font-size: 18px; font-family: arial,helvetica,sans-serif"><b>{{env('MAIL_FROM_ADDRESS')}}</b></span>
     </div>
     <div></div></div></td>
   </tr>

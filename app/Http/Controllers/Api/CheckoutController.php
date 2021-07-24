@@ -92,8 +92,8 @@ class CheckoutController extends Controller
         // Validation rules that exists on all validation conditions. (noArtKit, hasArtKit & bootcamp)
         $validation_rules = [
             'name' => 'required',
-            //'phone' => ['required', new TelephoneNumber],
-            'phone' => 'required',
+            'phone' => ['required', new TelephoneNumber],
+            // 'phone' => 'required',
             'grand_total' => 'required|integer',
             'total_order_price' => 'required|integer',
             'date' => 'required',

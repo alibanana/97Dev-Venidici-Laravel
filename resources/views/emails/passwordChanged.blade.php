@@ -192,7 +192,7 @@ body {font-family: 'Muli', sans-serif;}
       <td style="padding:18px 30px 18px 30px; line-height:22px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content">
         <div>
           <div style="text-align: center">
-          <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Feel free to email us via <a href="mailto::info@venidici.co.id">info@venidici.co.id</a> and dispute the claim if you believe this is an error.</span><br>
+          <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Feel free to email us via <a href="mailto::{{env('MAIL_FROM_ADDRESS')}}">{{env('MAIL_FROM_ADDRESS')}}</a> and dispute the claim if you believe this is an error.</span><br>
         </div>
       </td>
     </tr>

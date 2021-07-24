@@ -38,49 +38,52 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($admins as $key => $value) {
-            User::create($value);
-        }
-
-        $genders = ['Male', 'Female'];
-
-        $number_of_users = 80;
-
-        for ($i = 0; $i < $number_of_users; $i++) {
-            
-            if ($i < $number_of_users / 2) {
-                $status = "active";
-            } else {
-                $status = "suspended";
-            }
-
-            $timestamp = $faker
-                ->dateTimeBetween($startDate = '-1 months', $endDate = 'now');
-
-            $user = User::create([
-                'name' => $faker->name,
-                'email' => $faker->unique()->safeEmail,
-                'email_verified_at' => now(),
-                'password' => bcrypt('password'),
-                'status' => $status,
-                'remember_token' => Str::random(10),
-                'created_at' => $timestamp,
-                'updated_at' => $timestamp
-            ]);
-
+            $user = User::create($value);
             $user->userDetail()->create([
-                'telephone' => $faker->e164PhoneNumber,
                 'referral_code' => Str::random(6),
-                'birthdate' => $faker->date($format = 'Y-m-d', $max = '-16 years'),
-                'gender' => $genders[rand(0, count($genders) - 1)],
-                'address' => $faker->address,
-                'company' => $faker->company,
-                'occupancy' => $faker->jobTitle,
-                'created_at' => $timestamp,
-                'updated_at' => $timestamp
             ]);
-
-            $user->save();
         }
+
+        // $genders = ['Male', 'Female'];
+
+        // $number_of_users = 80;
+
+        // for ($i = 0; $i < $number_of_users; $i++) {
+            
+        //     if ($i < $number_of_users / 2) {
+        //         $status = "active";
+        //     } else {
+        //         $status = "suspended";
+        //     }
+
+        //     $timestamp = $faker
+        //         ->dateTimeBetween($startDate = '-1 months', $endDate = 'now');
+
+        //     $user = User::create([
+        //         'name' => $faker->name,
+        //         'email' => $faker->unique()->safeEmail,
+        //         'email_verified_at' => now(),
+        //         'password' => bcrypt('password'),
+        //         'status' => $status,
+        //         'remember_token' => Str::random(10),
+        //         'created_at' => $timestamp,
+        //         'updated_at' => $timestamp
+        //     ]);
+
+        //     $user->userDetail()->create([
+        //         'telephone' => $faker->e164PhoneNumber,
+        //         'referral_code' => Str::random(6),
+        //         'birthdate' => $faker->date($format = 'Y-m-d', $max = '-16 years'),
+        //         'gender' => $genders[rand(0, count($genders) - 1)],
+        //         'address' => $faker->address,
+        //         'company' => $faker->company,
+        //         'occupancy' => $faker->jobTitle,
+        //         'created_at' => $timestamp,
+        //         'updated_at' => $timestamp
+        //     ]);
+
+        //     $user->save();
+        // }
 
         // // Create Default Normal User
         // $defaultNormalUser = User::create([
