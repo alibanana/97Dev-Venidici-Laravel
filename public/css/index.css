@@ -1792,7 +1792,7 @@ html, body {
         padding:1vw
     }
     .transaction-notification-card{
-        height:12vw;
+        height:15vw;
     }
     #notification-title{
         margin-bottom:0.5vw !important;
@@ -1977,6 +1977,26 @@ html, body {
         padding:1.8vw 3vw !important;
         transition: 0.3s ease-in-out;
     
+    }
+    .grey-input-form{
+        padding: 1vw 3vw;
+        
+    }
+    .grey-input-form .search-course-title-icon{
+        
+        height:3vw !important;
+        padding-top: 0.5vw;
+        
+    }
+    .grey-input-form .search-course-title-input-width{
+        
+        width:23vw !important;
+        
+    }
+    .btn-search{
+        padding:3vw;
+
+        border-radius: 5px ;
     }
     /* END OF MOBILE WOKI SECTION */
 
