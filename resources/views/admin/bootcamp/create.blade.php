@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="">Subtitle</label>
+                        <label for="">Sub-title</label>
                         <textarea name="subtitle" id="" rows="3" class="form-control" required>{{ old('subtitle') }}</textarea> 
                         @error('subtitle')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -143,7 +143,7 @@
                     </div>
                 </div>
                 -->
-                <div class="col-6" style="margin-top:3vw">
+                <!-- <div class="col-6" style="margin-top:3vw">
                     <label for="">Persyaratan <span style="color: orange">(At least one element must be present!)</span></label>
                     @error('requirements')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -170,7 +170,7 @@
                         </div>
                     </div>
                     <button type="button" id="add_requirement" onlick="duplicateRequirement()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
-                </div>
+                </div> -->
 
                 <div class="col-6" style="margin-top:3vw">
                 <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
