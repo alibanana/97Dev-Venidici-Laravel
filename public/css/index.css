@@ -2458,3 +2458,20 @@ html, body {
 .schedule-title{
     color: rgba(43, 108, 170, 0.25);
 }
+
+.htj-title-active{
+    background-color: #2B6CAA !important;
+}
+.htj-title-active p{
+    color:#FFFFFF !important;
+}
+.htj-title{
+    background-color: #FFFFFF;
+    border-radius:50%;
+    width:3vw;
+    height:3vw;
+    text-align:center;
+}
+.htj-title p{
+    color:#2B6CAA ;
+}

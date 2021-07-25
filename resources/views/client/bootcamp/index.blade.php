@@ -443,18 +443,28 @@
     <!-- START OF RIGHT SECTION -->
     <div class="col-md-6 col-xs-12"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">How to join?</p>
-        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Like, Save, Follow, Share!</p>
-        <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+        <div class="htj-content" id="htj-1">
+            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Like</p>
+            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+        </div>
+        <div class="htj-content" id="htj-2" style="display: none;">
+            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Save</p>
+            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+        </div>
+        <div class="htj-content" id="htj-3" style="display: none;">
+            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Follow and Share!</p>
+            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+        </div>
         <!-- START OF LINKS -->
         <div style="display: flex;margin-top:1vw">
-            <div style="background-color: #2B6CAA;border-radius:50%;width:3vw;height:3vw;text-align:center;cursor:pointer">
-                <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF;">1</p>
+            <div class="htj-links htj-title htj-title-active" onclick="changeHowToJoin(event, 'htj-1')" style="cursor:pointer">
+                <p class="small-heading" style="font-family: Rubik Bold;">1</p>
             </div>
-            <div style="background-color: #FFFFFF;border-radius:50%;width:3vw;height:3vw;text-align:center;cursor:pointer;margin-left:2vw">
-                <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">2</p>
+            <div class="htj-links htj-title" onclick="changeHowToJoin(event, 'htj-2')" style="cursor:pointer;margin-left:2vw">
+                <p class="small-heading" style="font-family: Rubik Bold;">2</p>
             </div>
-            <div style="background-color: #FFFFFF;border-radius:50%;width:3vw;height:3vw;text-align:center;cursor:pointer;margin-left:2vw">
-                <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">3</p>
+            <div class="htj-links htj-title" onclick="changeHowToJoin(event, 'htj-3')" style="cursor:pointer;margin-left:2vw">
+                <p class="small-heading" style="font-family: Rubik Bold;">3</p>
             </div>
         </div>
         <!-- END OF LINKS -->
@@ -739,6 +749,22 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
+<script>
+    function changeHowToJoin(evt, categoryName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("htj-content")
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("htj-links");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace("htj-title-active", "htj-title");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " htj-title-active";
+        }
+         
+</script>
 <script>
     function changeSchedule(evt, categoryName) {
             var i, tabcontent, tablinks;
