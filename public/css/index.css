@@ -2475,3 +2475,18 @@ html, body {
 .htj-title p{
     color:#2B6CAA ;
 }
+
+.growth-title{
+    padding: 1vw 2vw;
+    text-align:center;
+    cursor:pointer
+}
+.growth-title p{
+    color:#3B3C43
+}
+.growth-title-active{
+    background-color:#2B6CAA
+}
+.growth-title-active p{
+    color:#FFFFFF !important
+}

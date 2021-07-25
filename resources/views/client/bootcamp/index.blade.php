@@ -88,45 +88,105 @@
 <div class="row m-0 page-container" style="background-color: #F6F6F6;padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="text-align: center;">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Apa itu Growth Hacking?</p>
-        
     </div>
     <div class="col-12" style="padding:1vw 10vw">
         <!-- START OF CONTENT LINKS -->
         <div style="border: 2px solid #2B6CAA;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
             <!-- START OF ONE LINK -->
-            <div style="padding: 1vw 2vw;border-right: 2px solid #2B6CAA;text-align:center;cursor:pointer;background-color:#2B6CAA">
-                <p class="normal-text" style="font-family: Rubik Bold;color:#FFFFFF;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
+            <div style="border-right: 2px solid #2B6CAA" class="growth-links growth-title growth-title-active" onclick="growthHacking(event, 'growth-1')">
+                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
             </div>
-            <div style="padding: 1vw 2vw;border-right: 2px solid #2B6CAA;text-align:center;cursor:pointer">
-                <p class="normal-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
+            <div style="border-right: 2px solid #2B6CAA;" class="growth-links growth-title" onclick="growthHacking(event, 'growth-2')">
+                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
             </div>
-            <div style="padding: 1vw 2vw;border-right: 2px solid #2B6CAA;text-align:center;cursor:pointer">
-                <p class="normal-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
+            <div style="border-right: 2px solid #2B6CAA;" class="growth-links growth-title" onclick="growthHacking(event, 'growth-3')">
+                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
             </div>
-            <div style="padding: 1vw 2vw;text-align:center;cursor:pointer">
-                <p class="normal-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
+            <div style="" class="growth-links growth-title" onclick="growthHacking(event, 'growth-4')">
+                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
             </div>
             <!-- END OF ONE LINK -->
         </div>
         <!-- END OF CONTENT LINK -->
     </div>
-    <!-- START OF ONE CONTENT SECTION -->
-    <div class="row m-0" style="padding-top:4vw">
-        <div class="col-md-4 p-0">
-            <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
-
-        </div>
-        <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-            <div style="padding-left: 4vw;">
-                <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
     
-                    Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+    <!-- START OF ONE CONTENT SECTION -->
+    <div class="growth-content"  id="growth-1" >
+        <div class="row m-0 "style="padding-top:4vw">
+            <div class="col-md-4 p-0">
+                <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
 
             </div>
+            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+                <div style="padding-left: 4vw;">
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
+        
+                        One Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
 
+                </div>
+
+            </div>
         </div>
     </div>
     <!-- END OF ONE CONTENT SECTION -->
+    <!-- START OF ONE CONTENT SECTION -->
+    <div class="growth-content"  id="growth-2" style="display: none;">
+        <div class="row m-0 "style="padding-top:4vw">
+            <div class="col-md-4 p-0">
+                <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
+
+            </div>
+            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+                <div style="padding-left: 4vw;">
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
+        
+                        Two Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END OF ONE CONTENT SECTION -->
+    <!-- START OF ONE CONTENT SECTION -->
+    <div class="growth-content"  id="growth-3" style="display: none;">
+        <div class="row m-0 "style="padding-top:4vw">
+            <div class="col-md-4 p-0">
+                <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
+
+            </div>
+            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+                <div style="padding-left: 4vw;">
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
+        
+                        Three Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END OF ONE CONTENT SECTION -->
+    <!-- START OF ONE CONTENT SECTION -->
+    <div class="growth-content"  id="growth-4" style="display: none;">
+        <div class="row m-0 "style="padding-top:4vw">
+            <div class="col-md-4 p-0">
+                <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
+
+            </div>
+            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+                <div style="padding-left: 4vw;">
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
+        
+                        Four Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END OF ONE CONTENT SECTION -->
+
 </div>
 <!-- END OF GROWTH HACKING SECTION -->
 
@@ -749,6 +809,22 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
+<script>
+    function growthHacking(evt, categoryName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("growth-content")
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("growth-links");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace("growth-title-active", "growth-title");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " growth-title-active";
+        }
+         
+</script>
 <script>
     function changeHowToJoin(evt, categoryName) {
             var i, tabcontent, tablinks;
