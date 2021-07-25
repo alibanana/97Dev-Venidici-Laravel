@@ -5,26 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BootcampSchedule extends Model
+class BootcampBenefit extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'date_start',
-        'date_end',
+        'bootcamp_application_id',
+        'course_id',
         'title',
-        'detail',
+        'description',
+        'course_id',
     ];
 
-    protected $casts = [
-        'date_time' => 'datetime',
-    ];
+    public function bootcampApplication() {
+        return $this->belongsTo(BootcampApplcation::class);
+    }
 
     public function course() {
         return $this->belongsTo(Course::class);
-    }
-
-    public function bootcampWeeklySchedules() {
-        return $this->hasMany(BootcampWeeklySchedules::class);
     }
 }

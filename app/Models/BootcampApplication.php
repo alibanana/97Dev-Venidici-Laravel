@@ -32,4 +32,24 @@ class BootcampApplication extends Model
     public function invoice() {
         return $this->belongsTo(Invoice::class);
     }
+
+    public function bootcampDescriptions() {
+        return $this->hasMany(BootcampDescription::class);
+    }
+
+    public function bootcampCourseDetails() {
+        return $this->hasMany(BootcampCourseDetail::class);
+    }
+
+    public function bootcampBenefits() {
+        return $this->hasMany(BootcampBenefit::class);
+    }
+
+    public function bootcampCandidates() {
+        return $this->hasMany(BootcampCandidate::class);
+    }
+
+    public function bootcampFutureCareers() {
+        return $this->hasMany(BootcampFutureCareer::class);
+    }
 }

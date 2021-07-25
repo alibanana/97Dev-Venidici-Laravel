@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourseFeaturesTable extends Migration
+class CreateBootcampWeeklySchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCourseFeaturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_features', function (Blueprint $table) {
+        Schema::create('bootcamp_weekly_schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->text('feature');
+            $table->unsignedBigInteger('bootcamp_schedule_id');
+            $table->foreign('bootcamp_schedule_id')->references('id')->on('bootcamp_application')->onDelete('cascade');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCourseFeaturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_features');
+        Schema::dropIfExists('bootcamp_weekly_schedules');
     }
 }

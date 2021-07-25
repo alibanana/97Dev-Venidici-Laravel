@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class BootcampDescription extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'bootcamp_application_id',
+        'title',
+        'image',
+        'description', 
+    ];
+
+    public function bootcamp() {
+        return $this->belongsTo (BootcampApplication::class);
+    }
+}

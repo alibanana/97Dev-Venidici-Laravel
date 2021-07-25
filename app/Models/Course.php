@@ -93,4 +93,8 @@ class Course extends Model
     public function bootcampSchedules() {
         return $this->hasMany(BootcampSchedule::class);
     }
+
+    public function bootcampBenefits() {
+        return $this->hasMany(BootcampBenefit::class);
+    }
 }
