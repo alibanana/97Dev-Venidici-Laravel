@@ -1167,6 +1167,7 @@
 <!-- END OF SARAN KAMI SECTION -->
 
 <!-- START MOBILE SARAN KAMI SECTION -->
+@if(count($courseSuggestions) != 0)
 <div class="row m-0 mobile-display" style="padding-top:2vw 5vw;display:none">
     <div class="col-12 p-0" style="text-align:center">
         <p class="small-heading" style="font-family:Rubik Medium;margin-bottom:0px;color:#3B3C43">Saran kelas dari kami</p>
@@ -1322,6 +1323,7 @@
 
     </div>
 </div>
+@endif
 <!-- END OF MOBILE SARAN KAMI SECTION -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
