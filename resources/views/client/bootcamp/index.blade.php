@@ -55,7 +55,7 @@
 <!-- START OF INTRODUCTION SECTION -->
 <div class="row m-0 page-container" style="padding-bottom:5vw">
     <div class="col-md-12 col-xs-12 p-0">
-        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp</p>
+        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp (Feature)</p>
         <div style="width:80%">
             <p class="normal-text" style="font-family: Rubik Bold;color:#626262;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque sit volutpat sed pulvinar facilisis dignissim. Aliquam aliquam urna sit duis gravida. Nunc consectetur laoreet consequat aenean fusce lacinia. Amet, pellentesque nibh quam massa. A ullamcorper tellus sit amet, arcu. </p>
         </div>
@@ -587,7 +587,7 @@
 <!-- END OF PRICING PLAN -->
 
 <!-- START OF OUR COMMUNITY -->
-<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
+<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color:#F5F2F2">
     <!-- START OF LEFT SECTION -->
     <div class="col-md-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Our Venidici Community</p>
@@ -604,6 +604,75 @@
 </div>
 <!-- END OF OUR COMMUNITY -->
 
+<!-- START OF FAQ SECTION -->
+<div class="row m-0 page-container faq-background" style="padding-top:6vw;padding-bottom:6vw">
+        <div class="col-12 p-0" style="text-align:center">
+        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Frequently Asked Questions</p>
+        </div>
+        <!-- START OF QUESTION SECTION -->
+        <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:1.5vw">
+            <div style="background-color:#F9F9F9;padding:1.5vw;border-radius:10px;width:92%">
+                <!-- START OF ONE FAQ CARD -->
+                <div class="faq-card">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Schedule</p>
+                        <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
+                            <i class="fas fa-chevron-down"></i>
+                        </p>                                    
+                    </div>
+                    <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja yang saya dapatkan di Venidici Skill Snack?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1A" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1A">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1A" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Kamu bisa melihat detail setiap course di page ya. Yang pasti, di setiap course, akan ada video pembelajaran, penilaian, dan sertifikat jika kamu sudah menyelesaikan semuanya!
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                    </div>
+                </div>
+                <!-- END OF ONE FAQ CARD -->
+                <!-- START OF ONE FAQ CARD -->
+                <div class="faq-card" style="margin-top: 1vw;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Learning</p>
+                        <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
+                            <i class="fas fa-chevron-down"></i>
+                        </p>                                    
+                    </div>
+                    <div class="collapse" id="collapseFaQ2" style="margin-top:1vw">
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja yang saya dapatkan di Venidici Skill Snack?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ2A" role="button" aria-expanded="false" aria-controls="collapseSubFaQ2A">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ2A" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Kamu bisa melihat detail setiap course di page ya. Yang pasti, di setiap course, akan ada video pembelajaran, penilaian, dan sertifikat jika kamu sudah menyelesaikan semuanya!
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                    </div>
+                </div>
+                <!-- END OF ONE FAQ CARD -->
+                
+                
+            </div>
+        </div>
+        <!-- END OF QUESTION SECTION -->
+    </div>
+    <!-- END OF FAQ SECTION -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
