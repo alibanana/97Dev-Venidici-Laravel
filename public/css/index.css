@@ -2198,6 +2198,22 @@ html, body {
         width:85vw !important
     }
     /* END OF MOBILE COMPLETED REVIEW SECTION */
+
+    /* START COMMUNITY PAGE SECTION */
+    .bg-image-mobile-height{
+        height:80vw !important
+    }
+    #mt-mobile-community{
+        margin-top:3vw !important
+    }
+    .image-community-mobile{
+        width: 86vw !important;
+    }
+    #image-discord-community-mobile{
+        margin-top:4vw !important;
+        height: 50vw !important;
+    }
+    /* END OF COMMUNITY PAGE SECTION */
     #card-tag-fontsize{
         font-size:3vw;
     }
@@ -2207,6 +2223,7 @@ html, body {
     }
     .big-heading{
         font-size: 6.5vw;
+        line-height: 8.2vw !important;
     }
     .small-heading{
         font-size: 5.5vw;
