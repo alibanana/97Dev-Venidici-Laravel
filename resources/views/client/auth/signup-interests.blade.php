@@ -37,7 +37,12 @@
                             @endif
                             margin-top:2vw">
                                 <div class="container interest-card" id="interest_card_{{$interest->id}}" 
-                                style="background-image: url({{ $interest->image }});cursor:pointer" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
+                                style="
+                                background: url({{ $interest->image }}) no-repeat center;
+                                            background-size: cover;
+                                            background-repeat:no-repeat;
+                                            background-position:center;
+                                cursor:pointer" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
                                     <input type="hidden" name="interests[{{ $interest->id }}]" value="0">
                                     <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{ $interest->hashtag }}</p>
                                 </div>
