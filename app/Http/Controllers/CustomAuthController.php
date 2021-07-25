@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
 use Axiom\Rules\StrongPassword;
+use Axiom\Rules\TelephoneNumber;
+
 use Throwable;
 
 use App\Models\User;
@@ -19,6 +21,7 @@ use App\Models\UserDetail;
 use App\Models\Hashtag;
 use App\Models\ReferralCodeCounter;
 use App\Mail\ForgetPasswordMail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,13 +49,19 @@ class CustomAuthController extends Controller
 
     // Stores User's General Info data in session.
     public function storeGeneralInfo(Request $request) {
+        $input = $request->all();
+        // Convert request input "phone" format.
+        if ($request->has('telephone'))
+            $input['telephone'] = preg_replace("/[^0-9 ]/", '', $input['telephone']);
+
         $validation_rules = [
             'name' => 'required',
-            'telephone' => 'required',
+            'telephone'     => ['required', new TelephoneNumber],
             'email' => 'required|email|unique:users',
             'response' => 'required',
             'referral_code' => '',
         ];
+
 
         // Use StrongPassword validation on production.
         if (App::environment('production'))

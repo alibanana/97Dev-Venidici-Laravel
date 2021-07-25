@@ -519,7 +519,12 @@
                                         @endif
                                         margin-top:2vw">
                                             <div class="container interest-card @if($flag) interest-card-active @endif" id="interest_card_{{$interest->id}}" 
-                                            style="background-image: url({{ $interest->image }});cursor:pointer; @if($flag) background-color: {{$interest->color}}; @endif" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
+                                            style="
+                                            background: url({{ $interest->image }}) no-repeat center;
+                                            background-size: cover;
+                                            background-repeat:no-repeat;
+                                            background-position:center;
+                                            cursor:pointer; @if($flag) background-color: {{$interest->color}}; @endif" onclick="toggleInterest('interest_card_{{ $interest->id }}', '{{ $interest->color }}')">
                                                 <input type="hidden" name="interests[{{ $interest->id }}]" value="@if($flag) 1 @else 0 @endif">
                                                 <p class="normal-text" style="font-family:Rubik Medium;color:#FFFFFF;margin-bottom:0px">{{ $interest->hashtag }}</p>
                                             </div>
@@ -1167,6 +1172,7 @@
 <!-- END OF SARAN KAMI SECTION -->
 
 <!-- START MOBILE SARAN KAMI SECTION -->
+@if(count($courseSuggestions) != 0)
 <div class="row m-0 mobile-display" style="padding-top:2vw 5vw;display:none">
     <div class="col-12 p-0" style="text-align:center">
         <p class="small-heading" style="font-family:Rubik Medium;margin-bottom:0px;color:#3B3C43">Saran kelas dari kami</p>
@@ -1322,6 +1328,7 @@
 
     </div>
 </div>
+@endif
 <!-- END OF MOBILE SARAN KAMI SECTION -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>

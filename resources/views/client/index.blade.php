@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Home')
+@section('title', 'Venidici - Anytime anywhere, Learn on your schedule from any device')
 
 @section('content')
 

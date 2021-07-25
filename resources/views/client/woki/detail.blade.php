@@ -257,6 +257,11 @@
         <!-- mobile perlengkapan seni -->
         <div class="mobile-display" style="display:none">
             <div class="row m-0 " style="" >
+                @if(count($course->artSupplies) == 0)
+                    <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                        <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum ada perlengkapan seni.</span></p>
+                    </div>
+                @else
                 @foreach ($course->artSupplies as $supply)
                     <!-- START OF ONE ART SUPPLY -->
                     <div class="col-6 p-0 pt-1" >

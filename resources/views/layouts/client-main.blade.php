@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="Description" content="Anytime anywhere, Learn on your schedule from any device ">
+    <meta name="Description" content="Anytime anywhere, Learn on your schedule from any device">
 
     <!-- INDEX CSS -->
     <link rel="stylesheet"  type="text/css"  href="/css/index.css">
@@ -127,6 +127,8 @@
 
     </div> -->
     @if( !Request::is('login') )
+      @if( !Request::is('signup') )
+      @if( !Request::is('signup-interests') )
     <!-- START OF MOBILE NAVBAR -->
     <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;position: sticky;
   top: 0;z-index: 10;">
@@ -253,8 +255,10 @@
         </nav>
       </div>
     </div>
-    <!-- END OF MOBILE NAVBAR -->
     @endif
+    @endif
+    @endif
+    <!-- END OF MOBILE NAVBAR -->
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
