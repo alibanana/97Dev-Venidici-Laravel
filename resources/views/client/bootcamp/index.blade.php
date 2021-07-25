@@ -135,89 +135,152 @@
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="margin-bottom:4vw">
         <div style="display: flex;justify-content:center;align-items:center">
-            <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;margin-right:3vw;cursor:pointer">Bootcamp Schedule</p>
-            <p class="small-heading" style="font-family: Rubik Bold;color: rgba(43, 108, 170, 0.25);;margin-left:3vw;cursor:pointer">Delivery Method</p>
+            <p class="small-heading schedule-links schedule-title schedule-title-active" onclick="changeSchedule(event, 'bootcamp-schedule')" style="font-family: Rubik Bold;margin-right:3vw;cursor:pointer">Bootcamp Schedule</p>
+            <p class="small-heading schedule-links schedule-title" onclick="changeSchedule(event, 'delivery-method')" style="font-family: Rubik Bold;margin-left:3vw;cursor:pointer">Delivery Method</p>
         </div>
     </div>
-    <!-- START OF LEFT SECTION -->
-    <div class="col-xs-12 col-md-6 p-0">
-        <div id="schedule-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
-            <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
-                <!-- START OF ONE ITEM -->
-                <div class="carousel-item active">
-                    <div style="display: flex;justify-content: center;">
-                        <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
-                            <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Day 1</p>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">19 September 2021</p>
-                            <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">Growth Fundamentals</p>
-                            <ul>
-                                <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                    <p class="small-text" style="margin-bottom: 0.3vw;">Pirate funneling</p>
-                                </li>
-                                <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                    <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking mindset & skills</p>
-                                </li>
-                                <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                    <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking vs Digital Marketing and others</p>
-                                </li>
-                                <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                    <p class="small-text" style="margin-bottom: 0.3vw;">A career in growth hacking </p>
-                                </li>
-                            </ul>
+    <!-- START OF BOOTCAMP SCHEDULE -->
+    <div class="schedule-content "  id="bootcamp-schedule">
+
+        <div class="row m-0">
+            <!-- START OF LEFT SECTION -->
+            <div class="col-xs-12 col-md-6 p-0">
+                <div id="schedule-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+                    <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item active">
+                            <div style="display: flex;justify-content: center;">
+                                <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Day 1</p>
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">19 September 2021</p>
+                                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">Growth Fundamentals</p>
+                                    <ul>
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">Pirate funneling</p>
+                                        </li>
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking mindset & skills</p>
+                                        </li>
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking vs Digital Marketing and others</p>
+                                        </li>
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">A career in growth hacking </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <!-- END OF ONE ITEM -->
-                <!-- START OF ONE ITEM -->
-                <div class="carousel-item">
-                    <div style="display: flex;justify-content: center;">
-                        
-                        <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
-                            <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Day 2</p>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">20 September 2021</p>
-                            <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">Growth Fundamentals</p>
-                            <ul>
-                                <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                    <p class="small-text" style="margin-bottom: 0.3vw;">Pirate funneling</p>
-                                </li>
-                                <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                    <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking mindset & skills</p>
-                                </li>
-                                <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                    <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking vs Digital Marketing and others</p>
-                                </li>
-                                <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                    <p class="small-text" style="margin-bottom: 0.3vw;">A career in growth hacking </p>
-                                </li>
-                            </ul>
+                        <!-- END OF ONE ITEM -->
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item">
+                            <div style="display: flex;justify-content: center;">
+                                
+                                <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Day 2</p>
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">20 September 2021</p>
+                                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">Growth Fundamentals</p>
+                                    <ul>
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">Pirate funneling</p>
+                                        </li>
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking mindset & skills</p>
+                                        </li>
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking vs Digital Marketing and others</p>
+                                        </li>
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">A career in growth hacking </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+                        <!-- END OF ONE ITEM -->
                     </div>
-                </div>
-                <!-- END OF ONE ITEM -->
+                    <a class="carousel-control-prev"   data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                        <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+                        <span class="visually-hidden">Prev</span>
+                    </a>
+                    <a class="carousel-control-next"   data-bs-target="#schedule-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                        <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>  
             </div>
-            <a class="carousel-control-prev"   data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
-                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
-                <span class="visually-hidden">Prev</span>
-            </a>
-            <a class="carousel-control-next"   data-bs-target="#schedule-carousel" style="width:2vw"  role="button"data-bs-slide="next">
-                <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
-                <span class="visually-hidden">Next</span>
-            </a>
-        </div>  
-    </div>
-    <!-- END OF LEFT SECTION -->
-    <!-- START OF RIGHT SECTION -->
-    <div class="col-md-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
-        <div style="padding-left: 5vw;">
-            <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
-            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-            <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
+            <!-- END OF LEFT SECTION -->
+            <!-- START OF RIGHT SECTION -->
+            <div class="col-md-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
+                <div style="padding-left: 5vw;">
+                    <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+                    <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
 
+                </div>
+
+                
+            </div>
+            <!-- END OF RIGHT SECTION -->        
         </div>
-
-        
     </div>
-    <!-- END OF RIGHT SECTION -->
+    <!-- END OF BOOTCAMP SCHEDULE -->
+    <!-- START OF DELIVERY METHOD -->
+    <div class="schedule-content"  id="delivery-method" style="display: none;">
+        <div class="row m-0">
+            <!-- START OF LEFT SECTION -->
+            <div class="col-xs-12 col-md-6 p-0">
+                <div id="delivery-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+                    <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item active">
+                            <div style="display: flex;justify-content: center;">
+                                <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Step-by-step teaching 1</p>
+                                    <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item">
+                            <div style="display: flex;justify-content: center;">
+                                <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Step-by-step teaching 2</p>
+                                    <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                    </div>
+                    <a class="carousel-control-prev"   data-bs-target="#delivery-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                        <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+                        <span class="visually-hidden">Prev</span>
+                    </a>
+                    <a class="carousel-control-next"   data-bs-target="#delivery-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                        <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>  
+            </div>
+            <!-- END OF LEFT SECTION -->
+            <!-- START OF RIGHT SECTION -->
+            <div class="col-md-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
+                <div style="padding-left: 5vw;">
+                    <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+                    <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
+
+                </div>
+            </div>
+            <!-- END OF RIGHT SECTION -->        
+        </div>
+    </div>
+    <!-- END OF DELIVERY METHOD -->
 </div>
 <!-- END OF SCHEDULE AND DELIVERY METHOD -->
 
@@ -677,18 +740,18 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>
-    function changeCourse(evt, categoryName) {
+    function changeSchedule(evt, categoryName) {
             var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("course-content")
+            tabcontent = document.getElementsByClassName("schedule-content")
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }
-            tablinks = document.getElementsByClassName("course-links");
+            tablinks = document.getElementsByClassName("schedule-links");
             for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("btn-blue-active", "btn-blue-on-hover");
+                tablinks[i].className = tablinks[i].className.replace("schedule-title-active", "schedule-title");
             }
             document.getElementById(categoryName).style.display = "block";
-            evt.currentTarget.className += " btn-blue-active";
+            evt.currentTarget.className += " schedule-title-active";
         }
          
 </script>

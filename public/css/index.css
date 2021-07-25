@@ -2451,3 +2451,10 @@ html, body {
     border-radius: 5px;
   }
 /* END OF PAGINATION */
+
+.schedule-title-active{
+    color:#2B6CAA !important;
+}
+.schedule-title{
+    color: rgba(43, 108, 170, 0.25);
+}
