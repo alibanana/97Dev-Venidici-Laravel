@@ -4,6 +4,42 @@
 
 @section('container')
 
+<!-- Modal Loading -->
+<div class="modal fade" id="bootcampFeatureModal" tabindex="-1" role="dialog" aria-labelledby="bootcampFeatureModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="POST" action="">
+            @csrf
+            {{ method_field('PUT') }}
+            <div class="modal-body">
+                <div class="form-group mt-2">
+					<input type="text" name="title" required class="form-control form-control-user"
+						id="bootcap_feature_title" placeholder="Insert feature title">
+					@error('title')
+						<span class="invalid-feedback" role="alert" style="display: block !important;">
+							<strong>{{ $message }}</strong>
+						</span>
+					@enderror
+				</div>
+                <div class="form-group mt-2">
+					<textarea name="feature" id="bootcap_feature_description" class="form-control"></textarea>
+					@error('feature')
+						<span class="invalid-feedback" role="alert" style="display: block !important;">
+							<strong>{{ $message }}</strong>
+						</span>
+					@enderror
+				</div>
+            </div>
+            <div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+				<button class="btn btn-primary" type="submit">Confirm</button>   
+			</div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END OF MODAL Loading -->
+
 <!-- Main Content -->
 <div id="content">
 
@@ -24,13 +60,15 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h2 class="mb-0 mb-3 text-gray-800">Update Bootcamp</h2>
         </div>
-        <div class="d-sm-flex align-items-center mb-2">
+        <div class="d-sm-flex align-items-center mb-2" style="justify-content:space-between;flex-wrap:wrap">
             <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h5>
             <!-- <h5 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5> -->
-            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
-            <h5 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
-            <h5 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
-            <h5 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="margin-left:1.5vw;cursor:pointer">Schedule</h5>
+            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer">Feature</h5>
+            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer">About</h5>
+            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="cursor:pointer">Pricing & Enrollment Scenario</h5>
+            <h5 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="cursor:pointer">Publish Status</h5>
+            <h5 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="cursor:pointer">Teacher</h5>
+            <h5 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="cursor:pointer">Schedule</h5>
         </div>
         
         <!-- Content Row -->
@@ -103,19 +141,6 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Embed youtube link for preview  (src only)</label>
-                            <input type="text" name="preview_video_link" class="form-control form-control-user"
-                                    id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg"
-                                    value="{{ old('preview_video_link', $course->preview_video) }}" required>
-                            @error('preview_video_link')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
                             <label for="">Zoom link</label>
                             <input type="text" name="link" class="form-control form-control-user" value="{{ old('link', $course->link) }}"
                                     placeholder="e.g. https://meet.google.com/pdq-umxk-fuv" required> 
@@ -174,37 +199,6 @@
                         </div>
                     </div>
                     <div class="col-6" style="margin-top:3vw">
-                        <label for="">Persyaratan <span style="color: orange">(At least one element must be present!)</span></label>
-                        @error('requirements')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        {{-- Element to be duplicated --}}
-                        <div id="requirement_duplicator_wrapper">
-                            <div class="row" id="requirement_duplicator" style="display:none">
-                                <div class="col-md-12">
-                                    <div class="form-group" style="display:flex">
-                                        <input type="text" class="form-control form-control-user" placeholder="Enter Student Requirement">
-                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            @foreach ($course->courseRequirements as $requirement)
-                                <div class="row" id="requirement_duplicator{{ $loop->iteration }}">
-                                    <div class="col-md-12">
-                                        <div class="form-group" style="display:flex">
-                                            <input type="text" name="requirements[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="{{ $requirement->requirement }}" required>
-                                            <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <button type="button" id="add_requirement" onlick="duplicateRequirement()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
-                    </div>
-
-                    <div class="col-6" style="margin-top:3vw">
                         <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
                         <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
                         @error('hashtags')
@@ -258,6 +252,120 @@
             </form>
         </div>
         <!-- END OF BASIC INFORMATION-->
+
+
+        <!-- START OF FEATURE -->
+        <div class="course-content" id="bootcamp-feature" style="display:none">
+            <form action="" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <input type="text" class="form-control" name="title" placeholder="Insert Title">
+                </div>
+                <div class="col-12 mt-2">
+                    <textarea name="feature" rows="5" class="form-control" placeholder="Insert Description"></textarea>
+                </div>
+                <div class="col-12 mt-2">
+                    <div style="display:flex;justify-content:flex-end">
+                        <button type="submit"  class="btn btn-primary btn-user p-3">Create New Feature</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="row" style="margin-top:2vw">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th >Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Customer Experience</td>
+                                    <td>Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</td>
+                                    <td>
+                                        <div style="padding: 0px 2px;" class="text-nowrap">
+                                            <a onclick="passBootcampFeature('Customer Experience','Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada')" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="#" data-toggle="modal" data-target="#bootcampFeatureModal">
+                                                Update
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- END OF FEATURE -->
+        
+        <!-- START OF BOOTCAMP DESCRIPTIONS -->
+        <div class="course-content" id="bootcamp-descriptions" style="display:none" >
+            <form action="" method="post"  enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <input type="file" name="image" placeholder="Insert Title">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control" name="title" placeholder="Insert Title">
+                </div>
+                <div class="col-12 mt-2">
+                    <textarea name="description" rows="5" class="form-control" placeholder="Insert Description"></textarea>
+                </div>
+                <div class="col-12 mt-2">
+                    <div style="display:flex;justify-content:flex-end">
+                        <button type="submit"  class="btn btn-primary btn-user p-3">Create New About</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="row" style="margin-top:2vw">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th >Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
+                                    </td>
+                                    <td>Customer Experience</td>
+                                    <td>Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</td>
+                                    <td>
+                                        <div style="padding: 0px 2px;" class="text-nowrap">
+                                            <a class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="/admin/bootcamp-about/1/update">
+                                                Update
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- END OF BOOTCAMP DESCRIPTIONS -->
 
 
         <!-- START OF PRICE AND ENROLLMENT -->
@@ -442,24 +550,64 @@
             @csrf
             <div class="row mt-2 mb-3">
                 <div class="col-12">
-                    <p>Create New Schedule</p>
+                    <h5>Create New Schedule</h5>
                 </div>
-               <div class="col-6">
-                   <input type="datetime-local" name="date_time" class="form-control">
+                <div class="col-6">
+                    <label for="">Date Start</label>
+                    <input type="date" name="date_start" class="form-control">
                 </div>
-               <!-- <div class="col-4"><input type="time" class="form-control"></div> -->
-               <div class="col-6">
-                   <input type="text" name="title" placeholder="title" class="form-control">
+                <div class="col-6">
+                    <label for="">Date End</label>
+                    <input type="date" name="date_end" class="form-control">
                 </div>
-               <div class="col-12 pt-3">
-                   <textarea name="detail" id="" class="form-control" rows="3" placeholder="insert description"></textarea>
-               </div>
-               <div class="col-12 pt-3">
+                <!-- <div class="col-4"><input type="time" class="form-control"></div> -->
+                <div class="col-6 pt-3">
+                    <label for="">Schedule Title</label>
+
+                   <input type="text" name="title" placeholder="Insert Title" class="form-control">
+                </div>
+                <div class="col-6 pt-3">
+                    <label for="">Schedule Sub-Title</label>
+
+                   <input type="text" name="subtitle" placeholder="Insert Sub Title" class="form-control">
+                </div>
+
+                <div class="col-6 pt-3">
+                    <label for="">Detail <span style="color: orange">(At least one element must be present!)</span></label>
+                    @error('schedule_details')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div id="weekly_schedule_detail_duplicator_wrapper">
+                        {{-- Element to be duplicated --}}
+                        <div class="row" id="weekly_schedule_duplicator" style="display:none">
+                            <div class="col-md-12">
+                                <div class="form-group" style="display:flex">
+                                    <input type="text" class="form-control form-control-user" placeholder="e.g. Pirate funneling">
+                                    <button type="button" onClick="removeDiv(this, 'weekly_schedule_detail_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="weekly_schedule_duplicator1">
+                            <div class="col-md-12">
+                                <div class="form-group" style="display:flex">
+                                    <input type="text" name="schedule_details[]" class="form-control form-control-user" placeholder="e.g. Pirate funneling" required>
+                                    <button type="button" onClick="removeDiv(this, 'weekly_schedule_detail_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add_schedule_detail" onlick="duplicateSchedule()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+                </div>
+
+
+                <div class="col-12 pt-3">
                    <div style="display:flex;justify-content:flex-end">
                     <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Schedule</button>
 
                    </div>
-               </div>
+                </div>
             </div>                
             </form>
             
@@ -470,50 +618,32 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Date Time</th>
                                     <th>Title</th>
-                                    <th>Description</th>
+                                    <th>Sub Title</th>
+                                    <th>Event Dates</th>
+                                    <th>Detail</th>
                                     <th >Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($schedules as $schedule)
                                 <tr>
+                                    <td>1</td>
+                                    <td>Title</td>
+                                    <td>Sub Title</td>
+                                    <td>20 September - 21 Agustus 2021</td>
                                     <td>
-                                    {{ $loop->iteration }}
-                                    </td>
-                                    @php
-                                        $datetime_default  = date('c', strtotime($schedule->date_time));
-                                        $datetime = explode("+", $datetime_default);
-                                    @endphp
-                                    
-                                    <form action="{{route('admin.bootcampschedule.update',$schedule->id)}}" method="post">
-                                    <td><input type="datetime-local" name="date_time" value="{{ $datetime[0]}}" class="form-control"></td>
-                                    <!-- <td><input type="time" class="form-control"></td> -->
-                                    <td><input type="text" value="{{$schedule->title}}" name="title" class="form-control"></td>
-                                    <td><textarea name="detail" id="" rows="3" class="form-control">{{$schedule->detail}}</textarea></td>  
+                                        <p>- lorem</p>
+                                        <p>- lorem</p>
+                                        <p>- lorem</p>
+                                        </td>
                                     <td>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                @csrf
-                                                @method('put')
-                                                
-                                                <div style="padding: 0px 2px">
-                                                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to update this schedule?')">Update</button>
-                                                </div>
-                                            </form> 
-                                        </div>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                            <form action="{{route('admin.bootcampschedule.destroy',$course->id)}}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <div style="padding: 0px 2px">
-                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
-                                                </div>
-                                            </form>
+                                        <div style="padding: 0px 2px;" class="text-nowrap">
+                                            <a class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="/admin/bootcamp-schedules/1/update" >
+                                                Update
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -595,6 +725,25 @@ function removeDiv(elem, wrapper_id){
     } else {
         alert("At least one element must be present!");
     }
+}
+</script>
+<script>
+    function passBootcampFeature(title,description) {
+		document.getElementById("bootcap_feature_title").value = title;
+		document.getElementById("bootcap_feature_description").value = description;
+    }
+</script>
+
+<script>
+document.getElementById('add_schedule_detail').onclick = duplicateSchedule;
+var i = 1; var original2 = document.getElementById('weekly_schedule_duplicator');
+function duplicateSchedule() {
+    var clone = original2.cloneNode(true); // "deep" clone
+    $(clone).find("input").attr("schedule_details[]");
+    $(clone).find("input").attr("required", "");
+    clone.style.display = "block";
+    clone.id = "weekly_schedule_duplicator" + ++i; // there can only be one element with an ID
+    original2.parentNode.appendChild(clone);
 }
 </script>
 @if (Session::has('page-option'))

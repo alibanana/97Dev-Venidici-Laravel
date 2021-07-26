@@ -187,5 +187,16 @@ class BootcampUpdateController extends Controller
             ->with('message', $result['message'])
             ->with('page-option', 'teacher');
     }
+
+    public function editBootcampAbout(){
+        $view = 'admin/bootcamp/update-bootcamp-about';
+
+        return view($view);
+    }
+    public function editBootcampSchedules(){
+        $view = 'admin/bootcamp/update-bootcamp-schedules';
+
+        return view($view);
+    }
     
 }

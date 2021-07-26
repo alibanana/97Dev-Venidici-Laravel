@@ -91,18 +91,6 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="">Embed youtube link for preview  (src only)</label>
-                        <input type="text" name="preview_video_link" class="form-control form-control-user" value="{{ old('preview_video_link') }}"
-                                id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg" required> 
-                        @error('preview_video_link')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror               
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
                         <label for="">Zoom link</label>
                         <input type="text" name="link" class="form-control form-control-user" value="{{ old('link') }}"
                                 placeholder="e.g. https://meet.google.com/pdq-umxk-fuv" required> 

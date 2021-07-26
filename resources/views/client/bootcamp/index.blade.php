@@ -211,8 +211,8 @@
                         <div class="carousel-item active">
                             <div style="display: flex;justify-content: center;">
                                 <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
-                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Day 1</p>
-                                    <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">19 September 2021</p>
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Week 1</p>
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">19 - 26 September 2021</p>
                                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">Growth Fundamentals</p>
                                     <ul>
                                         <li style="color:#2B6CAA;font-family: Rubik Regular;">
