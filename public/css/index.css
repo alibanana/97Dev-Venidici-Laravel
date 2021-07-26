@@ -1759,6 +1759,11 @@ html, body {
 #change-pass-mobile{
     width:40% !important;
 }
+.height-card-white-mobile{
+    height:20vw;
+    padding:2.5vw
+}
+
 
 
 
@@ -1958,6 +1963,12 @@ html, body {
         top:-10px !important
       
       }
+    .input-file-fontsize{
+        font-size:3vw !important
+    }
+    .popup-point-images{
+        width:30vw !important;
+    }
     /* END OF USERDASHBOARD POPUP */
 
     /* MOBILE WOKI SECTION */
@@ -1999,7 +2010,31 @@ html, body {
 
         border-radius: 5px ;
     }
+    
+    #user-font-size-mobile{
+        font-size:4vw !important;
+    }
+    .height-card-white-mobile{
+        height:35vw;
+        padding:2.5vw
+    }
+    .left-arrow-mobile{
+        width: 4vw !important;
+        margin-left:-8px !important
+    }
+    .right-arrow-mobile{
+        width: 4vw !important;
+        margin-right:-8px !important
+    }
     /* END OF MOBILE WOKI SECTION */
+
+    /* START HOMEPAGE POPUP MOBILE */
+    .logo-image-popup{
+        width:15vw !important;
+    }
+    /* END OF HOMEPAGE POPUP MOBILE */
+
+    
 
     /* START ONLINE COURSE MOBILE SECTION */
     .online-course-mobile-container{
@@ -2126,13 +2161,13 @@ html, body {
         width:7vw ;
         padding-left:3vw;
         z-index:99;
-        margin-right:0px
+        margin-left:10px
     }
     .carousel-fontsize-right{
         width:7vw ;
         padding-right:3vw;
         z-index:99;
-        margin-right:0px
+        margin-right:17px
     }
     /* END OF MOBILE SARAN KELAS DARI KAMI SECTION */
 
@@ -2145,6 +2180,8 @@ html, body {
     /* END OF LEARN MOBILE VIEW */
 
     /* START MOBILE COMPLETED REVIEW SECTION */
+
+    
     .review-completed-course{
         background: #FFFFFF;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
@@ -2161,6 +2198,22 @@ html, body {
         width:85vw !important
     }
     /* END OF MOBILE COMPLETED REVIEW SECTION */
+
+    /* START COMMUNITY PAGE SECTION */
+    .bg-image-mobile-height{
+        height:80vw !important
+    }
+    #mt-mobile-community{
+        margin-top:3vw !important
+    }
+    .image-community-mobile{
+        width: 86vw !important;
+    }
+    #image-discord-community-mobile{
+        margin-top:4vw !important;
+        height: 50vw !important;
+    }
+    /* END OF COMMUNITY PAGE SECTION */
     #card-tag-fontsize{
         font-size:3vw;
     }
@@ -2170,6 +2223,7 @@ html, body {
     }
     .big-heading{
         font-size: 6.5vw;
+        line-height: 8.2vw !important;
     }
     .small-heading{
         font-size: 5.5vw;
@@ -2177,6 +2231,7 @@ html, body {
     .small-heading{
         font-size: 5.5vw;
     }
+    
     
 
     .medium-heading{
@@ -2196,7 +2251,10 @@ html, body {
         line-height:4vw;
     }
     .bigger-text{
-        font-size: 3vw;
+        font-size: 3vw ;
+    }
+    #bigger-text-faq{
+        font-size: 3vw !important;
     }
     .very-small-text{
         font-size: 1.8vw;

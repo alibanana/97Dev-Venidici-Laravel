@@ -13,8 +13,8 @@
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
-                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
-                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Menjadi Pengajar</p>
+                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid logo-image-popup" style="width:5vw" alt="LOGO">
+                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:20px;margin-top:1vw">Menjadi Pengajar</p>
                         @if (session()->has('menjadi_pengajar_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
@@ -211,7 +211,7 @@
                     <div class="col-md-12" style="text-align:center;margin-top:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0.4vw;margin-top:1.5vw">Unggah file CV/Portfolio kamu disini</p>
                         <div style="padding:0vw 20vw;margin-top:1vw">
-                            <div class="drop-zone">
+                            <div class="drop-zone" style="height:25vw !important">
                                 <span class="drop-zone__prompt normal-text" style="font-family:Rubik Regular;color:black;"> Drag file CV/Portfolio kamu ke sini untuk Menunggah atau <span style="color:#3F92D8" >Browse</span></span>
                                 <input type="file" name="cv" class="drop-zone__input" accept=".pdf">
                             </div>
@@ -247,8 +247,8 @@
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
-                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
-                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Menjadi Kollaborator</p>
+                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid logo-image-popup" style="width:5vw" alt="LOGO">
+                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:20px;margin-top:1vw">Menjadi Kollaborator</p>
                         @if (session()->has('menjadi_kolaborator_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
@@ -370,7 +370,7 @@
             <input type="text" name="search" style="background:transparent;border:none;color: rgba(0, 0, 0, 0.5);font-family:Rubik Regular;font-size:3vw;width:100%" placeholder="Course Title">
         </div>
         <div class="grey-input-form" style="display: flex;align-items:center;width:100%;margin-top:3vw">
-            <select name="filter"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;font-size:3vw">
+            <select name="filter"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;font-size:3vw;padding:1vw 0vw">
                 <option value="None" disabled selected>Pilih Kategori</option>
                 <option value="Skill Snack">Skill Snack</option>
                 <option value="Woki">Woki</option>

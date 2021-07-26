@@ -110,7 +110,7 @@
                             <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw" alt="Failed to load user's profile image.."> <br>
                         @endif
 
-                        <input type="file" id="images" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
+                        <input type="file" id="images" class="input-file-fontsize" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
                         <!--
                         <label id="uploadButton" for="images" style="font-family:Rubik Medium">Choose Image</label>-->
                     </div>
@@ -365,7 +365,7 @@
         <div class="content" style="padding:2vw">
             <div class="row m-0">
                 <div class="col-12" style="text-align:center;">
-                    <img src="/assets/images/client/Stars_Illustration.png" class="img-fluid" style="width:14vw" alt="">
+                    <img src="/assets/images/client/Stars_Illustration.png" class="img-fluid popup-point-images" style="width:14vw" alt="">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Venidici {{strtoupper(auth()->user()->club)}} Club</p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{$usableStarsCount}} Stars</span></p>
                     <!--<p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">- Stars</span></p>-->
@@ -676,9 +676,9 @@
     @elseif(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
-        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+        <div class="alert alert-warning alert-dismissible fade show small-text"   style="width:100%;text-align:center;margin-bottom:0px;font-size:2.5vw;padding-right:6vw"role="alert">
             Kamu belum melengkapi profile. <strong><a href="#edit-profile">Klik disini</a></strong> untuk melengkapi.
-            <button type="button" style="top:-13px" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" style="top:-3px" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
     </div>
