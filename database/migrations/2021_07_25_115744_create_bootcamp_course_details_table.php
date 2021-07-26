@@ -15,8 +15,8 @@ class CreateBootcampCourseDetailsTable extends Migration
     {
         Schema::create('bootcamp_course_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('bootcamp_application_id');
-            $table->foreign('bootcamp_application_id')->references('id')->on('bootcamp_application')->onDelete('cascade');
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->string('meeting_link');
             $table->string('syllabus');
             $table->timestamps();

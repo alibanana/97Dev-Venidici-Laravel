@@ -10,6 +10,7 @@ class BootcampSchedule extends Model
     use HasFactory;
 
     protected $fillable = [
+        'course_id',
         'date_start',
         'date_end',
         'title',

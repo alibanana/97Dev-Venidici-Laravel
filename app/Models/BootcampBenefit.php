@@ -10,7 +10,6 @@ class BootcampBenefit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'bootcamp_application_id',
         'course_id',
         'title',
         'description',
