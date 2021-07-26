@@ -66,6 +66,30 @@
                         @enderror               
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Company Logo</label> <br>
+                        <input type="file" name="company_logo"> 
+                        @error('company_logo')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Occupancy</label>
+                        <input type="text" name="occupancy" class="form-control form-control-user"
+                            id="phone" aria-describedby="" value="{{ old('occupancy') }}"
+                            placeholder="Here insert teacher occupancy (e.g. Growth Marketer)" required> 
+                        @error('occupancy')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
                 <div class="col-12">
                     <div style="display:flex;justify-content:flex-end">
                         <button type="submit" class="btn btn-primary btn-user p-3">Create New Teacher</button>

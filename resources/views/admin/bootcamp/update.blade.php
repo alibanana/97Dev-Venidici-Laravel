@@ -60,15 +60,19 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h2 class="mb-0 mb-3 text-gray-800">Update Bootcamp</h2>
         </div>
-        <div class="d-sm-flex align-items-center mb-2" style="justify-content:space-between;flex-wrap:wrap">
-            <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h5>
-            <!-- <h5 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5> -->
-            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer">Feature</h5>
-            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer">About</h5>
-            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="cursor:pointer">Pricing & Enrollment Scenario</h5>
-            <h5 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="cursor:pointer">Publish Status</h5>
-            <h5 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="cursor:pointer">Teacher</h5>
-            <h5 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="cursor:pointer">Schedule</h5>
+        <div class="mb-2" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap">
+            <h6 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h6>
+            <!-- <h6 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h6> -->
+            <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer;">Feature</h6>
+            <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer;">About</h6>
+            <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="cursor:pointer;">Pricing & Enrollment Scenario</h6>
+            <h6 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="cursor:pointer;">Publish Status</h6>
+            <h6 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="cursor:pointer;">Teacher</h6>
+            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="cursor:pointer;">Schedule</h6>
+            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'benefit-page')" style="cursor:pointer;">Benefit</h6>
+            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'candidate-page')" style="cursor:pointer;">Candidate</h6>
+            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'future-career-page')" style="cursor:pointer;">Future Careers</h6>
+            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'hiring-partner-page')" style="cursor:pointer;">Hiring Partners</h6>
         </div>
         
         <!-- Content Row -->
@@ -347,7 +351,7 @@
             @csrf
             <div class="row">
                 <div class="col-6">
-                    <input type="file" name="image" placeholder="Insert Title">
+                    <input type="file"  accept=".jpg,,jpeg,.png" name="image" placeholder="Insert Title">
                 </div>
                 <div class="col-6">
                     <input type="text" class="form-control" name="title" placeholder="Insert Title">
@@ -432,26 +436,12 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <h5 for="">Pricing Options</h5>
-                            <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" onclick="disableInput()" name="is_free" value="1" id="pricing_options" 
-                                    @if($course->price == 0) checked @endif>
-                                <label class="form-check-label" for="pricing_options">
-                                    Free
-                                </label>
-                            </div>
-                            <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" onclick="enableInput()" name="is_free" value="0" id="pricing_options" 
-                                @if($course->price != 0) checked @endif    >
-                                <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.)</label> <br>
-                                <input type="number" name="price" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
-                                    id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" placeholder="e.g. 10000" >
-                            </div>
-                            @error('price')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror               
+                            <h5 for="">Full Registration Price</h5>
+                            <input class="form-control" type="text" name="bootcamp_full_price" value="{{ old('price', $course->price) }}">
+                        </div>
+                        <div class="form-group">
+                            <h5 for="">Free Trial Registration Price</h5>
+                            <input class="form-control" type="text" name="bootcamp_full_price" value="{{ old('price', $course->price) }}">
                         </div>
                     </div>
                     
@@ -531,6 +521,7 @@
                                     <th>No.</th>
                                     <th>Teacher</th>
                                     <th>Description</th>
+                                    <th>Company Logo</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -540,9 +531,12 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td style="text-align:center" class="text-nowrap">
                                             <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
-                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }}</p>
+                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }} <br> <span style="font-weight: italic !important;">Growth Marketer</span>​</p>
                                         </td>
                                         <td>{{ $teacher->description }}</td>  
+                                        <td>
+                                            <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
+                                        </td>
                                         <td>
                                             @if ($teacher->courses()->where('course_id', $course->id)->first())
                                                 <div class="d-sm-flex align-items-center justify-content-center mb-4">
@@ -577,6 +571,342 @@
             </div>
         </div>
         <!-- END OF Teacher-->
+
+        <!-- START BENEFITS-->
+        <div class="course-content" id="benefit-page" style="display:none">
+            <form action="" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input type="text" name="title" class="form-control form-control-user"
+                            placeholder="Enter benefit title"  required> 
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="4" placeholder="Enter benefit description"></textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Benefit</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <input type="text" name="title" value="title" class="form-control">
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="description"cols="30" rows="4" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident nisi veritatis sapiente ipsum neque quos blanditiis ipsa dolorum at, sequi dicta inventore quidem quam nihil dolore sed illum? Quis, vitae. </textarea>
+                                        </td>
+                                        <td>
+                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                <form action="" method="post">
+                                                    @csrf
+                                                    @method('put')
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                    </div>
+                                                </form> 
+                                            </div>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END BENEFITS-->
+        <!-- START OF CANDIDATES-->
+        <div class="course-content" id="candidate-page" style="display:none">
+            <form action="" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input type="text" name="title" class="form-control form-control-user"
+                            placeholder="Enter candidate title"  required> 
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="4" placeholder="Enter candidate description"></textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Candidate</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <input type="text" name="title" value="title" class="form-control">
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="description"cols="30" rows="4" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident nisi veritatis sapiente ipsum neque quos blanditiis ipsa dolorum at, sequi dicta inventore quidem quam nihil dolore sed illum? Quis, vitae. </textarea>
+                                        </td>
+                                        <td>
+                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                <form action="" method="post">
+                                                    @csrf
+                                                    @method('put')
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                    </div>
+                                                </form> 
+                                            </div>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF CANDIDATES-->
+
+        <!-- START OF FUTURE CAREERS-->
+        <div class="course-content" id="future-career-page" style="display:none">
+            <form action="" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Thumbnail</label> <br>
+                        <input type="file"  accept=".jpg,,jpeg,.png" name="thumbnail" class="" required> 
+                        @error('thumbnail')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input type="text" name="title" class="form-control form-control-user"
+                            placeholder="Enter benefit title"  required> 
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="4" placeholder="Enter benefit description"></textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Future Career</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Thumbnail</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <form action="" method="post">
+                                @csrf
+                                @method('put')
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label for="">Thumbnail</label> <br>
+                                                <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
+                                                <br>
+                                                <br>
+                                                Click button below to update image
+                                                <input type="file" name="thumbnail" aria-describedby="" accept=".jpg,,jpeg,.png"> 
+                                                @error('thumbnail')
+                                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror               
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="title" value="title" class="form-control">
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="description"cols="30" rows="4" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident nisi veritatis sapiente ipsum neque quos blanditiis ipsa dolorum at, sequi dicta inventore quidem quam nihil dolore sed illum? Quis, vitae. </textarea>
+                                        </td>
+                                        <td>
+                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                    </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF FUTURE CAREERS-->
+
+        <!-- START OF HIRING PARTNERS-->
+        <div class="course-content" id="hiring-partner-page" style="display:none">
+            <form action="" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Image</label> <br>
+                        <input type="file"  accept=".jpg,,jpeg,.png" name="thumbnail" class="" required> 
+                        @error('image')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Hiring Partner</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Partner</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <form action="" method="post">
+                                @csrf
+                                @method('put')
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label for="">Thumbnail</label> <br>
+                                                <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
+                                                <br>
+                                                <br>
+                                                Click button below to update image <br>
+                                                <input type="file" name="thumbnail" aria-describedby="" accept=".jpg,,jpeg,.png" required> 
+                                                @error('thumbnail')
+                                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror               
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                    </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF HIRING PARTNERS-->
 
         <!-- START OF Schedule-->
         <div class="course-content" id="schedule-page" style="display:none">

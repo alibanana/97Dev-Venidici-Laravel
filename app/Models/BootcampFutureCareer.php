@@ -11,6 +11,7 @@ class BootcampFutureCareer extends Model
 
     protected $fillable = [
         'course_id',
+        'thumbnail',
         'title',
         'description',
     ];

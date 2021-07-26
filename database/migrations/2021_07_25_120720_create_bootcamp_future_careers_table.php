@@ -17,6 +17,7 @@ class CreateBootcampFutureCareersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->text('thumbnail');
             $table->string('title');
             $table->text('description');
             $table->timestamps();
