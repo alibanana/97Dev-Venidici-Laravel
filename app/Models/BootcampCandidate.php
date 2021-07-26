@@ -15,7 +15,7 @@ class BootcampCandidate extends Model
         'description',
     ];
 
-    public function bootcampApplication() {
-        return $this->belongsTo(BootcampApplication::class);
+    public function course() {
+        return $this->belongsTo(Course::class);
     }
 }

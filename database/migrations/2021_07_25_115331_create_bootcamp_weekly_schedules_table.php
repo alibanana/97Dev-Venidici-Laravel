@@ -15,8 +15,8 @@ class CreateBootcampWeeklySchedulesTable extends Migration
     {
         Schema::create('bootcamp_weekly_schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->unsignedBigInteger('bootcamp_schedule_id');
+            $table->foreign('bootcamp_schedule_id')->references('id')->on('bootcamp_schedules')->onDelete('cascade');
             $table->text('description');
             $table->timestamps();
         });

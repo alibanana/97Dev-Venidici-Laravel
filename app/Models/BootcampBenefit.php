@@ -16,10 +16,6 @@ class BootcampBenefit extends Model
         'course_id',
     ];
 
-    public function bootcampApplication() {
-        return $this->belongsTo(BootcampApplcation::class);
-    }
-
     public function course() {
         return $this->belongsTo(Course::class);
     }

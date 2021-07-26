@@ -20,7 +20,6 @@ class CreateBootcampSchedulesTable extends Migration
             $table->date('date_start');
             $table->date('date_end');
             $table->string('title');
-            $table->text('detail');
             $table->timestamps();
         });
     }
