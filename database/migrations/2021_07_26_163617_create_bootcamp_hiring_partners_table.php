@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBootcampSchedulesTable extends Migration
+class CreateBootcampHiringPartnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateBootcampSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bootcamp_schedules', function (Blueprint $table) {
+        Schema::create('bootcamp_hiring_partners', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->date('date_start');
-            $table->date('date_end');
-            $table->string('title');
-            $table->string('subtitle');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateBootcampSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bootcamp_schedules');
+        Schema::dropIfExists('bootcamp_hiring_partners');
     }
 }
