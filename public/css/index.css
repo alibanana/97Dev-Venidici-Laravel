@@ -228,6 +228,18 @@ html, body {
     background-repeat: no-repeat;
     background-size: 30%;
 }
+.bootcamp-right-heading-bg{
+    background-image: url("/assets/images/client/Bootcamp_Circle_BG.png");
+    background-position:center right;
+    background-repeat: no-repeat;
+    background-size: 75%;
+}
+.bootcamp-bg{
+    background-image: url("/assets/images/client/Bootcamp_Background.png");
+    background-position:top left;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
 /* end of background images*/
 
 /* start of page padding */
@@ -1498,7 +1510,7 @@ html, body {
     color:#3B3C43
 }
 .krest-card:hover #krest-card-description {
-    color:#3B3C43
+    color:#3B3C43 !important
 }
 
 .display-icon{
@@ -1763,7 +1775,7 @@ html, body {
 
 
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) { 
 
     .image-qris{
         width:40vw !important
@@ -2243,6 +2255,12 @@ html, body {
     #completed-icon{
         width:50vw !important
     }
+    .homepage-popup-logo{
+        width: 10vw !important
+    }
+    .drop-zone{
+        height: auto !important;
+    }
 }
 
 /* MOBILE NAVBAR */
@@ -2371,8 +2389,8 @@ html, body {
  #menu
  {
    position: fixed;
-   width: 300px;
-   height:800px;
+   width: 70vw;
+   height:140vh;
    margin: -100px 0 0 -50px;
    padding: 50px;
    padding-top: 125px;
@@ -2439,3 +2457,42 @@ html, body {
     border-radius: 5px;
   }
 /* END OF PAGINATION */
+
+.schedule-title-active{
+    color:#2B6CAA !important;
+}
+.schedule-title{
+    color: rgba(43, 108, 170, 0.25);
+}
+
+.htj-title-active{
+    background-color: #2B6CAA !important;
+}
+.htj-title-active p{
+    color:#FFFFFF !important;
+}
+.htj-title{
+    background-color: #FFFFFF;
+    border-radius:50%;
+    width:3vw;
+    height:3vw;
+    text-align:center;
+}
+.htj-title p{
+    color:#2B6CAA ;
+}
+
+.growth-title{
+    padding: 1vw 2vw;
+    text-align:center;
+    cursor:pointer
+}
+.growth-title p{
+    color:#3B3C43
+}
+.growth-title-active{
+    background-color:#2B6CAA
+}
+.growth-title-active p{
+    color:#FFFFFF !important
+}

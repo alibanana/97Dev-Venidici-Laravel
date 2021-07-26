@@ -6,7 +6,7 @@
 <div class="row m-0 banner-background page-container pelatihan-venidici-mobile-container" style="height:40vw;padding-top:16vw;text-align:center">
     <div class="col-md-12 p-0">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Pelatihan Venidici</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum distinctio, consequatur sapiente doloribus dignissimos ipsum modi, illo facere quod voluptatem nemo dolorum reprehenderit sed aut et cumque corrupti beatae ea?</p>
+        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Platform anak muda kekinian buat naklukin karir impian!</p>
         
         <a href="#search-course-section" class="sub-description btn-blue-bordered btn-blue-bordered-active" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;width:100%;margin-top:5vw;padding:0.8vw 1vw">Search Courses</a>
 
@@ -35,11 +35,11 @@
             <div class="carousel-inner" style="padding: 0vw 3.5vw;">
                 @if(count($user_review) == 0)
                 <div class="carousel-item active">
-                    <div class="card-white" style="height:20vw;padding:2.5vw">
+                    <div class="card-white height-card-white-mobile" >
                         <div style="display:flex;align-items:center">   
                             <img src="/assets/images/client/Default_Display_Picture.png" style="width:5vw;border-radius:10px" class="img-fluid" alt="">
                             <div style="margin-left:1vw">
-                                <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">@wishnumurti</p>
+                                <p class="small-heading" id="user-font-size-mobile" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">@wishnumurti</p>
                                 <p class="bigger-text" style="font-family: Rubik Regular;color:#55525B;margin-top:-0.3vw;margin-bottom:0vw"></p>
                             </div>
                         </div>
@@ -61,11 +61,11 @@
                 @endif
                 @foreach($user_review as $review)
                 <div class="carousel-item @if($loop->first) active @endif">
-                    <div class="card-white" style="height:20vw;padding:2.5vw">
+                    <div class="card-white height-card-white-mobile" >
                         <div style="display:flex;align-items:center">   
                             <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset($review->user->avatar) }}" @endif style="width:5vw;border-radius:10px" class="img-fluid" alt="">
                             <div style="margin-left:1vw">
-                                <p class="small-heading" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">{{$review->user->name}}</p>
+                                <p class="small-heading" id="user-font-size-mobile" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0vw">{{$review->user->name}}</p>
                                 <p class="bigger-text" style="font-family: Rubik Regular;color:#55525B;margin-top:-0.3vw;margin-bottom:0vw">{{$review->user->occupancy}}</p>
                             </div>
                         </div>
@@ -89,11 +89,11 @@
 
             </div>
             <a class="carousel-control-prev"   data-bs-target="#feature-carousel" style="width:2vw" role="button"data-bs-slide="prev">
-                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+                <img src="/assets/images/icons/arrow-left.svg" class="left-arrow-mobile" id="carousel-control-left-menu-image " style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
             <a class="carousel-control-next"   data-bs-target="#feature-carousel" style="width:2vw"  role="button"data-bs-slide="next">
-                <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+                <img src="/assets/images/icons/arrow-right.svg" class="right-arrow-mobile" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>
         </div>  

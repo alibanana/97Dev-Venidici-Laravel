@@ -87,7 +87,7 @@ class PagesController extends Controller
             $cart_count = $this->cart_count;
 
             $view = 'client/index';
-            if ($agent->isPhone() || $agent->isTablet())
+            if ($agent->isPhone())
                 $view = 'client/mobile/index';
 
             return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
@@ -96,7 +96,7 @@ class PagesController extends Controller
         }
 
         $view = 'client/index';
-        if ($agent->isPhone() || $agent->isTablet())
+        if ($agent->isPhone())
             $view = 'client/mobile/index';
 
         return view($view, compact('configs', 'trusted_companies', 'fake_testimonies_big', 'fake_testimonies_small',
@@ -113,9 +113,9 @@ class PagesController extends Controller
 
     public function community_index(){
         $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {

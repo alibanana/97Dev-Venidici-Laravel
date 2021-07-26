@@ -428,7 +428,7 @@
     <div class="row m-0 page-container" style="padding-bottom:8vw   ">
         <div class="col-12 wow fadeInLeft" data-wow-delay="0.3s">
             <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw;margin-top:5vw">Untuk apa Woki lahir?</p>
-            <p style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;dont-size:3vw">Banyak sekali individu yang resah dengan dirinya dan tidak mendapatkan kesempatan untuk beristirahat sejenak, menyatu dengan dirinya. Woki sadar dan melihat tersebut, sehingga mencari solusi yang kreatif, unik, dan fun agar individu dapat healing dengan tersenyum.
+            <p style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;font-size:3vw">Banyak sekali individu yang resah dengan dirinya dan tidak mendapatkan kesempatan untuk beristirahat sejenak, menyatu dengan dirinya. Woki sadar dan melihat tersebut, sehingga mencari solusi yang kreatif, unik, dan fun agar individu dapat healing dengan tersenyum.
             
             Sampai akhirnya, Woki menemukan kebahagiaan sendiri disaat sedang berkreasi dengan seni dan crafting. Woki merasa art and craft bisa menjadi solusi tersebut. 
             </p>
@@ -486,7 +486,7 @@
     <div class="row m-0 page-container our-values-background-woki" style="padding-top:6vw;padding-bottom:6vw">
         <div class="col-12 p-0 wow bounceIn" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
             
-            <div id="woki-toki-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+            <div id="woki-toki-carousel-mobile" class="carousel slide" data-interval="5000" data-ride="carousel">
                 <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
                     <div class="carousel-item active">
                         <div style="text-align:center">
@@ -502,11 +502,11 @@
                         <img src="/assets/images/client/Woki_Karakter.png" style="height:35vw" class="img-fluid" alt="Image 1">
                     </div>
                 </div>
-                <a class="carousel-control-prev"   data-bs-target="#woki-toki-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                <a class="carousel-control-prev"   data-bs-target="#woki-toki-carousel-mobile" style="width:2vw" role="button"data-bs-slide="prev">
                     <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:4vw;z-index:99;margin-left:0px" alt="NEXT">
                     <span class="visually-hidden">Prev</span>
                 </a>
-                <a class="carousel-control-next"   data-bs-target="#woki-toki-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                <a class="carousel-control-next"   data-bs-target="#woki-toki-carousel-mobile" style="width:2vw"  role="button"data-bs-slide="next">
                     <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:4vw;z-index:99;margin-right:0px" alt="NEXT">
                     <span class="visually-hidden">Next</span>
                 </a>

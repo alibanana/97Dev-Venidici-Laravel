@@ -563,7 +563,7 @@
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
             Kamu belum melengkapi profile. <strong><a href="#edit-profile">Klik disini</a></strong> untuk melengkapi.
-            <button type="button" style="top:-13px" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" style="top:-3px" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
     </div>
