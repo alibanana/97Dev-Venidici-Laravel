@@ -14,6 +14,7 @@ class BootcampSchedule extends Model
         'date_start',
         'date_end',
         'title',
+        'subtitle',
     ];
 
     protected $casts = [

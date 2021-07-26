@@ -113,4 +113,8 @@ class Course extends Model
     public function bootcampFutureCareers() {
         return $this->hasMany(BootcampFutureCareer::class);
     }
+
+    public function bootcampHiringPartners() {
+        return $this->hasMany(BootcampHiringPartner::class);
+    }
 }
