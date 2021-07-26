@@ -173,6 +173,40 @@
                             @enderror             
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Date Start</label>
+                            <input type="date" name="date_start" class="form-control">
+                            @error('date_start')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Date End</label>
+                            <input type="date" name="date_end" class="form-control">
+                            @error('date_end')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Free Trial Date End</label>
+                            <input type="date" name="trial_date_end" class="form-control">
+                            @error('trial_date_end')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div> 
+                    <div class="col-6"></div>
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Persyaratan <span style="color: orange">(At least one element must be present!)</span></label>
                         @error('requirements')
