@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\BootcampAboutController as AdminBootcampAboutCont
 use App\Http\Controllers\Admin\BootcampUpdateController as AdminBootcampUpdateController;
 use App\Http\Controllers\Admin\BootcampScheduleController as AdminBootcampScheduleController;
 use App\Http\Controllers\Admin\BootcampBenefitController as AdminBootcampBenefitController;
+use App\Http\Controllers\Admin\BootcampCandidateController as AdminBootcampCandidateController;
 
 
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
@@ -320,7 +321,13 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/bootcamp/{id}/store-benefit', [AdminBootcampBenefitController::class, 'store'])->name('bootcamp-benefit.store');
         Route::get('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'edit'])->name('bootcamp.benefit-edit');
         Route::put('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'update'])->name('bootcamp-benefit.update');
-        Route::delete('/bootcamp-benefit/{id}', [AdminBootcampBenefitController::class, 'destroy'])->name('bootcamp-benefit.destroy');        
+        Route::delete('/bootcamp-benefit/{id}', [AdminBootcampBenefitController::class, 'destroy'])->name('bootcamp-benefit.destroy'); 
+
+        // BootcampCandidateController
+        Route::post('/bootcamp/{id}/store-candidate', [AdminBootcampCandidateController::class, 'store'])->name('bootcamp-candidate.store');
+        Route::get('/bootcamp-candidate/{id}/update', [AdminBootcampCandidateController::class, 'edit'])->name('bootcamp.candidate-edit');
+        Route::put('/bootcamp-candidate/{id}/update', [AdminBootcampCandidateController::class, 'update'])->name('bootcamp-candidate.update');
+        Route::delete('/bootcamp-candidate/{id}', [AdminBootcampCandidateController::class, 'destroy'])->name('bootcamp-candidate.destroy');        
 
         // SectionController
         Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');

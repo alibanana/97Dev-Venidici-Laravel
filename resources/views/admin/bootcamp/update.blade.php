@@ -645,7 +645,7 @@
                             <tbody>
                                     @foreach($course->bootcampBenefits as $benefit)
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{$loop->iteration}}</td>
                                         <form method="POST" action="{{route('admin.bootcamp-benefit.update', $benefit->id)}}">
                                         @csrf
                                         {{ method_field('PUT') }}
@@ -681,7 +681,7 @@
         <!-- END BENEFITS-->
         <!-- START OF CANDIDATES-->
         <div class="course-content" id="candidate-page" style="display:none">
-            <form action="" method="post">
+            <form action="{{route('admin.bootcamp-candidate.store', $course->id)}}" method="post">
             @csrf
             <div class="row">
                 <div class="col-6">
@@ -729,26 +729,35 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                    @foreach($course->bootcampCandidates as $candidate)
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-candidate.update', $candidate->id)}}">
+                                        @csrf
+                                        {{ method_field('PUT') }}
                                         <td>
-                                            <input type="text" name="title" value="title" class="form-control">
+                                            <input type="text" name="title" value="{{$candidate->title}}" class="form-control">
                                         </td>
                                         <td>
-                                            <textarea class="form-control" name="description"cols="30" rows="4" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident nisi veritatis sapiente ipsum neque quos blanditiis ipsa dolorum at, sequi dicta inventore quidem quam nihil dolore sed illum? Quis, vitae. </textarea>
+                                            <textarea class="form-control" name="description"cols="30" rows="4" >{{$candidate->description}}</textarea>
                                         </td>
                                         <td>
-                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    @method('put')
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
                                                     <div style="padding: 0px 2px">
                                                         <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
                                                     </div>
                                                 </form> 
+                                                <form action="{{route('admin.bootcamp-candidate.destroy', $candidate->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp future candidate?')">Delete</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -1169,6 +1178,8 @@ function duplicateSchedule() {
         <script>document.getElementById('about-page-button').click()</script>
     @elseif (Session::get('page-option') == 'benefit-page')
         <script>document.getElementById('benefit-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'candidate-page')
+        <script>document.getElementById('candidate-page-button').click()</script>
     @endif
 @endif
 @endsection

@@ -8,7 +8,7 @@ use App\Helper\Helper;
 
 use App\Models\BootcampCandidate;
 
-class BootcampBenefitController extends Controller
+class BootcampCandidateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,30 +17,6 @@ class BootcampBenefitController extends Controller
      */
     public function index()
     {
-        $candidates = new BootcampCandidate;
-
-        if ($request->has('sort')) {
-            if ($request['sort'] == "latest") {
-                $candidates = $candidates->orderBy('created_at', 'desc');
-            } else {
-                $candidates = $candidates->orderBy('created_at');
-            }
-        } else {
-            $candidates = $candidates->orderBy('created_at', 'desc');
-        }
-
-        if ($request->has('search')) {
-            if ($request->search == "") {
-                $url = route('admin.candidates.index', request()->except('search'));
-                return redirect($url);
-            } else {
-                $candidates = $candidates->where('name', 'like', "%".$request->search."%");
-            }
-        }
-
-        $candidates = $candidates->get();
-
-        return view('admin/bootcampcandidate/index', compact('candidates'));
     }
 
     /**
@@ -50,7 +26,6 @@ class BootcampBenefitController extends Controller
      */
     public function create()
     {
-        return view('admin/bootcampcandidate/create');
     }
 
     /**
@@ -59,7 +34,7 @@ class BootcampBenefitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $course_id)
     {
         $validated = $request->validate([
             'title'         => 'required',
@@ -67,14 +42,14 @@ class BootcampBenefitController extends Controller
         ]);
 
         $candidate = new BootcampCandidate();
-        $candidate->course_id     = $id;
+        $candidate->course_id     = $course_id;
         $candidate->title         = $validated['title'];
         $candidate->description   = $validated['description'];
         $candidate->save();
 
         $message = 'New candidate (' . $candidate->title . ') has been added to the database.';
 
-        return redirect()->route('admin.bootcamp.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $course_id)
             ->with('message', $message)
             ->with('page-option', 'candidate-page');
     }
@@ -121,12 +96,12 @@ class BootcampBenefitController extends Controller
         $candidate->save();
 
         if ($candidate->wasChanged()) {
-            $message = 'Schedule (' . $candidate->title . ') has been updated.';
+            $message = 'Future Candidate (' . $candidate->title . ') has been updated.';
         } else {
             $message = 'No changes was made to Schedule (' . $candidate->title . ')';
         }
 
-        return redirect()->route('admin.bootcamp.edit', $candidate->course->id)
+        return redirect()->route('admin.bootcamp.edit', $candidate->course_id)
             ->with('message', $message)
             ->with('page-option', 'candidate-page');
     }
@@ -139,12 +114,12 @@ class BootcampBenefitController extends Controller
      */
     public function destroy($id)
     {
-        $candidate = BootcampCandidate::where('course_id',$id)->first();
+        $candidate = BootcampCandidate::findOrFail($id);
         $candidate->delete();
 
-        $message = 'candidate (' . $candidate->title . ') has been deleted.';
+        $message = 'Future Candidate (' . $candidate->title . ') has been deleted.';
         
-        return redirect()->route('admin.bootcamp.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $candidate->course_id)
             ->with('message', $message)
             ->with('page-option', 'candidate-page');
     }
