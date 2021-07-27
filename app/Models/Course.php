@@ -102,8 +102,8 @@ class Course extends Model
         return $this->hasMany(BootcampDescription::class);
     }
 
-    public function bootcampCourseDetails() {
-        return $this->hasMany(BootcampCourseDetail::class);
+    public function bootcampCourseDetail() {
+        return $this->hasOne(BootcampCourseDetail::class);
     }
     
     public function bootcampCandidates() {

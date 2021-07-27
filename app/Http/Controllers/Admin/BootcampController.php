@@ -11,7 +11,7 @@ use App\Helper\CourseHelper;
 use App\Models\CourseCategory;
 use App\Models\CourseType;
 use App\Models\Course;
-use App\Models\CourseRequirement;
+use App\Models\BootcampCourseDetail;
 use App\Models\CourseFeature;
 use App\Models\Hashtag;
 
@@ -158,10 +158,11 @@ class BootcampController extends Controller
             'thumbnail' => 'required|mimes:jpeg,jpg,png',
             'subtitle' => 'required',
             'course_category_id' => 'required',
-            'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
-            'link' => '',
+            'meeting_link' => '',
             'description' => 'required',
-            'requirements' => 'required|array|min:1',
+            'date_start' => 'required',
+            'date_end' => 'required',
+            'trial_date_end' => 'required',
             'hashtags' => 'required|array|min:1'
 
         ])->setAttributeNames([
@@ -169,25 +170,15 @@ class BootcampController extends Controller
             'preview_video_link' => 'video link',
         ])->validate();
 
-        $course = new Course;
-        $course->course_type_id = 3; //3 seharusnya bootcamp
+        $course                     = new Course;
+        $course->course_type_id     = 3; //3 seharusnya bootcamp
         $course->course_category_id = $validated['course_category_id'];
-        $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/bootcamp-courses/');
-        $course->preview_video = $validated['preview_video_link'];
-        $course->title = $validated['title'];
-        $course->subtitle = $validated['subtitle'];
-        $course->description = $validated['description'];
-        $course->link = $validated['link'];
+        $course->thumbnail          = Helper::storeImage($request->file('thumbnail'), 'storage/images/bootcamp-courses/');
+        $course->title              = $validated['title'];
+        $course->subtitle           = $validated['subtitle'];
+        $course->description        = $validated['description'];
         $course->save();
 
-        foreach ($request->requirements as $requirement_value) {
-            if ($requirement_value != "") {
-                $new_requirement = new CourseRequirement;
-                $new_requirement->course_id = $course->id;
-                $new_requirement->requirement = $requirement_value;
-                $new_requirement->save();
-            }
-        }
 
         $added_hashtag_ids = [];
         foreach ($request->hashtags as $tag_id) {
@@ -197,7 +188,15 @@ class BootcampController extends Controller
         }
         $course->hashtags()->attach($added_hashtag_ids);
 
-        return redirect()->route('admin.bootcamp.index')->with('message', 'New Online Course has been added!');
+        $bootcampCourseDetail                   = new BootcampCourseDetail;
+        $bootcampCourseDetail->course_id        = $course->id;
+        $bootcampCourseDetail->meeting_link     = $validated['meeting_link'];
+        $bootcampCourseDetail->date_start       = $validated['date_start'];
+        $bootcampCourseDetail->date_end         = $validated['date_end'];
+        $bootcampCourseDetail->trial_date_end   = $validated['trial_date_end'];
+        $bootcampCourseDetail->save();
+
+        return redirect()->route('admin.bootcamp.index')->with('message', 'New Bootcamp has been added!');
     }
 
     /**

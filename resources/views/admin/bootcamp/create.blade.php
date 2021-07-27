@@ -92,9 +92,9 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Zoom link</label>
-                        <input type="text" name="link" class="form-control form-control-user" value="{{ old('link') }}"
+                        <input type="text" name="meeting_link" class="form-control form-control-user" value="{{ old('meeting_link') }}"
                                 placeholder="e.g. https://meet.google.com/pdq-umxk-fuv" required> 
-                        @error('link')
+                        @error('meeting_link')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
