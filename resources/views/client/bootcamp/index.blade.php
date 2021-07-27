@@ -6,7 +6,7 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container bootcamp-bg" style="padding-top:11vw;padding-bottom:21vw;">
     <!-- START OF LECT SECTION -->
-    <div class="col-xs-12 col-md-6 p-0">
+    <div class="col-xs-12 col-md-6 p-0 wow fadeInLeft">
         <img src="/assets/images/client/Bootcamp_Logo.png" style="width:15vw;margin-top:1vw" class="img-fluid" alt="Bootcamp Logo">
         <div style="margin-top: 2vw;">
             <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">Growth Hacking Through Facebook Ad</p>
@@ -36,7 +36,7 @@
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
-    <div class="col-xs-12 col-md-6 p-0 bootcamp-right-heading-bg" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-xs-12 col-md-6 p-0 bootcamp-right-heading-bg wow fadeInUp" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <div style="justify-content: center;display:flex;margin-left:10vw">
             <!-- START OF BOOTCAMP CARD -->
             <div style="padding:1vw;background-color:#E2E2E2;width:17vw;border-radius:10px;transform: rotate(8deg);">
@@ -55,7 +55,7 @@
 <!-- START OF INTRODUCTION SECTION -->
 <div class="row m-0 page-container" style="padding-bottom:5vw">
     <div class="col-md-12 col-xs-12 p-0">
-        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp (Feature)</p>
+        <p class="small-heading wow flash" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp (Feature)</p>
         <div style="width:80%">
             <p class="normal-text" style="font-family: Rubik Bold;color:#626262;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque sit volutpat sed pulvinar facilisis dignissim. Aliquam aliquam urna sit duis gravida. Nunc consectetur laoreet consequat aenean fusce lacinia. Amet, pellentesque nibh quam massa. A ullamcorper tellus sit amet, arcu. </p>
         </div>
@@ -87,7 +87,7 @@
 <!-- START OF GROWTH HACKING SECTION -->
 <div class="row m-0 page-container" style="background-color: #F6F6F6;padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="text-align: center;">
-        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Apa itu Growth Hacking?</p>
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Apa itu Growth Hacking?</p>
     </div>
     <div class="col-12" style="padding:1vw 10vw">
         <!-- START OF CONTENT LINKS -->
@@ -347,7 +347,7 @@
 <!-- START OF WHAT WILL YOU GET SECTION -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
     <div class="col-12 p-0" style="text-align: center;">
-        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">What will you get?</p>
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">What will you get?</p>
     </div>
     <div class="row m-0" style="padding-top:2vw">
         <div class="col-3" style="display:flex;justify-content:center">
@@ -441,7 +441,7 @@
 <!-- START OF BOOTCAMP INI UNTUK SIAPA -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
     <!-- START OF LEFT SECTION -->
-    <div class="col-md-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
+    <div class="col-md-6 col-xs-12 wow fadeInLeft"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Bootcamp ini untuk siapa?</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
         <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Register For Free</button>
@@ -452,7 +452,7 @@
     <div class="col-md-6 col-xs-12">
         <div class="row m-0">
             <!-- START OF ONE CARD -->
-            <div class="col-6 p-0">
+            <div class="col-6 p-0 wow fadeInUp" >
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
                     <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
@@ -461,7 +461,7 @@
             </div>
             <!-- END OF ONE CARD -->
             <!-- START OF ONE CARD -->
-            <div class="col-6 p-0">
+            <div class="col-6 p-0 wow fadeInUp" data-wow-delay="0.2s">
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
                     <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
@@ -470,7 +470,7 @@
             </div>
             <!-- END OF ONE CARD -->
             <!-- START OF ONE CARD -->
-            <div class="col-6 p-0" style="margin-top: 5vw;">
+            <div class="col-6 p-0 wow fadeInUp" data-wow-delay="0.4s" style="margin-top: 5vw;">
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
                     <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
@@ -479,7 +479,7 @@
             </div>
             <!-- END OF ONE CARD -->
             <!-- START OF ONE CARD -->
-            <div class="col-6 p-0" style="margin-top: 5vw;">
+            <div class="col-6 p-0 wow fadeInUp" data-wow-delay="0.6s" style="margin-top: 5vw;">
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
                     <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
@@ -502,7 +502,7 @@
     <!-- END OF LEFT SECTION -->
     <!-- START OF RIGHT SECTION -->
     <div class="col-md-6 col-xs-12"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
-        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">How to join?</p>
+        <p class="small-heading wow bounce" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">How to join?</p>
         <div class="htj-content" id="htj-1">
             <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Like</p>
             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
@@ -536,7 +536,7 @@
 <!-- START OF BISA BERKARIR JADI APA SECTION -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0">
-        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Bisa berkarir jadi apa?</p>
+        <p class="small-heading wow fadeInLeft" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Bisa berkarir jadi apa?</p>
     </div>
     <!-- START OF ONE CARD -->
     <div class="col-md-4 col-xs-6 p-0" style="display: flex;justify-content: flex-start;">
@@ -602,7 +602,7 @@
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
                         <div class="col-7" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
-                            <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Meet Our <span style="color:#67BBA3"> Instructor/s</span></p>
+                            <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Meet Our <span style="color:#67BBA3"> Instructor/s</span></p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​</p>
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left">Welby Nazhari,Growth Marketer​</p>
                             <img src="/assets/images/client/Instructor_Company_Logo.png" style="width:8vw;border-radius:10px" alt="Bootcamp Instructor Company">
@@ -639,12 +639,12 @@
     <!-- START OF RIGHT SECTION -->
     <div class="col-md-6 col-xs-6" style="padding-left: 5vw;">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap: wrap;">
-            <img src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
+            <img class="wow fadeInUp" data-wow-delay="0.2s" src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
+            <img class="wow fadeInUp" data-wow-delay="0.4s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
+            <img class="wow fadeInUp" data-wow-delay="0.6s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
+            <img class="wow fadeInUp" data-wow-delay="0.8s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
+            <img class="wow fadeInUp" data-wow-delay="1s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
+            <img class="wow fadeInUp" data-wow-delay="1.2s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
 
         </div>
     </div>
@@ -655,7 +655,7 @@
 <!-- START OF PRICING PLAN -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
     <div class="col-12 p-0" style="text-align: center;margin-bottom:2vw">
-        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Here is our Pricing Plan</p>
+        <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Here is our Pricing Plan</p>
     </div>
     <!-- START OF FULL REGISTRATION -->
     <div class="col-md-6 col-xs-12 p-0" >

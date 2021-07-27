@@ -2457,6 +2457,11 @@ html, body {
 }
 .schedule-title{
     color: rgba(43, 108, 170, 0.25);
+    transition: 0.2s ease-in-out;
+
+}
+.schedule-title:hover{
+    color:#2B6CAA !important;
 }
 
 .htj-title-active{
@@ -2471,6 +2476,16 @@ html, body {
     width:3vw;
     height:3vw;
     text-align:center;
+    transition: 0.2s ease-in-out;
+
+}
+
+.htj-title:hover{
+    background-color: #2B6CAA !important;
+
+}
+.htj-title:hover p{
+    color:#FFFFFF !important;
 }
 .htj-title p{
     color:#2B6CAA ;
@@ -2479,10 +2494,18 @@ html, body {
 .growth-title{
     padding: 1vw 2vw;
     text-align:center;
-    cursor:pointer
+    cursor:pointer;
+    transition: 0.2s ease-in-out;
+
 }
 .growth-title p{
     color:#3B3C43
+}
+.growth-title:hover{
+    background-color:#2B6CAA
+}
+.growth-title:hover p{
+    color:#FFFFFF !important
 }
 .growth-title-active{
     background-color:#2B6CAA
