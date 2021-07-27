@@ -38,6 +38,10 @@ class BootcampAboutController extends Controller
      */
     public function store(Request $request, $course_id)
     {        
+        if(BootcampDescription::where('course_id',$course_id)->count() >= 5)
+            return redirect()->back()
+            ->with('message', 'Maksimum Quantity has been reached!')
+            ->with('page-option', 'bootcamp-about-page');
 
         $validator = Validator::make($request->all(), [
             'title'         => 'required',

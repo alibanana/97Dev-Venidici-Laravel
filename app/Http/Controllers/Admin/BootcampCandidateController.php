@@ -37,6 +37,10 @@ class BootcampCandidateController extends Controller
      */
     public function store(Request $request, $course_id)
     {
+        if(BootcampCandidate::where('course_id',$course_id)->count() >= 4)
+            return redirect()->back()
+            ->with('message', 'Maksimum Quantity has been reached!')
+            ->with('page-option', 'candidate-page');
         $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'description'   => 'required',

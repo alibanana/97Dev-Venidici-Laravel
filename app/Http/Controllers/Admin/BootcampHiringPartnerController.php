@@ -38,6 +38,10 @@ class BootcampHiringPartnerController extends Controller
      */
     public function store(Request $request, $course_id)
     {
+        if(BootcampHiringPartner::where('course_id',$course_id)->count() >= 6)
+            return redirect()->back()
+            ->with('message', 'Maksimum Quantity has been reached!')
+            ->with('page-option', 'hiring-partner-page');
         $validated = $request->validate([
             'image'     => 'required|mimes:jpeg,jpg,png|max:5000',
         ]);

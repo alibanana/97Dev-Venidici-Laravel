@@ -37,6 +37,10 @@ class BootcampFeatureController extends Controller
      */
     public function store(Request $request, $course_id)
     {
+        if(CourseFeature::where('course_id',$course_id)->count() >= 3)
+            return redirect()->back()
+            ->with('message', 'Maksimum Quantity has been reached!')
+            ->with('page-option', 'bootcamp-feature-page');
         $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'feature'       => 'required',
