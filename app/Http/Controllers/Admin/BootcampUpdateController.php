@@ -117,25 +117,23 @@ class BootcampUpdateController extends Controller
     public function updatePricingEnrollment(Request $request, $id) {
         $validated = $request->validate([
             'enrollment_status' => 'required',
-            'is_free' => 'required|boolean',
-            'price' => 'integer'
+            'bootcamp_full_price' => 'integer',
+            'bootcamp_trial_price' => 'integer'
         ]);
 
         $course = Course::findOrFail($id);
         $course->enrollment_status = $validated['enrollment_status'];
-
-        if ($validated['is_free'] == '1') {
-            $course->price = 0;
-        } else {
-            $course->price = $validated['price'];
-        }
-
         $course->save();
 
-        if ($course->wasChanged()) {
+        $course_detail = $course->bootcampCourseDetail;
+        $course_detail->bootcamp_full_price = $validated['bootcamp_full_price'];
+        $course_detail->bootcamp_trial_price = $validated['bootcamp_trial_price'];
+        $course_detail->save();
+
+        if ($course->wasChanged() || $course_detail->wasChanged()) {
             $message = 'Bootcamp (' . $course->title . '), "Pricing & Enrollment Status" has been updated';
         } else {
-            $message = 'No changes was made to Bootcamp (' . $course->title . ')';
+            $message = 'No changes was made to Bootcamp (' . $course_detail->title . ')';
         }
 
         return redirect()->route('admin.bootcamp.edit', $id)

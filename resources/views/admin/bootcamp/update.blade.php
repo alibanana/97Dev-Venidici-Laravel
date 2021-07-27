@@ -458,11 +458,11 @@
                     <div class="col-6">
                         <div class="form-group">
                             <h5 for="">Full Registration Price</h5>
-                            <input class="form-control" type="text" name="bootcamp_full_price" value="{{ old('price', $course->price) }}">
+                            <input class="form-control" type="text" name="bootcamp_full_price" value="{{ old('price', $course->bootcampCourseDetail->bootcamp_full_price) }}">
                         </div>
                         <div class="form-group">
                             <h5 for="">Free Trial Registration Price</h5>
-                            <input class="form-control" type="text" name="bootcamp_full_price" value="{{ old('price', $course->price) }}">
+                            <input class="form-control" type="text" name="bootcamp_trial_price" value="{{ old('price', $course->bootcampCourseDetail->bootcamp_trial_price) }}">
                         </div>
                     </div>
                     
