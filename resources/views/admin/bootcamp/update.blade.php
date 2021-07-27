@@ -552,11 +552,11 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td style="text-align:center" class="text-nowrap">
                                             <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
-                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }} <br> <span style="font-weight: italic !important;">Growth Marketer</span>​</p>
+                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }} <br> <span style="font-weight: italic !important;">{{$teacher->occupancy}}</span>​</p>
                                         </td>
                                         <td>{{ $teacher->description }}</td>  
                                         <td>
-                                            <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
+                                            <img src="{{ asset($teacher->company_logo) }}" alt="Company logo not available.." style="width:10vw;" class="img-fluid">
                                         </td>
                                         <td>
                                             @if ($teacher->courses()->where('course_id', $course->id)->first())

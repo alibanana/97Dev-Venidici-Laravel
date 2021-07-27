@@ -57,13 +57,19 @@ class TeacherController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'image' => 'required|mimes:jpeg,jpg,png'
+            'image' => 'required|mimes:jpeg,jpg,png',
+            'company_logo' => 'mimes:jpeg,jpg,png',
+            'occupancy' => '',
         ]);
 
         $teacher = new Teacher();
         $teacher->name = $validated['name'];
         $teacher->description = $validated['description'];
         $teacher->image = Helper::storeImage($request->file('image'), 'storage/images/teachers/');
+        $teacher->occupancy = $validated['description'];
+
+        if ($request->has('company_logo')) 
+            $teacher->company_logo = Helper::storeImage($request->file('company_logo'), 'storage/images/teachers/company_logo/');
         $teacher->save();
 
         $message = 'New Teacher (' . $teacher->name . ') has been added to the database.';
@@ -83,16 +89,24 @@ class TeacherController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'image' => 'mimes:jpeg,jpg,png'
+            'image' => 'mimes:jpeg,jpg,png',
+            'company_logo' => 'mimes:jpeg,jpg,png',
+            'occupancy' => '',
         ]);
 
         $teacher = Teacher::findOrFail($id);
         $teacher->name = $validated['name'];
         $teacher->description = $validated['description'];
+        $teacher->occupancy = $validated['description'];
+
 
         if ($request->has('image')) {
             unlink($teacher->image);
             $teacher->image = Helper::storeImage($request->file('image'), 'storage/images/teachers/');
+        }
+        if ($request->has('company_logo')) {
+            unlink($teacher->company_logo);
+            $teacher->company_logo = Helper::storeImage($request->file('company_logo'), 'storage/images/teachers/company_logo/');
         }
         
         $teacher->save();

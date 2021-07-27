@@ -92,7 +92,7 @@
                         <label for="">Occupancy</label>
                         <input type="text" name="occupancy" class="form-control form-control-user"
                             id="phone" aria-describedby="" value="{{ old('occupancy', $teacher->occupancy) }}"
-                            placeholder="Here insert teacher occupancy (e.g. Growth Marketer)" required> 
+                            placeholder="Here insert teacher occupancy (e.g. Growth Marketer)"> 
                         @error('occupancy')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
