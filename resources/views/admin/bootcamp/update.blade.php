@@ -8,7 +8,7 @@
 <div class="modal fade" id="bootcampFeatureModal" tabindex="-1" role="dialog" aria-labelledby="bootcampFeatureModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" action="">
+            <form method="POST" action="{{route('admin.bootcamp-feature.update')}}">
             @csrf
             {{ method_field('PUT') }}
             <div class="modal-body">
@@ -32,6 +32,7 @@
             </div>
             <div class="modal-footer">
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <input type="hidden" name="bootcamp_feature_id" id="bootcamp_feature_id">
 				<button class="btn btn-primary" type="submit">Confirm</button>   
 			</div>
             </form>
@@ -63,16 +64,16 @@
         <div class="mb-2" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap">
             <h6 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h6>
             <!-- <h6 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h6> -->
-            <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer;">Feature</h6>
-            <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer;">About</h6>
+            <h6 id="feature-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer;">Feature</h6>
+            <h6 id="about-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer;">About</h6>
             <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="cursor:pointer;">Pricing & Enrollment Scenario</h6>
             <h6 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="cursor:pointer;">Publish Status</h6>
             <h6 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="cursor:pointer;">Teacher</h6>
             <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="cursor:pointer;">Schedule</h6>
-            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'benefit-page')" style="cursor:pointer;">Benefit</h6>
-            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'candidate-page')" style="cursor:pointer;">Candidate</h6>
-            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'future-career-page')" style="cursor:pointer;">Future Careers</h6>
-            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'hiring-partner-page')" style="cursor:pointer;">Hiring Partners</h6>
+            <h6 id="benefit-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'benefit-page')" style="cursor:pointer;">Benefit</h6>
+            <h6 id="candidate-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'candidate-page')" style="cursor:pointer;">Candidate</h6>
+            <h6 id="career-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'future-career-page')" style="cursor:pointer;">Future Careers</h6>
+            <h6 id="partner-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'hiring-partner-page')" style="cursor:pointer;">Hiring Partners</h6>
         </div>
         
         <!-- Content Row -->
@@ -294,7 +295,7 @@
 
         <!-- START OF FEATURE -->
         <div class="course-content" id="bootcamp-feature" style="display:none">
-            <form action="" method="post">
+            <form action="{{route('admin.bootcamp-feature.store', $course->id)}}" method="post">
             @csrf
             <div class="row">
                 <div class="col-6">
@@ -324,18 +325,29 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($course->courseFeatures as $feature)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Customer Experience</td>
-                                    <td>Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$feature->title}}</td>
                                     <td>
-                                        <div style="padding: 0px 2px;" class="text-nowrap">
-                                            <a onclick="passBootcampFeature('Customer Experience','Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada')" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="#" data-toggle="modal" data-target="#bootcampFeatureModal">
+                                        {{$feature->feature}}
+                                    </td>
+                                    <td>
+                                        <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                            <a onclick="passBootcampFeature('{{$feature->title}}','{{$feature->feature}}','{{$feature->id}}')" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" data-toggle="modal" data-target="#bootcampFeatureModal">
                                                 Update
                                             </a>
+                                            <form action="{{route('admin.bootcamp-feature.destroy', $feature->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp feature?')">Delete</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -1092,9 +1104,10 @@ function removeDiv(elem, wrapper_id){
 }
 </script>
 <script>
-    function passBootcampFeature(title,description) {
+    function passBootcampFeature(title,description,bootcamp_feature_id) {
 		document.getElementById("bootcap_feature_title").value = title;
 		document.getElementById("bootcap_feature_description").value = description;
+		document.getElementById("bootcamp_feature_id").value = bootcamp_feature_id;
     }
 </script>
 
@@ -1123,6 +1136,8 @@ function duplicateSchedule() {
         <script>document.getElementById('teacher-button').click()</script>
     @elseif (Session::get('page-option') == 'schedule-page')
         <script>document.getElementById('schedule-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'bootcamp-feature-page')
+        <script>document.getElementById('feature-page-button').click()</script>
     @endif
 @endif
 @endsection
