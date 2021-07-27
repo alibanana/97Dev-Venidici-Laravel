@@ -62,16 +62,18 @@ class BootcampScheduleController extends Controller
     public function store(Request $request, $id)
     {
         $validated = $request->validate([
-            'date_time' => 'required',
-            'title'     => 'required',
-            'detail'    => 'required',
+            'date_start'    => 'required',
+            'date_end'      => 'required',
+            'title'         => 'required',
+            'subtitle'      => 'required',
         ]);
 
         $schedule = new BootcampSchedule();
         $schedule->course_id    = $id;
-        $schedule->date_time    = $validated['date_time'];
+        $schedule->date_start   = $validated['date_start'];
+        $schedule->date_end     = $validated['date_end'];
         $schedule->title        = $validated['title'];
-        $schedule->detail       = $validated['detail'];
+        $schedule->subtitle     = $validated['subtitle'];
         $schedule->save();
 
         $message = 'New Schedule (' . $schedule->title . ') has been added to the database.';
@@ -116,14 +118,16 @@ class BootcampScheduleController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'date_time' => 'required',
-            'title'     => 'required',
-            'detail'    => 'required',
+            'date_start'    => 'required',
+            'date_end'      => 'required',
+            'title'         => 'required',
+            'subtitle'      => 'required',
         ]);
         $schedule = BootcampSchedule::findOrFail($id);
-        $schedule->date_time    = $validated['date_time'];
+        $schedule->date_start   = $validated['date_start'];
+        $schedule->date_end     = $validated['date_end'];
         $schedule->title        = $validated['title'];
-        $schedule->detail       = $validated['detail'];
+        $schedule->subtitle     = $validated['subtitle'];
         
         $schedule->save();
 

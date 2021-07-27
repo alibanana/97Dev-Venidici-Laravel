@@ -13,7 +13,6 @@ class BootcampBenefit extends Model
         'course_id',
         'title',
         'description',
-        'course_id',
     ];
 
     public function course() {
