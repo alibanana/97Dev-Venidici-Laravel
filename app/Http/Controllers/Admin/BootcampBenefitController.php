@@ -17,30 +17,7 @@ class BootcampBenefitController extends Controller
      */
     public function index()
     {
-        $benefits = new BootcampBenefit;
-
-        if ($request->has('sort')) {
-            if ($request['sort'] == "latest") {
-                $benefits = $benefits->orderBy('created_at', 'desc');
-            } else {
-                $benefits = $benefits->orderBy('created_at');
-            }
-        } else {
-            $benefits = $benefits->orderBy('created_at', 'desc');
-        }
-
-        if ($request->has('search')) {
-            if ($request->search == "") {
-                $url = route('admin.benefits.index', request()->except('search'));
-                return redirect($url);
-            } else {
-                $benefits = $benefits->where('name', 'like', "%".$request->search."%");
-            }
-        }
-
-        $benefits = $benefits->get();
-
-        return view('admin/bootcampbenefit/index', compact('benefits'));
+        
     }
 
     /**
@@ -59,7 +36,7 @@ class BootcampBenefitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $course_id)
     {
         $validated = $request->validate([
             'title'         => 'required',
@@ -67,14 +44,14 @@ class BootcampBenefitController extends Controller
         ]);
 
         $benefit = new BootcampBenefit();
-        $benefit->course_id     = $id;
+        $benefit->course_id     = $course_id;
         $benefit->title         = $validated['title'];
         $benefit->description   = $validated['description'];
         $benefit->save();
 
         $message = 'New benefit (' . $benefit->title . ') has been added to the database.';
 
-        return redirect()->route('admin.bootcamp.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $course_id)
             ->with('message', $message)
             ->with('page-option', 'benefit-page');
     }
@@ -126,7 +103,7 @@ class BootcampBenefitController extends Controller
             $message = 'No changes was made to Schedule (' . $benefit->title . ')';
         }
 
-        return redirect()->route('admin.bootcamp.edit', $benefit->course->id)
+        return redirect()->route('admin.bootcamp.edit', $benefit->course_id)
             ->with('message', $message)
             ->with('page-option', 'benefit-page');
     }
@@ -139,12 +116,12 @@ class BootcampBenefitController extends Controller
      */
     public function destroy($id)
     {
-        $benefit = BootcampBenefit::where('course_id',$id)->first();
+        $benefit = BootcampBenefit::findOrFail($id);
         $benefit->delete();
 
         $message = 'benefit (' . $benefit->title . ') has been deleted.';
         
-        return redirect()->route('admin.bootcamp.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $benefit->course_id)
             ->with('message', $message)
             ->with('page-option', 'benefit-page');
     }

@@ -25,7 +25,7 @@ class BootcampSchedule extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function bootcampWeeklySchedules() {
-        return $this->hasMany(BootcampWeeklySchedules::class);
+    public function bootcampScheduleDetails() {
+        return $this->hasMany(BootcampScheduleDetail::class);
     }
 }

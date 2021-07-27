@@ -21,6 +21,9 @@ use App\Http\Controllers\Admin\BootcampFeatureController as AdminBootcampFeature
 use App\Http\Controllers\Admin\BootcampAboutController as AdminBootcampAboutController;
 use App\Http\Controllers\Admin\BootcampUpdateController as AdminBootcampUpdateController;
 use App\Http\Controllers\Admin\BootcampScheduleController as AdminBootcampScheduleController;
+use App\Http\Controllers\Admin\BootcampBenefitController as AdminBootcampBenefitController;
+
+
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
 use App\Http\Controllers\Admin\WokiCourseUpdateController as AdminWokiCourseUpdateController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
@@ -304,6 +307,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/bootcamp/{id}/attach-teacher', [AdminBootcampUpdateController::class, 'attachTeacher'])->name('bootcamp.attach-teacher');
         Route::put('/bootcamp/{id}/detach-teacher', [AdminBootcampUpdateController::class, 'detachTeacher'])->name('bootcamp.detach-teacher');
         Route::get('/bootcamp-schedules/{id}/update', [AdminBootcampUpdateController::class, 'editBootcampSchedules'])->name('bootcamp.edit-schedules');
+
         // BootcampScheduleController
         // Route::get('/bootcampschedule', [AdminBootcampScheduleController::class, 'index'])->name('bootcampschedule.index');
         // Route::get('/bootcampschedule/create', [AdminBootcampScheduleController::class, 'create'])->name('bootcampschedule.create');
@@ -311,6 +315,13 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/bootcampschedule/{id}/update', [AdminBootcampScheduleController::class, 'edit'])->name('bootcampschedule.edit');
         Route::put('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'update'])->name('bootcampschedule.update');
         Route::delete('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'destroy'])->name('bootcampschedule.destroy');
+        
+        // BootcampBenefitController
+        Route::post('/bootcamp/{id}/store-benefit', [AdminBootcampBenefitController::class, 'store'])->name('bootcamp-benefit.store');
+        Route::get('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'edit'])->name('bootcamp.benefit-edit');
+        Route::put('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'update'])->name('bootcamp-benefit.update');
+        Route::delete('/bootcamp-benefit/{id}', [AdminBootcampBenefitController::class, 'destroy'])->name('bootcamp-benefit.destroy');        
+
         // SectionController
         Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
         Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');

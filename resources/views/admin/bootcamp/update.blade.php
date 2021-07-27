@@ -595,7 +595,7 @@
 
         <!-- START BENEFITS-->
         <div class="course-content" id="benefit-page" style="display:none">
-            <form action="" method="post">
+            <form action="{{route('admin.bootcamp-benefit.store',$course->id)}}" method="post">
             @csrf
             <div class="row">
                 <div class="col-6">
@@ -643,26 +643,35 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                    @foreach($course->bootcampBenefits as $benefit)
                                     <tr>
                                         <td>1</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-benefit.update', $benefit->id)}}">
+                                        @csrf
+                                        {{ method_field('PUT') }}
                                         <td>
-                                            <input type="text" name="title" value="title" class="form-control">
+                                            <input type="text" name="title" value="{{$benefit->title}}" class="form-control">
                                         </td>
                                         <td>
-                                            <textarea class="form-control" name="description"cols="30" rows="4" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident nisi veritatis sapiente ipsum neque quos blanditiis ipsa dolorum at, sequi dicta inventore quidem quam nihil dolore sed illum? Quis, vitae. </textarea>
+                                            <textarea class="form-control" name="description"cols="30" rows="4" >{{$benefit->description}}</textarea>
                                         </td>
                                         <td>
-                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                <form action="" method="post">
-                                                    @csrf
-                                                    @method('put')
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
                                                     <div style="padding: 0px 2px">
                                                         <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
                                                     </div>
                                                 </form> 
+                                                <form action="{{route('admin.bootcamp-benefit.destroy', $benefit->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp benefit?')">Delete</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -1011,24 +1020,33 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($course->bootcampSchedules as $schedule)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Title</td>
-                                    <td>Sub Title</td>
-                                    <td>20 September - 21 Agustus 2021</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$schedule->title}}</td>
+                                    <td>{{$schedule->subtitle}}</td>
+                                    <td>{{$schedule->date_start}} - {{$schedule->date_end}}</td>
                                     <td>
-                                        <p>- lorem</p>
-                                        <p>- lorem</p>
-                                        <p>- lorem</p>
-                                        </td>
+                                        @foreach($schedule->bootcampScheduleDetails as $detail)
+                                        <p>- {{$detail->description}}</p>
+                                        @endforeach
+                                    </td>
                                     <td>
-                                        <div style="padding: 0px 2px;" class="text-nowrap">
-                                            <a class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="/admin/bootcamp-schedules/1/update" >
+                                        <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                            <a class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="{{route('admin.bootcampschedule.edit',$schedule->id)}}" >
                                                 Update
                                             </a>
+                                            <form action="{{route('admin.bootcampschedule.destroy', $schedule->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp schedule?')">Delete</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -1125,7 +1143,7 @@ document.getElementById('add_schedule_detail').onclick = duplicateSchedule;
 var i = 1; var original2 = document.getElementById('weekly_schedule_duplicator');
 function duplicateSchedule() {
     var clone = original2.cloneNode(true); // "deep" clone
-    $(clone).find("input").attr("schedule_details[]");
+    $(clone).find("input").attr("name","schedule_details[]");
     $(clone).find("input").attr("required", "");
     clone.style.display = "block";
     clone.id = "weekly_schedule_duplicator" + ++i; // there can only be one element with an ID
@@ -1149,6 +1167,8 @@ function duplicateSchedule() {
         <script>document.getElementById('feature-page-button').click()</script>
     @elseif (Session::get('page-option') == 'bootcamp-about-page')
         <script>document.getElementById('about-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'benefit-page')
+        <script>document.getElementById('benefit-page-button').click()</script>
     @endif
 @endif
 @endsection
