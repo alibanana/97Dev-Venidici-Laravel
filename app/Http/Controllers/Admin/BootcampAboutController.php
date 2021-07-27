@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BootcampDescription;
 use App\Helper\Helper;
+use Illuminate\Support\Facades\Validator;
 
 class BootcampAboutController extends Controller
 {
@@ -36,12 +37,19 @@ class BootcampAboutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $course_id)
-    {
-        $validated = $request->validate([
+    {        
+
+        $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'image'         => 'required',
             'description'   => 'required',
         ]);
+        
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'bootcamp-about-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $new_about              = new BootcampDescription;
         $new_about->course_id   = $course_id;

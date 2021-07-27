@@ -8,6 +8,7 @@ use App\Helper\Helper;
 
 use App\Models\BootcampSchedule;
 use App\Models\BootcampScheduleDetail;
+use Illuminate\Support\Facades\Validator;
 
 class BootcampScheduleController extends Controller
 {
@@ -39,13 +40,18 @@ class BootcampScheduleController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'date_start'        => 'required',
             'date_end'          => 'required',
             'title'             => 'required',
             'subtitle'          => 'required',
             'schedule_details'  => 'required|array|min:1'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'schedule-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $schedule = new BootcampSchedule();
         $schedule->course_id    = $id;

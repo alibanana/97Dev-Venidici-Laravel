@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helper\Helper;
 
 use App\Models\BootcampHiringPartner;
+use Illuminate\Support\Facades\Validator;
 
 class BootcampHiringPartnerController extends Controller
 {
@@ -84,9 +85,13 @@ class BootcampHiringPartnerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $validated = Validator::make($request->all(), [
             'image'     => 'mimes:jpeg,jpg,png|max:5000',
         ]);
+        
+        if ($validated->fails())
+            return redirect()->back()->with(['page-option' => 'hiring-partner-page'])->withErrors($validated);
+
 
         $partner = BootcampHiringPartner::findOrFail($id);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CourseFeature;
+use Illuminate\Support\Facades\Validator;
 
 class BootcampFeatureController extends Controller
 {
@@ -36,10 +37,15 @@ class BootcampFeatureController extends Controller
      */
     public function store(Request $request, $course_id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title'         => 'required',
-            'feature'   => 'required',
+            'feature'       => 'required',
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'bootcamp-feature-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $new_feature = new CourseFeature;
         $new_feature->course_id = $course_id;

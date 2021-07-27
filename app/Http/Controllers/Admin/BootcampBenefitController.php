@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helper\Helper;
 
 use App\Models\BootcampBenefit;
+use Illuminate\Support\Facades\Validator;
 
 class BootcampBenefitController extends Controller
 {
@@ -38,10 +39,15 @@ class BootcampBenefitController extends Controller
      */
     public function store(Request $request, $course_id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'description'   => 'required',
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'benefit-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $benefit = new BootcampBenefit();
         $benefit->course_id     = $course_id;
@@ -87,10 +93,17 @@ class BootcampBenefitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'description'   => 'required',
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'benefit-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
+
+
         $benefit = BootcampBenefit::findOrFail($id);
         $benefit->title        = $validated['title'];
         $benefit->description  = $validated['description'];

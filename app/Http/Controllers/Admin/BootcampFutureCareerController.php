@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helper\Helper;
 
 use App\Models\BootcampFutureCareer;
+use Illuminate\Support\Facades\Validator;
 
 class BootcampFutureCareerController extends Controller
 {
@@ -36,11 +37,16 @@ class BootcampFutureCareerController extends Controller
      */
     public function store(Request $request, $course_id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'thumbnail'     => 'required|mimes:jpeg,jpg,png|max:5000',
             'title'         => 'required',
             'description'   => 'required',
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'future-career-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $career = new BootcampFutureCareer();
         $career->course_id     = $course_id;
@@ -87,13 +93,17 @@ class BootcampFutureCareerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'description'   => 'required',
             'thumbnail'     => 'mimes:jpeg,jpg,png|max:5000',
 
         ]);
 
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'future-career-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $career = BootcampFutureCareer::findOrFail($id);
         $career->title        = $validated['title'];

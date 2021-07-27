@@ -56,7 +56,7 @@ class BootcampUpdateController extends Controller
 
     // Updates data as seen under the Update Online Course -> Basic Informations tab.
     public function updateBasicInfo(Request $request, $id) {
-        $validated = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'thumbnail' => 'mimes:jpeg,jpg,png',
             'subtitle' => 'required',
@@ -70,6 +70,11 @@ class BootcampUpdateController extends Controller
         ])->setAttributeNames([
             'course_category_id'    => 'category',
         ])->validate();
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'basic-informations'])->withErrors($validator);
+        
+        $validated = $validator->validate();
 
 
         $course = Course::findOrFail($id);
@@ -115,11 +120,16 @@ class BootcampUpdateController extends Controller
 
     // Updates Course's Pricing & Enrollment Status.
     public function updatePricingEnrollment(Request $request, $id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'enrollment_status' => 'required',
             'bootcamp_full_price' => 'integer',
             'bootcamp_trial_price' => 'integer'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'pricing-and-enrollment'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $course = Course::findOrFail($id);
         $course->enrollment_status = $validated['enrollment_status'];

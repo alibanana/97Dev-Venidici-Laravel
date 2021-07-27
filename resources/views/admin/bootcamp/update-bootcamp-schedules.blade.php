@@ -36,21 +36,39 @@
                 <div class="col-6">
                     <label for="">Date Start</label>
                     <input type="date" name="date_start" class="form-control" value="{{$schedule->date_start}}">
+                    @error('date_start')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="col-6">
                     <label for="">Date End</label>
                     <input type="date" name="date_end" class="form-control" value="{{$schedule->date_end}}">
+                    @error('date_end')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <!-- <div class="col-4"><input type="time" class="form-control"></div> -->
                 <div class="col-6 pt-3">
                     <label for="">Schedule Title</label>
-
-                   <input type="text" name="title" value="{{$schedule->title}}" placeholder="Insert Title" class="form-control">
+                    <input type="text" name="title" value="{{$schedule->title}}" placeholder="Insert Title" class="form-control">
+                    @error('title')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="col-6 pt-3">
                     <label for="">Schedule Sub-Title</label>
-
-                   <input type="text" name="subtitle" value="{{$schedule->subtitle}}" placeholder="Insert Sub Title" class="form-control">
+                    <input type="text" name="subtitle" value="{{$schedule->subtitle}}" placeholder="Insert Sub Title" class="form-control">
+                    @error('subtitle')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="col-6 pt-3">

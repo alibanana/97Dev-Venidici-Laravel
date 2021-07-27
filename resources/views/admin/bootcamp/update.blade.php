@@ -300,9 +300,19 @@
             <div class="row">
                 <div class="col-6">
                     <input type="text" class="form-control" name="title" placeholder="Insert Title">
+                    @error('title')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror   
                 </div>
                 <div class="col-12 mt-2">
                     <textarea name="feature" rows="5" class="form-control" placeholder="Insert Description"></textarea>
+                    @error('feature')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
                 </div>
                 <div class="col-12 mt-2">
                     <div style="display:flex;justify-content:flex-end">
@@ -364,12 +374,27 @@
             <div class="row">
                 <div class="col-6">
                     <input type="file"  accept=".jpg,,jpeg,.png" name="image">
+                    @error('image')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror  
                 </div>
                 <div class="col-6">
                     <input type="text" class="form-control" name="title" placeholder="Insert Title">
+                    @error('title')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror  
                 </div>
                 <div class="col-12 mt-2">
                     <textarea name="description" rows="5" class="form-control" placeholder="Insert Description"></textarea>
+                    @error('description')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror  
                 </div>
                 <div class="col-12 mt-2">
                     <div style="display:flex;justify-content:flex-end">
@@ -459,10 +484,20 @@
                         <div class="form-group">
                             <h5 for="">Full Registration Price</h5>
                             <input class="form-control" type="text" name="bootcamp_full_price" value="{{ old('price', $course->bootcampCourseDetail->bootcamp_full_price) }}">
+                            @error('bootcamp_full_price')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror 
                         </div>
                         <div class="form-group">
                             <h5 for="">Free Trial Registration Price</h5>
                             <input class="form-control" type="text" name="bootcamp_trial_price" value="{{ old('price', $course->bootcampCourseDetail->bootcamp_trial_price) }}">
+                            @error('bootcamp_trial_price')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror 
                         </div>
                     </div>
                     
@@ -651,9 +686,19 @@
                                         {{ method_field('PUT') }}
                                         <td>
                                             <input type="text" name="title" value="{{$benefit->title}}" class="form-control">
+                                            @error('title')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
                                         </td>
                                         <td>
-                                            <textarea class="form-control" name="description"cols="30" rows="4" >{{$benefit->description}}</textarea>
+                                            <textarea class="form-control" name="description" cols="30" rows="4" >{{$benefit->description}}</textarea>
+                                            @error('description')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
                                         </td>
                                         <td>
                                             <div style="padding: 0px 2px;" class="text-nowrap d-flex">
@@ -737,9 +782,19 @@
                                         {{ method_field('PUT') }}
                                         <td>
                                             <input type="text" name="title" value="{{$candidate->title}}" class="form-control">
+                                            @error('title')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror  
                                         </td>
                                         <td>
-                                            <textarea class="form-control" name="description"cols="30" rows="4" >{{$candidate->description}}</textarea>
+                                            <textarea class="form-control" name="description" cols="30" rows="4" >{{$candidate->description}}</textarea>
+                                            @error('description')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror  
                                         </td>
                                         <td>
                                             <div style="padding: 0px 2px;" class="text-nowrap d-flex">
@@ -851,9 +906,19 @@
                                         </td>
                                         <td>
                                             <input type="text" name="title" value="{{$career->title}}" class="form-control">
+                                            @error('title')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
                                         </td>
                                         <td>
-                                            <textarea class="form-control" name="description"cols="30" rows="4" >{{$career->description}}</textarea>
+                                            <textarea class="form-control" name="description" cols="30" rows="4" >{{$career->description}}</textarea>
+                                            @error('description')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
                                         </td>
                                         <td>
                                             <div style="padding: 0px 2px;" class="text-nowrap d-flex">
@@ -976,21 +1041,39 @@
                 <div class="col-6">
                     <label for="">Date Start</label>
                     <input type="date" name="date_start" class="form-control">
+                    @error('date_start')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
                 </div>
                 <div class="col-6">
                     <label for="">Date End</label>
                     <input type="date" name="date_end" class="form-control">
+                    @error('date_end')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
                 </div>
                 <!-- <div class="col-4"><input type="time" class="form-control"></div> -->
                 <div class="col-6 pt-3">
                     <label for="">Schedule Title</label>
-
-                   <input type="text" name="title" placeholder="Insert Title" class="form-control">
+                    <input type="text" name="title" placeholder="Insert Title" class="form-control">
+                    @error('title')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
                 </div>
                 <div class="col-6 pt-3">
                     <label for="">Schedule Sub-Title</label>
-
-                   <input type="text" name="subtitle" placeholder="Insert Sub Title" class="form-control">
+                    <input type="text" name="subtitle" placeholder="Insert Sub Title" class="form-control">
+                    @error('subtitle')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
                 </div>
 
                 <div class="col-6 pt-3">

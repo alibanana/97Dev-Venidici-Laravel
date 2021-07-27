@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helper\Helper;
 
 use App\Models\BootcampCandidate;
+use Illuminate\Support\Facades\Validator;
 
 class BootcampCandidateController extends Controller
 {
@@ -36,10 +37,16 @@ class BootcampCandidateController extends Controller
      */
     public function store(Request $request, $course_id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'description'   => 'required',
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'candidate-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
+
 
         $candidate = new BootcampCandidate();
         $candidate->course_id     = $course_id;
@@ -85,10 +92,16 @@ class BootcampCandidateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'description'   => 'required',
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'candidate-page'])->withErrors($validator);
+
+        $validated = $validator->validate();
+
         $candidate = BootcampCandidate::findOrFail($id);
         $candidate->title        = $validated['title'];
         $candidate->description  = $validated['description'];
