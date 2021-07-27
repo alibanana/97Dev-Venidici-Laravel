@@ -29,19 +29,20 @@
         <!-- Content Row -->
 
         <!-- start of form -->
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.bootcamp-about.update', $about->id)}}"method="POST" enctype="multipart/form-data">
         @csrf
         @method('put')
+        
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Thumbnail</label> <br>
-                        <img src="" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
+                        <img src="{{ asset($about->image) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
                         <br>
                         <br>
                         Click button below to update image
-                        <input type="file" name="thumbnail" aria-describedby="" accept=".jpg,,jpeg,.png"> 
-                        @error('thumbnail')
+                        <input type="file" name="image" aria-describedby="" accept=".jpg,,jpeg,.png"> 
+                        @error('image')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -52,8 +53,8 @@
                     <h6 class="modal-title" id="exampleModalLabel">Title</h6>
                     <div class="form-group mt-2">
                         <input type="text" name="title" class="form-control form-control-user"
-                            id="exampleInputPassword" placeholder="e.g. Introduction to course"
-                            value="title" required>
+                            id="" placeholder="e.g. Introduction to course"
+                            value="{{$about->title}}" required>
                         @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -64,7 +65,7 @@
                 <div class="col-12">
                     <h6 class="modal-title" id="exampleModalLabel">Description</h6>
                     <div class="form-group mt-2">
-                        <textarea name="description" id="" rows="5" class="form-control" required>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quibusdam repellendus laborum porro nisi at recusandae cum quos a vitae delectus exercitationem, officiis dignissimos beatae, veritatis quidem adipisci eius harum!</textarea>
+                        <textarea name="description" id="" rows="5" class="form-control" required>{{$about->description}}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>

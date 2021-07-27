@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourse
 use App\Http\Controllers\Admin\WokiCourseController as AdminWokiCourseController;
 use App\Http\Controllers\Admin\BootcampController as AdminBootcampController;
 use App\Http\Controllers\Admin\BootcampFeatureController as AdminBootcampFeatureController;
+use App\Http\Controllers\Admin\BootcampAboutController as AdminBootcampAboutController;
 use App\Http\Controllers\Admin\BootcampUpdateController as AdminBootcampUpdateController;
 use App\Http\Controllers\Admin\BootcampScheduleController as AdminBootcampScheduleController;
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
@@ -287,6 +288,12 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/bootcamp/{id}/store-feature', [AdminBootcampFeatureController::class, 'store'])->name('bootcamp-feature.store');
         Route::delete('/bootcamp-feature/{id}', [AdminBootcampFeatureController::class, 'destroy'])->name('bootcamp-feature.destroy');
         Route::put('/bootcamp-feature/update', [AdminBootcampFeatureController::class, 'update'])->name('bootcamp-feature.update');
+        
+        // BootcampAboutController
+        Route::post('/bootcamp/{id}/store-about', [AdminBootcampAboutController::class, 'store'])->name('bootcamp-about.store');
+        Route::get('/bootcamp-about/{id}/update', [AdminBootcampAboutController::class, 'edit'])->name('bootcamp.about-edit');
+        Route::put('/bootcamp-about/{id}/update', [AdminBootcampAboutController::class, 'update'])->name('bootcamp-about.update');
+        Route::delete('/bootcamp-about/{id}', [AdminBootcampAboutController::class, 'destroy'])->name('bootcamp-about.destroy');
 
 
         // BootcampUpdateController
@@ -296,7 +303,6 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/bootcamp/{id}/update-publish-status', [AdminBootcampUpdateController::class, 'updatePublishStatus'])->name('bootcamp.update-publish-status');
         Route::put('/bootcamp/{id}/attach-teacher', [AdminBootcampUpdateController::class, 'attachTeacher'])->name('bootcamp.attach-teacher');
         Route::put('/bootcamp/{id}/detach-teacher', [AdminBootcampUpdateController::class, 'detachTeacher'])->name('bootcamp.detach-teacher');
-        Route::get('/bootcamp-about/{id}/update', [AdminBootcampUpdateController::class, 'editBootcampAbout'])->name('bootcamp.edit-about');
         Route::get('/bootcamp-schedules/{id}/update', [AdminBootcampUpdateController::class, 'editBootcampSchedules'])->name('bootcamp.edit-schedules');
         // BootcampScheduleController
         // Route::get('/bootcampschedule', [AdminBootcampScheduleController::class, 'index'])->name('bootcampschedule.index');

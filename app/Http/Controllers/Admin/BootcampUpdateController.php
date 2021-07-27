@@ -13,6 +13,8 @@ use App\Models\CourseType;
 use App\Models\Course;
 use App\Models\BootcampCourseDetail;
 use App\Models\CourseFeature;
+use App\Models\BootcampDescription;
+
 use App\Models\Teacher;
 use App\Models\BootcampSchedule;
 use App\Models\Hashtag;
@@ -184,11 +186,7 @@ class BootcampUpdateController extends Controller
             ->with('page-option', 'teacher');
     }
 
-    public function editBootcampAbout(){
-        $view = 'admin/bootcamp/update-bootcamp-about';
 
-        return view($view);
-    }
     public function editBootcampSchedules(){
         $view = 'admin/bootcamp/update-bootcamp-schedules';
 

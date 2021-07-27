@@ -65,7 +65,7 @@
             <h6 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h6>
             <!-- <h6 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h6> -->
             <h6 id="feature-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer;">Feature</h6>
-            <h6 id="about-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer;">About</h6>
+            <h6 id="about-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer;">About</h6>
             <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="cursor:pointer;">Pricing & Enrollment Scenario</h6>
             <h6 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="cursor:pointer;">Publish Status</h6>
             <h6 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="cursor:pointer;">Teacher</h6>
@@ -359,11 +359,11 @@
         
         <!-- START OF BOOTCAMP DESCRIPTIONS -->
         <div class="course-content" id="bootcamp-descriptions" style="display:none" >
-            <form action="" method="post"  enctype="multipart/form-data">
+            <form action="{{route('admin.bootcamp-about.store', $course->id)}}" method="post"  enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-6">
-                    <input type="file"  accept=".jpg,,jpeg,.png" name="image" placeholder="Insert Title">
+                    <input type="file"  accept=".jpg,,jpeg,.png" name="image">
                 </div>
                 <div class="col-6">
                     <input type="text" class="form-control" name="title" placeholder="Insert Title">
@@ -393,21 +393,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($course->bootcampDescriptions as $about)
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>
-                                        <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
+                                        <img src="{{ asset($about->image) }}" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
                                     </td>
-                                    <td>Customer Experience</td>
-                                    <td>Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</td>
+                                    <td>{{$about->title}}</td>
+                                    <td>{{$about->description}}</td>
                                     <td>
-                                        <div style="padding: 0px 2px;" class="text-nowrap">
-                                            <a class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="/admin/bootcamp-about/1/update">
+                                        <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                            <a class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="{{route('admin.bootcamp.about-edit', $about->id)}}">
                                                 Update
                                             </a>
+                                            <form action="{{route('admin.bootcamp-about.destroy', $about->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp item?')">Delete</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -1138,6 +1147,8 @@ function duplicateSchedule() {
         <script>document.getElementById('schedule-page-button').click()</script>
     @elseif (Session::get('page-option') == 'bootcamp-feature-page')
         <script>document.getElementById('feature-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'bootcamp-about-page')
+        <script>document.getElementById('about-page-button').click()</script>
     @endif
 @endif
 @endsection
