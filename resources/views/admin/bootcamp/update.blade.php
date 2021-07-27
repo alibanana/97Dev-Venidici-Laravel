@@ -146,9 +146,9 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Zoom link</label>
-                            <input type="text" name="link" class="form-control form-control-user" value="{{ old('link', $course->link) }}"
+                            <input type="text" name="meeting_link" class="form-control form-control-user" value="{{ old('meeting_link', $course->bootcampCourseDetail->meeting_link) }}"
                                     placeholder="e.g. https://meet.google.com/pdq-umxk-fuv" required> 
-                            @error('link')
+                            @error('meeting_link')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -205,7 +205,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Date Start</label>
-                            <input type="date" name="date_start" class="form-control">
+                            <input type="date" name="date_start" class="form-control" value="{{ old('event_date', $course->bootcampCourseDetail->date_start) }}">
                             @error('date_start')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -216,7 +216,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Date End</label>
-                            <input type="date" name="date_end" class="form-control">
+                            <input type="date" name="date_end" class="form-control" value="{{ old('event_date', $course->bootcampCourseDetail->date_end) }}" >
                             @error('date_end')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -227,7 +227,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Free Trial Date End</label>
-                            <input type="date" name="trial_date_end" class="form-control">
+                            <input type="date" name="trial_date_end" class="form-control" value="{{ old('event_date', $course->bootcampCourseDetail->trial_date_end) }}">
                             @error('trial_date_end')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>

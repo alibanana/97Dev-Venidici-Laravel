@@ -167,7 +167,6 @@ class BootcampController extends Controller
 
         ])->setAttributeNames([
             'course_category_id' => 'category',
-            'preview_video_link' => 'video link',
         ])->validate();
 
         $course                     = new Course;
