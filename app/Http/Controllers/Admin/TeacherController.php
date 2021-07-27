@@ -97,7 +97,7 @@ class TeacherController extends Controller
         $teacher = Teacher::findOrFail($id);
         $teacher->name = $validated['name'];
         $teacher->description = $validated['description'];
-        $teacher->occupancy = $validated['description'];
+        $teacher->occupancy = $validated['occupancy'];
 
 
         if ($request->has('image')) {

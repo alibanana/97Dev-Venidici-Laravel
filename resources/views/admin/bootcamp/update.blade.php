@@ -768,7 +768,7 @@
 
         <!-- START OF FUTURE CAREERS-->
         <div class="course-content" id="future-career-page" style="display:none">
-            <form action="" method="post">
+            <form action="{{route('admin.bootcamp-future-career.store', $course->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-6">
@@ -786,7 +786,7 @@
                     <div class="form-group">
                         <label for="">Title</label>
                         <input type="text" name="title" class="form-control form-control-user"
-                            placeholder="Enter benefit title"  required> 
+                            placeholder="Enter berkarir jadi apa title"  required> 
                         @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -797,7 +797,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label for="">Description</label>
-                        <textarea class="form-control" name="description" id="" cols="30" rows="4" placeholder="Enter benefit description"></textarea>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="4" placeholder="Enter berkarir jadi apa description"></textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -828,15 +828,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <form action="" method="post">
-                                @csrf
-                                @method('put')
+                                @foreach($course->bootcampFutureCareers as $career)
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-future-career.update', $career->id)}}" enctype="multipart/form-data">
+                                        @csrf
+                                        {{ method_field('PUT') }}
                                         <td>
                                             <div class="form-group">
                                                 <label for="">Thumbnail</label> <br>
-                                                <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
+                                                <img src="{{ asset($career->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
                                                 <br>
                                                 <br>
                                                 Click button below to update image
@@ -849,20 +850,28 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <input type="text" name="title" value="title" class="form-control">
+                                            <input type="text" name="title" value="{{$career->title}}" class="form-control">
                                         </td>
                                         <td>
-                                            <textarea class="form-control" name="description"cols="30" rows="4" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident nisi veritatis sapiente ipsum neque quos blanditiis ipsa dolorum at, sequi dicta inventore quidem quam nihil dolore sed illum? Quis, vitae. </textarea>
+                                            <textarea class="form-control" name="description"cols="30" rows="4" >{{$career->description}}</textarea>
                                         </td>
                                         <td>
-                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                
-                                                    <div style="padding: 0px 2px">
-                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
-                                                    </div>
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                </div>
+                                            </form> 
+                                            <form action="{{route('admin.bootcamp-future-career.destroy', $career->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp future candidate?')">Delete</button>
+                                                </div>
+                                            </form>
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </form>
                             </tbody>
                         </table>
@@ -874,13 +883,13 @@
 
         <!-- START OF HIRING PARTNERS-->
         <div class="course-content" id="hiring-partner-page" style="display:none">
-            <form action="" method="post">
+            <form action="{{route('admin.bootcamp-hiring-partner.store', $course->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Image</label> <br>
-                        <input type="file"  accept=".jpg,,jpeg,.png" name="thumbnail" class="" required> 
+                        <input type="file" accept=".jpg,,jpeg,.png" name="image" class="" required> 
                         @error('image')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -909,20 +918,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <form action="" method="post">
-                                @csrf
-                                @method('put')
+                                    @foreach($course->bootcampHiringPartners as $partner)
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-hiring-partner.update', $partner->id)}}" enctype="multipart/form-data">
+                                        @csrf
+                                        {{ method_field('PUT') }}
                                         <td>
                                             <div class="form-group">
-                                                <label for="">Thumbnail</label> <br>
-                                                <img src="{{ asset($course->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
+                                                <label for="">Company Image</label> <br>
+                                                <img src="{{ asset($partner->image) }}" alt="Image not available.." style="width:10vw;" class="img-fluid">
                                                 <br>
                                                 <br>
                                                 Click button below to update image <br>
-                                                <input type="file" name="thumbnail" aria-describedby="" accept=".jpg,,jpeg,.png" required> 
-                                                @error('thumbnail')
+                                                <input type="file" name="image" aria-describedby="" accept=".jpg,,jpeg,.png"> 
+                                                @error('image')
                                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -930,14 +940,22 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                
-                                                    <div style="padding: 0px 2px">
-                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
-                                                    </div>
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                </div>
+                                            </form> 
+                                            <form action="{{route('admin.bootcamp-hiring-partner.destroy', $partner->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp hiring partner?')">Delete</button>
+                                                </div>
+                                            </form>
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </form>
                             </tbody>
                         </table>
@@ -1180,6 +1198,10 @@ function duplicateSchedule() {
         <script>document.getElementById('benefit-page-button').click()</script>
     @elseif (Session::get('page-option') == 'candidate-page')
         <script>document.getElementById('candidate-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'future-career-page')
+        <script>document.getElementById('career-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'hiring-partner-page')
+        <script>document.getElementById('partner-page-button').click()</script>
     @endif
 @endif
 @endsection

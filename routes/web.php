@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\BootcampUpdateController as AdminBootcampUpdateCo
 use App\Http\Controllers\Admin\BootcampScheduleController as AdminBootcampScheduleController;
 use App\Http\Controllers\Admin\BootcampBenefitController as AdminBootcampBenefitController;
 use App\Http\Controllers\Admin\BootcampCandidateController as AdminBootcampCandidateController;
+use App\Http\Controllers\Admin\BootcampFutureCareerController as AdminBootcampFutureCareerController;
+use App\Http\Controllers\Admin\BootcampHiringPartnerController as AdminBootcampHiringPartnerController;
 
 
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
@@ -323,11 +325,23 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'update'])->name('bootcamp-benefit.update');
         Route::delete('/bootcamp-benefit/{id}', [AdminBootcampBenefitController::class, 'destroy'])->name('bootcamp-benefit.destroy'); 
 
+        // BootcampFutureCareerController
+        Route::post('/bootcamp/{id}/store-future-career', [AdminBootcampFutureCareerController::class, 'store'])->name('bootcamp-future-career.store');
+        Route::get('/bootcamp-future-career/{id}/update', [AdminBootcampFutureCareerController::class, 'edit'])->name('bootcamp.future-career-edit');
+        Route::put('/bootcamp-future-career/{id}/update', [AdminBootcampFutureCareerController::class, 'update'])->name('bootcamp-future-career.update');
+        Route::delete('/bootcamp-future-career/{id}', [AdminBootcampFutureCareerController::class, 'destroy'])->name('bootcamp-future-career.destroy'); 
+
         // BootcampCandidateController
         Route::post('/bootcamp/{id}/store-candidate', [AdminBootcampCandidateController::class, 'store'])->name('bootcamp-candidate.store');
         Route::get('/bootcamp-candidate/{id}/update', [AdminBootcampCandidateController::class, 'edit'])->name('bootcamp.candidate-edit');
         Route::put('/bootcamp-candidate/{id}/update', [AdminBootcampCandidateController::class, 'update'])->name('bootcamp-candidate.update');
         Route::delete('/bootcamp-candidate/{id}', [AdminBootcampCandidateController::class, 'destroy'])->name('bootcamp-candidate.destroy');        
+        
+        // BootcampHiringPartnerController
+        Route::post('/bootcamp/{id}/store-hiring-partner', [AdminBootcampHiringPartnerController::class, 'store'])->name('bootcamp-hiring-partner.store');
+        Route::get('/bootcamp-hiring-partner/{id}/update', [AdminBootcampHiringPartnerController::class, 'edit'])->name('bootcamp.hiring-partner-edit');
+        Route::put('/bootcamp-hiring-partner/{id}/update', [AdminBootcampHiringPartnerController::class, 'update'])->name('bootcamp-hiring-partner.update');
+        Route::delete('/bootcamp-hiring-partner/{id}', [AdminBootcampHiringPartnerController::class, 'destroy'])->name('bootcamp-hiring-partner.destroy');        
 
         // SectionController
         Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');

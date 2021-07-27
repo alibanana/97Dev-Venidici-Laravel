@@ -17,30 +17,7 @@ class BootcampHiringPartnerController extends Controller
      */
     public function index()
     {
-        $partners = new BootcampHiringPartner;
-
-        if ($request->has('sort')) {
-            if ($request['sort'] == "latest") {
-                $partners = $partners->orderBy('created_at', 'desc');
-            } else {
-                $partners = $partners->orderBy('created_at');
-            }
-        } else {
-            $partners = $partners->orderBy('created_at', 'desc');
-        }
-
-        if ($request->has('search')) {
-            if ($request->search == "") {
-                $url = route('admin.partners.index', request()->except('search'));
-                return redirect($url);
-            } else {
-                $partners = $partners->where('name', 'like', "%".$request->search."%");
-            }
-        }
-
-        $partners = $partners->get();
-
-        return view('admin/bootcamphiringpartner/index', compact('partners'));
+       
     }
 
     /**
@@ -50,7 +27,6 @@ class BootcampHiringPartnerController extends Controller
      */
     public function create()
     {
-        return view('admin/bootcamphiringpartner/create');
     }
 
     /**
@@ -59,20 +35,20 @@ class BootcampHiringPartnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $course_id)
     {
         $validated = $request->validate([
-            'image'     => 'required|image|mimes:jpeg,jpg,png|max:5000',
+            'image'     => 'required|mimes:jpeg,jpg,png|max:5000',
         ]);
 
         $partner = new BootcampHiringPartner();
-        $partner->course_id     = $id;
-        $partner->image         = Helper::storeImage($request->file('image'), 'storage/images/hiring-partners/');
+        $partner->course_id     = $course_id;
+        $partner->image         = Helper::storeImage($request->file('image'), 'storage/images/bootcamp/hiring-partners/');
         $partner->save();
 
         $message = 'New partner (' . $partner->title . ') has been added to the database.';
 
-        return redirect()->route('admin.bootcamp.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $course_id)
             ->with('message', $message)
             ->with('page-option', 'hiring-partner-page');
     }
@@ -109,26 +85,25 @@ class BootcampHiringPartnerController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'image'         => 'required',
+            'image'     => 'mimes:jpeg,jpg,png|max:5000',
         ]);
 
-        unlink($course->thumbnail);
-        $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/bootcamp/');
-        
+        $partner = BootcampHiringPartner::findOrFail($id);
 
-        $partner           = BootcampHiringPartner::findOrFail($id);
-        $partner->image    = $validated['image'];
+        if ($request->has('image')) {
+            unlink($partner->image);
+            $partner->image = Helper::storeImage($request->file('image'), 'storage/images/bootcamp/hiring-partners/');
+        }
         
-        
-        $course->save();
+        $partner->save();
 
         if ($partner->wasChanged()) {
-            $message = 'partner (' . $partner->title . ') has been updated.';
+            $message = 'Hiring Partner (' . $partner->image . ') has been updated.';
         } else {
-            $message = 'No changes was made to partner (' . $partner->title . ')';
+            $message = 'No changes was made to partner (' . $partner->image . ')';
         }
 
-        return redirect()->route('admin.bootcamp.edit', $partner->course->id)
+        return redirect()->route('admin.bootcamp.edit', $partner->course_id)
             ->with('message', $message)
             ->with('page-option', 'hiring-partner-page');
     }
@@ -141,13 +116,13 @@ class BootcampHiringPartnerController extends Controller
      */
     public function destroy($id)
     {
-        $career = BootcampHiringPartner::where('course_id',$id)->first();
-        unlink($career->thumbnail);
-        $career->delete();
+        $partner = BootcampHiringPartner::findOrFail($id);
+        unlink($partner->image);
+        $partner->delete();
 
-        $message = 'partner (' . $partner->title . ') has been deleted.';
+        $message = 'Hiring Partner (' . $partner->title . ') has been deleted.';
         
-        return redirect()->route('admin.bootcamp.edit', $id)
+        return redirect()->route('admin.bootcamp.edit', $partner->course_id)
             ->with('message', $message)
             ->with('page-option', 'hiring-partner-page');
     }
