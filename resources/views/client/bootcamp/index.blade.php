@@ -167,8 +167,9 @@
                             <i style="color:#DAD9E2" class="fas fa-layer-group"></i>
                             <select name="batch"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Batch</option>
-                                <option value="Batch 1 (Septmber 2021)">Batch 1 (Septmber 2021)</option>
-                                <option value="Batch 2 (August 2021)">Batch 2 (August 2021)</option>
+                                @foreach($course->bootcampBatches as $batch)
+                                <option value="{{$batch->date}})">Batch 1 ({{ date('d M Y', strtotime($batch->date))}})</option>
+                                @endforeach
                             </select>                              
                         </div>  
                         @error('batch')
@@ -306,6 +307,318 @@
 </div>
 <!-- END OF POPUP FREE TRIAL-->
 
+<!-- START OF POP UP FULL REGISTRATION-->
+<div id="full-registration" class="overlay" style="overflow:scroll">
+    <div class="popup">
+        <a class="close" href="#closed" >&times;</a>
+    
+        <div class="content" style="padding:2vw">
+            
+            <form action="" method="POST" enctype="multipart/form-data">
+            @csrf
+                <div class="row m-0">
+                    <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
+                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
+                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Full Bootcamp Registration</p>
+                        @if (session()->has('free_trial_bootcamp_message'))
+                        <div class="p-3 mt-2 mb-0">
+                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                            {{ session()->get('free_trial_bootcamp_message') }}
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    <!-- START OF LEFT SECTION -->
+                    <div class="col-6" style="">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user"></i>
+                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" >
+                        </div>  
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
+                            <input type="date" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" >
+                        </div>  
+                        @error('birth_place')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Kelamin</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
+                            <select name="gender"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Gender</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>                              
+                        </div> 
+                        @error('gender')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror 
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map"></i>
+                            <select name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Provinsi</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>                              
+                        </div>  
+                        @error('province_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div> 
+                    <!-- END OF LEFT SECTION --> 
+                    <!-- RIGHT SECTION -->
+                    <div class="col-6" style="">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                            <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email" >
+                        </div>  
+                        @error('email')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="dd.mm.yyyy" >
+                        </div>  
+                        @error('birth_date')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
+                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon" >
+                        </div>  
+                        @error('telephone')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map"></i>
+                            <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Kota</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>                              
+                        </div>  
+                        @error('city_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        
+                    </div>
+                    <!-- END OF RIGHT SECTION -->
+
+                    <!-- START OF ADDRESS -->
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" ></textarea>
+                        </div>  
+                        @error('address')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF ADDRESS -->
+
+                    <!-- START OF LEFT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pendidikan Terakhir</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
+                            <select name="last_degree"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Pendidikan</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                            </select>                              
+                        </div>  
+                        @error('last_degree')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Batch yang ingin dikuti</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-layer-group"></i>
+                            <select name="batch"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Batch</option>
+                                @foreach($course->bootcampBatches as $batch)
+                                <option value="{{$batch->date}})">Batch 1 ({{ date('d M Y', strtotime($batch->date))}})</option>
+                                @endforeach
+                            </select>                              
+                        </div>  
+                        @error('batch')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Apakah sedang mencari pekerjaan?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user-md"></i>
+                            <select name="mencari_kerja"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Jawaban</option>
+                                <option value="Sedang Kuliah">Sedang Kuliah</option>
+                                <option value="Sedang Mencari Pekerjaan">Sedang Mencari Pekerjaan</option>
+                                <option value="Sedang Tidak Mencari Pekerjaan">Sedang Tidak Mencari Pekerjaan</option>
+                            </select>                              
+                        </div>  
+                        @error('mencari_kerja')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Apakah kamu tertarik untuk melanjutkan bootcamp ini?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-info"></i>
+                            <select name="konsiderasi_lanjut"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Jawaban</option>
+                                <option value="Ya">Ya</option>
+                                <option value="Tidak">Tidak</option>
+                            </select>                              
+                        </div>  
+                        @error('konsiderasi_lanjut')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF LEFT SECTION -->
+
+                    <!-- START OF RIGHT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Institusi</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
+                            <input type="text" name="institution" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Institusi" >
+                        </div>   
+                        @error('institution')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Sumber tahu program ini?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-info"></i>
+                            <input type="text" name="sumber_tahu_program" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan sumber" >
+                        </div>   
+                        @error('sumber_tahu_program')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Social Media / Linked In</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-hashtag"></i>
+                            <input type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Atau LinkedIn" >
+                        </div>   
+                        @error('social_media')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <!-- END OF RIGHT SECTION -->
+
+                    <!-- START OF EXPECTATION -->
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kenapa kamu memililih Bootcamp ini</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="kenapa_memilih" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan jawaban anda" ></textarea>
+                        </div>  
+                        @error('kenapa_memilih')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Ekspektasi yang kamu ingin dapatkan dari bootcamp ini?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="expectation" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan ekspektasi anda" ></textarea>
+                        </div>  
+                        @error('expectation')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF EXPECTATION -->
+
+                    <!-- START OF LEFT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih Metode Pembayaran</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user-md"></i>
+                            <select name="payment_type"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Metode</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BRI">BRI</option>
+                                <option value="Mandiri">Mandiri</option>
+                            </select>                              
+                        </div>  
+                        @error('payment_type')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <!-- END OF LEFT SECTION -->
+                    <!-- START OF RIGHT SECTION -->
+
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">No. Rek Untuk Guarantee Return</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-money-check"></i>
+                            <input type="text" name="bank_account_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Rekening" >
+                        </div>   
+                        @error('bank_account_no')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF RIGHT SECTION -->
+                    
+                    <div class="col-12" style="text-align:center;padding-top:3vw">
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                    </div>  
+                    
+                    <!-- END OF GENNERAL INFORMATION -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END OF POP UP FULL REGISTRATION-->
+
 
 
 
@@ -334,7 +647,11 @@
             if (distance < 0) {
 
                 clearInterval(timer);
-                document.getElementById('countdown-card').style.display = "none";
+                document.getElementById('days').innerHTML = 0;
+                document.getElementById('hours').innerHTML = 0 ;
+                document.getElementById('minutes').innerHTML = 0 ;
+                // document.getElementById('free-trial-button').style.display = "none";
+                // document.getElementById('full-registration-button').style.display = "none";
                 return;
             }
             var days = Math.floor(distance / _day);
@@ -525,7 +842,7 @@
                 <div style="padding-left: 5vw;">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-                    <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
+                    <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}" target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</a>
 
                 </div>
 
@@ -583,7 +900,7 @@
                 <div style="padding-left: 5vw;">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-                    <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
+                    <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}" target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</a>
 
                 </div>
             </div>
@@ -842,7 +1159,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="#free-trial" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Register Now</a>
+            <a href="#full-registration" class="btn-blue-bordered normal-text" id="free-trial-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Register Now</a>
 
         </div>
 
@@ -872,7 +1189,7 @@
                     </li>
                 </ul>
             </div>
-            <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Get Free Trial Now</button>
+            <a href="#free-trial" href="full-registration" class="btn-blue-bordered normal-text" id="full-registration-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Get Free Trial Now</a>
 
         </div>
     </div>
@@ -886,7 +1203,7 @@
     <div class="col-md-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Our Venidici Community</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-        <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Explore Community</button>
+        <a href="/community" target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Explore Community</a>
 
     </div>    
     <!-- END OF LEFT SECTION -->
