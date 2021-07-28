@@ -238,4 +238,61 @@ class BootcampController extends Controller
 
         return redirect('/transaction-detail/'.$invoiceNumberResults['data'].'#payment-success');
     }
+
+    public function store(Request $request, $course_id)
+    {
+        $validated = $request->validate([
+            'course_id'             => 'required',
+            'user_id'               => 'required',
+            'invoice_id'            => 'required',
+            'name'                  => 'required',
+            'email'                 => 'required',
+            'birth_place'           => 'required',
+            'birth_date'            => 'required',
+            'gender'                => 'required',
+            'phone_no'              => 'required',
+            'province_id'           => 'required',
+            'city_id'               => 'required',
+            'address'               => 'required',
+            'last_degree'           => 'required',
+            'institution'           => 'required',
+            'batch'                 => 'required',
+            'sumber_tahu_program'   => 'required',
+            'mencari_kerja'         => 'required',
+            'social_media'          => 'required',
+            'konsiderasi_lanjut'    => 'required',
+            'kenapa_memilih'        => 'required',
+            'expectation'           => 'required',
+            'payment_type'          => 'required',
+            'bank_account_number'   => 'required',
+        ]);
+
+        $bootcamp                       = new BootcampApplication;
+        $bootcamp->course_id            = $course_id;
+        $bootcamp->user_id              = $validated['user_id'];
+        $bootcamp->invoice_id           = $validated['invoice_id'];
+        $bootcamp->name                 = $validated['name'];
+        $bootcamp->email                = $validated['email'];
+        $bootcamp->birth_place          = $validated['birth_place'];
+        $bootcamp->birth_date           = $validated['birth_date'];
+        $bootcamp->gender               = $validated['gender'];
+        $bootcamp->phone_no             = $validated['phone_no'];
+        $bootcamp->province_id          = $validated['province_id'];
+        $bootcamp->city_id              = $validated['city_id'];
+        $bootcamp->address              = $validated['address'];
+        $bootcamp->last_degree          = $validated['last_degree'];
+        $bootcamp->institution          = $validated['institution'];
+        $bootcamp->batch                = $validated['batch'];
+        $bootcamp->sumber_tahu_program  = $validated['sumber_tahu_program'];
+        $bootcamp->mencari_kerja        = $validated['mencari_kerja'];
+        $bootcamp->social_media         = $validated['social_media'];
+        $bootcamp->konsiderasi_lanjut   = $validated['konsiderasi_lanjut'];
+        $bootcamp->kenapa_memilih       = $validated['kenapa_memilih'];
+        $bootcamp->expectation          = $validated['expectation'];
+        $bootcamp->payment_type         = $validated['payment_type'];
+        $bootcamp->bank_account_number  = $validated['bank_account_number'];
+        $bootcamp->save();
+
+        return redirect()->back();
+    }
 }
