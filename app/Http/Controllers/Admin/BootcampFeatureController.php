@@ -41,6 +41,7 @@ class BootcampFeatureController extends Controller
             return redirect()->back()
             ->with('message', 'Maksimum Quantity has been reached!')
             ->with('page-option', 'bootcamp-feature-page');
+            
         $validator = Validator::make($request->all(), [
             'title'         => 'required',
             'feature'       => 'required',

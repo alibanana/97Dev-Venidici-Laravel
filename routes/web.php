@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\BootcampBenefitController as AdminBootcampBenefit
 use App\Http\Controllers\Admin\BootcampCandidateController as AdminBootcampCandidateController;
 use App\Http\Controllers\Admin\BootcampFutureCareerController as AdminBootcampFutureCareerController;
 use App\Http\Controllers\Admin\BootcampHiringPartnerController as AdminBootcampHiringPartnerController;
+use App\Http\Controllers\Admin\BootcampBatchController as AdminBootcampBatchController;
 
 
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
@@ -289,6 +290,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/bootcamp/{id}/un-archive', [AdminBootcampController::class, 'unArchive'])->name('bootcamp.unArchive');
         Route::post('/bootcamp/{id}/set-isfeatured-status-to-opposite', [AdminBootcampController::class, 'setIsFeaturedStatusToOpposite'])->name('bootcamp.set-isfeatured-status-to-opposite');
         Route::post('/bootcamp/{id}/set-publish-status-to-opposite', [AdminBootcampController::class, 'setPublishStatusToOpposite'])->name('bootcamp.set-publish-status-to-opposite');
+        Route::delete('/bootcamp/{id}/remove-syllabus', [AdminBootcampController::class, 'removeSyllabus'])->name('bootcmap.remove-syllabus');
 
         // BootcampFeatureController
         Route::post('/bootcamp/{id}/store-feature', [AdminBootcampFeatureController::class, 'store'])->name('bootcamp-feature.store');
@@ -342,6 +344,12 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/bootcamp-hiring-partner/{id}/update', [AdminBootcampHiringPartnerController::class, 'edit'])->name('bootcamp.hiring-partner-edit');
         Route::put('/bootcamp-hiring-partner/{id}/update', [AdminBootcampHiringPartnerController::class, 'update'])->name('bootcamp-hiring-partner.update');
         Route::delete('/bootcamp-hiring-partner/{id}', [AdminBootcampHiringPartnerController::class, 'destroy'])->name('bootcamp-hiring-partner.destroy');        
+        
+        // BootcampBatchController
+        Route::post('/bootcamp/{id}/store-batch', [AdminBootcampBatchController::class, 'store'])->name('bootcamp-batch.store');
+        Route::get('/bootcamp-batch/{id}/update', [AdminBootcampBatchController::class, 'edit'])->name('bootcamp.batch-edit');
+        Route::put('/bootcamp-batch/{id}/update', [AdminBootcampBatchController::class, 'update'])->name('bootcamp-batch.update');
+        Route::delete('/bootcamp-batch/{id}', [AdminBootcampBatchController::class, 'destroy'])->name('bootcamp-batch.destroy');        
 
         // SectionController
         Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');

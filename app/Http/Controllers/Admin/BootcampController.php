@@ -152,7 +152,6 @@ class BootcampController extends Controller
      */
     public function store(Request $request)
     {
-
         $validated = Validator::make($request->all(), [
             'title' => 'required',
             'thumbnail' => 'required|mimes:jpeg,jpg,png',
@@ -281,5 +280,22 @@ class BootcampController extends Controller
     public function setPublishStatusToOpposite(Request $request, $id) {
         $result = CourseHelper::setPublishStatusToOppositeById($id);
         return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+    }
+
+    // Remove a syllabus from an existing Course's Section-Content.
+    public function removeSyllabus($id) {
+        $content = BootcampCourseDetail::where('course_id',$id)->first();
+
+        if (!is_null($content->syllabus)) {
+            unlink($content->syllabus);
+            $content->syllabus = null;
+            $content->save();
+        }
+
+        $message = 'Syllabus in Course (' . $content->course->title  . ') has been deleted from the database';
+
+        return redirect()->route('admin.bootcamp.edit', $id)
+            ->with('message', $message)
+            ->with('page-option', 'basic-informations');
     }
 }

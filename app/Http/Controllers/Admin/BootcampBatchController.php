@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Helper\Helper;
-
-use App\Models\BootcampBenefit;
+use App\Models\BootcampBatch;
 use Illuminate\Support\Facades\Validator;
 
-class BootcampBenefitController extends Controller
+class BootcampBatchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,7 @@ class BootcampBenefitController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -28,7 +26,7 @@ class BootcampBenefitController extends Controller
      */
     public function create()
     {
-        return view('admin/bootcampbenefit/create');
+        //
     }
 
     /**
@@ -39,32 +37,26 @@ class BootcampBenefitController extends Controller
      */
     public function store(Request $request, $course_id)
     {
-        if(BootcampBenefit::where('course_id',$course_id)->count() >= 4)
-            return redirect()->back()
-            ->with('message', 'Maksimum Quantity has been reached!')
-            ->with('page-option', 'benefit-page');
-            
+
         $validator = Validator::make($request->all(), [
-            'title'         => 'required',
-            'description'   => 'required',
+            'date'         => 'required',
         ]);
 
         if ($validator->fails())
-            return redirect()->back()->with(['page-option' => 'benefit-page'])->withErrors($validator);
+            return redirect()->back()->with(['page-option' => 'batch-page'])->withErrors($validator);
 
         $validated = $validator->validate();
 
-        $benefit = new BootcampBenefit();
-        $benefit->course_id     = $course_id;
-        $benefit->title         = $validated['title'];
-        $benefit->description   = $validated['description'];
-        $benefit->save();
+        $new_batch = new BootcampBatch;
+        $new_batch->course_id   = $course_id;
+        $new_batch->date        = $validated['date'];
+        $new_batch->save();
 
-        $message = 'New benefit (' . $benefit->title . ') has been added to the database.';
+        $message = 'New Batch (' . $new_batch->date . ') has been added to the database.';
 
         return redirect()->route('admin.bootcamp.edit', $course_id)
             ->with('message', $message)
-            ->with('page-option', 'benefit-page');
+            ->with('page-option', 'batch-page');
     }
 
     /**
@@ -99,31 +91,29 @@ class BootcampBenefitController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'title'         => 'required',
-            'description'   => 'required',
+            'date'         => 'required',
         ]);
 
         if ($validator->fails())
-            return redirect()->back()->with(['page-option' => 'benefit-page'])->withErrors($validator);
+            return redirect()->back()->with(['page-option' => 'batch-page'])->withErrors($validator);
 
         $validated = $validator->validate();
 
 
-        $benefit = BootcampBenefit::findOrFail($id);
-        $benefit->title        = $validated['title'];
-        $benefit->description  = $validated['description'];
+        $batch = BootcampBatch::findOrFail($id);
+        $batch->date        = $validated['date'];
         
-        $benefit->save();
+        $batch->save();
 
-        if ($benefit->wasChanged()) {
-            $message = 'Schedule (' . $benefit->title . ') has been updated.';
+        if ($batch->wasChanged()) {
+            $message = 'Batch (' . $batch->date . ') has been updated.';
         } else {
-            $message = 'No changes was made to Schedule (' . $benefit->title . ')';
+            $message = 'No changes was made to Batch (' . $batch->title . ')';
         }
 
-        return redirect()->route('admin.bootcamp.edit', $benefit->course_id)
+        return redirect()->route('admin.bootcamp.edit', $batch->course_id)
             ->with('message', $message)
-            ->with('page-option', 'benefit-page');
+            ->with('page-option', 'batch-page');
     }
 
     /**
@@ -134,13 +124,13 @@ class BootcampBenefitController extends Controller
      */
     public function destroy($id)
     {
-        $benefit = BootcampBenefit::findOrFail($id);
-        $benefit->delete();
+        $batch = BootcampBatch::findOrFail($id);
+        $batch->delete();
 
-        $message = 'benefit (' . $benefit->title . ') has been deleted.';
+        $message = 'Batch (' . $batch->date . ') has been deleted.';
         
-        return redirect()->route('admin.bootcamp.edit', $benefit->course_id)
+        return redirect()->route('admin.bootcamp.edit', $batch->course_id)
             ->with('message', $message)
-            ->with('page-option', 'benefit-page');
+            ->with('page-option', 'batch-page');
     }
 }

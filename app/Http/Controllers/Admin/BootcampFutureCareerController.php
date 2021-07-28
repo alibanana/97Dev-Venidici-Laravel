@@ -41,6 +41,7 @@ class BootcampFutureCareerController extends Controller
             return redirect()->back()
             ->with('message', 'Maksimum Quantity has been reached!')
             ->with('page-option', 'future-career-page');
+            
         $validator = Validator::make($request->all(), [
             'thumbnail'     => 'required|mimes:jpeg,jpg,png|max:5000',
             'title'         => 'required',

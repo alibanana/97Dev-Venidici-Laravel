@@ -74,6 +74,7 @@
             <h6 id="candidate-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'candidate-page')" style="cursor:pointer;">Candidate</h6>
             <h6 id="career-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'future-career-page')" style="cursor:pointer;">Future Careers</h6>
             <h6 id="partner-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'hiring-partner-page')" style="cursor:pointer;">Hiring Partners</h6>
+            <h6 id="batch-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'batch-page')" style="cursor:pointer;">Batch</h6>
         </div>
         
         <!-- Content Row -->
@@ -149,6 +150,29 @@
                             <label for="">Zoom link</label>
                             <input type="text" name="meeting_link" class="form-control form-control-user" value="{{ old('meeting_link', $course->bootcampCourseDetail->meeting_link) }}"
                                     placeholder="e.g. https://meet.google.com/pdq-umxk-fuv"> 
+                            @error('meeting_link')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror               
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Syllabus</label> <br>
+                            <!-- if there is no attachment, change the text below to "no attachment" -->
+                            @if ($course->bootcampCourseDetail->syllabus)
+                                <div style="display:flex;align-items:center">
+                                    <p style="margin-bottom:0px;padding-right:2vw"> <span> <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}" target="_blank">click here</a> </span> to view current attachment</p>
+                                    <div style="padding: 0px 2px">
+                                        <button form="removeAttachmentForm" class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to remove this Syllabus?')">Remove Syllabus</button>
+                                    </div>
+                                </div>
+                            @else
+                                <p>No attachment available.</p>
+                            @endif
+                            <input type="file" name="syllabus" class="" value="{{ old('syllabus', $course->bootcampCourseDetail->syllabus) }}"
+                                    > 
                             @error('meeting_link')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -1173,6 +1197,91 @@
             </div>
         </div>
         <!-- END OF Schedule-->
+
+
+        <!-- START OF BATCH-->
+        <div class="course-content" id="batch-page" style="display:none">
+            <form action="{{route('admin.bootcamp-batch.store', $course->id)}}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Date</label> <br>
+                        <input type="date" accept=".jpg,,jpeg,.png" name="date" class="form-control" required> 
+                        @error('image')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Batch</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach($course->bootcampBatches as $batch)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-batch.update', $batch->id)}}" enctype="multipart/form-data">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="date" name="date" value="{{$batch->date}}" aria-describedby=""> 
+                                                @error('date')
+                                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror               
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                </div>
+                                            </form> 
+                                            <form action="{{route('admin.bootcamp-batch.destroy', $batch->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp batch?')">Delete</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </form>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF BATCH-->
+
+        <form id="removeAttachmentForm" action="{{ route('admin.bootcmap.remove-syllabus', $course->id) }}" method="post">
+            @csrf
+            @method('delete')
+        </form> 
         
     </div>
     <!-- /.container-fluid -->
@@ -1294,6 +1403,8 @@ function duplicateSchedule() {
         <script>document.getElementById('career-page-button').click()</script>
     @elseif (Session::get('page-option') == 'hiring-partner-page')
         <script>document.getElementById('partner-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'batch-page')
+        <script>document.getElementById('batch-page-button').click()</script>
     @endif
 @endif
 @endsection

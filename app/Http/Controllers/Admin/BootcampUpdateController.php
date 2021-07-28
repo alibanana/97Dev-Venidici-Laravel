@@ -62,6 +62,7 @@ class BootcampUpdateController extends Controller
             'subtitle' => 'required',
             'course_category_id' => 'required',
             'meeting_link' => '',
+            'syllabus' => 'mimes:pps,ppt,pptx,xls,xlsm,xlsx,doc,docx,pdf',
             'description' => 'required',
             'date_start' => 'required',
             'date_end' => 'required',
@@ -103,6 +104,14 @@ class BootcampUpdateController extends Controller
         $bootcampCourseDetail->date_start       = $validated['date_start'];
         $bootcampCourseDetail->date_end         = $validated['date_end'];
         $bootcampCourseDetail->trial_date_end   = $validated['trial_date_end'];
+
+        if ($request->has('syllabus')) {
+            if (!is_null($bootcampCourseDetail->syllabus)) unlink($bootcampCourseDetail->syllabus);
+            $bootcampCourseDetail->syllabus = Helper::storeFile($request->file('syllabus'), 'storage/documents/bootcamp/syllabus/');
+            $bootcampCourseDetail->save();
+        }
+
+
         $bootcampCourseDetail->save();
 
         if ($course->wasChanged() || $bootcampCourseDetail->wasChanged()) {
@@ -198,5 +207,7 @@ class BootcampUpdateController extends Controller
 
         return view($view);
     }
+
+    
     
 }
