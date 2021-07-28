@@ -35,6 +35,29 @@ class BootcampController extends Controller
 
     // Shows the Client's Main Bootcamp Page.
     public function index(Request $request) {
+        $course = Course::findOrFail(7);
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        if (Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews'));
+        }
+
+        return view('client/bootcamp/index', compact('course','footer_reviews'));
+
+
+
+
+
+
+    }
+    public function index_old(Request $request) {
         $agent = new Agent();
         if($agent->isPhone()){
             return view('client/mobile/under-construction');

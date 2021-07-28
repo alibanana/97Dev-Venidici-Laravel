@@ -69,13 +69,11 @@ class BootcampUpdateController extends Controller
             'hashtags' => 'required|array|min:1'
         ])->setAttributeNames([
             'course_category_id'    => 'category',
-        ])->validate();
-
+        ]);
         if ($validator->fails())
             return redirect()->back()->with(['page-option' => 'basic-informations'])->withErrors($validator);
         
         $validated = $validator->validate();
-
 
         $course = Course::findOrFail($id);
         $course->course_category_id = $validated['course_category_id'];
@@ -107,7 +105,7 @@ class BootcampUpdateController extends Controller
         $bootcampCourseDetail->trial_date_end   = $validated['trial_date_end'];
         $bootcampCourseDetail->save();
 
-        if ($course->wasChanged()) {
+        if ($course->wasChanged() || $bootcampCourseDetail->wasChanged()) {
             $message = 'Bootcamp (' . $course->title . ') -> Basic Information, has been updated';
         } else {
             $message = 'No changes was made to Bootcamp (' . $course->title . ')';

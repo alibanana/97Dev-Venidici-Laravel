@@ -3,30 +3,72 @@
 
 @section('content')
 
+
+@php
+    $a = $course->bootcampCourseDetail->date_start;
+    $b = strtotime($a);
+    
+    $customformat = date('M d,Y H:i:s', $b);
+@endphp
+
+<script>
+    CountDownTimer('{{$customformat}}', 'countdown');
+    function CountDownTimer(dt,id)
+    {
+        var end = new Date(dt);
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            if (distance < 0) {
+
+                clearInterval(timer);
+                document.getElementById('countdown-card').style.display = "none";
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+            document.getElementById('days').innerHTML = days;
+            document.getElementById('hours').innerHTML = hours ;
+            document.getElementById('minutes').innerHTML = minutes ;
+        }
+        timer = setInterval(showRemaining, 1000);
+    }
+</script>
+
+
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container bootcamp-bg" style="padding-top:11vw;padding-bottom:21vw;">
     <!-- START OF LECT SECTION -->
     <div class="col-xs-12 col-md-6 p-0 wow fadeInLeft">
         <img src="/assets/images/client/Bootcamp_Logo.png" style="width:15vw;margin-top:1vw" class="img-fluid" alt="Bootcamp Logo">
         <div style="margin-top: 2vw;">
-            <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">Growth Hacking Through Facebook Ad</p>
-            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum mauris consequat id. Morbi vestibulum commodo commodo nulla ipsum sit. Hendrerit lacus maecenas placerat vitae dignissim nibh mollis.</p>
+            <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{$course->title}}</p>
+            <p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} - {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}} | Via Zoom</p>
+            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{$course->subtitle}}</p>
         </div>
-        <p class="bigger-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-top:2vw">This bootcamp will start in:</p>
+        <p class="bigger-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-top:2vw">This bootcamp will start in: </p>
         <!-- START OF COUNTDOWN -->
-        <div style="padding:1vw;background-color:#FFFFFF;width:20vw;border-radius:10px">
+        <div style="padding:1vw;background-color:#FFFFFF;width:20vw;border-radius:10px" id="countdown-card">
             <div style="display: flex;justify-content:space-between;align-items:center">
                 <div style="text-align: center;border-right:2px solid #2B6CAA;padding-right:2vw">
                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Days</p>
-                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">08</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="days"></p>
                 </div>
                 <div style="text-align: center;">
                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Hours</p>
-                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">00</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="hours"></p>
                 </div>
                 <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw">
                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Minutes</p>
-                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">00</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="minutes"></p>
                 </div>
             </div>
         </div>
@@ -37,11 +79,11 @@
 
     <!-- START OF RIGHT SECTION -->
     <div class="col-xs-12 col-md-6 p-0 bootcamp-right-heading-bg wow fadeInUp" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <div style="justify-content: center;display:flex;margin-left:10vw">
+        <div style="justify-content: center;display:flex;margin-left:10vw" class="wow bounce" data-wow-delay="1s">
             <!-- START OF BOOTCAMP CARD -->
-            <div style="padding:1vw;background-color:#E2E2E2;width:17vw;border-radius:10px;transform: rotate(8deg);">
-                <img src="/assets/images/client/Dummy_Bootcamp_Thumbnail.png" style="width:100%;height:14vw;object-fit:cover;border-radius:10px;border:1px solid #FFFFFF;margin-bottom:0.5vw" class="img-fluid" alt="Bootcamp Logo">
-                <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Growth Hacking Through Facebook Ad</p>
+            <div  style="padding:1vw;background-color:#E2E2E2;width:17vw;border-radius:10px;transform: rotate(8deg);">
+                <img src="{{ asset($course->thumbnail) }}" style="width:100%;height:14vw;object-fit:cover;border-radius:10px;border:1px solid #FFFFFF;margin-bottom:0.5vw" class="img-fluid" alt="Bootcamp Logo">
+                <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">{{$course->title}}</p>
             </div>
             <!-- END OF BOOTCAMP CARD -->
 
@@ -55,32 +97,28 @@
 <!-- START OF INTRODUCTION SECTION -->
 <div class="row m-0 page-container" style="padding-bottom:5vw">
     <div class="col-md-12 col-xs-12 p-0">
-        <p class="small-heading wow flash" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp (Feature)</p>
+        <p class="small-heading wow flash" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp</p>
         <div style="width:80%">
-            <p class="normal-text" style="font-family: Rubik Bold;color:#626262;white-space:pre-line">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque sit volutpat sed pulvinar facilisis dignissim. Aliquam aliquam urna sit duis gravida. Nunc consectetur laoreet consequat aenean fusce lacinia. Amet, pellentesque nibh quam massa. A ullamcorper tellus sit amet, arcu. </p>
+            <p class="normal-text" style="font-family: Rubik Bold;color:#626262;white-space:pre-line">{{$course->description}}</p>
         </div>
     </div>
-    <div class="col-xs-6 col-md-4 p-0" style="display:flex;justify-content:flex-start">
+    @foreach($course->courseFeatures as $feature)
+    <div class="col-xs-6 col-md-4 p-0" style="display:flex;
+    @if($loop->iteration % 3 == 1)
+    justify-content:flex-start
+    @elseif($loop->iteration % 3 == 2)
+    justify-content:center
+    @elseif($loop->iteration % 3 == 0)
+    justify-content:flex-end
+    @endif
+    ">
         <div class="krest-card" style="margin-top:1.5vw">   
             <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
-            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Customer Experience</p>
-            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</p>
+            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
+            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">{{$feature->feature}}</p>
         </div>
     </div>
-    <div class="col-xs-6 col-md-4 p-0" style="display:flex;justify-content:center">
-        <div class="krest-card" style="margin-top:1.5vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
-            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Customer Experience</p>
-            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</p>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-4 p-0" style="display:flex;justify-content:flex-end">
-        <div class="krest-card" style="margin-top:1.5vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
-            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Customer Experience</p>
-            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</p>
-        </div>
-    </div>
+    @endforeach
 </div>
 <!-- END OF INTRODUCTION SECTION -->
 
@@ -92,100 +130,36 @@
     <div class="col-12" style="padding:1vw 10vw">
         <!-- START OF CONTENT LINKS -->
         <div style="border: 2px solid #2B6CAA;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+            @foreach($course->bootcampDescriptions as $about)
             <!-- START OF ONE LINK -->
-            <div style="border-right: 2px solid #2B6CAA" class="growth-links growth-title growth-title-active" onclick="growthHacking(event, 'growth-1')">
-                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
-            </div>
-            <div style="border-right: 2px solid #2B6CAA;" class="growth-links growth-title" onclick="growthHacking(event, 'growth-2')">
-                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
-            </div>
-            <div style="border-right: 2px solid #2B6CAA;" class="growth-links growth-title" onclick="growthHacking(event, 'growth-3')">
-                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
-            </div>
-            <div style="" class="growth-links growth-title" onclick="growthHacking(event, 'growth-4')">
-                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">Poin penjelasan Growth Hacking</p>
+            <div style="@if(!$loop->last) border-right: 2px solid #2B6CAA @endif" class="growth-links growth-title @if($loop->first) growth-title-active @endif" onclick="growthHacking(event, 'growth-{{$loop->iteration}}')">
+                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">{{$about->title}}</p>
             </div>
             <!-- END OF ONE LINK -->
+            @endforeach
         </div>
         <!-- END OF CONTENT LINK -->
     </div>
+    @foreach($course->bootcampDescriptions as $about)
+    <!-- START OF ONE CONTENT SECTION -->
+    <div class="growth-content"  id="growth-{{$loop->iteration}}" @if(!$loop->first) style="display:none" @endif >
+        <div class="row m-0 "style="padding-top:4vw">
+            <div class="col-md-4 p-0">
+                <img src="{{ asset($about->image) }}" style="width:100%;" class="img-fluid" alt="KREST">
+
+            </div>
+            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+                <div style="padding-left: 4vw;">
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">{{$about->description}}</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END OF ONE CONTENT SECTION -->
+    @endforeach
     
-    <!-- START OF ONE CONTENT SECTION -->
-    <div class="growth-content"  id="growth-1" >
-        <div class="row m-0 "style="padding-top:4vw">
-            <div class="col-md-4 p-0">
-                <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
-
-            </div>
-            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-                <div style="padding-left: 4vw;">
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
-        
-                        One Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- END OF ONE CONTENT SECTION -->
-    <!-- START OF ONE CONTENT SECTION -->
-    <div class="growth-content"  id="growth-2" style="display: none;">
-        <div class="row m-0 "style="padding-top:4vw">
-            <div class="col-md-4 p-0">
-                <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
-
-            </div>
-            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-                <div style="padding-left: 4vw;">
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
-        
-                        Two Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- END OF ONE CONTENT SECTION -->
-    <!-- START OF ONE CONTENT SECTION -->
-    <div class="growth-content"  id="growth-3" style="display: none;">
-        <div class="row m-0 "style="padding-top:4vw">
-            <div class="col-md-4 p-0">
-                <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
-
-            </div>
-            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-                <div style="padding-left: 4vw;">
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
-        
-                        Three Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- END OF ONE CONTENT SECTION -->
-    <!-- START OF ONE CONTENT SECTION -->
-    <div class="growth-content"  id="growth-4" style="display: none;">
-        <div class="row m-0 "style="padding-top:4vw">
-            <div class="col-md-4 p-0">
-                <img src="/assets/images/client/Image_Dummy.png" style="width:100%;" class="img-fluid" alt="KREST">
-
-            </div>
-            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-                <div style="padding-left: 4vw;">
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
-        
-                        Four Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- END OF ONE CONTENT SECTION -->
 
 </div>
 <!-- END OF GROWTH HACKING SECTION -->
@@ -207,57 +181,26 @@
             <div class="col-xs-12 col-md-6 p-0">
                 <div id="schedule-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
                     <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
+                        @foreach($course->bootcampSchedules as $schedule)
                         <!-- START OF ONE ITEM -->
-                        <div class="carousel-item active">
+                        <div class="carousel-item @if($loop->first) active @endif">
                             <div style="display: flex;justify-content: center;">
                                 <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
-                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Week 1</p>
-                                    <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">19 - 26 September 2021</p>
-                                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">Growth Fundamentals</p>
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">{{$schedule->title}}</p>
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">{{date('d M', strtotime($schedule->date_start))}} - {{date('d M Y', strtotime($schedule->date_end))}}</p>
+                                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">{{$schedule->subtitle}}</p>
                                     <ul>
+                                        @foreach($schedule->bootcampScheduleDetails as $detail)
                                         <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">Pirate funneling</p>
+                                            <p class="small-text" style="margin-bottom: 0.3vw;">{{$detail->description}}</p>
                                         </li>
-                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking mindset & skills</p>
-                                        </li>
-                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking vs Digital Marketing and others</p>
-                                        </li>
-                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">A career in growth hacking </p>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <!-- END OF ONE ITEM -->
-                        <!-- START OF ONE ITEM -->
-                        <div class="carousel-item">
-                            <div style="display: flex;justify-content: center;">
-                                
-                                <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
-                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Day 2</p>
-                                    <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">20 September 2021</p>
-                                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">Growth Fundamentals</p>
-                                    <ul>
-                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">Pirate funneling</p>
-                                        </li>
-                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking mindset & skills</p>
-                                        </li>
-                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">Growth hacking vs Digital Marketing and others</p>
-                                        </li>
-                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">A career in growth hacking </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END OF ONE ITEM -->
+                        @endforeach
                     </div>
                     <a class="carousel-control-prev"   data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
                         <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
@@ -350,6 +293,7 @@
         <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">What will you get?</p>
     </div>
     <div class="row m-0" style="padding-top:2vw">
+        @foreach($course->bootcampBenefits as $benefit)
         <div class="col-3" style="display:flex;justify-content:center">
             <div class="our-mission-card" >
                 <div style="text-align:center">
@@ -361,79 +305,17 @@
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Materi yang padat dan jelas</p>
+                        -webkit-box-orient: vertical !important;">{{$benefit->title}}</p>
                     </div>
                     <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;margin-top:1.5vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
+                        -webkit-box-orient: vertical !important;margin-top:1.5vw">{{$benefit->description}}</p>
                 </div>
             </div>
         </div>
-        <div class="col-3" style="display:flex;justify-content:center">
-            <div class="our-mission-card" >
-                <div style="text-align:center">
-                    <div style="text-align:center;margin-top:2vw">
-                        <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
-                    </div>
-                    <div style="height:3vw;margin-top:1vw;">
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Materi yang padat dan jelas</p>
-                    </div>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;margin-top:1.5vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-3" style="display:flex;justify-content:center">
-            <div class="our-mission-card" >
-                <div style="text-align:center">
-                    <div style="text-align:center;margin-top:2vw">
-                        <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
-                    </div>
-                    <div style="height:3vw;margin-top:1vw;">
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Materi yang padat dan jelas</p>
-                    </div>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;margin-top:1.5vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-3" style="display:flex;justify-content:center">
-            <div class="our-mission-card" >
-                <div style="text-align:center">
-                    <div style="text-align:center;margin-top:2vw">
-                        <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
-                    </div>
-                    <div style="height:3vw;margin-top:1vw;">
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 2 !important;
-                        -webkit-box-orient: vertical !important;">Materi yang padat dan jelas</p>
-                    </div>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;margin-top:1.5vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 <!-- END OF WHAT WILL YOU GET SECTION -->
@@ -451,42 +333,23 @@
     <!-- START OF RIGHT SECTION -->
     <div class="col-md-6 col-xs-12">
         <div class="row m-0">
+            @php
+                $delay = 0.0;
+            @endphp
+            @foreach($course->bootcampCandidates as $candidate)
             <!-- START OF ONE CARD -->
-            <div class="col-6 p-0 wow fadeInUp" >
+            <div class="col-6 p-0 wow fadeInUp" data-wow-delay="{{$delay}}s" @if($loop->iteration > 2) style="margin-top: 5vw;" @endif>
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
                     <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">{{$candidate->title}}</p>
+                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">{{$candidate->description}}</p>
                 </div>
             </div>
             <!-- END OF ONE CARD -->
-            <!-- START OF ONE CARD -->
-            <div class="col-6 p-0 wow fadeInUp" data-wow-delay="0.2s">
-                <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
-                    <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-            <!-- END OF ONE CARD -->
-            <!-- START OF ONE CARD -->
-            <div class="col-6 p-0 wow fadeInUp" data-wow-delay="0.4s" style="margin-top: 5vw;">
-                <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
-                    <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-            <!-- END OF ONE CARD -->
-            <!-- START OF ONE CARD -->
-            <div class="col-6 p-0 wow fadeInUp" data-wow-delay="0.6s" style="margin-top: 5vw;">
-                <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
-                    <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-            <!-- END OF ONE CARD -->
+            @php
+                $delay += 0.2;
+            @endphp
+            @endforeach
         </div>
     </div>
     <!-- END OF RIGHT SECTION -->
@@ -538,51 +401,31 @@
     <div class="col-12 p-0">
         <p class="small-heading wow fadeInLeft" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Bisa berkarir jadi apa?</p>
     </div>
+    @foreach($course->bootcampFutureCareers as $career)
     <!-- START OF ONE CARD -->
-    <div class="col-md-4 col-xs-6 p-0" style="display: flex;justify-content: flex-start;">
+    <div class="col-md-4 col-xs-6 p-0" style="display: flex;
+    @if($loop->iteration % 3 == 1)
+    justify-content:flex-start;
+    @elseif($loop->iteration % 3 == 2)
+    justify-content:center;
+    @elseif($loop->iteration % 3 == 0)
+    justify-content:flex-end;
+    @endif
+    ">
         <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:22vw;height:21vw">
             <div style="text-align:center;margin-bottom:1vw">
-                <img src="/assets/images/client/Bootcamp_Dummy_Illustration_1.png" style="width:7vw;" alt="Bootcamp Illustration">
+                <img src="{{asset($career->thumbnail)}}" style="width:7vw;" alt="Bootcamp Illustration">
             </div>
-            <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
+            <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">{{$career->title}}</p>
             <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0p;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla</p>
+                        -webkit-box-orient: vertical !important;">{{$career->description}}</p>
         </div>
     </div>
     <!-- END OF ONE CARD -->
-    <!-- START OF ONE CARD -->
-    <div class="col-md-4 col-xs-6 p-0" style="display: flex;justify-content:center;">
-        <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:22vw;height:21vw">
-            <div style="text-align:center;margin-bottom:1vw">
-                <img src="/assets/images/client/Bootcamp_Dummy_Illustration_1.png" style="width:7vw;" alt="Bootcamp Illustration">
-            </div>
-            <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
-            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0p;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla</p>
-        </div>
-    </div>
-    <!-- END OF ONE CARD -->
-    <!-- START OF ONE CARD -->
-    <div class="col-md-4 col-xs-6 p-0" style="display: flex;justify-content: flex-end;">
-        <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:22vw;height:21vw">
-            <div style="text-align:center;margin-bottom:1vw">
-                <img src="/assets/images/client/Bootcamp_Dummy_Illustration_1.png" style="width:7vw;" alt="Bootcamp Illustration">
-            </div>
-            <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">Product Managers</p>
-            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0p;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla</p>
-        </div>
-    </div>
-    <!-- END OF ONE CARD -->
+    @endforeach
 
 </div>
 <!-- END OF BISA BERKARIR JADI APA SECTION -->
@@ -592,27 +435,35 @@
     <div class="col-12 p-0">
         <div id="instructors-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
+                @foreach($course->teachers as $teacher)
                 <!-- START OF ONE ITEM -->
-                <div class="carousel-item active">
+                <div class="carousel-item @if($loop->first) active @endif">
                     <div class="row m-0"> 
                         <!-- START OF LEFT SECTION -->
                         <div class="col-5">
-                            <img src="/assets/images/client/Bootcamp_Instructor_1.png" style="min-width:18vw;height:18vw;border-radius:10px" alt="Bootcamp Instructor">
+                            <img src="{{asset($teacher->image)}}" style="min-width:18vw;height:18vw;border-radius:10px" alt="Bootcamp Instructor">
                         </div>
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
                         <div class="col-7" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
                             <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Meet Our <span style="color:#67BBA3"> Instructor/s</span></p>
-                            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​</p>
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left">Welby Nazhari,Growth Marketer​</p>
-                            <img src="/assets/images/client/Instructor_Company_Logo.png" style="width:8vw;border-radius:10px" alt="Bootcamp Instructor Company">
-
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left">{{$teacher->name}}
+                            @if($teacher->occupancy != null)
+                            , {{$teacher->occupancy}}​
+                            @endif
+                            </p>
+                            @if($teacher->company_logo != null)
+                            <img src="{{asset($teacher->company_logo)}}" style="width:8vw;border-radius:10px" alt="Bootcamp Instructor Company">
+                            @endif
                         </div>
                         <!-- END OF RIGHT SECTION -->
                     </div>
                 </div>
                 <!-- END OF ONE ITEM -->
+                @endforeach
             </div>
+            @if(count($course->teachers) > 1)
             <a class="carousel-control-prev"   data-bs-target="#instructors-carousel" style="width:2vw" role="button"data-bs-slide="prev">
                 <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
@@ -621,6 +472,7 @@
                 <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>
+            @endif
         </div>      
 
     </div>
@@ -639,13 +491,15 @@
     <!-- START OF RIGHT SECTION -->
     <div class="col-md-6 col-xs-6" style="padding-left: 5vw;">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap: wrap;">
-            <img class="wow fadeInUp" data-wow-delay="0.2s" src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img class="wow fadeInUp" data-wow-delay="0.4s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img class="wow fadeInUp" data-wow-delay="0.6s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img class="wow fadeInUp" data-wow-delay="0.8s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img class="wow fadeInUp" data-wow-delay="1s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-            <img class="wow fadeInUp" data-wow-delay="1.2s"src="/assets/images/client/Bootcamp_Hiring_Partner_1.png" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
-
+            @php
+                $delay = 0.2;
+            @endphp
+            @foreach($course->bootcampHiringPartners as $partner)
+            <img class="wow fadeInUp" data-wow-delay="{{$delay}}s" src="{{asset($partner->image)}}" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
+            @php
+                $delay += 0.2;
+            @endphp
+            @endforeach
         </div>
     </div>
     <!-- END OF RIGHT SECTION -->
@@ -662,7 +516,7 @@
         <div  style="background-color: #2B6CAA;padding:2vw;border-radius:10px 0px 0px 10px;border:2px solid #2B6CAA;display: flex;flex-direction: column;justify-content: space-between;align-items:flex-start;height:25vw">
             <div>
                 <p class="bigger-text" style="font-family: Poppins Medium;color:#FFFFFF;">Full registration to Bootcamp</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#67BBA3;">Rp 300.000 / person</p>
+                <p class="normal-text" style="font-family: Poppins Medium;color:#67BBA3;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }} / person</p>
                 <ul>
                     <li style="color:#FFFFFF;font-family: Rubik Regular;">
                         <p class="normal-text" style="margin-bottom: 0.3vw;">Full curriculum dan assessment</p>
@@ -692,7 +546,7 @@
         <div style="background-color: #FFFFFF;padding:2vw;border-radius:0px 10px 10px 0px;border:2px solid #2B6CAA;display: flex;flex-direction: column;justify-content: space-between;align-items:flex-start;height:25vw">
             <div>
                 <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Free Trial to Bootcamp</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Rp 300.000 / person</p>
+                <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
                 <ul>
                     <li style="color:#3B3C43;font-family: Rubik Regular;">
                         <p class="normal-text" style="margin-bottom: 0.3vw;">Full curriculum dan assessment</p>

@@ -2496,10 +2496,16 @@ html, body {
     text-align:center;
     cursor:pointer;
     transition: 0.2s ease-in-out;
-
+    width:20vw
 }
 .growth-title p{
-    color:#3B3C43
+    color:#3B3C43;
+
+    display: -webkit-box;
+    overflow : hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
 }
 .growth-title:hover{
     background-color:#2B6CAA

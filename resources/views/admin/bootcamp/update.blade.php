@@ -206,7 +206,10 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Date Start</label>
-                            <input type="date" name="date_start" class="form-control" value="{{ old('event_date', $course->bootcampCourseDetail->date_start) }}">
+                            @php
+                            $date_start = explode(" ", $course->bootcampCourseDetail->date_start);
+                            @endphp
+                            <input type="datetime-local" name="date_start" class="form-control" value="{{ old('date_start', $date_start[0].'T'.$date_start[1]) }}">
                             @error('date_start')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -217,7 +220,10 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Date End</label>
-                            <input type="date" name="date_end" class="form-control" value="{{ old('event_date', $course->bootcampCourseDetail->date_end) }}" >
+                            @php
+                            $date_end = explode(" ", $course->bootcampCourseDetail->date_end);
+                            @endphp
+                            <input type="datetime-local" name="date_end" class="form-control" value="{{ old('date_end', $date_end[0].'T'.$date_end[1]) }}" >
                             @error('date_end')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -228,7 +234,10 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Free Trial Date End</label>
-                            <input type="date" name="trial_date_end" class="form-control" value="{{ old('event_date', $course->bootcampCourseDetail->trial_date_end) }}">
+                            @php
+                            $trial_date_end = explode(" ", $course->bootcampCourseDetail->trial_date_end);
+                            @endphp
+                            <input type="datetime-local" name="trial_date_end" class="form-control" value="{{ old('trial_date_end', $trial_date_end[0].'T'.$trial_date_end[1]) }}">
                             @error('trial_date_end')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
