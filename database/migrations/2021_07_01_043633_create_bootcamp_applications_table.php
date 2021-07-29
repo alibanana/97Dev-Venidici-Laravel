@@ -17,7 +17,7 @@ class CreateBootcampApplicationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('invoice_id')->nullable();
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
@@ -35,14 +35,14 @@ class CreateBootcampApplicationsTable extends Migration
             $table->string('last_degree');
             $table->string('institution');
             $table->string('batch');
-            $table->text('sumber_tahu_program');
+            $table->text('sumber_tahu_program')->nullable();
             $table->string('mencari_kerja');
             $table->text('social_media');
             $table->string('konsiderasi_lanjut');
             $table->text('kenapa_memilih')->nullable();
             $table->text('expectation');
-            $table->string('payment_type');
-            $table->string('bank_account_number');
+            $table->string('payment_type')->nullable();
+            $table->string('bank_account_number')->nullable();
             $table->timestamps();
         });
     }

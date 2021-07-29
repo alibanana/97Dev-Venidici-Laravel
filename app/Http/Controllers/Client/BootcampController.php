@@ -17,6 +17,9 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\BootcampApplication;
 use App\Models\Notification;
+use App\Models\Province;
+use App\Models\City;
+use Illuminate\Support\Facades\Validator;
 
 class BootcampController extends Controller
 {
@@ -36,6 +39,16 @@ class BootcampController extends Controller
     // Shows the Client's Main Bootcamp Page.
     public function index(Request $request) {
         $course = Course::findOrFail(7);
+        $provinces = Province::all();
+        if ($request->has('province')) {
+            $province_id = $request['province'];
+            $cities = City::where('province_id', $province_id)->get();
+        } else{
+            if(auth()->user()->userDetail->city_id != null)
+                $cities = City::get();
+            else
+                $cities = null;
+        }
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
         if (Auth::check()) {
@@ -46,10 +59,10 @@ class BootcampController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews'));
+            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities'));
         }
 
-        return view('client/bootcamp/index', compact('course','footer_reviews'));
+        return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities'));
 
 
 
@@ -239,44 +252,48 @@ class BootcampController extends Controller
         return redirect('/transaction-detail/'.$invoiceNumberResults['data'].'#payment-success');
     }
 
-    public function store(Request $request, $course_id)
+    public function storeFullRegistration(Request $request, $course_id)
     {
-        $validated = $request->validate([
-            'course_id'             => 'required',
-            'user_id'               => 'required',
-            'invoice_id'            => 'required',
+        $validator = Validator::make($request->all(), [
             'name'                  => 'required',
             'email'                 => 'required',
             'birth_place'           => 'required',
             'birth_date'            => 'required',
             'gender'                => 'required',
-            'phone_no'              => 'required',
+            'telephone'             => 'required',
             'province_id'           => 'required',
             'city_id'               => 'required',
             'address'               => 'required',
             'last_degree'           => 'required',
             'institution'           => 'required',
             'batch'                 => 'required',
-            'sumber_tahu_program'   => 'required',
+            'sumber_tahu_program'   => '',
             'mencari_kerja'         => 'required',
             'social_media'          => 'required',
             'konsiderasi_lanjut'    => 'required',
             'kenapa_memilih'        => 'required',
             'expectation'           => 'required',
-            'payment_type'          => 'required',
-            'bank_account_number'   => 'required',
         ]);
+
+        if ($validator->fails())
+            return redirect('/bootcamp#full-registration')->withErrors($validator);
+        
+        $validated = $validator->validate();
+        
 
         $bootcamp                       = new BootcampApplication;
         $bootcamp->course_id            = $course_id;
-        $bootcamp->user_id              = $validated['user_id'];
-        $bootcamp->invoice_id           = $validated['invoice_id'];
+        if(Auth::check())
+            $bootcamp->user_id          = Auth::user()->id;
+        else
+            $bootcamp->user_id          = 1;
+            
         $bootcamp->name                 = $validated['name'];
         $bootcamp->email                = $validated['email'];
         $bootcamp->birth_place          = $validated['birth_place'];
         $bootcamp->birth_date           = $validated['birth_date'];
         $bootcamp->gender               = $validated['gender'];
-        $bootcamp->phone_no             = $validated['phone_no'];
+        $bootcamp->phone_no             = $validated['telephone'];
         $bootcamp->province_id          = $validated['province_id'];
         $bootcamp->city_id              = $validated['city_id'];
         $bootcamp->address              = $validated['address'];
@@ -289,10 +306,8 @@ class BootcampController extends Controller
         $bootcamp->konsiderasi_lanjut   = $validated['konsiderasi_lanjut'];
         $bootcamp->kenapa_memilih       = $validated['kenapa_memilih'];
         $bootcamp->expectation          = $validated['expectation'];
-        $bootcamp->payment_type         = $validated['payment_type'];
-        $bootcamp->bank_account_number  = $validated['bank_account_number'];
         $bootcamp->save();
 
-        return redirect()->back();
+        return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message',"Terimakasih telah mendaftar, we'll get back to you as soon as possible!");
     }
 }

@@ -161,8 +161,9 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree')->middleware(['auth', 'verified']);
     // BootcampController
     Route::get('/bootcamp', [BootcampController::class, 'index'])->name('bootcamp.index');
-    Route::post('/bootcamp/{id}', [BootcampController::class, 'buyFree'])->name('bootcamp.buyFree')->middleware(['auth', 'verified']);
     Route::get('/bootcamp/{id}', [BootcampController::class, 'show'])->name('bootcamp.show');
+    Route::post('/bootcamp/{id}', [BootcampController::class, 'buyFree'])->name('bootcamp.buyFree')->middleware(['auth', 'verified']);
+    Route::post('/bootcamp/{id}/full-registration', [BootcampController::class, 'storeFullRegistration'])->name('bootcamp.storeFullRegistration');
 
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware(['auth', 'verified']);

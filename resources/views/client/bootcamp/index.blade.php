@@ -11,7 +11,7 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{route('bootcamp.storeFullRegistration', $course->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
@@ -21,6 +21,8 @@
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
                             {{ session()->get('free_trial_bootcamp_message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
                             </div>
                         </div>
                         @endif
@@ -30,7 +32,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" >
+                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" 
+                            @if(Auth::check())
+                                value="{{Auth::user()->name}}"
+                            @endif
+                            >
                         </div>  
                         @error('name')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -40,7 +46,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                            <input type="date" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" >
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" >
                         </div>  
                         @error('birth_place')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -52,9 +58,20 @@
                             <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
                             <select name="gender"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Gender</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value="Male"
+                                @if(Auth::check())
+                                    @if(Auth::user()->userDetail->gender == 'Male')
+                                    selected
+                                    @endif
+                                @endif
+                                >Male</option>
+                                <option value="Female"
+                                @if(Auth::check())
+                                    @if(Auth::user()->userDetail->gender == 'Female')
+                                    selected
+                                    @endif
+                                @endif
+                                >Female</option>
                             </select>                              
                         </div> 
                         @error('gender')
@@ -65,11 +82,22 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <select name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option disabled selected>Pilih Provinsi</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                                <option value="Lainnya">Lainnya</option>
+                            <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#free-trial'}" name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                @if(Auth::user()->userDetail->province_id == null)
+                                    <option value="" disabled selected>Pilih Provinsi</option>
+                                @endif
+                                @foreach($provinces as $province)
+                                    <option value="{{ $province->id }}" 
+                                    @if(Auth::user()->userDetail->province_id != null && !Request::get('province'))
+                                        @if(Auth::user()->userDetail->province_id == $province->id)
+                                        selected
+                                        @endif
+                                    @elseif(Request::get('province') == $province->id) 
+                                    selected 
+                                    @endif
+                                    
+                                    >{{$province->name }}</option>                                    
+                                @endforeach
                             </select>                              
                         </div>  
                         @error('province_id')
@@ -84,7 +112,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                            <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email" >
+                            <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email"
+                            @if(Auth::check())
+                                value="{{Auth::user()->email}}"
+                            @endif
+                            >
                         </div>  
                         @error('email')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -94,7 +126,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="dd.mm.yyyy" >
+                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="yyyy.mm.dd"
+                            @if(Auth::check())
+                                value="{{Auth::user()->userDetail->birthdate}}"
+                            @endif
+                            >
                         </div>  
                         @error('birth_date')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -104,7 +140,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon" >
+                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
+                            @if(Auth::check())
+                                value="{{Auth::user()->userDetail->telephone}}"
+                            @endif
+                            >
                         </div>  
                         @error('telephone')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -115,10 +155,24 @@
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
                             <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option disabled selected>Pilih Kota</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                                <option value="Lainnya">Lainnya</option>
+                                @if($cities == null && Auth::user()->userDetail->city_id == null)
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                @else
+                                    <option disabled selected>Pilih Kota</option>
+
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->city_id }}" 
+                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
+                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
+                                                    selected
+                                                @endif
+                                            @elseif (Request::get('city') == $city->city_id) 
+                                                selected 
+                                            @endif
+                                            >{{$city->name }}
+                                        </option>
+                                    @endforeach          
+                                @endif
                             </select>                              
                         </div>  
                         @error('city_id')
@@ -134,7 +188,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" ></textarea>
+                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" >@if(Auth::check()){{Auth::user()->userDetail->address}}@endif</textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -314,16 +368,17 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route('bootcamp.storeFullRegistration', $course->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                         <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Full Bootcamp Registration</p>
-                        @if (session()->has('free_trial_bootcamp_message'))
+                        @if (session()->has('full_registration_bootcamp_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('free_trial_bootcamp_message') }}
+                            {{ session()->get('full_registration_bootcamp_message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
                         @endif
@@ -333,7 +388,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" >
+                            <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" 
+                            @if(Auth::check())
+                                value="{{Auth::user()->name}}"
+                            @endif
+                            >
                         </div>  
                         @error('name')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -343,7 +402,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                            <input type="date" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" >
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" >
                         </div>  
                         @error('birth_place')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -355,9 +414,20 @@
                             <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
                             <select name="gender"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Gender</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value="Male"
+                                @if(Auth::check())
+                                    @if(Auth::user()->userDetail->gender == 'Male')
+                                    selected
+                                    @endif
+                                @endif
+                                >Male</option>
+                                <option value="Female"
+                                @if(Auth::check())
+                                    @if(Auth::user()->userDetail->gender == 'Female')
+                                    selected
+                                    @endif
+                                @endif
+                                >Female</option>
                             </select>                              
                         </div> 
                         @error('gender')
@@ -368,11 +438,22 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <select name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option disabled selected>Pilih Provinsi</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                                <option value="Lainnya">Lainnya</option>
+                            <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}" name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                @if(Auth::user()->userDetail->province_id == null)
+                                    <option value="" disabled selected>Pilih Provinsi</option>
+                                @endif
+                                @foreach($provinces as $province)
+                                    <option value="{{ $province->id }}" 
+                                    @if(Auth::user()->userDetail->province_id != null && !Request::get('province'))
+                                        @if(Auth::user()->userDetail->province_id == $province->id)
+                                        selected
+                                        @endif
+                                    @elseif(Request::get('province') == $province->id) 
+                                    selected 
+                                    @endif
+                                    
+                                    >{{$province->name }}</option>                                    
+                                @endforeach
                             </select>                              
                         </div>  
                         @error('province_id')
@@ -387,7 +468,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                            <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email" >
+                            <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email"
+                            @if(Auth::check())
+                                value="{{Auth::user()->email}}"
+                            @endif
+                            >
                         </div>  
                         @error('email')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -397,7 +482,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="dd.mm.yyyy" >
+                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="yyyy.mm.dd"
+                            @if(Auth::check())
+                                value="{{Auth::user()->userDetail->birthdate}}"
+                            @endif
+                            >
                         </div>  
                         @error('birth_date')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -407,7 +496,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon" >
+                            <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
+                            @if(Auth::check())
+                                value="{{Auth::user()->userDetail->telephone}}"
+                            @endif
+                            >
                         </div>  
                         @error('telephone')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -418,10 +511,24 @@
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
                             <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option disabled selected>Pilih Kota</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                                <option value="Lainnya">Lainnya</option>
+                                @if($cities == null && Auth::user()->userDetail->city_id == null)
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                @else
+                                    <option disabled selected>Pilih Kota</option>
+
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->city_id }}" 
+                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
+                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
+                                                    selected
+                                                @endif
+                                            @elseif (Request::get('city') == $city->city_id) 
+                                                selected 
+                                            @endif
+                                            >{{$city->name }}
+                                        </option>
+                                    @endforeach          
+                                @endif
                             </select>                              
                         </div>  
                         @error('city_id')
@@ -437,7 +544,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" ></textarea>
+                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" >@if(Auth::check()){{Auth::user()->userDetail->address}}@endif</textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -571,7 +678,7 @@
                     </div>
                     <!-- END OF EXPECTATION -->
 
-                    <!-- START OF LEFT SECTION -->
+                    <!-- START OF LEFT SECTION
                     <div class="col-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih Metode Pembayaran</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
@@ -590,8 +697,8 @@
                         @enderror
                     </div>
 
-                    <!-- END OF LEFT SECTION -->
-                    <!-- START OF RIGHT SECTION -->
+                    <!-- END OF LEFT SECTION
+                    <!-- START OF RIGHT SECTION
 
                     <div class="col-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">No. Rek Untuk Guarantee Return</p>
@@ -605,7 +712,7 @@
                             </span>
                         @enderror
                     </div>
-                    <!-- END OF RIGHT SECTION -->
+                     END OF RIGHT SECTION -->
                     
                     <div class="col-12" style="text-align:center;padding-top:3vw">
                         <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
@@ -669,7 +776,7 @@
 
 
 <!-- START OF TOP SECTION -->
-<div class="row m-0 page-container bootcamp-bg" style="padding-top:11vw;padding-bottom:21vw;">
+<div class="row m-0 page-container bootcamp-bg" style="padding-top:11vw;padding-bottom:17vw;">
     <!-- START OF LECT SECTION -->
     <div class="col-xs-12 col-md-6 p-0 wow fadeInLeft">
         <img src="/assets/images/client/Bootcamp_Logo.png" style="width:15vw;margin-top:1vw" class="img-fluid" alt="Bootcamp Logo">
@@ -702,11 +809,11 @@
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
-    <div class="col-xs-12 col-md-6 p-0 bootcamp-right-heading-bg wow fadeInUp" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-xs-12 col-md-6 bootcamp-right-heading-bg wow fadeInUp" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center;padding:10vw 0vw">
         <div style="justify-content: center;display:flex;margin-left:10vw" class="wow bounce" data-wow-delay="1s">
             <!-- START OF BOOTCAMP CARD -->
-            <div  style="padding:1vw;background-color:#E2E2E2;width:17vw;border-radius:10px;transform: rotate(8deg);">
-                <img src="{{ asset($course->thumbnail) }}" style="width:100%;height:14vw;object-fit:cover;border-radius:10px;border:1px solid #FFFFFF;margin-bottom:0.5vw" class="img-fluid" alt="Bootcamp Logo">
+            <div  style="padding:1vw;background-color:#E2E2E2;width:20vw;border-radius:10px;transform: rotate(8deg);margin-right:5.5vw">
+                <img src="{{ asset($course->thumbnail) }}" style="width:100%;height:18vw;object-fit:cover;border-radius:10px;border:1px solid #FFFFFF;margin-bottom:0.5vw" class="img-fluid" alt="Bootcamp Logo">
                 <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">{{$course->title}}</p>
             </div>
             <!-- END OF BOOTCAMP CARD -->
@@ -736,10 +843,14 @@
     justify-content:flex-end
     @endif
     ">
-        <div class="krest-card" style="margin-top:1.5vw">   
+        <div class="krest-card" style="margin-top:1.5vw;height:22vw">   
             <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
-            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">{{$feature->feature}}</p>
+            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;display: -webkit-box;
+                        overflow : hidden !important;
+                        text-overflow: ellipsis !important;
+                        -webkit-line-clamp: 6 !important;
+                        -webkit-box-orient: vertical !important;">{{$feature->feature}}</p>
         </div>
     </div>
     @endforeach
@@ -1065,7 +1176,7 @@
                     <div class="row m-0"> 
                         <!-- START OF LEFT SECTION -->
                         <div class="col-5">
-                            <img src="{{asset($teacher->image)}}" style="min-width:18vw;height:18vw;border-radius:10px" alt="Bootcamp Instructor">
+                            <img src="{{asset($teacher->image)}}" style="min-width:18vw;height:18vw;border-radius:10px;object-fit:cover" alt="Bootcamp Instructor">
                         </div>
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
