@@ -43,8 +43,8 @@ class CreateBootcampApplicationsTable extends Migration
             $table->text('expectation');
             $table->string('payment_type')->nullable();
             $table->string('bank_account_number')->nullable();
-            $table->string('is_trial')->nullable();
-            $table->string('is_full_registration')->nullable();
+            $table->boolean('is_trial')->nullable();
+            $table->boolean('is_full_registration')->nullable();
             $table->enum('status', ['pending', 'success', 'refunded', 'failed'])->default('pending');
 
             $table->timestamps();
