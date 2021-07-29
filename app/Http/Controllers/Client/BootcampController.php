@@ -40,17 +40,12 @@ class BootcampController extends Controller
     public function index(Request $request) {
         $course = Course::findOrFail(7);
         $provinces = Province::all();
-        if ($request->has('province')) {
-            $province_id = $request['province'];
-            $cities = City::where('province_id', $province_id)->get();
-        } else{
-            if(auth()->user()->userDetail->city_id != null)
-                $cities = City::get();
-            else
-                $cities = null;
-        }
+        $cities = City::all();
 
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        $tomorrow = Carbon::now()->addDays(1);
+        $tomorrow->setTimezone('Asia/Jakarta');
         if (Auth::check()) {
             $this->resetNavbarData();
 
@@ -59,10 +54,11 @@ class BootcampController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities'));
+ 
+            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities','tomorrow'));
         }
 
-        return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities'));
+        return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities','tomorrow'));
 
 
 
@@ -276,18 +272,14 @@ class BootcampController extends Controller
         ]);
 
         if ($validator->fails())
-            return redirect('/bootcamp#full-registration')->withErrors($validator);
+            return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
         
         $validated = $validator->validate();
         
 
         $bootcamp                       = new BootcampApplication;
         $bootcamp->course_id            = $course_id;
-        if(Auth::check())
-            $bootcamp->user_id          = Auth::user()->id;
-        else
-            $bootcamp->user_id          = 1;
-            
+        $bootcamp->user_id              = Auth::user()->id;
         $bootcamp->name                 = $validated['name'];
         $bootcamp->email                = $validated['email'];
         $bootcamp->birth_place          = $validated['birth_place'];
@@ -306,7 +298,23 @@ class BootcampController extends Controller
         $bootcamp->konsiderasi_lanjut   = $validated['konsiderasi_lanjut'];
         $bootcamp->kenapa_memilih       = $validated['kenapa_memilih'];
         $bootcamp->expectation          = $validated['expectation'];
+        $bootcamp->is_full_registration = 1;
+        $bootcamp->status               = "pending";
         $bootcamp->save();
+
+        // create notification
+        $notification = Notification::create([
+            'user_id' => auth()->user()->id,
+            'isInformation' => 0,
+            'title' => 'Registrasi berhasil!',
+            'description' => 'Hi, '.auth()->user()->name.'.Terimakasih atas registrasi bootcampnya. Klik disini untuk melihat status',
+            'link' => '/dashboard'
+        ]);
+
+        // Check if notification creation failed.
+        if (!$notification->exists) {
+            abort(500);
+        }
 
         return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message',"Terimakasih telah mendaftar, we'll get back to you as soon as possible!");
     }

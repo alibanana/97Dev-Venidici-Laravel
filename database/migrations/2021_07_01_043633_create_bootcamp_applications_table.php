@@ -41,7 +41,7 @@ class CreateBootcampApplicationsTable extends Migration
             $table->string('konsiderasi_lanjut');
             $table->text('kenapa_memilih')->nullable();
             $table->text('expectation');
-            $table->string('payment_type')->nullable();
+            $table->string('bankShortCode')->nullable();
             $table->string('bank_account_number')->nullable();
             $table->boolean('is_trial')->nullable();
             $table->boolean('is_full_registration')->nullable();

@@ -382,7 +382,7 @@
                 @else
                 <a  href="{{$notif->link}}" style="text-decoration:none">
                 @endif
-                  <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
+                <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                         <div class="notification-left-blue-border">
                           <i class="fas fa-shopping-cart bigger-text" style="color:#2B6CAA"></i>
@@ -390,13 +390,13 @@
                         </div>
                     </div>
                     <div class="notification-right-blue-border" @if(!$hasSeen) style="background: rgba(43, 108, 170, 0.1) @endif">
-                        <div style="padding:0vw 1vw">
+                        <div style="padding:0.6vw 1vw">
                             
                           <p class="small-text" id="notification-title" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
                           <?php
                               $date_time = explode(' ', $notif->updated_at->diffForHumans());
                           ?>
-                          <p class="very-small-text"  style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
+                          <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
                           <p class="very-small-text" id="notification-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;

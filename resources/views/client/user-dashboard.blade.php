@@ -772,6 +772,7 @@
             </div>
         @else
             @foreach($liveWorkshopPaginationData['data'] as $course)
+                @if($course->course_type_id != 3)
                 <div class="col-12 p-0">
                     <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
                         <div class="container-image-card">
@@ -804,7 +805,47 @@
                             </div>
                         </div> 
                     </div>
-                </div>
+                </div>  
+                
+                @else
+                <!-- START OF BOOTCAMP CARD -->
+                <div class="col-12 p-0">
+                    <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
+                        <div class="container-image-card">
+                            <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                            <div class="top-left card-tag small-text" >Bootcamp</div>
+                        </div>           
+                        <div style="display:flex;justify-content:space-between">
+                            <div class="right-section" style="width:37vw">
+                                <div>
+                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                    @foreach($course->teachers as $teacher)
+                                        <span style="font-family:Rubik Bold">
+                                            @if($loop->last && count($course->teachers) != 1)
+                                            dan
+                                            @elseif(!$loop->first)
+                                            ,
+                                            @endif
+                                            {{$teacher->name}}
+                                        </span>
+                                    @endforeach
+                                    </p>   
+                                    <!-- <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p> -->
+                                    <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} -  {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}}</p>
+                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Applicant Status: <span style="color:#2B6CAA;font-family:Rubik Medium">Active</span></p>   
+
+                                </div>
+                            </div>
+                            <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                <a href="/bootcamp" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">Upgrade</a>
+                                <a href="{{$course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
+                            </div>
+                        </div> 
+                    </div>
+                </div>  
+                <!-- END  OF BOOTCAMP CARD -->
+                @endif
             @endforeach
             @if ($liveWorkshopPaginationData['total_page_amount'] > 1)
                 <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">

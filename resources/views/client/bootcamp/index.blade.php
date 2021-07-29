@@ -4,37 +4,38 @@
 @section('content')
 
 
-<!-- START OF POPUP FREE TRIAL-->
+<!-- START OF POP UP FREE TRIAL REGISTRATION-->
 <div id="free-trial" class="overlay" style="overflow:scroll">
     <div class="popup">
         <a class="close" href="#closed" >&times;</a>
     
         <div class="content" style="padding:2vw">
             
-        <form action="{{route('bootcamp.storeFullRegistration', $course->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('customer.cart.storeOrder')}}" method="POST" enctype="multipart/form-data">
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                         <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Free Trial Registration</p>
-                        @if (session()->has('free_trial_bootcamp_message'))
+                        @if (session()->has('full_registration_bootcamp_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('free_trial_bootcamp_message') }}
+                            {{ session()->get('full_registration_bootcamp_message') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
                             </div>
                         </div>
                         @endif
                     </div>
                     <!-- START OF LEFT SECTION -->
-                    <div class="col-6" style="">
+                    <div class="col-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
                             <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" 
                             @if(Auth::check())
-                                value="{{Auth::user()->name}}"
+                                value="{{ old('name', Auth::user()->name) }}"
+                            @else
+                                value="{{ old('name') }}"
                             @endif
                             >
                         </div>  
@@ -46,7 +47,9 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" >
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" 
+                            value="{{ old('birth_place')}}"
+                            >
                         </div>  
                         @error('birth_place')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -60,16 +63,16 @@
                                 <option disabled selected>Pilih Gender</option>
                                 <option value="Male"
                                 @if(Auth::check())
-                                    @if(Auth::user()->userDetail->gender == 'Male')
-                                    selected
-                                    @endif
+                                    @if(old('gender', Auth::user()->userDetail->gender) == 'Male') selected @endif
+                                @else
+                                    @if(old('gender') == 'Male') selected @endif
                                 @endif
                                 >Male</option>
                                 <option value="Female"
                                 @if(Auth::check())
-                                    @if(Auth::user()->userDetail->gender == 'Female')
-                                    selected
-                                    @endif
+                                    @if(old('gender', Auth::user()->userDetail->gender) == 'Female') selected @endif
+                                @else
+                                    @if(old('gender') == 'Female') selected @endif
                                 @endif
                                 >Female</option>
                             </select>                              
@@ -82,22 +85,24 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#free-trial'}" name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}" name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;"> -->
+                            <select  name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                @if(!Auth::check())
+                                <option value="" disabled selected>Pilih Provinsi</option>
+                                @else
                                 @if(Auth::user()->userDetail->province_id == null)
                                     <option value="" disabled selected>Pilih Provinsi</option>
                                 @endif
                                 @foreach($provinces as $province)
                                     <option value="{{ $province->id }}" 
-                                    @if(Auth::user()->userDetail->province_id != null && !Request::get('province'))
-                                        @if(Auth::user()->userDetail->province_id == $province->id)
+                                        @if(old('province_id',Auth::user()->userDetail->province_id) == $province->id)
+
                                         selected
                                         @endif
-                                    @elseif(Request::get('province') == $province->id) 
-                                    selected 
-                                    @endif
                                     
                                     >{{$province->name }}</option>                                    
                                 @endforeach
+                                @endif
                             </select>                              
                         </div>  
                         @error('province_id')
@@ -108,13 +113,15 @@
                     </div> 
                     <!-- END OF LEFT SECTION --> 
                     <!-- RIGHT SECTION -->
-                    <div class="col-6" style="">
+                    <div class="col-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
                             <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email"
                             @if(Auth::check())
-                                value="{{Auth::user()->email}}"
+                                value="{{old('email', Auth::user()->email)}}"
+                            @else
+                                value="{{old('email')}}"
                             @endif
                             >
                         </div>  
@@ -128,7 +135,9 @@
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
                             <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
-                                value="{{Auth::user()->userDetail->birthdate}}"
+                                value="{{old('birth_date', Auth::user()->userDetail->birthdate)}}"
+                            @else
+                                value="{{old('birth_date')}}"
                             @endif
                             >
                         </div>  
@@ -142,7 +151,9 @@
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
                             <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
                             @if(Auth::check())
-                                value="{{Auth::user()->userDetail->telephone}}"
+                                value="{{old('telephone', Auth::user()->userDetail->telephone)}}"
+                            @else
+                                value="{{old('telephone')}}"
                             @endif
                             >
                         </div>  
@@ -155,6 +166,9 @@
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
                             <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                @if(!Auth::check())
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                @else
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
                                 @else
@@ -162,16 +176,14 @@
 
                                     @foreach($cities as $city)
                                         <option value="{{ $city->city_id }}" 
-                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
-                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
-                                                    selected
-                                                @endif
-                                            @elseif (Request::get('city') == $city->city_id) 
-                                                selected 
-                                            @endif
+                                        @if(old('city_id',Auth::user()->userDetail->city_id) == $province->id)
+
+                                            selected
+                                        @endif
                                             >{{$city->name }}
                                         </option>
                                     @endforeach          
+                                @endif
                                 @endif
                             </select>                              
                         </div>  
@@ -188,7 +200,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" >@if(Auth::check()){{Auth::user()->userDetail->address}}@endif</textarea>
+                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()) {{old('address', Auth::user()->userDetail->address)}} @else {{old('address')}} @endif </textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -205,10 +217,10 @@
                             <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
                             <select name="last_degree"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Pendidikan</option>
-                                <option value="SMP">SMP</option>
-                                <option value="SMA">SMA</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
+                                <option value="SMP" @if(old('last_degree') == 'SMP') selected @endif>SMP</option>
+                                <option value="SMA" @if(old('last_degree') == 'SMA') selected @endif>SMA</option>
+                                <option value="D3" @if(old('last_degree') == 'D3') selected @endif>D3</option>
+                                <option value="S1" @if(old('last_degree') == 'S1') selected @endif>S1</option>
                             </select>                              
                         </div>  
                         @error('last_degree')
@@ -222,7 +234,7 @@
                             <select name="batch"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Batch</option>
                                 @foreach($course->bootcampBatches as $batch)
-                                <option value="{{$batch->date}})">Batch 1 ({{ date('d M Y', strtotime($batch->date))}})</option>
+                                <option value="{{$batch->date}}" @if(old('batch') == $batch->date) selected @endif>Batch 1 ({{ date('d M Y', strtotime($batch->date))}})</option>
                                 @endforeach
                             </select>                              
                         </div>  
@@ -236,9 +248,9 @@
                             <i style="color:#DAD9E2" class="fas fa-user-md"></i>
                             <select name="mencari_kerja"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Jawaban</option>
-                                <option value="Sedang Kuliah">Sedang Kuliah</option>
-                                <option value="Sedang Mencari Pekerjaan">Sedang Mencari Pekerjaan</option>
-                                <option value="Sedang Tidak Mencari Pekerjaan">Sedang Tidak Mencari Pekerjaan</option>
+                                <option value="Sedang Kuliah" @if(old('mencari_kerja') == 'Sedang Kuliah') selected @endif>Sedang Kuliah</option>
+                                <option value="Sedang Mencari Pekerjaan" @if(old('mencari_kerja') == 'Sedang Mencari Pekerjaan') selected @endif>Sedang Mencari Pekerjaan</option>
+                                <option value="Sedang Tidak Mencari Pekerjaan" @if(old('mencari_kerja') == 'Sedang Tidak Mencari Pekerjaan') selected @endif>Sedang Tidak Mencari Pekerjaan</option>
                             </select>                              
                         </div>  
                         @error('mencari_kerja')
@@ -251,8 +263,8 @@
                             <i style="color:#DAD9E2" class="fas fa-info"></i>
                             <select name="konsiderasi_lanjut"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Jawaban</option>
-                                <option value="Ya">Ya</option>
-                                <option value="Tidak">Tidak</option>
+                                <option value="Ya" @if(old('konsiderasi_lanjut') == 'Ya') selected @endif>Ya</option>
+                                <option value="Tidak" @if(old('konsiderasi_lanjut') == 'Tidak') selected @endif>Tidak</option>
                             </select>                              
                         </div>  
                         @error('konsiderasi_lanjut')
@@ -268,7 +280,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Institusi</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
-                            <input type="text" name="institution" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Institusi" >
+                            <input value="{{old('institution')}}" type="text" name="institution" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Institusi" >
                         </div>   
                         @error('institution')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -278,7 +290,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Sumber tahu program ini?</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-info"></i>
-                            <input type="text" name="sumber_tahu_program" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan sumber" >
+                            <input value="{{old('sumber_tahu_program')}}" type="text" name="sumber_tahu_program" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan sumber" >
                         </div>   
                         @error('sumber_tahu_program')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -288,7 +300,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Social Media / Linked In</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-hashtag"></i>
-                            <input type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Atau LinkedIn" >
+                            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Atau LinkedIn" >
                         </div>   
                         @error('social_media')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -301,9 +313,18 @@
 
                     <!-- START OF EXPECTATION -->
                     <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kenapa kamu memililih Bootcamp ini</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="kenapa_memilih" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan jawaban anda" >{{old('kenapa_memilih')}}</textarea>
+                        </div>  
+                        @error('kenapa_memilih')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Ekspektasi yang kamu ingin dapatkan dari bootcamp ini?</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="expectation" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan ekspektasi anda" ></textarea>
+                            <textarea name="expectation" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan ekspektasi anda" >{{old('expectation')}}</textarea>
                         </div>  
                         @error('expectation')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -318,14 +339,14 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih Metode Pembayaran</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-md"></i>
-                            <select name="payment_type"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="bankShortCode"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Metode</option>
-                                <option value="BCA">BCA</option>
-                                <option value="BRI">BRI</option>
-                                <option value="Mandiri">Mandiri</option>
+                                <option value="bca" @if(old('bankShortCode') == 'bca') selected @endif >BCA</option>
+                                <option value="bri" @if(old('bankShortCode') == 'bri') selected @endif >BRI</option>
+                                <option value="mandiri" @if(old('bankShortCode') == 'mandiri') selected @endif>Mandiri</option>
                             </select>                              
                         </div>  
-                        @error('payment_type')
+                        @error('bankShortCode')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -339,7 +360,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">No. Rek Untuk Guarantee Return</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-money-check"></i>
-                            <input type="text" name="bank_account_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Rekening" >
+                            <input value="{{ old('bank_account_no') }}" type="text" name="bank_account_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Rekening" >
                         </div>   
                         @error('bank_account_no')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -348,18 +369,58 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
+
+                    @if(Auth::check())
+                        @if(Auth::user()->club != null)
+                            @php
+                                $discount_club_price = 0;
+                                if(Auth::user()->club == 'bike')
+                                    $discount_club_price = 2500;
+                                elseif(Auth::user()->club == 'car' || Auth::user()->club == 'jet')
+                                    $discount_club_price = 5000;
+                            @endphp
+                        @else
+                            @php
+                            $discount_club_price = 0;
+                            @endphp
+                        @endif
+                    @else
+                        @php
+                            $discount_club_price = 0;
+                        @endphp
+                    @endif
                     
                     <div class="col-12" style="text-align:center;padding-top:3vw">
-                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                        <input type="hidden" name="total_order_price" value="{{$course->bootcampCourseDetail->bootcamp_trial_price}}">
+                        <input type="hidden" value="{{$discount_club_price}}" name="club_discount">
+                        <input type="hidden" name="discounted_price" value="0">
+                        <input type="hidden" name="promo_code" value="0">
+                        <?php
+                            $tomorrow_split = explode(' ', $tomorrow);
+                            $date = $tomorrow_split[0];
+                            $time = $tomorrow_split[1];
+                        ?>
+                        <input type="hidden" name="date" value="{{ $date }}">
+                        <input type="hidden" name="time" value="{{ $time }}">
+                        <input type="hidden" name="course_id" value="{{$course->id}}">
+                        @php
+                            $grand_total = $course->bootcampCourseDetail->bootcamp_trial_price - $discount_club_price;
+                        @endphp
+                        <input type="hidden" name="grand_total" value="{{$grand_total}}">
+                        <div style="text-align: center;margin-bottom:2vw">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:orange;margin-bottom:0.4vw">*Uang Guarantee akan dikembalikan setelah free trial selesai*</p>
+                        </div>
+                        <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
                     </div>  
                     
                     <!-- END OF GENNERAL INFORMATION -->
                 </div>
             </form>
+
         </div>
     </div>
 </div>
-<!-- END OF POPUP FREE TRIAL-->
+<!-- END OF POP UP FREE TRIAL REGISTRATION-->
 
 <!-- START OF POP UP FULL REGISTRATION-->
 <div id="full-registration" class="overlay" style="overflow:scroll">
@@ -384,13 +445,15 @@
                         @endif
                     </div>
                     <!-- START OF LEFT SECTION -->
-                    <div class="col-6" style="">
+                    <div class="col-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
                             <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" 
                             @if(Auth::check())
-                                value="{{Auth::user()->name}}"
+                                value="{{ old('name', Auth::user()->name) }}"
+                            @else
+                                value="{{ old('name') }}"
                             @endif
                             >
                         </div>  
@@ -402,7 +465,9 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" >
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" 
+                            value="{{ old('birth_place')}}"
+                            >
                         </div>  
                         @error('birth_place')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -416,16 +481,16 @@
                                 <option disabled selected>Pilih Gender</option>
                                 <option value="Male"
                                 @if(Auth::check())
-                                    @if(Auth::user()->userDetail->gender == 'Male')
-                                    selected
-                                    @endif
+                                    @if(old('gender', Auth::user()->userDetail->gender) == 'Male') selected @endif
+                                @else
+                                    @if(old('gender') == 'Male') selected @endif
                                 @endif
                                 >Male</option>
                                 <option value="Female"
                                 @if(Auth::check())
-                                    @if(Auth::user()->userDetail->gender == 'Female')
-                                    selected
-                                    @endif
+                                    @if(old('gender', Auth::user()->userDetail->gender) == 'Female') selected @endif
+                                @else
+                                    @if(old('gender') == 'Female') selected @endif
                                 @endif
                                 >Female</option>
                             </select>                              
@@ -438,22 +503,24 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}" name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}" name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;"> -->
+                            <select  name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                @if(!Auth::check())
+                                <option value="" disabled selected>Pilih Provinsi</option>
+                                @else
                                 @if(Auth::user()->userDetail->province_id == null)
                                     <option value="" disabled selected>Pilih Provinsi</option>
                                 @endif
                                 @foreach($provinces as $province)
                                     <option value="{{ $province->id }}" 
-                                    @if(Auth::user()->userDetail->province_id != null && !Request::get('province'))
-                                        @if(Auth::user()->userDetail->province_id == $province->id)
+                                        @if(old('province_id',Auth::user()->userDetail->province_id) == $province->id)
+
                                         selected
                                         @endif
-                                    @elseif(Request::get('province') == $province->id) 
-                                    selected 
-                                    @endif
                                     
                                     >{{$province->name }}</option>                                    
                                 @endforeach
+                                @endif
                             </select>                              
                         </div>  
                         @error('province_id')
@@ -464,13 +531,15 @@
                     </div> 
                     <!-- END OF LEFT SECTION --> 
                     <!-- RIGHT SECTION -->
-                    <div class="col-6" style="">
+                    <div class="col-6">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
                             <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email"
                             @if(Auth::check())
-                                value="{{Auth::user()->email}}"
+                                value="{{old('email', Auth::user()->email)}}"
+                            @else
+                                value="{{old('email')}}"
                             @endif
                             >
                         </div>  
@@ -484,7 +553,9 @@
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
                             <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
-                                value="{{Auth::user()->userDetail->birthdate}}"
+                                value="{{old('birth_date', Auth::user()->userDetail->birthdate)}}"
+                            @else
+                                value="{{old('birth_date')}}"
                             @endif
                             >
                         </div>  
@@ -498,7 +569,9 @@
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
                             <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
                             @if(Auth::check())
-                                value="{{Auth::user()->userDetail->telephone}}"
+                                value="{{old('telephone', Auth::user()->userDetail->telephone)}}"
+                            @else
+                                value="{{old('telephone')}}"
                             @endif
                             >
                         </div>  
@@ -511,6 +584,9 @@
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
                             <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                @if(!Auth::check())
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                @else
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
                                 @else
@@ -518,16 +594,14 @@
 
                                     @foreach($cities as $city)
                                         <option value="{{ $city->city_id }}" 
-                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
-                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
-                                                    selected
-                                                @endif
-                                            @elseif (Request::get('city') == $city->city_id) 
-                                                selected 
-                                            @endif
+                                        @if(old('city_id',Auth::user()->userDetail->city_id) == $province->id)
+
+                                            selected
+                                        @endif
                                             >{{$city->name }}
                                         </option>
                                     @endforeach          
+                                @endif
                                 @endif
                             </select>                              
                         </div>  
@@ -544,7 +618,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" >@if(Auth::check()){{Auth::user()->userDetail->address}}@endif</textarea>
+                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()) {{old('address', Auth::user()->userDetail->address)}} @else {{old('address')}} @endif </textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -561,10 +635,10 @@
                             <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
                             <select name="last_degree"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Pendidikan</option>
-                                <option value="SMP">SMP</option>
-                                <option value="SMA">SMA</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
+                                <option value="SMP" @if(old('last_degree') == 'SMP') selected @endif>SMP</option>
+                                <option value="SMA" @if(old('last_degree') == 'SMA') selected @endif>SMA</option>
+                                <option value="D3" @if(old('last_degree') == 'D3') selected @endif>D3</option>
+                                <option value="S1" @if(old('last_degree') == 'S1') selected @endif>S1</option>
                             </select>                              
                         </div>  
                         @error('last_degree')
@@ -578,7 +652,7 @@
                             <select name="batch"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Batch</option>
                                 @foreach($course->bootcampBatches as $batch)
-                                <option value="{{$batch->date}})">Batch 1 ({{ date('d M Y', strtotime($batch->date))}})</option>
+                                <option value="{{$batch->date}}" @if(old('batch') == $batch->date) selected @endif>Batch 1 ({{ date('d M Y', strtotime($batch->date))}})</option>
                                 @endforeach
                             </select>                              
                         </div>  
@@ -592,9 +666,9 @@
                             <i style="color:#DAD9E2" class="fas fa-user-md"></i>
                             <select name="mencari_kerja"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Jawaban</option>
-                                <option value="Sedang Kuliah">Sedang Kuliah</option>
-                                <option value="Sedang Mencari Pekerjaan">Sedang Mencari Pekerjaan</option>
-                                <option value="Sedang Tidak Mencari Pekerjaan">Sedang Tidak Mencari Pekerjaan</option>
+                                <option value="Sedang Kuliah" @if(old('mencari_kerja') == 'Sedang Kuliah') selected @endif>Sedang Kuliah</option>
+                                <option value="Sedang Mencari Pekerjaan" @if(old('mencari_kerja') == 'Sedang Mencari Pekerjaan') selected @endif>Sedang Mencari Pekerjaan</option>
+                                <option value="Sedang Tidak Mencari Pekerjaan" @if(old('mencari_kerja') == 'Sedang Tidak Mencari Pekerjaan') selected @endif>Sedang Tidak Mencari Pekerjaan</option>
                             </select>                              
                         </div>  
                         @error('mencari_kerja')
@@ -607,8 +681,8 @@
                             <i style="color:#DAD9E2" class="fas fa-info"></i>
                             <select name="konsiderasi_lanjut"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Jawaban</option>
-                                <option value="Ya">Ya</option>
-                                <option value="Tidak">Tidak</option>
+                                <option value="Ya" @if(old('konsiderasi_lanjut') == 'Ya') selected @endif>Ya</option>
+                                <option value="Tidak" @if(old('konsiderasi_lanjut') == 'Tidak') selected @endif>Tidak</option>
                             </select>                              
                         </div>  
                         @error('konsiderasi_lanjut')
@@ -624,7 +698,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Institusi</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
-                            <input type="text" name="institution" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Institusi" >
+                            <input value="{{old('institution')}}" type="text" name="institution" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Institusi" >
                         </div>   
                         @error('institution')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -634,7 +708,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Sumber tahu program ini?</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-info"></i>
-                            <input type="text" name="sumber_tahu_program" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan sumber" >
+                            <input value="{{old('sumber_tahu_program')}}" type="text" name="sumber_tahu_program" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan sumber" >
                         </div>   
                         @error('sumber_tahu_program')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -644,7 +718,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Social Media / Linked In</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-hashtag"></i>
-                            <input type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Atau LinkedIn" >
+                            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Atau LinkedIn" >
                         </div>   
                         @error('social_media')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -659,7 +733,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kenapa kamu memililih Bootcamp ini</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="kenapa_memilih" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan jawaban anda" ></textarea>
+                            <textarea name="kenapa_memilih" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan jawaban anda" >{{old('kenapa_memilih')}}</textarea>
                         </div>  
                         @error('kenapa_memilih')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -668,7 +742,7 @@
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Ekspektasi yang kamu ingin dapatkan dari bootcamp ini?</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="expectation" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan ekspektasi anda" ></textarea>
+                            <textarea name="expectation" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan ekspektasi anda" >{{old('expectation')}}</textarea>
                         </div>  
                         @error('expectation')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -683,14 +757,14 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih Metode Pembayaran</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-md"></i>
-                            <select name="payment_type"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="bankShortCode"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Metode</option>
                                 <option value="BCA">BCA</option>
                                 <option value="BRI">BRI</option>
                                 <option value="Mandiri">Mandiri</option>
                             </select>                              
                         </div>  
-                        @error('payment_type')
+                        @error('bankShortCode')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -1270,7 +1344,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="#full-registration" class="btn-blue-bordered normal-text" id="free-trial-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Register Now</a>
+            <a @if(Auth::check()) href="#full-registration" @else href="/login" @endif class="btn-blue-bordered normal-text" id="free-trial-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Register Now</a>
 
         </div>
 
@@ -1300,7 +1374,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="#free-trial" href="full-registration" class="btn-blue-bordered normal-text" id="full-registration-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Get Free Trial Now</a>
+            <a @if(Auth::check()) href="#free-trial" @else href="/login" @endif href="full-registration" class="btn-blue-bordered normal-text" id="full-registration-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Get Free Trial Now</a>
 
         </div>
     </div>
