@@ -94,16 +94,16 @@ class CheckoutController extends Controller
         if($request->action == 'createPaymentObjectBootcamp'){
             // Validation rules that exists on all validation conditions. (bootcamp)
             $validation_rules = [
-                'name'                  => 'required',
-                'email'                 => 'required',
+                'name'                  => '',
+                'email'                 => '',
                 'birth_place'           => 'required',
-                'birth_date'            => 'required',
-                'gender'                => 'required',
+                'birth_date'            => '',
+                'gender'                => '',
                 // 'telephone'          => ['required', new TelephoneNumber],
-                'telephone'             => 'required',
-                'province_id'           => 'required',
-                'city_id'               => 'required',
-                'address'               => 'required',
+                'telephone'             => '',
+                'province_id'           => '',
+                'city_id'               => '',
+                'address'               => '',
                 'last_degree'           => 'required',
                 'institution'           => 'required',
                 'batch'                 => 'required',
@@ -215,8 +215,8 @@ class CheckoutController extends Controller
             $invoice_data = [
                 'invoice_no' => $invoiceNumberResult['data'],
                 'user_id' => auth()->user()->id,
-                'name' => $validated['name'],
-                'phone' => $validated['telephone'],
+                'name' => auth()->user()->name,
+                'phone' => auth()->user()->userDetail->telephone,
                 'status' => 'pending',
                 'total_order_price' => $validated['total_order_price'],
                 'discounted_price' => $validated['discounted_price'],
@@ -291,7 +291,6 @@ class CheckoutController extends Controller
                 // return redirect()->route('bootcamp.show', $validated['course_id'])
                 //     ->with('message', 'Oops, something went wrong..');
                 return redirect('/bootcamp#free-trial')->with('full_registration_bootcamp_message', 'Oops, something went wrong..');
-
             }
 
             // Create bootcamp_application object.
@@ -299,15 +298,15 @@ class CheckoutController extends Controller
                 'course_id'             => $validated['course_id'],
                 'user_id'               => auth()->user()->id,
                 'invoice_id'            => $invoice->id,
-                'name'                  => $validated['name'],
-                'email'                 => $validated['email'],
+                'name'                  => auth()->user()->name,
+                'email'                 => auth()->user()->email,
                 'birth_place'           => $validated['birth_place'],
-                'birth_date'            => $validated['birth_date'],
-                'gender'                => $validated['gender'],
-                'phone_no'              => $validated['telephone'],
-                'province_id'           => $validated['province_id'],
-                'city_id'               => $validated['city_id'],
-                'address'               => $validated['address'],
+                'birth_date'            => auth()->user()->userDetail->birthdate,
+                'gender'                => auth()->user()->userDetail->gender,
+                'phone_no'              => auth()->user()->userDetail->telephone,
+                'province_id'           => auth()->user()->userDetail->province_id,
+                'city_id'               => auth()->user()->userDetail->city_id,
+                'address'               => auth()->user()->userDetail->address,
                 'last_degree'           => $validated['last_degree'],
                 'institution'           => $validated['institution'],
                 'batch'                 => $validated['batch'],
@@ -319,7 +318,6 @@ class CheckoutController extends Controller
                 'expectation'           => $validated['expectation'],
                 'is_trial'              => 1,
                 'status'                => "pending",
-                
             ]);
 
             // Handle if bootcamp_application creation failed.

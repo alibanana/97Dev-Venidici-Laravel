@@ -251,15 +251,15 @@ class BootcampController extends Controller
     public function storeFullRegistration(Request $request, $course_id)
     {
         $validator = Validator::make($request->all(), [
-            'name'                  => 'required',
-            'email'                 => 'required',
+            'name'                  => '',
+            'email'                 => '',
             'birth_place'           => 'required',
-            'birth_date'            => 'required',
-            'gender'                => 'required',
-            'telephone'             => 'required',
-            'province_id'           => 'required',
-            'city_id'               => 'required',
-            'address'               => 'required',
+            'birth_date'            => '',
+            'gender'                => '',
+            'telephone'             => '',
+            'province_id'           => '',
+            'city_id'               => '',
+            'address'               => '',
             'last_degree'           => 'required',
             'institution'           => 'required',
             'batch'                 => 'required',
@@ -280,15 +280,15 @@ class BootcampController extends Controller
         $bootcamp                       = new BootcampApplication;
         $bootcamp->course_id            = $course_id;
         $bootcamp->user_id              = Auth::user()->id;
-        $bootcamp->name                 = $validated['name'];
-        $bootcamp->email                = $validated['email'];
+        $bootcamp->name                 = Auth::user()->name;
+        $bootcamp->email                = Auth::user()->email;
         $bootcamp->birth_place          = $validated['birth_place'];
-        $bootcamp->birth_date           = $validated['birth_date'];
-        $bootcamp->gender               = $validated['gender'];
-        $bootcamp->phone_no             = $validated['telephone'];
-        $bootcamp->province_id          = $validated['province_id'];
-        $bootcamp->city_id              = $validated['city_id'];
-        $bootcamp->address              = $validated['address'];
+        $bootcamp->birth_date           = Auth::user()->userDetail->birthdate;
+        $bootcamp->gender               = Auth::user()->userDetail->gender;
+        $bootcamp->phone_no             = Auth::user()->userDetail->telephone;
+        $bootcamp->province_id          = Auth::user()->userDetail->province_id;
+        $bootcamp->city_id              = Auth::user()->userDetail->city_id;
+        $bootcamp->address              = Auth::user()->userDetail->address;
         $bootcamp->last_degree          = $validated['last_degree'];
         $bootcamp->institution          = $validated['institution'];
         $bootcamp->batch                = $validated['batch'];

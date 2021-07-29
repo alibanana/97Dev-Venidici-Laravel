@@ -121,8 +121,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Type</th>
                                                 <th>Profile</th>
+                                                <th>Type</th>
                                                 <th>Address</th>
                                                 <th>Institution</th>
                                                 <th>Sumber Tahu Program</th>
@@ -136,19 +136,8 @@
                                         <tbody>
                                             @foreach ($users as $user)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td class="text-nowrap">
-                                                        <!-- IF TRIAL -->
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && !$user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
-                                                        Free Trial
-                                                        <!-- IF FULL REGIS -->
-                                                        @elseif(!$user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
-                                                        Full Registration
-                                                        <!-- IF MOVE FROM TRIAL TO FULL REGIS -->
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
-                                                        From Trial to Full Regis
-                                                        @endif
-                                                    </td>
+                                                    <td rowspan="2">{{ $loop->iteration }}</td>
+                                                    
                                                     <td>
                                                         Batch : {{$user->bootcampApplications->where('course_id',$course->id)->first()->batch}} <br>
                                                         {{ $user->bootcampApplications->where('course_id',$course->id)->first()->name }} <br>
@@ -162,6 +151,18 @@
                                                             Konsiderasi Lanjut: {{ $user->bootcampApplications->where('course_id',$course->id)->first()->konsiderasi_lanjut }} <br>
                                                         </div>
                                                         
+                                                    </td>
+                                                    <td class="text-nowrap">
+                                                        <!-- IF TRIAL -->
+                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && !$user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        Free Trial
+                                                        <!-- IF FULL REGIS -->
+                                                        @elseif(!$user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        Full Registration
+                                                        <!-- IF MOVE FROM TRIAL TO FULL REGIS -->
+                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        From Trial to Full Regis
+                                                        @endif
                                                     </td>
                                                     <td>{{ $user->bootcampApplications->where('course_id',$course->id)->first()->address }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->province->name }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->city->name }}</td>
                                                     <td>{{ $user->bootcampApplications->where('course_id',$course->id)->first()->institution }} <br>
@@ -224,6 +225,96 @@
                                                         </form>
                                                         @endif
                                                     </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Batch : {{$user->bootcampApplications->where('course_id',$course->id)->first()->batch}} <br>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->name }} <br>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->email }} <br>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->phone_no }} <br>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->birth_place }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->birth_date }} <br>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->gender }} <br>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->mencari_kerja }} <br>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->social_media }} <br>
+                                                        <div class="text-nowrap">
+                                                            Konsiderasi Lanjut: {{ $user->bootcampApplications->where('course_id',$course->id)->first()->konsiderasi_lanjut }} <br>
+                                                        </div>
+                                                        
+                                                    </td>
+                                                    <td class="text-nowrap">
+                                                        <!-- IF TRIAL -->
+                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && !$user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        Free Trial
+                                                        <!-- IF FULL REGIS -->
+                                                        @elseif(!$user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        Full Registration
+                                                        <!-- IF MOVE FROM TRIAL TO FULL REGIS -->
+                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        From Trial to Full Regis
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $user->bootcampApplications->where('course_id',$course->id)->first()->address }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->province->name }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->city->name }}</td>
+                                                    <td>{{ $user->bootcampApplications->where('course_id',$course->id)->first()->institution }} <br>
+                                                        Last Degree: {{ $user->bootcampApplications->where('course_id',$course->id)->first()->last_degree }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->sumber_tahu_program }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->kenapa_memilih }} <br>
+                                                    </td>
+                                                    <td>
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->expectation }} <br>
+                                                    </td>
+                                                    <td>
+                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->bankShortCode != null)
+                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->bankShortCode }} | {{ $user->bootcampApplications->where('course_id',$course->id)->first()->bank_account_number }}
+                                                        @else
+                                                        -
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'pending')
+                                                        <span style="color: orange;">Pending</span>
+                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'success')
+                                                        <span style="color: green;">Success</span>
+                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'refunded')
+                                                        <span style="color: orange;">Refunded</span>
+                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'failed')
+                                                        <span style="color: red;">Failed</span>
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="{{ route('admin.invoices.show', $users_data[$user->id]['invoice_id']) }}" class="text-nowrap">View Invoice</a>
+                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'pending')
+                                                        <form action="" method="post" style="margin-top: 1vw;">
+                                                            @csrf
+                                                            <div style="padding: 0px 2px">
+                                                                <input type="hidden" name="" value"">
+                                                                <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to accept this user?')">Accept</button>
+                                                            </div>
+                                                        </form>
+                                                        <form action="" method="post" style="margin-top: 1vw;">
+                                                            @csrf
+                                                            <div style="padding: 0px 2px">
+                                                                <input type="hidden" name="" value"">
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reject this user?')">Reject</button>
+                                                            </div>
+                                                        </form>
+                                                        @endif
+                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && !$user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+
+                                                        <form action="" method="post" style="margin-top: 1vw;">
+                                                            @csrf
+                                                            <div style="padding: 0px 2px">
+                                                                <input type="hidden" name="" value"">
+                                                                <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to refund this user?')">Refund</button>
+                                                            </div>
+                                                        </form>
+                                                        @endif
+                                                    </td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
