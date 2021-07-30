@@ -133,6 +133,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                            @if(Auth::check())
                             <?php
                                 if (Auth::user()->userDetail->birthdate != null) {
                                     $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
@@ -140,6 +141,7 @@
                                     $time = $birthdate[1];
                                 }
                             ?>
+                            @endif
                             <input readonly type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
                                 value="{{ old('birth_date') ?? $date ?? null }}"
@@ -173,9 +175,10 @@
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
                             <select disabled  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                @if($cities == null && Auth::user()->userDetail->city_id == null)
+                                @if(Auth::check())
+                                    @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
-                                @else
+                                    @else
                                     <option disabled selected>Pilih Kota</option>
 
                                     @foreach($cities as $city)
@@ -190,6 +193,7 @@
                                             >{{$city->name }}
                                         </option>
                                     @endforeach          
+                                    @endif
                                 @endif
                             </select>                              
                         </div>  
@@ -557,6 +561,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                            @if(Auth::check())
                             <?php
                                 if (Auth::user()->userDetail->birthdate != null) {
                                     $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
@@ -564,6 +569,7 @@
                                     $time = $birthdate[1];
                                 }
                             ?>
+                            @endif
                             <input readonly type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
                                 value="{{ old('birth_date') ?? $date ?? null }}"
@@ -597,6 +603,7 @@
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
                             <select disabled  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                @if(Auth::check())
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
                                 @else
@@ -614,6 +621,7 @@
                                             >{{$city->name }}
                                         </option>
                                     @endforeach          
+                                @endif
                                 @endif
                             </select>                              
                         </div>  
