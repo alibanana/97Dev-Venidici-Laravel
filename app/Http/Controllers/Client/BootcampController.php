@@ -38,7 +38,7 @@ class BootcampController extends Controller
 
     // Shows the Client's Main Bootcamp Page.
     public function index(Request $request) {
-        $course = Course::findOrFail(6);
+        $course = Course::findOrFail(7);
         $provinces = Province::all();
         $cities = City::all();
 
@@ -275,6 +275,24 @@ class BootcampController extends Controller
             return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
         
         $validated = $validator->validate();
+
+
+        // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
+        //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
+ 
+        $bootcamp_application = BootcampApplication::where(
+            [   
+                ['course_id', '=', $course_id],
+                ['user_id', '=', auth()->user()->id],
+                ['status', '!=', 'ft_refunded'],
+                ['status', '!=', 'ft_cancelled'],
+                ['status', '!=', 'denied'],
+                
+            ]
+        )->count();
+        if($bootcamp_application != 0)
+            return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message', 'You already have registered for a bootcamp, we will get back to you soon.');
+        
         
 
         $bootcamp                       = new BootcampApplication;
@@ -299,7 +317,7 @@ class BootcampController extends Controller
         $bootcamp->kenapa_memilih       = $validated['kenapa_memilih'];
         $bootcamp->expectation          = $validated['expectation'];
         $bootcamp->is_full_registration = 1;
-        $bootcamp->status               = "pending";
+        $bootcamp->status               = "waiting";
         $bootcamp->save();
 
         // create notification

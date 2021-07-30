@@ -1278,7 +1278,7 @@
         </div>
         <!-- END OF BATCH-->
 
-        <form id="removeAttachmentForm" action="{{ route('admin.bootcmap.remove-syllabus', $course->id) }}" method="post">
+        <form id="removeAttachmentForm" action="{{ route('admin.bootcamp.remove-syllabus', $course->id) }}" method="post">
             @csrf
             @method('delete')
         </form> 

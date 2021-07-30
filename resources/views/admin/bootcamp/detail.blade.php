@@ -89,6 +89,22 @@
                     <div class="row mt-2 mb-3">
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
+                                <label class="w-100">Filter By:
+                                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                                        <option value="{{ request()->fullUrlWithQuery(['filter' => '']) }}" @if (!Request::has('filter')) selected @endif>None</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['filter' => 'ft_pending']) }}" @if (Request::get('filter') == 'ft_pending') selected @endif>Free Trial Pending</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['filter' => 'ft_paid']) }}" @if (Request::get('filter') == 'ft_paid') selected @endif>Free Trial Paid</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['filter' => 'ft_refunded']) }}" @if (Request::get('filter') == 'ft_refunded') selected @endif>Refunded</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['filter' => 'ft_cancelled']) }}" @if (Request::get('filter') == 'ft_cancelled') selected @endif>Cancelled</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['filter' => 'waiting']) }}" @if (Request::get('filter') == 'waiting') selected @endif>Waiting Confirmation</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['filter' => 'approved']) }}" @if (Request::get('filter') == 'approved') selected @endif>Approved</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['filter' => 'denied']) }}" @if (Request::get('filter') == 'denied') selected @endif>Rejected</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                            <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
                                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
                                         <option value="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
@@ -136,185 +152,119 @@
                                         <tbody>
                                             @foreach ($users as $user)
                                                 <tr>
-                                                    <td rowspan="2">{{ $loop->iteration }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     
                                                     <td>
-                                                        Batch : {{$user->bootcampApplications->where('course_id',$course->id)->first()->batch}} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->name }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->email }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->phone_no }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->birth_place }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->birth_date }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->gender }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->mencari_kerja }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->social_media }} <br>
+                                                        Batch : {{$user->batch}} <br>
+                                                        {{ $user->name }} <br>
+                                                        {{ $user->email }} <br>
+                                                        {{ $user->phone_no }} <br>
+                                                        {{ $user->birth_place }}, {{ $user->birth_date }} <br>
+                                                        {{ $user->gender }} <br>
+                                                        {{ $user->mencari_kerja }} <br>
+                                                        {{ $user->social_media }} <br>
                                                         <div class="text-nowrap">
-                                                            Konsiderasi Lanjut: {{ $user->bootcampApplications->where('course_id',$course->id)->first()->konsiderasi_lanjut }} <br>
+                                                            Konsiderasi Lanjut: {{ $user->konsiderasi_lanjut }} <br>
                                                         </div>
                                                         
                                                     </td>
                                                     <td class="text-nowrap">
                                                         <!-- IF TRIAL -->
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && !$user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        @if($user->is_trial && !$user->is_full_registration)
                                                         Free Trial
                                                         <!-- IF FULL REGIS -->
-                                                        @elseif(!$user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        @elseif(!$user->is_trial && $user->is_full_registration)
                                                         Full Registration
                                                         <!-- IF MOVE FROM TRIAL TO FULL REGIS -->
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        @elseif($user->is_trial && $user->is_full_registration)
                                                         From Trial to Full Regis
                                                         @endif
                                                     </td>
-                                                    <td>{{ $user->bootcampApplications->where('course_id',$course->id)->first()->address }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->province->name }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->city->name }}</td>
-                                                    <td>{{ $user->bootcampApplications->where('course_id',$course->id)->first()->institution }} <br>
-                                                        Last Degree: {{ $user->bootcampApplications->where('course_id',$course->id)->first()->last_degree }}
+                                                    <td>{{ $user->address }}, {{ $user->province->name }}, {{ $user->city->name }}</td>
+                                                    <td>{{ $user->institution }} <br>
+                                                        Last Degree: {{ $user->last_degree }}
                                                     </td>
                                                     <td>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->sumber_tahu_program }}
+                                                        {{ $user->sumber_tahu_program }}
                                                     </td>
                                                     <td>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->kenapa_memilih }} <br>
+                                                        {{ $user->kenapa_memilih }} <br>
                                                     </td>
                                                     <td>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->expectation }} <br>
+                                                        {{ $user->expectation }} <br>
                                                     </td>
                                                     <td>
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->bankShortCode != null)
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->bankShortCode }} | {{ $user->bootcampApplications->where('course_id',$course->id)->first()->bank_account_number }}
+                                                        @if($user->bankShortCode != null)
+                                                        {{ $user->bankShortCode }} | {{ $user->bank_account_number }}
                                                         @else
                                                         -
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'pending')
-                                                        <span style="color: orange;">Pending</span>
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'success')
-                                                        <span style="color: green;">Success</span>
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'refunded')
+                                                        @if($user->status == 'ft_pending')
+                                                        <span style="color: orange;">Pending Payment</span>
+                                                        @elseif($user->status == 'ft_paid')
+                                                        <span style="color: green;">Paid Payment</span>
+                                                        @elseif($user->status == 'ft_refunded')
                                                         <span style="color: orange;">Refunded</span>
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'failed')
-                                                        <span style="color: red;">Failed</span>
+                                                        @elseif($user->status == 'ft_cancelled')
+                                                        <span >Cancelled</span>
+                                                        @elseif($user->status == 'waiting')
+                                                        <span style="color: orange;">Waiting Confirmation</span>
+                                                        @elseif($user->status == 'approved')
+                                                        <span style="color: green;">Approved</span>
+                                                        @elseif($user->status == 'denied')
+                                                        <span style="color: green;">Rejected</span>
                                                         @endif
                                                     </td>
 
                                                     <td>
-                                                        <a href="{{ route('admin.invoices.show', $users_data[$user->id]['invoice_id']) }}" class="text-nowrap">View Invoice</a>
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'pending')
-                                                        <form action="" method="post" style="margin-top: 1vw;">
-                                                            @csrf
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" name="" value"">
-                                                                <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to accept this user?')">Accept</button>
-                                                            </div>
-                                                        </form>
-                                                        <form action="" method="post" style="margin-top: 1vw;">
-                                                            @csrf
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" name="" value"">
-                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reject this user?')">Reject</button>
-                                                            </div>
-                                                        </form>
-                                                        @endif
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && !$user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
+                                                        <!-- KALAU DAFTAR FREE TRIAL -->
+                                                        @if(($user->is_trial && !$user->is_full_registration && $user->status == 'ft_paid') || $user->status == 'approved')
+                                                        <a href="" class="text-nowrap">View Invoice</a>
 
-                                                        <form action="" method="post" style="margin-top: 1vw;">
+
+                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post"  style="margin-top: 1vw;">
                                                             @csrf
+                                                            @method('put')         
                                                             <div style="padding: 0px 2px">
                                                                 <input type="hidden" name="" value"">
-                                                                <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to refund this user?')">Refund</button>
+                                                                <button name="action" value="Refund" class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to refund this user?')">Refund</button>
                                                             </div>
                                                         </form>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Batch : {{$user->bootcampApplications->where('course_id',$course->id)->first()->batch}} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->name }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->email }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->phone_no }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->birth_place }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->birth_date }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->gender }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->mencari_kerja }} <br>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->social_media }} <br>
-                                                        <div class="text-nowrap">
-                                                            Konsiderasi Lanjut: {{ $user->bootcampApplications->where('course_id',$course->id)->first()->konsiderasi_lanjut }} <br>
-                                                        </div>
+                                                        <!-- KALAU DAFTAR FULL -->
+
+                                                        @elseif(!$user->is_trial && $user->is_full_registration && $user->status == 'waiting')
                                                         
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <!-- IF TRIAL -->
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && !$user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
-                                                        Free Trial
-                                                        <!-- IF FULL REGIS -->
-                                                        @elseif(!$user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
-                                                        Full Registration
-                                                        <!-- IF MOVE FROM TRIAL TO FULL REGIS -->
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && $user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
-                                                        From Trial to Full Regis
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $user->bootcampApplications->where('course_id',$course->id)->first()->address }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->province->name }}, {{ $user->bootcampApplications->where('course_id',$course->id)->first()->city->name }}</td>
-                                                    <td>{{ $user->bootcampApplications->where('course_id',$course->id)->first()->institution }} <br>
-                                                        Last Degree: {{ $user->bootcampApplications->where('course_id',$course->id)->first()->last_degree }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->sumber_tahu_program }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->kenapa_memilih }} <br>
-                                                    </td>
-                                                    <td>
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->expectation }} <br>
-                                                    </td>
-                                                    <td>
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->bankShortCode != null)
-                                                        {{ $user->bootcampApplications->where('course_id',$course->id)->first()->bankShortCode }} | {{ $user->bootcampApplications->where('course_id',$course->id)->first()->bank_account_number }}
-                                                        @else
-                                                        -
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'pending')
-                                                        <span style="color: orange;">Pending</span>
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'success')
-                                                        <span style="color: green;">Success</span>
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'refunded')
-                                                        <span style="color: orange;">Refunded</span>
-                                                        @elseif($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'failed')
-                                                        <span style="color: red;">Failed</span>
-                                                        @endif
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="{{ route('admin.invoices.show', $users_data[$user->id]['invoice_id']) }}" class="text-nowrap">View Invoice</a>
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->status == 'pending')
-                                                        <form action="" method="post" style="margin-top: 1vw;">
+                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post" style="margin-top: 1vw;">
                                                             @csrf
+                                                            @method('put')         
                                                             <div style="padding: 0px 2px">
-                                                                <input type="hidden" name="" value"">
-                                                                <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to accept this user?')">Accept</button>
+                                                                <button name="action" value="Approved" class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to accept this user?')">Accept</button>
                                                             </div>
                                                         </form>
-                                                        <form action="" method="post" style="margin-top: 1vw;">
+                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post" style="margin-top: 1vw;">
                                                             @csrf
+                                                            @method('put')         
                                                             <div style="padding: 0px 2px">
                                                                 <input type="hidden" name="" value"">
-                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reject this user?')">Reject</button>
+                                                                <button name="action" value="Reject" class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reject this user?')">Reject</button>
+                                                            </div>
+                                                        </form>
+
+                                                        @elseif(($user->is_trial && $user->is_full_registration && $user->status == 'waiting'))
+                                                        <!-- KALAU UPGRADE -->
+                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post"  style="margin-top: 1vw;">
+                                                            @csrf
+                                                            @method('put')         
+                                                            <div style="padding: 0px 2px">
+                                                                <input type="hidden" name="" value"">
+                                                                <button name="action" value="Upgrade" class="d-sm-inline-block btn btn-success shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to upgrade this user from trial to full registration?')">Accept Upgrade</button>
                                                             </div>
                                                         </form>
                                                         @endif
-                                                        @if($user->bootcampApplications->where('course_id',$course->id)->first()->is_trial && !$user->bootcampApplications->where('course_id',$course->id)->first()->is_full_registration)
 
-                                                        <form action="" method="post" style="margin-top: 1vw;">
-                                                            @csrf
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" name="" value"">
-                                                                <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to refund this user?')">Refund</button>
-                                                            </div>
-                                                        </form>
-                                                        @endif
                                                     </td>
-
                                                 </tr>
                                             @endforeach
                                         </tbody>

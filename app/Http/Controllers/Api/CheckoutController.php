@@ -84,6 +84,9 @@ class CheckoutController extends Controller
             return redirect()->back();
         }
 
+
+        
+
         $input = $request->all();
         // Convert request input "phone" format.
         if ($request->has('phone'))
@@ -200,12 +203,33 @@ class CheckoutController extends Controller
         // If validation passed store validated data in a variable.
         $validated = $validator->validate();
 
+
+
+        // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
+        //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
+        if($request->action == 'createPaymentObjectBootcamp'){
+ 
+            $bootcamp_application = BootcampApplication::where(
+                [   
+                    ['course_id', '=', $validated['course_id']],
+                    ['user_id', '=', auth()->user()->id],
+                    ['status', '!=', 'ft_refunded'],
+                    ['status', '!=', 'ft_cancelled'],
+                    ['status', '!=', 'denied'],
+                    
+                ]
+            )->count();
+
+            if($bootcamp_application != 0)
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'You already have registered for a bootcamp, please complete the payment first.');
+        }
+
         $invoiceNumberResult = Helper::generateInvoiceNumber();
         if ($invoiceNumberResult['status'] == 'Failed'){
             if ($request->action == 'createPaymentObjectBootcamp')
                 // return redirect()->route('bootcamp.show', $validated['course_id'])
                 //     ->with('message', $invoiceNumberResult['message']);
-                return redirect('/bootcamp#free-trial')->with('full_registration_bootcamp_message', $invoiceNumberResult['message']);
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', $invoiceNumberResult['message']);
             else
                 return redirect()->back()->with('message', $invoiceNumberResult['message']);
         }
@@ -263,7 +287,7 @@ class CheckoutController extends Controller
         $invoice = Invoice::create($invoice_data);
         if (!$invoice->exists){
             if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect('/bootcamp#free-trial')->with('full_registration_bootcamp_message', 'Oops, something went wrong..');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
 
             else
                 return redirect()->back()->with('message', 'Oops, something went wrong..');
@@ -290,7 +314,7 @@ class CheckoutController extends Controller
                 $invoice->delete();
                 // return redirect()->route('bootcamp.show', $validated['course_id'])
                 //     ->with('message', 'Oops, something went wrong..');
-                return redirect('/bootcamp#free-trial')->with('full_registration_bootcamp_message', 'Oops, something went wrong..');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
             }
 
             // Create bootcamp_application object.
@@ -316,8 +340,10 @@ class CheckoutController extends Controller
                 'konsiderasi_lanjut'    => $validated['konsiderasi_lanjut'],
                 'kenapa_memilih'        => $validated['kenapa_memilih'],
                 'expectation'           => $validated['expectation'],
+                'bankShortCode'         => $validated['bankShortCode'],
+                'bank_account_number'   => $validated['bank_account_no'],
                 'is_trial'              => 1,
-                'status'                => "pending",
+                'status'                => "ft_pending",
             ]);
 
             // Handle if bootcamp_application creation failed.
@@ -327,7 +353,7 @@ class CheckoutController extends Controller
                 $invoice->delete();
                 // return redirect()->route('bootcamp.show', $validated['course_id'])
                 //     ->with('message', 'Oops, something went wrong..');
-                return redirect('/bootcamp#free-trial')->with('full_registration_bootcamp_message', 'Oops, something went wrong..');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
 
             }
         /* 
@@ -379,7 +405,7 @@ class CheckoutController extends Controller
                 if ($request->action == 'createPaymentObjectBootcamp')
                     // return redirect()->route('bootcamp.show', $validated['course_id'])
                     //     ->with('message', $response['errors']['message']);
-                    return redirect('/bootcamp#free-trial')->with('full_registration_bootcamp_message', $response['errors']['message']);
+                    return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', $response['errors']['message']);
 
                 else
                     return redirect()->back()->with('message', $response['errors']['message']);
@@ -414,7 +440,7 @@ class CheckoutController extends Controller
             //if user buys a bootcamp
             if ($request->action == 'createPaymentObjectBootcamp')
                 // return redirect('bootcamp/'.$input['course_id'])->back()->with('message','Oops, something went wrong..');
-                return redirect('/bootcamp#free-trial')->with('full_registration_bootcamp_message', 'Oops, something went wrong..');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
 
             //if user does not buy a bootcamp
             else

@@ -14,6 +14,8 @@ use App\Models\Course;
 use App\Models\BootcampCourseDetail;
 use App\Models\CourseFeature;
 use App\Models\Hashtag;
+use App\Models\BootcampApplication;
+use App\Models\Notification;
 
 class BootcampController extends Controller
 {
@@ -214,11 +216,38 @@ class BootcampController extends Controller
             return redirect()->route('admin.bootcamp.show', $id);
         }
 
-        $users = $course->users();
+        $users = BootcampApplication::where('course_id',$id);
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
                 $users = $users->orderBy('created_at', 'desc');
+            } else {
+                $users = $users->orderBy('created_at');
+            }
+        } else {
+            $users = $users->orderBy('created_at', 'desc');
+        }
+        if ($request->has('filter')) {
+            if ($request['filter'] == "ft_pending") {
+                $users = $users->where('status', 'ft_pending');
+            }
+            elseif($request['filter'] == "ft_paid") {
+                $users = $users->where('status', 'ft_paid');
+            }
+            elseif($request['filter'] == "ft_refunded") {
+                $users = $users->where('status', 'ft_refunded');
+            }
+            elseif($request['filter'] == "ft_cancelled") {
+                $users = $users->where('status', 'ft_cancelled');
+            }
+            elseif($request['filter'] == "waiting") {
+                $users = $users->where('status', 'waiting');
+            }
+            elseif($request['filter'] == "approved") {
+                $users = $users->where('status', 'approved');
+            }
+            elseif($request['filter'] == "denied") {
+                $users = $users->where('status', 'denied');
             } else {
                 $users = $users->orderBy('created_at');
             }
@@ -297,5 +326,49 @@ class BootcampController extends Controller
         return redirect()->route('admin.bootcamp.edit', $id)
             ->with('message', $message)
             ->with('page-option', 'basic-informations');
+    }
+
+    public function changeApplicationStatus(Request $request, $id){
+        $application = BootcampApplication::findOrFail($id);
+        if($request->action == 'Approved')
+        {
+            $application->status = 'approved';
+            $title = 'Selamat, pendaftaran Bootcamp kamu telah diterima!';
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah diterima. Klick disin untuk melihat status';    
+        }
+        elseif($request->action == 'Reject'){
+            $application->status = 'denied';
+            $title = 'Ouch.. pendaftaran Bootcamp kamu telah ditolak!';    
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah ditolak.';    
+        }
+        elseif($request->action == 'Refund'){
+            $application->status = 'ft_refunded';
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu telah berhasil di refund.';    
+
+            $title = 'Pendaftaran Bootcamp kamu telah di refund!';    
+        }
+        elseif($request->action == 'Upgrade'){
+            $title = 'Pendaftaran Bootcamp kamu sedang di review!';    
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu sedang direview oleh tim kami. Klik disini untuk melihat status';    
+            $application->status = 'waiting';
+
+        }
+        
+        $application->save();
+        $notification_data = [
+            'user_id' => $application->user_id,
+            'isInformation' => 1,
+            'title' => $title,
+            'description' => $description,
+            'link' => '/dashboard'
+        ];
+
+        // Create notification for user.
+        $notification = Notification::create($notification_data);
+
+        $message = 'Application for user (' . $application->name . ') has been changed to '.$application->status.'!';
+
+        return redirect()->route('admin.bootcamp.show',$application->course_id)->with('message', $message);
+
     }
 }

@@ -31,8 +31,11 @@ class BootcampApplication extends Model
         'konsiderasi_lanjut',
         'kenapa_memilih',
         'expectation',
-        'payment_type',
+        'bankShortCode',
         'bank_account_number', 
+        'is_trial', 
+        'is_full_registration', 
+        'status', 
     ];
 
     public function course() {
