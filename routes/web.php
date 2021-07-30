@@ -58,7 +58,7 @@ use App\Http\Controllers\Api\CheckoutController;
 
 Route::middleware(['isSuspended'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
-    Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth', 'verified']);
+    Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
     Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);
     Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth']);
     Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth']);
@@ -125,15 +125,15 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/validate-voucher-code', [CheckoutController::class, 'validateVoucherCode'])->name('customer.cart.validate-voucher-code')->middleware(['auth', 'verified']);
 
     Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware(['auth', 'verified']);
-    Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware(['auth', 'verified']);
-    Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware(['auth', 'verified']);
-    Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store')->middleware(['auth', 'verified']);
-    Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware(['auth', 'verified']);
-    Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove')->middleware(['auth', 'verified']);
-    Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll')->middleware(['auth', 'verified']);
-    Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart')->middleware(['auth', 'verified']);
-    Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty')->middleware(['auth', 'verified']);
-    Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty')->middleware(['auth', 'verified']);
+    Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware(['auth']);
+    Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware(['auth']);
+    Route::post('/cart', [CartController::class, 'store'])->name('customer.cart.store')->middleware(['auth']);
+    Route::get('/cart/total', [CartController::class, 'getCartTotal'])->name('customer.cart.total')->middleware(['auth']);
+    Route::post('/cart/remove/{id}', [CartController::class, 'removeCart'])->name('customer.cart.remove')->middleware(['auth']);
+    Route::post('/cart/removeAll', [CartController::class, 'removeAllCart'])->name('customer.cart.removeAll')->middleware(['auth']);
+    Route::post('/update-to-cart', [CartController::class, 'updatetocart'])->name('customer.updatetocart')->middleware(['auth']);
+    Route::put('/increase-qty', [CartController::class, 'increaseQty'])->name('customer.increaseQty')->middleware(['auth']);
+    Route::put('/decrease-qty', [CartController::class, 'decreaseQty'])->name('customer.decreaseQty')->middleware(['auth']);
     Route::get('/check-discount', [CartController::class, 'checkDiscount'])->name('customer.checkDiscount')->middleware(['auth', 'verified']);
 
     /* START OF ONLINE COURSE ROUTING */

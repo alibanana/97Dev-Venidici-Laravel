@@ -36,7 +36,7 @@
   </head>
   <body style="padding-right:0px !important">
     <!-- Modal Loading -->
-    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" style="z-index:99" aria-labelledby="loadingModal" aria-hidden="true">
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog"  aria-labelledby="loadingModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body" style="text-align:center;height:20vw">
@@ -126,7 +126,7 @@
     <!-- END OF CONTACT US MODAL -->
 
     <!-- START OF POP UP LOGIN -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="loginModal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
