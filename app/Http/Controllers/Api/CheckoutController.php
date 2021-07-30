@@ -114,7 +114,6 @@ class CheckoutController extends Controller
                 'mencari_kerja'         => 'required',
                 'social_media'          => 'required',
                 'konsiderasi_lanjut'    => 'required',
-                'kenapa_memilih'        => 'required',
                 'expectation'           => 'required',
                 'bankShortCode'         => 'required',
                 'bank_account_no'       => 'required',
@@ -221,7 +220,7 @@ class CheckoutController extends Controller
             )->count();
 
             if($bootcamp_application != 0)
-                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'You already have registered for a bootcamp, please complete the payment first.');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'You already have registered for a bootcamp, please check your user dashboard.');
         }
 
         $invoiceNumberResult = Helper::generateInvoiceNumber();
@@ -338,7 +337,6 @@ class CheckoutController extends Controller
                 'mencari_kerja'         => $validated['mencari_kerja'],
                 'social_media'          => $validated['social_media'],
                 'konsiderasi_lanjut'    => $validated['konsiderasi_lanjut'],
-                'kenapa_memilih'        => $validated['kenapa_memilih'],
                 'expectation'           => $validated['expectation'],
                 'bankShortCode'         => $validated['bankShortCode'],
                 'bank_account_number'   => $validated['bank_account_no'],

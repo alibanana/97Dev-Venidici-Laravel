@@ -102,6 +102,29 @@ class DashboardController extends Controller
         $liveWorkshopPaginationData =
             CourseHelper::getDashboardLiveCoursesDataWithPagination($liveWorkshopAmountPerPage, $liveWorkshopPage);
 
+
+        // Start of dummy bootcamp data
+        $bootcampData = BootcampApplication::where('user_id',auth()->user()->id);
+        $bootcampData = $bootcampData->where(
+            [   
+                ['is_trial', '=',TRUE],
+                ['is_full_registration', '=', NULL],
+                ['status', '=', 'ft_pending']
+            ]
+        )->orWhere(
+            [   
+                ['is_trial', '=',NULL],
+                ['is_full_registration', '=', TRUE],
+                ['status', '=', 'approved']
+            ],
+        )->orWhere(
+            [   
+                ['is_trial', '=',TRUE],
+                ['is_full_registration', '=', TRUE],
+                ['status', '=', 'waiting']
+            ]
+        )->get();
+        
         // Get onGoingCoursesPaginationData from CourseHelper
         $onGoingCoursesAmountPerPage = 4;
         $onGoingCoursesPage = $request->has('onGoingCoursesPage') ? $request->onGoingCoursesPage : 1;
@@ -136,7 +159,7 @@ class DashboardController extends Controller
 
         $viewData = compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications', 'usableStarsCount',
             'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
-            'footer_reviews');
+            'footer_reviews','bootcampData');
 
         
 
@@ -480,7 +503,7 @@ class DashboardController extends Controller
         }
     }
 
-    public function upgradeBootcamp(Request $request, $id){
+    public function upgradeBootcamp($id){
             $application = BootcampApplication::findOrFail($id);
             $application->status = 'waiting';
             $application->is_full_registration = TRUE;

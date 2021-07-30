@@ -38,7 +38,7 @@ class BootcampController extends Controller
 
     // Shows the Client's Main Bootcamp Page.
     public function index(Request $request) {
-        $course = Course::findOrFail(7);
+        $course = Course::findOrFail(6);
         $provinces = Province::all();
         $cities = City::all();
 
