@@ -479,4 +479,30 @@ class DashboardController extends Controller
             return redirect()->back()->with('redeem_failed','Stars kamu tidak mencukupi');
         }
     }
+
+    public function upgradeBootcamp(Request $request, $id){
+            $application = BootcampApplication::findOrFail($id);
+            $application->status = 'waiting';
+            $application->is_full_registration = TRUE;
+            $application->save();
+
+            $title = 'Pendaftaran Bootcamp kamu sedang di review!';    
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu sedang direview oleh tim kami. Klik disini untuk melihat status';    
+            
+            $notification_data = [
+                'user_id' => $application->user_id,
+                'isInformation' => 1,
+                'title' => $title,
+                'description' => $description,
+                'link' => '/dashboard'
+            ];
+    
+            // Create notification for user.
+            $notification = Notification::create($notification_data);
+    
+            $message = 'Terimakasih! Pendaftaran Bootcamp kamu sedang di review.';
+    
+            return redirect()->back()->with('message', $message);
+    
+    }
 }
