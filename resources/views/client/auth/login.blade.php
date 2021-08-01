@@ -105,12 +105,6 @@
                                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;">Belum punya akun? <span> <a href="{{ route('custom-auth.signup_general_info.index') }}">Daftar di sini</a> </span> </p>
                                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;cursor:pointer"><span> <a href="#forget-password">Lupa Password</a> </span> </p>
                             </div>
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;margin-bottom:0.4vw;margin-top:1vw;margin-bottom:1vw">OR</p>
-                            <a href="{{ route('login.google') }}" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;width:100%;display:inline-block;background-color:#67BBA3;border:none;color:#FFFFFF;border-radius:5px;padding:0.5vw 2vw;text-decoration:none"> <i class="fab fa-google"></i> <span style="margin-left:0.5vw">Login with Google Account</span></a>
-                                <div style="text-align:center !important">
-                            </div>
-                            <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;">Belum punya akun? <span> <a href="{{ route('custom-auth.signup_general_info.index') }}">Daftar di sini</a> </span> </p>
-                            <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;cursor:pointer"><span> <a href="#forget-password">Lupa Password</a> </span> </p>
                         </div>
                     </div>   
                 </div>
