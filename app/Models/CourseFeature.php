@@ -13,7 +13,8 @@ class CourseFeature extends Model
 
     protected $fillable = [
         'course_id',
-        'requirement'
+        'title',
+        'feature'
     ];
 
     public function course() {

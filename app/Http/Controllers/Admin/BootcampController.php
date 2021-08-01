@@ -11,9 +11,11 @@ use App\Helper\CourseHelper;
 use App\Models\CourseCategory;
 use App\Models\CourseType;
 use App\Models\Course;
-use App\Models\CourseRequirement;
+use App\Models\BootcampCourseDetail;
 use App\Models\CourseFeature;
 use App\Models\Hashtag;
+use App\Models\BootcampApplication;
+use App\Models\Notification;
 
 class BootcampController extends Controller
 {
@@ -152,42 +154,31 @@ class BootcampController extends Controller
      */
     public function store(Request $request)
     {
-
         $validated = Validator::make($request->all(), [
             'title' => 'required',
             'thumbnail' => 'required|mimes:jpeg,jpg,png',
             'subtitle' => 'required',
             'course_category_id' => 'required',
-            'preview_video_link' => 'required|starts_with:https://www.youtube.com/embed/',
-            'link' => '',
+            'meeting_link' => '',
             'description' => 'required',
-            'requirements' => 'required|array|min:1',
+            'date_start' => 'required',
+            'date_end' => 'required',
+            'trial_date_end' => 'required',
             'hashtags' => 'required|array|min:1'
 
         ])->setAttributeNames([
             'course_category_id' => 'category',
-            'preview_video_link' => 'video link',
         ])->validate();
 
-        $course = new Course;
-        $course->course_type_id = 3; //3 seharusnya bootcamp
+        $course                     = new Course;
+        $course->course_type_id     = 3; //3 seharusnya bootcamp
         $course->course_category_id = $validated['course_category_id'];
-        $course->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/bootcamp-courses/');
-        $course->preview_video = $validated['preview_video_link'];
-        $course->title = $validated['title'];
-        $course->subtitle = $validated['subtitle'];
-        $course->description = $validated['description'];
-        $course->link = $validated['link'];
+        $course->thumbnail          = Helper::storeImage($request->file('thumbnail'), 'storage/images/bootcamp-courses/');
+        $course->title              = $validated['title'];
+        $course->subtitle           = $validated['subtitle'];
+        $course->description        = $validated['description'];
         $course->save();
 
-        foreach ($request->requirements as $requirement_value) {
-            if ($requirement_value != "") {
-                $new_requirement = new CourseRequirement;
-                $new_requirement->course_id = $course->id;
-                $new_requirement->requirement = $requirement_value;
-                $new_requirement->save();
-            }
-        }
 
         $added_hashtag_ids = [];
         foreach ($request->hashtags as $tag_id) {
@@ -197,7 +188,15 @@ class BootcampController extends Controller
         }
         $course->hashtags()->attach($added_hashtag_ids);
 
-        return redirect()->route('admin.bootcamp.index')->with('message', 'New Online Course has been added!');
+        $bootcampCourseDetail                   = new BootcampCourseDetail;
+        $bootcampCourseDetail->course_id        = $course->id;
+        $bootcampCourseDetail->meeting_link     = $validated['meeting_link'];
+        $bootcampCourseDetail->date_start       = $validated['date_start'];
+        $bootcampCourseDetail->date_end         = $validated['date_end'];
+        $bootcampCourseDetail->trial_date_end   = $validated['trial_date_end'];
+        $bootcampCourseDetail->save();
+
+        return redirect()->route('admin.bootcamp.index')->with('message', 'New Bootcamp has been added!');
     }
 
     /**
@@ -217,11 +216,38 @@ class BootcampController extends Controller
             return redirect()->route('admin.bootcamp.show', $id);
         }
 
-        $users = $course->users();
+        $users = BootcampApplication::where('course_id',$id);
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
                 $users = $users->orderBy('created_at', 'desc');
+            } else {
+                $users = $users->orderBy('created_at');
+            }
+        } else {
+            $users = $users->orderBy('created_at', 'desc');
+        }
+        if ($request->has('filter')) {
+            if ($request['filter'] == "ft_pending") {
+                $users = $users->where('status', 'ft_pending');
+            }
+            elseif($request['filter'] == "ft_paid") {
+                $users = $users->where('status', 'ft_paid');
+            }
+            elseif($request['filter'] == "ft_refunded") {
+                $users = $users->where('status', 'ft_refunded');
+            }
+            elseif($request['filter'] == "ft_cancelled") {
+                $users = $users->where('status', 'ft_cancelled');
+            }
+            elseif($request['filter'] == "waiting") {
+                $users = $users->where('status', 'waiting');
+            }
+            elseif($request['filter'] == "approved") {
+                $users = $users->where('status', 'approved');
+            }
+            elseif($request['filter'] == "denied") {
+                $users = $users->where('status', 'denied');
             } else {
                 $users = $users->orderBy('created_at');
             }
@@ -283,5 +309,66 @@ class BootcampController extends Controller
     public function setPublishStatusToOpposite(Request $request, $id) {
         $result = CourseHelper::setPublishStatusToOppositeById($id);
         return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+    }
+
+    // Remove a syllabus from an existing Course's Section-Content.
+    public function removeSyllabus($id) {
+        $content = BootcampCourseDetail::where('course_id',$id)->first();
+
+        if (!is_null($content->syllabus)) {
+            unlink($content->syllabus);
+            $content->syllabus = null;
+            $content->save();
+        }
+
+        $message = 'Syllabus in Course (' . $content->course->title  . ') has been deleted from the database';
+
+        return redirect()->route('admin.bootcamp.edit', $id)
+            ->with('message', $message)
+            ->with('page-option', 'basic-informations');
+    }
+
+    public function changeApplicationStatus(Request $request, $id){
+        $application = BootcampApplication::findOrFail($id);
+        if($request->action == 'Approved')
+        {
+            $application->status = 'approved';
+            $title = 'Selamat, pendaftaran Bootcamp kamu telah diterima!';
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah diterima. Klick disin untuk melihat status';    
+        }
+        elseif($request->action == 'Reject'){
+            $application->status = 'denied';
+            $title = 'Ouch.. pendaftaran Bootcamp kamu telah ditolak!';    
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah ditolak.';    
+        }
+        elseif($request->action == 'Refund'){
+            $application->status = 'ft_refunded';
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu telah berhasil di refund.';    
+
+            $title = 'Pendaftaran Bootcamp kamu telah di refund!';    
+        }
+        elseif($request->action == 'Upgrade'){
+            $title = 'Pendaftaran Bootcamp kamu sedang di review!';    
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu sedang direview oleh tim kami. Klik disini untuk melihat status';    
+            $application->status = 'waiting';
+
+        }
+        
+        $application->save();
+        $notification_data = [
+            'user_id' => $application->user_id,
+            'isInformation' => 1,
+            'title' => $title,
+            'description' => $description,
+            'link' => '/dashboard'
+        ];
+
+        // Create notification for user.
+        $notification = Notification::create($notification_data);
+
+        $message = 'Application for user (' . $application->name . ') has been changed to '.$application->status.'!';
+
+        return redirect()->route('admin.bootcamp.show',$application->course_id)->with('message', $message);
+
     }
 }

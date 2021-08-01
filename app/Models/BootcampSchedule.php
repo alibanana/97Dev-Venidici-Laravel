@@ -10,9 +10,11 @@ class BootcampSchedule extends Model
     use HasFactory;
 
     protected $fillable = [
-        'date_time',
+        'course_id',
+        'date_start',
+        'date_end',
         'title',
-        'detail',
+        'subtitle',
     ];
 
     protected $casts = [
@@ -21,5 +23,9 @@ class BootcampSchedule extends Model
 
     public function course() {
         return $this->belongsTo(Course::class);
+    }
+
+    public function bootcampScheduleDetails() {
+        return $this->hasMany(BootcampScheduleDetail::class);
     }
 }

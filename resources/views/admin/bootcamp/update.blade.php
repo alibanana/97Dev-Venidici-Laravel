@@ -4,6 +4,43 @@
 
 @section('container')
 
+<!-- Modal Loading -->
+<div class="modal fade" id="bootcampFeatureModal" tabindex="-1" role="dialog" aria-labelledby="bootcampFeatureModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="POST" action="{{route('admin.bootcamp-feature.update')}}">
+            @csrf
+            {{ method_field('PUT') }}
+            <div class="modal-body">
+                <div class="form-group mt-2">
+					<input type="text" name="title" required class="form-control form-control-user"
+						id="bootcap_feature_title" placeholder="Insert feature title">
+					@error('title')
+						<span class="invalid-feedback" role="alert" style="display: block !important;">
+							<strong>{{ $message }}</strong>
+						</span>
+					@enderror
+				</div>
+                <div class="form-group mt-2">
+					<textarea name="feature" id="bootcap_feature_description" class="form-control"></textarea>
+					@error('feature')
+						<span class="invalid-feedback" role="alert" style="display: block !important;">
+							<strong>{{ $message }}</strong>
+						</span>
+					@enderror
+				</div>
+            </div>
+            <div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <input type="hidden" name="bootcamp_feature_id" id="bootcamp_feature_id">
+				<button class="btn btn-primary" type="submit">Confirm</button>   
+			</div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END OF MODAL Loading -->
+
 <!-- Main Content -->
 <div id="content">
 
@@ -24,13 +61,20 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h2 class="mb-0 mb-3 text-gray-800">Update Bootcamp</h2>
         </div>
-        <div class="d-sm-flex align-items-center mb-2">
-            <h5 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h5>
-            <!-- <h5 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h5> -->
-            <h5 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="margin-left:1.5vw;cursor:pointer">Pricing & Enrollment Scenario</h5>
-            <h5 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="margin-left:1.5vw;cursor:pointer">Publish Status</h5>
-            <h5 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="margin-left:1.5vw;cursor:pointer">Teacher</h5>
-            <h5 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="margin-left:1.5vw;cursor:pointer">Schedule</h5>
+        <div class="mb-2" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap">
+            <h6 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h6>
+            <!-- <h6 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h6> -->
+            <h6 id="feature-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer;">Feature</h6>
+            <h6 id="about-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer;">About</h6>
+            <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="cursor:pointer;">Pricing & Enrollment Scenario</h6>
+            <h6 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="cursor:pointer;">Publish Status</h6>
+            <h6 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="cursor:pointer;">Teacher</h6>
+            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="cursor:pointer;">Schedule</h6>
+            <h6 id="benefit-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'benefit-page')" style="cursor:pointer;">Benefit</h6>
+            <h6 id="candidate-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'candidate-page')" style="cursor:pointer;">Candidate</h6>
+            <h6 id="career-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'future-career-page')" style="cursor:pointer;">Future Careers</h6>
+            <h6 id="partner-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'hiring-partner-page')" style="cursor:pointer;">Hiring Partners</h6>
+            <h6 id="batch-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'batch-page')" style="cursor:pointer;">Batch</h6>
         </div>
         
         <!-- Content Row -->
@@ -103,23 +147,33 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Embed youtube link for preview  (src only)</label>
-                            <input type="text" name="preview_video_link" class="form-control form-control-user"
-                                    id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg"
-                                    value="{{ old('preview_video_link', $course->preview_video) }}" required>
-                            @error('preview_video_link')
+                            <label for="">Zoom link</label>
+                            <input type="text" name="meeting_link" class="form-control form-control-user" value="{{ old('meeting_link', $course->bootcampCourseDetail->meeting_link) }}"
+                                    placeholder="e.g. https://meet.google.com/pdq-umxk-fuv"> 
+                            @error('meeting_link')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror
+                            @enderror               
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="">Zoom link</label>
-                            <input type="text" name="link" class="form-control form-control-user" value="{{ old('link', $course->link) }}"
-                                    placeholder="e.g. https://meet.google.com/pdq-umxk-fuv" required> 
-                            @error('link')
+                            <label for="">Syllabus</label> <br>
+                            <!-- if there is no attachment, change the text below to "no attachment" -->
+                            @if ($course->bootcampCourseDetail->syllabus)
+                                <div style="display:flex;align-items:center">
+                                    <p style="margin-bottom:0px;padding-right:2vw"> <span> <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}" target="_blank">click here</a> </span> to view current attachment</p>
+                                    <div style="padding: 0px 2px">
+                                        <button form="removeAttachmentForm" class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to remove this Syllabus?')">Remove Syllabus</button>
+                                    </div>
+                                </div>
+                            @else
+                                <p>No attachment available.</p>
+                            @endif
+                            <input type="file" name="syllabus" class="" value="{{ old('syllabus', $course->bootcampCourseDetail->syllabus) }}"
+                                    > 
+                            @error('meeting_link')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -173,37 +227,49 @@
                             @enderror             
                         </div>
                     </div>
-                    <div class="col-6" style="margin-top:3vw">
-                        <label for="">Persyaratan <span style="color: orange">(At least one element must be present!)</span></label>
-                        @error('requirements')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        {{-- Element to be duplicated --}}
-                        <div id="requirement_duplicator_wrapper">
-                            <div class="row" id="requirement_duplicator" style="display:none">
-                                <div class="col-md-12">
-                                    <div class="form-group" style="display:flex">
-                                        <input type="text" class="form-control form-control-user" placeholder="Enter Student Requirement">
-                                        <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            @foreach ($course->courseRequirements as $requirement)
-                                <div class="row" id="requirement_duplicator{{ $loop->iteration }}">
-                                    <div class="col-md-12">
-                                        <div class="form-group" style="display:flex">
-                                            <input type="text" name="requirements[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="{{ $requirement->requirement }}" required>
-                                            <button type="button" onClick="removeDiv(this, 'requirement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Date Start</label>
+                            @php
+                            $date_start = explode(" ", $course->bootcampCourseDetail->date_start);
+                            @endphp
+                            <input type="datetime-local" name="date_start" class="form-control" value="{{ old('date_start', $date_start[0].'T'.$date_start[1]) }}">
+                            @error('date_start')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <button type="button" id="add_requirement" onlick="duplicateRequirement()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
                     </div>
-
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Date End</label>
+                            @php
+                            $date_end = explode(" ", $course->bootcampCourseDetail->date_end);
+                            @endphp
+                            <input type="datetime-local" name="date_end" class="form-control" value="{{ old('date_end', $date_end[0].'T'.$date_end[1]) }}" >
+                            @error('date_end')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Free Trial Date End</label>
+                            @php
+                            $trial_date_end = explode(" ", $course->bootcampCourseDetail->trial_date_end);
+                            @endphp
+                            <input type="datetime-local" name="trial_date_end" class="form-control" value="{{ old('trial_date_end', $trial_date_end[0].'T'.$trial_date_end[1]) }}">
+                            @error('trial_date_end')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div> 
+                    <div class="col-6"></div>
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
                         <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
@@ -260,6 +326,165 @@
         <!-- END OF BASIC INFORMATION-->
 
 
+        <!-- START OF FEATURE -->
+        <div class="course-content" id="bootcamp-feature" style="display:none">
+            <form action="{{route('admin.bootcamp-feature.store', $course->id)}}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <input type="text" class="form-control" name="title" placeholder="Insert Title">
+                    @error('title')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror   
+                </div>
+                <div class="col-12 mt-2">
+                    <textarea name="feature" rows="5" class="form-control" placeholder="Insert Description"></textarea>
+                    @error('feature')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
+                </div>
+                <div class="col-12 mt-2">
+                    <div style="display:flex;justify-content:flex-end">
+                        <button type="submit"  class="btn btn-primary btn-user p-3">Create New Feature</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="row" style="margin-top:2vw">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th >Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($course->courseFeatures as $feature)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$feature->title}}</td>
+                                    <td>
+                                        {{$feature->feature}}
+                                    </td>
+                                    <td>
+                                        <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                            <a onclick="passBootcampFeature('{{$feature->title}}','{{$feature->feature}}','{{$feature->id}}')" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" data-toggle="modal" data-target="#bootcampFeatureModal">
+                                                Update
+                                            </a>
+                                            <form action="{{route('admin.bootcamp-feature.destroy', $feature->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp feature?')">Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- END OF FEATURE -->
+        
+        <!-- START OF BOOTCAMP DESCRIPTIONS -->
+        <div class="course-content" id="bootcamp-descriptions" style="display:none" >
+            <form action="{{route('admin.bootcamp-about.store', $course->id)}}" method="post"  enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <input type="file"  accept=".jpg,,jpeg,.png" name="image">
+                    @error('image')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror  
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control" name="title" placeholder="Insert Title">
+                    @error('title')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror  
+                </div>
+                <div class="col-12 mt-2">
+                    <textarea name="description" rows="5" class="form-control" placeholder="Insert Description"></textarea>
+                    @error('description')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror  
+                </div>
+                <div class="col-12 mt-2">
+                    <div style="display:flex;justify-content:flex-end">
+                        <button type="submit"  class="btn btn-primary btn-user p-3">Create New About</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="row" style="margin-top:2vw">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th >Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($course->bootcampDescriptions as $about)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        <img src="{{ asset($about->image) }}" alt="Thumbnail not available.." style="width:14vw;" class="img-fluid">
+                                    </td>
+                                    <td>{{$about->title}}</td>
+                                    <td>{{$about->description}}</td>
+                                    <td>
+                                        <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                            <a class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="{{route('admin.bootcamp.about-edit', $about->id)}}">
+                                                Update
+                                            </a>
+                                            <form action="{{route('admin.bootcamp-about.destroy', $about->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp item?')">Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- END OF BOOTCAMP DESCRIPTIONS -->
+
+
         <!-- START OF PRICE AND ENROLLMENT -->
         <div class="course-content" id="pricing-enrollment" style="display:none">
             <form action="{{ route('admin.bootcamp.update-pricing-enrollment', $course->id) }}" method="POST">
@@ -290,26 +515,22 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <h5 for="">Pricing Options</h5>
-                            <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" onclick="disableInput()" name="is_free" value="1" id="pricing_options" 
-                                    @if($course->price == 0) checked @endif>
-                                <label class="form-check-label" for="pricing_options">
-                                    Free
-                                </label>
-                            </div>
-                            <div class="form-check" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" onclick="enableInput()" name="is_free" value="0" id="pricing_options" 
-                                @if($course->price != 0) checked @endif    >
-                                <label class="form-check-label" for="pricing_options">One-Time Purchase (Rp.)</label> <br>
-                                <input type="number" name="price" style="margin-top:0.5vw" id="price-input" class="form-control form-control-user"
-                                    id="phone" aria-describedby="" value="{{ old('price', $course->price) }}" placeholder="e.g. 10000" >
-                            </div>
-                            @error('price')
+                            <h5 for="">Full Registration Price</h5>
+                            <input class="form-control" type="text" name="bootcamp_full_price" value="{{ old('price', $course->bootcampCourseDetail->bootcamp_full_price) }}">
+                            @error('bootcamp_full_price')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror               
+                            @enderror 
+                        </div>
+                        <div class="form-group">
+                            <h5 for="">Free Trial Registration Price</h5>
+                            <input class="form-control" type="text" name="bootcamp_trial_price" value="{{ old('price', $course->bootcampCourseDetail->bootcamp_trial_price) }}">
+                            @error('bootcamp_trial_price')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror 
                         </div>
                     </div>
                     
@@ -389,6 +610,7 @@
                                     <th>No.</th>
                                     <th>Teacher</th>
                                     <th>Description</th>
+                                    <th>Company Logo</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -398,9 +620,12 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td style="text-align:center" class="text-nowrap">
                                             <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="Teacher's profile not available..">
-                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }}</p>
+                                            <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }} <br> <span style="font-weight: italic !important;">{{$teacher->occupancy}}</span>​</p>
                                         </td>
                                         <td>{{ $teacher->description }}</td>  
+                                        <td>
+                                            <img src="{{ asset($teacher->company_logo) }}" alt="Company logo not available.." style="width:10vw;" class="img-fluid">
+                                        </td>
                                         <td>
                                             @if ($teacher->courses()->where('course_id', $course->id)->first())
                                                 <div class="d-sm-flex align-items-center justify-content-center mb-4">
@@ -436,30 +661,490 @@
         </div>
         <!-- END OF Teacher-->
 
+        <!-- START BENEFITS-->
+        <div class="course-content" id="benefit-page" style="display:none">
+            <form action="{{route('admin.bootcamp-benefit.store',$course->id)}}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input type="text" name="title" class="form-control form-control-user"
+                            placeholder="Enter benefit title"  required> 
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="4" placeholder="Enter benefit description"></textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Benefit</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach($course->bootcampBenefits as $benefit)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-benefit.update', $benefit->id)}}">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <td>
+                                            <input type="text" name="title" value="{{$benefit->title}}" class="form-control">
+                                            @error('title')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="description" cols="30" rows="4" >{{$benefit->description}}</textarea>
+                                            @error('description')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
+                                        </td>
+                                        <td>
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                    </div>
+                                                </form> 
+                                                <form action="{{route('admin.bootcamp-benefit.destroy', $benefit->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp benefit?')">Delete</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END BENEFITS-->
+        <!-- START OF CANDIDATES-->
+        <div class="course-content" id="candidate-page" style="display:none">
+            <form action="{{route('admin.bootcamp-candidate.store', $course->id)}}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input type="text" name="title" class="form-control form-control-user"
+                            placeholder="Enter candidate title"  required> 
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="4" placeholder="Enter candidate description"></textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Candidate</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach($course->bootcampCandidates as $candidate)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-candidate.update', $candidate->id)}}">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <td>
+                                            <input type="text" name="title" value="{{$candidate->title}}" class="form-control">
+                                            @error('title')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror  
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="description" cols="30" rows="4" >{{$candidate->description}}</textarea>
+                                            @error('description')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror  
+                                        </td>
+                                        <td>
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                    </div>
+                                                </form> 
+                                                <form action="{{route('admin.bootcamp-candidate.destroy', $candidate->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <div style="padding: 0px 2px">
+                                                        <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp future candidate?')">Delete</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF CANDIDATES-->
+
+        <!-- START OF FUTURE CAREERS-->
+        <div class="course-content" id="future-career-page" style="display:none">
+            <form action="{{route('admin.bootcamp-future-career.store', $course->id)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Thumbnail</label> <br>
+                        <input type="file"  accept=".jpg,,jpeg,.png" name="thumbnail" class="" required> 
+                        @error('thumbnail')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input type="text" name="title" class="form-control form-control-user"
+                            placeholder="Enter berkarir jadi apa title"  required> 
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="4" placeholder="Enter berkarir jadi apa description"></textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-12 pt-2">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Future Career</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Thumbnail</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($course->bootcampFutureCareers as $career)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-future-career.update', $career->id)}}" enctype="multipart/form-data">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <td>
+                                            <div class="form-group">
+                                                <label for="">Thumbnail</label> <br>
+                                                <img src="{{ asset($career->thumbnail) }}" alt="Thumbnail not available.." style="width:10vw;" class="img-fluid">
+                                                <br>
+                                                <br>
+                                                Click button below to update image
+                                                <input type="file" name="thumbnail" aria-describedby="" accept=".jpg,,jpeg,.png"> 
+                                                @error('thumbnail')
+                                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror               
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="title" value="{{$career->title}}" class="form-control">
+                                            @error('title')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="description" cols="30" rows="4" >{{$career->description}}</textarea>
+                                            @error('description')
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
+                                        </td>
+                                        <td>
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                </div>
+                                            </form> 
+                                            <form action="{{route('admin.bootcamp-future-career.destroy', $career->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp future candidate?')">Delete</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </form>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF FUTURE CAREERS-->
+
+        <!-- START OF HIRING PARTNERS-->
+        <div class="course-content" id="hiring-partner-page" style="display:none">
+            <form action="{{route('admin.bootcamp-hiring-partner.store', $course->id)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Image</label> <br>
+                        <input type="file" accept=".jpg,,jpeg,.png" name="image" class="" required> 
+                        @error('image')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Hiring Partner</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Partner</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach($course->bootcampHiringPartners as $partner)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-hiring-partner.update', $partner->id)}}" enctype="multipart/form-data">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <td>
+                                            <div class="form-group">
+                                                <label for="">Company Image</label> <br>
+                                                <img src="{{ asset($partner->image) }}" alt="Image not available.." style="width:10vw;" class="img-fluid">
+                                                <br>
+                                                <br>
+                                                Click button below to update image <br>
+                                                <input type="file" name="image" aria-describedby="" accept=".jpg,,jpeg,.png"> 
+                                                @error('image')
+                                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror               
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                </div>
+                                            </form> 
+                                            <form action="{{route('admin.bootcamp-hiring-partner.destroy', $partner->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp hiring partner?')">Delete</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </form>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF HIRING PARTNERS-->
+
         <!-- START OF Schedule-->
         <div class="course-content" id="schedule-page" style="display:none">
             <form action="{{route('admin.bootcampschedule.store', $course->id)}}" method="post">
             @csrf
             <div class="row mt-2 mb-3">
                 <div class="col-12">
-                    <p>Create New Schedule</p>
+                    <h5>Create New Schedule</h5>
                 </div>
-               <div class="col-6">
-                   <input type="datetime-local" name="date_time" class="form-control">
+                <div class="col-6">
+                    <label for="">Date Start</label>
+                    <input type="date" name="date_start" class="form-control">
+                    @error('date_start')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
                 </div>
-               <!-- <div class="col-4"><input type="time" class="form-control"></div> -->
-               <div class="col-6">
-                   <input type="text" name="title" placeholder="title" class="form-control">
+                <div class="col-6">
+                    <label for="">Date End</label>
+                    <input type="date" name="date_end" class="form-control">
+                    @error('date_end')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
                 </div>
-               <div class="col-12 pt-3">
-                   <textarea name="detail" id="" class="form-control" rows="3" placeholder="insert description"></textarea>
-               </div>
-               <div class="col-12 pt-3">
+                <!-- <div class="col-4"><input type="time" class="form-control"></div> -->
+                <div class="col-6 pt-3">
+                    <label for="">Schedule Title</label>
+                    <input type="text" name="title" placeholder="Insert Title" class="form-control">
+                    @error('title')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
+                </div>
+                <div class="col-6 pt-3">
+                    <label for="">Schedule Sub-Title</label>
+                    <input type="text" name="subtitle" placeholder="Insert Sub Title" class="form-control">
+                    @error('subtitle')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror 
+                </div>
+
+                <div class="col-6 pt-3">
+                    <label for="">Detail <span style="color: orange">(At least one element must be present!)</span></label>
+                    @error('schedule_details')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div id="weekly_schedule_detail_duplicator_wrapper">
+                        {{-- Element to be duplicated --}}
+                        <div class="row" id="weekly_schedule_duplicator" style="display:none">
+                            <div class="col-md-12">
+                                <div class="form-group" style="display:flex">
+                                    <input type="text" class="form-control form-control-user" placeholder="e.g. Pirate funneling">
+                                    <button type="button" onClick="removeDiv(this, 'weekly_schedule_detail_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="weekly_schedule_duplicator1">
+                            <div class="col-md-12">
+                                <div class="form-group" style="display:flex">
+                                    <input type="text" name="schedule_details[]" class="form-control form-control-user" placeholder="e.g. Pirate funneling" required>
+                                    <button type="button" onClick="removeDiv(this, 'weekly_schedule_detail_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add_schedule_detail" onlick="duplicateSchedule()" class="" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+                </div>
+
+
+                <div class="col-12 pt-3">
                    <div style="display:flex;justify-content:flex-end">
                     <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Schedule</button>
 
                    </div>
-               </div>
+                </div>
             </div>                
             </form>
             
@@ -470,44 +1155,35 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Date Time</th>
                                     <th>Title</th>
-                                    <th>Description</th>
+                                    <th>Sub Title</th>
+                                    <th>Event Dates</th>
+                                    <th>Detail</th>
                                     <th >Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($schedules as $schedule)
+                                @foreach($course->bootcampSchedules as $schedule)
                                 <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$schedule->title}}</td>
+                                    <td>{{$schedule->subtitle}}</td>
+                                    <td>{{$schedule->date_start}} - {{$schedule->date_end}}</td>
                                     <td>
-                                    {{ $loop->iteration }}
+                                        @foreach($schedule->bootcampScheduleDetails as $detail)
+                                        <p>- {{$detail->description}}</p>
+                                        @endforeach
                                     </td>
-                                    @php
-                                        $datetime_default  = date('c', strtotime($schedule->date_time));
-                                        $datetime = explode("+", $datetime_default);
-                                    @endphp
-                                    
-                                    <form action="{{route('admin.bootcampschedule.update',$schedule->id)}}" method="post">
-                                    <td><input type="datetime-local" name="date_time" value="{{ $datetime[0]}}" class="form-control"></td>
-                                    <!-- <td><input type="time" class="form-control"></td> -->
-                                    <td><input type="text" value="{{$schedule->title}}" name="title" class="form-control"></td>
-                                    <td><textarea name="detail" id="" rows="3" class="form-control">{{$schedule->detail}}</textarea></td>  
                                     <td>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                @csrf
-                                                @method('put')
-                                                
-                                                <div style="padding: 0px 2px">
-                                                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to update this schedule?')">Update</button>
-                                                </div>
-                                            </form> 
-                                        </div>
-                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                            <form action="{{route('admin.bootcampschedule.destroy',$course->id)}}" method="post">
+                                        <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                            <a class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" href="{{route('admin.bootcampschedule.edit',$schedule->id)}}" >
+                                                Update
+                                            </a>
+                                            <form action="{{route('admin.bootcampschedule.destroy', $schedule->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <div style="padding: 0px 2px">
-                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp schedule?')">Delete</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -521,6 +1197,91 @@
             </div>
         </div>
         <!-- END OF Schedule-->
+
+
+        <!-- START OF BATCH-->
+        <div class="course-content" id="batch-page" style="display:none">
+            <form action="{{route('admin.bootcamp-batch.store', $course->id)}}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Date</label> <br>
+                        <input type="date" accept=".jpg,,jpeg,.png" name="date" class="form-control" required> 
+                        @error('image')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6">
+                   <div style="display:flex;justify-content:flex-end">
+                    <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Create New Batch</button>
+
+                   </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="card shadow mb-4 mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach($course->bootcampBatches as $batch)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <form method="POST" action="{{route('admin.bootcamp-batch.update', $batch->id)}}" enctype="multipart/form-data">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="date" name="date" value="{{$batch->date}}" aria-describedby=""> 
+                                                @error('date')
+                                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror               
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding: 0px 2px;" class="text-nowrap d-flex">
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit">Update</button>
+                                                </div>
+                                            </form> 
+                                            <form action="{{route('admin.bootcamp-batch.destroy', $batch->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <div style="padding: 0px 2px">
+                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this bootcamp batch?')">Delete</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </form>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF BATCH-->
+
+        <form id="removeAttachmentForm" action="{{ route('admin.bootcamp.remove-syllabus', $course->id) }}" method="post">
+            @csrf
+            @method('delete')
+        </form> 
         
     </div>
     <!-- /.container-fluid -->
@@ -597,6 +1358,26 @@ function removeDiv(elem, wrapper_id){
     }
 }
 </script>
+<script>
+    function passBootcampFeature(title,description,bootcamp_feature_id) {
+		document.getElementById("bootcap_feature_title").value = title;
+		document.getElementById("bootcap_feature_description").value = description;
+		document.getElementById("bootcamp_feature_id").value = bootcamp_feature_id;
+    }
+</script>
+
+<script>
+document.getElementById('add_schedule_detail').onclick = duplicateSchedule;
+var i = 1; var original2 = document.getElementById('weekly_schedule_duplicator');
+function duplicateSchedule() {
+    var clone = original2.cloneNode(true); // "deep" clone
+    $(clone).find("input").attr("name","schedule_details[]");
+    $(clone).find("input").attr("required", "");
+    clone.style.display = "block";
+    clone.id = "weekly_schedule_duplicator" + ++i; // there can only be one element with an ID
+    original2.parentNode.appendChild(clone);
+}
+</script>
 @if (Session::has('page-option'))
     @if (Session::get('page-option') == 'basic-informations')
         <script>document.getElementById('basic-information-button').click()</script>
@@ -610,6 +1391,20 @@ function removeDiv(elem, wrapper_id){
         <script>document.getElementById('teacher-button').click()</script>
     @elseif (Session::get('page-option') == 'schedule-page')
         <script>document.getElementById('schedule-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'bootcamp-feature-page')
+        <script>document.getElementById('feature-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'bootcamp-about-page')
+        <script>document.getElementById('about-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'benefit-page')
+        <script>document.getElementById('benefit-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'candidate-page')
+        <script>document.getElementById('candidate-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'future-career-page')
+        <script>document.getElementById('career-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'hiring-partner-page')
+        <script>document.getElementById('partner-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'batch-page')
+        <script>document.getElementById('batch-page-button').click()</script>
     @endif
 @endif
 @endsection

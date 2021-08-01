@@ -73,6 +73,7 @@
                                             <th>No.</th>
                                             <th>Teacher</th>
                                             <th>Description</th>
+                                            <th>Company Logo</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -82,9 +83,12 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td style="text-align:center" class="text-nowrap">
                                                     <img src="{{ asset($teacher->image) }}" class="img-fluid" style="width:5vw" alt="">
-                                                    <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }}</p>
+                                                    <p style="color:black;font-weight:bold;margin-bottom:0px;margin-top:1vw">{{ $teacher->name }} <br> <span style="font-weight: italic !important;">{{$teacher->occupancy}}</span>​</p>
                                                 </td>
                                                 <td>{{ $teacher->description }}</td>  
+                                                <td>
+                                                    <img src="{{ asset($teacher->company_logo) }}" alt="Company logo not available.." style="width:10vw;" class="img-fluid">
+                                                </td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                         <form action="{{ route('admin.teachers.destroy', $teacher->id) }}" method="post">

@@ -12,7 +12,9 @@ class Teacher extends Model
     protected $fillable = [
         'name',
         'description',
-        'image'
+        'image',
+        'company_logo',
+        'occupancy',
     ];
 
     public function courses() {

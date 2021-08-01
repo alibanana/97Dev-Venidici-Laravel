@@ -29,13 +29,15 @@ class DatabaseSeeder extends Seeder
             TeacherSeeder::class,
             CourseSeeder::class,
             CourseRequirementSeeder::class,
-            CourseFeatureSeeder::class,  //Kamu akan dapat? section
+
+            CourseFeatureSeeder::class, // Kamu akan dapat? section
             AssessmentSeeder::class, // Assessment & Requirements are seeded here.
             LocationSeeder::class,
             SectionSeeder::class,
             SectionContentSeeder::class,
             PromotionSeeder::class,
             ReviewSeeder::class,
+
             NotificationSeeder::class,
             KrestProgramSeeder::class,
             KrestSeeder::class,
@@ -45,6 +47,7 @@ class DatabaseSeeder extends Seeder
             StarSeeder::class,
             WokiCourseDetailSeeder::class,
             ArtSupplySeeder::class
+
         ]);
     }
 }
