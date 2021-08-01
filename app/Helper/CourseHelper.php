@@ -2,11 +2,14 @@
 
 namespace App\Helper;
 
-use Exception;
+use Throwable;
 
 use App\Models\Course;
 use App\Models\SectionContent;
 use App\Models\User;
+use App\Models\BootcampApplication;
+
+
 
 class CourseHelper {
 
@@ -55,7 +58,7 @@ class CourseHelper {
                 'data' => $course,
                 'message' => $message
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -83,7 +86,7 @@ class CourseHelper {
                 'data' => $course,
                 'message' => $message
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -117,7 +120,7 @@ class CourseHelper {
                 'data' => $course,
                 'message' => $message
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -150,7 +153,7 @@ class CourseHelper {
                 'data' => $course,
                 'message' => $message
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -180,7 +183,7 @@ class CourseHelper {
                 'data' => $user_course,
                 'message' => $message
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -211,7 +214,7 @@ class CourseHelper {
                 'data' => $course,
                 'message' => $message
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -262,7 +265,7 @@ class CourseHelper {
                 'data' => $course,
                 'message' => "Course's total duration has been updated."
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -279,7 +282,7 @@ class CourseHelper {
                 'status' => 'Success',
                 'message' => $message
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -296,7 +299,7 @@ class CourseHelper {
                 'status' => 'Success',
                 'message' => $message
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -322,7 +325,7 @@ class CourseHelper {
                 'data' => $course,
                 'message' => "Course's average rating has been updated."
             ];
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return [
                 'status' => 'Failed',
                 'message' => "Caught exception: " . $e->getMessage()
@@ -330,11 +333,77 @@ class CourseHelper {
         }
     }
 
+    private static function generateCombinedCoursesAndBootcampApplicationData($amountPerPage, $coursesData, $bootcampData) {
+        $combinedData = [];
+        foreach ($coursesData as $courses)
+            $combinedData[] = $courses;
+        foreach ($bootcampData as $bootcampData)
+            $combinedData[] = $bootcampData;
+        $combinedDataSorted = CourseHelper::sortCombinedData($combinedData);
+        $chunkCombinedSortedData = CourseHelper::chunkCombinedSortedData($amountPerPage, $combinedDataSorted);
+        return $chunkCombinedSortedData;
+    }
+
+    private static function sortCombinedData($combinedData) {
+        $results = [];
+        foreach ($combinedData as $data) {
+            if (count($results) == 0)
+                $results[] = $data;
+            else {
+                $flag = true; $index = 0;
+                while ($flag) {
+                    if ($index == count($results)) {
+                        $results[] = $data;
+                        $flag = false;
+                    } else {
+                        $dataInserted = $results[$index];
+                        if ($dataInserted->pivot) { // If courses data.
+                            $resultDateTime = strtotime($dataInserted->wokiCourseDetail->event_date . ' ' . $dataInserted->wokiCourseDetail->start_time);
+                        } else { // If bootcamp data.
+                            $resultDateTime = strtotime($dataInserted->course->bootcampCourseDetail->date_start); 
+                        }
+    
+                        if ($data->pivot) { // If courses data.
+                            $dataDateTime = strtotime($data->wokiCourseDetail->event_date . ' ' . $data->wokiCourseDetail->start_time);
+                        } else { // If bootcamp data.
+                            $dataDateTime = strtotime($data->course->bootcampCourseDetail->date_start);
+                        }
+    
+                        if ($dataDateTime <= $resultDateTime) {
+                            $results = array_merge(
+                                array_slice($results, 0, $index),
+                                [$index => $data],
+                                array_slice($results, $index)
+                            );
+                            $flag = false;
+                        }
+
+                        $index++;
+                    }
+                }
+            }
+        }
+        return $results;
+    }
+
+    private static function chunkCombinedSortedData($amountPerPage, $combinedDataSorted) {
+        $results = collect();
+        foreach ($combinedDataSorted as $data) $results->push($data);
+        return $results->chunk($amountPerPage);
+    }
+
     // Function to get live workshop courses in dashboard page. (with pagination)
     public static function getDashboardLiveCoursesDataWithPagination($amountPerPage, $page) {
-        $liveCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 1)->get()->filter(function ($course) {
+        $liveWokiData = auth()->user()->courses()->where('course_type_id', 2)->get()->filter(function ($course) {
             return $course->pivot->status == 'on-going';
-        })->chunk($amountPerPage);
+        });
+
+        $liveBootcampData = auth()->user()->bootcampApplications()->get()->filter(function ($application) {
+            return CourseHelper::isCurrentDateTimeExceedBootcampTrialDate($application) &&
+                CourseHelper::isBootcampApplicationInLiveCourses($application);
+        });
+
+        $liveCoursesData = CourseHelper::generateCombinedCoursesAndBootcampApplicationData($amountPerPage, $liveWokiData, $liveBootcampData);
         
         if ($liveCoursesData->isEmpty()) 
             return ['data' => null];
@@ -343,6 +412,7 @@ class CourseHelper {
         $isNumberOfPageExceedTotalPageAmount = $page > $totalPageAmount;
         $isFirstPage = $page == 1;
         $isLastPage = $page == $totalPageAmount;
+
         return [
             'data' => $isNumberOfPageExceedTotalPageAmount ? $liveCoursesData[0] : $liveCoursesData[$page - 1],
             'total_page_amount' => $totalPageAmount,
@@ -350,6 +420,19 @@ class CourseHelper {
             'previous_page' => $isFirstPage ? $page : $page - 1,
             'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
         ]; 
+    }
+
+    private static function isCurrentDateTimeExceedBootcampTrialDate($application) {
+        return time() < strtotime($application->course->bootcampCourseDetail->trial_date_end);
+    }
+
+    private static function isBootcampApplicationInLiveCourses($application) {
+        if ($application->is_trial && $application->is_full_registration)
+            return $application->status == 'waiting' || $application->status == 'approved';
+        else if ($application->is_full_registration)
+            return $application->status == 'waiting' || $application->status == 'approved';
+        else
+            return $application->status == 'ft_paid';
     }
 
     // Function to get skill on-going courses in dashboard page. (with pagination)
@@ -372,12 +455,12 @@ class CourseHelper {
             'current_page' => $isNumberOfPageExceedTotalPageAmount ? 1 : $page,
             'previous_page' => $isFirstPage ? $page : $page - 1,
             'next_page' => $isLastPage || $isNumberOfPageExceedTotalPageAmount ? $page : $page + 1
-        ]; 
+        ];
     }
 
     // Function to get completed course in dashboard page. (with pagination)
     public static function getDashboardCompletedCoursesDataWithPagination($amountPerPage, $page) {
-        $completedCoursesData = auth()->user()->courses()->get()->filter(function ($course) {
+        $completedCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 3)->get()->filter(function ($course) {
             return $course->pivot->status == 'completed';
         })->chunk($amountPerPage);
 

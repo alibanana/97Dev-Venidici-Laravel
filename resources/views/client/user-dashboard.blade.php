@@ -780,103 +780,42 @@
             </div>
         @else
             @foreach($liveWorkshopPaginationData['data'] as $course)
-                @if($course->course_type_id != 3)
-                <div class="col-12 p-0">
-                    <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
-                        <div class="container-image-card">
-                            <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                            <div class="top-left card-tag small-text" >Woki</div>
-                        </div>           
-                        <div style="display:flex;justify-content:space-between">
-                            <div class="right-section" style="width:37vw">
-                                <div>
-                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                                    @foreach($course->teachers as $teacher)
-                                        <span style="font-family:Rubik Bold">
-                                            @if($loop->last && count($course->teachers) != 1)
-                                            dan
-                                            @elseif(!$loop->first)
-                                            ,
-                                            @endif
-                                            {{$teacher->name}}
-                                        </span>
-                                    @endforeach
-                                    </p>   
-                                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
-                                    <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+                @if($course->course_type_id && $course->course_type_id != 3)
+                    <div class="col-12 p-0">
+                        <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
+                            <div class="container-image-card">
+                                <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                                <div class="top-left card-tag small-text" >Woki</div>
+                            </div>           
+                            <div style="display:flex;justify-content:space-between">
+                                <div class="right-section" style="width:37vw">
+                                    <div>
+                                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                        @foreach($course->teachers as $teacher)
+                                            <span style="font-family:Rubik Bold">
+                                                @if($loop->last && count($course->teachers) != 1)
+                                                dan
+                                                @elseif(!$loop->first)
+                                                ,
+                                                @endif
+                                                {{$teacher->name}}
+                                            </span>
+                                        @endforeach
+                                        </p>   
+                                        <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
+                                        <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                                <a href="/woki/{{$course->title}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
-                                <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
-                            </div>
-                        </div> 
+                                <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                    <a href="/woki/{{$course->title}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
+                                    <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
+                                </div>
+                            </div> 
+                        </div>
                     </div>
-                </div>  
-                
                 @else
-                <!-- START OF BOOTCAMP CARD -->
-                <div class="col-12 p-0">
-                    <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
-                        <div class="container-image-card">
-                            <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
-                            <div class="top-left card-tag small-text" >Bootcamp</div>
-                        </div>           
-                        <div style="display:flex;justify-content:space-between">
-                            <div class="right-section" style="width:37vw">
-                                <div>
-                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
-                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                                    @foreach($course->teachers as $teacher)
-                                        <span style="font-family:Rubik Bold">
-                                            @if($loop->last && count($course->teachers) != 1)
-                                            dan
-                                            @elseif(!$loop->first)
-                                            ,
-                                            @endif
-                                            {{$teacher->name}}
-                                        </span>
-                                    @endforeach
-                                    </p>   
-                                    <!-- <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p> -->
-                                    <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} -  {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}}</p>
-                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Application Status: <span style="color:#2B6CAA;font-family:Rubik Medium">Active</span></p>   
-
-                                </div>
-                            </div>
-                            <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                            
-                                <a href="/bootcamp" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">Upgrade</a>
-                                <a href="{{$course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
-                            </div>
-                        </div> 
-                    </div>
-                </div>  
-                <!-- END  OF BOOTCAMP CARD -->
-                @endif
-            @endforeach
-
-            @if ($liveWorkshopPaginationData['total_page_amount'] > 1)
-                <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
-                    <div class="pagination-client">
-                        <a href="{{ request()->fullUrlWithQuery([
-                            'liveWorkshopPage' => $liveWorkshopPaginationData['previous_page'],
-                            'coursesTab' => 'liveWorkshop'
-                        ]) }}"><i class="fas fa-angle-left"></i></a>
-                        @for ($i = 1; $i <= $liveWorkshopPaginationData['total_page_amount']; $i++)
-                            <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $i, 'coursesTab' => 'liveWorkshop']) }}"
-                                @if($i == $liveWorkshopPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
-                        @endfor
-                        <a href="{{ request()->fullUrlWithQuery([
-                            'liveWorkshopPage' => $liveWorkshopPaginationData['next_page'],
-                            'coursesTab' => 'liveWorkshop'
-                        ]) }}"><i class="fas fa-angle-right"></i></a>
-                    </div>
-                </div>
-            @endif
-        @endif
-        @foreach($bootcampData as $application)
+                @php $application = $course; @endphp
                 <!-- START OF BOOTCAMP CARD -->
                 <div class="col-12 p-0">
                     <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
@@ -944,7 +883,28 @@
                     </div>
                 </div>  
                 <!-- END  OF BOOTCAMP CARD -->
+                @endif
             @endforeach
+
+            @if ($liveWorkshopPaginationData['total_page_amount'] > 1)
+                <div style="display:flex;align-items:center;justify-content:center;margin-top:2vw">
+                    <div class="pagination-client">
+                        <a href="{{ request()->fullUrlWithQuery([
+                            'liveWorkshopPage' => $liveWorkshopPaginationData['previous_page'],
+                            'coursesTab' => 'liveWorkshop'
+                        ]) }}"><i class="fas fa-angle-left"></i></a>
+                        @for ($i = 1; $i <= $liveWorkshopPaginationData['total_page_amount']; $i++)
+                            <a href="{{ request()->fullUrlWithQuery(['liveWorkshopPage' => $i, 'coursesTab' => 'liveWorkshop']) }}"
+                                @if($i == $liveWorkshopPaginationData['current_page']) class="active" @endif>{{ $i }}</a>
+                        @endfor
+                        <a href="{{ request()->fullUrlWithQuery([
+                            'liveWorkshopPage' => $liveWorkshopPaginationData['next_page'],
+                            'coursesTab' => 'liveWorkshop'
+                        ]) }}"><i class="fas fa-angle-right"></i></a>
+                    </div>
+                </div>
+            @endif
+        @endif
     </div>
     <!-- End of Live Pelatihan Content -->
 
@@ -1023,7 +983,7 @@
             </div>
         @else
             @foreach($completedCoursesPaginationData['data'] as $course)
-                @if($course->course_type_id ==1)
+                @if($course->course_type_id && $course->course_type_id == 1)
                     <div class="col-12 p-0">
                         <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->title}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');">
                             <div class="container-image-card">
@@ -1061,7 +1021,7 @@
                             </div> 
                         </div>
                     </div>
-                @elseif($course->course_type_id ==2)
+                @elseif($course->course_type_id && $course->course_type_id ==2)
                     <div class="col-12 p-0">
                         <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" @if(count($course->sections ) != 0) onclick="window.open('/online-course/{{ $course->title }}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');" @endif>
                             <div class="container-image-card">
@@ -1102,6 +1062,75 @@
                             </div> 
                         </div>
                     </div>
+                @else
+                    @php $application = $course; @endphp
+                    <!-- START OF BOOTCAMP CARD -->
+                    <div class="col-12 p-0">
+                        <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
+                            <div class="container-image-card">
+                                <img src="{{asset($application->course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                                <div class="top-left card-tag small-text" >Bootcamp</div>
+                            </div>           
+                            <div style="display:flex;justify-content:space-between">
+                                <div class="right-section" style="width:37vw">
+                                    <div>
+                                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$application->course->title}}</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                        @foreach($application->course->teachers as $teacher)
+                                            <span style="font-family:Rubik Bold">
+                                                @if($loop->last && count($application->course->teachers) != 1)
+                                                dan
+                                                @elseif(!$loop->first)
+                                                ,
+                                                @endif
+                                                {{$teacher->name}}
+                                            </span>
+                                        @endforeach
+                                        </p>   
+                                        <!-- <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$application->course->subtitle}}</p> -->
+                                        <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">{{date('d M Y', strtotime($application->course->bootcampCourseDetail->date_start))}} -  {{date('d M Y', strtotime($application->course->bootcampCourseDetail->date_end))}}</p>
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Application Status: <span style="color:#2B6CAA;font-family:Rubik Medium">
+                                        @if($application->status == 'ft_pending')
+                                        <span style="color: orange;">Pending Payment</span> (Trial)
+                                        @elseif($application->status == 'ft_paid')
+                                        <span style="color: green;">Paid Payment</span> (Trial)
+                                        @elseif($application->status == 'ft_refunded')
+                                        <span style="color: orange;">Refunded</span>
+                                        @elseif($application->status == 'ft_cancelled')
+                                        <span >Cancelled</span>
+                                        @elseif($application->status == 'waiting')
+                                        <span style="color: orange;">Waiting Confirmation</span>
+                                        @elseif($application->status == 'approved')
+                                        <span style="color: green;">Approved</span>
+                                        @elseif($application->status == 'denied')
+                                        <span style="color: green;">Rejected</span>
+                                        @endif
+                                        </span></p>   
+
+                                    </div>
+                                </div>
+                                @if(
+                                    ($application->is_trial && !$application->is_full_registration && $application->status == 'ft_paid') 
+                                    || 
+                                    (!$application->is_trial && $application->is_full_registration && $application->status == 'approved') 
+                                    || 
+                                    ($application->is_trial && $application->is_full_registration && $application->status == 'waiting') 
+                                )
+                                <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                    @if($application->is_trial && !$application->is_full_registration)
+                                    <form action="{{route('bootcamp.upgrade-status', $application->id)}}" method="post">
+                                    @csrf
+                                    @method('put')
+                                        <button onclick="return confirm('Are you sure you want to upgrade?')" type="submit" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">Upgrade</button>
+                                    </form>
+                                    @endif
+                                    <a href="{{$application->course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium; @if($application->is_trial && !$application->is_full_registration) margin-top:2vw @endif">Meeting Link</a>
+                                </div>
+                                @endif
+                            </div> 
+                        </div>
+                    </div>  
+                    <!-- END  OF BOOTCAMP CARD -->
                 @endif
             @endforeach
             @if ($completedCoursesPaginationData['total_page_amount'] > 1)

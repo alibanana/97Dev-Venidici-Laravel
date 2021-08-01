@@ -62,25 +62,6 @@ class DashboardController extends Controller
         $informations = $this->informations;
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
-        
-        // $orders = Order::whereHas('invoice', function ($query){
-        //     $query->where(
-        //         [
-        //             ['status', '=', 'paid'],
-        //             ['user_id', '=', auth()->user()->id],
-        //         ],
-        //     )->orWhere(
-        //         [
-        //             ['status', '=', 'completed'],
-        //             ['user_id', '=', auth()->user()->id],
-        //         ],
-        //     );
-        //         })->orderBy('orders.created_at', 'desc')->get();
-                
-        // *Bootcamp not included for now*
-        // $bootcamp_applications = BootcampApplication::whereHas('invoice', function($query){
-        //     $query->where('status', 'paid')->orWhere('status', 'completed');
-        // })->orderBy('bootcamp_applications.created_at','desc')->get();
 
         $interests = Hashtag::all();
         $usableStarsCount = Helper::getUsableStars(auth()->user());     
@@ -101,29 +82,6 @@ class DashboardController extends Controller
         $liveWorkshopPage = $request->has('liveWorkshopPage') ? $request->liveWorkshopPage : 1;
         $liveWorkshopPaginationData =
             CourseHelper::getDashboardLiveCoursesDataWithPagination($liveWorkshopAmountPerPage, $liveWorkshopPage);
-
-
-        // Start of dummy bootcamp data
-        $bootcampData = BootcampApplication::where('user_id',auth()->user()->id);
-        $bootcampData = $bootcampData->where(
-            [   
-                ['is_trial', '=',TRUE],
-                ['is_full_registration', '=', NULL],
-                ['status', '=', 'ft_pending']
-            ]
-        )->orWhere(
-            [   
-                ['is_trial', '=',NULL],
-                ['is_full_registration', '=', TRUE],
-                ['status', '=', 'approved']
-            ],
-        )->orWhere(
-            [   
-                ['is_trial', '=',TRUE],
-                ['is_full_registration', '=', TRUE],
-                ['status', '=', 'waiting']
-            ]
-        )->get();
         
         // Get onGoingCoursesPaginationData from CourseHelper
         $onGoingCoursesAmountPerPage = 4;
@@ -159,7 +117,7 @@ class DashboardController extends Controller
 
         $viewData = compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications', 'usableStarsCount',
             'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
-            'footer_reviews','bootcampData');
+            'footer_reviews');
 
         
 

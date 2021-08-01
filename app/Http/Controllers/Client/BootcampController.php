@@ -59,13 +59,8 @@ class BootcampController extends Controller
         }
 
         return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities','tomorrow'));
-
-
-
-
-
-
     }
+
     public function index_old(Request $request) {
         $agent = new Agent();
         if($agent->isPhone()){

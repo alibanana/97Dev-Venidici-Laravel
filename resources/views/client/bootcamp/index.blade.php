@@ -244,7 +244,7 @@
                             <select name="batch"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Batch</option>
                                 @foreach($course->bootcampBatches as $batch)
-                                <option value="{{$batch->date}}" @if(old('batch') == $batch->date) selected @endif>Batch 1 ({{ date('d M Y', strtotime($batch->date))}})</option>
+                                <option value="{{$batch->date}}" @if(old('batch') == $batch->date) selected @endif>Batch {{ $loop->iteration }} ({{ date('d M Y', strtotime($batch->date))}})</option>
                                 @endforeach
                             </select>                              
                         </div>  
@@ -663,7 +663,7 @@
                             <select name="batch"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Batch</option>
                                 @foreach($course->bootcampBatches as $batch)
-                                <option value="{{$batch->date}}" @if(old('batch') == $batch->date) selected @endif>Batch 1 ({{ date('d M Y', strtotime($batch->date))}})</option>
+                                <option value="{{$batch->date}}" @if(old('batch') == $batch->date) selected @endif>Batch {{ $loop->iteration }} ({{ date('d M Y', strtotime($batch->date))}})</option>
                                 @endforeach
                             </select>                              
                         </div>  
