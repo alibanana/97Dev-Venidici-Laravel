@@ -68,6 +68,12 @@
                         <div class="col-6" style="padding:0vw 4vw;display: flex;flex-direction: column;justify-content: center;">
                             <div style="text-align:center">
                                 <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
+                                @if (session('email-verification-success'))
+                                    <div class="alert alert-success alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
+                                        Your email <span style="font-weight: bold">{{session('email-verification-success') }}</span> has been verified!
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Email Address</p>
                                 <div  class="auth-input-form" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-envelope"></i>
