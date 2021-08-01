@@ -84,9 +84,6 @@ class CheckoutController extends Controller
             return redirect()->back();
         }
 
-
-        
-
         $input = $request->all();
         // Convert request input "phone" format.
         if ($request->has('phone'))
@@ -97,16 +94,7 @@ class CheckoutController extends Controller
         if($request->action == 'createPaymentObjectBootcamp'){
             // Validation rules that exists on all validation conditions. (bootcamp)
             $validation_rules = [
-                'name'                  => '',
-                'email'                 => '',
                 'birth_place'           => 'required',
-                'birth_date'            => '',
-                'gender'                => '',
-                // 'telephone'          => ['required', new TelephoneNumber],
-                'telephone'             => '',
-                'province_id'           => '',
-                'city_id'               => '',
-                'address'               => '',
                 'last_degree'           => 'required',
                 'institution'           => 'required',
                 'batch'                 => 'required',
@@ -194,20 +182,14 @@ class CheckoutController extends Controller
             // Kalau error field lainnya dan user buys a bootcamp
             // return redirect(route('bootcamp.show', $input['course_id']) . '#payment')->withErrors($validator);
             return redirect('/bootcamp#free-trial')->withErrors($validator)->withInput($request->all());
-
         }
-
-
 
         // If validation passed store validated data in a variable.
         $validated = $validator->validate();
 
-
-
         // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
         //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
         if($request->action == 'createPaymentObjectBootcamp'){
- 
             $bootcamp_application = BootcampApplication::where(
                 [   
                     ['course_id', '=', $validated['course_id']],
@@ -287,7 +269,6 @@ class CheckoutController extends Controller
         if (!$invoice->exists){
             if ($request->action == 'createPaymentObjectBootcamp')
                 return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
-
             else
                 return redirect()->back()->with('message', 'Oops, something went wrong..');
         }
