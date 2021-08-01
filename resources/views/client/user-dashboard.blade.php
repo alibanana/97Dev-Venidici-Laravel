@@ -549,8 +549,12 @@
     @if(Auth::user()->email_verified_at == null)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
-        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
-            Email kamu belum di verifikasi. Belum dapat email? 
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
+            @if(session('new_email_verification_sent'))
+            Email verifikasi baru telah dikirim. Belum dapat? 
+            @else
+            Beberapa fitur tidak tersedia jika email belum ter-verifikasi. Belum dapat? 
+            @endif
             <span style="display: inline-block;">
                 <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
@@ -566,7 +570,7 @@
     @elseif(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
-        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:50%;text-align:center;margin-bottom:0px"role="alert">
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
             Kamu belum melengkapi profile. <strong><a href="#edit-profile">Klik disini</a></strong> untuk melengkapi.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -660,7 +664,11 @@
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show "  style="width:100%;text-align:center;margin-bottom:0px;font-size:2.5vw;padding-top:2vw;height:10vw"role="alert">
-            Email kamu belum di verifikasi. Belum dapat email? 
+            @if(session('new_email_verification_sent'))
+            Email verifikasi baru telah dikirim. Belum dapat? 
+            @else
+            Beberapa fitur tidak tersedia jika email belum ter-verifikasi. Belum dapat? 
+            @endif
             <span style="display: inline-block;">
                 <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
