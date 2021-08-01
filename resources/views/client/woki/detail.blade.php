@@ -134,9 +134,9 @@
                             @csrf
                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
                                 <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
-                                <button type="submit" class="normal-text btn-blue-bordered full-width-button"
+                                <button @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif class="normal-text btn-blue-bordered full-width-button"
                                     style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
-                                <button class="normal-text btn-dark-blue full-width-button" name="action" value="buyNow" 
+                                <button class="normal-text btn-dark-blue full-width-button" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif name="action" value="buyNow" 
                                     style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:2vw; padding-top:5vw">Beli Sekarang</button>
                             </form>
                         {{-- If user has not bought the course and the price IS 0. --}}
@@ -166,7 +166,7 @@
                 <div style="padding:2vw;background:#FFFFFF">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Ada <span style="font-family:Hypebeast">Pertanyaan?</span> </p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
-                    <a  href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;"><i class="fab fa-whatsapp"></i> <span style="margin-left:0.5vw">+628112345678</span></a>
+                    <a  href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;"><i class="fab fa-whatsapp"></i> <span style="margin-left:0.5vw">+6281294131031</span></a>
 
                 </div>
             </div>
@@ -276,6 +276,7 @@
                     </div>
                     <!-- END OF ONE ART SUPPLY -->
                 @endforeach
+                @endif
             </div>
         </div>
         <!-- end of mobile perlengkapan seni -->
@@ -376,7 +377,7 @@
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
                 <div style="display:flex">
                     
-                    <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
+                    <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset($review->user->avatar) }}" @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
                     <div style="margin-left:1vw">
                         <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">{{$review->user->name}}</p>
                         <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
@@ -493,9 +494,9 @@
                     @csrf
                         <input type="hidden" name="course_id" value="{{ $course->id }}">
                         <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
-                        <button type="submit" class="normal-text btn-blue-bordered"
+                        <button @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif class="normal-text btn-blue-bordered"
                             style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
-                        <button class="normal-text btn-dark-blue" name="action" value="buyNow" 
+                        <button class="normal-text btn-dark-blue" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif name="action" value="buyNow" 
                             style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
                     </form>
                 {{-- If user has not bought the course and the price IS 0. --}}
@@ -525,7 +526,7 @@
         <div style="padding:2vw;background:#FFFFFF">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Ada <span style="font-family:Hypebeast">Pertanyaan?</span> </p>
             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
-            <a  href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;"><i class="fab fa-whatsapp"></i> <span style="margin-left:0.5vw">+628112345678</span></a>
+            <a  href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;"><i class="fab fa-whatsapp"></i> <span style="margin-left:0.5vw">+6281294131031</span></a>
 
         </div>
     </div>

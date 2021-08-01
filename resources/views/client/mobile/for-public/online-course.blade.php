@@ -259,7 +259,7 @@
             <div class="faq-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
                     <p style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;font-size:4vw">Apakah saya bisa mendapatkan refund?</p>
-                    <p style="margin-bottom:0px;color:#747D88;font-size:4vw" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
+                    <p style="margin-bottom:0px;color:#747D88;font-size:3vw" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>

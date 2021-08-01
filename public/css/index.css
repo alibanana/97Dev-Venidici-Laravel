@@ -232,7 +232,7 @@ html, body {
     background-image: url("/assets/images/client/Bootcamp_Circle_BG.png");
     background-position:center right;
     background-repeat: no-repeat;
-    background-size: 90%;
+    background-size: 75%;
 }
 .bootcamp-bg{
     background-image: url("/assets/images/client/Bootcamp_Background.png");
@@ -1775,7 +1775,7 @@ html, body {
 
 
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) { 
 
     .image-qris{
         width:40vw !important
@@ -2255,6 +2255,12 @@ html, body {
     #completed-icon{
         width:50vw !important
     }
+    .homepage-popup-logo{
+        width: 10vw !important
+    }
+    .drop-zone{
+        height: auto !important;
+    }
 }
 
 /* MOBILE NAVBAR */
@@ -2383,8 +2389,8 @@ html, body {
  #menu
  {
    position: fixed;
-   width: 300px;
-   height:800px;
+   width: 70vw;
+   height:140vh;
    margin: -100px 0 0 -50px;
    padding: 50px;
    padding-top: 125px;
@@ -2476,6 +2482,7 @@ html, body {
     width:3vw;
     height:3vw;
     text-align:center;
+
     transition: 0.2s ease-in-out;
 
 }
@@ -2494,6 +2501,10 @@ html, body {
 .growth-title{
     padding: 1vw 2vw;
     text-align:center;
+    cursor:pointer
+}
+.growth-title p{
+    color:#3B3C43;
     cursor:pointer;
     transition: 0.2s ease-in-out;
     width:20vw

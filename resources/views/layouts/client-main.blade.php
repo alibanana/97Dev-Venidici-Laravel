@@ -36,7 +36,7 @@
   </head>
   <body style="padding-right:0px !important">
     <!-- Modal Loading -->
-    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModal" aria-hidden="true">
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog"  aria-labelledby="loadingModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body" style="text-align:center;height:20vw">
@@ -50,79 +50,131 @@
     <!-- END OF MODAL Loading -->
     <!-- Contact Us Modal-->
     <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title sub-description" style="font-family:Rubik Bold" id="exampleModalLabel">Contact Us</h5>
-                </div>
-                <div class="modal-body">
-                  <form action="{{route('admin.contact-us.store')}}" method="POST" enctype="multipart/form-data">
-                  @csrf
-                    <div class="row m-0">
-                        <div class="col-12 p-0" style="text-align:center">
-                          @if (session()->has('contact_us_message'))
-                          <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
-                              {{ session()->get('contact_us_message') }}
-                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          </div>
-                          @endif
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title sub-description" style="font-family:Rubik Bold" id="exampleModalLabel">Contact Us</h5>
+              </div>
+              <div class="modal-body">
+                <form action="{{route('admin.contact-us.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                  <div class="row m-0">
+                      <div class="col-12 p-0" style="text-align:center">
+                        @if (session()->has('contact_us_message'))
+                        <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                            {{ session()->get('contact_us_message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        
-                        <!-- START OF TOP SECTION -->
-                        <div class="col-12">
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;">Full Name</p>
-                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                                <i style="color:#DAD9E2" class="fas fa-user"></i>
-                                <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama anda" >
-                            </div>  
-                            @error('name')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            
-                        </div> 
-                        <!-- END OF TOP SECTION --> 
-                        <!-- RIGHT SECTION -->
-                        <div class="col-12">
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw"">Email</p>
-                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                                <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                                <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email" >
-                            </div>  
-                            @error('email')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            
-                            
-                        </div>
-                        <!-- END OF RIGHT SECTION -->
-                        <div class="col-12">
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Inquiry</p>
-                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                                <textarea name="inquiry" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan pesan anda" ></textarea>
-                            </div>  
-                            @error('inquiry')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        
-                        <div class="col-12" style="text-align:right;padding-top:1vw">
-                            <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
-                        </div>  
-                        
-                        <!-- END OF GENNERAL INFORMATION -->
-                    </div>
-                  </form>
-                </div>
-            </div>
-        </div>
+                        @endif
+                      </div>
+                      
+                      <!-- START OF TOP SECTION -->
+                      <div class="col-12">
+                          <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;">Full Name</p>
+                          <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                              <i style="color:#DAD9E2" class="fas fa-user"></i>
+                              <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama anda" >
+                          </div>  
+                          @error('name')
+                              <span class="invalid-feedback" role="alert" style="display: block !important;">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                          
+                      </div> 
+                      <!-- END OF TOP SECTION --> 
+                      <!-- RIGHT SECTION -->
+                      <div class="col-12">
+                          <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw"">Email</p>
+                          <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                              <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                              <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email" >
+                          </div>  
+                          @error('email')
+                              <span class="invalid-feedback" role="alert" style="display: block !important;">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                          
+                          
+                      </div>
+                      <!-- END OF RIGHT SECTION -->
+                      <div class="col-12">
+                          <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Inquiry</p>
+                          <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                              <textarea name="inquiry" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan pesan anda" ></textarea>
+                          </div>  
+                          @error('inquiry')
+                              <span class="invalid-feedback" role="alert" style="display: block !important;">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                      </div>
+                      
+                      <div class="col-12" style="text-align:right;padding-top:1vw">
+                          <button type="submit" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                      </div>  
+                      
+                      <!-- END OF GENNERAL INFORMATION -->
+                  </div>
+                </form>
+              </div>
+          </div>
       </div>
+    </div>
+    <!-- END OF CONTACT US MODAL -->
+
+    <!-- START OF POP UP LOGIN -->
+    <div class="modal fade" id="loginModal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-body">
+                <form action="{{ route('login') }}" method="POST">
+                @csrf
+                    <div class="row m-0"> 
+                        <div class="col-12" style="padding:0vw 4vw;display: flex;flex-direction: column;justify-content: center;">
+                            <div style="text-align:center">
+                                <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
+                                <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Email Address</p>
+                                <div  class="auth-input-form" style="display: flex;align-items:center">
+                                    <i style="color:#DAD9E2" class="fas fa-envelope normal-text"></i>
+                                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="johndoe@gmail.com" value="{{ old('email') }}">
+                                </div>  
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;text-align:left !important">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Password</p>
+                                <div  class="auth-input-form" style="display: flex;align-items:center">
+                                    <i style="color:#DAD9E2" class="fas fa-lock normal-text"></i>
+                                    <input type="password" name="password" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="*******">
+                                </div> 
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;text-align:left !important">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div style="display:flex;justify-content:space-between;">
+                                    <input type="hidden" name="url" value="{{Request::url()}}">
+                                    <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered w-100" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw">Login</button>
+                                </div>
+                                <!-- <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;margin-bottom:0.4vw;margin-top:1vw;margin-bottom:1vw">OR</p> -->
+                                <!-- <a href="{{ route('login.google') }}" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;width:100%;display:inline-block;background-color:#67BBA3;border:none;color:#FFFFFF;border-radius:5px;padding:0.5vw 2vw;text-decoration:none"> <i class="fab fa-google"></i> <span style="margin-left:0.5vw">Login with Google Account</span></a>
+                                    <div style="text-align:center !important">
+                                </div> -->
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-top:1vw;text-decoration:none;color: #3B3C43;">Belum punya akun? <span> <a href="{{ route('custom-auth.signup_general_info.index') }}">Daftar di sini</a> </span> </p>
+                            </div>
+                        </div>   
+                    </div>
+                </form>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- END OF POP UP LOGIN -->
     <!-- <div style="padding:4vw;background-color:#2B6CAA;z-index:99;position:fixed;width:100%" class="sticky-top" id="mobile-navbar">
 
     </div> -->
@@ -770,6 +822,11 @@
           });
         }
       });
+    </script>
+    <script>
+      function openLogin() {
+          $('#loginModal').modal('show');
+      }
     </script>
     <script>
       function openLoading() {

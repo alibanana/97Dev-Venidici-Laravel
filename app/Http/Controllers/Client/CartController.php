@@ -74,10 +74,10 @@ class CartController extends Controller
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
         
-        if (!auth()->user()->isProfileUpdated)
-            return redirect()->back()->with('message','Please complete your profile first.');
-        else if (auth()->user()->email_verified_at == null)
+        if (auth()->user()->email_verified_at == null)
             return redirect()->back()->with('message','Please verify your email first.');
+        else if (!auth()->user()->isProfileUpdated)
+            return redirect()->back()->with('message','Please complete your profile first.');
         elseif (count(auth()->user()->carts) == 0)
             return redirect('/cart');
 
@@ -152,6 +152,12 @@ class CartController extends Controller
 
     // Add item to cart (in the database).
     public function store(Request $request) {
+
+        if (auth()->user()->email_verified_at == null)
+            return redirect()->back()->with('success','Please verify your email first.');
+        else if (!auth()->user()->isProfileUpdated)
+            return redirect()->back()->with('success','Please complete your profile first.');
+
         $validated = $request->validate([
             'course_id' => 'required|integer',
             'withArtOrNo' => 'required|integer'

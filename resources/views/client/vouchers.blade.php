@@ -10,7 +10,7 @@
         <div class="content" style="padding:2vw">
             <div class="row m-0">
                 <div class="col-12" style="text-align:center;">
-                    <img src="/assets/images/client/Stars_Illustration.png" class="img-fluid" style="width:14vw" alt="">
+                    <img src="/assets/images/client/Stars_Illustration.png" class="img-fluid popup-point-images" style="width:14vw" alt="">
                     <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Venidici {{strtoupper(auth()->user()->club)}} Club</p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#2B6CAA;margin-bottom:0.4vw;margin-top:1vw">Available: <span style="margin-left:1vw;font-family:Rubik Bold">{{$usableStarsCount}} Stars</span></p>
                     <!--<p class="normal-text" style="font-family:Rubik Regular;color:#CE3369;margin-bottom:0.4vw;margin-top:0.5vw">Soon expired (22/02/21): <span style="margin-left:1vw;font-family:Rubik Bold">240 Stars</span></p>-->

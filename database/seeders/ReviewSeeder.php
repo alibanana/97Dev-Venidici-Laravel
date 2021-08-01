@@ -16,25 +16,25 @@ class ReviewSeeder extends Seeder
     {
         $promotions = [
             [
-                'user_id' => 10,
+                'user_id' => 1,
                 'course_id' => 1,
                 'review' => 5,
                 'description' => 'Course ini bagus, sangat informatif!'
             ],
             [
-                'user_id' => 15,
+                'user_id' => 1,
                 'course_id' => 1,
                 'review' => 2,
                 'description' => 'Coursenya kurang lengkap nih'
             ],
             [
-                'user_id' => 21,
+                'user_id' => 1,
                 'course_id' => 2,
                 'review' => 5,
                 'description' => 'Course ini bagus, sangat informatif!'
             ],
             [
-                'user_id' => 10,
+                'user_id' => 1,
                 'course_id' => 2,
                 'review' => 2,
                 'description' => 'Coursenya kurang lengkap nih'
