@@ -228,6 +228,18 @@ html, body {
     background-repeat: no-repeat;
     background-size: 30%;
 }
+.bootcamp-right-heading-bg{
+    background-image: url("/assets/images/client/Bootcamp_Circle_BG.png");
+    background-position:center right;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+.bootcamp-bg{
+    background-image: url("/assets/images/client/Bootcamp_Background.png");
+    background-position:top left;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
 /* end of background images*/
 
 /* start of page padding */
@@ -736,8 +748,9 @@ html, body {
 }
 
 .btn-blue-bordered:hover{
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     background-color: #2B6CAA !important;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .btn-yellow-bordered{
@@ -1497,7 +1510,7 @@ html, body {
     color:#3B3C43
 }
 .krest-card:hover #krest-card-description {
-    color:#3B3C43
+    color:#3B3C43 !important
 }
 
 .display-icon{
@@ -2438,3 +2451,71 @@ html, body {
     border-radius: 5px;
   }
 /* END OF PAGINATION */
+
+.schedule-title-active{
+    color:#2B6CAA !important;
+}
+.schedule-title{
+    color: rgba(43, 108, 170, 0.25);
+    transition: 0.2s ease-in-out;
+
+}
+.schedule-title:hover{
+    color:#2B6CAA !important;
+}
+
+.htj-title-active{
+    background-color: #2B6CAA !important;
+}
+.htj-title-active p{
+    color:#FFFFFF !important;
+}
+.htj-title{
+    background-color: #FFFFFF;
+    border-radius:50%;
+    width:3vw;
+    height:3vw;
+    text-align:center;
+    transition: 0.2s ease-in-out;
+
+}
+
+.htj-title:hover{
+    background-color: #2B6CAA !important;
+
+}
+.htj-title:hover p{
+    color:#FFFFFF !important;
+}
+.htj-title p{
+    color:#2B6CAA ;
+}
+
+.growth-title{
+    padding: 1vw 2vw;
+    text-align:center;
+    cursor:pointer;
+    transition: 0.2s ease-in-out;
+    width:20vw
+}
+.growth-title p{
+    color:#3B3C43;
+
+    display: -webkit-box;
+    overflow : hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+}
+.growth-title:hover{
+    background-color:#2B6CAA
+}
+.growth-title:hover p{
+    color:#FFFFFF !important
+}
+.growth-title-active{
+    background-color:#2B6CAA
+}
+.growth-title-active p{
+    color:#FFFFFF !important
+}

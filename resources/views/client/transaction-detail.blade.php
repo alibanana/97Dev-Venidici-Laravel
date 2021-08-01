@@ -128,6 +128,8 @@
             
         </div>
     </div>
+    @if($invoice->status == 'pending')
+
     <div class="col-12 mobile-display" style="padding-bottom:3vw;display:none">
         <div class="alert alert-dismissible fade show"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
             <div style="display:flex;align-items:center">
@@ -142,6 +144,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="col-md-8 col-xs-12 p-0" style="">
         <div class="page-container-left" style="padding-top:3vw;paading-right:9vw">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Isi Keranjang</p>
@@ -219,14 +222,23 @@
                                 </div>
                             @endif
                             <div class="margin-right-shipment" style="width:7.5vw;text-align:right">
-                                @if($cart->withArtOrNo)
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
-
-                                @elseif($cart->course->price == 0)
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
-                                @else
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
+                                @if($cart->course->course_type_id != 3)
+                                    @if($cart->withArtOrNo)
+                                    <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
+                                        
+                                    @elseif(($cart->course->price == 0))
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
+                                        @else
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
+                                    @endif
+                                @elseif($cart->course->course_type_id == 3)
+                                    @if(($cart->course->bootcampCourseDetail->bootcamp_trial_price == 0))
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
+                                        @else
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }}</p>
+                                    @endif
                                 @endif
+                               
                             </div>                        
                         </div>
                     </div>
@@ -397,8 +409,8 @@
                     <p onclick="openLoading()" class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to cancel the payment </p>
                 </form> 
             </div>
-           <!-- END OF CANCEL PAYMENT -->
-
+            <!-- END OF CANCEL PAYMENT -->
+            @if(env('APP_ENV') != 'production')
             <!-- RECEIVE PAYMENT -->
             <div style="text-align:center;margin-top:1vw">  
                 <form action="{{route('customer.cart.receivePayment',$invoice->xfers_payment_id)}}" method="POST">
@@ -407,6 +419,7 @@
                 </form> 
             </div>
            <!-- END OF RECEIVE PAYMENT -->
+           @endif
            @endif
            
         </div>

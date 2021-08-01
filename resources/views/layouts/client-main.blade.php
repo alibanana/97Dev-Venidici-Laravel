@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="Description" content="Anytime anywhere, Learn on your schedule from any device ">
+    <meta name="Description" content="Anytime anywhere, Learn on your schedule from any device">
 
     <!-- INDEX CSS -->
     <link rel="stylesheet"  type="text/css"  href="/css/index.css">
@@ -127,6 +127,8 @@
 
     </div> -->
     @if( !Request::is('login') )
+      @if( !Request::is('signup') )
+      @if( !Request::is('signup-interests') )
     <!-- START OF MOBILE NAVBAR -->
     <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;position: sticky;
   top: 0;z-index: 10;">
@@ -195,7 +197,7 @@
                 -->
                 <tr>
                   <td  style="padding-top:4vw">
-                  <a href="/" class="navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Bootcamp</a>
+                  <a href="/bootcamp" class="navbar-item @if( Request::is('bootcamp') || Request::is('bootcamp/*'))navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Bootcamp</a>
                   </td>
                 </tr>
                 <tr>
@@ -253,8 +255,10 @@
         </nav>
       </div>
     </div>
-    <!-- END OF MOBILE NAVBAR -->
     @endif
+    @endif
+    @endif
+    <!-- END OF MOBILE NAVBAR -->
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
@@ -262,9 +266,9 @@
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
-        <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*') || Request::is('bootcamp') || Request::is('bootcamp/*') )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
+        <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*')  )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <!--<a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>-->
-        <a href="/" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Bootcamp</a>
+        <a href="/bootcamp" class="normal-text navbar-item @if( Request::is('bootcamp') || Request::is('bootcamp/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Bootcamp</a>
         <a href="/community" class="normal-text navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Log In</a>
@@ -378,7 +382,7 @@
                 @else
                 <a  href="{{$notif->link}}" style="text-decoration:none">
                 @endif
-                  <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
+                <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                         <div class="notification-left-blue-border">
                           <i class="fas fa-shopping-cart bigger-text" style="color:#2B6CAA"></i>
@@ -386,13 +390,13 @@
                         </div>
                     </div>
                     <div class="notification-right-blue-border" @if(!$hasSeen) style="background: rgba(43, 108, 170, 0.1) @endif">
-                        <div style="padding:0vw 1vw">
+                        <div style="padding:0.6vw 1vw">
                             
                           <p class="small-text" id="notification-title" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43">{{$notif->title}}</p>
                           <?php
                               $date_time = explode(' ', $notif->updated_at->diffForHumans());
                           ?>
-                          <p class="very-small-text"  style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
+                          <p class="very-small-text" style="font-family: Rubik Regular;color:#C4C4C4;margin-bottom:0.5vw">{{$date_time[0]}} {{$date_time[1]}}</p>
                           <p class="very-small-text" id="notification-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
@@ -566,6 +570,9 @@
             <div style="margin-top:1vw">
               <a href="/for-public/woki" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Woki</a>
             </div>
+            <div style="margin-top:1vw">
+              <a href="/bootcamp" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Bootcamp</a>
+            </div>
             <!--<div style="margin-top:1vw">
               <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Corporate</a>
             </div>-->
@@ -674,6 +681,9 @@
             </div>
             <div>
               <a href="/for-public/woki" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Woki</a>
+            </div>
+            <div>
+              <a href="/bootcamp" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Bootcamp</a>
             </div>
             <!--<div>
               <a href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">For Corporate</a>

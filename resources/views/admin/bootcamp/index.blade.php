@@ -182,7 +182,7 @@
                                                                     @csrf
                                                                     @method('put')
                                                                     <div style="padding: 0px 2px">
-                                                                        <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to un-archive this bootcamp course?')">Un-Archive</button>
+                                                                        <button class="d-sm-inline-block btn btn-success shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to un-archive this bootcamp course?')">Un-Archive</button>
                                                                     </div>
                                                                 </form>
                                                             @else

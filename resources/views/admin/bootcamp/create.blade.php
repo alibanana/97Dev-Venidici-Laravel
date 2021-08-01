@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="">Subtitle</label>
+                        <label for="">Sub-title</label>
                         <textarea name="subtitle" id="" rows="3" class="form-control" required>{{ old('subtitle') }}</textarea> 
                         @error('subtitle')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -91,22 +91,10 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="">Embed youtube link for preview  (src only)</label>
-                        <input type="text" name="preview_video_link" class="form-control form-control-user" value="{{ old('preview_video_link') }}"
-                                id="exampleInputPassword" placeholder="e.g. https://www.youtube.com/embed/DSJlhjZNVpg" required> 
-                        @error('preview_video_link')
-                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror               
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
                         <label for="">Zoom link</label>
-                        <input type="text" name="link" class="form-control form-control-user" value="{{ old('link') }}"
-                                placeholder="e.g. https://meet.google.com/pdq-umxk-fuv" required> 
-                        @error('link')
+                        <input type="text" name="meeting_link" class="form-control form-control-user" value="{{ old('meeting_link') }}"
+                                placeholder="e.g. https://meet.google.com/pdq-umxk-fuv"> 
+                        @error('meeting_link')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -124,6 +112,41 @@
                         @enderror
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Date Start</label>
+                        <input type="datetime-local" name="date_start" class="form-control">
+                        @error('date_start')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Date End</label>
+                        <input type="datetime-local" name="date_end" class="form-control">
+                        @error('date_end')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Free Trial Date End</label>
+                        <input type="datetime-local" name="trial_date_end" class="form-control">
+                        @error('trial_date_end')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-6"></div>
+
                 <!--
                 <div class="col-12">
                     <p>Visibility Level</p>
@@ -143,7 +166,7 @@
                     </div>
                 </div>
                 -->
-                <div class="col-6" style="margin-top:3vw">
+                <!-- <div class="col-6" style="margin-top:3vw">
                     <label for="">Persyaratan <span style="color: orange">(At least one element must be present!)</span></label>
                     @error('requirements')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -170,9 +193,9 @@
                         </div>
                     </div>
                     <button type="button" id="add_requirement" onlick="duplicateRequirement()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
-                </div>
+                </div> -->
 
-                <div class="col-6" style="margin-top:3vw">
+                <div class="col-6" >
                 <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
                 <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
                 @error('hashtags')

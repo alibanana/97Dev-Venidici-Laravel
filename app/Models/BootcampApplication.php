@@ -15,10 +15,27 @@ class BootcampApplication extends Model
         'invoice_id',
         'name', 
         'email', 
+        'birth_place',
+        'birth_date',
+        'gender',
         'phone_no', 
-        'bank', 
+        'province_id',
+        'city_id',
+        'address',
+        'last_degree',
+        'institution',
+        'batch',
+        'sumber_tahu_program',
+        'mencari_kerja',
+        'social_media',
+        'konsiderasi_lanjut',
+        'kenapa_memilih',
+        'expectation',
+        'bankShortCode',
         'bank_account_number', 
-        'address' 
+        'is_trial', 
+        'is_full_registration', 
+        'status', 
     ];
 
     public function course() {
@@ -31,5 +48,13 @@ class BootcampApplication extends Model
 
     public function invoice() {
         return $this->belongsTo(Invoice::class);
+    }
+
+    public function province() {
+        return $this->belongsTo(Province::class);
+    }
+    
+    public function city() {
+        return $this->belongsTo(City::class);
     }
 }

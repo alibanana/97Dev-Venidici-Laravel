@@ -143,6 +143,19 @@
 
                     </div>
                 </div>
+
+                <!-- START OF DROPDOWN -->
+                <a class="nav-link collapsed collapse-item img-fluid" href="#" data-toggle="collapse" data-target="#collapseBootcamp"
+                    aria-expanded="true" aria-controls="collapseBootcamp">
+                    <span>Bootcamp</span>
+                </a>
+                <div id="collapseBootcamp" class="collapse" aria-labelledby="headingTwo" data-parent="#collapseBootcamp">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a>
+                        
+
+                    </div>
+                </div>
                 <!-- <a class="collapse-item" href="{{ route('admin.bootcamp.index') }}">Bootcamp List</a> -->
                 <a class="collapse-item" href="{{ route('admin.teachers.index') }}">Teachers</a>
                 <a class="collapse-item" href="/admin/reviews">Reviews</a>

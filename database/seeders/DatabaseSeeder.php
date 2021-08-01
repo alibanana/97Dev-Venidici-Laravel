@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             SectionSeeder::class,
             SectionContentSeeder::class,
             PromotionSeeder::class,
-            ReviewSeeder::class,
+            // ReviewSeeder::class,
             NotificationSeeder::class,
             KrestProgramSeeder::class,
             KrestSeeder::class,
@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
             RedeemSeeder::class,
             StarSeeder::class,
             WokiCourseDetailSeeder::class,
-            ArtSupplySeeder::class
+            ArtSupplySeeder::class,
+            BootcampCourseDetailSeeder::class,
         ]);
     }
 }
