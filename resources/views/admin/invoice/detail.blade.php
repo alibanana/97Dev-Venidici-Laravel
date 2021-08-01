@@ -115,6 +115,13 @@
                                                     </div>
                                                 @endif
                                                 <div style="width:7.5vw;text-align:right">
+                                                    @if($course->course_type_id == 3)
+                                                        @if($cart->course->bootcampCourseDetail->bootcamp_trial_price == 0)
+                                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
+                                                        @else
+                                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }}</p>
+                                                        @endif
+                                                    @else
                                                     @if($cart->withArtOrNo)
                                                     <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
 
@@ -122,6 +129,8 @@
                                                     <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
                                                     @else
                                                     <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
+                                                    @endif
+
                                                     @endif
                                                 </div>                        
                                             </div>

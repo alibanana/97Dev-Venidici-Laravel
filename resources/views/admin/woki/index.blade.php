@@ -186,7 +186,7 @@
                                                                     @if ($course->publish_status == 'Draft')
                                                                         <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to set this woki course as published?')">Set as published</button>
                                                                     @elseif ($course->publish_status == 'Published')
-                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this woki course as draft?')">Set as draft</button>
+                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to set this woki course as draft?')">Set as draft</button>
                                                                     @endif
                                                                 </div>
                                                             </form>

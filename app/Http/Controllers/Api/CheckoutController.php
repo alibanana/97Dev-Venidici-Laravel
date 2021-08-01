@@ -513,6 +513,13 @@ class CheckoutController extends Controller
                         }
                     }
                 }
+
+                //if its bootcamp, change the status to ft_paid
+                if($invoice->bootcampApplication){
+                    $invoice->bootcampApplication->status = 'ft_paid';
+                    $invoice->bootcampApplication->save();
+                }
+
                 // Add stars to user based on how much the user paid.
                 $star_mulitiplication = (int) ($invoice->grand_total / 30000);
                 $star_added = $star_mulitiplication * 12;
@@ -656,6 +663,12 @@ class CheckoutController extends Controller
                 $notif->title        = 'Pembayaran Telah Dibatalkan!';
                 $notif->description  = 'Hi, '.auth()->user()->name.'. Pembayaranmu untuk pelatihan: '.$courses_string.' telah dibatalkan.';
                 $notif->save();
+        }
+        
+        //if its bootcamp
+        if($invoice->bootcampApplication){
+            $invoice->bootcampApplication->status = 'ft_cancelled';
+            $invoice->bootcampApplication->save();
         }
 
         return redirect('/transaction-detail/'.$payment_object['data']['attributes']['targetId']);

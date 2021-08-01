@@ -16,6 +16,7 @@ use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\CourseFeature;
 use App\Models\WokiCourseDetail;
+use Svg\Tag\Rect;
 
 /*
 |--------------------------------------------------------------------------
@@ -306,5 +307,17 @@ class WokiCourseController extends Controller
         $user_id = $request->user_id;
         $result = CourseHelper::setIsAbsentStatusToOpposite($course_id,$user_id);
         return redirect()->route('admin.woki-courses.show',$course_id)->with('message', $result['message']);
+    }
+
+
+    // Change the status of the woki to completed
+    public function setWokiAsDone(Request $request, $course_id){
+        $course = Course::findOrFail($course_id);
+        foreach($course->users as $user){
+            $user->pivot->status = 'completed';
+            $user->pivot->save();
+        }
+        return redirect()->route('admin.woki-courses.show',$course_id)->with('message', 'Woki telah berhasil dirubah menjadi selesai!');
+
     }
 }

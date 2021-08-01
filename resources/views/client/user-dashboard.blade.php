@@ -570,8 +570,9 @@
     @elseif(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
+
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
-            Kamu belum melengkapi profile. <strong><a href="#edit-profile">Klik disini</a></strong> untuk melengkapi.
+            Beberapa fitur tidak tersedia jika kamu belum <strong><a href="#edit-profile"> melengkapi profile</a></strong>.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
@@ -792,7 +793,7 @@
                                     <div>
                                         <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
-                                        @foreach($course->teachers as $teacher)
+                                        @foreach($course->teachers as $teacher) 
                                             <span style="font-family:Rubik Bold">
                                                 @if($loop->last && count($course->teachers) != 1)
                                                 dan
@@ -804,9 +805,9 @@
                                         @endforeach
                                         </p>   
                                         <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$course->subtitle}}</p>
-                                        <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->wokiCourseDetail->event_date}}  |  {{$course->wokiCourseDetail->start_time}} - {{$course->wokiCourseDetail->end_time}}</p>
+                                        <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">{{date('d M Y', strtotime($course->wokiCourseDetail->event_date))}}  |  {{date('H:i', strtotime($course->wokiCourseDetail->start_time))}} - {{date('H:i', strtotime($course->wokiCourseDetail->end_time))}}</p>
                                     </div>
-                                </div>
+                                </div>  
                                 <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                                     <a href="/woki/{{$course->title}}" target="_blank" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">View Details</a>
                                     <a href="{{$course->wokiCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium;margin-top:2vw">Meeting Link</a>
@@ -818,7 +819,7 @@
                 @php $application = $course; @endphp
                 <!-- START OF BOOTCAMP CARD -->
                 <div class="col-12 p-0">
-                    <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
+                    <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;" >
                         <div class="container-image-card">
                             <img src="{{asset($application->course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
                             <div class="top-left card-tag small-text" >Bootcamp</div>
@@ -909,7 +910,7 @@
     <!-- End of Live Pelatihan Content -->
 
     <!-- Pelatihan Aktif Content -->
-    <div style="padding:0px;display:none" class="user-content wow fadeInLeft" id="pelatihan-aktif">
+    <div style="padding:0px;display:none" class="user-content" id="pelatihan-aktif">
         @if(!$onGoingCoursesPaginationData['data'])
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
@@ -976,7 +977,7 @@
     <!-- End of Pelatihan Aktif Content -->
 
     <!-- Pelatihan Selesai Content -->
-    <div style="padding:0px;display:none;" class="user-content wow fadeInLeft" id="pelatihan-selesai">
+    <div style="padding:0px;display:none;" class="user-content" id="pelatihan-selesai">
         @if(!$completedCoursesPaginationData['data'])
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
                 <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
