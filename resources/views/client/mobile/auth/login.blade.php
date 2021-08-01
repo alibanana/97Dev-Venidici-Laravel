@@ -62,6 +62,12 @@
                             <a href="/"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none;font-size:4vw"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Home</span></a>
                         </div>
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:25vw;padding-top:6vw" alt="LOGO">
+                        @if (session('email-verification-success'))
+                            <div class="alert alert-success alert-dismissible fade show small-text mb-3 "  style="width:100%;text-align:center;margin-bottom:0px;margin-top:3vw"role="alert">
+                                Your email <span style="font-weight: bold">{{session('email-verification-success') }}</span> has been verified!
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <p style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:3vw;font-size:4vw">Email Address</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center;padding:2vw">
                             <i style="color:#DAD9E2;font-size:4vw" class="fas fa-envelope"></i>

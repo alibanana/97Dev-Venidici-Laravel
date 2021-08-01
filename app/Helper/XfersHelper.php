@@ -8,8 +8,8 @@ class XfersHelper {
 
     const METHOD_GET = 'get';
     const METHOD_POST = 'post';
-    // const BASE_URL = 'https://sandbox-id.xfers.com/api/v4/payments/';
-    const BASE_URL = 'https://id.xfers.com/api/v4/payments/';
+    const BASE_URL = 'https://sandbox-id.xfers.com/api/v4/payments/';
+    // const BASE_URL = 'https://id.xfers.com/api/v4/payments/';
     const DEFAULT_HEADERS = [
         'Accept' => 'application/vnd.api+json',
         'Content-Type' => 'application/vnd.api+json'

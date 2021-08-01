@@ -17,8 +17,17 @@ use App\Http\Controllers\Admin\OnlineCourseController as AdminOnlineCourseContro
 use App\Http\Controllers\Admin\OnlineCourseUpdateController as AdminOnlineCourseUpdateController;
 use App\Http\Controllers\Admin\WokiCourseController as AdminWokiCourseController;
 use App\Http\Controllers\Admin\BootcampController as AdminBootcampController;
+use App\Http\Controllers\Admin\BootcampFeatureController as AdminBootcampFeatureController;
+use App\Http\Controllers\Admin\BootcampAboutController as AdminBootcampAboutController;
 use App\Http\Controllers\Admin\BootcampUpdateController as AdminBootcampUpdateController;
 use App\Http\Controllers\Admin\BootcampScheduleController as AdminBootcampScheduleController;
+use App\Http\Controllers\Admin\BootcampBenefitController as AdminBootcampBenefitController;
+use App\Http\Controllers\Admin\BootcampCandidateController as AdminBootcampCandidateController;
+use App\Http\Controllers\Admin\BootcampFutureCareerController as AdminBootcampFutureCareerController;
+use App\Http\Controllers\Admin\BootcampHiringPartnerController as AdminBootcampHiringPartnerController;
+use App\Http\Controllers\Admin\BootcampBatchController as AdminBootcampBatchController;
+
+
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
 use App\Http\Controllers\Admin\WokiCourseUpdateController as AdminWokiCourseUpdateController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
@@ -65,6 +74,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
     Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth', 'verified']);
     Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
+    Route::put('/bootcamp/{id}/upgrade-status', [DashboardController::class, 'upgradeBootcamp'])->name('bootcamp.upgrade-status')->middleware(['auth']);
 
     /*
     |--------------------------------------------------------------------------
@@ -152,8 +162,9 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree')->middleware(['auth', 'verified']);
     // BootcampController
     Route::get('/bootcamp', [BootcampController::class, 'index'])->name('bootcamp.index');
-    Route::post('/bootcamp/{id}', [BootcampController::class, 'buyFree'])->name('bootcamp.buyFree')->middleware(['auth', 'verified']);
     Route::get('/bootcamp/{id}', [BootcampController::class, 'show'])->name('bootcamp.show');
+    Route::post('/bootcamp/{id}', [BootcampController::class, 'buyFree'])->name('bootcamp.buyFree')->middleware(['auth', 'verified']);
+    Route::post('/bootcamp/{id}/full-registration', [BootcampController::class, 'storeFullRegistration'])->name('bootcamp.storeFullRegistration')->middleware(['auth']);
 
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware(['auth', 'verified']);
@@ -281,6 +292,21 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/bootcamp/{id}/un-archive', [AdminBootcampController::class, 'unArchive'])->name('bootcamp.unArchive');
         Route::post('/bootcamp/{id}/set-isfeatured-status-to-opposite', [AdminBootcampController::class, 'setIsFeaturedStatusToOpposite'])->name('bootcamp.set-isfeatured-status-to-opposite');
         Route::post('/bootcamp/{id}/set-publish-status-to-opposite', [AdminBootcampController::class, 'setPublishStatusToOpposite'])->name('bootcamp.set-publish-status-to-opposite');
+        Route::delete('/bootcamp/{id}/remove-syllabus', [AdminBootcampController::class, 'removeSyllabus'])->name('bootcamp.remove-syllabus');
+        Route::put('/bootcamp/{id}/change_application_status', [AdminBootcampController::class, 'changeApplicationStatus'])->name('bootcamp.change-application-status');
+
+        // BootcampFeatureController
+        Route::post('/bootcamp/{id}/store-feature', [AdminBootcampFeatureController::class, 'store'])->name('bootcamp-feature.store');
+        Route::delete('/bootcamp-feature/{id}', [AdminBootcampFeatureController::class, 'destroy'])->name('bootcamp-feature.destroy');
+        Route::put('/bootcamp-feature/update', [AdminBootcampFeatureController::class, 'update'])->name('bootcamp-feature.update');
+        
+        // BootcampAboutController
+        Route::post('/bootcamp/{id}/store-about', [AdminBootcampAboutController::class, 'store'])->name('bootcamp-about.store');
+        Route::get('/bootcamp-about/{id}/update', [AdminBootcampAboutController::class, 'edit'])->name('bootcamp.about-edit');
+        Route::put('/bootcamp-about/{id}/update', [AdminBootcampAboutController::class, 'update'])->name('bootcamp-about.update');
+        Route::delete('/bootcamp-about/{id}', [AdminBootcampAboutController::class, 'destroy'])->name('bootcamp-about.destroy');
+
+
         // BootcampUpdateController
         Route::get('/bootcamp/{id}/update', [AdminBootcampUpdateController::class, 'edit'])->name('bootcamp.edit');
         Route::put('/bootcamp/{id}/update-basic-info', [AdminBootcampUpdateController::class, 'updateBasicInfo'])->name('bootcamp.update-basic-info');
@@ -288,6 +314,8 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/bootcamp/{id}/update-publish-status', [AdminBootcampUpdateController::class, 'updatePublishStatus'])->name('bootcamp.update-publish-status');
         Route::put('/bootcamp/{id}/attach-teacher', [AdminBootcampUpdateController::class, 'attachTeacher'])->name('bootcamp.attach-teacher');
         Route::put('/bootcamp/{id}/detach-teacher', [AdminBootcampUpdateController::class, 'detachTeacher'])->name('bootcamp.detach-teacher');
+        Route::get('/bootcamp-schedules/{id}/update', [AdminBootcampUpdateController::class, 'editBootcampSchedules'])->name('bootcamp.edit-schedules');
+
         // BootcampScheduleController
         // Route::get('/bootcampschedule', [AdminBootcampScheduleController::class, 'index'])->name('bootcampschedule.index');
         // Route::get('/bootcampschedule/create', [AdminBootcampScheduleController::class, 'create'])->name('bootcampschedule.create');
@@ -295,6 +323,37 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/bootcampschedule/{id}/update', [AdminBootcampScheduleController::class, 'edit'])->name('bootcampschedule.edit');
         Route::put('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'update'])->name('bootcampschedule.update');
         Route::delete('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'destroy'])->name('bootcampschedule.destroy');
+        
+        // BootcampBenefitController
+        Route::post('/bootcamp/{id}/store-benefit', [AdminBootcampBenefitController::class, 'store'])->name('bootcamp-benefit.store');
+        Route::get('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'edit'])->name('bootcamp.benefit-edit');
+        Route::put('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'update'])->name('bootcamp-benefit.update');
+        Route::delete('/bootcamp-benefit/{id}', [AdminBootcampBenefitController::class, 'destroy'])->name('bootcamp-benefit.destroy'); 
+
+        // BootcampFutureCareerController
+        Route::post('/bootcamp/{id}/store-future-career', [AdminBootcampFutureCareerController::class, 'store'])->name('bootcamp-future-career.store');
+        Route::get('/bootcamp-future-career/{id}/update', [AdminBootcampFutureCareerController::class, 'edit'])->name('bootcamp.future-career-edit');
+        Route::put('/bootcamp-future-career/{id}/update', [AdminBootcampFutureCareerController::class, 'update'])->name('bootcamp-future-career.update');
+        Route::delete('/bootcamp-future-career/{id}', [AdminBootcampFutureCareerController::class, 'destroy'])->name('bootcamp-future-career.destroy'); 
+
+        // BootcampCandidateController
+        Route::post('/bootcamp/{id}/store-candidate', [AdminBootcampCandidateController::class, 'store'])->name('bootcamp-candidate.store');
+        Route::get('/bootcamp-candidate/{id}/update', [AdminBootcampCandidateController::class, 'edit'])->name('bootcamp.candidate-edit');
+        Route::put('/bootcamp-candidate/{id}/update', [AdminBootcampCandidateController::class, 'update'])->name('bootcamp-candidate.update');
+        Route::delete('/bootcamp-candidate/{id}', [AdminBootcampCandidateController::class, 'destroy'])->name('bootcamp-candidate.destroy');        
+        
+        // BootcampHiringPartnerController
+        Route::post('/bootcamp/{id}/store-hiring-partner', [AdminBootcampHiringPartnerController::class, 'store'])->name('bootcamp-hiring-partner.store');
+        Route::get('/bootcamp-hiring-partner/{id}/update', [AdminBootcampHiringPartnerController::class, 'edit'])->name('bootcamp.hiring-partner-edit');
+        Route::put('/bootcamp-hiring-partner/{id}/update', [AdminBootcampHiringPartnerController::class, 'update'])->name('bootcamp-hiring-partner.update');
+        Route::delete('/bootcamp-hiring-partner/{id}', [AdminBootcampHiringPartnerController::class, 'destroy'])->name('bootcamp-hiring-partner.destroy');        
+        
+        // BootcampBatchController
+        Route::post('/bootcamp/{id}/store-batch', [AdminBootcampBatchController::class, 'store'])->name('bootcamp-batch.store');
+        Route::get('/bootcamp-batch/{id}/update', [AdminBootcampBatchController::class, 'edit'])->name('bootcamp.batch-edit');
+        Route::put('/bootcamp-batch/{id}/update', [AdminBootcampBatchController::class, 'update'])->name('bootcamp-batch.update');
+        Route::delete('/bootcamp-batch/{id}', [AdminBootcampBatchController::class, 'destroy'])->name('bootcamp-batch.destroy');        
+
         // SectionController
         Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
         Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');

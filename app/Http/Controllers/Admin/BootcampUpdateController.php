@@ -11,8 +11,10 @@ use App\Helper\CourseHelper;
 use App\Models\CourseCategory;
 use App\Models\CourseType;
 use App\Models\Course;
-use App\Models\CourseRequirement;
+use App\Models\BootcampCourseDetail;
 use App\Models\CourseFeature;
+use App\Models\BootcampDescription;
+
 use App\Models\Teacher;
 use App\Models\BootcampSchedule;
 use App\Models\Hashtag;
@@ -54,29 +56,31 @@ class BootcampUpdateController extends Controller
 
     // Updates data as seen under the Update Online Course -> Basic Informations tab.
     public function updateBasicInfo(Request $request, $id) {
-        $validated = Validator::make($request->all(), [
-            'title'                 => 'required',
-            'thumbnail'             => 'mimes:jpeg,jpg,png',
-            'subtitle'              => 'required',
-            'course_category_id'    => 'required',
-            'preview_video_link'    => 'required|starts_with:https://www.youtube.com/embed/',
-            'link'                  => '',
-            'description'           => 'required',
-            'requirements'          => 'required|array|min:1',
-            'hashtags'              => 'required|array|min:1'
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'thumbnail' => 'mimes:jpeg,jpg,png',
+            'subtitle' => 'required',
+            'course_category_id' => 'required',
+            'meeting_link' => '',
+            'syllabus' => 'mimes:pps,ppt,pptx,xls,xlsm,xlsx,doc,docx,pdf',
+            'description' => 'required',
+            'date_start' => 'required',
+            'date_end' => 'required',
+            'trial_date_end' => 'required',
+            'hashtags' => 'required|array|min:1'
         ])->setAttributeNames([
             'course_category_id'    => 'category',
-            'preview_video_link'    => 'video link',
-        ])->validate();
-
+        ]);
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'basic-informations'])->withErrors($validator);
+        
+        $validated = $validator->validate();
 
         $course = Course::findOrFail($id);
         $course->course_category_id = $validated['course_category_id'];
-        $course->preview_video = $validated['preview_video_link'];
-        $course->link = $validated['link'];
-        $course->title = $validated['title'];
-        $course->subtitle = $validated['subtitle'];
-        $course->description = $validated['description'];
+        $course->title              = $validated['title'];
+        $course->subtitle           = $validated['subtitle'];
+        $course->description        = $validated['description'];
 
         if ($request->has('thumbnail')) {
             unlink($course->thumbnail);
@@ -85,15 +89,6 @@ class BootcampUpdateController extends Controller
 
         $course->save();
 
-        $course->courseRequirements()->delete();
-        foreach ($request->requirements as $requirement_value) {
-            if ($requirement_value != "") {
-                $new_requirement = new CourseRequirement;
-                $new_requirement->course_id = $course->id;
-                $new_requirement->requirement = $requirement_value;
-                $new_requirement->save();
-            }
-        }
 
         $course->hashtags()->detach();
         $added_hashtag_ids = [];
@@ -104,7 +99,22 @@ class BootcampUpdateController extends Controller
         }
         $course->hashtags()->attach($added_hashtag_ids);
 
-        if ($course->wasChanged()) {
+        $bootcampCourseDetail                   = BootcampCourseDetail::where('course_id',$course->id)->first();
+        $bootcampCourseDetail->meeting_link     = $validated['meeting_link'];
+        $bootcampCourseDetail->date_start       = $validated['date_start'];
+        $bootcampCourseDetail->date_end         = $validated['date_end'];
+        $bootcampCourseDetail->trial_date_end   = $validated['trial_date_end'];
+
+        if ($request->has('syllabus')) {
+            if (!is_null($bootcampCourseDetail->syllabus)) unlink($bootcampCourseDetail->syllabus);
+            $bootcampCourseDetail->syllabus = Helper::storeFile($request->file('syllabus'), 'storage/documents/bootcamp/syllabus/');
+            $bootcampCourseDetail->save();
+        }
+
+
+        $bootcampCourseDetail->save();
+
+        if ($course->wasChanged() || $bootcampCourseDetail->wasChanged()) {
             $message = 'Bootcamp (' . $course->title . ') -> Basic Information, has been updated';
         } else {
             $message = 'No changes was made to Bootcamp (' . $course->title . ')';
@@ -117,27 +127,30 @@ class BootcampUpdateController extends Controller
 
     // Updates Course's Pricing & Enrollment Status.
     public function updatePricingEnrollment(Request $request, $id) {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'enrollment_status' => 'required',
-            'is_free' => 'required|boolean',
-            'price' => 'integer'
+            'bootcamp_full_price' => 'integer',
+            'bootcamp_trial_price' => 'integer'
         ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with(['page-option' => 'pricing-and-enrollment'])->withErrors($validator);
+
+        $validated = $validator->validate();
 
         $course = Course::findOrFail($id);
         $course->enrollment_status = $validated['enrollment_status'];
-
-        if ($validated['is_free'] == '1') {
-            $course->price = 0;
-        } else {
-            $course->price = $validated['price'];
-        }
-
         $course->save();
 
-        if ($course->wasChanged()) {
+        $course_detail = $course->bootcampCourseDetail;
+        $course_detail->bootcamp_full_price = $validated['bootcamp_full_price'];
+        $course_detail->bootcamp_trial_price = $validated['bootcamp_trial_price'];
+        $course_detail->save();
+
+        if ($course->wasChanged() || $course_detail->wasChanged()) {
             $message = 'Bootcamp (' . $course->title . '), "Pricing & Enrollment Status" has been updated';
         } else {
-            $message = 'No changes was made to Bootcamp (' . $course->title . ')';
+            $message = 'No changes was made to Bootcamp (' . $course_detail->title . ')';
         }
 
         return redirect()->route('admin.bootcamp.edit', $id)
@@ -187,5 +200,14 @@ class BootcampUpdateController extends Controller
             ->with('message', $result['message'])
             ->with('page-option', 'teacher');
     }
+
+
+    public function editBootcampSchedules(){
+        $view = 'admin/bootcamp/update-bootcamp-schedules';
+
+        return view($view);
+    }
+
+    
     
 }

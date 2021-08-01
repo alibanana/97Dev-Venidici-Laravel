@@ -18,6 +18,8 @@ class CreateTeachersTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('image');
+            $table->string('company_logo')->nullable();
+            $table->string('occupancy')->nullable();
             $table->timestamps();
         });
 

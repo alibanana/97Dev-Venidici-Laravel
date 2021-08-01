@@ -128,6 +128,8 @@
             
         </div>
     </div>
+    @if($invoice->status == 'pending')
+
     <div class="col-12 mobile-display" style="padding-bottom:3vw;display:none">
         <div class="alert alert-dismissible fade show"  style="font-family:Rubik Medium;width:100%;text-align:center;margin-bottom:0px;color:#3B3C43;background-color:#EBF5FF"role="alert">
             <div style="display:flex;align-items:center">
@@ -142,6 +144,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="col-md-8 col-xs-12 p-0" style="">
         <div class="page-container-left" style="padding-top:3vw;paading-right:9vw">
             <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;">Isi Keranjang</p>
@@ -219,14 +222,23 @@
                                 </div>
                             @endif
                             <div class="margin-right-shipment" style="width:7.5vw;text-align:right">
-                                @if($cart->withArtOrNo)
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
-
-                                @elseif($cart->course->price == 0)
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
-                                @else
-                                <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
+                                @if($cart->course->course_type_id != 3)
+                                    @if($cart->withArtOrNo)
+                                    <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->priceWithArtKit, 0, ',', ',') }}</p>
+                                        
+                                    @elseif(($cart->course->price == 0))
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
+                                        @else
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->price, 0, ',', ',') }}</p>
+                                    @endif
+                                @elseif($cart->course->course_type_id == 3)
+                                    @if(($cart->course->bootcampCourseDetail->bootcamp_trial_price == 0))
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
+                                        @else
+                                        <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }}</p>
+                                    @endif
                                 @endif
+                               
                             </div>                        
                         </div>
                     </div>

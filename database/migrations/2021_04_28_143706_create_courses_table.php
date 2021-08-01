@@ -20,7 +20,7 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('course_category_id')->nullable();
             $table->foreign('course_category_id')->references('id')->on('course_categories')->onDelete('set null');
             $table->string('thumbnail');
-            $table->string('preview_video');
+            $table->string('preview_video')->nullable();
             $table->string('title');
             $table->text('subtitle');
             $table->text('description');

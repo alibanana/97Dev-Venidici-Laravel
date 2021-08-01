@@ -16,4 +16,8 @@ class Province extends Model
     public function user() {
         return $this->hasMany(User::class);
     }
+
+    public function bootcampApplications() {
+        return $this->hasMany(BootcampApplication::class);
+    }
 }

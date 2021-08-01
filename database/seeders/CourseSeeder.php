@@ -80,30 +80,30 @@ class CourseSeeder extends Seeder
                 'price' => 149000
             ],
             // Bootcamp Workshop
-            // [
-            //     'course_type_id' => 3,
-            //     'course_category_id' => 5,
-            //     'thumbnail' => 'assets/images/seeder/bootcamp-pertama.jpg',
-            //     'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
-            //     'title' => 'Contoh Bootcamp Gratis',
-            //     'subtitle' => 'Bootcamp Workshop',
-            //     'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, quam nec malesuada placerat, nisi massa lobortis nibh, ac pretium velit tellus aliquet enim. Maecenas nec sodales mi. Proin vitae est ante. Vestibulum ut viverra erat. Duis ligula ex, aliquam eu tincidunt lacinia, imperdiet vulputate erat. Suspendisse rutrum, neque id sagittis pharetra, urna justo volutpat nibh, a porttitor lectus enim ac quam. Ut imperdiet id mauris vel ultrices.
+            [
+                'course_type_id' => 3,
+                'course_category_id' => 5,
+                'thumbnail' => 'assets/images/seeder/bootcamp-pertama.jpg',
+                'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
+                'title' => 'Contoh Bootcamp Gratis',
+                'subtitle' => 'Bootcamp Workshop',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, quam nec malesuada placerat, nisi massa lobortis nibh, ac pretium velit tellus aliquet enim. Maecenas nec sodales mi. Proin vitae est ante. Vestibulum ut viverra erat. Duis ligula ex, aliquam eu tincidunt lacinia, imperdiet vulputate erat. Suspendisse rutrum, neque id sagittis pharetra, urna justo volutpat nibh, a porttitor lectus enim ac quam. Ut imperdiet id mauris vel ultrices.
 
-            //     Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque mollis nulla vulputate, scelerisque leo et, vestibulum erat. Sed id ultrices elit, ac congue nibh. Donec eu augue mi. Ut in purus in ex maximus facilisis a id dolor. Nunc maximus ac massa sit amet fringilla. Sed quam velit, sagittis eget augue eu, rhoncus facilisis quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sollicitudin nunc id eros scelerisque lobortis. Etiam justo leo, pharetra at nibh in, bibendum tincidunt libero. Praesent convallis leo at ligula convallis rutrum. Quisque a eros a dolor euismod varius in eget mauris. Nam faucibus leo eget nisi viverra molestie. Nullam maximus risus non est euismod venenatis.',
-            //     'price' => 0
-            // ],
-            // [
-            //     'course_type_id' => 3,
-            //     'course_category_id' => 4,
-            //     'thumbnail' => 'assets/images/seeder/bootcamp-kedua.jpg',
-            //     'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
-            //     'title' => 'Contoh Bootcamp Berbayar',
-            //     'subtitle' => 'Bootcamp Workshop',
-            //     'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, quam nec malesuada placerat, nisi massa lobortis nibh, ac pretium velit tellus aliquet enim. Maecenas nec sodales mi. Proin vitae est ante. Vestibulum ut viverra erat. Duis ligula ex, aliquam eu tincidunt lacinia, imperdiet vulputate erat. Suspendisse rutrum, neque id sagittis pharetra, urna justo volutpat nibh, a porttitor lectus enim ac quam. Ut imperdiet id mauris vel ultrices.
+                Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque mollis nulla vulputate, scelerisque leo et, vestibulum erat. Sed id ultrices elit, ac congue nibh. Donec eu augue mi. Ut in purus in ex maximus facilisis a id dolor. Nunc maximus ac massa sit amet fringilla. Sed quam velit, sagittis eget augue eu, rhoncus facilisis quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sollicitudin nunc id eros scelerisque lobortis. Etiam justo leo, pharetra at nibh in, bibendum tincidunt libero. Praesent convallis leo at ligula convallis rutrum. Quisque a eros a dolor euismod varius in eget mauris. Nam faucibus leo eget nisi viverra molestie. Nullam maximus risus non est euismod venenatis.',
+                'price' => 0
+            ],
+            [
+                'course_type_id' => 3,
+                'course_category_id' => 4,
+                'thumbnail' => 'assets/images/seeder/bootcamp-kedua.jpg',
+                'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
+                'title' => 'Contoh Bootcamp Berbayar',
+                'subtitle' => 'Bootcamp Workshop',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, quam nec malesuada placerat, nisi massa lobortis nibh, ac pretium velit tellus aliquet enim. Maecenas nec sodales mi. Proin vitae est ante. Vestibulum ut viverra erat. Duis ligula ex, aliquam eu tincidunt lacinia, imperdiet vulputate erat. Suspendisse rutrum, neque id sagittis pharetra, urna justo volutpat nibh, a porttitor lectus enim ac quam. Ut imperdiet id mauris vel ultrices.
 
-            //     Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque mollis nulla vulputate, scelerisque leo et, vestibulum erat. Sed id ultrices elit, ac congue nibh. Donec eu augue mi. Ut in purus in ex maximus facilisis a id dolor. Nunc maximus ac massa sit amet fringilla. Sed quam velit, sagittis eget augue eu, rhoncus facilisis quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sollicitudin nunc id eros scelerisque lobortis. Etiam justo leo, pharetra at nibh in, bibendum tincidunt libero. Praesent convallis leo at ligula convallis rutrum. Quisque a eros a dolor euismod varius in eget mauris. Nam faucibus leo eget nisi viverra molestie. Nullam maximus risus non est euismod venenatis.',
-            //     'price' => 199000
-            // ]
+                Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque mollis nulla vulputate, scelerisque leo et, vestibulum erat. Sed id ultrices elit, ac congue nibh. Donec eu augue mi. Ut in purus in ex maximus facilisis a id dolor. Nunc maximus ac massa sit amet fringilla. Sed quam velit, sagittis eget augue eu, rhoncus facilisis quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sollicitudin nunc id eros scelerisque lobortis. Etiam justo leo, pharetra at nibh in, bibendum tincidunt libero. Praesent convallis leo at ligula convallis rutrum. Quisque a eros a dolor euismod varius in eget mauris. Nam faucibus leo eget nisi viverra molestie. Nullam maximus risus non est euismod venenatis.',
+                'price' => 199000
+            ]
         ];
 
         // Online Courses
@@ -129,12 +129,12 @@ class CourseSeeder extends Seeder
         $course4->teachers()->attach([3]);
 
         // Bootcamp Courses
-        // $course5 = Course::create($courses[4]);
-        // $course5->hashtags()->attach([9, 2, 3]);
-        // $course5->teachers()->attach([1]);
+        $course5 = Course::create($courses[4]);
+        $course5->hashtags()->attach([9, 2, 3]);
+        $course5->teachers()->attach([1]);
 
-        // $course6 = Course::create($courses[5]);
-        // $course6->hashtags()->attach([5, 7, 2]);
-        // $course6->teachers()->attach([2, 3]);
+        $course6 = Course::create($courses[5]);
+        $course6->hashtags()->attach([5, 7, 2]);
+        $course6->teachers()->attach([2, 3]);
     }
 }

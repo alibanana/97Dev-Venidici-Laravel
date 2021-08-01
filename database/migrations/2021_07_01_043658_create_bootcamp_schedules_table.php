@@ -17,9 +17,10 @@ class CreateBootcampSchedulesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->datetime('date_time');
+            $table->date('date_start');
+            $table->date('date_end');
             $table->string('title');
-            $table->text('detail');
+            $table->string('subtitle');
             $table->timestamps();
         });
     }

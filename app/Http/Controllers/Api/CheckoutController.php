@@ -84,26 +84,70 @@ class CheckoutController extends Controller
             return redirect()->back();
         }
 
+
+        
+
         $input = $request->all();
         // Convert request input "phone" format.
         if ($request->has('phone'))
             $input['phone'] = preg_replace("/[^0-9 ]/", '', $input['phone']);
+        if ($request->has('telephone'))
+            $input['telephone'] = preg_replace("/[^0-9 ]/", '', $input['telephone']);
 
-        // Validation rules that exists on all validation conditions. (noArtKit, hasArtKit & bootcamp)
-        $validation_rules = [
-            'name' => 'required',
-            'phone' => ['required', new TelephoneNumber],
-            // 'phone' => 'required',
-            'grand_total' => 'required|integer',
-            'total_order_price' => 'required|integer',
-            'date' => 'required',
-            'time' => 'required',
-            'bankShortCode' => 'required',
-            'discounted_price' => 'required|integer',
-            'promo_code' => '', // no validations but included for ease of access.
-            'club_discount' => 'required|integer',
-            'course_id' => '', // no validations but included for ease of access.
-        ];
+        if($request->action == 'createPaymentObjectBootcamp'){
+            // Validation rules that exists on all validation conditions. (bootcamp)
+            $validation_rules = [
+                'name'                  => '',
+                'email'                 => '',
+                'birth_place'           => 'required',
+                'birth_date'            => '',
+                'gender'                => '',
+                // 'telephone'          => ['required', new TelephoneNumber],
+                'telephone'             => '',
+                'province_id'           => '',
+                'city_id'               => '',
+                'address'               => '',
+                'last_degree'           => 'required',
+                'institution'           => 'required',
+                'batch'                 => 'required',
+                'sumber_tahu_program'   => '',
+                'mencari_kerja'         => 'required',
+                'social_media'          => 'required',
+                'konsiderasi_lanjut'    => 'required',
+                'expectation'           => 'required',
+                'bankShortCode'         => 'required',
+                'bank_account_no'       => 'required',
+                'promo_code'            => '', // no validations but included for ease of access.
+                'course_id'             => '', // no validations but included for ease of access.
+                'grand_total'           => 'required|integer',
+                'total_order_price'     => 'required|integer',
+                'discounted_price'      => 'required|integer',
+                'club_discount'         => 'required|integer',
+                'date'                  => 'required',
+                'time'                  => 'required',
+                'course_id'             => '', // no validations but included for ease of access.
+
+            ];
+        }
+        else{
+            // Validation rules that exists on all validation conditions. (noArtKit, hasArtKit)
+            $validation_rules = [
+                'name' => 'required',
+                'phone' => ['required', new TelephoneNumber],
+                // 'phone' => 'required',
+                'grand_total' => 'required|integer',
+                'total_order_price' => 'required|integer',
+                'date' => 'required',
+                'time' => 'required',
+                'bankShortCode' => 'required',
+                'discounted_price' => 'required|integer',
+                'promo_code' => '', // no validations but included for ease of access.
+                'club_discount' => 'required|integer',
+                'course_id' => '', // no validations but included for ease of access.
+            ];
+
+        }
+
 
         // Extra validation rules if orders has artKit.
         if ($request->action == 'createPaymentObject') {
@@ -116,14 +160,15 @@ class CheckoutController extends Controller
                 'city' => 'required|integer',
                 'address' => 'required'
             ]);
+        } 
         // Extra validation rules for bootcamp payments.
-        } elseif ($request->action == 'createPaymentObjectBootcamp') {
-            $validation_rules = array_merge($validation_rules, [
-                'email' => 'required',
-                'address' => 'required',
-                'bank_account_number' => 'required|integer'
-            ]);
-        }
+        // elseif ($request->action == 'createPaymentObjectBootcamp') {
+        //     $validation_rules = array_merge($validation_rules, [
+        //         'email' => 'required',
+        //         'address' => 'required',
+        //         'bank_account_number' => 'required|integer'
+        //     ]);
+        // }
 
         $validator = Validator::make($input, $validation_rules);
         // Handle validation failed
@@ -147,7 +192,9 @@ class CheckoutController extends Controller
             }
 
             // Kalau error field lainnya dan user buys a bootcamp
-            return redirect(route('bootcamp.show', $input['course_id']) . '#payment')->withErrors($validator);
+            // return redirect(route('bootcamp.show', $input['course_id']) . '#payment')->withErrors($validator);
+            return redirect('/bootcamp#free-trial')->withErrors($validator)->withInput($request->all());
+
         }
 
 
@@ -155,30 +202,69 @@ class CheckoutController extends Controller
         // If validation passed store validated data in a variable.
         $validated = $validator->validate();
 
+
+
+        // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
+        //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
+        if($request->action == 'createPaymentObjectBootcamp'){
+ 
+            $bootcamp_application = BootcampApplication::where(
+                [   
+                    ['course_id', '=', $validated['course_id']],
+                    ['user_id', '=', auth()->user()->id],
+                    ['status', '!=', 'ft_refunded'],
+                    ['status', '!=', 'ft_cancelled'],
+                    ['status', '!=', 'denied'],
+                    
+                ]
+            )->count();
+
+            if($bootcamp_application != 0)
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'You already have registered for a bootcamp, please check your user dashboard.');
+        }
+
         $invoiceNumberResult = Helper::generateInvoiceNumber();
         if ($invoiceNumberResult['status'] == 'Failed'){
             if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect()->route('bootcamp.show', $validated['course_id'])
-                    ->with('message', $invoiceNumberResult['message']);
+                // return redirect()->route('bootcamp.show', $validated['course_id'])
+                //     ->with('message', $invoiceNumberResult['message']);
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', $invoiceNumberResult['message']);
             else
                 return redirect()->back()->with('message', $invoiceNumberResult['message']);
         }
 
-        // Invoice data if no artKit.
-        $invoice_data = [
-            'invoice_no' => $invoiceNumberResult['data'],
-            'user_id' => auth()->user()->id,
-            'name' => $validated['name'],
-            'phone' => $validated['phone'],
-            'status' => 'pending',
-            'promo_code' => $validated['promo_code'],
-            'total_order_price' => $validated['total_order_price'],
-            'discounted_price' => $validated['discounted_price'],
-            'club_discount' => $validated['club_discount'],
-            'grand_total' => $validated['grand_total']
-        ];
-        
-        
+        if ($request->action == 'createPaymentObjectBootcamp') {
+            // Invoice data if bootcamp
+            $invoice_data = [
+                'invoice_no' => $invoiceNumberResult['data'],
+                'user_id' => auth()->user()->id,
+                'name' => auth()->user()->name,
+                'phone' => auth()->user()->userDetail->telephone,
+                'status' => 'pending',
+                'total_order_price' => $validated['total_order_price'],
+                'discounted_price' => $validated['discounted_price'],
+                'club_discount' => $validated['club_discount'],
+                'grand_total' => $validated['grand_total']
+            ];
+        }
+        else{
+            // Invoice data if no artKit.
+            $invoice_data = [
+                'invoice_no' => $invoiceNumberResult['data'],
+                'user_id' => auth()->user()->id,
+                'name' => $validated['name'],
+                'phone' => $validated['phone'],
+                'status' => 'pending',
+                'promo_code' => $validated['promo_code'],
+                'total_order_price' => $validated['total_order_price'],
+                'discounted_price' => $validated['discounted_price'],
+                'club_discount' => $validated['club_discount'],
+                'grand_total' => $validated['grand_total']
+            ];
+            
+        }
+
+    
         // Invoice data if order has artKit.
         if ($request->action == 'createPaymentObject') {
             $invoice_data = array_merge($invoice_data, [ 
@@ -200,8 +286,8 @@ class CheckoutController extends Controller
         $invoice = Invoice::create($invoice_data);
         if (!$invoice->exists){
             if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect()->route('bootcamp.show', $validated['course_id'])
-                    ->with('message', 'Oops, something went wrong..');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
+
             else
                 return redirect()->back()->with('message', 'Oops, something went wrong..');
         }
@@ -225,21 +311,37 @@ class CheckoutController extends Controller
             if (!$order->exists) {
                 $invoice->orders()->delete();
                 $invoice->delete();
-                return redirect()->route('bootcamp.show', $validated['course_id'])
-                    ->with('message', 'Oops, something went wrong..');
+                // return redirect()->route('bootcamp.show', $validated['course_id'])
+                //     ->with('message', 'Oops, something went wrong..');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
             }
 
             // Create bootcamp_application object.
             $bootcamp_application = BootcampApplication::create([
-                'course_id' => $validated['course_id'],
-                'user_id' => auth()->user()->id,
-                'invoice_id' => $invoice->id,
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'phone_no' => $validated['phone'],
-                'bank' => $validated['bankShortCode'],
-                'bank_account_number' => $validated['bank_account_number'],
-                'address' => $validated['address']
+                'course_id'             => $validated['course_id'],
+                'user_id'               => auth()->user()->id,
+                'invoice_id'            => $invoice->id,
+                'name'                  => auth()->user()->name,
+                'email'                 => auth()->user()->email,
+                'birth_place'           => $validated['birth_place'],
+                'birth_date'            => auth()->user()->userDetail->birthdate,
+                'gender'                => auth()->user()->userDetail->gender,
+                'phone_no'              => auth()->user()->userDetail->telephone,
+                'province_id'           => auth()->user()->userDetail->province_id,
+                'city_id'               => auth()->user()->userDetail->city_id,
+                'address'               => auth()->user()->userDetail->address,
+                'last_degree'           => $validated['last_degree'],
+                'institution'           => $validated['institution'],
+                'batch'                 => $validated['batch'],
+                'sumber_tahu_program'   => $validated['sumber_tahu_program'],
+                'mencari_kerja'         => $validated['mencari_kerja'],
+                'social_media'          => $validated['social_media'],
+                'konsiderasi_lanjut'    => $validated['konsiderasi_lanjut'],
+                'expectation'           => $validated['expectation'],
+                'bankShortCode'         => $validated['bankShortCode'],
+                'bank_account_number'   => $validated['bank_account_no'],
+                'is_trial'              => 1,
+                'status'                => "ft_pending",
             ]);
 
             // Handle if bootcamp_application creation failed.
@@ -247,8 +349,10 @@ class CheckoutController extends Controller
                 $invoice->orders()->delete();
                 $invoice->bootcampApplication()->delete();
                 $invoice->delete();
-                return redirect()->route('bootcamp.show', $validated['course_id'])
-                    ->with('message', 'Oops, something went wrong..');
+                // return redirect()->route('bootcamp.show', $validated['course_id'])
+                //     ->with('message', 'Oops, something went wrong..');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
+
             }
         /* 
         * For Non-Bootcamp payments :
@@ -289,7 +393,6 @@ class CheckoutController extends Controller
                 }
             }
         }
-
         // Create payment object (in xfers) & handle failed.
         $response = $validated['bankShortCode'] == 'qris' ?
             XfersHelper::createQRISPayment($request->only(['grand_total', 'date', 'time']), $invoiceNumberResult['data'], $invoice->id) :
@@ -298,8 +401,10 @@ class CheckoutController extends Controller
                 $invoice->orders()->delete();
                 $invoice->delete();
                 if ($request->action == 'createPaymentObjectBootcamp')
-                    return redirect()->route('bootcamp.show', $validated['course_id'])
-                        ->with('message', $response['errors']['message']);
+                    // return redirect()->route('bootcamp.show', $validated['course_id'])
+                    //     ->with('message', $response['errors']['message']);
+                    return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', $response['errors']['message']);
+
                 else
                     return redirect()->back()->with('message', $response['errors']['message']);
         } 
@@ -332,7 +437,9 @@ class CheckoutController extends Controller
             $invoice->delete();
             //if user buys a bootcamp
             if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect('bootcamp/'.$input['course_id'])->back()->with('message','Oops, something went wrong..');
+                // return redirect('bootcamp/'.$input['course_id'])->back()->with('message','Oops, something went wrong..');
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
+
             //if user does not buy a bootcamp
             else
                 return redirect()->back()->with('message', 'Oops, something went wrong..');
