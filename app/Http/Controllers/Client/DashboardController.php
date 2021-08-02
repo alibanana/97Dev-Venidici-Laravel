@@ -51,7 +51,7 @@ class DashboardController extends Controller
     // Shows the client User Dashboard page.
     public function index(Request $request)
     {
-        // $agent = new Agent();
+        $agent = new Agent();
         // if($agent->isPhone()){
         //     return view('client/mobile/under-construction');
         // }
@@ -159,9 +159,7 @@ class DashboardController extends Controller
 
         $viewData = compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications', 'usableStarsCount',
             'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
-            'footer_reviews','bootcampData');
-
-        
+            'footer_reviews','bootcampData','agent');
 
         return view('client/user-dashboard', $viewData);
     }
@@ -221,6 +219,14 @@ class DashboardController extends Controller
     public function update_profile(Request $request, $id)
     {
         $input = $request->all();
+        if($request->has('date') || $request->has('month')|| $request->has('year')  ){
+            if($request['date'] == null || $request['month'] == null || $request['year'] == null)
+                return redirect('/dashboard#edit-profile')
+                ->withInput($request->all())
+                ->with('date_message','The date field is required');
+            
+            $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date'];
+        }
         // Convert request input "phone" format.
         if ($request->has('telephone'))
             $input['telephone'] = preg_replace("/[^0-9 ]/", '', $input['telephone']);
@@ -257,6 +263,11 @@ class DashboardController extends Controller
         $user_detail->update($request->except([
             'name','province_id','city_id','address'
         ]));
+
+        if($request->has('date') || $request->has('month')|| $request->has('year')  ){
+            $user_detail->birthdate = $birthdate;
+            $user_detail->save();
+        }
 
         //check if the user update the general info for the first time
         if(!$user->isGeneralInfoUpdated){
