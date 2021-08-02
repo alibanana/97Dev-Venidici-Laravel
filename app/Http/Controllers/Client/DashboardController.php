@@ -461,10 +461,17 @@ class DashboardController extends Controller
         }
     }
 
-    public function upgradeBootcamp($id){
-            $application = BootcampApplication::findOrFail($id);
-            $application->status = 'waiting';
-            $application->is_full_registration = TRUE;
+    public function upgradeBootcamp(Request $request){
+            // dd($request->all());
+            $application                        = BootcampApplication::findOrFail($request->bootcamp_application_id);
+            // dd($application);
+
+            if($application->status == 'waiting')
+                return redirect()->back()->with('bootcamp_message', 'Aplikasi bootcamp anda sedang di review.');
+            
+            $application->status                = 'waiting';
+            $application->kenapa_memilih        = $request->kenapa_memilih;
+            $application->is_full_registration  = TRUE;
             $application->save();
 
             $title = 'Pendaftaran Bootcamp kamu sedang di review!';    
@@ -483,7 +490,7 @@ class DashboardController extends Controller
     
             $message = 'Terimakasih! Pendaftaran Bootcamp kamu sedang di review.';
     
-            return redirect()->back()->with('message', $message);
+            return redirect()->back()->with('bootcamp_message', $message);
     
     }
 }

@@ -38,7 +38,8 @@ class BootcampController extends Controller
 
     // Shows the Client's Main Bootcamp Page.
     public function index(Request $request) {
-        $course = Course::findOrFail(6);
+        $course_id = 6;
+        $course = Course::findOrFail($course_id);
         $provinces = Province::all();
         $cities = City::all();
 
@@ -54,8 +55,21 @@ class BootcampController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
- 
-            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities','tomorrow'));
+            // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
+            //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
+    
+            $bootcamp_application_count = BootcampApplication::where(
+                [   
+                    ['course_id', '=', $course_id],
+                    ['user_id', '=', auth()->user()->id],
+                    ['status', '!=', 'ft_refunded'],
+                    ['status', '!=', 'ft_cancelled'],
+                    ['status', '!=', 'denied'],
+                    
+                ]
+            )->count();
+            
+            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities','tomorrow','bootcamp_application_count'));
         }
 
         return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities','tomorrow'));

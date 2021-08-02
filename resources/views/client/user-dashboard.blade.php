@@ -3,6 +3,52 @@
 
 @section('content')
 
+<!-- UPGRADE BOOTCAMP POP UP -->
+<div class="modal fade" id="upgradeBootcamp" tabindex="-1" role="dialog"  aria-labelledby="upgradeBootcamp" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align:center;">
+                <div class="row m-0">
+                    <div class="col-12" style="text-align:left;">
+                        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Upgrade Bootcamp to Full</p>
+                        <form action="{{route('bootcamp.upgrade-status')}}" method="POST">
+                        @csrf
+                        @method('put')
+                            <div>
+                                @if (session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @elseif (session('danger'))
+                                    <div class="alert alert-danger alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
+                                        {{ session('danger') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                <input type="hidden" name="bootcamp_application_id" id="bootcamp_application_id">
+                                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;">Kenapa kamu memililih Bootcamp ini?</p>
+                                <div  class="auth-input-form" >
+                                    <textarea name="kenapa_memilih" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan jawaban anda" >{{old('kenapa_memilih')}}</textarea>
+                                </div>  
+                                @error('kenapa_memilih')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div style="text-align:right;margin-top:1vw">
+                                    <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Submit</button>                
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF UPGRADE BOOTCAMP POP UP -->
+
 <!-- START OF POP UP BOOTCAMP-->
 <div id="bootcamp-detail" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:50%">
@@ -566,6 +612,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
+        <!-- ALERT MESSAGE -->
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor aut cum alias placeat dolorem tempore similique neque. Illum expedita sed consectetur. Ad ex accusantium et quis reiciendis eveniet, consequuntur nam?
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!-- END OF ALERT MESSAGE -->
     </div>
     @elseif(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
@@ -573,6 +625,16 @@
 
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
             Beberapa fitur tidak tersedia jika kamu belum <strong><a href="#edit-profile"> melengkapi profile</a></strong>.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!-- END OF ALERT MESSAGE -->
+    </div>
+    @endif
+    @if(session('bootcamp_message'))
+    <div style="display:flex;justify-content:center">
+        <!-- ALERT MESSAGE -->
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
+            {{session('bootcamp_message')}}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
@@ -863,20 +925,10 @@
                                 </div>
                             </div>
                             @if(
-                                ($application->is_trial && !$application->is_full_registration && $application->status == 'ft_paid') 
-                                || 
-                                (!$application->is_trial && $application->is_full_registration && $application->status == 'approved') 
-                                || 
-                                ($application->is_trial && $application->is_full_registration && $application->status == 'waiting') 
+                                ($application->is_trial && !$application->is_full_registration && $application->status == 'ft_paid')
                             )
                             <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                                @if($application->is_trial && !$application->is_full_registration)
-                                <form action="{{route('bootcamp.upgrade-status', $application->id)}}" method="post">
-                                @csrf
-                                @method('put')
-                                    <button onclick="return confirm('Are you sure you want to upgrade?')" type="submit" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">Upgrade</button>
-                                </form>
-                                @endif
+                                <button onclick="passBootcampApplicationId({{$application->id}})"  data-toggle="modal" data-target="#upgradeBootcamp" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">Upgrade</button>
                                 <a href="{{$application->course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium; @if($application->is_trial && !$application->is_full_registration) margin-top:2vw @endif">Meeting Link</a>
                             </div>
                             @endif
@@ -1523,6 +1575,12 @@
 		document.getElementById("bootcamp-bank").value = bank;
 		document.getElementById("bootcamp-bank_account_number").value = bank_account_number;
 		document.getElementById("bootcamp-address").value = address;
+    }
+</script>
+
+<script>
+    function passBootcampApplicationId(bootcamp_application_id) {
+		document.getElementById("bootcamp_application_id").value = bootcamp_application_id;
     }
 </script>
 @if ( request()->get('coursesTab'))

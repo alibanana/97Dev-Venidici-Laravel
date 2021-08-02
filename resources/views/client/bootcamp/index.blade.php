@@ -1355,13 +1355,25 @@
                     </li>
                 </ul>
             </div>
-            <a @if(Auth::check()) 
+            <a 
+            @if(Auth::check())
+             
                 @if(auth()->user()->isProfileUpdated)
-                href="#full-registration" 
-                @else
-                href="/dashboard" 
+                    @if($bootcamp_application_count != 0)
+                    onclick="return alert('You have an on going bootcamp application.')"
+                    @else
+                    href="#full-registration" 
                 @endif
-            @else href="/login" @endif class="btn-blue-bordered normal-text" id="free-trial-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Register Now</a>
+
+                @else
+                    href="/dashboard" 
+                @endif
+            
+            @else 
+                href="/login" 
+            @endi
+
+            @endif class="btn-blue-bordered normal-text" id="free-trial-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Register Now</a>
 
         </div>
 
@@ -1391,14 +1403,23 @@
                     </li>
                 </ul>
             </div>
-            <a @if(Auth::check()) 
+            <a  
+            @if(Auth::check())
+             
                 @if(auth()->user()->isProfileUpdated)
-                href="#free-trial" 
+                    @if($bootcamp_application_count != 0)
+                    onclick="return alert('You have an on going bootcamp application.')"
+                    @else
+                    href="#free-trial" 
+                @endif
+
                 @else
-                href="/dashboard" 
+                    href="/dashboard" 
                 @endif
             
-            @else href="/login" @endif href="full-registration" class="btn-blue-bordered normal-text" id="full-registration-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Get Free Trial Now</a>
+            @else 
+                href="/login" 
+            @endif class="btn-blue-bordered normal-text" id="full-registration-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Get Free Trial Now</a>
 
         </div>
     </div>
