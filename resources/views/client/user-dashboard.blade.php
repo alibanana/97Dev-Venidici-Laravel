@@ -164,11 +164,47 @@
                                 $time = $birthdate[1];
                             }
                         ?>
+                        @if($agent->browser() == "Safari")
+                        @php
+                            $birthdate_safari = explode('-',$date);
+                            $year_safari = $birthdate_safari[0];
+                            $month_safari = $birthdate_safari[1];
+                            $date_safari = $birthdate_safari[2];
+
+                        @endphp
+                        <div style="display: flex;align-items:center;justify-content:space-between">
+                            <div class="auth-input-form" style="width: 30%;">
+                                <input type="text" name="date" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
+                                    placeholder="Tanggal" value="{{$date_safari}}">
+                            </div>  
+                            <div class="auth-input-form" style="width: 30%;">
+                                <select name="month" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                    @php
+                                        $months = array("January"=>"01","February"=>"02","March"=>"03",
+                                        "April"=>"04","May"=>"05","June"=>"06","July"=>"07","August"=>"08",
+                                        "September"=>"09","October"=>"10","November"=>"11","December"=>"12");
+                                    @endphp
+                                    @foreach($months as $key => $value) {
+                                        <option @if($month_safari == $value) selected @endif value="{{$value}}" 
+                                        >{{$key}}</option>                                    
+                                    @endforeach
+                                </select>
+                            </div>  
+                            <div class="auth-input-form" style="width: 30%;">
+                                <input type="text" name="year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                    placeholder="Tahun" value="{{$year_safari}}">
+                            </div>
+
+                        </div>
+
+                        @else
                         <div class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
                             <input type="date" name="birthdate" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                                 placeholder="dd.mm.yyyy" value="{{ old('birthdate') ?? $date ?? null }}">
                         </div>  
+
+                        @endif
                         @error('birthdate')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
