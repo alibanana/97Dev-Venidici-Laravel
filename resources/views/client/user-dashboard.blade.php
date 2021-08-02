@@ -165,17 +165,19 @@
                             }
                         ?>
                         @if($agent->browser() == "Safari")
-                        @php
-                            $birthdate_safari = explode('-',$date);
-                            $year_safari = $birthdate_safari[0];
-                            $month_safari = $birthdate_safari[1];
-                            $date_safari = $birthdate_safari[2];
+                            @php
+                                if (Auth::user()->userDetail->birthdate != null) {
+                                    $birthdate_safari = explode('-',$date);
+                                    $year_safari = $birthdate_safari[0];
+                                    $month_safari = $birthdate_safari[1];
+                                    $date_safari = $birthdate_safari[2];
+                                }
 
-                        @endphp
-                        <div style="display: flex;align-items:center;justify-content:space-between">
+                            @endphp
+                            <div style="display: flex;align-items:center;justify-content:space-between">
                             <div class="auth-input-form" style="width: 30%;">
                                 <input type="text" name="date" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
-                                    placeholder="Tanggal" value="{{$date_safari}}">
+                                    placeholder="Tanggal"  @if(Auth::user()->userDetail->birthdate != null)  value="{{$date_safari}}" @endif>
                             </div>  
                             <div class="auth-input-form" style="width: 30%;">
                                 <select name="month" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
@@ -185,14 +187,18 @@
                                         "September"=>"09","October"=>"10","November"=>"11","December"=>"12");
                                     @endphp
                                     @foreach($months as $key => $value) {
-                                        <option @if($month_safari == $value) selected @endif value="{{$value}}" 
+                                        <option  
+                                        @if(Auth::user()->userDetail->birthdate != null)
+                                            @if($month_safari == $value) selected @endif 
+                                        @endif
+                                        value="{{$value}}" 
                                         >{{$key}}</option>                                    
                                     @endforeach
                                 </select>
                             </div>  
                             <div class="auth-input-form" style="width: 30%;">
                                 <input type="text" name="year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                                    placeholder="Tahun" value="{{$year_safari}}">
+                                    placeholder="Tahun" @if(Auth::user()->userDetail->birthdate != null) value="{{$year_safari}}" @endif>
                             </div>
 
                         </div>
@@ -206,6 +212,16 @@
 
                         @endif
                         @error('birthdate')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        @if(session('date_message'))
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ session('date_message') }}</strong>
+                            </span>
+                        @endif
+                        @error('date')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>

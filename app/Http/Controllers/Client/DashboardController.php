@@ -220,6 +220,11 @@ class DashboardController extends Controller
     {
         $input = $request->all();
         if($request->has('date') || $request->has('month')|| $request->has('year')  ){
+            if($request['date'] == null || $request['month'] == null || $request['year'] == null)
+                return redirect('/dashboard#edit-profile')
+                ->withInput($request->all())
+                ->with('date_message','The date field is required');
+            
             $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date'];
         }
         // Convert request input "phone" format.
