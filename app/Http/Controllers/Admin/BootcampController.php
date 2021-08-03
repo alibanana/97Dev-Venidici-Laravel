@@ -332,7 +332,7 @@ class BootcampController extends Controller
 
     public function changeApplicationStatus(Request $request, $id){
         $application = BootcampApplication::findOrFail($id);
-        if($request->action == 'Approved')
+        if($request->action == 'Approved' || $request->action == 'Upgrade')
         {
             $application->status = 'approved';
             $title = 'Selamat, pendaftaran Bootcamp kamu telah diterima!';
@@ -348,12 +348,6 @@ class BootcampController extends Controller
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu telah berhasil di refund.';    
 
             $title = 'Pendaftaran Bootcamp kamu telah di refund!';    
-        }
-        elseif($request->action == 'Upgrade'){
-            $title = 'Pendaftaran Bootcamp kamu sedang di review!';    
-            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu sedang direview oleh tim kami. Klik disini untuk melihat status';    
-            $application->status = 'waiting';
-
         }
         
         $application->save();

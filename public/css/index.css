@@ -300,7 +300,7 @@ html, body {
 
 .navbar-floating{
     position: fixed;
-    width: 65vw;
+    width: 70vw;
     margin: 3.2vw auto; /* Will not center vertically and won't work in IE6/7. */
     left: 0;
     right: 0;

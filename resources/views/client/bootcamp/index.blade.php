@@ -3,8 +3,7 @@
 
 @section('content')
 
-@if(Auth::check())
-@if(auth()->user()->isProfileUpdated && $bootcamp_application_count == 0)
+
 
 <!-- START OF POP UP FREE TRIAL REGISTRATION-->
 <div id="free-trial" class="overlay" style="overflow:scroll">
@@ -411,7 +410,7 @@
                         @endphp
                         <input type="hidden" name="grand_total" value="{{$grand_total}}">
                         <div style="text-align: center;margin-bottom:2vw">
-                            <p class="normal-text" style="font-family:Rubik Medium;color:orange;margin-bottom:0.4vw">*Uang Guarantee akan dikembalikan setelah free trial selesai*</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:orange;margin-bottom:0.4vw">*Uang Guarantee dapat dikembalikan setelah free trial selesai*</p>
                         </div>
                         <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
                     </div>  
@@ -812,9 +811,6 @@
     </div>
 </div>
 <!-- END OF POP UP FULL REGISTRATION-->
-@endif
-@endif
-
 
 
 

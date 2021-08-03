@@ -63,7 +63,7 @@ class BootcampController extends Controller
     
             $bootcamp_application_count = BootcampApplication::where(
                 [   
-                    ['course_id', '=', $course_id],
+                    ['course_id', '=', $course->id],
                     ['user_id', '=', auth()->user()->id],
                     ['status', '!=', 'ft_refunded'],
                     ['status', '!=', 'ft_cancelled'],

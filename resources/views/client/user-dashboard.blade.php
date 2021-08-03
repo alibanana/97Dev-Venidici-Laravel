@@ -975,7 +975,7 @@
                                 || 
                                 (!$application->is_trial && $application->is_full_registration && $application->status == 'approved') 
                                 || 
-                                ($application->is_trial && $application->is_full_registration && $application->status == 'waiting') 
+                                ($application->is_trial && $application->is_full_registration && ($application->status == 'waiting' || $application->status == 'approved') ) 
                             )
                             <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                                 @if($application->is_trial && !$application->is_full_registration)
@@ -1171,7 +1171,7 @@
                     @php $application = $course; @endphp
                     <!-- START OF BOOTCAMP CARD -->
                     <div class="col-12 p-0">
-                        <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
+                        <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;" >
                             <div class="container-image-card">
                                 <img src="{{asset($application->course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
                                 <div class="top-left card-tag small-text" >Bootcamp</div>
@@ -1219,17 +1219,10 @@
                                     || 
                                     (!$application->is_trial && $application->is_full_registration && $application->status == 'approved') 
                                     || 
-                                    ($application->is_trial && $application->is_full_registration && $application->status == 'waiting') 
+                                    ($application->is_trial && $application->is_full_registration && ($application->status == 'waiting' || $application->status == 'approved') ) 
                                 )
                                 <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                                    @if($application->is_trial && !$application->is_full_registration)
-                                    <form action="{{route('bootcamp.upgrade-status', $application->id)}}" method="post">
-                                    @csrf
-                                    @method('put')
-                                        <button onclick="return confirm('Are you sure you want to upgrade?')" type="submit" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">Upgrade</button>
-                                    </form>
-                                    @endif
-                                    <a href="{{$application->course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium; @if($application->is_trial && !$application->is_full_registration) margin-top:2vw @endif">Meeting Link</a>
+                                    <a href="{{$application->course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium; ">Meeting Link</a>
                                 </div>
                                 @endif
                             </div> 

@@ -415,7 +415,7 @@ class CourseHelper {
         });
 
         $liveBootcampData = auth()->user()->bootcampApplications()->get()->filter(function ($application) {
-            return CourseHelper::isCurrentDateTimeExceedBootcampTrialDate($application) &&
+            return CourseHelper::isCurrentDateTimeBehindBootcampDate($application) &&
                 CourseHelper::isBootcampApplicationInLiveCourses($application);
         });
 
@@ -438,8 +438,34 @@ class CourseHelper {
         ]; 
     }
 
-    private static function isCurrentDateTimeExceedBootcampTrialDate($application) {
-        return time() < strtotime($application->course->bootcampCourseDetail->trial_date_end);
+    private static function isCurrentDateTimeExceedBootcampDate($application) {
+        //if free trial
+        if($application->is_trial && $application->is_full_registration == null)
+            return time() > strtotime($application->course->bootcampCourseDetail->trial_date_end);
+
+        //if full regis or upgraded
+        elseif($application->is_full_registration){
+            return time() > strtotime($application->course->bootcampCourseDetail->date_end);
+        }
+    }
+    private static function isCurrentDateTimeBehindBootcampDate($application) {
+        //if free trial
+        if($application->is_trial && $application->is_full_registration == null)
+            return time() < strtotime($application->course->bootcampCourseDetail->trial_date_end);
+
+        //if full regis or upgraded
+        elseif($application->is_full_registration){
+            return time() < strtotime($application->course->bootcampCourseDetail->date_end);
+        }
+    }
+
+    private static function isBootcampApplicationInFinishedCourses($application) {
+        if ($application->is_trial && $application->is_full_registration)
+            return $application->status == 'approved';
+        else if ($application->is_full_registration)
+            return $application->status == 'approved';
+        else
+            return $application->status == 'ft_paid' || $application->status == 'ft_refunded';
     }
 
     private static function isBootcampApplicationInLiveCourses($application) {
@@ -478,8 +504,16 @@ class CourseHelper {
     public static function getDashboardCompletedCoursesDataWithPagination($amountPerPage, $page) {
         $completedCoursesData = auth()->user()->courses()->where('course_type_id', '!=', 3)->get()->filter(function ($course) {
             return $course->pivot->status == 'completed';
-        })->chunk($amountPerPage);
+        });
 
+        $completedBootcampData = auth()->user()->bootcampApplications()->get()->filter(function ($application) {
+            return CourseHelper::isCurrentDateTimeExceedBootcampDate($application) &&
+                CourseHelper::isBootcampApplicationInFinishedCourses($application);
+        });
+        
+
+        $completedCoursesData = CourseHelper::generateCombinedCoursesAndBootcampApplicationData($amountPerPage, $completedCoursesData, $completedBootcampData);
+        
         if ($completedCoursesData->isEmpty()) 
             return ['data' => null];
 
