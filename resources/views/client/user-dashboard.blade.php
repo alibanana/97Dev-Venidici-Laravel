@@ -27,7 +27,7 @@
                                     </div>
                                 @endif
                                 <input type="hidden" name="bootcamp_application_id" id="bootcamp_application_id">
-                                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;">Kenapa kamu memililih Bootcamp ini?</p>
+                                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;" required>Kenapa kamu memililih Bootcamp ini?</p>
                                 <div  class="auth-input-form" >
                                     <textarea name="kenapa_memilih" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan jawaban anda" >{{old('kenapa_memilih')}}</textarea>
                                 </div>  
@@ -949,7 +949,11 @@
                                     @endforeach
                                     </p>   
                                     <!-- <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$application->course->subtitle}}</p> -->
+                                    @if($application->is_trial && !$application->is_full_registration)
+                                    <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">{{date('d M Y', strtotime($application->course->bootcampCourseDetail->date_start))}} -  {{date('d M Y', strtotime($application->course->bootcampCourseDetail->trial_date_end))}}</p>
+                                    @else
                                     <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">{{date('d M Y', strtotime($application->course->bootcampCourseDetail->date_start))}} -  {{date('d M Y', strtotime($application->course->bootcampCourseDetail->date_end))}}</p>
+                                    @endif
                                     <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Application Status: <span style="color:#2B6CAA;font-family:Rubik Medium">
                                     @if($application->status == 'ft_pending')
                                     <span style="color: orange;">Pending Payment</span> (Trial)
@@ -1193,7 +1197,11 @@
                                         @endforeach
                                         </p>   
                                         <!-- <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-top:1vw">{{$application->course->subtitle}}</p> -->
+                                        @if($application->is_trial && !$application->is_full_registration)
+                                        <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">{{date('d M Y', strtotime($application->course->bootcampCourseDetail->date_start))}} -  {{date('d M Y', strtotime($application->course->bootcampCourseDetail->trial_date_end))}}</p>
+                                        @else
                                         <p class="small-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1vw">{{date('d M Y', strtotime($application->course->bootcampCourseDetail->date_start))}} -  {{date('d M Y', strtotime($application->course->bootcampCourseDetail->date_end))}}</p>
+                                        @endif
                                         <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">Application Status: <span style="color:#2B6CAA;font-family:Rubik Medium">
                                         @if($application->status == 'ft_pending')
                                         <span style="color: orange;">Pending Payment</span> (Trial)
@@ -1214,17 +1222,6 @@
 
                                     </div>
                                 </div>
-                                @if(
-                                    ($application->is_trial && !$application->is_full_registration && $application->status == 'ft_paid') 
-                                    || 
-                                    (!$application->is_trial && $application->is_full_registration && $application->status == 'approved') 
-                                    || 
-                                    ($application->is_trial && $application->is_full_registration && ($application->status == 'waiting' || $application->status == 'approved') ) 
-                                )
-                                <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
-                                    <a href="{{$application->course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium; ">Meeting Link</a>
-                                </div>
-                                @endif
                             </div> 
                         </div>
                     </div>  

@@ -98,6 +98,7 @@
                                                 <th>No.</th>
                                                 <th>Course</th>
                                                 <th>Status</th>
+                                                <th>Featured</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -148,6 +149,13 @@
                                                     @else
                                                         <td>DRAFT</td>
                                                     @endif
+                                                    <td>
+                                                    @if($course->isFeatured)
+                                                        YES
+                                                    @else
+                                                        NO
+                                                    @endif
+                                                    </td>
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <form action="{{ route('admin.bootcamp.set-isfeatured-status-to-opposite', $course->id) }}" method="post">

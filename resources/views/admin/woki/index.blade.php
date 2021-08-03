@@ -99,6 +99,7 @@
                                                 <th>Course</th>
                                                 <th>Status</th>
                                                 <th>Pricing</th>
+                                                <th>Featured</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -162,6 +163,13 @@
                                                     <span style="color:orange">
                                                         No Art kit
                                                     </span>
+                                                    @endif
+                                                    </td>
+                                                    <td>
+                                                    @if($course->isFeatured)
+                                                        YES
+                                                    @else
+                                                        NO
                                                     @endif
                                                     </td>
                                                     <td>
