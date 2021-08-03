@@ -102,7 +102,7 @@
                     @enderror
                 </div>
                 <div class="modal-footer">
-                    <button  onclick="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>
+                    <!--<button  onclick="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal" style="font-family:Poppins Medium;padding:0.5vw 2vw">Batal</button>-->
                     <button type="submit" data-toggle="modal" data-target="#exampleModal" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;cursor:pointer;padding:0.5vw 2vw">Kirim</button>                
                 </div>
             </div>
@@ -115,8 +115,8 @@
 <div class="row page-container m-0 krest-background" style="padding-top:10vw;display:flex;align-items:center">
     <div class="col-6 p-0">
         <img src="/assets/images/client/logo-horizontal.png" style="width:20vw" class="img-fluid" alt="KREST">
-        <p class="medium-heading" style="font-family: Rubik Bold;color:#686B82;margin-top:1.5vw">Turut Memaksimalkan Potensi <br> Bagi Talenta dan Perusahaan</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#686B82;margin-top:1.5vw;margin-bottom:3vw">Vendici turut membantu menggali potensi dan <br> perkembangan di masing masing individual</p>
+        <p class="medium-heading" style="font-family: Rubik Bold;color:#686B82;margin-top:1.5vw">Extracting businesses’ true potential. In search of peak efficiency</p>
+        <p class="sub-description" style="font-family: Rubik Regular;color:#686B82;margin-top:1.5vw;margin-bottom:3vw">Optimalkan talenta-talenta dalam perusahaan Anda <br> untuk performa bisnis terbaik</p>
         <a href="#programs-section" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw">Explore Krest</a>
 
     </div>
@@ -125,17 +125,23 @@
     </div>
     <div class="col-12 wow fadeInUp" data-wow-delay="0.7s" style="padding:6vw 16vw">
         <div style="display:flex;justify-content:space-between;align-items:center">
-            <div style="text-align:center">
-                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">5+</p>
-                <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA;">Trusted Companies</p>
+            <div style="text-align:center;width:25vw;margin-right:2vw">
+                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">20+</p>
+                <div style="height:4vw">
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA;">Speakers from well-known institution</p>
+                </div>
             </div>
-            <div style="text-align:center">
-                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">100+</p>
-                <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA;">Trusted Companies</p>
+            <div style="text-align:center;width:25vw">
+                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">6.35/7</p>
+                <div style="height:4vw">
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA;">Average satisfaction rate per br webinar</p>
+                </div>
             </div>
-            <div style="text-align:center">
-                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">50+</p>
-                <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA;">Trusted Companies</p>
+            <div style="text-align:center;width:25vw;margin-left:2vw">
+                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">1800+</p>
+                <div style="height:4vw">
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA;">Participants <br> </p>
+                </div>
             </div>
         </div>
     </div>
@@ -146,13 +152,11 @@
 <div class="row m-0 page-container krest-history-background" style="padding-top:2vw;padding-bottom:2vw">
     
     <div class="col-6" style="padding-right:2vw">
-        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Our History</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Apa itu Krest?</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
-
-        </p>
+        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">A Closer Look</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Krest in a nutshell</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Krest by Venidici hadir untuk membantu bisnis Anda meningkatkan produktivitas melalui serangkaian pelatihan secara online yang dirancang khusus sesuai dengan kebutuhan dan tujuan perusahaan.
+        
+        Krest berfokus pada pelatihan soft-skill yang kini jadi jauh semakin penting untuk mampu bersaing di era yang super kompetitif.</p>
     </div>
     <div class="col-6 wow fadeInRight" data-wow-delay="0.3s">
         <div style="display:flex;align-items:center">
@@ -183,11 +187,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
           <img src="/assets/images/client/kenapa_online_course.png" style="width:38vw;object-fit:cover;height:25vw;border-radius: 10px" class="img-fluid" alt="Image 1">
     </div>
     <div class="col-6 wow fadeInRight" data-wow-delay="0.3s">
-        <p class="medium-heading" style="font-family: Rubik Bold;color:#3B3C43">The Urgency of Soft Skills</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
+        <p class="medium-heading" style="font-family: Rubik Bold;color:#3B3C43">We chose soft skills over hard skills, here’s why</p>
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Jangan salah, semua orang butuh Hard skill. Nyatanya, kombinasi keduanya lah yang terbaik. Hard Skill jadi tidak berarti kalau tidak bisa tersampaikan dengan Soft Skill yang baik. Sebaliknya, Soft Skill yang baik justru akan lebih meningkatkan nilai Hard Skill itu sendiri. 
 
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
-        </p>
+Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan waktu yang lama sehingga masih sedikit orang yang bisa memaksimalkan keduanya. Karenanya, sosok yang berhasil menguasai Soft Skill umumnya adalah mereka yang mampu untuk “stand-out” dan mengungguli yang lain.
+</p>
     </div>
     
 </div>
@@ -197,23 +201,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
 <div class="row m-0 page-container" id="programs-section" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
     <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Programs</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Mengakomodasi Kebutuhan Talenta <br> Perusahaan Anda Dengan Program Venidici</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Satu platform untuk semua kebutuhan <br> talenta perusahaan Anda</p>
     </div>
     <div style="display:flex;justify-content:center;align-items:center;margin-top:2vw">
         <p class="btn-blue-bordered btn-blue-active normal-text program-links" onclick="changePrograms(event, 'available-programs')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;margin-right:1vw;border:1px solid #2B6CAA;cursor:pointer">
-            Available Programs
+            Available Modules
         </p>
         <p class="btn-blue-bordered  normal-text program-links"  onclick="changePrograms(event, 'on-demand-programs')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;margin-left:1vw;border:1px solid #2B6CAA;cursor:pointer">
-            On Demand Programs
+            On Demand Modules
         </p>
     </div>
-    <div style="text-align:center">
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">
-        Venidici memberikan berbagai macam program yang dapat diikuti oleh masyarakat luas. Mulai dari bla bla bla dan ini adalah sebuah bla bla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat urna commodo eget sem. 
-
-        </p>   
-    </div>
     <div class="program-content"  id="available-programs">
+        <div style="text-align:center">
+            <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">
+            Pilih modul soft-skills yang kami sediakan sesuai dengan tujuan perusahaan Anda. 
+            </p>   
+        </div>
         <!-- START OF CAROUSEL -->
         <div id="perlengkapan-carousel" style="margin-top:2vw" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 2vw;">
@@ -289,11 +292,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
         <!-- END OF CAROUSEL -->
     </div>
     <div class="program-content" id="on-demand-programs" style="text-align:center;display:none">
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin egestas mollis id lacinia nec. Nunc felis mi bibendum facilisi sollicitudin tempor, ultricies. Dignissim montes, risus ultrices egestas. At in suscipit nulla eget. Dictum lacus donec imperdiet malesuada.
-        </p>   
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">Menjawab tantangan persaingan bisnis dengan materi-materi Soft Skills yang diracik khusus <br> sesuai dengan kebutuhan perusahaan Anda.</p>   
         <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 2.5vw;border:none;margin-top:1vw">
-            Hubungi Kami
+            Diskusi lebih lanjut
         </button>
     </div>
 </div>
@@ -303,33 +304,33 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw">
     <div class="col-12">
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Our Values</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Mengenal Nilai Program Krest dalam <br> kemudahan mengaksesnya</p>
+        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Krest Signature Benefits</p>
     </div>
     <div class="col-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
             <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
-            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Customer Experience</p>
-            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFFmargin-top:1vw">Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</p>
+            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Quick</p>
+            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFFmargin-top:1vw">Ucapkan selamat tinggal pada repotnya mengatur workshop yang efektif</p>
         </div>
     </div>
     <div class="col-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
             <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
-            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Customer Experience</p>
-            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFFmargin-top:1vw">Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</p>
+            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Effective</p>
+            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFFmargin-top:1vw">Instruktur profesional akan membantu tim Anda menyerap materi sepenuhnya dengan sesi interaktif penuh praktik dan studi kasus nyata.</p>
         </div>
     </div>
     <div class="col-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
             <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
-            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Customer Experience</p>
-            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFFmargin-top:1vw">Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada</p>
+            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Tailored</p>
+            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFFmargin-top:1vw">Penyampaian materi disesuaikan dengan kebutuhan perusahaan Anda.</p>
         </div>
     </div>
 </div>
 <!-- END OF OUR VALUES SECTION -->
 
-<!-- START OF OUR PARTNERS TESTIMONY -->
+<!-- START OF OUR PARTNERS TESTIMONY 
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
     <div style="text-align:center">
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Our Partners Testimony</p>
@@ -368,7 +369,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
         </div>
     </div>
 </div>
-<!-- END OF OUR PARTNERS TESTIMONY -->
+END OF OUR PARTNERS TESTIMONY -->
 
 <!-- START OF OUR VALUES
 <div class="row m-0 page-container krest-values-background" style="padding-top:15vw;padding-bottom:15vw">

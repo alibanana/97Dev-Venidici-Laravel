@@ -3,7 +3,7 @@
 @section('title', 'Venidici Log In')
 @section('content')
 
-<!-- START OF POPUP VA EXPLANATION-->
+<!-- START OF FORGET PASSWORD-->
 <div id="forget-password" class="overlay" style="overflow:scroll">
     <div class="popup" style="width:40vw">
         <a class="close" href="#" >&times;</a>
@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-<!-- END OF POPUP VA EXPLANATION-->
+<!-- END OF FORGET PASSWORD-->
 
 <div class="row m-0 auth-background">
     <!--

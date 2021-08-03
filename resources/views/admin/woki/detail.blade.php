@@ -115,6 +115,15 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                            <form action="{{route('admin.woki-courses.set-as-done' , $course->id)}}" method="post">
+                                @csrf
+                                @method('put')
+                                <div style="padding: 0px 2px">
+                                    <button class="btn btn-primary btn-user p-3 text-nowrap" type="submit" onclick="return confirm('Are you sure you want to mark this course as done?')">Mark Woki as Complete</button>
+                                </div>
+                            </form> 
+                        </div>
                     </div>
 
                     <!-- Main Table -->

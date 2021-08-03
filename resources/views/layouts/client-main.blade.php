@@ -249,7 +249,12 @@
                 -->
                 <tr>
                   <td  style="padding-top:4vw">
-                  <a href="/for-corporate/krest" class="navbar-item @if( Request::is('bootcamp') || Request::is('bootcamp/*'))navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">For Corporate</a>
+                  <a href="/for-corporate/krest" class="navbar-item @if( Request::is('for-corporate') || Request::is('for-corporate/*'))navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">For Corporate</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/bootcamp" class="navbar-item @if( Request::is('bootcamp') || Request::is('bootcamp/*'))navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Bootcamp</a>
                   </td>
                 </tr>
                 <tr>
@@ -320,7 +325,8 @@
         <a href="/" class="normal-text navbar-item @if(Request::is('/'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Home</a>
         <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*')  )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <!--<a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>-->
-        <a href="/for-corporate/krest" class="normal-text navbar-item @if( Request::is('bootcamp') || Request::is('bootcamp/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
+        <a href="/for-corporate/krest" class="normal-text navbar-item @if( Request::is('for-corporate') || Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
+        <a href="/bootcamp" class="normal-text navbar-item @if( Request::is('bootcamp') || Request::is('bootcamp/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Bootcamp</a>
         <a href="/community" class="normal-text navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Log In</a>
@@ -613,9 +619,9 @@
 
           <div>
             <p class="normal-text" style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw">Site Map</p>
-            <div style="margin-top:1vw">
+            <!-- <div style="margin-top:1vw">
               <a href="/" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Home Page</a>
-            </div>
+            </div> -->
             <div style="margin-top:1vw">
               <a href="/for-public/online-course" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Skill Snack</a>
             </div>
@@ -623,7 +629,10 @@
               <a href="/for-public/woki" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Woki</a>
             </div>
             <div style="margin-top:1vw">
-              <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Corporate</a>
+              <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Krest</a>
+            </div>
+            <div style="margin-top:1vw">
+              <a href="/bootcamp" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">Bootcamp</a>
             </div>
             <!--<div style="margin-top:1vw">
               <a href="/for-corporate/krest" class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none">For Corporate</a>
@@ -725,9 +734,9 @@
       <div class="row m-0">
         <div class="col-4 p-0">
             <p style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Site Map</p>
-            <div>
+            <!-- <div>
               <a href="/" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Home Page</a>
-            </div>
+            </div> -->
             <div>
               <a href="/for-public/online-course" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Skill Snack</a>
             </div>
@@ -735,7 +744,10 @@
               <a href="/for-public/woki" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Woki</a>
             </div>
             <div>
-              <a href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">For Corporate</a>
+              <a href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Krest</a>
+            </div>
+            <div>
+              <a href="/bootcamp" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Bootcamp</a>
             </div>
             <!--<div>
               <a href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">For Corporate</a>

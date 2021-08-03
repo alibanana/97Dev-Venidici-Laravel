@@ -62,25 +62,6 @@ class DashboardController extends Controller
         $informations = $this->informations;
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
-        
-        // $orders = Order::whereHas('invoice', function ($query){
-        //     $query->where(
-        //         [
-        //             ['status', '=', 'paid'],
-        //             ['user_id', '=', auth()->user()->id],
-        //         ],
-        //     )->orWhere(
-        //         [
-        //             ['status', '=', 'completed'],
-        //             ['user_id', '=', auth()->user()->id],
-        //         ],
-        //     );
-        //         })->orderBy('orders.created_at', 'desc')->get();
-                
-        // *Bootcamp not included for now*
-        // $bootcamp_applications = BootcampApplication::whereHas('invoice', function($query){
-        //     $query->where('status', 'paid')->orWhere('status', 'completed');
-        // })->orderBy('bootcamp_applications.created_at','desc')->get();
 
         $interests = Hashtag::all();
         $usableStarsCount = Helper::getUsableStars(auth()->user());     
@@ -88,42 +69,19 @@ class DashboardController extends Controller
         $mytime = Carbon::now()->setTimezone('Asia/Phnom_Penh');
 
         // Check live woki and change status to complete if date time has passed
-        foreach (auth()->user()->courses->where('course_type_id', 2) as $course) {
-            $woki_date = $course->wokiCourseDetail->event_date . ' ' .$course->wokiCourseDetail->end_time;
-            if ($mytime >= $woki_date) {
-                $course->pivot->status = 'completed';
-                $course->pivot->save();
-            }
-        }
+        // foreach (auth()->user()->courses->where('course_type_id', 2) as $course) {
+        //     $woki_date = $course->wokiCourseDetail->event_date . ' ' .$course->wokiCourseDetail->end_time;
+        //     if ($mytime >= $woki_date) {
+        //         $course->pivot->status = 'completed';
+        //         $course->pivot->save();
+        //     }
+        // }
 
         // Get dashboardLiveWorkshopData from CourseHelper
         $liveWorkshopAmountPerPage = 4;
         $liveWorkshopPage = $request->has('liveWorkshopPage') ? $request->liveWorkshopPage : 1;
         $liveWorkshopPaginationData =
             CourseHelper::getDashboardLiveCoursesDataWithPagination($liveWorkshopAmountPerPage, $liveWorkshopPage);
-
-
-        // Start of dummy bootcamp data
-        $bootcampData = BootcampApplication::where('user_id',auth()->user()->id);
-        $bootcampData = $bootcampData->where(
-            [   
-                ['is_trial', '=',TRUE],
-                ['is_full_registration', '=', NULL],
-                ['status', '=', 'ft_pending']
-            ]
-        )->orWhere(
-            [   
-                ['is_trial', '=',NULL],
-                ['is_full_registration', '=', TRUE],
-                ['status', '=', 'approved']
-            ],
-        )->orWhere(
-            [   
-                ['is_trial', '=',TRUE],
-                ['is_full_registration', '=', TRUE],
-                ['status', '=', 'waiting']
-            ]
-        )->get();
         
         // Get onGoingCoursesPaginationData from CourseHelper
         $onGoingCoursesAmountPerPage = 4;
@@ -159,7 +117,7 @@ class DashboardController extends Controller
 
         $viewData = compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications', 'usableStarsCount',
             'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
-            'footer_reviews','bootcampData','agent');
+            'footer_reviews','agent');
 
         return view('client/user-dashboard', $viewData);
     }
@@ -219,6 +177,7 @@ class DashboardController extends Controller
     public function update_profile(Request $request, $id)
     {
         $input = $request->all();
+        //for safari
         if($request->has('date') || $request->has('month')|| $request->has('year')  ){
             if($request['date'] == null || $request['month'] == null || $request['year'] == null)
                 return redirect('/dashboard#edit-profile')
@@ -237,8 +196,8 @@ class DashboardController extends Controller
             'telephone'     => 'required',
             'birthdate'     => 'date',
             'gender'        => 'required',
-            'company'       => 'required',
-            'occupancy'     => 'required',
+            'company'       => '',
+            'occupancy'     => '',
         ]);
 
         if($validated->fails()) 
@@ -280,13 +239,15 @@ class DashboardController extends Controller
 
         //check if the user update the profile for the first time
         if(!$user->isProfileUpdated && $user->isShippingUpdated && $user->isGeneralInfoUpdated){
-            $user->isProfileUpdated = TRUE;
-            // here insert star reward
-            //tambah 15 stars
-            Helper::addStars(auth()->user(),15,'Completing Personal Data');
-            $user->save();
-            $user_detail->save();
-            return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
+            if($user->userDetail->company != null && $user->userDetail->occupancy != null){
+                $user->isProfileUpdated = TRUE;
+                // here insert star reward
+                //tambah 15 stars
+                Helper::addStars(auth()->user(),15,'Completing Personal Data');
+                $user->save();
+                $user_detail->save();
+                return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
+            }
         }
 
 
@@ -514,10 +475,17 @@ class DashboardController extends Controller
         }
     }
 
-    public function upgradeBootcamp($id){
-            $application = BootcampApplication::findOrFail($id);
-            $application->status = 'waiting';
-            $application->is_full_registration = TRUE;
+    public function upgradeBootcamp(Request $request){
+            // dd($request->all());
+            $application                        = BootcampApplication::findOrFail($request->bootcamp_application_id);
+            // dd($application);
+
+            if($application->status == 'waiting')
+                return redirect()->back()->with('bootcamp_message', 'Aplikasi bootcamp anda sedang di review.');
+            
+            $application->status                = 'waiting';
+            $application->kenapa_memilih        = $request->kenapa_memilih;
+            $application->is_full_registration  = TRUE;
             $application->save();
 
             $title = 'Pendaftaran Bootcamp kamu sedang di review!';    
@@ -536,7 +504,7 @@ class DashboardController extends Controller
     
             $message = 'Terimakasih! Pendaftaran Bootcamp kamu sedang di review.';
     
-            return redirect()->back()->with('message', $message);
+            return redirect()->back()->with('bootcamp_message', $message);
     
     }
 }

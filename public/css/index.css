@@ -232,7 +232,7 @@ html, body {
     background-image: url("/assets/images/client/Bootcamp_Circle_BG.png");
     background-position:center right;
     background-repeat: no-repeat;
-    background-size: 75%;
+    background-size: 85%;
 }
 .bootcamp-bg{
     background-image: url("/assets/images/client/Bootcamp_Background.png");
@@ -300,7 +300,7 @@ html, body {
 
 .navbar-floating{
     position: fixed;
-    width: 65vw;
+    width: 70vw;
     margin: 3.2vw auto; /* Will not center vertically and won't work in IE6/7. */
     left: 0;
     right: 0;

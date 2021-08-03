@@ -10,6 +10,7 @@ class BootcampCourseDetail extends Model
     use HasFactory;
 
     protected $fillable = [
+        'what_will_be_taught',
         'course_id',
         'meeting_link',
         'syllabus',

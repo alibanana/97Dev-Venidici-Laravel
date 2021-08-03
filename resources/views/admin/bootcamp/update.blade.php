@@ -219,8 +219,19 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea name="description" id="" rows="5"  class="form-control form-control-user" required>{{ old('description', $course->description) }}</textarea>
+                            <textarea name="description" id="" rows="5"  class="form-control form-control-user">{{ old('description', $course->description) }}</textarea>
                             @error('description')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror             
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">What will be taught in our bootcamp?</label>
+                            <textarea name="what_will_be_taught" id="" rows="5"  class="form-control form-control-user">{{ old('what_will_be_taught', $course->bootcampCourseDetail->what_will_be_taught) }}</textarea>
+                            @error('what_will_be_taught')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
                                 </span>

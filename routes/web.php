@@ -74,7 +74,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
     Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth', 'verified']);
     Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
-    Route::put('/bootcamp/{id}/upgrade-status', [DashboardController::class, 'upgradeBootcamp'])->name('bootcamp.upgrade-status')->middleware(['auth']);
+    Route::put('/bootcamp/upgrade-status', [DashboardController::class, 'upgradeBootcamp'])->name('bootcamp.upgrade-status')->middleware(['auth']);
 
     /*
     |--------------------------------------------------------------------------
@@ -274,6 +274,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/woki-course/{id}/un-archive', [AdminWokiCourseController::class, 'unArchive'])->name('woki-courses.unArchive');
         Route::post('/woki-courses/{id}/set-isfeatured-status-to-opposite', [AdminWokiCourseController::class, 'setIsFeaturedStatusToOpposite'])->name('woki-courses.set-isfeatured-status-to-opposite');
         Route::post('/woki-courses/{id}/set-publish-status-to-opposite', [AdminWokiCourseController::class, 'setPublishStatusToOpposite'])->name('woki-courses.set-publish-status-to-opposite');
+        Route::put('/woki-courses/{id}/set-as-done', [AdminWokiCourseController::class, 'setWokiAsDone'])->name('woki-courses.set-as-done');
         // WokiCourseUpdateController
         Route::get('/woki-courses/{id}/update', [AdminWokiCourseUpdateController::class, 'edit'])->name('woki-courses.edit');
         Route::put('/woki-courses/{id}/update-basic-info', [AdminWokiCourseUpdateController::class, 'updateBasicInfo'])->name('woki-courses.update-basic-info');

@@ -99,6 +99,7 @@
                                                 <th>Course</th>
                                                 <th>Status</th>
                                                 <th>Pricing</th>
+                                                <th>Featured</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -165,6 +166,13 @@
                                                     @endif
                                                     </td>
                                                     <td>
+                                                    @if($course->isFeatured)
+                                                        YES
+                                                    @else
+                                                        NO
+                                                    @endif
+                                                    </td>
+                                                    <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <form action="{{ route('admin.woki-courses.set-isfeatured-status-to-opposite', $course->id) }}" method="post">
                                                                 @csrf
@@ -186,7 +194,7 @@
                                                                     @if ($course->publish_status == 'Draft')
                                                                         <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to set this woki course as published?')">Set as published</button>
                                                                     @elseif ($course->publish_status == 'Published')
-                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to set this woki course as draft?')">Set as draft</button>
+                                                                        <button class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to set this woki course as draft?')">Set as draft</button>
                                                                     @endif
                                                                 </div>
                                                             </form>
