@@ -945,7 +945,7 @@
 <!-- START OF GROWTH HACKING SECTION -->
 <div class="row m-0 page-container" style="background-color: #F6F6F6;padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="text-align: center;">
-        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Apa itu Growth Hacking?</p>
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Apa itu {{$course->title}}</p>
     </div>
     <div class="col-12" style="padding:1vw 10vw">
         <!-- START OF CONTENT LINKS -->
