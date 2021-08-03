@@ -3,6 +3,8 @@
 
 @section('content')
 
+@if(Auth::check())
+@if(auth()->user()->isProfileUpdated && $bootcamp_application_count == 0)
 
 <!-- START OF POP UP FREE TRIAL REGISTRATION-->
 <div id="free-trial" class="overlay" style="overflow:scroll">
@@ -810,7 +812,8 @@
     </div>
 </div>
 <!-- END OF POP UP FULL REGISTRATION-->
-
+@endif
+@endif
 
 
 
@@ -894,7 +897,7 @@
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
-    <div class="col-xs-12 col-md-6 bootcamp-right-heading-bg wow fadeInUp" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: center;align-items:center;padding:10vw 0vw">
+    <div class="col-xs-12 col-md-6 bootcamp-right-heading-bg wow fadeInUp" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: flex-end;align-items:center;padding:10vw 0vw">
         <div style="justify-content: center;display:flex;margin-left:10vw" class="wow bounce" data-wow-delay="1s">
             <!-- START OF BOOTCAMP CARD -->
             <div  style="padding:1vw;background-color:#E2E2E2;width:20vw;border-radius:10px;transform: rotate(8deg);margin-right:5.5vw">
@@ -1037,8 +1040,10 @@
             <div class="col-md-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
                 <div style="padding-left: 5vw;">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-                    <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}" target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</a>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">{{$course->bootcampCourseDetail->what_will_be_taught}}</p>
+                    @if($course->bootcampCourseDetail->syllabus != null) 
+                    <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}"  target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</a>
+                    @endif
 
                 </div>
 
@@ -1095,8 +1100,10 @@
             <div class="col-md-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
                 <div style="padding-left: 5vw;">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">{{$course->bootcampCourseDetail->what_will_be_taught}}</p>
+                    @if($course->bootcampCourseDetail->syllabus != null) 
                     <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}" target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</a>
+                    @endif
 
                 </div>
             </div>
@@ -1146,7 +1153,7 @@
     <div class="col-md-6 col-xs-12 wow fadeInLeft"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Bootcamp ini untuk siapa?</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-        <button class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Register For Free</button>
+        <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Register For Free</a>
     </div>
     <!-- END OF LEFT SECTION -->
 

@@ -38,8 +38,11 @@ class BootcampController extends Controller
 
     // Shows the Client's Main Bootcamp Page.
     public function index(Request $request) {
-        $course_id = 6;
-        $course = Course::findOrFail($course_id);
+        // $course_id = 6;
+        $course = Course::where('course_type_id',3)->where('enrollment_status', 'open')
+        ->where('publish_status', 'published')->where('isDeleted', false)->where('isFeatured',TRUE)->first();
+        if($course == null)
+            return redirect()->back();
         $provinces = Province::all();
         $cities = City::all();
 

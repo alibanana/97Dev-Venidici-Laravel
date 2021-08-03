@@ -160,6 +160,7 @@ class BootcampController extends Controller
             'subtitle' => 'required',
             'course_category_id' => 'required',
             'meeting_link' => '',
+            'what_will_be_taught' => 'required',
             'description' => 'required',
             'date_start' => 'required',
             'date_end' => 'required',
@@ -188,12 +189,13 @@ class BootcampController extends Controller
         }
         $course->hashtags()->attach($added_hashtag_ids);
 
-        $bootcampCourseDetail                   = new BootcampCourseDetail;
-        $bootcampCourseDetail->course_id        = $course->id;
-        $bootcampCourseDetail->meeting_link     = $validated['meeting_link'];
-        $bootcampCourseDetail->date_start       = $validated['date_start'];
-        $bootcampCourseDetail->date_end         = $validated['date_end'];
-        $bootcampCourseDetail->trial_date_end   = $validated['trial_date_end'];
+        $bootcampCourseDetail                       = new BootcampCourseDetail;
+        $bootcampCourseDetail->what_will_be_taught  = $validated['what_will_be_taught'];
+        $bootcampCourseDetail->course_id            = $course->id;
+        $bootcampCourseDetail->meeting_link         = $validated['meeting_link'];
+        $bootcampCourseDetail->date_start           = $validated['date_start'];
+        $bootcampCourseDetail->date_end             = $validated['date_end'];
+        $bootcampCourseDetail->trial_date_end       = $validated['trial_date_end'];
         $bootcampCourseDetail->save();
 
         return redirect()->route('admin.bootcamp.index')->with('message', 'New Bootcamp has been added!');

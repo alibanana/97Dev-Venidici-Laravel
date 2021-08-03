@@ -227,6 +227,17 @@
                             @enderror             
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">What will be taught in our bootcamp?</label>
+                            <textarea name="what_will_be_taught" id="" rows="5"  class="form-control form-control-user" required>{{ old('what_will_be_taught', $course->bootcampCourseDetail->what_will_be_taught) }}</textarea>
+                            @error('what_will_be_taught')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror             
+                        </div>
+                    </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="">Date Start</label>

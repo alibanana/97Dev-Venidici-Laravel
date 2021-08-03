@@ -132,6 +132,22 @@ class CourseHelper {
     public static function setIsFeaturedStatusToOppositeById($id) {
         try {
             $course = Course::findOrFail($id);
+            if($course->course_type_id == 3){
+                $featuredCourseCount = $course->where(
+                    [   
+                        ['isFeatured', '=', TRUE],
+                        ['course_type_id', '=', 3]
+                        
+                    ])->count();
+
+                if($featuredCourseCount >= 1 && !$course->isFeatured){
+                    return [
+                        'status' => 'Failed',
+                        'data' => $course,
+                        'message' => 'There can only be one featured bootcamp!'
+                    ];
+                }
+            }
             $course->isFeatured = !$course->isFeatured;
             $course->save();
 

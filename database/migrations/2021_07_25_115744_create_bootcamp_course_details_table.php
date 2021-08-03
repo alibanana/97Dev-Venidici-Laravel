@@ -17,6 +17,7 @@ class CreateBootcampCourseDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->text('what_will_be_taught')->nullable();
             $table->string('meeting_link')->nullable();
             $table->string('syllabus')->nullable();
             $table->datetime('date_start');

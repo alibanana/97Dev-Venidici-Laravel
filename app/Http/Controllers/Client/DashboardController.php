@@ -117,7 +117,7 @@ class DashboardController extends Controller
 
         $viewData = compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications', 'usableStarsCount',
             'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
-            'footer_reviews','bootcampData','agent');
+            'footer_reviews','agent');
 
         return view('client/user-dashboard', $viewData);
     }
@@ -177,6 +177,7 @@ class DashboardController extends Controller
     public function update_profile(Request $request, $id)
     {
         $input = $request->all();
+        //for safari
         if($request->has('date') || $request->has('month')|| $request->has('year')  ){
             if($request['date'] == null || $request['month'] == null || $request['year'] == null)
                 return redirect('/dashboard#edit-profile')
@@ -195,8 +196,8 @@ class DashboardController extends Controller
             'telephone'     => 'required',
             'birthdate'     => 'date',
             'gender'        => 'required',
-            'company'       => 'required',
-            'occupancy'     => 'required',
+            'company'       => '',
+            'occupancy'     => '',
         ]);
 
         if($validated->fails()) 
@@ -238,13 +239,15 @@ class DashboardController extends Controller
 
         //check if the user update the profile for the first time
         if(!$user->isProfileUpdated && $user->isShippingUpdated && $user->isGeneralInfoUpdated){
-            $user->isProfileUpdated = TRUE;
-            // here insert star reward
-            //tambah 15 stars
-            Helper::addStars(auth()->user(),15,'Completing Personal Data');
-            $user->save();
-            $user_detail->save();
-            return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
+            if($user->userDetail->company != null && $user->userDetail->occupancy != null){
+                $user->isProfileUpdated = TRUE;
+                // here insert star reward
+                //tambah 15 stars
+                Helper::addStars(auth()->user(),15,'Completing Personal Data');
+                $user->save();
+                $user_detail->save();
+                return redirect('/dashboard#edit-profile')->with('success', 'Update Profile Berhasil! kamu mendapatkan 15 stars.');
+            }
         }
 
 

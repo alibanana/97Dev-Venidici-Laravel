@@ -276,7 +276,7 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
                             <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                                placeholder="Universitas Indonesia" value="{{ old('company', Auth::user()->userDetail->company) }}">
+                                placeholder="e.g. Universitas Indonesia" value="{{ old('company', Auth::user()->userDetail->company) }}">
                         </div>  
                         @error('company')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -287,7 +287,7 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-friends"></i>
                             <input type="text" name="occupancy" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                                placeholder="Mahasiswa" value="{{ old('occupancy', Auth::user()->userDetail->occupancy )}}">
+                                placeholder="e.g. Mahasiswa" value="{{ old('occupancy', Auth::user()->userDetail->occupancy )}}">
                         </div>  
                         @error('occupancy')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -664,12 +664,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
-        <!-- ALERT MESSAGE -->
-        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor aut cum alias placeat dolorem tempore similique neque. Illum expedita sed consectetur. Ad ex accusantium et quis reiciendis eveniet, consequuntur nam?
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <!-- END OF ALERT MESSAGE -->
     </div>
     @elseif(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
@@ -978,9 +972,15 @@
                             </div>
                             @if(
                                 ($application->is_trial && !$application->is_full_registration && $application->status == 'ft_paid')
+                                || 
+                                (!$application->is_trial && $application->is_full_registration && $application->status == 'approved') 
+                                || 
+                                ($application->is_trial && $application->is_full_registration && $application->status == 'waiting') 
                             )
                             <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                @if($application->is_trial && !$application->is_full_registration)
                                 <button onclick="passBootcampApplicationId({{$application->id}})"  data-toggle="modal" data-target="#upgradeBootcamp" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">Upgrade</button>
+                                @endif
                                 <a href="{{$application->course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium; @if($application->is_trial && !$application->is_full_registration) margin-top:2vw @endif">Meeting Link</a>
                             </div>
                             @endif

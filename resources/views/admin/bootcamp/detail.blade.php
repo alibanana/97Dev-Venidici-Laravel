@@ -214,14 +214,14 @@
                                                         @elseif($user->status == 'approved')
                                                         <span style="color: green;">Approved</span>
                                                         @elseif($user->status == 'denied')
-                                                        <span style="color: green;">Rejected</span>
+                                                        <span style="color: red;">Rejected</span>
                                                         @endif
                                                     </td>
 
                                                     <td>
                                                         <!-- KALAU DAFTAR FREE TRIAL -->
                                                         @if(($user->is_trial && !$user->is_full_registration && $user->status == 'ft_paid') || $user->status == 'approved')
-                                                        <a href="{{ route('admin.invoices.show', $user->invoice_id) }}"  class="text-nowrap">View Invoice</a>
+                                                        <a href=""  class="text-nowrap">View Invoice</a>
 
 
                                                         <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post"  style="margin-top: 1vw;">
