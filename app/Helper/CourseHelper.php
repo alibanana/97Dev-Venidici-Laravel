@@ -374,13 +374,27 @@ class CourseHelper {
                     } else {
                         $dataInserted = $results[$index];
                         if ($dataInserted->pivot) { // If courses data.
-                            $resultDateTime = strtotime($dataInserted->wokiCourseDetail->event_date . ' ' . $dataInserted->wokiCourseDetail->start_time);
+                            // If Skill Snack
+                            if($dataInserted->course_type_id == 1)
+                                $resultDateTime = strtotime($dataInserted->pivot->updated_at);
+                            // If Woki
+                            elseif($dataInserted->course_type_id == 2){
+                                if($dataInserted->pivot->status == 'on-going')
+                                    $resultDateTime = strtotime($dataInserted->wokiCourseDetail->event_date . ' ' . $dataInserted->wokiCourseDetail->start_time);
+                                else
+                                    $resultDateTime = strtotime($dataInserted->pivot->updated_at);
+                            }
+
                         } else { // If bootcamp data.
                             $resultDateTime = strtotime($dataInserted->course->bootcampCourseDetail->date_start); 
                         }
     
                         if ($data->pivot) { // If courses data.
-                            $dataDateTime = strtotime($data->wokiCourseDetail->event_date . ' ' . $data->wokiCourseDetail->start_time);
+                            // If Skill Snack
+                            if($data->course_type_id == 1)
+                                $dataDateTime = strtotime($data->pivot->updated_at);
+                            elseif($data->course_type_id == 2)
+                                $dataDateTime = strtotime($data->wokiCourseDetail->event_date . ' ' . $data->wokiCourseDetail->start_time);
                         } else { // If bootcamp data.
                             $dataDateTime = strtotime($data->course->bootcampCourseDetail->date_start);
                         }
@@ -510,8 +524,6 @@ class CourseHelper {
             return CourseHelper::isCurrentDateTimeExceedBootcampDate($application) &&
                 CourseHelper::isBootcampApplicationInFinishedCourses($application);
         });
-        
-
         $completedCoursesData = CourseHelper::generateCombinedCoursesAndBootcampApplicationData($amountPerPage, $completedCoursesData, $completedBootcampData);
         
         if ($completedCoursesData->isEmpty()) 

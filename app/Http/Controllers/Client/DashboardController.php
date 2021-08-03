@@ -69,13 +69,13 @@ class DashboardController extends Controller
         $mytime = Carbon::now()->setTimezone('Asia/Phnom_Penh');
 
         // Check live woki and change status to complete if date time has passed
-        foreach (auth()->user()->courses->where('course_type_id', 2) as $course) {
-            $woki_date = $course->wokiCourseDetail->event_date . ' ' .$course->wokiCourseDetail->end_time;
-            if ($mytime >= $woki_date) {
-                $course->pivot->status = 'completed';
-                $course->pivot->save();
-            }
-        }
+        // foreach (auth()->user()->courses->where('course_type_id', 2) as $course) {
+        //     $woki_date = $course->wokiCourseDetail->event_date . ' ' .$course->wokiCourseDetail->end_time;
+        //     if ($mytime >= $woki_date) {
+        //         $course->pivot->status = 'completed';
+        //         $course->pivot->save();
+        //     }
+        // }
 
         // Get dashboardLiveWorkshopData from CourseHelper
         $liveWorkshopAmountPerPage = 4;

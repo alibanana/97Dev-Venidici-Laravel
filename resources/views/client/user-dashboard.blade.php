@@ -10,7 +10,7 @@
             <div class="modal-body" style="text-align:center;">
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
-                        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Upgrade Bootcamp to Full</p>
+                        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;">Upgrade Bootcamp</p>
                         <form action="{{route('bootcamp.upgrade-status')}}" method="POST">
                         @csrf
                         @method('put')
@@ -893,7 +893,7 @@
                     <div class="col-12 p-0">
                         <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" >
                             <div class="container-image-card">
-                                <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                                <img src="{{asset($course->thumbnail)}}" style="width:12vw" cla12="img-fluid" alt="">
                                 <div class="top-left card-tag small-text" >Woki</div>
                             </div>           
                             <div style="display:flex;justify-content:space-between">
@@ -929,7 +929,7 @@
                 <div class="col-12 p-0">
                     <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;" >
                         <div class="container-image-card">
-                            <img src="{{asset($application->course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                            <img src="{{asset($application->course->thumbnail)}}" style="width:12vw" class="img-fluid" alt="">
                             <div class="top-left card-tag small-text" >Bootcamp</div>
                         </div>           
                         <div style="display:flex;justify-content:space-between">
@@ -1028,7 +1028,7 @@
                 <div class="col-12 p-0">
                     <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->title}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');">
                         <div class="container-image-card">
-                            <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                            <img src="{{asset($course->thumbnail)}}" style="width:12vw" class="im12fluid" alt="">
                             <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill-Snack @else Woki @endif</div>
                         </div>           
                         <div style="display:flex;justify-content:space-between">
@@ -1096,7 +1096,7 @@
                     <div class="col-12 p-0">
                         <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->title}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');">
                             <div class="container-image-card">
-                                <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                                <img src="{{asset($course->thumbnail)}}" style="width:12vw" class="im12fluid" alt="">
                                 <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill Snack @else Woki @endif</div>
                             </div>           
                             <div style="display:flex;justify-content:space-between">
@@ -1134,7 +1134,7 @@
                     <div class="col-12 p-0">
                         <div class="red-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" @if(count($course->sections ) != 0) onclick="window.open('/online-course/{{ $course->title }}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');" @endif>
                             <div class="container-image-card">
-                                <img src="{{asset($course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                                <img src="{{asset($course->thumbnail)}}" style="width:12vw" cla12="img-fluid" alt="">
                                 <div class="top-left card-tag small-text" >Woki</div>
                             </div>           
                             <div style="display:flex;justify-content:space-between">
@@ -1165,7 +1165,7 @@
                                         <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
                                     </form>
                                     @else
-                                    <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Kelas Selesai</button>
+                                    <p id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:2vw">Kelas Selesai</p>
                                     @endif
                                 </div>
                             </div> 
@@ -1177,11 +1177,11 @@
                     <div class="col-12 p-0">
                         <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;" >
                             <div class="container-image-card">
-                                <img src="{{asset($application->course->thumbnail)}}" style="width:13vw" class="img-fluid" alt="">
+                                <img src="{{asset($application->course->thumbnail)}}" style="width:12vw" class="img-fluid" alt="">
                                 <div class="top-left card-tag small-text" >Bootcamp</div>
                             </div>           
                             <div style="display:flex;justify-content:space-between">
-                                <div class="right-section" style="width:37vw">
+                                <div class="right-section" style="width:36.8vw">
                                     <div>
                                         <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$application->course->title}}</p>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
@@ -1221,6 +1221,11 @@
                                         </span></p>   
 
                                     </div>
+                                </div>
+                                <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
+                                    <i class="fas fa-check-circle big-heading"></i>
+                                    <p id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:2vw">Kelas Selesai</p>
+
                                 </div>
                             </div> 
                         </div>
