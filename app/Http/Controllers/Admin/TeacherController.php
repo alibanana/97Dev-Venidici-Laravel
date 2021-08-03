@@ -66,7 +66,7 @@ class TeacherController extends Controller
         $teacher->name = $validated['name'];
         $teacher->description = $validated['description'];
         $teacher->image = Helper::storeImage($request->file('image'), 'storage/images/teachers/');
-        $teacher->occupancy = $validated['description'];
+        $teacher->occupancy = $validated['occupancy'];
 
         if ($request->has('company_logo')) 
             $teacher->company_logo = Helper::storeImage($request->file('company_logo'), 'storage/images/teachers/company_logo/');
@@ -105,7 +105,8 @@ class TeacherController extends Controller
             $teacher->image = Helper::storeImage($request->file('image'), 'storage/images/teachers/');
         }
         if ($request->has('company_logo')) {
-            unlink($teacher->company_logo);
+            if($teacher->company_logo != null)
+                unlink($teacher->company_logo);
             $teacher->company_logo = Helper::storeImage($request->file('company_logo'), 'storage/images/teachers/company_logo/');
         }
         

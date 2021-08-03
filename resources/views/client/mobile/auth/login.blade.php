@@ -63,7 +63,7 @@
                         </div>
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:25vw;padding-top:6vw" alt="LOGO">
                         @if (session('email-verification-success'))
-                            <div class="alert alert-success alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
+                            <div class="alert alert-success alert-dismissible fade show small-text mb-3 "  style="width:100%;text-align:center;margin-bottom:0px;margin-top:3vw"role="alert">
                                 Your email <span style="font-weight: bold">{{session('email-verification-success') }}</span> has been verified!
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
