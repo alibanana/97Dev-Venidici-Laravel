@@ -32,7 +32,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" 
+                            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan nama" 
                             @if(Auth::check())
                                 value="{{ old('name', Auth::user()->name) }}"
                             @else
@@ -48,7 +48,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" 
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan tempat lahir" 
                             value="{{ old('birth_place')}}"
                             >
                         </div>  
@@ -118,7 +118,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email"
+                            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan email"
                             @if(Auth::check())
                                 value="{{old('email', Auth::user()->email)}}"
                             @else
@@ -143,7 +143,7 @@
                                 }
                             ?>
                             @endif
-                            <input readonly type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="yyyy.mm.dd"
+                            <input disabled readonly type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
                                 value="{{ old('birth_date') ?? $date ?? null }}"
                             @else
@@ -159,7 +159,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
+                            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan Nomor Telepon"
                             @if(Auth::check())
                                 value="{{old('telephone', Auth::user()->userDetail->telephone)}}"
                             @else
@@ -211,7 +211,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div readonly class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea disabled name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()) {{old('address', Auth::user()->userDetail->address)}} @else {{old('address')}} @endif </textarea>
+                            <textarea disabled name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: grey;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()) {{old('address', Auth::user()->userDetail->address)}} @else {{old('address')}} @endif </textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -451,7 +451,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan nama" 
+                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan nama" 
                             @if(Auth::check())
                                 value="{{ old('name', Auth::user()->name) }}"
                             @else
@@ -537,7 +537,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email"
+                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan email"
                             @if(Auth::check())
                                 value="{{old('email', Auth::user()->email)}}"
                             @else
@@ -562,7 +562,7 @@
                                 }
                             ?>
                             @endif
-                            <input readonly type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="yyyy.mm.dd"
+                            <input readonly type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
                                 value="{{ old('birth_date') ?? $date ?? null }}"
                             @else
@@ -578,7 +578,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
+                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan Nomor Telepon"
                             @if(Auth::check())
                                 value="{{old('telephone', Auth::user()->userDetail->telephone)}}"
                             @else
@@ -630,7 +630,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea disabled name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()) {{old('address', Auth::user()->userDetail->address)}} @else {{old('address')}} @endif </textarea>
+                            <textarea disabled name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: grey;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()) {{old('address', Auth::user()->userDetail->address)}} @else {{old('address')}} @endif </textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -964,7 +964,7 @@
     <div class="growth-content"  id="growth-{{$loop->iteration}}" @if(!$loop->first) style="display:none" @endif >
         <div class="row m-0 "style="padding-top:4vw">
             <div class="col-md-4 p-0">
-                <img src="{{ asset($about->image) }}" style="width:100%;" class="img-fluid" alt="KREST">
+                <img src="{{ asset($about->image) }}" style="width:100%;border-radius:10px" class="img-fluid" alt="KREST">
 
             </div>
             <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
