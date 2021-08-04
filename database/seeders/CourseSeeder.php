@@ -83,18 +83,14 @@ class CourseSeeder extends Seeder
             [
                 'course_type_id' => 3,
                 'course_category_id' => 5,
-                'thumbnail' => 'assets/images/seeder/bootcamp-pertama.jpg',
+                'thumbnail' => 'assets/images/seeder/Dummy_Bootcamp_Thumbnail.png',
                 'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
-                'title' => 'Contoh Bootcamp Gratis',
-                'subtitle' => 'Bootcamp Workshop',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, quam nec malesuada placerat, nisi massa lobortis nibh, ac pretium velit tellus aliquet enim. Maecenas nec sodales mi. Proin vitae est ante. Vestibulum ut viverra erat. Duis ligula ex, aliquam eu tincidunt lacinia, imperdiet vulputate erat. Suspendisse rutrum, neque id sagittis pharetra, urna justo volutpat nibh, a porttitor lectus enim ac quam. Ut imperdiet id mauris vel ultrices.
-
-                Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque mollis nulla vulputate, scelerisque leo et, vestibulum erat. Sed id ultrices elit, ac congue nibh. Donec eu augue mi. Ut in purus in ex maximus facilisis a id dolor. Nunc maximus ac massa sit amet fringilla. Sed quam velit, sagittis eget augue eu, rhoncus facilisis quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sollicitudin nunc id eros scelerisque lobortis. Etiam justo leo, pharetra at nibh in, bibendum tincidunt libero. Praesent convallis leo at ligula convallis rutrum. Quisque a eros a dolor euismod varius in eget mauris. Nam faucibus leo eget nisi viverra molestie. Nullam maximus risus non est euismod venenatis.',
+                'title' => 'Growth Hacking Through Facebook Ad',
+                'subtitle' => 'Here insert veindicis bootcamp subtitle',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum mauris consequat id. Morbi vestibulum commodo commodo nulla ipsum sit. Hendrerit lacus maecenas placerat vitae dignissim nibh mollis.',
                 'price' => 0,
                 'isFeatured' => true,
                 'publish_status' => 'Published',
-
-
             ]
         ];
 
@@ -123,6 +119,6 @@ class CourseSeeder extends Seeder
         // Bootcamp Courses
         $course5 = Course::create($courses[4]);
         $course5->hashtags()->attach([9, 2, 3]);
-        $course5->teachers()->attach([1]);
+        $course5->teachers()->attach([4]);
     }
 }

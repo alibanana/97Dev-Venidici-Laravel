@@ -964,7 +964,7 @@
     <div class="growth-content"  id="growth-{{$loop->iteration}}" @if(!$loop->first) style="display:none" @endif >
         <div class="row m-0 "style="padding-top:4vw">
             <div class="col-md-4 p-0">
-                <img src="{{ asset($about->image) }}" style="width:100%;" class="img-fluid" alt="KREST">
+                <img src="{{ asset($about->image) }}" style="width:100%;border-radius:10px" class="img-fluid" alt="KREST">
 
             </div>
             <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
