@@ -74,11 +74,18 @@ class CourseFeatureSeeder extends Seeder
             // Bootcamp Courses
             [
                 'course_id' => 5,
-                'feature' => 'Basic skills untuk public speaking',
+                'title' => 'Instruktur Berkualitas',
+                'feature' => 'Tim instruktur kami yang handal dan berpengalaman di bidang mereka siap membimbing Anda dalam memahami materi dan menjawab semua pertanyaan Anda',
             ],
             [
-                'course_id' => 6,
-                'feature' => 'Ini adalah skill yang akan didapatkan setelah anda join bootcamp ini.',
+                'course_id' => 5,
+                'title' => 'Jadwal & Metode Belajar yang Dapat Disesuaikan',
+                'feature' => 'Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada',
+            ],
+            [
+                'course_id' => 5,
+                'title' => 'Customer Experience',
+                'feature' => 'Customer Experience yang sigap menangangani dan mengayomi setiap user yang memiliki kesulitan dalam mengakses venidici dan mencerna informasi materi yang ada',
             ],
         ];
 

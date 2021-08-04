@@ -393,8 +393,13 @@ class CourseHelper {
                             // If Skill Snack
                             if($data->course_type_id == 1)
                                 $dataDateTime = strtotime($data->pivot->updated_at);
-                            elseif($data->course_type_id == 2)
-                                $dataDateTime = strtotime($data->wokiCourseDetail->event_date . ' ' . $data->wokiCourseDetail->start_time);
+                            elseif($data->course_type_id == 2){
+                                if($dataInserted->pivot->status == 'on-going')
+                                    $resultDateTime = strtotime($dataInserted->wokiCourseDetail->event_date . ' ' . $dataInserted->wokiCourseDetail->start_time);
+                                else
+                                    $resultDateTime = strtotime($dataInserted->pivot->updated_at);
+                            }
+
                         } else { // If bootcamp data.
                             $dataDateTime = strtotime($data->course->bootcampCourseDetail->date_start);
                         }

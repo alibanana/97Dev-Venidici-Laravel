@@ -46,7 +46,7 @@ class CreateBootcampApplicationsTable extends Migration
             $table->boolean('is_trial')->nullable();
             $table->boolean('is_full_registration')->nullable();
             $table->enum('status', ['ft_pending', 'ft_paid', 'ft_refunded', 'ft_cancelled','waiting','approved','denied'])->nullable();
-            $table->timestamps();
+                $table->timestamps();
         });
     }
 
