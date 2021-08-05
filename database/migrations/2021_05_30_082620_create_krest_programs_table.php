@@ -16,8 +16,8 @@ class CreateKrestProgramsTable extends Migration
         Schema::create('krest_programs', function (Blueprint $table) {
             $table->id();
             $table->string('program');
-            $table->string('category');
-            $table->text('description');
+            $table->string('category')->nullable();
+            $table->text('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->timestamps();
         });

@@ -21,8 +21,8 @@ class CreateKrestsTable extends Migration
             $table->string('email');
             $table->string('telephone', 16);
             $table->string('company');
-            $table->string('subject');
-            $table->text('message');
+            $table->string('tahu_dari_mana');
+            $table->text('message')->nullable();
             $table->enum('status', ['Pending', 'Contacted', 'Rejected'])->default('Pending');
             $table->timestamps();
         });

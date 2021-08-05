@@ -59,16 +59,19 @@ class KrestProgramController extends Controller
     {
         $validated = $request->validate([
             'program' => 'required',
-            'category' => 'required',
-            'description' => 'required',
+            'category' => '',
+            'description' => '',
             'thumbnail' => 'required|mimes:jpeg,jpg,png',
         ]);
 
         $program = new KrestProgram;
         $program->program = $validated['program'];
-        $program->category = $validated['category'];
-        $program->description = $validated['description'];
-        $program->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/krest-programs/');
+        if($request->has('category'))
+            $program->category = $validated['category'];
+        if($request->has('description'))
+            $program->description = $validated['description'];
+        if($request->has('thumbnail'))
+            $program->thumbnail = Helper::storeImage($request->file('thumbnail'), 'storage/images/krest-programs/');
         $program->save();
 
         return redirect()->route('admin.krest_programs.index')->with('message', 'New Program has been added!');
@@ -87,9 +90,9 @@ class KrestProgramController extends Controller
     {
         $validated = $request->validate([
             'program' => 'required',
-            'category' => 'required',
-            'description' => 'required',
-            'thumbnail' => 'required|mimes:jpeg,jpg,png',
+            'category' => '',
+            'description' => '',
+            'thumbnail' => 'mimes:jpeg,jpg,png',
         ]);
         
         $program = KrestProgram::findOrFail($id);
