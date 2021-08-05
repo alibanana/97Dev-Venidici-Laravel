@@ -89,19 +89,22 @@ class KrestController extends Controller
             'email'             => 'required',
             'telephone'         => 'required',
             'company'           => 'required',
-            'krest_program_id'  => 'required',
-            'subject'           => 'required',
-            'message'           => 'required'
+            'krest_program_id'  => '',
+            'tahu_dari_mana'    => 'required',
+            'message'           => ''
         ]);
+
 
         $krest                      = new Krest;
         $krest->name                = $validated['name'];
         $krest->email               = $validated['email'];
         $krest->telephone           = $validated['telephone'];
         $krest->company             = $validated['company'];
-        $krest->krest_program_id    = $validated['krest_program_id'];
-        $krest->subject             = $validated['subject'];
-        $krest->message             = $validated['message'];
+        if($request->has('krest_program_id'))
+            $krest->krest_program_id    = $validated['krest_program_id'];
+        $krest->tahu_dari_mana             = $validated['tahu_dari_mana'];
+        if($request->has('message'))
+            $krest->message    = $validated['message'];
         $krest->status              = 'Pending';
         $krest->save();
 

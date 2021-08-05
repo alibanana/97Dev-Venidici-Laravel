@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Promo Codes')
+@section('title', 'Venidici Krest Applicants')
 
 @section('container')
 
@@ -99,7 +99,7 @@
                                                 <th>Applicant</th>
                                                 <th>Company</th>
                                                 <th>Krest Program</th>
-                                                <th>Subject</th>
+                                                <th>Tahu Dari mana</th>
                                                 <th>Message</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -115,8 +115,15 @@
                                                 {{$applicant->telephone}}
                                                 </td>
                                                 <td>{{$applicant->company}}</td>   
-                                                <td>{{$applicant->krestProgram->program}}</td>   
-                                                <td>{{$applicant->subject}}</td>   
+                                                
+                                                <td>
+                                                @if($applicant->krestProgram)
+                                                {{$applicant->krestProgram->program}}
+                                                @else
+                                                None 
+                                                @endif
+                                                </td>   
+                                                <td>{{$applicant->tahu_dari_mana}}</td>   
                                                 <td>{{$applicant->message}}</td>   
                                                 <td
                                                 @if($applicant->status == 'Contacted')
