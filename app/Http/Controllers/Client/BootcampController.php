@@ -277,7 +277,7 @@ class BootcampController extends Controller
             'batch'                 => 'required',
             'sumber_tahu_program'   => '',
             'mencari_kerja'         => 'required',
-            'social_media'          => 'required',
+            'social_media'          => 'required|starts_with:https://www.linkedin.com',
             'konsiderasi_lanjut'    => 'required',
             'kenapa_memilih'        => 'required',
             'expectation'           => 'required',

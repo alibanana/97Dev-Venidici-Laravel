@@ -308,10 +308,10 @@
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Social Media / Linked In</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-hashtag"></i>
-                            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Atau LinkedIn" >
+                            <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
+                            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
                         </div>   
                         @error('social_media')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -727,10 +727,10 @@
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Social Media / Linked In</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-hashtag"></i>
-                            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Social Media Atau LinkedIn" >
+                            <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
+                            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
                         </div>   
                         @error('social_media')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -1363,7 +1363,7 @@
              
                 @if(auth()->user()->isProfileUpdated)
                     @if($bootcamp_application_count != 0)
-                    onclick="return alert('You have an on going bootcamp application.')"
+                    onclick="return alert('You have a pending or an on going bootcamp application.')"
                     @else
                     href="#full-registration" 
                 @endif
@@ -1411,7 +1411,7 @@
              
                 @if(auth()->user()->isProfileUpdated)
                     @if($bootcamp_application_count != 0)
-                    onclick="return alert('You have an on going bootcamp application.')"
+                    onclick="return alert('You have a pending or an on going bootcamp application.')"
                     @else
                     href="#free-trial" 
                 @endif
