@@ -135,7 +135,7 @@
                             <form action="{{ route('customer.cart.store') }}" method="post">
                             @csrf
                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
-                                <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
+                                <input type="hidden" id="withArtOrNoMobile" name="withArtOrNo" value="0">
                                 <button @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif class="normal-text btn-blue-bordered full-width-button"
                                     style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
                                 <button class="normal-text btn-dark-blue full-width-button" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif name="action" value="buyNow" 

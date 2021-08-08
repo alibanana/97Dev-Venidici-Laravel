@@ -276,7 +276,7 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-building"></i>
                             <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                                placeholder="e.g. Universitas Indonesia" value="{{ old('company', Auth::user()->userDetail->company) }}">
+                                placeholder="Masukkan perusahaan atau institusi" value="{{ old('company', Auth::user()->userDetail->company) }}">
                         </div>  
                         @error('company')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -287,7 +287,7 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-friends"></i>
                             <input type="text" name="occupancy" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                                placeholder="e.g. Mahasiswa" value="{{ old('occupancy', Auth::user()->userDetail->occupancy )}}">
+                                placeholder="Masukkan pekerjaan (e.g. Mahasiswa)" value="{{ old('occupancy', Auth::user()->userDetail->occupancy )}}">
                         </div>  
                         @error('occupancy')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -336,7 +336,7 @@
                             @enderror
                         </div>
                         <div class="col-12 col-sm-6">
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kabupaten/Kota</p>
                             <div class="auth-input-form" style="display: flex;align-items:center;width:100%">
                                 <select name="city_id" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
@@ -897,7 +897,7 @@
                                 <div class="top-left card-tag small-text" >Woki</div>
                             </div>           
                             <div style="display:flex;justify-content:space-between">
-                                <div class="right-section" style="width:37vw">
+                                <div class="right-section" style="width:35vw">
                                     <div>
                                         <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
@@ -933,7 +933,7 @@
                             <div class="top-left card-tag small-text" >Bootcamp</div>
                         </div>           
                         <div style="display:flex;justify-content:space-between">
-                            <div class="right-section" style="width:37vw">
+                            <div class="right-section" style="width:35vw">
                                 <div>
                                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$application->course->title}}</p>
                                     <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
@@ -1032,7 +1032,7 @@
                             <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill-Snack @else Woki @endif</div>
                         </div>           
                         <div style="display:flex;justify-content:space-between">
-                            <div class="right-section" style="width:37vw">
+                            <div class="right-section" style="width:35vw">
                                 <div>
                                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
                                     <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">By 
@@ -1056,7 +1056,7 @@
                                     <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ $userCourseProgress[$course->id] }}%;">
                                     </div>
                                 </div>
-                                <a href="{{ route('online-course.learn', ['course_title' => $course->title, 'content_title' => $course->sections[0]->sectionContents[0]->title]) }}" id="detail-button" class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Lanjutkan</a>
+                                <a href="{{ route('online-course.learn', ['course_title' => $course->title, 'content_title' => $course->sections[0]->sectionContents[0]->title]) }}" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Mulai Belajar</a>
                             </div>
                         </div> 
                     </div>
@@ -1100,7 +1100,7 @@
                                 <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill Snack @else Woki @endif</div>
                             </div>           
                             <div style="display:flex;justify-content:space-between">
-                                <div class="right-section" style="width:37vw">
+                                <div class="right-section" style="width:35vw">
                                     <div>
                                         <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
@@ -1124,7 +1124,7 @@
                                     @csrf
                                         <input type="hidden" name="name" value="{{auth()->user()->name}}">
                                         <input type="hidden" name="course_id" value="{{$course->id}}">
-                                        <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
+                                        <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Unduh Sertifikat</button>
                                     </form>
                                 </div>
                             </div> 
@@ -1162,7 +1162,7 @@
                                     @csrf
                                         <input type="hidden" name="name" value="{{auth()->user()->name}}">
                                         <input type="hidden" name="course_id" value="{{$course->id}}">
-                                        <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Cek Sertifikat</button>
+                                        <button id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Unduh Sertifikat</button>
                                     </form>
                                     @else
                                     <p id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:2vw">Kelas Selesai</p>

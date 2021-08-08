@@ -74,9 +74,9 @@
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-right:3vw;color:#3B3C43">{{$question->question}}</p>
                         @foreach($question->assessmentQuestionAnswers as $answer)
                             <!-- START OF ONE ANSWERS -->
-                            <div class="form-check normal-text" style="margin-top:1vw">
-                                <input class="form-check-input" type="radio" name="questions[{{ $question->id }}]" id="flexRadioDefault{{ $question_index * 4 + $loop->iteration }}" value="{{ $answer->id }}">
-                                <label class="form-check-label" style="font-family: Rubik Regular" for="flexRadioDefault{{ $question_index * 4 + $loop->iteration }}">
+                            <div class="form-check normal-text" style="margin-top:1vw;display:flex;align-items: center;">
+                                <input class="form-check-input bigger-text" type="radio" name="questions[{{ $question->id }}]" id="flexRadioDefault{{ $question_index * 4 + $loop->iteration }}" value="{{ $answer->id }}">
+                                <label class="form-check-label " style="font-family: Rubik Regular;margin-bottom:0px;margin-left:1vw" for="flexRadioDefault{{ $question_index * 4 + $loop->iteration }}">
                                     {{ $answer->answer }}
                                 </label>
                             </div>

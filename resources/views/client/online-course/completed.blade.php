@@ -24,7 +24,7 @@
                 @csrf
                     <input type="hidden" name="name" value="{{auth()->user()->name}}">
                     <input type="hidden" name="course_id" value="{{$course->id}}">
-                    <button id="detail-button" class="normal-text text-nowrap btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Cek Sertifikat</button>
+                    <button id="detail-button" class="normal-text text-nowrap btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Unduh Sertifikat</button>
 
                 </form>
             </div>

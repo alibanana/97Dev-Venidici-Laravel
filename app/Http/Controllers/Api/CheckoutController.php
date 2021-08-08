@@ -69,6 +69,23 @@ class CheckoutController extends Controller
     }
 
     public function store(Request $request) {
+
+        $user_invoices = Invoice::where("user_id",auth()->user()->id)->get();
+        $flag = FALSE;
+        foreach($user_invoices as $invoice){
+            foreach($invoice->orders as $order){
+                foreach(auth()->user()->carts as $cart){
+                    if($cart->course_id != 3 && !$cart->withArtOrNo){
+                        if($cart->course_id == $order->course_id)
+                            $flag = TRUE;
+                    }
+                }
+            }
+        }
+
+        if($flag)
+            return redirect()->back()->with('discount_not_found', 'Salah satu barang sudah pernah di checkout. Silahkan check notifikasi anda');
+
         // Checks if somehow the cart data does not exists.
         // This could be caused by:
         // [1] User submitted the request twice (on second occasion cart data has been deleted).
@@ -100,7 +117,7 @@ class CheckoutController extends Controller
                 'batch'                 => 'required',
                 'sumber_tahu_program'   => '',
                 'mencari_kerja'         => 'required',
-                'social_media'          => 'required',
+                'social_media'          => 'required|starts_with:https://www.linkedin.com',
                 'konsiderasi_lanjut'    => 'required',
                 'expectation'           => 'required',
                 'bankShortCode'         => 'required',
