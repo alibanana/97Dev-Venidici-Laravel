@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venidici 419</title>
+    <title>Venidici 404</title>
     <style>
         * {
             box-sizing: border-box;
@@ -66,7 +66,7 @@
     margin-left: -250px;
     margin-top: -150px;">
         <img src="/assets/images/client/Logo_white.png" class="img-fluid" id="logo_mobile" style="width:10vw" alt="">
-        <p style="font-family:Rubik Bold;color:#FFFFFF;font-size:2vw;margin-top:2vw" id="title_text">419 - Oops.. this session is expired</p>
+        <p style="font-family:Rubik Bold;color:#FFFFFF;font-size:2vw;margin-top:2vw" id="title_text">404 - Oops.. Page not found</p>
         <p style="font-family:Rubik Regular;color:#FFFFFF;font-size:1.5vw;margin-top:2vw" id="description_text"> <span> <a href="/login" style="color:white">Clik here</a> </span>to go back to venidici</p>
 
     </div>
