@@ -55,7 +55,10 @@
                             <select name="response" id=""  class=""  style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%;font-size:4vw">
                                 <option value="Friend" @if(Session::get('response') == 'Friend') selected @endif>Friend</option>
                                 <option value="Instagram" @if(Session::get('response') == 'Instagram') selected @endif>Instagram</option>
-                                <option value="Instagram" @if(Session::get('response') == 'Other') selected @endif>Other</option>
+                                <option value="Tiktok" @if(Session::get('response') == 'Tiktok') selected @endif>Tiktok</option>
+                                <option value="Twitter" @if(Session::get('response') == 'Twitter') selected @endif>Twitter</option>
+                                <option value="LinkedIn" @if(Session::get('response') == 'LinkedIn') selected @endif>LinkedIn</option>
+                                <option value="Other" @if(Session::get('response') == 'Other') selected @endif>Other</option>
                             </select>
                         </div> 
                         @error('response')

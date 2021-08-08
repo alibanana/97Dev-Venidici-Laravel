@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Online Course Detail')
+@section('title', 'Venidici Bootcamp Detail')
 
 @section('container')
 

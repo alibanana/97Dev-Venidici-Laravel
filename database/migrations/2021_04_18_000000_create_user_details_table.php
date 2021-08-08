@@ -21,6 +21,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('telephone', 16)->nullable();
             $table->string('referral_code', 6);
             $table->string('referred_by_code', 6)->nullable();
+            $table->text('response')->nullable();
             $table->date('birthdate')->nullable();
             $table->enum('gender', ['Male', 'Female'])->nullable();
             $table->text('address')->nullable();
