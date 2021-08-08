@@ -145,7 +145,7 @@
 										<tr>
 											<th>No.</th>
 											<th>Full Name</th>
-											<th>Email</th>
+											<th>Know Venidici From</th>
 											<th>Telephone</th>
 											<th>Referral Code</th>
 											<th>Occupancy</th>
@@ -160,13 +160,15 @@
 										@foreach ($users as $user)
 											<tr>
 												<td>{{ $users_data['from'] + $loop->index }}</td>
-												<td>{{ $user->name }}</td>
-												<td>{{ $user->email }}</td>
+												<td>{{ $user->name }}
+												{{ $user->email }}</td>
 												@if ($user->userDetail()->exists())
+													<td>{{ $user->userDetail->response }}</td>
 													<td>{{ $user->userDetail->telephone }}</td>
 													<td>{{ $user->userDetail->referral_code }}</td>
 													<td>{{ $user->userDetail->occupancy }}</td>
 												@else
+													<td>-</td>
 													<td>-</td>
 													<td>-</td>
 													<td>-</td>
