@@ -37,9 +37,9 @@ class KrestController extends Controller
     public function index()
     {
         $agent = new Agent();
-        // if($agent->isPhone()){
-        //     return view('client/mobile/under-construction');
-        // }
+        if($agent->isPhone()){
+            return view('client/mobile/under-construction');
+        }
         $informations = Notification::where('isInformation',1)->orderBy('created_at','desc')->get();
         $programs = KrestProgram::all();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);

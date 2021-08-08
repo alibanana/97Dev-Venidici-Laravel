@@ -1,6 +1,6 @@
 @extends('layouts/admin-main')
 
-@section('title', 'Venidici Bootcamp')
+@section('title', 'Venidici Bootcamp List')
 
 @section('container')
 
