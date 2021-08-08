@@ -183,6 +183,8 @@
                                                     <td style="color: green">{{$invoice->status}}</td>
                                                 @elseif ($invoice->status == 'cancelled')
                                                     <td style="color: grey">{{$invoice->status}}</td>
+                                                @elseif ($invoice->status == 'expired')
+                                                    <td style="color: grey">{{$invoice->status}}</td>
                                                 @endif
                                                 @if ($invoice->status == 'paid' || $invoice->status == 'completed')
                                                     <td>Rp {{$invoice->grand_total}}</td>
