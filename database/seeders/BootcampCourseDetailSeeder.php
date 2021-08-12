@@ -27,9 +27,9 @@ class BootcampCourseDetailSeeder extends Seeder
             [
                 'course_id' => '5',
                 'meeting_link' => 'zoom.com/5hqo34',
-                'date_start' => '2021-08-06',
+                'date_start' => '2021-08-14',
                 'date_end' => '2021-08-20',
-                'trial_date_end' => '2021-07-30',
+                'trial_date_end' => '2021-08-19',
                 'what_will_be_taught' => 'Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.',
                 'bootcamp_full_price' => '300000',
                 'bootcamp_trial_price' => '150000',

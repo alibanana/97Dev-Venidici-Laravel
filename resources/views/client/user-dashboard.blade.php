@@ -935,7 +935,7 @@
                         <div style="display:flex;justify-content:space-between">
                             <div class="right-section" style="width:35vw">
                                 <div>
-                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$application->course->title}}</p>
+                                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;">{{$application->course->title}}</p>
                                     <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
                                     @foreach($application->course->teachers as $teacher)
                                         <span style="font-family:Rubik Bold">
@@ -1102,7 +1102,7 @@
                             <div style="display:flex;justify-content:space-between">
                                 <div class="right-section" style="width:35vw">
                                     <div>
-                                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$course->title}}</p>
+                                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;">{{$course->title}}</p>
                                         <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
                                         @foreach($course->teachers as $teacher)
                                             @if ($loop->last && count($course->teachers) != 1)
@@ -1566,7 +1566,7 @@
 
             </div>
             <a class="carousel-control-prev"   data-bs-target="#saran-carousel-mobile" style="width:2.5vw;" role="button"data-bs-slide="prev">
-                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image " class="carousel-fontsize-left"  alt="NEXT">
+                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" class="carousel-fontsize-left"  alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
             <a class="carousel-control-next"   data-bs-target="#saran-carousel-mobile" style="width:2.5vw;"  role="button"data-bs-slide="next">
