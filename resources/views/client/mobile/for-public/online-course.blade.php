@@ -116,7 +116,7 @@
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
                         -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;font-size:2vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
+                        -webkit-box-orient: vertical !important;font-size:2.5vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
                 </div>
             </div>
         </div>

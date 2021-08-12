@@ -16,8 +16,8 @@
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
-                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
-                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Free Trial Registration</p>
+                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid logo-bootcamp-popup"  alt="LOGO">
+                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-top:1vw">Free Trial Registration</p>
                         @if (session()->has('free_trial_bootcamp_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
@@ -435,8 +435,8 @@
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
-                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
-                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px;margin-top:1vw">Full Bootcamp Registration</p>
+                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid logo-bootcamp-popup"  alt="LOGO">
+                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-top:1vw">Full Bootcamp Registration</p>
                         @if (session()->has('full_registration_bootcamp_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
@@ -863,7 +863,7 @@
 <div class="row m-0 page-container bootcamp-bg" style="padding-top:11vw;padding-bottom:17vw;">
     <!-- START OF LECT SECTION -->
     <div class="col-xs-12 col-md-6 p-0 wow fadeInLeft">
-        <img src="/assets/images/client/Bootcamp_Logo.png" style="width:15vw;margin-top:1vw" class="img-fluid" alt="Bootcamp Logo">
+        <img src="/assets/images/client/Bootcamp_Logo.png"  class="img-fluid bootcamp-logo-image" alt="Bootcamp Logo">
         <div style="margin-top: 2vw;">
             <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{$course->title}}</p>
             <p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} - {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}} | Via Zoom</p>
@@ -877,7 +877,7 @@
                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Days</p>
                     <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="days"></p>
                 </div>
-                <div style="text-align: center;">
+                <div style="text-align: center;padding:0vw 2vw">
                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Hours</p>
                     <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="hours"></p>
                 </div>
@@ -910,7 +910,7 @@
 <!-- END OF TOP SECTION -->
 
 <!-- START OF INTRODUCTION SECTION -->
-<div class="row m-0 page-container" style="padding-bottom:5vw">
+<div class="row m-0 page-container desktop-display" style="padding-bottom:5vw">
     <div class="col-md-12 col-xs-12 p-0">
         <p class="small-heading wow flash" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp</p>
         <div style="width:80%">
@@ -941,12 +941,45 @@
 </div>
 <!-- END OF INTRODUCTION SECTION -->
 
+<!-- START OF INTRODUCTION MOBILE SECTION -->
+<div class="row m-0 page-container mobile-display" style="padding-bottom:5vw;display:none">
+    <div class="col-12 ">
+        <p class="small-heading wow flash" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp</p>
+        <div style="width:80%">
+            <p class="normal-text" style="font-family: Rubik Bold;color:#626262;white-space:pre-line">{{$course->description}}</p>
+        </div>
+    </div>
+    <div class="row m-0 p-0">
+        @foreach($course->courseFeatures as $feature)
+        
+        <div class="col-6" style="display:flex;
+        @if($loop->iteration % 2 == 1)
+        justify-content:flex-start
+        @elseif($loop->iteration % 2 == 0)
+        justify-content:flex-end
+        @endif
+        ">
+            <div class="krest-card" style="margin-top:1.5vw;height:22vw">   
+                <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+                <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
+                <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;display: -webkit-box;
+                            overflow : hidden !important;
+                            text-overflow: ellipsis !important;
+                            -webkit-line-clamp: 6 !important;
+                            -webkit-box-orient: vertical !important;">{{$feature->feature}}</p>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+<!-- END OF INTRODUCTION MOBILE SECTION -->
+
 <!-- START OF GROWTH HACKING SECTION -->
 <div class="row m-0 page-container" style="background-color: #F6F6F6;padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="text-align: center;">
         <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Apa itu {{$course->title}}</p>
     </div>
-    <div class="col-12" style="padding:1vw 10vw">
+    <div class="col-12 growth-hacking-title" style="">
         <!-- START OF CONTENT LINKS -->
         <div style="border: 2px solid #2B6CAA;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
             @foreach($course->bootcampDescriptions as $about)
@@ -968,7 +1001,7 @@
 
             </div>
             <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-                <div style="padding-left: 4vw;">
+                <div id="growth-hacking-description">
                     <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">{{$about->description}}</p>
 
                 </div>
@@ -987,7 +1020,7 @@
 <!-- START OF SCHEDULE AND DELIVERY METHOD -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="margin-bottom:4vw">
-        <div style="display: flex;justify-content:center;align-items:center">
+        <div class="container-schedule-delivery">
             <p class="small-heading schedule-links schedule-title schedule-title-active" onclick="changeSchedule(event, 'bootcamp-schedule')" style="font-family: Rubik Bold;margin-right:3vw;cursor:pointer">Bootcamp Schedule</p>
             <p class="small-heading schedule-links schedule-title" onclick="changeSchedule(event, 'delivery-method')" style="font-family: Rubik Bold;margin-left:3vw;cursor:pointer">Delivery Method</p>
         </div>
@@ -997,14 +1030,14 @@
 
         <div class="row m-0">
             <!-- START OF LEFT SECTION -->
-            <div class="col-xs-12 col-md-6 p-0">
+            <div class="col-12 col-md-6 p-0">
                 <div id="schedule-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
                     <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
                         @foreach($course->bootcampSchedules as $schedule)
                         <!-- START OF ONE ITEM -->
                         <div class="carousel-item @if($loop->first) active @endif">
                             <div style="display: flex;justify-content: center;">
-                                <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
+                                <div class="bootcamp-schedule-card-container">
                                     <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">{{$schedule->title}}</p>
                                     <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">{{date('d M', strtotime($schedule->date_start))}} - {{date('d M Y', strtotime($schedule->date_end))}}</p>
                                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">{{$schedule->subtitle}}</p>
@@ -1022,11 +1055,11 @@
                         @endforeach
                     </div>
                     <a class="carousel-control-prev"   data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
-                        <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+                        <img src="/assets/images/icons/arrow-left.svg" class="left-arrow-delivery-method" id="carousel-control-left-menu-image " style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                         <span class="visually-hidden">Prev</span>
                     </a>
                     <a class="carousel-control-next"   data-bs-target="#schedule-carousel" style="width:2vw"  role="button"data-bs-slide="next">
-                        <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+                        <img src="/assets/images/icons/arrow-right.svg" class="right-arrow-delivery-method" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
                         <span class="visually-hidden">Next</span>
                     </a>
                 </div>  
@@ -1059,7 +1092,7 @@
                         <!-- START OF ONE ITEM -->
                         <div class="carousel-item active">
                             <div style="display: flex;justify-content: center;">
-                                <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
+                                <div class="bootcamp-delivery-method-container">
                                     <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Step-by-step teaching 1</p>
                                     <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
                                     <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
@@ -1071,7 +1104,7 @@
                         <!-- START OF ONE ITEM -->
                         <div class="carousel-item">
                             <div style="display: flex;justify-content: center;">
-                                <div style="background: #FFFFFF;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:25vw;text-align:left;">
+                                <div class="bootcamp-delivery-method-container">
                                     <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Step-by-step teaching 2</p>
                                     <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
                                     <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
@@ -1082,11 +1115,11 @@
                         <!-- END OF ONE ITEM -->
                     </div>
                     <a class="carousel-control-prev"   data-bs-target="#delivery-carousel" style="width:2vw" role="button"data-bs-slide="prev">
-                        <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+                        <img src="/assets/images/icons/arrow-left.svg" class="left-arrow-delivery-method" id="carousel-control-left-menu-image " style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                         <span class="visually-hidden">Prev</span>
                     </a>
                     <a class="carousel-control-next"   data-bs-target="#delivery-carousel" style="width:2vw"  role="button"data-bs-slide="next">
-                        <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+                        <img src="/assets/images/icons/arrow-right.svg" class="right-arrow-delivery-method" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
                         <span class="visually-hidden">Next</span>
                     </a>
                 </div>  
@@ -1111,7 +1144,7 @@
 <!-- END OF SCHEDULE AND DELIVERY METHOD -->
 
 <!-- START OF WHAT WILL YOU GET SECTION -->
-<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
+<div class="row m-0 page-container desktop-display" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
     <div class="col-12 p-0" style="text-align: center;">
         <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">What will you get?</p>
     </div>
@@ -1143,13 +1176,39 @@
 </div>
 <!-- END OF WHAT WILL YOU GET SECTION -->
 
+<!-- START OF WHAT WILL YOU GET MOBILE SECTION -->
+<div class="row m-0 page-container mobile-display" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;display:none">
+    <div class="col-12 p-0" style="text-align: center;">
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">What will you get?</p>
+    </div>
+    <div class="row m-0 p-0" >
+        @foreach($course->bootcampBenefits as $benefit)
+        <div class="col-6 col-md-3" style="display:flex;justify-content:center">
+            <div class="our-mission-card-mobile" style="margin-top:3vw">
+                <div style="text-align:center">
+                    <div style="text-align:center;margin-top:2vw">
+                        <img src="/assets/images/client/Icon_Illustration.png" style="width:11vw;" class="img-fluid" alt="Image 1">
+                    </div>
+                    <div style="height:3vw;margin-top:1vw;">
+                        <p class="bigger-text our-mission-card-title">{{$benefit->title}}</p>
+                    </div>
+                    <p class="small-text our-mission-card-description" >{{$benefit->description}}</p>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+<!-- END OF WHAT WILL YOU GET MOBILE SECTION -->
+
 <!-- START OF BOOTCAMP INI UNTUK SIAPA -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
     <!-- START OF LEFT SECTION -->
     <div class="col-md-6 col-xs-12 wow fadeInLeft"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Bootcamp ini untuk siapa?</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-        <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Register For Free</a>
+        <a href="#payment-section" class="btn-blue-bordered normal-text desktop-display" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Register For Free</a>
+        <a href="#payment-section" class="btn-blue-bordered normal-text mobile-display" style="font-family: Rubik Medium;color:#3B3C43;display:none;text-align:center">Register For Free</a>
     </div>
     <!-- END OF LEFT SECTION -->
 
@@ -1161,9 +1220,17 @@
             @endphp
             @foreach($course->bootcampCandidates as $candidate)
             <!-- START OF ONE CARD -->
-            <div class="col-6 p-0 wow fadeInUp" data-wow-delay="{{$delay}}s" @if($loop->iteration > 2) style="margin-top: 5vw;" @endif>
+            <div class="col-6 p-0 wow fadeInUp desktop-display" data-wow-delay="{{$delay}}s" @if($loop->iteration > 2) style="margin-top: 5vw;" @endif>
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:15vw">
-                    <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" alt="Bootcamp Logo">
+                    <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" class=""  alt="Bootcamp Logo">
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">{{$candidate->title}}</p>
+                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">{{$candidate->description}}</p>
+                </div>
+            </div>
+            <!-- END OF ONE CARD -->
+            <!-- START OF ONE CARD -->
+            <div class="col-6 p-0 wow fadeInUp mobile-display"  data-wow-delay="{{$delay}}s" @if($loop->iteration > 0) style="margin-top: 5vw;display:none" @endif>
+                <div style="background: rgba(43, 108, 170, 0.1);padding:3vw;border-radius:10px;width:40vw;height:25vw">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">{{$candidate->title}}</p>
                     <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">{{$candidate->description}}</p>
                 </div>
@@ -1183,7 +1250,7 @@
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
     <!-- START OF LEFT SECTION -->
     <div class="col-md-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <img src="/assets/images/client/Bootcamp_How_To_Join.png" style="width:25vw;" alt="Bootcamp Logo">
+        <img src="/assets/images/client/Bootcamp_How_To_Join.png" class="image-start-how-to-join" alt="Bootcamp Logo">
     </div>
     <!-- END OF LEFT SECTION -->
     <!-- START OF RIGHT SECTION -->
@@ -1220,7 +1287,7 @@
 <!-- END OF HOW TO JOIN SECTION -->
 
 <!-- START OF BISA BERKARIR JADI APA SECTION -->
-<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw">
+<div class="row m-0 page-container desktop-display" style="padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0">
         <p class="small-heading wow fadeInLeft" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Bisa berkarir jadi apa?</p>
     </div>
@@ -1253,6 +1320,40 @@
 </div>
 <!-- END OF BISA BERKARIR JADI APA SECTION -->
 
+<!-- START OF BISA BERKARIR JADI APA MOBILE SECTION -->
+<div class="row m-0 page-container mobile-display" style="padding-top:5vw;padding-bottom:5vw;display:none">
+    <div class="col-12 ">
+        <p class="small-heading wow fadeInLeft mb-0" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Bisa berkarir jadi apa?</p>
+    </div>
+    <div class="row m-0 p-0">
+        @foreach($course->bootcampFutureCareers as $career)
+        <!-- START OF ONE CARD -->
+        <div class="col-6" style="display:flex;
+            @if($loop->iteration % 2 == 1)
+            justify-content:flex-start
+            @elseif($loop->iteration % 2 == 0)
+            justify-content:flex-end
+            @endif
+            ">
+            <div  @if($loop->iteration > 0) style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:44vw;height:40vw;margin-top:5vw" @endif>
+                <div style="text-align:center;margin-bottom:1vw">
+                    <img src="{{asset($career->thumbnail)}}" style="width:13vw;" alt="Bootcamp Illustration">
+                </div>
+                <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">{{$career->title}}</p>
+                <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0p;display: -webkit-box;
+                            overflow : hidden !important;
+                            text-overflow: ellipsis !important;
+                            -webkit-line-clamp: 6 !important;
+                            -webkit-box-orient: vertical !important;">{{$career->description}}</p>
+            </div>
+        </div>
+        <!-- END OF ONE CARD -->
+        @endforeach
+    </div>
+
+</div>
+<!-- END OF BISA BERKARIR JADI APA MOBILE SECTION -->
+
 <!-- START OF OUR INSTRUCTORS -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F5F2F2;">
     <div class="col-12 p-0">
@@ -1263,21 +1364,21 @@
                 <div class="carousel-item @if($loop->first) active @endif">
                     <div class="row m-0"> 
                         <!-- START OF LEFT SECTION -->
-                        <div class="col-5">
-                            <img src="{{asset($teacher->image)}}" style="min-width:18vw;height:18vw;border-radius:10px;object-fit:cover" alt="Bootcamp Instructor">
+                        <div class="col-12 col-md-5">
+                            <img src="{{asset($teacher->image)}}" class="image-teacher-bootcamp" alt="Bootcamp Instructor">
                         </div>
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
-                        <div class="col-7" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+                        <div class="col-12 col-md-7" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
                             <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Meet Our <span style="color:#67BBA3"> Instructor/s</span></p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left">{{$teacher->name}}
+                            <p class="bigger-text" id="bootcamp-teacher-name" style="font-family: Rubik Medium;color:#626262;text-align:left">{{$teacher->name}}
                             @if($teacher->occupancy != null)
                             , {{$teacher->occupancy}}​
                             @endif
                             </p>
                             @if($teacher->company_logo != null)
-                            <img src="{{asset($teacher->company_logo)}}" style="width:8vw;border-radius:10px" alt="Bootcamp Instructor Company">
+                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;border-radius:10px" alt="Bootcamp Instructor Company">
                             @endif
                         </div>
                         <!-- END OF RIGHT SECTION -->
@@ -1318,7 +1419,7 @@
                 $delay = 0.2;
             @endphp
             @foreach($course->bootcampHiringPartners as $partner)
-            <img class="wow fadeInUp" data-wow-delay="{{$delay}}s" src="{{asset($partner->image)}}" style="width:10vw;border-radius:10px" alt="Bootcamp Partner">
+            <img class="wow fadeInUp bootcamp-image-hiring-partner" data-wow-delay="{{$delay}}s" src="{{asset($partner->image)}}"  alt="Bootcamp Partner">
             @php
                 $delay += 0.2;
             @endphp
@@ -1335,8 +1436,8 @@
         <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Here is our Pricing Plan</p>
     </div>
     <!-- START OF FULL REGISTRATION -->
-    <div class="col-md-6 col-xs-12 p-0" >
-        <div  style="background-color: #2B6CAA;padding:2vw;border-radius:10px 0px 0px 10px;border:2px solid #2B6CAA;display: flex;flex-direction: column;justify-content: space-between;align-items:flex-start;height:25vw">
+    <div class="col-md-6 col-6 p-0" >
+        <div class="full-registration-container">
             <div>
                 <p class="bigger-text" style="font-family: Poppins Medium;color:#FFFFFF;">Full registration to Bootcamp</p>
                 <p class="normal-text" style="font-family: Poppins Medium;color:#67BBA3;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }} / person</p>
@@ -1376,15 +1477,15 @@
                 href="/login" 
             @endi
 
-            @endif class="btn-blue-bordered normal-text" id="free-trial-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Register Now</a>
+            @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="">Register Now</a>
 
         </div>
 
     </div>
     <!-- END OF FULL REGISTRATION -->
     <!-- START OF FREE TRIAL -->
-    <div class="col-md-6 col-xs-12 p-0">
-        <div style="background-color: #FFFFFF;padding:2vw;border-radius:0px 10px 10px 0px;border:2px solid #2B6CAA;display: flex;flex-direction: column;justify-content: space-between;align-items:flex-start;height:25vw">
+    <div class="col-md-6 col-6 p-0">
+        <div class="free-trial-container">
             <div>
                 <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Free Trial to Bootcamp</p>
                 <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
@@ -1422,7 +1523,7 @@
             
             @else 
                 href="/login" 
-            @endif class="btn-blue-bordered normal-text" id="full-registration-button" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Get Free Trial Now</a>
+            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" >Get Free Trial Now</a>
 
         </div>
     </div>
@@ -1436,14 +1537,17 @@
     <div class="col-md-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Our Venidici Community</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-        <a href="/community" target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-top:2vw">Explore Community</a>
+        <a href="/community" target="_blank" class="btn-blue-bordered normal-text our-community-bootcamp" >Explore Community</a>
 
     </div>    
     <!-- END OF LEFT SECTION -->
     <!-- START OF RIGHT SECTION -->
-    <div class="col-md-6 col-xs-12">
-        <img src="/assets/images/client/Community_Asset_3.png" class="img-fluid" style="width:100%;height:20vw" alt="">
-    </div>    
+    <div class="col-md-6 col-xs-12 desktop-display">
+        <img src="/assets/images/client/Community_Asset_3.png" class="img-fluid" style="width:100%;height:20vw;object-fit:cover" alt="">
+    </div>
+    <div class="col-12 mobile-display" style="display:none">
+        <img src="/assets/images/client/Community_Asset_3.png" class="img-fluid" style="width:100%;height:35vw;object-fit:cover" alt="">
+    </div>        
     <!-- END OF RIGHT SECTION -->
 </div>
 <!-- END OF OUR COMMUNITY -->

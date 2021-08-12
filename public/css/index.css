@@ -1771,6 +1771,117 @@ html, body {
 #change-pass-mobile{
     width:40% !important;
 }
+.container-krest-top-section{
+    padding:6vw 16vw
+}
+#logo-image-krest{
+    width:14vw;
+}
+.bootcamp-logo-image{
+    width:15vw;margin-top:1vw
+}
+.growth-hacking-title{
+    padding:1vw 10vw !important;
+}
+#growth-hacking-description{
+    padding-left: 4vw;
+}
+.bootcamp-schedule-card-container{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+    border-radius: 10px;
+    padding:2vw;
+    width:25vw;
+    text-align:left;
+}
+.container-schedule-delivery{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    padding-left:3vw;
+}
+.bootcamp-delivery-method-container{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+    border-radius: 10px;
+    padding:2vw;
+    width:25vw;
+    text-align:left;
+}
+
+.our-mission-card-title{
+    font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
+    overflow : hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    
+}
+.our-mission-card-description{
+    font-family: Rubik Regular;color:#888888;display: -webkit-box;
+    overflow : hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 6 !important;
+    -webkit-box-orient: vertical !important;
+    margin-top:1.5vw
+}
+.image-start-how-to-join{
+    width:25vw;
+}
+.image-teacher-bootcamp{
+    min-width:18vw;height:18vw;border-radius:10px;object-fit:cover
+}
+.full-registration-container{
+    background-color: #2B6CAA;
+    padding:2vw;
+    border-radius:10px 0px 0px 10px;
+    border:2px solid #2B6CAA;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:flex-start;
+    height:25vw
+}
+.free-trial-container{
+    background-color: #FFFFFF;
+    padding:2vw;
+    border-radius:0px 10px 10px 0px;
+    border:2px solid #2B6CAA;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:flex-start;
+    height:25vw
+}
+.register-now-button{
+    font-family: Rubik Medium;
+    color:#3B3C43;
+    padding:0.5vw 2vw;
+    margin-top:2vw;
+    
+}
+.free-trial-button{
+    font-family: Rubik Medium;
+    color:#3B3C43;
+    padding:0.5vw 2vw;
+    margin-top:2vw
+    
+}
+.logo-bootcamp-popup{
+    width:5vw;
+}
+.our-community-bootcamp{
+    font-family: Rubik Medium;
+    color:#3B3C43;
+    padding:0.5vw 2vw;
+    margin-top:2vw;
+    
+}
+.bootcamp-image-hiring-partner{
+    width:10vw;border-radius:10px
+}
+
+
 
 
 
@@ -2173,6 +2284,210 @@ html, body {
         width:85vw !important
     }
     /* END OF MOBILE COMPLETED REVIEW SECTION */
+
+    /* KREST MOBILE SECTION */
+    .popup-krest-font{
+        font-size:3vw;
+    }
+    .container-krest-top-section{
+        padding:16vw 0vw
+    }
+    .mobile-space-krest{
+        margin-top:4.5vw
+    }
+    #logo-image-krest{
+        width:24vw;
+        margin-bottom:3vw
+    }
+    
+    
+    .image-kenapa-online-course{
+        width:100%;
+        object-fit:cover;
+        height:100%;
+        border-radius: 10px;
+        padding-bottom:5vw
+    }
+    .image-krest-card-mobile{
+        object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height: 26vw !important;
+    }
+    .container-description-card-krest-mobile{
+        background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px;height:20vw
+    }
+    .krest-card{
+        background: #82A5C8;
+        border: 1px solid #82A5C8;
+        box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+        border-radius: 10px;
+        padding:2.5vw;
+        width:40vw;
+        height:45vw !important;
+        transition: 0.2s ease-in-out;
+        line-height: 4vw;
+    
+    }
+    
+    
+    .our-mission-card-mobile{
+        width:37vw;
+        height:50vw;
+        padding:2vw;
+        background: #FDFDFD;
+        border: 1px solid #D7D6D6;
+        box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
+        border-radius: 10px;
+        
+    }
+    .our-mission-card-description{
+        font-family: Rubik Regular;color:#888888;display: -webkit-box;
+        overflow : hidden !important;
+        text-overflow: ellipsis !important;
+        -webkit-line-clamp: 6 !important;
+        -webkit-box-orient: vertical !important;
+        margin-top:8.5vw
+    }
+    .our-mission-card-title{
+        
+        -webkit-line-clamp: 3 !important;
+        line-height:3vw;
+        
+        
+    }
+    .register-now-button{
+        font-family: Rubik Medium;
+        color:#3B3C43;
+        padding:0.5vw 2vw;
+        margin-top:2vw;
+        
+    }
+    /* END OF KREST MOBILE SECTION */
+    /* BOOTCAMP MOBILE SECTION */
+    .bootcamp-logo-image{
+        width:30vw;margin-top:1vw
+    }
+    .growth-hacking-title{
+        padding:1vw 0vw !important;
+    }
+    #growth-hacking-description{
+        padding-left: 0vw;
+        padding-top:4vw
+    }
+    .bootcamp-schedule-card-container{
+        
+        width:76vw;
+        margin-bottom:5vw
+    }
+    .bootcamp-delivery-method-container{
+        
+        width:76vw;
+        margin-bottom:5vw
+    }
+    .htj-title{
+        
+        width:8vw !important;
+        height:8vw !important;
+        
+    
+    }
+    .image-start-how-to-join{
+        width:100%
+    }
+    .image-teacher-bootcamp{
+        min-width:100%;height:84vw;border-radius:10px;object-fit:cover;margin-bottom:3vw
+    }
+    .full-registration-container{
+        background-color: #2B6CAA;
+        padding:2vw;
+        border-radius:10px 0px 0px 10px;
+        border:2px solid #2B6CAA;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items:flex-start;
+        height:97vw
+    }
+    .free-trial-container{
+        background-color: #FFFFFF;
+        padding:2vw;
+        border-radius:0px 10px 10px 0px;
+        border:2px solid #2B6CAA;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items:flex-start;
+        height:97vw
+    }
+    .register-now-button{
+        font-family: Rubik Medium;
+        color:#3B3C43;
+        padding:0.5vw 2vw;
+        margin-top:2vw;
+        text-align:center
+        
+    }
+    .free-trial-button{
+        font-family: Rubik Medium;
+        color:#3B3C43;
+        padding:0.5vw 2vw;
+        margin-top:2vw;
+        text-align:center
+        
+    }
+    .logo-bootcamp-popup{
+        width:15vw
+    }
+    .our-community-bootcamp{
+        font-family: Rubik Medium;
+        color:#3B3C43;
+        padding:0.5vw 2vw;
+        margin-top:2vw;
+        margin-bottom:2vw;
+        text-align:center
+    }
+    .bootcamp-image-hiring-partner{
+        width:20vw;border-radius:10px
+    }
+    #bootcamp-teacher-name{
+        font-size:5vw !important
+    }
+    #bootcamp-instructor-company-logo{
+        width:30vw !important;
+    }
+    .left-arrow-delivery-method{
+        width:5vw !important;
+        margin-left:-2vw !important;
+
+    }
+    .right-arrow-delivery-method{
+        width:5vw !important;
+        margin-right:-2vw !important;
+
+    }
+    .bootcamp-delivery-method-container{
+        
+        padding:4vw;
+        
+    }
+    
+    
+    
+    /* END OF BOOTCAMP MOBILE SECTION */
+
+    /* START COMMUNITY PAGE SECTION */
+    .bg-image-mobile-height{
+        height:80vw !important
+    }
+    #mt-mobile-community{
+        margin-top:3vw !important
+    }
+    .image-community-mobile{
+        width: 86vw !important;
+    }
+    #image-discord-community-mobile{
+        margin-top:4vw !important;
+        height: 50vw !important;
+    }
+    /* END OF COMMUNITY PAGE SECTION */
     #card-tag-fontsize{
         font-size:3vw;
     }
@@ -2182,6 +2497,7 @@ html, body {
     }
     .big-heading{
         font-size: 6.5vw;
+        line-height: 8.2vw !important;
     }
     .small-heading{
         font-size: 5.5vw;
