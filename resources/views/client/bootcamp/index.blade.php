@@ -920,7 +920,7 @@
 <!-- START OF TOP SECTION MOBILE -->
 <div class="row m-0 page-container  mobile-display" style="display:none">
     <!-- START OF LECT SECTION -->
-    <div class="col-xs-12 col-md-6 wow fadeInLeft" style="margin-top:5vw;margin-bottom:3vw">
+    <div class="col-12 wow fadeInLeft" style="margin-top:5vw;margin-bottom:3vw">
         <div style="background-color:#2B6CAA; margin-top: 4vw;border-radius: 5px;padding: 7vw 5vw;">
             <div style="">
                 <img src="/assets/images/client/Bootcamp_Logo.png"  class="img-fluid bootcamp-logo-image" alt="Bootcamp Logo">
