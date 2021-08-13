@@ -157,7 +157,7 @@
 <div class="row page-container m-0 krest-background mobile-display" style="padding-top:10vw;display:flex;align-items:center;display:none">
     
     
-    <div class="col-12 col-md-6 ">
+    <div class="col-12  ">
         <img src="/assets/images/client/logo-horizontal.png" id="logo-image-krest"  class="img-fluid" alt="KREST">
     </div>
     <div class="col-12 col-lg-6  wow fadeInRight " data-wow-delay="0.3s" >
@@ -197,14 +197,14 @@
 <!-- START OF OUR HISTORY -->
 <div class="row m-0 page-container krest-history-background" style="padding-top:2vw;padding-bottom:2vw">
     
-    <div class="col-12 col-md-6" style="padding-right:2vw">
+    <div class="col-12 col-lg-6" style="padding-right:2vw">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">A Closer Look</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Krest in a nutshell</p>
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Krest by Venidici hadir untuk membantu bisnis Anda meningkatkan produktivitas melalui serangkaian pelatihan secara online yang dirancang khusus sesuai dengan kebutuhan dan tujuan perusahaan.
         
         Krest berfokus pada pelatihan soft-skill yang kini jadi jauh semakin penting untuk mampu bersaing di era yang super kompetitif.</p>
     </div>
-    <div class="col-12 col-md-6 wow fadeInRight" data-wow-delay="0.3s">
+    <div class="col-12 col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
         <div style="display:flex;align-items:center">
             <div>
                 <div style="background: #FFFFFF;box-shadow: 0px 0px 20px rgba(157, 157, 157, 0.15);border-radius: 10px;padding:1vw;height:100%">
