@@ -578,20 +578,20 @@
         </a>
     </div>
     <!-- END OF ONE PROGRAMS -->
-    <!-- START OF ONE PROGRAMS
+    <!-- START OF ONE PROGRAMS -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
+                <img src="/assets/images/client/Krest_Dummy.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Krest</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Krest by Venidici hadir untuk membantu bisnis Anda meningkatkan produktivitas melalui serangkaian pelatihan secara online yang dirancang khusus sesuai dengan kebutuhan dan tujuan perusahaan.</p>
                     <a href="/for-corporate/krest" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Krest</a>
                 </div>
             </div>
         </a>
     </div>
-    END OF ONE PROGRAMS -->
+   <!-- END OF ONE PROGRAMS -->
 </div>
 <!-- END OF OUR PROGRAMS SECTION -->
 
@@ -638,26 +638,26 @@
                     <div style="padding:1.5vw">
                         <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Bootcamp</p>
                         <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam porro blanditiis cupiditate in soluta iste eveniet, veritatis architecto pariatur numquam. Placeat praesentium officiis, assumenda ducimus ratione delectus quia dolore? Laboriosam?</p>
-                        <a href="" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
+                        <a href="/bootcamp" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
                     </div>
                 </div>
             </a>
         </div>
         <!-- END OF ONE PROGRAMS -->
-        <!-- START OF ONE PROGRAMS 
+        <!-- START OF ONE PROGRAMS -->
         <div class="col-6 p-0" style="display:flex;justify-content:center">
             <a href="/for-corporate/krest" style="text-decoration:none">
                 <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
-                    <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
+                    <img src="/assets/images/client/Krest_Dummy.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
                     <div style="padding:1.5vw">
                         <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Krest</p>
-                        <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
+                        <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Krest by Venidici hadir untuk membantu bisnis Anda meningkatkan produktivitas melalui serangkaian pelatihan secara online yang dirancang khusus sesuai dengan kebutuhan dan tujuan perusahaan.</p>
                         <a href="/for-corporate/krest" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Krest</a>
                     </div>
                 </div>
             </a>
         </div>
-        END OF ONE PROGRAMS -->
+        <!-- END OF ONE PROGRAMS -->
     </div>
 </div>
 <!-- END OF MOBILE OUR PROGRAMS SECTION -->
