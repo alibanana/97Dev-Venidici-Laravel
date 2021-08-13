@@ -1442,18 +1442,16 @@
                     @endif
                 
                         <div>
-                            <!-- START OF ONE COURSE CARD -->
                             @if ($course->courseType->type == "Course")
-                                <div class="course-card-green" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif" >
+                                <div class="course-card-green">
                             @elseif ($course->courseType->type == "Woki")
-                                <div class="course-card-red" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif">
+                                <div class="course-card-red">
                             @elseif ($course->courseType->type == "Bootcamp")
-                                <div class="course-card-blue" style="@if($card_counter % 2 == 1) margin-right:1vw @elseif($card_counter % 2 == 0) margin-left:1vw @endif">
+                                <div class="course-card-blue">
                             @endif
                                 <div class="container">
-                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw"
-                                        alt="Image not available..">
-                                    <div class="top-left card-tag small-text">
+                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:30vw;" alt="Snow">
+                                    <div class="top-left card-tag " style="font-size:2.5vw">
                                         @if ($course->courseType->type == "Course")
                                         Skill-Snack
                                         @elseif ($course->courseType->type == "Woki")
@@ -1462,93 +1460,95 @@
                                         Bootcamp
                                         @endif
                                     </div>
+                                    <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                                    </div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="height:15vw">
+                                    <div style="height:10vw">
                                         <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
                                             @if ($course->courseType->type == 'Course')
-                                                <a href="/online-course/{{ $course->title }}" class=""
-                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                                <a href="/online-course/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
                                             @elseif ($course->courseType->type == 'Woki')
-                                                <a href="/woki/{{ $course->title }}" class=""
-                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                                <a href="/woki/{{$course->title}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+
                                             @elseif ($course->courseType->type == 'Bootcamp')
-                                                <a href="/bootcamp/{{ $course->id }}" class=""
-                                                    style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+                                                <a href="/bootcamp/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;text-decoration:none;font-size:4vw">{{ $course->title }}</a>
+
                                             @endif
-                                            <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i>
+                                            <!-- <i style="font-size:2vw;padding-left:4vw;font-size:4vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                         </div>
                                         @foreach ($course->hashtags as $tag)
-                                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
+                                            <a  style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;font-size:3vw">{{ $tag->hashtag }}</a>
                                         @endforeach
                                     </div>
-                                    <div class="collapse" id="courses-collapse{{ $loop->iteration }}" style="margin-top:1vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
+                                    <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
+                                        <p class="course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);font-size:3vw">{{ $course->description }}</p>
                                     </div>
-                                    <div style="display: flex;justify-content:space-between;margin-top:1vw">
-                                        <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
-                                            @foreach($course->teachers as $teacher)
-                                                @if ($loop->last && count($course->teachers) != 1)
-                                                dan
-                                                @elseif (!$loop->first)
-                                                ,
-                                                @endif
-                                                {{$teacher->name}}
-                                            @endforeach
-                                            </p>
-                                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
-                                            @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
-                                                @if ($course->total_duration)
-                                                    {{ explode(',', $course->total_duration)[0] }} mins
-                                                @else
-                                                    - mins
-                                                @endif
-                                            @elseif ($course->courseType->type == 'Woki')
-                                                @if ($course->wokiCourseDetail->event_duration)
-                                                    {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
-                                                @else
-                                                    - mins
-                                                @endif
+
+                                    <div style="display: flex;justify-content:space-between;margin-top:3vw" >
+                                        <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                        @foreach($course->teachers as $teacher)
+
+                                            @if ($loop->last && count($course->teachers) != 1)
+                                            dan
+                                            @elseif (!$loop->first)
+                                            ,
                                             @endif
+                                            {{$teacher->name}}
+                                        @endforeach
+                                        </p>
+                                        <p  style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;font-size:3vw">
+                                        @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                            @if ($course->total_duration)
+                                                {{ explode(',', $course->total_duration)[0] }} mins
+                                            @else
+                                                - mins
+                                            @endif
+                                        @elseif ($course->courseType->type == 'Woki')
+                                            @if ($course->wokiCourseDetail->event_duration)
+                                                {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                            @else
+                                                - mins
+                                            @endif
+                                        @endif
                                         </p>
                                     </div>
                                     <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
+                                        <p style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px;font-size:3vw">{{ $course->average_rating }}/5</p>
                                         <div style="display: flex;justify-content:center;margin-left:1vw">
                                             @for ($i = 1; $i < 6; $i++)
                                                 @if ($i <= $course->average_rating)
                                                     @if ($i == 1)
-                                                        <i style="color:#F4C257" class="fas fa-star small-text"></i>
+                                                        <i style="color:#F4C257;font-size:3vw" class="fas fa-star"></i>
                                                     @else
-                                                        <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
+                                                        <i style="margin-left:0.5vw;color:#F4C257;font-size:3vw" class="fas fa-star"></i>
                                                     @endif
                                                 @else
                                                     @if ($i == 1)
-                                                        <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                                                        <i style="color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
                                                     @else
-                                                        <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                                        <i style="margin-left:0.5vw;color:#B3B5C2;font-size:3vw" class="fas fa-star"></i>
                                                     @endif
                                                 @endif
                                             @endfor
                                         </div>
                                     </div>
                                     <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        {{-- <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
-                                        <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a> --}}
-                                        <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                                         @if ($course->price == 0)
-                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                            <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">FREE</p>
                                         @else
-                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                            <p style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;font-size:3.5vw">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
                                         @endif
                                         @if ($course->courseType->type == 'Course')
-                                            <a href="/online-course/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
-                                        @elseif ($course->courseType->type == 'Woki')
-                                            <a href="/woki/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
-                                        @elseif ($course->courseType->type == 'Bootcamp')
-                                            <a href="/bootcamp/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
+                                            <a href="/online-course/{{$course->title}}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                            @elseif ($course->courseType->type == 'Woki')
+                                            <a href="/woki/{{ $course->title }}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
+                                            @elseif ($course->courseType->type == 'Bootcamp')
+                                            <a href="/bootcamp/{{ $course->id }}" class="course-card-button" style="font-size:3.5vw">Enroll Now</a>
                                         @endif
                                     </div>
+                    
                                 </div>
                             </div>
                             <!-- END OF ONE COURSE CARD -->
