@@ -115,7 +115,7 @@
                                                     </div>
                                                 @endif
                                                 <div style="width:7.5vw;text-align:right">
-                                                    @if($course->course_type_id == 3)
+                                                    @if($cart->course->course_type_id == 3)
                                                         @if($cart->course->bootcampCourseDetail->bootcamp_trial_price == 0)
                                                         <p class="bigger-text text-nowrap"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">FREE</p>
                                                         @else

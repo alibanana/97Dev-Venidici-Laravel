@@ -342,7 +342,7 @@
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
                                 @else
-                                    <option disabled selected>Pilih Kota</option>
+                                    <option disabled selected>Pilih Kabupaten/Kota</option>
 
                                     @foreach($cities as $city)
                                         <option value="{{ $city->city_id }}" 

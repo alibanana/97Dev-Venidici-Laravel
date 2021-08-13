@@ -841,6 +841,9 @@
                 document.getElementById('days').innerHTML = 0;
                 document.getElementById('hours').innerHTML = 0 ;
                 document.getElementById('minutes').innerHTML = 0 ;
+                document.getElementById('days-mobile').innerHTML = 0;
+                document.getElementById('hours-mobile').innerHTML = 0 ;
+                document.getElementById('minutes-mobile').innerHTML = 0 ;
                 // document.getElementById('free-trial-button').style.display = "none";
                 // document.getElementById('full-registration-button').style.display = "none";
                 return;
@@ -853,6 +856,10 @@
             document.getElementById('days').innerHTML = days;
             document.getElementById('hours').innerHTML = hours ;
             document.getElementById('minutes').innerHTML = minutes ;
+
+            document.getElementById('days-mobile').innerHTML = days;
+            document.getElementById('hours-mobile').innerHTML = hours ;
+            document.getElementById('minutes-mobile').innerHTML = minutes ;
         }
         timer = setInterval(showRemaining, 1000);
     }
@@ -913,29 +920,29 @@
 <!-- START OF TOP SECTION MOBILE -->
 <div class="row m-0 page-container  mobile-display" style="display:none">
     <!-- START OF LECT SECTION -->
-    <div class="col-xs-12 col-md-6  wow fadeInLeft" style="margin-top:5vw;margin-bottom:3vw">
-        <img src="/assets/images/client/Bootcamp_Logo.png"  class="img-fluid bootcamp-logo-image" alt="Bootcamp Logo">
+    <div class="col-xs-12 col-md-6 wow fadeInLeft" style="margin-top:5vw;margin-bottom:3vw">
         <div style="background-color:#2B6CAA; margin-top: 4vw;border-radius: 5px;padding: 7vw 5vw;">
-            <div style="margin-top: 2vw;">
-                <p class="medium-heading" style="font-family: Rubik Bold;color:white;white-space:pre-line">{{$course->title}}</p>
+            <div style="">
+                <img src="/assets/images/client/Bootcamp_Logo.png"  class="img-fluid bootcamp-logo-image" alt="Bootcamp Logo">
+                <p class="medium-heading" style="font-family: Rubik Bold;color:white;white-space:pre-line;margin-top:4vw">{{$course->title}}</p>
                 <p class="sub-description" style="font-family: Rubik Medium;color:white;white-space:pre-line">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} - {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}} | Via Zoom</p>
                 <p class="normal-text" style="font-family: Rubik Regular;color:white;white-space:pre-line">{{$course->subtitle}}</p>
             </div>
             <p class="bigger-text" style="font-family: Rubik Medium;color:white;margin-top:2vw">This bootcamp will start in: </p>
             <!-- START OF COUNTDOWN -->
-            <div style="padding:1vw;background-color:white;width:47vw;border-radius:5px;margin-bottom:2vw" id="countdown-card">
+            <div style="padding:1vw;background-color:white;width:47vw;border-radius:5px;margin-bottom:5vw" id="countdown-card">
                 <div style="display: flex;justify-content:space-between;align-items:center">
                     <div style="text-align: center;border-right:2px solid #2B6CAA;padding-right:2vw">
                         <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Days</p>
-                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="days"></p>
+                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="days-mobile"></p>
                     </div>
                     <div style="text-align: center;padding:0vw 2vw">
                         <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Hours</p>
-                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="hours"></p>
+                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="hours-mobile"></p>
                     </div>
                     <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw">
                         <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Minutes</p>
-                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="minutes"></p>
+                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="minutes-mobile"></p>
                     </div>
                 </div>
             </div>
