@@ -1840,7 +1840,7 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     align-items:flex-start;
-    height:25vw
+    height:30vw
 }
 .free-trial-container{
     background-color: #FFFFFF;
@@ -1851,7 +1851,7 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     align-items:flex-start;
-    height:25vw
+    height:30vw
 }
 .register-now-button{
     font-family: Rubik Medium;

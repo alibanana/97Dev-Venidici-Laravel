@@ -1043,11 +1043,11 @@
     <!-- START OF ONE CONTENT SECTION -->
     <div class="growth-content"  id="growth-{{$loop->iteration}}" @if(!$loop->first) style="display:none" @endif >
         <div class="row m-0 "style="padding-top:4vw">
-            <div class="col-md-4 p-0">
+            <div class="col-lg-4 col-xs-12 p-0">
                 <img src="{{ asset($about->image) }}" style="width:100%;border-radius:10px" class="img-fluid" alt="KREST">
 
             </div>
-            <div class="col-md-8 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+            <div class="col-lg-8 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
                 <div id="growth-hacking-description">
                     <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">{{$about->description}}</p>
 
@@ -1077,7 +1077,7 @@
 
         <div class="row m-0">
             <!-- START OF LEFT SECTION -->
-            <div class="col-12 col-md-6 p-0">
+            <div class="col-xs-12 col-lg-6 p-0">
                 <div id="schedule-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
                     <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
                         @foreach($course->bootcampSchedules as $schedule)
@@ -1113,7 +1113,7 @@
             </div>
             <!-- END OF LEFT SECTION -->
             <!-- START OF RIGHT SECTION -->
-            <div class="col-md-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
+            <div class="col-lg-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
                 <div style="padding-left: 5vw;">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">{{$course->bootcampCourseDetail->what_will_be_taught}}</p>
@@ -1133,7 +1133,7 @@
     <div class="schedule-content"  id="delivery-method" style="display: none;">
         <div class="row m-0">
             <!-- START OF LEFT SECTION -->
-            <div class="col-xs-12 col-md-6 p-0">
+            <div class="col-xs-12 col-lg-6 p-0">
                 <div id="delivery-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
                     <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
                         <!-- START OF ONE ITEM -->
@@ -1173,7 +1173,7 @@
             </div>
             <!-- END OF LEFT SECTION -->
             <!-- START OF RIGHT SECTION -->
-            <div class="col-md-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
+            <div class="col-lg-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
                 <div style="padding-left: 5vw;">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">{{$course->bootcampCourseDetail->what_will_be_taught}}</p>
@@ -1230,7 +1230,7 @@
     </div>
     <div class="row m-0 p-0" >
         @foreach($course->bootcampBenefits as $benefit)
-        <div class="col-6 col-md-3" style="display:flex;justify-content:center">
+        <div class="col-6" style="display:flex;justify-content:center">
             <div class="our-mission-card-mobile" style="margin-top:3vw">
                 <div style="text-align:center">
                     <div style="text-align:center;margin-top:2vw">
@@ -1251,7 +1251,7 @@
 <!-- START OF BOOTCAMP INI UNTUK SIAPA -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
     <!-- START OF LEFT SECTION -->
-    <div class="col-md-6 col-xs-12 wow fadeInLeft"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
+    <div class="col-lg-6 col-xs-12 wow fadeInLeft"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Bootcamp ini untuk siapa?</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
         <a href="#payment-section" class="btn-blue-bordered normal-text desktop-display" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Register For Free</a>
@@ -1260,7 +1260,7 @@
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
-    <div class="col-md-6 col-xs-12">
+    <div class="col-lg-6 col-xs-12">
         <div class="row m-0">
             @php
                 $delay = 0.0;
@@ -1296,12 +1296,12 @@
 <!-- START OF HOW TO JOIN SECTION -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
     <!-- START OF LEFT SECTION -->
-    <div class="col-md-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-lg-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/Bootcamp_How_To_Join.png" class="image-start-how-to-join" alt="Bootcamp Logo">
     </div>
     <!-- END OF LEFT SECTION -->
     <!-- START OF RIGHT SECTION -->
-    <div class="col-md-6 col-xs-12"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+    <div class="col-lg-6 col-xs-12"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading wow bounce" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">How to join?</p>
         <div class="htj-content" id="htj-1">
             <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Like</p>
@@ -1411,12 +1411,12 @@
                 <div class="carousel-item @if($loop->first) active @endif">
                     <div class="row m-0"> 
                         <!-- START OF LEFT SECTION -->
-                        <div class="col-12 col-md-5">
+                        <div class="col-12 col-lg-5">
                             <img src="{{asset($teacher->image)}}" class="image-teacher-bootcamp" alt="Bootcamp Instructor">
                         </div>
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
-                        <div class="col-12 col-md-7" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+                        <div class="col-12 col-lg-7" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
                             <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Meet Our <span style="color:#67BBA3"> Instructor/s</span></p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
                             <p class="bigger-text" id="bootcamp-teacher-name" style="font-family: Rubik Medium;color:#626262;text-align:left">{{$teacher->name}}
@@ -1453,14 +1453,14 @@
 <!-- START OF OUR HIRING PARTNERS SECTION -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
     <!-- START OF LEFT SECTION -->
-    <div class="col-md-6 col-xs-6" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+    <div class="col-lg-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;">Our Hiring Partners</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal.</p>
 
     </div>
     <!-- END OF LEFT SECTION -->
     <!-- START OF RIGHT SECTION -->
-    <div class="col-md-6 col-xs-6" style="padding-left: 5vw;">
+    <div class="col-lg-6 col-xs-12" style="padding-left: 5vw;">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap: wrap;">
             @php
                 $delay = 0.2;
@@ -1581,7 +1581,7 @@
 <!-- START OF OUR COMMUNITY -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color:#F5F2F2">
     <!-- START OF LEFT SECTION -->
-    <div class="col-md-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+    <div class="col-lg-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Our Venidici Community</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
         <a href="/community" target="_blank" class="btn-blue-bordered normal-text our-community-bootcamp" >Explore Community</a>
@@ -1589,7 +1589,7 @@
     </div>    
     <!-- END OF LEFT SECTION -->
     <!-- START OF RIGHT SECTION -->
-    <div class="col-md-6 col-xs-12 desktop-display">
+    <div class="col-lg-6 col-xs-12 desktop-display">
         <img src="/assets/images/client/Community_Asset_3.png" class="img-fluid" style="width:100%;height:20vw;object-fit:cover" alt="">
     </div>
     <div class="col-12 mobile-display" style="display:none">
