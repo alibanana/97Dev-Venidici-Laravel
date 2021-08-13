@@ -61,7 +61,7 @@
                 <div class="col-6" style="">
                     <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                     <div  class="auth-input-form" style="display: flex;align-items:center">
-                        <i style="color:#DAD9E2" class="fas fa-user"></i>
+                        <i style="color:#DAD9E2" class="fas fa-user "></i>
                         <input type="text" id="bootcamp-name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                             placeholder="John Doe" value="Fernandha Dzaky" readonly >
                     </div>  
@@ -140,9 +140,9 @@
                         @if(session('success'))
                             <!-- ALERT MESSAGE -->
                             <div style="text-align:center;margin-top:1vw">
-                                <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:1vw;width:20vw"role="alert">
+                                <div class="alert alert-success alert-dismissible fade show small-text alert-message-success"  style="text-align:center;margin-bottom:1vw;width:20vw"role="alert">
                                 {{ session('success') }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close close-btn-edit-popup-mobile" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             </div>
                             <!-- END OF ALERT MESSAGE -->
@@ -153,7 +153,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">@if(Auth::user()->avatar) Current @endif Display Picture</p>
                         @if(Auth::user()->avatar)
-                            <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw" alt="Failed to load user's profile image.."> <br>
+                            <img src="{{ asset(Auth::user()->avatar) }}" style="width:6vw" id="edit-profile-mobile-image" alt="Failed to load user's profile image.."> <br>
                         @endif
 
                         <input type="file" id="images" class="input-file-fontsize" name="avatar" accept=".jpg,.jpeg,.png" style="margin-top:1vw"/>
@@ -163,7 +163,7 @@
                     <div class="col-6" style="">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-user"></i>
+                            <i style="color:#DAD9E2" class="fas fa-user popup-krest-font"></i>
                             <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                                 placeholder="John Doe" value="{{ old('name', Auth::user()->name) }}">
                         </div>  
@@ -174,7 +174,7 @@
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
+                            <i style="color:#DAD9E2" class="fas fa-phone-alt popup-krest-font"></i>
                             <input type="text" name="telephone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                                 placeholder="Insert telephone number" value="{{ old('telephone', Auth::user()->userDetail->telephone) }}">
                         </div>  
@@ -185,7 +185,7 @@
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Gender</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-user"></i>
+                            <i style="color:#DAD9E2" class="fas fa-user popup-krest-font"></i>
                             <select name="gender" id="" class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
                                 <option disabled selected>Choose Gender</option>
                                 <option value="Male" @if(old('gender', Auth::user()->userDetail->gender) == 'Male') selected @endif>Male</option>
@@ -251,7 +251,7 @@
 
                         @else
                         <div class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                            <i style="color:#DAD9E2" class="fas fa-birthday-cake popup-krest-font"></i>
                             <input type="date" name="birthdate" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                                 placeholder="dd.mm.yyyy" value="{{ old('birthdate') ?? $date ?? null }}">
                         </div>  
@@ -274,7 +274,7 @@
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Company/Institution</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-building"></i>
+                            <i style="color:#DAD9E2" class="fas fa-building popup-krest-font"></i>
                             <input type="text" name="company" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                                 placeholder="Masukkan perusahaan atau institusi" value="{{ old('company', Auth::user()->userDetail->company) }}">
                         </div>  
@@ -285,7 +285,7 @@
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pekerjaan</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-user-friends"></i>
+                            <i style="color:#DAD9E2" class="fas fa-user-friends popup-krest-font"></i>
                             <input type="text" name="occupancy" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                                 placeholder="Masukkan pekerjaan (e.g. Mahasiswa)" value="{{ old('occupancy', Auth::user()->userDetail->occupancy )}}">
                         </div>  
@@ -417,7 +417,7 @@
                     <div class="col-12" style="">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Old Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
+                            <i style="color:#DAD9E2" class="fas fa-unlock-alt popup-krest-font"></i>
                             <input type="password" placeholder="Insert Old Password" name="old_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
                         </div>  
                         @error('old_password')
@@ -427,7 +427,7 @@
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
+                            <i style="color:#DAD9E2" class="fas fa-unlock-alt popup-krest-font"></i>
                             <input type="password" placeholder="Insert New Password" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
                         </div>  
                         @error('password')
@@ -437,7 +437,7 @@
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Confirm New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-unlock-alt"></i>
+                            <i style="color:#DAD9E2" class="fas fa-unlock-alt popup-krest-font"></i>
                             <input type="password" placeholder="Confirm New Password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
                         </div>  
                         @error('password_confirmation')
