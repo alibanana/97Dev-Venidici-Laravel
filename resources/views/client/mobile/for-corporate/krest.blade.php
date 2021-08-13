@@ -318,7 +318,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper in proin e
                             <!-- START OF ONE KREST  CARD -->
                             <div class="course-card-blue">
                                 <div class="container">
-                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                                    <img src="/assets/images/client/course-card-image-dummy.png" class="img-fluid"  alt="Course's thumbnail not available..">
                                     <div class="top-left card-tag small-text">Krest</div>
                                 </div>
                                 <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">

@@ -62,11 +62,11 @@
                 <form action="{{ route('login') }}" method="POST">
                 @csrf
                     <div class="row m-0">
-                        <div class="col-6" style="padding-left:3.5vw;padding-top:5vw">
+                        <div class="col-6 desktop-display" style="padding-left:3.5vw;padding-top:5vw">
                             <p class="big-heading" style="font-family:Rubik Medium;color:#55525B;">Mari kita sambut Indonesia <span style="font-family:Hypebeast;color:#F4C257;font-size:3.5vw !important;line-height:1vw">EMAS!</span> </p>
                             <img src="/assets/images/client/Login_Image.png" class="img-fluid" style="width:100%;height:18vw;object-fit:cover" alt="">
                         </div>   
-                        <div class="col-6" style="padding:0vw 4vw;display: flex;flex-direction: column;justify-content: center;">
+                        <div class="col-12 col-lg-6 mobile-display" style="padding:0vw 4vw;display: flex;flex-direction: column;justify-content: center;">
                             <div style="text-align:center">
                                 <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
                                 @if (session('email-verification-success'))
@@ -106,7 +106,8 @@
                                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:1vw;text-decoration:none;color: #3B3C43;cursor:pointer"><span> <a href="#forget-password">Lupa Password</a> </span> </p>
                             </div>
                         </div>
-                    </div>   
+                    </div>
+                       
                 </div>
             </form>
             <!--

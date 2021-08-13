@@ -389,7 +389,7 @@
     </div>
     <!-- END OF KENAPA MEMILIH Skill Snack -->
     
-    <!-- START OF OUR MISSION -->
+    <!-- START OF OUR MISSION MOBILE -->
     <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
         <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
             <p style="font-family: Rubik Medium;color:#67BBA3;font-size:4vw;margin-bottom:0px">Our Mission</p>
@@ -415,7 +415,7 @@
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
                             -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;font-size:2vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
+                            -webkit-box-orient: vertical !important;font-size:2.5vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
                     </div>
                 </div>
             </div>
@@ -489,7 +489,7 @@
             </div>
         </div>
     </div>
-    <!-- END OF OUR MISSION -->
+    <!-- END OF OUR MISSION MOBILE -->
     
     <!-- START OF OUR VALUES 
     <div class="row m-0 page-container our-values-background" style="padding-top:15vw;padding-bottom:15vw">
