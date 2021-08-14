@@ -27,6 +27,7 @@ class BootcampCourseDetailSeeder extends Seeder
             [
                 'course_id' => '5',
                 'meeting_link' => 'zoom.com/5hqo34',
+                'syllabus' => 'assets/documents/seeder/content-attachment-2.pdf',
                 'date_start' => '2021-08-16',
                 'date_end' => '2021-08-20',
                 'trial_date_end' => '2021-08-19',
