@@ -70,6 +70,19 @@
                     </div>
 
                 </div>
+                <div class="col-6 mt-4">
+                    <div class="card bg-light text-black shadow">
+                        <div class="card-body">
+                            Syllabus Request
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($course->bootcampSyllabusRequests)}}</div>
+                                <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.bootcamp.syllabusRequests', $course->id) }}">View List</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
         

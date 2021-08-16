@@ -367,4 +367,9 @@ class BootcampController extends Controller
         return redirect()->route('admin.bootcamp.show',$application->course_id)->with('message', $message);
 
     }
+
+    public function syllabusRequests($course_id){
+        $course = Course::findOrFail($course_id);
+        return view('admin/bootcamp/syllabus-list', compact('course'));
+    }
 }
