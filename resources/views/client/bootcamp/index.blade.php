@@ -1065,7 +1065,7 @@
 
 
 <!-- START OF SCHEDULE AND DELIVERY METHOD -->
-<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw">
+<div class="row m-0 page-container" id="schedule-section" style="padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="margin-bottom:4vw">
         <div class="container-schedule-delivery">
             <p class="small-heading schedule-links schedule-title schedule-title-active" onclick="changeSchedule(event, 'bootcamp-schedule')" style="font-family: Rubik Bold;margin-right:3vw;cursor:pointer">Bootcamp Schedule</p>
@@ -1117,9 +1117,22 @@
                 <div style="padding-left: 5vw;">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">{{$course->bootcampCourseDetail->what_will_be_taught}}</p>
-                    @if($course->bootcampCourseDetail->syllabus != null) 
-                    <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}"  target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</a>
+                    @if (session()->has('send_syllabus_message'))
+
+                    <div class="p-0 mt-2 mb-0">
+                        <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                        {{ session()->get('send_syllabus_message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
                     @endif
+                    @if($course->bootcampCourseDetail->syllabus != null) 
+                    <form action="{{route('bootcamp.sendSyllabus', $course->id)}}" method="post">
+                        @csrf
+                        <button  @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif   class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
+                    </form>
+                    @endif
+
 
                 </div>
 
@@ -1177,8 +1190,20 @@
                 <div style="padding-left: 5vw;">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">{{$course->bootcampCourseDetail->what_will_be_taught}}</p>
+                    @if (session()->has('send_syllabus_message'))
+
+                    <div class="p-0 mt-2 mb-0">
+                        <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                        {{ session()->get('send_syllabus_message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    @endif
                     @if($course->bootcampCourseDetail->syllabus != null) 
-                    <a href="{{ asset($course->bootcampCourseDetail->syllabus) }}" target="_blank" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</a>
+                    <form action="{{route('bootcamp.sendSyllabus', $course->id)}}" method="post">
+                        @csrf
+                        <button  @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif  class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
+                    </form>
                     @endif
 
                 </div>
