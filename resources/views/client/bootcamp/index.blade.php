@@ -1129,7 +1129,7 @@
                         <!-- END OF ONE ITEM -->
                         @endforeach
                     </div>
-                    <a class="carousel-control-prev"   data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                    <a class="carousel-control-prev"    data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
                         <img src="/assets/images/icons/arrow-left.svg" class="left-arrow-delivery-method" id="carousel-control-left-menu-image " style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                         <span class="visually-hidden">Prev</span>
                     </a>
@@ -1533,7 +1533,7 @@
             justify-content:flex-end
             @endif
             ">
-            <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:44vw;height:58vw;margin-top:5vw">
+            <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:44vw;height:63vw;margin-top:5vw">
                 <div style="text-align:center;margin-bottom:1vw">
                     <img src="{{asset($career->thumbnail)}}" style="width:13vw;" alt="Bootcamp Illustration">
                 </div>
@@ -1584,12 +1584,12 @@
                 @endforeach
             </div>
             @if(count($course->teachers) > 1)
-            <a class="carousel-control-prev"   data-bs-target="#instructors-carousel" style="width:2vw" role="button"data-bs-slide="prev">
-                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+            <a class="carousel-control-prev" id="carousel-arrow-mobile"   data-bs-target="#instructors-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" class="bootcamp-left-arrow" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
-            <a class="carousel-control-next"   data-bs-target="#instructors-carousel" style="width:2vw"  role="button"data-bs-slide="next">
-                <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+            <a class="carousel-control-next" id="carousel-arrow-mobile"  data-bs-target="#instructors-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                <img src="/assets/images/icons/arrow-right.svg" class="bootcamp-right-arrow" id="carousel-control-right-menu-image" style="" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>
             @endif
