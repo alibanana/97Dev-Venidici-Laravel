@@ -679,7 +679,7 @@
                 
                 <div class="carousel-item active">
                     <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
-                        <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
+                        <img src="/assets/images/client/Skill_Penunjang_Karir.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                             <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Skill Penunjang Karir</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Dapetin skill yang kamu mau dan taklukin karir impian melalui Venidici Bootcamp</p>
@@ -688,7 +688,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
-                        <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
+                        <img src="/assets/images/client/Healing_Bersama_Teman.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                             <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Healing bersama dengan teman baru!</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Bareng woki, healing sambil berkarya dan bercerita</p>
@@ -697,7 +697,7 @@
                 </div>
                 <div class="carousel-item">
                         <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
-                        <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
+                        <img src="/assets/images/client/Jangan_Kalah_Saing.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                             <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Jangan sampai perusahaan kamu kalah saing!</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Krest bisa bantu naikkin performa tim kamu lewat hands-on workshop yang seru</p>
@@ -1213,7 +1213,7 @@
                     
                     <div class="carousel-item active">
                         <div class="card-white" style="display: flex;align-items:center;height:22vw;width:70vw">
-                            <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 20vw;" alt="">
+                            <img src="/assets/images/client/Skill_Penunjang_Karir.png" class="img-fluid" style="width: 20vw;" alt="">
                             <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                                 <p  style="font-family: Rubik Medium;color:#3B3C43;font-size:3vw;margin-bottom:1vw">Skill Penunjang Karir</p>
                                 <p  style="font-family: Rubik Regular;color:#3B3C43;font-size:2.5vw;margin-bottom:0px">Dapetin skill yang kamu mau dan taklukin karir impian melalui Venidici Bootcamp</p>
@@ -1222,7 +1222,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="card-white" style="display: flex;align-items:center;height:22vw;width:70vw">
-                            <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 20vw;" alt="">
+                            <img src="/assets/images/client/Healing_Bersama_Teman.png" class="img-fluid" style="width: 20vw;" alt="">
                             <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                                 <p  style="font-family: Rubik Medium;color:#3B3C43;font-size:3vw;margin-bottom:1vw">Healing bersama dengan teman baru!</p>
                                 <p  style="font-family: Rubik Regular;color:#3B3C43;font-size:2.5vw;margin-bottom:0px">Bareng woki, healing sambil berkarya dan bercerita</p>
@@ -1231,7 +1231,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="card-white" style="display: flex;align-items:center;height:22vw;width:70vw">
-                            <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 20vw;" alt="">
+                            <img src="/assets/images/client/Jangan_Kalah_Saing.png" class="img-fluid" style="width: 20vw;" alt="">
                             <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                                 <p  style="font-family: Rubik Medium;color:#3B3C43;font-size:3vw;margin-bottom:1vw">Jangan sampai perusahaan kamu kalah saing!</p>
                                 <p  style="font-family: Rubik Regular;color:#3B3C43;font-size:2.5vw;margin-bottom:0px">Krest bisa bantu naikkin performa tim kamu lewat hands-on workshop yang seru</p>
