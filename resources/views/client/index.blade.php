@@ -578,20 +578,20 @@
         </a>
     </div>
     <!-- END OF ONE PROGRAMS -->
-    <!-- START OF ONE PROGRAMS
+    <!-- START OF ONE PROGRAMS -->
     <div class="col-4 p-0" style="display:flex;justify-content:center">
         <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
+                <img src="/assets/images/client/Krest_Dummy.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
                 <div style="padding:1.5vw">
                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Krest</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Krest by Venidici hadir untuk membantu bisnis Anda meningkatkan produktivitas melalui serangkaian pelatihan secara online yang dirancang khusus sesuai dengan kebutuhan dan tujuan perusahaan.</p>
                     <a href="/for-corporate/krest" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Krest</a>
                 </div>
             </div>
         </a>
     </div>
-    END OF ONE PROGRAMS -->
+   <!-- END OF ONE PROGRAMS -->
 </div>
 <!-- END OF OUR PROGRAMS SECTION -->
 
@@ -638,26 +638,26 @@
                     <div style="padding:1.5vw">
                         <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Bootcamp</p>
                         <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam porro blanditiis cupiditate in soluta iste eveniet, veritatis architecto pariatur numquam. Placeat praesentium officiis, assumenda ducimus ratione delectus quia dolore? Laboriosam?</p>
-                        <a href="" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
+                        <a href="/bootcamp" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Bootcamp</a>
                     </div>
                 </div>
             </a>
         </div>
         <!-- END OF ONE PROGRAMS -->
-        <!-- START OF ONE PROGRAMS 
+        <!-- START OF ONE PROGRAMS -->
         <div class="col-6 p-0" style="display:flex;justify-content:center">
             <a href="/for-corporate/krest" style="text-decoration:none">
                 <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:90%">
-                    <img src="/assets/images/client/Krest-Banner.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
+                    <img src="/assets/images/client/Krest_Dummy.png" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
                     <div style="padding:1.5vw">
                         <p id="card-title" style="font-family: Rubik Medium;color:#55525B;font-size:3vw;margin-bottom:1vw">Krest</p>
-                        <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
+                        <p class=" our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;font-size:2.5vw;line-height:2.5vw">Krest by Venidici hadir untuk membantu bisnis Anda meningkatkan produktivitas melalui serangkaian pelatihan secara online yang dirancang khusus sesuai dengan kebutuhan dan tujuan perusahaan.</p>
                         <a href="/for-corporate/krest" class="btn-blue" style="text-decoration: none;font-family:Rubik Regular;font-size:2.5vw">Explore Krest</a>
                     </div>
                 </div>
             </a>
         </div>
-        END OF ONE PROGRAMS -->
+        <!-- END OF ONE PROGRAMS -->
     </div>
 </div>
 <!-- END OF MOBILE OUR PROGRAMS SECTION -->
@@ -679,7 +679,7 @@
                 
                 <div class="carousel-item active">
                     <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
-                        <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
+                        <img src="/assets/images/client/Skill_Penunjang_Karir.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                             <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Skill Penunjang Karir</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Dapetin skill yang kamu mau dan taklukin karir impian melalui Venidici Bootcamp</p>
@@ -688,7 +688,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
-                        <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
+                        <img src="/assets/images/client/Healing_Bersama_Teman.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                             <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Healing bersama dengan teman baru!</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Bareng woki, healing sambil berkarya dan bercerita</p>
@@ -697,7 +697,7 @@
                 </div>
                 <div class="carousel-item">
                         <div class="card-white" style="display: flex;align-items:center;height:15vw;width:48.5vw">
-                        <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 18vw;" alt="">
+                        <img src="/assets/images/client/Jangan_Kalah_Saing.png" class="img-fluid" style="width: 18vw;" alt="">
                         <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                             <p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;">Jangan sampai perusahaan kamu kalah saing!</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">Krest bisa bantu naikkin performa tim kamu lewat hands-on workshop yang seru</p>
@@ -1213,7 +1213,7 @@
                     
                     <div class="carousel-item active">
                         <div class="card-white" style="display: flex;align-items:center;height:22vw;width:70vw">
-                            <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 20vw;" alt="">
+                            <img src="/assets/images/client/Skill_Penunjang_Karir.png" class="img-fluid" style="width: 20vw;" alt="">
                             <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                                 <p  style="font-family: Rubik Medium;color:#3B3C43;font-size:3vw;margin-bottom:1vw">Skill Penunjang Karir</p>
                                 <p  style="font-family: Rubik Regular;color:#3B3C43;font-size:2.5vw;margin-bottom:0px">Dapetin skill yang kamu mau dan taklukin karir impian melalui Venidici Bootcamp</p>
@@ -1222,7 +1222,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="card-white" style="display: flex;align-items:center;height:22vw;width:70vw">
-                            <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 20vw;" alt="">
+                            <img src="/assets/images/client/Healing_Bersama_Teman.png" class="img-fluid" style="width: 20vw;" alt="">
                             <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                                 <p  style="font-family: Rubik Medium;color:#3B3C43;font-size:3vw;margin-bottom:1vw">Healing bersama dengan teman baru!</p>
                                 <p  style="font-family: Rubik Regular;color:#3B3C43;font-size:2.5vw;margin-bottom:0px">Bareng woki, healing sambil berkarya dan bercerita</p>
@@ -1231,7 +1231,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="card-white" style="display: flex;align-items:center;height:22vw;width:70vw">
-                            <img src="/assets/images/client/illustration-dummy.png" class="img-fluid" style="width: 20vw;" alt="">
+                            <img src="/assets/images/client/Jangan_Kalah_Saing.png" class="img-fluid" style="width: 20vw;" alt="">
                             <div style="margin-left:1vw;display: flex;flex-direction: column;justify-content: center;">
                                 <p  style="font-family: Rubik Medium;color:#3B3C43;font-size:3vw;margin-bottom:1vw">Jangan sampai perusahaan kamu kalah saing!</p>
                                 <p  style="font-family: Rubik Regular;color:#3B3C43;font-size:2.5vw;margin-bottom:0px">Krest bisa bantu naikkin performa tim kamu lewat hands-on workshop yang seru</p>

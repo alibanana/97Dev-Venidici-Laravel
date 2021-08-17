@@ -85,9 +85,9 @@ class CourseSeeder extends Seeder
                 'course_category_id' => 5,
                 'thumbnail' => 'assets/images/seeder/Dummy_Bootcamp_Thumbnail.png',
                 'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
-                'title' => 'Growth Hacking Through Facebook Ad',
-                'subtitle' => 'Here insert veindicis bootcamp subtitle',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum mauris consequat id. Morbi vestibulum commodo commodo nulla ipsum sit. Hendrerit lacus maecenas placerat vitae dignissim nibh mollis.',
+                'title' => 'Venidici Growth Hacking Bootcamp',
+                'subtitle' => 'The 1st Batch will start on Sept 20th 2021',
+                'description' => 'Program 16 minggu yang sekaligus merupakan Bootcamp Growth Hacking pertama di Indonesia. Diracik khusus untuk jadi pondasi kuat pertama kamu dalam berbisnis atau berkarir di dunia Growth Hacking. #JagoDigital bersama Venidici demi Indonesia Emas 2045',
                 'price' => 0,
                 'isFeatured' => true,
                 'publish_status' => 'Published',
@@ -119,6 +119,6 @@ class CourseSeeder extends Seeder
         // Bootcamp Courses
         $course5 = Course::create($courses[4]);
         $course5->hashtags()->attach([9, 2, 3]);
-        $course5->teachers()->attach([4]);
+        $course5->teachers()->attach([4,5,6,7,8,9,10]);
     }
 }

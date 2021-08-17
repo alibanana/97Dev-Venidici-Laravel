@@ -566,15 +566,15 @@ END OF OUR VALUES-->
 </form>
 <!-- END OF CONTACT US SECTION -->
 
-<!-- START OF FAQ SECTION -->
+<!-- START OF FAQ SECTION -
 <div class="row m-0 page-container" style="padding-top:6vw;padding-bottom:6vw;background-color:#F9F9F9">
     <div class="col-12 p-0">
         <p class="big-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-left:3vw">Frequently Asked Questions</p>
     </div>
-    <!-- START OF QUESTION SECTION -->
+    <!-- START OF QUESTION SECTION -
     <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:1.5vw">
         <div style="background-color:#F9F9F9;padding:1.5vw;border-radius:10px;width:92%">
-            <!-- START OF ONE FAQ CARD -->
+            <!-- START OF ONE FAQ CARD -
             <div class="faq-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
                     <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">What is your shipping policy?</p>
@@ -588,8 +588,8 @@ END OF OUR VALUES-->
                     </p>
                 </div>
             </div>
-            <!-- END OF ONE FAQ CARD -->
-            <!-- START OF ONE FAQ CARD -->
+            <!-- END OF ONE FAQ CARD -
+            <!-- START OF ONE FAQ CARD -
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
                     <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Can I refund the course that i enrolled?</p>
@@ -603,8 +603,8 @@ END OF OUR VALUES-->
                     </p>
                 </div>
             </div>
-            <!-- END OF ONE FAQ CARD -->
-            <!-- START OF ONE FAQ CARD -->
+            <!-- END OF ONE FAQ CARD -
+            <!-- START OF ONE FAQ CARD -
             <div class="faq-card" style="margin-top:1vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
                     <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
@@ -618,11 +618,11 @@ END OF OUR VALUES-->
                     </p>
                 </div>
             </div>
-            <!-- END OF ONE FAQ CARD -->
+            <!-- END OF ONE FAQ CARD -
             
         </div>
     </div>
-    <!-- END OF QUESTION SECTION -->
+    <!-- END OF QUESTION SECTION -
 </div>
 <!-- END OF FAQ SECTION -->
 

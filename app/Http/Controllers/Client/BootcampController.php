@@ -14,12 +14,17 @@ use App\Models\Course;
 use App\Helper\CourseHelper;
 use Carbon\Carbon;
 use App\Models\Invoice;
+use App\Models\SyllabusRequest;
 use App\Models\Order;
 use App\Models\BootcampApplication;
 use App\Models\Notification;
 use App\Models\Province;
 use App\Models\City;
 use Illuminate\Support\Facades\Validator;
+
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BootcampSyllabusMail;
 
 class BootcampController extends Controller
 {
@@ -347,5 +352,19 @@ class BootcampController extends Controller
         }
 
         return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message',"Terimakasih telah mendaftar, we'll get back to you as soon as possible!");
+    }
+
+    public function sendSyllabus($course_id){
+        $user = auth()->user();
+        $course = Course::findOrFail($course_id);
+        $link = asset($course->bootcampCourseDetail->syllabus);
+        Mail::to(auth()->user()->email)->send(new BootcampSyllabusMail($course,$link,$user));
+        $syllabusRequest = new SyllabusRequest;
+        $syllabusRequest->course_id = $course_id;
+        $syllabusRequest->user_id = $user->id;
+        $syllabusRequest->save();
+
+        return redirect('/bootcamp#schedule-section')->with('send_syllabus_message',"Syllabus telah terkirim ke email anda.");
+
     }
 }

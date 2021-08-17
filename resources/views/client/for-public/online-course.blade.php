@@ -102,7 +102,7 @@
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">1.</p>
                     <div style="">
                         <div style="text-align:center">
-                            <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                            <img src="/assets/images/client/Lifetime_Flexible_Access.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
@@ -124,7 +124,7 @@
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">2.</p>
                     <div style="">
                         <div style="text-align:center">
-                            <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                            <img src="/assets/images/client/Learning_By_Doing.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
@@ -170,7 +170,7 @@
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">3.</p>
                     <div style="">
                         <div style="text-align:center">
-                            <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                            <img src="/assets/images/client/Credible_Mentors.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
@@ -401,7 +401,7 @@
                     <p style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">1.</p>
                     <div style="">
                         <div style="text-align:center">
-                            <img src="/assets/images/client/Icon_Illustration.png" style="width:35%;" class="img-fluid" alt="Image 1">
+                            <img src="/assets/images/client/Lifetime_Flexible_Access.png" style="width:35%;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:10vw;margin-top:1vw">
                             <p style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
@@ -424,7 +424,7 @@
                     <p  style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">2.</p>
                     <div style="">
                         <div style="text-align:center">
-                            <img src="/assets/images/client/Icon_Illustration.png" style="width:35%;" class="img-fluid" alt="Image 1">
+                            <img src="/assets/images/client/Learning_By_Doing.png" style="width:35%;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:10vw;margin-top:1vw">
                             <p style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
@@ -470,7 +470,7 @@
                     <p  style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">3.</p>
                     <div style="">
                         <div style="text-align:center">
-                            <img src="/assets/images/client/Icon_Illustration.png" style="width:35%;" class="img-fluid" alt="Image 1">
+                            <img src="/assets/images/client/Credible_Mentors.png" style="width:35%;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:10vw;margin-top:1vw">
                             <p style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;

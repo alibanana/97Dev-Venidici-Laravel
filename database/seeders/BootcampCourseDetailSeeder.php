@@ -27,47 +27,43 @@ class BootcampCourseDetailSeeder extends Seeder
             [
                 'course_id' => '5',
                 'meeting_link' => 'zoom.com/5hqo34',
-                'date_start' => '2021-08-14',
-                'date_end' => '2021-08-20',
-                'trial_date_end' => '2021-08-19',
-                'what_will_be_taught' => 'Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.',
-                'bootcamp_full_price' => '300000',
-                'bootcamp_trial_price' => '150000',
+                'syllabus' => 'assets/documents/seeder/content-attachment-2.pdf',
+                'date_start' => '2021-09-20',
+                'date_end' => '2022-01-29',
+                'trial_date_end' => '2021-09-27',
+                'what_will_be_taught' => 'Setelah lulus dari bootcamp kami, kamu akan dapat bereksperimen growth hacking berdasarkan data, paham berbagai konsep growth hacking dan marketing, sampai melatih softskill teamwork, communication, dan mempersiapkan karir',
+                'bootcamp_full_price' => '9500000',
+                'bootcamp_trial_price' => '1500000',
             ]
         ];
 
         $abouts = [
             [
                 'course_id' => '5',
-                'title' => 'Poin penjelasan Growth Hacking',
-                'image' => 'assets/images/seeder/Bootcamp-About-Seeder.png',
-                'description' => 'Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
+                'title' => 'Growth Hacking Overview',
+                'image' => 'assets/images/seeder/Skill_Penunjang_Karir.png',
+                'description' => 'Growth Hacking memadukan marketing, teknologi, dan penggunaan data untuk memaksimalkan resource. Dengan me-reveal strategi terbaik melalui eksperimen dan analisis berdasarkan data, pertumbuhan perusahaan yang cepat dapat tercapai. Karakternya yang cepat dan efisien bikin Growth Hacking juga cocok untuk startup atau bisnis kecil yang pada umumnya minim sumber daya. Tidak seperti Digital Marketing yang hanya fokus dalam mencari pelanggan, Growth Hacking merambah semua aspek dan departemen dengan satu tujuan utama yakni pertumbuhan perusahaan.'
+            ],
+            [
+                'course_id' => '5',
+                'title' => 'Opportunity in The Field’ atau ‘ Future-proof Career',
+                'image' => 'assets/images/seeder/Skill_Penunjang_Karir.png',
+                'description' => 'Keberadaan Growth Hacking di Indonesia masih sangat langka. Kompetisinya minim! Tapi peluang di waktu dekat sangat besar berkat banyaknya startup dan bisnis-bisnis baru yang kian bermunculan. 
 
-                Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.'
+                Sebagai Bootcamp Growth Hacking pertama di Indonesia, Venidici adalah jalur terbaik kamu untuk jadi yang terdepan dibanding yang lain di industri ini.
+                ​'
             ],
             [
                 'course_id' => '5',
-                'title' => 'Bikin perusahaan jadi lebih kaya',
-                'image' => 'assets/images/seeder/bootcamp-kedua.jpg',
-                'description' => 'Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.
-                
-                Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​'
+                'title' => 'Real PAID PROJECT',
+                'image' => 'assets/images/seeder/Skill_Penunjang_Karir.png',
+                'description' => 'Semua project yang akan dijalankan diracik semirip mungkin dengan keadaan yang terjadi di lingkungan kerja nyata demi memaksimalkan persiapan setiap peserta untuk masa kerja nanti. Beberapa project bahkan disalurkan langsung dari perusahaan partner Venidici sehingga peserta bisa mendapat pengalaman otentik dengan benar-benar langsung berkontribusi di perusahaan. Sama seperti di lingkungan aslinya, peserta juga berkesempatan mendapatkan bayaran atas project yang dikerjakan.'
             ],
             [
                 'course_id' => '5',
-                'title' => 'Poin penjelasan Growth Hacking',
-                'image' => 'assets/images/seeder/homepage_background.png',
-                'description' => 'Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​
-
-                Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.'
-            ],
-            [
-                'course_id' => '5',
-                'title' => 'Poin penjelasan Growth Hacking',
-                'image' => 'assets/images/seeder/Bootcamp-About-Seeder.png',
-                'description' => 'Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.
-                
-                Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal, terutama di era industri 4.0 yang super kompetitif.​'
+                'title' => 'Wide Range of Expertise',
+                'image' => 'assets/images/seeder/Skill_Penunjang_Karir.png',
+                'description' => 'Growth Hacking punya scope yang luas sehingga pilihan karirnya pun beragam. Dengan belajar Growth Hacking, secara tidak langsung kamu sudah mempelajari materi seperti experimentation, content marketing, UI/UX, copywriting, data analytics, dan berbagai marketing hack yang bisa memiliki jalur karir tersendiri secara individual selain pilihan karir rekomendasi utama Venidici seperti Growth Hacker, Digital Marketer, Product Manager, Performance Marketer. Menjadikan perjalanan karir kamu ke depan akan jauh lebih terjamin.'
             ],
         ];
 
@@ -127,67 +123,86 @@ class BootcampCourseDetailSeeder extends Seeder
         $benefits = [
             [
                 'course_id' => '5',
-                'title' => 'Materi yang padat dan jelas',
-                'description' => 'This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.',
+                'title' => 'After-hours Online Live Class with Expert Instructors',
+                'description' => 'i. Kelas live interaktif 3 kali dalam seminggu untuk membantumu menyerap ilmu yang dibutuhkan di industri
+                
+                ii. Dapatkan modul lengkap untuk setiap kelas!
+                ',
             ],
             [
                 'course_id' => '5',
                 'title' => 'Fitur Assesment untuk pemantapan materi',
-                'description' => 'This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.',
+                'description' => 'i. Praktekin apa yang dipelajari di kelas, mulai dari ilmu baru sampai tools terkini
+                
+                ii. Kuasai materi mingguan dengan praktek yang telah kami desain
+                
+                iii. Mengerjakan real PAID project untuk pengalaman bekerja bagi perusahaan yang lebih nyata
+                ',
             ],
             [
                 'course_id' => '5',
                 'title' => 'Materi yang padat dan jelas',
-                'description' => 'This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.',
+                'description' => 'i. Nikmati fasilitas one on one session dengan para mentor berpengalaman untuk mendapatkan saran, kritik, ataupun sekadar berbagi experience seputar bidang karir',
             ],
             [
                 'course_id' => '5',
                 'title' => 'Fitur Assesment untuk pemantapan materi',
-                'description' => 'This is a description for program 1 and this is a brief description. The maximum length is the same as the button bellow.',
+                'description' => 'i. Dapatkan kelas workshop persiapan karir mulai dari pembuatan CV, mock-up interview, sampai konsultasi karir
+                
+                ii. Dapatkan personalized career coach untuk membantumu menata rencana karir dan akhirnya menggapai pekerjaan impianmu
+                ',
+            ],
+            [
+                'course_id' => '5',
+                'title' => 'Fitur Assesment untuk pemantapan materi',
+                'description' => 'i. Bebas tanya mentor terkait tugas dan materi yang masih belum dipahami
+                
+                ii. Bekerja kolaboratif dan juga saling bertukar pendapat bersama peserta bootcamp lainnya
+                ',
             ],
         ];
 
         $candidates = [
             [
                 'course_id' => '5',
-                'title' => 'Product Managers',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'title' => 'Career First Timer',
+                'description' => 'Baru lulus atau sebentar lagi? Bootcamp ini akan menjadi batu loncatan terbaik kamu dalam menggaet pengalaman baru dan mengawali karir di dunia Growth Hacking dan Marketing.',
             ],
             [
                 'course_id' => '5',
-                'title' => 'Mobile Developers',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'title' => 'Career Shifter',
+                'description' => 'Meninggalkan karir lama adalah keputusan yang besar, make it count! Imbangi lembaran baru kamu di industri yang berkembang sangat cepat ini dengan materi komplit bersama instruktur expert kami.',
             ],
             [
                 'course_id' => '5',
-                'title' => 'UI Designers',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'title' => 'Business Owners',
+                'description' => 'Tak hanya efektif untuk startup besar, sifat alami Growth Hacking yang memaksimalkan resource minim menjadi pertumbuhan yang impactful juga sangat cocok untuk bisnis-bisnis kecil. Tumbuhkan sendiri bisnis kamu bersama Venidici!',
             ],
             [
                 'course_id' => '5',
-                'title' => 'UX Researches',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'title' => 'Professionals and Employees',
+                'description' => 'Sudah cukup familiar dengan industri Growth Hacking? Lucky for you! Berkat scope Growth Hacking yang amat luas, akan masih banyak yang bisa kamu pelajari sehingga kesempatan upskilling masih amat besar sekalipun kamu sudah cukup familiar dengan industri tetangga seperti Marketing. Ajukan program upskilling melalui perusahaan tempat kamu bekerja untuk kemungkinan penawaran yang bahkan lebih menarik lagi.',
             ],
         ];
 
         $future_careers = [
             [
                 'course_id' => '5',
-                'thumbnail' => 'assets/images/seeder/Career_Seeder_1.png',
-                'title' => 'Product Manager',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla ',
+                'thumbnail' => 'assets/images/seeder/Growth_Hacker_Icon.png',
+                'title' => 'Growth Hacker',
+                'description' => 'The man of the show. Growth Hacking menggunakan sistem eksperimen berbasis data yang dilakukan menyeluruh di setiap aspek perusahaan untuk tujuan utama pertumbuhan perusahaan dengan resource seminimal mungkin.',
             ],
             [
                 'course_id' => '5',
-                'thumbnail' => 'assets/images/seeder/Career_Seeder_2.png',
-                'title' => 'Accountant',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla ',
+                'thumbnail' => 'assets/images/seeder/Digital_Marketer.png',
+                'title' => 'Digital Marketer’ & ‘Performance Marketer',
+                'description' => 'Mempromosikan brand melalui berbagai saluran atau channel digital. Diperlukan hubungan yang kuat antara brand dan pelanggan untuk peningkatan konversi yang maksimal.’',
             ],
             [
                 'course_id' => '5',
-                'thumbnail' => 'assets/images/seeder/Career_Seeder_1.png',
-                'title' => 'Product Manager',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget non dictum pellentesque nulla ',
+                'thumbnail' => 'assets/images/seeder/Various_Marketing.png',
+                'title' => 'Various Marketing Specialization',
+                'description' => 'Berkat scope Growth Hacking yang luas, tersedia berbagai pilihan karir yang berangkat dari topik-topik materi secara individu. Ada copywriter, SEO & SEM specialist, Social Media Manager, Content Creator, dan lain sebagainya.',
             ],
         ];
 
