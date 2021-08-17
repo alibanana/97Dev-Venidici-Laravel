@@ -1316,40 +1316,95 @@
 
 <!-- START OF HOW TO JOIN SECTION -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
-    <!-- START OF LEFT SECTION -->
-    <div class="col-lg-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
-        <img src="/assets/images/client/Bootcamp_How_To_Join.png" class="image-start-how-to-join" alt="Bootcamp Logo">
-    </div>
-    <!-- END OF LEFT SECTION -->
-    <!-- START OF RIGHT SECTION -->
-    <div class="col-lg-6 col-xs-12"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+    
+    <div class="col-lg-12 col-xs-12" style="text-align:center">
         <p class="small-heading wow bounce" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">How to join?</p>
-        <div class="htj-content" id="htj-1">
-            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Like</p>
-            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-        </div>
-        <div class="htj-content" id="htj-2" style="display: none;">
-            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Save</p>
-            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-        </div>
-        <div class="htj-content" id="htj-3" style="display: none;">
-            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">Follow and Share!</p>
-            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-        </div>
-        <!-- START OF LINKS -->
-        <div style="display: flex;margin-top:1vw">
-            <div class="htj-links htj-title htj-title-active" onclick="changeHowToJoin(event, 'htj-1')" style="cursor:pointer">
-                <p class="small-heading" style="font-family: Rubik Bold;">1</p>
+        <div style="display:flex;justify-content:center">
+            <div class="accordion" id="accordionExample" style="width:50vw;">
+
+                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border: 3px solid rgba(43, 108, 170, 0.25);border-radius: 10px 0px 0px 0px">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">1</p>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-top: 3px solid rgba(43, 108, 170, 0.25);border-radius: 0px 10px 0px 0px;width: 100%;">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Online Application</p>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Selesaikan formulir singkat berdurasi 5 menit untuk menginformasikan kami latar belakang, tujuan, dan pengalaman kamu sebelumnya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">2</p>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Online Test</p>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Mengerjakan tes analitis dan pengetahuan dasar yang akan dilakukan secara online</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">3</p>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Free Introduction Class</p>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Menghadiri introduction class tidak berbayar yang diadakan di minggu pertama serta menyelesaikan assignment yang diberikan pada kelas tersebut.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">4</p>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Video Call</p>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Bertemu via video call dengan Counselor kami untuk memastikan bahwa harapan dan tujuan karir kamu selaras dengan apa yang program kami tawarkan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">5</p>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Secure Financing</p>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Akhirnya, memilih antara metode pembayaran penuh & angsuran atau melakukan finalisasi skema Income Share Agreement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-radius: 0px 0px 0px 10px;">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">6</p>
+                    </div>
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;border-radius: 0px 0px 10px 0px;">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Start Class</p>
+                        <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Setelah merampungkan hal terkait pembayaran, kamu akhirnya siap mentransformasi karirmu!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="htj-links htj-title" onclick="changeHowToJoin(event, 'htj-2')" style="cursor:pointer;margin-left:2vw">
-                <p class="small-heading" style="font-family: Rubik Bold;">2</p>
-            </div>
-            <div class="htj-links htj-title" onclick="changeHowToJoin(event, 'htj-3')" style="cursor:pointer;margin-left:2vw">
-                <p class="small-heading" style="font-family: Rubik Bold;">3</p>
-            </div>
         </div>
-        <!-- END OF LINKS -->
+
     </div>
+    
     <!-- END OF RIGHT SECTION -->
 </div>
 <!-- END OF HOW TO JOIN SECTION -->
@@ -1468,7 +1523,7 @@
 <!-- END OF OUR INSTRUCTORS -->
 
 <!-- START OF OUR HIRING PARTNERS SECTION -->
-<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
+<div class="row m-0 page-container d-none" style="padding-top:5vw;padding-bottom:5vw;">
     <!-- START OF LEFT SECTION -->
     <div class="col-lg-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;">Our Hiring Partners</p>
@@ -1686,8 +1741,29 @@
     </div>
     <!-- END OF FAQ SECTION -->
 
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
+<script>
+var acc = document.getElementsByClassName("accordions");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("mouseover", function() {
+    var grandParent = $(this).parents()[1]
+    console.log(grandParent)
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+
+  
+
+}
+</script>
 <script>
     function growthHacking(evt, categoryName) {
             var i, tabcontent, tablinks;

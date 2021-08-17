@@ -2581,6 +2581,12 @@ html, body {
     .drop-zone{
         height: auto !important;
     }
+    .accordion{
+        width:100% !important
+    }
+    .accordion-item>#left-section{
+        padding: 1vw  3vw !important;
+    }
 }
 
 /* MOBILE NAVBAR */
