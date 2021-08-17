@@ -104,6 +104,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function bootcampApplications() {
         return $this->hasMany(BootcampApplication::class);
     }
+    public function bootcampSyllabusRequests() {
+        return $this->hasMany(SyllabusRequest::class);
+    }
 
     public function referralCodeCounters() {
         return $this->hasMany(ReferralCodeCounter::class);

@@ -165,6 +165,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/bootcamp/{id}', [BootcampController::class, 'show'])->name('bootcamp.show');
     Route::post('/bootcamp/{id}', [BootcampController::class, 'buyFree'])->name('bootcamp.buyFree')->middleware(['auth', 'verified']);
     Route::post('/bootcamp/{id}/full-registration', [BootcampController::class, 'storeFullRegistration'])->name('bootcamp.storeFullRegistration')->middleware(['auth']);
+    Route::post('/bootcamp/{id}/syllabus', [BootcampController::class, 'sendSyllabus'])->name('bootcamp.sendSyllabus');
 
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware(['auth', 'verified']);
@@ -176,9 +177,6 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::put('/online-course/assessment/{id}/reset-user-assessment', [AssessmentController::class, 'resetUserAssessment'])->name('online-course-assessment.reset-user-assessment')->middleware(['auth', 'verified']);
     Route::put('/online-course/assessment/{id}/update-assessment-timer', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assessment.updateAssessmentTimer')->middleware(['auth', 'verified']);
 
-    Route::get('/online-course/sertifikat-menjadi-komedian-lucu', function () {
-        return view('client/online-course/detail');
-    });
 
     /* END OF ONLINE COURSE ROUTING */
 
@@ -288,6 +286,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/bootcamp', [AdminBootcampController::class, 'index'])->name('bootcamp.index');
         Route::get('/bootcamp/create', [AdminBootcampController::class, 'create'])->name('bootcamp.create');
         Route::get('/bootcamp/{id}', [AdminBootcampController::class, 'show'])->name('bootcamp.show');
+        Route::get('/bootcamp/{id}/syllabus-requests', [AdminBootcampController::class, 'syllabusRequests'])->name('bootcamp.syllabusRequests');
         Route::post('/bootcamp', [AdminBootcampController::class, 'store'])->name('bootcamp.store');
         Route::put('/bootcamp/{id}/archive', [AdminBootcampController::class, 'archive'])->name('bootcamp.archive');
         Route::put('/bootcamp/{id}/un-archive', [AdminBootcampController::class, 'unArchive'])->name('bootcamp.unArchive');
@@ -510,6 +509,9 @@ Route::middleware(['isSuspended'])->group(function () {
         });
         Route::get('/level_up', function () {
             return view('emails/level_up');
+        });
+        Route::get('/emails/bootcamp', function () {
+            return view('emails/bootcamp_syllabus');
         });
     };
 

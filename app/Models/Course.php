@@ -121,4 +121,8 @@ class Course extends Model
     public function bootcampBatches() {
         return $this->hasMany(BootcampBatch::class);
     }
+    
+    public function bootcampSyllabusRequests() {
+        return $this->hasMany(SyllabusRequest::class);
+    }
 }
