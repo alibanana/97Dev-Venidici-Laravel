@@ -873,7 +873,27 @@
         <img src="/assets/images/client/Bootcamp_Logo.png"  class="img-fluid bootcamp-logo-image" alt="Bootcamp Logo">
         <div style="margin-top: 2vw;">
             <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{$course->title}}</p>
-            <p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} - {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}} | Via Zoom</p>
+            <!--<p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} - {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}} | Via Zoom</p>-->
+            <ul>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">After-hour 16 Weeks classes</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Get a job right away or get a up to 100% refund</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Learn from the best instructors (working in Gojek, Grab, Bukalapak, Wagely, Kumparan)</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Get paid working on a real project</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Flexible payment methods (ISA Available)</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Beginner friendly, welcome!</p>
+                </li>
+            </ul>
             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{$course->subtitle}}</p>
         </div>
         <p class="bigger-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-top:2vw">Early Bird registration ends in:</p>
@@ -895,7 +915,7 @@
             </div>
         </div>
         <!-- END OF COUNT DOWN --> 
-        <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Register Now</a>
+        <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply as Early Bird’ & ‘Free Intro Week</a>
     </div>
     <!-- END OF LEFT SECTION -->
 
@@ -975,12 +995,21 @@
     @endif
     ">
         <div class="krest-card" style="margin-top:1.5vw;height:22vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+            <img
+            @if($loop->iteration == 1)
+            src="/assets/images/icons/Expert_Instructor_Icon.png" 
+            @elseif($loop->iteration == 2)
+            src="/assets/images/icons/Guaranteed_Job_Offer_Icon.png" 
+            @elseif($loop->iteration == 3)
+            src="/assets/images/icons/Payment_Flexibility_Icon.png" 
+            @endif
+            
+            style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;display: -webkit-box;
                         overflow : hidden !important;
                         text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 6 !important;
+                        -webkit-line-clamp: 10 !important;
                         -webkit-box-orient: vertical !important;">{{$feature->feature}}</p>
         </div>
     </div>
@@ -1007,12 +1036,11 @@
         @endif
         ">
             <div class="krest-card" style="margin-top:1.5vw;height:22vw">   
-                <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
                 <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
                 <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
+                            -webkit-line-clamp: 11 !important;
                             -webkit-box-orient: vertical !important;">{{$feature->feature}}</p>
             </div>
         </div>
@@ -1024,7 +1052,7 @@
 <!-- START OF GROWTH HACKING SECTION -->
 <div class="row m-0 page-container" style="background-color: #F6F6F6;padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="text-align: center;">
-        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Get to Know Our Beloved Bootcamp</p>
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Apa itu {{$course->title}}</p>
     </div>
     <div class="col-12 growth-hacking-title" style="">
         <!-- START OF CONTENT LINKS -->
@@ -1153,9 +1181,9 @@
                         <div class="carousel-item active">
                             <div style="display: flex;justify-content: center;">
                                 <div class="bootcamp-delivery-method-container">
-                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Step-by-step teaching 1</p>
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Experiential learning</p>
                                     <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
-                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Mempercepat proses belajar melalui learning-by-doing dan refleksi dari pengalaman tersebut</p>
 
                                 </div>
                             </div>
@@ -1165,9 +1193,33 @@
                         <div class="carousel-item">
                             <div style="display: flex;justify-content: center;">
                                 <div class="bootcamp-delivery-method-container">
-                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Step-by-step teaching 2</p>
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Online Delivery</p>
                                     <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
-                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Ikuti kelas dari belahan dunia mana saja!</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item">
+                            <div style="display: flex;justify-content: center;">
+                                <div class="bootcamp-delivery-method-container">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Fun and Interactive</p>
+                                    <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Setiap sesi telah kami desain agar menyenangkan untukmu!</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item">
+                            <div style="display: flex;justify-content: center;">
+                                <div class="bootcamp-delivery-method-container">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Go together, go far</p>
+                                    <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Dengan buddy system, melangkah bersama untuk berkembang lebih jauh.</p>
 
                                 </div>
                             </div>
@@ -1253,14 +1305,14 @@
         @foreach($course->bootcampBenefits as $benefit)
         <div class="col-6" style="display:flex;justify-content:center">
             <div class="our-mission-card-mobile" style="margin-top:3vw">
-                <div style="text-align:center">
+                <div style="text-align:left">
                     <div style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Icon_Illustration.png" style="width:11vw;" class="img-fluid" alt="Image 1">
                     </div>
                     <div style="height:3vw;margin-top:1vw;">
                         <p class="bigger-text our-mission-card-title">{{$benefit->title}}</p>
                     </div>
-                    <p class="small-text our-mission-card-description" >{{$benefit->description}}</p>
+                    <p class="small-text our-mission-card-description" style=";white-space:pre-line">{{$benefit->description}}</p>
                 </div>
             </div>
         </div>
@@ -1274,9 +1326,9 @@
     <!-- START OF LEFT SECTION -->
     <div class="col-lg-5 col-xs-12 wow fadeInLeft"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Bootcamp ini untuk siapa?</p>
-        <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>
-        <a href="#payment-section" class="btn-blue-bordered normal-text desktop-display" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Register For Free</a>
-        <a href="#payment-section" class="btn-blue-bordered normal-text mobile-display" style="font-family: Rubik Medium;color:#3B3C43;display:none;text-align:center">Register For Free</a>
+        <!--<p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>-->
+        <a href="#payment-section" class="btn-blue-bordered normal-text desktop-display" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply as Early Bird</a>
+        <a href="#payment-section" class="btn-blue-bordered normal-text mobile-display" style="font-family: Rubik Medium;color:#3B3C43;display:none;text-align:center">Apply as Early Bird</a>
     </div>
     <!-- END OF LEFT SECTION -->
 
@@ -1290,7 +1342,17 @@
             <!-- START OF ONE CARD -->
             <div class="col-6 p-0 wow fadeInUp desktop-display" data-wow-delay="{{$delay}}s" @if($loop->iteration > 2) style="margin-top: 5vw;" @endif>
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:20vw">
-                    <img src="/assets/images/icons/Bootcamp_Icon_1.png" style="width:5vw;margin-top:-7vw" class=""  alt="Bootcamp Logo">
+                    <img
+                    @if($loop->iteration == 1)
+                    src="/assets/images/icons/Career_First_Timer_Icon.png"
+                    @elseif($loop->iteration == 2)
+                    src="/assets/images/icons/Career_Shifter_Icon.png"
+                    @elseif($loop->iteration == 3)
+                    src="/assets/images/icons/Business_Owner_Icon.png"
+                    @elseif($loop->iteration == 4)
+                    src="/assets/images/icons/Professional_Icon.png"
+                    @endif
+                    style="width:5vw;margin-top:-7vw" class=""  alt="Bootcamp Logo">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw;height:4vw">{{$candidate->title}}</p>
                     <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">{{$candidate->description}}</p>
                 </div>
@@ -1488,16 +1550,18 @@
                         </div>
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
-                        <div class="col-12 col-lg-7" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
-                            <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Meet Our <span style="color:#67BBA3"> Instructor/s</span></p>
+                        <div class="col-12 col-lg-7 " style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+                            <p class="small-heading" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Meet Our <span style="color:#67BBA3"> Instructor/s</span></p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
-                            <p class="bigger-text" id="bootcamp-teacher-name" style="font-family: Rubik Medium;color:#626262;text-align:left">{{$teacher->name}}
-                            @if($teacher->occupancy != null)
-                            , {{$teacher->occupancy}}​
-                            @endif
+                            <p class="bigger-text" id="bootcamp-teacher-name" style="font-family: Rubik Medium;color:#626262;text-align:left;margin-bottom:0px">{{$teacher->name}}
                             </p>
+                            @if($teacher->occupancy != null)
+                            <p class="normal-text" id="bootcamp-teacher-name" style="font-family: Rubik Medium;color:#626262;text-align:left">
+                            {{$teacher->occupancy}}​
+                            </p>
+                            @endif
                             @if($teacher->company_logo != null)
-                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;border-radius:10px" alt="Bootcamp Instructor Company">
+                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;height:4vw;object-fit:contain;border-radius:10px" alt="Bootcamp Instructor Company">
                             @endif
                         </div>
                         <!-- END OF RIGHT SECTION -->
@@ -1552,31 +1616,46 @@
 <!-- START OF PRICING PLAN -->
 <div class="row m-0 page-container" id="payment-section" style="padding-top:5vw;padding-bottom:5vw;">
     <div class="col-12 p-0" style="text-align: center;margin-bottom:2vw">
-        <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Here is our Pricing Plan</p>
+        <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Tuition for Future Investment</p>
     </div>
     <!-- START OF FULL REGISTRATION -->
     <div class="col-md-6 col-6 p-0" >
         <div class="full-registration-container">
             <div>
-                <p class="bigger-text" style="font-family: Poppins Medium;color:#FFFFFF;">Full registration to Bootcamp</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#67BBA3;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }} / person</p>
-                <ul>
-                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Full curriculum dan assessment</p>
-                    </li>
-                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Sertifikat dan pembimbingan</p>
-                    </li>
-                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Purus volutpat eu nisi, maecenas neque eget sit</p>
-                    </li>
-                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Rhoncus nascetur pellentesque est blandit</p>
-                    </li>
-                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Pembayaran di luar website</p>
-                    </li>
-                </ul>
+                <p class="bigger-text" style="font-family: Poppins Medium;color:#FFFFFF;">Full Payment</p>
+                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF;text-decoration: line-through;">Rp. 15.000.000</p>
+                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF">1st Batch Discount <span style=";text-decoration: line-through;"> Rp. 12.000.000</span></p>
+                <p class="bigger-text" style="font-family: Poppins Medium;color:#67BBA3;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }} / person</p>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Bayar penuh di depan atau cicil sebanyak 2x</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Fasilitas penempatan kerja dengan perlindungan money-back guarantee sampai dengan 100%</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular"> 80+ jam live workshop dari ekspert top StartUp Indonesia</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">30+ modul dan praktek</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Real project untuk memantapkan skill</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Fasilitas bimbingan karir one-on-one dari CV, Interview, Portfolio, sampai konsultasi arah karir</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Sertifikat kelulusan</p>
+                </div>
+
+
             </div>
             <a 
             @if(Auth::check())
@@ -1596,7 +1675,7 @@
                 href="/login" 
             @endi
 
-            @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="">Register Now</a>
+            @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="">Apply as Early Bird</a>
 
         </div>
 
@@ -1606,25 +1685,37 @@
     <div class="col-md-6 col-6 p-0">
         <div class="free-trial-container">
             <div>
-                <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Free Trial to Bootcamp</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
-                <ul>
-                    <li style="color:#3B3C43;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Full curriculum dan assessment</p>
-                    </li>
-                    <li style="color:#3B3C43;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Sertifikat dan pembimbingan</p>
-                    </li>
-                    <li style="color:#3B3C43;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Purus volutpat eu nisi, maecenas neque eget sit</p>
-                    </li>
-                    <li style="color:#3B3C43;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Rhoncus nascetur pellentesque est blandit</p>
-                    </li>
-                    <li style="color:#3B3C43;font-family: Rubik Regular;">
-                        <p class="normal-text" style="margin-bottom: 0.3vw;">Pembayaran di luar website</p>
-                    </li>
-                </ul>
+                <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Income Share Agreement</p>
+                <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
+                <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Ikut bootcamp tanpa bayar apapun di depan	Membayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Fasilitas penempatan kerja dan bayar setelah diterima tanpa bunga dan denda</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Hanya membayar uang pendaftaran yang akan dikembalikan di akhir bootcamp</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">80+ jam live workshop dari ekspert top StartUp Indonesia</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">30+ modul dan praktek</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Real project untuk memantapkan skill</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Fasilitas bimbingan karir one-on-one dari CV, Interview, Portfolio, sampai konsultasi arah karir</p>
+                </div>
+                <div style=display:flex>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Sertifikat kelulusan</p>
+                </div>
             </div>
             <a  
             @if(Auth::check())
@@ -1642,7 +1733,7 @@
             
             @else 
                 href="/login" 
-            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" >Get Free Trial Now</a>
+            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" >Attend Free Intro Week</a>
 
         </div>
     </div>
