@@ -461,21 +461,21 @@ Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan 
     </div>
     <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+            <img src="/assets/images/icons/Quick_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Quick</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Ucapkan selamat tinggal pada repotnya mengatur workshop yang efektif</p>
         </div>
     </div>
     <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+            <img src="/assets/images/icons/Effective_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Effective</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Instruktur profesional akan membantu tim Anda menyerap materi sepenuhnya dengan sesi interaktif penuh praktik dan studi kasus nyata.</p>
         </div>
     </div>
     <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+            <img src="/assets/images/icons/Tailored_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Tailored</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Penyampaian materi disesuaikan dengan kebutuhan perusahaan Anda.</p>
         </div>

@@ -1278,7 +1278,20 @@
             <div class="our-mission-card" style="@if($loop->iteration > 4) margin-top:3vw @endif" >
                 <div style="text-align:left">
                     <div style="text-align:center;margin-top:2vw">
-                        <img src="/assets/images/client/Icon_Illustration.png" style="width:6vw;" class="img-fluid" alt="Image 1">
+                        <img 
+
+                        @if($loop->iteration == 1)
+                        src="/assets/images/icons/After_Hours_Icon.png" 
+                        @elseif($loop->iteration == 2)
+                        src="/assets/images/icons/Group_Individual_Icon.png" 
+                        @elseif($loop->iteration == 3)
+                        src="/assets/images/icons/Personalized_Coaching_Icon.png" 
+                        @elseif($loop->iteration == 4)
+                        src="/assets/images/icons/Career_Lab_Icon.png" 
+                        @elseif($loop->iteration == 5)
+                        src="/assets/images/icons/Student_Assistance_Icon.png" 
+                        @endif
+                        style="width:6vw;" class="img-fluid" alt="Image 1">
                     </div>
                     <div style="height:5vw;margin-top:1vw;">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
@@ -1385,7 +1398,7 @@
             <div class="accordion" id="accordionExample" style="width:50vw;">
 
                 <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border: 3px solid rgba(43, 108, 170, 0.25);border-radius: 10px 0px 0px 0px">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-radius: 10px 0px 0px 0px;">
                         <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">1</p>
                     </div>
                     <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-top: 3px solid rgba(43, 108, 170, 0.25);border-radius: 0px 10px 0px 0px;width: 100%;">
