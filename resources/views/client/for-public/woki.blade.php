@@ -210,7 +210,7 @@
                         <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 4 !important;
+                            -webkit-line-clamp: 5 !important;
                             -webkit-box-orient: vertical !important;">Usaha kamu berarti, gimanapun hasilnya! Kamu-kamu yang udah jadi seniman baru bareng Woki, kamu bakal dapet e-certificate di setiap kelasnya.</p>
                     </div>
                 </div>
@@ -232,7 +232,7 @@
                         <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 4 !important;
+                            -webkit-line-clamp: 5 !important;
                             -webkit-box-orient: vertical !important;">Woki udah siapin semua hal yang akan kamu butuhin untuk berkarya nanti  dalam satu kit. Ga perlu lagi deh repot-repot cari bahan!</p>
                     </div>
                 </div>
@@ -254,7 +254,7 @@
                         <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 4 !important;
+                            -webkit-line-clamp: 5 !important;
                             -webkit-box-orient: vertical !important;">New to art? Ga perlu takut! Pembicara-pembicara Woki yang udah expert di bidangnya akan selalu pandu kamu di step by step nya.</p>
                     </div>
                 </div>
@@ -276,7 +276,7 @@
                         <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 4 !important;
+                            -webkit-line-clamp: 5 !important;
                             -webkit-box-orient: vertical !important;">Selain belajar bikin karya, kamu juga akan mendapatkan sharing and healing session bersama Woki dan temen-temen yang lain. </p>
                     </div>
                 </div>
@@ -327,7 +327,7 @@
                 <!-- START OF ONE FAQ CARD -->
                 <div class="faq-card" style="margin-top:1vw">
                     <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Jika berhalangan hadir di Workshop bagaimana?</p>
+                        <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Bagaimana jika saya berhalangan hadir ke Workshop?</p>
                         <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3">
                             <i class="fas fa-chevron-down"></i>
                         </p>                                    
@@ -551,7 +551,7 @@
                         <p style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 4 !important;
+                            -webkit-line-clamp: 5 !important;
                             -webkit-box-orient: vertical !important;font-size:2.5vw;padding-top:2vw">Usaha kamu berarti, gimanapun hasilnya! Kamu-kamu yang udah jadi seniman baru bareng Woki, kamu bakal dapet e-certificate di setiap kelasnya.</p>
                     </div>
                 </div>
@@ -573,7 +573,7 @@
                         <p style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 4 !important;
+                            -webkit-line-clamp: 5 !important;
                             -webkit-box-orient: vertical !important;font-size:2.5vw;padding-top:2vw">Woki udah siapin semua hal yang akan kamu butuhin untuk berkarya nanti  dalam satu kit. Ga perlu lagi deh repot-repot cari bahan!</p>
                     </div>
                 </div>
@@ -595,7 +595,7 @@
                         <p style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 4 !important;
+                            -webkit-line-clamp: 5 !important;
                             -webkit-box-orient: vertical !important;font-size:2.5vw;padding-top:4.5vw">New to art? Ga perlu takut! Pembicara-pembicara Woki yang udah expert di bidangnya akan selalu pandu kamu di step by step nya.</p>
                     </div>
                 </div>
@@ -617,7 +617,7 @@
                         <p style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
                             overflow : hidden !important;
                             text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 4 !important;
+                            -webkit-line-clamp: 5 !important;
                             -webkit-box-orient: vertical !important;font-size:2.5vw;padding-top:4.5vw">Selain belajar bikin karya, kamu juga akan mendapatkan sharing and healing session bersama Woki dan temen-temen yang lain. </p>
                     </div>
                 </div>
@@ -668,7 +668,7 @@
                 <!-- START OF ONE FAQ CARD -->
                 <div class="faq-card" style="margin-top:1vw">
                     <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <p style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;font-size:4vw">Jika berhalangan hadir di Workshop bagaimana?</p>
+                        <p style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;font-size:4vw">Bagaimana jika saya berhalangan hadir ke Workshop?</p>
                         <p style="margin-bottom:0px;color:#747D88;font-size:3vw" data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3">
                             <i class="fas fa-chevron-down"></i>
                         </p>                                    

@@ -793,8 +793,10 @@
     @elseif(!Auth::user()->isProfileUpdated)
     <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
-        <div class="alert alert-warning alert-dismissible fade show small-text"   style="width:100%;text-align:center;margin-bottom:0px;font-size:2.5vw;padding-right:6vw"role="alert">
-            Kamu belum melengkapi profile. <strong><a href="#edit-profile">Klik disini</a></strong> untuk melengkapi.
+        <div class="alert alert-warning alert-dismissible fade show small-text" id="update-profile-toast-user-dashboard" style="width:100%;text-align:center;margin-bottom:0px;font-size:2.5vw;padding-right:6vw"role="alert">
+            <p>
+                Kamu belum melengkapi profile. <strong><a href="#edit-profile">Klik disini</a></strong> untuk melengkapi.
+            </p>
             <button type="button" style="top:-3px" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- END OF ALERT MESSAGE -->
