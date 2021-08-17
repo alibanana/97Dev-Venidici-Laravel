@@ -39,7 +39,7 @@ class BootcampBenefitController extends Controller
      */
     public function store(Request $request, $course_id)
     {
-        if(BootcampBenefit::where('course_id',$course_id)->count() >= 4)
+        if(BootcampBenefit::where('course_id',$course_id)->count() >= 5)
             return redirect()->back()
             ->with('message', 'Maksimum Quantity has been reached!')
             ->with('page-option', 'benefit-page');
