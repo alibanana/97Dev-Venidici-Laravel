@@ -1837,7 +1837,7 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     align-items:flex-start;
-    height:40vw
+    height:41vw
 }
 .free-trial-container{
     background-color: #FFFFFF;
@@ -1848,7 +1848,7 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     align-items:flex-start;
-    height:40vw
+    height:41vw
 }
 .register-now-button{
     font-family: Rubik Medium;
@@ -2422,7 +2422,7 @@ html, body {
         flex-direction: column;
         justify-content: space-between;
         align-items:flex-start;
-        height:120vw
+        height:140vw
     }
     .free-trial-container{
         background-color: #FFFFFF;
@@ -2433,7 +2433,7 @@ html, body {
         flex-direction: column;
         justify-content: space-between;
         align-items:flex-start;
-        height:120vw
+        height:140vw
     }
     .register-now-button{
         font-family: Rubik Medium;

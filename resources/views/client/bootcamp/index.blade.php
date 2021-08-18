@@ -978,7 +978,7 @@
         <div style="background-color:#2B6CAA; margin-top: 4vw;border-radius: 5px;padding: 7vw 5vw;">
             <div style="">
                 <img src="/assets/images/client/Bootcamp_Logo.png"  class="img-fluid bootcamp-logo-image" alt="Bootcamp Logo">
-                <p class="medium-heading" style="font-family: Rubik Bold;color:white;white-space:pre-line;margin-top:4vw">{{$course->title}}</p>
+                <p class="medium-heading" style="font-family: Rubik Bold;color:white;white-space:pre-line;margin-top:6vw">{{$course->title}}</p>
                 <!--<p class="sub-description" style="font-family: Rubik Medium;color:white;white-space:pre-line">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} - {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}} | Via Zoom</p>-->
                 <ul>
                     <li style="color:#FFFFFF;font-family: Rubik Regular;">
@@ -1004,27 +1004,27 @@
             </div>
             <p class="bigger-text" style="font-family: Rubik Medium;color:white;margin-top:2vw">This bootcamp will start in: </p>
             <!-- START OF COUNTDOWN -->
-            <div style="padding:1vw;background-color:white;width:47vw;border-radius:5px;margin-bottom:5vw" id="countdown-card">
+            <div style="padding:1vw;background-color:white;width:100%;border-radius:5px;margin-bottom:5vw" id="countdown-card">
                 <div style="display: flex;justify-content:space-between;align-items:center">
-                    <div style="text-align: center;border-right:2px solid #2B6CAA;padding-right:2vw">
+                    <div style="text-align: center;border-right:2px solid #2B6CAA;padding-right:2vw;width:33%">
                         <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Days</p>
                         <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="days-mobile"></p>
                     </div>
-                    <div style="text-align: center;padding:0vw 2vw">
+                    <div style="text-align: center;padding:0vw 2vw;width:33%">
                         <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Hours</p>
                         <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="hours-mobile"></p>
                     </div>
-                    <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw">
+                    <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw;width:33%">
                         <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Minutes</p>
                         <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="minutes-mobile"></p>
                     </div>
                 </div>
             </div>
             <!-- END OF COUNT DOWN --> 
-            <div style="display:flex">
-                <a href="#payment-section" class="btn-blue-bordered" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;font-size:3vw;text-align:center">Apply as Early Bird</a>
-                <a href="#payment-section" class="btn-blue-bordered" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw;font-size:3vw;text-align:center">Attend Free Intro Week</a>
-            </div>
+                <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;text-align:center;display:inline-block;width:100%">Apply as Early Bird</a>
+                <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-bottom:0px;text-align:center;margin-top:2vw;margin-bottom:2vw">OR</p>
+
+                <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw;text-align:center;display:inline-block;width:100%">Attend Free Intro Week</a>
         </div>
     </div>
     <!-- END OF LEFT SECTION -->
@@ -1071,7 +1071,7 @@
 <!-- END OF INTRODUCTION SECTION -->
 
 <!-- START OF INTRODUCTION MOBILE SECTION -->
-<div class="row m-0 page-container mobile-display" style="padding-bottom:5vw;display:none">
+<div class="row m-0 page-container mobile-display" style="padding-bottom:5vw;display:none;padding-top:10vw">
     <div class="col-12 p-0">
         <p class="small-heading wow flash" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp</p>
         <div style="width:100%">
@@ -1099,7 +1099,33 @@
     <div class="col-12 p-0" style="text-align: center;">
         <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Find Your “WHY”</p>
     </div>
-    <div class="col-12 growth-hacking-title" style="">
+
+    <!-- START OF SLIDER SECTION -->
+    <div class="row m-0 p-0 mobile-display" style="padding:4vw;display:none">
+        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:center;overflow-y: hidden;height:auto;cursor:grab">
+            @foreach($course->bootcampDescriptions as $about)
+
+            <div class="item" @if($loop->iteration > 1) style="margin-left:8vw" @endif >
+                <div style="border-radius: 10px;border: 0.5px solid #2B6CAA;width:60vw;height:150vw">
+                    <div style="background-color:#2B6CAA;height:15vw;border-radius:10px 10px 0px 0px">
+                    </div>
+                    <div style="height:auto;text-align:center;padding:2vw">
+                        <img src="{{ asset($about->image) }}" style="width:30vw;border-radius:10px;margin-top:-10vw" class="img-fluid" alt="KREST">
+                        <p class="bigger-text" style="font-family: Poppins Medium;margin-top:3vw">{{$about->title}}</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line;text-align:left">{{$about->description}}</p>
+
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+                
+    </div>
+    <!-- END OF SLIDER SECTION -->
+
+
+
+    <div class="col-12 growth-hacking-title desktop-display" style="">
         <!-- START OF CONTENT LINKS -->
         <div style="border: 2px solid #2B6CAA;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
             @foreach($course->bootcampDescriptions as $about)
@@ -1114,7 +1140,7 @@
     </div>
     @foreach($course->bootcampDescriptions as $about)
     <!-- START OF ONE CONTENT SECTION -->
-    <div class="growth-content"  id="growth-{{$loop->iteration}}" @if(!$loop->first) style="display:none" @endif >
+    <div class="growth-content desktop-display"  id="growth-{{$loop->iteration}}" @if(!$loop->first) style="display:none" @endif >
         <div class="row m-0 "style="padding-top:4vw">
             <div class="col-lg-4 col-xs-12 p-0">
                 <img src="{{ asset($about->image) }}" style="width:100%;border-radius:10px" class="img-fluid" alt="KREST">

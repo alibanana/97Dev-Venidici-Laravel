@@ -42,7 +42,9 @@ class BootcampCourseDetailSeeder extends Seeder
                 'course_id' => '5',
                 'title' => 'Growth Hacking Overview',
                 'image' => 'assets/images/seeder/Skill_Penunjang_Karir.png',
-                'description' => 'Growth Hacking memadukan marketing, teknologi, dan penggunaan data untuk memaksimalkan resource. Dengan me-reveal strategi terbaik melalui eksperimen dan analisis berdasarkan data, pertumbuhan perusahaan yang cepat dapat tercapai. Karakternya yang cepat dan efisien bikin Growth Hacking juga cocok untuk startup atau bisnis kecil yang pada umumnya minim sumber daya. Tidak seperti Digital Marketing yang hanya fokus dalam mencari pelanggan, Growth Hacking merambah semua aspek dan departemen dengan satu tujuan utama yakni pertumbuhan perusahaan.'
+                'description' => 'Growth Hacking memadukan marketing, teknologi, dan penggunaan data untuk memaksimalkan resource. Dengan me-reveal strategi terbaik melalui eksperimen dan analisis berdasarkan data, pertumbuhan perusahaan yang cepat dapat tercapai.
+                
+                Karakternya yang cepat dan efisien bikin Growth Hacking juga cocok untuk startup atau bisnis kecil yang pada umumnya minim sumber daya. Tidak seperti Digital Marketing yang hanya fokus dalam mencari pelanggan, Growth Hacking merambah semua aspek dan departemen dengan satu tujuan utama yakni pertumbuhan perusahaan.'
             ],
             [
                 'course_id' => '5',
