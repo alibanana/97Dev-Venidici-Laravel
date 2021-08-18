@@ -1051,7 +1051,7 @@
     justify-content:flex-end
     @endif
     ">
-        <div class="krest-card" style="margin-top:1.5vw;height:24vw;width:25vw;background-color:#2B6CAA">   
+        <div class="krest-card" style="margin-top:1.5vw;height:26vw;width:25vw;background-color:#2B6CAA">   
             <img
             @if($loop->iteration == 1)
             src="/assets/images/icons/Expert_Instructor_Icon.png" 
@@ -1669,7 +1669,7 @@
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
                         <div class="col-12 col-lg-7 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
-                            <p class="small-heading" id="mtm2"  data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Hi! We're Your<span style="color:#67BBA3"> Instructor/s</span></p>
+                            <p class="small-heading" id="mtm2"  data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Hi! We're Your<span style="color:#67BBA3"> Instructors</span></p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left;margin-bottom:0px">{{$teacher->name}}
                             </p>
