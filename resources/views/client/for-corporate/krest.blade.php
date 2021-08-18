@@ -354,11 +354,11 @@ Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan 
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Programs</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Satu platform untuk semua kebutuhan <br> talenta perusahaan Anda</p>
     </div>
-    <div style="display:flex;justify-content:center;align-items:center;margin-top:2vw">
+    <div style="center;margin-top:2vw">
         <p class="btn-blue-bordered btn-blue-active normal-text program-links-mobile" onclick="changeProgramsMobile(event, 'available-programs-mobile')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;margin-right:1vw;border:1px solid #2B6CAA;cursor:pointer;text-align:center">
             Available Modules
         </p>
-        <p class="btn-blue-bordered  normal-text program-links-mobile"  onclick="changeProgramsMobile(event, 'on-demand-programs-mobile')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;margin-left:1vw;border:1px solid #2B6CAA;cursor:pointer;text-align:center">
+        <p class="btn-blue-bordered  normal-text program-links-mobile"  onclick="changeProgramsMobile(event, 'on-demand-programs-mobile')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;border:1px solid #2B6CAA;cursor:pointer;text-align:center">
             On Demand Modules
         </p>
     </div>
