@@ -31,6 +31,8 @@ class BootcampApplication extends Model
         'konsiderasi_lanjut',
         'kenapa_memilih',
         'expectation',
+        'promo_code',
+        'metode_pembayaran_bootcamp',
         'bankShortCode',
         'bank_account_number', 
         'is_trial', 

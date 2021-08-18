@@ -111,32 +111,33 @@ class CheckoutController extends Controller
         if($request->action == 'createPaymentObjectBootcamp'){
             // Validation rules that exists on all validation conditions. (bootcamp)
             $validation_rules = [
-                'birth_place'           => 'required',
-                'birth_date'            => 'required',
-                'gender'                => 'required',
-                'phone_no'              => 'required',
-                'province_id'           => 'required',
-                'city_id'               => 'required',
-                'address'               => 'required',
-                'last_degree'           => 'required',
-                'institution'           => 'required',
-                'batch'                 => 'required',
-                'sumber_tahu_program'   => '',
-                'mencari_kerja'         => 'required',
-                'social_media'          => 'required|starts_with:https://www.linkedin.com',
-                'konsiderasi_lanjut'    => 'required',
-                'expectation'           => 'required',
-                'bankShortCode'         => 'required',
-                'bank_account_no'       => 'required',
-                'promo_code'            => '', // no validations but included for ease of access.
-                'course_id'             => '', // no validations but included for ease of access.
-                'grand_total'           => 'required|integer',
-                'total_order_price'     => 'required|integer',
-                'discounted_price'      => 'required|integer',
-                'club_discount'         => 'required|integer',
-                'date'                  => 'required',
-                'time'                  => 'required',
-                'course_id'             => '', // no validations but included for ease of access.
+                'birth_place'                   => 'required',
+                'birth_date'                    => 'required',
+                'gender'                        => 'required',
+                'phone_no'                      => 'required',
+                'province_id'                   => 'required',
+                'city_id'                       => 'required',
+                'address'                       => 'required',
+                'last_degree'                   => 'required',
+                'institution'                   => 'required',
+                'batch'                         => 'required',
+                'sumber_tahu_program'           => '',
+                'mencari_kerja'                 => 'required',
+                'social_media'                  => 'required|starts_with:https://www.linkedin.com',
+                'konsiderasi_lanjut'            => 'required',
+                'expectation'                   => 'required',
+                'bankShortCode'                 => 'required',
+                'bank_account_no'               => 'required',
+                'promo_code'                    => '', // no validations but included for ease of access.
+                'metode_pembayaran_bootcamp'    => 'required',
+                'course_id'                     => '', // no validations but included for ease of access.
+                'grand_total'                   => 'required|integer',
+                'total_order_price'             => 'required|integer',
+                'discounted_price'              => 'required|integer',
+                'club_discount'                 => 'required|integer',
+                'date'                          => 'required',
+                'time'                          => 'required',
+                'course_id'                     => '', // no validations but included for ease of access.
 
             ];
         }
@@ -209,6 +210,7 @@ class CheckoutController extends Controller
 
         // If validation passed store validated data in a variable.
         $validated = $validator->validate();
+
 
         // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
         //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
@@ -287,6 +289,9 @@ class CheckoutController extends Controller
         }
 
 
+        
+
+
         // Create Invoice object and validate if it failed.
         $invoice = Invoice::create($invoice_data);
         if (!$invoice->exists){
@@ -304,6 +309,16 @@ class CheckoutController extends Controller
         *  - Validate if bootcamp_application creation success.
         */
         if ($request->action == 'createPaymentObjectBootcamp') {
+
+            // check if promo code exists
+            if ($validated['promo_code'] != null){
+                $promoObject = Promotion::where('code', $validated['promo_code'])->where('isActive',1)->first();
+                if ($promoObject == null) 
+                    return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, Promo Code tidak ditemukan..')->withInput($request->all());
+            }
+
+
+
             $order = Order::create([
                 'invoice_id' => $invoice->id,
                 'course_id' => $validated['course_id'],
@@ -341,6 +356,8 @@ class CheckoutController extends Controller
                 'mencari_kerja'         => $validated['mencari_kerja'],
                 'social_media'          => $validated['social_media'],
                 'konsiderasi_lanjut'    => $validated['konsiderasi_lanjut'],
+                'promo_code'            => $validated['promo_code'],
+                'metode_pembayaran_bootcamp'            => $validated['metode_pembayaran_bootcamp'],
                 'expectation'           => $validated['expectation'],
                 'bankShortCode'         => $validated['bankShortCode'],
                 'bank_account_number'   => $validated['bank_account_no'],

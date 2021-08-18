@@ -83,7 +83,7 @@ class CourseSeeder extends Seeder
             [
                 'course_type_id' => 3,
                 'course_category_id' => 5,
-                'thumbnail' => 'assets/images/seeder/Dummy_Bootcamp_Thumbnail.png',
+                'thumbnail' => 'assets/images/seeder/Dummy_Bootcamp_Thumbnail.jpg',
                 'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
                 'title' => 'Venidici Growth Hacking Bootcamp',
                 'subtitle' => 'The 1st Batch will start on Sept 20th 2021',
