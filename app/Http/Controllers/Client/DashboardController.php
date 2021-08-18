@@ -194,8 +194,8 @@ class DashboardController extends Controller
             
         $validated = Validator::make($input,[
             'name'          => 'required',
-            //'telephone'     => ['required', new TelephoneNumber],
-            'telephone'     => 'required',
+            'telephone'     => ['required', new TelephoneNumber],
+            //'telephone'     => 'required',
             'birthdate'     => 'date',
             'gender'        => 'required',
             'company'       => '',

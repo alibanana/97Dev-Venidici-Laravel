@@ -15,7 +15,7 @@ class CourseFeatureSeeder extends Seeder
      */
     public function run()
     {
-        $features = [
+        $features_old = [
             // Emotional Intelligence
             [
                 'course_id' => 1,
@@ -84,6 +84,25 @@ class CourseFeatureSeeder extends Seeder
             ],
             [
                 'course_id' => 5,
+                'title' => 'Payment Flexibility',
+                'feature' => 'Pada akhirnya, karir kamulah yang terpenting! Sistem pembayaran fleksibel antara bayar penuh, atau bahkan dengan Income Share Agreement yang memungkinkan kamu untuk ikut bootcamp tanpa membayar terlebih dahulu! Jadwal kelas yang juga diadakan di luar jam kerja pada umumnya yang pastinya memudahkan kamu untuk mengikuti bootcamp sekalipun beriringan dengan kegiatan lain.',
+            ],
+        ];
+        $features = [
+            
+            // Bootcamp Courses
+            [
+                'course_id' => 1,
+                'title' => 'Expert Instructors',
+                'feature' => 'Instruktur dan mentor berkualitas yang telah berpengalaman di bidangnya akan memastikan penyampaian materi terbaik serta mudah dipahami bagi semua peserta. Instruktur bootcamp Venidici berasal dari beragam perusahaan Startup besar dan ternama di Indonesia seperti Gojek, Tokopedia, Wagely, Kumparan, dan Grab.',
+            ],
+            [
+                'course_id' => 1,
+                'title' => 'Guaranteed Job Offer',
+                'feature' => 'Semua peserta Bootcamp Growth Hacking Venidici memiliki fasilitas jaminan diterima kerja di berbagai hiring partner yang bekerjasama dengan kami. Membuktikan tingkat kepercayaan diri Venidici dalam masa depan Growth Hacking di Indonesia ataupun luar negri!',
+            ],
+            [
+                'course_id' => 1,
                 'title' => 'Payment Flexibility',
                 'feature' => 'Pada akhirnya, karir kamulah yang terpenting! Sistem pembayaran fleksibel antara bayar penuh, atau bahkan dengan Income Share Agreement yang memungkinkan kamu untuk ikut bootcamp tanpa membayar terlebih dahulu! Jadwal kelas yang juga diadakan di luar jam kerja pada umumnya yang pastinya memudahkan kamu untuk mengikuti bootcamp sekalipun beriringan dengan kegiatan lain.',
             ],

@@ -1051,7 +1051,7 @@
     justify-content:flex-end
     @endif
     ">
-        <div class="krest-card" style="margin-top:1.5vw;height:20vw;width:25vw;background-color:#2B6CAA">   
+        <div class="krest-card" style="margin-top:1.5vw;height:26vw;width:25vw;background-color:#2B6CAA">   
             <img
             @if($loop->iteration == 1)
             src="/assets/images/icons/Expert_Instructor_Icon.png" 
@@ -1084,7 +1084,7 @@
         <div class="col-12 p-0" style="display:flex;
         justify-content:center
         ">
-            <div class="krest-card" style="margin-top:1.5vw;height:auto !important;width:100% !important">   
+            <div class="krest-card" style="margin-top:1.5vw;height:auto !important;width:100% !important;background-color:#2B6CAA">   
                 <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
                 <p id="krest-card-description" class="normal-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;">{{$feature->feature}}</p>
             </div>

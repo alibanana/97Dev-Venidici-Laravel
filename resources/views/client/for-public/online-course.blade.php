@@ -98,46 +98,30 @@
         </div>
         <div class="row m-0" style="padding-top:2vw">
             <div class="col-4" style="display:flex;justify-content:center">
-                <div class="our-mission-card" style="">
+                <div class="our-mission-card" style="height:23vw">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">1.</p>
                     <div style="">
                         <div style="text-align:center">
                             <img src="/assets/images/client/Lifetime_Flexible_Access.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Lifetime flexible access</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Lifetime flexible access</p>
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
                     </div>
                 </div>
             </div>
             <div class="col-4" style="display:flex;justify-content:center">
-                <div class="our-mission-card" style="">
+                <div class="our-mission-card" style="height:23vw">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">2.</p>
                     <div style="">
                         <div style="text-align:center">
                             <img src="/assets/images/client/Learning_By_Doing.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Learning by doing</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Learning by doing</p>
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;">Ada materi penunjang tambahan seperti case study, slides, ataupun templates untuk kamu pelajari lebih dalam lagi! Terus, uji kepahamanmu lewat quiz dan berbagai assessment.</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Ada materi penunjang tambahan seperti case study, slides, ataupun templates untuk kamu pelajari lebih dalam lagi! Terus, uji kepahamanmu lewat quiz dan berbagai assessment.</p>
                     </div>
                 </div>
             </div>
@@ -166,24 +150,16 @@
             </div>
     -->
             <div class="col-4" style="display:flex;justify-content:center">
-                <div class="our-mission-card" style="">
+                <div class="our-mission-card" style="height:23vw">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">3.</p>
                     <div style="">
                         <div style="text-align:center">
                             <img src="/assets/images/client/Credible_Mentors.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Credible mentors</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Credible mentors</p>
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;">Dipandu oleh mentor berpengalaman dari perusahaan ternama, pasti kamu akan dapet banyak insight!</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Dipandu oleh mentor berpengalaman dari perusahaan ternama, pasti kamu akan dapet banyak insight!</p>
                     </div>
                 </div>
             </div>
@@ -392,7 +368,7 @@
     <!-- START OF OUR MISSION MOBILE -->
     <div class="row m-0 page-container mobile-display" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6;display:none">
         <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
-            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;margin-bottom:2vw">Our Misssion</p>
+            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;margin-bottom:2vw">Our Mission</p>
             <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">Effective Learning for You</p>
         </div>
         <div class="row m-0" style="padding-top:2vw">

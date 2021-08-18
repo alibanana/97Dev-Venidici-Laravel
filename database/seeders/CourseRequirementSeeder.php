@@ -15,7 +15,7 @@ class CourseRequirementSeeder extends Seeder
      */
     public function run()
     {
-        $requirements = [
+        $requirements_old = [
             // Emotional Intelligence
             [
                 'course_id' => 1,
@@ -78,6 +78,22 @@ class CourseRequirementSeeder extends Seeder
             ],
             [
                 'course_id' => 5,
+                'requirement' => 'Rasa penasaran yang tinggi :)'
+            ]
+        ];
+        $requirements = [
+          
+            // Bootcamp Courses
+            [
+                'course_id' => 1,
+                'requirement' => 'PC atau laptop'
+            ],
+            [
+                'course_id' => 1,
+                'requirement' => 'Koneksi Internet'
+            ],
+            [
+                'course_id' => 1,
                 'requirement' => 'Rasa penasaran yang tinggi :)'
             ]
         ];
