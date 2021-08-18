@@ -17,7 +17,8 @@
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid logo-bootcamp-popup"  alt="LOGO">
-                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-top:1vw">Free Trial Registration</p>
+                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-top:1vw">Free Intro Week Registration</p>
+                        <p class="bigger-text" style="font-family:Rubik Regular;color:grey;margin-top:1vw">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
                         @if (session()->has('free_trial_bootcamp_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
@@ -911,7 +912,7 @@
 
         <div style="display:flex">
             <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply as Early Bird</a>
-            <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw">Free Intro Week</a>
+            <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw">Attend Free Intro Week</a>
         </div>
     </div>
     <!-- END OF LEFT SECTION -->
@@ -1700,7 +1701,6 @@
         <div class="free-trial-container">
             <div>
                 <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Income Share Agreement</p>
-                <p class="sub-description" style="font-family: Poppins Medium;color:#3B3C43;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
                 <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Ikut bootcamp tanpa bayar apapun di depan	Membayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>
                 <div style=display:flex;align-items:flex-start>
                     <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
