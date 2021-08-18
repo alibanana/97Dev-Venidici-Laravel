@@ -163,33 +163,34 @@
     <div class="col-12 col-lg-6  wow fadeInRight " data-wow-delay="0.3s" >
         <img src="/assets/images/client/Krest_Dummy.png" style="width:86vw;height:40vw;object-fit:cover;border-radius:10px;margin-bottom:3vw" class="img-fluid" alt="KREST">
         <div style="text-align:left">
-            <p class="medium-heading" style="font-family: Rubik Bold;color:#686B82;margin-top:1.5vw">Extracting businesses’ true potential. In search of peak efficiency</p>
-            <p class="sub-description" style="font-family: Rubik Regular;color:#686B82;margin-top:1.5vw;margin-bottom:3vw">Optimalkan talenta-talenta dalam perusahaan Anda <br> untuk performa bisnis terbaik</p>
-            <a href="#programs-section" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:2vw 4.5vw;font-size:3.5vw">Explore Krest</a>
+            <p class="small-heading" style="font-family: Rubik Bold;color:#686B82;margin-top:1.5vw">Extracting businesses’ true potential. In search of peak efficiency</p>
+            <p class="bigger-text" style="font-family: Rubik Regular;color:#686B82;margin-top:1.5vw;margin-bottom:3vw">Optimalkan talenta-talenta dalam perusahaan Anda <br> untuk performa bisnis terbaik</p>
+            <a href="#programs-section" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:2vw 4.5vw;display:inline-block;margin-top:1vw">Explore Krest</a>
         </div>
     </div>
 
     <div class="col-12 wow fadeInUp container-krest-top-section" data-wow-delay="0.7s" >
-        <div style="display:flex;justify-content:space-between;align-items:center">
-            <div style="text-align:center;width:25vw;margin-right:2vw">
-                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">20+</p>
-                <div style="height:4vw">
-                    <p class="sub-description mobile-space-krest" style="font-family: Rubik Medium;color:#2B6CAA;">Speakers from well-known institution</p>
+            <div>
+                <div style="text-align:center;width:50vw;">
+                    <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">20+</p>
+                    <div style="">
+                        <p class="bigger-text mobile-space-krest" style="font-family: Rubik Medium;color:#2B6CAA;">Speakers from well-known institution</p>
+                    </div>
                 </div>
-            </div>
-            <div style="text-align:center;width:25vw">
-                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">6.35/7</p>
-                <div style="height:4vw">
-                    <p class="sub-description mobile-space-krest" style="font-family: Rubik Medium;color:#2B6CAA;">Average satisfaction rate per br webinar</p>
+                <div style="text-align:center;width:50vw">
+                    <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">6.35/7</p>
+                    <div style="">
+                        <p class="bigger-text mobile-space-krest" style="font-family: Rubik Medium;color:#2B6CAA;">Average satisfaction rate per br webinar</p>
+                    </div>
                 </div>
-            </div>
-            <div style="text-align:center;width:25vw;margin-left:2vw">
-                <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">1800+</p>
-                <div style="height:4vw">
-                    <p class="sub-description mobile-space-krest" style="font-family: Rubik Medium;color:#2B6CAA;">Participants <br> </p>
+                <div style="text-align:center;width:50vw;">
+                    <p class="big-heading" style="font-family: Rubik Medium;color:#B8D1EE;margin-bottom:0.5vw">1800+</p>
+                    <div style="">
+                        <p class="bigger-text mobile-space-krest" style="font-family: Rubik Medium;color:#2B6CAA;">Participants <br> </p>
+                    </div>
                 </div>
+
             </div>
-        </div>
     </div>
 </div>
 <!-- END OF TOP SECTION mobile -->
@@ -229,7 +230,7 @@
 
 <!-- START OF URGENCY OF SOFT SKILLS TERBUAT -->
 <div class="row m-0 page-container krest-program-background" style="padding-bottom:8vw;padding-top:5vw">
-    <div class="col-12 col-lg-6" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-12 col-lg-6 desktop-display" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/kenapa_online_course.png" class="img-fluid image-kenapa-online-course" alt="Image 1">
     </div>
     <div class="col-12 col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
@@ -247,7 +248,7 @@ Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan 
 <div class="row m-0 page-container desktop-display" id="programs-section" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
     <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Programs</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Satu platform untuk semua kebutuhan <br> talenta perusahaan Anda</p>
+        <p class="medium-heading" style="font-family: Rubik Bold;color:#3B3C43">Satu platform untuk semua kebutuhan <br> talenta perusahaan Anda</p>
     </div>
     <div style="display:flex;justify-content:center;align-items:center;margin-top:2vw">
         <p class="btn-blue-bordered btn-blue-active normal-text program-links" onclick="changePrograms(event, 'available-programs')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;margin-right:1vw;border:1px solid #2B6CAA;cursor:pointer">
@@ -351,20 +352,20 @@ Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan 
 <!-- START OF OUR MOBILE PROGRAMS -->
 <div class="row m-0 page-container mobile-display" id="programs-section" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6;display:none">
     <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
-        <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Programs</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Satu platform untuk semua kebutuhan <br> talenta perusahaan Anda</p>
+        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA">Programs</p>
+        <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43">Satu platform untuk semua kebutuhan <br> talenta perusahaan Anda</p>
     </div>
-    <div style="display:flex;justify-content:center;align-items:center;margin-top:2vw">
+    <div style="center;margin-top:2vw">
         <p class="btn-blue-bordered btn-blue-active normal-text program-links-mobile" onclick="changeProgramsMobile(event, 'available-programs-mobile')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;margin-right:1vw;border:1px solid #2B6CAA;cursor:pointer;text-align:center">
             Available Modules
         </p>
-        <p class="btn-blue-bordered  normal-text program-links-mobile"  onclick="changeProgramsMobile(event, 'on-demand-programs-mobile')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;margin-left:1vw;border:1px solid #2B6CAA;cursor:pointer;text-align:center">
+        <p class="btn-blue-bordered  normal-text program-links-mobile"  onclick="changeProgramsMobile(event, 'on-demand-programs-mobile')" style="text-decoration: none;font-family:Rubik Regular;padding:0.2vw 2.5vw;border:1px solid #2B6CAA;cursor:pointer;text-align:center">
             On Demand Modules
         </p>
     </div>
     <div class="program-content-mobile"  id="available-programs-mobile">
         <div style="text-align:center">
-            <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">
+            <p class="normal-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">
             Pilih modul soft-skills yang kami sediakan sesuai dengan tujuan perusahaan Anda. 
             </p>   
         </div>
@@ -406,10 +407,10 @@ Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan 
                                 </div>
                                 <div class="container-description-card-krest-mobile">
                                     <div style="display:flex;justify-content:space-between;align-items:center">
-                                        <a href="/woki/sertifikat-menjadi-seniman" class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 3 !important;-webkit-box-orient: vertical !important;">{{$program->program}}</a>
+                                        <a href="/woki/sertifikat-menjadi-seniman" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-bottom:0.5vw;text-decoration:none;">{{$program->program}}</a>
                                     </div>
                                     @if($program->category != null)
-                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$program->category}}</a>
+                                    <a class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{$program->category}}</a>
                                     @endif
                                     <div style="margin-top:1vw">
                                     <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);margin-top:1vw">{{$program->description}}</p>
@@ -445,7 +446,7 @@ Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan 
         <!-- END OF CAROUSEL -->
     </div>
     <div class="program-content-mobile" id="on-demand-programs-mobile" style="text-align:center;display:none">
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">Menjawab tantangan persaingan bisnis dengan materi-materi Soft Skills yang diracik khusus <br> sesuai dengan kebutuhan perusahaan Anda.</p>   
+        <p class="normal-text" style="font-family: Rubik Regular;color:#000000;padding-top:3vw">Menjawab tantangan persaingan bisnis dengan materi-materi Soft Skills yang diracik khusus <br> sesuai dengan kebutuhan perusahaan Anda.</p>   
         <button type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:2vw 4.5vw;border:none;margin-top:1vw;font-size:3.5vw">
             Diskusi lebih lanjut
         </button>
@@ -457,25 +458,25 @@ Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan 
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw">
     <div class="col-12">
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Our Values</p>
-        <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Krest Signature Benefits</p>
+        <p class="medium-heading" style="font-family: Rubik Bold;color:#3B3C43">Krest Signature Benefits</p>
     </div>
-    <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
-        <div class="krest-card" style="margin-top:1.5vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+    <div class="col-xs-12 col-lg-4" style="display:flex;justify-content:center">
+        <div class="krest-card krest-card-mobile" style="margin-top:1.5vw">   
+            <img src="/assets/images/icons/Quick_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid desktop-display" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Quick</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Ucapkan selamat tinggal pada repotnya mengatur workshop yang efektif</p>
         </div>
     </div>
-    <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
-        <div class="krest-card" style="margin-top:1.5vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+    <div class="col-xs-12 col-lg-4" style="display:flex;justify-content:center">
+        <div class="krest-card  krest-card-mobile" style="margin-top:1.5vw">   
+            <img src="/assets/images/icons/Effective_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid  desktop-display" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Effective</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Instruktur profesional akan membantu tim Anda menyerap materi sepenuhnya dengan sesi interaktif penuh praktik dan studi kasus nyata.</p>
         </div>
     </div>
-    <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
-        <div class="krest-card" style="margin-top:1.5vw">   
-            <img src="/assets/images/client/Krest_Dummy_Card_Image.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+    <div class="col-xs-12 col-lg-4" style="display:flex;justify-content:center">
+        <div class="krest-card  krest-card-mobile" style="margin-top:1.5vw">   
+            <img src="/assets/images/icons/Tailored_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid  desktop-display" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Tailored</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Penyampaian materi disesuaikan dengan kebutuhan perusahaan Anda.</p>
         </div>
@@ -552,11 +553,12 @@ END OF OUR VALUES-->
                         Tanya via Whatsapp
                     </a>   
                 </div>
-                <div class="mobile-display" style="display:flex;align-items:center;justify-content:center;display:none">
-                    <button  id="contact-us-button" type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:2vw 4.5vw;border:none;margin-top:1vw;margin-right:1vw;font-size:3.5vw">
+                <div class="mobile-display" style="display:none">
+                    <button  id="contact-us-button" type="button" data-toggle="modal" data-target="#contactModal" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:2vw 4.5vw;border:none;margin-top:1vw;width:100%">
                         Saya tertarik
                     </button>   
-                    <a  href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%21%20Saya%20ingin%20bertanya%20tentang%20program%20Krest%20By%20Venidici%20" target="_blank" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:2vw 4.5vw;border:none;margin-top:1vw;margin-left:1vw;font-size:3.5vw">
+                    <br>
+                    <a  href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%21%20Saya%20ingin%20bertanya%20tentang%20program%20Krest%20By%20Venidici%20" target="_blank" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:2vw 4.5vw;border:none;margin-top:4vw;display:inline-block;width:100%">
                         Tanya via Whatsapp
                     </a>   
                 </div>

@@ -24,3 +24,6 @@ Homestead.yaml
 .LSOverride
 
 ### docker-compose file ###
+
+### hosting ###
+.htaccess

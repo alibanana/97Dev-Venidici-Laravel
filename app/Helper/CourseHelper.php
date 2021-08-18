@@ -395,9 +395,9 @@ class CourseHelper {
                                 $dataDateTime = strtotime($data->pivot->updated_at);
                             elseif($data->course_type_id == 2){
                                 if($dataInserted->pivot->status == 'on-going')
-                                    $resultDateTime = strtotime($dataInserted->wokiCourseDetail->event_date . ' ' . $dataInserted->wokiCourseDetail->start_time);
+                                    $dataDateTime = strtotime($dataInserted->wokiCourseDetail->event_date . ' ' . $dataInserted->wokiCourseDetail->start_time);
                                 else
-                                    $resultDateTime = strtotime($dataInserted->pivot->updated_at);
+                                    $dataDateTime = strtotime($dataInserted->pivot->updated_at);
                             }
 
                         } else { // If bootcamp data.

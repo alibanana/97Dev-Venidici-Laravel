@@ -21,6 +21,7 @@ use App\Models\Notification;
 use App\Models\Province;
 use App\Models\City;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Promotion;
 
 
 use Illuminate\Support\Facades\Mail;
@@ -271,22 +272,23 @@ class BootcampController extends Controller
             'name'                  => '',
             'email'                 => '',
             'birth_place'           => 'required',
-            'birth_date'            => '',
-            'gender'                => '',
-            'telephone'             => '',
-            'province_id'           => '',
-            'city_id'               => '',
-            'address'               => '',
+            'birth_date'            => 'required',
+            'gender'                => 'required',
+            'phone_no'              => 'required',
+            'province_id'           => 'required',
+            'city_id'               => 'required',
+            'address'               => 'required',
             'last_degree'           => 'required',
             'institution'           => 'required',
             'batch'                 => 'required',
             'sumber_tahu_program'   => '',
             'mencari_kerja'         => 'required',
             'social_media'          => 'required|starts_with:https://www.linkedin.com',
-            'konsiderasi_lanjut'    => 'required',
             'kenapa_memilih'        => 'required',
             'expectation'           => 'required',
-        ]);
+            'promo_code'            => '',
+            'metode_pembayaran_bootcamp'    => 'required',
+            ]);
 
         if ($validator->fails())
             return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
@@ -310,7 +312,12 @@ class BootcampController extends Controller
         if($bootcamp_application != 0)
             return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message', 'You already have registered for a bootcamp, we will get back to you soon.');
         
-        
+        // change promo code.
+        if ($validated['promo_code'] != null){
+            $promoObject = Promotion::where('code', $validated['promo_code'])->where('isActive',1)->first();
+            if ($promoObject == null) 
+                return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message', 'Oops, Promo Code tidak ditemukan..')->withInput($request->all());
+        }
 
         $bootcamp                       = new BootcampApplication;
         $bootcamp->course_id            = $course_id;
@@ -318,21 +325,23 @@ class BootcampController extends Controller
         $bootcamp->name                 = Auth::user()->name;
         $bootcamp->email                = Auth::user()->email;
         $bootcamp->birth_place          = $validated['birth_place'];
-        $bootcamp->birth_date           = Auth::user()->userDetail->birthdate;
-        $bootcamp->gender               = Auth::user()->userDetail->gender;
-        $bootcamp->phone_no             = Auth::user()->userDetail->telephone;
-        $bootcamp->province_id          = Auth::user()->userDetail->province_id;
-        $bootcamp->city_id              = Auth::user()->userDetail->city_id;
-        $bootcamp->address              = Auth::user()->userDetail->address;
+        $bootcamp->birth_date           = $validated['birth_date'];
+        $bootcamp->gender               = $validated['gender'];
+        $bootcamp->phone_no             = $validated['phone_no'];
+        $bootcamp->province_id          = $validated['province_id'];
+        $bootcamp->city_id              = $validated['city_id'];
+        $bootcamp->address              = $validated['address'];
         $bootcamp->last_degree          = $validated['last_degree'];
         $bootcamp->institution          = $validated['institution'];
         $bootcamp->batch                = $validated['batch'];
         $bootcamp->sumber_tahu_program  = $validated['sumber_tahu_program'];
         $bootcamp->mencari_kerja        = $validated['mencari_kerja'];
         $bootcamp->social_media         = $validated['social_media'];
-        $bootcamp->konsiderasi_lanjut   = $validated['konsiderasi_lanjut'];
+        $bootcamp->konsiderasi_lanjut   = 'Ya';
         $bootcamp->kenapa_memilih       = $validated['kenapa_memilih'];
         $bootcamp->expectation          = $validated['expectation'];
+        $bootcamp->promo_code          = $validated['promo_code'];
+        $bootcamp->metode_pembayaran_bootcamp          = $validated['metode_pembayaran_bootcamp'];
         $bootcamp->is_full_registration = 1;
         $bootcamp->status               = "waiting";
         $bootcamp->save();

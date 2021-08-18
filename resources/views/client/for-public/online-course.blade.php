@@ -98,46 +98,30 @@
         </div>
         <div class="row m-0" style="padding-top:2vw">
             <div class="col-4" style="display:flex;justify-content:center">
-                <div class="our-mission-card" style="">
+                <div class="our-mission-card" style="height:23vw">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">1.</p>
                     <div style="">
                         <div style="text-align:center">
                             <img src="/assets/images/client/Lifetime_Flexible_Access.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Lifetime flexible access</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Lifetime flexible access</p>
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
                     </div>
                 </div>
             </div>
             <div class="col-4" style="display:flex;justify-content:center">
-                <div class="our-mission-card" style="">
+                <div class="our-mission-card" style="height:23vw">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">2.</p>
                     <div style="">
                         <div style="text-align:center">
                             <img src="/assets/images/client/Learning_By_Doing.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Learning by doing</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Learning by doing</p>
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;">Ada materi penunjang tambahan seperti case study, slides, ataupun templates untuk kamu pelajari lebih dalam lagi! Terus, uji kepahamanmu lewat quiz dan berbagai assessment.</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Ada materi penunjang tambahan seperti case study, slides, ataupun templates untuk kamu pelajari lebih dalam lagi! Terus, uji kepahamanmu lewat quiz dan berbagai assessment.</p>
                     </div>
                 </div>
             </div>
@@ -166,24 +150,16 @@
             </div>
     -->
             <div class="col-4" style="display:flex;justify-content:center">
-                <div class="our-mission-card" style="">
+                <div class="our-mission-card" style="height:23vw">
                     <p class="sub-description" style="font-family: Rubik Bold;color:#000000;margin-bottom:0px">3.</p>
                     <div style="">
                         <div style="text-align:center">
                             <img src="/assets/images/client/Credible_Mentors.png" style="width:6vw;" class="img-fluid" alt="Image 1">
                         </div>
                         <div style="height:3vw;margin-top:1vw">
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;">Credible mentors</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Credible mentors</p>
                         </div>
-                        <p class="small-text" style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;">Dipandu oleh mentor berpengalaman dari perusahaan ternama, pasti kamu akan dapet banyak insight!</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Dipandu oleh mentor berpengalaman dari perusahaan ternama, pasti kamu akan dapet banyak insight!</p>
                     </div>
                 </div>
             </div>
@@ -317,22 +293,22 @@
     <!-- START OF TOP SECTION -->
     <div class="row m-0 page-container"  style="background-color:white;">
         <div class="col-12 p-0" style="margin-top:5vw">
-            <img src="/assets/images/client/Skill-Snack-Green-Logo.png" style="width:40vw;" class="img-fluid" alt="Image 1">
+            <img src="/assets/images/client/Skill-Snack-Green-Logo.png" style="width:50vw;" class="img-fluid" alt="Image 1">
             <div style="margin-top:4vw;border-radius:5px;background-color:#67BBA3;padding:7vw 5vw" class="skill-snack-fb-bg">
-                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:6vw">Fun learning anytime
+                <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;margin-top:1.5vw;">Fun learning anytime
                 & anywhere</p>
-                <div style="width:70%">
-                    <p style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:4vw;font-size:3vw;margin-bottom:4vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
+                <div style="width:80%">
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;margin-bottom:4vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
                 </div>
-                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:4vw">Explore our programs</p>
+                <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;margin-top:1.5vw;">Explore our programs</p>
 
-                <button onclick="window.location.href='/for-public/online-course';" class="blue-link blue-link-active" style="font-family:Rubik Medium;margin-right:1.5vw;min-width:25vw;font-size:3vw;">
+                <a href="/for-public/online-course" class="blue-link blue-link-active normal-text" style="font-family:Rubik Medium;margin-right:1.5vw;min-width:50%;display:inline-block;text-align:center">
                     Skill Snack
-                </button> <br>
+                </a>
                 <div style="margin-top:3vw">
-                    <button onclick="window.location.href='/for-public/woki';"class="red-link" style="font-family:Rubik Medium;min-width:25vw;font-size:3vw">
+                    <a href="/for-public/woki" class="red-link normal-text" style="font-family:Rubik Medium;min-width:50%;display:inline-block;text-align:center">
                         Woki
-                    </button>
+                    </a>
                 </div>
 
             </div>
@@ -364,9 +340,9 @@
         </div>
         <div class="col-12 wow fadeInRight"data-wow-delay="0.3s">
             <!-- <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p> -->
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw;margin-top:4vw">Skill Snack Live</p>
-            <p style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;font-size:3vw">Enjoy sesi live workshop ngomongin berbagai topik dan skill yang bisa kamu pelajari bersama expert-expert di bidangnya.</p>
-            <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;font-size:3vw">See upcoming live session</a>
+            <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43;margin-top:4vw">Skill Snack Live</p>
+            <p class="normal-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;">Enjoy sesi live workshop ngomongin berbagai topik dan skill yang bisa kamu pelajari bersama expert-expert di bidangnya.</p>
+            <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">See upcoming live session</a>
     
         </div>
     </div>
@@ -375,14 +351,14 @@
     <!-- START OF KENAPA MEMILIH Skill Snack -->
     <div class="row m-0 page-container" style="padding-bottom:8vw   ">
         <div class="col-12 wow fadeInLeft" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;padding-right:2vw">
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw;margin-top:4vw">Skill Snack On-Demand</p>
-            <p style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;font-size:3vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack On-Demand berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.</p>
+            <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43;margin-top:4vw">Skill Snack On-Demand</p>
+            <p class="normal-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack On-Demand berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.</p>
             <div>
-                <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;font-size:3vw">See upcoming live session</a>
+                <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">See upcoming live session</a>
             </div>
     
         </div>
-        <div class="col-12" style="display: flex;flex-direction: column;justify-content: center;align-items:center;padding-top:3vw">
+        <div class="col-12 desktop-display" style="display: flex;flex-direction: column;justify-content: center;align-items:center;padding-top:3vw">
               <img src="/assets/images/client/kenapa_online_course.png" style="width:100%;object-fit:cover;height:100%;border-radius: 10px" class="img-fluid" alt="Image 1">
         </div>
         
@@ -390,54 +366,42 @@
     <!-- END OF KENAPA MEMILIH Skill Snack -->
     
     <!-- START OF OUR MISSION MOBILE -->
-    <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6">
+    <div class="row m-0 page-container mobile-display" style="padding-top:4vw;padding-bottom:4vw;background-color:#F6F6F6;display:none">
         <div style="text-align:center" class="wow flash" data-wow-delay="0.3s">
-            <p style="font-family: Rubik Medium;color:#67BBA3;font-size:4vw;margin-bottom:0px">Our Mission</p>
-            <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw">Effective Learning for You</p>
+            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;margin-bottom:2vw">Our Mission</p>
+            <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">Effective Learning for You</p>
         </div>
         <div class="row m-0" style="padding-top:2vw">
-            <div class="col-6" style="display:flex;justify-content:center">
-                <div style="width:100%;height:55vw;background: #FDFDFD;border: 1px solid #D7D6D6;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw">
+            <div class="col-12 p-0" style="display:flex;justify-content:center">
+                <div style="width:100%;height:auto;background: #FDFDFD;border: 1px solid #D7D6D6;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw">
                     <p style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">1.</p>
                     <div style="">
-                        <div style="text-align:center">
-                            <img src="/assets/images/client/Lifetime_Flexible_Access.png" style="width:35%;" class="img-fluid" alt="Image 1">
-                        </div>
                         <div style="height:10vw;margin-top:1vw">
-                            <p style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;
-                            font-size:3vw">Lifetime flexible access</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Lifetime flexible access</p>
                         </div>
-                        <p  style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;font-size:2.5vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
                     </div>
                 </div>
             </div>
-            <div class="col-6" style="display:flex;justify-content:center">
-                <div style="width:100%;height:55vw;background: #FDFDFD;border: 1px solid #D7D6D6;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw">
-                    <p  style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">2.</p>
+            <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:2vw">
+                <div style="width:100%;height:auto;background: #FDFDFD;border: 1px solid #D7D6D6;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw">
+                    <p style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">2.</p>
                     <div style="">
-                        <div style="text-align:center">
-                            <img src="/assets/images/client/Learning_By_Doing.png" style="width:35%;" class="img-fluid" alt="Image 1">
-                        </div>
                         <div style="height:10vw;margin-top:1vw">
-                            <p style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;font-size:3vw">Learning by doing</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Learning by doing</p>
                         </div>
-                        <p style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;font-size:2.5vw">Ada materi penunjang tambahan seperti case study, slides, ataupun templates untuk kamu pelajari lebih dalam lagi! Terus, uji kepahamanmu lewat quiz dan berbagai assessment.</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Ada materi penunjang tambahan seperti case study, slides, ataupun templates untuk kamu pelajari lebih dalam lagi! Terus, uji kepahamanmu lewat quiz dan berbagai assessment.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:2vw">
+                <div style="width:100%;height:auto;background: #FDFDFD;border: 1px solid #D7D6D6;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw">
+                    <p style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">3.</p>
+                    <div style="">
+                        <div style="height:10vw;margin-top:1vw">
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Credible Mentors</p>
+                        </div>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Dipandu oleh mentor berpengalaman dari perusahaan ternama, pasti kamu akan dapet banyak insight!</p>
                     </div>
                 </div>
             </div>
@@ -464,29 +428,7 @@
                     </div>
                 </div>
             </div>
-    -->
-            <div class="col-6" style="display:flex;justify-content:center;padding-top:1vw">
-                <div  style="width:100%;height:55vw;background: #FDFDFD;border: 1px solid #D7D6D6;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw">
-                    <p  style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">3.</p>
-                    <div style="">
-                        <div style="text-align:center">
-                            <img src="/assets/images/client/Credible_Mentors.png" style="width:35%;" class="img-fluid" alt="Image 1">
-                        </div>
-                        <div style="height:10vw;margin-top:1vw">
-                            <p style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;font-size:3vw">Credible mentors</p>
-                        </div>
-                        <p style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;font-size:2.5vw">Dipandu oleh mentor berpengalaman dari perusahaan ternama, pasti kamu akan dapet banyak insight!</p>
-                    </div>
-                </div>
-            </div>
+        -->
         </div>
     </div>
     <!-- END OF OUR MISSION MOBILE -->
@@ -557,9 +499,9 @@
                 <!-- START OF ONE FAQ CARD -->
                 <div class="faq-card">
                     <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <p style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;font-size:4vw">Apakah saya bisa mendapatkan refund?</p>
-                        <p style="margin-bottom:0px;color:#747D88;font-size:3vw" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
-                            <i class="fas fa-chevron-down"></i>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;">Apakah saya bisa mendapatkan refund?</p>
+                        <p style="margin-bottom:0px;color:#747D88;" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
+                            <i class="fas fa-chevron-down bigger-text"></i>
                         </p>                                    
                     </div>
                     <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
@@ -569,13 +511,13 @@
                 <!-- START OF ONE FAQ CARD -->
                 <div class="faq-card" style="margin-top:1vw">
                     <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <p style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;font-size:4vw">Apa saja yang saya dapatkan di Venidici on Demand?</p>
-                        <p style="margin-bottom:0px;color:#747D88;font-size:3vw" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
-                            <i class="fas fa-chevron-down"></i>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;">Apa saja yang saya dapatkan di Venidici on Demand?</p>
+                        <p style="margin-bottom:0px;color:#747D88;" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
+                            <i class="fas fa-chevron-down bigger-textx"></i>
                         </p>                                    
                     </div>
                     <div class="collapse" id="collapseFaQ2" style="margin-top:1vw">
-                        <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;font-size:2.7vw"> 
+                        <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;"> 
                         Kamu bisa melihat detail setiap course di page ya. Yang pasti, di setiap course, akan ada video pembelajaran, penilaian, dan sertifikat jika kamu sudah menyelesaikan semuanya!
     </p>
                     </div>
@@ -592,9 +534,9 @@
     <div class="row m-0 page-container" style="padding-bottom:8vw">
         <div class="col-12" style="padding:0vw 3vw">
             <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
-                <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
+                <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid desktop-display" alt="Newsletter Illustration">
                 <div style="width:60%;margin-left:2vw">
-                    <p class=" wow fadeInUp" data-wow-delay="0.3s" style="color:#FFFFFF;font-family:Rubik Bold;font-size:4vw">Let’s learn together!</p>
+                    <p class="bigger-text wow fadeInUp" data-wow-delay="0.3s" style="color:#FFFFFF;font-family:Rubik Bold;margin-bottom:0px">Let’s learn together!</p>
                     
                     <!-- <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular;width:75%;"> 
                     Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin!                </p> -->
@@ -602,7 +544,7 @@
                     
                     
                 </div>
-                <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none;font-size:2.7vw;text-align:centerpap" class="btn-blue text-nowrap" >Explore courses</a>
+                <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none;text-align:centerpap" class="btn-blue text-nowrap normal-text" >Explore courses</a>
             </div> 
         </div>
     </div>

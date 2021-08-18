@@ -727,44 +727,44 @@
     <!-- START OF FOOTER MOBILE -->
     <div class="row m-0 page-container footer-mobile" style="padding-top:5vw;padding-bottom:8vw;display:none">
       <div class="col-12">
-          <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:6vw" class="img-fluid" alt="">
-          <p style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:3vw;font-size:3vw">Platform anak kekinian <br>   buat naklukin karir impian!</p>
+          <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:10vw" class="img-fluid" alt="">
+          <p class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:3vw;">Platform anak kekinian <br>   buat naklukin karir impian!</p>
       </div>
 
       <div class="row m-0">
         <div class="col-4 p-0">
-            <p style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Site Map</p>
+            <p class="normal-text"  style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;">Site Map</p>
             <!-- <div>
-              <a href="/" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Home Page</a>
+              <a href="/" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">Home Page</a>
             </div> -->
             <div>
-              <a href="/for-public/online-course" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Skill Snack</a>
+              <a  class="normal-text" href="/for-public/online-course" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">Skill Snack</a>
             </div>
             <div>
-              <a href="/for-public/woki" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Woki</a>
+              <a  class="normal-text" href="/for-public/woki" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">Woki</a>
             </div>
             <div>
-              <a href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Krest</a>
+              <a  class="normal-text" href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">Krest</a>
             </div>
             <div>
-              <a href="/bootcamp" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Bootcamp</a>
+              <a  class="normal-text" href="/bootcamp" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">Bootcamp</a>
             </div>
             <!--<div>
-              <a href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">For Corporate</a>
+              <a  class="normal-text" href="/for-corporate/krest" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">For Corporate</a>
             </div>-->
         </div>
   
         <div class="col-4 p-0" style="display:flex;justify-content:center">
             <div>
-              <p  style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Information</p>
+              <p  class="normal-text"  style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;">Information</p>
               <!--<div>
-                <a href="/for-corporate/krest"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Corporate Programs</a>
+                <a href="/for-corporate/krest"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">Corporate Programs</a>
               </div>-->
               <div>
-                <a href="/community"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Discord Community</a>
+                <a href="/community"  class="normal-text"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">Discord Community</a>
               </div>
               <div>
-                <a  data-toggle="modal"  data-target="#contactUsModal"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw">Contact Us</a>
+                <a  data-toggle="modal"  class="normal-text"  data-target="#contactUsModal"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;">Contact Us</a>
               </div>
             </div>
         </div>
@@ -772,24 +772,24 @@
         <div class="col-4 p-0" style="display:flex;justify-content:flex-end">
           <div>
 
-            <p style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;font-size:3vw">Social</p>
+            <p  class="normal-text"  style="font-family:Rubik Bold;color:#1F2041;margin-bottom:0.5vw;">Social</p>
             
 
-            <div>
-              <a href="https://www.instagram.com/venidici.id/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-instagram-square bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1.15vw">Instagram</span></a>
+            <div >
+              <a  class="normal-text" href="https://www.instagram.com/venidici.id/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;"><i class="fab fa-instagram-square bigger-text" style="color:#0879C0;"></i><span style="margin-left:1.15vw">Instagram</span></a>
             </div>
             
-            <div>
-              <a href="https://www.tiktok.com/@venidici.id" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-tiktok bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Tiktok</span></a>
+            <div style="margin-top:3vw">
+              <a  class="normal-text" href="https://www.tiktok.com/@venidici.id" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;"><i class="fab fa-tiktok bigger-text" style="color:#0879C0;"></i><span style="margin-left:1vw">Tiktok</span></a>
             </div>
-            <div>
-              <a href="https://twitter.com/venidici_id" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-twitter bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Twitter</span></a>
+            <div style="margin-top:3vw">
+              <a  class="normal-text" href="https://twitter.com/venidici_id" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;"><i class="fab fa-twitter bigger-text" style="color:#0879C0;"></i><span style="margin-left:1vw">Twitter</span></a>
             </div>
-            <div>
-              <a href="https://www.linkedin.com/company/venidiciindonesia/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-linkedin bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1vw">Linkedin</span></a>
+            <div style="margin-top:3vw">
+              <a  class="normal-text" href="https://www.linkedin.com/company/venidiciindonesia/" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;"><i class="fab fa-linkedin bigger-text" style="color:#0879C0;"></i><span style="margin-left:1vw">Linkedin</span></a>
             </div>
-            <div>
-              <a href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;font-size:3vw"><i class="fab fa-whatsapp-square bigger-text" style="color:#0879C0;font-size:3vw"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
+            <div style="margin-top:3vw">
+              <a  class="normal-text" href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%20Venidici%21" target="_blank" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.5);text-decoration:none;"><i class="fab fa-whatsapp-square bigger-text" style="color:#0879C0;"></i><span style="margin-left:1.15vw">Whatsapp </span></a>
             </div>
           </div>
         </div>
@@ -797,7 +797,7 @@
       </div>
 
       <div class="col-12 p-0" style="text-align:center;margin-top:4vw">
-        <p style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:1vw;font-size:3vw">Copyright © 2021 Venidici. All rights reserved.</p>
+        <p  class="normal-text"  style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:1vw;">Copyright © 2021 Venidici. All rights reserved.</p>
       </div>
     </div>
 

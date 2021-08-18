@@ -140,12 +140,17 @@ class HashtagSeeder extends Seeder
         //     Hashtag::create($value);
         // }
 
-        for ($i = 0; $i < 12; $i++) { 
-            Hashtag::create([
-                'hashtag' => $faker->unique()->word,
-                'image' => 'assets/images/seeder/hashtag-dummy-image.png',
-                'color' => '#' . substr(md5(rand()), 0, 6)
-            ]);
-        }
+        //for ($i = 0; $i < 1; $i++) { 
+            //Hashtag::create([
+                //'hashtag' => 'Leadership',
+                //'image' => 'assets/images/seeder/hashtag-dummy-image.png',
+                //'color' => '#' . substr(md5(rand()), 0, 6)
+            //]);
+        //}
+        Hashtag::create([
+            'hashtag' => 'Leadership',
+            'image' => 'assets/images/seeder/hashtag-dummy-image.png',
+            'color' => '#' . substr(md5(rand()), 0, 6)
+        ]);
     }
 }

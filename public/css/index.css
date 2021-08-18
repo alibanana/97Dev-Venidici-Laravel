@@ -41,7 +41,16 @@ html, body {
     background-position:left top;
     background-repeat: no-repeat;
     background-size: 100%;
-    height:100%;
+    height:150%;
+
+    
+}
+.course-list-banner-background{
+    background: url("/assets/images/client/Home_Page_Banner_2.png") no-repeat center center fixed !important; 
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
 }
 .home-background{
     background-image: url("/assets/images/client/Home_Page_Banner.png");
@@ -283,10 +292,11 @@ html, body {
 }
 .bigger-text{
     font-size: 1.3vw;
+    line-height:1.8vw;
 }
 .normal-text{
     font-size: 1.05vw;
-    line-height:1.4vw;
+    line-height:1.5vw;
 }
 .small-text{
     font-size: 0.9vw;
@@ -1265,8 +1275,8 @@ html, body {
  end of scroll bars */
   
 .our-mission-card{
-    width:18vw;
-    height:30vw;
+    width:22vw;
+    height:27vw;
     background: #FDFDFD;
     border: 1px solid #D7D6D6;
     box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
@@ -1497,7 +1507,7 @@ html, body {
 }
 
 .krest-card:hover{
-    background: #FFFFFF;
+    background: #FFFFFF !important;
     border: 1px solid #B8D1EE;
     box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
     cursor: pointer;
@@ -1818,18 +1828,14 @@ html, body {
     
 }
 .our-mission-card-description{
-    font-family: Rubik Regular;color:#888888;display: -webkit-box;
-    overflow : hidden !important;
-    text-overflow: ellipsis !important;
-    -webkit-line-clamp: 6 !important;
-    -webkit-box-orient: vertical !important;
+    font-family: Rubik Regular;color:#888888;
     margin-top:1.5vw
 }
 .image-start-how-to-join{
     width:25vw;
 }
 .image-teacher-bootcamp{
-    min-width:18vw;height:18vw;border-radius:10px;object-fit:cover
+    min-width:18vw;height:18vw;border-radius:10px;object-fit:cover;
 }
 .full-registration-container{
     background-color: #2B6CAA;
@@ -1840,7 +1846,7 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     align-items:flex-start;
-    height:30vw
+    height:41vw
 }
 .free-trial-container{
     background-color: #FFFFFF;
@@ -1851,20 +1857,18 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     align-items:flex-start;
-    height:30vw
+    height:41vw
 }
 .register-now-button{
     font-family: Rubik Medium;
     color:#3B3C43;
     padding:0.5vw 2vw;
-    margin-top:2vw;
     
 }
 .free-trial-button{
     font-family: Rubik Medium;
     color:#3B3C43;
     padding:0.5vw 2vw;
-    margin-top:2vw
     
 }
 .logo-bootcamp-popup{
@@ -1879,6 +1883,12 @@ html, body {
 }
 .bootcamp-image-hiring-partner{
     width:10vw;border-radius:10px
+}
+.bootcamp-left-arrow{
+    width:2vw;z-index:99;margin-left:0px
+}
+.bootcamp-right-arrow{
+    width:2vw;z-index:99;margin-right:0px
 }
 
 
@@ -2138,7 +2148,7 @@ html, body {
 
     /* START ONLINE COURSE MOBILE SECTION */
     .online-course-mobile-container{
-        height:60vw !important;
+        height:100vw !important;
     }
     .card-online-course-mobile-height{
         height: 12.5vw !important;
@@ -2148,6 +2158,8 @@ html, body {
     /* START MOBILE PELATIHAN VENIDICI */
     .pelatihan-venidici-mobile-container{
         height:60vw !important;
+        padding-top: 10vw !important
+        ;
     }
     .card-pelatihan-venidici-mobile-height{
         height: 12.5vw !important;
@@ -2302,14 +2314,17 @@ html, body {
         font-size:3vw;
     }
     .container-krest-top-section{
-        padding:16vw 0vw
+        display: flex;
+        justify-content: center;
+        width:100% !important;
+        
     }
     .mobile-space-krest{
         margin-top:4.5vw
     }
     #logo-image-krest{
-        width:24vw;
-        margin-bottom:3vw
+        width:30vw;
+        margin-bottom:5vw
     }
     
     
@@ -2321,10 +2336,10 @@ html, body {
         padding-bottom:5vw
     }
     .image-krest-card-mobile{
-        object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height: 26vw !important;
+        object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height: 28vw !important;
     }
     .container-description-card-krest-mobile{
-        background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px;height:20vw
+        background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px;height:25vw
     }
     .krest-card{
         background: #82A5C8;
@@ -2341,9 +2356,9 @@ html, body {
     
     
     .our-mission-card-mobile{
-        width:37vw;
-        height:50vw;
-        padding:2vw;
+        width:100%;
+        height:auto;
+        padding:5vw;
         background: #FDFDFD;
         border: 1px solid #D7D6D6;
         box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
@@ -2351,12 +2366,8 @@ html, body {
         
     }
     .our-mission-card-description{
-        font-family: Rubik Regular;color:#888888;display: -webkit-box;
-        overflow : hidden !important;
-        text-overflow: ellipsis !important;
-        -webkit-line-clamp: 6 !important;
-        -webkit-box-orient: vertical !important;
-        margin-top:8.5vw
+        font-family: Rubik Regular;color:#888888;
+        margin-top:6vw
     }
     .our-mission-card-title{
         
@@ -2374,6 +2385,15 @@ html, body {
     }
     /* END OF KREST MOBILE SECTION */
     /* BOOTCAMP MOBILE SECTION */
+    #carousel-arrow-mobile{
+        bottom:58vw !important
+    }
+    .bootcamp-left-arrow{
+        width:5vw;z-index:99;margin-left:0px
+    }
+    .bootcamp-right-arrow{
+        width:5vw;z-index:99;margin-right:-7px
+    }
     .bootcamp-logo-image{
         width:30vw;margin-top:1vw
     }
@@ -2405,36 +2425,37 @@ html, body {
         width:100%
     }
     .image-teacher-bootcamp{
-        min-width:100%;height:84vw;border-radius:10px;object-fit:cover;margin-bottom:3vw
+        min-width:25vw;height:25vw;border-radius:5px;object-fit:cover;margin-bottom:3vw
     }
     .full-registration-container{
         background-color: #2B6CAA;
-        padding:2vw;
+        padding:4vw;
         border-radius:10px 0px 0px 10px;
         border:2px solid #2B6CAA;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items:flex-start;
-        height:97vw
+        height:195vw
     }
     .free-trial-container{
         background-color: #FFFFFF;
-        padding:2vw;
+        padding:4vw;
         border-radius:0px 10px 10px 0px;
         border:2px solid #2B6CAA;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items:flex-start;
-        height:97vw
+        height:195vw
     }
     .register-now-button{
         font-family: Rubik Medium;
         color:#3B3C43;
         padding:0.5vw 2vw;
         margin-top:2vw;
-        text-align:center
+        text-align:center;
+        width:100% !important
         
     }
     .free-trial-button{
@@ -2442,8 +2463,9 @@ html, body {
         color:#3B3C43;
         padding:0.5vw 2vw;
         margin-top:2vw;
-        text-align:center
-        
+        text-align:center;
+        width:100% !important
+
     }
     .logo-bootcamp-popup{
         width:15vw
@@ -2459,9 +2481,7 @@ html, body {
     .bootcamp-image-hiring-partner{
         width:20vw;border-radius:10px
     }
-    #bootcamp-teacher-name{
-        font-size:5vw !important
-    }
+
     #bootcamp-instructor-company-logo{
         width:30vw !important;
     }
@@ -2504,39 +2524,39 @@ html, body {
         font-size:3vw;
     }
     .sub-description{
-        font-size: 3vw;
-        line-height: 4vw;
+        font-size: 5.5vw;
+        line-height: 6vw;
     }
     .big-heading{
-        font-size: 6.5vw;
+        font-size: 7.5vw;
         line-height: 8.2vw !important;
     }
     .small-heading{
-        font-size: 5.5vw;
-    }
-    .small-heading{
-        font-size: 5.5vw;
+        font-size: 6.5vw;
+        line-height: 9vw;
+
     }
     
 
     .medium-heading{
-        font-size: 6vw;
-        line-height: 6vw;
+        font-size: 7vw;
+        line-height: 9vw;
     }
     .small-text{
-        font-size: 3vw;
-        line-height: 2.9vw;
+        font-size: 3.6vw;
+        line-height: 6vw;
     }
     .normal-text{
-        font-size: 2.5vw;
-        line-height: 5vw;
+        font-size: 4vw;
+        line-height: 7vw;
     }
     .normal-text-card{
         font-size: 4vw;
         line-height:4vw;
     }
     .bigger-text{
-        font-size: 3vw;
+        font-size: 5vw;
+        line-height:6vw;
     }
     .very-small-text{
         font-size: 1.8vw;
@@ -2586,6 +2606,40 @@ html, body {
     }
     .accordion-item>#left-section{
         padding: 1vw  3vw !important;
+    }
+
+    #update-profile-toast-user-dashboard{
+        height: 10vw;
+    }
+
+    #plbn{
+        padding-left:0px !important
+    }
+    .accordion-admission-item{
+        padding:2vw !important
+    }
+    #mtm2{
+        margin-top:2vw
+    }
+
+    .user-dashboard-normal-text{
+        font-size: 4vw !important;
+    }
+
+    #bootcamp-ud-thumb{
+        width:24.5vw !important
+    }
+
+    .krest-card-mobile{
+        width: 100% !important;
+        height: 35vw !important;
+    }
+    #carousel-control-right-menu-image{
+        width: 5vw !important;
+        margin-left: 3vw !important;
+    }
+    #carousel-control-left-menu-image{
+        width: 5vw !important;
     }
 }
 
