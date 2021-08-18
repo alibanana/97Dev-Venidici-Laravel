@@ -1051,7 +1051,7 @@
     justify-content:flex-end
     @endif
     ">
-        <div class="krest-card" style="margin-top:1.5vw;height:26vw;width:25vw;background-color:#2B6CAA">   
+        <div class="krest-card" style="margin-top:1.5vw;height:20vw;width:25vw;background-color:#2B6CAA">   
             <img
             @if($loop->iteration == 1)
             src="/assets/images/icons/Expert_Instructor_Icon.png" 
