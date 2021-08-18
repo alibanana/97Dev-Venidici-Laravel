@@ -1102,7 +1102,7 @@
 
     <!-- START OF SLIDER SECTION -->
     <div class="row m-0 p-0 mobile-display" style="padding:4vw;display:none">
-        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:flex-start;overflow-y: hidden;height:auto;cursor:grab">
+        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:flex-start;overflow-y: hidden;height:225vw;cursor:grab">
             @foreach($course->bootcampDescriptions as $about)
 
             <div class="item" @if($loop->iteration > 1) style="margin-left:8vw" @endif >
