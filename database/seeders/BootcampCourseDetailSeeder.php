@@ -236,11 +236,7 @@ class BootcampCourseDetailSeeder extends Seeder
         $batches = [
             [
                 'course_id' => '5',
-                'date' => '2021-08-06'
-            ],
-            [
-                'course_id' => '5',
-                'date' => '2021-08-13'
+                'date' => '2021-09-20'
             ],
         ];
 

@@ -60,7 +60,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Kelamin</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
-                            <select disabled  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select class="normal-text" name="gender" style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Gender</option>
                                 <option value="Male"
                                 @if(Auth::check())
@@ -87,7 +87,7 @@
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
                             <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;"> -->
-                            <select disabled  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select class="normal-text" name="province_id" style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 @if(!Auth::check())
                                 <option value="" disabled selected>Pilih Provinsi</option>
                                 @else
@@ -143,9 +143,9 @@
                                 }
                             ?>
                             @endif
-                            <input disabled readonly type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="yyyy.mm.dd"
+                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
-                                value="{{ old('birth_date') ?? $date ?? null }}"
+                                value="{{old('birth_date' ?? $date ?? null)}}"
                             @else
                                 value="{{old('birth_date')}}"
                             @endif
@@ -157,17 +157,17 @@
                             </span>
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
-                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                        <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan Nomor Telepon"
+                            <input type="text" name="phone_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan Nomor Telepon"
                             @if(Auth::check())
-                                value="{{old('telephone', Auth::user()->userDetail->telephone)}}"
+                                value="{{old('phone_no', Auth::user()->userDetail->telephone)}}"
                             @else
-                                value="{{old('telephone')}}"
+                                value="{{old('phone_no')}}"
                             @endif
                             >
                         </div>  
-                        @error('telephone')
+                        @error('phone_no')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -175,7 +175,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <select disabled  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select  class="normal-text" name="city_id" style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 @if(Auth::check())
                                     @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
@@ -211,7 +211,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div readonly class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea disabled name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: grey;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()) {{old('address', Auth::user()->userDetail->address)}} @else {{old('address')}} @endif </textarea>
+                            <textarea name="address" name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: grey;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()){{old('address', Auth::user()->userDetail->address)}}@else{{old('address')}}@endif</textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -479,7 +479,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Kelamin</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
-                            <select readonly  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="gender"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Gender</option>
                                 <option value="Male"
                                 @if(Auth::check())
@@ -506,7 +506,7 @@
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
                             <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;"> -->
-                            <select disabled  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 @if(!Auth::check())
                                 <option value="" disabled selected>Pilih Provinsi</option>
                                 @else
@@ -553,18 +553,11 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                           
+                            <input name="birth_date" type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
-                            <?php
-                                if (Auth::user()->userDetail->birthdate != null) {
-                                    $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
-                                    $date = $birthdate[0];
-                                    $time = $birthdate[1];
-                                }
-                            ?>
-                            @endif
-                            <input readonly type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="yyyy.mm.dd"
-                            @if(Auth::check())
-                                value="{{ old('birth_date') ?? $date ?? null }}"
+                                value="{{old('birth_date' ?? $date ?? null)}}"
+
                             @else
                                 value="{{old('birth_date')}}"
                             @endif
@@ -578,15 +571,15 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan Nomor Telepon"
+                            <input name="phone_no" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan Nomor Telepon"
                             @if(Auth::check())
-                                value="{{old('telephone', Auth::user()->userDetail->telephone)}}"
+                                value="{{old('phone_no', Auth::user()->userDetail->telephone)}}"
                             @else
-                                value="{{old('telephone')}}"
+                                value="{{old('phone_no')}}"
                             @endif
                             >
                         </div>  
-                        @error('telephone')
+                        @error('phone_no')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -594,7 +587,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <select disabled  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 @if(Auth::check())
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
@@ -630,7 +623,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea disabled name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: grey;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()) {{old('address', Auth::user()->userDetail->address)}} @else {{old('address')}} @endif </textarea>
+                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: grey;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()){{old('address', Auth::user()->userDetail->address)}}@else{{old('address')}}@endif</textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -894,7 +887,7 @@
                     <p class="normal-text" style="margin-bottom: 0.3vw;">Beginner friendly, welcome!</p>
                 </li>
             </ul>
-            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{$course->subtitle}}</p>
+            <p class="bigger-text" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{$course->subtitle}}</p>
         </div>
         <p class="bigger-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-top:2vw">Early Bird registration ends in:</p>
         <!-- START OF COUNTDOWN -->
@@ -1114,12 +1107,12 @@
                             <div style="display: flex;justify-content: center;">
                                 <div class="bootcamp-schedule-card-container">
                                     <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">{{$schedule->title}}</p>
-                                    <p class="small-text" style="font-family: Rubik Regular;color:#2B6CAA;">{{date('d M', strtotime($schedule->date_start))}} - {{date('d M Y', strtotime($schedule->date_end))}}</p>
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;">{{date('d M', strtotime($schedule->date_start))}} - {{date('d M Y', strtotime($schedule->date_end))}}</p>
                                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">{{$schedule->subtitle}}</p>
                                     <ul>
                                         @foreach($schedule->bootcampScheduleDetails as $detail)
                                         <li style="color:#2B6CAA;font-family: Rubik Regular;">
-                                            <p class="small-text" style="margin-bottom: 0.3vw;">{{$detail->description}}</p>
+                                            <p class="normal-text" style="margin-bottom: 0.3vw;">{{$detail->description}}</p>
                                         </li>
                                         @endforeach
                                     </ul>
@@ -1530,16 +1523,12 @@
     justify-content:flex-end;
     @endif
     ">
-        <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:22vw;height:24vw">
+        <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:22vw;height:26vw">
             <div style="text-align:center;margin-bottom:1vw">
                 <img src="{{asset($career->thumbnail)}}" style="width:7vw;" alt="Bootcamp Illustration">
             </div>
             <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">{{$career->title}}</p>
-            <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0p;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 6 !important;
-                        -webkit-box-orient: vertical !important;">{{$career->description}}</p>
+            <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0p;">{{$career->description}}</p>
         </div>
     </div>
     <!-- END OF ONE CARD -->
@@ -1751,7 +1740,7 @@
             <a 
                 @if(Auth::check())
                     
-                    @if(auth()->user()->isProfileUpdated)
+                    @if(auth()->user()->email_verified_at)
                         @if($bootcamp_application_count != 0)
                         onclick="return alert('You have a pending or an on going bootcamp application.')"
                         @else
@@ -1763,7 +1752,7 @@
                     @endif
                 
                 @else 
-                    href="/login" 
+                    onclick="openLogin()" 
                 @endi
     
                 @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:100%;">Apply as Early Bird</a>
@@ -1774,7 +1763,7 @@
         <a  
             @if(Auth::check())
              
-                @if(auth()->user()->isProfileUpdated)
+                @if(auth()->user()->email_verified_at)
                     @if($bootcamp_application_count != 0)
                     onclick="return alert('You have a pending or an on going bootcamp application.')"
                     @else
@@ -1786,7 +1775,7 @@
                 @endif
             
             @else 
-                href="/login" 
+                onclick="openLogin()"
             @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" style="display:inline-block;width:100%;">Attend Free Intro Week</a>
         </div>
     </div>

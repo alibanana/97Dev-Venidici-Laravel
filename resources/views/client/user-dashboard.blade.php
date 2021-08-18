@@ -645,7 +645,7 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0 page-container desktop-display" style="padding-top:9vw"> 
     @if(Auth::user()->email_verified_at == null)
-    <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
+    <div class="col-12 wow bounce" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
             @if(session('new_email_verification_sent'))
@@ -666,7 +666,7 @@
         <!-- END OF ALERT MESSAGE -->
     </div>
     @elseif(!Auth::user()->isProfileUpdated)
-    <div class="col-12" style="height:3.5vw;display:flex;justify-content:center">
+    <div class="col-12  wow bounce" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
 
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
@@ -677,7 +677,7 @@
     </div>
     @endif
     @if(session('bootcamp_message'))
-    <div style="display:flex;justify-content:center">
+    <div class="wow bounce" style="display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
             {{session('bootcamp_message')}}
@@ -938,7 +938,7 @@
                             <div class="right-section" style="width:35vw">
                                 <div>
                                     <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;">{{$application->course->title}}</p>
-                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                    <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;">Kelas oleh
                                     @foreach($application->course->teachers as $teacher)
                                         <span style="font-family:Rubik Bold">
                                             @if($loop->last && count($application->course->teachers) != 1)
@@ -1186,7 +1186,7 @@
                                 <div class="right-section" style="width:36.8vw">
                                     <div>
                                         <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$application->course->title}}</p>
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw">Kelas oleh
+                                        <p class="small-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.5vw;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;">Kelas oleh
                                         @foreach($application->course->teachers as $teacher)
                                             <span style="font-family:Rubik Bold">
                                                 @if($loop->last && count($application->course->teachers) != 1)
