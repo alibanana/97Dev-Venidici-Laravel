@@ -18,7 +18,7 @@ class CourseSeeder extends Seeder
         // Course Types: Course, Woki, Bootcamp
         // Course Category: Tech, Arts, Math, Personal Development, Business
 
-        $courses = [
+        $courses_old = [
             // Online Courses
             [
                 'course_type_id' => 1,
@@ -93,32 +93,43 @@ class CourseSeeder extends Seeder
                 'publish_status' => 'Published',
             ]
         ];
+        $courses = [
+            // Bootcamp Workshop
+            [
+                'course_type_id' => 3,
+                'course_category_id' => 5,
+                'thumbnail' => 'assets/images/seeder/Dummy_Bootcamp_Thumbnail.jpg',
+                'preview_video' => 'https://www.youtube.com/embed/6v2ZvW6F_Hs',
+                'title' => 'Venidici Growth Hacking Bootcamp',
+                'subtitle' => 'The 1st Batch will start on Sept 20th 2021',
+                'description' => 'Program 16 minggu yang sekaligus merupakan Bootcamp Growth Hacking pertama di Indonesia. Diracik khusus untuk jadi pondasi kuat pertama kamu dalam berbisnis atau berkarir di dunia Growth Hacking. #JagoDigital bersama Venidici demi Indonesia Emas 2045',
+                'price' => 0,
+                'isFeatured' => true,
+                'publish_status' => 'Published',
+            ]
+        ];
 
         // Online Courses
-        $course1 = Course::create($courses[0]);
-        // $course1->hashtags()->attach([27, 28, 30]);
-        $course1->hashtags()->attach([1, 2, 3]);
-        $course1->teachers()->attach([2, 3]);
-        // $course1->users()->attach([3, 4, 5, 6, 7, 8, 9, 10]);
+        // $course1 = Course::create($courses[0]);
+        // $course1->hashtags()->attach([1, 2, 3]);
+        // $course1->teachers()->attach([2, 3]);
 
-        $course2 = Course::create($courses[1]);
-        // $course2->hashtags()->attach([10, 14, 29]);
-        $course2->hashtags()->attach([5, 7, 2]);
-        $course2->teachers()->attach([1]);
-        // $course2->users()->attach([11, 12, 13, 14, 15, 16, 17]);
+        // $course2 = Course::create($courses[1]);
+        // $course2->hashtags()->attach([5, 7, 2]);
+        // $course2->teachers()->attach([1]);
 
         // Woki Courses
-        $course3 = Course::create($courses[2]);
-        $course3->hashtags()->attach([9, 2, 3]);
-        $course3->teachers()->attach([2]);
+        // $course3 = Course::create($courses[2]);
+        // $course3->hashtags()->attach([9, 2, 3]);
+        // $course3->teachers()->attach([2]);
 
-        $course4 = Course::create($courses[3]);
-        $course4->hashtags()->attach([1, 6, 7]);
-        $course4->teachers()->attach([3]);
+        // $course4 = Course::create($courses[3]);
+        // $course4->hashtags()->attach([1, 6, 7]);
+        // $course4->teachers()->attach([3]);
 
         // Bootcamp Courses
-        $course5 = Course::create($courses[4]);
+        $course5 = Course::create($courses[0]);
         $course5->hashtags()->attach([9, 2, 3]);
-        $course5->teachers()->attach([4,5,6,7,8,9,10]);
+        $course5->teachers()->attach([1,2,3,4,5,6,7]);
     }
 }

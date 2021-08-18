@@ -28,25 +28,25 @@ class DatabaseSeeder extends Seeder
             HashtagSeeder::class,
             TeacherSeeder::class,
             CourseSeeder::class,
-            CourseRequirementSeeder::class,
+            //CourseRequirementSeeder::class,
 
             CourseFeatureSeeder::class, // Kamu akan dapat? section
-            AssessmentSeeder::class, // Assessment & Requirements are seeded here.
+            //AssessmentSeeder::class, // Assessment & Requirements are seeded here.
             LocationSeeder::class,
-            SectionSeeder::class,
-            SectionContentSeeder::class,
-            PromotionSeeder::class,
+            //SectionSeeder::class,
+            //SectionContentSeeder::class,
+            //PromotionSeeder::class,
             // ReviewSeeder::class,
 
             NotificationSeeder::class,
             KrestProgramSeeder::class,
             KrestSeeder::class,
             InstructorPositionSeeder::class,
-            NewsletterSeeder::class,
-            RedeemSeeder::class,
-            StarSeeder::class,
-            WokiCourseDetailSeeder::class,
-            ArtSupplySeeder::class,
+            //NewsletterSeeder::class,
+            //RedeemSeeder::class,
+            //StarSeeder::class,
+            //WokiCourseDetailSeeder::class,
+            //ArtSupplySeeder::class,
             BootcampCourseDetailSeeder::class
 
         ]);

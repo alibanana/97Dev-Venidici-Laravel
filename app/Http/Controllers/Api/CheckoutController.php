@@ -114,7 +114,7 @@ class CheckoutController extends Controller
                 'birth_place'                   => 'required',
                 'birth_date'                    => 'required',
                 'gender'                        => 'required',
-                'phone_no'                      => 'required',
+                'phone_no' => ['required', new TelephoneNumber],
                 'province_id'                   => 'required',
                 'city_id'                       => 'required',
                 'address'                       => 'required',
@@ -145,8 +145,8 @@ class CheckoutController extends Controller
             // Validation rules that exists on all validation conditions. (noArtKit, hasArtKit)
             $validation_rules = [
                 'name' => 'required',
-                //'phone' => ['required', new TelephoneNumber],
-                'phone' => 'required',
+                'phone' => ['required', new TelephoneNumber],
+                //'phone' => 'required',
                 'grand_total' => 'required|integer',
                 'total_order_price' => 'required|integer',
                 'date' => 'required',
