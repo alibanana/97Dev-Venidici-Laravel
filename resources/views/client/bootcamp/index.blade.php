@@ -1663,7 +1663,7 @@
                 <div class="carousel-item @if($loop->first) active @endif">
                     <div class="row m-0"> 
                         <!-- START OF LEFT SECTION -->
-                        <div class="col-12 col-lg-5">
+                        <div class="col-12 col-lg-5" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
                             <img src="{{asset($teacher->image)}}" id="instructor-image" class="image-teacher-bootcamp" alt="Bootcamp Instructor">
                         </div>
                         <!-- END OF LEFT SECTION -->

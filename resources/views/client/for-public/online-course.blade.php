@@ -319,20 +319,20 @@
         <div class="col-12 p-0" style="margin-top:5vw">
             <img src="/assets/images/client/Skill-Snack-Green-Logo.png" style="width:40vw;" class="img-fluid" alt="Image 1">
             <div style="margin-top:4vw;border-radius:5px;background-color:#67BBA3;padding:7vw 5vw" class="skill-snack-fb-bg">
-                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:6vw">Fun learning anytime
+                <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;">Fun learning anytime
                 & anywhere</p>
                 <div style="width:70%">
-                    <p style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;line-height:4vw;font-size:3vw;margin-bottom:4vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line;padding-top:0vw;margin-bottom:4vw">Dear kamu yang takut punya komitmen, ini buat kamu! Belajar berbagai skill jempolan dengan durasi singkat di Skill Snack. Time saving, flexible, all those good things basically</p>
                 </div>
-                <p style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;line-height:6vw;margin-top:1.5vw;font-size:4vw">Explore our programs</p>
+                <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line;margin-top:1.5vw;">Explore our programs</p>
 
-                <button onclick="window.location.href='/for-public/online-course';" class="blue-link blue-link-active" style="font-family:Rubik Medium;margin-right:1.5vw;min-width:25vw;font-size:3vw;">
+                <a href="/for-public/online-course" class="blue-link blue-link-active bigger-text" style="font-family:Rubik Medium;margin-right:1.5vw;min-width:40vw;display:inline-block;text-align:center">
                     Skill Snack
-                </button> <br>
+                </a>
                 <div style="margin-top:3vw">
-                    <button onclick="window.location.href='/for-public/woki';"class="red-link" style="font-family:Rubik Medium;min-width:25vw;font-size:3vw">
+                    <a href="/for-public/woki" class="red-link bigger-text" style="font-family:Rubik Medium;min-width:40vw;display:inline-block;text-align:center">
                         Woki
-                    </button>
+                    </a>
                 </div>
 
             </div>
@@ -396,26 +396,14 @@
             <p style="font-family: Rubik Bold;color:#3B3C43;font-size:6vw">Effective Learning for You</p>
         </div>
         <div class="row m-0" style="padding-top:2vw">
-            <div class="col-6" style="display:flex;justify-content:center">
-                <div style="width:100%;height:55vw;background: #FDFDFD;border: 1px solid #D7D6D6;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw">
+            <div class="col-12 p-0" style="display:flex;justify-content:center">
+                <div style="width:100%;height:45vw;background: #FDFDFD;border: 1px solid #D7D6D6;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw">
                     <p style="font-family: Rubik Bold;color:#000000;margin-bottom:0px;font-size:4vw">1.</p>
                     <div style="">
-                        <div style="text-align:center">
-                            <img src="/assets/images/client/Lifetime_Flexible_Access.png" style="width:35%;" class="img-fluid" alt="Image 1">
-                        </div>
                         <div style="height:10vw;margin-top:1vw">
-                            <p style="font-family: Rubik Medium;color:#67BBA3;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 2 !important;
-                            -webkit-box-orient: vertical !important;
-                            font-size:3vw">Lifetime flexible access</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#67BBA3;">Lifetime flexible access</p>
                         </div>
-                        <p  style="font-family: Rubik Regular;color:#888888;display: -webkit-box;
-                            overflow : hidden !important;
-                            text-overflow: ellipsis !important;
-                            -webkit-line-clamp: 6 !important;
-                            -webkit-box-orient: vertical !important;font-size:2.5vw">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#888888;">Cukup beli sekali dengan nominal yang kamu inginkan, akses seumur hidup. Kapanpun dimanapun</p>
                     </div>
                 </div>
             </div>
@@ -557,7 +545,7 @@
                 <!-- START OF ONE FAQ CARD -->
                 <div class="faq-card">
                     <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <p style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;font-size:4vw">Apakah saya bisa mendapatkan refund?</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px;">Apakah saya bisa mendapatkan refund?</p>
                         <p style="margin-bottom:0px;color:#747D88;font-size:3vw" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
                             <i class="fas fa-chevron-down"></i>
                         </p>                                    
