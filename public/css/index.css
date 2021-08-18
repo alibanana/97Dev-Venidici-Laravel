@@ -2158,6 +2158,8 @@ html, body {
     /* START MOBILE PELATIHAN VENIDICI */
     .pelatihan-venidici-mobile-container{
         height:60vw !important;
+        padding-top: 10vw !important
+        ;
     }
     .card-pelatihan-venidici-mobile-height{
         height: 12.5vw !important;
@@ -2631,6 +2633,13 @@ html, body {
     .krest-card-mobile{
         width: 100% !important;
         height: 35vw !important;
+    }
+    #carousel-control-right-menu-image{
+        width: 5vw !important;
+        margin-left: 3vw !important;
+    }
+    #carousel-control-left-menu-image{
+        width: 5vw !important;
     }
 }
 

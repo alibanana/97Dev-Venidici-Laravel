@@ -846,7 +846,7 @@
 
 
 @php
-    $a = $course->bootcampCourseDetail->date_start;
+    $a = '2021-08-29 00:00:00';
     $b = strtotime($a);
     
     $customformat = date('M d,Y H:i:s', $b);

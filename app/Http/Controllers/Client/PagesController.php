@@ -237,7 +237,7 @@ class PagesController extends Controller
             }
         }
         $courses = $courses->where('enrollment_status', 'open')
-        ->where('publish_status', 'published')->where('isDeleted', false)->get();
+        ->where('publish_status', 'published')->where('isDeleted', false)->where('course_type_id','!=',3)->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
         $user_review = Review::orderBy('created_at','desc')->get();
         if (Auth::check()) {
