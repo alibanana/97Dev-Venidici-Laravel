@@ -2115,12 +2115,11 @@
     @csrf
     <div class="col-12 " style="padding:0vw 3vw">
         <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
-            <img src="/assets/images/client/Newsletter_Illustration.png" style="height:15vw" class="img-fluid" alt="Newsletter Illustration">
-            <div style="width:80%;margin-left:2vw">
-                <p class="wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold;font-size:3vw">Beneran rela ketinggalan info…?</p>
+            <div style="width:100%;margin-left:2vw">
+                <p class="wow fadeInUp bigger-text" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold;">Beneran rela ketinggalan info…?</p>
                 <div style="display:flex;align-items:center">
-                    <input required placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none;font-size:2vw">
-                    <button type="submit" onclick="openLoading()" style="font-family:Rubik Regular;margin-left:2vw;border:none;font-size:2vw" class="btn-blue text-nowrap" >Subscribe Now</button>
+                    <input class="normal-text" required placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none;">
+                    <button type="submit" onclick="openLoading()" style="font-family:Rubik Regular;margin-left:2vw;border:none;" class="btn-blue text-nowrap normal-text" >Subscribe Now</button>
                     <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
                 </div>
             </div>
