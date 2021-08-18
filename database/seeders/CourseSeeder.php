@@ -129,7 +129,7 @@ class CourseSeeder extends Seeder
 
         // Bootcamp Courses
         $course5 = Course::create($courses[0]);
-        $course5->hashtags()->attach([9, 2, 3]);
+        $course5->hashtags()->attach([1]);
         $course5->teachers()->attach([1,2,3,4,5,6,7]);
     }
 }
