@@ -915,7 +915,11 @@
             </div>
         </div>
         <!-- END OF COUNT DOWN --> 
-        <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply as Early Bird’ & ‘Free Intro Week</a>
+
+        <div style="display:flex">
+            <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply as Early Bird</a>
+            <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw">Free Intro Week</a>
+        </div>
     </div>
     <!-- END OF LEFT SECTION -->
 
@@ -994,7 +998,7 @@
     justify-content:flex-end
     @endif
     ">
-        <div class="krest-card" style="margin-top:1.5vw;height:22vw">   
+        <div class="krest-card" style="margin-top:1.5vw;height:27vw">   
             <img
             @if($loop->iteration == 1)
             src="/assets/images/icons/Expert_Instructor_Icon.png" 
@@ -1004,13 +1008,9 @@
             src="/assets/images/icons/Payment_Flexibility_Icon.png" 
             @endif
             
-            style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
+            style="width:4vw;height:4vw;object-fit:contain;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
-            <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;display: -webkit-box;
-                        overflow : hidden !important;
-                        text-overflow: ellipsis !important;
-                        -webkit-line-clamp: 10 !important;
-                        -webkit-box-orient: vertical !important;">{{$feature->feature}}</p>
+            <p id="krest-card-description" class="normal-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;text-align: justify;text-justify: inter-word;">{{$feature->feature}}</p>
         </div>
     </div>
     @endforeach
@@ -1052,7 +1052,7 @@
 <!-- START OF GROWTH HACKING SECTION -->
 <div class="row m-0 page-container" style="background-color: #F6F6F6;padding-top:5vw;padding-bottom:5vw">
     <div class="col-12 p-0" style="text-align: center;">
-        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Apa itu {{$course->title}}</p>
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Find Your “WHY”</p>
     </div>
     <div class="col-12 growth-hacking-title" style="">
         <!-- START OF CONTENT LINKS -->
@@ -1077,7 +1077,7 @@
             </div>
             <div class="col-lg-8 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
                 <div id="growth-hacking-description">
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line">{{$about->description}}</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line;text-align: justify;text-justify: inter-word;">{{$about->description}}</p>
 
                 </div>
 
@@ -1129,7 +1129,7 @@
                         <!-- END OF ONE ITEM -->
                         @endforeach
                     </div>
-                    <a class="carousel-control-prev"   data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                    <a class="carousel-control-prev"    data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
                         <img src="/assets/images/icons/arrow-left.svg" class="left-arrow-delivery-method" id="carousel-control-left-menu-image " style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
                         <span class="visually-hidden">Prev</span>
                     </a>
@@ -1273,6 +1273,7 @@
         <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">What will you get?</p>
     </div>
     <div class="row m-0" style="padding-top:2vw">
+        @if(count($course->bootcampBenefits )< 4)
         @foreach($course->bootcampBenefits as $benefit)
         <div class="col-3" style="display:flex;justify-content:center  ">
             <div class="our-mission-card" style="@if($loop->iteration > 4) margin-top:3vw @endif" >
@@ -1291,7 +1292,7 @@
                         @elseif($loop->iteration == 5)
                         src="/assets/images/icons/Student_Assistance_Icon.png" 
                         @endif
-                        style="width:6vw;" class="img-fluid" alt="Image 1">
+                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="Image 1">
                     </div>
                     <div style="height:5vw;margin-top:1vw;">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
@@ -1300,11 +1301,41 @@
                         -webkit-line-clamp: 3 !important;
                         -webkit-box-orient: vertical !important;height:">{{$benefit->title}}</p>
                     </div>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#888888;margin-top:1.5vw;white-space:pre-line">{{$benefit->description}}</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;margin-top:0.5vw;color:#888888;white-space:pre-line;">{{$benefit->description}}</p>
                 </div>
             </div>
         </div>
         @endforeach
+        @else
+        @foreach($course->bootcampBenefits as $benefit)
+        <div class="col-4" style="display:flex;justify-content:center;@if($loop->iteration > 3) margin-left:8vw; @endif  ">
+            <div class="our-mission-card" style="@if($loop->iteration > 3) margin-top:3vw; @endif" >
+                <div style="text-align:left">
+                    <div style="text-align:center;margin-top:2vw">
+                        <img 
+
+                        @if($loop->iteration == 1)
+                        src="/assets/images/icons/After_Hours_Icon.png" 
+                        @elseif($loop->iteration == 2)
+                        src="/assets/images/icons/Group_Individual_Icon.png" 
+                        @elseif($loop->iteration == 3)
+                        src="/assets/images/icons/Personalized_Coaching_Icon.png" 
+                        @elseif($loop->iteration == 4)
+                        src="/assets/images/icons/Career_Lab_Icon.png" 
+                        @elseif($loop->iteration == 5)
+                        src="/assets/images/icons/Student_Assistance_Icon.png" 
+                        @endif
+                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="Image 1">
+                    </div>
+                    <div style="margin-top:1vw;">
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">{{$benefit->title}}</p>
+                    </div>
+                    <p class="normal-text" style="font-family: Rubik Regular;margin-top:1vw;color:#888888;white-space:pre-line;">{{$benefit->description}}</p>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        @endif
     </div>
 </div>
 <!-- END OF WHAT WILL YOU GET SECTION -->
@@ -1338,10 +1369,9 @@
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
     <!-- START OF LEFT SECTION -->
     <div class="col-lg-5 col-xs-12 wow fadeInLeft"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
-        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Bootcamp ini untuk siapa?</p>
+        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Who is this bootcamp for?</p>
         <!--<p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>-->
         <a href="#payment-section" class="btn-blue-bordered normal-text desktop-display" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply as Early Bird</a>
-        <a href="#payment-section" class="btn-blue-bordered normal-text mobile-display" style="font-family: Rubik Medium;color:#3B3C43;display:none;text-align:center">Apply as Early Bird</a>
     </div>
     <!-- END OF LEFT SECTION -->
 
@@ -1366,8 +1396,8 @@
                     src="/assets/images/icons/Professional_Icon.png"
                     @endif
                     style="width:5vw;margin-top:-7vw" class=""  alt="Bootcamp Logo">
-                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw;height:4vw">{{$candidate->title}}</p>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">{{$candidate->description}}</p>
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw;">{{$candidate->title}}</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{$candidate->description}}</p>
                 </div>
             </div>
             <!-- END OF ONE CARD -->
@@ -1375,7 +1405,7 @@
             <div class="col-6 p-0 wow fadeInUp mobile-display"  data-wow-delay="{{$delay}}s" @if($loop->iteration > 0) style="margin-top: 5vw;display:none" @endif>
                 <div style="background: rgba(43, 108, 170, 0.1);padding:3vw;border-radius:10px;width:40vw;">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">{{$candidate->title}}</p>
-                    <p class="small-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">{{$candidate->description}}</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">{{$candidate->description}}</p>
                 </div>
             </div>
             <!-- END OF ONE CARD -->
@@ -1393,84 +1423,84 @@
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
     
     <div class="col-lg-12 col-xs-12" style="text-align:center">
-        <p class="small-heading wow bounce" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">How to join?</p>
+        <p class="small-heading wow bounce" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Admission Journey</p>
         <div style="display:flex;justify-content:center">
             <div class="accordion" id="accordionExample" style="width:50vw;">
 
-                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="accordion-item" style="display:flex;" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-radius: 10px 0px 0px 0px;">
                         <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">1</p>
                     </div>
-                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-top: 3px solid rgba(43, 108, 170, 0.25);border-radius: 0px 10px 0px 0px;width: 100%;">
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-top: 3px solid rgba(43, 108, 170, 0.25);border-radius: 0px 10px 0px 0px;width: 100%;cursor:pointer">
                         <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Online Application</p>
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="" style="margin-top:1vw;text-align:left">
-                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Selesaikan formulir singkat berdurasi 5 menit untuk menginformasikan kami latar belakang, tujuan, dan pengalaman kamu sebelumnya</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Selesaikan formulir singkat berdurasi 5 menit untuk menginformasikan kami latar belakang, tujuan, dan pengalaman kamu sebelumnya</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <div class="accordion-item" style="display:flex;" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
                         <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">2</p>
                     </div>
-                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;">
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;cursor:pointer">
                         <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Online Test</p>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="" style="margin-top:1vw;text-align:left">
-                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Mengerjakan tes analitis dan pengetahuan dasar yang akan dilakukan secara online</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Mengerjakan tes analitis dan pengetahuan dasar yang akan dilakukan secara online</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                <div class="accordion-item" style="display:flex;"  data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
                         <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">3</p>
                     </div>
-                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;">
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;cursor:pointer">
                         <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Free Introduction Class</p>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="" style="margin-top:1vw;text-align:left">
-                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Menghadiri introduction class tidak berbayar yang diadakan di minggu pertama serta menyelesaikan assignment yang diberikan pada kelas tersebut.</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Menghadiri introduction class tidak berbayar yang diadakan di minggu pertama serta menyelesaikan assignment yang diberikan pada kelas tersebut.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                <div class="accordion-item" style="display:flex;"  data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                     <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
                         <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">4</p>
                     </div>
-                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;">
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;cursor:pointer">
                         <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Video Call</p>
                         <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="" style="margin-top:1vw;text-align:left">
-                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Bertemu via video call dengan Counselor kami untuk memastikan bahwa harapan dan tujuan karir kamu selaras dengan apa yang program kami tawarkan.</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Bertemu via video call dengan Counselor kami untuk memastikan bahwa harapan dan tujuan karir kamu selaras dengan apa yang program kami tawarkan.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                <div class="accordion-item" style="display:flex;"  data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                     <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
                         <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">5</p>
                     </div>
-                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;">
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;cursor:pointer">
                         <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Secure Financing</p>
                         <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="" style="margin-top:1vw;text-align:left">
-                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Akhirnya, memilih antara metode pembayaran penuh & angsuran atau melakukan finalisasi skema Income Share Agreement.</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Akhirnya, memilih antara metode pembayaran penuh & angsuran atau melakukan finalisasi skema Income Share Agreement.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item" style="display:flex;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                <div class="accordion-item" style="display:flex;"  data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
                     <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-radius: 0px 0px 0px 10px;">
                         <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">6</p>
                     </div>
-                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;border-radius: 0px 0px 10px 0px;">
+                    <div style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;border-radius: 0px 0px 10px 0px;cursor:pointer">
                         <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Start Class</p>
                         <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="" style="margin-top:1vw;text-align:left">
-                                <p class="regular-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Setelah merampungkan hal terkait pembayaran, kamu akhirnya siap mentransformasi karirmu!</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Setelah merampungkan hal terkait pembayaran, kamu akhirnya siap mentransformasi karirmu!</p>
                             </div>
                         </div>
                     </div>
@@ -1533,7 +1563,7 @@
             justify-content:flex-end
             @endif
             ">
-            <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:44vw;height:58vw;margin-top:5vw">
+            <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:44vw;height:63vw;margin-top:5vw">
                 <div style="text-align:center;margin-bottom:1vw">
                     <img src="{{asset($career->thumbnail)}}" style="width:13vw;" alt="Bootcamp Illustration">
                 </div>
@@ -1584,12 +1614,12 @@
                 @endforeach
             </div>
             @if(count($course->teachers) > 1)
-            <a class="carousel-control-prev"   data-bs-target="#instructors-carousel" style="width:2vw" role="button"data-bs-slide="prev">
-                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+            <a class="carousel-control-prev" id="carousel-arrow-mobile"   data-bs-target="#instructors-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" class="bootcamp-left-arrow" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
-            <a class="carousel-control-next"   data-bs-target="#instructors-carousel" style="width:2vw"  role="button"data-bs-slide="next">
-                <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+            <a class="carousel-control-next" id="carousel-arrow-mobile"  data-bs-target="#instructors-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                <img src="/assets/images/icons/arrow-right.svg" class="bootcamp-right-arrow" id="carousel-control-right-menu-image" style="" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>
             @endif
@@ -1636,59 +1666,41 @@
         <div class="full-registration-container">
             <div>
                 <p class="bigger-text" style="font-family: Poppins Medium;color:#FFFFFF;">Full Payment</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF;text-decoration: line-through;">Rp. 15.000.000</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF">1st Batch Discount <span style=";text-decoration: line-through;"> Rp. 12.000.000</span></p>
-                <p class="bigger-text" style="font-family: Poppins Medium;color:#67BBA3;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }} / person</p>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF;text-decoration: line-through;opacity:0.7">Rp. 15,000,,000</p>
+                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF;opacity:0.7">1st Batch Discount <span style=";text-decoration: line-through;"> Rp. 12,000,000</span></p>
+                <p class="sub-description" style="font-family: Poppins Medium;color:#FFFFFF;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }} / person</p>
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Bayar penuh di depan atau cicil sebanyak 2x</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Fasilitas penempatan kerja dengan perlindungan money-back guarantee sampai dengan 100%</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular"> 80+ jam live workshop dari ekspert top StartUp Indonesia</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">30+ modul dan praktek</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Real project untuk memantapkan skill</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Fasilitas bimbingan karir one-on-one dari CV, Interview, Portfolio, sampai konsultasi arah karir</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#FFFFFF"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Sertifikat kelulusan</p>
                 </div>
 
 
             </div>
-            <a 
-            @if(Auth::check())
-             
-                @if(auth()->user()->isProfileUpdated)
-                    @if($bootcamp_application_count != 0)
-                    onclick="return alert('You have a pending or an on going bootcamp application.')"
-                    @else
-                    href="#full-registration" 
-                @endif
-
-                @else
-                    href="/dashboard" 
-                @endif
             
-            @else 
-                href="/login" 
-            @endi
-
-            @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="">Apply as Early Bird</a>
 
         </div>
 
@@ -1699,38 +1711,67 @@
         <div class="free-trial-container">
             <div>
                 <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Income Share Agreement</p>
-                <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
+                <p class="sub-description" style="font-family: Poppins Medium;color:#3B3C43;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
                 <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Ikut bootcamp tanpa bayar apapun di depan	Membayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Fasilitas penempatan kerja dan bayar setelah diterima tanpa bunga dan denda</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Hanya membayar uang pendaftaran yang akan dikembalikan di akhir bootcamp</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">80+ jam live workshop dari ekspert top StartUp Indonesia</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">30+ modul dan praktek</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Real project untuk memantapkan skill</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Fasilitas bimbingan karir one-on-one dari CV, Interview, Portfolio, sampai konsultasi arah karir</p>
                 </div>
-                <div style=display:flex>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#2B6CAA"></i> 
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Sertifikat kelulusan</p>
                 </div>
             </div>
-            <a  
+            
+
+        </div>
+    </div>
+    <div class="col-6">
+        <div style="text-align:center">
+            <a 
+                @if(Auth::check())
+                    
+                    @if(auth()->user()->isProfileUpdated)
+                        @if($bootcamp_application_count != 0)
+                        onclick="return alert('You have a pending or an on going bootcamp application.')"
+                        @else
+                        href="#full-registration" 
+                    @endif
+    
+                    @else
+                        href="/dashboard" 
+                    @endif
+                
+                @else 
+                    href="/login" 
+                @endi
+    
+                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:100%;">Apply as Early Bird</a>
+        </div>
+    </div>
+    <div class="col-6">
+        <div style="text-align:center">
+        <a  
             @if(Auth::check())
              
                 @if(auth()->user()->isProfileUpdated)
@@ -1746,8 +1787,7 @@
             
             @else 
                 href="/login" 
-            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" >Attend Free Intro Week</a>
-
+            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" style="display:inline-block;width:100%;">Attend Free Intro Week</a>
         </div>
     </div>
     <!-- END OF FREE TRIAL -->

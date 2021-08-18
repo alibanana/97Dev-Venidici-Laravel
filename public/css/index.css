@@ -283,10 +283,11 @@ html, body {
 }
 .bigger-text{
     font-size: 1.3vw;
+    line-height:1.8vw;
 }
 .normal-text{
     font-size: 1.05vw;
-    line-height:1.4vw;
+    line-height:1.5vw;
 }
 .small-text{
     font-size: 0.9vw;
@@ -1265,8 +1266,8 @@ html, body {
  end of scroll bars */
   
 .our-mission-card{
-    width:18vw;
-    height:30vw;
+    width:22vw;
+    height:28vw;
     background: #FDFDFD;
     border: 1px solid #D7D6D6;
     box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
@@ -1876,6 +1877,12 @@ html, body {
 .bootcamp-image-hiring-partner{
     width:10vw;border-radius:10px
 }
+.bootcamp-left-arrow{
+    width:2vw;z-index:99;margin-left:0px
+}
+.bootcamp-right-arrow{
+    width:2vw;z-index:99;margin-right:0px
+}
 
 
 
@@ -2366,6 +2373,15 @@ html, body {
     }
     /* END OF KREST MOBILE SECTION */
     /* BOOTCAMP MOBILE SECTION */
+    #carousel-arrow-mobile{
+        bottom:58vw !important
+    }
+    .bootcamp-left-arrow{
+        width:5vw;z-index:99;margin-left:0px
+    }
+    .bootcamp-right-arrow{
+        width:5vw;z-index:99;margin-right:-7px
+    }
     .bootcamp-logo-image{
         width:30vw;margin-top:1vw
     }
@@ -2397,7 +2413,7 @@ html, body {
         width:100%
     }
     .image-teacher-bootcamp{
-        min-width:100%;height:84vw;border-radius:10px;object-fit:cover;margin-bottom:3vw
+        min-width:100%;height:81vw;border-radius:10px;object-fit:cover;margin-bottom:3vw
     }
     .full-registration-container{
         background-color: #2B6CAA;

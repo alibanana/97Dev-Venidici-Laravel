@@ -118,7 +118,7 @@
 <!-- START OF TOP SECTION -->
 <div class="row page-container m-0 krest-background desktop-display" style="padding-top:10vw;display:flex;align-items:center">
     
-    <div class="col-12 col-md-6 p-0">
+    <div class="col-12 col-md-6 col-l p-0">
         <img src="/assets/images/client/logo-horizontal.png" id="logo-image-krest"  class="img-fluid" alt="KREST">
         <p class="medium-heading" style="font-family: Rubik Bold;color:#686B82;margin-top:1.5vw">Extracting businesses’ true potential. In search of peak efficiency</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#686B82;margin-top:1.5vw;margin-bottom:3vw">Optimalkan talenta-talenta dalam perusahaan Anda <br> untuk performa bisnis terbaik</p>
@@ -157,10 +157,10 @@
 <div class="row page-container m-0 krest-background mobile-display" style="padding-top:10vw;display:flex;align-items:center;display:none">
     
     
-    <div class="col-12 col-md-6 ">
+    <div class="col-12  ">
         <img src="/assets/images/client/logo-horizontal.png" id="logo-image-krest"  class="img-fluid" alt="KREST">
     </div>
-    <div class="col-12 col-md-6  wow fadeInRight " data-wow-delay="0.3s" >
+    <div class="col-12 col-lg-6  wow fadeInRight " data-wow-delay="0.3s" >
         <img src="/assets/images/client/Krest_Dummy.png" style="width:86vw;height:40vw;object-fit:cover;border-radius:10px;margin-bottom:3vw" class="img-fluid" alt="KREST">
         <div style="text-align:left">
             <p class="medium-heading" style="font-family: Rubik Bold;color:#686B82;margin-top:1.5vw">Extracting businesses’ true potential. In search of peak efficiency</p>
@@ -197,14 +197,14 @@
 <!-- START OF OUR HISTORY -->
 <div class="row m-0 page-container krest-history-background" style="padding-top:2vw;padding-bottom:2vw">
     
-    <div class="col-12 col-md-6" style="padding-right:2vw">
+    <div class="col-12 col-lg-6" style="padding-right:2vw">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">A Closer Look</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Krest in a nutshell</p>
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Krest by Venidici hadir untuk membantu bisnis Anda meningkatkan produktivitas melalui serangkaian pelatihan secara online yang dirancang khusus sesuai dengan kebutuhan dan tujuan perusahaan.
         
         Krest berfokus pada pelatihan soft-skill yang kini jadi jauh semakin penting untuk mampu bersaing di era yang super kompetitif.</p>
     </div>
-    <div class="col-12 col-md-6 wow fadeInRight" data-wow-delay="0.3s">
+    <div class="col-12 col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
         <div style="display:flex;align-items:center">
             <div>
                 <div style="background: #FFFFFF;box-shadow: 0px 0px 20px rgba(157, 157, 157, 0.15);border-radius: 10px;padding:1vw;height:100%">
@@ -229,10 +229,10 @@
 
 <!-- START OF URGENCY OF SOFT SKILLS TERBUAT -->
 <div class="row m-0 page-container krest-program-background" style="padding-bottom:8vw;padding-top:5vw">
-    <div class="col-12 col-md-6" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-12 col-lg-6" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <img src="/assets/images/client/kenapa_online_course.png" class="img-fluid image-kenapa-online-course" alt="Image 1">
     </div>
-    <div class="col-12 col-md-6 wow fadeInRight" data-wow-delay="0.3s">
+    <div class="col-12 col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
         <p class="medium-heading" style="font-family: Rubik Bold;color:#3B3C43">We chose soft skills over hard skills, here’s why</p>
         <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Jangan salah, semua orang butuh Hard skill. Nyatanya, kombinasi keduanya lah yang terbaik. Hard Skill jadi tidak berarti kalau tidak bisa tersampaikan dengan Soft Skill yang baik. Sebaliknya, Soft Skill yang baik justru akan lebih meningkatkan nilai Hard Skill itu sendiri. 
 
@@ -459,21 +459,21 @@ Sayangnya menguasai Soft Skill sepenuhnya terbukti jauh lebih sulit dan memakan 
         <p class="sub-description" style="font-family: Rubik Medium;color:#2B6CAA">Our Values</p>
         <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Krest Signature Benefits</p>
     </div>
-    <div class="col-6 col-md-4" style="display:flex;justify-content:center">
+    <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
             <img src="/assets/images/icons/Quick_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Quick</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Ucapkan selamat tinggal pada repotnya mengatur workshop yang efektif</p>
         </div>
     </div>
-    <div class="col-6 col-md-4" style="display:flex;justify-content:center">
+    <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
             <img src="/assets/images/icons/Effective_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Effective</p>
             <p id="krest-card-description" class="small-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw">Instruktur profesional akan membantu tim Anda menyerap materi sepenuhnya dengan sesi interaktif penuh praktik dan studi kasus nyata.</p>
         </div>
     </div>
-    <div class="col-6 col-md-4" style="display:flex;justify-content:center">
+    <div class="col-6 col-lg-4" style="display:flex;justify-content:center">
         <div class="krest-card" style="margin-top:1.5vw">   
             <img src="/assets/images/icons/Tailored_Icon.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="KREST">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">Tailored</p>

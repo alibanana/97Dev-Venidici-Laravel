@@ -46,7 +46,7 @@ class BootcampCourseDetailSeeder extends Seeder
             ],
             [
                 'course_id' => '5',
-                'title' => 'Opportunity in The Field’ atau ‘ Future-proof Career',
+                'title' => 'Opportunity in The Field',
                 'image' => 'assets/images/seeder/Skill_Penunjang_Karir.png',
                 'description' => 'Keberadaan Growth Hacking di Indonesia masih sangat langka. Kompetisinya minim! Tapi peluang di waktu dekat sangat besar berkat banyaknya startup dan bisnis-bisnis baru yang kian bermunculan. 
 
@@ -124,40 +124,40 @@ class BootcampCourseDetailSeeder extends Seeder
             [
                 'course_id' => '5',
                 'title' => 'After-hours Online Live Class with Expert Instructors',
-                'description' => 'i. Kelas live interaktif 3 kali dalam seminggu untuk membantumu menyerap ilmu yang dibutuhkan di industri
+                'description' => 'Kelas live interaktif 3 kali dalam seminggu untuk membantumu menyerap ilmu yang dibutuhkan di industri
                 
-                ii. Dapatkan modul lengkap untuk setiap kelas!
+                Dapatkan modul lengkap untuk setiap kelas!
                 ',
             ],
             [
                 'course_id' => '5',
-                'title' => 'Fitur Assesment untuk pemantapan materi',
-                'description' => 'i. Praktekin apa yang dipelajari di kelas, mulai dari ilmu baru sampai tools terkini
+                'title' => 'Group and individual project',
+                'description' => 'Praktekin apa yang dipelajari di kelas, mulai dari ilmu baru sampai tools terkini
                 
-                ii. Kuasai materi mingguan dengan praktek yang telah kami desain
+                Kuasai materi mingguan dengan praktek yang telah kami desain
                 
-                iii. Mengerjakan real PAID project untuk pengalaman bekerja bagi perusahaan yang lebih nyata
+                Mengerjakan real PAID project untuk pengalaman bekerja bagi perusahaan yang lebih nyata
                 ',
             ],
             [
                 'course_id' => '5',
-                'title' => 'Materi yang padat dan jelas',
-                'description' => 'i. Nikmati fasilitas one on one session dengan para mentor berpengalaman untuk mendapatkan saran, kritik, ataupun sekadar berbagi experience seputar bidang karir',
+                'title' => 'Personalized Coaching',
+                'description' => 'Nikmati fasilitas one on one session dengan para mentor berpengalaman untuk mendapatkan saran, kritik, ataupun sekadar berbagi experience seputar bidang karir',
             ],
             [
                 'course_id' => '5',
-                'title' => 'Fitur Assesment untuk pemantapan materi',
-                'description' => 'i. Dapatkan kelas workshop persiapan karir mulai dari pembuatan CV, mock-up interview, sampai konsultasi karir
+                'title' => 'Career Lab',
+                'description' => 'Dapatkan kelas workshop persiapan karir mulai dari pembuatan CV, mock-up interview, sampai konsultasi karir
                 
-                ii. Dapatkan personalized career coach untuk membantumu menata rencana karir dan akhirnya menggapai pekerjaan impianmu
+                Dapatkan personalized career coach untuk membantumu menata rencana karir dan akhirnya menggapai pekerjaan impianmu
                 ',
             ],
             [
                 'course_id' => '5',
-                'title' => 'Fitur Assesment untuk pemantapan materi',
-                'description' => 'i. Bebas tanya mentor terkait tugas dan materi yang masih belum dipahami
+                'title' => 'Student assistance via Slack',
+                'description' => 'Bebas tanya mentor terkait tugas dan materi yang masih belum dipahami
                 
-                ii. Bekerja kolaboratif dan juga saling bertukar pendapat bersama peserta bootcamp lainnya
+                Bekerja kolaboratif dan juga saling bertukar pendapat bersama peserta bootcamp lainnya
                 ',
             ],
         ];
