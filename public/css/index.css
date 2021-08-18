@@ -1826,7 +1826,7 @@ html, body {
     width:25vw;
 }
 .image-teacher-bootcamp{
-    min-width:18vw;height:18vw;border-radius:10px;object-fit:cover
+    min-width:18vw;height:18vw;border-radius:10px;object-fit:cover;margin-bottom:5vw !important
 }
 .full-registration-container{
     background-color: #2B6CAA;
@@ -2415,25 +2415,25 @@ html, body {
     }
     .full-registration-container{
         background-color: #2B6CAA;
-        padding:2vw;
+        padding:4vw;
         border-radius:10px 0px 0px 10px;
         border:2px solid #2B6CAA;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items:flex-start;
-        height:140vw
+        height:195vw
     }
     .free-trial-container{
         background-color: #FFFFFF;
-        padding:2vw;
+        padding:4vw;
         border-radius:0px 10px 10px 0px;
         border:2px solid #2B6CAA;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items:flex-start;
-        height:140vw
+        height:195vw
     }
     .register-now-button{
         font-family: Rubik Medium;
@@ -2510,39 +2510,38 @@ html, body {
         font-size:3vw;
     }
     .sub-description{
-        font-size: 5vw;
+        font-size: 5.5vw;
         line-height: 6vw;
     }
     .big-heading{
-        font-size: 6.5vw;
+        font-size: 7.5vw;
         line-height: 8.2vw !important;
     }
     .small-heading{
-        font-size: 5.5vw;
-    }
-    .small-heading{
-        font-size: 5.5vw;
+        font-size: 6.5vw;
+        line-height: 6vw;
+
     }
     
 
     .medium-heading{
-        font-size: 6vw;
-        line-height: 6vw;
+        font-size: 7vw;
+        line-height: 9vw;
     }
     .small-text{
-        font-size: 3vw;
-        line-height: 2.9vw;
+        font-size: 3.8vw;
+        line-height: 6vw;
     }
     .normal-text{
-        font-size: 3.5vw;
-        line-height: 5vw;
+        font-size: 4.3vw;
+        line-height: 7vw;
     }
     .normal-text-card{
         font-size: 4vw;
         line-height:4vw;
     }
     .bigger-text{
-        font-size: 4.5vw;
+        font-size: 5vw;
         line-height:6vw;
     }
     .very-small-text{

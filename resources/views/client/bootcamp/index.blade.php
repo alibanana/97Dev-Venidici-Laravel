@@ -1007,16 +1007,16 @@
             <div style="padding:1vw;background-color:white;width:100%;border-radius:5px;margin-bottom:5vw" id="countdown-card">
                 <div style="display: flex;justify-content:space-between;align-items:center">
                     <div style="text-align: center;border-right:2px solid #2B6CAA;padding-right:2vw;width:33%">
-                        <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Days</p>
-                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="days-mobile"></p>
+                        <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Days</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="days-mobile"></p>
                     </div>
                     <div style="text-align: center;padding:0vw 2vw;width:33%">
-                        <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Hours</p>
-                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="hours-mobile"></p>
+                        <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Hours</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="hours-mobile"></p>
                     </div>
                     <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw;width:33%">
-                        <p class="" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;font-size:3.5vw">Minutes</p>
-                        <p class="" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;font-size:3.5vw" id="minutes-mobile"></p>
+                        <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Minutes</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="minutes-mobile"></p>
                     </div>
                 </div>
             </div>
@@ -1102,11 +1102,11 @@
 
     <!-- START OF SLIDER SECTION -->
     <div class="row m-0 p-0 mobile-display" style="padding:4vw;display:none">
-        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:center;overflow-y: hidden;height:auto;cursor:grab">
+        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:flex-start;overflow-y: hidden;height:auto;cursor:grab">
             @foreach($course->bootcampDescriptions as $about)
 
             <div class="item" @if($loop->iteration > 1) style="margin-left:8vw" @endif >
-                <div style="border-radius: 10px;border: 0.5px solid #2B6CAA;width:60vw;height:150vw">
+                <div style="border-radius: 10px;border: 0.5px solid #2B6CAA;width:60vw;height:auto">
                     <div style="background-color:#2B6CAA;height:15vw;border-radius:10px 10px 0px 0px">
                     </div>
                     <div style="height:auto;text-align:center;padding:2vw">
@@ -1669,12 +1669,12 @@
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
                         <div class="col-12 col-lg-7 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
-                            <p class="small-heading" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Hi! We're Your<span style="color:#67BBA3"> Instructor/s</span></p>
+                            <p class="small-heading" id="mtm2"  data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Hi! We're Your<span style="color:#67BBA3"> Instructor/s</span></p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left;margin-bottom:0px">{{$teacher->name}}
                             </p>
                             @if($teacher->occupancy != null)
-                            <p class="normal-text" id="mtm2" style="font-family: Rubik Medium;color:#626262;text-align:left">
+                            <p class="normal-text" id="mtm2" style="font-family: Rubik Regular;color:#626262;text-align:left">
                             {{$teacher->occupancy}}​
                             </p>
                             @endif
