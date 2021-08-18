@@ -579,7 +579,7 @@
     </div>
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
-    <div class="col-4 p-0" style="display:flex;justify-content:center">
+    <div class="col-12 p-0" style="display:flex;justify-content:center">
         <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Krest_Dummy.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
