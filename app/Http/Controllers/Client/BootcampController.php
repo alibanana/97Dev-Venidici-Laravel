@@ -21,6 +21,7 @@ use App\Models\Notification;
 use App\Models\Province;
 use App\Models\City;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Promotion;
 
 
 use Illuminate\Support\Facades\Mail;
@@ -283,10 +284,11 @@ class BootcampController extends Controller
             'sumber_tahu_program'   => '',
             'mencari_kerja'         => 'required',
             'social_media'          => 'required|starts_with:https://www.linkedin.com',
-            'konsiderasi_lanjut'    => 'required',
             'kenapa_memilih'        => 'required',
             'expectation'           => 'required',
-        ]);
+            'promo_code'            => '',
+            'metode_pembayaran_bootcamp'    => 'required',
+            ]);
 
         if ($validator->fails())
             return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
@@ -310,7 +312,12 @@ class BootcampController extends Controller
         if($bootcamp_application != 0)
             return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message', 'You already have registered for a bootcamp, we will get back to you soon.');
         
-        
+        // change promo code.
+        if ($validated['promo_code'] != null){
+            $promoObject = Promotion::where('code', $validated['promo_code'])->where('isActive',1)->first();
+            if ($promoObject == null) 
+                return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message', 'Oops, Promo Code tidak ditemukan..')->withInput($request->all());
+        }
 
         $bootcamp                       = new BootcampApplication;
         $bootcamp->course_id            = $course_id;
@@ -330,9 +337,11 @@ class BootcampController extends Controller
         $bootcamp->sumber_tahu_program  = $validated['sumber_tahu_program'];
         $bootcamp->mencari_kerja        = $validated['mencari_kerja'];
         $bootcamp->social_media         = $validated['social_media'];
-        $bootcamp->konsiderasi_lanjut   = $validated['konsiderasi_lanjut'];
+        $bootcamp->konsiderasi_lanjut   = 'Ya';
         $bootcamp->kenapa_memilih       = $validated['kenapa_memilih'];
         $bootcamp->expectation          = $validated['expectation'];
+        $bootcamp->promo_code          = $validated['promo_code'];
+        $bootcamp->metode_pembayaran_bootcamp          = $validated['metode_pembayaran_bootcamp'];
         $bootcamp->is_full_registration = 1;
         $bootcamp->status               = "waiting";
         $bootcamp->save();
