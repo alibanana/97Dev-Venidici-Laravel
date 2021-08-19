@@ -115,6 +115,7 @@ class CheckoutController extends Controller
                 'birth_date'                    => 'required',
                 'gender'                        => 'required',
                 'phone_no' => ['required', new TelephoneNumber],
+                //'phone_no' => 'required',
                 'province_id'                   => 'required',
                 'city_id'                       => 'required',
                 'address'                       => 'required',
@@ -375,6 +376,9 @@ class CheckoutController extends Controller
                 return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
 
             }
+            $course_title = $invoice->bootcampApplication->course->title;
+            $user_name = $invoice->bootcampApplication->user->name;
+            Mail::to(auth()->user()->email)->send(new BootcampFreeTrialMail($course_title,$user_name));
         /* 
         * For Non-Bootcamp payments :
         *  - Create orders object from user's carts data & validate if order creation success.
@@ -558,9 +562,6 @@ class CheckoutController extends Controller
                 if($invoice->bootcampApplication){
                     $invoice->bootcampApplication->status = 'ft_paid';
                     $invoice->bootcampApplication->save();
-                    $course_title = $invoice->bootcampApplication->course->title;
-                    $user_name = $invoice->bootcampApplication->user->name;
-                    Mail::to(auth()->user()->email)->send(new BootcampFreeTrialMail($course_title,$user_name));
                 }
 
                 // Add stars to user based on how much the user paid.

@@ -339,9 +339,7 @@ class BootcampController extends Controller
             $application->status = 'approved';
             $title = 'Selamat, pendaftaran Bootcamp kamu telah diterima!';
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah diterima. Click disini untuk melihat status';
-            $course_title = $application->course->title;
-            $user_name = $application->user->name;
-            Mail::to(auth()->user()->email)->send(new BootcampFullRegistrationMail($course_title,$user_name));
+            
         }
         elseif($request->action == 'Reject'){
             $application->status = 'denied';
