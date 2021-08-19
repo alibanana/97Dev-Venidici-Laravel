@@ -30,7 +30,7 @@ use App\Models\ReferralCodeCounter;
 use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\BootcampApplication;
-
+use App\Mail\BootcampFreeTrialMail;
 class CheckoutController extends Controller
 {
     private $notifications; // Stores combined notifications data.
@@ -558,6 +558,9 @@ class CheckoutController extends Controller
                 if($invoice->bootcampApplication){
                     $invoice->bootcampApplication->status = 'ft_paid';
                     $invoice->bootcampApplication->save();
+                    $course_title = $invoice->bootcampApplication->course->title;
+                    $user_name = $invoice->bootcampApplication->user->name;
+                    Mail::to(auth()->user()->email)->send(new BootcampFreeTrialMail($course_title,$user_name));
                 }
 
                 // Add stars to user based on how much the user paid.

@@ -727,7 +727,7 @@
     <!-- START OF FOOTER MOBILE -->
     <div class="row m-0 page-container footer-mobile" style="padding-top:5vw;padding-bottom:8vw;display:none">
       <div class="col-12">
-          <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:10vw" class="img-fluid" alt="">
+          <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:7vw" class="img-fluid" alt="">
           <p class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:3vw;">Platform anak kekinian <br>   buat naklukin karir impian!</p>
       </div>
 
