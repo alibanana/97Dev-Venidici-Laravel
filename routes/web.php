@@ -510,8 +510,8 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/level_up', function () {
             return view('emails/level_up');
         });
-        Route::get('/emails/bootcamp', function () {
-            return view('emails/bootcamp_syllabus');
+        Route::get('/emails/bootcamp/full_registration', function () {
+            return view('emails/bootcamp_full_registration');
         });
     };
 
