@@ -1669,7 +1669,7 @@
 <!-- START OF OUR INSTRUCTORS -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F5F2F2;">
     <div class="col-12 p-0">
-        <div id="instructors-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+        <div id="instructors-carousel" class="carousel slide" data-interval="10000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
                 @foreach($course->teachers as $teacher)
                 <!-- START OF ONE ITEM -->
@@ -1692,7 +1692,7 @@
                             </p>
                             @endif
                             @if($teacher->company_logo != null)
-                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;height:4vw;object-fit:cover;border-radius:10px" alt="Bootcamp Instructor Company">
+                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;height:4vw;object-fit:contain;border-radius:10px" alt="Bootcamp Instructor Company">
                             @endif
                         </div>
                         <!-- END OF RIGHT SECTION -->
