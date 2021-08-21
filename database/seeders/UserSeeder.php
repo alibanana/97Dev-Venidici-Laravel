@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             ]);
         }
 
-        // $genders = ['Male', 'Female'];
+        $genders = ['Male', 'Female'];
 
         // $number_of_users = 80;
 
@@ -85,25 +85,25 @@ class UserSeeder extends Seeder
         //     $user->save();
         // }
 
-        // // Create Default Normal User
-        // $defaultNormalUser = User::create([
-        //     'name' => env('NORMAL_USER_NAME'),
-        //     'email' => env('NORMAL_USER_EMAIL'),
-        //     'email_verified_at' => now(),
-        //     'password' => bcrypt(env('NORMAL_USER_PASSWORD')),
-        //     'remember_token' => Str::random(10)
-        // ]);
+        // Create Default Normal User
+        $defaultNormalUser = User::create([
+            'name' => env('NORMAL_USER_NAME'),
+            'email' => env('NORMAL_USER_EMAIL'),
+            'email_verified_at' => now(),
+            'password' => bcrypt(env('NORMAL_USER_PASSWORD')),
+            'remember_token' => Str::random(10)
+        ]);
 
-        // // General userDetail data for defaultNormalUser.
-        // $defaultNormalUser->userDetail()->create([
-        //     'telephone' => $faker->e164PhoneNumber,
-        //     'referral_code' => Str::random(6),
-        //     'birthdate' => $faker->date($format = 'Y-m-d', $max = '-16 years'),
-        //     'gender' => $genders[rand(0, count($genders) - 1)],
-        //     'address' => $faker->address,
-        //     'company' => $faker->company,
-        //     'occupancy' => $faker->jobTitle
-        // ]);
+        // General userDetail data for defaultNormalUser.
+        $defaultNormalUser->userDetail()->create([
+            'telephone' => $faker->e164PhoneNumber,
+            'referral_code' => Str::random(6),
+            'birthdate' => $faker->date($format = 'Y-m-d', $max = '-16 years'),
+            'gender' => $genders[rand(0, count($genders) - 1)],
+            'address' => $faker->address,
+            'company' => $faker->company,
+            'occupancy' => $faker->jobTitle
+        ]);
 
     }
 }

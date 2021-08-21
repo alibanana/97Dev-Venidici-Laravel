@@ -69,15 +69,16 @@ class CheckoutController extends Controller
     }
 
     public function store(Request $request) {
-
         $user_invoices = Invoice::where("user_id",auth()->user()->id)->get();
         $flag = FALSE;
         foreach($user_invoices as $invoice){
-            foreach($invoice->orders as $order){
-                foreach(auth()->user()->carts as $cart){
-                    if($cart->course_id != 3 && !$cart->withArtOrNo){
-                        if($cart->course_id == $order->course_id)
-                            $flag = TRUE;
+            if ($invoice->status == 'pending' || $invoice->status == 'paid' || $invoice->status == 'completed') {
+                foreach($invoice->orders as $order){
+                    foreach(auth()->user()->carts as $cart){
+                        if($cart->course_id != 3 && !$cart->withArtOrNo){
+                            if($cart->course_id == $order->course_id)
+                                $flag = TRUE;
+                        }
                     }
                 }
             }
