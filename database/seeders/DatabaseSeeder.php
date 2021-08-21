@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
             NotificationSeeder::class,
             KrestProgramSeeder::class,
-            KrestSeeder::class,
+            //KrestSeeder::class,
             InstructorPositionSeeder::class,
             //NewsletterSeeder::class,
             //RedeemSeeder::class,

@@ -16,6 +16,8 @@ use App\Models\CourseFeature;
 use App\Models\Hashtag;
 use App\Models\BootcampApplication;
 use App\Models\Notification;
+use App\Mail\BootcampFullRegistrationMail;
+use Illuminate\Support\Facades\Mail;
 
 class BootcampController extends Controller
 {
@@ -336,7 +338,8 @@ class BootcampController extends Controller
         {
             $application->status = 'approved';
             $title = 'Selamat, pendaftaran Bootcamp kamu telah diterima!';
-            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah diterima. Klick disin untuk melihat status';    
+            $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah diterima. Click disini untuk melihat status';
+            
         }
         elseif($request->action == 'Reject'){
             $application->status = 'denied';
@@ -360,7 +363,7 @@ class BootcampController extends Controller
         ];
 
         // Create notification for user.
-        $notification = Notification::create($notification_data);
+        Notification::create($notification_data);
 
         $message = 'Application for user (' . $application->name . ') has been changed to '.$application->status.'!';
 

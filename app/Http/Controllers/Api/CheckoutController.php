@@ -30,7 +30,7 @@ use App\Models\ReferralCodeCounter;
 use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\BootcampApplication;
-
+use App\Mail\BootcampFreeTrialMail;
 class CheckoutController extends Controller
 {
     private $notifications; // Stores combined notifications data.
@@ -115,6 +115,7 @@ class CheckoutController extends Controller
                 'birth_date'                    => 'required',
                 'gender'                        => 'required',
                 'phone_no' => ['required', new TelephoneNumber],
+                //'phone_no' => 'required',
                 'province_id'                   => 'required',
                 'city_id'                       => 'required',
                 'address'                       => 'required',
@@ -375,6 +376,9 @@ class CheckoutController extends Controller
                 return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
 
             }
+            $course_title = $invoice->bootcampApplication->course->title;
+            $user_name = $invoice->bootcampApplication->user->name;
+            Mail::to(auth()->user()->email)->send(new BootcampFreeTrialMail($course_title,$user_name));
         /* 
         * For Non-Bootcamp payments :
         *  - Create orders object from user's carts data & validate if order creation success.

@@ -22,7 +22,7 @@ use App\Models\Province;
 use App\Models\City;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Promotion;
-
+use App\Mail\BootcampFullRegistrationMail;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BootcampSyllabusMail;
@@ -345,6 +345,10 @@ class BootcampController extends Controller
         $bootcamp->is_full_registration = 1;
         $bootcamp->status               = "waiting";
         $bootcamp->save();
+
+        $course_title = $bootcamp->course->title;
+        $user_name = $bootcamp->user->name;
+        Mail::to(auth()->user()->email)->send(new BootcampFullRegistrationMail($course_title,$user_name));
 
         // create notification
         $notification = Notification::create([

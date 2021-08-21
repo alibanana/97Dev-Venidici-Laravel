@@ -871,9 +871,11 @@
                 document.getElementById('days').innerHTML = 0;
                 document.getElementById('hours').innerHTML = 0 ;
                 document.getElementById('minutes').innerHTML = 0 ;
+                document.getElementById('seconds').innerHTML = 0 ;
                 document.getElementById('days-mobile').innerHTML = 0;
                 document.getElementById('hours-mobile').innerHTML = 0 ;
                 document.getElementById('minutes-mobile').innerHTML = 0 ;
+                document.getElementById('seconds-mobile').innerHTML = 0 ;
                 // document.getElementById('free-trial-button').style.display = "none";
                 // document.getElementById('full-registration-button').style.display = "none";
                 return;
@@ -886,10 +888,12 @@
             document.getElementById('days').innerHTML = days;
             document.getElementById('hours').innerHTML = hours ;
             document.getElementById('minutes').innerHTML = minutes ;
+            document.getElementById('seconds').innerHTML = seconds ;
 
             document.getElementById('days-mobile').innerHTML = days;
             document.getElementById('hours-mobile').innerHTML = hours ;
             document.getElementById('minutes-mobile').innerHTML = minutes ;
+            document.getElementById('seconds-mobile').innerHTML = seconds ;
         }
         timer = setInterval(showRemaining, 1000);
     }
@@ -928,19 +932,23 @@
         </div>
         <p class="bigger-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-top:2vw">Early Bird registration ends in:</p>
         <!-- START OF COUNTDOWN -->
-        <div style="padding:1vw;background-color:#FFFFFF;width:20vw;border-radius:10px;margin-bottom:2vw" id="countdown-card">
+        <div style="padding:1vw;background-color:#FFFFFF;width:30vw;border-radius:10px;margin-bottom:2vw" id="countdown-card">
             <div style="display: flex;justify-content:space-between;align-items:center">
                 <div style="text-align: center;border-right:2px solid #2B6CAA;padding-right:2vw">
                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Days</p>
                     <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="days"></p>
                 </div>
-                <div style="text-align: center;padding:0vw 2vw">
+                <div style="text-align: center;padding:0vw 2vw;border-right:2px solid #2B6CAA;">
                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Hours</p>
                     <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="hours"></p>
                 </div>
-                <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw">
+                <div style="text-align: center;padding:0vw 2vw">
                     <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Minutes</p>
                     <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="minutes"></p>
+                </div>
+                <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw">
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Seconds</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="seconds"></p>
                 </div>
             </div>
         </div>
@@ -1014,9 +1022,13 @@
                         <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Hours</p>
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="hours-mobile"></p>
                     </div>
-                    <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw;width:33%">
+                    <div style="text-align: center;padding:0vw 2vw;width:33%">
                         <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Minutes</p>
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="minutes-mobile"></p>
+                    </div>
+                    <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw;width:33%">
+                        <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Seconds</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="seconds-mobile"></p>
                     </div>
                 </div>
             </div>
@@ -1051,7 +1063,7 @@
     justify-content:flex-end
     @endif
     ">
-        <div class="krest-card" style="margin-top:1.5vw;height:26vw;width:25vw;background-color:#2B6CAA">   
+        <div class="krest-card" style="margin-top:1.5vw;height:auto;width:25vw;background-color:#2B6CAA">   
             <img
             @if($loop->iteration == 1)
             src="/assets/images/icons/Expert_Instructor_Icon.png" 
@@ -1102,7 +1114,7 @@
 
     <!-- START OF SLIDER SECTION -->
     <div class="row m-0 p-0 mobile-display" style="padding:4vw;display:none">
-        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:flex-start;overflow-y: hidden;height:225vw;cursor:grab">
+        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:flex-start;overflow-y: hidden;height:auto;cursor:grab">
             @foreach($course->bootcampDescriptions as $about)
 
             <div class="item" @if($loop->iteration > 1) style="margin-left:8vw" @endif >
@@ -1112,7 +1124,8 @@
                     <div style="height:auto;text-align:center;padding:2vw">
                         <img src="{{ asset($about->image) }}" style="width:30vw;border-radius:10px;margin-top:-10vw" class="img-fluid" alt="KREST">
                         <p class="bigger-text" style="font-family: Poppins Medium;margin-top:3vw">{{$about->title}}</p>
-                        <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line;text-align:left">{{$about->description}}</p>
+                        
+                        <p class="normal-text show-read-more" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line;text-align:left">{{$about->description}}</p>
 
                     </div>
                 </div>
@@ -1347,7 +1360,7 @@
         @if(count($course->bootcampBenefits )< 4)
         @foreach($course->bootcampBenefits as $benefit)
         <div class="col-3" style="display:flex;justify-content:center  ">
-            <div class="our-mission-card" style="@if($loop->iteration > 4) margin-top:3vw @endif" >
+            <div class="our-mission-card" style="@if($loop->iteration > 4) margin-top:3vw @endif;height:auto !important" >
                 <div style="text-align:left">
                     <div style="text-align:center;margin-top:2vw">
                         <img 
@@ -1656,7 +1669,7 @@
 <!-- START OF OUR INSTRUCTORS -->
 <div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F5F2F2;">
     <div class="col-12 p-0">
-        <div id="instructors-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+        <div id="instructors-carousel" class="carousel slide" data-interval="10000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
                 @foreach($course->teachers as $teacher)
                 <!-- START OF ONE ITEM -->
@@ -1740,42 +1753,21 @@
     <div class="col-lg-6 col-xs-12 p-0" >
         <div class="full-registration-container">
             <div>
-                <p class="bigger-text" style="font-family: Poppins Medium;color:#FFFFFF;">Full Payment</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF;text-decoration: line-through;opacity:0.7">Rp. 15,000,000</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF;opacity:0.7">1st Batch Discount <span style=";text-decoration: line-through;"> Rp. 12,000,000</span></p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#FFFFFF;">Discount tambahan untuk early bird!</p>
-                <p class="sub-description" style="font-family: Poppins Medium;color:#FFFFFF;">Now Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }}</p>
-                <p class="small-text" style="font-family: Poppins Medium;color:#FFFFFF;">Valid until 29 August 2021</p>
+                <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;">Full Payment</p>
+                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;text-decoration: line-through;opacity:0.7;margin-bottom:0.5vw">Rp. 15,000,000</p>
+                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;opacity:0.7;margin-bottom:0.5vw">1st Batch Discount <span style="text-decoration: line-through;"> Rp. 12,000,000</span></p>
+                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;">Discount tambahan untuk early bird!</p>
+                <p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;">Now Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }}</p>
+                <p class="small-text" style="font-family: Rubik Regular;color:#FFFFFF;">Valid until 29 August 2021</p>
                 <div style=display:flex;align-items:flex-start>
                     <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Bayar penuh di depan atau cicil sebanyak 2x</p>
+                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular">Bayar penuh di depan atau cicil sebanyak 2x</p>
                 </div>
                 <div style=display:flex;align-items:flex-start>
                     <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Fasilitas penempatan kerja dengan perlindungan money-back guarantee sampai dengan 100%</p>
+                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular">Fasilitas penempatan kerja dengan perlindungan money-back guarantee sampai dengan 100%</p>
                 </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular"> 80+ jam live workshop dari ekspert top StartUp Indonesia</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">30+ modul dan praktek</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Real project untuk memantapkan skill</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Fasilitas bimbingan karir one-on-one dari CV, Interview, Portfolio, sampai konsultasi arah karir</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#FFFFFF;font-family:Rubik Regular">Sertifikat kelulusan</p>
-                </div>
-
-
+                
             </div>
             
 
@@ -1787,88 +1779,127 @@
     <div class="col-lg-6 col-xs-12 p-0" id="mtm2">
         <div class="free-trial-container">
             <div>
-                <p class="bigger-text" style="font-family: Poppins Medium;color:#3B3C43;">Income Share Agreement</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Ikut bootcamp tanpa bayar apapun di depan</p>
-                <p class="normal-text" style="font-family: Poppins Medium;color:#888888;">Bayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>
+                <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;">Income Share Agreement</p>
+                <p class="normal-text" style="font-family: Rubik Medium;color:#888888;margin-bottom:0.3vw">Ikut bootcamp tanpa bayar apapun di depan</p>
+                <p class="normal-text" style="font-family: Rubik Medium;color:#888888;">Bayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>
                 <div style=display:flex;align-items:flex-start>
                     <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Fasilitas penempatan kerja dan bayar setelah diterima tanpa bunga dan denda</p>
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Fasilitas penempatan kerja dan bayar setelah diterima tanpa bunga dan denda</p>
                 </div>
                 <div style=display:flex;align-items:flex-start>
                     <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Hanya membayar uang pendaftaran yang akan dikembalikan di akhir bootcamp</p>
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Hanya membayar uang pendaftaran yang akan dikembalikan di akhir bootcamp</p>
                 </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">80+ jam live workshop dari ekspert top StartUp Indonesia</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">30+ modul dan praktek</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Real project untuk memantapkan skill</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Fasilitas bimbingan karir one-on-one dari CV, Interview, Portfolio, sampai konsultasi arah karir</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="1vw;color:#3B3C43;font-family:Rubik Regular">Sertifikat kelulusan</p>
-                </div>
+                
             </div>
             
 
         </div>
     </div>
-    <div class="col-12 desktop-display" style="display:flex;justify-content:center;align-items:center;margin-top:4vw">
-        <div style="text-align:center">
-            <a 
-                @if(Auth::check())
+    <div class="col-12 p-0" id="mtm2">
+        <div class="what-will-you-get-container">
+            <div >
+                <div style="text-align: center;margin-bottom:2vw">
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;">What Will You Get?</p>
+                </div>
+                <div class="row m-0">
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:5.5vw>
+
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">80+ jam live workshop expert dari top StartUp di Indonesia</p>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:3vw>
+
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Fasilitas penempatan kerja ketika lulus</p>
+                        </div>
+
+                    </div>
                     
-                    @if(auth()->user()->email_verified_at)
-                        @if($bootcamp_application_count != 0)
-                        onclick="return alert('You have a pending or an on going bootcamp application.')"
-                        @else
-                        href="#full-registration" 
-                    @endif
-    
-                    @else
-                        href="/dashboard" 
-                    @endif
-                
-                @else 
-                    onclick="openLogin()" 
-                @endi
-    
-                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:30vw;">Apply as Early Bird</a>
-        </div>
-        <div style="padding-left:2vw;padding-right:2vw">
-            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">OR</p>
-        </div>
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:5.5vw>
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">30+ modul dan praktek</p>
+                        </div>
+                    </div>
 
-        <div style="text-align:center">
-            <a  
-            @if(Auth::check())
-             
-                @if(auth()->user()->email_verified_at)
-                    @if($bootcamp_application_count != 0)
-                    onclick="return alert('You have a pending or an on going bootcamp application.')"
-                    @else
-                    href="#free-trial" 
-                @endif
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:3vw>
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Sertifikat kelulusan</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:5.5vw>
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Real project untuk memantapkan skill</p>
+                        </div>
 
-                @else
-                    href="/dashboard" 
-                @endif
-            
-            @else 
-                onclick="openLogin()"
-            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" style="display:inline-block;width:30vw;">Attend Free Intro Week</a>
+                    </div>
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:3vw>
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Fasilitas bimbingan karir one-on-one dari CV, Interview, Portfolio, sampai konsultasi arah karir</p>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <div class="col-12 desktop-display" style="display:flex;justify-content:center;align-items:center;margin-top:2vw">
+                        <div style="text-align:center">
+                            <a 
+                                @if(Auth::check())
+                                    
+                                    @if(auth()->user()->email_verified_at)
+                                        @if($bootcamp_application_count != 0)
+                                        onclick="return alert('You have a pending or an on going bootcamp application.')"
+                                        @else
+                                        href="#full-registration" 
+                                    @endif
+                    
+                                    @else
+                                        href="/dashboard" 
+                                    @endif
+                                
+                                @else 
+                                    onclick="openLogin()" 
+                                @endi
+                    
+                                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:30vw;">Apply as Early Bird</a>
+                        </div>
+                        <div style="padding-left:2vw;padding-right:2vw">
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">OR</p>
+                        </div>
+
+                        <div style="text-align:center">
+                            <a  
+                            @if(Auth::check())
+                            
+                                @if(auth()->user()->email_verified_at)
+                                    @if($bootcamp_application_count != 0)
+                                    onclick="return alert('You have a pending or an on going bootcamp application.')"
+                                    @else
+                                    href="#free-trial" 
+                                @endif
+
+                                @else
+                                    href="/dashboard" 
+                                @endif
+                            
+                            @else 
+                                onclick="openLogin()"
+                            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" style="display:inline-block;width:30vw;">Attend Free Intro Week</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    
     <div class="col-12 p-0 mobile-display" style="margin-top:4vw;text-align:center;display:none">
         <div style="">
             <a 
@@ -2015,6 +2046,26 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+	var maxLength = 250;
+	$(".show-read-more").each(function(){
+		var myStr = $(this).text();
+		if($.trim(myStr).length > maxLength){
+			var newStr = myStr.substring(0, maxLength);
+			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+			$(this).empty().html(newStr);
+			$(this).append('<a href="javascript:void(0);" class="read-more"> read more...</a>');
+			$(this).append('<span class="more-text">' +removedStr+ '</span>');
+		}
+	});
+	$(".read-more").click(function(){
+		$(this).siblings(".more-text").contents().unwrap();
+		$(this).remove();
+	});
+});
+</script>
 
 <script>
 var acc = document.getElementsByClassName("accordions");
