@@ -101,7 +101,8 @@ class TeacherController extends Controller
 
 
         if ($request->has('image')) {
-            unlink($teacher->image);
+            if($teacher->image != null)
+                unlink($teacher->image);
             $teacher->image = Helper::storeImage($request->file('image'), 'storage/images/teachers/');
         }
         if ($request->has('company_logo')) {
