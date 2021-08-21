@@ -1063,7 +1063,7 @@
     justify-content:flex-end
     @endif
     ">
-        <div class="krest-card" style="margin-top:1.5vw;height:26vw;width:25vw;background-color:#2B6CAA">   
+        <div class="krest-card" style="margin-top:1.5vw;height:auto;width:25vw;background-color:#2B6CAA">   
             <img
             @if($loop->iteration == 1)
             src="/assets/images/icons/Expert_Instructor_Icon.png" 
@@ -1114,7 +1114,7 @@
 
     <!-- START OF SLIDER SECTION -->
     <div class="row m-0 p-0 mobile-display" style="padding:4vw;display:none">
-        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:flex-start;overflow-y: hidden;height:225vw;cursor:grab">
+        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:flex-start;overflow-y: hidden;height:auto;cursor:grab">
             @foreach($course->bootcampDescriptions as $about)
 
             <div class="item" @if($loop->iteration > 1) style="margin-left:8vw" @endif >
@@ -1124,7 +1124,8 @@
                     <div style="height:auto;text-align:center;padding:2vw">
                         <img src="{{ asset($about->image) }}" style="width:30vw;border-radius:10px;margin-top:-10vw" class="img-fluid" alt="KREST">
                         <p class="bigger-text" style="font-family: Poppins Medium;margin-top:3vw">{{$about->title}}</p>
-                        <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line;text-align:left">{{$about->description}}</p>
+                        
+                        <p class="normal-text show-read-more" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line;text-align:left">{{$about->description}}</p>
 
                     </div>
                 </div>
@@ -1359,7 +1360,7 @@
         @if(count($course->bootcampBenefits )< 4)
         @foreach($course->bootcampBenefits as $benefit)
         <div class="col-3" style="display:flex;justify-content:center  ">
-            <div class="our-mission-card" style="@if($loop->iteration > 4) margin-top:3vw @endif" >
+            <div class="our-mission-card" style="@if($loop->iteration > 4) margin-top:3vw @endif;height:auto !important" >
                 <div style="text-align:left">
                     <div style="text-align:center;margin-top:2vw">
                         <img 
@@ -1691,7 +1692,7 @@
                             </p>
                             @endif
                             @if($teacher->company_logo != null)
-                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;height:4vw;object-fit:contain;border-radius:10px" alt="Bootcamp Instructor Company">
+                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;height:4vw;object-fit:cover;border-radius:10px" alt="Bootcamp Instructor Company">
                             @endif
                         </div>
                         <!-- END OF RIGHT SECTION -->
@@ -1800,8 +1801,6 @@
             <div >
                 <div style="text-align: center;margin-bottom:2vw">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;">What Will You Get?</p>
-                    <p class="normal-text" style="font-family: Rubik Medium;color:#888888;margin-bottom:0px">Ikut bootcamp tanpa bayar apapun di depan</p>
-                    <p class="normal-text" style="font-family: Rubik Medium;color:#888888;">Bayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>
                 </div>
                 <div class="row m-0">
                     <div class="col-lg-6 col-xs-12 p-0">
@@ -2047,6 +2046,26 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+	var maxLength = 250;
+	$(".show-read-more").each(function(){
+		var myStr = $(this).text();
+		if($.trim(myStr).length > maxLength){
+			var newStr = myStr.substring(0, maxLength);
+			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+			$(this).empty().html(newStr);
+			$(this).append('<a href="javascript:void(0);" class="read-more"> read more...</a>');
+			$(this).append('<span class="more-text">' +removedStr+ '</span>');
+		}
+	});
+	$(".read-more").click(function(){
+		$(this).siblings(".more-text").contents().unwrap();
+		$(this).remove();
+	});
+});
+</script>
 
 <script>
 var acc = document.getElementsByClassName("accordions");
