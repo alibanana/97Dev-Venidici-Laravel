@@ -555,8 +555,12 @@ class CourseHelper {
         });
 
         $userCourseProgressByCourseIds = [];
+
         foreach ($onGoingCourses as $course) {
-            $userCourseProgressByCourseIds[$course->id] = CourseHelper::calculateUserCourseProgressByCourseObject($course);
+            if(count($course->sections) != 0 )
+                $userCourseProgressByCourseIds[$course->id] = CourseHelper::calculateUserCourseProgressByCourseObject($course);
+            else
+                $userCourseProgressByCourseIds[$course->id] = 0;
         }
 
         return $userCourseProgressByCourseIds;
@@ -579,7 +583,8 @@ class CourseHelper {
     // Get courses suggestions
     public static function getCourseSuggestion($size, $type = null) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
-        $courses = Course::where('course_type_id', '!=', 3)->with('hashtags')->get()
+        $courses = Course::where('course_type_id', '!=', 3)->where('enrollment_status', 'Open')
+            ->where('publish_status', 'Published')->with('hashtags')->get()
             ->sortByDesc(function ($course) use ($userHashtags) {
                 $similarityPoint = 0;
                 foreach ($course->hashtags as $hashtag) {

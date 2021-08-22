@@ -194,7 +194,49 @@
                                         <p class="bigger-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px"><i class="far fa-window-close"></i> <span style="margin-left:1vw">Pembelian Dibatalkan</span></p>
                                     @endif
                                 </div>
-                                <!-- END OF STATUS CARD -->       
+                                <!-- END OF STATUS CARD -->
+
+                                @if($payment_object['data']['attributes']['paymentMethod']['type'] != 'qris')
+                                    <!-- START OF ONE PAYMENT METHOD -->
+                                    <div style="display:flex;margin-top:2vw">
+
+                                        <div class="payment-method-card-active-left" style="width:100%" >
+                                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                                <div style="display:flex;align-items:center">
+                                                    <div>
+                                                        <p class="small-text" style="margin-bottom:0.5vw;font-family:Rubik Medium;color:#3B3C43">Bank {{$payment_object['data']['attributes']['paymentMethod']['instructions']['bankShortCode']}} ( Virtual Account)</p>
+                                                        <p class="sub-description" style="font-family:Rubik Medium;color:#074EE8;margin-bottom:0px">{{$payment_object['data']['attributes']['paymentMethod']['instructions']['accountNo']}}</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="payment-method-card-active-right" style="display: flex;flex-direction: column;justify-content: center;" >
+                                            <a href="#pembayaran-va">
+                                                <i class="fas fa-question-circle sub-description" style="color:#FFFFFF;"></i>
+                                            </a>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <!-- END OF ONE PAYMENT METHOD --> 
+                                @else
+                                    <!-- START OF QR PAYMENT METHOD -->
+                                    <div style="display:flex;margin-top:2vw">
+
+                                        <div class="payment-method-card-active-left" style="width:100%;border-radius: 10px !important" >
+                                            <div style="text-align: center;">
+                                                <p class="small-text" style="margin-bottom:1vw;font-family:Rubik Medium;color:#3B3C43">QRIS Payment</p>
+                                                <div style="display:flex;justify-content:center">
+                                                    <img src="{{$payment_object['data']['attributes']['paymentMethod']['instructions']['imageUrl']}}" style="width:12vw" alt="" class="img-fluid">                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <!-- END OF QR PAYMENT METHOD -->  
+                                @endif
 
                                 @if($cart->withArtOrNo)
                                 <!-- START OF SHIPPING ADDRESS -->

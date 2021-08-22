@@ -46,6 +46,9 @@ class SectionController extends Controller
         } elseif ($course->courseType->type == 'Woki') {
             $route = 'admin.woki-courses.edit';
             $message = 'Section (' . $section->title  . ') has been added to Woki Course (' . $course->title . ')';
+        } elseif ($course->courseType->type == 'Bootcamp') {
+            $route = 'admin.bootcamp.edit';
+            $message = 'Section (' . $section->title  . ') has been added to Bootcamp Course (' . $course->title . ')';
         }
 
         return redirect()->route($route, $course->id)
@@ -80,6 +83,9 @@ class SectionController extends Controller
             $route = 'admin.online-courses.edit';
         elseif ($section->course->courseType->type == 'Woki')
             $route = 'admin.woki-courses.edit';
+        elseif ($section->course->courseType->type == 'Bootcamp')
+            $route = 'admin.bootcamp.edit';
+
 
         return redirect()->route($route, $section->course->id)
             ->with('message', $message)
@@ -106,6 +112,10 @@ class SectionController extends Controller
         } elseif ($section->course->courseType->type == 'Woki') {
             $route = 'admin.woki-courses.edit';
             $message = 'Section (' . $section->title  . ') has been deleted from Woki Course (' . $section->course->title . ')';
+        
+        } elseif ($section->course->courseType->type == 'Bootcamp') {
+            $route = 'admin.bootcamp.edit';
+            $message = 'Section (' . $section->title  . ') has been deleted from Bootcamp Course (' . $section->course->title . ')';
         }
 
         return redirect()->route($route, $section->course->id)

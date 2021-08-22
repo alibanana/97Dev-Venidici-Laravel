@@ -42,6 +42,7 @@ class BootcampCandidateController extends Controller
             ->with('message', 'Maksimum Quantity has been reached!')
             ->with('page-option', 'candidate-page');
         $validator = Validator::make($request->all(), [
+            'icon'         => 'required',
             'title'         => 'required',
             'description'   => 'required',
         ]);
@@ -54,6 +55,9 @@ class BootcampCandidateController extends Controller
 
         $candidate = new BootcampCandidate();
         $candidate->course_id     = $course_id;
+        if ($request->has('icon')) 
+            $candidate->icon = Helper::storeImage($request->file('icon'), 'storage/images/bootcamp/icons/');
+        
         $candidate->title         = $validated['title'];
         $candidate->description   = $validated['description'];
         $candidate->save();
@@ -107,6 +111,11 @@ class BootcampCandidateController extends Controller
         $validated = $validator->validate();
 
         $candidate = BootcampCandidate::findOrFail($id);
+        if ($request->has('icon')) {
+            if($candidate->icon != null)
+                unlink($candidate->icon);
+            $candidate->icon = Helper::storeImage($request->file('icon'), 'storage/images/bootcamp/icons/');
+        }
         $candidate->title        = $validated['title'];
         $candidate->description  = $validated['description'];
         

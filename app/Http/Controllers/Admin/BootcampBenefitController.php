@@ -39,12 +39,13 @@ class BootcampBenefitController extends Controller
      */
     public function store(Request $request, $course_id)
     {
-        if(BootcampBenefit::where('course_id',$course_id)->count() >= 5)
+        if(BootcampBenefit::where('course_id',$course_id)->count() >= 6)
             return redirect()->back()
             ->with('message', 'Maksimum Quantity has been reached!')
             ->with('page-option', 'benefit-page');
             
         $validator = Validator::make($request->all(), [
+            'icon'         => 'required',
             'title'         => 'required',
             'description'   => 'required',
         ]);
@@ -56,6 +57,8 @@ class BootcampBenefitController extends Controller
 
         $benefit = new BootcampBenefit();
         $benefit->course_id     = $course_id;
+        if ($request->has('icon')) 
+            $benefit->icon = Helper::storeImage($request->file('icon'), 'storage/images/bootcamp/icons/');
         $benefit->title         = $validated['title'];
         $benefit->description   = $validated['description'];
         $benefit->save();
@@ -110,6 +113,11 @@ class BootcampBenefitController extends Controller
 
 
         $benefit = BootcampBenefit::findOrFail($id);
+        if ($request->has('icon')) {
+            if($benefit->icon != null)
+                unlink($benefit->icon);
+            $benefit->icon = Helper::storeImage($request->file('icon'), 'storage/images/bootcamp/icons/');
+        }
         $benefit->title        = $validated['title'];
         $benefit->description  = $validated['description'];
         

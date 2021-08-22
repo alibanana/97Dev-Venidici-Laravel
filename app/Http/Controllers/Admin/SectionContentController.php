@@ -44,6 +44,8 @@ class SectionContentController extends Controller
             $route = 'admin.online-courses.edit';
         elseif ($section->course->courseType->type == 'Woki')
             $route = 'admin.woki-courses.edit';
+        elseif ($section->course->courseType->type == 'Bootcamp')
+            $route = 'admin.bootcamp.edit';
 
         $newContentTitle = $validated['section-' . $validated['section_id'] . '-newContentTitle'];
 
@@ -74,6 +76,8 @@ class SectionContentController extends Controller
             $view = 'admin/online-course/create-video';
         elseif ($content->section->course->courseType->type == 'Woki')
             $view = 'admin/woki/create-video';
+        elseif ($content->section->course->courseType->type == 'Bootcamp')
+            $view = 'admin/bootcamp/create-video';
 
         return view($view, compact('content'));
     }
@@ -94,13 +98,15 @@ class SectionContentController extends Controller
             $route = 'admin.online-courses.edit';
         elseif ($content->section->course->courseType->type == 'Woki')
             $route = 'admin.woki-courses.edit';
+        elseif ($content->section->course->courseType->type == 'Bootcamp')
+            $route = 'admin.bootcamp.edit';
 
         // Checks if sectionContent is unique in course level.
-        $isSectionContentTitleUnique = CourseHelper::isSectionContentTitleUniqueByCourseObjectAndTitle($content->section->course, $validated['title']);
-        if (!$isSectionContentTitleUnique)
-            return redirect()->back()->withErrors([
-                'title' => "Content's title already exists in the current course.."
-            ]);
+        //$isSectionContentTitleUnique = CourseHelper::isSectionContentTitleUniqueByCourseObjectAndTitle($content->section->course, $validated['title']);
+        //if (!$isSectionContentTitleUnique)
+            //return redirect()->back()->withErrors([
+                //'title' => "Content's title already exists in the current course.."
+            //]);
 
         $content->title = $validated['title'];
         $content->youtube_link = $validated['youtube_link'];
@@ -144,6 +150,8 @@ class SectionContentController extends Controller
             $route = 'admin.online-courses.edit';
         elseif ($content->section->course->courseType->type == 'Woki')
             $route = 'admin.woki-courses.edit';
+        elseif ($content->section->course->courseType->type == 'Bootcamp')
+            $route = 'admin.bootcamp.edit';
 
         return redirect()->route($route, $content->section->course->id)
             ->with('message', $message)

@@ -69,15 +69,16 @@ class CheckoutController extends Controller
     }
 
     public function store(Request $request) {
-
         $user_invoices = Invoice::where("user_id",auth()->user()->id)->get();
         $flag = FALSE;
         foreach($user_invoices as $invoice){
-            foreach($invoice->orders as $order){
-                foreach(auth()->user()->carts as $cart){
-                    if($cart->course_id != 3 && !$cart->withArtOrNo){
-                        if($cart->course_id == $order->course_id)
-                            $flag = TRUE;
+            if ($invoice->status == 'pending' || $invoice->status == 'paid' || $invoice->status == 'completed') {
+                foreach($invoice->orders as $order){
+                    foreach(auth()->user()->carts as $cart){
+                        if($cart->course_id != 3 && !$cart->withArtOrNo){
+                            if($cart->course_id == $order->course_id)
+                                $flag = TRUE;
+                        }
                     }
                 }
             }
@@ -422,16 +423,15 @@ class CheckoutController extends Controller
         $response = $validated['bankShortCode'] == 'qris' ?
             XfersHelper::createQRISPayment($request->only(['grand_total', 'date', 'time']), $invoiceNumberResult['data'], $invoice->id) :
             XfersHelper::createPayment($request->only(['grand_total', 'date', 'time', 'bankShortCode']), $invoiceNumberResult['data'], $invoice->id);
-            if ($response['status'] == 'Failed') {
-                $invoice->orders()->delete();
-                $invoice->delete();
-                if ($request->action == 'createPaymentObjectBootcamp')
-                    // return redirect()->route('bootcamp.show', $validated['course_id'])
-                    //     ->with('message', $response['errors']['message']);
-                    return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', $response['errors']['message']);
-
-                else
-                    return redirect()->back()->with('message', $response['errors']['message']);
+        if ($response['status'] == 'Failed') {
+            $invoice->orders()->delete();
+            $invoice->delete();
+            if ($request->action == 'createPaymentObjectBootcamp')
+                // return redirect()->route('bootcamp.show', $validated['course_id'])
+                //     ->with('message', $response['errors']['message']);
+                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', $response['errors']['message']);
+            else
+                return redirect()->route('customer.cart.index')->with('message', $response['errors']['message']);
         } 
 
         $payment_object = $response['data'];

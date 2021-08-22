@@ -1065,15 +1065,9 @@
     ">
         <div class="krest-card" style="margin-top:1.5vw;height:auto;width:25vw;background-color:#2B6CAA">   
             <img
-            @if($loop->iteration == 1)
-            src="/assets/images/icons/Expert_Instructor_Icon.png" 
-            @elseif($loop->iteration == 2)
-            src="/assets/images/icons/Guaranteed_Job_Offer_Icon.png" 
-            @elseif($loop->iteration == 3)
-            src="/assets/images/icons/Payment_Flexibility_Icon.png" 
-            @endif
+            src="{{asset($feature->icon)}}" 
             
-            style="width:4vw;height:4vw;object-fit:contain;border-radius:10px" class="img-fluid" alt="KREST">
+            style="width:4vw;height:4vw;object-fit:contain;border-radius:10px" class="img-fluid" alt="ICON IMAGE">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
             <p id="krest-card-description" class="normal-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;text-align: justify;text-justify: inter-word;">{{$feature->feature}}</p>
         </div>
@@ -1365,18 +1359,8 @@
                     <div style="text-align:center;margin-top:2vw">
                         <img 
 
-                        @if($loop->iteration == 1)
-                        src="/assets/images/icons/After_Hours_Icon.png" 
-                        @elseif($loop->iteration == 2)
-                        src="/assets/images/icons/Group_Individual_Icon.png" 
-                        @elseif($loop->iteration == 3)
-                        src="/assets/images/icons/Personalized_Coaching_Icon.png" 
-                        @elseif($loop->iteration == 4)
-                        src="/assets/images/icons/Career_Lab_Icon.png" 
-                        @elseif($loop->iteration == 5)
-                        src="/assets/images/icons/Student_Assistance_Icon.png" 
-                        @endif
-                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="Image 1">
+                        src="{{asset($benefit->icon)}}" 
+                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="BENNEFIT ICONS">
                     </div>
                     <div style="height:5vw;margin-top:1vw;">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
@@ -1398,18 +1382,9 @@
                     <div style="text-align:center;margin-top:2vw">
                         <img 
 
-                        @if($loop->iteration == 1)
-                        src="/assets/images/icons/After_Hours_Icon.png" 
-                        @elseif($loop->iteration == 2)
-                        src="/assets/images/icons/Group_Individual_Icon.png" 
-                        @elseif($loop->iteration == 3)
-                        src="/assets/images/icons/Personalized_Coaching_Icon.png" 
-                        @elseif($loop->iteration == 4)
-                        src="/assets/images/icons/Career_Lab_Icon.png" 
-                        @elseif($loop->iteration == 5)
-                        src="/assets/images/icons/Student_Assistance_Icon.png" 
-                        @endif
-                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="Image 1">
+                        src="{{asset($benefit->icon)}}" 
+
+                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="BENEFIT ICONS">
                     </div>
                     <div style="margin-top:1vw;">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">{{$benefit->title}}</p>
@@ -1436,18 +1411,8 @@
                 <div style="text-align:left">
                     <div style="text-align:center;margin-top:2vw">
                         <img
-                        @if($loop->iteration == 1)
-                        src="/assets/images/icons/After_Hours_Icon.png" 
-                        @elseif($loop->iteration == 2)
-                        src="/assets/images/icons/Group_Individual_Icon.png" 
-                        @elseif($loop->iteration == 3)
-                        src="/assets/images/icons/Personalized_Coaching_Icon.png" 
-                        @elseif($loop->iteration == 4)
-                        src="/assets/images/icons/Career_Lab_Icon.png" 
-                        @elseif($loop->iteration == 5)
-                        src="/assets/images/icons/Student_Assistance_Icon.png" 
-                        @endif
-                        style="width:11vw;" class="img-fluid" alt="Image 1">
+                        src="{{asset($benefit->icon)}}" 
+                        style="width:11vw;" class="img-fluid" alt="BENEFIT ICON">
                     </div>
                     <div style="margin-top:4vw;">
                         <p class="bigger-text our-mission-card-title" style="text-align:center;">{{$benefit->title}}</p>
@@ -1484,15 +1449,7 @@
             <div class="col-6 p-0 wow fadeInUp desktop-display" data-wow-delay="{{$delay}}s" @if($loop->iteration > 2) style="margin-top: 5vw;" @endif>
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:20vw">
                     <img
-                    @if($loop->iteration == 1)
-                    src="/assets/images/icons/Career_First_Timer_Icon.png"
-                    @elseif($loop->iteration == 2)
-                    src="/assets/images/icons/Career_Shifter_Icon.png"
-                    @elseif($loop->iteration == 3)
-                    src="/assets/images/icons/Business_Owner_Icon.png"
-                    @elseif($loop->iteration == 4)
-                    src="/assets/images/icons/Professional_Icon.png"
-                    @endif
+                    src="{{asset($candidate->icon)}}"
                     style="width:5vw;margin-top:-7vw" class=""  alt="Bootcamp Logo">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw;">{{$candidate->title}}</p>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{$candidate->description}}</p>
@@ -1681,19 +1638,28 @@
                         </div>
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
-                        <div class="col-12 col-lg-7 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+                        <div class="col-12 col-lg-7 p-0" style="text-align:left">
                             <p class="small-heading" id="mtm2"  data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Hi! We're Your<span style="color:#67BBA3"> Instructors</span></p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left;margin-bottom:0px">{{$teacher->name}}
-                            </p>
-                            @if($teacher->occupancy != null)
-                            <p class="normal-text" id="mtm2" style="font-family: Rubik Regular;color:#626262;text-align:left">
-                            {{$teacher->occupancy}}​
-                            </p>
-                            @endif
+                            <div style="display:flex;align-items:flex-start">
+                                <div class="desktop-display">
+                                    @if($teacher->company_logo != null)
+                                    <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="max-width:8vw;height:4vw;object-fit:contain;border-radius:10px;margin-right:1vw" alt="Bootcamp Instructor Company">
+                                    @endif
+                                </div>
+                                <div >
+                                    <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left;margin-bottom:0px">{{$teacher->name}}</p>
+                                    @if($teacher->occupancy != null)
+                                    <p class="normal-text" id="mtm2" style="font-family: Rubik Regular;color:#626262;text-align:left">
+                                    {{$teacher->occupancy}}​
+                                    </p>
+                                    @endif
+                                </div>
+                            </div>
                             @if($teacher->company_logo != null)
-                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;height:4vw;object-fit:contain;border-radius:10px" alt="Bootcamp Instructor Company">
+                            <img src="{{asset($teacher->company_logo)}}" class="mobile-display" id="bootcamp-instructor-company-logo" style="display:none;max-width:8vw;height:4vw;object-fit:contain;border-radius:10px;margin-right:1vw" alt="Bootcamp Instructor Company">
                             @endif
+                            
                         </div>
                         <!-- END OF RIGHT SECTION -->
                     </div>

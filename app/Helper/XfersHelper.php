@@ -8,8 +8,6 @@ class XfersHelper {
 
     const METHOD_GET = 'get';
     const METHOD_POST = 'post';
-    //const BASE_URL = 'https://sandbox-id.xfers.com/api/v4/payments/';
-    const BASE_URL = 'https://id.xfers.com/api/v4/payments/';
     const DEFAULT_HEADERS = [
         'Accept' => 'application/vnd.api+json',
         'Content-Type' => 'application/vnd.api+json'
@@ -65,7 +63,7 @@ class XfersHelper {
 
     // Function to simulate payment (only works on sandbox version)
     public static function simulatePayment($id) {
-        $url = self::BASE_URL . $id . '/tasks';
+        $url = env('XFERS_BASE_URL') . $id . '/tasks';
         $payload = [
             "data" => [
                 "attributes" => [
@@ -79,7 +77,7 @@ class XfersHelper {
 
     // Function to cancel payment.
     public static function cancelPayment($id) {
-        $url = self::BASE_URL . $id . '/tasks';
+        $url = env('XFERS_BASE_URL') . $id . '/tasks';
         $payload = [
             "data" => [
                 "attributes" => [
@@ -93,14 +91,14 @@ class XfersHelper {
 
     // Function to get payment detail by id.
     public static function getPaymentDetail($id) {
-        $url = self::BASE_URL . $id;
+        $url = env('XFERS_BASE_URL') . $id;
         $xfersHelper = new XfersHelper;
         return $xfersHelper->executeWithResponseValidation(self::METHOD_GET, $url);
     }
 
     // Function to create a payment object.
     public static function createPayment($request, $no_invoice, $invoice_id) {
-        $url = self::BASE_URL;
+        $url = env('XFERS_BASE_URL');
         $payload = [
             "data" => [
                 "attributes" => [
@@ -122,7 +120,7 @@ class XfersHelper {
     }
 
     public static function createQRISPayment($request, $no_invoice, $invoice_id) {
-        $url = self::BASE_URL;
+        $url = env('XFERS_BASE_URL');
         $payload = [
             "data" => [
                 "attributes" => [

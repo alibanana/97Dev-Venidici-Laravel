@@ -94,7 +94,15 @@ class InvoiceController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin/invoice/detail', compact('invoice','noWoki','orders'));
+        // Get payment_object.
+        $result = XfersHelper::getPaymentDetail($invoice->xfers_payment_id);
+        if ($result['status'] == 'Failed')
+            return redirect()->back()->with('message', $result['errors']['message']);
+
+        $payment_object = $result['data'];
+        // $payment_status = $payment_object['data']['attributes']['status'];
+
+        return view('admin/invoice/detail', compact('invoice', 'noWoki', 'orders', 'payment_object'));
     }
 
     // Sync the status of each invoices data with Xfers's response.

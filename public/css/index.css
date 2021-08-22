@@ -2366,7 +2366,7 @@ html, body {
     .our-mission-card-mobile{
         width:100%;
         height:auto;
-        padding:5vw;
+        padding:3vw;
         background: #FDFDFD;
         border: 1px solid #D7D6D6;
         box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);
@@ -2502,8 +2502,8 @@ html, body {
     }
 
     #bootcamp-instructor-company-logo{
-        height:12vw !important;
-        width:12vw !important;
+        height:15vw !important;
+        max-width:20vw !important;
     }
     .left-arrow-delivery-method{
         width:5vw !important;
@@ -2656,7 +2656,7 @@ html, body {
     }
     #carousel-control-right-menu-image{
         width: 5vw !important;
-        margin-left: 3vw !important;
+        margin-left: 1vw !important;
     }
     #carousel-control-left-menu-image{
         width: 5vw !important;
