@@ -1359,18 +1359,8 @@
                     <div style="text-align:center;margin-top:2vw">
                         <img 
 
-                        @if($loop->iteration == 1)
-                        src="/assets/images/icons/After_Hours_Icon.png" 
-                        @elseif($loop->iteration == 2)
-                        src="/assets/images/icons/Group_Individual_Icon.png" 
-                        @elseif($loop->iteration == 3)
-                        src="/assets/images/icons/Personalized_Coaching_Icon.png" 
-                        @elseif($loop->iteration == 4)
-                        src="/assets/images/icons/Career_Lab_Icon.png" 
-                        @elseif($loop->iteration == 5)
-                        src="/assets/images/icons/Student_Assistance_Icon.png" 
-                        @endif
-                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="Image 1">
+                        src="{{asset($benefit->icon)}}" 
+                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="BENNEFIT ICONS">
                     </div>
                     <div style="height:5vw;margin-top:1vw;">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
@@ -1392,18 +1382,9 @@
                     <div style="text-align:center;margin-top:2vw">
                         <img 
 
-                        @if($loop->iteration == 1)
-                        src="/assets/images/icons/After_Hours_Icon.png" 
-                        @elseif($loop->iteration == 2)
-                        src="/assets/images/icons/Group_Individual_Icon.png" 
-                        @elseif($loop->iteration == 3)
-                        src="/assets/images/icons/Personalized_Coaching_Icon.png" 
-                        @elseif($loop->iteration == 4)
-                        src="/assets/images/icons/Career_Lab_Icon.png" 
-                        @elseif($loop->iteration == 5)
-                        src="/assets/images/icons/Student_Assistance_Icon.png" 
-                        @endif
-                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="Image 1">
+                        src="{{asset($benefit->icon)}}" 
+
+                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="BENEFIT ICONS">
                     </div>
                     <div style="margin-top:1vw;">
                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">{{$benefit->title}}</p>
@@ -1430,18 +1411,8 @@
                 <div style="text-align:left">
                     <div style="text-align:center;margin-top:2vw">
                         <img
-                        @if($loop->iteration == 1)
-                        src="/assets/images/icons/After_Hours_Icon.png" 
-                        @elseif($loop->iteration == 2)
-                        src="/assets/images/icons/Group_Individual_Icon.png" 
-                        @elseif($loop->iteration == 3)
-                        src="/assets/images/icons/Personalized_Coaching_Icon.png" 
-                        @elseif($loop->iteration == 4)
-                        src="/assets/images/icons/Career_Lab_Icon.png" 
-                        @elseif($loop->iteration == 5)
-                        src="/assets/images/icons/Student_Assistance_Icon.png" 
-                        @endif
-                        style="width:11vw;" class="img-fluid" alt="Image 1">
+                        src="{{asset($benefit->icon)}}" 
+                        style="width:11vw;" class="img-fluid" alt="BENEFIT ICON">
                     </div>
                     <div style="margin-top:4vw;">
                         <p class="bigger-text our-mission-card-title" style="text-align:center;">{{$benefit->title}}</p>

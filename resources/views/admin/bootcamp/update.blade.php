@@ -343,6 +343,8 @@
             @csrf
             <div class="row">
                 <div class="col-6">
+                    <label for="">Icon</label>  <br>
+
                     <input type="file" name="icon">
                     @error('icon')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -351,6 +353,8 @@
                     @enderror   
                 </div>
                 <div class="col-6">
+                    <label for="">Title</label>
+
                     <input type="text" class="form-control" name="title" placeholder="Insert Title">
                     @error('title')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -711,9 +715,20 @@
 
         <!-- START BENEFITS-->
         <div class="course-content" id="benefit-page" style="display:none">
-            <form action="{{route('admin.bootcamp-benefit.store',$course->id)}}" method="post">
+            <form action="{{route('admin.bootcamp-benefit.store',$course->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Icon</label>  <br>
+                        <input type="file" name="icon" > 
+                        @error('icon')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Title</label>
@@ -753,6 +768,7 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Icon</th>
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Action</th>
@@ -762,9 +778,18 @@
                                     @foreach($course->bootcampBenefits as $benefit)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <form method="POST" action="{{route('admin.bootcamp-benefit.update', $benefit->id)}}">
+                                        <form method="POST" action="{{route('admin.bootcamp-benefit.update', $benefit->id)}}"  enctype="multipart/form-data">
                                         @csrf
                                         {{ method_field('PUT') }}
+                                        <td>
+                                        <img src="{{asset($benefit->icon)}}" style="width:5vw" class="img-fluid" alt="No icon found!"> <br>
+                                        <input type="file" name="icon" > 
+                                        @error('icon')
+                                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror  
+                                        </td>
                                         <td>
                                             <input type="text" name="title" value="{{$benefit->title}}" class="form-control">
                                             @error('title')
