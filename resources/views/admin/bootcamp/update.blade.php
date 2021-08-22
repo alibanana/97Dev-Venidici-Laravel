@@ -832,9 +832,20 @@
         <!-- END BENEFITS-->
         <!-- START OF CANDIDATES-->
         <div class="course-content" id="candidate-page" style="display:none">
-            <form action="{{route('admin.bootcamp-candidate.store', $course->id)}}" method="post">
+            <form action="{{route('admin.bootcamp-candidate.store', $course->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Icon</label> <br>
+                        <input type="file" name="icon"> 
+                        @error('icon')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Title</label>
@@ -874,6 +885,7 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Icon</th>
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Action</th>
@@ -883,9 +895,18 @@
                                     @foreach($course->bootcampCandidates as $candidate)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <form method="POST" action="{{route('admin.bootcamp-candidate.update', $candidate->id)}}">
+                                        <form method="POST" action="{{route('admin.bootcamp-candidate.update', $candidate->id)}}" enctype="multipart/form-data">
                                         @csrf
                                         {{ method_field('PUT') }}
+                                        <td>
+                                        <img src="{{asset($candidate->icon)}}" style="width:5vw" class="img-fluid" alt="No icon found!"> <br>
+                                        <input type="file" name="icon" > 
+                                        @error('icon')
+                                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror  
+                                        </td>
                                         <td>
                                             <input type="text" name="title" value="{{$candidate->title}}" class="form-control">
                                             @error('title')

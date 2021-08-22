@@ -1449,15 +1449,7 @@
             <div class="col-6 p-0 wow fadeInUp desktop-display" data-wow-delay="{{$delay}}s" @if($loop->iteration > 2) style="margin-top: 5vw;" @endif>
                 <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:20vw">
                     <img
-                    @if($loop->iteration == 1)
-                    src="/assets/images/icons/Career_First_Timer_Icon.png"
-                    @elseif($loop->iteration == 2)
-                    src="/assets/images/icons/Career_Shifter_Icon.png"
-                    @elseif($loop->iteration == 3)
-                    src="/assets/images/icons/Business_Owner_Icon.png"
-                    @elseif($loop->iteration == 4)
-                    src="/assets/images/icons/Professional_Icon.png"
-                    @endif
+                    src="{{asset($candidate->icon)}}"
                     style="width:5vw;margin-top:-7vw" class=""  alt="Bootcamp Logo">
                     <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw;">{{$candidate->title}}</p>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{$candidate->description}}</p>
