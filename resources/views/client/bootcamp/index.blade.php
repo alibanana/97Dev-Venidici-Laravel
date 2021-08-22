@@ -1638,19 +1638,28 @@
                         </div>
                         <!-- END OF LEFT SECTION -->
                         <!-- START OF RIGHT SECTION -->
-                        <div class="col-12 col-lg-7 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+                        <div class="col-12 col-lg-7 p-0" style="text-align:left">
                             <p class="small-heading" id="mtm2"  data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Hi! We're Your<span style="color:#67BBA3"> Instructors</span></p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left;margin-bottom:0px">{{$teacher->name}}
-                            </p>
-                            @if($teacher->occupancy != null)
-                            <p class="normal-text" id="mtm2" style="font-family: Rubik Regular;color:#626262;text-align:left">
-                            {{$teacher->occupancy}}​
-                            </p>
-                            @endif
+                            <div style="display:flex;align-items:flex-start">
+                                <div class="desktop-display">
+                                    @if($teacher->company_logo != null)
+                                    <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="max-width:8vw;height:4vw;object-fit:contain;border-radius:10px;margin-right:1vw" alt="Bootcamp Instructor Company">
+                                    @endif
+                                </div>
+                                <div >
+                                    <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left;margin-bottom:0px">{{$teacher->name}}</p>
+                                    @if($teacher->occupancy != null)
+                                    <p class="normal-text" id="mtm2" style="font-family: Rubik Regular;color:#626262;text-align:left">
+                                    {{$teacher->occupancy}}​
+                                    </p>
+                                    @endif
+                                </div>
+                            </div>
                             @if($teacher->company_logo != null)
-                            <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="width:8vw;height:4vw;object-fit:contain;border-radius:10px" alt="Bootcamp Instructor Company">
+                            <img src="{{asset($teacher->company_logo)}}" class="mobile-display" id="bootcamp-instructor-company-logo" style="display:none;max-width:8vw;height:4vw;object-fit:contain;border-radius:10px;margin-right:1vw" alt="Bootcamp Instructor Company">
                             @endif
+                            
                         </div>
                         <!-- END OF RIGHT SECTION -->
                     </div>
