@@ -115,7 +115,7 @@ class SectionController extends Controller
         
         } elseif ($section->course->courseType->type == 'Bootcamp') {
             $route = 'admin.bootcamp.edit';
-            $message = 'Section (' . $section->title  . ') has been deleted from Bootcmp Course (' . $section->course->title . ')';
+            $message = 'Section (' . $section->title  . ') has been deleted from Bootcamp Course (' . $section->course->title . ')';
         }
 
         return redirect()->route($route, $section->course->id)
