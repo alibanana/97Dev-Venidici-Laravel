@@ -555,8 +555,12 @@ class CourseHelper {
         });
 
         $userCourseProgressByCourseIds = [];
+
         foreach ($onGoingCourses as $course) {
-            $userCourseProgressByCourseIds[$course->id] = CourseHelper::calculateUserCourseProgressByCourseObject($course);
+            if(count($course->sections) != 0 )
+                $userCourseProgressByCourseIds[$course->id] = CourseHelper::calculateUserCourseProgressByCourseObject($course);
+            else
+                $userCourseProgressByCourseIds[$course->id] = 0;
         }
 
         return $userCourseProgressByCourseIds;

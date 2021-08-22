@@ -1034,7 +1034,7 @@
         @else
             @foreach($onGoingCoursesPaginationData['data'] as $course)
                 <div class="col-12 p-0">
-                    <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->title}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');">
+                    <div class="@if($course->course_type_id == 1) blue-bordered-card @else red-bordered-card @endif" style="margin-top:2.5vw;display:flex;cursor:pointer" @if(count($course->sections) != 0 ) onclick="window.open('/online-course/{{$course->title}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');" @endif>
                         <div class="container-image-card">
                             <img src="{{asset($course->thumbnail)}}" style="width:12vw" class="img-fluid" alt="">
                             <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill-Snack @else Woki @endif</div>
@@ -1064,8 +1064,8 @@
                                     <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ $userCourseProgress[$course->id] }}%;">
                                     </div>
                                 </div>
-                                @if( count(course->sections) != 0 )
-                                    @if(count(course->sections[0]->sectionContents) != 0)
+                                @if( count($course->sections) != 0 )
+                                    @if(count($course->sections[0]->sectionContents) != 0)
                                     <a href="{{ route('online-course.learn', ['course_title' => $course->title, 'content_title' => $course->sections[0]->sectionContents[0]->title]) }}" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Mulai Belajar</a>
                                     @endif
                                 @endif
@@ -1106,7 +1106,7 @@
             @foreach($completedCoursesPaginationData['data'] as $course)
                 @if($course->course_type_id && $course->course_type_id == 1)
                     <div class="col-12 p-0">
-                        <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" onclick="window.open('/online-course/{{$course->title}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');">
+                        <div class="blue-bordered-card" style="margin-top:2.5vw;display:flex;cursor:pointer" @if(count($course->sections) != 0 ) onclick="window.open('/online-course/{{$course->title}}/learn/lecture/{{ $course->sections[0]->sectionContents[0]->title }}','_self');" @endif>
                             <div class="container-image-card">
                                 <img src="{{asset($course->thumbnail)}}" style="width:12vw" class="img-fluid" alt="">
                                 <div class="top-left card-tag small-text" > @if($course->course_type_id == 1) Skill Snack @else Woki @endif</div>
