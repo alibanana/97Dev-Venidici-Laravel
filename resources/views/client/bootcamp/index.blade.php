@@ -1065,15 +1065,9 @@
     ">
         <div class="krest-card" style="margin-top:1.5vw;height:auto;width:25vw;background-color:#2B6CAA">   
             <img
-            @if($loop->iteration == 1)
-            src="/assets/images/icons/Expert_Instructor_Icon.png" 
-            @elseif($loop->iteration == 2)
-            src="/assets/images/icons/Guaranteed_Job_Offer_Icon.png" 
-            @elseif($loop->iteration == 3)
-            src="/assets/images/icons/Payment_Flexibility_Icon.png" 
-            @endif
+            src="{{asset($feature->icon)}}" 
             
-            style="width:4vw;height:4vw;object-fit:contain;border-radius:10px" class="img-fluid" alt="KREST">
+            style="width:4vw;height:4vw;object-fit:contain;border-radius:10px" class="img-fluid" alt="ICON IMAGE">
             <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
             <p id="krest-card-description" class="normal-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;text-align: justify;text-justify: inter-word;">{{$feature->feature}}</p>
         </div>

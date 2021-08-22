@@ -126,41 +126,27 @@ class BootcampCourseDetailSeeder extends Seeder
             [
                 'course_id' => '1',
                 'title' => 'After-hours Online Live Class with Expert Instructors',
-                'description' => 'Kelas live interaktif 3 kali dalam seminggu untuk membantumu menyerap ilmu yang dibutuhkan di industri
-                
-                Dapatkan modul lengkap untuk setiap kelas!
-                ',
+                'description' => 'Kelas live interaktif 3 kali dalam seminggu untuk membantumu menyerap ilmu yang dibutuhkan di industri. Dapatkan modul lengkap untuk setiap kelas!',
             ],
             [
                 'course_id' => '1',
                 'title' => 'Group and individual project',
-                'description' => 'Praktekin apa yang dipelajari di kelas, mulai dari ilmu baru sampai tools terkini
-                
-                Kuasai materi mingguan dengan praktek yang telah kami desain
-                
-                Mengerjakan real PAID project untuk pengalaman bekerja bagi perusahaan yang lebih nyata
-                ',
+                'description' => 'Praktekin apa yang dipelajari di kelas, mulai dari ilmu baru sampai tools terkini. Kerjakan real PAID project untuk pengalaman bekerja bagi perusahaan yang lebih nyata.',
             ],
             [
                 'course_id' => '1',
                 'title' => 'Personalized Coaching',
-                'description' => 'Nikmati fasilitas one on one session dengan para mentor berpengalaman untuk mendapatkan saran, kritik, ataupun sekadar berbagi experience seputar bidang karir',
+                'description' => 'Nikmati fasilitas one on one session dengan para mentor berpengalaman untuk mendapatkan saran, kritik, ataupun berbagi experience seputar bidang karir.',
             ],
             [
                 'course_id' => '1',
                 'title' => 'Career Lab',
-                'description' => 'Dapatkan kelas workshop persiapan karir mulai dari pembuatan CV, mock-up interview, sampai konsultasi karir
-                
-                Dapatkan personalized career coach untuk membantumu menata rencana karir dan akhirnya menggapai pekerjaan impianmu
-                ',
+                'description' => 'Dapatkan kelas workshop persiapan karir mulai dari pembuatan CV, portfolio, mock-up interview. Personalized career coach akan membantumu menata rencana karir dan menggapai pekerjaan impianmu.',
             ],
             [
                 'course_id' => '1',
                 'title' => 'Student assistance via Slack',
-                'description' => 'Bebas tanya mentor terkait tugas dan materi yang masih belum dipahami
-                
-                Bekerja kolaboratif dan juga saling bertukar pendapat bersama peserta bootcamp lainnya
-                ',
+                'description' => 'Bebas tanya mentor terkait tugas dan materi yang masih belum dipahami. Kerja kolaboratif dan bertukar pendapat bersama peserta bootcamp lainnya.',
             ],
         ];
 

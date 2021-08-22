@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CourseFeature;
+use App\Helper\Helper;
+
 use Illuminate\Support\Facades\Validator;
 
 class BootcampFeatureController extends Controller
@@ -43,6 +45,7 @@ class BootcampFeatureController extends Controller
             ->with('page-option', 'bootcamp-feature-page');
             
         $validator = Validator::make($request->all(), [
+            'icon'          => 'required',
             'title'         => 'required',
             'feature'       => 'required',
         ]);
@@ -54,6 +57,8 @@ class BootcampFeatureController extends Controller
 
         $new_feature = new CourseFeature;
         $new_feature->course_id = $course_id;
+        if ($request->has('icon')) 
+            $new_feature->icon = Helper::storeImage($request->file('icon'), 'storage/images/bootcamp/icons/');
         $new_feature->title     = $validated['title'];
         $new_feature->feature   = $validated['feature'];
         $new_feature->save();
@@ -104,6 +109,11 @@ class BootcampFeatureController extends Controller
 
         $feature            = CourseFeature::findOrFail($validated['bootcamp_feature_id']);
         $feature->title     = $validated['title'];
+        if ($request->has('icon')) {
+            if($feature->icon != null)
+                unlink($feature->icon);
+            $feature->icon = Helper::storeImage($request->file('icon'), 'storage/images/bootcamp/icons/');
+        }
         $feature->feature   = $validated['feature'];
         $feature->save();
 

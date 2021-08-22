@@ -339,9 +339,17 @@
 
         <!-- START OF FEATURE -->
         <div class="course-content" id="bootcamp-feature" style="display:none">
-            <form action="{{route('admin.bootcamp-feature.store', $course->id)}}" method="post">
+            <form action="{{route('admin.bootcamp-feature.store', $course->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
+                <div class="col-6">
+                    <input type="file" name="icon">
+                    @error('icon')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror   
+                </div>
                 <div class="col-6">
                     <input type="text" class="form-control" name="title" placeholder="Insert Title">
                     @error('title')
@@ -373,6 +381,7 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Icon</th>
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th >Action</th>
@@ -381,16 +390,44 @@
                             <tbody>
                                 @foreach($course->courseFeatures as $feature)
                                 <tr>
+                                <form method="POST" action="{{route('admin.bootcamp-feature.update')}}" enctype="multipart/form-data">
+                                @csrf
+                                {{ method_field('PUT') }}
+                                <input type="hidden" name="bootcamp_feature_id" value="{{$feature->id}}">
+
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$feature->title}}</td>
                                     <td>
-                                        {{$feature->feature}}
+                                    <img src="{{asset($feature->icon)}}" style="width:5vw" class="img-fluid" alt="no icon yet!">
+                                    <input type="file" name="icon">
+                                    @error('icon')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror  
+                                    </td>
+                                    <td style="width:20vw">
+                                    <input type="text" class="form-control" name="title" placeholder="Insert Title" value="{{$feature->title}}">
+                                    @error('title')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    </td>
+                                    <td>
+                                    <textarea name="feature" rows="5" class="form-control" cols="100" placeholder="Insert Description">{{$feature->feature}}</textarea>
+                                    @error('feature')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     </td>
                                     <td>
                                         <div style="padding: 0px 2px;" class="text-nowrap d-flex">
-                                            <a onclick="passBootcampFeature('{{$feature->title}}','{{$feature->feature}}','{{$feature->id}}')" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" data-toggle="modal" data-target="#bootcampFeatureModal">
+                                            <!--<a onclick="passBootcampFeature('{{$feature->title}}','{{$feature->feature}}','{{$feature->id}}')" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" data-toggle="modal" data-target="#bootcampFeatureModal">
                                                 Update
-                                            </a>
+                                            </a>-->
+                                            <button type="submit" class="btn btn-info shadow-sm">Update</button>
+                                            </form>
                                             <form action="{{route('admin.bootcamp-feature.destroy', $feature->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')

@@ -17,6 +17,7 @@ class CreateCourseFeaturesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->string('icon')->nullable();
             $table->string('title')->nullable();
             $table->text('feature');
             $table->timestamps();
