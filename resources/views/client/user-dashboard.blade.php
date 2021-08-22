@@ -987,7 +987,13 @@
                                 @if($application->is_trial && !$application->is_full_registration)
                                 <button onclick="passBootcampApplicationId({{$application->id}})"  data-toggle="modal" data-target="#upgradeBootcamp" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-bottom:2vw;">Upgrade</button>
                                 @endif
+
                                 <a href="{{$application->course->bootcampCourseDetail->meeting_link}}" target="_blank" id="meeting-link" class="small-text" style="font-family:Rubik Medium; @if($application->is_trial && !$application->is_full_registration) margin-top:2vw @endif">Meeting Link</a>
+                                @if( count($application->course->sections) != 0 )
+                                    @if(count($application->course->sections[0]->sectionContents) != 0)
+                                    <a href="{{ route('online-course.learn', ['course_title' => $application->course->title, 'content_title' => $application->course->sections[0]->sectionContents[0]->title]) }}" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Recorded Videos</a>
+                                    @endif
+                                @endif
                             </div>
                             @endif
                         </div> 
@@ -1058,7 +1064,11 @@
                                     <div class="progress-bar-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ $userCourseProgress[$course->id] }}%;">
                                     </div>
                                 </div>
-                                <a href="{{ route('online-course.learn', ['course_title' => $course->title, 'content_title' => $course->sections[0]->sectionContents[0]->title]) }}" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Mulai Belajar</a>
+                                @if( count(course->sections) != 0 )
+                                    @if(count(course->sections[0]->sectionContents) != 0)
+                                    <a href="{{ route('online-course.learn', ['course_title' => $course->title, 'content_title' => $course->sections[0]->sectionContents[0]->title]) }}" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Mulai Belajar</a>
+                                    @endif
+                                @endif
                             </div>
                         </div> 
                     </div>
@@ -1226,8 +1236,11 @@
                                 </div>
                                 <div style=" display: flex;flex-direction: column;justify-content: center;align-items: center;padding:1.4vw 2vw;" >
                                     <i class="fas fa-check-circle big-heading"></i>
-                                    <p id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;margin-top:2vw">Kelas Selesai</p>
-
+                                    @if( count($application->course->sections) != 0 )
+                                        @if(count($application->course->sections[0]->sectionContents) != 0)
+                                        <a href="{{ route('online-course.learn', ['course_title' => $application->course->title, 'content_title' => $application->course->sections[0]->sectionContents[0]->title]) }}" id="detail-button" class="small-text text-nowrap" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;margin-top:2vw">Recorded Videos</a>
+                                        @endif
+                                    @endif
                                 </div>
                             </div> 
                         </div>

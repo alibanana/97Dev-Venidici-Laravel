@@ -61,20 +61,21 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h2 class="mb-0 mb-3 text-gray-800">Update Bootcamp</h2>
         </div>
-        <div class="mb-2" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <div class="mb-2" style="display:flex;align-items:center;flex-wrap:wrap">
             <h6 id="basic-informations-button" class="mb-0 mb-3 course-link course-link-active course-item"  onclick="changeContent(event, 'basic-informations')" style="cursor:pointer">Basic Informations</h6>
-            <!-- <h6 id="manage-curriculum-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h6> -->
-            <h6 id="feature-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer;">Feature</h6>
-            <h6 id="about-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer;">About</h6>
-            <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="cursor:pointer;">Pricing & Enrollment Scenario</h6>
-            <h6 id="publish-status-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'publish-status')" style="cursor:pointer;">Publish Status</h6>
-            <h6 id="teacher-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="cursor:pointer;">Teacher</h6>
-            <h6 id="schedule-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="cursor:pointer;">Schedule</h6>
+            <!-- <h6 id="manage-curriculum-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'manage-curriculum')" style="margin-left:1.5vw;cursor:pointer">Manage Curriculum</h6> -->
+            <h6 id="feature-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'bootcamp-feature')" style="cursor:pointer;">Feature</h6>
+            <h6 id="about-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'bootcamp-descriptions')" style="cursor:pointer;">About</h6>
+            <h6 id="manage-curriculum-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'bootcamp-curriculum')" style="cursor:pointer;">Manage Curriculum</h6>
+            <h6 id="pricing-and-enrollment-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'pricing-enrollment')" style="cursor:pointer;">Pricing & Enrollment Scenario</h6>
+            <h6 id="publish-status-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'publish-status')" style="cursor:pointer;">Publish Status</h6>
+            <h6 id="teacher-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'teacher-page')" style="cursor:pointer;">Teacher</h6>
+            <h6 id="schedule-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'schedule-page')" style="cursor:pointer;">Schedule</h6>
             <h6 id="benefit-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'benefit-page')" style="cursor:pointer;">Benefit</h6>
-            <h6 id="candidate-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'candidate-page')" style="cursor:pointer;">Candidate</h6>
-            <h6 id="career-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'future-career-page')" style="cursor:pointer;">Future Careers</h6>
-            <h6 id="partner-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'hiring-partner-page')" style="cursor:pointer;">Hiring Partners</h6>
-            <h6 id="batch-page-button" class="mb-0 mb-3 course-link course-item" onclick="changeContent(event, 'batch-page')" style="cursor:pointer;">Batch</h6>
+            <h6 id="candidate-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'candidate-page')" style="cursor:pointer;">Candidate</h6>
+            <h6 id="career-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'future-career-page')" style="cursor:pointer;">Future Careers</h6>
+            <h6 id="partner-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'hiring-partner-page')" style="cursor:pointer;">Hiring Partners</h6>
+            <h6 id="batch-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'batch-page')" style="cursor:pointer;">Batch</h6>
         </div>
         
         <!-- Content Row -->
@@ -535,6 +536,105 @@
             
         </div>
         <!-- END OF BOOTCAMP DESCRIPTIONS -->
+        
+        <!-- START OF MANAGE CURRICULUM -->
+        <div class="course-content" id="bootcamp-curriculum" style="display:none">
+            <form action="{{ route('admin.sections.store') }}" method="POST">
+            @csrf
+                <input type="hidden" name="course_id" value="{{ $course->id }}" hidden>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Section</label>
+                            <input type="text" name="section-title" class="form-control form-control-user"
+                                id="phone" aria-describedby="" value="{{ old('section-title') }}"
+                                placeholder="Enter couse section" required> 
+                            @error('section-title')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-6" style="padding:2vw 1vw">
+                        <div style="display:flex;justify-content:flex-start">
+                            <button type="submit" class="btn btn-primary btn-user">Add Section</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            @foreach ($course->sections as $section)
+                <!-- START OF ONE MATERI -->
+                <div class="row" style="margin-top:2vw">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div style="display:flex;justify-content:space-between;align-items:center">
+                                    <div>
+                                        <form action="{{ route('admin.sections.update', $section->id) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                            <input style="width:50% !important;" type="text" name="section-title-{{ $section->id }}" 
+                                                value="{{ old('section-title-' . $section->id, $section->title) }}" required>
+                                            @error('section-title-' . $section->id)
+                                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
+                                            <button type="submit" class="btn btn-primary btn-info" onclick="return confirm('Are you sure you want to update this section?')">Update Section</button>    
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <form action="{{ route('admin.sections.destroy', $section->id) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                            <button type="submit" class="btn btn-primary btn-danger" onclick="return confirm('Are you sure you want to remove this section from the course?')">Delete Section</button>
+                                        </form>
+                                    </div>
+                                </div>                        
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                @foreach ($section->sectionContents as $content)
+                                <form action="{{ route('admin.section-contents.destroy', $content->id) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
+                                    {{ $content->title }}
+                                        <div>
+                                            <!--<a href="#" data-toggle="modal" data-target="#addContentModal"  class="btn btn-primary btn-primary">
+                                            Add Content
+                                            </a>-->
+                                            <a href="{{ route('admin.section-contents.edit', $content->id) }}" class="btn btn-primary btn-primary">
+                                            Update content
+                                            </a>
+                                            <button type="submit" class="btn btn-primary btn-danger" onclick="return confirm('Are you sure you want to remove this content?')">Delete Content</button>
+                                        </div>
+                                    </div>     
+                                </form>
+                                @endforeach
+                                <form action="{{ route('admin.section-contents.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="section_id" value="{{ $section->id }}" hidden>
+                                    <div class="list-group-item" style="display:flex;justify-content:space-between;align-items:center">
+                                        <input type="text" placeholder="Enter new lecture title" style="width:80%" 
+                                            name="section-{{ $section->id }}-newContentTitle" 
+                                            value="{{ old('section-' . $section->id . '-newContentTitle') }}" required>
+                                        <button type="submit" class="btn btn-primary btn-info">Create Lecture</button>
+                                    </div>
+                                </form>
+                            </ul>
+                        </div>
+                        @error('section-' . $section->id . '-newContentTitle')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <!-- END OF ONE MATERI -->
+            @endforeach
+        </div>
+        <!-- END OF MANAGE CURRICULUM -->
 
 
         <!-- START OF PRICE AND ENROLLMENT -->
@@ -899,7 +999,7 @@
                                         @csrf
                                         {{ method_field('PUT') }}
                                         <td>
-                                        <img src="{{asset($candidate->icon)}}" style="width:5vw" class="img-fluid" alt="No icon found!"> <br>
+                                        <img src="{{asset($candidate    ->icon)}}" style="width:5vw" class="img-fluid" alt="No icon found!"> <br>
                                         <input type="file" name="icon" > 
                                         @error('icon')
                                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -1499,6 +1599,8 @@ function duplicateSchedule() {
         <script>document.getElementById('partner-page-button').click()</script>
     @elseif (Session::get('page-option') == 'batch-page')
         <script>document.getElementById('batch-page-button').click()</script>
+    @elseif (Session::get('page-option') == 'manage-curriculum')
+        <script>document.getElementById('manage-curriculum-button').click()</script>
     @endif
 @endif
 @endsection

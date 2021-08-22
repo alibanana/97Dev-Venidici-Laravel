@@ -16,6 +16,10 @@ use App\Models\CourseFeature;
 use App\Models\Hashtag;
 use App\Models\BootcampApplication;
 use App\Models\Notification;
+
+use App\Models\User;
+use App\Models\UserDetail;
+
 use App\Mail\BootcampFullRegistrationMail;
 use Illuminate\Support\Facades\Mail;
 
@@ -339,6 +343,13 @@ class BootcampController extends Controller
             $application->status = 'approved';
             $title = 'Selamat, pendaftaran Bootcamp kamu telah diterima!';
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah diterima. Click disini untuk melihat status';
+            $user = User::findOrFail($application->user_id);
+            if (!$user->courses->contains($application->course->id)) {
+                $user->courses()->syncWithoutDetaching([$application->course->id]);
+                if ($application->course->assessment()->exists()) {
+                    $user->assessments()->syncWithoutDetaching([$application->course->assessment->id]);
+                }
+            }
             
         }
         elseif($request->action == 'Reject'){
