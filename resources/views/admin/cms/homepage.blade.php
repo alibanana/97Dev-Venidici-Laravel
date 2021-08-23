@@ -96,16 +96,16 @@
                     @method("put")
                         <div class="row" style="margin-top:4vw" >
                             <div class="col-6" >
-                                <h5 class="mb-0 mb-3 text-gray-800" style="color:white">Trusted Company Section</h5>
+                                <h5 class="mb-0 mb-3 text-gray-800" style="color:white">Trusted Collaborator Section</h5>
                             </div>
                             <div class="col-6" style="display:flex;justify-content:flex-end">
-                                <button type="submit" class="btn btn-primary btn-user" style="padding:1vw 8vw" onclick='return confirm("Are you sure you want to update the Trusted Company section in the Homepage?")'>
-                                    Update Content
+                                <button type="submit" class="btn btn-primary btn-user" style="padding:1vw 3.2vw" onclick='return confirm("Are you sure you want to update the Trusted Collaborator section in the Homepage?")'>
+                                    Update All Collaborator Content
                                 </button>						
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="">Trusted Company Count</label>
+                                    <label for="">Trusted Collaborator Count</label>
                                     <input type="text" name="trusted-company-count" class="form-control form-control-user" 
                                         value="{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}" required>
                                     @error('trusted-company-count')
@@ -115,14 +115,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-6">
-                                
-                            </div>
                             <form action="">
-                            <div class="col-6">
+                            <div class="col-6" style="display:flex;justify-content:flex-end">
                                 <div class="form-group">
+                                    <br>
                                     <label for="">Add New Collaborator</label>  <br>
-                                    <input type="file" name=""required>
+                                    <input type="file" name=""  required>
                                     @error('')
                                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                                             <strong>{{ $message }}</strong>
@@ -132,16 +130,16 @@
                             </div>
                             <div class="col-6">
                             </div>
-                            <div class="col-6">
+                            
+                            <div class="col-6" style="display:flex;justify-content:flex-end">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-user" style="padding:1vw 8vw" onclick='return confirm("Are you sure you want to update the Trusted Company section in the Homepage?")'>
+                                    <button type="submit" class="btn btn-primary btn-user" style="padding:0.5vw 9vw;" onclick='return confirm("Are you sure you want to update the Trusted Company section in the Homepage?")'>
                                         Add New
                                     </button>	
                                 </div>
                             </div>
                             </form>
-                            <div class="col-6">
-                            </div>
+                            
                             
                             @foreach ($trusted_companies as $company)
                                 <div class="col-3 mb-4">
