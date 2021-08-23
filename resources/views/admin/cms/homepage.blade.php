@@ -115,10 +115,38 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-6"></div>
+                            <div class="col-6">
+                                
+                            </div>
+                            <form action="">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Add New Collaborator</label>  <br>
+                                    <input type="file" name=""required>
+                                    @error('')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-6">
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-user" style="padding:1vw 8vw" onclick='return confirm("Are you sure you want to update the Trusted Company section in the Homepage?")'>
+                                        Add New
+                                    </button>	
+                                </div>
+                            </div>
+                            </form>
+                            <div class="col-6">
+                            </div>
+                            
                             @foreach ($trusted_companies as $company)
                                 <div class="col-3 mb-4">
                                     <div class="card shadow h-100 py-2">
+                                        <form action="">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center" style="height: 250px">
                                                 <div class="col" style="text-align:center">
@@ -132,7 +160,17 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                            
+                                            <div>
+                                            <button type="submit" class="btn btn-primary btn-user mt-3" style="padding:0.5vw 2vw;width:100%;" >
+                                                Update
+                                            </button>
+                                            <button type="submit" class="btn btn-danger btn-user mt-3" style="padding:0.5vw 2vw;width:100%;" >
+                                                Delete
+                                            </button>
+                                            </div>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             @endforeach

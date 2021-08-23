@@ -399,7 +399,7 @@
 
 <!-- START OF BANNER SECTION -->
 <div class="row m-0 banner-background page-container desktop-display"
-    style="height: 50vw; padding-top: 19vw; text-align: center;
+    style="height: 50vw; padding-top: 17vw; text-align: center;
     background-image: url({{ $configs['cms.homepage.top-section.background']->value }});">
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
@@ -471,17 +471,20 @@
 <!-- END OF MOBILE BANNER SECTION -->
 
 <!-- START OF TRUSTED COMPANY SECTION -->
-<div class="row m-0 page-container desktop-display d-none"  style="z-index: 99;padding-bottom:5vw">
+<div class="row m-0 page-container desktop-display"  style="z-index: 99;padding-bottom:5vw">
     <div class="col-12 p-0" id="trusted-company-margin" style="margin-top:-5vw">
-        <div class="wow fadeInRight" data-wow-delay="1s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;justify-content:space-between;align-items:center">
+        <div class="wow fadeInRight" data-wow-delay="1s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;align-items:center">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
-                <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Trusted Companies</p>
+                <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA">Collaborators</p>
             </div>
-            <img src="/assets/images/icons/vertical-splitter.png" style="max-height:3.5vw" class="img-fluid" alt="">
+            <img src="/assets/images/icons/vertical-splitter.png" style="max-height:3.5vw;margin-left:2vw" class="img-fluid" alt="">
+            <div class="items" id="collaborators-slider" style="display:flex;align-items:center;overflow-y: scroll;cursor:grab">
             @foreach ($trusted_companies as $company)
-                <img src="{{ asset($company->image) }}" style="max-height:3.5vw" class="img-fluid" alt="Image not available..">                
+                <img src="{{ asset($company->image) }}" style="max-height:3.5vw;margin-left:4vw" class="img-fluid" alt="Image not available..">                
+                <img src="{{ asset($company->image) }}" style="max-height:3.5vw;margin-left:4vw" class="img-fluid" alt="Image not available..">                
             @endforeach
+            </div>
         </div>
     </div>
 </div>
@@ -2133,13 +2136,13 @@
 
 
 
-<!-- START OF MOBILE TRUSTED COMPANIES -->
-<div class="row m-0 page-container mobile-display d-none"  style="display:none;padding-top:5vw;padding-bottom:8vw;">
+<!-- START OF MOBILE Collaborators -->
+<div class="row m-0 page-container mobile-display"  style="display:none;padding-top:5vw;padding-bottom:8vw;">
     <div class="col-12 p-0">
         <div class="wow fadeInRight">
             <div style="text-align: center;">
                 <p class="big-heading" style="font-family: Rubik Medium;color:#000000;margin-bottom:0px">{{ $configs['cms.homepage.trusted-company-section.trusted-company-count']->value }}</p>
-                <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-top:2vw;margin-bottom:0px">Trusted Companies</p>
+                <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-top:2vw;margin-bottom:0px">Collaborators</p>
             </div>
             <div style="display:flex;align-items:center;justify-content:center;flex-wrap: wrap;">
                 @foreach ($trusted_companies as $company)
@@ -2151,9 +2154,62 @@
         </div>
     </div>
 </div>
-<!-- END OF MOBILE TRUSTED COMPANIES -->
+<!-- END OF MOBILE Collaborators -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script>
+
+function animatethis(targetElement, speed) {
+    var scrollWidth = $(targetElement).get(0).scrollWidth;
+    var clientWidth = $(targetElement).get(0).clientWidth;
+    $(targetElement).animate({ scrollLeft: scrollWidth - clientWidth },
+    {
+        duration: speed,
+        complete: function () {
+            targetElement.animate({ scrollLeft: 0 },
+            {
+                duration: speed,
+                complete: function () {
+                    animatethis(targetElement, speed);
+                }
+            });
+        }
+    });
+};
+window.addEventListener("load", function(){
+    animatethis($('#collaborators-slider'), 12000);
+});
+</script>
+
+<script>
+    const slider = document.querySelector('.items');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+    });
+    slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+    });
+    slider.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1; //scroll-fast
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
 
 <script>
     function changeCourse(evt, categoryName) {

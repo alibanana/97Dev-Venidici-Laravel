@@ -182,7 +182,7 @@
       @if( !Request::is('signup') )
       @if( !Request::is('signup-interests') )
     <!-- START OF MOBILE NAVBAR -->
-    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;position: sticky;
+    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;
   top: 0;z-index: 10;">
       <div >
         <!--    Made by Erik Terwan    -->
