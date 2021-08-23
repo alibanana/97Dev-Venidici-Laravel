@@ -116,8 +116,8 @@
                                 </div>
                             </div>
                             <form action="">
-                            <div class="col-6" style="display:flex;justify-content:flex-end">
-                                <div class="form-group">
+                            <div class="col-6" style="display:flex;align-items:flex-end;justify-content:flex-end">
+                                <div class="form-group" style="width:40%">
                                     <br>
                                     <label for="">Add New Collaborator</label>  <br>
                                     <input type="file" name=""  required>
@@ -127,13 +127,8 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="col-6">
-                            </div>
-                            
-                            <div class="col-6" style="display:flex;justify-content:flex-end">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-user" style="padding:0.5vw 9vw;" onclick='return confirm("Are you sure you want to update the Trusted Company section in the Homepage?")'>
+                                    <button type="submit" class="btn btn-primary btn-user" style="width:100%" onclick='return confirm("Are you sure you want to update the Trusted Company section in the Homepage?")'>
                                         Add New
                                     </button>	
                                 </div>
