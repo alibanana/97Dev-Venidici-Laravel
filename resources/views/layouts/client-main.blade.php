@@ -440,7 +440,7 @@
                 @else
                 <a  href="{{$notif->link}}" style="text-decoration:none">
                 @endif
-                <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
+                <div class="" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                         <div class="notification-left-blue-border">
                           <i class="fas fa-shopping-cart bigger-text" style="color:#2B6CAA"></i>

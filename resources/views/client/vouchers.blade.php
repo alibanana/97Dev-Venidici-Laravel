@@ -325,8 +325,8 @@
                     @endif
 
                     <!-- START OF ONE REDEEM  CARD -->
-                    <div class="col-6" style="display:flex;justify-content:center">
-                        <div class="redeem-card-blue" style="padding:1.5vw;width:40vw">
+                    <div class="col-12" style="display:flex;justify-content:center">
+                        <div class="redeem-card-blue" style="padding:1.5vw;width:80vw">
                             <div style="text-align:center">
                                 <img src="/assets/images/client/redeem_voucher.png" class="img-fluid" style="width:7vw" alt="">
                             </div>
@@ -351,14 +351,14 @@
                     </div>
                     <!-- END OF ONE  REDEEM CARD -->
 
-                    @if ($loop->last || $card_counter == 2)
+                    @if ($loop->last || $card_counter == 1)
                             </div>
                         </div>
                     @endif
 
                     @php
                         $new_carousel_item = false;
-                        if ($card_counter == 2) $card_counter = 0;
+                        if ($card_counter == 1) $card_counter = 0;
                     @endphp
                 @endforeach
             </div>
