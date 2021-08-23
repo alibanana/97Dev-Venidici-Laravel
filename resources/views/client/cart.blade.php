@@ -47,8 +47,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="margin-right" style="display:flex;align-items:center">
-                                <div  style="width:7.5vw;text-align:right">
+                            <div  style="display:flex;align-items:center" id="mobile-view-margin-course-card">
+                                <div  style="width:7.5vw;text-align:right" >
                                     <p class="bigger-text text-nowrap mb-0"  style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Rp. {{ number_format($cart->price, 0, ',', ',') }}</p>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div style="display:flex;align-items:center">
+                            <div style="display:flex;align-items:center" id="mobile-view-margin-woki">
                                 @if ($cart->withArtOrNo)
                                     <div style="display:flex;align-items:center;margin-right:5vw" class="quantity">
                                         <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">
