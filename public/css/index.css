@@ -2673,6 +2673,12 @@ html, body {
     .show-read-more .more-text{
         display: none;
     }
+    #small-venidici-icon{
+        width: 12vw !important;
+    }
+    .edit-item{
+        padding-top: 1vw !important;
+    }
 }
 
 /* MOBILE NAVBAR */

@@ -579,8 +579,8 @@
                             <div class="row m-0 page-container">
                                 <div class="col-12 p-0">
                                     <div style="text-align:center">
-                                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
-                                        <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
+                                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" id="small-venidici-icon" style="width:5vw" alt="LOGO">
+                                        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
                                         <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">{{ session('message') ?? 'Maksimal 3 pilihan' }}</p>
                                         @if(session('update_interest_success'))
                                             <!-- ALERT MESSAGE -->
@@ -818,19 +818,19 @@
 
 
                         <div class="dropdown-menu "  aria-labelledby="editDropdown" style="border-radius:10px;padding:0px;min-width:50vw !important;margin-right:39vw">
-                            <div class="edit-item" style="border-radius:10px 10px 0px 0px;padding:0vw 3vw !important" >
+                            <div class="edit-item" style="border-radius:10px 10px 0px 0px;padding:1vw 3vw " >
                                 <a href="#edit-profile" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Edit Profile</span></a>   
                             </div>
-                            <div class="edit-item" style="padding:0vw 3vw !important">
+                            <div class="edit-item" style="padding:1vw 3vw ">
                                 <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
                             </div>
-                            <div class="edit-item" style="padding:0vw 3vw !important">
+                            <div class="edit-item" style="padding:1vw 3vw ">
                                 <a href="#my-interests" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-heart"></i> <span style="margin-left:0.8vw">My interests</span></a>   
                             </div>
-                            <div class="edit-item" style="padding:0vw 3vw !important">
+                            <div class="edit-item" style="padding:1vw 3vw ">
                                 <a href="/dashboard/redeem-vouchers" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-tags"></i> <span style="margin-left:0.55vw">Vouchers</span></a>   
                             </div>
-                            <div class="edit-item" style="border-radius:0px 0px 10px 10px;padding:0vw 3vw !important">
+                            <div class="edit-item" style="border-radius:0px 0px 10px 10px;padding:1vw 3vw ">
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" style="background:none;border:none">
@@ -887,7 +887,7 @@
     <div style="padding:0px" class="user-content wow fadeInLeft" id="live-pelatihan">
         @if(!$liveWorkshopPaginationData['data'])
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description user-dashboard-normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
+                <p class="sub-description user-dashboard-normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Jadwal live belum tersedia.</span></p>
             </div>
         @else
             @foreach($liveWorkshopPaginationData['data'] as $course)
@@ -1100,7 +1100,7 @@
     <div style="padding:0px;display:none;" class="user-content" id="pelatihan-selesai">
         @if(!$completedCoursesPaginationData['data'])
             <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description  user-dashboard-normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan aktif belum tersedia.</span></p>
+                <p class="sub-description  user-dashboard-normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Pelatihan selesai belum tersedia.</span></p>
             </div>
         @else
             @foreach($completedCoursesPaginationData['data'] as $course)

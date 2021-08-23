@@ -613,7 +613,7 @@
       <div class="col-12 p-0">
         <div style="display:flex;justify-content:space-between">
           <div>
-            <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:3vw" class="img-fluid" alt="">
+            <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:2.5vw" class="img-fluid" alt="">
             <p class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:1vw">Platform anak kekinian <br>   buat naklukin karir impian!</p>
           </div>
 
