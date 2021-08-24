@@ -399,7 +399,7 @@
 
 <!-- START OF BANNER SECTION -->
 <div class="row m-0 banner-background page-container desktop-display"
-    style="height: 50vw; padding-top: 17vw; text-align: center;
+    style="height: 50vw; padding-top: 19vw; text-align: center;
     background-image: url({{ $configs['cms.homepage.top-section.background']->value }});">
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{ $configs['cms.homepage.top-section.heading']->value }}</p>
@@ -471,7 +471,7 @@
 <!-- END OF MOBILE BANNER SECTION -->
 
 <!-- START OF TRUSTED COMPANY SECTION -->
-<div class="row m-0 page-container desktop-display"  style="z-index: 99;padding-bottom:5vw">
+<div class="row m-0 page-container desktop-display d-none"  style="z-index: 99;padding-bottom:5vw">
     <div class="col-12 p-0" id="trusted-company-margin" style="margin-top:-5vw">
         <div class="wow fadeInRight" data-wow-delay="1s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;align-items:center">
             <div style="text-align: center;">
@@ -2137,7 +2137,7 @@
 
 
 <!-- START OF MOBILE Collaborators -->
-<div class="row m-0 page-container mobile-display"  style="display:none;padding-top:5vw;padding-bottom:8vw;">
+<div class="row m-0 page-container mobile-display d-none"  style="display:none;padding-top:5vw;padding-bottom:8vw;">
     <div class="col-12 p-0">
         <div class="wow fadeInRight">
             <div style="text-align: center;">

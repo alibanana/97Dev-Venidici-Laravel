@@ -68,6 +68,7 @@ class BootcampUpdateController extends Controller
             'date_start' => 'required',
             'date_end' => 'required',
             'trial_date_end' => 'required',
+            'whatsapp' => 'required',
             'hashtags' => 'required|array|min:1'
         ])->setAttributeNames([
             'course_category_id'    => 'category',
@@ -106,6 +107,7 @@ class BootcampUpdateController extends Controller
         $bootcampCourseDetail->date_start           = $validated['date_start'];
         $bootcampCourseDetail->date_end             = $validated['date_end'];
         $bootcampCourseDetail->trial_date_end       = $validated['trial_date_end'];
+        $bootcampCourseDetail->whatsapp             = $validated['whatsapp'];
 
         if ($request->has('syllabus')) {
             if (!is_null($bootcampCourseDetail->syllabus)) unlink($bootcampCourseDetail->syllabus);

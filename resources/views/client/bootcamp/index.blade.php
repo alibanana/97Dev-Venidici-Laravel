@@ -1932,7 +1932,7 @@
     <div class="col-lg-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Still Hesitating?</p>
         <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Jangan sungkan untuk bertanya kepada kami! Mulai dari struktur program, sampai program pembayaran. Apapun akan kami layani sebaik mungkin.</p>
-        <a href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%21%20Saya%20ingin%20bertanya%20tentang%20program%20Bootcamp%20By%20Venidici%20" class="btn-blue-bordered normal-text our-community-bootcamp" >Consult via Whatsapp</a>
+        <a href="https://api.whatsapp.com/send?phone={{$course->bootcampCourseDetail->whatsapp}}&text=Halo%21%20Saya%20ingin%20bertanya%20tentang%20program%20Bootcamp%20By%20Venidici%20" class="btn-blue-bordered normal-text our-community-bootcamp" >Consult via Whatsapp</a>
 
     </div>    
     <!-- END OF LEFT SECTION -->

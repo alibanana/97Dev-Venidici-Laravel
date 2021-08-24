@@ -281,7 +281,19 @@
                             @enderror
                         </div>
                     </div> 
-                    <div class="col-6"></div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">Whatsapp Number</label>
+                            <input type="text" name="whatsapp" class="form-control form-control-user" value="{{ old('whatsapp', $course->bootcampCourseDetail->whatsapp) }}"
+                                    placeholder="e.g. +628111377894"> 
+                            @error('whatsapp')
+                                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror               
+                        </div>
+                    
+                    </div>
                     <div class="col-6" style="margin-top:3vw">
                         <label for="">Hashtag <span style="color: orange">(At least one element must be present!)</span></label>
                         <p> <span> <a href="/admin/hashtags" target="_blank">Click here</a> </span> to add new hashtag</p>
