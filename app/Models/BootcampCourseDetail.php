@@ -19,6 +19,7 @@ class BootcampCourseDetail extends Model
         'trial_date_end',
         'bootcamp_full_price',
         'bootcamp_trial_price',
+        'whatsapp',
     ];
 
     public function course() {
