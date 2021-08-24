@@ -50,7 +50,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan tempat lahir" 
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%;" placeholder="Masukkan tempat lahir" 
                             value="{{ old('birth_place')}}"
                             >
                         </div>  
@@ -62,7 +62,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Kelamin</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
-                            <select class="normal-text" name="gender" style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select class="normal-text" name="gender" style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Gender</option>
                                 <option value="Male"
                                 @if(Auth::check())
@@ -88,8 +88,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;"> -->
-                            <select class="normal-text" name="province_id" style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;"> -->
+                            <select class="normal-text" name="province_id" style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
                                 @if(!Auth::check())
                                 <option value="" disabled selected>Pilih Provinsi</option>
                                 @else
@@ -145,9 +145,9 @@
                                 }
                             ?>
                             @endif
-                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="yyyy.mm.dd"
+                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
-                                value="{{old('birth_date' ?? $date ?? null)}}"
+                                value="{{old('birth_date',$date)}}"
                             @else
                                 value="{{old('birth_date')}}"
                             @endif
@@ -161,7 +161,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input type="text" name="phone_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan Nomor Telepon"
+                            <input type="text" name="phone_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
                             @if(Auth::check())
                                 value="{{old('phone_no', Auth::user()->userDetail->telephone)}}"
                             @else
@@ -177,7 +177,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <select  class="normal-text" name="city_id" style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select  class="normal-text" name="city_id" style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
                                 @if(Auth::check())
                                     @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
@@ -213,7 +213,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div readonly class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="address" name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: grey;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()){{old('address', Auth::user()->userDetail->address)}}@else{{old('address')}}@endif</textarea>
+                            <textarea name="address" name="address" rows="3" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()){{old('address', Auth::user()->userDetail->address)}}@else{{old('address')}}@endif</textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -228,7 +228,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pendidikan Terakhir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
-                            <select name="last_degree"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="last_degree"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Pendidikan</option>
                                 <option value="SMP" @if(old('last_degree') == 'SMP') selected @endif>SMP</option>
                                 <option value="SMA" @if(old('last_degree') == 'SMA') selected @endif>SMA</option>
@@ -494,7 +494,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan tempat lahir" 
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan tempat lahir" 
                             value="{{ old('birth_place')}}"
                             >
                         </div>  
@@ -506,7 +506,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Kelamin</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
-                            <select name="gender"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="gender"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
                                 <option disabled selected>Pilih Gender</option>
                                 <option value="Male"
                                 @if(Auth::check())
@@ -532,8 +532,8 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;"> -->
-                            <select name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;"> -->
+                            <select name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
                                 @if(!Auth::check())
                                 <option value="" disabled selected>Pilih Provinsi</option>
                                 @else
@@ -580,11 +580,18 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                           
-                            <input name="birth_date" type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="yyyy.mm.dd"
                             @if(Auth::check())
-                                value="{{old('birth_date' ?? $date ?? null)}}"
-
+                            <?php
+                                if (Auth::user()->userDetail->birthdate != null) {
+                                    $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
+                                    $date = $birthdate[0];
+                                    $time = $birthdate[1];
+                                }
+                            ?>
+                            @endif
+                            <input name="birth_date" type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="yyyy.mm.dd"
+                            @if(Auth::check())
+                                value="{{old('birth_date',$date)}}"
                             @else
                                 value="{{old('birth_date')}}"
                             @endif
@@ -598,7 +605,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-                            <input name="phone_no" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan Nomor Telepon"
+                            <input name="phone_no" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
                             @if(Auth::check())
                                 value="{{old('phone_no', Auth::user()->userDetail->telephone)}}"
                             @else
@@ -614,7 +621,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-map"></i>
-                            <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
                                 @if(Auth::check())
                                 @if($cities == null && Auth::user()->userDetail->city_id == null)
                                     <option disabled selected>Pilih Provinsi terlebih dahulu</option>
@@ -650,7 +657,7 @@
                     <div class="col-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
                         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color: grey;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()){{old('address', Auth::user()->userDetail->address)}}@else{{old('address')}}@endif</textarea>
+                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()){{old('address', Auth::user()->userDetail->address)}}@else{{old('address')}}@endif</textarea>
                         </div>  
                         @error('address')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
