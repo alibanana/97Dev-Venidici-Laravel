@@ -113,7 +113,7 @@ class CheckoutController extends Controller
             // Validation rules that exists on all validation conditions. (bootcamp)
             $validation_rules = [
                 'birth_place'                   => 'required',
-                'birth_date'                    => 'required',
+                'birth_date'                    => 'date',
                 'gender'                        => 'required',
                 'phone_no' => ['required', new TelephoneNumber],
                 //'phone_no' => 'required',
@@ -210,8 +210,19 @@ class CheckoutController extends Controller
             return redirect('/bootcamp#free-trial')->withErrors($validator)->withInput($request->all());
         }
 
+        //if safari and bootcamp
+        if($request->has('date_safari') || $request->has('month')|| $request->has('year')  ){
+            if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
+            return redirect('/bootcamp#free-trial')
+            ->withInput($request->all())
+            ->with('date_message','The date field is required');
+            
+            $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date_safari'];
+        }
+
         // If validation passed store validated data in a variable.
         $validated = $validator->validate();
+
 
 
         // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
@@ -345,7 +356,7 @@ class CheckoutController extends Controller
                 'name'                  => auth()->user()->name,
                 'email'                 => auth()->user()->email,
                 'birth_place'           => $validated['birth_place'],
-                'birth_date'            => $validated['birth_date'],
+                'birth_date'            => $birthdate,
                 'gender'                => $validated['gender'],
                 'phone_no'              => $validated['phone_no'],
                 'province_id'           => $validated['province_id'],
@@ -379,7 +390,13 @@ class CheckoutController extends Controller
             }
             $course_title = $invoice->bootcampApplication->course->title;
             $user_name = $invoice->bootcampApplication->user->name;
-            Mail::to(auth()->user()->email)->send(new BootcampFreeTrialMail($course_title,$user_name));
+            $sentence = "";
+            Mail::to(auth()->user()->email)->send(new BootcampFreeTrialMail($course_title,$user_name,$sentence));
+            $admins = User::where('user_role_id','!=',1)->get();
+            foreach($admins as $admin){
+                $sentence = "Hi Admin!";
+                Mail::to($admin->email)->send(new BootcampFreeTrialMail($course_title,$user_name,$sentence));
+            }
         /* 
         * For Non-Bootcamp payments :
         *  - Create orders object from user's carts data & validate if order creation success.
@@ -584,8 +601,15 @@ class CheckoutController extends Controller
                         Helper::addStars(auth()->user(), 60 , 'penggunaan Referral Code '. $referred_by_code);
                     }
                 }
-
-                Mail::to(auth()->user()->email)->send(new InvoiceMail($invoice));
+                $sentence ="";
+                //Fernandha Dzaky telah membayar Skill Snack dengan
+                Mail::to(auth()->user()->email)->send(new InvoiceMail($invoice,$sentence));
+                $admins = User::where('user_role_id','!=',1)->get();
+                foreach($admins as $admin){
+                    $sentence = $invoice->user->name . ' telah membayar dengan ';
+                    //Fernandha Dzaky telah membayar Skill Snack dengan
+                    Mail::to($admin->email)->send(new InvoiceMail($invoice,$sentence));
+                }
             }
 
             // start of courses string

@@ -24,12 +24,7 @@
         <div class="d-sm-flex align-items-center justify-content-between">
             <h1 class="mb-0 mb-3 text-gray-800">{{ $course->title }}</h1>
         </div>
-        @if ($course->price == 0)
-            <h4 style="">FREE</h4>
-        @else
-            <h4 style="">Rp. {{ $course->price }}</h4>
-        @endif
-        <div style="display: flex;font-size:1.5vw" class="mb-4">
+        <!--<div style="display: flex;font-size:1.5vw" class="mb-4">
             {{ $course->average_rating }}
             <div style="margin-left:0.5vw">
                 @for ($i = 1; $i < 6; $i++)
@@ -49,7 +44,7 @@
                 @endfor
             </div>
             
-        </div>
+        </div>-->
         <div class="card-body p-0">
             <div class="row">
                 <div class="col-6">
@@ -159,6 +154,7 @@
                                                 <th>Ekspektasi</th>
                                                 <th>Bank Information</th>
                                                 <th>Status</th>
+                                                <th>Submitted At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -229,6 +225,9 @@
                                                         @elseif($user->status == 'denied')
                                                         <span style="color: red;">Rejected</span>
                                                         @endif
+                                                    </td>
+                                                    <td>
+                                                        {{$user->created_at}}
                                                     </td>
 
                                                     <td>
