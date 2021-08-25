@@ -99,13 +99,16 @@ class OnlineCourseUpdateController extends Controller
 
         $course->save();
 
+        // Update Assesment Section.
         $wasAssessmentChanged = false;
 
         if ($course->assessment) {
+            // Update previous assessment to null if it will be updated.
             if ($course->assessment->id != $validated['assessment_id']) {
                 $assessment = $course->assessment; 
                 $assessment->course_id = null;
                 $assessment->save();
+                $assessment->users()->detach();
                 if (!$wasAssessmentChanged) $wasAssessmentChanged = true;
             }
         }
@@ -114,6 +117,8 @@ class OnlineCourseUpdateController extends Controller
             $assessment = Assessment::find($validated['assessment_id']);
             $assessment->course_id = $course->id;
             $assessment->save();
+            // Re-attach users to new assessment.
+            $assessment->users()->attach($course->users->pluck('id'));
             if (!$wasAssessmentChanged) $wasAssessmentChanged = true;
         }
 
