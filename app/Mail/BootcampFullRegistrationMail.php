@@ -12,6 +12,7 @@ class BootcampFullRegistrationMail extends Mailable
     use Queueable, SerializesModels;
     public $course_title;
     public $user_name;
+    public $sentence;
 
 
     /**
@@ -19,10 +20,11 @@ class BootcampFullRegistrationMail extends Mailable
      *
      * @return void
      */
-    public function __construct($course_title,$user_name)
+    public function __construct($course_title,$user_name,$sentence)
     {
         $this->course_title     = $course_title;
         $this->user_name        = $user_name;
+        $this->sentence         = $sentence;
     }
 
     /**

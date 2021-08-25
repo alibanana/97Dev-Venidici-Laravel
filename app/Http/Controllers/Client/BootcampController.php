@@ -20,6 +20,7 @@ use App\Models\BootcampApplication;
 use App\Models\Notification;
 use App\Models\Province;
 use App\Models\City;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Promotion;
 use App\Mail\BootcampFullRegistrationMail;
@@ -44,6 +45,8 @@ class BootcampController extends Controller
 
     // Shows the Client's Main Bootcamp Page.
     public function index(Request $request) {
+        $agent = new Agent();
+
         // $course_id = 6;
         $course = Course::where('course_type_id',3)->where('enrollment_status', 'open')
         ->where('publish_status', 'published')->where('isDeleted', false)->where('isFeatured',TRUE)->first();
@@ -78,10 +81,10 @@ class BootcampController extends Controller
                 ]
             )->count();
             
-            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities','tomorrow','bootcamp_application_count'));
+            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities','tomorrow','bootcamp_application_count','agent'));
         }
 
-        return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities','tomorrow'));
+        return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities','tomorrow','agent'));
     }
 
     public function index_old(Request $request) {
@@ -268,11 +271,14 @@ class BootcampController extends Controller
 
     public function storeFullRegistration(Request $request, $course_id)
     {
+
+        $input = $request->all();
+
         $validator = Validator::make($request->all(), [
             'name'                  => '',
             'email'                 => '',
             'birth_place'           => 'required',
-            'birth_date'            => 'required',
+            'birth_date'            => 'date',
             'gender'                => 'required',
             'phone_no'              => 'required',
             'province_id'           => 'required',
@@ -292,7 +298,17 @@ class BootcampController extends Controller
 
         if ($validator->fails())
             return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
-        
+        //if safari and bootcamp
+        if($request->has('date_safari') || $request->has('month')|| $request->has('year')  ){
+
+            if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
+            return redirect('/bootcamp#full-registration')
+            ->withInput($request->all())
+            ->with('date_message','The date field is required');
+            
+            $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date_safari'];
+        }
+
         $validated = $validator->validate();
 
 
@@ -325,7 +341,7 @@ class BootcampController extends Controller
         $bootcamp->name                 = Auth::user()->name;
         $bootcamp->email                = Auth::user()->email;
         $bootcamp->birth_place          = $validated['birth_place'];
-        $bootcamp->birth_date           = $validated['birth_date'];
+        $bootcamp->birth_date           = $birthdate;
         $bootcamp->gender               = $validated['gender'];
         $bootcamp->phone_no             = $validated['phone_no'];
         $bootcamp->province_id          = $validated['province_id'];
@@ -348,7 +364,13 @@ class BootcampController extends Controller
 
         $course_title = $bootcamp->course->title;
         $user_name = $bootcamp->user->name;
-        Mail::to(auth()->user()->email)->send(new BootcampFullRegistrationMail($course_title,$user_name));
+        $sentence ="";
+        Mail::to(auth()->user()->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));
+        $admins = User::where('user_role_id','!=',1)->get();
+        foreach($admins as $admin){
+            $sentence = "Hi Admin!";
+            Mail::to($admin->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));
+        }
 
         // create notification
         $notification = Notification::create([

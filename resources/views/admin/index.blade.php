@@ -32,7 +32,7 @@
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Online Course Earnings Overview</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Skill Snack Earnings Overview</h6>
                         <div class="dropdown no-arrow">
                             <!--
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -190,7 +190,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-sm font-weight-bold text-uppercase mb-1" style="color:#2B6CAA">
-                                    Online Courses</div>
+                                    Skill Snacks</div>
                                 <div class="h3 mb-0 font-weight-bold text-gray-800">{{$courses_count}}</div>
                             </div>
                             <div class="col-auto">

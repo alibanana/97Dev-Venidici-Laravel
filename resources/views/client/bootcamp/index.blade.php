@@ -134,25 +134,72 @@
                             </span>
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
-                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                            @if(Auth::check())
-                            <?php
+                        @if(Auth::check())
+                        <?php
+                            if (Auth::user()->userDetail->birthdate != null) {
+                                $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
+                                $date = $birthdate[0];
+                                $time = $birthdate[1];
+                            }
+                        ?>
+                        @endif
+                        @if($agent->browser() == "Safari")
+                            @php
                                 if (Auth::user()->userDetail->birthdate != null) {
-                                    $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
-                                    $date = $birthdate[0];
-                                    $time = $birthdate[1];
+                                    $birthdate_safari = explode('-',$date);
+                                    $year_safari = $birthdate_safari[0];
+                                    $month_safari = $birthdate_safari[1];
+                                    $date_safari = $birthdate_safari[2];
                                 }
-                            ?>
-                            @endif
-                            <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd"
-                            @if(Auth::check())
-                                value="{{old('birth_date',$date)}}"
-                            @else
-                                value="{{old('birth_date')}}"
-                            @endif
-                            >
-                        </div>  
+
+                            @endphp
+                            <div style="display: flex;align-items:center;justify-content:space-between">
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <input type="text" name="date_safari" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
+                                        placeholder="Tanggal"  @if(Auth::user()->userDetail->birthdate != null)  value="{{$date_safari}}" @endif>
+                                </div>  
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <select name="month" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                        @php
+                                            $months = array("January"=>"01","February"=>"02","March"=>"03",
+                                            "April"=>"04","May"=>"05","June"=>"06","July"=>"07","August"=>"08",
+                                            "September"=>"09","October"=>"10","November"=>"11","December"=>"12");
+                                        @endphp
+                                        @foreach($months as $key => $value) {
+                                            <option  
+                                            @if(Auth::user()->userDetail->birthdate != null)
+                                                @if($month_safari == $value) selected @endif 
+                                            @endif
+                                            value="{{$value}}" 
+                                            >{{$key}}</option>                                    
+                                        @endforeach
+                                    </select>
+                                </div>  
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <input type="text" name="year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                        placeholder="Tahun" @if(Auth::user()->userDetail->birthdate != null) value="{{$year_safari}}" @endif>
+                                </div>
+
+                            </div>
+
+                        @else 
+                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                                <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                                <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd"
+                                @if(Auth::check())
+                                    value="{{old('birth_date' ?? $date  ?? null )}}"
+                                @else
+                                    value="{{old('birth_date')}}"
+                                @endif
+                                >
+                            </div> 
+                        @endif 
+
+                        @if(session('date_message'))
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ session('date_message') }}</strong>
+                            </span>
+                        @endif
                         @error('birth_date')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
@@ -578,25 +625,73 @@
                             </span>
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
-                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                            @if(Auth::check())
-                            <?php
+                        @if(Auth::check())
+                        <?php
+                            if (Auth::user()->userDetail->birthdate != null) {
+                                $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
+                                $date = $birthdate[0];
+                                $time = $birthdate[1];
+                            }
+                        ?>
+                        @endif
+
+                        @if($agent->browser() == "Safari")
+                            @php
                                 if (Auth::user()->userDetail->birthdate != null) {
-                                    $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
-                                    $date = $birthdate[0];
-                                    $time = $birthdate[1];
+                                    $birthdate_safari = explode('-',$date);
+                                    $year_safari = $birthdate_safari[0];
+                                    $month_safari = $birthdate_safari[1];
+                                    $date_safari = $birthdate_safari[2];
                                 }
-                            ?>
-                            @endif
-                            <input name="birth_date" type="date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="yyyy.mm.dd"
-                            @if(Auth::check())
-                                value="{{old('birth_date',$date)}}"
-                            @else
-                                value="{{old('birth_date')}}"
-                            @endif
-                            >
-                        </div>  
+
+                            @endphp
+                            <div style="display: flex;align-items:center;justify-content:space-between">
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <input type="text" name="date_safari" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
+                                        placeholder="Tanggal"  @if(Auth::user()->userDetail->birthdate != null)  value="{{$date_safari}}" @endif>
+                                </div>  
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <select name="month" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                        @php
+                                            $months = array("January"=>"01","February"=>"02","March"=>"03",
+                                            "April"=>"04","May"=>"05","June"=>"06","July"=>"07","August"=>"08",
+                                            "September"=>"09","October"=>"10","November"=>"11","December"=>"12");
+                                        @endphp
+                                        @foreach($months as $key => $value) {
+                                            <option  
+                                            @if(Auth::user()->userDetail->birthdate != null)
+                                                @if($month_safari == $value) selected @endif 
+                                            @endif
+                                            value="{{$value}}" 
+                                            >{{$key}}</option>                                    
+                                        @endforeach
+                                    </select>
+                                </div>  
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <input type="text" name="year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                        placeholder="Tahun" @if(Auth::user()->userDetail->birthdate != null) value="{{$year_safari}}" @endif>
+                                </div>
+
+                            </div>
+
+                        @else 
+                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                                <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                                <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd"
+                                @if(Auth::check())
+                                    value="{{old('birth_date' ?? $date  ?? null )}}"
+                                @else
+                                    value="{{old('birth_date')}}"
+                                @endif
+                                >
+                            </div> 
+                        @endif 
+
+                        @if(session('date_message'))
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ session('date_message') }}</strong>
+                            </span>
+                        @endif
                         @error('birth_date')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
