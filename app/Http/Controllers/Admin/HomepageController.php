@@ -90,7 +90,6 @@ class HomepageController extends Controller
 
     // Update Trusted Company in the database.
     public function updateTrustedCompanies(Request $request) {
-        dd($request->all());
         $validated = $request->validate([
             'trusted-company-count' => 'required',
             'images' => 'array',

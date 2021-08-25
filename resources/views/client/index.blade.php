@@ -2177,7 +2177,7 @@ function animatethis(targetElement, speed) {
     });
 };
 window.addEventListener("load", function(){
-    animatethis($('#collaborators-slider'), 12000);
+    animatethis($('#collaborators-slider'), 20000);
 });
 </script>
 
