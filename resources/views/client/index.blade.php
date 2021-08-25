@@ -471,7 +471,7 @@
 <!-- END OF MOBILE BANNER SECTION -->
 
 <!-- START OF TRUSTED COMPANY SECTION -->
-<div class="row m-0 page-container desktop-display d-none"  style="z-index: 99;padding-bottom:5vw">
+<div class="row m-0 page-container desktop-display"  style="z-index: 99;padding-bottom:5vw">
     <div class="col-12 p-0" id="trusted-company-margin" style="margin-top:-5vw">
         <div class="wow fadeInRight" data-wow-delay="1s" style="background-color: #FCFCFC;border-radius:10px;padding:1vw 2vw;display:flex;align-items:center">
             <div style="text-align: center;">
@@ -481,8 +481,7 @@
             <img src="/assets/images/icons/vertical-splitter.png" style="max-height:3.5vw;margin-left:2vw" class="img-fluid" alt="">
             <div class="items" id="collaborators-slider" style="display:flex;align-items:center;overflow-y: scroll;cursor:grab">
             @foreach ($trusted_companies as $company)
-                <img src="{{ asset($company->image) }}" style="max-height:3.5vw;margin-left:4vw" class="img-fluid" alt="Image not available..">                
-                <img src="{{ asset($company->image) }}" style="max-height:3.5vw;margin-left:4vw" class="img-fluid" alt="Image not available..">                
+                <img src="{{ asset($company->image) }}" style="max-height:3.5vw;margin-left:4vw" class="img-fluid" alt="Image not available..">             
             @endforeach
             </div>
         </div>
@@ -2137,7 +2136,7 @@
 
 
 <!-- START OF MOBILE Collaborators -->
-<div class="row m-0 page-container mobile-display d-none"  style="display:none;padding-top:5vw;padding-bottom:8vw;">
+<div class="row m-0 page-container mobile-display"  style="display:none;padding-top:5vw;padding-bottom:8vw;">
     <div class="col-12 p-0">
         <div class="wow fadeInRight">
             <div style="text-align: center;">
