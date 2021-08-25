@@ -23,11 +23,8 @@
         <!-- Page Heading
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="mb-0 mb-3 text-gray-800">Content Management System</h1>
-        </div>
-		
-		 -->
+        </div>-->
         <!-- Content Row -->
-
 
         <!-- start of table -->
         <div class="row">
@@ -91,6 +88,15 @@
                     </form>
 
                     <!-- Trusted Companies Section -->
+                    <!-- Add New Form Element  -->
+                    <form id="trusted-company-store-form" action="{{ route('admin.cms.homepage.trusted-company.store') }}" method="POST"
+                        enctype="multipart/form-data">
+                    @csrf
+                    </form>
+                    <!-- Delete Individual Form element -->
+                    <form id="trusted-company-delete-form" action="{{ route('admin.cms.homepage.trusted-company.destroy') }}" method="POST">
+                    @csrf
+                    </form>
                     <form method="POST" action="{{ route('admin.cms.homepage.trusted-company.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method("put")
@@ -115,31 +121,32 @@
                                     @enderror
                                 </div>
                             </div>
-                            <form action="">
-                            <div class="col-6" style="display:flex;align-items:flex-end;justify-content:flex-end">
+                            
+                            <!-- Spacers -->
+                            <div class="col-2"></div>
+
+                            <!-- Add New Collaborator Section -->
+                            <div class="col-4" style="display:flex;align-items:flex-end;justify-content:space-between">
                                 <div class="form-group" style="width:40%">
                                     <br>
                                     <label for="">Add New Collaborator</label>  <br>
-                                    <input type="file" name=""  required>
-                                    @error('')
+                                    <input form="trusted-company-store-form" type="file" name="trusted-company-store-images[]" accept=".jpeg,.jpg,.png" multiple required>
+                                    @error('trusted-company-store-images')
                                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-user" style="width:100%" onclick='return confirm("Are you sure you want to update the Trusted Company section in the Homepage?")'>
+                                    <button form="trusted-company-store-form" type="submit" class="btn btn-primary btn-user" style="width:100%">
                                         Add New
-                                    </button>	
+                                    </button>
                                 </div>
                             </div>
-                            </form>
-                            
                             
                             @foreach ($trusted_companies as $company)
                                 <div class="col-3 mb-4">
                                     <div class="card shadow h-100 py-2">
-                                        <form action="">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center" style="height: 250px">
                                                 <div class="col" style="text-align:center">
@@ -154,16 +161,12 @@
                                                 </span>
                                             @enderror
                                             
-                                            <div>
-                                            <button type="submit" class="btn btn-primary btn-user mt-3" style="padding:0.5vw 2vw;width:100%;" >
-                                                Update
-                                            </button>
-                                            <button type="submit" class="btn btn-danger btn-user mt-3" style="padding:0.5vw 2vw;width:100%;" >
+                                            <button form="trusted-company-delete-form" type="submit" class="btn btn-danger btn-user mt-3"
+                                                name="id" value="{{ $company->id }}" style="padding:0.5vw 2vw;width:100%;"
+                                                onclick='return confirm("Are you sure you want to delete this Trusted Collaborator?")'>
                                                 Delete
                                             </button>
-                                            </div>
                                         </div>
-                                        </form>
                                     </div>
                                 </div>
                             @endforeach
