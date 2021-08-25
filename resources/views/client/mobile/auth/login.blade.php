@@ -91,10 +91,10 @@
                         <div style="display:flex;justify-content:space-between;">
                             <button type="submit" class="btn-blue-bordered w-100" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw;font-size:4vw">Login</button>
                         </div>
-                        <!--<p  style="font-family:Rubik Medium;color:#5F5D70;margin-bottom:0.4vw;margin-top:3vw;margin-bottom:1vw;font-size:4vw">OR</p>
+                        <p  style="font-family:Rubik Medium;color:#5F5D70;margin-bottom:0.4vw;margin-top:3vw;margin-bottom:1vw;font-size:4vw">OR</p>
                         <a href="{{ route('login.google') }}"  style="font-family: Poppins Medium;margin-bottom:2vw;margin-top:3vw;width:100%;display:inline-block;background-color:#67BBA3;border:none;color:#FFFFFF;border-radius:5px;padding:0.5vw 2vw;text-decoration:none;font-size:4vw"> <i class="fab fa-google"></i> <span style="margin-left:0.5vw">Login with Google Account</span></a>
                             <div style="text-align:center !important">
-                        </div>-->
+                        </div>
                         <p style="font-family: Rubik Regular;margin-bottom:0px;margin-top:3vw;text-decoration:none;color: #3B3C43;font-size:4vw">Belum punya akun? <span> <a href="/signup">Daftar di sini</a> </span> </p>
                         <p style="font-family: Rubik Regular;margin-bottom:0px;margin-top:2vw;text-decoration:none;color: #3B3C43;cursor:pointer;font-size:4vw"><span> <a href="#forget-password">Lupa Password</a> </span> </p>
                     </div>
