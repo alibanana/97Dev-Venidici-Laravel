@@ -100,9 +100,9 @@ class WokiController extends Controller
         $course = Course::where('title', $course_title)->firstOrFail();
 
         if ($course->courseType->type == 'Course') {
-            return redirect()->route('online-course.show', $course->id);
+            return redirect()->route('online-course.show', $course->title);
         } elseif ($course->courseType->type == 'Bootcamp') {
-            return redirect()->route('bootcamp.show', $course->id);
+            return redirect()->route('bootcamp.show', $course->title);
         }
         
         $reviews = Review::where('course_id',$course->id)->orderBy('created_at', 'desc')->get();

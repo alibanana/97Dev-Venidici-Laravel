@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Helper\Helper;
 
 use Axiom\Rules\Decimal;
@@ -38,6 +39,28 @@ class HomepageController extends Controller
         return view('admin/cms/homepage', compact('configs', 'trusted_companies', 'fake_testimonies_big',  'fake_testimonies_small'));
     }
 
+    // Store new trusted companies in bulk.
+    public function storeTrustedCompanies(Request $request) {
+        $validated = Validator::make($request->all(), [
+            'trusted-company-store-images' => 'array|required',
+            'trusted-company-store-images.*' => 'mimes:jpeg,jpg,png'
+        ])->setAttributeNames([
+            'trusted-company-store-images' => 'images'
+        ])->validate();
+
+        $newImagesCount = 0;
+        if ($request->has('trusted-company-store-images')) {
+            foreach ($request->file('trusted-company-store-images') as $image) {
+                $newImagesCount++;
+                $company = TrustedCompany::create([
+                    'image' => Helper::storeImage($image, 'storage/images/trusted-companies/')
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.cms.homepage.index')->with('message', $newImagesCount . ' new Trusted Collaborators was added to the database.');
+    }
+
     // Update Top Section in the database.
     public function updateTopSection(Request $request) {
         $validated = $request->validate([
@@ -66,7 +89,7 @@ class HomepageController extends Controller
     }
 
     // Update Trusted Company in the database.
-    public function updateTrustedCompany(Request $request) {
+    public function updateTrustedCompanies(Request $request) {
         $validated = $request->validate([
             'trusted-company-count' => 'required',
             'images' => 'array',
@@ -87,7 +110,7 @@ class HomepageController extends Controller
             }
         }
 
-        return redirect()->route('admin.cms.homepage.index')->with('message', 'Trusted Company Section has been updated!');
+        return redirect()->route('admin.cms.homepage.index')->with('message', 'Trusted Collaborators Section has been updated!');
     }
 
     // Show page to update Fake Testimonies.
@@ -135,6 +158,15 @@ class HomepageController extends Controller
         $testimony->save();
         
         return redirect()->route('admin.cms.homepage.index')->with('message', 'Testimony Section has been updated!');
+    }
+
+    // Delete Trusted Company from the database.
+    public function destroyTrustedCompany(Request $request) {
+        $validated = $request->validate(['id' => 'required']);
+        $company = TrustedCompany::findOrFail($validated['id']);
+        unlink($company->image);
+        $company->delete();
+        return redirect()->route('admin.cms.homepage.index')->with('message', 'Trusted Collaborators (' . $company->id . ') has been deleted.');
     }
 
 }

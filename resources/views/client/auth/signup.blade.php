@@ -33,7 +33,10 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user"></i>
-                            <input value="{{Session::get('name')}}" type="text" name="name" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="John Doe">
+                            <input
+                            value="{{ old('name', Session::get('name')) }}"
+
+                             type="text" name="name" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="John Doe">
                         </div>  
                         @error('name')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -43,7 +46,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                            <input value="{{Session::get('telephone')}}" type="text" name="telephone" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Insert phone number">
+                            <input value="{{ old('telephone', Session::get('telephone')) }}"  type="text" name="telephone" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Insert phone number">
                         </div>  
                         @error('telephone')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -54,12 +57,13 @@
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-friends"></i>
                             <select name="response" id=""  class="normal-text"  style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%">
-                                <option value="Friend" @if(Session::get('response') == 'Friend') selected @endif>Friend</option>
-                                <option value="Instagram" @if(Session::get('response') == 'Instagram') selected @endif>Instagram</option>
-                                <option value="Tiktok" @if(Session::get('response') == 'Tiktok') selected @endif>Tiktok</option>
-                                <option value="Twitter" @if(Session::get('response') == 'Twitter') selected @endif>Twitter</option>
-                                <option value="LinkedIn" @if(Session::get('response') == 'LinkedIn') selected @endif>LinkedIn</option>
-                                <option value="Other" @if(Session::get('response') == 'Other') selected @endif>Other</option>
+                                <option value="" disabled selected>Pilih Jawaban</option>
+                                <option value="Friend" @if(old('response', Session::get('response')) == 'Friend') selected @endif>Friend</option>
+                                <option value="Instagram" @if(old('response', Session::get('response')) == 'Instagram') selected @endif>Instagram</option>
+                                <option value="Tiktok" @if(old('response', Session::get('response')) == 'Tiktok') selected @endif>Tiktok</option>
+                                <option value="Twitter" @if(old('response', Session::get('response')) == 'Twitter') selected @endif>Twitter</option>
+                                <option value="LinkedIn" @if(old('response', Session::get('response')) == 'LinkedIn') selected @endif>LinkedIn</option>
+                                <option value="Other" @if(old('response', Session::get('response')) == 'Other') selected @endif>Other</option>
                             </select>
                         </div> 
                         @error('response')
@@ -74,7 +78,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw;width:100%">Email Address</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                            <input value="{{Session::get('email')}}" type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="johndoe@gmail.com">
+                            <input value="{{ old('email', Session::get('email')) }}" type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="johndoe@gmail.com">
                         </div>  
                         @error('email')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -94,7 +98,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Referral Code</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-user-friends"></i>
-                            <input value="{{Session::get('referral_code')}}" type="text" name="referral_code" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Insert Referral Code">
+                            <input  value="{{ old('referral_code', Session::get('referral_code')) }}" type="text" name="referral_code" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="Insert Referral Code">
                         </div>  
                         @error('referral_code')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">

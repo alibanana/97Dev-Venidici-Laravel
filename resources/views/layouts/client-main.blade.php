@@ -28,7 +28,33 @@
     <!-- wow js -->
     <link rel="stylesheet" href="/WOW-master/css/libs/animate.css">
 
-
+    @env('production')
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC8WXP5NZZ"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LC8WXP5NZZ');
+      </script>
+      <!-- Facebook Pixel Code -->
+      <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '377781967128623');
+        fbq('track', 'PageView');
+      </script>
+      <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=377781967128623&ev=PageView&noscript=1"/>
+      </noscript>
+      <!-- End Facebook Pixel Code -->
+    @endenv
     
 
     <title>@yield('title')</title>
@@ -182,7 +208,7 @@
       @if( !Request::is('signup') )
       @if( !Request::is('signup-interests') )
     <!-- START OF MOBILE NAVBAR -->
-    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;position: sticky;
+    <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;
   top: 0;z-index: 10;">
       <div >
         <!--    Made by Erik Terwan    -->
@@ -440,7 +466,7 @@
                 @else
                 <a  href="{{$notif->link}}" style="text-decoration:none">
                 @endif
-                <div class="transaction-notification-card" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
+                <div class="" style="display:flex;@if($loop->iteration != 1)margin-top:1vw; @endif" >
                     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                         <div class="notification-left-blue-border">
                           <i class="fas fa-shopping-cart bigger-text" style="color:#2B6CAA"></i>
@@ -613,7 +639,7 @@
       <div class="col-12 p-0">
         <div style="display:flex;justify-content:space-between">
           <div>
-            <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:3vw" class="img-fluid" alt="">
+            <img src="/assets/images/client/Venidici_Logo_Horizontal.png" style="height:2.5vw" class="img-fluid" alt="">
             <p class="normal-text" style="font-family:Rubik Regular;color:rgba(31, 32, 65, 0.75);margin-top:1vw">Platform anak kekinian <br>   buat naklukin karir impian!</p>
           </div>
 

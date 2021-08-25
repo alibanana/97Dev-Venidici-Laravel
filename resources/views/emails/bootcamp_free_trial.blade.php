@@ -164,7 +164,7 @@ body {font-family: 'Muli', sans-serif;}
     <td style="padding:18px 30px 18px 30px; line-height:22px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content">
     <div>
         <div style=";font-family:Rubik Regular 400 Italic; text-align: left">
-        
+        @if($sentence == "")
         <span style="font-size: 18px">Hi {{$user_name}},
 Thank you for participation in FREE introductory week of {{$course_title}}. <br> <br>
 Venidici is a platform for youth to find and get their dream career in the digital field through exploration and education Through our bootcamp program, we help people to develop skills necessary to start a career in the digital field, especially as a growth hacker. <br> <br>
@@ -177,7 +177,11 @@ Thank you for your participation. We are hoping for the best results from your p
 Best Regards,<br>
 Venidici Indonesia
 </span> <br> <br>
-        <span style="font-size: 18px">Click the button below to view your bootcamp application status</span>
+        @else
+        <span style="font-size: 18px">{{$sentence}} User {{$user_name}} telah apply bootcamp free trial!
+</span> <br> <br>
+        @endif
+        <span style="font-size: 18px">Click the button below to view the bootcamp application status</span>
     </div>
     <div></div></div></td>
   </tr>
@@ -204,8 +208,15 @@ Venidici Indonesia
       <td style="padding:18px 30px 18px 30px; line-height:22px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content">
         <div>
           <div style="text-align: center">
+          @if($sentence == "")
+
           <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Having trouble accessing the button above? Use this link:</span><br>
           <span style="color: #000000; font-size: 18px;"><a href="{{env('APP_URL')}}/dashboard">{{env('APP_URL')}}/dashboard</a></span>
+          @else
+          <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Having trouble accessing the button above? Use this link:</span><br>
+          <span style="color: #000000; font-size: 18px;"><a href="{{route('admin.dashboard.index')}}">{{route('admin.dashboard.index')}}</a></span>
+
+          @endif          
         </div>
       </td>
     </tr>

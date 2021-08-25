@@ -204,7 +204,7 @@ body {font-family: 'Muli', sans-serif;}
           @endif
         </table>
         <br>
-        <span style="font-size: 18px;padding-top:10px"> <b> Total: Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} </b></span>
+        <span style="font-size: 18px;padding-top:10px"> <b>{{$sentence}} Total: Rp{{ number_format($invoice->grand_total, 0, ',', ',') }} </b></span>
     </div>
     <div></div></div></td>
   </tr>
@@ -217,16 +217,26 @@ body {font-family: 'Muli', sans-serif;}
       <td align="center" bgcolor="#ffffff" class="outer-td" style="padding:0px 0px 0px 0px;">
         <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">
           <tbody>
+            @if($sentence == "")
             <tr>
               <td align="center" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
                   <a class="btnLogin" href="{{route('customer.dashboard')}}" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Mulai Belajar</a>
               </td>
             </tr>
+            @else
+            <tr>
+              <td align="center" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
+                  <a class="btnLogin" href="{{route('admin.dashboard.index')}}" style="display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none;;font-family:Rubik" target="_blank">Cek Pembayaran</a>
+              </td>
+            </tr>
+
+            @endif
 
           </tbody>
         </table>
       </td>
     </tr>
+    @if($sentence == "")
     <tr>
       <td style="padding:18px 30px 18px 30px; line-height:22px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content">
         <div>
@@ -236,6 +246,18 @@ body {font-family: 'Muli', sans-serif;}
         </div>
       </td>
     </tr>
+    @else
+    <tr>
+      <td style="padding:18px 30px 18px 30px; line-height:22px; text-align:inherit; background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff" role="module-content">
+        <div>
+          <div style="text-align: center">
+          <span style="font-size: 18px;font-family:Rubik Regular 400 Italic">Having trouble accessing the button above? Use this link:</span><br>
+          <span style="color: #000000; font-size: 18px;"><a href="{{route('admin.dashboard.index')}}">{{route('admin.dashboard.index')}}</a></span>
+        </div>
+      </td>
+    </tr>
+    @endif
+   
   </tbody>
 </table><table class="module" role="module" data-type="spacer" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="7770fdab-634a-4f62-a277-1c66b2646d8d.1">
 <tbody>

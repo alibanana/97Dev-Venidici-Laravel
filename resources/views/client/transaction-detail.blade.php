@@ -248,7 +248,7 @@
                     <!-- START OF ONE ITEM COLLAPSE -->
                     <div style="display:flex;align-items:center;margin-top:1.5vw">
                         <i style="color:#2B6CAA" class="fas fa-circle normal-text"></i>
-                        <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid" alt="COURSE THUMBNAIL">
+                        <img src="{{asset($supply->image)}}" style="width:7vw;object-fit:cover;border-radius:10px;margin-left:1vw" class="img-fluid desktop-display" alt="COURSE THUMBNAIL">
                         <div style="margin-left:1vw">
                             <p class="normal-text" style="font-family:Rubik Bold;color:#3B3C43; display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;margin-bottom:0.5vw">{{$supply->name}}</p>
                             <p class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{$supply->description}}</p>

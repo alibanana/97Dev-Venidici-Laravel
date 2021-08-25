@@ -220,12 +220,14 @@ Route::middleware(['isSuspended'])->group(function () {
         // DashboardController
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
-        Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
         // HomepageController
+        Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
         Route::put('/cms/homepage/top-section', [AdminHomepageController::class, 'updateTopSection'])->name('cms.homepage.top-section.update');
-        Route::put('/cms/homepage/trusted-company', [AdminHomepageController::class, 'updateTrustedCompany'])->name('cms.homepage.trusted-company.update');
+        Route::post('/cms/homepage/trusted-company', [AdminHomepageController::class, 'storeTrustedCompanies'])->name('cms.homepage.trusted-company.store');
+        Route::put('/cms/homepage/trusted-company', [AdminHomepageController::class, 'updateTrustedCompanies'])->name('cms.homepage.trusted-company.update');
         Route::get('/cms/homepage/testimonies/{id}/update/{flag}', [AdminHomepageController::class, 'editTestimonies'])->name('cms.homepage.testimonies.edit');
         Route::put('/cms/homepage/testimonies/{id}', [AdminHomepageController::class, 'updateTestimonies'])->name('cms.homepage.testimonies.update');
+        Route::post('/cms/homepage/trusted-company/delete', [AdminHomepageController::class, 'destroyTrustedCompany'])->name('cms.homepage.trusted-company.destroy');
         // AnalyticsController
         Route::get('/analytics/online-course', [AdminAnalyticsController::class, 'onlineCourseIndex'])->name('analytics.online-course.index');
         Route::get('/analytics/woki-course', [AdminAnalyticsController::class, 'wokiCourseIndex'])->name('analytics.woki-course.index');

@@ -1918,7 +1918,7 @@ html, body {
     .notification-right-blue-border{
         border-radius: 0px 5px 5px 0px;
         width:100%;
-        padding:1vw;
+        padding:0vw;
     }
     .notification-left-blue-border{
         width:8vw;
@@ -1933,9 +1933,7 @@ html, body {
         width:100%;
         padding:1vw
     }
-    .transaction-notification-card{
-        height:15vw;
-    }
+    
     #notification-title{
         margin-bottom:0.5vw !important;
     }
@@ -1967,7 +1965,13 @@ html, body {
     }
     .cart-card-grey{
         width:86vw;
-        height:20vw
+        height:33vw
+    }
+    #mobile-view-margin-woki{
+        margin-right:14vw !important
+    }
+    #mobile-view-margin-course-card{
+        margin-right:23vw !important
     }
     .margin-right{
         margin-right: 10vw !important;
@@ -2024,7 +2028,7 @@ html, body {
         margin-bottom:4vw !important;
     }
     .margin-right-shipment{
-        margin-right: 15vw !important;
+        margin-right: 24vw !important;
     }
     .half-width-button{
         width:50%;
@@ -2038,7 +2042,7 @@ html, body {
     /* end of mobile cart_shipment */
     /* metode pembayaran mobile */
     .payment-method-card{
-        padding:3vw;
+        padding: 1vw;
         
     }
     .image-bank{
@@ -2093,7 +2097,11 @@ html, body {
         
         width:80% !important ;
       
-      }
+    }
+    #icon-wdith-mobile-interest{
+        width:17vw !important
+    }
+    
     .popup-change-pass .close{
         right:15px !important;
         top:-10px !important
@@ -2527,7 +2535,7 @@ html, body {
 
     /* START COMMUNITY PAGE SECTION */
     .bg-image-mobile-height{
-        height:80vw !important
+        height:93vw !important
     }
     #mt-mobile-community{
         margin-top:3vw !important
@@ -2579,8 +2587,8 @@ html, body {
         line-height:6vw;
     }
     .very-small-text{
-        font-size: 1.8vw;
-        line-height: 2.4vw;
+        font-size: 2.3vw;
+        line-height: 3  vw;
     }
     .navbar-floating{
         display: none
@@ -2664,6 +2672,12 @@ html, body {
 
     .show-read-more .more-text{
         display: none;
+    }
+    #small-venidici-icon{
+        width: 12vw !important;
+    }
+    .edit-item{
+        padding-top: 1vw !important;
     }
 }
 
@@ -2933,3 +2947,13 @@ html, body {
 .growth-title-active p{
     color:#FFFFFF !important
 }
+
+.items {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+  }
+  
+  .items::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
