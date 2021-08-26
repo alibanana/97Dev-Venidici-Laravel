@@ -53,7 +53,8 @@ class InvoiceController extends Controller
                 $url = route('admin.invoices.index', request()->except('search'));
                 return redirect($url);
             } else {
-                $invoices = $invoices->where('invoice_no', 'like', "%".$request->search."%");
+                $invoices = $invoices->where('invoice_no', 'like', "%".$request->search."%")
+                    ->orWhere('name', 'like', "%".$request->search."%");
             }
         }
 
