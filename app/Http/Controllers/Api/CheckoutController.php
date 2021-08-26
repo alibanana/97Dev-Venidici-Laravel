@@ -144,7 +144,7 @@ class CheckoutController extends Controller
             ];
 
             if ($agent->browser() != "Safari") {
-                $validationRules = array_merge($validationRules, [
+                $validation_rules = array_merge($validation_rules, [
                     'birth_date' => 'required|date'
                 ]);
             }
