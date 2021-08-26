@@ -298,6 +298,8 @@ class BootcampController extends Controller
         if ($validator->fails())
             return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
 
+        $validated = $validator->validate();
+
         $birthdate = $validated['birth_date'];
 
         // If browser is safari and bootcamp
@@ -309,9 +311,6 @@ class BootcampController extends Controller
             
             $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date_safari'];
         }
-
-        $validated = $validator->validate();
-
 
         // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
         //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
