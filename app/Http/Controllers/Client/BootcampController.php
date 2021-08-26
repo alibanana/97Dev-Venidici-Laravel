@@ -271,7 +271,6 @@ class BootcampController extends Controller
 
     public function storeFullRegistration(Request $request, $course_id)
     {
-
         $input = $request->all();
 
         $validator = Validator::make($request->all(), [
@@ -298,13 +297,15 @@ class BootcampController extends Controller
 
         if ($validator->fails())
             return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
-        //if safari and bootcamp
-        if($request->has('date_safari') || $request->has('month')|| $request->has('year')  ){
 
+        $birthdate = $validated['birth_date'];
+
+        // If browser is safari and bootcamp
+        if($request->has('date_safari') || $request->has('month')|| $request->has('year')){
             if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
-            return redirect('/bootcamp#full-registration')
-            ->withInput($request->all())
-            ->with('date_message','The date field is required');
+                return redirect('/bootcamp#full-registration')
+                    ->withInput($request->all())
+                    ->with('date_message','The date field is required');
             
             $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date_safari'];
         }

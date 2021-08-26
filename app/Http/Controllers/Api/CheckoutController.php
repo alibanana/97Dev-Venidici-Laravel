@@ -142,8 +142,7 @@ class CheckoutController extends Controller
                 'course_id'                     => '', // no validations but included for ease of access.
 
             ];
-        }
-        else{
+        } else {
             // Validation rules that exists on all validation conditions. (noArtKit, hasArtKit)
             $validation_rules = [
                 'name' => 'required',
@@ -159,9 +158,7 @@ class CheckoutController extends Controller
                 'club_discount' => 'required|integer',
                 'course_id' => '', // no validations but included for ease of access.
             ];
-
         }
-
 
         // Extra validation rules if orders has artKit.
         if ($request->action == 'createPaymentObject') {
@@ -210,20 +207,21 @@ class CheckoutController extends Controller
             return redirect('/bootcamp#free-trial')->withErrors($validator)->withInput($request->all());
         }
 
-        //if safari and bootcamp
-        if($request->has('date_safari') || $request->has('month')|| $request->has('year')  ){
-            if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
-            return redirect('/bootcamp#free-trial')
-            ->withInput($request->all())
-            ->with('date_message','The date field is required');
-            
-            $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date_safari'];
-        }
-
         // If validation passed store validated data in a variable.
         $validated = $validator->validate();
 
-
+        // If safari and bootcamp
+        if ($request->action == 'createPaymentObjectBootcamp') {
+            $birthdate = $validated['birth_date'];
+            if($request->has('date_safari') || $request->has('month')|| $request->has('year')){
+                if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
+                    return redirect('/bootcamp#free-trial')
+                        ->withInput($request->all())
+                        ->with('date_message','The date field is required');
+    
+                $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date_safari'];
+            }
+        }
 
         // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
         //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
@@ -301,10 +299,6 @@ class CheckoutController extends Controller
                 $invoice_data['shipping_notes'] = $request->shipping_notes;
         }
 
-
-        
-
-
         // Create Invoice object and validate if it failed.
         $invoice = Invoice::create($invoice_data);
         if (!$invoice->exists){
@@ -322,15 +316,12 @@ class CheckoutController extends Controller
         *  - Validate if bootcamp_application creation success.
         */
         if ($request->action == 'createPaymentObjectBootcamp') {
-
             // check if promo code exists
             if ($validated['promo_code'] != null){
                 $promoObject = Promotion::where('code', $validated['promo_code'])->where('isActive',1)->first();
                 if ($promoObject == null) 
                     return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, Promo Code tidak ditemukan..')->withInput($request->all());
             }
-
-
 
             $order = Order::create([
                 'invoice_id' => $invoice->id,
@@ -370,7 +361,7 @@ class CheckoutController extends Controller
                 'social_media'          => $validated['social_media'],
                 'konsiderasi_lanjut'    => $validated['konsiderasi_lanjut'],
                 'promo_code'            => $validated['promo_code'],
-                'metode_pembayaran_bootcamp'            => $validated['metode_pembayaran_bootcamp'],
+                'metode_pembayaran_bootcamp' => $validated['metode_pembayaran_bootcamp'],
                 'expectation'           => $validated['expectation'],
                 'bankShortCode'         => $validated['bankShortCode'],
                 'bank_account_number'   => $validated['bank_account_no'],
