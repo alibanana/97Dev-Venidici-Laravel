@@ -271,13 +271,14 @@ class BootcampController extends Controller
 
     public function storeFullRegistration(Request $request, $course_id)
     {
+        $agent = new Agent();
+
         $input = $request->all();
 
-        $validator = Validator::make($request->all(), [
+        $validationRules = [
             'name'                  => '',
             'email'                 => '',
             'birth_place'           => 'required',
-            'birth_date'            => 'date',
             'gender'                => 'required',
             'phone_no'              => 'required',
             'province_id'           => 'required',
@@ -293,8 +294,22 @@ class BootcampController extends Controller
             'expectation'           => 'required',
             'promo_code'            => '',
             'metode_pembayaran_bootcamp'    => 'required',
-            ]);
+        ];
 
+        if ($agent->browser() == "Safari") {
+            $validationRules = array_merge($validationRules, [
+                'date_safari' => 'required',
+                'month' => 'required|date',
+                'year' => 'required|date'
+            ]);
+        } else {
+            $validationRules = array_merge($validationRules, [
+                'birth_date' => 'required|date'
+            ]);
+        }
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
         if ($validator->fails())
             return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
 
@@ -313,8 +328,8 @@ class BootcampController extends Controller
         }
 
         // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
-        //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
- 
+        // ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
+
         $bootcamp_application = BootcampApplication::where(
             [   
                 ['course_id', '=', $course_id],
