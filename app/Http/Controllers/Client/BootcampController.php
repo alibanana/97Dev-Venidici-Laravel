@@ -309,10 +309,10 @@ class BootcampController extends Controller
 
         $validated = $validator->validate();
 
-        $birthdate = $validated['birth_date'];
-
-        // If browser is safari and bootcamp
-        if($request->has('date_safari') || $request->has('month')|| $request->has('year')){
+        if ($agent->browser() != "Safari") {
+            $birthdate = $validated['birth_date'];
+        } else {
+            // If browser is safari and bootcamp
             if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
                 return redirect('/bootcamp#full-registration')
                     ->withInput($request->all())

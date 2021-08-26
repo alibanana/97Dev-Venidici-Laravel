@@ -218,8 +218,9 @@ class CheckoutController extends Controller
 
         // If safari and bootcamp
         if ($request->action == 'createPaymentObjectBootcamp') {
-            $birthdate = $validated['birth_date'];
-            if($request->has('date_safari') || $request->has('month')|| $request->has('year')){
+            if ($agent->browser() != "Safari") {
+                $birthdate = $validated['birth_date'];
+            } else {
                 if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
                     return redirect('/bootcamp#free-trial')
                         ->withInput($request->all())
