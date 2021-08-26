@@ -102,6 +102,8 @@ class CheckoutController extends Controller
             return redirect()->back();
         }
 
+        $agent = new Agent();
+        
         $input = $request->all();
         // Convert request input "phone" format.
         if ($request->has('phone'))
@@ -113,7 +115,6 @@ class CheckoutController extends Controller
             // Validation rules that exists on all validation conditions. (bootcamp)
             $validation_rules = [
                 'birth_place'                   => 'required',
-                'birth_date'                    => 'date',
                 'gender'                        => 'required',
                 'phone_no' => ['required', new TelephoneNumber],
                 //'phone_no' => 'required',
@@ -140,8 +141,13 @@ class CheckoutController extends Controller
                 'date'                          => 'required',
                 'time'                          => 'required',
                 'course_id'                     => '', // no validations but included for ease of access.
-
             ];
+
+            if ($agent->browser() != "Safari") {
+                $validationRules = array_merge($validationRules, [
+                    'birth_date' => 'required|date'
+                ]);
+            }
         } else {
             // Validation rules that exists on all validation conditions. (noArtKit, hasArtKit)
             $validation_rules = [

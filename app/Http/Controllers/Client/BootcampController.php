@@ -296,13 +296,7 @@ class BootcampController extends Controller
             'metode_pembayaran_bootcamp'    => 'required',
         ];
 
-        if ($agent->browser() == "Safari") {
-            $validationRules = array_merge($validationRules, [
-                'date_safari' => 'required',
-                'month' => 'required',
-                'year' => 'required'
-            ]);
-        } else {
+        if ($agent->browser() != "Safari") {
             $validationRules = array_merge($validationRules, [
                 'birth_date' => 'required|date'
             ]);
