@@ -271,14 +271,14 @@ class BootcampController extends Controller
 
     public function storeFullRegistration(Request $request, $course_id)
     {
+        $agent = new Agent();
 
         $input = $request->all();
 
-        $validator = Validator::make($request->all(), [
+        $validationRules = [
             'name'                  => '',
             'email'                 => '',
             'birth_place'           => 'required',
-            'birth_date'            => 'date',
             'gender'                => 'required',
             'phone_no'              => 'required',
             'province_id'           => 'required',
@@ -294,27 +294,42 @@ class BootcampController extends Controller
             'expectation'           => 'required',
             'promo_code'            => '',
             'metode_pembayaran_bootcamp'    => 'required',
-            ]);
+        ];
 
+        if ($agent->browser() == "Safari") {
+            $validationRules = array_merge($validationRules, [
+                'date_safari' => 'required',
+                'month' => 'required|date',
+                'year' => 'required|date'
+            ]);
+        } else {
+            $validationRules = array_merge($validationRules, [
+                'birth_date' => 'required|date'
+            ]);
+        }
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
         if ($validator->fails())
             return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
-        //if safari and bootcamp
-        if($request->has('date_safari') || $request->has('month')|| $request->has('year')  ){
 
+        $validated = $validator->validate();
+
+        $birthdate = $validated['birth_date'];
+
+        // If browser is safari and bootcamp
+        if($request->has('date_safari') || $request->has('month')|| $request->has('year')){
             if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
-            return redirect('/bootcamp#full-registration')
-            ->withInput($request->all())
-            ->with('date_message','The date field is required');
+                return redirect('/bootcamp#full-registration')
+                    ->withInput($request->all())
+                    ->with('date_message','The date field is required');
             
             $birthdate = $input['year'].'-'.$input['month'].'-'.$input['date_safari'];
         }
 
-        $validated = $validator->validate();
-
-
         // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
-        //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
- 
+        // ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
+
         $bootcamp_application = BootcampApplication::where(
             [   
                 ['course_id', '=', $course_id],
