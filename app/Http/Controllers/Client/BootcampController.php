@@ -299,8 +299,8 @@ class BootcampController extends Controller
         if ($agent->browser() == "Safari") {
             $validationRules = array_merge($validationRules, [
                 'date_safari' => 'required',
-                'month' => 'required|date',
-                'year' => 'required|date'
+                'month' => 'required',
+                'year' => 'required'
             ]);
         } else {
             $validationRules = array_merge($validationRules, [
