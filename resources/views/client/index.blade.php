@@ -538,36 +538,9 @@
         </a>
     </div>
     -->
+
     <!-- START OF ONE PROGRAMS -->
-    <div class="col-4 p-0" style="display:flex;justify-content:center">
-        <a href="/online-course?cat=Featured" style="text-decoration:none">
-            <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Online-Course-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
-                <div style="padding:1.5vw">
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Skill Snack</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
-                    <a href="/online-course?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Courses</a>
-                </div>
-            </div>
-        </a>
-    </div>
-    <!-- END OF ONE PROGRAMS -->
-    <!-- START OF ONE PROGRAMS -->
-    <div class="col-4 p-0" style="display:flex;justify-content:center">
-        <a href="/woki?cat=Featured" style="text-decoration:none">
-            <div class="our-programs-card-homepage" style="margin-top:2.5vw">
-                <img src="/assets/images/client/Woki-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
-                <div style="padding:1.5vw">
-                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Woki</p>
-                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
-                    <a href="/woki?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Woki</a>
-                </div>
-            </div>
-        </a>
-    </div>
-    <!-- END OF ONE PROGRAMS -->
-    <!-- START OF ONE PROGRAMS -->
-    <div class="col-4 p-0" style="display:flex;justify-content:center">
+    <div class="col-3 p-0" style="display:flex;justify-content:center">
         <a href="/bootcamp" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/seeder/Dummy_Bootcamp_Thumbnail.jpg" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
@@ -581,7 +554,36 @@
     </div>
     <!-- END OF ONE PROGRAMS -->
     <!-- START OF ONE PROGRAMS -->
-    <div class="col-12 p-0" style="display:flex;justify-content:center">
+    <div class="col-3 p-0" style="display:flex;justify-content:center">
+        <a href="/online-course?cat=Featured" style="text-decoration:none">
+            <div class="our-programs-card-homepage" style="margin-top:2.5vw">
+                <img src="/assets/images/client/Online-Course-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
+                <div style="padding:1.5vw">
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Skill Snack</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin! Dengan recorded learning session dari berbagai topik, Venidici on Demand bawa pengalaman belajar kamu jadi seru lagi.</p>
+                    <a href="/online-course?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Courses</a>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- END OF ONE PROGRAMS -->
+    <!-- START OF ONE PROGRAMS -->
+    <div class="col-3 p-0" style="display:flex;justify-content:center">
+        <a href="/woki?cat=Featured" style="text-decoration:none">
+            <div class="our-programs-card-homepage" style="margin-top:2.5vw">
+                <img src="/assets/images/client/Woki-Banner.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
+                <div style="padding:1.5vw">
+                    <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;">Woki</p>
+                    <p class="small-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw">Buat kamu yang pengen healing baik sendiri atau bersama teman, tenang ada Woki disini! Woki akan membantu kamu meningkatkan kreativitas dan art skills diselingi dengan sesi healing. #BertumbuhDanPeduli bersama Woki.</p>
+                    <a href="/woki?cat=Featured" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;">Explore Woki</a>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- END OF ONE PROGRAMS -->
+    
+    <!-- START OF ONE PROGRAMS -->
+    <div class="col-3 p-0" style="display:flex;justify-content:center">
         <a href="/for-corporate/krest" style="text-decoration:none">
             <div class="our-programs-card-homepage" style="margin-top:2.5vw">
                 <img src="/assets/images/client/Krest_Dummy.png" style="width:100%;height:11vw;object-fit:cover;border-radius:10px 10px 0px 0px" class="img-fluid" alt="">
@@ -604,6 +606,20 @@
         <div class="col-12 p-0" style="text-align:center">
             <p style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:1vw;font-size:7vw"><span style="font-family:Hypebeast;margin-left:1vw" >PROGRAM </span> Venidici</p>
         </div>
+        <!-- START OF ONE PROGRAMS -->
+        <div class="col-12 p-0" style="display:flex;justify-content:center">
+            <a href="/bootcamp" style="text-decoration:none">
+                <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:100%">
+                    <img src="/assets/images/seeder/Dummy_Bootcamp_Thumbnail.jpg" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
+                    <div style="padding:1.5vw">
+                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:1vw">Bootcamp</p>
+                        <p class="normal-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;">Program 16 minggu yang sekaligus merupakan Bootcamp Growth Hacking pertama di Indonesia. Diracik khusus untuk jadi pondasi kuat pertama kamu dalam berbisnis atau berkarir di dunia Growth Hacking. #JagoDigital bersama Venidici demi Indonesia Emas 2045</p>
+                        <a href="/bootcamp" class="btn-blue normal-text"  style="text-decoration: none;font-family:Rubik Regular;">Explore Bootcamp</a>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- END OF ONE PROGRAMS -->
         <!-- START OF ONE PROGRAMS -->
         <div class="col-12 p-0" style="display:flex;justify-content:center">
             <a href="/online-course?cat=Featured" style="text-decoration:none">
@@ -632,20 +648,7 @@
             </a>
         </div>
         <!-- END OF ONE PROGRAMS -->
-        <!-- START OF ONE PROGRAMS -->
-        <div class="col-12 p-0" style="display:flex;justify-content:center">
-            <a href="/bootcamp" style="text-decoration:none">
-                <div class="our-programs-card-homepage" style="margin-top:2.5vw;width:100%">
-                    <img src="/assets/images/seeder/Dummy_Bootcamp_Thumbnail.jpg" style="width:100%;height:20vw;object-fit:cover;border-radius: 5px 5px 0px 0px;" class="img-fluid" alt="">
-                    <div style="padding:1.5vw">
-                        <p class="bigger-text" id="card-title" style="font-family: Rubik Medium;color:#55525B;margin-bottom:1vw">Bootcamp</p>
-                        <p class="normal-text our-programs-card-description" style="font-family: Rubik Regular;color:#55525B;margin-bottom:1vw;">Program 16 minggu yang sekaligus merupakan Bootcamp Growth Hacking pertama di Indonesia. Diracik khusus untuk jadi pondasi kuat pertama kamu dalam berbisnis atau berkarir di dunia Growth Hacking. #JagoDigital bersama Venidici demi Indonesia Emas 2045</p>
-                        <a href="/bootcamp" class="btn-blue normal-text"  style="text-decoration: none;font-family:Rubik Regular;">Explore Bootcamp</a>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- END OF ONE PROGRAMS -->
+        
         <!-- START OF ONE PROGRAMS -->
         <div class="col-12 p-0" style="display:flex;justify-content:center">
             <a href="/for-corporate/krest" style="text-decoration:none">
@@ -1858,7 +1861,7 @@
     </div>
     <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#000000;">Ga percaya kita? Tanya sama mereka</p>
-        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;white-space:pre-line">Berhasil dapetin nilai rata-rata XX dari XX di berbagai
+        <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;white-space:pre-line">Berhasil dapetin nilai rata-rata 6.35 dari 7 di berbagai
         program-program sebelumnya ngebuktiin bahwa
         Venidici siap untuk bawa masalah pendidikan dan
         karir di Indonesia to the next level!</p>
@@ -1872,7 +1875,7 @@
 <div class="row m-0 page-container mobile-display" style="display:none;background:#F6F6F6">
     <div class="col-12" style="display: flex;flex-direction: column;justify-content: center;padding-top:5vw">
         <p class="bigger-text" style="font-family: Rubik Medium;color:#000000;">Ga percaya kita? Tanya sama mereka</p>
-        <p class="normal-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;white-space:pre-line">Berhasil dapetin nilai rata-rata XX dari XX di berbagai
+        <p class="normal-text" style="font-family: Rubik Regular;color:#000000;margin-top:1vw;white-space:pre-line">Berhasil dapetin nilai rata-rata 6.35 dari 7 di berbagai
         program-program sebelumnya ngebuktiin bahwa
         Venidici siap untuk bawa masalah pendidikan dan
         karir di Indonesia to the next level!</p>

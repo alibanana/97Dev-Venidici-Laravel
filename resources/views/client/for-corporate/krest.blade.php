@@ -119,7 +119,7 @@
 <div class="row page-container m-0 krest-background desktop-display" style="padding-top:10vw;display:flex;align-items:center">
     
     <div class="col-12 col-md-6 col-l p-0">
-        <img src="/assets/images/client/logo-horizontal.png" id="logo-image-krest"  class="img-fluid" alt="KREST">
+        <img src="/assets/images/client/Krest_Logo.png" id="logo-image-krest"  class="img-fluid" alt="KREST">
         <p class="medium-heading" style="font-family: Rubik Bold;color:#686B82;margin-top:1.5vw">Extracting businesses’ true potential. In search of peak efficiency</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#686B82;margin-top:1.5vw;margin-bottom:3vw">Optimalkan talenta-talenta dalam perusahaan Anda <br> untuk performa bisnis terbaik</p>
         <a href="#programs-section" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw">Explore Krest</a>
@@ -568,63 +568,117 @@ END OF OUR VALUES-->
 </form>
 <!-- END OF CONTACT US SECTION -->
 
-<!-- START OF FAQ SECTION -
+<!-- START OF FAQ SECTION --->
 <div class="row m-0 page-container" style="padding-top:6vw;padding-bottom:6vw;background-color:#F9F9F9">
     <div class="col-12 p-0">
         <p class="big-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-left:3vw">Frequently Asked Questions</p>
     </div>
-    <!-- START OF QUESTION SECTION -
+    <!-- START OF QUESTION SECTION -->
     <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:1.5vw">
         <div style="background-color:#F9F9F9;padding:1.5vw;border-radius:10px;width:92%">
-            <!-- START OF ONE FAQ CARD -
+            <!-- START OF ONE FAQ CARD -->
             <div class="faq-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">What is your shipping policy?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa itu Krest?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    Krest by Venidici adalah rangkaian workshop dalam sesi pembelajaran online dima karyawan dari suatu perusahaan dapat belajar bersama beberapa soft-skill dan pengetahuan untuk meningkatkan kinerja perusahaan.
                     </p>
                 </div>
             </div>
-            <!-- END OF ONE FAQ CARD -
-            <!-- START OF ONE FAQ CARD -
-            <div class="faq-card" style="margin-top:1vw">
+            <!-- END OF ONE FAQ CARD -->
+            <!-- START OF ONE FAQ CARD -->
+            <div class="faq-card" style="margin-top:0.5vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Can I refund the course that i enrolled?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apakah bisa mengajukan topik dari kita sendiri?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ2" style="margin-top:1vw">
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    Ya, anda dapat mengajukan topik dari anda sendiri. Tetapi kami menyediakan 10 topik yang relevan dengan karyawan di masa sekarang.
                     </p>
                 </div>
             </div>
-            <!-- END OF ONE FAQ CARD -
-            <!-- START OF ONE FAQ CARD -
-            <div class="faq-card" style="margin-top:1vw">
+            <!-- END OF ONE FAQ CARD -->
+            <!-- START OF ONE FAQ CARD -->
+            <div class="faq-card" style="margin-top:0.5vw">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Lorem Ipsum Dolor Sit Amet?</p>
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja 10 topik yang disediakan oleh Krest?</p>
                     <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ3" role="button" aria-expanded="false" aria-controls="collapseFaQ3">
                         <i class="fas fa-chevron-down"></i>
                     </p>                                    
                 </div>
                 <div class="collapse" id="collapseFaQ3" style="margin-top:1vw">
-                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular;white-space:pre-line"> Daftar 10 topik yang disediakan adalah
+1. Effective Conflict Management with Negotiation Skills
+2. Complex Problem Solving Essentials
+3. Be More Effective with Leadership & Social Influencing Skills
+4. Creative Thinking Skills
+5. Persuasive Communication & Public Speaking
+6. Resiliency & Stress Management 
+7. Managing People & Team
+8. Teamwork
+9. Objective and Key Result
+10. Effective Time Management
                     </p>
                 </div>
             </div>
-            <!-- END OF ONE FAQ CARD -
+            <!-- END OF ONE FAQ CARD -->
+
+            <!-- START OF ONE FAQ CARD -->
+            <div class="faq-card" style="margin-top:0.5vw">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Dapatkan saya mendaftar secara individual untuk Krest?</p>
+                    <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ4" role="button" aria-expanded="false" aria-controls="collapseFaQ4">
+                        <i class="fas fa-chevron-down"></i>
+                    </p>                                    
+                </div>
+                <div class="collapse" id="collapseFaQ4" style="margin-top:1vw">
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                    Sayangnya tidak, Krest hanya menyediakan corporate package.</p>
+                </div>
+            </div>
+            <!-- END OF ONE FAQ CARD -->
+
+            <!-- START OF ONE FAQ CARD -->
+            <div class="faq-card" style="margin-top:0.5vw">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja yang bisa didapatkan dari Krest?</p>
+                    <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ5" role="button" aria-expanded="false" aria-controls="collapseFaQ5">
+                        <i class="fas fa-chevron-down"></i>
+                    </p>                                    
+                </div>
+                <div class="collapse" id="collapseFaQ5" style="margin-top:1vw">
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                    Anda bisa mendapatkan materi presentasi, framework atau tools yang dapat diimplementasikan, metode yang aplikatif, sesi interaktif, dan sesi tanya jawab.</p>
+                </div>
+            </div>
+            <!-- END OF ONE FAQ CARD -->
+
+            <!-- START OF ONE FAQ CARD -->
+            <div class="faq-card" style="margin-top:0.5vw">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Bagaimana cara saya mendaftarkan karyawan saya untuk mendapatkan Krest?</p>
+                    <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ6" role="button" aria-expanded="false" aria-controls="collapseFaQ6">
+                        <i class="fas fa-chevron-down"></i>
+                    </p>                                    
+                </div>
+                <div class="collapse" id="collapseFaQ6" style="margin-top:1vw">
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                    Anda dapat menghubungi narahubung atau <span> <a href="https://api.whatsapp.com/send?phone=+6281294131031&text=Halo%21%20Saya%20ingin%20bertanya%20tentang%20program%20Krest%20By%20Venidici%20"> klik disini</a> </span>.</p>
+                </div>
+            </div>
+            <!-- END OF ONE FAQ CARD -->
             
         </div>
     </div>
-    <!-- END OF QUESTION SECTION -
+    <!-- END OF QUESTION SECTION -->
 </div>
 <!-- END OF FAQ SECTION -->
 
