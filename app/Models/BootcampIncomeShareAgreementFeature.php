@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class BootcampIncomeShareAgreementFeature extends Model
 {
+    use HasFactory;
+
     protected $table = 'bootcamp_income_share_agreement_features';
 
     protected $fillable = [
