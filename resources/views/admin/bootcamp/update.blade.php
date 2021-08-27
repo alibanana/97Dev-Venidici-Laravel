@@ -1494,7 +1494,6 @@
                     <div style="display:flex;justify-content:space-between">
                         <h5 for="">Full Payment Content</h5>
                         <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Update Content</button>
-
                     </div>
                     <div class="form-group">
                         <label for="">Description</label> <br>
@@ -1535,7 +1534,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <button type="button" id="add_full_payment_feature" onlick="duplicateFullPaymentFeature()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+                    <button type="button" id="add_full_payment_feature" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
                 </div>
 
             </div>
@@ -1589,7 +1588,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <button type="button" id="add_income_share_agreement_feature" onlick="duplicateFullPaymentFeature()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+                    <button type="button" id="add_income_share_agreement_feature" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
                 </div>
 
             </div>
@@ -1620,39 +1619,39 @@ function duplicateFullPaymentFeature() {
 }
 </script>
 <script>
-document.getElementById('add_income_share_agreement_feature').onclick = duplicateFullPaymentFeature;
-var i = 0; var original = document.getElementById('income_share_agreement_duplicator');
-function duplicateFullPaymentFeature() {
-    var clone = original.cloneNode(true); // "deep" clone
+document.getElementById('add_income_share_agreement_feature').onclick = duplicateIncomeShareAgreementFeature;
+var i = 0; var original2 = document.getElementById('income_share_agreement_duplicator');
+function duplicateIncomeShareAgreementFeature() {
+    var clone = original2.cloneNode(true); // "deep" clone
     $(clone).find("input").attr("name", "income_share_agreement_features[]");
     $(clone).find("input").attr("required", "");
     clone.style.display = "block";
     clone.id = "income_share_agreement_duplicator" + ++i; // there can only be one element with an ID
-    original.parentNode.appendChild(clone);
-}
-</script>
-<script>
-document.getElementById('add_learn').onclick = duplicateLearn;
-var i = 0; var original2 = document.getElementById('learn_duplicator');
-function duplicateLearn() {
-    var clone = original2.cloneNode(true); // "deep" clone
-    $(clone).find("input").attr("name", "features[]");
-    $(clone).find("input").attr("required", "");
-    clone.style.display = "block";
-    clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
     original2.parentNode.appendChild(clone);
 }
 </script>
 <script>
-document.getElementById('add_hashtag').onclick = duplicateHashtag;
-var i = 0; var original3 = document.getElementById('hashtag_duplicator');
-function duplicateHashtag() {
+document.getElementById('add_learn').onclick = duplicateLearn;
+var i = 0; var original3 = document.getElementById('learn_duplicator');
+function duplicateLearn() {
     var clone = original3.cloneNode(true); // "deep" clone
+    $(clone).find("input").attr("name", "features[]");
+    $(clone).find("input").attr("required", "");
+    clone.style.display = "block";
+    clone.id = "learn_duplicator" + ++i; // there can only be one element with an ID
+    original3.parentNode.appendChild(clone);
+}
+</script>
+<script>
+document.getElementById('add_hashtag').onclick = duplicateHashtag;
+var i = 0; var original4 = document.getElementById('hashtag_duplicator');
+function duplicateHashtag() {
+    var clone = original4.cloneNode(true); // "deep" clone
     $(clone).find("select").attr("name", "hashtags[]");
     $(clone).find("select").attr("required", "");
     clone.style.display = "block";
     clone.id = "hashtag_duplicator" + ++i; // there can only be one element with an ID
-    original3.parentNode.appendChild(clone);
+    original4.parentNode.appendChild(clone);
 }
 </script>
 <script>
@@ -1700,14 +1699,14 @@ function removeDiv(elem, wrapper_id){
 
 <script>
 document.getElementById('add_schedule_detail').onclick = duplicateSchedule;
-var i = 1; var original2 = document.getElementById('weekly_schedule_duplicator');
+var i = 1; var original5 = document.getElementById('weekly_schedule_duplicator');
 function duplicateSchedule() {
-    var clone = original2.cloneNode(true); // "deep" clone
+    var clone = original5.cloneNode(true); // "deep" clone
     $(clone).find("input").attr("name","schedule_details[]");
     $(clone).find("input").attr("required", "");
     clone.style.display = "block";
     clone.id = "weekly_schedule_duplicator" + ++i; // there can only be one element with an ID
-    original2.parentNode.appendChild(clone);
+    original5.parentNode.appendChild(clone);
 }
 </script>
 
