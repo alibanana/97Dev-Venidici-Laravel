@@ -353,8 +353,14 @@ class BootcampController extends Controller
             
         }
         elseif($request->action == 'Reject'){
-            $application->status = 'ft_paid';
-            $application->is_full_registration = null;
+            //kalau daftar full regis
+            if($application->is_full_registration && !$application->is_trial){
+                $application->status = 'denied';
+            //kalau upgrade
+            }else{
+                $application->status = 'ft_paid';
+                $application->is_full_registration = null;
+            }
             $title = 'Ouch.. pendaftaran Bootcamp kamu telah ditolak!';    
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah ditolak.';    
         }
