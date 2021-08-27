@@ -143,7 +143,7 @@
                             }
                         ?>
                         @endif
-                        @if($agent->browser() == "Safari")
+                        @if($agent->browser() == "Safari" && Auth::check())
                             @php
                                 if (Auth::user()->userDetail->birthdate != null) {
                                     $birthdate_safari = explode('-',$date);
@@ -635,7 +635,7 @@
                         ?>
                         @endif
 
-                        @if($agent->browser() == "Safari")
+                        @if($agent->browser() == "Safari" && Auth::check())
                             @php
                                 if (Auth::user()->userDetail->birthdate != null) {
                                     $birthdate_safari = explode('-',$date);
