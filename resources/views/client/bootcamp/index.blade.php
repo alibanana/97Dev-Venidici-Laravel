@@ -234,7 +234,7 @@
                                     @foreach($cities as $city)
                                         <option value="{{ $city->city_id }}" 
                                             @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
-                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
+                                                @if(old('city_id',Auth::user()->userDetail->city_id) == $city->city_id)
                                                     selected
                                                 @endif
                                             @elseif (Request::get('city') == $city->city_id) 
@@ -726,7 +726,7 @@
                                     @foreach($cities as $city)
                                         <option value="{{ $city->city_id }}" 
                                             @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
-                                                @if(Auth::user()->userDetail->city_id == $city->city_id)
+                                                 @if(old('city_id',Auth::user()->userDetail->city_id) == $city->city_id)
                                                     selected
                                                 @endif
                                             @elseif (Request::get('city') == $city->city_id) 
@@ -1822,19 +1822,19 @@
         <div class="full-registration-container">
             <div>
                 <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;">Full Payment</p>
-                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;text-decoration: line-through;opacity:0.7;margin-bottom:0.5vw">Rp. 15,000,000</p>
+                <div class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;">{!! $course->bootcampCourseDetail->full_payment_description !!}</div>
+                <p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }}</p>
+                <!--<p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;text-decoration: line-through;opacity:0.7;margin-bottom:0.5vw">Rp. 15,000,000</p>
                 <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;opacity:0.7;margin-bottom:0.5vw">1st Batch Discount <span style="text-decoration: line-through;"> Rp. 12,000,000</span></p>
                 <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;">Discount tambahan untuk early bird!</p>
                 <p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;">Now Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }}</p>
-                <p class="small-text" style="font-family: Rubik Regular;color:#FFFFFF;">Valid until 29 August 2021</p>
+                <p class="small-text" style="font-family: Rubik Regular;color:#FFFFFF;">Valid until 29 August 2021</p>-->
+                @foreach ($course->bootcampFullPaymentFeatures as $feature)
                 <div style=display:flex;align-items:flex-start>
                     <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular">Bayar penuh di depan atau cicil sebanyak 2x</p>
+                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular">{{$feature->feature}}</p>
                 </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular">Fasilitas penempatan kerja dengan perlindungan money-back guarantee sampai dengan 100%</p>
-                </div>
+                @endforeach
                 
             </div>
             
@@ -1848,16 +1848,20 @@
         <div class="free-trial-container">
             <div>
                 <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;">Income Share Agreement</p>
-                <p class="normal-text" style="font-family: Rubik Medium;color:#888888;margin-bottom:0.3vw">Ikut bootcamp tanpa bayar apapun di depan</p>
-                <p class="normal-text" style="font-family: Rubik Medium;color:#888888;">Bayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>
+                <!--<p class="normal-text" style="font-family: Rubik Medium;color:#888888;margin-bottom:0.3vw">Ikut bootcamp tanpa bayar apapun di depan</p>
+                <p class="normal-text" style="font-family: Rubik Medium;color:#888888;">Bayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>-->
+                <div class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;">{!! $course->bootcampCourseDetail->income_share_description !!}</div>
+                @foreach ($course->bootcampIncomeShareAgreementFeatures as $feature)
                 <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">{{$feature->feature}}</p>
+                </div>
+                @endforeach
+                <!--<div style=display:flex;align-items:flex-start>
                     <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
                     <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Fasilitas penempatan kerja dan bayar setelah diterima tanpa bunga dan denda</p>
-                </div>
-                <div style=display:flex;align-items:flex-start>
-                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
-                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Hanya membayar uang pendaftaran yang akan dikembalikan di akhir bootcamp</p>
-                </div>
+                </div>-->
+                
                 
             </div>
             

@@ -677,7 +677,7 @@
     </div>
     @endif
     @if(session('bootcamp_message'))
-    <div class="wow bounce" style="display:flex;justify-content:center">
+    <div class="wow bounce" style="display:flex;justify-content:center;margin-top:2vw">
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
             {{session('bootcamp_message')}}

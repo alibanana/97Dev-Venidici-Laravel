@@ -1846,6 +1846,7 @@ html, body {
     justify-content: space-between;
     align-items:flex-start;
     background-color: #2B6CAA;padding:2vw;
+    height:100%
 }
 .free-trial-container{
     background-color: #FFFFFF;
