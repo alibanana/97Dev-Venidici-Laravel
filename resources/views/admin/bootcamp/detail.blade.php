@@ -233,7 +233,7 @@
                                                     <td>
                                                         <!-- KALAU DAFTAR FREE TRIAL -->
                                                         @if(($user->is_trial && !$user->is_full_registration && $user->status == 'ft_paid') || $user->status == 'approved')
-                                                        <a href=""  class="text-nowrap">View Invoice</a>
+                                                        <a href="/admin/invoices/{{$user->invoice_id}}"  class="text-nowrap">View Invoice</a>
 
 
                                                         <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post"  style="margin-top: 1vw;">

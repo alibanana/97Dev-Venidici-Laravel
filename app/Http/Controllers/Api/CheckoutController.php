@@ -116,8 +116,8 @@ class CheckoutController extends Controller
             $validation_rules = [
                 'birth_place'                   => 'required',
                 'gender'                        => 'required',
-                'phone_no' => ['required', new TelephoneNumber],
-                //'phone_no' => 'required',
+                //'phone_no' => ['required', new TelephoneNumber],
+                'phone_no' => 'required',
                 'province_id'                   => 'required',
                 'city_id'                       => 'required',
                 'address'                       => 'required',

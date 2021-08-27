@@ -353,7 +353,14 @@ class BootcampController extends Controller
             
         }
         elseif($request->action == 'Reject'){
-            $application->status = 'denied';
+            //kalau daftar full regis
+            if($application->is_full_registration && $application->is_trial == null){
+                $application->status = 'denied';
+            //kalau upgrade
+            }else{
+                $application->status = 'ft_paid';
+                $application->is_full_registration = null;
+            }
             $title = 'Ouch.. pendaftaran Bootcamp kamu telah ditolak!';    
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah ditolak.';    
         }
@@ -376,7 +383,7 @@ class BootcampController extends Controller
         // Create notification for user.
         Notification::create($notification_data);
 
-        $message = 'Application for user (' . $application->name . ') has been changed to '.$application->status.'!';
+        $message = 'Application for user (' . $application->name . ') has been changed';
 
         return redirect()->route('admin.bootcamp.show',$application->course_id)->with('message', $message);
 

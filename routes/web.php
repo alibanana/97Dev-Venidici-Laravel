@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\BootcampCandidateController as AdminBootcampCandi
 use App\Http\Controllers\Admin\BootcampFutureCareerController as AdminBootcampFutureCareerController;
 use App\Http\Controllers\Admin\BootcampHiringPartnerController as AdminBootcampHiringPartnerController;
 use App\Http\Controllers\Admin\BootcampBatchController as AdminBootcampBatchController;
+use App\Http\Controllers\Admin\BootcampPricingContentController as AdminBootcampPricingContentController;
 
 
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
@@ -301,6 +302,12 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/bootcamp/{id}/store-feature', [AdminBootcampFeatureController::class, 'store'])->name('bootcamp-feature.store');
         Route::delete('/bootcamp-feature/{id}', [AdminBootcampFeatureController::class, 'destroy'])->name('bootcamp-feature.destroy');
         Route::put('/bootcamp-feature/update', [AdminBootcampFeatureController::class, 'update'])->name('bootcamp-feature.update');
+
+
+        
+        // BootcampFeatureController 
+        Route::post('/bootcamp-full-payment-content/update/{id}', [AdminBootcampPricingContentController::class, 'updateFullPayment'])->name('bootcamp-full-payment-content.update');
+        Route::post('/bootcamp-income-share-agreement-content-content/update/{id}', [AdminBootcampPricingContentController::class, 'updateIncomeShareAgreement'])->name('bootcamp-income-share-agreement-content.update');
         
         // BootcampAboutController
         Route::post('/bootcamp/{id}/store-about', [AdminBootcampAboutController::class, 'store'])->name('bootcamp-about.store');

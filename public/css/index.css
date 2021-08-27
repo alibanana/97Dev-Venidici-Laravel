@@ -1785,7 +1785,7 @@ html, body {
     padding:6vw 16vw
 }
 #logo-image-krest{
-    width:14vw;
+    width:12vw;
 }
 .bootcamp-logo-image{
     width:15vw;margin-top:1vw
@@ -1846,6 +1846,7 @@ html, body {
     justify-content: space-between;
     align-items:flex-start;
     background-color: #2B6CAA;padding:2vw;
+    height:100%
 }
 .free-trial-container{
     background-color: #FFFFFF;

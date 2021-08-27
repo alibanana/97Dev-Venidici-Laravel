@@ -76,6 +76,7 @@
             <h6 id="career-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'future-career-page')" style="cursor:pointer;">Future Careers</h6>
             <h6 id="partner-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'hiring-partner-page')" style="cursor:pointer;">Hiring Partners</h6>
             <h6 id="batch-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'batch-page')" style="cursor:pointer;">Batch</h6>
+            <h6 id="pricing-content-page-button" class="mb-0 mb-3 ml-5 course-link course-item" onclick="changeContent(event, 'pricing-content-page')" style="cursor:pointer;">Pricing Content</h6>
         </div>
         
         <!-- Content Row -->
@@ -1484,6 +1485,119 @@
         </div>
         <!-- END OF BATCH-->
 
+        <!-- START OF PRICING CONTENT-->
+        <div class="course-content" id="pricing-content-page" style="display:none">
+            <form action="{{route('admin.bootcamp-full-payment-content.update', $course->id) }}" method="POST">
+            @csrf  
+            <div class="row">
+                <div class="col-12">
+                    <div style="display:flex;justify-content:space-between">
+                        <h5 for="">Full Payment Content</h5>
+                        <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Update Content</button>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Description</label> <br>
+
+                        <textarea name="full_payment_content" class="form-control tinymce-textarea">{{ $course->bootcampCourseDetail->full_payment_description }}</textarea>
+                        @error('full_payment_content')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6" style="margin-top:3vw">
+                    <label for="">Full Payment Feature <span style="color: orange">(At least one element must be present!)</span></label>
+                    @error('full_payment_features')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    
+                    <div id="full_payment_duplicator_wrapper">
+                        <div class="row" id="full_payment_duplicator" style="display:none">
+                            <div class="col-md-12">
+                                <div class="form-group" style="display:flex">
+                                    <input type="text" class="form-control form-control-user" placeholder="Enter Student Requirement">
+                                    <button type="button" onClick="removeDiv(this, 'full_payment_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach ($course->bootcampFullPaymentFeatures as $feature)
+                            <div class="row" id="full_payment_duplicator{{ $loop->iteration }}">
+                                <div class="col-md-12">
+                                    <div class="form-group" style="display:flex">
+                                        <input type="text" name="full_payment_features[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="{{ $feature->feature }}" required>
+                                        <button type="button" onClick="removeDiv(this, 'full_payment_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <button type="button" id="add_full_payment_feature" onlick="duplicateFullPaymentFeature()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+                </div>
+
+            </div>
+            </form>
+
+            <form action="{{route('admin.bootcamp-income-share-agreement-content.update', $course->id) }}" method="POST">
+            @csrf  
+            <div class="row" style="margin-top:5vw">
+                <div class="col-12">
+                    <div style="display:flex;justify-content:space-between">
+                        <h5 for="">Income Share Agreement Content</h5>
+                        <button type="submit" class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap" type="submit" >Update Content</button>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Description</label> <br>
+
+                        <textarea name="income_share_description" class="form-control tinymce-textarea">{{ $course->bootcampCourseDetail->income_share_description }}</textarea>
+                        @error('income_share_description')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror               
+                    </div>
+                </div>
+                <div class="col-6" style="margin-top:3vw">
+                    <label for="">Income Share Agreement Feature <span style="color: orange">(At least one element must be present!)</span></label>
+                    @error('income_share_agreement_features')
+                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    
+                    <div id="income_share_agreement_duplicator_wrapper">
+                        <div class="row" id="income_share_agreement_duplicator" style="display:none">
+                            <div class="col-md-12">
+                                <div class="form-group" style="display:flex">
+                                    <input type="text" class="form-control form-control-user" placeholder="Enter Student Requirement">
+                                    <button type="button" onClick="removeDiv(this, 'income_share_agreement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach ($course->bootcampIncomeShareAgreementFeatures as $feature)
+                            <div class="row" id="income_share_agreement_duplicator{{ $loop->iteration }}">
+                                <div class="col-md-12">
+                                    <div class="form-group" style="display:flex">
+                                        <input type="text" name="income_share_agreement_features[]" class="form-control form-control-user" placeholder="Enter Student Requirement" value="{{ $feature->feature }}" required>
+                                        <button type="button" onClick="removeDiv(this, 'income_share_agreement_duplicator_wrapper')" style="background:none;border:none;color:red" class="bigger-text close-requirement" ><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <button type="button" id="add_income_share_agreement_feature" onlick="duplicateFullPaymentFeature()" style="background-color:#3F92D8; border-radius:10px;border:none;color:white;padding: 6px 12px;width:100%">Tambah</button> 
+                </div>
+
+            </div>
+            </form>
+
+        </div>
+        <!-- END OF PRICING CONTENT-->
+
         <form id="removeAttachmentForm" action="{{ route('admin.bootcamp.remove-syllabus', $course->id) }}" method="post">
             @csrf
             @method('delete')
@@ -1494,14 +1608,26 @@
 </div>
 
 <script>
-document.getElementById('add_requirement').onclick = duplicateRequirement;
-var i = 0; var original = document.getElementById('requirement_duplicator');
-function duplicateRequirement() {
+document.getElementById('add_full_payment_feature').onclick = duplicateFullPaymentFeature;
+var i = 0; var original = document.getElementById('full_payment_duplicator');
+function duplicateFullPaymentFeature() {
     var clone = original.cloneNode(true); // "deep" clone
-    $(clone).find("input").attr("name", "requirements[]");
+    $(clone).find("input").attr("name", "full_payment_features[]");
     $(clone).find("input").attr("required", "");
     clone.style.display = "block";
-    clone.id = "requirement_duplicator" + ++i; // there can only be one element with an ID
+    clone.id = "full_payment_duplicator" + ++i; // there can only be one element with an ID
+    original.parentNode.appendChild(clone);
+}
+</script>
+<script>
+document.getElementById('add_income_share_agreement_feature').onclick = duplicateFullPaymentFeature;
+var i = 0; var original = document.getElementById('income_share_agreement_duplicator');
+function duplicateFullPaymentFeature() {
+    var clone = original.cloneNode(true); // "deep" clone
+    $(clone).find("input").attr("name", "income_share_agreement_features[]");
+    $(clone).find("input").attr("required", "");
+    clone.style.display = "block";
+    clone.id = "income_share_agreement_duplicator" + ++i; // there can only be one element with an ID
     original.parentNode.appendChild(clone);
 }
 </script>
@@ -1584,6 +1710,20 @@ function duplicateSchedule() {
     original2.parentNode.appendChild(clone);
 }
 </script>
+
+<!-- tinymce JavaScript -->
+<script src="https://cdn.tiny.cloud/1/b4mxmojo2bn35i1gse1t6ug1zb4arvlzz7riz4giu0w4p8oh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        mode : "specific_textareas",
+        editor_selector : "tinymce-textarea",
+    });
+</script>
+
+
+
+
 @if (Session::has('page-option'))
     @if (Session::get('page-option') == 'basic-informations')
         <script>document.getElementById('basic-information-button').click()</script>
@@ -1613,6 +1753,10 @@ function duplicateSchedule() {
         <script>document.getElementById('batch-page-button').click()</script>
     @elseif (Session::get('page-option') == 'manage-curriculum')
         <script>document.getElementById('manage-curriculum-button').click()</script>
+    @elseif (Session::get('page-option') == 'pricing-content-page')
+        <script>document.getElementById('pricing-content-page-button').click()</script>
     @endif
 @endif
 @endsection
+
+

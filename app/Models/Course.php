@@ -43,6 +43,12 @@ class Course extends Model
     public function courseFeatures() {
         return $this->hasMany(CourseFeature::class);
     }
+    public function bootcampFullPaymentFeatures() {
+        return $this->hasMany(BootcampFullPaymentFeature::class);
+    }
+    public function bootcampIncomeShareAgreementFeatures() {
+        return $this->hasMany(BootcampIncomeShareAgreementFeature::class);
+    }
 
     public function wokiCourseDetail() {
         return $this->hasOne(WokiCourseDetail::class);
