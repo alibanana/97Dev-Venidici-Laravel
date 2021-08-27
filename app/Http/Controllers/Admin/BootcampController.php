@@ -354,7 +354,7 @@ class BootcampController extends Controller
         }
         elseif($request->action == 'Reject'){
             //kalau daftar full regis
-            if($application->is_full_registration && !$application->is_trial){
+            if($application->is_full_registration && $application->is_trial == null){
                 $application->status = 'denied';
             //kalau upgrade
             }else{
