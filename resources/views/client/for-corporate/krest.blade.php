@@ -230,7 +230,7 @@
 
 <!-- START OF URGENCY OF SOFT SKILLS TERBUAT -->
 <div class="row m-0 page-container krest-program-background" style="padding-bottom:8vw;padding-top:5vw">
-    <div class="col-12 col-lg-6 desktop-display" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-12 col-lg-6 desktop-display" style="display: flex;flex-direction: column;justify-content: center;align-items:center;padding-right:4vw">
         <img src="/assets/images/client/kenapa_online_course.png" class="img-fluid image-kenapa-online-course" alt="Image 1">
     </div>
     <div class="col-12 col-lg-6 wow fadeInRight" data-wow-delay="0.3s">

@@ -55,7 +55,7 @@
 <div class="row m-0 page-container" style="padding-top:8vw;padding-bottom:8vw;background-color:#F6F6F6">
     <div class="col-lg-5 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;">
         <p class="small-heading wow bounceIn" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43">Gabung jadi keluarga Venidici Community dengan mengunjungi</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform</a>
+        <!--<a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform</a>-->
         <div style="margin-top:2vw">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" target="_blank" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw;">Bergabung Sekarang</a>
         </div>
