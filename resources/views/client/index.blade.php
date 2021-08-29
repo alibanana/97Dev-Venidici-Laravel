@@ -796,7 +796,7 @@
                                 <div class="collapse" id="courses-collapse{{ $loop->iteration }}" style="margin-top:1vw">
                                     <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
                                 </div>
-                                <div style="display: flex;justify-content:space-between;margin-top:1vw">
+                                <!--<div style="display: flex;justify-content:space-between;margin-top:1vw">
                                     <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
                                         @foreach($course->teachers as $teacher)
                                             @if ($loop->last && count($course->teachers) != 1)
@@ -822,7 +822,7 @@
                                             @endif
                                         @endif
                                     </p>
-                                </div>
+                                </div>-->
                                 <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                     <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                                     <div style="display: flex;justify-content:center;margin-left:1vw">
@@ -847,10 +847,18 @@
                                     {{-- <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
                                     <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a> --}}
                                     <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
-                                    @if ($course->price == 0)
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                    @if($course->course_type_id == 3)
+                                        @if ($course->bootcampCourseDetail->bootcamp_full_price == 0)
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                        @else
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }}</p>
+                                        @endif
                                     @else
-                                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                        @if ($course->price == 0)
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                        @else
+                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                        @endif
                                     @endif
                                     @if ($course->courseType->type == 'Course')
                                         <a href="/online-course/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
@@ -1124,7 +1132,7 @@
                                 <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
                             </div>
 
-                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                            <!--<div style="display: flex;justify-content:space-between;margin-top:1vw" >
                                 <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
                                 @foreach($course->teachers as $teacher)
                                     @if ($loop->last && count($course->teachers) != 1)
@@ -1135,7 +1143,7 @@
                                     {{$teacher->name}}
                                 @endforeach
                                 </p>
-                                <!--
+                                
                                 <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
                                 @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
                                     @if ($course->total_duration)
@@ -1150,9 +1158,9 @@
                                         - mins
                                     @endif
                                 @endif
-                                </p>-->
+                                </p>
                                 
-                            </div>
+                            </div>-->
                             <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                 <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                                 <div style="display: flex;justify-content:center;margin-left:1vw">
