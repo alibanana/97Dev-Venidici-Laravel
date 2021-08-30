@@ -73,7 +73,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth']);
     Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth']);
     Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
-    Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth', 'verified']);
+    Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth']);
     Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
     Route::put('/bootcamp/upgrade-status', [DashboardController::class, 'upgradeBootcamp'])->name('bootcamp.upgrade-status')->middleware(['auth']);
 
