@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Newsletter as News;
 use App\Helper\Helper;
-use Newsletter;
+use App\Helper\MailchimpHelper;
+
+use App\Models\Newsletter;
 
 class NewsletterController extends Controller
 {
@@ -17,7 +18,7 @@ class NewsletterController extends Controller
      */
     public function index(Request $request)
     {
-        $subscribers = new News;
+        $subscribers = new Newsletter;
 
 
         if ($request->has('sort')) {
@@ -45,80 +46,36 @@ class NewsletterController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        if(! Newsletter::isSubscribed($request->email)){
-            Newsletter::subscribe($request->email);
-
-            $validated = $request->validate([
-                'email'         => 'required',
-            ]);
-
-            $news         = new News();
-            $news->email  = $validated['email'];
-            $news->save();
-            
-            //tambah 10 point
-            if($request->email == auth()->user()->email)
-            {
-                Helper::addStars(auth()->user(),10,'Subscribing to our newsletter');
-                return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter. Anda mendapatkan 10 stars!');
-            }
-            
-            return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
+    public function store(Request $request) {
+        if(!MailchimpHelper::isSubscribed($request->email)){
+            $response = MailchimpHelper::subscribe($request->email);
+            if ($response['status'] == 'Success') {
+                $validated = $request->validate([
+                    'email' => 'required',
+                ]);
+    
+                $news = new Newsletter();
+                $news->email = $validated['email'];
+                $news->save();
+                
+                // Tambah 10 point
+                if (auth()->check() && $request->email == auth()->user()->email) {
+                    Helper::addStars(auth()->user(), 10, 'Subscribing to our newsletter');
+                    return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter. Anda mendapatkan 10 stars!');
+                }
+                
+                return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
+            } else
+                return redirect('/#newsletter-section')->with('newsletter_info_message', 'Sorry, an error occured while subscribing your email!');
         }
         return redirect('/#newsletter-section')->with('newsletter_info_message', 'Sorry, you are already subscribed');
 
         // return redirect('/#newsletter-section')->with('newsletter_message', 'Thank you for subscribing to our newsletter!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -130,7 +87,7 @@ class NewsletterController extends Controller
     public function destroy($id)
     {
         
-        $newsletter = News::findOrFail($id);
+        $newsletter = Newsletter::findOrFail($id);
 
         $newsletter->delete();
 
