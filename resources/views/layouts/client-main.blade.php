@@ -112,7 +112,7 @@
                       <!-- END OF TOP SECTION --> 
                       <!-- RIGHT SECTION -->
                       <div class="col-12">
-                          <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw"">Email</p>
+                          <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
                           <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                               <i style="color:#DAD9E2" class="fas fa-envelope"></i>
                               <input type="text" name="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email" >
@@ -897,6 +897,15 @@
             evt.currentTarget.className += " notif-item-active";
         }
     </script>
+    @if ($errors->has('wrong_credential') && Request::path() != 'login') 
+    
+    <script>
+    console.log('test');
+    $('#loginModal').modal('toggle');
+
+    </script>
+
+    @endif
     
    
   </body>

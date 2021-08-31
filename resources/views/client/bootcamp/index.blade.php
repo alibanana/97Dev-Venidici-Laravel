@@ -948,7 +948,7 @@
 
 
 @php
-    $a = '2021-08-29 00:00:00';
+    $a = $course->bootcampCourseDetail->date_start;
     $b = strtotime($a);
     
     $customformat = date('M d,Y H:i:s', $b);
@@ -1032,7 +1032,7 @@
             </ul>
             <p class="bigger-text" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{$course->subtitle}}</p>
         </div>
-        <p class="bigger-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-top:2vw">Early Bird registration ends in:</p>
+        <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-top:2vw">This bootcamp will start in:</p>-->
         <!-- START OF COUNTDOWN -->
         <div style="padding:1vw;background-color:#FFFFFF;width:30vw;border-radius:10px;margin-bottom:2vw" id="countdown-card">
             <div style="display: flex;justify-content:space-between;align-items:center">
@@ -1112,7 +1112,7 @@
                 </ul>
                 <p class="bigger-text" style="font-family: Rubik Regular;color:white;white-space:pre-line">{{$course->subtitle}}</p>
             </div>
-            <p class="bigger-text" style="font-family: Rubik Medium;color:white;margin-top:2vw">This bootcamp will start in: </p>
+            <!--<p class="bigger-text" style="font-family: Rubik Medium;color:white;margin-top:2vw">This bootcamp will start in: </p>-->
             <!-- START OF COUNTDOWN -->
             <div style="padding:1vw;background-color:white;width:100%;border-radius:5px;margin-bottom:5vw" id="countdown-card">
                 <div style="display: flex;justify-content:space-between;align-items:center">
