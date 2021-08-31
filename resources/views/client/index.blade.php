@@ -679,7 +679,7 @@
     </div>
     <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:2vw">
 
-        <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+        <div id="feature-carousel" class="carousel slide" data-interval="20000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 6vw;">
                 
                 <div class="carousel-item active">
