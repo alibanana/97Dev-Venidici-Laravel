@@ -8,6 +8,7 @@ class MailchimpHelper {
 
     const METHOD_GET = 'get';
     const METHOD_POST = 'post';
+    const METHOD_PUT = 'put';
     const DEFAULT_HEADERS = [
         'Accept' => 'application/vnd.api+json',
         'Content-Type' => 'application/vnd.api+json'
@@ -28,6 +29,8 @@ class MailchimpHelper {
             return $this->generateDefaultHttpObject()->get($url, $payload);
         elseif ($method == self::METHOD_POST)
             return $this->generateDefaultHttpObject()->post($url, $payload);
+        elseif ($method == self::METHOD_PUT)
+            return $this->generateDefaultHttpObject()->put($url, $payload);
     }
 
     private function validateResponse($response) {
@@ -70,6 +73,14 @@ class MailchimpHelper {
         $helper = new MailchimpHelper;
         return $helper->executeWithResponseValidation(self::METHOD_GET, $url, $params);
     }
+
+    // Hit Add-Or-Update-List-Member
+    public static function addOrUpdateListMember($email, $skip_merge_validation, $params = null) {
+        $url = env('MAILCHIMP_BASE_URL') . '/lists/' . env('MAILCHIMP_LIST_ID') . '/members/' . $email . 
+            '?skip_merge_validation=' . $skip_merge_validation;
+        $helper = new MailchimpHelper;
+        return $helper->executeWithResponseValidation(self::METHOD_PUT, $url, $params);
+    }
     // END OF CLIENT METHODS
 
 
@@ -88,8 +99,9 @@ class MailchimpHelper {
 
     // Subscribe a new email to the list.
     public static function subscribe($email) {
-        return MailchimpHelper::addMemberToList(true, [
+        return MailchimpHelper::addOrUpdateListMember($email, true, [
             "email_address" => $email,
+            "status_if_new" => "subscribed",
             "status" => "subscribed"
         ]);
     }
