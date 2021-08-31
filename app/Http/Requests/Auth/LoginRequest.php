@@ -50,6 +50,7 @@ class LoginRequest extends FormRequest
 
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
+                'wrong_credential' => __('auth.failed'),
             ]);
         }
 

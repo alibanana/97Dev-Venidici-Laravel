@@ -130,7 +130,7 @@
                             @csrf
                                 <input type="hidden" name="course_id" value="{{$course->id}}">              
                                 <button class="normal-text  btn-dark-blue full-width-button"
-                                    style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+                                    style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif >Beli Sekarang</button>
                             </form>
                         @endif
                     @endif
@@ -396,7 +396,7 @@
                     @csrf
                         <input type="hidden" name="course_id" value="{{$course->id}}">              
                         <button class="normal-text  btn-dark-blue"
-                            style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Beli Sekarang</button>
+                            style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif>Beli Sekarang</button>
                     </form>
                 @endif
             @endif
