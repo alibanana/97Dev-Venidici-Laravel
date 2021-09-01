@@ -160,7 +160,7 @@ class CustomAuthController extends Controller
         // Checks if user's email is subscribed to mailchimp.
         if (MailchimpHelper::isSubscribed($user->email)) {
             Helper::addStars($user, 10, 'Subscribing to our newsletter');
-            if (Newsletter::where('email', $user->email)->first())
+            if (!Newsletter::where('email', $user->email)->first())
                 Newsletter::create($user->email);
         }
     
