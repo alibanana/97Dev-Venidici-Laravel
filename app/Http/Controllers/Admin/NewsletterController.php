@@ -59,9 +59,8 @@ class NewsletterController extends Controller
                     'email' => 'required',
                 ]);
     
-                $news = new Newsletter();
-                $news->email = $validated['email'];
-                $news->save();
+                if (!Newsletter::where('email', $validated['email'])->first())
+                    Newsletter::create(['email' => $validated['email']]);
                 
                 // Tambah 10 point
                 if (auth()->check() && $request->email == auth()->user()->email) {

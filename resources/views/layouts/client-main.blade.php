@@ -897,7 +897,7 @@
             evt.currentTarget.className += " notif-item-active";
         }
     </script>
-    @if ($errors->has('wrong_credential') && Request::path() != 'login') 
+    @if (($errors->has('wrong_credential') || $errors->has('password') || $errors->has('email')) && Request::path() != 'login') 
     
     <script>
     console.log('test');
