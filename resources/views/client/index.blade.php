@@ -1393,7 +1393,7 @@
                                         @elseif ($course->courseType->type == 'Woki')
                                         <a href="/woki/{{ $course->title }}" class="course-card-button normal-text" style="">Enroll Now</a>
                                         @elseif ($course->courseType->type == 'Bootcamp') 
-                                        <a href="/bootcamp/{{ $course->id }}" class="course-card-button normal-text" style="">Enroll Now</a>
+                                        <a href="/bootcamp" class="course-card-button normal-text" style="">Enroll Now</a>
                                     @endif
                                 </div>
                 
