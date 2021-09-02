@@ -78,6 +78,8 @@ class PagesController extends Controller
 
         $pengajar_positions = InstructorPosition::all();
 
+        $view = 'client/index';
+
         if(Auth::check()) {
             $this->resetNavbarData();
 
@@ -86,7 +88,6 @@ class PagesController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            $view = 'client/index';
             //if ($agent->isPhone())
                 //$view = 'client/mobile/index';
 
@@ -94,8 +95,7 @@ class PagesController extends Controller
                 'most_popular_courses', 'online_courses', 'wokis','bootcamps', 'cart_count', 'notifications', 'transactions',
                 'informations', 'pengajar_positions','footer_reviews'));
         }
-
-        $view = 'client/index';
+        
         //if ($agent->isPhone())
             //$view = 'client/mobile/index';
 

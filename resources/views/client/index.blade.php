@@ -784,7 +784,7 @@
                                             <a href="/woki/{{ $course->title }}" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @elseif ($course->courseType->type == 'Bootcamp')
-                                            <a href="/bootcamp/{{ $course->id }}" class="normal-text"
+                                            <a href="/bootcamp" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @endif
                                         <!-- <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i> -->
@@ -865,7 +865,7 @@
                                     @elseif ($course->courseType->type == 'Woki')
                                         <a href="/woki/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Bootcamp')
-                                        <a href="/bootcamp/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/bootcamp" class="course-card-button normal-text">Enroll Now</a>
                                     @endif
                                 </div>
                             </div>
@@ -1393,7 +1393,7 @@
                                         @elseif ($course->courseType->type == 'Woki')
                                         <a href="/woki/{{ $course->title }}" class="course-card-button normal-text" style="">Enroll Now</a>
                                         @elseif ($course->courseType->type == 'Bootcamp') 
-                                        <a href="/bootcamp/{{ $course->id }}" class="course-card-button normal-text" style="">Enroll Now</a>
+                                        <a href="/bootcamp" class="course-card-button normal-text" style="">Enroll Now</a>
                                     @endif
                                 </div>
                 
@@ -2065,41 +2065,40 @@
 
 
 
-@if(Auth::check())
+
 <!-- START OF NEWSLETTER SECTION -->
 <div class="row m-0 page-container desktop-display" id="newsletter-section" style="padding-bottom:8vw">
-
     @if (session()->has('newsletter_message'))
-    <div class="col-12 " style="padding:1vw 3vw">
-        <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
-            {{ session()->get('newsletter_message') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-    
-    @elseif (session()->has('newsletter_info_message'))
-    <div class="col-12" style="padding:1vw 3vw">
-        <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
-            {{ session()->get('newsletter_info_message') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-    @endif
-    <form action="{{route('newsletter.store')}}" method="post" style="padding:0px">
-    @csrf
-    <div class="col-12" style="padding:0vw 3vw">
-        <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
-            <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
-            <div style="width:80%;margin-left:2vw">
-                <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
-                <div style="display:flex;align-items:center">
-                    <input required class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
-                    <button type="submit" onclick="openLoading()" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
-                    <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
-                </div>
+        <div class="col-12 " style="padding:1vw 3vw">
+            <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                {{ session()->get('newsletter_message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div> 
-    </div>
+    @elseif (session()->has('newsletter_info_message'))
+        <div class="col-12" style="padding:1vw 3vw">
+            <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                {{ session()->get('newsletter_info_message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
+    <form action="{{route('newsletter.store')}}" method="post" style="padding:0px">
+    @csrf
+        <div class="col-12" style="padding:0vw 3vw">
+            <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
+                <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
+                <div style="width:80%;margin-left:2vw">
+                    <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
+                    <div style="display:flex;align-items:center">
+                        <input required class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
+                        <button type="submit" onclick="openLoading()" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
+                        <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
+                    </div>
+                </div>
+            </div> 
+        </div>
     </form>
 </div>
 <!-- END OF NEWSLETTER SECTION -->
@@ -2142,7 +2141,6 @@
     </form>
 </div>
 <!-- END OF MOBILE NEWSLETTER SECTION -->
-@endif
 
 
 

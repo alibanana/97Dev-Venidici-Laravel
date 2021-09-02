@@ -12,14 +12,16 @@ use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
 use Axiom\Rules\StrongPassword;
 use Axiom\Rules\TelephoneNumber;
-
 use Throwable;
+use App\Helper\Helper;
+use App\Helper\MailchimpHelper;
 
 use App\Models\User;
 use App\Models\Review;
 use App\Models\UserDetail;
 use App\Models\Hashtag;
 use App\Models\ReferralCodeCounter;
+use App\Models\Newsletter;
 use App\Mail\ForgetPasswordMail;
 
 
@@ -154,6 +156,13 @@ class CustomAuthController extends Controller
 
         // here store to user_hashtag table
         $user->hashtags()->attach($hashtag_ids);
+
+        // Checks if user's email is subscribed to mailchimp.
+        if (MailchimpHelper::isSubscribed($user->email)) {
+            Helper::addStars($user, 10, 'Subscribing to our newsletter');
+            if (!Newsletter::where('email', $user->email)->first())
+                Newsletter::create(['email' => $user->email]);
+        }
     
         $request->session()->flush();
         
