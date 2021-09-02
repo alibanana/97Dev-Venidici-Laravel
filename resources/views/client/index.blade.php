@@ -784,7 +784,7 @@
                                             <a href="/woki/{{ $course->title }}" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @elseif ($course->courseType->type == 'Bootcamp')
-                                            <a href="/bootcamp" class="normal-text"
+                                            <a href="/bootcamp/{{ $course->id }}" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @endif
                                         <!-- <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i> -->
@@ -844,6 +844,8 @@
                                     </div>
                                 </div>
                                 <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                    {{-- <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp 300,000</p>
+                                    <a href="/woki/sertifikat-menjadi-seniman" class="course-card-button normal-text">Enroll Now</a> --}}
                                     <!-- <p class="sub-description" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">Enroll Now</p> -->
                                     @if($course->course_type_id == 3)
                                         @if ($course->bootcampCourseDetail->bootcamp_full_price == 0)
@@ -863,7 +865,7 @@
                                     @elseif ($course->courseType->type == 'Woki')
                                         <a href="/woki/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Bootcamp')
-                                        <a href="/bootcamp" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/bootcamp/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                     @endif
                                 </div>
                             </div>
