@@ -784,7 +784,7 @@
                                             <a href="/woki/{{ $course->title }}" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @elseif ($course->courseType->type == 'Bootcamp')
-                                            <a href="/bootcamp/{{ $course->id }}" class="normal-text"
+                                            <a href="/bootcamp" class="normal-text"
                                                 style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;text-decoration:none">{{ $course->title }}</a>
                                         @endif
                                         <!-- <i style="font-size:2vw;" role="button" aria-controls="courses-collapse{{ $loop->iteration }}" data-toggle="collapse" href="#courses-collapse{{ $loop->iteration }}" class="fas fa-caret-down"></i> -->
@@ -865,7 +865,7 @@
                                     @elseif ($course->courseType->type == 'Woki')
                                         <a href="/woki/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
                                     @elseif ($course->courseType->type == 'Bootcamp')
-                                        <a href="/bootcamp/{{ $course->title }}" class="course-card-button normal-text">Enroll Now</a>
+                                        <a href="/bootcamp" class="course-card-button normal-text">Enroll Now</a>
                                     @endif
                                 </div>
                             </div>
@@ -1393,7 +1393,7 @@
                                         @elseif ($course->courseType->type == 'Woki')
                                         <a href="/woki/{{ $course->title }}" class="course-card-button normal-text" style="">Enroll Now</a>
                                         @elseif ($course->courseType->type == 'Bootcamp') 
-                                        <a href="/bootcamp/{{ $course->id }}" class="course-card-button normal-text" style="">Enroll Now</a>
+                                        <a href="/bootcamp" class="course-card-button normal-text" style="">Enroll Now</a>
                                     @endif
                                 </div>
                 

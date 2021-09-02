@@ -551,7 +551,6 @@
 </script>
 <script>
     function checkDiscount() {
-        console.log(document.getElementById('check_discount_form'))
         document.getElementById("check_discount_form").submit();
     }
 </script>
