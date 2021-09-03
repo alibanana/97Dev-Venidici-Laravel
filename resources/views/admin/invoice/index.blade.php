@@ -169,36 +169,41 @@
                                         </thead>
                                         <tbody>
                                             @foreach($invoices as $invoice)
-                                            <tr>
-                                                <td>{{$loop->iteration}}</td>
-                                                <td>{{$invoice->invoice_no}}</td>
-                                                <td>{{$invoice->user->name}}</td>
-                                                @if ($invoice->status == 'pending')
-                                                    <td style="color: orange">{{$invoice->status}}</td>
-                                                @elseif ($invoice->status == 'completed')
-                                                    <td style="color: green">{{$invoice->status}}</td>
-                                                @elseif ($invoice->status == 'failed')
-                                                    <td style="color: red">{{$invoice->status}}</td>
-                                                @elseif ($invoice->status == 'paid')
-                                                    <td style="color: green">{{$invoice->status}}</td>
-                                                @elseif ($invoice->status == 'cancelled')
-                                                    <td style="color: grey">{{$invoice->status}}</td>
-                                                @elseif ($invoice->status == 'expired')
-                                                    <td style="color: grey">{{$invoice->status}}</td>
-                                                @endif
-                                                @if ($invoice->status == 'paid' || $invoice->status == 'completed')
-                                                    <td>Rp {{$invoice->grand_total}}</td>
-                                                @else
-                                                    <td>-</td>
-                                                @endif
-                                                <td>
-                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                        <div style="padding: 0px 2px;">
-                                                            <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.invoices.show', $invoice->id) }}">View Detail</a>
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$invoice->invoice_no}}</td>
+                                                    <td>{{$invoice->user->name}}</td>
+                                                    @if ($invoice->status == 'pending')
+                                                        <td style="color: orange">{{$invoice->status}}</td>
+                                                    @elseif ($invoice->status == 'completed')
+                                                        <td style="color: green">{{$invoice->status}}</td>
+                                                    @elseif ($invoice->status == 'failed')
+                                                        <td style="color: red">{{$invoice->status}}</td>
+                                                    @elseif ($invoice->status == 'paid')
+                                                        <td style="color: green">{{$invoice->status}}</td>
+                                                    @elseif ($invoice->status == 'cancelled')
+                                                        <td style="color: grey">{{$invoice->status}}</td>
+                                                    @elseif ($invoice->status == 'expired')
+                                                        <td style="color: grey">{{$invoice->status}}</td>
+                                                    @endif
+                                                    @if ($invoice->status == 'paid' || $invoice->status == 'completed')
+                                                        <td>Rp {{$invoice->grand_total}}</td>
+                                                    @else
+                                                        <td>-</td>
+                                                    @endif
+                                                    <td>
+                                                        <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                            <div style="padding: 0px 2px;">
+                                                                <a class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="{{ route('admin.invoices.show', $invoice->id) }}">View Detail</a>
+                                                                <form action="{{ route('admin.invoices.destroy', $invoice->id) }}" method="POST" style="display: inline">
+                                                                    @csrf
+                                                                    @method("DELETE")
+                                                                    <button type="submit" class="d-sm-inline-block btn btn-danger shadow-sm text-nowrap">Delete</button>
+                                                                </form>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
