@@ -1057,7 +1057,7 @@
         <!-- END OF COUNT DOWN --> 
 
         <div style="display:flex">
-            <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply as Early Bird</a>
+            <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply</a>
             <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw">Attend Free Intro Week</a>
         </div>
     </div>
@@ -1135,7 +1135,7 @@
                 </div>
             </div>
             <!-- END OF COUNT DOWN --> 
-                <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;text-align:center;display:inline-block;width:100%">Apply as Early Bird</a>
+                <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;text-align:center;display:inline-block;width:100%">Apply</a>
                 <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-bottom:0px;text-align:center;margin-top:2vw;margin-bottom:2vw">OR</p>
 
                 <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw;text-align:center;display:inline-block;width:100%">Attend Free Intro Week</a>
@@ -1535,7 +1535,7 @@
         <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0px">Who is this bootcamp for?</p>
         <!--<p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>-->
         <div style="padding-top:2vw">
-            <a href="#payment-section" class="btn-blue-bordered normal-text desktop-display" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply as Early Bird</a>
+            <a href="#payment-section" class="btn-blue-bordered normal-text desktop-display" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply</a>
         </div>
     </div>
     <!-- END OF LEFT SECTION -->
@@ -1941,7 +1941,7 @@
                                     onclick="openLogin()" 
                                 @endi
                     
-                                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:30vw;">Apply as Early Bird</a>
+                                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:30vw;">Apply</a>
                         </div>
                         <div style="padding-left:2vw;padding-right:2vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">OR</p>
@@ -1992,7 +1992,7 @@
                     onclick="openLogin()" 
                 @endi
     
-                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:30vw;">Apply as Early Bird</a>
+                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:30vw;">Apply</a>
         </div>
         <div style="padding-left:2vw;padding-right:2vw;padding-top:2vw">
             <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">OR</p>
@@ -2066,14 +2066,74 @@
                         <!-- START OF ONE FAQ CARD -->
                         <div class="faq-card" style="margin-top:1vw">
                             <div style="display:flex;align-items:center;justify-content:space-between;">
-                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja yang saya dapatkan di Venidici Skill Snack?</p>
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Kapan Bootcamp Growth Hacking diadakan?</p>
                                 <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1A" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1A">
                                     <i class="fas fa-chevron-down"></i>
                                 </p>                                    
                             </div>
                             <div class="collapse" id="collapseSubFaQ1A" style="margin-top:1vw">
                                 <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                                Kamu bisa melihat detail setiap course di page ya. Yang pasti, di setiap course, akan ada video pembelajaran, penilaian, dan sertifikat jika kamu sudah menyelesaikan semuanya!
+                                Tanggal 20 september 2021 sampai 31 Januari 2022 selama 16 minggu terhitung dari waktu kegiatan dimulai. Kami hanya menerima 15-20 siswa untuk mengikuti program ini. Untuk mendapatkan beasiswa anda dapat mendaftar sebelum tanggal 26.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Dimana Venidici berada?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1B" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1B">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1B" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Venidici berpusat di Jakarta, tetapi kelas yang kami adakan secara online dan terbuka untuk seluruh indonesia untuk umum.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Berapa lama kegiatan program bootcamp diadakan?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1C" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1C">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1C" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Program diadakan selama 16 minggu disusun dengan rangkaian silabus tiap minggunya, anda dapat meluangkan waktu anda 15-20 jam pada jam 7-10 pm tiap minggu untuk mendapatkan materi dari mentor di hari selasa, kamis dan sabtu.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Bagaimana jika saya berhalangan untuk hadir dan tidak mengikuti mentoring?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1D" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1D">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1D" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Kami mengadakan dua tipe kelas yaitu sesi live dan recording, jika anda berhalangan untuk hadir dalam waktu yang sudah ditentukan anda dapat mengaksesnya melalui fitur recording. Siswa yang berhalangan hadir diharapkan tetap mengerjakan tugas yang sudah diberikan dan ada minimal kehadiran untuk mengklaim Venidici Guarantee.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa yang terjadi jika saya memutuskan untuk tidak melanjutkan program bootcamp tersebut?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1E" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1E">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1E" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Kami sangat mengerti apapun yang menjadi alasan siswa tidak dapat melanjutkan program bootcamp kami. Anda dapat melakukan refund dikurangi dengan Rp. 1.500.000 sebagai biaya administrasi terhitung dari minggu pertama kegiatan pembelajaran dimulai.
                             </p>
                             </div>
                         </div>
@@ -2093,14 +2153,44 @@
                         <!-- START OF ONE FAQ CARD -->
                         <div class="faq-card" style="margin-top:1vw">
                             <div style="display:flex;align-items:center;justify-content:space-between;">
-                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa saja yang saya dapatkan di Venidici Skill Snack?</p>
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Kriteria seperti apakah yang dapat bergabung dalam program bootcamp?</p>
                                 <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ2A" role="button" aria-expanded="false" aria-controls="collapseSubFaQ2A">
                                     <i class="fas fa-chevron-down"></i>
                                 </p>                                    
                             </div>
                             <div class="collapse" id="collapseSubFaQ2A" style="margin-top:1vw">
                                 <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
-                                Kamu bisa melihat detail setiap course di page ya. Yang pasti, di setiap course, akan ada video pembelajaran, penilaian, dan sertifikat jika kamu sudah menyelesaikan semuanya!
+                                Kami melihat dari para pendaftar yang memiliki motivasi tinggi, semangat and ingin belajar, dan pekerja keras. Kami dapat menerima siswa yang bukan berlatar belakang marketing dan IT, kami membutuhkan anda yang memiliki growth mindset dan proaktif untuk berpartisipasi dalam bootcamp ini.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Bagaimana struktur kurikulum program bootcamp?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ2B" role="button" aria-expanded="false" aria-controls="collapseSubFaQ2B">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ2B" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Program dilaksanakan selama 16 minggu yang diadakan pada hari selasa yang akan diadakan secara live dan online interactions (19.00-22.00 pada hari selasa, kamis dan jam 13.00-16.00 hari sabtu)
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Siapa sajakah para instructor?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ2C" role="button" aria-expanded="false" aria-controls="collapseSubFaQ2C">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ2C" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Instructors dari Venidici adalah instructors yang memiliki pengalaman kerja 5-10 tahun dan mengajar secara profesional dengan ilmu yang mereka kuasai, instructors berasal dari company ternama di Indonesia yaitu Gojek, Grab, NGO international, Tokopedia, dan lain lain.
                             </p>
                             </div>
                         </div>
@@ -2146,7 +2236,6 @@ var i;
 for (i = 0; i < acc.length; i++) {
   acc[i].addEventListener("mouseover", function() {
     var grandParent = $(this).parents()[1]
-    console.log(grandParent)
     var panel = this.nextElementSibling;
     if (panel.style.display === "block") {
       panel.style.display = "none";
