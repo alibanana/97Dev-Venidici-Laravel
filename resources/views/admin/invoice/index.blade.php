@@ -141,15 +141,21 @@
                         </div>
                         <div class="col-sm-12 col-md-2">
                             <div style="margin-top:1.2vw" class="text-nowrap">
-                                <form action="{{ route('admin.invoices.refresh') }}" method="POST">
+                                <form action="{{ route('admin.invoices.refresh') }}" method="POST" style="display: inline">
                                     @csrf
                                     <button type="submit" class="d-sm-inline-block btn btn-warning shadow-sm">
                                         Refresh
                                     </button>
                                 </form>
-                            </div> 
+                                <form class="ml-2" action="{{ route('admin.invoices.export') }}" method="POST" style="display: inline">
+                                    @csrf
+                                    <button type="submit" class="d-sm-inline-block btn btn-secondary shadow-sm"
+                                        onclick="return confirm('Are you sure you want to export all the Invoices?')">
+                                        Export
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                        
                     </div>
 
                     <!-- Main Table -->
@@ -198,7 +204,8 @@
                                                                 <form action="{{ route('admin.invoices.destroy', $invoice->id) }}" method="POST" style="display: inline">
                                                                     @csrf
                                                                     @method("DELETE")
-                                                                    <button type="submit" class="d-sm-inline-block btn btn-danger shadow-sm text-nowrap">Delete</button>
+                                                                    <button type="submit" class="d-sm-inline-block btn btn-danger shadow-sm text-nowrap"
+                                                                        onclick="return confirm('Are you sure you want to delete this Invoice?')">Delete</button>
                                                                 </form>
                                                             </div>
                                                         </div>

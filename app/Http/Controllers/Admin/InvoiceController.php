@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Helper\XfersHelper;
 use App\Helper\Helper;
 
@@ -13,6 +14,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Promotion;
+use App\Exports\OrdersExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -240,6 +242,11 @@ class InvoiceController extends Controller
             $errorMessages[] = "Status must be pending";
         return redirect()->route('admin.invoices.index')
             ->with('message', $this->constructErrorMessage($message, $errorMessages));
+    }
+
+    // Method to Export invoices data to excel and download them.
+    public function export(Request $request) {
+        return Excel::download(new OrdersExport, 'invoices.xlsx');
     }
 
     // Method to check if current transaction is the user's first transaction.
