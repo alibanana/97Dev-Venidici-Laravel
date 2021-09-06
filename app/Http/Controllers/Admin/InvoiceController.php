@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Helper\XfersHelper;
 use App\Helper\Helper;
 
@@ -13,6 +14,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Promotion;
+use App\Exports\OrdersExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -221,6 +223,32 @@ class InvoiceController extends Controller
         return redirect()->route('admin.invoices.index');
     }
 
+    // Function to delete invoices (and its corresponding orders).
+    //  - Invoice Status == pending, xfers_payment_id == null
+    public function destroy($id) {
+        $invoice = Invoice::findOrFail($id);
+        $isXfersIdNull = $invoice->xfers_payment_id == null; $isStatusPending = $invoice->status == 'pending';
+        if ($isXfersIdNull && $isStatusPending) {
+            $invoice->orders()->delete();
+            $invoice->delete();
+            return redirect()->route('admin.invoices.index')
+                ->with('message', 'Invoice (' . $invoice->id .') has been deleted from the database!');
+        }
+        $message = 'Invoice (' . $invoice->id . ') cannot be deleted!';
+        $errorMessages = [];
+        if (!$isXfersIdNull)
+            $errorMessages[] = "XfersId must be null";
+        if (!$isStatusPending)
+            $errorMessages[] = "Status must be pending";
+        return redirect()->route('admin.invoices.index')
+            ->with('message', $this->constructErrorMessage($message, $errorMessages));
+    }
+
+    // Method to Export invoices data to excel and download them.
+    public function export(Request $request) {
+        return Excel::download(new OrdersExport, 'invoices.xlsx');
+    }
+
     // Method to check if current transaction is the user's first transaction.
     private function isUserFirstTransaction($user) {
         $paidOrCompletedInvoices = $user->invoices()
@@ -233,5 +261,21 @@ class InvoiceController extends Controller
         $createdAt = Carbon::parse($user->created_at);
         $createdAtPlus30Days = Carbon::parse($user->created_at)->addDays(30);
         return Carbon::now()->between($createdAt, $createdAtPlus30Days);
+    }
+
+    // Method to construct error messages.
+    private function constructErrorMessage($baseMessage, $errorMessages) {
+        $message = $baseMessage; $counter = 0;
+        foreach ($errorMessages as $err) {
+            if ($counter == 0)
+                $message = $message . " [";
+            if (($counter+1) == count($errorMessages)) {
+                $message = $message . $err . "]";
+            } else {
+                $message = $message . $err . ", ";
+            }
+            $counter++;
+        }
+        return $message;
     }
 }
