@@ -4,7 +4,7 @@
 
 @section('container')
 
-<!-- password Modal-->
+<!-- Stars Modal-->
 <div class="modal fade" id="addStarsModal" tabindex="-1" role="dialog" aria-labelledby="addStarsModal"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">

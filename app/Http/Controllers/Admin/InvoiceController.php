@@ -15,6 +15,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Promotion;
 use App\Exports\OrdersExport;
+use App\Models\Course;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,9 @@ class InvoiceController extends Controller
             $invoicesTotalByStatus[$key] = number_format($value, 2, ',', '.'); 
         }
 
-        return view('admin/invoice/index', compact('invoices', 'invoicesCountByStatus', 'invoicesTotalByStatus'));
+        $courses = Course::all();
+
+        return view('admin/invoice/index', compact('invoices', 'invoicesCountByStatus', 'invoicesTotalByStatus','courses'));
     }
 
     // Shows the admin Invoice Details page.
