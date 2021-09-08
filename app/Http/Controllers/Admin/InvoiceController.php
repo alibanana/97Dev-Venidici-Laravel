@@ -33,12 +33,12 @@ class InvoiceController extends Controller
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
-                $invoices = $invoices->orderBy('created_at', 'desc');
+                $invoices = $invoices->orderBy('updated_at', 'desc');
             } else {
-                $invoices = $invoices->orderBy('created_at');
+                $invoices = $invoices->orderBy('updated_at');
             }
         } else {
-            $invoices = $invoices->orderBy('created_at', 'desc');
+            $invoices = $invoices->orderBy('updated_at', 'desc');
         }
 
         if ($request->has('filterStatus')) {
