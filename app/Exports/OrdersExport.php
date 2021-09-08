@@ -8,9 +8,13 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class OrdersExport implements FromView
 {
+    public function __construct($orders) {
+        $this->orders = $orders;
+    }
+
     public function view(): View {
         return view('exports.orders', [
-            'orders' => Order::all()
+            'orders' => $this->orders
         ]);
     }
 }

@@ -249,7 +249,21 @@ class InvoiceController extends Controller
 
     // Method to Export invoices data to excel and download them.
     public function export(Request $request) {
-        return Excel::download(new OrdersExport, 'invoices.xlsx');
+        $orders = $this->generateOrderQueryForOrderExport($request);
+        if ($orders->count() == 0)
+            return redirect()->back()->with('export-failed', 'Theres nothing to export!');
+        return Excel::download(new OrdersExport($orders), 'invoices.xlsx');
+    }
+
+    private function generateOrderQueryForOrderExport(Request $request) {
+        $orders = new Order;
+        if ($request->has('course_id'))
+            $orders = $orders->where('course_id', $request->course_id);
+        if ($request->has('start_date') && $request->start_date)
+            $orders = $orders->where('updated_at', '>=', $request->start_date);
+        if ($request->has('end_date') && $request->end_date)
+            $orders = $orders->where('updated_at', '<=', $request->end_date);
+        return $orders->get();
     }
 
     // Method to check if current transaction is the user's first transaction.
