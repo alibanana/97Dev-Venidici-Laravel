@@ -409,14 +409,14 @@
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
-                <input type="text" name="search" class="small-text typeahead" autocomplete="off"
+                <input type="text" name="search" class="normal-text typeahead" autocomplete="off"
                     style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Course Title">
             </div>
             <div style="margin-left: 1vw;">
             <!--
-                <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
+                <select class="grey-input-form normal-text" style="height:100%;appearance:none" aria-label="">-->
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                    <select name="filter" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                    <select name="filter" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                         <option value="None" disabled selected>Pilih Kategori</option>
                         <option value="Skill Snack">Skill Snack</option>
                         <option value="Woki">Woki</option>
@@ -430,7 +430,7 @@
                 </div>  
             </div>
             <div style="margin-left: 1vw;">
-                <button type="submit" onclick="openLoading()" class="btn-search small-text"><i class="fas fa-search"></i></button>
+                <button type="submit" onclick="openLoading()" class="btn-search normal-text"><i class="fas fa-search"></i></button>
             </div>
         </div>            
         </form>
