@@ -104,6 +104,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/search-course', [PagesController::class, 'search_course'])->name('search_course');
     Route::get('/', [PagesController::class, 'index'])->name('index');
     Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
+    Route::get('/article/1', [PagesController::class, 'article_detail'])->name('article_detail');
 
     /* START OF CLIENT ROUTING */
 
@@ -181,11 +182,11 @@ Route::middleware(['isSuspended'])->group(function () {
 
     /* END OF ONLINE COURSE ROUTING */
 
-    /* START OF WOKI ROUTING */
-    Route::get('/woki/sertifikat-menjadi-seniman', function () {
-        return view('client/woki/detail');
+    /* START OF PHASE 2 ROUTING */
+    Route::get('/job-portal', function () {
+        return view('client/job-portal/index');
     });
-    /* END OF WOKI ROUTING */
+    /* END OF PHASE 2 ROUTING */
 
     Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('admin.contact-us.store');
 

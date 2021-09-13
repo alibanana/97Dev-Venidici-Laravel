@@ -2958,3 +2958,24 @@ html, body {
   .items::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
   }
+
+.btn-blue-toggle{
+    background-color:#FFFFFF;padding:0.8vw 1.5vw;border-radius:0px 10px 10px 0px;cursor:pointer;border:1px solid #FFFFFF;    transition: 0.2s ease-in-out;
+
+}
+.btn-blue-toggle p {
+    color: #2B6CAA;
+}
+.btn-blue-toggle:hover {
+    background-color:#2B6CAA;
+    border:1px solid #2B6CAA
+}
+.btn-blue-toggle:hover p{
+    color:#FFFFFF
+}
+.btn-blue-toggle-active{
+    background-color:#2B6CAA;padding:0.8vw 1.5vw;border-radius:10px 0px 0px 10px;cursor:pointer;border:1px solid #2B6CAA
+}
+.btn-blue-toggle-active p {
+    color:#FFFFFF
+}

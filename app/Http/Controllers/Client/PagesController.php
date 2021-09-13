@@ -322,4 +322,22 @@ class PagesController extends Controller
 
         }
     }
+
+    public function article_detail(){
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/article-detail', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+        }
+        
+        return view('client/article-detail',compact('footer_reviews'));
+    }
 }
