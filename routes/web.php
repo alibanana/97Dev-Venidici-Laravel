@@ -181,11 +181,11 @@ Route::middleware(['isSuspended'])->group(function () {
 
     /* END OF ONLINE COURSE ROUTING */
 
-    /* START OF JOB PORTAL ROUTINNG */
-    Route::get('/job-portal', function () {
-        return view('client/job-portal/index');
+    /* START OF WOKI ROUTING */
+    Route::get('/woki/sertifikat-menjadi-seniman', function () {
+        return view('client/woki/detail');
     });
-    /* END OF JOB PORTAL ROUTINNG */
+    /* END OF WOKI ROUTING */
 
     Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('admin.contact-us.store');
 
