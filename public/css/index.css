@@ -2959,7 +2959,7 @@ html, body {
     display: none; /* for Chrome, Safari, and Opera */
   }
 
-.btn-blue-toggle{
+    .btn-blue-toggle{
     background-color:#FFFFFF;padding:0.8vw 1.5vw;border-radius:0px 10px 10px 0px;cursor:pointer;border:1px solid #FFFFFF;    transition: 0.2s ease-in-out;
 
 }

@@ -109,45 +109,30 @@
     </div>
     <div class="col-8" style="border-right:2px solid  #3B3C43;padding:0vw 4vw 0vw 0vw">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Featured</p>
-        <!-- START OF ONE ARTICLE CARD -->
-        <div style="margin-top:4vw;display:flex">
-            <div style="padding-right:2vw">
-                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
-                <p class="normal-text" style="margin-top:1vw;font-family: Rubik Regular;color:#3B3C43;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">Lorem ipsum dolor, sit amet consectetur adipisicing elit. In obcaecati quas placeat laudantium vel laborum! Rerum quo eligendi maxime amet, iure ad, quisquam ab fugiat optio quae non expedita dicta!    </p>
-                <div style="display:flex;align-items:center">
-                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
-                </div>
-                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
+        @if(count($blogs) == 0)
+            <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
             </div>
-            <img onclick="window.open('/','_self');" src="/assets/images/client/Article_Dummy_Thumbnail.png" class="img-fluid" style="cursor:pointer;width:12vw;height:10vw;object-fit:cover" alt="">
+        @endif
+        @foreach($blogs as $blog)
+        <!-- START OF ONE ARTICLE CARD -->
+        <div style="margin-top:4vw;display:flex;justify-content:space-between">
+            <div style="padding-right:2vw">
+                <a href="/blog/{{$blog->id}}" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">{{$blog->title}}</a>
+                <p class="normal-text" style="margin-top:1vw;font-family: Rubik Regular;color:#3B3C43;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">{{$blog->short_description}}</p>
+                <div style="display:flex;align-items:center">
+                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">{{$blog->created_at->diffForHumans()}} - {{$blog->duration}} mins read</p>
+                </div>
+                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{$blog->hashtag}}</a>
+            </div>
+            <img onclick="window.open('/blog/'+{{$blog->id}},'_self');" src="{{asset($blog->image)}}" class="img-fluid" style="cursor:pointer;width:12vw;height:10vw;object-fit:cover" alt="">
         </div>
         <!-- END OF ONE ARTICLE CARD -->
-        <!-- START OF ONE ARTICLE CARD -->
-        <div style="margin-top:4vw;display:flex">
-            <div style="padding-right:2vw">
-                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
-                <p class="normal-text" style="margin-top:1vw;font-family: Rubik Regular;color:#3B3C43;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">Lorem ipsum dolor, sit amet consectetur adipisicing elit. In obcaecati quas placeat laudantium vel laborum! Rerum quo eligendi maxime amet, iure ad, quisquam ab fugiat optio quae non expedita dicta!    </p>
-                <div style="display:flex;align-items:center">
-                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
-                </div>
-                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
-            </div>
-            <img onclick="window.open('/','_self');" src="/assets/images/client/Article_Dummy_Thumbnail.png" class="img-fluid" style="cursor:pointer;width:12vw;height:10vw;object-fit:cover" alt="">
+        @endforeach
+        <div style="margin-top:4vw">
+            <a href="/blogs" class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">View All Blogs</a>
         </div>
-        <!-- END OF ONE ARTICLE CARD -->
-        <!-- START OF ONE ARTICLE CARD -->
-        <div style="margin-top:4vw;display:flex">
-            <div style="padding-right:2vw">
-                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
-                <p class="normal-text" style="margin-top:1vw;font-family: Rubik Regular;color:#3B3C43;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">Lorem ipsum dolor, sit amet consectetur adipisicing elit. In obcaecati quas placeat laudantium vel laborum! Rerum quo eligendi maxime amet, iure ad, quisquam ab fugiat optio quae non expedita dicta!    </p>
-                <div style="display:flex;align-items:center">
-                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
-                </div>
-                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
-            </div>
-            <img onclick="window.open('/','_self');" src="/assets/images/client/Article_Dummy_Thumbnail.png" class="img-fluid" style="cursor:pointer;width:12vw;height:10vw;object-fit:cover" alt="">
-        </div>
-        <!-- END OF ONE ARTICLE CARD -->
+
     </div>
     <div class="col-4" style="padding:0vw 0vw 0vw 4vw">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Recommended</p>
@@ -185,10 +170,7 @@
             </div>
         </div>
         <!-- END OF ONE RECOMMENDATION ARTICLE CARD -->
-        <div style="margin-top:4vw">
-            <a href="" class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">View All</a>
-        </div>
-
+        
     </div>
 </div>
 
