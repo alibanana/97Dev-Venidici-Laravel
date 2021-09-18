@@ -317,6 +317,19 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
+    @if(Request::is('admin/blog') || Request::is('admin/blog/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link" href="/admin/blog" 
+            aria-expanded="true" >
+            <i class="fas fa-newspaper"></i>
+            <span>Blog</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
     @if(Request::is('admin/contact-us') || Request::is('admin/contact-us/*'))
     <li class="nav-item active">
     @else

@@ -15,13 +15,168 @@
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">Get your social widen
         with Venidici Community</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:2vw">Wadah buat anak muda penuh yang antusias membangun relasi dan <br> berkembang melalui teknologi digital dan kreativitas untuk <br> mewujudkan Generasi Emas 2045</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" target="_blank" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none">Bergabung Sekarang</a>                
+        <div style="display:flex;align-items:center">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" target="_blank" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none">Bergabung Sekarang</a>                
+            <p class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;margin-left:2vw">OR</a>                
+            <a href="#" class="bigger-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;text-decoration:none;margin-left:2vw">Explore Venidici Blog</a>                
+        </div>
 
     </div>
 </div>
 <!-- END OF TOP SECTION -->
 
-<!-- START OF MIDDLE SECTION -->
+<!-- START OF WHY JOIN VENIDICI COMMUNITY -->
+<div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#EAF0F7;height:32vw">
+    <div class="col-12 p-0" style="text-align:center">
+        <p class="small-heading" id="mt-mobile-community" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:2vw">Why join Venidici Community?</p>
+    </div>
+    <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:2vw">
+
+        <div id="feature-carousel" class="carousel slide" data-interval="25000" data-ride="carousel">
+            <div class="carousel-inner" style="padding: 0vw 6vw;">
+                
+                <div class="carousel-item active" style="height:auto">
+                    <div class="row m-0">
+                        <div class="col-lg-6 col-xs-12" style="text-align:center" >
+                                <img src="/assets/images/client/Not_Just_A_Place_Icon.png" class="img-fluid" style="width:8vw;height:auto;object-fit:contain" alt="">
+                                <p class="small-heading" id="mt-mobile-community" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Not just a place</p>
+
+                        </div>
+                        <div class="col-lg-6 col-xs-12" style=";display: flex;flex-direction: column;justify-content: center;">
+                            <div class="card-white" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
+                                <div style="display: flex;flex-direction: column;justify-content: center;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;margin-bottom:0px">Venidici Community mengajak semua anak muda menemukan jati diri mereka yang sebenarnya dengan bergabung dan bertemu orang-orang dari bermacam-macam latar belakang dan berbagai skill set serta passion.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto">
+                    <div class="row m-0">
+                        <div class="col-lg-6 col-xs-12" style="text-align:center" >
+                                <img src="/assets/images/client/Boost_Career_Icon.png" class="img-fluid" style="width:14vw;height:auto;object-fit:contain" alt="">
+                                <p class="small-heading" id="mt-mobile-community" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">
+                        Everything You Need to <br> Boost Your Career</p>
+
+                        </div>
+                        <div class="col-lg-6 col-xs-12" style=";display: flex;flex-direction: column;justify-content: center;">
+                            <div class="card-white" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
+                                <div style="display: flex;flex-direction: column;justify-content: center;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;margin-bottom:0px">Vici Belajar, Vici Program, Vici Linkedin. Segudang fitur untuk bantu kamu networking, belajar hal-hal insightful baru dan bahkan cari peluang karir melalui info lowongan pekerjaan atau magang. Bagian terbaik, member Venidici Community akan secara reguler mendapat penawaran eksklusif dari program pelatihan Venidici!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto">
+                    <div class="row m-0">
+                        <div class="col-lg-6 col-xs-12" style="text-align:center" >
+                            <img src="/assets/images/client/Get_Support_Icon.png" class="img-fluid" style="width:14vw;height:auto;object-fit:contain" alt="">
+                                <p class="small-heading" id="mt-mobile-community" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">
+                                Get Support from <br> Fellow Members</p>
+
+                        </div>
+                        <div class="col-lg-6 col-xs-12" style=";display: flex;flex-direction: column;justify-content: center;">
+                            <div class="card-white" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
+                                <div style="display: flex;flex-direction: column;justify-content: center;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;margin-bottom:0px">Punya pertanyaan atau masalah terkait program? Atau cuma pengen punya temen diskusi? Tim Vendici dan member keluarga Venidici yang kolaboratif selalu ada buat kamu!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev"   data-bs-target="#feature-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2.5vw;z-index:99;margin-left:0px" alt="NEXT">
+                <span class="visually-hidden">Prev</span>
+            </a>
+            <a class="carousel-control-next"   data-bs-target="#feature-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2.5vw;z-index:99;margin-right:0px" alt="NEXT">
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>  
+
+    </div>
+</div>
+
+<!-- END OF WHY JOIN VENIDICI COMMUNITY -->
+
+
+<!-- START OF VENIDICI BLOG SECTION -->
+<div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;">
+    <div class="col-12 p-0">
+        <p class="small-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:2vw">Venidici Blog</p>
+    </div>
+    <div class="col-8" style="border-right:2px solid  #3B3C43;padding:0vw 4vw 0vw 0vw">
+        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Featured</p>
+        @if(count($blogs) == 0)
+            <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+            </div>
+        @endif
+        @foreach($blogs as $blog)
+        <!-- START OF ONE ARTICLE CARD -->
+        <div style="margin-top:4vw;display:flex;justify-content:space-between">
+            <div style="padding-right:2vw">
+                <a href="/blog/{{$blog->id}}" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">{{$blog->title}}</a>
+                <p class="normal-text" style="margin-top:1vw;font-family: Rubik Regular;color:#3B3C43;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">{{$blog->short_description}}</p>
+                <div style="display:flex;align-items:center">
+                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">{{$blog->created_at->diffForHumans()}} - {{$blog->duration}} mins read</p>
+                </div>
+                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{$blog->hashtag}}</a>
+            </div>
+            <img onclick="window.open('/blog/'+{{$blog->id}},'_self');" src="{{asset($blog->image)}}" class="img-fluid" style="cursor:pointer;width:12vw;height:10vw;object-fit:cover" alt="">
+        </div>
+        <!-- END OF ONE ARTICLE CARD -->
+        @endforeach
+        <div style="margin-top:4vw">
+            <a href="/blogs" class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;">View All Blogs</a>
+        </div>
+
+    </div>
+    <div class="col-4" style="padding:0vw 0vw 0vw 4vw">
+        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Recommended</p>
+
+        <!-- START OF ONE RECOMMENDATION ARTICLE CARD -->
+        <div style="margin-top:4vw;display:flex">
+            <div >
+                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
+                <div style="display:flex;align-items:center;margin-top:1vw">
+                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
+                </div>
+                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
+            </div>
+        </div>
+        <!-- END OF ONE RECOMMENDATION ARTICLE CARD -->
+        <!-- START OF ONE RECOMMENDATION ARTICLE CARD -->
+        <div style="margin-top:4vw;display:flex">
+            <div >
+                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
+                <div style="display:flex;align-items:center;margin-top:1vw">
+                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
+                </div>
+                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#2B6CAA;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
+            </div>
+        </div>
+        <!-- END OF ONE RECOMMENDATION ARTICLE CARD -->
+        <!-- START OF ONE RECOMMENDATION ARTICLE CARD -->
+        <div style="margin-top:4vw;display:flex">
+            <div >
+                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
+                <div style="display:flex;align-items:center;margin-top:1vw">
+                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
+                </div>
+                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#2B6CAA;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
+            </div>
+        </div>
+        <!-- END OF ONE RECOMMENDATION ARTICLE CARD -->
+        
+    </div>
+</div>
+
+<!-- END OF VENIDICI BLOG SECTION -->
+
+<!-- START OF MIDDLE SECTION 
 <div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw">
 
     <div class="col-12 wow fadeInUp" data-wow-delay="0.7s" style="text-align:center;margin-bottom:2vw">
@@ -49,13 +204,12 @@
     </div>
 
 </div>
-<!-- END OF MIDDLE SECTION -->
+END OF MIDDLE SECTION -->
 
-<!-- START OF BOTTOM SECTION -->
+<!-- START OF BOTTOM SECTION 
 <div class="row m-0 page-container" style="padding-top:8vw;padding-bottom:8vw;background-color:#F6F6F6">
     <div class="col-lg-5 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;">
         <p class="small-heading wow bounceIn" data-wow-delay="0.3s" style="font-family: Rubik Medium;color:#3B3C43">Gabung jadi keluarga Venidici Community dengan mengunjungi</p>
-        <!--<a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;">https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform</a>-->
         <div style="margin-top:2vw">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" target="_blank" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:1vw 2.5vw;">Bergabung Sekarang</a>
         </div>
@@ -66,7 +220,44 @@
 
     </div>
 </div>
-<!-- END OF BOTTOM SECTION -->
+ END OF BOTTOM SECTION -->
+
+ <!-- START OF NEWSLETTER SECTION -->
+<div class="row m-0 page-container desktop-display" id="newsletter-section" style="padding-bottom:8vw;padding-top:8vw">
+    @if (session()->has('newsletter_message'))
+        <div class="col-12 " style="padding:1vw 3vw">
+            <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                {{ session()->get('newsletter_message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div> 
+    @elseif (session()->has('newsletter_info_message'))
+        <div class="col-12" style="padding:1vw 3vw">
+            <div class="alert alert-warning alert-dismissible fade show small-text mb-3"  tyle="font-family:Rubik Regular"role="alert">
+                {{ session()->get('newsletter_info_message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
+    <form action="{{route('newsletter.store')}}" method="post" style="padding:0px">
+    @csrf
+        <div class="col-12" style="padding:0vw 3vw">
+            <div style="background-color:#1A1C31;padding:2vw 4vw;border-radius: 10px;display:flex;align-items:center">
+                <img src="/assets/images/client/Newsletter_Illustration.png" style="height:10vw" class="img-fluid" alt="Newsletter Illustration">
+                <div style="width:80%;margin-left:2vw">
+                    <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="color:#FFFFFF;font-family:Rubik Bold">Beneran rela ketinggalan info…?</p>
+                    <div style="display:flex;align-items:center">
+                        <input required class="normal-text" placeholder="Type your email" name="email" type="text" style="background: #F0F4F9;border-radius: 10px;width:75%;padding:0.4vw 1vw;font-family:Rubik Regular;border:none">
+                        <button type="submit" onclick="openLoading()" style="font-family:Rubik Regular;margin-left:2vw;border:none" class="btn-blue normal-text" >Subscribe Now</button>
+                        <!--<a href="#"style="text-decoration: none;font-family:Rubik Regular;margin-left:2vw;padding:0vw"></a>-->
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </form>
+</div>
+<!-- END OF NEWSLETTER SECTION -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>

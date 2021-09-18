@@ -21,7 +21,8 @@
         "maatwebsite/excel": "^3.1",
         "mattkingshott/axiom": "^3.2",
         "midtrans/midtrans-php": "^2.3",
-        "tymon/jwt-auth": "1.0.1"
+        "tymon/jwt-auth": "1.0.1",
+        "unisharp/laravel-filemanager": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -69,3 +70,4 @@
     "minimum-stability": "dev",
     "prefer-stable": true
 }
+

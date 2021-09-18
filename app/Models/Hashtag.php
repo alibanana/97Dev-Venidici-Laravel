@@ -18,6 +18,10 @@ class Hashtag extends Model
     public function courses() {
         return $this->belongsToMany(Course::class, 'course_hashtag')->withTimestamps();
     }
+
+    public function blogs() {
+        return $this->belongsToMany(Blog::class, 'blogs')->withTimestamps();
+    }
     
     public function users() {
         return $this->belongsToMany(User::class, 'user_hashtag')->withTimestamps();

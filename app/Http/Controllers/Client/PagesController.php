@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Helper\Helper;
 use PDF;
 use App\Models\CourseCategory;
+use App\Models\Blog;  
 
 use App\Models\Notification;
 use App\Models\Config;
@@ -116,6 +117,8 @@ class PagesController extends Controller
         // if($agent->isPhone()){
         //     return view('client/mobile/under-construction');
         // }
+        $blogs = Blog::orderBy('created_at','desc')->where('is_featured',TRUE)->paginate(3);
+
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
 
         if(Auth::check()) {
@@ -126,10 +129,10 @@ class PagesController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/community', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+            return view('client/community', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','blogs'));
         }
         
-        return view('client/community',compact('footer_reviews'));
+        return view('client/community',compact('footer_reviews','blogs'));
     }
 
     public function autocomplete(Request $request){
@@ -321,5 +324,61 @@ class PagesController extends Controller
             return redirect('/pelatihan-venidici?search='.$request->search.'#search-course-section');
 
         }
+    }
+
+    public function blog_detail($id){
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        $blog = Blog::findOrFail($id);
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/blogs/blog-detail', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','blog'));
+        }
+        
+        return view('client/blogs/blog-detail',compact('footer_reviews','blog'));
+    }
+    public function blog_list(Request $request){
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        $blogs = new Blog;
+    
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $blogs = $blogs->orderBy('created_at', 'desc');
+            } else {
+                $blogs = $blogs->orderBy('created_at');
+            }
+        } else {
+            $blogs = $blogs->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('blog_list', request()->except('search'));
+                return redirect($url);
+            } else {
+                $blogs = $blogs->where('title', 'like', "%".$request->search."%");
+            }
+        }
+
+        $blogs = $blogs->get();
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/blogs/blog-list', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','blogs'));
+        }
+        
+        return view('client/blogs/blog-list',compact('footer_reviews','blogs'));
     }
 }

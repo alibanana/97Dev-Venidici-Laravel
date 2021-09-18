@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\KrestController as AdminKrestController;
 use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramController;
 use App\Http\Controllers\Admin\InstructorController as AdminInstructorController;
@@ -104,7 +105,12 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/search-course', [PagesController::class, 'search_course'])->name('search_course');
     Route::get('/', [PagesController::class, 'index'])->name('index');
     Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
-
+    Route::get('/blog/{id}', [PagesController::class, 'blog_detail'])->name('blog_detail');
+    Route::get('/blogs', [PagesController::class, 'blog_list'])->name('blog_list');
+    // ADMIN ROUTING
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
     /* START OF CLIENT ROUTING */
 
 
@@ -181,11 +187,11 @@ Route::middleware(['isSuspended'])->group(function () {
 
     /* END OF ONLINE COURSE ROUTING */
 
-    /* START OF WOKI ROUTING */
-    Route::get('/woki/sertifikat-menjadi-seniman', function () {
-        return view('client/woki/detail');
+    /* START OF PHASE 2 ROUTING */
+    Route::get('/job-portal', function () {
+        return view('client/job-portal/index');
     });
-    /* END OF WOKI ROUTING */
+    /* END OF PHASE 2 ROUTING */
 
     Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('admin.contact-us.store');
 
@@ -432,6 +438,15 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/informations/{id}/update', [AdminNotificationController::class, 'edit'])->name('informations.edit');
         Route::put('/informations/{id}', [AdminNotificationController::class, 'update'])->name('informations.update');
         Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
+        // BlogController
+        Route::get('/blog', [AdminBlogController::class, 'index'])->name('blog.index');
+        Route::get('/blog/create', [AdminBlogController::class, 'create'])->name('blog.create');
+        Route::post('/blog', [AdminBlogController::class, 'store'])->name('blog.store');
+        Route::get('/blog/{id}/update', [AdminBlogController::class, 'edit'])->name('blog.edit');
+        Route::put('/blog/{id}', [AdminBlogController::class, 'update'])->name('blog.update');
+        Route::delete('/blog/{id}', [AdminBlogController::class, 'destroy'])->name('blog.destroy');
+        Route::post('/blog/{id}/set-isfeatured-status-to-opposite', [AdminBlogController::class, 'setIsFeaturedStatusToOpposite'])->name('blog.set-isfeatured-status-to-opposite');
+
         // InstructorController
         Route::get('/menjadi-pengajar', [AdminInstructorController::class, 'index'])->name('instructors.index');
         Route::delete('/menjadi-pengajar/{id}', [AdminInstructorController::class, 'destroy'])->name('instructors.destroy');
