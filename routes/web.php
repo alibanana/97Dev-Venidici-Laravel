@@ -446,7 +446,6 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/blog/{id}', [AdminBlogController::class, 'update'])->name('blog.update');
         Route::delete('/blog/{id}', [AdminBlogController::class, 'destroy'])->name('blog.destroy');
         Route::post('/blog/{id}/set-isfeatured-status-to-opposite', [AdminBlogController::class, 'setIsFeaturedStatusToOpposite'])->name('blog.set-isfeatured-status-to-opposite');
-
         // InstructorController
         Route::get('/menjadi-pengajar', [AdminInstructorController::class, 'index'])->name('instructors.index');
         Route::delete('/menjadi-pengajar/{id}', [AdminInstructorController::class, 'destroy'])->name('instructors.destroy');

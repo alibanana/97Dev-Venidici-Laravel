@@ -4,65 +4,47 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Blog;  
-use App\Models\Hashtag;  
 use App\Helper\Helper;
 use App\Helper\CourseHelper;
 
+use App\Models\Blog;  
+use App\Models\Hashtag;  
+
 class BlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
+    // Get list of blogs for admin page.
+    public function index(Request $request) {
         $blogs = new Blog;
-    
-            if ($request->has('sort')) {
-                if ($request['sort'] == "latest") {
-                    $blogs = $blogs->orderBy('created_at', 'desc');
-                } else {
-                    $blogs = $blogs->orderBy('created_at');
-                }
-            } else {
+
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
                 $blogs = $blogs->orderBy('created_at', 'desc');
+            } else {
+                $blogs = $blogs->orderBy('created_at');
             }
+        } else {
+            $blogs = $blogs->orderBy('created_at', 'desc');
+        }
     
-            if ($request->has('search')) {
-                if ($request->search == "") {
-                    $url = route('admin.notifications.index', request()->except('search'));
-                    return redirect($url);
-                } else {
-                    $blogs = $blogs->where('title', 'like', "%".$request->search."%");
-                }
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('admin.notifications.index', request()->except('search'));
+                return redirect($url);
+            } else {
+                $blogs = $blogs->where('title', 'like', "%".$request->search."%");
             }
+        }
     
-            $blogs = $blogs->get();
-        return view('admin/blog/index',compact('blogs'));
+        $blogs = $blogs->get();
+        return view('admin/blog/index', compact('blogs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function create() {
         $tags = Hashtag::all();
-
         return view('admin/blog/create', compact('tags'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $validated = $request->validate([
             'title'                 => 'required',
             'author'                => 'required',
@@ -71,9 +53,8 @@ class BlogController extends Controller
             'body'                  => 'required',
             'banner'                => 'required|mimes:jpeg,jpg,png',
             'image'                 => 'required|mimes:jpeg,jpg,png',
-            'hashtag'               => 'required',
+            'hashtag'               => 'required'
         ]);
-
 
         $blog                       = new Blog();
         $blog->title                = $validated['title'];
@@ -88,46 +69,23 @@ class BlogController extends Controller
 
         $blog->save();
 
-
         $message = 'New blog (' . $blog->title . ') has been added to the database.';
 
         return redirect()->route('admin.blog.index')->with('message', $message);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
+    public function edit($id) {
         $blog = Blog::findOrFail($id);
         $tags = Hashtag::all();
 
         return view('admin/blog/update',compact('blog','tags'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $validated = $request->validate([
             'title'                 => 'required',
             'author'                => 'required',
@@ -147,11 +105,11 @@ class BlogController extends Controller
         $blog->body                 = $validated['body'];
         $blog->hashtag              = $validated['hashtag'];
         
-
         if ($request->has('banner')) {
             unlink($blog->banner);
             $blog->banner = Helper::storeImage($request->file('banner'), 'storage/images/blog/');
         }
+        
         if ($request->has('image')) {
             unlink($blog->image);
             $blog->image = Helper::storeImage($request->file('image'), 'storage/images/blog/');
@@ -168,14 +126,7 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index')->with('message', $message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $blog = Blog::findOrFail($id);
         $blog->delete();
 
@@ -195,12 +146,8 @@ class BlogController extends Controller
                 $message = 'Blog (' . $blog->title.') is now featured.';
             else
                 $message = 'Blog (' . $blog->title.') has been un-featured.';
+        } catch (Throwable $e) { }
 
-
-        } catch (Throwable $e) {
-           
-        }
-        
         return redirect()->route('admin.blog.index')->with('message', $message);
     }
 }
