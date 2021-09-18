@@ -10,8 +10,17 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title','duration','short_description','body','banner','image','hashtag','is_featured'
+        'title',
+        'duration',
+        'short_description',
+        'body',
+        'banner',
+        'image',
+        'hashtag',
+        'is_featured'
     ];
 
-
+    public function hashtags() {
+        return $this->belongsToMany(Hashtag::class, 'blog_hashtag')->withTimestamps();
+    }
 }
