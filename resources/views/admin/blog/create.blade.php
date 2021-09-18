@@ -155,11 +155,39 @@
 
 <!-- tinymce JavaScript -->
 <script src="https://cdn.tiny.cloud/1/b4mxmojo2bn35i1gse1t6ug1zb4arvlzz7riz4giu0w4p8oh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
+<script>
+   var route_prefix = "/laravel-filemanager";
+  </script>
 <script>
     tinymce.init({
         mode : "specific_textareas",
         editor_selector : "tinymce-textarea",
+        plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker image searchreplace wordcount textcolor colorpicker',
+        toolbar: 'a11ycheck casechange code formatpainter pageembed permanentpen table image file searchreplace',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Authorname',
+        image_caption: true,
+        relative_urls: false,
+
+        file_picker_types: 'file image media',
+        file_picker_callback: function (callback, value, meta) {
+            let x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+            let y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+            let type = 'image' === meta.filetype ? 'Images' : 'Files',
+                url  =  '/laravel-filemanager?editor=tinymce5&type=' + type;
+
+            tinymce.activeEditor.windowManager.openUrl({
+                url : url,
+                title : 'Filemanager',
+                width : x * 0.8,
+                height : y * 0.8,
+                onMessage: (api, message) => {
+                    callback(message.content);
+                }
+            });
+        }
     });
 </script>
 

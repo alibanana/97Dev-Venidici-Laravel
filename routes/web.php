@@ -107,7 +107,10 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
     Route::get('/blog/{id}', [PagesController::class, 'blog_detail'])->name('blog_detail');
     Route::get('/blogs', [PagesController::class, 'blog_list'])->name('blog_list');
-
+    // ADMIN ROUTING
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
     /* START OF CLIENT ROUTING */
 
 
