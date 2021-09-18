@@ -12,33 +12,28 @@
     <div class="container-fluid">
 
         @if (session()->has('message'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
-            {{ session()->get('message') }}            
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
+                {{ session()->get('message') }}            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="mb-0 mb-3 text-gray-800">Blog List</h1>
             <a href="/admin/blog/create" class="btn btn-primary btn-user p-3">Create New Blog</a>
-
         </div>
         
         <!-- Content Row -->
-
-
         <!-- start of table -->
-        
         <div class="row">
             <div class="col-md-12">
                 <!-- Begin Page Content -->
                 <div class="container-fluid p-0 mt-3">
                     <!-- Page Heading -->
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
-
                     <div class="row mt-2 mb-3">
                         <!--
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
@@ -74,80 +69,74 @@
                                 </label>
                             </div>
                         </div>
-                        
                     </div>
 
                     <!-- Main Table -->
                     <div class="card shadow mb-4">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Title</th>
-                                                <th>Author</th>
-                                                <th>Duration</th>
-                                                <th>Hashtag</th>
-                                                <th>Featured Status</th>
-                                                <th>Created At</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($blogs as $blog)
-                                            <tr>
-                                                <td>{{$loop->iteration}}</td>
-                                                <td>{{$blog->title}}</td>
-                                                <td>{{$blog->author}}</td>
-                                                <td>{{$blog->duration}} mins</td>
-                                                <td>{{$blog->hashtags}}</td>
-                                                <td>
-                                                    @if($blog->is_featured)
-                                                       <span style="color:green">YES</span>
-                                                    @else
-                                                        NO
-                                                    @endif
-                                                    </td>
-                                                <td class="text-nowrap">{{$blog->created_at->toDateString()}}</td>
-
-                                                <td>
-                                                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="{{ route('admin.blog.destroy', $blog->id) }}" method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div style="padding: 0px 2px">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this information?')">Delete</button>
-                                                                </div>
-                                                            </form> 
-                                                            <form action="{{ route('admin.blog.set-isfeatured-status-to-opposite', $blog->id) }}" method="post">
-                                                                @csrf
-                                                                <div style="padding: 0px 2px">
-                                                                    @if ($blog->is_featured)
-                                                                        <button class="d-sm-inline-block btn btn-dark shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to un-feature this blog?')">Un-Feature</button>
-                                                                    @else
-                                                                        <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to feature this blog?')">Feature</button>
-                                                                    @endif
-                                                                </div>
-                                                            </form>
-                                                      
-                                                            <div style="padding: 0px 2px;">
-                                                                <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/blog/{{$blog->id}}/update">Update</a>
-                                                            </div>
-                                                   
-                                                    </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Duration</th>
+                                            <th>Hashtag</th>
+                                            <th>Featured Status</th>
+                                            <th>Updated At</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($blogs as $blog)
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$blog->title}}</td>
+                                            <td>{{$blog->author}}</td>
+                                            <td>{{$blog->duration}} mins</td>
+                                            <td>{{$blog->hashtags[0]->hashtag}}</td>
+                                            <td>
+                                                @if($blog->is_featured)
+                                                    <span style="color:green">YES</span>
+                                                @else
+                                                    NO
+                                                @endif
                                                 </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            <td class="text-nowrap">{{$blog->updated_at->toDateString()}}</td>
+
+                                            <td>
+                                                <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                    <form action="{{ route('admin.blog.set-isfeatured-status-to-opposite', $blog->id) }}" method="post">
+                                                        @csrf
+                                                        <div style="padding: 0px 2px">
+                                                            @if ($blog->is_featured)
+                                                                <button class="d-sm-inline-block btn btn-dark shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to un-feature this blog?')">Un-Feature</button>
+                                                            @else
+                                                                <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to feature this blog?')">Feature</button>
+                                                            @endif
+                                                        </div>
+                                                    </form>
+                                                    <div style="padding: 0px 2px;">
+                                                        <a class="d-sm-inline-block btn btn-info shadow-sm" href="/admin/blog/{{$blog->id}}/update">Update</a>
+                                                    </div>
+                                                    <form action="{{ route('admin.blog.destroy', $blog->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <div style="padding: 0px 2px">
+                                                            <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this information?')">Delete</button>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        
-        
+                    </div>
                     <!-- /.container-fluid -->
-
                 </div>
             </div>
         </div>
