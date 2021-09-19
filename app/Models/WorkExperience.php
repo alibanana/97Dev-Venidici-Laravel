@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CandidateDetailChange extends Model
+class WorkExperience extends Model
 {
     use HasFactory;
 
-    protected $table = 'candidate_detail_changes';
+    protected $table = 'work_experiences';
 
     protected $fillable = [
-        'candidate_id',
-        'preferred_working_location',
-        'linkedin_link',
-        'whatsapp_number',
-        'about_me_description',
-        'status' // pending, approved, cancelled
+        'candidate_detail_id',
+        'company',
+        'job_position',
+        'start_date',
+        'end_date',
+        'location'
     ];
 
     public function candidateDetail() {
