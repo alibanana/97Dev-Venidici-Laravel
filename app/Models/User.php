@@ -27,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'isGeneralInfoUpdated',
         'isShippingUpdated',
         'isProfileUpdated',
+        'isCandidate'
     ];
 
     /**
@@ -54,6 +55,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function userRole() {
         return $this->belongsTo(UserRole::class);
+    }
+
+    public function candidateDetail() {
+        return $this->hasOne(CandidateDetail::class);
     }
 
     public function hashtags() {
