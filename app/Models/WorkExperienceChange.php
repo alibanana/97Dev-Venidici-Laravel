@@ -12,7 +12,7 @@ class WorkExperienceChange extends Model
     protected $table = 'work_experience_changes';
 
     protected $fillable = [
-        'candidate_detail_id',
+        'candidate_detail_change_id',
         'work_experience_id',
         'company',
         'job_position',
@@ -22,8 +22,8 @@ class WorkExperienceChange extends Model
         'action' // create, update, delete
     ];
 
-    public function candidateDetail() {
-        return $this->belongsTo(CandidateDetail::class);
+    public function candidateDetailChange() {
+        return $this->belongsTo(CandidateDetailChange::class);
     }
 
     public function workExperience() {

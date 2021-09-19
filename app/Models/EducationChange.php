@@ -12,7 +12,7 @@ class EducationChange extends Model
     protected $table = 'education_changes';
 
     protected $fillable = [
-        'candidate_detail_id',
+        'candidate_detail_change_id',
         'education_id',
         'degree',
         'school',
@@ -22,8 +22,8 @@ class EducationChange extends Model
         'action' // create, udpate, delete
     ];
 
-    public function candidateDetail() {
-        return $this->belongsTo(CandidateDetail::class);
+    public function candidateDetailChange() {
+        return $this->belongsTo(CandidateDetailChange::class);
     }
 
     public function education() {
