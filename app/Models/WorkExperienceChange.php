@@ -26,7 +26,7 @@ class WorkExperienceChange extends Model
         return $this->belongsTo(CandidateDetail::class);
     }
 
-    public function workExperienceChange() {
+    public function workExperience() {
         return $this->belongsTo(WorkExperience::class);
     }
 }
