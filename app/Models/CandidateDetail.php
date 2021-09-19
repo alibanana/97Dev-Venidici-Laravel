@@ -30,4 +30,8 @@ class CandidateDetail extends Model
     public function workExperiences() {
         return $this->hasMany(WorkExperience::class);
     }
+
+    public function educations() {
+        return $this->hasMany(Education::class);
+    }
 }

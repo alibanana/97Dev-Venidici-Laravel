@@ -27,4 +27,8 @@ class CandidateDetailChange extends Model
     public function workExperienceChanges() {
         return $this->hasMany(WorkExperienceChange::class);
     }
+
+    public function educationChanges() {
+        return $this->hasMany(EducationChange::class);
+    }
 }
