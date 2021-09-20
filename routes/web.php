@@ -68,6 +68,7 @@ use App\Http\Controllers\Api\CheckoutController;
 */
 
 Route::middleware(['isSuspended'])->group(function () {
+    Route::get('/candidate-details', [DashboardController::class, 'edit_job_portal'])->name('customer.edit_job_portal')->middleware(['auth']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
     Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);

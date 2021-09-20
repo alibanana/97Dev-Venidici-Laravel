@@ -58,8 +58,8 @@ class CustomAuthController extends Controller
 
         $validation_rules = [
             'name' => 'required',
-            //'telephone'     => 'required',
-            'telephone'     => ['required', new TelephoneNumber],
+            'telephone'     => 'required',
+            //'telephone'     => ['required', new TelephoneNumber],
             'email' => 'required|email|unique:users',
             'response' => 'required',
             'referral_code' => '',
