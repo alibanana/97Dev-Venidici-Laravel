@@ -39,4 +39,8 @@ class CandidateDetailChange extends Model
     public function hardskillChanges() {
         return $this->hasMany(HardskillChange::class);
     }
+
+    public function softskillChanges() {
+        return $this->hasMany(SoftskillChange::class);
+    }
 }
