@@ -20,8 +20,8 @@ class AchievementChange extends Model
         'action' // created, update, delete
     ];
 
-    public function candidateDetail() {
-        return $this->belongsTo(CandidateDetail::class);
+    public function candidateDetailChange() {
+        return $this->belongsTo(CandidateDetailChange::class);
     }
 
     public function achievement() {
