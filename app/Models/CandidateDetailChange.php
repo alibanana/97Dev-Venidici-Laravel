@@ -35,4 +35,8 @@ class CandidateDetailChange extends Model
     public function achievementChanges() {
         return $this->hasMany(AchievementChange::class);
     }
+
+    public function hardskillChanges() {
+        return $this->hasMany(HardskillChange::class);
+    }
 }
