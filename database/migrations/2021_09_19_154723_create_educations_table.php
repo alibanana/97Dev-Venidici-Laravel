@@ -16,12 +16,12 @@ class CreateEducationsTable extends Migration
         Schema::create('educations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('candidate_detail_id');
-            $table->foreign('candidate_detail_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('candidate_detail_id')->references('id')->on('candidate_details')->onDelete('cascade');
             $table->string('degree');
             $table->string('school');
             $table->string('major');
-            $table->integer('start_year', 4);
-            $table->integer('end_year', 4);
+            $table->year('start_year');
+            $table->year('end_year', 4)->nullable();
             $table->timestamps();
         });
     }

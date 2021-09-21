@@ -16,7 +16,7 @@ class CreateWorkExperiencesTable extends Migration
         Schema::create('work_experiences', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('candidate_detail_id');
-            $table->foreign('candidate_detail_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('candidate_detail_id')->references('id')->on('candidate_details')->onDelete('cascade');
             $table->string('company');
             $table->string('job_position');
             $table->date('start_date');

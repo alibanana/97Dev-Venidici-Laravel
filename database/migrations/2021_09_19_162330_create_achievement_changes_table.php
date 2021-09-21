@@ -16,12 +16,12 @@ class CreateAchievementChangesTable extends Migration
         Schema::create('achievement_changes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('candidate_detail_change_id');
-            $table->foreign('candidate_detail_change_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('achievement_id');
+            $table->foreign('candidate_detail_change_id')->references('id')->on('candidate_detail_changes')->onDelete('cascade');
+            $table->unsignedBigInteger('achievement_id')->nullable();
             $table->foreign('achievement_id')->references('id')->on('achievements')->onDelete('cascade');
             $table->string('title')->nullable();
             $table->string('location_of_event')->nullable();
-            $table->integer('year', 4)->nullable();
+            $table->year('year')->nullable();
             $table->enum('action', ['create', 'update', 'delete']);
             $table->timestamps();
         });
