@@ -34,4 +34,8 @@ class CandidateDetail extends Model
     public function educations() {
         return $this->hasMany(Education::class);
     }
+
+    public function achievements() {
+        return $this->hasMany(Achievement::class);
+    }
 }

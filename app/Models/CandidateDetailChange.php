@@ -31,4 +31,8 @@ class CandidateDetailChange extends Model
     public function educationChanges() {
         return $this->hasMany(EducationChange::class);
     }
+
+    public function achievementChanges() {
+        return $this->hasMany(AchievementChange::class);
+    }
 }
