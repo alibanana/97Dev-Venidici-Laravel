@@ -530,4 +530,58 @@ class DashboardController extends Controller
         
         return view('client/job-portal/client/edit',compact('footer_reviews','agent'));
     }
+    public function job_portal_index(){
+        $agent = new Agent();
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','agent'));
+        }
+        
+        return view('client/job-portal/company/index',compact('footer_reviews','agent'));
+    }
+    public function job_portal_candidate_detail(){
+        $agent = new Agent();
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/job-portal/company/detail', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','agent'));
+        }
+        
+        return view('client/job-portal/company/detail',compact('footer_reviews','agent'));
+    }
+    public function job_portal_profile(){
+        $agent = new Agent();
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/job-portal/company/profile', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','agent'));
+        }
+        
+        return view('client/job-portal/company/profile',compact('footer_reviews','agent'));
+    }
 }

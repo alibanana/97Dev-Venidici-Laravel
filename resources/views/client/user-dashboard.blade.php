@@ -763,7 +763,7 @@
         </div>
 
     </div>
-    <div class="col-12" style="padding:0vw 17vw;margin-top:2vw">
+    <div class="col-12" style="padding:0vw 17vw;margin-top:2vw;margin-bottom:4vw">
         <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
             <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
             <a href="/candidate-details" style=";color:#3B3C43">
@@ -882,7 +882,7 @@
     <div class="col-12 p-0" style="margin-top:2vw">
         <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
             <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
-            <a href="/candidate-details" style=";color:#3B3C43">
+            <a href="/candidate-details" style=";color:#3B3C43;padding-left:10vw">
                 <i class="fas fa-arrow-right normal-text"></i>
             </a>
         </div>

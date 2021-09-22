@@ -66,9 +66,11 @@ use App\Http\Controllers\Api\CheckoutController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::middleware(['isSuspended'])->group(function () {
     Route::get('/candidate-details', [DashboardController::class, 'edit_job_portal'])->name('customer.edit_job_portal')->middleware(['auth']);
+    Route::get('/job-portal', [DashboardController::class, 'job_portal_index'])->name('customer.job_portal_index');
+    Route::get('/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
+    Route::get('/job-portal/profile', [DashboardController::class, 'job_portal_profile'])->name('customer.job_portal_profile');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
     Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);
@@ -189,9 +191,7 @@ Route::middleware(['isSuspended'])->group(function () {
     /* END OF ONLINE COURSE ROUTING */
 
     /* START OF PHASE 2 ROUTING */
-    Route::get('/job-portal', function () {
-        return view('client/job-portal/index');
-    });
+    
     /* END OF PHASE 2 ROUTING */
 
     Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('admin.contact-us.store');
