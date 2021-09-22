@@ -4,6 +4,69 @@
 
 @section('container')
 
+<!-- Stars Modal-->
+<div class="modal fade" id="exportInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="exportInvoiceModal"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exportInvoiceModal">Export Invoice</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+            </div>
+
+			<form method="POST" action="{{ route('admin.invoices.export') }}">
+            @csrf
+                <div class="modal-body">
+                    <h6 class="modal-title" id="exportInvoiceModal">Filter by course</h6>
+                    <div class="form-group mt-2">
+                        <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                            <option name="course_id" value="" selected>All</option>
+                            @foreach($courses as $course)
+                                <option name="course_id" value="{{$course->id}}">{{$course->courseType->type}} - {{$course->title}}</option>
+                            @endforeach
+                        </select>
+                        @error('course_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-6 " style="padding-left:0px">
+                            <div class="form-group">
+                                <label for="">Start Date</label>
+                                <input type="date" name="start_date" class="form-control form-control-user" placeholder="dd.mm.yyyy"> 
+                                @error('start_date')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror               
+                            </div>
+                        </div>
+                        <div class="col-6" style="padding-right:0px ">
+                            <div class="form-group">
+                                <label for="">End Date</label>
+                                <input type="date" name="end_date" class="form-control form-control-user" placeholder="dd.mm.yyyy"> 
+                                @error('end_date')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Export</button>   
+                </div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <!-- Main Content -->
 <div id="content">
 
@@ -12,12 +75,21 @@
     <div class="container-fluid">
 
         @if (session()->has('message'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
-            {{ session()->get('message') }}            
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert" style="font-size: 18px">
+                {{ session()->get('message') }}            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+        @if (session()->has('export-failed'))
+            <div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
+                {{ session()->get('export-failed') }}    
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
 
         <!-- Page Heading -->
@@ -147,13 +219,9 @@
                                         Refresh
                                     </button>
                                 </form>
-                                <form class="ml-2" action="{{ route('admin.invoices.export') }}" method="POST" style="display: inline">
-                                    @csrf
-                                    <button type="submit" class="d-sm-inline-block btn btn-secondary shadow-sm"
-                                        onclick="return confirm('Are you sure you want to export all the Invoices?')">
-                                        Export
-                                    </button>
-                                </form>
+                                <button data-toggle="modal" data-target="#exportInvoiceModal" class="d-sm-inline-block btn btn-secondary shadow-sm ml-2">
+                                    Export
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -170,6 +238,7 @@
                                                 <th>User</th>
                                                 <th>Status</th>
                                                 <th>Total</th>
+                                                <th>Last Updated</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -197,6 +266,7 @@
                                                     @else
                                                         <td>-</td>
                                                     @endif
+                                                    <td>{{$invoice->updated_at}}</td>
                                                     <td>
                                                         <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px;">
