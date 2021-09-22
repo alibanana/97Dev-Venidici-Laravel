@@ -15,6 +15,8 @@ use App\Helper\CourseHelper;
 use Carbon\Carbon;
 use Throwable;
 use Axiom\Rules\TelephoneNumber;
+use Illuminate\Support\Facades\Auth;
+
 
 
 use App\Models\Hashtag;
@@ -194,8 +196,8 @@ class DashboardController extends Controller
             
         $validated = Validator::make($input,[
             'name'          => 'required',
-            'telephone'     => ['required', new TelephoneNumber],
-            //'telephone'     => 'required',
+            //'telephone'     => ['required', new TelephoneNumber],
+            'telephone'     => 'required',
             'birthdate'     => 'date',
             'gender'        => 'required',
             'company'       => '',
@@ -508,5 +510,78 @@ class DashboardController extends Controller
     
             return redirect()->back()->with('bootcamp_message', $message);
     
+    }
+
+    public function edit_job_portal(){
+        $agent = new Agent();
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/job-portal/client/edit', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','agent'));
+        }
+        
+        return view('client/job-portal/client/edit',compact('footer_reviews','agent'));
+    }
+    public function job_portal_index(){
+        $agent = new Agent();
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','agent'));
+        }
+        
+        return view('client/job-portal/company/index',compact('footer_reviews','agent'));
+    }
+    public function job_portal_candidate_detail(){
+        $agent = new Agent();
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/job-portal/company/detail', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','agent'));
+        }
+        
+        return view('client/job-portal/company/detail',compact('footer_reviews','agent'));
+    }
+    public function job_portal_profile(){
+        $agent = new Agent();
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            return view('client/job-portal/company/profile', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','agent'));
+        }
+        
+        return view('client/job-portal/company/profile',compact('footer_reviews','agent'));
     }
 }

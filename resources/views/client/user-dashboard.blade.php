@@ -689,8 +689,8 @@
 </div>
 
 <div class="row m-0 page-container desktop-display" style="padding-top:1.5vw;">
-    <div class="col-12 p-0" style="display:flex;justify-content:center">
-        <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:18vw;padding:1.5vw 1.5vw;width:49vw;display:flex;align-items:center">
+    <div class="col-12" style="display:flex;justify-content:center;padding:0vw 17vw">
+        <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:18vw;padding:1.5vw 1.5vw;width:100%;display:flex;align-items:center">
             <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:14vw;height:14vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;">
@@ -763,6 +763,14 @@
         </div>
 
     </div>
+    <div class="col-12" style="padding:0vw 17vw;margin-top:2vw;margin-bottom:4vw">
+        <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
+            <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
+            <a href="/candidate-details" style=";color:#3B3C43">
+                <i class="fas fa-arrow-right normal-text"></i>
+            </a>
+        </div>
+    </div>
 </div>
 <!-- END OF TOP SECTION -->
 
@@ -807,7 +815,7 @@
 <div class="row m-0 page-container mobile-display" style="background-color:#2B6CAA;padding:9vw 0vw;display:none">
     <div class="col-12 p-0" style="display:flex;justify-content:center">
         <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:35vw;padding:3vw 1.5vw;width:92vw;display:flex;align-items:center">
-            <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:27vw;height:27vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
+            <!--<img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif style="width:27vw;height:27vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">-->
             <div style="margin-left:1.5vw;width:100%;display: flex;flex-direction: column;justify-content: flex-end;">
                 <div style="display:flex;justify-content:space-between;align-items:">
                     <p class="bigger-text" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{Auth::user()->name}}</p> 
@@ -871,8 +879,17 @@
         </div>
 
     </div>
+    <div class="col-12 p-0" style="margin-top:2vw">
+        <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
+            <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
+            <a href="/candidate-details" style=";color:#3B3C43;padding-left:10vw">
+                <i class="fas fa-arrow-right normal-text"></i>
+            </a>
+        </div>
+    </div>
 </div>
 <!-- END OF MOBILE TOP SECTION -->
+
 
 <!-- START OF MIDDLE SECTION -->
 <div class="row m-0 page-container-inner" data-wow-delay="0.6s" >

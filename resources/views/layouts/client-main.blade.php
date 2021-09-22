@@ -207,6 +207,8 @@
     @if( !Request::is('login') )
       @if( !Request::is('signup') )
       @if( !Request::is('signup-interests') )
+        @if( !Request::is('job-portal') )
+        @if( !Request::is('job-portal/*') )
     <!-- START OF MOBILE NAVBAR -->
     <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;
   top: 0;z-index: 10;">
@@ -342,10 +344,14 @@
     @endif
     @endif
     @endif
+    @endif
+    @endif
     <!-- END OF MOBILE NAVBAR -->
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
+        @if( !Request::is('job-portal') )
+        @if( !Request::is('job-portal/*') )
     <!-- START OF NAVBAR -->
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
@@ -378,6 +384,19 @@
     <!-- END OF NAVBAR -->
         @endif
       @endif
+        @endif
+      @endif
+    @endif
+
+    @if( Request::is('job-portal') || Request::is('job-portal/*') )
+    <!-- START OF JOB PORTAL  NAVBAR -->
+    <div class="navbar-floating" style="width:30vw">
+        <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
+        <a href="/job-portal" class="normal-text navbar-item @if(Request::is('job-portal'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Job Portal</a>
+        <a href="/job-portal/profile" class="normal-text navbar-item @if( Request::is('job-portal/profile') || Request::is('job-portal/profile'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Profile</a>
+        
+    </div>
+    <!-- END OF JOB PORTAL  NAVBAR -->
     @endif
     @if(Auth::check())
     <!-- START OF POPUP -->
