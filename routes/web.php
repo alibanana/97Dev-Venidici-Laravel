@@ -236,7 +236,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
         Route::put('/users', [AdminUserController::class, 'add_stars'])->name('users.add_stars');
         Route::post('/users/{id}/set-status-to-opposite', [AdminUserController::class, 'setStatusToOpposite'])->name('users.set-status-to-opposite');
-        Route::post('/users/{id}/set-role-to-opposite', [AdminUserController::class, 'setRoleToOpposite'])->name('users.set-role-to-opposite');
+        Route::post('/users/{id}/set-role-to-opposite', [AdminUserController::class, 'setRoleToOpposite'])->name('users.set-role-to-opposite')->middleware(['isSuper']);
         // InvoiceController
         Route::get('/invoices', [AdminInvoiceController::class, 'index'])->name('invoices.index');
         Route::get('/invoices/{id}', [AdminInvoiceController::class, 'show'])->name('invoices.show');
