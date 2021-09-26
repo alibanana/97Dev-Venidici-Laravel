@@ -101,8 +101,10 @@
 									<thead>
 										<tr>
 											<th>No.</th>
+											<th>Name</th>
 											<th>Company Name</th>
 											<th>Email</th>
+											<th>Created At</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -110,20 +112,22 @@
                                         @foreach ($users as $user)
                                             <tr>
                                                 <td>{{ $users_data['from'] + $loop->index }}</td>
+                                                <td>{{ $user->name }}</td>
                                                 <td>{{ $user->companyName }}</td>
                                                 <td>{{ $user->email }}</td>
+												<td class="text-nowrap">{{ $user->created_at->diffForHumans() }}</td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" value="Contacted" name="status">
+                                                            <a href="/admin/job-portal/hiring-partners/1/candidates" class="d-sm-inline-block btn btn-info shadow-sm" >View Contacted Candidates</a>
+                                                        </div>
                                                         <form action="" method="post">
                                                             <div style="padding: 0px 2px">
                                                                 <input type="hidden" value="Rejected" name="status">
                                                                 <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
                                                             </div>
-                                                        </form> 
-                                                        <div style="padding: 0px 2px">
-                                                            <input type="hidden" value="Contacted" name="status">
-                                                            <a href="/admin/job-portal/hiring-partners/1/candidates" class="d-sm-inline-block btn btn-info shadow-sm" >View Contacted Candidates</a>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </td>											
                                             </tr>

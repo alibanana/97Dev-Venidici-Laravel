@@ -56,6 +56,7 @@ class HiringPartnerController extends Controller
 
                 $users = $users->where(function ($query) use ($search) {
                     $query->where([['name', 'like', "%".$search."%"]])
+                    ->orWhere([['companyName', 'like', "%".$search."%"]])
                     ->orWhere([['email', 'like', "%".$search."%"]])
                     ->orWhere([['telephone', 'like', "%".$search."%"]]);
                 });
