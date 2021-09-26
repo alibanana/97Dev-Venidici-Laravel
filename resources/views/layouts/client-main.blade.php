@@ -83,7 +83,7 @@
                   <h5 class="modal-title sub-description" style="font-family:Rubik Bold" id="exampleModalLabel">Contact Us</h5>
               </div>
               <div class="modal-body">
-                <form action="{{route('admin.contact-us.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('contact-us.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                   <div class="row m-0">
                       <div class="col-12 p-0" style="text-align:center">
