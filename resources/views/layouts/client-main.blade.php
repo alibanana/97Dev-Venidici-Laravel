@@ -50,7 +50,6 @@
         fbq('init', '377781967128623');
         fbq('track', 'PageView');
       </script>
-      <meta name="facebook-domain-verification" content="9vqji91k0n1eqsy0fdxgqvjy58e80d" />
       <noscript>
         <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=377781967128623&ev=PageView&noscript=1"/>
       </noscript>
