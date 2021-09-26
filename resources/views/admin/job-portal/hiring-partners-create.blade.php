@@ -28,14 +28,14 @@
         <!-- Content Row -->
 
         <!-- start of form -->
-        <form action="{{ route('admin.teachers.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.job-portal.hiring-partners.store') }}" method="POST">
         @csrf
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Full Name</label>
                         <input type="text" name="name" class="form-control form-control-user"
-                            id="phone" aria-describedby="" value="{{ old('name') }}"
+                            aria-describedby="" value="{{ old('name') }}"
                             placeholder="Here insert partner name (e.g. Elon Musk)" required> 
                         @error('name')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label for="">Email</label>
                         <input type="email" name="email" class="form-control form-control-user"
-                            id="phone" aria-describedby="" value="{{ old('email') }}"
+                            aria-describedby="" value="{{ old('email') }}"
                             placeholder="Here insert parnter email (e.g. Elon@tesla.com)" required> 
                         @error('email')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -60,10 +60,10 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Company Name</label>
-                        <input type="text" name="company_name" class="form-control form-control-user"
-                            id="phone" aria-describedby="" value="{{ old('company_name') }}"
+                        <input type="text" name="companyName" class="form-control form-control-user"
+                            aria-describedby="" value="{{ old('companyName') }}"
                             placeholder="Here insert parnter Company Name (e.g. Tesla)" required> 
-                        @error('company_name')
+                        @error('companyName')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -74,7 +74,7 @@
                     <div class="form-group">
                         <label for="">Password</label>
                         <input type="text" name="password" class="form-control form-control-user"
-                            id="phone" aria-describedby="" value="{{ old('password') }}"
+                            aria-describedby="" value="{{ old('password') }}"
                             placeholder="Here insert account Password" required> 
                         @error('password')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">

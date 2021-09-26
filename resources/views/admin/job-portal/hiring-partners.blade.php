@@ -25,7 +25,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="mb-0 mb-3 text-gray-800">Hiring Partners</h1>
-            <a href="/admin/job-portal/hiring-partners/create" class="btn btn-primary btn-user p-3">Create New User</a>
+            <a href="{{ route('admin.job-portal.hiring-partners.create') }}" class="btn btn-primary btn-user p-3">Create New User</a>
 
         </div>
         
@@ -40,10 +40,24 @@
                 <div class="container-fluid p-0 mt-3">
                     <!-- Page Heading -->
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
-                    <h1 class="h5 mb-2 text-gray-800 d-inline">Showing 1 from 100 Users</h1>
+                    @if ($users_data['total'] != 0)
+                        <h1 class="h5 mb-2 text-gray-800 d-inline">{{ "(Showing " . $users_data['from'] . " to " . $users_data['to'] . " of " . $users_data['total'] . " results)" }}</h1>
+                    @else
+                        <h1 class="h5 mb-2 text-gray-800 d-inline">{{ "(*There are currently no Hiring Partners)" }}</h1>
+                    @endif
 
                     <div class="row mt-2 mb-3">
-                        
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                            <div class="dataTables_length" id="show_entries">
+                                <label class="w-100">Show:
+                                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                                        @foreach ($users_data['per_page_options'] as $option)
+                                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'show' => $option]) }}" @if (Request::get('show') == $option) selected @endif>{{ $option }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
@@ -93,25 +107,27 @@
 										</tr>
 									</thead>
 									<tbody>
-											<tr>
-												<td>1</td>												
-												<td>Tesla Inc.</td>												
-												<td>test@gmail.com</td>												
-												<td>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <td>{{ $users_data['from'] + $loop->index }}</td>
+                                                <td>{{ $user->companyName }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            <form action="" method="post">
-                                                                <div style="padding: 0px 2px">
-                                                                    <input type="hidden" value="Rejected" name="status">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
-                                                                </div>
-                                                            </form> 
+                                                        <form action="" method="post">
                                                             <div style="padding: 0px 2px">
-                                                                <input type="hidden" value="Contacted" name="status">
-                                                                <a href="/admin/job-portal/hiring-partners/1/candidates" class="d-sm-inline-block btn btn-info shadow-sm" >View Contacted Candidates</a>
+                                                                <input type="hidden" value="Rejected" name="status">
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
                                                             </div>
+                                                        </form> 
+                                                        <div style="padding: 0px 2px">
+                                                            <input type="hidden" value="Contacted" name="status">
+                                                            <a href="/admin/job-portal/hiring-partners/1/candidates" class="d-sm-inline-block btn btn-info shadow-sm" >View Contacted Candidates</a>
+                                                        </div>
                                                     </div>
                                                 </td>											
-											</tr>
+                                            </tr>
+                                        @endforeach
 									</tbody>
 								</table>
 							</div>

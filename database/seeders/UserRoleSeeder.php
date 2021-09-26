@@ -24,6 +24,9 @@ class UserRoleSeeder extends Seeder
             ],
             [
                 'role_name' => 'super-admin',
+            ],
+            [
+                'role_name' => 'hiring-partner',
             ]
         ];
 

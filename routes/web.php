@@ -48,6 +48,8 @@ use App\Http\Controllers\Admin\NotificationController as AdminNotificationContro
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\KrestController as AdminKrestController;
 use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramController;
+use App\Http\Controllers\Admin\HiringPartnerController as AdminHiringPartnerController;
+use App\Http\Controllers\Admin\CandidateController as AdminCandidateController;
 use App\Http\Controllers\Admin\InstructorController as AdminInstructorController;
 use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPositionController;
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
@@ -397,6 +399,12 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/krest/programs/{id}/update', [AdminKrestProgramController::class, 'edit'])->name('krest_programs.edit');
         Route::put('/krest/programs/{id}', [AdminKrestProgramController::class, 'update'])->name('krest_programs.update');
         Route::delete('/krest/programs/{id}', [AdminKrestProgramController::class, 'destroy'])->name('krest_programs.destroy');
+        // HiringPartnerController
+        Route::get('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'index'])->name('job-portal.hiring-partners.index');
+        Route::get('/job-portal/hiring-partners/create', [AdminHiringPartnerController::class, 'create'])->name('job-portal.hiring-partners.create');
+        Route::post('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'store'])->name('job-portal.hiring-partners.store');
+        // CandidateController
+        Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidate.index');
         // HashtagController
         Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
         Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -516,17 +524,8 @@ Route::middleware(['isSuspended'])->group(function () {
         });
 
 
-        Route::get('/admin/job-portal/hiring-partners', function () {
-            return view('admin/job-portal/hiring-partners');
-        });
         Route::get('/admin/job-portal/hiring-partners/1/candidates', function () {
             return view('admin/job-portal/contacted-candidates');
-        });
-        Route::get('/admin/job-portal/hiring-partners/create', function () {
-            return view('admin/job-portal/hiring-partners-create');
-        });
-        Route::get('/admin/job-portal/candidates', function () {
-            return view('admin/job-portal/candidates');
         });
     };
 
