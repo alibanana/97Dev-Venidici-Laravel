@@ -70,6 +70,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/candidate-details', [DashboardController::class, 'edit_job_portal'])->name('customer.edit_job_portal')->middleware(['auth']);
     Route::get('/job-portal', [DashboardController::class, 'job_portal_index'])->name('customer.job_portal_index');
     Route::get('/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
+    Route::get('admin/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
     Route::get('/job-portal/profile', [DashboardController::class, 'job_portal_profile'])->name('customer.job_portal_profile');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
@@ -538,6 +539,21 @@ Route::middleware(['isSuspended'])->group(function () {
         });
         Route::get('/emails/bootcamp/full_registration', function () {
             return view('emails/bootcamp_full_registration');
+        });
+
+
+        Route::get('/admin/job-portal/hiring-partners', function () {
+            return view('admin/job-portal/hiring-partners');
+        });
+        Route::get('/admin/job-portal/hiring-partners/1/candidates', function () {
+            return view('admin/job-portal/contacted-candidates');
+        });
+        Route::get('/admin/job-portal/hiring-partners/create', function () {
+            return view('admin/job-portal/hiring-partners-create');
+        });
+
+        Route::get('/admin/job-portal/candidates', function () {
+            return view('admin/job-portal/candidates');
         });
     };
 

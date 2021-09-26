@@ -206,6 +206,26 @@
         </div>
     </li> 
 
+    @if(Request::is('admin/job-portal/*'))
+    <li class="nav-item active">
+    @else
+    <li class="nav-item">
+    @endif
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJobPortal"
+            aria-expanded="true" aria-controls="collapseJobPortal">
+            <i class="fas fa-business-time"></i>
+            <span>Job Portal</span>
+        </a>
+
+        <div id="collapseJobPortal" class="collapse" aria-labelledby="" data-parent="#collapseJobPortal">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin/job-portal/hiring-partners">Hiring Partners</a>
+                <a class="collapse-item" href="/admin/job-portal/candidates">Candidates</a>
+
+            </div>
+        </div>
+    </li> 
+
 
     
 
