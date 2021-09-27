@@ -14,9 +14,9 @@ use App\Models\UserDetail;
 
 class HiringPartnerController extends Controller
 {
-    private static String $INDEX_ROUTE = 'admin.job-portal.hiring-partners.index';
-    private static Array $AVAILABLE_FILTERS = ['active', 'suspended'];
-    private static Array $USERS_STATUS_LIST = ['active', 'suspended'];
+    private const INDEX_ROUTE = 'admin.job-portal.hiring-partners.index';
+    private const AVAILABLE_FILTERS = ['active', 'suspended'];
+    private const USERS_STATUS_LIST = ['active', 'suspended'];
 
     // Shows the Admin Hiring-Partners List page.
     public function index(Request $request) {
@@ -33,18 +33,18 @@ class HiringPartnerController extends Controller
         }
 
         if ($request->has('filter')) {
-            if (!in_array($request->filter, self::$AVAILABLE_FILTERS)) {
-                $url = route(self::$INDEX_ROUTE, request()->except('filter'));
+            if (!in_array($request->filter, self::AVAILABLE_FILTERS)) {
+                $url = route(self::INDEX_ROUTE, request()->except('filter'));
                 return redirect($url);    
             }
 
-            if (in_array($request->filter, self::$USERS_STATUS_LIST))
+            if (in_array($request->filter, self::USERS_STATUS_LIST))
                 $users = $users->where('status', $request->filter);
         }
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route(self::$INDEX_ROUTE, request()->except('search'));
+                $url = route(self::INDEX_ROUTE, request()->except('search'));
                 return redirect($url);
             } else {
                 $userDetails = UserDetail::select(DB::raw('user_id as id'), 'telephone');
@@ -67,12 +67,12 @@ class HiringPartnerController extends Controller
 
         if ($request->has('show')) {
             if (!in_array($request->show, $show_options)) {
-                return redirect(route(self::$INDEX_ROUTE, request()->except(['search', 'page'])));
+                return redirect(route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
             }
 
             if ($request->show == "All") {
                 if ($request->has('page')) {
-                    return redirect(route(self::$INDEX_ROUTE, request()->except(['search', 'page'])));
+                    return redirect(route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
                 }
 
                 $users = $users->get();
@@ -154,6 +154,6 @@ class HiringPartnerController extends Controller
         event(new Registered($user));
 
         $message = 'New Hiring-Partner (' . $user->email .') account has been created!';
-        return redirect()->route(self::$INDEX_ROUTE)->with('message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 }
