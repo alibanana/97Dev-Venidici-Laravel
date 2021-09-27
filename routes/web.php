@@ -71,7 +71,6 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/candidate-details', [DashboardController::class, 'edit_job_portal'])->name('customer.edit_job_portal')->middleware(['auth']);
     Route::get('/job-portal', [DashboardController::class, 'job_portal_index'])->name('customer.job_portal_index');
     Route::get('/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
-    Route::get('admin/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
     Route::get('/job-portal/profile', [DashboardController::class, 'job_portal_profile'])->name('customer.job_portal_profile');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
@@ -402,7 +401,8 @@ Route::middleware(['isSuspended'])->group(function () {
         // HiringPartnerController
         Route::get('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'index'])->name('job-portal.hiring-partners.index');
         Route::get('/job-portal/hiring-partners/create', [AdminHiringPartnerController::class, 'create'])->name('job-portal.hiring-partners.create');
-        Route::post('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'store'])->name('job-portal.hiring-partners.store');
+        Route::get('/job-portal/1', [AdminHiringPartnerController::class, 'candidate_profile'])->name('job-portal.hiring-partners.candidate_profile');
+        Route::get('/job-portal/request/1', [AdminHiringPartnerController::class, 'candidate_profile_request'])->name('job-portal.hiring-partners.candidate_profile_request');
         // CandidateController
         Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidate.index');
         // HashtagController
@@ -466,6 +466,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::delete('/menjadi-kolaborator/{id}', [AdminCollaboratorController::class, 'destroy'])->name('collaborators.destroy');
         //CollaboratorController
         Route::get('/donations', [AdminPromotionController::class, 'donations_index'])->name('donations.index');
+        
     });
     /* END OF ADMIN ROUTING */
 
@@ -479,6 +480,9 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
     Route::get('/for-public/bootcamp', [PagesController::class, 'bootcamp_index'])->name('customer.bootcamp_index');
     Route::get('/pelatihan-venidici', [PagesController::class, 'pelatihan_venidici_index'])->name('customer.pelatihan_venidici_index');
+    
+    Route::get('/job-portal/login', [PagesController::class, 'job_portal_login_index'])->name('customer.job_portal_login_index');
+
     /* END OF FOR PUBLIC ROUTING*/
 
     /* START OF FOR CORPORATE ROUTING */
@@ -523,10 +527,10 @@ Route::middleware(['isSuspended'])->group(function () {
             return view('emails/bootcamp_full_registration');
         });
 
-
         Route::get('/admin/job-portal/hiring-partners/1/candidates', function () {
             return view('admin/job-portal/contacted-candidates');
         });
+
     };
 
     /* START OF DOMPDF ROUTING */

@@ -389,14 +389,15 @@
     @endif
 
     @if( Request::is('job-portal') || Request::is('job-portal/*') )
+          @if(!Request::is('job-portal/login') )
     <!-- START OF JOB PORTAL  NAVBAR -->
     <div class="navbar-floating" style="width:30vw">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
         <a href="/job-portal" class="normal-text navbar-item @if(Request::is('job-portal'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Job Portal</a>
         <a href="/job-portal/profile" class="normal-text navbar-item @if( Request::is('job-portal/profile') || Request::is('job-portal/profile'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Profile</a>
-        
     </div>
     <!-- END OF JOB PORTAL  NAVBAR -->
+        @endif
     @endif
     @if(Auth::check())
     <!-- START OF POPUP -->
@@ -654,6 +655,7 @@
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
           @if(!Request::is('cart'))
+            @if(!Request::is('job-portal/login') )
     <!-- FOOTER DESKTOP-->
     <div class="row m-0 page-container footer-desktop" style="padding-top:5vw;padding-bottom:2vw">
       <div class="col-12 p-0">
@@ -854,6 +856,7 @@
       @endif
         @endif
           @endif
+            @endif
 
     <!-- WOW JS -->
     <script src="/WOW-master/dist/wow.min.js"></script>

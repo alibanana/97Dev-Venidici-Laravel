@@ -73,7 +73,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input type="text" name="password" class="form-control form-control-user"
+                        <input type="password" name="password" class="form-control form-control-user"
                             aria-describedby="" value="{{ old('password') }}"
                             placeholder="Here insert account Password" required> 
                         @error('password')

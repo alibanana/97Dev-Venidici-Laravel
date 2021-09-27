@@ -24,7 +24,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="mb-0 mb-3 text-gray-800">Candidate Profile Requests</h1>
+            <h1 class="mb-0 mb-3 text-gray-800">Job-Portal Candidates</h1>
         </div>
         
 
@@ -56,6 +56,7 @@
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Filter:
 									<select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                                        <option>All</option>
                                         <option>Not yet update profile</option>
                                         <option>Waiting for approval</option>
                                         <option>Accepted</option>
@@ -117,7 +118,9 @@
 												<td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             <div style="padding: 0px 2px">
-                                                                <input type="hidden" value="Contacted" name="status">
+                                                                <a href="/admin/job-portal/request/1" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm" >View Updates</a>
+                                                            </div>
+                                                            <div style="padding: 0px 2px">
                                                                 <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm" >View Detail</a>
                                                             </div>
                                                             <form action="" method="post">
