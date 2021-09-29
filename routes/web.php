@@ -14,6 +14,7 @@ use App\Http\Controllers\Client\ReviewController;
 use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\Client\BootcampController;
 use App\Http\Controllers\Client\ContactUsController;
+use App\Http\Controllers\Client\JobPortalController;
 use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
@@ -68,20 +69,6 @@ use App\Http\Controllers\Admin\ContactUsController as AdminContactUsController;
 |
 */
 Route::middleware(['isSuspended'])->group(function () {
-    Route::get('/candidate-details', [DashboardController::class, 'edit_job_portal'])->name('customer.edit_job_portal')->middleware(['auth']);
-    Route::get('/job-portal', [DashboardController::class, 'job_portal_index'])->name('customer.job_portal_index');
-    Route::get('/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
-    Route::get('/job-portal/profile', [DashboardController::class, 'job_portal_profile'])->name('customer.job_portal_profile');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
-    Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
-    Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);
-    Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth']);
-    Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth']);
-    Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
-    Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth']);
-    Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
-    Route::put('/bootcamp/upgrade-status', [DashboardController::class, 'upgradeBootcamp'])->name('bootcamp.upgrade-status')->middleware(['auth']);
-
     /*
     |--------------------------------------------------------------------------
     | Custom Auth Routes
@@ -95,56 +82,38 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/signup-interests', [CustomAuthController::class, 'signUpInterestIndex'])->name('custom-auth.signup_interest.index')->middleware('guest');
     Route::post('/register', [CustomAuthController::class, 'storeNewUser'])->name('custom-auth.register')->middleware('guest');
     Route::post('/reset-password', [CustomAuthController::class, 'resetPassword'])->name('custom-auth.reset-password')->middleware('guest');
-
-    /*
-    |--------------------------------------------------------------------------
-    | Client Routes
-    |
-    | Controllers can be found inside -> App\Http\Controllers\Client\
-    | Controllers Used:
-    |   - PagesController
-    |   - CartController
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/search-course', [PagesController::class, 'search_course'])->name('search_course');
+    Route::get('/job-portal/login', [CustomAuthController::class, 'showJobPortalLogin'])->name('job-portal.login')->middleware('guest');
+    
+    /* START OF CLIENT ROUTING */
     Route::get('/', [PagesController::class, 'index'])->name('index');
+    Route::post('/search-course', [PagesController::class, 'search_course'])->name('search_course');
+    Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
     Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
     Route::get('/blog/{id}', [PagesController::class, 'blog_detail'])->name('blog_detail');
     Route::get('/blogs', [PagesController::class, 'blog_list'])->name('blog_list');
-    // ADMIN ROUTING
-    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-        \UniSharp\LaravelFilemanager\Lfm::routes();
-    });
-    /* START OF CLIENT ROUTING */
 
-
-    /*  MENJADI PENGAJAR & KOLLABORATOR*/
+    /* DASHBOARD & USER RELATED ROUTES */
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
+    Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
+    Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);
+    Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth']);
+    Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth']);
+    Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
+    Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth']);
+    Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
+    Route::put('/bootcamp/upgrade-status', [DashboardController::class, 'upgradeBootcamp'])->name('bootcamp.upgrade-status')->middleware(['auth']);
+    
+    /* MENJADI PENGAJAR & KOLLABORATOR*/
     Route::post('/menjadi-pengajar', [AdminInstructorController::class, 'store'])->name('menjadi_pengajar.store');
     Route::post('/menjadi-kolaborator', [AdminCollaboratorController::class, 'store'])->name('collaborators.store');
     Route::post('/add-newsletter', [AdminNewsletterController::class, 'store'])->name('newsletter.store');
 
-    Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
-
-
-    //Route::get('/signup-interests', function () {
-        //return view('client/auth/signup-interests');
-    //});
-
-
-    //Route::get('/cart', function () {
-        //return view('client/cart');
-    //});
-    // Route::get('/dashboard', function () {
-    //     return view('client/user-dashboard');
-    // });
     /* CART ROUTING */
-
     Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail')->middleware(['auth', 'verified']);
     Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment')->middleware(['auth', 'verified']);
     Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware(['auth', 'verified']);
     Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware(['auth', 'verified']);
     Route::post('/validate-voucher-code', [CheckoutController::class, 'validateVoucherCode'])->name('customer.cart.validate-voucher-code')->middleware(['auth', 'verified']);
-
     Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware(['auth', 'verified']);
     Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware(['auth']);
     Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware(['auth']);
@@ -161,11 +130,9 @@ Route::middleware(['isSuspended'])->group(function () {
     // OnlineCourseController
     Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
     Route::get('/online-course/{course_title}', [OnlineCourseController::class, 'show'])->name('online-course.show');
-
     Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree')->middleware(['auth', 'verified']);
     Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware(['auth', 'verified']);
     Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware(['auth', 'verified']);
-
     Route::get('online-course/{course_title}/learn/lecture/{content_title}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware(['auth', 'verified']);
     // WokiController
     Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
@@ -177,7 +144,6 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/bootcamp/{id}', [BootcampController::class, 'buyFree'])->name('bootcamp.buyFree')->middleware(['auth', 'verified']);
     Route::post('/bootcamp/{id}/full-registration', [BootcampController::class, 'storeFullRegistration'])->name('bootcamp.storeFullRegistration')->middleware(['auth']);
     Route::post('/bootcamp/{id}/syllabus', [BootcampController::class, 'sendSyllabus'])->name('bootcamp.sendSyllabus');
-
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware(['auth', 'verified']);
     Route::delete('/deleteReview/{id}', [ReviewController::class, 'destroy'])->name('customer.review.destroy')->middleware(['auth', 'verified']);
@@ -188,14 +154,35 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::put('/online-course/assessment/{id}/reset-user-assessment', [AssessmentController::class, 'resetUserAssessment'])->name('online-course-assessment.reset-user-assessment')->middleware(['auth', 'verified']);
     Route::put('/online-course/assessment/{id}/update-assessment-timer', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assessment.updateAssessmentTimer')->middleware(['auth', 'verified']);
     Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contact-us.store');
-
     /* END OF ONLINE COURSE ROUTING */
 
-    /* START OF PHASE 2 ROUTING */
+    /* START OF FOR PUBLIC ROUTING */
+    Route::get('/for-public/online-course', [PagesController::class, 'online_course_index'])->name('customer.online_course_index');
+    Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
+    Route::get('/for-public/bootcamp', [PagesController::class, 'bootcamp_index'])->name('customer.bootcamp_index');
+    Route::get('/pelatihan-venidici', [PagesController::class, 'pelatihan_venidici_index'])->name('customer.pelatihan_venidici_index');
+    /* END OF FOR PUBLIC ROUTING*/
     
-    /* END OF PHASE 2 ROUTING */
-
+    /* START OF FOR CORPORATE ROUTING */
+    Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
+    Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
+    /* END OF FOR CORPORATE ROUTING*/
     /* END OF CLIENT ROUTING */
+
+    /*
+    |--------------------------------------------------------------------------
+    | Client Job Portal Routes
+    |--------------------------------------------------------------------------
+    | Description:
+    | All routes in the group below has the /job-portal prefix, job-portal.* name
+    | and uses ['auth', 'is_hiringPartner'] middleware.
+    */
+    Route::prefix('job-portal')->name('job-portal.')->middleware(['auth', 'isHiringPartner'])->group(function() {
+        Route::get('/', [JobPortalController::class, 'index'])->middleware(['verified'])->name('index');
+        Route::get('/profile', [JobPortalController::class, 'profileIndex'])->name('profile.index');
+    });
+    Route::get('/candidate-details', [DashboardController::class, 'edit_job_portal'])->name('customer.edit_job_portal')->middleware(['auth']);
+    Route::get('/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
 
     /*
     |--------------------------------------------------------------------------
@@ -203,7 +190,7 @@ Route::middleware(['isSuspended'])->group(function () {
     |--------------------------------------------------------------------------
     | Description:
     | All routes in the group below has /admin prefix, admin.* name and uses
-    | ['auth', 'is_admin'] middleware (user must be logged in to access it).
+    | ['auth', 'isAdmin'] middleware (user must be logged in to access it).
     |
     | Controllers can be found inside -> App\Http\Controllers\Admin\
     | Controllers Used:
@@ -401,10 +388,10 @@ Route::middleware(['isSuspended'])->group(function () {
         // HiringPartnerController
         Route::get('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'index'])->name('job-portal.hiring-partners.index');
         Route::get('/job-portal/hiring-partners/create', [AdminHiringPartnerController::class, 'create'])->name('job-portal.hiring-partners.create');
-        Route::get('/job-portal/1', [AdminHiringPartnerController::class, 'candidate_profile'])->name('job-portal.hiring-partners.candidate_profile');
-        Route::get('/job-portal/request/1', [AdminHiringPartnerController::class, 'candidate_profile_request'])->name('job-portal.hiring-partners.candidate_profile_request');
         // CandidateController
         Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidate.index');
+        Route::get('/job-portal/1', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.hiring-partners.candidate_profile');
+        Route::get('/job-portal/request/1', [AdminCandidateController::class, 'showCandidateChange'])->name('job-portal.hiring-partners.candidate_profile_request');
         // HashtagController
         Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
         Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -466,7 +453,6 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::delete('/menjadi-kolaborator/{id}', [AdminCollaboratorController::class, 'destroy'])->name('collaborators.destroy');
         //CollaboratorController
         Route::get('/donations', [AdminPromotionController::class, 'donations_index'])->name('donations.index');
-        
     });
     /* END OF ADMIN ROUTING */
 
@@ -474,22 +460,6 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('login/google', [SocialController::class, 'redirectToGoogle'])->name('login.google');
     Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback']);
     /* END OF GOOGLE AUTH*/
-
-    /* START OF FOR PUBLIC ROUTING */
-    Route::get('/for-public/online-course', [PagesController::class, 'online_course_index'])->name('customer.online_course_index');
-    Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
-    Route::get('/for-public/bootcamp', [PagesController::class, 'bootcamp_index'])->name('customer.bootcamp_index');
-    Route::get('/pelatihan-venidici', [PagesController::class, 'pelatihan_venidici_index'])->name('customer.pelatihan_venidici_index');
-    
-    Route::get('/job-portal/login', [PagesController::class, 'job_portal_login_index'])->name('customer.job_portal_login_index');
-
-    /* END OF FOR PUBLIC ROUTING*/
-
-    /* START OF FOR CORPORATE ROUTING */
-    Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
-    Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
-
-    /* END OF FOR CORPORATE ROUTING*/
 
     // ROUTES TO CHECK EMAIL VIEWS
     if (!App::environment('production')) {
@@ -526,16 +496,17 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/emails/bootcamp/full_registration', function () {
             return view('emails/bootcamp_full_registration');
         });
-
         Route::get('/admin/job-portal/hiring-partners/1/candidates', function () {
             return view('admin/job-portal/contacted-candidates');
         });
-
     };
 
-    /* START OF DOMPDF ROUTING */
+    /* OTHERS ROUTING */
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
     Route::post('/certificate/pdf', [PagesController::class, 'print'])->name('print_certificate')->middleware(['auth', 'verified']);
-    /* END OF DOMPDF ROUTING */
+    /* OTHERS ROUTING */
 });
 
 require __DIR__.'/auth.php';

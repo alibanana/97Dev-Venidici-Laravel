@@ -156,14 +156,4 @@ class HiringPartnerController extends Controller
         $message = 'New Hiring-Partner (' . $user->email .') account has been created!';
         return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
-
-    public function candidate_profile(){
-        return view('admin/job-portal/candidate-profile');
-
-    }
-
-    public function candidate_profile_request(){
-        return view('admin/job-portal/candidate-profile');
-
-    }
 }

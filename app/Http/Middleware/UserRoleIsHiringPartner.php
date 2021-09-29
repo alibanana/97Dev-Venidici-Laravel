@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class UserRoleIsAdmin
+class UserRoleIsHiringPartner
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,16 @@ class UserRoleIsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $this->isUserAdmin() ? $next($request) : abort(403);
+        return $this->isUserAdmin() || $this->isUserHiringPartner() ?
+            $next($request) : abort(403);
     }
 
     private function isUserAdmin() {
         return Auth::user()->userRole->role_name == 'admin' || 
             Auth::user()->userRole->role_name == 'super-admin';
+    }
+
+    private function isUserHiringPartner() {
+        return Auth::user()->userRole->role_name == 'hiring-partner';
     }
 }

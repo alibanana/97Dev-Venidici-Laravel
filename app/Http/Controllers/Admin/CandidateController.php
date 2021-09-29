@@ -11,4 +11,14 @@ class CandidateController extends Controller
     public function index() {
         return view('admin/job-portal/candidates');
     }
+
+    // Shows the candidate's detail page.
+    public function showCandidate(){
+        return view('admin/job-portal/candidate-profile');
+    }
+
+    // Shows the candidate's changes detail page.
+    public function showCandidateChange(){
+        return view('admin/job-portal/candidate-profile');
+    }
 }

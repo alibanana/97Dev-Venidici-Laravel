@@ -232,4 +232,9 @@ class CustomAuthController extends Controller
         }
         return $str;
     }
+
+    // Shows the Job Portal Login Page.
+    public function showJobPortalLogin() {
+        return view('client/job-portal/company/login');
+    }
 }

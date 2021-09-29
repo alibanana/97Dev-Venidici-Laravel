@@ -59,7 +59,7 @@
                     <a href="/" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#CE3369;text-decoration:none"><i  class="fas fa-arrow-left"></i> <span style="margin-left:0.5vw">Back to Venidici</span></a>
                     <!--<a href="/signup" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;color:#2B6CAA;text-decoration:none">Sign up<i style="margin-left:0.5vw" class="fas fa-arrow-right"></i></a>-->
                 </div>
-                <form action="{{ route('login') }}" method="POST">
+                <form action="{{ route('job-portal.login') }}" method="POST">
                 @csrf
                     <div class="row m-0">
                         <div class="col-6 desktop-display" style="padding-left:3.5vw;padding-top:5vw">
@@ -72,6 +72,11 @@
                                 @if (session('email-verification-success'))
                                     <div class="alert alert-success alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
                                         Your email <span style="font-weight: bold">{{session('email-verification-success') }}</span> has been verified!
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @elseif (session('validation-error'))
+                                    <div class="alert alert-danger alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
+                                        {{ session('validation-error') }}
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 @endif

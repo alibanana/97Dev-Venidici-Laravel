@@ -16,8 +16,9 @@ class EmailVerificationPromptController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return $request->user()->hasVerifiedEmail()
-                    ? redirect()->intended(RouteServiceProvider::HOME)
-                    : redirect()->route('customer.dashboard');
+        return $request->user()->hasVerifiedEmail() 
+            ? redirect()->intended(RouteServiceProvider::HOME)
+            : redirect()->route($request->user()->user_role_id != 4 ?
+                'customer.dashboard' : 'job-portal.profile.index');
     }
 }

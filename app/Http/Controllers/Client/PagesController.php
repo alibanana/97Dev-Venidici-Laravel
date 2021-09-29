@@ -381,13 +381,4 @@ class PagesController extends Controller
         
         return view('client/blogs/blog-list',compact('footer_reviews','blogs'));
     }
-
-    public function job_portal_login_index(){
-        // if($agent->isPhone()){
-        //     return view('client/mobile/under-construction');
-        // }
-
-        
-        return view('client/job-portal/company/login');
-    }
 }

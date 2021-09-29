@@ -17,6 +17,7 @@ class UserRoleIsSuperAdmin
      */
     public function handle(Request $request, Closure $next)
     {
+        // If user role's is not super-admin
         if (Auth::user()->userRole->role_name != 'super-admin') {
             abort(403);
         }
