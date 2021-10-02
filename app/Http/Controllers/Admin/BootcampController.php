@@ -25,11 +25,9 @@ use Illuminate\Support\Facades\Mail;
 
 class BootcampController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private const INDEX_ROUTE = 'admin.bootcamp.index';
+
+    // Shows the Bootcamp List admin page.
     public function index(Request $request)
     {
         $course_categories = CourseCategory::select('id', 'category')->get();
@@ -51,7 +49,7 @@ class BootcampController extends Controller
 
         if ($request->has('filter')) {
             if (!in_array($request->filter, $course_categories_category_flatten)) {
-                $url = route('admin.bootcamp.index', request()->except('filter'));
+                $url = route(self::INDEX_ROUTE, request()->except('filter'));
                 return redirect($url);
             }
 
@@ -65,7 +63,7 @@ class BootcampController extends Controller
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route('admin.bootcamp.index', request()->except('search'));
+                $url = route(self::INDEX_ROUTE, request()->except('search'));
                 return redirect($url);
             } else {
                 $search = $request->search;
@@ -81,13 +79,13 @@ class BootcampController extends Controller
 
         if ($request->has('show')) {
             if (!in_array($request->show, $show_options)) {
-                return redirect(route('admin.bootcamp.index', request()->except(['search', 'page'])));
+                return redirect(route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
             }
 
             if ($request->show == "All") {
                 if ($request->has('page')) {
                     return redirect(
-                        route('admin.bootcamp.index', request()->except(['search', 'page'])));
+                        route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
                 }
 
                 $courses = $courses->get();
@@ -138,26 +136,14 @@ class BootcampController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    // Shows the Create New Bootcamp admin page.
+    public function create() {
         $course_categories = CourseCategory::select('id', 'category')->get();
         $tags = Hashtag::all();
-
         return view('admin/bootcamp/create', compact('course_categories','tags'));
-
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Stores new Bootcamp in the database.
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
@@ -204,24 +190,18 @@ class BootcampController extends Controller
         $bootcampCourseDetail->trial_date_end       = $validated['trial_date_end'];
         $bootcampCourseDetail->save();
 
-        return redirect()->route('admin.bootcamp.index')->with('message', 'New Bootcamp has been added!');
+        return redirect()->route(self::INDEX_ROUTE)->with('message', 'New Bootcamp has been added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Shows the Bootcamp Detail admin page.
     public function show(Request $request, $id)
     {
         $course = Course::findOrFail($id);
 
         if ($course->courseType->type == 'Woki') {
-            return redirect()->route('admin.bootcamp.show', $id);
-        }
-        elseif($course->courseType->type == 'Course') {
-            return redirect()->route('admin.bootcamp.show', $id);
+            return redirect()->route('admin.woki.show', $course->title);
+        } elseif ($course->courseType->type == 'Course') {
+            return redirect()->route('admin.online-course.show', $course->title);
         }
 
         $users = BootcampApplication::where('course_id',$id);
@@ -290,33 +270,32 @@ class BootcampController extends Controller
         return view('admin/bootcamp/detail', compact('course', 'users', 'total_revenue', 'users_data'));
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
         return view('admin/bootcamp/update');
     }
 
     // Archive (isDeleted -> true) Bootcamp Course from the database.
     public function archive($id) {
         $result = CourseHelper::makeIsDeletedTrueById($id);
-        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $result['message']);
     }
 
     // UnArchive (isDeleted -> false) Bootcamp Course from the database.wo
     public function unArchive($id) {
         $result = CourseHelper::makeIsDeletedFalseById($id);
-        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $result['message']);
     }
 
     // Change the isFeatured status of the chosen Online Course to its opposite.
     public function setIsFeaturedStatusToOpposite(Request $request, $id) {
         $result = CourseHelper::setIsFeaturedStatusToOppositeById($id);
-        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $result['message']);
     }
 
     // Change the public status of the chosen Online Course to its opposite.
     public function setPublishStatusToOpposite(Request $request, $id) {
         $result = CourseHelper::setPublishStatusToOppositeById($id);
-        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $result['message']);
     }
 
     // Remove a syllabus from an existing Course's Section-Content.

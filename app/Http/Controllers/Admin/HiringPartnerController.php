@@ -14,13 +14,19 @@ use App\Models\UserDetail;
 
 class HiringPartnerController extends Controller
 {
+    private const HIRING_PARTNER_ROLE_ID = 4;
+    
     private const INDEX_ROUTE = 'admin.job-portal.hiring-partners.index';
+
     private const AVAILABLE_FILTERS = ['active', 'suspended'];
     private const USERS_STATUS_LIST = ['active', 'suspended'];
+    
+    private const AVAILABLE_OPTIONS = [10, 25, 50, 100, "All"];
+    private const AVAILABLE_OPTIONS_WITHOUT_ALL = [10, 25, 50, 100];
 
     // Shows the Admin Hiring-Partners List page.
     public function index(Request $request) {
-        $users = User::where('user_role_id', 4);
+        $users = User::where('user_role_id', self::HIRING_PARTNER_ROLE_ID);
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
@@ -63,10 +69,8 @@ class HiringPartnerController extends Controller
             }
         }
 
-        $show_options = [10, 25, 50, 100, "All"];
-
         if ($request->has('show')) {
-            if (!in_array($request->show, $show_options)) {
+            if (!in_array($request->show, self::AVAILABLE_OPTIONS)) {
                 return redirect(route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
             }
 
@@ -82,7 +86,7 @@ class HiringPartnerController extends Controller
                 $users_data_flag = 1;
             }
         } else {
-            $users = $users->paginate($show_options[0]);
+            $users = $users->paginate(self::AVAILABLE_OPTIONS[0]);
             $users_data_flag = 1;
         }
 
@@ -97,16 +101,15 @@ class HiringPartnerController extends Controller
             $users_count = $users_to_array['total'];
         }
 
-        $show_options_without_all = array_splice($show_options, 0, count($show_options) - 1);
-        $show_options_without_all_count = count($show_options_without_all);
+        $show_options_without_all_count = count(self::AVAILABLE_OPTIONS_WITHOUT_ALL);
         
-        $users_per_page_options = [$show_options_without_all[0]];
+        $users_per_page_options = [self::AVAILABLE_OPTIONS_WITHOUT_ALL[0]];
 
         $counter = 0;
         while ($counter < $show_options_without_all_count - 1) {
-            $option = $show_options_without_all[$counter];
+            $option = self::AVAILABLE_OPTIONS_WITHOUT_ALL[$counter];
             if ($users_count > $option) {
-                $users_per_page_options[] = $show_options_without_all[$counter + 1];
+                $users_per_page_options[] = self::AVAILABLE_OPTIONS_WITHOUT_ALL[$counter + 1];
             }
             $counter++;
         }
@@ -154,6 +157,16 @@ class HiringPartnerController extends Controller
         event(new Registered($user));
 
         $message = 'New Hiring-Partner (' . $user->email .') account has been created!';
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
+    }
+
+    // Deletes a particular hiring-partner (user) from the database.
+    public function destroy($id) {
+        $user = User::where('user_role_id', self::HIRING_PARTNER_ROLE_ID)
+            ->where('id', $id)
+            ->firstOrFail();
+        $user->delete();
+        $message = 'Hiring-Partner (' . $user->name . ') has been deleted from the database!';
         return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 }

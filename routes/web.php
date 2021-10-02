@@ -193,21 +193,6 @@ Route::middleware(['isSuspended'])->group(function () {
     | ['auth', 'isAdmin'] middleware (user must be logged in to access it).
     |
     | Controllers can be found inside -> App\Http\Controllers\Admin\
-    | Controllers Used:
-    |   - DashboardController
-    |   - HomepageController
-    |   - AnalyticsController
-    |   - UserController
-    |   - InvoiceController
-    |   - OnlineCourseController
-    |   - OnlineCourseUpdateController // Update is separated because its very complex.
-    |   - WokiCourseController
-    |   - SectionController
-    |   - SectionContentController
-    |   - CourseCategoryController
-    |   - KrestController
-    |   - KrestProgramController
-    |   - HashtagController
     */
     Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(function() {
         // DashboardController
@@ -388,6 +373,8 @@ Route::middleware(['isSuspended'])->group(function () {
         // HiringPartnerController
         Route::get('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'index'])->name('job-portal.hiring-partners.index');
         Route::get('/job-portal/hiring-partners/create', [AdminHiringPartnerController::class, 'create'])->name('job-portal.hiring-partners.create');
+        Route::post('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'store'])->name('job-portal.hiring-partners.store');
+        Route::delete('/job-portal/hiring-partners/{id}', [AdminHiringPartnerController::class, 'destroy'])->name('job-portal.hiring-partners.destroy')->middleware(['isSuper']);
         // CandidateController
         Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidate.index');
         Route::get('/job-portal/1', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.hiring-partners.candidate_profile');

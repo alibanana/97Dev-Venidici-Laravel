@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
+
 use App\Helper\XfersHelper;
 use App\Helper\Helper;
+use App\Helper\UserHelper;
 
 use App\Mail\InvoiceMail;
 use App\Models\Invoice;
@@ -166,7 +168,7 @@ class InvoiceController extends Controller
 
                 $sentence = "";
                 Mail::to($user->email)->send(new InvoiceMail($invoice,$sentence));
-                $admins = User::where('user_role_id','!=',1)->get();
+                $admins = UserHelper::findAllAdmins();
                 foreach($admins as $admin){
                     $sentence = $user->name . ' telah membayar dengan ';
                     //Fernandha Dzaky telah membayar Skill Snack dengan

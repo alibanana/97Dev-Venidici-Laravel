@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\CourseCategory;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Jenssegers\Agent\Agent;
-use App\Models\Review;
-use App\Helper\Helper;
-use App\Models\Course;
-use App\Helper\CourseHelper;
 use Carbon\Carbon;
+
+use App\Helper\Helper;
+use App\Helper\CourseHelper;
+use App\Helper\UserHelper;
+
+use App\Models\Review;
+use App\Models\Course;
 use App\Models\Invoice;
 use App\Models\SyllabusRequest;
 use App\Models\Order;
@@ -21,11 +26,8 @@ use App\Models\Notification;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Promotion;
 use App\Mail\BootcampFullRegistrationMail;
-
-use Illuminate\Support\Facades\Mail;
 use App\Mail\BootcampSyllabusMail;
 
 class BootcampController extends Controller
@@ -375,7 +377,7 @@ class BootcampController extends Controller
         $user_name = $bootcamp->user->name;
         $sentence ="";
         Mail::to(auth()->user()->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));
-        $admins = User::where('user_role_id','!=',1)->get();
+        $admins = UserHelper::findAllAdmins();
         foreach($admins as $admin){
             $sentence = "Hi Admin!";
             Mail::to($admin->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));

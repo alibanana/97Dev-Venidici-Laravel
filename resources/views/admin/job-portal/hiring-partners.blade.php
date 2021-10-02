@@ -122,12 +122,17 @@
                                                             <input type="hidden" value="Contacted" name="status">
                                                             <a href="/admin/job-portal/hiring-partners/1/candidates" class="d-sm-inline-block btn btn-info shadow-sm" >View Contacted Candidates</a>
                                                         </div>
-                                                        <form action="" method="post">
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" value="Rejected" name="status">
-                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
-                                                            </div>
-                                                        </form>
+                                                        {{-- checks if current user is super-admin --}}
+                                                        @if (Auth::user()->user_role_id == 3) 
+                                                            <form action="{{ route('admin.job-portal.hiring-partners.destroy', $user->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div style="padding: 0px 2px">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit"
+                                                                        onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                                                                </div>
+                                                            </form>
+                                                        @endif
                                                     </div>
                                                 </td>											
                                             </tr>
