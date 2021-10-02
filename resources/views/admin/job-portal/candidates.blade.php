@@ -96,48 +96,51 @@
 										</tr>
 									</thead>
 									<tbody>
-											<tr>
-												<td>1</td>												
-												<td>Fernandha Dzaky</td>												
-												<td>test@gmail.com</td>												
-												<td>08111377893</td>												
-												<td>
-                                                <span style="color:grey">
-                                                    Not yet update profile
-                                                </span>  <br>
-                                                <span style="color:orange">
-                                                    Waiting for approval
-                                                </span>  <br>
-                                                <span style="color:green">
-                                                    Accepted
-                                                </span>  <br>
-                                                <span style="color:red">
-                                                    Rejected
-                                                </span>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>												
+                                                <td>{{ $user->name }}</td>												
+                                                <td>{{ $user->email }}</td>												
+                                                <td>{{ $user->userDetail->telephone }}</td>												
+                                                <td>
+                                                    @if ($userIdAndCandidateStatusMap[$user->id] == 'not_updated')
+                                                        <span style="color:grey">
+                                                            Not Yet Updated
+                                                        </span>
+                                                    @elseif ($userIdAndCandidateStatusMap[$user->id] == 'pending')
+                                                        <span style="color:orange">
+                                                            Waiting For Approval
+                                                        </span>
+                                                    @else
+                                                        <span style="color:green">
+                                                            Accepted
+                                                        </span>
+                                                    @endif
                                                 </td>												
-												<td>
+                                                <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
+                                                        <div style="padding: 0px 2px">
+                                                            <a href="/admin/job-portal/request/1" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm">View Updates</a>
+                                                        </div>
+                                                        <div style="padding: 0px 2px">
+                                                            <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm">View Detail</a>
+                                                        </div>
+                                                        <form action="" method="post">
                                                             <div style="padding: 0px 2px">
-                                                                <a href="/admin/job-portal/request/1" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm" >View Updates</a>
+                                                                <input type="hidden" value="Approved" name="status">
+                                                                <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to approve this user?')">Approve</button>
                                                             </div>
+                                                        </form>
+                                                        <form action="" method="post">
                                                             <div style="padding: 0px 2px">
-                                                                <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm" >View Detail</a>
+                                                                <input type="hidden" value="Rejected" name="status">
+                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Reject</button>
                                                             </div>
-                                                            <form action="" method="post">
-                                                                <div style="padding: 0px 2px">
-                                                                    <input type="hidden" value="Approved" name="status">
-                                                                    <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to approve this user?')">Approve</button>
-                                                                </div>
-                                                            </form> 
-                                                            <form action="" method="post">
-                                                                <div style="padding: 0px 2px">
-                                                                    <input type="hidden" value="Rejected" name="status">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Reject</button>
-                                                                </div>
-                                                            </form> 
+                                                        </form>
                                                     </div>
-                                                </td>											
-											</tr>
+                                                </td>
+                                            </tr>
+                                        @endforeach
 									</tbody>
 								</table>
 							</div>

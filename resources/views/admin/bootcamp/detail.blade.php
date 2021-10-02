@@ -232,55 +232,55 @@
 
                                                     <td>
                                                         <!-- KALAU DAFTAR FREE TRIAL -->
-                                                        @if(($user->is_trial && !$user->is_full_registration && $user->status == 'ft_paid') || $user->status == 'approved')
-                                                        <a href="/admin/invoices/{{$user->invoice_id}}"  class="text-nowrap">View Invoice</a>
+                                                        @if ($user->is_trial && !$user->is_full_registration && ($user->status == 'ft_paid' || $user->status == 'approved'))
+                                                            <a href="/admin/invoices/{{$user->invoice_id}}"  class="text-nowrap">View Invoice</a>
 
+                                                            <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post"  style="margin-top: 1vw;">
+                                                                @csrf
+                                                                @method('put')         
+                                                                <div style="padding: 0px 2px">
+                                                                    <button name="action" value="Refund" class="d-sm-inline-block btn btn-warning shadow-sm"
+                                                                        type="submit" onclick="return confirm('Are you sure you want to refund this user?')">Refund</button>
+                                                                </div>
+                                                            </form>
 
-                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post"  style="margin-top: 1vw;">
-                                                            @csrf
-                                                            @method('put')         
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" name="" value"">
-                                                                <button name="action" value="Refund" class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to refund this user?')">Refund</button>
-                                                            </div>
-                                                        </form>
                                                         <!-- KALAU DAFTAR FULL -->
-
                                                         @elseif(!$user->is_trial && $user->is_full_registration && $user->status == 'waiting')
-                                                        
-                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post" style="margin-top: 1vw;">
-                                                            @csrf
-                                                            @method('put')         
-                                                            <div style="padding: 0px 2px">
-                                                                <button name="action" value="Approved" class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to accept this user?')">Accept</button>
-                                                            </div>
-                                                        </form>
-                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post" style="margin-top: 1vw;">
-                                                            @csrf
-                                                            @method('put')         
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" name="" value"">
-                                                                <button name="action" value="Reject" class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reject this user?')">Reject</button>
-                                                            </div>
-                                                        </form>
+                                                            <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post" style="margin-top: 1vw;">
+                                                                @csrf
+                                                                @method('put')         
+                                                                <div style="padding: 0px 2px">
+                                                                    <button name="action" value="Approved" class="d-sm-inline-block btn btn-success shadow-sm"
+                                                                        type="submit" onclick="return confirm('Are you sure you want to accept this user?')">Accept</button>
+                                                                </div>
+                                                            </form>
+                                                            <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post" style="margin-top: 1vw;">
+                                                                @csrf
+                                                                @method('put')         
+                                                                <div style="padding: 0px 2px">
+                                                                    <button name="action" value="Reject" class="d-sm-inline-block btn btn-danger shadow-sm"
+                                                                        type="submit" onclick="return confirm('Are you sure you want to reject this user?')">Reject</button>
+                                                                </div>
+                                                            </form>
 
+                                                        <!-- KALAU USER REQUEST UPGRADE FT -> FULL -->
                                                         @elseif(($user->is_trial && $user->is_full_registration && $user->status == 'waiting'))
-                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post"  style="margin-top: 1vw;">
-                                                            @csrf
-                                                            @method('put')         
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" name="" value"">
-                                                                <button name="action" value="Upgrade" class="d-sm-inline-block btn btn-success shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to upgrade this user from trial to full registration?')">Accept Upgrade</button>
-                                                            </div>
-                                                        </form>
-                                                        <form action="{{route('admin.bootcamp.change-application-status',$user->id)}}" method="post"  style="margin-top: 1vw;">
-                                                            @csrf
-                                                            @method('put')         
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" name="" value"">
-                                                                <button name="action" value="Reject" class="d-sm-inline-block btn btn-danger shadow-sm text-nowrap" type="submit" onclick="return confirm('Are you sure you want to reject this user from trial to full registration?')">Reject Upgrade</button>
-                                                            </div>
-                                                        </form>
+                                                            <form action="{{route('admin.bootcamp.change-application-status', $user->id)}}" method="post"  style="margin-top: 1vw;">
+                                                                @csrf
+                                                                @method('put')         
+                                                                <div style="padding: 0px 2px">
+                                                                    <button name="action" value="Upgrade" class="d-sm-inline-block btn btn-success shadow-sm text-nowrap"
+                                                                        type="submit" onclick="return confirm('Are you sure you want to upgrade this user from trial to full registration?')">Accept Upgrade</button>
+                                                                </div>
+                                                            </form>
+                                                            <form action="{{route('admin.bootcamp.change-application-status', $user->id)}}" method="post"  style="margin-top: 1vw;">
+                                                                @csrf
+                                                                @method('put')         
+                                                                <div style="padding: 0px 2px">
+                                                                    <button name="action" value="Reject" class="d-sm-inline-block btn btn-danger shadow-sm text-nowrap"
+                                                                        type="submit" onclick="return confirm('Are you sure you want to reject this user from trial to full registration?')">Reject Upgrade</button>
+                                                                </div>
+                                                            </form>
                                                         @endif
 
                                                     </td>

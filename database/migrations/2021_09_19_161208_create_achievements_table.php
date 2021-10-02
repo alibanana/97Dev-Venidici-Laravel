@@ -17,9 +17,9 @@ class CreateAchievementsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('candidate_detail_id');
             $table->foreign('candidate_detail_id')->references('id')->on('candidate_details')->onDelete('cascade');
-            $table->string('title');
-            $table->string('location_of_event');
-            $table->year('year');
+            $table->string('title')->nullable();
+            $table->string('location_of_event')->nullable();
+            $table->year('year')->nullable();
             $table->timestamps();
         });
     }

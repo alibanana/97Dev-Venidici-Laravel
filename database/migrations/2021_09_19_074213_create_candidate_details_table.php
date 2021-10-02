@@ -17,10 +17,10 @@ class CreateCandidateDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('preferred_working_location');
-            $table->string('linkedin_link');
-            $table->string('whatsapp_number', 16);
-            $table->text('about_me_description');
+            $table->string('preferred_working_location')->nullable();
+            $table->string('linkedin_link')->nullable();
+            $table->string('whatsapp_number', 16)->nullable();
+            $table->text('about_me_description')->nullable();
             $table->timestamps();
         });
     }

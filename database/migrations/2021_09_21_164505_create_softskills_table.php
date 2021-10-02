@@ -17,8 +17,8 @@ class CreateSoftskillsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('candidate_detail_id');
             $table->foreign('candidate_detail_id')->references('id')->on('candidate_details')->onDelete('cascade');
-            $table->string('title');
-            $table->unsignedInteger('score');
+            $table->string('title')->nullable();
+            $table->unsignedInteger('score')->nullable();
             $table->timestamps();
         });
     }

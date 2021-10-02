@@ -26,6 +26,12 @@ use Illuminate\Support\Facades\Mail;
 class BootcampController extends Controller
 {
     private const INDEX_ROUTE = 'admin.bootcamp.index';
+    private const SHOW_ROUTE = 'admin.bootcamp.show';
+    private const ONLINE_COURSE_SHOW_ROUTE = 'admin.online-course.show';
+    private const WOKI_SHOW_ROUTE = 'admin.woki.show';
+
+    private const BOOTCAMP_APPLICATION_STATUS_LIST =
+        ['ft_pending', 'ft_paid', 'ft_refunded', 'ft_cancelled', 'waiting', 'approved', 'denied'];
 
     // Shows the Bootcamp List admin page.
     public function index(Request $request)
@@ -199,9 +205,9 @@ class BootcampController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->courseType->type == 'Woki') {
-            return redirect()->route('admin.woki.show', $course->title);
+            return redirect()->route(self::WOKI_SHOW_ROUTE, $course->title);
         } elseif ($course->courseType->type == 'Course') {
-            return redirect()->route('admin.online-course.show', $course->title);
+            return redirect()->route(self::ONLINE_COURSE_SHOW_ROUTE, $course->title);
         }
 
         $users = BootcampApplication::where('course_id',$id);
@@ -215,27 +221,10 @@ class BootcampController extends Controller
         } else {
             $users = $users->orderBy('created_at', 'desc');
         }
+
         if ($request->has('filter')) {
-            if ($request['filter'] == "ft_pending") {
-                $users = $users->where('status', 'ft_pending');
-            }
-            elseif($request['filter'] == "ft_paid") {
-                $users = $users->where('status', 'ft_paid');
-            }
-            elseif($request['filter'] == "ft_refunded") {
-                $users = $users->where('status', 'ft_refunded');
-            }
-            elseif($request['filter'] == "ft_cancelled") {
-                $users = $users->where('status', 'ft_cancelled');
-            }
-            elseif($request['filter'] == "waiting") {
-                $users = $users->where('status', 'waiting');
-            }
-            elseif($request['filter'] == "approved") {
-                $users = $users->where('status', 'approved');
-            }
-            elseif($request['filter'] == "denied") {
-                $users = $users->where('status', 'denied');
+            if (in_array($request['filter'], self::BOOTCAMP_APPLICATION_STATUS_LIST)) {
+                $users = $users->where('status', $request['filter']);
             } else {
                 $users = $users->orderBy('created_at');
             }
@@ -245,7 +234,7 @@ class BootcampController extends Controller
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route('admin.bootcamp.show', $id, request()->except('search'));
+                $url = route(self::SHOW_ROUTE, $id, request()->except('search'));
                 return redirect($url);
             } else {
                 $search = $request->search;
@@ -317,40 +306,42 @@ class BootcampController extends Controller
 
     public function changeApplicationStatus(Request $request, $id){
         $application = BootcampApplication::findOrFail($id);
-        if($request->action == 'Approved' || $request->action == 'Upgrade')
-        {
+        $user = $application->user;
+
+        if ($request->action == 'Approved' || $request->action == 'Upgrade') {
             $application->status = 'approved';
             $title = 'Selamat, pendaftaran Bootcamp kamu telah diterima!';
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah diterima. Click disini untuk melihat status';
-            $user = User::findOrFail($application->user_id);
+            $user->isCandidate = true;
             if (!$user->courses->contains($application->course->id)) {
                 $user->courses()->syncWithoutDetaching([$application->course->id]);
                 if ($application->course->assessment()->exists()) {
                     $user->assessments()->syncWithoutDetaching([$application->course->assessment->id]);
                 }
             }
-            
-        }
-        elseif($request->action == 'Reject'){
+        } elseif ($request->action == 'Reject') {
             //kalau daftar full regis
-            if($application->is_full_registration && $application->is_trial == null){
+            if ($application->is_full_registration && $application->is_trial == null) {
                 $application->status = 'denied';
+                $user->isCandidate = false;
             //kalau upgrade
-            }else{
+            } else {
                 $application->status = 'ft_paid';
                 $application->is_full_registration = null;
+                $user->isCandidate = false;
             }
             $title = 'Ouch.. pendaftaran Bootcamp kamu telah ditolak!';    
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah ditolak.';    
-        }
-        elseif($request->action == 'Refund'){
+        } elseif ($request->action == 'Refund') {
             $application->status = 'ft_refunded';
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu telah berhasil di refund.';    
-
-            $title = 'Pendaftaran Bootcamp kamu telah di refund!';    
+            $title = 'Pendaftaran Bootcamp kamu telah di refund!';
+            $user->isCandidate = false;
         }
         
         $application->save();
+        $user->save();
+
         $notification_data = [
             'user_id' => $application->user_id,
             'isInformation' => 1,
@@ -364,8 +355,7 @@ class BootcampController extends Controller
 
         $message = 'Application for user (' . $application->name . ') has been changed';
 
-        return redirect()->route('admin.bootcamp.show',$application->course_id)->with('message', $message);
-
+        return redirect()->route(self::SHOW_ROUTE, $application->course_id)->with('message', $message);
     }
 
     public function syllabusRequests($course_id){

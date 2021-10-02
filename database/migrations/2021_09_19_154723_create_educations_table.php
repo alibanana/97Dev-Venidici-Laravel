@@ -17,10 +17,10 @@ class CreateEducationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('candidate_detail_id');
             $table->foreign('candidate_detail_id')->references('id')->on('candidate_details')->onDelete('cascade');
-            $table->string('degree');
-            $table->string('school');
-            $table->string('major');
-            $table->year('start_year');
+            $table->string('degree')->nullable();
+            $table->string('school')->nullable();
+            $table->string('major')->nullable();
+            $table->year('start_year')->nullable();
             $table->year('end_year', 4)->nullable();
             $table->timestamps();
         });

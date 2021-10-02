@@ -58,8 +58,7 @@ class UserController extends Controller
                     $users = $users->where('user_role_id', 3);
                 elseif($request->filter == 'normal-user')
                     $users = $users->where('user_role_id', 1);
-            }
-            else {
+            } else {
                 $userDetails = UserDetail::select(DB::raw('user_id as id'), 'birthdate');
 
                 $users = $users->joinSub($userDetails, 'details', function ($join) {

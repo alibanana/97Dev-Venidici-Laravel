@@ -17,11 +17,11 @@ class CreateWorkExperiencesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('candidate_detail_id');
             $table->foreign('candidate_detail_id')->references('id')->on('candidate_details')->onDelete('cascade');
-            $table->string('company');
-            $table->string('job_position');
-            $table->date('start_date');
+            $table->string('company')->nullable();
+            $table->string('job_position')->nullable();
+            $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }

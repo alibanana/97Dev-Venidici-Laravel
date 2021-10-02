@@ -757,20 +757,20 @@
                     <p class="small-text" style="font-family:Rubik Medium;color:{{$hashtag->color}};background-color:#EEEEEE;border-radius:10px;padding:0.5vw 1.5vw;margin-bottom:0px;@if($loop->iteration != 1) margin-left:1vw @endif">{{$hashtag->hashtag}}</p>
                     @endforeach
                 </div>
-
-
             </div>
         </div>
+    </div>
 
-    </div>
-    <div class="col-12" style="padding:0vw 17vw;margin-top:2vw;margin-bottom:4vw">
-        <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
-            <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
-            <a href="/candidate-details" style=";color:#3B3C43">
-                <i class="fas fa-arrow-right normal-text"></i>
-            </a>
+    @if ($isUserCandidateAndCandidateDetailNotUpdated)
+        <div class="col-12" style="padding:0vw 17vw;margin-top:2vw;margin-bottom:4vw">
+            <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
+                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
+                <a href="/candidate-details" style=";color:#3B3C43">
+                    <i class="fas fa-arrow-right normal-text"></i>
+                </a>
+            </div>
         </div>
-    </div>
+    @endif
 </div>
 <!-- END OF TOP SECTION -->
 
@@ -874,19 +874,20 @@
                     @endforeach
                 </div>
                 -->
-
             </div>
         </div>
+    </div>
 
-    </div>
-    <div class="col-12 p-0" style="margin-top:2vw">
-        <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
-            <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
-            <a href="/candidate-details" style=";color:#3B3C43;padding-left:10vw">
-                <i class="fas fa-arrow-right normal-text"></i>
-            </a>
+    @if ($isUserCandidateAndCandidateDetailNotUpdated)
+        <div class="col-12 p-0" style="margin-top:2vw">
+            <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
+                <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
+                <a href="/candidate-details" style=";color:#3B3C43;padding-left:10vw">
+                    <i class="fas fa-arrow-right normal-text"></i>
+                </a>
+            </div>
         </div>
-    </div>
+    @endif
 </div>
 <!-- END OF MOBILE TOP SECTION -->
 
