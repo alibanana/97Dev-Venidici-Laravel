@@ -13,7 +13,7 @@ class HardskillChange extends Model
 
     protected $fillable = [
         'candidate_detail_change_id',
-        'hardskill_id',
+        'hardskill_id', // nullable
         'title',
         'score',
         'action' // create, update, delete

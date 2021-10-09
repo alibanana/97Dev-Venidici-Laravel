@@ -13,7 +13,7 @@ class SoftskillChange extends Model
 
     protected $fillable = [
         'candidate_detail_change_id',
-        'softskill_id',
+        'softskill_id', // nullable
         'title',
         'score',
         'action' // create, update, delete

@@ -13,7 +13,7 @@ class AchievementChange extends Model
 
     protected $fillable = [
         'candidate_detail_change_id',
-        'achievement_id',
+        'achievement_id', // nullable
         'title',
         'location_of_event',
         'year',

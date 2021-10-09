@@ -13,7 +13,7 @@ class EducationChange extends Model
 
     protected $fillable = [
         'candidate_detail_change_id',
-        'education_id',
+        'education_id', // nullable
         'degree',
         'school',
         'major',

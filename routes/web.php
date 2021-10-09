@@ -173,7 +173,11 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::prefix('candidate-details')->name('candidate-detail.')->middleware(['auth', 'isCandidate'])->group(function() {
         Route::get('/', [CandidateDetailController::class, 'index'])->name('index');
         Route::post('/basic-info', [CandidateDetailController::class, 'upsertCandidateDetail'])->name('upsert-candidate-detail');
-        Route::post('/work-experience', [CandidateDetailController::class, 'storeWorkExperience'])->name('store-work-experience');
+        Route::post('/work-experiences', [CandidateDetailController::class, 'storeWorkExperience'])->name('store-work-experience');
+        Route::post('/educations', [CandidateDetailController::class, 'storeEducation'])->name('store-education');
+        Route::post('/achievements', [CandidateDetailController::class, 'storeAchievement'])->name('store-achievement');
+        Route::post('/hardskills', [CandidateDetailController::class, 'storeHardskill'])->name('store-hardskill');
+        Route::post('/softskills', [CandidateDetailController::class, 'storeSoftskill'])->name('store-softskill');
     });
     /* END OF CANDIDATE DETAILS ROUTING */
 
