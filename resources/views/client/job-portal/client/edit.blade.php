@@ -3,6 +3,11 @@
 
 @section('content')
 
+<!-- start of candidate detail form -->
+
+<form action="{{route('customer.upsert__basic_info_job_portal')}}" method="POST">
+@csrf
+@method('put')
 <!-- Modal VA -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -12,7 +17,7 @@
             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Admin approval will be processed within 1 x 24 hours</p>
             <button type="submit" class="normal-text btn-blue-bordered btn-blue-bordered-active full-width-button" style="font-family: Avenir Medium;cursor:pointer;padding:0.5vw 2vw">Confirm</button>                
             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-top:1vw">OR</p>
-            <p type="button" class="normal-text" style="font-family:Rubik Medium;color:grey;margin-top:1vw" data-dismiss="modal" >Cancel</p>
+            <p class="normal-text" style="font-family:Rubik Medium;color:grey;margin-top:1vw;cursor:pointer" data-dismiss="modal" >Cancel</p>
         </div>
         </div>
     </div>
@@ -22,6 +27,16 @@
 <!-- START OF BASIC INFO SECTION -->
 <div class="row m-0 page-container-inner" style="padding-top:14vw !important;">
     <div class="col-12 p-0">
+        @if(session('candidate_update_message'))
+            <!-- ALERT MESSAGE -->
+            <div style="text-align:center;margin-top:1vw">
+                <div class="alert alert-success alert-dismissible fade show small-text alert-message-success"  style="text-align:center;margin-bottom:1vw;"role="alert">
+                {{ session('candidate_update_message') }}
+                    <button type="button" class="btn-close close-btn-edit-popup-mobile" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <!-- END OF ALERT MESSAGE -->
+        @endif
         <p class="medium-heading" style="font-family:Rubik Bold;color:#2B6CAA">Basic Info</p>
     </div>
     <!-- START OF LEFT SECTION -->
@@ -118,9 +133,9 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
-            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
+            <input value="{{old('linkedin_link')}}" type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
         </div>   
-        @error('social_media')
+        @error('linkedin_link')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
             <strong>{{ $message }}</strong>
             </span>
@@ -148,11 +163,11 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Prefered Working Location (Province)</p>
         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-map"></i>
-            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra" 
+            <input value="{{old('preferred_working_location')}}"  name="preferred_working_location" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra" 
             value=""
             >
         </div>  
-        @error('name')
+        @error('preferred_working_location')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
             <strong>{{ $message }}</strong>
             </span>
@@ -160,15 +175,15 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Whatsapp</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-            <input name="phone_no" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
+            <input name="whatsapp_number" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
             @if(Auth::check())
-                value="{{old('phone_no', Auth::user()->userDetail->telephone)}}"
+                value="{{old('whatsapp_number', Auth::user()->userDetail->telephone)}}"
             @else
-                value="{{old('phone_no')}}"
+                value="{{old('whatsapp_number')}}"
             @endif
             >
         </div>  
-        @error('phone_no')
+        @error('whatsapp_number')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
             <strong>{{ $message }}</strong>
             </span>
@@ -179,21 +194,24 @@
 <!-- END OF BASIC INFO SECTION -->
 
 <!-- START OF RESUME -->
-<div class="row m-0 page-container-inner" style="">
+<div class="row m-0 page-container-inner" style="padding-top:4vw">
     <div class="col-12 p-0">
         <p class="medium-heading" style="font-family:Rubik Bold;color:#2B6CAA">Resume</p>
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">About me</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-            <textarea name="about_me" rows="6" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="This is an example." ></textarea>
-            @error('phone_no')
-                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+            <textarea name="about_me_description" value="{{old('about_me_description')}}" rows="6" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="This is an example." >{{old('about_me_description')}}</textarea>
         </div>  
+        @error('about_me_description')
+            <span class="invalid-feedback" role="alert" style="display: block !important;">
+            <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
 </div>
 <!-- END OF RESUME -->
+
+</form>
+<!-- end of candidate detail form -->
 
 
 <!-- START OF POP UP WORK EXPERIENCE CREATE -->
@@ -203,8 +221,9 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route('customer.add__work_experience_job_portal')}}" method="POST">
             @csrf
+            @method('put')
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Work Experience</p>
@@ -222,9 +241,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Company</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="PT. John Doe" >
+                            <input name="company" value="{{ old('company') }}" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="PT. John Doe" >
                         </div>  
-                        @error('name')
+                        @error('company')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -234,15 +253,25 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Start Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="start_date"  value="{{ old('start_date') }}"  class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
                                 </div> 
+                                @error('start_date')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-lg-6 col-xs-12 ps-0">
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">End Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="end_date"  value="{{ old('end_date') }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
                                 </div> 
+                                @error('end_date')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div> 
@@ -251,18 +280,18 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Job Position</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Sales Manager" >
+                            <input name="job_position" value="{{ old('job_position') }}"  type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Sales Manager" >
                         </div>  
-                        @error('name')
+                        @error('job_position')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Location</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="DKI Jakarta" >
+                            <input name="location" value="{{ old('location') }}"  type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="DKI Jakarta" >
                         </div>  
-                        @error('name')
+                        @error('location')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -271,7 +300,6 @@
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
-
                     </div>
                 </div>
             </form>
@@ -368,7 +396,7 @@
 
 
 <!-- START OF Work Experience -->
-<div class="row m-0 page-container-inner" style="padding-bottom:10vw">
+<div class="row m-0 page-container-inner" style="padding-bottom:5vw;padding-top:4vw">
     <div class="col-12 p-0" style="display:flex;justify-content:space-between;align-items:center">
         <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Work Experience</p>
         <a href="#we-create"  style="color:#2B6CAA">
@@ -583,7 +611,7 @@
 <!-- END OF POP UP EDUCATION UPDATE -->
 
 <!-- START OF Education -->
-<div class="row m-0 page-container-inner" style="padding-bottom:10vw">
+<div class="row m-0 page-container-inner" style="padding-bottom:5vw">
     <div class="col-12 p-0" style="display:flex;justify-content:space-between;align-items:center">
         <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Education</p>
         <a href="#edu-create"  style="color:#2B6CAA">
@@ -764,7 +792,7 @@
 
 
 <!-- START OF Achievements -->
-<div class="row m-0 page-container-inner" style="padding-bottom:10vw">
+<div class="row m-0 page-container-inner" style="padding-bottom:5vw">
     <div class="col-12 p-0" style="display:flex;justify-content:space-between;align-items:center">
         <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Achievements</p>
         <a href="#achievement-create"  style="color:#2B6CAA">
@@ -929,7 +957,7 @@
 <!-- END OF POP UP Hard Skills Update-->
 
 <!-- START OF Hard Skills -->
-<div class="row m-0 page-container-inner" style="padding-bottom:10vw">
+<div class="row m-0 page-container-inner" style="padding-bottom:5vw">
     <div class="col-12 p-0" style="display:flex;justify-content:space-between;align-items:center">
         <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Hard Skills</p>
         <a href="#hs-create"  style="color:#2B6CAA">
@@ -1096,7 +1124,7 @@
 
 
 <!-- START OF Soft Skills -->
-<div class="row m-0 page-container-inner" style="padding-bottom:10vw">
+<div class="row m-0 page-container-inner" style="padding-bottom:5vw">
     <div class="col-12 p-0" style="display:flex;justify-content:space-between;align-items:center">
         <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Soft Skills</p>
         <a href="#ss-create"  style="color:#2B6CAA">
@@ -1176,7 +1204,7 @@
 </div>
 <!-- END OF Interests -->
 
-<div class="row m-0 page-container-inner" style="padding-bottom:10vw;padding-top:0px !important">
+<div class="row m-0 page-container-inner" style="padding-bottom:5vw;padding-top:4vw">
     <div class="col-12 p-0" style="display:flex;justify-content:flex-end;align-items:center">
         <button  data-toggle="modal" data-target="#confirmModal" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update Profile</button>                
 

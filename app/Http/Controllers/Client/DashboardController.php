@@ -34,6 +34,7 @@ use App\Models\Course;
 use App\Mail\PasswordChangedMail;
 use App\Models\BootcampApplication;
 
+
 class DashboardController extends Controller
 {
 
@@ -551,4 +552,6 @@ class DashboardController extends Controller
         
         return view('client/job-portal/company/detail',compact('footer_reviews','agent'));
     }
+
+    
 }

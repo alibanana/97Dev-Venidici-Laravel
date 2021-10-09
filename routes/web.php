@@ -181,7 +181,12 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/', [JobPortalController::class, 'index'])->middleware(['verified'])->name('index');
         Route::get('/profile', [JobPortalController::class, 'profileIndex'])->name('profile.index');
     });
+
     Route::get('/candidate-details', [DashboardController::class, 'edit_job_portal'])->name('customer.edit_job_portal')->middleware(['auth']);
+    Route::put('/candidate-details/basic-info', [JobPortalController::class, 'upsert__basic_info_job_portal'])->name('customer.upsert__basic_info_job_portal')->middleware(['auth']);
+    Route::put('/candidate-details/work-experience', [JobPortalController::class, 'add__work_experience_job_portal'])->name('customer.add__work_experience_job_portal')->middleware(['auth']);
+    
+    
     Route::get('/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
 
     /*
