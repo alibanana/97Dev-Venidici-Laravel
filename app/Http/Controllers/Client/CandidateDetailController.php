@@ -277,7 +277,7 @@ class CandidateDetailController extends Controller
     }
 
     // Store new Achievement in the database.
-    public function storeHardskill(Request $request) {
+    public function storeSoftskill(Request $request) {
         $validationRules = [
             'title' => 'required',
             'score' => 'required|integer|digits:1|min:1|max:10'
