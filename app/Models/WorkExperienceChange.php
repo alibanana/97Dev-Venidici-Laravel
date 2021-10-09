@@ -13,7 +13,7 @@ class WorkExperienceChange extends Model
 
     protected $fillable = [
         'candidate_detail_change_id',
-        'work_experience_id',
+        'work_experience_id', // nullable
         'company',
         'job_position',
         'start_date',

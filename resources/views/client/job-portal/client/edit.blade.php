@@ -5,9 +5,8 @@
 
 <!-- start of candidate detail form -->
 
-<form action="{{route('customer.upsert__basic_info_job_portal')}}" method="POST">
+<form action="{{route('candidate-detail.upsert-candidate-detail')}}" method="POST">
 @csrf
-@method('put')
 <!-- Modal VA -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -44,13 +43,8 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-user"></i>
-            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan nama" 
-            @if(Auth::check())
-                value="{{ old('name', Auth::user()->name) }}"
-            @else
-                value="{{ old('name') }}"
-            @endif
-            >
+            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%"
+                placeholder="Masukkan nama" value="{{ old('name', Auth::user()->name) }}">
         </div>  
         @error('name')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -58,7 +52,6 @@
             </span>
         @enderror
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Date of Birth</p>
-        @if(Auth::check())
         <?php
             if (Auth::user()->userDetail->birthdate != null) {
                 $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
@@ -66,58 +59,12 @@
                 $time = $birthdate[1];
             }
         ?>
-        @endif
-        @if($agent->browser() == "Safari" && Auth::check())
-            @php
-                if (Auth::user()->userDetail->birthdate != null) {
-                    $birthdate_safari = explode('-',$date);
-                    $year_safari = $birthdate_safari[0];
-                    $month_safari = $birthdate_safari[1];
-                    $date_safari = $birthdate_safari[2];
-                }
-
-            @endphp
-            <div style="display: flex;align-items:center;justify-content:space-between">
-                <div class="auth-input-form" style="width: 30%;">
-                    <input type="text" name="date_safari" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
-                        placeholder="Tanggal"  @if(Auth::user()->userDetail->birthdate != null)  value="{{$date_safari}}" @endif>
-                </div>  
-                <div class="auth-input-form" style="width: 30%;">
-                    <select name="month" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
-                        @php
-                            $months = array("January"=>"01","February"=>"02","March"=>"03",
-                            "April"=>"04","May"=>"05","June"=>"06","July"=>"07","August"=>"08",
-                            "September"=>"09","October"=>"10","November"=>"11","December"=>"12");
-                        @endphp
-                        @foreach($months as $key => $value) {
-                            <option  
-                            @if(Auth::user()->userDetail->birthdate != null)
-                                @if($month_safari == $value) selected @endif 
-                            @endif
-                            value="{{$value}}" 
-                            >{{$key}}</option>                                    
-                        @endforeach
-                    </select>
-                </div>  
-                <div class="auth-input-form" style="width: 30%;">
-                    <input type="text" name="year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                        placeholder="Tahun" @if(Auth::user()->userDetail->birthdate != null) value="{{$year_safari}}" @endif>
-                </div>
-
-            </div>
-
-        @else 
-            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-                <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd"
-                @if(Auth::check())
-                    value="{{old('birth_date' ?? $date  ?? null )}}"
-                @else
-                    value="{{old('birth_date')}}"
-                @endif
-                >
-            </div> 
-        @endif 
+        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+            <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+            <input type="date" class="normal-text"
+                style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;"
+                placeholder="yyyy.mm.dd" value="{{ $date }}" disabled>
+        </div>
 
         @if(session('date_message'))
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -133,7 +80,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
-            <input value="{{old('linkedin_link')}}" type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
+            <input value="{{ old('linkedin_link') }}" type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
         </div>   
         @error('linkedin_link')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -175,13 +122,9 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Whatsapp</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-            <input name="whatsapp_number" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
-            @if(Auth::check())
-                value="{{old('whatsapp_number', Auth::user()->userDetail->telephone)}}"
-            @else
-                value="{{old('whatsapp_number')}}"
-            @endif
-            >
+            <input name="whatsapp_number" type="text" class="normal-text" placeholder="Masukkan Nomor Telepon"
+                style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%"
+                value="{{ old('whatsapp_number', Auth::user()->userDetail->telephone) }}">
         </div>  
         @error('whatsapp_number')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -220,10 +163,8 @@
         <a class="close" href="#closed" >&times;</a>
     
         <div class="content" style="padding:2vw">
-            
-            <form action="{{route('customer.add__work_experience_job_portal')}}" method="POST">
+            <form action="{{ route('candidate-detail.store-work-experience') }}" method="POST">
             @csrf
-            @method('put')
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Work Experience</p>
@@ -384,7 +325,6 @@
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
-
                     </div>
                 </div>
             </form>
@@ -407,7 +347,7 @@
         <!-- START OF ONE CARD -->
         <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
             <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">Product Manager Intern</p>
+                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">Product Manager Intern (EXAMPLE)</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">PT. Global Digital Niaga (Blibli.com)</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2021 - Until now</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
@@ -419,21 +359,21 @@
             </div>
         </div>
         <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">Product Manager Intern</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">PT. Global Digital Niaga (Blibli.com)</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2021 - Until now</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
+        @foreach ($candidate_detail->workExperiences as $workExperience)
+            <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                <div>
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                    <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                </div>
+                <div>
+                    <a href="#we-update" style="color:#2B6CAA">
+                        <i class="fas fa-edit bigger-text"></i>
+                    </a>
+                </div>
             </div>
-            <div>
-                <a href="#we-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-            </div>
-        </div>
-        <!-- END OF ONE CARD -->
+        @endforeach
     </div>
 </div>
 <!-- END OF Work Experience -->
@@ -1206,8 +1146,7 @@
 
 <div class="row m-0 page-container-inner" style="padding-bottom:5vw;padding-top:4vw">
     <div class="col-12 p-0" style="display:flex;justify-content:flex-end;align-items:center">
-        <button  data-toggle="modal" data-target="#confirmModal" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update Profile</button>                
-
+        <button  data-toggle="modal" data-target="#confirmModal" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update Profile</button>
     </div>
 </div>
 

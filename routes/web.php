@@ -14,6 +14,7 @@ use App\Http\Controllers\Client\ReviewController;
 use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\Client\BootcampController;
 use App\Http\Controllers\Client\ContactUsController;
+use App\Http\Controllers\Client\CandidateDetailController;
 use App\Http\Controllers\Client\JobPortalController;
 use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -167,6 +168,15 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
     Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
     /* END OF FOR CORPORATE ROUTING*/
+
+    /* START OF CANDIDATE DETAILS ROUTING */
+    Route::prefix('candidate-details')->name('candidate-detail.')->middleware(['auth', 'isCandidate'])->group(function() {
+        Route::get('/', [CandidateDetailController::class, 'index'])->name('index');
+        Route::post('/basic-info', [CandidateDetailController::class, 'upsertCandidateDetail'])->name('upsert-candidate-detail');
+        Route::post('/work-experience', [CandidateDetailController::class, 'storeWorkExperience'])->name('store-work-experience');
+    });
+    /* END OF CANDIDATE DETAILS ROUTING */
+
     /* END OF CLIENT ROUTING */
 
     /*
@@ -182,11 +192,6 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/profile', [JobPortalController::class, 'profileIndex'])->name('profile.index');
     });
 
-    Route::get('/candidate-details', [DashboardController::class, 'edit_job_portal'])->name('customer.edit_job_portal')->middleware(['auth']);
-    Route::put('/candidate-details/basic-info', [JobPortalController::class, 'upsert__basic_info_job_portal'])->name('customer.upsert__basic_info_job_portal')->middleware(['auth']);
-    Route::put('/candidate-details/work-experience', [JobPortalController::class, 'add__work_experience_job_portal'])->name('customer.add__work_experience_job_portal')->middleware(['auth']);
-    
-    
     Route::get('/job-portal/1', [DashboardController::class, 'job_portal_candidate_detail'])->name('customer.job_portal_candidate_detail');
 
     /*

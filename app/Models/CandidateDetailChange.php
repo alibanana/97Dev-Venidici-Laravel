@@ -12,7 +12,7 @@ class CandidateDetailChange extends Model
     protected $table = 'candidate_detail_changes';
 
     protected $fillable = [
-        'candidate_id',
+        'candidate_detail_id',
         'preferred_working_location',
         'linkedin_link',
         'whatsapp_number',

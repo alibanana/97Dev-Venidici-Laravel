@@ -515,25 +515,6 @@ class DashboardController extends Controller
     
     }
 
-    public function edit_job_portal(){
-        $agent = new Agent();
-
-        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
-        if(Auth::check()) {
-            $this->resetNavbarData();
-
-            $notifications = $this->notifications;
-            $informations = $this->informations;
-            $transactions = $this->transactions;
-            $cart_count = $this->cart_count;
-
-            return view('client/job-portal/client/edit', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','agent'));
-        }
-        
-        return view('client/job-portal/client/edit',compact('footer_reviews','agent'));
-    }
-
     public function job_portal_candidate_detail(){
         $agent = new Agent();
 

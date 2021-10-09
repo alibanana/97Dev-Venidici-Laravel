@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'isSuper' => \App\Http\Middleware\UserRoleIsSuperAdmin::class,
         'isHiringPartner' => \App\Http\Middleware\UserRoleIsHiringPartner::class,
         'isSuspended' => \App\Http\Middleware\UserStatusIsSuspended::class,
+        'isCandidate' => \App\Http\Middleware\UserIsCandidate::class,
     ];
 }
