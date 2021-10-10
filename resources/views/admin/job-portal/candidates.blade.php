@@ -120,10 +120,10 @@
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                         <div style="padding: 0px 2px">
-                                                            <a href="/admin/job-portal/request/1" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm">View Updates</a>
+                                                            <a href="/admin/job-portal/request/1" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm text-nowrap">View Updates</a>
                                                         </div>
                                                         <div style="padding: 0px 2px">
-                                                            <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm">View Detail</a>
+                                                            <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm text-nowrap">View Detail</a>
                                                         </div>
                                                         <form action="" method="post">
                                                             <div style="padding: 0px 2px">

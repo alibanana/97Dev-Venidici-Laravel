@@ -191,13 +191,13 @@ class CandidateDetailController extends Controller
             'major' => $validated['major'],
             'start_year' => $validated['start_year'],
             'end_year' => array_key_exists('end_year', $validated) ?
-                $validated['end_date'] : null,
+                $validated['end_year'] : null,
             'action' => 'create'
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect(self::INDEX_URL_WITH_CREATE_EDUCATION_MODAL)->with('education_create_message', $message);
     }
 
     // Store new Achievement in the database.
@@ -236,7 +236,7 @@ class CandidateDetailController extends Controller
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect(self::INDEX_URL_WITH_CREATE_ACHIEVEMENT_MODAL)->with('achievement_create_message', $message);
     }
 
     // Store new Achievement in the database.
@@ -273,7 +273,7 @@ class CandidateDetailController extends Controller
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect(self::INDEX_URL_WITH_CREATE_HARDSKILL_MODAL)->with('hard_skills_create_message', $message);
     }
 
     // Store new Achievement in the database.
@@ -310,6 +310,6 @@ class CandidateDetailController extends Controller
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect(self::INDEX_URL_WITH_CREATE_SOFTSKILL_MODAL)->with('soft_skills_create_message', $message);
     }
 }

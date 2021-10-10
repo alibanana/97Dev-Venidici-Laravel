@@ -893,7 +893,7 @@
 
 
 <!-- START OF MIDDLE SECTION -->
-<div class="row m-0 page-container-inner" data-wow-delay="0.6s" >
+<div class="row m-0 page-container-inner" data-wow-delay="0.6s" style="padding-top:4vw">
     <div class="col-12 p-0" style="">
         <div style="display:flex">
             <p id="JadwalLivePelatihanButton"class="sub-description blue-text-underline blue-text-underline-active user-links user-dashboard-normal-text" onclick="changeContent(event, 'live-pelatihan')"  style="font-family:Rubik Medium;cursor:pointer;margin-bottom:0px">Jadwal Live Workshop</p>

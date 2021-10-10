@@ -13,7 +13,7 @@
         <div class="modal-content">
         <div class="modal-body" style="text-align:center">
             <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA">Update Job Portal Profile?</p>
-            <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Admin approval will be processed within 1 x 24 hours</p>
+            <p class="normal-text" style="font-family:Rubik Medium;color:#000000;margin-bottom:2vw">Admin approval will be processed within 1 x 24 hours</p>
             <button type="submit" class="normal-text btn-blue-bordered btn-blue-bordered-active full-width-button" style="font-family: Avenir Medium;cursor:pointer;padding:0.5vw 2vw">Confirm</button>                
             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-top:1vw">OR</p>
             <p class="normal-text" style="font-family:Rubik Medium;color:grey;margin-top:1vw;cursor:pointer" data-dismiss="modal" >Cancel</p>
@@ -154,6 +154,11 @@
 <!-- END OF RESUME -->
 
 </form>
+<div class="row m-0 page-container-inner" style="padding-top:4vw">
+    <div class="col-12 p-0" style="display:flex;justify-content:flex-end;align-items:center">
+        <button  data-toggle="modal" data-target="#confirmModal" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update Profile</button>
+    </div>
+</div>
 <!-- end of candidate detail form -->
 
 
@@ -352,10 +357,13 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2021 - Until now</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#we-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
@@ -367,10 +375,13 @@
                     <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
                     <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
                 </div>
-                <div>
+                <div style="display:flex;align-items:center">
                     <a href="#we-update" style="color:#2B6CAA">
                         <i class="fas fa-edit bigger-text"></i>
                     </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
                 </div>
             </div>
         @endforeach
@@ -385,14 +396,14 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('candidate-detail.store-education') }}" method="POST">
             @csrf
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Education</p>
 
                         @if (session()->has('education_create_message'))
-                        <div class="p-3 mt-2 mb-0">
+                        <div class="p-3 mt-2 mb-0 ps-0 pe-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
                             {{ session()->get('education_create_message') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -404,18 +415,18 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Degree</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="High School Diploma" >
+                            <input name="degree"  value="{{ old('degree') }}"  type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="High School Diploma" >
                         </div>  
-                        @error('name')
+                        @error('degree')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Major</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Bisnis Informatik" >
+                            <input name="major"  value="{{ old('major') }}" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Bisnis Informatik" >
                         </div>  
-                        @error('name')
+                        @error('major')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -427,9 +438,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">School</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="SMAN 123" >
+                            <input name="school"  value="{{ old('school') }}"  type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="SMAN 123" >
                         </div>  
-                        @error('name')
+                        @error('school')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -439,15 +450,25 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Start Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="number"name="start_year"  value="{{ old('start_year') }}"  class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy">
                                 </div> 
+                                @error('start_year')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-lg-6 col-xs-12 ps-0">
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Graduate Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="number" name="end_year"  value="{{ old('end_year') }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy">
                                 </div> 
+                                @error('end_year')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -566,10 +587,13 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#edu-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
@@ -580,10 +604,13 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#edu-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
@@ -599,14 +626,14 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('candidate-detail.store-achievement') }}" method="POST">
             @csrf
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Achievements</p>
 
                         @if (session()->has('achievement_create_message'))
-                        <div class="p-3 mt-2 mb-0">
+                        <div class="p-3 mt-2 mb-0 ps-0 pe-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
                             {{ session()->get('achievement_create_message') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -618,9 +645,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Juara 1 Nasional Lomba.." >
+                            <input name="title"  value="{{ old('title') }}"   type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Juara 1 Nasional Lomba.." >
                         </div>  
-                        @error('name')
+                        @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -630,8 +657,13 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Achievement Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="number" name="year"  value="{{ old('year') }}"   class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy">
                                 </div> 
+                                @error('year')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror   
                             </div>
                         </div>
                     </div> 
@@ -640,9 +672,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Location of Event</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Sekolah Dasar.." >
+                            <input  name="location_of_event"  value="{{ old('location_of_event') }}"type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Sekolah Dasar.." >
                         </div>  
-                        @error('name')
+                        @error('location_of_event')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -747,10 +779,13 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#achievement-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
@@ -761,10 +796,13 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#achievement-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
@@ -779,14 +817,14 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('candidate-detail.store-hardskill') }}" method="POST">
             @csrf
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Hard Skills</p>
 
                         @if (session()->has('hard_skills_create_message'))
-                        <div class="p-3 mt-2 mb-0">
+                        <div class="p-3 mt-2 mb-0 ps-0 pe-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
                             {{ session()->get('hard_skills_create_message') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -798,9 +836,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Web Designer" >
+                            <input name="title"  value="{{ old('title') }}" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Web Designer" >
                         </div>  
-                        @error('name')
+                        @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -812,10 +850,10 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Hard Skill Score</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <span style="margin-right:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">1</span>
-                            <input type="range" class="form-range" min="0" max="10" id="customRange2">
+                            <input type="range"  name="score"  value="{{ old('score') }}" class="form-range" min="0" max="10" id="customRange2">
                             <span style="margin-left:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">10</span>
                         </div>  
-                        @error('name')
+                        @error('score')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -912,10 +950,13 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#hs-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
@@ -926,10 +967,13 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#hs-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
@@ -945,14 +989,14 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('candidate-detail.store-softskill') }}" method="POST">
             @csrf
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Soft Skills</p>
 
                         @if (session()->has('soft_skills_create_message'))
-                        <div class="p-3 mt-2 mb-0">
+                        <div class="p-3 mt-2 mb-0 ps-0 pe-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
                             {{ session()->get('soft_skills_create_message') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -964,9 +1008,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Komunikasi" >
+                            <input name="title"  value="{{ old('title') }}" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Komunikasi" >
                         </div>  
-                        @error('name')
+                        @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -978,10 +1022,10 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Soft Skill Score</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <span style="margin-right:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">1</span>
-                            <input type="range" class="form-range" min="0" max="10" id="customRange2">
+                            <input type="range" name="score"  value="{{ old('score') }}" class="form-range" min="0" max="10" id="customRange2">
                             <span style="margin-left:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">10</span>
                         </div>  
-                        @error('name')
+                        @error('score')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -1079,10 +1123,13 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#ss-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
@@ -1093,62 +1140,171 @@
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
                 <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
             </div>
-            <div>
+            <div style="display:flex;align-items:center">
                 <a href="#ss-update" style="color:#2B6CAA">
                     <i class="fas fa-edit bigger-text"></i>
                 </a>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                </form>
             </div>
         </div>
         <!-- END OF ONE CARD -->
     </div>
 </div>
 <!-- END OF Soft Skills -->
+
+
+<!-- START OF POP UP INTEREST Create -->
+<div id="interest-create" class="overlay" style="overflow:scroll">
+    <div class="popup" style="width:65%">
+        <a class="close" href="#closed" >&times;</a>
+    
+        <div class="content" style="padding:2vw">
+            
+            <form action="" method="POST">
+            @csrf
+                <div class="row m-0">
+                    <div class="col-12" style="text-align:left;margin-top:2vw">
+                    <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Interests</p>
+
+                        @if (session()->has('interests_create_message'))
+                        <div class="p-3 mt-2 mb-0 ps-0 pe-0">
+                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                            {{ session()->get('interests_create_message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
+                        <div class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <input name="title"  value="{{ old('title') }}" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Komunikasi" >
+                        </div>  
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div> 
+                    <!-- END OF RIGHT SECTION -->
+                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- END OF POP UP INTEREST Create -->
+
+<!-- START OF POP UP INTEREST Update -->
+<div id="interest-create" class="overlay" style="overflow:scroll">
+    <div class="popup" style="width:65%">
+        <a class="close" href="#closed" >&times;</a>
+    
+        <div class="content" style="padding:2vw">
+            
+            <form action="" method="POST">
+            @csrf
+                <div class="row m-0">
+                    <div class="col-12" style="text-align:left;margin-top:2vw">
+                    <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Interests</p>
+
+                        @if (session()->has('interests_update_message'))
+                        <div class="p-3 mt-2 mb-0 ps-0 pe-0">
+                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                            {{ session()->get('interests_update_message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
+                        <div class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <input name="title"  value="{{ old('title') }}" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Komunikasi" >
+                        </div>  
+                        @error('title')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div> 
+                    <!-- END OF RIGHT SECTION -->
+                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- END OF POP UP INTEREST Update -->
+
+
+
 <!-- START OF Interests -->
 <div class="row m-0 page-container-inner" >
     <div class="col-12 p-0" style="display:flex;justify-content:space-between;align-items:center">
         <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Interests</p>
-        <a href=""  style="color:#2B6CAA">
+        <a href="#interest-create"  style="color:#2B6CAA">
             <i class="fas fa-plus-circle small-heading"></i>
         </a>
     </div>
     <div class="col-12 p-0">
+        <div style="display:flex;align-items:center;flex-wrap:wrap">
         <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SD Nusantara</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
+            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+                <p class="normal-text" style="margin-bottom:0px">Information Technology</p>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                </form>
             </div>
-            <div>
-                <a href="" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-            </div>
-        </div>
         <!-- END OF ONE CARD -->
         <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SMP GLOBAL JAYA</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
+            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+                <p class="normal-text" style="margin-bottom:0px">Pencuri Hati</p>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                </form>
             </div>
-            <div>
-                <a href="" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-            </div>
-        </div>
         <!-- END OF ONE CARD -->
+        <!-- START OF ONE CARD -->
+            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+                <p class="normal-text" style="margin-bottom:0px">Menantu Ibu-mu</p>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                </form>
+            </div>
+        <!-- END OF ONE CARD -->
+        <!-- START OF ONE CARD -->
+            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+                <p class="normal-text" style="margin-bottom:0px">Data Analyst</p>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                </form>
+            </div>
+        <!-- END OF ONE CARD -->
+        <!-- START OF ONE CARD -->
+        <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+                <p class="normal-text" style="margin-bottom:0px">Menantu Ibu-mu</p>
+                <form style="margin-left:1vw" action=""> 
+                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                </form>
+            </div>
+        <!-- END OF ONE CARD -->
+        </div>
     </div>
 </div>
 <!-- END OF Interests -->
 
-<div class="row m-0 page-container-inner" style="padding-bottom:5vw;padding-top:4vw">
-    <div class="col-12 p-0" style="display:flex;justify-content:flex-end;align-items:center">
-        <button  data-toggle="modal" data-target="#confirmModal" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update Profile</button>
-    </div>
-</div>
+
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
