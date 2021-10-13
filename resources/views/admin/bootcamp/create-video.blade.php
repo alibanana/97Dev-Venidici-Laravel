@@ -33,6 +33,29 @@
         @csrf
         @method('put')
             <div class="row">
+                <div class="col-12">
+                    <h6 class="modal-title" id="exampleModalLabel">Attachment</h6>
+                    <div class="form-group mt-2">
+                        <!-- if there is no attachment, change the text below to "no attachment" -->
+                        @if ($content->attachment)
+                            <div style="display:flex;align-items:center">
+                                <p style="margin-bottom:0px;padding-right:2vw"> <span> <a href="{{ asset($content->attachment) }}" target="_blank">click here</a> </span> to view current attachment</p>
+                                <div style="padding: 0px 2px">
+                                    <button form="removeAttachmentForm" class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to remove this attachment?')">Remove Attachment</button>
+                                </div>
+                            </div>
+                        @else
+                            <p>No attachment available.</p>
+                        @endif
+                        <input type="file" name="attachment" accept=".pps,.ppt,.pptx,.xls,.xlsm,.xlsx,.doc,.docx,.pdf">
+                        @error('attachment')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
                 <div class="col-6">
                     <h6 class="modal-title" id="exampleModalLabel">Title</h6>
                     <div class="form-group mt-2">
