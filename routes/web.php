@@ -178,6 +178,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/achievements', [CandidateDetailController::class, 'storeAchievement'])->name('store-achievement');
         Route::post('/hardskills', [CandidateDetailController::class, 'storeHardskill'])->name('store-hardskill');
         Route::post('/softskills', [CandidateDetailController::class, 'storeSoftskill'])->name('store-softskill');
+        Route::post('/interests', [CandidateDetailController::class, 'storeInterest'])->name('store-interest');
     });
     /* END OF CANDIDATE DETAILS ROUTING */
 
@@ -292,7 +293,7 @@ Route::middleware(['isSuspended'])->group(function () {
         // BootcampFeatureController
         Route::post('/bootcamp/{id}/store-feature', [AdminBootcampFeatureController::class, 'store'])->name('bootcamp-feature.store');
         Route::delete('/bootcamp-feature/{id}', [AdminBootcampFeatureController::class, 'destroy'])->name('bootcamp-feature.destroy');
-        Route::put('/bootcamp-feature/update', [AdminBootcampFeatureController::class, 'update'])->name('bootcamp-feature.update');\
+        Route::put('/bootcamp-feature/update', [AdminBootcampFeatureController::class, 'update'])->name('bootcamp-feature.update');
         // BootcampPricingContentController
         Route::post('/bootcamp-full-payment-content/update/{id}', [AdminBootcampPricingContentController::class, 'updateFullPayment'])->name('bootcamp-full-payment-content.update');
         Route::post('/bootcamp-income-share-agreement-content-content/update/{id}', [AdminBootcampPricingContentController::class, 'updateIncomeShareAgreement'])->name('bootcamp-income-share-agreement-content.update');
@@ -392,7 +393,7 @@ Route::middleware(['isSuspended'])->group(function () {
         // CandidateController
         Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidates.index');
         Route::get('/job-portal/1', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.candidates.showCandidate');
-        Route::get('/job-portal/request/1', [AdminCandidateController::class, 'showCandidateChange'])->name('job-portal.candidates.showCandidateChange');
+        Route::get('/job-portal/{candidate_detail_id}/changes', [AdminCandidateController::class, 'showCandidateChange'])->name('job-portal.candidates.showCandidateChange');
         // HashtagController
         Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
         Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');

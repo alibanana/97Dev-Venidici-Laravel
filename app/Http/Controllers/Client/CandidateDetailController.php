@@ -19,6 +19,7 @@ use App\Models\EducationChange;
 use App\Models\AchievementChange;
 use App\Models\HardskillChange;
 use App\Models\SoftskillChange;
+use App\Models\InterestChange;
 
 class CandidateDetailController extends Controller
 {
@@ -29,6 +30,7 @@ class CandidateDetailController extends Controller
     private const INDEX_URL_WITH_CREATE_ACHIEVEMENT_MODAL = '/candidate-details#achievement-create';
     private const INDEX_URL_WITH_CREATE_HARDSKILL_MODAL = '/candidate-details#hs-create';
     private const INDEX_URL_WITH_CREATE_SOFTSKILL_MODAL = '/candidate-details#ss-create';
+    private const INDEX_URL_WITH_CREATE_INTEREST_MODAL = '/candidate-details#interest-create';
     
     private $notifications; // Stores combined notifications data.
     private $informations; // Stores notification (isInformation == true) data.
@@ -311,5 +313,40 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
         return redirect(self::INDEX_URL_WITH_CREATE_SOFTSKILL_MODAL)->with('soft_skills_create_message', $message);
+    }
+
+    // Store new Interest in the database.
+    public function storeInterest(Request $request) {
+        $validationRules = [
+            'title' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect(self::INDEX_URL_WITH_CREATE_INTEREST_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $candidateDetail = CandidateDetail::firstOrCreate(
+            ['user_id' => Auth::user()->id]);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate(
+            [
+                'candidate_detail_id' => $candidateDetail->id,
+                'status' => 'pending'
+            ]
+        );
+
+        $hardskillChange = InterestChange::create([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'title' => $validated['title'],
+            'action' => 'create'
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_CREATE_INTEREST_MODAL)->with('interests_create_message', $message);
     }
 }

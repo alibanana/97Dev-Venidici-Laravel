@@ -705,6 +705,11 @@
                             <div class="edit-item" style="border-radius:10px 10px 0px 0px">
                                 <a href="#edit-profile" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Edit Profile</span></a>   
                             </div>
+                            @if (Auth::user()->isCandidate)
+                                <div class="edit-item">
+                                    <a href="{{ route('candidate-detail.index') }}" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Job Portal Profile</span></a>   
+                                </div>
+                            @endif
                             <div class="edit-item">
                                 <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
                             </div>
@@ -765,7 +770,7 @@
         <div class="col-12" style="padding:0vw 17vw;margin-top:2vw;margin-bottom:4vw">
             <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
-                <a href="/candidate-details" style=";color:#3B3C43">
+                <a href="{{ route('candidate-detail.index') }}" style=";color:#3B3C43">
                     <i class="fas fa-arrow-right normal-text"></i>
                 </a>
             </div>
@@ -829,6 +834,11 @@
                             <div class="edit-item" style="border-radius:10px 10px 0px 0px;padding:1vw 3vw " >
                                 <a href="#edit-profile" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Edit Profile</span></a>   
                             </div>
+                            @if (Auth::user()->isCandidate)
+                                <div class="edit-item" style="padding:1vw 3vw " >
+                                    <a href="{{ route('candidate-detail.index') }}" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Job Portal Profile</span></a>   
+                                </div>
+                            @endif
                             <div class="edit-item" style="padding:1vw 3vw ">
                                 <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
                             </div>
@@ -882,7 +892,7 @@
         <div class="col-12 p-0" style="margin-top:2vw">
             <div style="background-color:#F4C257;padding:2vw;border-radius:10px;display:flex;align-items:center">
                 <p class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43" >Kamu bisa mendaftarkan diri ke Job Portal Venidici, dimana Hiring Partners kami akan menghubungi kamu untuk mendapatkan kerja. Isi resume-mu sekarang!</p>
-                <a href="/candidate-details" style=";color:#3B3C43;padding-left:10vw">
+                <a href="{{ route('candidate-detail.index') }}" style=";color:#3B3C43;padding-left:10vw">
                     <i class="fas fa-arrow-right normal-text"></i>
                 </a>
             </div>

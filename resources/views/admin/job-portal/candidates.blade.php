@@ -103,11 +103,11 @@
                                                 <td>{{ $user->email }}</td>												
                                                 <td>{{ $user->userDetail->telephone }}</td>												
                                                 <td>
-                                                    @if ($userIdAndCandidateStatusMap[$user->id] == 'not_updated')
+                                                    @if ($userIdAndAdditionalUserDataMap[$user->id]['candidateStatus'] == 'not_updated')
                                                         <span style="color:grey">
                                                             Not Yet Updated
                                                         </span>
-                                                    @elseif ($userIdAndCandidateStatusMap[$user->id] == 'pending')
+                                                    @elseif ($userIdAndAdditionalUserDataMap[$user->id]['candidateStatus'] == 'pending')
                                                         <span style="color:orange">
                                                             Waiting For Approval
                                                         </span>
@@ -116,12 +116,14 @@
                                                             Accepted
                                                         </span>
                                                     @endif
-                                                </td>												
+                                                </td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                        <div style="padding: 0px 2px">
-                                                            <a href="/admin/job-portal/request/1" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm text-nowrap">View Updates</a>
-                                                        </div>
+                                                        @if ($userIdAndAdditionalUserDataMap[$user->id]['isCandidateDetailExists'])
+                                                            <div style="padding: 0px 2px">
+                                                                <a href="{{ route('admin.job-portal.candidates.showCandidateChange', $user->candidateDetail->id) }}" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm text-nowrap">View Updates</a>
+                                                            </div>
+                                                        @endif
                                                         <div style="padding: 0px 2px">
                                                             <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm text-nowrap">View Detail</a>
                                                         </div>

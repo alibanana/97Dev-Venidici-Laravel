@@ -1162,7 +1162,7 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST">
+            <form action="{{ route('candidate-detail.store-interest') }}" method="POST">
             @csrf
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
@@ -1190,8 +1190,7 @@
                     </div> 
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
-
+                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>
                     </div>
                 </div>
             </form>

@@ -46,4 +46,8 @@ class CandidateDetail extends Model
     public function softskills() {
         return $this->hasMany(Softskill::class);
     }
+
+    public function interests() {
+        return $this->hasMany(Interest::class);
+    }
 }
