@@ -5,7 +5,7 @@
 
 <!-- start of candidate detail form -->
 
-<form action="{{route('candidate-detail.upsert-candidate-detail')}}" method="POST">
+<form action="{{route('candidate-detail.upsert-candidate-detail')}}" method="POST"  enctype="multipart/form-data">
 @csrf
 <!-- Modal VA -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -63,7 +63,7 @@
             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
             <input type="date" class="normal-text"
                 style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;"
-                placeholder="yyyy.mm.dd" value="{{ $date }}" disabled>
+                placeholder="yyyy-mm-dd" value="{{ $date }}" disabled>
         </div>
 
         @if(session('date_message'))
@@ -80,7 +80,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
-            <input value="{{ old('linkedin_link') }}" type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
+            <input value="{{old('linkedin_link', 'active or pending')}}"  type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
         </div>   
         @error('linkedin_link')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -110,7 +110,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Prefered Working Location (Province)</p>
         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-map"></i>
-            <input value="{{old('preferred_working_location')}}"  name="preferred_working_location" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra" 
+            <input value="{{old('preferred_working_location', 'active or pending')}}"  name="preferred_working_location" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra" 
             value=""
             >
         </div>  
@@ -122,7 +122,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Whatsapp</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-            <input name="whatsapp_number" type="text" class="normal-text" placeholder="Masukkan Nomor Telepon"
+            <input disabled readonly name="whatsapp_number" type="text" class="normal-text" placeholder="Masukkan Nomor Telepon"
                 style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%"
                 value="{{ old('whatsapp_number', Auth::user()->userDetail->telephone) }}">
         </div>  
@@ -136,6 +136,44 @@
 </div>
 <!-- END OF BASIC INFO SECTION -->
 
+<!-- START OF EXPERIENCE -->
+<div class="row m-0 page-container-inner" style="padding-top:4vw">
+    <div class="col-12 p-0">
+        <p class="medium-heading" style="font-family:Rubik Bold;color:#2B6CAA">What’s your experience?</p>
+    </div>
+    <div class="col-lg-6 col-xs-12 ps-0 pe-5">
+        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Experience</p>
+        <div  class="auth-input-form" style="display: flex;align-items:center">
+            <i style="color:#DAD9E2" class="fas fa-user popup-krest-font"></i>
+            <select name="experience_year" id="" class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
+                <option disabled selected>Choose Answer</option>
+                <option value="Less than 1 Year of Experience" > < 1 Year of Experience</option>
+                <option value="Less than 2 Years of Experience" > < 2 Years of Experience</option>
+                <option value="Less than 3 Years of Experience" > < 3 Years of Experience</option>
+                <option value="More than 4 Years of Experience" > > 3 Years of Experience</option>
+            </select>
+        </div> 
+        @error('experience_year')
+            <span class="invalid-feedback" role="alert" style="display: block !important;">
+            <strong>{{ $message }}</strong>
+            </span>
+        @enderror 
+    </div>
+    <div class="col-lg-6 col-xs-12 pe-0 ps-5">
+        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Industry</p>
+        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+            <i style="color:#DAD9E2" class="fas fa-building"></i>
+            <input value="{{ old('industry') }}" type="text" name="industry" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Industri Pekerjaan" >
+        </div>   
+        @error('industry')
+            <span class="invalid-feedback" role="alert" style="display: block !important;">
+            <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<!-- END OF EXPERIENCE -->
+
 <!-- START OF RESUME -->
 <div class="row m-0 page-container-inner" style="padding-top:4vw">
     <div class="col-12 p-0">
@@ -145,6 +183,20 @@
             <textarea name="about_me_description" value="{{old('about_me_description')}}" rows="6" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="This is an example." >{{old('about_me_description')}}</textarea>
         </div>  
         @error('about_me_description')
+            <span class="invalid-feedback" role="alert" style="display: block !important;">
+            <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="col-12 p-0">
+        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">CV / Resume</p>
+        <a href="" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw">VIEW MY CV</a>
+        <div class="drop-zone">
+            <span class="drop-zone__prompt" style="font-family:Rubik Regular;color:black;font-size:1.7vw"> <span style="color:#3F92D8" >Upload a file</span> or drag and drop here</span>
+            <input type="file"  name="cv_file" class="drop-zone__input" accept=".pdf">
+        </div>
+        <!--<input type="file">-->
+        @error('cv_file')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
             <strong>{{ $message }}</strong>
             </span>
@@ -199,7 +251,7 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Start Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="start_date"  value="{{ old('start_date') }}"  class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="start_date"  value="{{ old('start_date') }}"  class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
                                 @error('start_date')
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -211,8 +263,10 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">End Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="end_date"  value="{{ old('end_date') }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="end_date"  value="{{ old('end_date') }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
+                                <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:0.5vw;color:orange">(Leave Blank if still active)</p>
+
                                 @error('end_date')
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                                     <strong>{{ $message }}</strong>
@@ -293,14 +347,14 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Start Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
                             </div>
                             <div class="col-lg-6 col-xs-12 ps-0">
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">End Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
                             </div>
                         </div>
@@ -349,7 +403,7 @@
         </a>
     </div>
     <div class="col-12 p-0">
-        <!-- START OF ONE CARD -->
+        <!-- START OF ONE CARD
         <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
             <div>   
                 <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">Product Manager Intern (EXAMPLE)</p>
@@ -366,23 +420,83 @@
                 </form>
             </div>
         </div>
-        <!-- END OF ONE CARD -->
-        @foreach ($candidate_detail->workExperiences as $workExperience)
-            <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-                <div>
-                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
-                </div>
-                <div style="display:flex;align-items:center">
-                    <a href="#we-update" style="color:#2B6CAA">
-                        <i class="fas fa-edit bigger-text"></i>
-                    </a>
+        END OF ONE CARD -->
+
+        @foreach ($work_experiences_not_udpated as $workExperience)
+        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+            <div>   
+                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+            </div>
+            <div style="display:flex;align-items:center">
+                <a href="#we-update" style="color:#2B6CAA">
+                    <i class="fas fa-edit bigger-text"></i>
+                </a>
                 <form style="margin-left:1vw" action=""> 
                 <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                 </form>
-                </div>
+            </div>
+        </div>
+        @endforeach
+        @foreach ($candidate_detail_change->workExperienceChanges as $workExperienceChange)
+            <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                @if ($workExperienceChange->action == 'create')
+                    <div>   
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                    </div>
+                    <div style="display:flex;align-items:center">
+                        <a href="#we-update" style="color:#2B6CAA">
+                            <i class="fas fa-edit bigger-text"></i>
+                        </a>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        </form>
+                    </div>
+                @elseif ($workExperienceChange->action == 'update')
+                    <div>   
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                        <br>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                    </div>
+                    <div style="display:flex;align-items:center">
+                        <a href="#we-update" style="color:#2B6CAA">
+                            <i class="fas fa-edit bigger-text"></i>
+                        </a>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        </form>
+                    </div>
+                @elseif ($workExperienceChange->action == 'delete')
+                    <div>   
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                    </div>
+                    <div style="display:flex;align-items:center">
+                        <a href="#we-update" style="color:#2B6CAA">
+                            <i class="fas fa-edit bigger-text"></i>
+                        </a>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        </form>
+                    </div>
+                @endif
             </div>
         @endforeach
     </div>
@@ -546,14 +660,14 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Start Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
                             </div>
                             <div class="col-lg-6 col-xs-12 ps-0">
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Graduate Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
                             </div>
                         </div>
@@ -731,7 +845,7 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Achievement Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd">
+                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
                             </div>
                         </div>
@@ -1291,7 +1405,7 @@
             </div>
         <!-- END OF ONE CARD -->
         <!-- START OF ONE CARD -->
-        <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
                 <p class="normal-text" style="margin-bottom:0px">Menantu Ibu-mu</p>
                 <form style="margin-left:1vw" action=""> 
                 <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
@@ -1307,5 +1421,6 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="/js/main.js"></script>
 
 @endsection

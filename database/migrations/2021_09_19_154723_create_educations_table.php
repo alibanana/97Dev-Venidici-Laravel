@@ -20,8 +20,8 @@ class CreateEducationsTable extends Migration
             $table->string('degree')->nullable();
             $table->string('school')->nullable();
             $table->string('major')->nullable();
-            $table->bigInteger('start_year')->nullable();
-            $table->bigInteger('end_year', 4)->nullable();
+            $table->unsignedInteger('start_year')->nullable();
+            $table->unsignedInteger('end_year')->nullable();
             $table->timestamps();
         });
     }

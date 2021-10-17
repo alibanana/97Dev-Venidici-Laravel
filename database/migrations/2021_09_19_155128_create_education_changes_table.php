@@ -22,8 +22,8 @@ class CreateEducationChangesTable extends Migration
             $table->string('degree')->nullable();
             $table->string('school')->nullable();
             $table->string('major')->nullable();
-            $table->bigInteger('start_year')->nullable();
-            $table->bigInteger('end_year')->nullable();
+            $table->unsignedInteger('start_year')->nullable();
+            $table->unsignedInteger('end_year')->nullable();
             $table->enum('action', ['create', 'update', 'delete']);
             $table->timestamps();
         });

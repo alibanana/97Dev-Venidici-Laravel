@@ -99,8 +99,12 @@ class CandidateController extends Controller
     }
 
     // Shows the candidate's detail page.
-    public function showCandidate(){
-        return view('admin/job-portal/candidate-profile');
+    public function showCandidate($candidate_id){
+        $candidate_detail = CandidateDetail::where('user_id', $candidate_id)
+            ->with('user', 'workExperiences', 'educations', 'achievements', 'hardskills', 'softskills', 'interests')
+            ->firstOrFail();
+        
+        return view('admin/job-portal/candidate-profile', compact('candidate_detail'));
     }
 
     // Shows the candidate's changes detail page.
@@ -140,11 +144,11 @@ class CandidateController extends Controller
             ->doesntHave('interestChanges')
             ->get();
 
-        $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated($candidate_detail->user);
+        $isCandidateDetailNotUpdated = UserHelper::isCandidateNotUpdated($candidate_detail->user);
 
         return view('admin/job-portal/candidate-profile-change', compact('candidate_detail', 'candidate_detail_change', 'work_experiences_not_udpated',
             'educations_not_updated', 'achivements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
-            'isCandidateDetailUpdated'));
+            'isCandidateDetailNotUpdated'));
     }
 
     // Method to approve changes requested by user (candidate).

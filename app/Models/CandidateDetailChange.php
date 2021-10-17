@@ -17,7 +17,11 @@ class CandidateDetailChange extends Model
         'linkedin_link',
         'whatsapp_number',
         'about_me_description',
-        'status' // pending, approved, cancelled
+        'experience_year',
+        'industry',
+        'cv_file',
+        'status' // pending, approved, cancelled,
+
     ];
 
     public function candidateDetail() {

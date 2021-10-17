@@ -21,6 +21,9 @@ class CreateCandidateDetailChangesTable extends Migration
             $table->string('linkedin_link')->nullable();
             $table->string('whatsapp_number', 16)->nullable();
             $table->text('about_me_description')->nullable();
+            $table->text('experience_year')->nullable();
+            $table->text('industry')->nullable();
+            $table->text('cv_file')->nullable();
             $table->enum('status', ['pending', 'approved', 'cancelled'])->default('pending');
             $table->timestamps();
         });

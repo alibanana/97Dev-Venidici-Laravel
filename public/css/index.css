@@ -2996,3 +2996,71 @@ html, body {
 .job-listing-card:hover{
     background-color: #EFF7FE;
 }
+
+
+
+#upload-file-btn-label {
+    cursor: pointer;
+    /* Style as you please, it will become the visible UI component. */
+    background-color: #2B6CAA;
+    padding: 0.5vw;
+    font-family: Rubik Medium;
+    color: white
+ }
+ 
+ #upload-file-btn {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+ }
+
+
+
+.drop-zone {
+    max-width: 100%;
+    height: 14vw;
+    padding: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    color: #cccccc;
+    border: 4px dashed #707070;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+  }
+  
+  .drop-zone--over {
+    border-style: solid;
+  }
+  
+  .drop-zone__input {
+    display: none;
+  }
+  
+  .drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #707070;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+  }

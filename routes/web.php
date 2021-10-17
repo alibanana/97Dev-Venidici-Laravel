@@ -392,7 +392,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::delete('/job-portal/hiring-partners/{id}', [AdminHiringPartnerController::class, 'destroy'])->name('job-portal.hiring-partners.destroy')->middleware(['isSuper']);
         // CandidateController
         Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidates.index');
-        Route::get('/job-portal/1', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.candidates.showCandidate');
+        Route::get('/job-portal/{candidate_id}', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.candidates.showCandidate');
         Route::get('/job-portal/{candidate_detail_id}/changes', [AdminCandidateController::class, 'showCandidateChange'])->name('job-portal.candidates.showCandidateChange');
         Route::post('/job-portal/approve-change', [AdminCandidateController::class, 'approveChange'])->name('job-portal.candidates.approve-change');
         // HashtagController

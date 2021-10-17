@@ -126,7 +126,7 @@
                                                         @endif
                                                         @if ($userIdAndAdditionalUserDataMap[$user->id]['isCandidateDetailEmpty'])
                                                             <div style="padding: 0px 2px">
-                                                                <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm text-nowrap">View Detail</a>
+                                                                <a href="/admin/job-portal/{{$user->id}}" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm text-nowrap">View Detail</a>
                                                             </div>
                                                         @endif
                                                         @if ($userIdAndAdditionalUserDataMap[$user->id]['candidateStatus'] == 'pending')

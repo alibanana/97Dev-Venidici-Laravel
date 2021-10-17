@@ -20,6 +20,12 @@ use App\Models\AchievementChange;
 use App\Models\HardskillChange;
 use App\Models\SoftskillChange;
 use App\Models\InterestChange;
+use App\Models\WorkExperience;
+use App\Models\Education;
+use App\Models\Achievement;
+use App\Models\Hardskill;
+use App\Models\Softskill;
+use App\Models\Interest;
 
 class CandidateDetailController extends Controller
 {
@@ -65,17 +71,63 @@ class CandidateDetailController extends Controller
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
 
-        $view_data = array_merge($view_data, ['cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
-        return view('client/job-portal/client/edit', compact($view_data));
+        $candidate_detail = CandidateDetail::where('user_id', auth()->user()->id)
+            ->with('user', 'educations', 'achievements', 'hardskills', 'softskills')
+            ->first();
+
+        $candidate_detail_change = CandidateDetailChange::where('candidate_detail_id', $candidate_detail->id)
+            ->where('status', 'pending')
+            ->with('candidateDetail', 'workExperienceChanges', 'educationChanges', 'achievementChanges', 'hardskillChanges',
+                'softskillChanges', 'interestChanges')
+            ->latest()
+            ->first();
+
+        $work_experiences_not_udpated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('workExperienceChanges')
+            ->get();
+
+        $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('educationChanges')
+            ->get();
+
+        $achivements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('achievementChanges')
+            ->get();
+            
+        $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('hardskillChanges')
+            ->get();
+        
+        $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('softskillChanges')
+            ->get();
+        
+        $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('interestChanges')
+            ->get();
+
+        $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated($candidate_detail->user);
+
+        //$view_data = array_merge($view_data, ['candidate_detail','cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
+        
+        return view('client/job-portal/client/edit', compact('candidate_detail', 'candidate_detail_change', 'work_experiences_not_udpated',
+            'educations_not_updated', 'achivements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
+            'isCandidateDetailUpdated','candidate_detail','cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent'));
+
+        //return view('client/job-portal/client/edit', compact($view_data));
     }
 
     // Store / Update a user's candidate profile details.
     public function upsertCandidateDetail(Request $request) {
+
         $validationRules = [
             'linkedin_link' => 'required|starts_with:https://www.linkedin.com',
             'preferred_working_location' => 'required',
             'whatsapp_number' => 'required',
-            'about_me_description' => 'required'
+            'about_me_description' => 'required',
+            'experience_year' => 'required',
+            'industry' => 'required',
+            'cv_file' => 'required|mimes:pdf',
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
@@ -99,7 +151,10 @@ class CandidateDetailController extends Controller
                 'preferred_working_location' => $validated['preferred_working_location'],
                 'linkedin_link' => $validated['linkedin_link'],
                 'whatsapp_number' => $validated['whatsapp_number'],
-                'about_me_description' => $validated['about_me_description']
+                'about_me_description' => $validated['about_me_description'],
+                'experience_year' => $validated['experience_year'],
+                'industry' => $validated['industry'],
+                'cv_file' => Helper::storeFile($request->file('cv_file'), 'storage/documents/bootcamp/cv/')
             ]
         );
 
