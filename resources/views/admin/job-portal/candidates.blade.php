@@ -26,7 +26,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="mb-0 mb-3 text-gray-800">Job-Portal Candidates</h1>
         </div>
-        
+
 
         <!-- Content Row -->
 
@@ -119,26 +119,31 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                        @if ($userIdAndAdditionalUserDataMap[$user->id]['isCandidateDetailExists'])
+                                                        @if ($userIdAndAdditionalUserDataMap[$user->id]['candidateStatus'] == 'pending')
                                                             <div style="padding: 0px 2px">
                                                                 <a href="{{ route('admin.job-portal.candidates.showCandidateChange', $user->candidateDetail->id) }}" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm text-nowrap">View Updates</a>
                                                             </div>
                                                         @endif
-                                                        <div style="padding: 0px 2px">
-                                                            <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm text-nowrap">View Detail</a>
-                                                        </div>
-                                                        <form action="" method="post">
+                                                        @if ($userIdAndAdditionalUserDataMap[$user->id]['isCandidateDetailEmpty'])
                                                             <div style="padding: 0px 2px">
-                                                                <input type="hidden" value="Approved" name="status">
-                                                                <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to approve this user?')">Approve</button>
+                                                                <a href="/admin/job-portal/1" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm text-nowrap">View Detail</a>
                                                             </div>
-                                                        </form>
-                                                        <form action="" method="post">
-                                                            <div style="padding: 0px 2px">
-                                                                <input type="hidden" value="Rejected" name="status">
-                                                                <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Reject</button>
-                                                            </div>
-                                                        </form>
+                                                        @endif
+                                                        @if ($userIdAndAdditionalUserDataMap[$user->id]['candidateStatus'] == 'pending')
+                                                            <form action="{{ route('admin.job-portal.candidates.approve-change') }}" method="post">
+                                                                @csrf
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="candidate_detail_change_id" value="{{ $userIdAndAdditionalUserDataMap[$user->id]['pendingCandidateDetailChangeId'] }}">
+                                                                    <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to approve this user?')">Approve</button>
+                                                                </div>
+                                                            </form>
+                                                            <form action="" method="post">
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="candidate_detail_change_id" value="{{ $userIdAndAdditionalUserDataMap[$user->id]['pendingCandidateDetailChangeId'] }}">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Reject</button>
+                                                                </div>
+                                                            </form>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>

@@ -35,10 +35,15 @@
                             </div>
                         </div>
                     </div>
+                    @if ($isCandidateDetailUpdated)
+                        <div class="col-12 p-0" style="margin-top:4vw">
+                            <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me (old)</p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">{{ $candidate_detail->about_me_description }}</p>
+                        </div>
+                    @endif
                     <div class="col-12 p-0" style="margin-top:4vw">
-                        <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me</p>
-                        <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">{{ $candidate_detail_change->about_me_description ?? $candidate_detail->about_me_description }}</p>
-
+                        <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me (new)</p>
+                        <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">{{ $candidate_detail->about_me_description }}</p>
                     </div>
                 </div>
 

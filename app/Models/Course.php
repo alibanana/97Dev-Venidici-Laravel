@@ -59,8 +59,9 @@ class Course extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(User::class, 'user_course')->withPivot(
-            'status'
+        return $this->belongsToMany(User::class, 'user_course')
+        ->withPivot(
+            'status', 'isAbsent', 'score'
         )->withTimestamps();
     }
 

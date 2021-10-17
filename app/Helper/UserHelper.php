@@ -25,4 +25,23 @@ class UserHelper {
         return $user->isCandidate &&
             ($user->candidateDetail->candidateDetailChanges()->where('status', 'pending')->get()->isNotEmpty());
     }
+
+    // Check if a user's candidate detail data is empty. Assumes that user is already a candidate
+    // Returns true if candidateDetail does not exists yet.
+    public static function isCandidateDetailEmpty($user) {
+        if ($user->candidateDetail()->exists()) {
+            $candidateDetail = $user->candidateDetail;
+            return $candidateDetail->preferred_working_location != null ||
+                $candidateDetail->linkedin_link != null ||
+                $candidateDetail->whatsapp_number != null ||
+                $candidateDetail->about_me_description != null ||
+                $candidateDetail->workExperiences()->exists() ||
+                $candidateDetail->educations()->exists() ||
+                $candidateDetail->achievements()->exists() ||
+                $candidateDetail->hardskills()->exists() ||
+                $candidateDetail->softskills()->exists() ||
+                $candidateDetail->interests()->exists();
+        }
+        return true;
+    }
 }

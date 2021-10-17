@@ -394,6 +394,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidates.index');
         Route::get('/job-portal/1', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.candidates.showCandidate');
         Route::get('/job-portal/{candidate_detail_id}/changes', [AdminCandidateController::class, 'showCandidateChange'])->name('job-portal.candidates.showCandidateChange');
+        Route::post('/job-portal/approve-change', [AdminCandidateController::class, 'approveChange'])->name('job-portal.candidates.approve-change');
         // HashtagController
         Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
         Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
