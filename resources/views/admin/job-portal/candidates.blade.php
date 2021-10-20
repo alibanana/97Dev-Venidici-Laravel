@@ -134,13 +134,14 @@
                                                                 @csrf
                                                                 <div style="padding: 0px 2px">
                                                                     <input type="hidden" name="candidate_detail_change_id" value="{{ $userIdAndAdditionalUserDataMap[$user->id]['pendingCandidateDetailChangeId'] }}">
-                                                                    <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to approve this user?')">Approve</button>
+                                                                    <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to approve changes?')">Approve</button>
                                                                 </div>
                                                             </form>
-                                                            <form action="" method="post">
+                                                            <form action="{{ route('admin.job-portal.candidates.reject-change') }}" method="post">
+                                                                @csrf
                                                                 <div style="padding: 0px 2px">
                                                                     <input type="hidden" name="candidate_detail_change_id" value="{{ $userIdAndAdditionalUserDataMap[$user->id]['pendingCandidateDetailChangeId'] }}">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Reject</button>
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to reject changes?')">Reject</button>
                                                                 </div>
                                                             </form>
                                                         @endif

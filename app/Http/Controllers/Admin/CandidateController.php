@@ -63,7 +63,7 @@ class CandidateController extends Controller
                 //     $query->where('status', 'pending');
                 // });
             } elseif ($request->filter == self::FILTER_APPROVED) {
-                // Case #1 - Users candidateDetail.candidateDetailChanges objects are all approved. 
+                // Case #1 - Users candidateDetail.candidateDetailChanges objects are all approved.
             }
         }
         
@@ -108,7 +108,7 @@ class CandidateController extends Controller
     }
 
     // Shows the candidate's changes detail page.
-    public function showCandidateChange($candidate_detail_id){
+    public function showCandidateChange($candidate_detail_id) {
         $candidate_detail = CandidateDetail::where('id', $candidate_detail_id)
             ->with('user', 'educations', 'achievements', 'hardskills', 'softskills')
             ->firstOrFail();
@@ -337,5 +337,22 @@ class CandidateController extends Controller
         } elseif ($action == 'delete') {
             $interestChange->interest()->delete();
         }
+    }
+
+    public function rejectChange(Request $request) {
+        $validated = $request->validate([
+            'candidate_detail_change_id' => 'required|integer'
+        ]);
+
+        $candidate_detail_change = CandidateDetailChange::where('id', $validated['candidate_detail_change_id'])
+            ->where('status', 'pending')
+            ->firstOrFail();
+
+        $candidate_detail_change->status = 'cancelled';
+        $candidate_detail_change->save();
+        
+        $message = 'Candidate Detail Changes for user (' . $candidate_detail_change->candidateDetail->user->name . ') has been rejected!';
+
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 }

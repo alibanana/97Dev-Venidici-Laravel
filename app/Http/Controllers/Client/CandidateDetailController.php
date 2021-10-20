@@ -14,29 +14,37 @@ use App\Helper\UserHelper;
 use App\Models\Review;
 use App\Models\CandidateDetail;
 use App\Models\CandidateDetailChange;
-use App\Models\WorkExperienceChange;
-use App\Models\EducationChange;
-use App\Models\AchievementChange;
-use App\Models\HardskillChange;
-use App\Models\SoftskillChange;
-use App\Models\InterestChange;
 use App\Models\WorkExperience;
+use App\Models\WorkExperienceChange;
 use App\Models\Education;
+use App\Models\EducationChange;
 use App\Models\Achievement;
+use App\Models\AchievementChange;
 use App\Models\Hardskill;
+use App\Models\HardskillChange;
 use App\Models\Softskill;
+use App\Models\SoftskillChange;
 use App\Models\Interest;
+use App\Models\InterestChange;
 
 class CandidateDetailController extends Controller
 {
 
     private const INDEX_ROUTE = 'candidate-detail.index';
+    
     private const INDEX_URL_WITH_CREATE_WORK_EXPERIENCE_MODAL = '/candidate-details#we-create';
     private const INDEX_URL_WITH_CREATE_EDUCATION_MODAL = '/candidate-details#edu-create';
     private const INDEX_URL_WITH_CREATE_ACHIEVEMENT_MODAL = '/candidate-details#achievement-create';
     private const INDEX_URL_WITH_CREATE_HARDSKILL_MODAL = '/candidate-details#hs-create';
     private const INDEX_URL_WITH_CREATE_SOFTSKILL_MODAL = '/candidate-details#ss-create';
     private const INDEX_URL_WITH_CREATE_INTEREST_MODAL = '/candidate-details#interest-create';
+
+    private const INDEX_URL_WITH_UPDATE_WORK_EXPERIENCE_MODAL = '/candidate-details#we-update';
+    private const INDEX_URL_WITH_UPDATE_EDUCATION_MODAL = '/candidate-details#edu-update';
+    private const INDEX_URL_WITH_UPDATE_ACHIEVEMENT_MODAL = '/candidate-details#achievement-update';
+    private const INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL = '/candidate-details#hs-update';
+    private const INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL = '/candidate-details#ss-update';
+    private const INDEX_URL_WITH_UPDATE_INTEREST_MODAL = '/candidate-details#interest-update';
     
     private $notifications; // Stores combined notifications data.
     private $informations; // Stores notification (isInformation == true) data.
@@ -59,10 +67,43 @@ class CandidateDetailController extends Controller
         $view_data = [];
         if (Auth::user()->candidateDetail()->exists()) {
             $candidate_detail = CandidateDetail::where('user_id', Auth::user()->id)
-                ->with('workExperiences', 'educations', 'achievements',
-                    'hardskills', 'softskills')
+                ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
                 ->first();
-            $view_data[] = 'candidate_detail';
+
+            $candidate_detail_change = CandidateDetailChange::where('candidate_detail_id', $candidate_detail->id)
+                ->where('status', 'pending')
+                ->with('candidateDetail', 'workExperienceChanges', 'educationChanges', 'achievementChanges', 'hardskillChanges',
+                    'softskillChanges', 'interestChanges')
+                ->latest()
+                ->first();
+
+            $work_experiences_not_udpated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('workExperienceChanges')
+                ->get();
+
+            $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('educationChanges')
+                ->get();
+
+            $achivements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('achievementChanges')
+                ->get();
+                
+            $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('hardskillChanges')
+                ->get();
+            
+            $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('softskillChanges')
+                ->get();
+            
+            $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('interestChanges')
+                ->get();
+
+            $view_data = array_merge($view_data, ['candidate_detail', 'candidate_detail_change', 'work_experiences_not_udpated',
+            'educations_not_updated', 'achivements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
+            'isCandidateDetailUpdated']);
         }
         
         $this->resetNavbarData();
@@ -71,55 +112,15 @@ class CandidateDetailController extends Controller
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
 
-        $candidate_detail = CandidateDetail::where('user_id', auth()->user()->id)
-            ->with('user', 'educations', 'achievements', 'hardskills', 'softskills')
-            ->first();
+        $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
 
-        $candidate_detail_change = CandidateDetailChange::where('candidate_detail_id', $candidate_detail->id)
-            ->where('status', 'pending')
-            ->with('candidateDetail', 'workExperienceChanges', 'educationChanges', 'achievementChanges', 'hardskillChanges',
-                'softskillChanges', 'interestChanges')
-            ->latest()
-            ->first();
+        $view_data = array_merge($view_data, ['cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
 
-        $work_experiences_not_udpated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('workExperienceChanges')
-            ->get();
-
-        $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('educationChanges')
-            ->get();
-
-        $achivements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('achievementChanges')
-            ->get();
-            
-        $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('hardskillChanges')
-            ->get();
-        
-        $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('softskillChanges')
-            ->get();
-        
-        $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('interestChanges')
-            ->get();
-
-        $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated($candidate_detail->user);
-
-        //$view_data = array_merge($view_data, ['candidate_detail','cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
-        
-        return view('client/job-portal/client/edit', compact('candidate_detail', 'candidate_detail_change', 'work_experiences_not_udpated',
-            'educations_not_updated', 'achivements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
-            'isCandidateDetailUpdated','candidate_detail','cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent'));
-
-        //return view('client/job-portal/client/edit', compact($view_data));
+        return view('client/job-portal/client/edit', compact($view_data));
     }
 
     // Store / Update a user's candidate profile details.
     public function upsertCandidateDetail(Request $request) {
-
         $validationRules = [
             'linkedin_link' => 'required|starts_with:https://www.linkedin.com',
             'preferred_working_location' => 'required',
@@ -210,6 +211,92 @@ class CandidateDetailController extends Controller
         return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 
+    // Create new workExperienceChange to edit an existing WorkExperience object.
+    public function updateWorkExperience(Request $request, $work_experience_id) {
+        $workExperience = WorkExperience::findOrFail($work_experience_id);
+
+        $validationRules = [
+            'company' => 'required',
+            'job_position' => 'required',
+            'start_date' => 'required|date_format:Y-m-d',
+            'location' => 'required'
+        ];
+
+        if ($request->end_date) {
+            $validationRules['end_date'] = 'date_format:Y-m-d';
+        }
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect(self::INDEX_URL_WITH_UPDATE_WORK_EXPERIENCE_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $candidateDetail = CandidateDetail::findOrFail($workExperience->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $workExperienceChange = WorkExperienceChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'work_experience_id' => $workExperience->id,
+            'action' => 'update'
+        ], [
+            'company' => $validated['company'],
+            'job_position' => $validated['job_position'],
+            'start_date' => $validated['start_date'],
+            'end_date' => array_key_exists('end_date', $validated) ?
+                $validated['end_date'] : null,
+            'location' => $validated['location']
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_WORK_EXPERIENCE_MODAL)->with('work_experience_update_message', $message);
+    }
+
+    // Update an existing WorkExperienceChange object. Only WorkExperienceChange which action are either
+    // create or update can be updated.
+    public function updateWorkExperienceChange(Request $request, $work_experience_change_id) {
+        $validationRules = [
+            'company' => 'required',
+            'job_position' => 'required',
+            'start_date' => 'required|date_format:Y-m-d',
+            'location' => 'required'
+        ];
+
+        if ($request->end_date) {
+            $validationRules['end_date'] = 'date_format:Y-m-d';
+        }
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect(self::INDEX_URL_WITH_UPDATE_WORK_EXPERIENCE_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $workExperienceChange = WorkExperienceChange::where('action', 'create')
+            ->orWhere('action', 'update')
+            ->update([
+                'company' => $validated['company'],
+                'job_position' => $validated['job_position'],
+                'start_date' => $validated['start_date'],
+                'end_date' => array_key_exists('end_date', $validated) ?
+                    $validated['end_date'] : null,
+                'location' => $validated['location']
+            ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_WORK_EXPERIENCE_MODAL)->with('work_experience_update_message', $message);
+    }
+
     // Store new Education in the database.
     public function storeEducation(Request $request) {
         $validationRules = [
@@ -257,6 +344,91 @@ class CandidateDetailController extends Controller
         return redirect(self::INDEX_URL_WITH_CREATE_EDUCATION_MODAL)->with('education_create_message', $message);
     }
 
+    // Create new educationChange to edit an existing Education object.
+    public function updateEducation(Request $request, $education_id) {
+        $education = Education::findOrFail($education_id);
+
+        $validationRules = [
+            'degree' => 'required',
+            'school' => 'required',
+            'major' => 'required',
+            'start_year' => 'required|integer|digits:4'
+        ];
+
+        if ($request->end_year) {
+            $validationRules['end_year'] = 'integer|digits:4|gte:start_year';
+        }
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $candidateDetail = CandidateDetail::findOrFail($workExperience->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $educationChange = EducationChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'education_id' => $education->id,
+            'action' => 'update'
+        ], [
+            'degree' => $validated['degree'],
+            'school' => $validated['school'],
+            'major' => $validated['major'],
+            'start_year' => $validated['start_year'],
+            'end_year' => array_key_exists('end_year', $validated) ?
+                $validated['end_year'] : null
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)->with('education_update_message', $message);
+    }
+
+    // Update existing EducationChange object.
+    public function updateEducationChange(Request $request, $education_change_id) {
+        $validationRules = [
+            'degree' => 'required',
+            'school' => 'required',
+            'major' => 'required',
+            'start_year' => 'required|integer|digits:4'
+        ];
+
+        if ($request->end_year) {
+            $validationRules['end_year'] = 'integer|digits:4|gte:start_year';
+        }
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $educationCange = EducationChange::where('action', 'create')
+            ->orWhere('action', 'update')
+            ->update([
+                'degree' => $validated['degree'],
+                'school' => $validated['school'],
+                'major' => $validated['major'],
+                'start_year' => $validated['start_year'],
+                'end_year' => array_key_exists('end_year', $validated) ?
+                    $validated['end_year'] : null,
+            ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)->with('education_update_message', $message);
+    }
+
     // Store new Achievement in the database.
     public function storeAchievement(Request $request) {
         $validationRules = [
@@ -296,6 +468,75 @@ class CandidateDetailController extends Controller
         return redirect(self::INDEX_URL_WITH_CREATE_ACHIEVEMENT_MODAL)->with('achievement_create_message', $message);
     }
 
+    // Create new achievementChange to edit an existing Achievement object.
+    public function updateAchievement(Request $request, $achievement_id) {
+        $achievement = Achievement::findOrFail($achievement_id);
+
+        $validationRules = [
+            'title' => 'required',
+            'location_of_event' => 'required',
+            'year' => 'required|integer|digits:4'
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_ACHIEVEMENT_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $candidateDetail = CandidateDetail::findOrFail($achievement->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $achievementChange = AchievementChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'achievement_id' => $achievement->id,
+            'action' => 'create'
+        ], [
+            'title' => $validated['title'],
+            'location_of_event' => $validated['location_of_event'],
+            'year' => $validated['year']
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_ACHIEVEMENT_MODAL)->with('achievement_update_message', $message);
+    }
+
+    // Update existing AchivementChange object in the database.
+    public function updateAchievementChange(Request $request, $achievement_change_id) {
+        $validationRules = [
+            'title' => 'required',
+            'location_of_event' => 'required',
+            'year' => 'required|integer|digits:4'
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_ACHIEVEMENT_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $achievementChange = AchievementChange::where('action', 'create')
+            ->orWhere('action', 'update')
+            ->update([
+                'title' => $validated['title'],
+                'location_of_event' => $validated['location_of_event'],
+                'year' => $validated['year']
+            ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_ACHIEVEMENT_MODAL)->with('achievement_update_message', $message);
+    }
+
     // Store new Achievement in the database.
     public function storeHardskill(Request $request) {
         $validationRules = [
@@ -331,6 +572,71 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
         return redirect(self::INDEX_URL_WITH_CREATE_HARDSKILL_MODAL)->with('hard_skills_create_message', $message);
+    }
+
+    // Create new hardskillChange to edit an existing Hardskill object.
+    public function updateHardskill(Request $request, $hardskill_id) {
+        $hardskill = Hardskill::findOrFail($hardskill_id);
+
+        $validationRules = [
+            'title' => 'required',
+            'score' => 'required|integer|digits:1|min:1|max:10'
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $candidateDetail = CandidateDetail::findOrFail($hardskill->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $hardskillChange = HardskillChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'hardskill_id' => $hardskill->id,
+            'action' => 'update'
+        ], [
+            'title' => $validated['title'],
+            'score' => $validated['score']
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('hardskill_update_message', $message);
+    }
+
+    // Method to update existing HardskillChange object in the database.
+    public function updateHardskillChange(Request $request, $hardskill_change_id) {
+        $validationRules = [
+            'title' => 'required',
+            'score' => 'required|integer|digits:1|min:1|max:10'
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $hardskillChange = HardskillChange::where('action', 'create')
+            ->orWhere('action', 'update')
+            ->update([
+                'title' => $validated['title'],
+                'score' => $validated['score']
+            ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('hardskill_update_message', $message);
     }
 
     // Store new Achievement in the database.
@@ -370,6 +676,71 @@ class CandidateDetailController extends Controller
         return redirect(self::INDEX_URL_WITH_CREATE_SOFTSKILL_MODAL)->with('soft_skills_create_message', $message);
     }
 
+    // Create new softskillChange to edit an existing Softskill object.
+    public function updateSoftskill(Request $request, $softskill_id) {
+        $softskill = Softskill::findOrFail($softskill_id);
+
+        $validationRules = [
+            'title' => 'required',
+            'score' => 'required|integer|digits:1|min:1|max:10'
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $candidateDetail = CandidateDetail::findOrFail($softskill->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $softskillChange = SoftskillChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'softskill_id' => $softskill->id,
+            'action' => 'update'
+        ], [
+            'title' => $validated['title'],
+            'score' => $validated['score']
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('softskill_update_message', $message);
+    }
+
+    // Method to update existing SoftskillChange in the database.
+    public function updateSoftskillChange(Request $request, $softskill_change_id) {
+        $validationRules = [
+            'title' => 'required',
+            'score' => 'required|integer|digits:1|min:1|max:10'
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $softskillChange = SoftskillChange::where('action', 'create')
+            ->orWhere('action', 'update')
+            ->update([
+                'title' => $validated['title'],
+                'score' => $validated['score']
+            ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('softskill_update_message', $message);
+    }
+
     // Store new Interest in the database.
     public function storeInterest(Request $request) {
         $validationRules = [
@@ -403,5 +774,62 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
         return redirect(self::INDEX_URL_WITH_CREATE_INTEREST_MODAL)->with('interests_create_message', $message);
+    }
+
+    // Create new interestChange to edit an existing Interest object.
+    public function updateInterest(Request $request, $interest_id) {
+        $interest = Interest::findOrFail($interest_id);
+        
+        $validator = Validator::make($request->all(), [
+            'title' => 'required'
+        ]);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_INTEREST_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $candidateDetail = CandidateDetail::findOrFail($interest->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $interestChange = InterestChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'interest_id' => $interest->id,
+            'action' => 'update'
+        ], [
+            'title' => $validated['title']
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_INTEREST_MODAL)->with('interest_update_message', $message);
+    }
+
+    // Method to update existing InterestChange object in the database.
+    public function updateInterestChange(Request $request, $interest_change_id) {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required'
+        ]);
+        
+        if ($validator->fails())
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_INTEREST_MODAL)
+                ->withErrors($validator)->withInput($request->all());
+
+        $validated = $validator->validate();
+
+        $interestChange = InterestChange::where('action', 'create')
+            ->orWhere('action', 'update')
+            ->update([
+                'title' => $validated['title']
+            ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect(self::INDEX_URL_WITH_UPDATE_INTEREST_MODAL)->with('interest_update_message', $message);
     }
 }

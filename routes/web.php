@@ -174,11 +174,23 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/', [CandidateDetailController::class, 'index'])->name('index');
         Route::post('/basic-info', [CandidateDetailController::class, 'upsertCandidateDetail'])->name('upsert-candidate-detail');
         Route::post('/work-experiences', [CandidateDetailController::class, 'storeWorkExperience'])->name('store-work-experience');
+        Route::put('/work-experiences/{work_experience_id}', [CandidateDetailController::class, 'updateWorkExperience'])->name('update-work-experience');
+        Route::put('/work-experience-changes/{work_experience_change_id}', [CandidateDetailController::class, 'updateWorkExperienceChange'])->name('update-work-experience-change');
         Route::post('/educations', [CandidateDetailController::class, 'storeEducation'])->name('store-education');
+        Route::put('/educations/{education_id}', [CandidateDetailController::class, 'updateEducation'])->name('update-education');
+        Route::put('/education-changes/{education_change_id}', [CandidateDetailController::class, 'updateEducationChange'])->name('update-education-change');
         Route::post('/achievements', [CandidateDetailController::class, 'storeAchievement'])->name('store-achievement');
+        Route::put('/achievements/{achievement_id}', [CandidateDetailController::class, 'updateAchievement'])->name('update-achievement');
+        Route::put('/achievement-changes/{achievement_change_id}', [CandidateDetailController::class, 'updateAchievementChange'])->name('update-achievement-change');
         Route::post('/hardskills', [CandidateDetailController::class, 'storeHardskill'])->name('store-hardskill');
+        Route::put('/hardskills/{hardskill_id}', [CandidateDetailController::class, 'updateHardskill'])->name('update-hardskill');
+        Route::put('/hardskill-changes/{hardskill_change_id}', [CandidateDetailController::class, 'updateHardskillChange'])->name('update-hardskill-change');
         Route::post('/softskills', [CandidateDetailController::class, 'storeSoftskill'])->name('store-softskill');
+        Route::put('/softskills/{softskill_id}', [CandidateDetailController::class, 'updateSoftskill'])->name('update-softskill');
+        Route::put('/softskill-change/{softskill_change_id}', [CandidateDetailController::class, 'updateSoftskillChange'])->name('update-softskill-change');
         Route::post('/interests', [CandidateDetailController::class, 'storeInterest'])->name('store-interest');
+        Route::put('/interests/{interest_id}', [CandidateDetailController::class, 'updateInterest'])->name('update-interest');
+        Route::put('/interest-changes/{interest_change_id}', [CandidateDetailController::class, 'updateInterestChange'])->name('update-interest-change');
     });
     /* END OF CANDIDATE DETAILS ROUTING */
 
@@ -395,6 +407,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/job-portal/{candidate_id}', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.candidates.showCandidate');
         Route::get('/job-portal/{candidate_detail_id}/changes', [AdminCandidateController::class, 'showCandidateChange'])->name('job-portal.candidates.showCandidateChange');
         Route::post('/job-portal/approve-change', [AdminCandidateController::class, 'approveChange'])->name('job-portal.candidates.approve-change');
+        Route::post('/job-portal/reject-change', [AdminCandidateController::class, 'rejectChange'])->name('job-portal.candidates.reject-change');
         // HashtagController
         Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
         Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');

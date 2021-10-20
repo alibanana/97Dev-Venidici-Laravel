@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <!-- show current profile -->
-                    @if ($isCandidateDetailNotUpdated != null)
+                    @if ($isCandidateDetailNotUpdated)
                     <div class="col-12 p-0" style="margin-top:4vw">
                         <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me (existing)</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Linked In: {{$candidate_detail->linkedin_link == null ? '-' : $candidate_detail->linkedin_link }}</p>
@@ -60,7 +60,6 @@
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">{{ $candidate_detail_change->about_me_description }}</p>
                         </div>
                     @endif
-  
                 </div>
 
             </div>
@@ -170,6 +169,7 @@
                     <div class="collapse show" id="collapseHardskills">
                         @foreach ($hardskills_not_updated as $hardskill)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
+                                <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p>
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $hardskill->title }}</p>
                                 <div style="padding-right:8vw;">   
                                     <div style="text-align:right">  
@@ -289,11 +289,11 @@
                     <div class="collapse show" id="collapseSoftSkills">
                         @foreach ($softskills_not_updated as $softskill)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
+                                <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p>
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $softskill->title }}</p>
-                                <div style="padding-right:8vw;">   
-                                    <div style="text-align:right">  
+                                <div style="padding-right:8vw;">
+                                    <div style="text-align:right">
                                         <p class="normal-text" style="font-family: Rubik Medium;color:#67BBA3;margin-bottom:0px;">{{ $softskill->score }}/10</p>
-
                                     </div>
                                     <div class="progress" style="height: 1.5vw;background-color:#AAD4C8 !important">
                                         <div class="progress-bar" role="progressbar" style="width: {{ $softskill->score * 10 }}%;background-color:#67BBA3" aria-valuenow="{{ $softskill->score * 10 }}" aria-valuemin="0" aria-valuemax="100"></div>

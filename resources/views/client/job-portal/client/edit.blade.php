@@ -323,12 +323,12 @@
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Work Experience</p>
 
                         @if (session()->has('work_experience_update_message'))
-                        <div class="p-3 mt-2 mb-0">
-                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('work_experience_update_message') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <div class="p-3 mt-2 mb-0">
+                                <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                                {{ session()->get('work_experience_update_message') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                     <!-- START OF LEFT SECTION -->
@@ -422,29 +422,10 @@
         </div>
         END OF ONE CARD -->
 
-        @foreach ($work_experiences_not_udpated as $workExperience)
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#we-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
-        @endforeach
-        @foreach ($candidate_detail_change->workExperienceChanges as $workExperienceChange)
-            <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-                @if ($workExperienceChange->action == 'create')
+        @isset($work_experiences_not_udpated)
+            @foreach ($work_experiences_not_udpated as $workExperience)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
                     <div>   
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
                         <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
                         <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
@@ -458,47 +439,70 @@
                         <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                         </form>
                     </div>
-                @elseif ($workExperienceChange->action == 'update')
-                    <div>   
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
-                        <br>
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
-                    </div>
-                    <div style="display:flex;align-items:center">
-                        <a href="#we-update" style="color:#2B6CAA">
-                            <i class="fas fa-edit bigger-text"></i>
-                        </a>
-                        <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                        </form>
-                    </div>
-                @elseif ($workExperienceChange->action == 'delete')
-                    <div>   
-                        <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
-                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
-                    </div>
-                    <div style="display:flex;align-items:center">
-                        <a href="#we-update" style="color:#2B6CAA">
-                            <i class="fas fa-edit bigger-text"></i>
-                        </a>
-                        <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                        </form>
-                    </div>
-                @endif
-            </div>
-        @endforeach
+                </div>
+            @endforeach
+        @endisset
+        @isset($candidate_detail_change->workExperienceChanges)
+            @foreach ($candidate_detail_change->workExperienceChanges as $workExperienceChange)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    @if ($workExperienceChange->action == 'create')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($workExperienceChange->action == 'update')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                            <br>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($workExperienceChange->action == 'delete')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        @endisset
     </div>
 </div>
 <!-- END OF Work Experience -->
@@ -1295,7 +1299,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <input name="title"  value="{{ old('title') }}" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Komunikasi" >
-                        </div>  
+                        </div>
                         @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
