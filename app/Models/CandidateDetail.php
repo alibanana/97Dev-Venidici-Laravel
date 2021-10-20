@@ -16,7 +16,10 @@ class CandidateDetail extends Model
         'preferred_working_location',
         'linkedin_link',
         'whatsapp_number',
-        'about_me_description'
+        'about_me_description',
+        'experience_year',
+        'industry',
+        'cv_file'
     ];
 
     public function user() {

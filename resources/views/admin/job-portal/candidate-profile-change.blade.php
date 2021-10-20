@@ -34,8 +34,8 @@
                             @if ($candidate_detail_change->about_me_description != null)
                                 <p class="bigger-text" style="font-family: Rubik Regular;color:#FFFFFF">I have {{$candidate_detail_change->experience_year}} in {{$candidate_detail_change->industry}} ({{$candidate_detail_change->status}})</p>
                             @endif
-                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Phone: {{$candidate_detail->whatsapp_number == null ? '-' : $candidate_detail->whatsapp_number }}</p>
-                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail->preferred_working_location == null ? '-' : $candidate_detail->preferred_working_location }}</p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Phone: {{$candidate_detail->whatsapp_number == null ? $candidate_detail_change->whatsapp_number : $candidate_detail->whatsapp_number }}</p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail->preferred_working_location == null ? $candidate_detail_change->preferred_working_location : $candidate_detail->preferred_working_location }}</p>
                             <div style="display:flex;align-items:center;margin-top:3vw">   
                                 <div>
                                     <a href="" class="a-white" style="">Download CV</a>

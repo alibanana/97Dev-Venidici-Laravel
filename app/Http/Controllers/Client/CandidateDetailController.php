@@ -77,15 +77,14 @@ class CandidateDetailController extends Controller
                 ->latest()
                 ->first();
 
-            $work_experiences_not_udpated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
+            $work_experiences_not_updated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
                 ->doesntHave('workExperienceChanges')
                 ->get();
 
             $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
                 ->doesntHave('educationChanges')
                 ->get();
-
-            $achivements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
+            $achievements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
                 ->doesntHave('achievementChanges')
                 ->get();
                 
@@ -101,8 +100,8 @@ class CandidateDetailController extends Controller
                 ->doesntHave('interestChanges')
                 ->get();
 
-            $view_data = array_merge($view_data, ['candidate_detail', 'candidate_detail_change', 'work_experiences_not_udpated',
-            'educations_not_updated', 'achivements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
+            $view_data = array_merge($view_data, ['candidate_detail', 'candidate_detail_change', 'work_experiences_not_updated',
+            'educations_not_updated', 'achievements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
             'isCandidateDetailUpdated']);
         }
         
@@ -117,6 +116,60 @@ class CandidateDetailController extends Controller
         $view_data = array_merge($view_data, ['cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
 
         return view('client/job-portal/client/edit', compact($view_data));
+    }
+
+    public function show_profile(){
+        $agent = new Agent();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        
+        $view_data = [];
+        if (Auth::user()->candidateDetail()->exists()) {
+            $candidate_detail = CandidateDetail::where('user_id', Auth::user()->id)
+                ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
+                ->first();
+
+            $work_experiences_not_updated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('workExperienceChanges')
+                ->get();
+
+            $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('educationChanges')
+                ->get();
+
+            $achievements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('achievementChanges')
+                ->get();
+                
+            $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('hardskillChanges')
+                ->get();
+            $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('softskillChanges')
+                ->get();
+            
+            $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)
+                ->doesntHave('interestChanges')
+                ->get();
+
+            $view_data = array_merge($view_data, ['candidate_detail','work_experiences_not_updated',
+            'educations_not_updated', 'achievements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
+            'isCandidateDetailUpdated']);
+        }
+        else{
+            return redirect()->route(self::INDEX_ROUTE);
+        }
+        
+        $this->resetNavbarData();
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+
+        $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
+
+        $view_data = array_merge($view_data, ['cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
+
+        return view('client/job-portal/client/bootcamp-profile', compact($view_data));
     }
 
     // Store / Update a user's candidate profile details.
@@ -208,7 +261,8 @@ class CandidateDetailController extends Controller
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect(self::INDEX_URL_WITH_CREATE_WORK_EXPERIENCE_MODAL)->with('work_experience_create_message', $message);
+
     }
 
     // Create new workExperienceChange to edit an existing WorkExperience object.
@@ -367,7 +421,7 @@ class CandidateDetailController extends Controller
 
         $validated = $validator->validate();
 
-        $candidateDetail = CandidateDetail::findOrFail($workExperience->candidate_detail_id);
+        $candidateDetail = CandidateDetail::findOrFail($education->candidate_detail_id);
 
         $candidateDetailChange = CandidateDetailChange::firstOrCreate([
             'candidate_detail_id' => $candidateDetail->id,
@@ -541,7 +595,7 @@ class CandidateDetailController extends Controller
     public function storeHardskill(Request $request) {
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|digits:1|min:1|max:10'
+            'score' => 'required|integer|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
@@ -643,7 +697,7 @@ class CandidateDetailController extends Controller
     public function storeSoftskill(Request $request) {
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|digits:1|min:1|max:10'
+            'score' => 'required|integer|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);

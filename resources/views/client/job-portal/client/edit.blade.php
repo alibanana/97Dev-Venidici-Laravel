@@ -43,7 +43,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-user"></i>
-            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%"
+            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
                 placeholder="Masukkan nama" value="{{ old('name', Auth::user()->name) }}">
         </div>  
         @error('name')
@@ -62,8 +62,8 @@
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
             <input type="date" class="normal-text"
-                style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;"
-                placeholder="yyyy-mm-dd" value="{{ $date }}" disabled>
+                style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%;"
+                placeholder="yyyy-mm-dd" value="{{ $date }}" readonly>
         </div>
 
         @if(session('date_message'))
@@ -80,7 +80,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
-            <input value="{{old('linkedin_link', 'active or pending')}}"  type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
+            <input value="{{old('linkedin_link', $candidate_detail_change->linkedin_link != null ? $candidate_detail_change->linkedin_link : $candidate_detail->linkedin_link)}}"  type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
         </div>   
         @error('linkedin_link')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -94,7 +94,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-            <input readonly type="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan email"
+            <input readonly type="email" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan email"
             @if(Auth::check())
                 value="{{old('email', Auth::user()->email)}}"
             @else
@@ -110,7 +110,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Prefered Working Location (Province)</p>
         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-map"></i>
-            <input value="{{old('preferred_working_location', 'active or pending')}}"  name="preferred_working_location" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra" 
+            <input value="{{old('preferred_working_location', $candidate_detail_change->preferred_working_location != null ? $candidate_detail_change->preferred_working_location : $candidate_detail->preferred_working_location)}}"  name="preferred_working_location" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra" 
             value=""
             >
         </div>  
@@ -122,7 +122,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Whatsapp</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-            <input disabled readonly name="whatsapp_number" type="text" class="normal-text" placeholder="Masukkan Nomor Telepon"
+            <input readonly name="whatsapp_number" type="text" class="normal-text" placeholder="Masukkan Nomor Telepon"
                 style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%"
                 value="{{ old('whatsapp_number', Auth::user()->userDetail->telephone) }}">
         </div>  
@@ -147,10 +147,13 @@
             <i style="color:#DAD9E2" class="fas fa-user popup-krest-font"></i>
             <select name="experience_year" id="" class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
                 <option disabled selected>Choose Answer</option>
-                <option value="Less than 1 Year of Experience" > < 1 Year of Experience</option>
-                <option value="Less than 2 Years of Experience" > < 2 Years of Experience</option>
-                <option value="Less than 3 Years of Experience" > < 3 Years of Experience</option>
-                <option value="More than 4 Years of Experience" > > 3 Years of Experience</option>
+                @php
+                $experience = $candidate_detail_change->experience_year != null ? $candidate_detail_change->experience_year : $candidate_detail->experience_year
+                @endphp
+                <option value="Less than 1 Year of Experience" @if($experience == 'Less than 1 Year of Experience') selected @endif > < 1 Year of Experience</option>
+                <option value="Less than 2 Years of Experience" @if($experience == 'Less than 2 Years of Experience') selected @endif> < 2 Years of Experience</option>
+                <option value="Less than 3 Years of Experience" @if($experience == 'Less than 3 Years of Experience') selected @endif> < 3 Years of Experience</option>
+                <option value="More than 3 Years of Experience" @if($experience == 'More than 3 Years of Experience') selected @endif> > 3 Years of Experience</option>
             </select>
         </div> 
         @error('experience_year')
@@ -163,7 +166,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Industry</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-building"></i>
-            <input value="{{ old('industry') }}" type="text" name="industry" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Industri Pekerjaan" >
+            <input value="{{old('industry', $candidate_detail_change->industry != null ? $candidate_detail_change->industry : $candidate_detail->industry)}}"  type="text" name="industry" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Industri Pekerjaan" >
         </div>   
         @error('industry')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -180,7 +183,7 @@
         <p class="medium-heading" style="font-family:Rubik Bold;color:#2B6CAA">Resume</p>
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">About me</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-            <textarea name="about_me_description" value="{{old('about_me_description')}}" rows="6" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="This is an example." >{{old('about_me_description')}}</textarea>
+            <textarea name="about_me_description" value="{{old('about_me_description', $candidate_detail_change->about_me_description != null ? $candidate_detail_change->about_me_description : $candidate_detail->about_me_description)}}" rows="6" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="This is an example." >{{old('about_me_description', $candidate_detail_change->about_me_description != null ? $candidate_detail_change->about_me_description : $candidate_detail->about_me_description)}}</textarea>
         </div>  
         @error('about_me_description')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -190,7 +193,15 @@
     </div>
     <div class="col-12 p-0">
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">CV / Resume</p>
-        <a href="" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw">VIEW MY CV</a>
+        @php
+            $cv_file = $candidate_detail_change->cv_file != null ? $candidate_detail_change->cv_file : $candidate_detail->cv_file
+        @endphp
+
+        @if($candidate_detail_change->cv_file != null)
+        <div style="margin-bottom:2vw">
+            <a href="{{$cv_file}}" target="_blank" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;">View my current CV</a>
+        </div>
+        @endif
         <div class="drop-zone">
             <span class="drop-zone__prompt" style="font-family:Rubik Regular;color:black;font-size:1.7vw"> <span style="color:#3F92D8" >Upload a file</span> or drag and drop here</span>
             <input type="file"  name="cv_file" class="drop-zone__input" accept=".pdf">
@@ -315,9 +326,10 @@
         <a class="close" href="#closed" >&times;</a>
     
         <div class="content" style="padding:2vw">
-            
-            <form action="" method="POST" enctype="multipart/form-data">
+
+            <form id="workExperienceForm" action="" method="POST">
             @csrf
+            @method('put')
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Work Experience</p>
@@ -335,9 +347,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Company</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="PT. John Doe" >
+                            <input name="company" id="workExperienceCompany" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="PT. John Doe" >
                         </div>  
-                        @error('name')
+                        @error('company')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -347,15 +359,25 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Start Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
+                                    <input type="date" name="start_date" id="workExperienceStart_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
+                                @error('start_date')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-lg-6 col-xs-12 ps-0">
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">End Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
+                                    <input type="date" name="end_date" id="workExperienceEnd_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
                                 </div> 
+                                @error('end_date')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div> 
@@ -364,18 +386,18 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Job Position</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Sales Manager" >
+                            <input name="job_position" id="workExperienceJob_position" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Sales Manager" >
                         </div>  
-                        @error('name')
+                        @error('job_position')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Location</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="DKI Jakarta" >
+                            <input name="location" id="workExperienceLocation" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="DKI Jakarta" >
                         </div>  
-                        @error('name')
+                        @error('location')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -421,9 +443,8 @@
             </div>
         </div>
         END OF ONE CARD -->
-
-        @isset($work_experiences_not_udpated)
-            @foreach ($work_experiences_not_udpated as $workExperience)
+        @isset($work_experiences_not_updated)
+            @foreach ($work_experiences_not_updated as $workExperience)
                 <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
                     <div>   
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
@@ -432,30 +453,31 @@
                         <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
                     </div>
                     <div style="display:flex;align-items:center">
-                        <a href="#we-update" style="color:#2B6CAA">
-                            <i class="fas fa-edit bigger-text"></i>
+                        <a  href="#we-update"  style="color:#2B6CAA">
+                            <i onclick="passWorkExperience('{{ $workExperience->company }}', '{{$workExperience->job_position}}', '{{$workExperience->start_date}}', '{{$workExperience->end_date}}', '{{$workExperience->location}}', '{{route('candidate-detail.update-work-experience', $workExperience->id)}}' )" class="fas fa-edit bigger-text"></i>
                         </a>
                         <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                         </form>
                     </div>
                 </div>
             @endforeach
         @endisset
+       
         @isset($candidate_detail_change->workExperienceChanges)
             @foreach ($candidate_detail_change->workExperienceChanges as $workExperienceChange)
                 <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
                     @if ($workExperienceChange->action == 'create')
                         <div>   
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperienceChange->start_date }} - {{ $workExperienceChange->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperienceChange->location }}</p>
                         </div>
                         <div style="display:flex;align-items:center">
                             <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
+                                <i onclick="passWorkExperience('{{ $workExperienceChange->company }}', '{{$workExperienceChange->job_position}}', '{{$workExperienceChange->start_date}}', '{{$workExperienceChange->end_date}}', '{{$workExperienceChange->location}}', '{{route('candidate-detail.update-work-experience-change', $workExperienceChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
                             <form style="margin-left:1vw" action=""> 
                             <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
@@ -464,20 +486,20 @@
                     @elseif ($workExperienceChange->action == 'update')
                         <div>   
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->workExperience->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->workExperience->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperienceChange->workExperience->start_date }} - {{ $workExperienceChange->workExperience->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperienceChange->workExperience->location }}</p>
                             <br>
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">Updated</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperienceChange->start_date }} - {{ $workExperienceChange->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperienceChange->location }}</p>
                         </div>
                         <div style="display:flex;align-items:center">
                             <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
+                                <i onclick="passWorkExperience('{{ $workExperienceChange->company }}', '{{$workExperienceChange->job_position}}', '{{$workExperienceChange->start_date}}', '{{$workExperienceChange->end_date}}', '{{$workExperienceChange->location}}', '{{route('candidate-detail.update-work-experience-change', $workExperienceChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
                             <form style="margin-left:1vw" action=""> 
                             <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
@@ -486,18 +508,12 @@
                     @elseif ($workExperienceChange->action == 'delete')
                         <div>   
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->job_position }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperience->company }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperience->location }}</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperienceChange->start_date }} - {{ $workExperienceChange->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperienceChange->location }}</p>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
-                            </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                            </form>
                         </div>
                     @endif
                 </div>
@@ -610,8 +626,9 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form id="educationForm" action="" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('put')
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Education</p>
@@ -629,18 +646,18 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Degree</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="High School Diploma" >
+                            <input name="degree" id="educationDegree" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="High School Diploma" >
                         </div>  
-                        @error('name')
+                        @error('degree')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Major</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Bisnis Informatik" >
+                            <input name="major" id="educationMajor" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Bisnis Informatik" >
                         </div>  
-                        @error('name')
+                        @error('major')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -652,9 +669,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">School</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="SMAN 123" >
+                            <input name="school" id="educationSchool" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="SMAN 123" >
                         </div>  
-                        @error('name')
+                        @error('school')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -664,15 +681,25 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Start Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
+                                    <input type="number" name="start_year" id="educationStart_year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy">
                                 </div> 
+                                @error('start_year')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-lg-6 col-xs-12 ps-0">
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Graduate Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
+                                    <input type="number" name="end_year" id="educationEnd_year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy">
                                 </div> 
+                                @error('end_year')
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -699,38 +726,78 @@
     </div>
     <div class="col-12 p-0">
         <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SD Nusantara</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#edu-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
-        <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SMP GLOBAL JAYA</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#edu-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
+        @isset($educations_not_updated)
+            @foreach ($educations_not_updated as $education)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    <div>   
+                    <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $education->school }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $education->degree }} | {{ $education->major }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $education->start_year }} - {{ $education->end_year ?? 'Until Now' }}</p>
+                    </div>
+                    <div style="display:flex;align-items:center">
+                        <a href="#edu-update" style="color:#2B6CAA">
+                            <i onclick="passEducation('{{ $education->degree }}', '{{$education->school}}', '{{$education->major}}', '{{$education->start_year}}', '{{$education->end_year}}', '{{route('candidate-detail.update-education', $education->id)}}' )" class="fas fa-edit bigger-text"></i>
+
+                        </a>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        @endisset
+       
+        @isset($candidate_detail_change->educationChanges)
+            @foreach ($candidate_detail_change->educationChanges as $educationChange)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    @if ($educationChange->action == 'create')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->school }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->degree }} | {{ $educationChange->major }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $educationChange->start_year }} - {{ $educationChange->end_year ?? 'Until Now' }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#edu-update" style="color:#2B6CAA">
+                                <i onclick="passEducation('{{ $educationChange->degree }}', '{{$educationChange->school}}', '{{$educationChange->major}}', '{{$educationChange->start_year}}', '{{$educationChange->end_year}}', '{{route('candidate-detail.update-education-change', $educationChange->id)}}' )" class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($educationChange->action == 'update')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->education->degree }} | {{ $educationChange->education->school }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->education->major }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $educationChange->education->start_year }} - {{ $educationChange->education->end_year ?? 'Until Now' }}</p>
+                            <br>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">Updated</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->degree }} | {{ $educationChange->school }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->major }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $educationChange->start_year }} - {{ $educationChange->end_year ?? 'Until Now' }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#edu-update" style="color:#2B6CAA">
+                                <i onclick="passEducation('{{ $educationChange->degree }}', '{{$educationChange->school}}', '{{$educationChange->major}}', '{{$educationChange->start_year}}', '{{$educationChange->end_year}}', '{{route('candidate-detail.update-education-change', $educationChange->id)}}' )" class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($educationChange->action == 'delete')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->degree }} | {{ $educationChange->school }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->major }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $educationChange->start_year }} - {{ $educationChange->end_year ?? 'Until Now' }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        @endisset
         <!-- END OF ONE CARD -->
     </div>
 </div>
@@ -891,38 +958,81 @@
     </div>
     <div class="col-12 p-0">
         <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SD Nusantara</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#achievement-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
-        <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SMP GLOBAL JAYA</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#achievement-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
+        @isset($achievements_not_updated)
+            @foreach ($achievements_not_updated as $achievement)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    <div>   
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievement->title }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievement->location_of_event }} </p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievement->year }}</p>
+                    </div>
+                    <div style="display:flex;align-items:center">
+                        <a href="#we-update" style="color:#2B6CAA">
+                            <i class="fas fa-edit bigger-text"></i>
+                        </a>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        @endisset
+       
+        @isset($candidate_detail_change->achievementChanges)
+            @foreach ($candidate_detail_change->achievementChanges as $achievementChange)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    @if ($achievementChange->action == 'create')
+                        <div> 
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->location_of_event }} </p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->year }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($achievementChanges->action == 'update')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->achievement->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->achievement->location_of_event }} </p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->achievement->year }}</p>
+                            <br>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">Updated</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->location_of_event }} </p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->year }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($achievementChanges->action == 'delete')
+                        <div>   
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->location_of_event }} </p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->year }}</p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        @endisset
         <!-- END OF ONE CARD -->
     </div>
 </div>
@@ -968,7 +1078,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Hard Skill Score</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <span style="margin-right:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">1</span>
-                            <input type="range"  name="score"  value="{{ old('score') }}" class="form-range" min="0" max="10" id="customRange2">
+                            <input type="range"  name="score"  value="{{ old('score') }}" class="form-range" min="1" max="10" id="customRange2">
                             <span style="margin-left:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">10</span>
                         </div>  
                         @error('score')
@@ -1030,7 +1140,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Hard Skill Score</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <span style="margin-right:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">1</span>
-                            <input type="range" class="form-range" min="0" max="10" id="customRange2">
+                            <input type="range" class="form-range" min="1" max="10" id="customRange2">
                             <span style="margin-left:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">10</span>
                         </div>  
                         @error('name')
@@ -1062,38 +1172,76 @@
     </div>
     <div class="col-12 p-0">
         <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SD Nusantara</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#hs-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
-        <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SMP GLOBAL JAYA</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#hs-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
+        @isset($hardskills_not_updated)
+            @foreach ($hardskills_not_updated as $hard_skill)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    <div>   
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hard_skill->title }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $hard_skill->score }} </p>
+                    </div>
+                    <div style="display:flex;align-items:center">
+                        <a href="#we-update" style="color:#2B6CAA">
+                            <i class="fas fa-edit bigger-text"></i>
+                        </a>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        @endisset
+       
+        @isset($candidate_detail_change->hardskillChanges)
+            @foreach ($candidate_detail_change->hardskillChanges as $hardskillChange)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    @if ($workExperienceChange->action == 'create')
+                        <div> 
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->score }} </p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($hardskillChanges->action == 'update')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->hardskill->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->hardskill->score }} </p>
+                            <br>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Update</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->score }} </p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($hardskillChanges->action == 'delete')
+                        <div>   
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->score }} </p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        @endisset
         <!-- END OF ONE CARD -->
     </div>
 </div>
@@ -1140,7 +1288,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Soft Skill Score</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <span style="margin-right:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">1</span>
-                            <input type="range" name="score"  value="{{ old('score') }}" class="form-range" min="0" max="10" id="customRange2">
+                            <input type="range" name="score"  value="{{ old('score') }}" class="form-range" min="1" max="10" id="customRange2">
                             <span style="margin-left:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">10</span>
                         </div>  
                         @error('score')
@@ -1202,7 +1350,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Soft Skill Score</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <span style="margin-right:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">1</span>
-                            <input type="range" class="form-range" min="0" max="10" id="customRange2">
+                            <input type="range" class="form-range" min="1" max="10" id="customRange2">
                             <span style="margin-left:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">10</span>
                         </div>  
                         @error('name')
@@ -1235,38 +1383,76 @@
     </div>
     <div class="col-12 p-0">
         <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SD Nusantara</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2020</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#ss-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
-        <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-        <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-            <div>   
-                <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">SMP GLOBAL JAYA</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">Feb 2017</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">DKI Jakarta</p>
-            </div>
-            <div style="display:flex;align-items:center">
-                <a href="#ss-update" style="color:#2B6CAA">
-                    <i class="fas fa-edit bigger-text"></i>
-                </a>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        </div>
+        @isset($softskills_not_updated)
+            @foreach ($softskills_not_updated as $soft_skill)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    <div>   
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $soft_skill->title }}</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $soft_skill->score }} </p>
+                    </div>
+                    <div style="display:flex;align-items:center">
+                        <a href="#we-update" style="color:#2B6CAA">
+                            <i class="fas fa-edit bigger-text"></i>
+                        </a>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        @endisset
+       
+        @isset($candidate_detail_change->softskillChanges)
+            @foreach ($candidate_detail_change->softskillChanges as $softSkillChange)
+                <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
+                    @if ($softSkillChange->action == 'create')
+                        <div> 
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $softSkillChange->score }} </p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($softskillChanges->action == 'update')
+                        <div>   
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->softskill->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $softSkillChange->softskill->score }} </p>
+                            <br>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">Updated</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $softSkillChange->score }} </p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @elseif ($softskillChanges->action == 'delete')
+                        <div>   
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $softSkillChange->score }} </p>
+                        </div>
+                        <div style="display:flex;align-items:center">
+                            <a href="#we-update" style="color:#2B6CAA">
+                                <i class="fas fa-edit bigger-text"></i>
+                            </a>
+                            <form style="margin-left:1vw" action=""> 
+                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        @endisset
         <!-- END OF ONE CARD -->
     </div>
 </div>
@@ -1377,54 +1563,64 @@
     <div class="col-12 p-0">
         <div style="display:flex;align-items:center;flex-wrap:wrap">
         <!-- START OF ONE CARD -->
-            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
-                <p class="normal-text" style="margin-bottom:0px">Information Technology</p>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
-                <p class="normal-text" style="margin-bottom:0px">Pencuri Hati</p>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
-                <p class="normal-text" style="margin-bottom:0px">Menantu Ibu-mu</p>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
-                <p class="normal-text" style="margin-bottom:0px">Data Analyst</p>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
-        <!-- END OF ONE CARD -->
-        <!-- START OF ONE CARD -->
-            <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
-                <p class="normal-text" style="margin-bottom:0px">Menantu Ibu-mu</p>
-                <form style="margin-left:1vw" action=""> 
-                <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
-                </form>
-            </div>
+        @isset($interests_not_updated)
+            @foreach ($interests_not_updated as $interest)
+                <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+                    <p class="normal-text" style="margin-bottom:0px">{{$interest->title}}</p>
+                    <form style="margin-left:1vw" action=""> 
+                    <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                    </form>
+                </div>
+            @endforeach
+        @endisset
+       
+        @isset($candidate_detail_change->interestChanges)
+            @foreach ($candidate_detail_change->interestChanges as $interestChange)
+                <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+                    @if ($softSkillChange->action == 'create')
+                        <p class="normal-text" style="margin-bottom:0px">(NEW) - {{$interestChange->title}}</p>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                        </form>
+                    @elseif ($interestChanges->action == 'delete')
+                        <p class="normal-text" style="margin-bottom:0px">(DELETED) - {{$interestChange->title}}</p>
+                        <form style="margin-left:1vw" action=""> 
+                        <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                        </form>
+                    @endif
+                </div>
+            @endforeach
+        @endisset
         <!-- END OF ONE CARD -->
         </div>
     </div>
 </div>
 <!-- END OF Interests -->
+<script>
+    function passWorkExperience(company, job_position, start_date, end_date, location, route) {
+		document.getElementById("workExperienceCompany").value      = company;
+		document.getElementById("workExperienceJob_position").value = job_position;
+		document.getElementById("workExperienceStart_date").value   = start_date;
+		document.getElementById("workExperienceEnd_date").value     = end_date;
+		document.getElementById("workExperienceLocation").value     = location;
+		document.getElementById("workExperienceForm").action        = route;
+    }
+</script>
 
-
-
+<script>
+    function passEducation(degree, school, major,start_year, end_year, route) {
+		document.getElementById("educationDegree").value        = degree;
+		document.getElementById("educationSchool").value        = school;
+		document.getElementById("educationMajor").value         = major;
+		document.getElementById("educationStart_year").value    = start_year;
+		document.getElementById("educationEnd_year").value      = end_year;
+		document.getElementById("educationForm").action         = route;
+    }
+</script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="/js/main.js"></script>
+
+
 
 @endsection
