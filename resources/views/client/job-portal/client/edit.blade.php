@@ -5,7 +5,7 @@
 
 <!-- start of candidate detail form -->
 
-<form action="{{route('candidate-detail.upsert-candidate-detail')}}" method="POST"  enctype="multipart/form-data">
+<form action="{{route('candidate-detail.upsert-candidate-detail')}}" method="POST" enctype="multipart/form-data">
 @csrf
 <!-- Modal VA -->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -122,7 +122,7 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Whatsapp</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
-            <input disabled readonly name="whatsapp_number" type="text" class="normal-text" placeholder="Masukkan Nomor Telepon"
+            <input name="whatsapp_number" type="text" class="normal-text" placeholder="Masukkan Nomor Telepon"
                 style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%"
                 value="{{ old('whatsapp_number', Auth::user()->userDetail->telephone) }}">
         </div>  

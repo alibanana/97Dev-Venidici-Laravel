@@ -172,12 +172,8 @@ class CandidateController extends Controller
 
     private function updateCandidateDetail(CandidateDetailChange $candidateDetailChange) {
         // Updates Candidate Detail.
-        CandidateDetail::where('id', $candidateDetailChange->candidate_detail_id)->update([
-            'preferred_working_location' => $candidateDetailChange['preferred_working_location'],
-            'linkedin_link' => $candidateDetailChange['linkedin_link'],
-            'whatsapp_number' => $candidateDetailChange['whatsapp_number'],
-            'about_me_description' => $candidateDetailChange['about_me_description']
-        ]);
+        $candidateDetailData = $this->constructCandidateDetailDataAndUnlinkExistingCV($candidateDetailChange);
+        CandidateDetail::where('id', $candidateDetailChange->candidate_detail_id)->update($candidateDetailData);
 
         if ($candidateDetailChange->workExperienceChanges()->exists()) {
             foreach ($candidateDetailChange->workExperienceChanges as $workExperienceChange) {
@@ -217,6 +213,25 @@ class CandidateController extends Controller
 
         $candidateDetailChange->status = 'approved';
         $candidateDetailChange->save();
+    }
+
+    private function constructCandidateDetailDataAndUnlinkExistingCV(CandidateDetailChange $candidateDetailChange) {
+        $data = [
+            'preferred_working_location' => $candidateDetailChange['preferred_working_location'],
+            'linkedin_link' => $candidateDetailChange['linkedin_link'],
+            'whatsapp_number' => $candidateDetailChange['whatsapp_number'],
+            'about_me_description' => $candidateDetailChange['about_me_description'],
+            'experience_year' => $candidateDetailChange['experience_year'],
+            'industry' => $candidateDetailChange['industry']
+        ];
+
+        // If candidateDetailChange have cv_file, unlink previous and include in update data.
+        if ($candidateDetailChange->hasAttribute('cv_file') && !is_null($candidateDetailChange->cv_file)) {
+            unlink($candidateDetailChange->candidateDetail->cv_file);
+            $data['cv_file'] = $candidateDetailChange['cv_file'];
+        }
+
+        return $data;
     }
 
     private function processWorkExperienceChange(WorkExperienceChange $workExperienceChange) {
@@ -350,6 +365,10 @@ class CandidateController extends Controller
 
         $candidate_detail_change->status = 'cancelled';
         $candidate_detail_change->save();
+
+        if ($candidateDetailChange->hasAttribute('cv_file') && !is_null($candidateDetailChange->cv_file)) {
+            unlink($candidateDetailChange->cv_file);
+        }
         
         $message = 'Candidate Detail Changes for user (' . $candidate_detail_change->candidateDetail->user->name . ') has been rejected!';
 

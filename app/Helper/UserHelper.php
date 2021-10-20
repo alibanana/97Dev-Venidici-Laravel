@@ -31,16 +31,19 @@ class UserHelper {
     public static function isCandidateDetailEmpty($user) {
         if ($user->candidateDetail()->exists()) {
             $candidateDetail = $user->candidateDetail;
-            return $candidateDetail->preferred_working_location != null ||
-                $candidateDetail->linkedin_link != null ||
-                $candidateDetail->whatsapp_number != null ||
-                $candidateDetail->about_me_description != null ||
-                $candidateDetail->workExperiences()->exists() ||
-                $candidateDetail->educations()->exists() ||
-                $candidateDetail->achievements()->exists() ||
-                $candidateDetail->hardskills()->exists() ||
-                $candidateDetail->softskills()->exists() ||
-                $candidateDetail->interests()->exists();
+            return $candidateDetail->preferred_working_location == null ||
+                $candidateDetail->linkedin_link == null ||
+                $candidateDetail->whatsapp_number == null ||
+                $candidateDetail->about_me_description == null ||
+                $candidateDetail->experience_year == null ||
+                $candidateDetail->industry == null ||
+                $candidateDetail->cv_file == null;
+                // !$candidateDetail->workExperiences()->exists() ||
+                // !$candidateDetail->educations()->exists() ||
+                // !$candidateDetail->achievements()->exists() ||
+                // !$candidateDetail->hardskills()->exists() ||
+                // !$candidateDetail->softskills()->exists() ||
+                // !$candidateDetail->interests()->exists();
         }
         return true;
     }

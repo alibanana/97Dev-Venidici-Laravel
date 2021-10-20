@@ -45,6 +45,8 @@ class CandidateDetailController extends Controller
     private const INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL = '/candidate-details#hs-update';
     private const INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL = '/candidate-details#ss-update';
     private const INDEX_URL_WITH_UPDATE_INTEREST_MODAL = '/candidate-details#interest-update';
+
+    private const BOOTCAMP_CV_PATH = 'storage/documents/bootcamp/cv/';
     
     private $notifications; // Stores combined notifications data.
     private $informations; // Stores notification (isInformation == true) data.
@@ -128,8 +130,12 @@ class CandidateDetailController extends Controller
             'about_me_description' => 'required',
             'experience_year' => 'required',
             'industry' => 'required',
-            'cv_file' => 'required|mimes:pdf',
+            'cv_file' => 'mimes:pdf',
         ];
+
+        if (UserHelper::isCandidateDetailEmpty(Auth::user())) {
+            $validationRules['cv_file'] = 'required|mimes:pdf';
+        } 
 
         $validator = Validator::make($request->all(), $validationRules);
         
@@ -155,7 +161,8 @@ class CandidateDetailController extends Controller
                 'about_me_description' => $validated['about_me_description'],
                 'experience_year' => $validated['experience_year'],
                 'industry' => $validated['industry'],
-                'cv_file' => Helper::storeFile($request->file('cv_file'), 'storage/documents/bootcamp/cv/')
+                'cv_file' => $request->has('cv_file') ?
+                    Helper::storeFile($request->file('cv_file'), self::BOOTCAMP_CV_PATH) : null
             ]
         );
 
