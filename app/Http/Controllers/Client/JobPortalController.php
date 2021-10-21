@@ -29,18 +29,19 @@ class JobPortalController extends Controller
     // Shows the Client Job Portal Page. 
     public function index() {
         $agent = new Agent();
+
         $footer_reviews = Review::orderBy('created_at', 'desc')->get()->take(2);
-        if(Auth::check()) {
-            $this->resetNavbarData();
-            $notifications = $this->notifications;
-            $informations = $this->informations;
-            $transactions = $this->transactions;
-            $cart_count = $this->cart_count;
-            return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
-                'informations', 'footer_reviews', 'agent'));
-        }
+
         
-        return view('client/job-portal/company/index', compact('footer_reviews', 'agent'));
+        
+        $this->resetNavbarData();
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+        
+        return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
+            'informations', 'footer_reviews', 'agent'));
     }
 
     // Shows the Client Job Portal Profile page.

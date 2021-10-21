@@ -124,7 +124,11 @@
             <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
             <input name="whatsapp_number" type="text" class="normal-text" placeholder="Masukkan Nomor Telepon"
                 style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%"
-                value="{{ old('whatsapp_number', Auth::user()->userDetail->telephone) }}">
+                @if ($isCandidateDetailUpdated)
+                    value="{{ old('whatsapp_number', $isCandidatePending && $candidate_detail_change->whatsapp_number != null ? $candidate_detail_change->whatsapp_number : $candidate_detail->whatsapp_number) }}">
+                @else
+                    value="{{ old('whatsapp_number', Auth::user()->userDetail->telephone) }}">
+                @endif
         </div>  
         @error('whatsapp_number')
             <span class="invalid-feedback" role="alert" style="display: block !important;">

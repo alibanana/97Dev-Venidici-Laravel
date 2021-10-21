@@ -16,6 +16,7 @@ class AuthenticatedSessionController extends Controller
 {
     private const LOGIN_ROUTE = 'login';
     private const JOB_PORTAL_LOGIN_ROUTE = 'job-portal.login';
+    private const JOB_PORTAL_PROFILE_ROUTE = 'job-portal.profile.index';
 
     private const VALIDATION_ERROR_TOPIC = 'validation-error';
 
@@ -97,7 +98,7 @@ class AuthenticatedSessionController extends Controller
             }
         // If user's role is "hiring-partner"
         } else if ($userRoleId == 4) {
-            return redirect()->route(self::JOB_PORTAL_LOGIN_ROUTE);
+            return redirect()->route(self::JOB_PORTAL_PROFILE_ROUTE);
         }
 
         return redirect()->route('admin.dashboard.index');

@@ -169,4 +169,9 @@ class HiringPartnerController extends Controller
         $message = 'Hiring-Partner (' . $user->name . ') has been deleted from the database!';
         return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
+
+    // Shows the admin hiring-partner contacted candidate list view.
+    public function viewContactedCandidates(Request $request, $id) {
+        return view('admin/job-portal/contacted-candidates');
+    }
 }

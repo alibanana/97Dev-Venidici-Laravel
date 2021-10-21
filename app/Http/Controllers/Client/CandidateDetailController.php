@@ -102,9 +102,11 @@ class CandidateDetailController extends Controller
                 ->doesntHave('interestChanges')
                 ->get();
 
+            $isCandidatePending = UserHelper::isCandidatePending(Auth::user());
+
             $view_data = array_merge($view_data, ['candidate_detail', 'candidate_detail_change', 'work_experiences_not_updated',
             'educations_not_updated', 'achievements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
-            'isCandidateDetailUpdated']);
+            'isCandidatePending']);
         }
         
         $this->resetNavbarData();
@@ -113,9 +115,9 @@ class CandidateDetailController extends Controller
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
 
-        $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
+        $isCandidateDetailUpdated = !UserHelper::isCandidateNotUpdated(Auth::user());
 
-        $view_data = array_merge($view_data, ['cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
+        $view_data = array_merge($view_data, ['cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent', 'isCandidateDetailUpdated']);
 
         return view('client/job-portal/client/edit', compact($view_data));
     }
