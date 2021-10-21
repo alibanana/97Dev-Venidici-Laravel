@@ -172,6 +172,7 @@ Route::middleware(['isSuspended'])->group(function () {
     /* START OF CANDIDATE DETAILS ROUTING */
     Route::prefix('candidate-details')->name('candidate-detail.')->middleware(['auth', 'isCandidate'])->group(function() {
         Route::get('/', [CandidateDetailController::class, 'index'])->name('index');
+        Route::get('/my-profile', [CandidateDetailController::class, 'show_profile'])->name('show_profile');
         Route::post('/basic-info', [CandidateDetailController::class, 'upsertCandidateDetail'])->name('upsert-candidate-detail');
         Route::post('/work-experiences', [CandidateDetailController::class, 'storeWorkExperience'])->name('store-work-experience');
         Route::put('/work-experiences/{work_experience_id}', [CandidateDetailController::class, 'updateWorkExperience'])->name('update-work-experience');

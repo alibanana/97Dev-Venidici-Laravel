@@ -134,7 +134,10 @@
 
                                 </div>
                                 <div class="progress" style="height: 1.5vw;background-color:#AAD4C8 !important">
-                                    <div class="progress-bar" role="progressbar" style="width: 25%;background-color:#67BBA3" aria-valuenow="{{$hs->score}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    @php
+                                    $progress = $hs->score * 10
+                                    @endphp
+                                    <div class="progress-bar" role="progressbar" style="width: {{$progress}}%;background-color:#67BBA3" aria-valuenow="{{$hs->score}}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +171,10 @@
 
                                 </div>
                                 <div class="progress" style="height: 1.5vw;background-color:#AAD4C8 !important">
-                                    <div class="progress-bar" role="progressbar" style="width: 25%;background-color:#67BBA3" aria-valuenow="{{$ss->score}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    @php
+                                    $progress = $ss->score * 10
+                                    @endphp
+                                    <div class="progress-bar" role="progressbar" style="width: {$progress}%;background-color:#67BBA3" aria-valuenow="{{$ss->score}}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
