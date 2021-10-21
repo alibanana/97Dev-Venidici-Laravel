@@ -172,8 +172,10 @@ class CandidateController extends Controller
 
     private function updateCandidateDetail(CandidateDetailChange $candidateDetailChange) {
         // Updates Candidate Detail.
-        $candidateDetailData = $this->constructCandidateDetailDataAndUnlinkExistingCV($candidateDetailChange);
-        CandidateDetail::where('id', $candidateDetailChange->candidate_detail_id)->update($candidateDetailData);
+        if (!UserHelper::isCandidateDetailChangeDataNull($candidateDetailChange)) {
+            $candidateDetailData = $this->constructCandidateDetailDataAndUnlinkExistingCV($candidateDetailChange);
+            CandidateDetail::where('id', $candidateDetailChange->candidate_detail_id)->update($candidateDetailData);
+        }
 
         if ($candidateDetailChange->workExperienceChanges()->exists()) {
             foreach ($candidateDetailChange->workExperienceChanges as $workExperienceChange) {

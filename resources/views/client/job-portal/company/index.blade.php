@@ -377,88 +377,50 @@
                 </div>
             </div>
             <!-- END OF ONE CARD -->
-            <!-- START OF ONE CARD -->
-            <div class="col-lg-4 col-xs-12 p-0" style="margin-top:4vw;display:flex;justify-content:flex-end">
-                <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px">
-                    <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA">
-                        <div class="col-4 ps-0">
-                            <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:7vw;height:100%;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
-                        </div>
-                        <div class="col-8">
-                            <div style="margin-bottom:0.5vw">
-                                <a href="/job-portal/1" class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;text-decoration:none;">Fernandha Dzaky Zevelin Sitorus</a>
+            
+            @isset($candidateDetails)
+                @foreach ($candidateDetails as $candidateDetail)
+                    <div class="col-lg-4 col-xs-12 p-0" style="margin-top:4vw;display:flex;justify-content:flex-start">
+                        <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px">
+                            <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA">
+                                <div class="col-4 ps-0">
+                                    <img src="{{ $candidateDetail->user->userDetail->display_picture }}" style="width:7vw;height:100%;object-fit:cover;border-radius:5px" class="img-fluid" alt="Image not available..">
+                                </div>
+                                <div class="col-8">
+                                    <div style="margin-bottom:0.5vw">
+                                        <a href="/job-portal/1" class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;text-decoration:none;">{{ $candidateDetail->user->name }}</a>
+                                    </div>
+                                    <p class="small-text" style="font-family: Rubik Regular;color:#B7CFE6;margin-bottom:1vw">{{ $candidateDetail->experience_year }} in {{ $candidateDetail->industry }}</p>
+                                    <a class="small-text" style="font-family: Rubik Medium;background-color:#67BBA3;color:#ffffff;text-decoration:none;padding:0.5vw;border-radius:5px">Looking for a job</a>
+                                </div>
                             </div>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#B7CFE6;margin-bottom:1vw">Still looking for experience</p>
-                            <a class="small-text" style="font-family: Rubik Medium;background-color:#67BBA3;color:#ffffff;text-decoration:none;padding:0.5vw;border-radius:5px">Looking for a job</a>
+                            <div style="padding:1vw;background:#FFFFFF">
+                                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA">Dominant Skill:</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">{{ $candidateDetail->industry }}</p>
+                                
+                                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Interest:</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">{{ $candidateDetailIdAndCombinedInterestMap[$candidateDetail->id] }}</p>
+        
+                                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: 98</p>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">   
+                                    <button class="normal-text btn-dark-blue full-width-button" type="submit" 
+                                        style="border:none;font-family: Rubik Bold;margin-bottom:0px;cursor:pointer;">
+                                        Add to my list</button>
+                                    <div style="display:flex">
+                                        <a href="{{ $candidateDetail->linkedin_link }}" target="_blank" class="sub-description" style="margin-right:1vw">
+                                            <i class="fab fa-linkedin " style="color:#3B3C43"></i> 
+                                        </a>
+                                        <a href="{{ $candidateDetail->cv_file }}" target="_blank" class="sub-description">
+                                            <i class="fas fa-download " style="color:#3B3C43"></i> 
+                                        </a>
+                                    </div>
+        
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div style="padding:1vw;background:#FFFFFF">
-                        <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA">Dominant Skill:</p>
-                        <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Product Management</p>
-                        
-                        <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Interest:</p>
-                        <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Fullstack Developer, QA Tester, QA Automation</p>
-
-                        <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: 98</p>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">   
-                            <button class="normal-text btn-dark-blue full-width-button" type="submit" 
-                                style="border:none;font-family: Rubik Bold;margin-bottom:0px;cursor:pointer;">
-                                Add to my list</button>
-                            <div style="display:flex">
-                                <a href="" class="sub-description" style="margin-right:1vw">
-                                    <i class="fab fa-linkedin " style="color:#3B3C43"></i> 
-                                </a>
-                                <a href="" class="sub-description">
-                                    <i class="fas fa-download " style="color:#3B3C43"></i> 
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END OF ONE CARD -->
-            <!-- START OF ONE CARD -->
-            <div class="col-lg-4 col-xs-12 p-0" style="margin-top:4vw;display:flex;justify-content:flex-start">
-                <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px">
-                    <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA">
-                        <div class="col-4 ps-0">
-                            <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:7vw;height:100%;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
-                        </div>
-                        <div class="col-8">
-                            <div style="margin-bottom:0.5vw">
-                                <a href="/job-portal/1" class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;text-decoration:none;">Fernandha Dzaky Zevelin Sitorus</a>
-                            </div>
-                            <p class="small-text" style="font-family: Rubik Regular;color:#B7CFE6;margin-bottom:1vw">Still looking for experience</p>
-                            <a class="small-text" style="font-family: Rubik Medium;background-color:#67BBA3;color:#ffffff;text-decoration:none;padding:0.5vw;border-radius:5px">Looking for a job</a>
-                        </div>
-                    </div>
-                    <div style="padding:1vw;background:#FFFFFF">
-                        <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA">Dominant Skill:</p>
-                        <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Product Management</p>
-                        
-                        <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Interest:</p>
-                        <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Fullstack Developer, QA Tester, QA Automation</p>
-
-                        <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: 98</p>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">   
-                            <button class="normal-text btn-dark-blue full-width-button" type="submit" 
-                                style="border:none;font-family: Rubik Bold;margin-bottom:0px;cursor:pointer;">
-                                Add to my list</button>
-                            <div style="display:flex">
-                                <a href="" class="sub-description" style="margin-right:1vw">
-                                    <i class="fab fa-linkedin " style="color:#3B3C43"></i> 
-                                </a>
-                                <a href="" class="sub-description">
-                                    <i class="fas fa-download " style="color:#3B3C43"></i> 
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END OF ONE CARD -->
+                @endforeach
+            @endisset
 
         </div>
     </div>

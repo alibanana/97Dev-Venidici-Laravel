@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Validator;
 use Jenssegers\Agent\Agent;
 
 use App\Helper\Helper;
+use App\Helper\UserHelper;
+
 use App\Models\Review;
+use App\Models\CandidateDetail;
 
 class JobPortalController extends Controller
 {
@@ -29,19 +32,29 @@ class JobPortalController extends Controller
     // Shows the Client Job Portal Page. 
     public function index() {
         $agent = new Agent();
-
         $footer_reviews = Review::orderBy('created_at', 'desc')->get()->take(2);
 
-        
-        
         $this->resetNavbarData();
         $notifications = $this->notifications;
         $informations = $this->informations;
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
+
+        $candidateDetails = CandidateDetail::with('user', 'interests')->get()
+            ->filter(function ($candidateDetail, $key) {
+                return !UserHelper::isCandidateDetailDataAndRelationshipEmpty($candidateDetail);
+            });
+
+        $candidateDetailIdAndCombinedInterestMap = $candidateDetails->mapWithKeys(function ($candidateDetail, $key) {
+            $combinedInterestsString = '';
+            foreach ($candidateDetail->interests as $interest) {
+                $combinedInterestsString = $combinedInterestsString . $interest->title . ', ';
+            }
+            return [$candidateDetail->id => substr($combinedInterestsString, 0, -2)];
+        });
         
         return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
-            'informations', 'footer_reviews', 'agent'));
+            'informations', 'footer_reviews', 'agent', 'candidateDetails', 'candidateDetailIdAndCombinedInterestMap'));
     }
 
     // Shows the Client Job Portal Profile page.
