@@ -4,6 +4,53 @@
 
 @section('container')
 
+<!-- Bootcamp Score Modal-->
+<div class="modal fade" id="updateScoreModal" tabindex="-1" role="dialog" aria-labelledby="updateScoreModal"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="updateScoreModal">Update User's Bootcamp Score</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			@if (session()->has('error_validation_on_update_score'))
+			<div class="p-3 mt-2 mb-0">
+				<div class="alert alert-danger alert-dismissible fade show m-0" role="alert" style="font-size: 18px">
+					{{ session()->get('error_validation_on_update_score') }}     
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 26px">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+			@endif
+
+			<form method="POST" action="">
+			@csrf
+			{{ method_field('PUT') }}
+			<div class="modal-body">
+					<input type="hidden" name="user_id" id="bootcamp_user_id">
+				<h6 class="modal-title" id="updateScoreModal">Bootcamp Score</h6>
+				<div class="form-group mt-2">
+					<input type="text" name="bootacamp_score" required class="form-control form-control-user"
+						id="bootcamp_user_score" placeholder="Insert score (0-100)">
+					@error('bootacamp_score')
+						<span class="invalid-feedback" role="alert" style="display: block !important;">
+							<strong>{{ $message }}</strong>
+						</span>
+					@enderror
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+				<button class="btn btn-primary" type="submit">Update</button>   
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <!-- Main Content -->
 <div id="content">
 
@@ -283,6 +330,14 @@
                                                             </form>
                                                         @endif
 
+                                                        @if($user->status == 'approved')
+                                                        <div style="padding: 0px 2px">
+                                                            <a onclick="passUserData({{$user->id}},0)" class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="#" data-toggle="modal" data-target="#updateScoreModal">
+																Update Score
+															</a>
+                                                        </div>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -302,4 +357,13 @@
     </div>
     <!-- /.container-fluid -->
 </div>
+
+<script>
+    function passUserData(user_id, user_score) {
+
+		document.getElementById("bootcamp_user_id").value = user_id;
+		document.getElementById("bootcamp_user_score").value = user_score;
+
+    }
+</script>
 @endsection

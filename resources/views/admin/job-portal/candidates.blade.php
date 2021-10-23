@@ -5,6 +5,8 @@
 @section('container')
 
 
+
+
 <!-- Main Content -->
 <div id="content">
 
@@ -91,6 +93,7 @@
 											<th>Name</th>
 											<th>Email</th>
 											<th>Phone</th>
+											<th>Bootcamp Score</th>
 											<th>Status</th>
 											<th>Action</th>
 										</tr>
@@ -116,6 +119,10 @@
                                                             Accepted
                                                         </span>
                                                     @endif
+                                                </td>
+                                                <td>
+                                                <!-- default score is 0. If 0, render '-' -->
+                                                -
                                                 </td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
@@ -163,5 +170,7 @@
     </div>
     <!-- /.container-fluid -->
 </div>
+
+
 
 @endsection
