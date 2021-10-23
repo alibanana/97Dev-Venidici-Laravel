@@ -983,7 +983,7 @@
             @if(count($wokis) != 0)
 
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="/woki?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/woki?cat=None" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
 
             </div>
             @endif
@@ -1092,7 +1092,7 @@
             @if(count($online_courses) != 0)
 
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="/online-course?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/online-course?cat=None" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
             </div>
             @endif
         </div>
@@ -1198,7 +1198,7 @@
             @if(count($bootcamps) != 0)
 
             <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                <a href="/bootcamp?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
+                <a href="/bootcamp?cat=None" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;">View All</a>
             </div>
             @endif
         </div>
@@ -1506,7 +1506,7 @@
                 @endforeach
                 @if(count($wokis) != 0)
                 <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                    <a href="/woki?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
+                    <a href="/woki?cat=None" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
 
                 </div>
                 @endif
@@ -1616,7 +1616,7 @@
                 @endforeach
                 @if(count($online_courses) != 0)
                 <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                    <a href="/online-course?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
+                    <a href="/online-course?cat=None" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
                 </div>
                 @endif
             </div>
@@ -1723,7 +1723,7 @@
                 @endforeach
                 @if(count($bootcamps) != 0)
                 <div class="col-12 p-0" style="text-align: center;margin-top:5vw">
-                    <a href="/bootcamp?cat=Featured" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
+                    <a href="/bootcamp?cat=None" class="btn-blue normal-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.5vw 3vw;font-size:4vw">View All</a>
                 </div>
                 @endif
             </div>
