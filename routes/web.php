@@ -213,6 +213,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/candidate/contact', [JobPortalController::class, 'contactCandidate'])->name('contact-candidate');
         Route::post('/candidate/accept', [JobPortalController::class, 'acceptContactedCandidate'])->name('accept-candidate');
         Route::get('/{id}', [JobPortalController::class, 'job_portal_candidate_detail'])->name('job_portal_candidate_detail');
+        Route::post('/change-password', [JobPortalController::class, 'changePassword'])->name('change-password')->middleware(['auth', 'verified']);
     });
 
     

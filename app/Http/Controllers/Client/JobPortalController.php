@@ -27,6 +27,11 @@ use App\Models\Softskill;
 use App\Models\SoftskillChange;
 use App\Models\Interest;
 use App\Models\InterestChange;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordChangedMail;
+
 
 class JobPortalController extends Controller
 {
@@ -207,5 +212,70 @@ class JobPortalController extends Controller
         }
 
         return redirect('job-portal/my-list#daftar-saya')->with('my_list_message', $message);
+    }
+
+    // Changes the user's password in the database.
+    public function changePassword(Request $request) {
+        // Use StrongPassword validation on production.
+        if (App::environment('production'))
+            $validation_rules = [
+                'old_password' => 'required',
+                'password' => ['required', 'confirmed', new StrongPassword]
+            ];
+        else
+            $validation_rules = [
+                'old_password' => 'required',
+                'password' => ['required', 'confirmed']
+            ];
+
+        $validator = Validator::make($request->all(), $validation_rules);
+
+        if ($validator->fails()) {
+            return redirect(route('job-portal.profile.index') . '#change-password')
+                ->withErrors($validator);
+        }
+
+        $validated = $request->only(['old_password', 'password']);
+        $user = auth()->user();
+
+        // Check if old password matches.
+        if (!Hash::check($validated['old_password'], $user->password)) {
+            return redirect(route('job-portal.profile.index') . '#change-password')
+                ->withErrors([
+                    'old_password' => 'Current password does not matched..'
+                ]);
+        }
+
+        // Check if new password is the same with old password.
+        if (Hash::check($validated['password'], $user->password)) {
+            return redirect(route('job-portal.profile.index') . '#change-password')
+                ->withErrors([
+                    'password' => 'New pasword cannot be the same..'
+                ]);
+        }
+
+        $user->password =  Hash::make($validated['password']);
+        $user->save();
+
+        if ($user->wasChanged()) {
+            $messageTopic = 'success';
+            $message = 'Your password has been changed. A notification email has been sent to your email.';
+            try {
+                Mail::to(auth()->user()->email)->send(new PasswordChangedMail());
+            } catch (Throwable $e) {
+                $user->password =  Hash::make($validated['old_password']);
+                $user->save();
+                $messageTopic = 'danger';
+                $message = 'Oops, unable to send email. Your old password has been kept.';
+                if (!App::environment('production'))
+                    $message = $e->getMessage();
+            }
+        } else {
+            $messageTopic = 'danger';
+            $message = 'Oops, unable to update your password.';
+        }
+
+        return redirect(route('job-portal.profile.index') . '#change-password')->with($messageTopic, $message);
+        
     }
 }
