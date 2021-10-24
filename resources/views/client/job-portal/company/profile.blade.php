@@ -23,7 +23,7 @@
                     </div>
                 </div>
             @endif
-            <form action="{{ route('customer.change-password') }}" method="post">
+            <form action="{{ route('job-portal.change-password') }}" method="post">
                 @csrf
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;">
@@ -34,7 +34,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Old Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt popup-krest-font"></i>
-                            <input type="password" placeholder="Insert Old Password" name="old_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
+                            <input type="password" placeholder="Insert Old Password" name="old_password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" >
                         </div>  
                         @error('old_password')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -44,7 +44,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt popup-krest-font"></i>
-                            <input type="password" placeholder="Insert New Password" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
+                            <input type="password" placeholder="Insert New Password" name="password" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" >
                         </div>  
                         @error('password')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -54,7 +54,7 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Confirm New Password</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center">
                             <i style="color:#DAD9E2" class="fas fa-unlock-alt popup-krest-font"></i>
-                            <input type="password" placeholder="Confirm New Password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" required>
+                            <input type="password" placeholder="Confirm New Password" name="password_confirmation" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
                         </div>  
                         @error('password_confirmation')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -75,6 +75,28 @@
 <!-- START OF BANNER SECTION -->
 <div class="row m-0 page-container desktop-display"
     style="padding-bottom:8vw; padding-top: 14vw ;background-color:#2B6CAA">
+    @if(Auth::user()->email_verified_at == null)
+    <div class="col-12 wow bounce" style="height:3.5vw;display:flex;justify-content:center;margin-bottom:2vw">
+        <!-- ALERT MESSAGE -->
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
+            @if(session('new_email_verification_sent'))
+            Email verifikasi baru telah dikirim. Belum dapat? 
+            @else
+            Beberapa fitur tidak tersedia jika email belum ter-verifikasi. Belum dapat? 
+            @endif
+            <span style="display: inline-block;">
+                <form method="POST" action="{{ route('verification.send') }}">
+                @csrf
+                <button type="submit" onclick="openLoading()" style="background: none;border:none;color:#2B6CAA">
+                    Kirim ulang email
+                </button>
+                </form>
+            </span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!-- END OF ALERT MESSAGE -->
+    </div>
+    @endif
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <div class="row m-0">
             <div class="col-12" style="display:flex;justify-content:center;padding:0vw 17vw">
