@@ -80,8 +80,12 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
-            <input value="{{old('linkedin_link', $isCandidatePending && $candidate_detail_change->linkedin_link != null ? $candidate_detail_change->linkedin_link : $candidate_detail->linkedin_link)}}"  type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
-        </div>   
+            @if ($isCandidateDetailUpdated)
+                <input value="{{old('linkedin_link', $isCandidatePending && $candidate_detail_change->linkedin_link != null ? $candidate_detail_change->linkedin_link : $candidate_detail->linkedin_link)}}" type="text" name="linkedin_link" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In">
+            @else
+                <input type="text" name="linkedin_link" value="{{ old('linkedin_link') }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In">
+            @endif
+        </div>
         @error('linkedin_link')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
             <strong>{{ $message }}</strong>
@@ -104,19 +108,21 @@
         </div>  
         @error('email')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
-            <strong>{{ $message }}</strong>
+                <strong>{{ $message }}</strong>
             </span>
         @enderror
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Prefered Working Location (Province)</p>
         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-map"></i>
-            <input value="{{old('preferred_working_location', $isCandidatePending && $candidate_detail_change->preferred_working_location != null ? $candidate_detail_change->preferred_working_location : $candidate_detail->preferred_working_location)}}"  name="preferred_working_location" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra" 
-            value=""
-            >
+            @if ($isCandidateDetailUpdated)
+                <input value="{{old('preferred_working_location', $isCandidatePending && $candidate_detail_change->preferred_working_location != null ? $candidate_detail_change->preferred_working_location : $candidate_detail->preferred_working_location)}}"  name="preferred_working_location" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra">
+            @else
+                <input name="preferred_working_location" value="" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="DKI Jakarta, Kalimantan, Sumatra">
+            @endif
         </div>  
         @error('preferred_working_location')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
-            <strong>{{ $message }}</strong>
+                <strong>{{ $message }}</strong>
             </span>
         @enderror
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Whatsapp</p>
@@ -152,7 +158,10 @@
             <select name="experience_year" id="" class="normal-text"  style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%">
                 <option disabled selected>Choose Answer</option>
                 @php
-                $experience = $isCandidatePending && $candidate_detail_change->experience_year != null ? $candidate_detail_change->experience_year : $candidate_detail->experience_year
+                    $experience = null;
+                    if ($isCandidateDetailUpdated) {
+                        $experience = $isCandidatePending && $candidate_detail_change->experience_year != null ? $candidate_detail_change->experience_year : $candidate_detail->experience_year;
+                    }
                 @endphp
                 <option value="Less than 1 Year of Experience" @if($experience == 'Less than 1 Year of Experience') selected @endif > < 1 Year of Experience</option>
                 <option value="Less than 2 Years of Experience" @if($experience == 'Less than 2 Years of Experience') selected @endif> < 2 Years of Experience</option>
@@ -170,7 +179,11 @@
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Industry</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-building"></i>
-            <input value="{{old('industry', $isCandidatePending && $candidate_detail_change->industry != null ? $candidate_detail_change->industry : $candidate_detail->industry)}}"  type="text" name="industry" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Industri Pekerjaan" >
+            @if ($isCandidateDetailUpdated)
+                <input value="{{old('industry', $isCandidatePending && $candidate_detail_change->industry != null ? $candidate_detail_change->industry : $candidate_detail->industry)}}"  type="text" name="industry" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Industri Pekerjaan" >
+            @else
+                <input value="{{ old('industry') }}"  type="text" name="industry" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Industri Pekerjaan">
+            @endif
         </div>   
         @error('industry')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -187,7 +200,11 @@
         <p class="medium-heading" style="font-family:Rubik Bold;color:#2B6CAA">Resume</p>
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">About me</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
-            <textarea name="about_me_description" value="{{old('about_me_description', $isCandidatePending && $candidate_detail_change->about_me_description != null ? $candidate_detail_change->about_me_description : $candidate_detail->about_me_description)}}" rows="6" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="This is an example." >{{old('about_me_description', $isCandidatePending && $candidate_detail_change->about_me_description != null ? $candidate_detail_change->about_me_description : $candidate_detail->about_me_description)}}</textarea>
+            @if ($isCandidateDetailUpdated)
+                <textarea name="about_me_description" value="{{old('about_me_description', $isCandidatePending && $candidate_detail_change->about_me_description != null ? $candidate_detail_change->about_me_description : $candidate_detail->about_me_description)}}" rows="6" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="This is an example." >{{old('about_me_description', $isCandidatePending && $candidate_detail_change->about_me_description != null ? $candidate_detail_change->about_me_description : $candidate_detail->about_me_description)}}</textarea>
+            @else
+                <textarea name="about_me_description" value="{{ old('about_me_description') }}" rows="6" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="This is an example.">{{ old('about_me_description') }}</textarea>
+            @endif
         </div>  
         @error('about_me_description')
             <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -198,12 +215,15 @@
     <div class="col-12 p-0">
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">CV / Resume</p>
         @php
-            $cv_file = $isCandidatePending && $candidate_detail_change->cv_file != null ? $candidate_detail_change->cv_file : $candidate_detail->cv_file
+            $cv_file = null;
+            if ($isCandidateDetailUpdated) {
+                $cv_file = $isCandidatePending && $candidate_detail_change->cv_file != null ? $candidate_detail_change->cv_file : $candidate_detail->cv_file;
+            }
         @endphp
 
-        @if($isCandidatePending && $candidate_detail_change->cv_file != null)
+        @if($cv_file != null)
         <div style="margin-bottom:2vw">
-            <a href="{{$cv_file}}" target="_blank" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;">View my current CV</a>
+            <a href="{{ $cv_file }}" target="_blank" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;">View my current CV</a>
         </div>
         @endif
         <div class="drop-zone">
@@ -240,14 +260,13 @@
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Work Experience</p>
-
                         @if (session()->has('work_experience_create_message'))
-                        <div class="p-3 mt-2 mb-0">
-                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('work_experience_create_message') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <div class="p-3 mt-2 mb-0">
+                                <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert">
+                                    {{ session()->get('work_experience_create_message') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                     <!-- START OF LEFT SECTION -->
@@ -255,10 +274,10 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Company</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <input name="company" value="{{ old('company') }}" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="PT. John Doe" >
-                        </div>  
+                        </div>
                         @error('company')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
+                                <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                         <div class="row m-0">
@@ -266,11 +285,12 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Start Date</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="start_date"  value="{{ old('start_date') }}"  class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
-                                </div> 
+                                    <input type="date" name="start_date" value="{{ old('start_date') }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
+                                </div>
+
                                 @error('start_date')
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                    <strong>{{ $message }}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -279,12 +299,12 @@
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
                                     <input type="date" name="end_date"  value="{{ old('end_date') }}" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
-                                </div> 
+                                </div>
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:0.5vw;color:orange">(Leave Blank if still active)</p>
 
                                 @error('end_date')
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                    <strong>{{ $message }}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
