@@ -1302,7 +1302,7 @@
 
 <!-- START OF SARAN KAMI SECTION -->
 @if(count($courseSuggestions) != 0)
-<div class="row m-0 page-container-inner desktop-display" >
+<div class="row m-0 page-container-inner desktop-display" style="padding-top:5vw" >
     <div class="col-12 p-0" style="text-align:center">
         <p class="small-heading" style="font-family:Rubik Medium;margin-bottom:0px;color:#3B3C43">Saran kelas dari kami</p>
     </div>

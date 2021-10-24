@@ -1,5 +1,5 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Bootcamp Alumni Profile')
+@section('title', 'Venidici Bootcamp Hiring Partner Profile')
 
 @section('content')
 
@@ -82,7 +82,7 @@
                     <img src="/assets/images/client/Default_Display_Picture.png" style="width:14vw;height:10vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
                     <div style="margin-left:1.5vw;width:100%;">
                         <div style="display:flex;justify-content:space-between;">
-                            <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Fernandha Dzaky Saputra</p> 
+                            <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{auth()->user()->name}}</p> 
                             <div class="dropdown show">
                                 
                                 <a class="small-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
@@ -105,8 +105,8 @@
                                 </div>
                             </div>  
                         </div>
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">fernandhadzaky@hotmail.com</p>   
-                        <p class="normal-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">PT. Karya Anak Bangsa</p>   
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{auth()->user()->email}}</p>   
+                        <p class="normal-text" style="font-family:Rubik Regular;color:#888888;margin-bottom:0px;margin-top:0.8vw">{{auth()->user()->companyName}}</p>   
 
 
                     </div>

@@ -14,6 +14,19 @@ use App\Helper\UserHelper;
 use App\Models\Review;
 use App\Models\User;
 use App\Models\CandidateDetail;
+use App\Models\CandidateDetailChange;
+use App\Models\WorkExperience;
+use App\Models\WorkExperienceChange;
+use App\Models\Education;
+use App\Models\EducationChange;
+use App\Models\Achievement;
+use App\Models\AchievementChange;
+use App\Models\Hardskill;
+use App\Models\HardskillChange;
+use App\Models\Softskill;
+use App\Models\SoftskillChange;
+use App\Models\Interest;
+use App\Models\InterestChange;
 
 class JobPortalController extends Controller
 {
@@ -31,6 +44,63 @@ class JobPortalController extends Controller
         $this->informations = $navbarData['informations'];
         $this->transactions = $navbarData['transactions'];
         $this->cart_count = $navbarData['cart_count'];
+    }
+
+    // Shows Candidate Detail Profile Page
+    public function job_portal_candidate_detail($id){
+
+        $agent = new Agent();
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+        
+        $view_data = [];
+        $candidate_detail = CandidateDetail::where('user_id', $id)
+            ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
+            ->first();
+
+        $work_experiences_not_updated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('workExperienceChanges')
+            ->get();
+
+        $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('educationChanges')
+            ->get();
+
+        $achievements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('achievementChanges')
+            ->get();
+            
+        $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('hardskillChanges')
+            ->get();
+        $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('softskillChanges')
+            ->get();
+        
+        $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)
+            ->doesntHave('interestChanges')
+            ->get();
+
+        $view_data = array_merge($view_data, ['candidate_detail','work_experiences_not_updated',
+        'educations_not_updated', 'achievements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
+        'isCandidateDetailUpdated']);
+
+        if(Auth::check()) {
+
+            $this->resetNavbarData();
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+    
+            $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
+    
+            $view_data = array_merge($view_data, ['cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
+            
+        }
+        
+        return view('client/job-portal/company/detail',compact($view_data));
+
+        
     }
 
     // Shows the Client Job Portal Page. 
@@ -52,12 +122,29 @@ class JobPortalController extends Controller
         $candidateDetailIdAndCombinedInterestMap =
             $this->generateCandidateDetailIdAndCombinedInterestMap($candidateDetails);
 
+        
+        return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
+            'informations', 'footer_reviews', 'agent', 'candidateDetails', 'candidateDetailIdAndCombinedInterestMap'));
+    }
+
+    // Shows the Hiring Partner List Page. 
+    public function my_list() {
+        $agent = new Agent();
+        $footer_reviews = Review::orderBy('created_at', 'desc')->get()->take(2);
+
+        $this->resetNavbarData();
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+
+
         $contactedCandidates = Auth::user()->candidates()
             ->with('candidateDetail')
             ->paginate(self::CONTACTED_CANDIDATES_PAGE_SIZE);
         
-        return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
-            'informations', 'footer_reviews', 'agent', 'candidateDetails', 'candidateDetailIdAndCombinedInterestMap',
+        return view('client/job-portal/company/mylist', compact('cart_count', 'notifications', 'transactions',
+            'informations', 'footer_reviews', 'agent',
             'contactedCandidates'));
     }
 
@@ -99,7 +186,7 @@ class JobPortalController extends Controller
         $candidate->hiringPartners()->attach(Auth::user()->id);
 
         $message = 'Candidate (' . $candidate->name . ') has been contacted through email & is now available on you list.';
-        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
+        return redirect('/job-portal#kandidat-venidici')->with('message', $message);
     }
 
     // Accepts a Contacted Candidate (user). Assumes that candidate has already be contacted.
@@ -119,6 +206,6 @@ class JobPortalController extends Controller
             $message = 'Candidate (' . $candidate->name . ') has successfully been accepted on your company.';
         }
 
-        return redirect()->route(self::INDEX_ROUTE)->with('my_list_message', $message);
+        return redirect('job-portal/my-list#daftar-saya')->with('my_list_message', $message);
     }
 }

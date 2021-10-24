@@ -14,10 +14,10 @@
             lihat, saya taklukkan.</p>
             <div style="display:flex;justify-content:center;margin-top:4vw">
                 <div style="display:flex;align-items:center;">
-                    <div class="btn-blue-toggle btn-blue-toggle-active toggle-link" style="border-radius:10px 0px 0px 10px" onclick="changeContent(event, 'kandidat-venidici')">
+                    <div class="btn-blue-toggle btn-blue-toggle-active toggle-link" style="border-radius:10px 0px 0px 10px" onclick="window.location.href='job-portal'">
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px" >Kandidat Venidici</p>
                     </div>   
-                    <div class="btn-blue-toggle toggle-link"  onclick="changeContent(event, 'daftar-saya')">
+                    <div class="btn-blue-toggle toggle-link" onclick="window.location.href='job-portal/my-list'">
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px">Daftar Saya</p>
                     </div>    
                 </div>
@@ -27,142 +27,6 @@
     </div>
     <!-- END OF BANNER SECTION -->
 
-    <div class="toggle-content" style="display:none" id="daftar-saya">
-
-        <!-- START OF DESCRIPTION AND SEARCH SECTION -->
-        <div class="row m-0 page-container desktop-display" style="padding-top:8vw">
-            <!-- START OF SEARCH SECTION -->
-            <div class="col-12 p-0" style="display:flex;align-items:center;margin-top:3vw;justify-content:space-between">
-                <div style="display:flex;align-items:center">
-                    <div style="">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Years of Experience</option>
-                                <option value="1 Tahun">< 1 Tahun</option>
-                                <option value="2 Tahun">< 2 Tahun</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>  
-                    </div>
-
-                    <div style="margin-left: 3vw;">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Status</option>
-                                <option value="Business">Business</option>
-                                <option value="Technology">Technology</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>  
-                    </div>
-
-                    <div style="margin-left: 3vw;">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Sort by</option>
-                                <option value="Alphabet Ascending">Alphabet Ascending</option>
-                                <option value="Alphabet Descending">Alphabet Descending</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>  
-                    </div>
-                </div>
-                </div>
-            <!-- END OF SEARCH SECTION -->
-
-        </div>
-        <!-- END OF DESCRIPTION AND SEARCH SECTION -->
-        <!-- START OF JOB LISTING -->
-        <div class="row m-0 page-container" style="padding-bottom:8vw">
-
-            <!-- START OF TABLE -->
-            <div class="col-lg-12" style="margin-top:4vw;background: #FFFFFF;box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);border-radius: 10px;padding:2vw 0vw">
-                <div class="row m-0" style="padding:0vw 2vw 2vw 2vw">
-                    <div class="col-8"> 
-                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">Candidate</p>
-                    </div>
-                    <div class="col-2" style="text-align:center"> 
-                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">Status</p>
-                    </div>
-                    <div class="col-2"  style="text-align:center"> 
-                        <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">Action</p>
-                    </div>
-                </div>
-                
-                @isset($contactedCandidates)
-                    @foreach ($contactedCandidates as $candidate)
-                        <div class="row m-0  job-listing-card" >
-                            <div class="col-8"> 
-                                <div style="display:flex;align-items:center">
-                                    <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
-                                    <div style="margin-left:1vw">
-                                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0.5vw">{{ $candidate->name }}</p>
-                                        <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;margin-bottom:0.5vw">{{ $candidate->candidateDetail->industry }}</p>
-                                        <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $candidate->candidateDetail->experience__year }} in {{ $candidate->candidateDetail->industry }}</p>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2" style="text-align:center">
-                                @if ($candidate->pivot->status == 'contacted')
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Contacted</a>
-                                @elseif ($candidate->pivot->status == 'accepted')
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Accepted</a>
-                                @elseif ($candidate->pivot->status == 'rejected')
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Rejected</a>
-                                @elseif ($candidate->pivot->status == 'hired')
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Hired</a>
-                                @endif
-                            </div>
-                            <div class="col-2"  style="text-align:center"> 
-                                <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
-                                    <select name="" class="normal-text"  style="background:transparent;border:none;color: #ffffff;;width:100%;font-family:Rubik Regular;">
-                                        <option value="None" disabled selected>Select Action</option>
-                                        @if ($candidate->pivot->status == 'contacted')
-                                            <option value="Accept">Accept</option>
-                                            <option value="Reject">Reject</option>
-                                            <option value="Remove">Remove from List</option>
-                                        @elseif ($candidate->pivot->status == 'accepted')
-                                            <option value="Cancel">Cancel</option>
-                                        @elseif ($candidate->pivot->status == 'rejected')
-                                            <option value="Cancel">Cancel</option>
-                                        @endif
-                                    </select>                    
-                                    @error('')
-                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div> 
-                            </div>
-                        </div>
-                    @endforeach
-                @endisset
-
-                <div class="row m-0" style="">
-                    <div class="col-12 p-0" style="text-align:center">
-                        <div style="padding-top:1.5vw;">
-                            <p style="margin-bottom:0px">pagination</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END OF TABLE -->
-
-        </div>
-    </div>
 
     <div class="toggle-content" id="kandidat-venidici">
 
@@ -244,7 +108,14 @@
 
         <!-- START OF JOB LISTING -->
         <div class="row m-0 page-container" style="padding-bottom:8vw">
-            
+            @if (session()->has('message'))
+            <div class="col-12 ps-0 pe-0">
+                <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular;text-align:center" role="alert" >
+                    {{ session()->get('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            @endif
             @isset($candidateDetails)
                 @foreach ($candidateDetails as $candidateDetail)
                     @if($loop->iteration % 3 == 1)
@@ -254,8 +125,8 @@
                     @elseif($loop->iteration % 3 == 0)
                     <div class="col-lg-4 col-xs-12 p-0" style="margin-top:4vw;display:flex;justify-content:flex-end">
                     @endif   
-                        <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px">
-                            <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA">
+                        <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px;" >
+                            <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA;cursor:pointer" onclick="window.location.href='job-portal/{{$candidateDetail->user_id}}'">
                                 <div class="col-4 ps-0">
                                     <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidateDetail->user->userDetail->display_picture }}" @endif style="width:7vw;height:100%;object-fit:cover;border-radius:5px" class="img-fluid" alt="Image not available..">
                                 </div>
@@ -282,9 +153,12 @@
                                         <button class="normal-text btn-dark-blue full-width-button" type="submit" 
                                             style="border:none;font-family: Rubik Bold;margin-bottom:0px;cursor:pointer;">
                                             Add to my list</button>
+                                        <button class="normal-text btn-dark-blue full-width-button" disabled
+                                            style="border:none;font-family: Rubik Bold;margin-bottom:0px;">
+                                            Added</button>
                                     </form>
                                     <div style="display:flex">
-                                        <a href="{{ $candidateDetail->linkedin_link }}" target="_blank" class="sub-description" style="margin-right:1vw">
+                                        <a href="{{ $candidateDetail->linkedin_link }}" target="_blank" class="sub-description" style="margin-right:1vw;z-index:">
                                             <i class="fab fa-linkedin " style="color:#3B3C43"></i> 
                                         </a>
                                         <a href="{{ $candidateDetail->cv_file }}" target="_blank" class="sub-description">

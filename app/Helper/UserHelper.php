@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\CandidateDetail;
 use App\Models\CandidateDetailChange;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserHelper {
 
