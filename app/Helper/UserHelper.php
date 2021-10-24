@@ -43,9 +43,9 @@ class UserHelper {
         return true;
     }
 
-    public static function isCandidateDetailDataAndRelationshipEmpty(CandidateDetail $candidateDetail) {
+    public static function isRequiredCandidateDetailDataAndRelationshipEmpty(CandidateDetail $candidateDetail) {
         return self::isCandidateDetailDataNull($candidateDetail) ||
-            self::isCandidateDetailRelationshipNull($candidateDetail);
+            self::isRequiredCandidateDetailRelationshipDataNull($candidateDetail);
     }
 
     private static function isCandidateDetailDataNull(CandidateDetail $candidateDetail) {
@@ -58,13 +58,11 @@ class UserHelper {
             $candidateDetail->cv_file == null;
     }
     
-    private static function isCandidateDetailRelationshipNull(CandidateDetail $candidateDetail) {
+    private static function isRequiredCandidateDetailRelationshipDataNull(CandidateDetail $candidateDetail) {
         return !$candidateDetail->workExperiences()->exists() ||
             !$candidateDetail->educations()->exists() ||
-            !$candidateDetail->achievements()->exists() ||
             !$candidateDetail->hardskills()->exists() ||
-            !$candidateDetail->softskills()->exists() ||
-            !$candidateDetail->interests()->exists();
+            !$candidateDetail->softskills()->exists();
     }
 
     public static function isCandidateDetailChangeDataNull(CandidateDetailChange $candidateDetailChange) {

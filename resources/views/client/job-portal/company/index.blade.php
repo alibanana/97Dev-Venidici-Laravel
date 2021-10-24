@@ -147,16 +147,19 @@
         
                                 <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: 98</p>
                                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">
-                                    <form action="{{ route('job-portal.contact-candidate') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="user_id" value="{{ $candidateDetail->user->id }}" hidden>
-                                        <button class="normal-text btn-dark-blue full-width-button" type="submit" 
-                                            style="border:none;font-family: Rubik Bold;margin-bottom:0px;cursor:pointer;">
-                                            Add to my list</button>
+                                    @if (in_array($candidateDetail->user->id, $archivedCandidateIds))
                                         <button class="normal-text btn-dark-blue full-width-button" disabled
                                             style="border:none;font-family: Rubik Bold;margin-bottom:0px;">
                                             Added</button>
-                                    </form>
+                                    @else
+                                        <form action="{{ route('job-portal.archive-candidate') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ $candidateDetail->user->id }}" hidden>
+                                            <button class="normal-text btn-dark-blue full-width-button" type="submit" 
+                                                style="border:none;font-family: Rubik Bold;margin-bottom:0px;cursor:pointer;">
+                                                Add to my list</button>
+                                        </form>
+                                    @endif
                                     <div style="display:flex">
                                         <a href="{{ $candidateDetail->linkedin_link }}" target="_blank" class="sub-description" style="margin-right:1vw;z-index:">
                                             <i class="fab fa-linkedin " style="color:#3B3C43"></i> 

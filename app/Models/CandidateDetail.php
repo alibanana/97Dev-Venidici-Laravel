@@ -22,6 +22,11 @@ class CandidateDetail extends Model
         'cv_file'
     ];
 
+    // Method to check if column exists.
+    public function hasAttribute($attr) {
+        return array_key_exists($attr, $this->attributes);
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }

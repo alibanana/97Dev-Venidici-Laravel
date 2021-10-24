@@ -229,7 +229,8 @@ class CandidateController extends Controller
 
         // If candidateDetailChange have cv_file, unlink previous and include in update data.
         if ($candidateDetailChange->hasAttribute('cv_file') && !is_null($candidateDetailChange->cv_file)) {
-            unlink($candidateDetailChange->candidateDetail->cv_file);
+            if ($candidateDetailChange->candidateDetail->hasAttribute('cv_file') && !is_null($candidateDetailChange->candidateDetail->cv_file))
+                unlink($candidateDetailChange->candidateDetail->cv_file);
             $data['cv_file'] = $candidateDetailChange['cv_file'];
         }
 

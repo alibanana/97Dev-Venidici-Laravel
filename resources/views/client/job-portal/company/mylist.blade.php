@@ -38,8 +38,9 @@
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="None" disabled selected>Years of Experience</option>
-                                <option value="1 Tahun">< 1 Tahun</option>
-                                <option value="2 Tahun">< 2 Tahun</option>
+                                @foreach ($availableExperienceYearFilters as $filter)
+                                    <option value="{{ $filter }}">{{ $filter }}</option>
+                                @endforeach
                             </select>                    
                             @error('')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">

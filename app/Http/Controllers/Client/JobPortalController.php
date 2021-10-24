@@ -6,10 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Jenssegers\Agent\Agent;
 
 use App\Helper\Helper;
 use App\Helper\UserHelper;
+
+use App\Mail\PasswordChangedMail;
 
 use App\Models\Review;
 use App\Models\User;
@@ -27,16 +32,18 @@ use App\Models\Softskill;
 use App\Models\SoftskillChange;
 use App\Models\Interest;
 use App\Models\InterestChange;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\PasswordChangedMail;
-
 
 class JobPortalController extends Controller
 {
     private const INDEX_ROUTE = 'job-portal.index';
     private const CONTACTED_CANDIDATES_PAGE_SIZE = 4;
+    private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER = ['< 1 Tahun', '< 2 tahun', '< 3 Tahun', '> 3 Tahun'];
+    private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER_AND_DB_VALUE_MAP = [
+        '< 1 Tahun' => ['Less than 1 Year of Experience'],
+        '< 2 tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience'],
+        '< 3 tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience', 'Less than 3 Years of Experience'],
+        '> 3 tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience', 'Less than 3 Years of Experience', 'More than 3 Years of Experience']
+    ];
 
     private $notifications; // Stores combined notifications data.
     private $informations; // Stores notification (isInformation == true) data.
@@ -51,13 +58,72 @@ class JobPortalController extends Controller
         $this->cart_count = $navbarData['cart_count'];
     }
 
+    // Shows the Client Job Portal Page. 
+    public function index() {
+        $agent = new Agent();
+        $footer_reviews = Review::orderBy('created_at', 'desc')->get()->take(2);
+
+        $this->resetNavbarData();
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+
+        $candidateDetails = CandidateDetail::with('user', 'interests')->get()
+            ->filter(function ($candidateDetail, $key) {
+                return !UserHelper::isRequiredCandidateDetailDataAndRelationshipEmpty($candidateDetail);
+            });
+
+        $candidateDetailIdAndCombinedInterestMap =
+            $this->generateCandidateDetailIdAndCombinedInterestMap($candidateDetails);
+
+        $archivedCandidateIds = Auth::user()->candidates()
+            ->select('candidate_id')->pluck('candidate_id')->toArray();
+        
+        return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
+            'informations', 'footer_reviews', 'agent', 'candidateDetails', 'candidateDetailIdAndCombinedInterestMap',
+            'archivedCandidateIds'));
+    }
+
+    private function generateCandidateDetailIdAndCombinedInterestMap($candidateDetails) {
+        return $candidateDetails->mapWithKeys(function ($candidateDetail, $key) {
+            $combinedInterestsString = '';
+            foreach ($candidateDetail->interests as $interest) {
+                $combinedInterestsString = $combinedInterestsString . $interest->title . ', ';
+            }
+            return [$candidateDetail->id => substr($combinedInterestsString, 0, -2)];
+        });
+    }
+
+    // Shows the Hiring Partner List Page. 
+    public function myListIndex(Request $request) {
+        $agent = new Agent();
+        $footer_reviews = Review::orderBy('created_at', 'desc')->get()->take(2);
+
+        $this->resetNavbarData();
+        $notifications = $this->notifications;
+        $informations = $this->informations;
+        $transactions = $this->transactions;
+        $cart_count = $this->cart_count;
+
+        $contactedCandidates = Auth::user()->candidates()
+            ->with('candidateDetail');
+
+        // ADD FILTERS & SORTING HERE
+
+        $contactedCandidates = $contactedCandidates->paginate(self::CONTACTED_CANDIDATES_PAGE_SIZE);
+
+        $availableExperienceYearFilters = self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER;
+        
+        return view('client/job-portal/company/mylist', compact('cart_count', 'notifications', 'transactions',
+            'informations', 'footer_reviews', 'agent', 'contactedCandidates', 'availableExperienceYearFilters'));
+    }
+
     // Shows Candidate Detail Profile Page
     public function job_portal_candidate_detail($id){
-
         $agent = new Agent();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-        
-        $view_data = [];
+
         $candidate_detail = CandidateDetail::where('user_id', $id)
             ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
             ->first();
@@ -85,82 +151,19 @@ class JobPortalController extends Controller
             ->doesntHave('interestChanges')
             ->get();
 
-        $view_data = array_merge($view_data, ['candidate_detail','work_experiences_not_updated',
-        'educations_not_updated', 'achievements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
-        'isCandidateDetailUpdated']);
-
-        if(Auth::check()) {
-
-            $this->resetNavbarData();
-            $notifications = $this->notifications;
-            $informations = $this->informations;
-            $transactions = $this->transactions;
-            $cart_count = $this->cart_count;
-    
-            $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
-    
-            $view_data = array_merge($view_data, ['cart_count', 'notifications', 'transactions', 'informations', 'footer_reviews', 'agent']);
-            
-        }
-        
-        return view('client/job-portal/company/detail',compact($view_data));
-
-        
-    }
-
-    // Shows the Client Job Portal Page. 
-    public function index() {
-        $agent = new Agent();
-        $footer_reviews = Review::orderBy('created_at', 'desc')->get()->take(2);
-
         $this->resetNavbarData();
         $notifications = $this->notifications;
         $informations = $this->informations;
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
 
-        $candidateDetails = CandidateDetail::with('user', 'interests')->get()
-            ->filter(function ($candidateDetail, $key) {
-                return !UserHelper::isCandidateDetailDataAndRelationshipEmpty($candidateDetail);
-            });
+        $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
 
-        $candidateDetailIdAndCombinedInterestMap =
-            $this->generateCandidateDetailIdAndCombinedInterestMap($candidateDetails);
-
+        $view_data = ['candidate_detail','work_experiences_not_updated', 'educations_not_updated', 'achievements_not_updated',
+            'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated', 'isCandidateDetailUpdated', 'cart_count',
+            'notifications', 'transactions', 'informations', 'footer_reviews', 'agent'];
         
-        return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
-            'informations', 'footer_reviews', 'agent', 'candidateDetails', 'candidateDetailIdAndCombinedInterestMap'));
-    }
-
-    // Shows the Hiring Partner List Page. 
-    public function my_list() {
-        $agent = new Agent();
-        $footer_reviews = Review::orderBy('created_at', 'desc')->get()->take(2);
-
-        $this->resetNavbarData();
-        $notifications = $this->notifications;
-        $informations = $this->informations;
-        $transactions = $this->transactions;
-        $cart_count = $this->cart_count;
-
-
-        $contactedCandidates = Auth::user()->candidates()
-            ->with('candidateDetail')
-            ->paginate(self::CONTACTED_CANDIDATES_PAGE_SIZE);
-        
-        return view('client/job-portal/company/mylist', compact('cart_count', 'notifications', 'transactions',
-            'informations', 'footer_reviews', 'agent',
-            'contactedCandidates'));
-    }
-
-    private function generateCandidateDetailIdAndCombinedInterestMap($candidateDetails) {
-        return $candidateDetails->mapWithKeys(function ($candidateDetail, $key) {
-            $combinedInterestsString = '';
-            foreach ($candidateDetail->interests as $interest) {
-                $combinedInterestsString = $combinedInterestsString . $interest->title . ', ';
-            }
-            return [$candidateDetail->id => substr($combinedInterestsString, 0, -2)];
-        });
+        return view('client/job-portal/company/detail', compact($view_data));
     }
 
     // Shows the Client Job Portal Profile page.
@@ -180,7 +183,25 @@ class JobPortalController extends Controller
         return view('client/job-portal/company/profile', compact('footer_reviews', 'agent'));
     }
 
-    // Contact user (candidate) & Adding them to Hiring Partner's Contacted Candidate List.
+    // Save user (candidate) to Hiring Partner's candidate-list.
+    public function archiveCandidate(Request $request) {
+        $validated = $request->validate(['user_id' => 'required|integer']);
+
+        $candidate = User::where('id', $validated['user_id'])
+            ->has('candidateDetail')
+            ->firstOrFail();
+
+        if (UserHelper::isHiringPartnerCandidateExists(Auth::user()->id, $candidate->id)) {
+            $message = 'Candidate (' . $candidate->name . ') is already available on your list.';
+        } else {
+            $candidate->hiringPartners()->attach(Auth::user()->id);
+            $message = 'Candidate (' . $candidate->name . ') is now available on your list.';
+        }
+
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
+    }
+
+    // Update hiringPartner-Candidate status to contacted.
     public function contactCandidate(Request $request) {
         $validated = $request->validate(['user_id' => 'required|integer']);
 
@@ -188,9 +209,18 @@ class JobPortalController extends Controller
             ->has('candidateDetail')
             ->firstOrFail();
 
-        $candidate->hiringPartners()->attach(Auth::user()->id);
+        if (UserHelper::isCandidateHired($candidate->id)) {
+            $message = 'Candidate (' . $candidate->name . ') has already been hired';
+        } else if (!UserHelper::isHiringPartnerCandidateExists(Auth::user()->id, $candidate->id)) {
+            $message = 'Candidate (' . $candidate->name . ') has not been added to your list.';
+        } else {$hiringPartnerCandidatePivot = $candidate->hiringPartners()
+                ->where('hiring_partner_id', Auth::user()->id)
+                ->firstOrFail()->pivot;
+            $hiringPartnerCandidatePivot->status = 'contacted';
+            $hiringPartnerCandidatePivot->save();
+            $message = 'Candidate (' . $candidate->name . ') has been contacted through email.';
+        }
 
-        $message = 'Candidate (' . $candidate->name . ') has been contacted through email & is now available on you list.';
         return redirect('/job-portal#kandidat-venidici')->with('message', $message);
     }
 

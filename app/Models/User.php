@@ -68,13 +68,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function candidates() {
         return $this->belongsToMany(User::class, 'hiring_partner_candidate', 'hiring_partner_id', 'candidate_id')
-            ->withPivot('status') // contacted, accepted, rejected, hired
+            ->withPivot('status') // archived, contacted, accepted, rejected, hired
             ->withTimestamps();
     }
 
     public function hiringPartners() {
         return $this->belongsToMany(User::class, 'hiring_partner_candidate', 'candidate_id', 'hiring_partner_id')
-            ->withPivot('status') // contacted, accepted, rejected, hired
+            ->withPivot('status') // archived, contacted, accepted, rejected, hired
             ->withTimestamps();
     }
 

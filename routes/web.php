@@ -206,14 +206,14 @@ Route::middleware(['isSuspended'])->group(function () {
     | and uses ['auth', 'is_hiringPartner'] middleware.
     */
     Route::prefix('job-portal')->name('job-portal.')->middleware(['auth', 'isHiringPartner'])->group(function() {
-        // Route::get('/', [JobPortalController::class, 'index'])->middleware(['verified'])->name('index');
-        Route::get('/', [JobPortalController::class, 'index'])->name('index');
-        Route::get('/my-list', [JobPortalController::class, 'my_list'])->name('my_list');
+        Route::get('/', [JobPortalController::class, 'index'])->name('index')->middleware(['verified']);
+        Route::get('/my-list', [JobPortalController::class, 'myListIndex'])->name('my-list.index')->middleware(['verified']);
         Route::get('/profile', [JobPortalController::class, 'profileIndex'])->name('profile.index');
-        Route::post('/candidate/contact', [JobPortalController::class, 'contactCandidate'])->name('contact-candidate');
-        Route::post('/candidate/accept', [JobPortalController::class, 'acceptContactedCandidate'])->name('accept-candidate');
-        Route::get('/{id}', [JobPortalController::class, 'job_portal_candidate_detail'])->name('job_portal_candidate_detail');
-        Route::post('/change-password', [JobPortalController::class, 'changePassword'])->name('change-password')->middleware(['auth', 'verified']);
+        Route::post('/candidate/archive', [JobPortalController::class, 'archiveCandidate'])->name('archive-candidate')->middleware(['verified']);
+        Route::post('/candidate/contact', [JobPortalController::class, 'contactCandidate'])->name('contact-candidate')->middleware(['verified']);
+        Route::post('/candidate/accept', [JobPortalController::class, 'acceptContactedCandidate'])->name('accept-candidate')->middleware(['verified']);
+        Route::get('/{id}', [JobPortalController::class, 'job_portal_candidate_detail'])->name('job_portal_candidate_detail')->middleware(['verified']);
+        Route::post('/change-password', [JobPortalController::class, 'changePassword'])->name('change-password')->middleware(['verified']);
     });
 
     

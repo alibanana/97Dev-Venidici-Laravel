@@ -163,7 +163,7 @@
                         $experience = $isCandidatePending && $candidate_detail_change->experience_year != null ? $candidate_detail_change->experience_year : $candidate_detail->experience_year;
                     }
                 @endphp
-                <option value="Less than 1 Year of Experience" @if($experience == 'Less than 1 Year of Experience') selected @endif > < 1 Year of Experience</option>
+                <option value="Less than 1 Year of Experience" @if($experience == 'Less than 1 Year of Experience') selected @endif> < 1 Year of Experience</option>
                 <option value="Less than 2 Years of Experience" @if($experience == 'Less than 2 Years of Experience') selected @endif> < 2 Years of Experience</option>
                 <option value="Less than 3 Years of Experience" @if($experience == 'Less than 3 Years of Experience') selected @endif> < 3 Years of Experience</option>
                 <option value="More than 3 Years of Experience" @if($experience == 'More than 3 Years of Experience') selected @endif> > 3 Years of Experience</option>

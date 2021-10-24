@@ -19,7 +19,7 @@ class CreateHiringPartnerCandidateTable extends Migration
             $table->foreign('hiring_partner_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('candidate_id');
             $table->foreign('candidate_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('status', ['contacted', 'accepted', 'rejected', 'hired'])->default('contacted');
+            $table->enum('status', ['archived', 'contacted', 'accepted', 'rejected', 'hired'])->default('archived');
             $table->timestamps();
         });
     }
