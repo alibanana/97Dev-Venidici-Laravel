@@ -69,7 +69,8 @@
                             <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="None" disabled selected>Sort by</option>
                                 <option value="Alphabet Ascending">Alphabet Ascending</option>
-                                <option value="Alphabet Descending">Alphabet Descending</option>                            </select>                    
+                                <option value="Alphabet Descending">Alphabet Descending</option>
+                            </select>                    
                             @error('')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
                                 <strong>{{ $message }}</strong>
@@ -99,107 +100,56 @@
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">Action</p>
                     </div>
                 </div>
+                
+                @isset($contactedCandidates)
+                    @foreach ($contactedCandidates as $candidate)
+                        <div class="row m-0  job-listing-card" >
+                            <div class="col-8"> 
+                                <div style="display:flex;align-items:center">
+                                    <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
+                                    <div style="margin-left:1vw">
+                                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0.5vw">{{ $candidate->name }}</p>
+                                        <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;margin-bottom:0.5vw">{{ $candidate->candidateDetail->industry }}</p>
+                                        <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $candidate->candidateDetail->experience__year }} in {{ $candidate->candidateDetail->industry }}</p>
 
-                <!-- START OF ONE ROW -->
-                <div class="row m-0  job-listing-card" >
-                    <div class="col-8"> 
-                        <div style="display:flex;align-items:center">
-                            <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
-                            <div style="margin-left:1vw">
-                                <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0.5vw">Gabriel Amileano Vidyananto Soebiantoro</p>
-                                <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;margin-bottom:0.5vw">Product Management</p>
-                                <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px">4+ Years of Experience in Project Management Industry</p>
-
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2" style="text-align:center">
+                                @if ($candidate->pivot->status == 'contacted')
+                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Contacted</a>
+                                @elseif ($candidate->pivot->status == 'accepted')
+                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Accepted</a>
+                                @elseif ($candidate->pivot->status == 'rejected')
+                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Rejected</a>
+                                @elseif ($candidate->pivot->status == 'hired')
+                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Hired</a>
+                                @endif
+                            </div>
+                            <div class="col-2"  style="text-align:center"> 
+                                <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
+                                    <select name="" class="normal-text"  style="background:transparent;border:none;color: #ffffff;;width:100%;font-family:Rubik Regular;">
+                                        <option value="None" disabled selected>Select Action</option>
+                                        @if ($candidate->pivot->status == 'contacted')
+                                            <option value="Accept">Accept</option>
+                                            <option value="Reject">Reject</option>
+                                            <option value="Remove">Remove from List</option>
+                                        @elseif ($candidate->pivot->status == 'accepted')
+                                            <option value="Cancel">Cancel</option>
+                                        @elseif ($candidate->pivot->status == 'rejected')
+                                            <option value="Cancel">Cancel</option>
+                                        @endif
+                                    </select>                    
+                                    @error('')
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div> 
                             </div>
                         </div>
-                    </div>
-                    <div class="col-2" style="text-align:center"> 
-                        <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Contacted</a>
-                    </div>
-                    <div class="col-2"  style="text-align:center"> 
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #ffffff;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Select Action</option>
-                                <option value="Accepted">Accepted</option>
-                                <option value="Contacted">Contacted</option>
-                                <option value="Rejected">Rejected</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div> 
-                    </div>
-                </div>
-                <!-- END OF ONE ROW -->
-                <!-- START OF ONE ROW -->
-                <div class="row m-0  job-listing-card" >
-                    <div class="col-8"> 
-                        <div style="display:flex;align-items:center">
-                            <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
-                            <div style="margin-left:1vw">
-                                <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0.5vw">Gabriel Amileano Vidyananto Soebiantoro</p>
-                                <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;margin-bottom:0.5vw">Product Management</p>
-                                <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px">4+ Years of Experience in Project Management Industry</p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2" style="text-align:center"> 
-                        <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Contacted</a>
-                    </div>
-                    <div class="col-2"  style="text-align:center"> 
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #ffffff;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Select Action</option>
-                                <option value="Accepted">Accepted</option>
-                                <option value="Contacted">Contacted</option>
-                                <option value="Rejected">Rejected</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div> 
-                    </div>
-                </div>
-                <!-- END OF ONE ROW -->
-                <!-- START OF ONE ROW -->
-                <div class="row m-0  job-listing-card" >
-                    <div class="col-8"> 
-                        <div style="display:flex;align-items:center">
-                            <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
-                            <div style="margin-left:1vw">
-                                <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0.5vw">Gabriel Amileano Vidyananto Soebiantoro</p>
-                                <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;margin-bottom:0.5vw">Product Management</p>
-                                <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px">4+ Years of Experience in Project Management Industry</p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2" style="text-align:center"> 
-                        <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Contacted</a>
-                    </div>
-                    <div class="col-2"  style="text-align:center"> 
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #ffffff;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Select Action</option>
-                                <option value="Accepted">Accepted</option>
-                                <option value="Contacted">Contacted</option>
-                                <option value="Rejected">Rejected</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div> 
-                    </div>
-                </div>
-                <!-- END OF ONE ROW -->
-
+                    @endforeach
+                @endisset
 
                 <div class="row m-0" style="">
                     <div class="col-12 p-0" style="text-align:center">
@@ -247,7 +197,7 @@
                             </select>                    
                             @error('')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>  
@@ -325,10 +275,14 @@
                                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">{{ $candidateDetailIdAndCombinedInterestMap[$candidateDetail->id] }}</p>
         
                                 <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: 98</p>
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">   
-                                    <button class="normal-text btn-dark-blue full-width-button" type="submit" 
-                                        style="border:none;font-family: Rubik Bold;margin-bottom:0px;cursor:pointer;">
-                                        Add to my list</button>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">
+                                    <form action="{{ route('job-portal.contact-candidate') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{ $candidateDetail->user->id }}" hidden>
+                                        <button class="normal-text btn-dark-blue full-width-button" type="submit" 
+                                            style="border:none;font-family: Rubik Bold;margin-bottom:0px;cursor:pointer;">
+                                            Add to my list</button>
+                                    </form>
                                     <div style="display:flex">
                                         <a href="{{ $candidateDetail->linkedin_link }}" target="_blank" class="sub-description" style="margin-right:1vw">
                                             <i class="fab fa-linkedin " style="color:#3B3C43"></i> 

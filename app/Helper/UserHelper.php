@@ -2,6 +2,8 @@
 
 namespace App\Helper;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Models\User;
 use App\Models\CandidateDetail;
 use App\Models\CandidateDetailChange;
@@ -9,6 +11,7 @@ use App\Models\CandidateDetailChange;
 class UserHelper {
 
     private const ADMIN_ROLE_IDS = [2, 3];
+    private const HIRING_PARTNER_CANDIDATE_TABLE = 'hiring_partner_candidate';
 
     // Get lists of admins.
     public static function findAllAdmins() {
@@ -70,5 +73,45 @@ class UserHelper {
             $candidateDetailChange->experience_year == null ||
             $candidateDetailChange->industry == null ||
             $candidateDetailChange->cv_file == null;
+    }
+
+    // Method to check where a candidate has been hired.
+    public static function isCandidateHired($candidate_id) {
+        return DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
+            ->where('candidate_id', $candidate_id)
+            ->where('status', 'accepted')
+            ->orWhere('status', 'hired')
+            ->count() > 0;
+    }
+
+    // Method to check if HiringPartner & Candidate has been mapped.
+    public static function isHiringPartnerCandidateExists($hiring_partner_id, $candidate_id) {
+        return DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
+            ->where('hiring_partner_id', $hiring_partner_id)
+            ->where('candidate_id', $candidate_id)
+            ->count() > 0;
+    }
+
+    // Method to hire Candidate to a HiringPartner. Assumes that :
+    //  - Candidate has not been hired by another HiringPartner
+    //  - Candidate has been mapped to the given HiringPartner
+    public static function hireCandidate(User $candidate, $hiring_partner_id) {
+        // Update pivot data of given candidate & hiring partner to 'accepted'.
+        $hiringPartnerCandidatePivot = $candidate->hiringPartners()
+            ->where('hiring_partner_id', Auth::user()->id)
+            ->firstOrFail()->pivot;
+        $hiringPartnerCandidatePivot->status = 'accepted';
+        $hiringPartnerCandidatePivot->save();
+
+        // Update all other pivot data of given candidate to 'hired'.
+        $contactedHiringPartnerCandidatePivots =
+            DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
+                ->where('candidate_id', $candidate_id)
+                ->where('status', 'contacted')
+                ->get();
+        foreach ($contactedHiringPartnerCandidatePivots as $contactedHiringPartnerCandidatePivot) {
+            $contactedHiringPartnerCandidatePivot->status = 'hired';
+            $contactedHiringPartnerCandidatePivot->save();
+        }
     }
 }
