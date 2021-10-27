@@ -344,8 +344,8 @@ class CandidateDetailController extends Controller
 
         $validated = $validator->validate();
 
-        $workExperienceChange = WorkExperienceChange::where('action', 'create')
-            ->orWhere('action', 'update')
+        $workExperienceChange = WorkExperienceChange::where('id', $work_experience_change_id)
+            ->whereIn('action', ['create', 'update'])
             ->update([
                 'company' => $validated['company'],
                 'job_position' => $validated['job_position'],
@@ -476,8 +476,8 @@ class CandidateDetailController extends Controller
 
         $validated = $validator->validate();
 
-        $educationCange = EducationChange::where('action', 'create')
-            ->orWhere('action', 'update')
+        $educationCange = EducationChange::where('id', $education_change_id)
+            ->whereIn('action', ['create', 'update'])
             ->update([
                 'degree' => $validated['degree'],
                 'school' => $validated['school'],
@@ -559,7 +559,7 @@ class CandidateDetailController extends Controller
         $achievementChange = AchievementChange::firstOrCreate([
             'candidate_detail_change_id' => $candidateDetailChange->id,
             'achievement_id' => $achievement->id,
-            'action' => 'create'
+            'action' => 'update'
         ], [
             'title' => $validated['title'],
             'location_of_event' => $validated['location_of_event'],
@@ -587,8 +587,8 @@ class CandidateDetailController extends Controller
 
         $validated = $validator->validate();
 
-        $achievementChange = AchievementChange::where('action', 'create')
-            ->orWhere('action', 'update')
+        $achievementChange = AchievementChange::where('id', $achievement_change_id)
+            ->whereIn('action', ['create', 'update'])
             ->update([
                 'title' => $validated['title'],
                 'location_of_event' => $validated['location_of_event'],
@@ -690,8 +690,8 @@ class CandidateDetailController extends Controller
 
         $validated = $validator->validate();
 
-        $hardskillChange = HardskillChange::where('action', 'create')
-            ->orWhere('action', 'update')
+        $hardskillChange = HardskillChange::where('id', $hardskill_change_id)
+            ->whereIn('action', ['create', 'update'])
             ->update([
                 'title' => $validated['title'],
                 'score' => $validated['score']
@@ -792,8 +792,8 @@ class CandidateDetailController extends Controller
 
         $validated = $validator->validate();
 
-        $softskillChange = SoftskillChange::where('action', 'create')
-            ->orWhere('action', 'update')
+        $softskillChange = SoftskillChange::where('id', $softskill_change_id)
+            ->whereIn('action', ['create', 'update'])
             ->update([
                 'title' => $validated['title'],
                 'score' => $validated['score']
@@ -885,8 +885,8 @@ class CandidateDetailController extends Controller
 
         $validated = $validator->validate();
 
-        $interestChange = InterestChange::where('action', 'create')
-            ->orWhere('action', 'update')
+        $interestChange = InterestChange::where('id', $interest_change_id)
+            ->whereIn('action', ['create', 'update'])
             ->update([
                 'title' => $validated['title']
             ]);
