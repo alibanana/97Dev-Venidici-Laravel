@@ -71,8 +71,7 @@ class UserHelper {
             $candidateDetailChange->whatsapp_number == null ||
             $candidateDetailChange->about_me_description == null ||
             $candidateDetailChange->experience_year == null ||
-            $candidateDetailChange->industry == null ||
-            $candidateDetailChange->cv_file == null;
+            $candidateDetailChange->industry == null;
     }
 
     // Method to check where a candidate has been hired.
