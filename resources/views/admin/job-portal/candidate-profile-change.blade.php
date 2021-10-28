@@ -21,35 +21,65 @@
 
                 <div class="row m-0">
                     <div class="col-lg-3 col-xs-12 p-0">
-                        <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:13vw;height:17vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
+                        <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidate_detail->user->userDetail->display_picture }}" @endif style="width:13vw;height:17vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
                     </div>
-                    <div class="col-lg-9 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+                    <div class="col-lg-9 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:left">
                         <div>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Hi, my name is</p>
                             <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF">{{ $candidate_detail->user->name }}</p>
-                            @if ($isCandidateDetailNotUpdated != null)
+                            @if (!$isCandidateDetailNotUpdated)
                                 <p class="bigger-text" style="font-family: Rubik Regular;color:#FFFFFF">I have {{$candidate_detail->experience_year}} in {{$candidate_detail->industry}} (existing)</p>
                             @endif
                             <!-- show pending profile -->
                             @if ($candidate_detail_change->about_me_description != null)
                                 <p class="bigger-text" style="font-family: Rubik Regular;color:#FFFFFF">I have {{$candidate_detail_change->experience_year}} in {{$candidate_detail_change->industry}} ({{$candidate_detail_change->status}})</p>
                             @endif
-                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Phone: {{$candidate_detail->whatsapp_number == null ? $candidate_detail_change->whatsapp_number : $candidate_detail->whatsapp_number }}</p>
-                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail->preferred_working_location == null ? $candidate_detail_change->preferred_working_location : $candidate_detail->preferred_working_location }}</p>
+                            
+                            
+
+
+                            @if (!$isCandidateDetailNotUpdated)
+                                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Phone: {{$candidate_detail->whatsapp_number}} (existing)</p>
+                            @endif
+                            <!-- show pending profile -->
+                            @if ($candidate_detail_change->about_me_description != null)
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Phone: {{$candidate_detail_change->whatsapp_number}} ({{$candidate_detail_change->status}})</p>
+                            @endif
+
+
+
+
+                            
+                            @if (!$isCandidateDetailNotUpdated)
+                                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail->preferred_working_location}} (existing)</p>
+                            @endif
+                            <!-- show pending profile -->
+                            @if ($candidate_detail_change->about_me_description != null)
+                                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail_change->preferred_working_location}} ({{$candidate_detail_change->status}})</p>
+                            @endif
+                           
                             <div style="display:flex;align-items:center;margin-top:3vw">   
-                                <div>
-                                    <a href="" class="a-white" style="">Download CV</a>
-                                </div>
+                                @if (!$isCandidateDetailNotUpdated)
+                                    <div>
+                                        <a target="_blank" href="/{{$candidate_detail->cv_file }}" class="a-white" style="">Existing CV</a>
+                                    </div>
+                                @endif
+                                <!-- show pending profile -->
+                                @if ($candidate_detail_change->cv_file != null)
+                                    <div>
+                                        <a target="_blank" href="/{{$candidate_detail_change->cv_file }}" class="a-white" style="">Updated CV</a>
+                                    </div>
+                                @endif  
                             </div>
                         </div>
                     </div>
                     <!-- show current profile -->
                     @if ($isCandidateDetailNotUpdated)
-                    <div class="col-12 p-0" style="margin-top:4vw">
-                        <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me (existing)</p>
+                        <div class="col-12 p-0" style="margin-top:4vw">
+                            <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me (existing)</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Linked In: {{$candidate_detail->linkedin_link == null ? '-' : $candidate_detail->linkedin_link }}</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">{{ $candidate_detail->about_me_description }}</p>
-                        </div>
+                        </div>                    
                     @endif
 
                     <!-- show pending profile -->
@@ -58,6 +88,10 @@
                             <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me ({{$candidate_detail_change->status}})</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Linked In: {{$candidate_detail_change->linkedin_link == null ? '-' : $candidate_detail_change->linkedin_link }}</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">{{ $candidate_detail_change->about_me_description }}</p>
+                        </div>
+                    @else
+                        <div class="col-12 p-0" style="margin-top:4vw">
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">No update for description</p>
                         </div>
                     @endif
                 </div>

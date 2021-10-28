@@ -909,8 +909,9 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="" id="achievementForm" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('put')
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Achievements</p>
@@ -928,9 +929,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Juara 1 Nasional Lomba.." >
+                            <input name="title" id="achievementTitle" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Juara 1 Nasional Lomba.." >
                         </div>  
-                        @error('name')
+                        @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -940,7 +941,7 @@
                                 <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Achievement Year</p>
                                 <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
                                     <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
-                                    <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy-mm-dd">
+                                    <input type="number" name="year" id="achievementYear" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy">
                                 </div> 
                             </div>
                         </div>
@@ -950,9 +951,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Location of Event</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Sekolah Dasar.." >
+                            <input name="location_of_event" id="achievementLocationOfEvent" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="DKI Jakarta" >
                         </div>  
-                        @error('name')
+                        @error('location_of_event')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -991,8 +992,8 @@
                         <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievement->year }}</p>
                     </div>
                     <div style="display:flex;align-items:center">
-                        <a href="#we-update" style="color:#2B6CAA">
-                            <i class="fas fa-edit bigger-text"></i>
+                        <a href="#achievement-update" style="color:#2B6CAA">
+                            <i onclick="passAchievement('{{ $achievement->title }}', '{{$achievement->location_of_event}}', '{{$achievement->year}}', '{{route('candidate-detail.update-achievement', $achievement->id)}}' )" class="fas fa-edit bigger-text"></i>
                         </a>
                         <form style="margin-left:1vw" action=""> 
                         <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
@@ -1007,19 +1008,20 @@
                 <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
                     @if ($achievementChange->action == 'create')
                         <div> 
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->title }}</p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->location_of_event }} </p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->year }}</p>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
+                            <a href="#achievement-update" style="color:#2B6CAA">
+                                <i onclick="passAchievement('{{ $achievementChange->title }}', '{{$achievementChange->location_of_event}}', '{{$achievementChange->year}}', '{{route('candidate-detail.update-achievement-change', $achievementChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
                             <form style="margin-left:1vw" action=""> 
                             <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
-                    @elseif ($achievementChanges->action == 'update')
+                    @elseif ($achievementChange->action == 'update')
                         <div>   
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->achievement->title }}</p>
@@ -1032,26 +1034,18 @@
                             <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->year }}</p>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
+                            <a href="#achievement-update" style="color:#2B6CAA">
+                                <i onclick="passAchievement('{{ $achievementChange->title }}', '{{$achievementChange->location_of_event}}', '{{$achievementChange->year}}', '{{route('candidate-detail.update-achievement-change', $achievementChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
                             <form style="margin-left:1vw" action=""> 
                             <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
-                    @elseif ($achievementChanges->action == 'delete')
+                    @elseif ($achievementChange->action == 'delete')
                         <div>   
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->title }}</p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->location_of_event }} </p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->year }}</p>
-                        </div>
-                        <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
-                            </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                            </form>
                         </div>
                     @endif
                 </div>
@@ -1131,16 +1125,17 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="" id="hardskillForm" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('put')
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Hard Skills</p>
 
-                        @if (session()->has('hard_skills_update_message'))
+                        @if (session()->has('hardskill_update_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('hard_skills_update_message') }}
+                            {{ session()->get('hardskill_update_message') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
@@ -1150,9 +1145,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Web Designer" >
+                            <input name="title" id="hardskillTitle" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Web Designer" >
                         </div>  
-                        @error('name')
+                        @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -1164,10 +1159,10 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Hard Skill Score</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <span style="margin-right:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">1</span>
-                            <input type="range" class="form-range" min="1" max="10" id="customRange2">
+                                <input type="range" id="hardskillScore" name="score" class="form-range" min="1" max="10">
                             <span style="margin-left:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">10</span>
                         </div>  
-                        @error('name')
+                        @error('score')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -1176,7 +1171,6 @@
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
-
                     </div>
                 </div>
             </form>
@@ -1204,8 +1198,8 @@
                         <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $hard_skill->score }} </p>
                     </div>
                     <div style="display:flex;align-items:center">
-                        <a href="#we-update" style="color:#2B6CAA">
-                            <i class="fas fa-edit bigger-text"></i>
+                        <a href="#hs-update" style="color:#2B6CAA">
+                            <i onclick="passHardSkill('{{ $hard_skill->title }}', '{{$hard_skill->score}}', '{{route('candidate-detail.update-hardskill', $hard_skill->id)}}' )" class="fas fa-edit bigger-text"></i>
                         </a>
                         <form style="margin-left:1vw" action=""> 
                         <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
@@ -1218,49 +1212,43 @@
         @isset($candidate_detail_change->hardskillChanges)
             @foreach ($candidate_detail_change->hardskillChanges as $hardskillChange)
                 <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
-                    @if ($workExperienceChange->action == 'create')
+                    @if ($hardskillChange->action == 'create')
                         <div> 
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
+
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->title }}</p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->score }} </p>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
+                            <a href="#hs-update" style="color:#2B6CAA">
+                                <i onclick="passHardSkill('{{ $hardskillChange->title }}', '{{$hardskillChange->score}}', '{{route('candidate-detail.update-hardskill-change', $hardskillChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
                             <form style="margin-left:1vw" action=""> 
                             <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
-                    @elseif ($hardskillChanges->action == 'update')
+                    @elseif ($hardskillChange->action == 'update')
                         <div>   
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->hardskill->title }}</p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->hardskill->score }} </p>
                             <br>
-                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Update</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">Update</p>
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->title }}</p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->score }} </p>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
+                            <a href="#hs-update" style="color:#2B6CAA">
+                                <i onclick="passHardSkill('{{ $hardskillChange->title }}', '{{$hardskillChange->score}}', '{{route('candidate-detail.update-hardskill-change', $hardskillChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
                             <form style="margin-left:1vw" action=""> 
                             <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
-                    @elseif ($hardskillChanges->action == 'delete')
+                    @elseif ($hardskillChange->action == 'delete')
                         <div>   
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->title }}</p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->score }} </p>
-                        </div>
-                        <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
-                            </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                            </form>
                         </div>
                     @endif
                 </div>
@@ -1341,16 +1329,17 @@
     
         <div class="content" style="padding:2vw">
             
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="" id="softskillForm" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('put')
                 <div class="row m-0">
                     <div class="col-12" style="text-align:left;margin-top:2vw">
                     <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px">Soft Skills</p>
 
-                        @if (session()->has('soft_skills_update_message'))
+                        @if (session()->has('softskill_update_message'))
                         <div class="p-3 mt-2 mb-0">
                             <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
-                            {{ session()->get('soft_skills_update_message') }}
+                            {{ session()->get('softskill_update_message') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
@@ -1360,9 +1349,9 @@
                     <div class="col-lg-6 col-xs-12">
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Title</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
-                            <input name="name" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Komunikasi" >
+                            <input name="title" id="softskillTitle" type="text" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Komunikasi" >
                         </div>  
-                        @error('name')
+                        @error('title')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -1374,10 +1363,10 @@
                         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Soft Skill Score</p>
                         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
                             <span style="margin-right:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">1</span>
-                            <input type="range" class="form-range" min="1" max="10" id="customRange2">
+                            <input type="range" name="score" id="softskillScore" class="form-range" min="1" max="10" >
                             <span style="margin-left:1vw;font-family:Rubik Medium;color:#2B6CAA" class="normal-text">10</span>
                         </div>  
-                        @error('name')
+                        @error('score')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -1415,8 +1404,8 @@
                         <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $soft_skill->score }} </p>
                     </div>
                     <div style="display:flex;align-items:center">
-                        <a href="#we-update" style="color:#2B6CAA">
-                            <i class="fas fa-edit bigger-text"></i>
+                        <a href="#ss-update" style="color:#2B6CAA">
+                            <i onclick="passSoftSkill('{{ $soft_skill->title }}', '{{$soft_skill->score}}', '{{route('candidate-detail.update-softskill', $soft_skill->id)}}' )" class="fas fa-edit bigger-text"></i>
                         </a>
                         <form style="margin-left:1vw" action=""> 
                         <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
@@ -1431,18 +1420,20 @@
                 <div style="background-color:#F7F7F9;padding:1.5vw;border-radius:5px;border:2px solid #2B6CAA;display:flex;align-items:center;justify-content:space-between;margin-top:2vw">
                     @if ($softSkillChange->action == 'create')
                         <div> 
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: green">New</p>
+
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->title }}</p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $softSkillChange->score }} </p>
                         </div>
                         <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
+                            <a href="#ss-update" style="color:#2B6CAA">
+                                <i onclick="passSoftSkill('{{ $softSkillChange->title }}', '{{$softSkillChange->score}}', '{{route('candidate-detail.update-softskill-change', $softSkillChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
                             <form style="margin-left:1vw" action=""> 
                             <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
-                    @elseif ($softskillChanges->action == 'update')
+                    @elseif ($softSkillChange->action == 'update')
                         <div>   
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Old</p>
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->softskill->title }}</p>
@@ -1454,24 +1445,16 @@
                         </div>
                         <div style="display:flex;align-items:center">
                             <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
+                                <i onclick="passSoftSkill('{{ $softSkillChange->title }}', '{{$softSkillChange->score}}', '{{route('candidate-detail.update-softskill-change', $softSkillChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
                             <form style="margin-left:1vw" action=""> 
                             <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
-                    @elseif ($softskillChanges->action == 'delete')
+                    @elseif ($softSkillChange->action == 'delete')
                         <div>   
                             <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->title }}</p>
                             <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $softSkillChange->score }} </p>
-                        </div>
-                        <div style="display:flex;align-items:center">
-                            <a href="#we-update" style="color:#2B6CAA">
-                                <i class="fas fa-edit bigger-text"></i>
-                            </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
-                            </form>
                         </div>
                     @endif
                 </div>
@@ -1639,6 +1622,31 @@
 		document.getElementById("educationStart_year").value    = start_year;
 		document.getElementById("educationEnd_year").value      = end_year;
 		document.getElementById("educationForm").action         = route;
+    }
+</script>
+
+<script>
+    function passAchievement(title, location_of_event, year, route) {
+		document.getElementById("achievementTitle").value           = title;
+		document.getElementById("achievementLocationOfEvent").value = location_of_event;
+		document.getElementById("achievementYear").value            = year;
+		document.getElementById("achievementForm").action           = route;
+    }
+</script>
+
+<script>
+    function passHardSkill(title, score, route) {
+		document.getElementById("hardskillTitle").value = title;
+		document.getElementById("hardskillScore").value = score;
+		document.getElementById("hardskillForm").action = route;
+    }
+</script>
+
+<script>
+    function passSoftSkill(title, score, route) {
+		document.getElementById("softskillTitle").value = title;
+		document.getElementById("softskillScore").value = score;
+		document.getElementById("softskillForm").action = route;
     }
 </script>
 

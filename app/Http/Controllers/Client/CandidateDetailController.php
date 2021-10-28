@@ -132,32 +132,7 @@ class CandidateDetailController extends Controller
                 ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
                 ->first();
 
-            $work_experiences_not_updated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('workExperienceChanges')
-                ->get();
-
-            $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('educationChanges')
-                ->get();
-
-            $achievements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('achievementChanges')
-                ->get();
-                
-            $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('hardskillChanges')
-                ->get();
-            $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('softskillChanges')
-                ->get();
-            
-            $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('interestChanges')
-                ->get();
-
-            $view_data = array_merge($view_data, ['candidate_detail','work_experiences_not_updated',
-            'educations_not_updated', 'achievements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
-            'isCandidateDetailUpdated']);
+            $view_data = array_merge($view_data, ['candidate_detail']);
         }
         else{
             return redirect()->route(self::INDEX_ROUTE);
@@ -471,7 +446,7 @@ class CandidateDetailController extends Controller
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect()->route(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)
+            return redirect(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)
                 ->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();
@@ -643,13 +618,13 @@ class CandidateDetailController extends Controller
 
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|digits:1|min:1|max:10'
+            'score' => 'required|integer|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect()->route(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
+            return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
                 ->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();
@@ -679,13 +654,13 @@ class CandidateDetailController extends Controller
     public function updateHardskillChange(Request $request, $hardskill_change_id) {
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|digits:1|min:1|max:10'
+            'score' => 'required|integer|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect()->route(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
+            return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
                 ->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();
@@ -745,7 +720,7 @@ class CandidateDetailController extends Controller
 
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|digits:1|min:1|max:10'
+            'score' => 'required|integer|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
@@ -781,13 +756,13 @@ class CandidateDetailController extends Controller
     public function updateSoftskillChange(Request $request, $softskill_change_id) {
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|digits:1|min:1|max:10'
+            'score' => 'required|integer|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect()->route(self::INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL)
+            return redirect(self::INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL)
                 ->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();

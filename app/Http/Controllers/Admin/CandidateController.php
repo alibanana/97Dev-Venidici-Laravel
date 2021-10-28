@@ -369,8 +369,8 @@ class CandidateController extends Controller
         $candidate_detail_change->status = 'cancelled';
         $candidate_detail_change->save();
 
-        if ($candidateDetailChange->hasAttribute('cv_file') && !is_null($candidateDetailChange->cv_file)) {
-            unlink($candidateDetailChange->cv_file);
+        if ($candidate_detail_change->hasAttribute('cv_file') && !is_null($candidate_detail_change->cv_file)) {
+            unlink($candidate_detail_change->cv_file);
         }
         
         $message = 'Candidate Detail Changes for user (' . $candidate_detail_change->candidateDetail->user->name . ') has been rejected!';
