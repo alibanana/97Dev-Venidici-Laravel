@@ -10,8 +10,8 @@
         <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
             <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">Selamat datang di
             Hiring Partner!</p>
-            <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">“Veni, vidi, vici.” Saya datang, saya
-            lihat, saya taklukkan.</p>
+            <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">Platform anak kekinian buat naklukin
+karir impian!</p>
             <div style="display:flex;justify-content:center;margin-top:4vw">
                 <div style="display:flex;align-items:center;">
                     <div class="btn-blue-toggle btn-blue-toggle-active toggle-link" style="border-radius:10px 0px 0px 10px" onclick="window.location.href='job-portal'">
@@ -56,8 +56,10 @@
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="None" disabled selected>Years of Experience</option>
-                                <option value="1 Tahun">< 1 Tahun</option>
-                                <option value="2 Tahun">< 2 Tahun</option>
+                                <option value="all" >Semua</option>
+                                @foreach($availableExperienceYearFilters as $filter)
+                                <option value="{{$filter}}">{{$filter}}</option>
+                                @endforeach
                             </select>                    
                             @error('')
                                 <span class="invalid-feedback" role="alert" style="display: block !important;">
@@ -70,22 +72,8 @@
                     <div style="margin-left: 3vw;">
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Select Interest</option>
-                                <option value="Business">Business</option>
-                                <option value="Technology">Technology</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>  
-                    </div>
-
-                    <div style="margin-left: 3vw;">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="None" disabled selected>Sort by</option>
+                                <option value="all" >Semua</option>
                                 <option value="Alphabet Ascending">Alphabet Ascending</option>
                                 <option value="Alphabet Descending">Alphabet Descending</option>
                             </select>                    
@@ -132,7 +120,7 @@
                                 </div>
                                 <div class="col-8">
                                     <div style="margin-bottom:0.5vw">
-                                        <a href="/job-portal/1" class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;text-decoration:none;">{{ $candidateDetail->user->name }}</a>
+                                        <a href="/job-portal/{{$candidateDetail->user_id}}" class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;text-decoration:none;">{{ $candidateDetail->user->name }}</a>
                                     </div>
                                     <p class="small-text" style="font-family: Rubik Regular;color:#B7CFE6;margin-bottom:1vw">{{ $candidateDetail->experience_year }} in {{ $candidateDetail->industry }}</p>
                                     <a class="small-text" style="font-family: Rubik Medium;background-color:#67BBA3;color:#ffffff;text-decoration:none;padding:0.5vw;border-radius:5px">Looking for a job</a>

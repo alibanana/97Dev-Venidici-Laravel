@@ -10,8 +10,8 @@
         <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
             <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">Selamat datang di
             Hiring Partner!</p>
-            <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">“Veni, vidi, vici.” Saya datang, saya
-            lihat, saya taklukkan.</p>
+            <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">Platform anak kekinian buat naklukin
+karir impian!</p>
             <div style="display:flex;justify-content:center;margin-top:4vw">
                 <div style="display:flex;align-items:center;">
                     <div class="btn-blue-toggle  toggle-link" style="border-radius:10px 0px 0px 10px" onclick="window.location.href='/job-portal'">
@@ -38,6 +38,7 @@
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                             <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
                                 <option value="None" disabled selected>Years of Experience</option>
+                                <option value="all" >Semua</option>
                                 @foreach ($availableExperienceYearFilters as $filter)
                                     <option value="{{ $filter }}">{{ $filter }}</option>
                                 @endforeach
@@ -114,7 +115,7 @@
                         <div class="row m-0  job-listing-card" >
                             <div class="col-8"> 
                                 <div style="display:flex;align-items:center">
-                                    <img src="/assets/images/seeder/Job_Portal_Dummy_DP.png" style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
+                                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidate->user->userDetail->display_picture }}" @endif style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
                                     <div style="margin-left:1vw">
                                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0.5vw">{{ $candidate->name }}</p>
                                         <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;margin-bottom:0.5vw">{{ $candidate->candidateDetail->industry }}</p>
@@ -123,15 +124,16 @@
                                 </div>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#F4C257;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Pending</a>
-                                @if ($candidate->pivot->status == 'contacted')
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Contacted</a>
+                                @if ($candidate->pivot->status == 'archived')
+                                    <p class="normal-text" style="font-family: Rubik Medium;background-color:#F4C257;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Pending</p>
+                                @elseif ($candidate->pivot->status == 'contacted')
+                                    <p class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Contacted</p>
                                 @elseif ($candidate->pivot->status == 'accepted')
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Accepted</a>
+                                    <p class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Accepted</p>
                                 @elseif ($candidate->pivot->status == 'rejected')
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Rejected</a>
+                                    <p class="normal-text" style="font-family: Rubik Medium;background-color:#F4C257;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Rejected</p>
                                 @elseif ($candidate->pivot->status == 'hired')
-                                    <a class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Hired</a>
+                                    <p class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Hired</p>
                                 @endif
                             </div>
                             <div class="col-2"  style="text-align:center"> 
