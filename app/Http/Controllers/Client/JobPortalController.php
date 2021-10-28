@@ -80,9 +80,11 @@ class JobPortalController extends Controller
         $archivedCandidateIds = Auth::user()->candidates()
             ->select('candidate_id')->pluck('candidate_id')->toArray();
         
+        $availableExperienceYearFilters = self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER;
+
         return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
             'informations', 'footer_reviews', 'agent', 'candidateDetails', 'candidateDetailIdAndCombinedInterestMap',
-            'archivedCandidateIds'));
+            'archivedCandidateIds','availableExperienceYearFilters'));
     }
 
     private function generateCandidateDetailIdAndCombinedInterestMap($candidateDetails) {
@@ -198,7 +200,7 @@ class JobPortalController extends Controller
             $message = 'Candidate (' . $candidate->name . ') is now available on your list.';
         }
 
-        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
+        return redirect('job-portal/#kandidat-venidici')->with('message', $message);
     }
 
     // Update hiringPartner-Candidate status to contacted.
