@@ -141,18 +141,21 @@ karir impian!</p>
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $candidate->candidateDetail->user->id }}" hidden>
                                     <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
-                                        <select name="" class="normal-text action-select"  style="background:transparent;border:none;color: #ffffff;;width:100%;font-family:Rubik Regular;">
+                                        <select name="" class="normal-text action-select"  style="background:transparent;border:none;color: #ffffff;width:100%;font-family:Rubik Regular;">
                                             <option value="None" disabled selected>Select Action</option>
-                                            @if ($candidate->pivot->status == 'contacted')
-                                                <option value="Accept">Accept</option>
-                                                <option value="Reject">Reject</option>
-                                                <option value="Remove">Remove from List</option>
+                                            @if ($candidate->pivot->status == 'archived')
+                                                <option style="color: black" value="Contact">Contact</option>
+                                                <option style="color: black" value="Remove">Remove from List</option>
+                                            @elseif ($candidate->pivot->status == 'contacted')
+                                                <option style="color: black" value="Accept">Accept</option>
+                                                <option style="color: black" value="Reject">Reject</option>
+                                                <option style="color: black" value="Remove">Remove from List</option>
                                             @elseif ($candidate->pivot->status == 'accepted')
-                                                <option value="Cancel">Cancel</option>
+                                                <option style="color: black" value="Cancel">Cancel</option>
                                             @elseif ($candidate->pivot->status == 'rejected')
-                                                <option value="Cancel">Cancel</option>
+                                                <option style="color: black" value="Cancel">Cancel</option>
                                             @endif
-                                        </select>                    
+                                        </select>
                                         @error('')
                                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                                 <strong>{{ $message }}</strong>
