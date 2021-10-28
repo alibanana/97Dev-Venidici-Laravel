@@ -177,21 +177,33 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/work-experiences', [CandidateDetailController::class, 'storeWorkExperience'])->name('store-work-experience');
         Route::put('/work-experiences/{work_experience_id}', [CandidateDetailController::class, 'updateWorkExperience'])->name('update-work-experience');
         Route::put('/work-experience-changes/{work_experience_change_id}', [CandidateDetailController::class, 'updateWorkExperienceChange'])->name('update-work-experience-change');
+        Route::delete('/work-experiences/{work_experience_id}', [CandidateDetailController::class, 'deleteWorkExperience'])->name('delete-work-experience');
+        Route::post('/work-experience-changes/{work_experience_change_id}/cancel', [CandidateDetailController::class, 'cancelWorkExperienceChange'])->name('cancel-work-experience-change');
         Route::post('/educations', [CandidateDetailController::class, 'storeEducation'])->name('store-education');
         Route::put('/educations/{education_id}', [CandidateDetailController::class, 'updateEducation'])->name('update-education');
         Route::put('/education-changes/{education_change_id}', [CandidateDetailController::class, 'updateEducationChange'])->name('update-education-change');
+        Route::delete('/educations/{education_id}', [CandidateDetailController::class, 'deleteEducation'])->name('delete-education');
+        Route::post('/education-changes/{education_change_id}/cancel', [CandidateDetailController::class, 'cancelEducationChange'])->name('cancel-education-change');
         Route::post('/achievements', [CandidateDetailController::class, 'storeAchievement'])->name('store-achievement');
         Route::put('/achievements/{achievement_id}', [CandidateDetailController::class, 'updateAchievement'])->name('update-achievement');
         Route::put('/achievement-changes/{achievement_change_id}', [CandidateDetailController::class, 'updateAchievementChange'])->name('update-achievement-change');
+        Route::delete('/achievements/{achievement_id}', [CandidateDetailController::class, 'deleteAchievement'])->name('delete-achievement');
+        Route::post('/achievement-changes/{achievement_change_id}/cancel', [CandidateDetailController::class, 'cancelAchievementChange'])->name('cancel-achievement-change');
         Route::post('/hardskills', [CandidateDetailController::class, 'storeHardskill'])->name('store-hardskill');
         Route::put('/hardskills/{hardskill_id}', [CandidateDetailController::class, 'updateHardskill'])->name('update-hardskill');
         Route::put('/hardskill-changes/{hardskill_change_id}', [CandidateDetailController::class, 'updateHardskillChange'])->name('update-hardskill-change');
+        Route::delete('/hardskills/{hardskill_id}', [CandidateDetailController::class, 'deleteHardskill'])->name('delete-hardskill');
+        Route::post('/hardskill-changes/{hardskill_change_id}/cancel', [CandidateDetailController::class, 'cancelHardskillChange'])->name('cancel-hardskill-change');
         Route::post('/softskills', [CandidateDetailController::class, 'storeSoftskill'])->name('store-softskill');
         Route::put('/softskills/{softskill_id}', [CandidateDetailController::class, 'updateSoftskill'])->name('update-softskill');
         Route::put('/softskill-change/{softskill_change_id}', [CandidateDetailController::class, 'updateSoftskillChange'])->name('update-softskill-change');
+        Route::delete('/softskills/{softskill_id}', [CandidateDetailController::class, 'deleteSoftskill'])->name('delete-softskill');
+        Route::post('/softskill-change/{softskill_change_id}/cancel', [CandidateDetailController::class, 'cancelSoftskillChange'])->name('cancel-softskill-change');
         Route::post('/interests', [CandidateDetailController::class, 'storeInterest'])->name('store-interest');
         Route::put('/interests/{interest_id}', [CandidateDetailController::class, 'updateInterest'])->name('update-interest');
         Route::put('/interest-changes/{interest_change_id}', [CandidateDetailController::class, 'updateInterestChange'])->name('update-interest-change');
+        Route::delete('/interests/{interest_id}', [CandidateDetailController::class, 'deleteInterest'])->name('delete-interest');
+        Route::post('/interest-changes/{interest_change_id}/cancel', [CandidateDetailController::class, 'cancelInterestChange'])->name('cancel-interest-change');
     });
     /* END OF CANDIDATE DETAILS ROUTING */
 

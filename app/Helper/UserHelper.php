@@ -65,6 +65,11 @@ class UserHelper {
             !$candidateDetail->softskills()->exists();
     }
 
+    public static function isCandidateDetailChangeDataAndRelationshipEmpty(CandidateDetailChange $candidateDetailChange) {
+        return self::isCandidateDetailChangeDataNull($candidateDetailChange)
+            && self::isRequiredCandidateDetailChangeRelationshipDataNull($candidateDetailChange);
+    }
+
     public static function isCandidateDetailChangeDataNull(CandidateDetailChange $candidateDetailChange) {
         return $candidateDetailChange->preferred_working_location == null ||
             $candidateDetailChange->linkedin_link == null ||
@@ -72,6 +77,15 @@ class UserHelper {
             $candidateDetailChange->about_me_description == null ||
             $candidateDetailChange->experience_year == null ||
             $candidateDetailChange->industry == null;
+    }
+
+    private static function isRequiredCandidateDetailChangeRelationshipDataNull(CandidateDetailChange $candidateDetailChange) {
+        return !$candidateDetailChange->workExperienceChanges()->exists() ||
+            !$candidateDetailChange->educationChanges()->exists() ||
+            !$candidateDetailChange->achievementChanges()->exists() ||
+            !$candidateDetailChange->hardskillChanges()->exists() ||
+            !$candidateDetailChange->softskillChanges()->exists() ||
+            !$candidateDetailChange->interestChanges()->exists();
     }
 
     // Method to check where a candidate has been hired.

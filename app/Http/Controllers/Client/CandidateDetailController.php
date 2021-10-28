@@ -335,6 +335,48 @@ class CandidateDetailController extends Controller
         return redirect(self::INDEX_URL_WITH_UPDATE_WORK_EXPERIENCE_MODAL)->with('work_experience_update_message', $message);
     }
 
+    // Create new workExperienceChange to delete an existing WorkExperience object.
+    public function deleteWorkExperience($work_experience_id) {
+        $workExperience = WorkExperience::findOrFail($work_experience_id);
+
+        $candidateDetail = CandidateDetail::findOrFail($workExperience->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $workExperienceChange = WorkExperienceChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'work_experience_id' => $workExperience->id,
+            'action' => 'delete'
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+    }
+
+    // Delete an existing WorkExperienceChange object
+    public function cancelWorkExperienceChange($work_experience_change_id) {
+        $workExperienceChange = WorkExperienceChange::where('id', $work_experience_change_id)
+            ->whereIn('action', ['create', 'update', 'delete'])
+            ->with('candidateDetailChange')
+            ->firstOrFail();
+
+        $candidateDetailChange = $workExperienceChange->candidateDetailChange;
+
+        $workExperienceChange->destroy();
+
+        if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
+            $candidateDetailChange->destroy();
+        }
+
+        $message = 'Thank you! Your changes have been cancelled.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+    }
+
     // Store new Education in the database.
     public function storeEducation(Request $request) {
         $validationRules = [
@@ -446,7 +488,7 @@ class CandidateDetailController extends Controller
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)
                 ->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();
@@ -465,6 +507,47 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
         return redirect(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)->with('education_update_message', $message);
+    }
+
+    // Create new educationChange to delete an existing Education object.
+    public function deleteEducation($education_id) {
+        $education = Education::findOrFail($education_id);
+
+        $candidateDetail = CandidateDetail::findOrFail($education->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $educationChange = EducationChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'education_id' => $education->id,
+            'action' => 'delete'
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+    }
+
+    // Cancel existing EducationChange object.
+    public function cancelEducationChange($education_change_id) {
+        $educationChange = EducationChange::where('id', $education_change_id)
+            ->whereIn('action', ['create', 'update', 'delete'])
+            ->firstOrFail();
+
+        $candidateDetailChange = $educationChange->candidateDetailChange;
+
+        $educationChange->destroy();
+
+        if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
+            $candidateDetailChange->destroy();
+        }
+
+        $message = 'Thank you! Your changes have been cancelled.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 
     // Store new Achievement in the database.
@@ -575,6 +658,47 @@ class CandidateDetailController extends Controller
         return redirect(self::INDEX_URL_WITH_UPDATE_ACHIEVEMENT_MODAL)->with('achievement_update_message', $message);
     }
 
+    // Create new achievementChange to delete an existing Achievement object.
+    public function deleteAchievement($achievement_id) {
+        $achievement = Achievement::findOrFail($achievement_id);
+
+        $candidateDetail = CandidateDetail::findOrFail($achievement->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $achievementChange = AchievementChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'achievement_id' => $achievement->id,
+            'action' => 'delete'
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+    }
+
+    // Cancel existing AchievementChange object.
+    public function cancelAchievementChange($achievement_change_id) {
+        $achievementChange = AchievementChange::where('id', $achievement_change_id)
+            ->whereIn('action', ['create', 'update', 'delete'])
+            ->firstOrFail();
+
+        $candidateDetailChange = $achievementChange->candidateDetailChange;
+
+        $achievementChange->destroy();
+
+        if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
+            $candidateDetailChange->destroy();
+        }
+
+        $message = 'Thank you! Your changes have been cancelled.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+    }
+
     // Store new Achievement in the database.
     public function storeHardskill(Request $request) {
         $validationRules = [
@@ -618,13 +742,13 @@ class CandidateDetailController extends Controller
 
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|min:1|max:10'
+            'score' => 'required|integer|digits:1|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
                 ->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();
@@ -654,13 +778,13 @@ class CandidateDetailController extends Controller
     public function updateHardskillChange(Request $request, $hardskill_change_id) {
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|min:1|max:10'
+            'score' => 'required|integer|digits:1|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)
                 ->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();
@@ -675,6 +799,47 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
         return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('hardskill_update_message', $message);
+    }
+
+    // Create new hardskillChange to delete an existing Hardskill object.
+    public function deleteHardskill($hardskill_id) {
+        $hardskill = Hardskill::findOrFail($hardskill_id);
+
+        $candidateDetail = CandidateDetail::findOrFail($hardskill->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $hardskillChange = HardskillChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'hardskill_id' => $hardskill->id,
+            'action' => 'delete'
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+    }
+
+    // Cancel existing HardskillChange object.
+    public function cancelHardskillChange($hardskill_change_id) {
+        $hardskillChange = HardskillChange::where('id', $hardskill_change_id)
+            ->whereIn('action', ['create', 'update', 'delete'])
+            ->firstOrFail();
+
+        $candidateDetailChange = $hardskillChange->candidateDetailChange;
+
+        $hardskillChange->destroy();
+
+        if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
+            $candidateDetailChange->destroy();
+        }
+
+        $message = 'Thank you! Your changes have been cancelled.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 
     // Store new Achievement in the database.
@@ -720,7 +885,7 @@ class CandidateDetailController extends Controller
 
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|min:1|max:10'
+            'score' => 'required|integer|digits:1|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
@@ -756,13 +921,13 @@ class CandidateDetailController extends Controller
     public function updateSoftskillChange(Request $request, $softskill_change_id) {
         $validationRules = [
             'title' => 'required',
-            'score' => 'required|integer|min:1|max:10'
+            'score' => 'required|integer|digits:1|min:1|max:10'
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect(self::INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL)
+            return redirect()->route(self::INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL)
                 ->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();
@@ -777,6 +942,47 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
         return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('softskill_update_message', $message);
+    }
+
+    // Create new softskillChange to delete an existing Softskill object.
+    public function deleteSoftskill($softskill_id) {
+        $softskill = Softskill::findOrFail($softskill_id);
+
+        $candidateDetail = CandidateDetail::findOrFail($softskill->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $softskillChange = SoftskillChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'softskill_id' => $softskill->id,
+            'action' => 'delete'
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+    }
+
+    // Cancel existing SoftskillChange object.
+    public function cancelSoftskillChange($softskill_change_id) {
+        $softskillChange = SoftskillChange::where('id', $softskill_change_id)
+            ->whereIn('action', ['create', 'update', 'delete'])
+            ->firstOrFail();
+
+        $candidateDetailChange = $softskillChange->candidateDetailChange;
+
+        $softskillChange->destroy();
+
+        if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
+            $candidateDetailChange->destroy();
+        }
+
+        $message = 'Thank you! Your changes have been cancelled.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 
     // Store new Interest in the database.
@@ -869,5 +1075,46 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
         return redirect(self::INDEX_URL_WITH_UPDATE_INTEREST_MODAL)->with('interest_update_message', $message);
+    }
+
+    // Create new interestChange to delete an existing Interest object.
+    public function deleteInterest($interest_id) {
+        $interest = Interest::findOrFail($interest_id);
+
+        $candidateDetail = CandidateDetail::findOrFail($interest->candidate_detail_id);
+
+        $candidateDetailChange = CandidateDetailChange::firstOrCreate([
+            'candidate_detail_id' => $candidateDetail->id,
+            'status' => 'pending'
+        ]);
+
+        $interestChange = InterestChange::firstOrCreate([
+            'candidate_detail_change_id' => $candidateDetailChange->id,
+            'interest_id' => $interest->id,
+            'action' => 'delete'
+        ]);
+
+        $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+    }
+
+    // Cancel existing InterestChange object.
+    public function cancelInterestChange($interest_change_id) {
+        $interestChange = InterestChange::where('id', $interest_change_id)
+            ->whereIn('action', ['create', 'update', 'delete'])
+            ->firstOrFail();
+
+        $candidateDetailChange = $interestChange->candidateDetailChange;
+
+        $interestChange->destroy();
+
+        if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
+            $candidateDetailChange->destroy();
+        }
+
+        $message = 'Thank you! Your changes have been cancelled.';
+    
+        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 }
