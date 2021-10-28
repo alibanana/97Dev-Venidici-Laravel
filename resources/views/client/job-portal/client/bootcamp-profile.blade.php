@@ -65,8 +65,8 @@
                 <a data-toggle="collapse" href="#collapseExperiences" class="medium-heading" style="color:#2B6CAA"> <i class="fas fa-caret-down"></i> </a>
             </div>
             <div class="collapse show" id="collapseExperiences">
-                @if(isset($work_experiences_not_updated))
-                    @foreach ($work_experiences_not_updated as $workExperience)
+                @if(isset($candidate_detail->workExperiences))
+                    @foreach ($candidate_detail->workExperiences as $workExperience)
                         <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">{{ $workExperience->job_position }} at {{ $workExperience->company }}</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
@@ -93,8 +93,8 @@
                 <a data-toggle="collapse" href="#collapseEducation" class="medium-heading" style="color:#2B6CAA"> <i class="fas fa-caret-down"></i> </a>
             </div>
             <div class="collapse show" id="collapseEducation">
-                @if(isset($educations_not_updated))
-                    @foreach ($educations_not_updated as $education)
+                @if(isset($candidate_detail->educations))
+                    @foreach ($candidate_detail->educations as $education)
                         <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">{{ $education->school }}</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $education->degree }} | {{ $education->major }}</p>
@@ -120,8 +120,8 @@
                 <a data-toggle="collapse" href="#collapseHardskills" class="medium-heading" style="color:#2B6CAA"> <i class="fas fa-caret-down"></i> </a>
             </div>
             <div class="collapse" id="collapseHardskills">
-                @if(isset($hardskills_not_updated))
-                    @foreach ($hardskills_not_updated as $hard_skill)
+                @if(isset($candidate_detail->hardskills))
+                    @foreach ($candidate_detail->hardskills as $hard_skill)
                         <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">{{ $hard_skill->title }}</p>
                             <div style="padding-right:8vw;">   
@@ -156,8 +156,8 @@
                 <a data-toggle="collapse" href="#collapseAchievements" class="medium-heading" style="color:#2B6CAA"> <i class="fas fa-caret-down"></i> </a>
             </div>
             <div class="collapse" id="collapseAchievements">
-                @if(isset($achievements_not_updated))
-                    @foreach ($achievements_not_updated as $achievement)
+                @if(isset($candidate_detail->achievements))
+                    @foreach ($candidate_detail->achievements as $achievement)
                         <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">{{ $achievement->title }}</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $achievement->location_of_event }}</p>
@@ -183,8 +183,8 @@
                 <a data-toggle="collapse" href="#collapseSoftSkills" class="medium-heading" style="color:#2B6CAA"> <i class="fas fa-caret-down"></i> </a>
             </div>
             <div class="collapse" id="collapseSoftSkills">
-                @if(isset($softskills_not_updated))
-                    @foreach ($softskills_not_updated as $softskill)
+                @if(isset($candidate_detail->softskills))
+                    @foreach ($candidate_detail->softskills as $softskill)
                         <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">{{ $softskill->title }}</p>
                             <div style="padding-right:8vw;">   
@@ -219,8 +219,8 @@
                 <a data-toggle="collapse" href="#collapseInterests" class="medium-heading" style="color:#2B6CAA"> <i class="fas fa-caret-down"></i> </a>
             </div>
             <div class="collapse" id="collapseInterests">
-                @if(isset($interests_not_updated))
-                    @foreach ($interests_not_updated as $interest)
+                @if(isset($candidate_detail->interests))
+                    @foreach ($candidate_detail->interests as $interest)
                         <!-- START OF ONE CARD -->
                         <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
                             <p class="normal-text" style="margin-bottom:0px">{{$interest->title}}</p>
