@@ -120,7 +120,7 @@
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                         <div style="padding: 0px 2px">
                                                             <input type="hidden" value="Contacted" name="status">
-                                                            <a href="/admin/job-portal/hiring-partners/1/candidates" class="d-sm-inline-block btn btn-info shadow-sm" >View Contacted Candidates</a>
+                                                            <a href="{{ route('admin.job-portal.hiring-partners.view-contacted-candidates', $user->id) }}" class="d-sm-inline-block btn btn-info shadow-sm">View Contacted Candidates</a>
                                                         </div>
                                                         {{-- checks if current user is super-admin --}}
                                                         @if (Auth::user()->user_role_id == 3) 

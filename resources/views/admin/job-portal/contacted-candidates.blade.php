@@ -38,7 +38,7 @@
                 <div class="container-fluid p-0 mt-3">
                     <!-- Page Heading -->
                     <!--<h1 class="h3 mb-2 text-gray-800 d-inline">Testimony List</h1>-->
-                    <h1 class="h5 mb-2 text-gray-800 d-inline">Showing 1 from 100 Users</h1>
+                    <h1 class="h5 mb-2 text-gray-800 d-inline">{{ "(Showing " . $contactedCandidates_data['from'] . " to " . $contactedCandidates_data['to'] . " of " . $contactedCandidates_data['total'] . " results)" }}</h1>
 
                     <div class="row mt-2 mb-3">
                         
@@ -94,23 +94,32 @@
 										</tr>
 									</thead>
 									<tbody>
-											<tr>
-												<td>1</td>												
-												<td>Fernandha Dzaky</td>												
-												<td>test@gmail.com</td>												
-												<td>08111377893</td>												
-												<td>
-                                                <span style="color:grey">
-                                                    Contacted
-                                                </span>  <br>
-                                                <span style="color:green">
-                                                    Accepted
-                                                </span>  <br>
-                                                <span style="color:red">
-                                                    Rejected
-                                                </span>
+                                        @foreach ($contactedCandidates as $candidate)
+                                            <tr>
+                                                <td>{{ $contactedCandidates_data['from'] + $loop->index }}</td>
+                                                <td>{{ $candidate->name }}</td>
+                                                <td>{{ $candidate->email }}</td>
+                                                <td>{{ $candidate->candidateDetail->whatsapp_number }}</td>
+                                                <td>
+                                                    @if ($candidate->pivot->status == 'archived')
+                                                        <span style="color:grey">
+                                                            Archived
+                                                        </span>
+                                                    @elseif ($candidate->pivot->status == 'contacted')
+                                                        <span style="color:orange">
+                                                            Contacted
+                                                        </span>
+                                                    @elseif ($candidate->pivot->status == 'accepted')
+                                                        <span style="color:green">
+                                                            Accepted
+                                                        </span>
+                                                    @elseif ($candidate->pivot->status == 'hired')
+                                                        <span style="color:green">
+                                                            Hired
+                                                        </span>
+                                                    @endif
                                                 </td>												
-												<td>
+                                                <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
                                                             
                                                             <form action="" method="post">
@@ -127,7 +136,8 @@
                                                             </form> 
                                                     </div>
                                                 </td>											
-											</tr>
+                                            </tr>
+                                        @endforeach
 									</tbody>
 								</table>
 							</div>

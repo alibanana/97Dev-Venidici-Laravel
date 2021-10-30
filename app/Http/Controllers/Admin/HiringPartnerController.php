@@ -11,18 +11,25 @@ use Axiom\Rules\StrongPassword;
 
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Models\CandidateDetail;
 
 class HiringPartnerController extends Controller
 {
     private const HIRING_PARTNER_ROLE_ID = 4;
     
     private const INDEX_ROUTE = 'admin.job-portal.hiring-partners.index';
+    private const VIEW_CONTACTED_CANDIDATES_ROUTE =
+        'admin.job-portal.hiring-partners.view-contacted-candidates';
 
     private const AVAILABLE_FILTERS = ['active', 'suspended'];
     private const USERS_STATUS_LIST = ['active', 'suspended'];
-    
     private const AVAILABLE_OPTIONS = [10, 25, 50, 100, "All"];
     private const AVAILABLE_OPTIONS_WITHOUT_ALL = [10, 25, 50, 100];
+
+    private const CONTACTED_CANDIDATES_AVAILABLE_FILTERS = ['archived', 'contacted', 'accepted', 'hired'];
+    private const HIRING_PARTNER_CANDIDATE_STATUS_LIST = ['archived', 'contacted', 'accepted', 'hired'];
+    private const CONTACTED_CANDIDATES_AVAILABLE_OPTIONS = [10, 25, 50, 100, "All"];
+    private const CONTACTED_CANDIDATES_AVAILABLE_OPTIONS_WITHOUT_ALL = [10, 25, 50, 100];
 
     // Shows the Admin Hiring-Partners List page.
     public function index(Request $request) {
@@ -172,6 +179,107 @@ class HiringPartnerController extends Controller
 
     // Shows the admin hiring-partner contacted candidate list view.
     public function viewContactedCandidates(Request $request, $id) {
-        return view('admin/job-portal/contacted-candidates');
+        $hiringPartner = User::where('user_role_id', self::HIRING_PARTNER_ROLE_ID)
+            ->where('id', $id)
+            ->firstOrFail();
+
+        $contactedCandidates = $hiringPartner->candidates()->with('candidateDetail');
+
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $contactedCandidates = $contactedCandidates->orderBy('hiring_partner_candidate.created_at', 'desc');
+            } else {
+                $contactedCandidates = $contactedCandidates->orderBy('hiring_partner_candidate.created_at');
+            }
+        } else {
+            $contactedCandidates = $contactedCandidates->orderBy('hiring_partner_candidate.created_at', 'desc');
+        }
+
+        if ($request->has('filter')) {
+            if (!in_array($request->filter, self::CONTACTED_CANDIDATES_AVAILABLE_FILTERS)) {
+                $url = route(self::VIEW_CONTACTED_CANDIDATES_ROUTE, request()->except('filter'));
+                return redirect($url);
+            }
+
+            if (in_array($request->filter, self::HIRING_PARTNER_CANDIDATE_STATUS_LIST))
+                $contactedCandidates = $contactedCandidates
+                    ->where('hiring_partner_candidate.status', $request->filter);
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route(self::VIEW_CONTACTED_CANDIDATES_ROUTE, request()->except('search'));
+                return redirect($url);
+            } else {
+                $candidateDetails = CandidateDetail::select(DB::raw('user_id as id'), 'whatsapp_number');
+                $contactedCandidates = $contactedCandidates->joinSub($candidateDetails, 'details', function ($join) {
+                    $join->on('users.id', '=', 'details.id');
+                });
+                
+                $search = $request->search;
+
+                $contactedCandidates = $contactedCandidates->where(function ($query) use ($search) {
+                    $query->where([['name', 'like', "%".$search."%"]])
+                    ->orWhere([['email', 'like', "%".$search."%"]])
+                    ->orWhere([['whatsapp_number', 'like', "%".$search."%"]]);
+                });
+            }
+        }
+
+        if ($request->has('show')) {
+            if (!in_array($request->show, self::CONTACTED_CANDIDATES_AVAILABLE_OPTIONS)) {
+                return redirect(route(self::VIEW_CONTACTED_CANDIDATES_ROUTE, request()->except(['search', 'page'])));
+            }
+
+            if ($request->show == "All") {
+                if ($request->has('page')) {
+                    return redirect(route(self::VIEW_CONTACTED_CANDIDATES_ROUTE, request()->except(['search', 'page'])));
+                }
+
+                $contactedCandidates = $contactedCandidates->get();
+                $contactedCandidates_data_flag = 0;
+            } else {
+                $contactedCandidates = $contactedCandidates->paginate($request->show);
+                $contactedCandidates_data_flag = 1;
+            }
+        } else {
+            $contactedCandidates = $contactedCandidates->paginate(self::CONTACTED_CANDIDATES_AVAILABLE_OPTIONS[0]);
+            $contactedCandidates_data_flag = 1;
+        }
+
+        if ($contactedCandidates_data_flag == 0) {
+            $contactedCandidates_from = 1;
+            $contactedCandidates_count = $contactedCandidates->count();
+            $contactedCandidates_to = $contactedCandidates_count;
+        } else {
+            $contactedCandidates_to_array = $contactedCandidates->toArray();
+            $contactedCandidates_from = $contactedCandidates_to_array['from'];
+            $contactedCandidates_to = $contactedCandidates_to_array['to'];
+            $contactedCandidates_count = $contactedCandidates_to_array['total'];
+        }
+
+        $show_options_without_all_count = count(self::CONTACTED_CANDIDATES_AVAILABLE_OPTIONS_WITHOUT_ALL);
+        
+        $contactedCandidates_per_page_options = [self::CONTACTED_CANDIDATES_AVAILABLE_OPTIONS_WITHOUT_ALL[0]];
+
+        $counter = 0;
+        while ($counter < $show_options_without_all_count - 1) {
+            $option = self::CONTACTED_CANDIDATES_AVAILABLE_OPTIONS_WITHOUT_ALL[$counter];
+            if ($contactedCandidates_count > $option) {
+                $contactedCandidates_per_page_options[] = self::CONTACTED_CANDIDATES_AVAILABLE_OPTIONS_WITHOUT_ALL[$counter + 1];
+            }
+            $counter++;
+        }
+
+        $contactedCandidates_per_page_options[] = "All";
+
+        $contactedCandidates_data = [
+            'per_page_options' => $contactedCandidates_per_page_options,
+            'from' => $contactedCandidates_from,
+            'to' => $contactedCandidates_to,
+            'total' => $contactedCandidates_count
+        ];
+
+        return view('admin/job-portal/contacted-candidates', compact('contactedCandidates', 'contactedCandidates_data'));
     }
 }

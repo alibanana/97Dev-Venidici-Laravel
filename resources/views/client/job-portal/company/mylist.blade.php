@@ -130,8 +130,6 @@ karir impian!</p>
                                     <p class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Contacted</p>
                                 @elseif ($candidate->pivot->status == 'accepted')
                                     <p class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Accepted</p>
-                                @elseif ($candidate->pivot->status == 'rejected')
-                                    <p class="normal-text" style="font-family: Rubik Medium;background-color:#F4C257;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Rejected</p>
                                 @elseif ($candidate->pivot->status == 'hired')
                                     <p class="normal-text" style="font-family: Rubik Medium;background-color:#D0F5EB;color:#3B3C43;text-decoration:none;padding:0.5vw;border-radius:5px">Hired</p>
                                 @endif
