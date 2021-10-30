@@ -111,7 +111,7 @@
                         <a data-toggle="collapse" href="#collapseExperiences" class="medium-heading" style="color:#2B6CAA"> <i class="fas fa-caret-down"></i> </a>
                     </div>
                     <div class="collapse show" id="collapseExperiences">
-                        @foreach ($work_experiences_not_udpated as $workExperience)
+                        @foreach ($work_experiences_not_updated as $workExperience)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
                                 <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p> -->
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $workExperience->job_position }} at {{ $workExperience->company }}</p>
@@ -276,7 +276,7 @@
                         <a data-toggle="collapse" href="#collapseAchievements" class="medium-heading" style="color:#2B6CAA"> <i class="fas fa-caret-down"></i> </a>
                     </div>
                     <div class="collapse show" id="collapseAchievements">
-                        @foreach ($achivements_not_updated as $achievement)
+                        @foreach ($achievements_not_updated as $achievement)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
                                 <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p> -->
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $achievement->title }}</p>

@@ -79,28 +79,41 @@ class CandidateDetailController extends Controller
                 ->latest()
                 ->first();
 
-            $work_experiences_not_updated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('workExperienceChanges')
-                ->get();
+            $updatedWorkExperienceIds = UserHelper::getUpdatedWorkExperienceIds($candidate_detail_change);
+            $work_experiences_not_updated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)->get()
+                ->filter(function ($workExperience) use ($updatedWorkExperienceIds) {
+                    return !in_array($workExperience->id, $updatedWorkExperienceIds);
+                });
 
-            $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('educationChanges')
-                ->get();
-            $achievements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('achievementChanges')
-                ->get();
-                
-            $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('hardskillChanges')
-                ->get();
-            
-            $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('softskillChanges')
-                ->get();
-            
-            $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)
-                ->doesntHave('interestChanges')
-                ->get();
+            $updatedEducationIds = UserHelper::getUpdatedEducationIds($candidate_detail_change);
+            $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)->get()
+                ->filter(function ($education) use ($updatedEducationIds) {
+                    return !in_array($education->id, $updatedEducationIds);
+                });
+
+            $updatedAchievementIds = UserHelper::getUpdatedAchievementIds($candidate_detail_change);
+            $achievements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)->get()
+                ->filter(function ($achievement) use ($updatedAchievementIds) {
+                    return !in_array($achievement->id, $updatedAchievementIds);
+                });
+
+            $updatedHardskillIds = UserHelper::getUpdatedHardskillIds($candidate_detail_change);
+            $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)->get()
+                ->filter(function ($hardskill) use ($updatedHardskillIds) {
+                    return !in_array($hardskill->id, $updatedHardskillIds);
+                });
+
+            $updatedSoftskillIds = UserHelper::getUpdatedSoftskillIds($candidate_detail_change);
+            $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)->get()
+                ->filter(function ($softskill) use ($updatedSoftskillIds) {
+                    return !in_array($softskill->id, $updatedSoftskillIds);
+                });
+
+            $updatedInterestIds = UserHelper::getUpdatedInterestIds($candidate_detail_change);
+            $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)->get()
+                ->filter(function ($interest) use ($updatedInterestIds) {
+                    return !in_array($interest->id, $updatedInterestIds);
+                });
 
             $isCandidatePending = UserHelper::isCandidatePending(Auth::user());
 

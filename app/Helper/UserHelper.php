@@ -171,4 +171,58 @@ class UserHelper {
                     ->update(['status' => 'contacted']);
         }
     }
+
+    // Method to get list of updated work_experience_ids from a CandidateDetailChange object.
+    public static function getUpdatedWorkExperienceIds($candidateDetailChange) {
+        if (!is_null($candidateDetailChange)) {
+            return $candidateDetailChange->workExperienceChanges()
+                ->pluck('work_experience_id')->toArray();
+        }
+        return [];
+    }
+
+    // Method to get list of updated education_ids from a CandidateDetailChange object.
+    public static function getUpdatedEducationIds($candidateDetailChange) {
+        if (!is_null($candidateDetailChange)) {
+            return $candidateDetailChange->educationChanges()
+                ->pluck('education_id')->toArray();
+        }
+        return [];
+    }
+
+    // Method to get list of updated achievement_ids from a CandidateDetailChange object.
+    public static function getUpdatedAchievementIds($candidateDetailChange) {
+        if (!is_null($candidateDetailChange)) {
+            return $candidateDetailChange->achievementChanges()
+                ->pluck('achievement_id')->toArray();
+        }
+        return [];
+    }
+
+    // Method to get list of updated hardskill_ids from a CandidateDetailChange object.
+    public static function getUpdatedHardskillIds($candidateDetailChange) {
+        if (!is_null($candidateDetailChange)) {
+            return $candidateDetailChange->hardskillChanges()
+                ->pluck('hardskill_id')->toArray();
+        }
+        return [];
+    }
+
+    // Method to get list of updated softskill_ids from a CandidateDetailChange object.
+    public static function getUpdatedSoftskillIds($candidateDetailChange) {
+        if (!is_null($candidateDetailChange)) {
+            return $candidateDetailChange->softskillChanges()
+                ->pluck('softskill_id')->toArray();
+        }
+        return [];
+    }
+
+    // Method to get list of updated interest_ids from a CandidateDetailChange object.
+    public static function getUpdatedInterestIds($candidateDetailChange) {
+        if (!is_null($candidateDetailChange)) {
+            return $candidateDetailChange->interestChanges()
+                ->pluck('interest_id')->toArray();
+        }
+        return [];
+    }
 }
