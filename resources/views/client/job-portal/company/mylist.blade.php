@@ -183,9 +183,9 @@ karir impian!</p>
 
 <script>
 $(document).ready(function() {
-  $('.action-select').on('change', function() {
-     document.forms['action-form'].submit();
-  });
+    $('.action-select').on('change', function() {
+        document.forms['action-form'].submit();
+    });
 });
 </script>
 

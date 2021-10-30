@@ -150,11 +150,7 @@ class UserHelper {
                 DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
                     ->where('candidate_id', $candidate->id)
                     ->whereIn('status', ['archived', 'contacted'])
-                    ->get();
-            foreach ($contactedHiringPartnerCandidatePivots as $contactedHiringPartnerCandidatePivot) {
-                $contactedHiringPartnerCandidatePivot->status = 'hired';
-                $contactedHiringPartnerCandidatePivot->save();
-            }
+                    ->update(['status' => 'hired']);
         }
     }
 
@@ -172,11 +168,7 @@ class UserHelper {
                 DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
                     ->where('candidate_id', $candidate->id)
                     ->whereIn('status', ['accepted', 'hired'])
-                    ->get();
-            foreach ($contactedHiringPartnerCandidatePivots as $contactedHiringPartnerCandidatePivot) {
-                $contactedHiringPartnerCandidatePivot->status = 'contacted';
-                $contactedHiringPartnerCandidatePivot->save();
-            }
+                    ->update(['status' => 'contacted']);
         }
     }
 }

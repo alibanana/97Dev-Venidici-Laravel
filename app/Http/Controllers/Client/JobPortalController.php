@@ -223,7 +223,7 @@ class JobPortalController extends Controller
         } elseif ($validated['action'] == 'unarchive') {
             UserHelper::unarchiveCandidate($candidate, Auth::user()->id);
             $message = 'Candidate (' . $candidate->name . ') has been removed from your list.';
-        } elseif ($validated['action'] == 'approve') {
+        } elseif ($validated['action'] == 'accept') {
             UserHelper::hireCandidate($candidate, Auth::user()->id);
             $message = 'Candidate (' . $candidate->name . ') has successfully been accepted on your company.';
         } elseif ($validated['action'] == 'cancel') {
