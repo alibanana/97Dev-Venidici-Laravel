@@ -105,7 +105,34 @@ class UserHelper {
             ->count() > 0;
     }
 
-    // Method to hire Candidate to a HiringPartner. Assumes that :
+    // Method to contact Archived Candidate. Assumes that :
+    //  - Candidate has not been hired by another HiringPartner
+    //  - Candidate has been mapped to the given HiringPartner
+    public static function contactCandidate(User $candidate, $hiring_partner_id) {
+        $hiringPartnerCandidatePivot = $candidate->hiringPartners()
+            ->where('hiring_partner_id', $hiring_partner_id)
+            ->firstOrFail()->pivot;
+
+        if ($hiringPartnerCandidatePivot->status == 'archived') {
+            $hiringPartnerCandidatePivot->status = 'contacted';
+            $hiringPartnerCandidatePivot->save();
+        }
+    }
+
+    // Method to unarchive Archived/Contacted/Hired Candidate. Assumes that :
+    //  - Candidate has not been hired by another HiringPartner
+    //  - Candidate has been mapped to the given HiringPartner
+    public static function unarchiveCandidate(User $candidate, $hiring_partner_id) {
+        $hiringPartnerCandidatePivot = $candidate->hiringPartners()
+            ->where('hiring_partner_id', $hiring_partner_id)
+            ->firstOrFail()->pivot;
+
+        if (in_array($hiringPartnerCandidatePivot->status, ['archived', 'contacted', 'hired'])) {
+            $candidate->hiringPartners()->detach($hiring_partner_id);
+        }
+    }
+
+    // Method to hire Archived Candidate. Assumes that :
     //  - Candidate has not been hired by another HiringPartner
     //  - Candidate has been mapped to the given HiringPartner
     public static function hireCandidate(User $candidate, $hiring_partner_id) {
@@ -113,18 +140,43 @@ class UserHelper {
         $hiringPartnerCandidatePivot = $candidate->hiringPartners()
             ->where('hiring_partner_id', Auth::user()->id)
             ->firstOrFail()->pivot;
-        $hiringPartnerCandidatePivot->status = 'accepted';
-        $hiringPartnerCandidatePivot->save();
 
-        // Update all other pivot data of given candidate to 'hired'.
-        $contactedHiringPartnerCandidatePivots =
-            DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
-                ->where('candidate_id', $candidate_id)
-                ->where('status', 'contacted')
-                ->get();
-        foreach ($contactedHiringPartnerCandidatePivots as $contactedHiringPartnerCandidatePivot) {
-            $contactedHiringPartnerCandidatePivot->status = 'hired';
-            $contactedHiringPartnerCandidatePivot->save();
+        if ($hiringPartnerCandidatePivot->status == 'contacted') {
+            $hiringPartnerCandidatePivot->status = 'accepted';
+            $hiringPartnerCandidatePivot->save();
+    
+            // Update all other pivot data of given candidate to 'hired'.
+            $contactedHiringPartnerCandidatePivots =
+                DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
+                    ->where('candidate_id', $candidate->id)
+                    ->whereIn('status', ['archived', 'contacted'])
+                    ->get();
+            foreach ($contactedHiringPartnerCandidatePivots as $contactedHiringPartnerCandidatePivot) {
+                $contactedHiringPartnerCandidatePivot->status = 'hired';
+                $contactedHiringPartnerCandidatePivot->save();
+            }
+        }
+    }
+
+    // Method to change Accepted Candidate status to Contacted. Assumes that :
+    //  - Candidate has not been hired by another HiringPartner
+    //  - Candidate has been mapped to the given HiringPartner
+    public static function cancelCandidate(User $candidate, $hiring_partner_id) {
+        $hiringPartnerCandidatePivot = $candidate->hiringPartners()
+            ->where('hiring_partner_id', $hiring_partner_id)
+            ->firstOrFail()->pivot;
+
+        if ($hiringPartnerCandidatePivot->status == 'accepted') {
+            // Update all other pivot data of given candidate to 'contacted'.
+            $contactedHiringPartnerCandidatePivots =
+                DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
+                    ->where('candidate_id', $candidate->id)
+                    ->whereIn('status', ['accepted', 'hired'])
+                    ->get();
+            foreach ($contactedHiringPartnerCandidatePivots as $contactedHiringPartnerCandidatePivot) {
+                $contactedHiringPartnerCandidatePivot->status = 'contacted';
+                $contactedHiringPartnerCandidatePivot->save();
+            }
         }
     }
 }

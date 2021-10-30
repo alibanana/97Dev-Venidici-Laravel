@@ -94,7 +94,7 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/blogs', [PagesController::class, 'blog_list'])->name('blog_list');
 
     /* DASHBOARD & USER RELATED ROUTES */
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth', 'isNotHiringPartner']);
     Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
     Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);
     Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth']);
@@ -222,8 +222,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/my-list', [JobPortalController::class, 'myListIndex'])->name('my-list.index')->middleware(['verified']);
         Route::get('/profile', [JobPortalController::class, 'profileIndex'])->name('profile.index');
         Route::post('/candidate/archive', [JobPortalController::class, 'archiveCandidate'])->name('archive-candidate')->middleware(['verified']);
-        Route::post('/candidate/contact', [JobPortalController::class, 'contactCandidate'])->name('contact-candidate')->middleware(['verified']);
-        Route::post('/candidate/accept', [JobPortalController::class, 'acceptContactedCandidate'])->name('accept-candidate')->middleware(['verified']);
+        Route::post('/candidate/action', [JobPortalController::class, 'handleCandidateAction'])->name('handle-candidate-action')->middleware(['verified']);
         Route::get('/{id}', [JobPortalController::class, 'job_portal_candidate_detail'])->name('job_portal_candidate_detail')->middleware(['verified']);
         Route::post('/change-password', [JobPortalController::class, 'changePassword'])->name('change-password')->middleware(['verified']);
     });

@@ -36,6 +36,7 @@ use App\Models\InterestChange;
 class JobPortalController extends Controller
 {
     private const INDEX_ROUTE = 'job-portal.index';
+    private const MY_LIST_INDEX_ROUTE = 'job-portal.my-list.index';
     private const CONTACTED_CANDIDATES_PAGE_SIZE = 4;
     private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER = ['< 1 Tahun', '< 2 tahun', '< 3 Tahun', '> 3 Tahun'];
     private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER_AND_DB_VALUE_MAP = [
@@ -109,7 +110,8 @@ class JobPortalController extends Controller
         $cart_count = $this->cart_count;
 
         $contactedCandidates = Auth::user()->candidates()
-            ->with('candidateDetail');
+            ->with('candidateDetail')
+            ->orderBy('hiring_partner_candidate.created_at', 'desc');
 
         // ADD FILTERS & SORTING HERE
 
@@ -145,6 +147,7 @@ class JobPortalController extends Controller
         $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
             ->doesntHave('hardskillChanges')
             ->get();
+
         $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
             ->doesntHave('softskillChanges')
             ->get();
@@ -200,50 +203,35 @@ class JobPortalController extends Controller
             $message = 'Candidate (' . $candidate->name . ') is now available on your list.';
         }
 
-        return redirect('job-portal/#kandidat-venidici')->with('message', $message);
+        return redirect()->route(self::MY_LIST_INDEX_ROUTE)->with('message', $message);
     }
 
-    // Update hiringPartner-Candidate status to contacted.
-    public function contactCandidate(Request $request) {
-        $validated = $request->validate(['user_id' => 'required|integer']);
+    // Method to handle Candidate Related Actions
+    public function handleCandidateAction(Request $request) {
+        $validated = $request->validate([
+            'user_id' => 'required|integer',
+            'action' => 'required' // contact, unarchive, approve, cancel
+        ]);
 
         $candidate = User::where('id', $validated['user_id'])
             ->has('candidateDetail')
             ->firstOrFail();
 
-        if (UserHelper::isCandidateHired($candidate->id)) {
-            $message = 'Candidate (' . $candidate->name . ') has already been hired';
-        } else if (!UserHelper::isHiringPartnerCandidateExists(Auth::user()->id, $candidate->id)) {
-            $message = 'Candidate (' . $candidate->name . ') has not been added to your list.';
-        } else {$hiringPartnerCandidatePivot = $candidate->hiringPartners()
-                ->where('hiring_partner_id', Auth::user()->id)
-                ->firstOrFail()->pivot;
-            $hiringPartnerCandidatePivot->status = 'contacted';
-            $hiringPartnerCandidatePivot->save();
+        if ($validated['action'] == 'contact') {
+            UserHelper::contactCandidate($candidate, Auth::user()->id);
             $message = 'Candidate (' . $candidate->name . ') has been contacted through email.';
-        }
-
-        return redirect('/job-portal#kandidat-venidici')->with('message', $message);
-    }
-
-    // Accepts a Contacted Candidate (user). Assumes that candidate has already be contacted.
-    public function acceptContactedCandidate(Request $request) {
-        $validated = $request->validate(['user_id' => 'required|integer']);
-
-        $candidate = User::where('id', $validated['user_id'])
-            ->has('candidateDetail')
-            ->firstOrFail();
-
-        if (UserHelper::isCandidateHired($candidate->id)) {
-            $message = 'Candidate (' . $candidate->name . ') has already been hired';
-        } else if (!UserHelper::isHiringPartnerCandidateExists(Auth::user()->id, $candidate->id)) {
-            $message = 'Candidate (' . $candidate->name . ') has not been added to your list.';
-        } else {
+        } elseif ($validated['action'] == 'unarchive') {
+            UserHelper::unarchiveCandidate($candidate, Auth::user()->id);
+            $message = 'Candidate (' . $candidate->name . ') has been removed from your list.';
+        } elseif ($validated['action'] == 'approve') {
             UserHelper::hireCandidate($candidate, Auth::user()->id);
             $message = 'Candidate (' . $candidate->name . ') has successfully been accepted on your company.';
+        } elseif ($validated['action'] == 'cancel') {
+            UserHelper::cancelCandidate($candidate, Auth::user()->id);
+            $message = 'Candidate (' . $candidate->name . ') status successfully has been updated from accepted to contacted.';
         }
 
-        return redirect('job-portal/my-list#daftar-saya')->with('my_list_message', $message);
+        return redirect()->route(self::MY_LIST_INDEX_ROUTE)->with('message', $message);
     }
 
     // Changes the user's password in the database.

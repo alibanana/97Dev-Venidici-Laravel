@@ -137,30 +137,24 @@ karir impian!</p>
                                 @endif
                             </div>
                             <div class="col-2"  style="text-align:center"> 
-                                <form name="action-form" action="{{ route('job-portal.accept-candidate') }}" method="POST">
+                                <form name="action-form" action="{{ route('job-portal.handle-candidate-action') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="user_id" value="{{ $candidate->candidateDetail->user->id }}" hidden>
+                                    <input type="hidden" name="user_id" value="{{ $candidate->candidateDetail->user->id }}" hidden>
                                     <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
-                                        <select name="" class="normal-text action-select"  style="background:transparent;border:none;color: #ffffff;width:100%;font-family:Rubik Regular;">
+                                        <select name="action" class="normal-text action-select"  style="background:transparent;border:none;color: #ffffff;width:100%;font-family:Rubik Regular;">
                                             <option value="None" disabled selected>Select Action</option>
                                             @if ($candidate->pivot->status == 'archived')
-                                                <option style="color: black" value="Contact">Contact</option>
-                                                <option style="color: black" value="Remove">Remove from List</option>
+                                                <option style="color: black" value="contact">Contact</option>
+                                                <option style="color: black" value="unarchive">Remove from List</option>
                                             @elseif ($candidate->pivot->status == 'contacted')
-                                                <option style="color: black" value="Accept">Accept</option>
-                                                <option style="color: black" value="Reject">Reject</option>
-                                                <option style="color: black" value="Remove">Remove from List</option>
+                                                <option style="color: black" value="accept">Accept</option>
+                                                <option style="color: black" value="unarchive">Remove from List</option>
                                             @elseif ($candidate->pivot->status == 'accepted')
-                                                <option style="color: black" value="Cancel">Cancel</option>
-                                            @elseif ($candidate->pivot->status == 'rejected')
-                                                <option style="color: black" value="Cancel">Cancel</option>
+                                                <option style="color: black" value="cancel">Cancel</option>
+                                            @elseif ($candidate->pivot->status == 'hired')
+                                                <option style="color: black" value="unarchive">Remove from List</option>
                                             @endif
                                         </select>
-                                        @error('')
-                                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div> 
                                 </form>
                             </div>
