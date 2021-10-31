@@ -213,31 +213,7 @@ class JobPortalController extends Controller
         $candidate_detail = CandidateDetail::where('user_id', $id)
             ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
             ->first();
-
-        $work_experiences_not_updated = WorkExperience::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('workExperienceChanges')
-            ->get();
-
-        $educations_not_updated = Education::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('educationChanges')
-            ->get();
-
-        $achievements_not_updated = Achievement::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('achievementChanges')
-            ->get();
-            
-        $hardskills_not_updated = Hardskill::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('hardskillChanges')
-            ->get();
-
-        $softskills_not_updated = Softskill::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('softskillChanges')
-            ->get();
-        
-        $interests_not_updated = Interest::where('candidate_detail_id', $candidate_detail->id)
-            ->doesntHave('interestChanges')
-            ->get();
-
+    
         $this->resetNavbarData();
         $notifications = $this->notifications;
         $informations = $this->informations;
@@ -246,8 +222,7 @@ class JobPortalController extends Controller
 
         $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
 
-        $view_data = ['candidate_detail','work_experiences_not_updated', 'educations_not_updated', 'achievements_not_updated',
-            'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated', 'isCandidateDetailUpdated', 'cart_count',
+        $view_data = ['candidate_detail', 'isCandidateDetailUpdated', 'cart_count',
             'notifications', 'transactions', 'informations', 'footer_reviews', 'agent'];
         
         return view('client/job-portal/company/detail', compact($view_data));

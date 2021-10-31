@@ -25,7 +25,15 @@
 
 <!-- START OF BASIC INFO SECTION -->
 <div class="row m-0 page-container-inner" style="padding-top:14vw !important;">
-    <div class="col-12 p-0">
+    <div class="col-12 wow bounce p-0" style="height:3.5vw;display:flex;justify-content:center">
+        <!-- ALERT MESSAGE -->
+        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
+            Jangan lupa untuk isi form ini dengan lengkap (Interest dan Achievement Optional), agar profil mu bisa terlihat oleh Hiring Partner Venidici.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!-- END OF ALERT MESSAGE -->
+    </div>
+    <div class="col-12 p-0" style="margin-top:2vw">
         @if(session('candidate_update_message'))
             <!-- ALERT MESSAGE -->
             <div style="text-align:center;margin-top:1vw">
@@ -480,8 +488,10 @@
                         <a  href="#we-update"  style="color:#2B6CAA">
                             <i onclick="passWorkExperience('{{ $workExperience->company }}', '{{$workExperience->job_position}}', '{{$workExperience->start_date}}', '{{$workExperience->end_date}}', '{{$workExperience->location}}', '{{route('candidate-detail.update-work-experience', $workExperience->id)}}' )" class="fas fa-edit bigger-text"></i>
                         </a>
-                        <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.delete-work-experience', $workExperience->id)}}"> 
+                        @csrf
+                        @method('delete')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                         </form>
                     </div>
                 </div>
@@ -503,8 +513,9 @@
                             <a href="#we-update" style="color:#2B6CAA">
                                 <i onclick="passWorkExperience('{{ $workExperienceChange->company }}', '{{$workExperienceChange->job_position}}', '{{$workExperienceChange->start_date}}', '{{$workExperienceChange->end_date}}', '{{$workExperienceChange->location}}', '{{route('candidate-detail.update-work-experience-change', $workExperienceChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-work-experience-change', $workExperienceChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($workExperienceChange->action == 'update')
@@ -525,17 +536,18 @@
                             <a href="#we-update" style="color:#2B6CAA">
                                 <i onclick="passWorkExperience('{{ $workExperienceChange->company }}', '{{$workExperienceChange->job_position}}', '{{$workExperienceChange->start_date}}', '{{$workExperienceChange->end_date}}', '{{$workExperienceChange->location}}', '{{route('candidate-detail.update-work-experience-change', $workExperienceChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-work-experience-change', $workExperienceChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($workExperienceChange->action == 'delete')
                         <div>   
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->job_position }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->company }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperienceChange->start_date }} - {{ $workExperienceChange->end_date ?? 'Until Now' }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperienceChange->location }}</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->workExperience->job_position }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $workExperienceChange->workExperience->company }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $workExperienceChange->workExperience->start_date }} - {{ $workExperienceChange->workExperience->end_date ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0px">{{ $workExperienceChange->workExperience->location }}</p>
                         </div>
                         <div style="display:flex;align-items:center">
                         </div>
@@ -763,8 +775,10 @@
                             <i onclick="passEducation('{{ $education->degree }}', '{{$education->school}}', '{{$education->major}}', '{{$education->start_year}}', '{{$education->end_year}}', '{{route('candidate-detail.update-education', $education->id)}}' )" class="fas fa-edit bigger-text"></i>
 
                         </a>
-                        <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.delete-education', $education->id)}}"> 
+                        @csrf
+                        @method('delete')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                         </form>
                     </div>
                 </div>
@@ -785,8 +799,9 @@
                             <a href="#edu-update" style="color:#2B6CAA">
                                 <i onclick="passEducation('{{ $educationChange->degree }}', '{{$educationChange->school}}', '{{$educationChange->major}}', '{{$educationChange->start_year}}', '{{$educationChange->end_year}}', '{{route('candidate-detail.update-education-change', $educationChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-education-change', $educationChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($educationChange->action == 'update')
@@ -805,16 +820,17 @@
                             <a href="#edu-update" style="color:#2B6CAA">
                                 <i onclick="passEducation('{{ $educationChange->degree }}', '{{$educationChange->school}}', '{{$educationChange->major}}', '{{$educationChange->start_year}}', '{{$educationChange->end_year}}', '{{route('candidate-detail.update-education-change', $educationChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-education-change', $educationChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($educationChange->action == 'delete')
                         <div>   
                             <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->degree }} | {{ $educationChange->school }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->major }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $educationChange->start_year }} - {{ $educationChange->end_year ?? 'Until Now' }}</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->education->degree }} | {{ $educationChange->education->school }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $educationChange->education->major }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $educationChange->education->start_year }} - {{ $educationChange->education->end_year ?? 'Until Now' }}</p>
                         </div>
                         <div style="display:flex;align-items:center">
                         </div>
@@ -995,8 +1011,10 @@
                         <a href="#achievement-update" style="color:#2B6CAA">
                             <i onclick="passAchievement('{{ $achievement->title }}', '{{$achievement->location_of_event}}', '{{$achievement->year}}', '{{route('candidate-detail.update-achievement', $achievement->id)}}' )" class="fas fa-edit bigger-text"></i>
                         </a>
-                        <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.delete-achievement', $achievement->id)}}"> 
+                        @csrf
+                        @method('delete')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                         </form>
                     </div>
                 </div>
@@ -1017,8 +1035,9 @@
                             <a href="#achievement-update" style="color:#2B6CAA">
                                 <i onclick="passAchievement('{{ $achievementChange->title }}', '{{$achievementChange->location_of_event}}', '{{$achievementChange->year}}', '{{route('candidate-detail.update-achievement-change', $achievementChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-achievement-change', $achievementChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($achievementChange->action == 'update')
@@ -1037,15 +1056,17 @@
                             <a href="#achievement-update" style="color:#2B6CAA">
                                 <i onclick="passAchievement('{{ $achievementChange->title }}', '{{$achievementChange->location_of_event}}', '{{$achievementChange->year}}', '{{route('candidate-detail.update-achievement-change', $achievementChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-achievement-change', $achievementChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($achievementChange->action == 'delete')
                         <div>   
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->title }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->location_of_event }} </p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->year }}</p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->achievement->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">{{ $achievementChange->achievement->location_of_event }} </p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#B3B5C2;margin-bottom:0.5vw">{{ $achievementChange->achievement->year }}</p>
                         </div>
                     @endif
                 </div>
@@ -1201,8 +1222,10 @@
                         <a href="#hs-update" style="color:#2B6CAA">
                             <i onclick="passHardSkill('{{ $hard_skill->title }}', '{{$hard_skill->score}}', '{{route('candidate-detail.update-hardskill', $hard_skill->id)}}' )" class="fas fa-edit bigger-text"></i>
                         </a>
-                        <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.delete-hardskill', $hard_skill->id)}}"> 
+                        @csrf
+                        @method('delete')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                         </form>
                     </div>
                 </div>
@@ -1223,8 +1246,9 @@
                             <a href="#hs-update" style="color:#2B6CAA">
                                 <i onclick="passHardSkill('{{ $hardskillChange->title }}', '{{$hardskillChange->score}}', '{{route('candidate-detail.update-hardskill-change', $hardskillChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-hardskill-change', $hardskillChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($hardskillChange->action == 'update')
@@ -1241,14 +1265,16 @@
                             <a href="#hs-update" style="color:#2B6CAA">
                                 <i onclick="passHardSkill('{{ $hardskillChange->title }}', '{{$hardskillChange->score}}', '{{route('candidate-detail.update-hardskill-change', $hardskillChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-hardskill-change', $hardskillChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($hardskillChange->action == 'delete')
-                        <div>   
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->title }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->score }} </p>
+                        <div>  
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $hardskillChange->hardskill->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $hardskillChange->hardskill->score }} </p>
                         </div>
                     @endif
                 </div>
@@ -1407,8 +1433,10 @@
                         <a href="#ss-update" style="color:#2B6CAA">
                             <i onclick="passSoftSkill('{{ $soft_skill->title }}', '{{$soft_skill->score}}', '{{route('candidate-detail.update-softskill', $soft_skill->id)}}' )" class="fas fa-edit bigger-text"></i>
                         </a>
-                        <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                        <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.delete-softskill', $soft_skill->id)}}"> 
+                        @csrf
+                        @method('delete')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                         </form>
                     </div>
                 </div>
@@ -1429,8 +1457,9 @@
                             <a href="#ss-update" style="color:#2B6CAA">
                                 <i onclick="passSoftSkill('{{ $softSkillChange->title }}', '{{$softSkillChange->score}}', '{{route('candidate-detail.update-softskill-change', $softSkillChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-softskill-change', $softSkillChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($softSkillChange->action == 'update')
@@ -1447,14 +1476,16 @@
                             <a href="#we-update" style="color:#2B6CAA">
                                 <i onclick="passSoftSkill('{{ $softSkillChange->title }}', '{{$softSkillChange->score}}', '{{route('candidate-detail.update-softskill-change', $softSkillChange->id)}}' )" class="fas fa-edit bigger-text"></i>
                             </a>
-                            <form style="margin-left:1vw" action=""> 
-                            <button type="submit" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
+                            <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-softskill-change', $softSkillChange->id)}}"> 
+                            @csrf
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:#2B6CAA" class="fas fa-trash"></i></button> 
                             </form>
                         </div>
                     @elseif ($softSkillChange->action == 'delete')
                         <div>   
-                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->title }}</p>
-                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $softSkillChange->score }} </p>
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: orange">Delete</p>
+                            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0.5vw">{{ $softSkillChange->softskill->title }}</p>
+                            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0.5vw">Level: {{ $softSkillChange->softskill->score }} </p>
                         </div>
                     @endif
                 </div>
@@ -1574,8 +1605,10 @@
             @foreach ($interests_not_updated as $interest)
                 <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
                     <p class="normal-text" style="margin-bottom:0px">{{$interest->title}}</p>
-                    <form style="margin-left:1vw" action=""> 
-                    <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                    <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.delete-interest', $interest->id)}}"> 
+                    @csrf
+                    @method('delete')
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
                     </form>
                 </div>
             @endforeach
@@ -1584,16 +1617,14 @@
         @isset($candidate_detail_change->interestChanges)
             @foreach ($candidate_detail_change->interestChanges as $interestChange)
                 <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
-                    @if ($softSkillChange->action == 'create')
+                    @if ($interestChange->action == 'create')
                         <p class="normal-text" style="margin-bottom:0px">(NEW) - {{$interestChange->title}}</p>
-                        <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
+                        <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.cancel-interest-change', $interestChange->id)}}"> 
+                        @csrf
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
                         </form>
-                    @elseif ($interestChanges->action == 'delete')
-                        <p class="normal-text" style="margin-bottom:0px">(DELETED) - {{$interestChange->title}}</p>
-                        <form style="margin-left:1vw" action=""> 
-                        <button type="submit" style="background:none;border:none"> <i style="color:white" class="fas fa-trash"></i></button> 
-                        </form>
+                    @elseif ($interestChange->action == 'delete')
+                        <p class="normal-text" style="margin-bottom:0px">(DELETED) - {{$interestChange->interest->title}}</p>
                     @endif
                 </div>
             @endforeach

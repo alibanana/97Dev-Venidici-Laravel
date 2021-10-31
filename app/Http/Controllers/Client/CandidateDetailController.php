@@ -379,10 +379,10 @@ class CandidateDetailController extends Controller
 
         $candidateDetailChange = $workExperienceChange->candidateDetailChange;
 
-        $workExperienceChange->destroy();
+        $workExperienceChange->delete();
 
         if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
-            $candidateDetailChange->destroy();
+            $candidateDetailChange->delete();
         }
 
         $message = 'Thank you! Your changes have been cancelled.';
@@ -551,10 +551,10 @@ class CandidateDetailController extends Controller
 
         $candidateDetailChange = $educationChange->candidateDetailChange;
 
-        $educationChange->destroy();
+        $educationChange->delete();
 
         if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
-            $candidateDetailChange->destroy();
+            $candidateDetailChange->delete();
         }
 
         $message = 'Thank you! Your changes have been cancelled.';
@@ -700,10 +700,10 @@ class CandidateDetailController extends Controller
 
         $candidateDetailChange = $achievementChange->candidateDetailChange;
 
-        $achievementChange->destroy();
+        $achievementChange->delete();
 
         if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
-            $candidateDetailChange->destroy();
+            $candidateDetailChange->delete();
         }
 
         $message = 'Thank you! Your changes have been cancelled.';
@@ -843,10 +843,10 @@ class CandidateDetailController extends Controller
 
         $candidateDetailChange = $hardskillChange->candidateDetailChange;
 
-        $hardskillChange->destroy();
+        $hardskillChange->delete();
 
         if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
-            $candidateDetailChange->destroy();
+            $candidateDetailChange->delete();
         }
 
         $message = 'Thank you! Your changes have been cancelled.';
@@ -986,10 +986,10 @@ class CandidateDetailController extends Controller
 
         $candidateDetailChange = $softskillChange->candidateDetailChange;
 
-        $softskillChange->destroy();
+        $softskillChange->delete();
 
         if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
-            $candidateDetailChange->destroy();
+            $candidateDetailChange->delete();
         }
 
         $message = 'Thank you! Your changes have been cancelled.';
@@ -1119,10 +1119,10 @@ class CandidateDetailController extends Controller
 
         $candidateDetailChange = $interestChange->candidateDetailChange;
 
-        $interestChange->destroy();
+        $interestChange->delete();
 
         if (UserHelper::isCandidateDetailChangeDataAndRelationshipEmpty($candidateDetailChange)) {
-            $candidateDetailChange->destroy();
+            $candidateDetailChange->delete();
         }
 
         $message = 'Thank you! Your changes have been cancelled.';
