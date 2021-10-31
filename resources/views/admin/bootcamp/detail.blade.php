@@ -202,6 +202,7 @@
                                                 <th>Bank Information</th>
                                                 <th>Status</th>
                                                 <th>Submitted At</th>
+                                                <th>Bootcamp Score</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -275,6 +276,9 @@
                                                     </td>
                                                     <td>
                                                         {{$user->created_at}}
+                                                    </td>
+                                                    <td>
+                                                        80
                                                     </td>
 
                                                     <td>
