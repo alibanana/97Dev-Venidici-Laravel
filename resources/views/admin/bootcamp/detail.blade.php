@@ -26,26 +26,25 @@
 			</div>
 			@endif
 
-			<form method="POST" action="">
-			@csrf
-			{{ method_field('PUT') }}
-			<div class="modal-body">
-					<input type="hidden" name="user_id" id="bootcamp_user_id">
-				<h6 class="modal-title" id="updateScoreModal">Bootcamp Score</h6>
-				<div class="form-group mt-2">
-					<input type="text" name="bootacamp_score" required class="form-control form-control-user"
-						id="bootcamp_user_score" placeholder="Insert score (0-100)">
-					@error('bootacamp_score')
-						<span class="invalid-feedback" role="alert" style="display: block !important;">
-							<strong>{{ $message }}</strong>
-						</span>
-					@enderror
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<button class="btn btn-primary" type="submit">Update</button>   
-			</div>
+			<form method="POST" action="{{ route('admin.bootcamp.update-score', $course->id) }}">
+                @csrf
+                <div class="modal-body">
+                    <input type="hidden" name="user_id" id="bootcamp_user_id">
+                    <h6 class="modal-title" id="updateScoreModal">Bootcamp Score</h6>
+                    <div class="form-group mt-2">
+                        <input type="text" name="score" required class="form-control form-control-user"
+                            id="bootcamp_user_score" placeholder="Insert score (0-100)">
+                        @error('score')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Update</button>   
+                </div>
 			</form>
 		</div>
 	</div>
@@ -181,7 +180,6 @@
                                 </label>
                             </div>
                         </div>
-                      
                     </div>
 
                     <!-- Main Table -->
@@ -202,7 +200,7 @@
                                                 <th>Bank Information</th>
                                                 <th>Status</th>
                                                 <th>Submitted At</th>
-                                                <th>Bootcamp Score</th>
+                                                <th>Score</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -252,7 +250,7 @@
                                                     </td>
                                                     <td>
                                                         @if($user->bankShortCode != null)
-                                                        {{ $user->bankShortCode }} | {{ $user->bank_account_number }}
+                                                            {{ $user->bankShortCode }} | {{ $user->bank_account_number }}
                                                         @else
                                                         -
                                                         @endif
@@ -274,13 +272,8 @@
                                                         <span style="color: red;">Rejected</span>
                                                         @endif
                                                     </td>
-                                                    <td>
-                                                        {{$user->created_at}}
-                                                    </td>
-                                                    <td>
-                                                        80
-                                                    </td>
-
+                                                    <td>{{ $user->created_at }}</td>
+                                                    <td>{{ $userIdAndScoreMap[$user->user->id] ?? '-' }}</td>
                                                     <td>
                                                         <!-- KALAU DAFTAR FREE TRIAL -->
                                                         @if ($user->is_trial && !$user->is_full_registration && ($user->status == 'ft_paid' || $user->status == 'approved'))
@@ -335,11 +328,11 @@
                                                         @endif
 
                                                         @if($user->status == 'approved')
-                                                        <div style="padding: 0px 2px">
-                                                            <a onclick="passUserData({{$user->id}},0)" class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="#" data-toggle="modal" data-target="#updateScoreModal">
-																Update Score
-															</a>
-                                                        </div>
+                                                            <div style="padding: 0px 2px">
+                                                                <a onclick="passUserData({{ $user->user->id }}, 0)" class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap" href="#" data-toggle="modal" data-target="#updateScoreModal">
+                                                                    Update Score
+                                                                </a>
+                                                            </div>
                                                         @endif
 
                                                     </td>

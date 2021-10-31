@@ -319,6 +319,7 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/bootcamp/{id}/set-publish-status-to-opposite', [AdminBootcampController::class, 'setPublishStatusToOpposite'])->name('bootcamp.set-publish-status-to-opposite');
         Route::delete('/bootcamp/{id}/remove-syllabus', [AdminBootcampController::class, 'removeSyllabus'])->name('bootcamp.remove-syllabus');
         Route::put('/bootcamp/{id}/change_application_status', [AdminBootcampController::class, 'changeApplicationStatus'])->name('bootcamp.change-application-status');
+        Route::post('/bootcamp/{id}/udpate-score', [AdminBootcampController::class, 'updateScore'])->name('bootcamp.update-score');
         // BootcampFeatureController
         Route::post('/bootcamp/{id}/store-feature', [AdminBootcampFeatureController::class, 'store'])->name('bootcamp-feature.store');
         Route::delete('/bootcamp-feature/{id}', [AdminBootcampFeatureController::class, 'destroy'])->name('bootcamp-feature.destroy');
