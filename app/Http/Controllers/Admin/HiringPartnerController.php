@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Axiom\Rules\StrongPassword;
+
+use App\Helper\UserHelper;
 
 use App\Models\User;
 use App\Models\UserDetail;
@@ -18,8 +21,8 @@ class HiringPartnerController extends Controller
     private const HIRING_PARTNER_ROLE_ID = 4;
     
     private const INDEX_ROUTE = 'admin.job-portal.hiring-partners.index';
-    private const VIEW_CONTACTED_CANDIDATES_ROUTE =
-        'admin.job-portal.hiring-partners.view-contacted-candidates';
+    private const VIEW_SAVED_CANDIDATES_ROUTE =
+        'admin.job-portal.hiring-partners.view-saved-candidates';
 
     private const AVAILABLE_FILTERS = ['active', 'suspended'];
     private const USERS_STATUS_LIST = ['active', 'suspended'];
@@ -177,8 +180,8 @@ class HiringPartnerController extends Controller
         return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 
-    // Shows the admin hiring-partner contacted candidate list view.
-    public function viewContactedCandidates(Request $request, $id) {
+    // Shows the admin hiring-partner saved candidate list view.
+    public function viewSavedCandidates(Request $request, $id) {
         $hiringPartner = User::where('user_role_id', self::HIRING_PARTNER_ROLE_ID)
             ->where('id', $id)
             ->firstOrFail();
@@ -197,7 +200,8 @@ class HiringPartnerController extends Controller
 
         if ($request->has('filter')) {
             if (!in_array($request->filter, self::CONTACTED_CANDIDATES_AVAILABLE_FILTERS)) {
-                $url = route(self::VIEW_CONTACTED_CANDIDATES_ROUTE, request()->except('filter'));
+                $url = route(self::VIEW_SAVED_CANDIDATES_ROUTE,
+                    array_merge(request()->except('filter'), ['id' => $id]));
                 return redirect($url);
             }
 
@@ -208,7 +212,8 @@ class HiringPartnerController extends Controller
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route(self::VIEW_CONTACTED_CANDIDATES_ROUTE, request()->except('search'));
+                $url = route(self::VIEW_SAVED_CANDIDATES_ROUTE,
+                    array_merge(request()->except('search'), ['id' => $id]));
                 return redirect($url);
             } else {
                 $candidateDetails = CandidateDetail::select(DB::raw('user_id as id'), 'whatsapp_number');
@@ -228,12 +233,14 @@ class HiringPartnerController extends Controller
 
         if ($request->has('show')) {
             if (!in_array($request->show, self::CONTACTED_CANDIDATES_AVAILABLE_OPTIONS)) {
-                return redirect(route(self::VIEW_CONTACTED_CANDIDATES_ROUTE, request()->except(['search', 'page'])));
+                return redirect(route(self::VIEW_SAVED_CANDIDATES_ROUTE,
+                    array_merge(request()->except(['search', 'page']), ['id' => $id])));
             }
 
             if ($request->show == "All") {
                 if ($request->has('page')) {
-                    return redirect(route(self::VIEW_CONTACTED_CANDIDATES_ROUTE, request()->except(['search', 'page'])));
+                    return redirect(route(self::VIEW_SAVED_CANDIDATES_ROUTE,
+                        array_merge(request()->except(['search', 'page']), ['id' => $id])));
                 }
 
                 $contactedCandidates = $contactedCandidates->get();
@@ -280,6 +287,38 @@ class HiringPartnerController extends Controller
             'total' => $contactedCandidates_count
         ];
 
-        return view('admin/job-portal/contacted-candidates', compact('contactedCandidates', 'contactedCandidates_data'));
+        return view('admin/job-portal/contacted-candidates', compact('hiringPartner', 'contactedCandidates', 'contactedCandidates_data'));
+    }
+
+    // Method to handle Candidate Related Actions
+    public function handleCandidateAction(Request $request) {
+        $validated = $request->validate([
+            'hiring_partner_id' => 'required|integer',
+            'candidate_id' => 'required|integer',
+            'action' => 'required' // contact, unarchive, approve, cancel
+        ]);
+
+        $hiringPartner = User::where('id', $validated['hiring_partner_id'])
+            ->firstOrFail();
+
+        $candidate = User::where('id', $validated['candidate_id'])
+            ->has('candidateDetail')
+            ->firstOrFail();
+
+        if ($validated['action'] == 'contact') {
+            UserHelper::contactCandidate($candidate, $hiringPartner->id);
+            $message = 'Candidate (' . $candidate->name . ') has been contacted through email.';
+        } elseif ($validated['action'] == 'unarchive') {
+            UserHelper::unarchiveCandidate($candidate, $hiringPartner->id);
+            $message = 'Candidate (' . $candidate->name . ') has been removed from ('. $hiringPartner->companyName .') list.';
+        } elseif ($validated['action'] == 'accept') {
+            UserHelper::hireCandidate($candidate, $hiringPartner->id);
+            $message = 'Candidate (' . $candidate->name . ') has successfully been accepted on ('. $hiringPartner->companyName .').';
+        } elseif ($validated['action'] == 'cancel') {
+            UserHelper::cancelCandidate($candidate, $hiringPartner->id);
+            $message = 'Candidate (' . $candidate->name . ') status successfully has been updated from accepted to contacted.';
+        }
+
+        return redirect(route(self::VIEW_SAVED_CANDIDATES_ROUTE, $hiringPartner->id))->with('message', $message);
     }
 }

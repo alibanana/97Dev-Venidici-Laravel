@@ -24,7 +24,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="mb-0 mb-3 text-gray-800">Contacted Candidates by Tesla</h2>
+            <h2 class="mb-0 mb-3 text-gray-800">Saved Candidates by {{ $hiringPartner->companyName }}</h2>
         </div>
         
 
@@ -41,7 +41,17 @@
                     <h1 class="h5 mb-2 text-gray-800 d-inline">{{ "(Showing " . $contactedCandidates_data['from'] . " to " . $contactedCandidates_data['to'] . " of " . $contactedCandidates_data['total'] . " results)" }}</h1>
 
                     <div class="row mt-2 mb-3">
-                        
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                            <div class="dataTables_length" id="show_entries">
+                                <label class="w-100">Show:
+                                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
+                                        @foreach ($contactedCandidates_data['per_page_options'] as $option)
+                                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'show' => $option]) }}" @if (Request::get('show') == $option) selected @endif>{{ $option }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-md-2 col-lg-2 col-xl-1">
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Sort By:
@@ -56,9 +66,11 @@
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Filter:
 									<select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option >Contacted</option>
-                                        <option >Accepted</option>
-                                        <option >Rejected</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'archived']) }}" @if (Request::get('filter') == 'archived') selected @endif>Archived</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'contacted']) }}" @if (Request::get('filter') == 'contacted') selected @endif>Contacted</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'accepted']) }}" @if (Request::get('filter') == 'accepted') selected @endif>Accepted</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'hired']) }}" @if (Request::get('filter') == 'hired') selected @endif>Hired</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'none']) }}" @if (!Request::has('filter')) selected @endif>None</option>
                                     </select>
                                 </label>
                             </div>
@@ -66,7 +78,7 @@
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
-                                    <form action="{{ route('admin.users.index') }}" method="GET">
+                                    <form action="{{ route('admin.job-portal.hiring-partners.view-saved-candidates', $hiringPartner->id) }}" method="GET">
                                         <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
                                         @if (Request::get('show'))
                                             <input name="show" value="{{ Request::get('show') }}" hidden>
@@ -121,19 +133,65 @@
                                                 </td>												
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                                                            
-                                                            <form action="" method="post">
+                                                        @if ($candidate->pivot->status == 'archived')
+                                                            <form action="{{ route('admin.job-portal.hiring-partners.candidates-action') }}" method="post">
+                                                                @csrf
                                                                 <div style="padding: 0px 2px">
-                                                                    <input type="hidden" value="Approved" name="status">
-                                                                    <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to approve this user?')">Approve</button>
+                                                                    <input type="hidden" name="hiring_partner_id" value="{{ $hiringPartner->id }}">
+                                                                    <input type="hidden" name="candidate_id" value="{{ $candidate->pivot->candidate_id }}">
+                                                                    <input type="hidden" name="action" value="contact">
+                                                                    <button class="d-sm-inline-block btn btn-warning shadow-sm" type="submit" onclick="return confirm('Are you sure you want to contact this candidate?')">Contact</button>
                                                                 </div>
-                                                            </form> 
-                                                            <form action="" method="post">
+                                                            </form>
+                                                            <form action="{{ route('admin.job-portal.hiring-partners.candidates-action') }}" method="post">
+                                                                @csrf
                                                                 <div style="padding: 0px 2px">
-                                                                    <input type="hidden" value="Rejected" name="status">
-                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Reject</button>
+                                                                    <input type="hidden" name="hiring_partner_id" value="{{ $hiringPartner->id }}">
+                                                                    <input type="hidden" name="candidate_id" value="{{ $candidate->pivot->candidate_id }}">
+                                                                    <input type="hidden" name="action" value="unarchive">
+                                                                    <button class="d-sm-inline-block btn btn-secondary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to unarchive this candidate?')">Unarchive</button>
                                                                 </div>
-                                                            </form> 
+                                                            </form>
+                                                        @elseif ($candidate->pivot->status == 'contacted')
+                                                            <form action="{{ route('admin.job-portal.hiring-partners.candidates-action') }}" method="post">
+                                                                @csrf
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="hiring_partner_id" value="{{ $hiringPartner->id }}">
+                                                                    <input type="hidden" name="candidate_id" value="{{ $candidate->pivot->candidate_id }}">
+                                                                    <input type="hidden" name="action" value="accept">
+                                                                    <button class="d-sm-inline-block btn btn-success shadow-sm" type="submit" onclick="return confirm('Are you sure you want to accept this candidate?')">Accept</button>
+                                                                </div>
+                                                            </form>
+                                                            <form action="{{ route('admin.job-portal.hiring-partners.candidates-action') }}" method="post">
+                                                                @csrf
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="hiring_partner_id" value="{{ $hiringPartner->id }}">
+                                                                    <input type="hidden" name="candidate_id" value="{{ $candidate->pivot->candidate_id }}">
+                                                                    <input type="hidden" name="action" value="unarchive">
+                                                                    <button class="d-sm-inline-block btn btn-secondary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to unarchive this candidate?')">Unarchive</button>
+                                                                </div>
+                                                            </form>
+                                                        @elseif ($candidate->pivot->status == 'accepted')
+                                                            <form action="{{ route('admin.job-portal.hiring-partners.candidates-action') }}" method="post">
+                                                                @csrf
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="hiring_partner_id" value="{{ $hiringPartner->id }}">
+                                                                    <input type="hidden" name="candidate_id" value="{{ $candidate->pivot->candidate_id }}">
+                                                                    <input type="hidden" name="action" value="cancel">
+                                                                    <button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to cancel this candidate?')">Cancel</button>
+                                                                </div>
+                                                            </form>
+                                                        @elseif ($candidate->pivot->status == 'hired')
+                                                            <form action="{{ route('admin.job-portal.hiring-partners.candidates-action') }}" method="post">
+                                                                @csrf
+                                                                <div style="padding: 0px 2px">
+                                                                    <input type="hidden" name="hiring_partner_id" value="{{ $hiringPartner->id }}">
+                                                                    <input type="hidden" name="candidate_id" value="{{ $candidate->pivot->candidate_id }}">
+                                                                    <input type="hidden" name="action" value="unarchive">
+                                                                    <button class="d-sm-inline-block btn btn-secondary shadow-sm" type="submit" onclick="return confirm('Are you sure you want to unarchive this candidate?')">Unarchive</button>
+                                                                </div>
+                                                            </form>
+                                                        @endif
                                                     </div>
                                                 </td>											
                                             </tr>

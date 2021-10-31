@@ -419,7 +419,8 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/job-portal/hiring-partners/create', [AdminHiringPartnerController::class, 'create'])->name('job-portal.hiring-partners.create');
         Route::post('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'store'])->name('job-portal.hiring-partners.store');
         Route::delete('/job-portal/hiring-partners/{id}', [AdminHiringPartnerController::class, 'destroy'])->name('job-portal.hiring-partners.destroy')->middleware(['isSuper']);
-        Route::get('/job-portal/hiring-partners/{id}/candidates', [AdminHiringPartnerController::class, 'viewContactedCandidates'])->name('job-portal.hiring-partners.view-contacted-candidates');
+        Route::get('/job-portal/hiring-partners/{id}/candidates', [AdminHiringPartnerController::class, 'viewSavedCandidates'])->name('job-portal.hiring-partners.view-saved-candidates');
+        Route::post('/job-portal/hiring-partners/candidates-action', [AdminHiringPartnerController::class, 'handleCandidateAction'])->name('job-portal.hiring-partners.candidates-action');
         // CandidateController
         Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidates.index');
         Route::get('/job-portal/{candidate_id}', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.candidates.showCandidate');

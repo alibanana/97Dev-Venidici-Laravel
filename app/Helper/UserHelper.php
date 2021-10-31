@@ -138,7 +138,7 @@ class UserHelper {
     public static function hireCandidate(User $candidate, $hiring_partner_id) {
         // Update pivot data of given candidate & hiring partner to 'accepted'.
         $hiringPartnerCandidatePivot = $candidate->hiringPartners()
-            ->where('hiring_partner_id', Auth::user()->id)
+            ->where('hiring_partner_id', $hiring_partner_id)
             ->firstOrFail()->pivot;
 
         if ($hiringPartnerCandidatePivot->status == 'contacted') {
@@ -168,7 +168,7 @@ class UserHelper {
                 DB::table(self::HIRING_PARTNER_CANDIDATE_TABLE)
                     ->where('candidate_id', $candidate->id)
                     ->whereIn('status', ['accepted', 'hired'])
-                    ->update(['status' => 'contacted']);
+                    ->update(['status' => 'archived']);
         }
     }
 
