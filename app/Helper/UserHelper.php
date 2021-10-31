@@ -80,11 +80,11 @@ class UserHelper {
     }
 
     private static function isRequiredCandidateDetailChangeRelationshipDataNull(CandidateDetailChange $candidateDetailChange) {
-        return !$candidateDetailChange->workExperienceChanges()->exists() ||
-            !$candidateDetailChange->educationChanges()->exists() ||
-            !$candidateDetailChange->achievementChanges()->exists() ||
-            !$candidateDetailChange->hardskillChanges()->exists() ||
-            !$candidateDetailChange->softskillChanges()->exists() ||
+        return !$candidateDetailChange->workExperienceChanges()->exists() &&
+            !$candidateDetailChange->educationChanges()->exists() &&
+            !$candidateDetailChange->achievementChanges()->exists() &&
+            !$candidateDetailChange->hardskillChanges()->exists() &&
+            !$candidateDetailChange->softskillChanges()->exists() &&
             !$candidateDetailChange->interestChanges()->exists();
     }
 

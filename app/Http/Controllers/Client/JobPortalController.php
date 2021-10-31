@@ -39,6 +39,7 @@ class JobPortalController extends Controller
     private const MY_LIST_INDEX_ROUTE = 'job-portal.my-list.index';
     private const CONTACTED_CANDIDATES_PAGE_SIZE = 4;
     private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER = ['< 1 Tahun', '< 2 tahun', '< 3 Tahun', '> 3 Tahun'];
+    private const AVAILABLE_STATUS_FILTER = ['All','Archived', 'Contacted', 'Accepted', 'Hired'];
     private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER_AND_DB_VALUE_MAP = [
         '< 1 Tahun' => ['Less than 1 Year of Experience'],
         '< 2 tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience'],
@@ -110,17 +111,17 @@ class JobPortalController extends Controller
         $cart_count = $this->cart_count;
 
         $contactedCandidates = Auth::user()->candidates()
-            ->with('candidateDetail')
-            ->orderBy('hiring_partner_candidate.created_at', 'desc');
+            ->with('candidateDetail');
 
         // ADD FILTERS & SORTING HERE
 
         $contactedCandidates = $contactedCandidates->paginate(self::CONTACTED_CANDIDATES_PAGE_SIZE);
 
         $availableExperienceYearFilters = self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER;
-        
+        $availableStatusFilters = self::AVAILABLE_STATUS_FILTER;
+
         return view('client/job-portal/company/mylist', compact('cart_count', 'notifications', 'transactions',
-            'informations', 'footer_reviews', 'agent', 'contactedCandidates', 'availableExperienceYearFilters'));
+            'informations', 'footer_reviews', 'agent', 'contactedCandidates', 'availableExperienceYearFilters','availableStatusFilters'));
     }
 
     // Shows Candidate Detail Profile Page

@@ -114,7 +114,7 @@ karir impian!</p>
                     <div class="col-lg-4 col-xs-12 p-0" style="margin-top:4vw;display:flex;justify-content:flex-end">
                     @endif   
                         <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px;" >
-                            <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA;cursor:pointer" onclick="window.location.href='job-portal/{{$candidateDetail->user_id}}'">
+                            <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA;cursor:pointer" onclick="window.location.href='/job-portal/{{$candidateDetail->user_id}}'">
                                 <div class="col-4 ps-0">
                                     <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidateDetail->user->userDetail->display_picture }}" @endif style="width:7vw;height:100%;object-fit:cover;border-radius:5px" class="img-fluid" alt="Image not available..">
                                 </div>
@@ -131,7 +131,7 @@ karir impian!</p>
                                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">{{ $candidateDetail->industry }}</p>
                                 
                                 <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Interest:</p>
-                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">{{ $candidateDetailIdAndCombinedInterestMap[$candidateDetail->id] }}</p>
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;">{{ $candidateDetailIdAndCombinedInterestMap[$candidateDetail->id] }}</p>
         
                                 <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: 98</p>
                                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">

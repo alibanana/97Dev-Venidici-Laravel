@@ -112,7 +112,7 @@ karir impian!</p>
                 
                 @isset($contactedCandidates)
                     @foreach ($contactedCandidates as $candidate)
-                        <div class="row m-0  job-listing-card" >
+                        <div class="row m-0  job-listing-card" style="cursor:pointer" onclick="window.location.href='/job-portal/{{$candidate->candidateDetail->user_id}}'" >
                             <div class="col-8"> 
                                 <div style="display:flex;align-items:center">
                                     <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidate->user->userDetail->display_picture }}" @endif style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
@@ -135,11 +135,11 @@ karir impian!</p>
                                 @endif
                             </div>
                             <div class="col-2"  style="text-align:center"> 
-                                <form name="action-form" action="{{ route('job-portal.handle-candidate-action') }}" method="POST">
+                                <form name="action-form-{{$candidate->candidateDetail->user_id}}" action="{{ route('job-portal.handle-candidate-action') }}" method="POST">
                                 @csrf
                                     <input type="hidden" name="user_id" value="{{ $candidate->candidateDetail->user->id }}" hidden>
                                     <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
-                                        <select name="action" class="normal-text action-select"  style="background:transparent;border:none;color: #ffffff;width:100%;font-family:Rubik Regular;">
+                                        <select name="action" class="normal-text action-select" id="action-form-{{$candidate->candidateDetail->user_id}}"  style="background:transparent;border:none;color: #ffffff;width:100%;font-family:Rubik Regular;">
                                             <option value="None" disabled selected>Select Action</option>
                                             @if ($candidate->pivot->status == 'archived')
                                                 <option style="color: black" value="contact">Contact</option>
@@ -182,7 +182,8 @@ karir impian!</p>
 <script>
 $(document).ready(function() {
     $('.action-select').on('change', function() {
-        document.forms['action-form'].submit();
+        var form_name = $(this).attr('id');
+        document.forms[form_name].submit();
     });
 });
 </script>
