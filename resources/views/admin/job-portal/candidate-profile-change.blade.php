@@ -51,7 +51,7 @@
                             @endif
                             <!-- show pending profile -->
                             
-                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Bootcamp Score: <b>1000</b> </p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Bootcamp Score: <b>{{ $score ?? '-' }}</b> </p>
 
                             <div style="display:flex;align-items:center;margin-top:3vw">   
                                 @if (!$isCandidateDetailNotUpdated)

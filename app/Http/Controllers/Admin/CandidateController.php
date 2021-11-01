@@ -120,8 +120,10 @@ class CandidateController extends Controller
         $candidate_detail = CandidateDetail::where('user_id', $candidate_id)
             ->with('user', 'workExperiences', 'educations', 'achievements', 'hardskills', 'softskills', 'interests')
             ->firstOrFail();
+
+        $score = UserHelper::getHighestScoreFromCandidateDetail($candidate_detail);
         
-        return view('admin/job-portal/candidate-profile', compact('candidate_detail'));
+        return view('admin/job-portal/candidate-profile', compact('candidate_detail', 'score'));
     }
 
     // Shows the candidate's changes detail page.
@@ -129,6 +131,8 @@ class CandidateController extends Controller
         $candidate_detail = CandidateDetail::where('id', $candidate_detail_id)
             ->with('user', 'educations', 'achievements', 'hardskills', 'softskills')
             ->firstOrFail();
+
+        $score = UserHelper::getHighestScoreFromCandidateDetail($candidate_detail);
 
         $candidate_detail_change = CandidateDetailChange::where('candidate_detail_id', $candidate_detail_id)
             ->where('status', 'pending')
@@ -175,7 +179,7 @@ class CandidateController extends Controller
 
         $isCandidateDetailNotUpdated = UserHelper::isCandidateNotUpdated($candidate_detail->user);
 
-        return view('admin/job-portal/candidate-profile-change', compact('candidate_detail', 'candidate_detail_change', 'work_experiences_not_updated',
+        return view('admin/job-portal/candidate-profile-change', compact('candidate_detail', 'score', 'candidate_detail_change', 'work_experiences_not_updated',
             'educations_not_updated', 'achievements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
             'isCandidateDetailNotUpdated'));
     }

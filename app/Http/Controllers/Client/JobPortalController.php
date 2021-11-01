@@ -229,6 +229,8 @@ class JobPortalController extends Controller
         $candidate_detail = CandidateDetail::where('user_id', $id)
             ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
             ->first();
+
+        $score = UserHelper::getHighestScoreFromCandidateDetail($candidate_detail);
     
         $this->resetNavbarData();
         $notifications = $this->notifications;
@@ -238,7 +240,7 @@ class JobPortalController extends Controller
 
         $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
 
-        $view_data = ['candidate_detail', 'isCandidateDetailUpdated', 'cart_count',
+        $view_data = ['candidate_detail', 'score', 'isCandidateDetailUpdated', 'cart_count',
             'notifications', 'transactions', 'informations', 'footer_reviews', 'agent'];
         
         return view('client/job-portal/company/detail', compact($view_data));

@@ -225,4 +225,12 @@ class UserHelper {
         }
         return [];
     }
+
+    // Method get highest score from candidateDetail object.
+    public static function getHighestScoreFromCandidateDetail($candidateDetail) {
+        return $candidateDetail->user->courses()->get()
+            ->map(function ($course) {
+                return $course->pivot->score;
+            })->sortBy('score')->toArray()[0];
+    }
 }
