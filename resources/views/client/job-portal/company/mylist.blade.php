@@ -17,7 +17,7 @@ karir impian!</p>
                     <div class="btn-blue-toggle  toggle-link" style="border-radius:10px 0px 0px 10px" onclick="window.location.href='/job-portal'">
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px" >Kandidat Venidici</p>
                     </div>   
-                    <div class="btn-blue-toggle toggle-link btn-blue-toggle-active" onclick="window.location.href='job-portal/my-list'" >
+                    <div class="btn-blue-toggle toggle-link btn-blue-toggle-active" onclick="window.location.href='/job-portal/my-list'" >
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px">Daftar Saya</p>
                     </div>    
                 </div>

@@ -24,6 +24,6 @@ class Hashtag extends Model
     }
 
     public function blogs() {
-        return $this->belongsToMany(Blog::class, 'blog_hashtag')->withTimestamps();
+        return $this->hasMany(Blog::class, 'blogs');
     }
 }

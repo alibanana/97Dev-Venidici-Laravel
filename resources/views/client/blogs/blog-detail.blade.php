@@ -26,15 +26,13 @@
             <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">{{$blog->title}}</p>
             <p class="normal-text" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">{{$blog->author}}</p>
             <p class="normal-text" style="font-family: Rubik Medium;color:#55525B;">{{$blog->created_at->diffForHumans()}}</p>
+            <p class="normal-text" style="font-family: Rubik Regular;color:#5F5C5C;white-space:pre-line">{{$blog->short_description}}</p>
 
             <div style="background-color:#F5F2F2;padding:1.5vw;border-radius:10px;margin-top:2vw">  
-                <p class="normal-text" style="font-family: Rubik Regular;color:#5F5C5C;white-space:pre-line">{{$blog->short_description}}</p>
                 <div class="row m-0" style="padding-top:1.5vw">
-                    <div class="col-4 ps-0">
-                            <img  src="{{asset($blog->image)}}" class="img-fluid" style="width:100%;height:30vw;object-fit:cover" alt="">
-                    </div>
-                    <div class="col-8">
-                    <div class="normal-text" style="font-family: Rubik Regular;color:#5F5C5C;white-space:pre-line">{!!$blog->body!!}</div>   
+   
+                    <div class="col-12 p-0">
+                        <div class="normal-text" style="font-family: Rubik Regular;color:#5F5C5C;white-space:pre-line">{!!$blog->body!!}</div>   
                     </div>
                 </div>
             </div>

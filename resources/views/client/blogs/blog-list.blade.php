@@ -53,8 +53,8 @@
         @endif
     @foreach($blogs as $blog)
         <!-- START OF ONE ARTICLE CARD -->
-        <div style="margin-top:4vw;display:flex;">
-            <div style="padding-right:2vw">
+        <div style="padding-top:4vw;" class="row m-0">
+            <div class="col-lg-8 col-xs-12 ps-0" style="padding-right:2vw">
                 <a href="/blog/{{$blog->id}}" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">{{$blog->title}}</a>
                 <p class="normal-text" style="margin-top:1vw;font-family: Rubik Regular;color:#3B3C43;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">{{$blog->short_description}}</p>
                 <div style="display:flex;align-items:center">
@@ -62,8 +62,8 @@
                 </div>
                 <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{$blog->hashtag}}</a>
             </div>
-            <div>
-                <img onclick="window.open('/blog/'+{{$blog->id}},'_self');" src="{{asset($blog->image)}}" class="img-fluid" style="cursor:pointer;width:100vw !important;height:12vw;object-fit:cover" alt="">
+            <div class="col-lg-4 col-xs-12 mobile-display">
+                <img onclick="window.open('/blog/'+{{$blog->id}},'_self');" src="{{asset($blog->image)}}" class="img-fluid" style="cursor:pointer;width:100% !important;height:12vw;object-fit:cover" alt="">
             </div>
         </div>
         <!-- END OF ONE ARTICLE CARD -->

@@ -128,11 +128,11 @@
                                                                 <a href="{{ route('admin.job-portal.candidates.showCandidateChange', $user->candidateDetail->id) }}" target="_blank" class="d-sm-inline-block btn btn-warning shadow-sm text-nowrap">View Updates</a>
                                                             </div>
                                                         @endif
-                                                        @if (!$userIdAndAdditionalUserDataMap[$user->id]['isCandidateDetailEmpty'])
+                                                        <!-- if (!$userIdAndAdditionalUserDataMap[$user->id]['isCandidateDetailEmpty']) -->
                                                             <div style="padding: 0px 2px">
                                                                 <a href="/admin/job-portal/{{$user->id}}" target="_blank" class="d-sm-inline-block btn btn-info shadow-sm text-nowrap">View Detail</a>
                                                             </div>
-                                                        @endif
+                                                        <!-- endif-->
                                                         @if ($userIdAndAdditionalUserDataMap[$user->id]['candidateStatus'] == 'pending')
                                                             <form action="{{ route('admin.job-portal.candidates.approve-change') }}" method="post">
                                                                 @csrf
