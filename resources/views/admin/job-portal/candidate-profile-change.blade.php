@@ -21,7 +21,7 @@
 
                 <div class="row m-0">
                     <div class="col-lg-3 col-xs-12 p-0">
-                        <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidate_detail->user->userDetail->display_picture }}" @endif style="width:13vw;height:17vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
+                        <img @if($candidate_detail->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="/{{ $candidate_detail->user->avatar }}" @endif style="width:13vw;height:17vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-9 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:left">
                         <div>

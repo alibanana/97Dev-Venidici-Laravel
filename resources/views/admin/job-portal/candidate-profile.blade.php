@@ -17,12 +17,12 @@
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <div class="row m-0">
             <div class="col-lg-3 col-xs-12 p-0">
-                <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidateDetail->user->userDetail->display_picture }}" @endif style="width:13vw;height:17vw;object-fit:contain;border-radius:5px" class="img-fluid" alt="">
+                <img @if($candidate_detail->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="/{{ $candidate_detail->user->avatar}}" @endif style="width:13vw;height:17vw;object-fit:contain;border-radius:5px" class="img-fluid" alt="">
             </div>
             <div class="col-lg-9 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:left">
                 <div>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Hi, my name is</p>
-                    <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF">{{auth()->user()->name}}</p>
+                    <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF">{{$candidate_detail->user->name}}</p>
                     @isset($candidate_detail->experience_year)
                     <p class="bigger-text" style="font-family: Rubik Regular;color:#FFFFFF">I have {{$candidate_detail->experience_year}} in {{$candidate_detail->industry}}</p>
                     @endisset
