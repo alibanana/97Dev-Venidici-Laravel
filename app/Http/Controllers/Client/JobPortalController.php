@@ -37,6 +37,7 @@ class JobPortalController extends Controller
 {
     private const INDEX_ROUTE = 'job-portal.index';
     private const MY_LIST_INDEX_ROUTE = 'job-portal.my-list.index';
+    private const MY_TABLE_LIST_ROUTE = '/job-portal/my-list#daftar-saya';
     private const CONTACTED_CANDIDATES_PAGE_SIZE = 4;
     private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER = ['< 1 Tahun', '< 2 tahun', '< 3 Tahun', '> 3 Tahun'];
     private const AVAILABLE_STATUS_FILTER = ['All','Archived', 'Contacted', 'Accepted', 'Hired'];
@@ -173,13 +174,13 @@ class JobPortalController extends Controller
             ->firstOrFail();
 
         if (UserHelper::isHiringPartnerCandidateExists(Auth::user()->id, $candidate->id)) {
-            $message = 'Candidate (' . $candidate->name . ') is already available on your list.';
+            $my_list_message = 'Candidate (' . $candidate->name . ') is already available on your list.';
         } else {
             $candidate->hiringPartners()->attach(Auth::user()->id);
-            $message = 'Candidate (' . $candidate->name . ') is now available on your list.';
+            $my_list_message = 'Candidate (' . $candidate->name . ') is now available on your list.';
         }
 
-        return redirect()->route(self::MY_LIST_INDEX_ROUTE)->with('message', $message);
+        return redirect(self::MY_TABLE_LIST_ROUTE)->with('my_list_message', $my_list_message);
     }
 
     // Method to handle Candidate Related Actions
@@ -207,7 +208,7 @@ class JobPortalController extends Controller
             $message = 'Candidate (' . $candidate->name . ') status successfully has been updated from accepted to contacted.';
         }
 
-        return redirect()->route(self::MY_LIST_INDEX_ROUTE)->with('message', $message);
+        return redirect(self::MY_TABLE_LIST_ROUTE)->with('my_list_message', $message);
     }
 
     // Changes the user's password in the database.

@@ -46,18 +46,13 @@
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Phone: {{$candidate_detail_change->whatsapp_number}} ({{$candidate_detail_change->status}})</p>
                             @endif
 
-
-
-
-                            
                             @if (!$isCandidateDetailNotUpdated)
                                 <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail->preferred_working_location}} (existing)</p>
                             @endif
                             <!-- show pending profile -->
-                            @if ($candidate_detail_change->about_me_description != null)
-                                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail_change->preferred_working_location}} ({{$candidate_detail_change->status}})</p>
-                            @endif
-                           
+                            
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Bootcamp Score: <b>1000</b> </p>
+
                             <div style="display:flex;align-items:center;margin-top:3vw">   
                                 @if (!$isCandidateDetailNotUpdated)
                                     <div>
@@ -78,6 +73,7 @@
                         <div class="col-12 p-0" style="margin-top:4vw">
                             <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me (existing)</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Linked In: {{$candidate_detail->linkedin_link == null ? '-' : $candidate_detail->linkedin_link }}</p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail->preferred_working_location == null ? '-' : $candidate_detail->preferred_working_location }}</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">{{ $candidate_detail->about_me_description }}</p>
                         </div>                    
                     @endif
@@ -87,6 +83,7 @@
                         <div class="col-12 p-0" style="margin-top:4vw">
                             <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me ({{$candidate_detail_change->status}})</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Linked In: {{$candidate_detail_change->linkedin_link == null ? '-' : $candidate_detail_change->linkedin_link }}</p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail_change->preferred_working_location == null ? '-' : $candidate_detail_change->preferred_working_location }}</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">{{ $candidate_detail_change->about_me_description }}</p>
                         </div>
                     @else

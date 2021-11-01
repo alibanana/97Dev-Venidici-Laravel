@@ -21,9 +21,7 @@
                     @isset($candidate_detail->whatsapp_number)
                     <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Phone: <b>{{$candidate_detail->whatsapp_number == null ? '-' : $candidate_detail->whatsapp_number }}</b> </p>
                     @endisset
-                    @isset($candidate_detail->preferred_working_location)
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: <b> {{$candidate_detail->preferred_working_location == null ? '-' : $candidate_detail->preferred_working_location }}</b> </p>
-                    @endisset
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Bootcamp Score: <b>1000</b> </p>
                     <div style="display:flex;align-items:center;margin-top:3vw">   
                         @isset($candidate_detail->cv_file)
                         <div>
@@ -37,6 +35,9 @@
                 <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me</p>
                 @isset($candidate_detail->linkedin_link)
                 <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Linked In: <b> {{$candidate_detail->linkedin_link == null ? '-' : $candidate_detail->linkedin_link }}</b> </p>
+                @endisset
+                @isset($candidate_detail->preferred_working_location)
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: <b> {{$candidate_detail->preferred_working_location == null ? '-' : $candidate_detail->preferred_working_location }}</b> </p>
                 @endisset
                 @isset($candidate_detail->about_me_description)
                 <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">
