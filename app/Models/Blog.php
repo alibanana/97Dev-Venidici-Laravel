@@ -15,12 +15,11 @@ class Blog extends Model
         'short_description',
         'body',
         'banner',
-        'image',
-        'hashtag',
+        'hashtag_id',
         'is_featured'
     ];
 
-    public function hashtags() {
-        return $this->belongsToMany(Hashtag::class, 'blog_hashtag')->withTimestamps();
+    public function hashtag() {
+        return $this->belongsTo(Hashtag::class, 'hashtags');
     }
 }

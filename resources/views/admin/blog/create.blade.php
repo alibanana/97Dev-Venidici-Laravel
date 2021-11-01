@@ -72,7 +72,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Hashtag</label>
-                    <select name="hashtag" class="form-control form-control-user" id="" required>
+                    <select name="hashtag_id" class="form-control form-control-user" id="" required>
                         <option value="" selected disabled>Pilih Hashtag</option>
                         @foreach ($tags as $tag)
                             <option value="{{ $tag->id }}">{{ $tag->hashtag }}</option>
@@ -91,18 +91,6 @@
                     <br>
                     <input type="file" name="banner" aria-describedby="" accept=".jpeg,.jpg,.png" required> 
                     @error('banner')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label for="">Image</label>
-                    <br>
-                    <input type="file" name="image" aria-describedby="" accept=".jpeg,.jpg,.png" required> 
-                    @error('image')
                         <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                         </span>

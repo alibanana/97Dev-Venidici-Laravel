@@ -52,8 +52,7 @@ class BlogController extends Controller
             'short_description' => 'required',
             'body' => 'required',
             'banner' => 'required|mimes:jpeg,jpg,png',
-            'image' => 'required|mimes:jpeg,jpg,png',
-            'hashtag' => 'required'
+            'hashtag_id' => 'required'
         ]);
 
         $blog = new Blog();
@@ -63,11 +62,10 @@ class BlogController extends Controller
         $blog->short_description = $validated['short_description'];
         $blog->body = $validated['body'];
         $blog->banner = Helper::storeImage($request->file('banner'), 'storage/images/blog/');
-        $blog->image = Helper::storeImage($request->file('image'), 'storage/images/blog/');
         $blog->is_featured = false;
+        $blog->hashtag_id = $validated['hashtag_id'];
         $blog->save();
 
-        $blog->hashtags()->attach($validated['hashtag']);
 
         $message = 'New blog (' . $blog->title . ') has been added to the database.';
 
@@ -92,8 +90,7 @@ class BlogController extends Controller
             'short_description' => 'required',
             'body' => 'required',
             'banner' => 'mimes:jpeg,jpg,png',
-            'image' => 'mimes:jpeg,jpg,png',
-            'hashtag' => 'required',
+            'hashtag_id' => 'required',
         ]);
 
         $blog = Blog::findOrFail($id);
@@ -102,21 +99,16 @@ class BlogController extends Controller
         $blog->duration             = $validated['duration'];
         $blog->short_description    = $validated['short_description'];
         $blog->body                 = $validated['body'];
+        $blog->hashtag_id           = $validated['hashtag_id'];
+
         
         if ($request->has('banner')) {
             unlink($blog->banner);
             $blog->banner = Helper::storeImage($request->file('banner'), 'storage/images/blog/');
         }
         
-        if ($request->has('image')) {
-            unlink($blog->image);
-            $blog->image = Helper::storeImage($request->file('image'), 'storage/images/blog/');
-        }
-        
-        $blog->save();
 
-        $blog->hashtags()->detach();
-        $blog->hashtags()->attach($validated['hashtag']);
+        $blog->save();
 
         if ($blog->wasChanged()) {
             $message = 'Blog (' . $blog->title . ') has been updated.';
@@ -130,7 +122,6 @@ class BlogController extends Controller
     public function destroy($id) {
         $blog = Blog::findOrFail($id);
         unlink($blog->banner);
-        unlink($blog->image);
         $blog->delete();
 
         $message = 'Blog (' . $blog->title . ') has been deleted.';
