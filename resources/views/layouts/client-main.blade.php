@@ -47,13 +47,16 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '377781967128623');
+        fbq('init', '4280190432066581');
         fbq('track', 'PageView');
       </script>
-      <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=377781967128623&ev=PageView&noscript=1"/>
-      </noscript>
+
+      <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=4280190432066581&ev=PageView&noscript=1"
+      /></noscript>
+      <meta name="facebook-domain-verification" content="9vqji91k0n1eqsy0fdxgqvjy58e80d" />
       <!-- End Facebook Pixel Code -->
+      
     @endenv
     
 
