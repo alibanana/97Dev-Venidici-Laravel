@@ -129,7 +129,7 @@ karir impian!</p>
                                 <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Interest:</p>
                                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;">{{ $candidateDetailIdAndCombinedInterestMap[$candidateDetail->id] }}</p>
         
-                                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: 98</p>
+                                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: {{ $candidateDetailIdAndScoreMap[$candidateDetail->id] }}</p>
                                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">
                                     @if (in_array($candidateDetail->user->id, $archivedCandidateIds))
                                         <button class="normal-text btn-dark-blue full-width-button" disabled

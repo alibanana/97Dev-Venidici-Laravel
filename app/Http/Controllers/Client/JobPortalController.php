@@ -47,6 +47,7 @@ class JobPortalController extends Controller
         '> 3 Tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience', 'Less than 3 Years of Experience', 'More than 3 Years of Experience']
     ];
     private const HIRING_PARTNER_CANDIDATE_STATUS_LIST = ['archived', 'contacted', 'accepted', 'hired'];
+    private const BOOTCAMP_COURSE_TYPE_ID = 3;
 
     private $notifications; // Stores combined notifications data.
     private $informations; // Stores notification (isInformation == true) data.
@@ -121,7 +122,7 @@ class JobPortalController extends Controller
 
         $candidateDetailIdAndCombinedInterestMap =
             $this->generateCandidateDetailIdAndCombinedInterestMap($candidateDetails);
-
+        $candidateDetailIdAndScoreMap = $this->generateCandidateDetailIdAndScoreMap($candidateDetails);
         $archivedCandidateIds = Auth::user()->candidates()
             ->select('candidate_id')->pluck('candidate_id')->toArray();
         
@@ -130,7 +131,7 @@ class JobPortalController extends Controller
 
         return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
             'informations', 'footer_reviews', 'agent', 'candidateDetails', 'candidateDetailIdAndCombinedInterestMap',
-            'archivedCandidateIds','availableExperienceYearFilters', 'availableStatusFilters'));
+            'candidateDetailIdAndScoreMap', 'archivedCandidateIds','availableExperienceYearFilters', 'availableStatusFilters'));
     }
 
     private function generateCandidateDetailIdAndCombinedInterestMap($candidateDetails) {
@@ -140,6 +141,20 @@ class JobPortalController extends Controller
                 $combinedInterestsString = $combinedInterestsString . $interest->title . ', ';
             }
             return [$candidateDetail->id => substr($combinedInterestsString, 0, -2)];
+        });
+    }
+
+    private function generateCandidateDetailIdAndScoreMap($candidateDetails) {
+        return $candidateDetails->mapWithKeys(function ($candidateDetail) {
+            if ($candidateDetail->user->courses != null) {
+                $scores = $candidateDetail->user->courses()
+                    ->where('course_type_id', self::BOOTCAMP_COURSE_TYPE_ID)
+                    ->get()->map(function ($course) {
+                        return $course->pivot->score;
+                    })->sortBy('score')->toArray();
+
+                return [$candidateDetail->id => $scores[0]];
+            }
         });
     }
 

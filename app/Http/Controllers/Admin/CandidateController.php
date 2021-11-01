@@ -30,10 +30,12 @@ class CandidateController extends Controller
     private const FILTER_NOT_UPDATED = 'not_updated';
     private const FILTER_PENDING = 'pending';
     private const FILTER_APPROVED = 'approved';
+    private const BOOTCAMP_COURSE_TYPE_ID = 3;
 
     // Shows the admin job portal's candidates list page.
     public function index(Request $request) {
-        $users = User::where('isCandidate', true)->with('candidateDetail');
+        $users = User::where('isCandidate', true)
+            ->with('candidateDetail', 'courses');
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
@@ -69,8 +71,9 @@ class CandidateController extends Controller
         
         $users = $users->with('userDetail')->get();
         $userIdAndAdditionalUserDataMap = $this->generateMapOfUserIdAndAdditionalUserData($users);
+        $userIdAndScoreMap = $this->generateMapOfUserIdAndScore($users);
 
-        return view('admin/job-portal/candidates', compact('users', 'userIdAndAdditionalUserDataMap'));
+        return view('admin/job-portal/candidates', compact('users', 'userIdAndAdditionalUserDataMap', 'userIdAndScoreMap'));
     }
 
     private function generateMapOfUserIdAndAdditionalUserData($users) {
@@ -95,6 +98,20 @@ class CandidateController extends Controller
             $data['isCandidateDetailEmpty'] = UserHelper::isCandidateDetailEmpty($user);
             
             return [$user->id => $data];
+        });
+    }
+
+    private function generateMapOfUserIdAndScore($users) {
+        return $users->mapWithKeys(function ($user) {
+            if ($user->courses()->exists()) {
+                $scores = $user->courses()
+                    ->where('course_type_id', self::BOOTCAMP_COURSE_TYPE_ID)
+                    ->get()->map(function ($course) {
+                        return $course->pivot->score;
+                    })->sortBy('score')->toArray();
+
+                return [$user->id => $scores[0]];
+            }
         });
     }
 

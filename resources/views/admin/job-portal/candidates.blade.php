@@ -104,7 +104,8 @@
                                                 <td>{{ $loop->iteration }}</td>												
                                                 <td>{{ $user->name }}</td>												
                                                 <td>{{ $user->email }}</td>												
-                                                <td>{{ $user->userDetail->telephone }}</td>												
+                                                <td>{{ $user->userDetail->telephone }}</td>	
+                                                <td>{{ $userIdAndScoreMap[$user->id] }}</td>
                                                 <td>
                                                     @if ($userIdAndAdditionalUserDataMap[$user->id]['candidateStatus'] == 'not_updated')
                                                         <span style="color:grey">
@@ -119,10 +120,6 @@
                                                             Accepted
                                                         </span>
                                                     @endif
-                                                </td>
-                                                <td>
-                                                <!-- default score is 0. If 0, render '-' -->
-                                                -
                                                 </td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">
