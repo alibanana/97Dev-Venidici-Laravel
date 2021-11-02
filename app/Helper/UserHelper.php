@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Models\CandidateDetail;
 use App\Models\CandidateDetailChange;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifyAdminCandidateAccepted;
+
 
 
 class UserHelper {
@@ -152,6 +155,8 @@ class UserHelper {
                     ->whereIn('status', ['archived', 'contacted'])
                     ->update(['status' => 'hired']);
         }
+
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminCandidateAccepted($candidate->name, 'PT. ABCD'));
     }
 
     // Method to change Accepted Candidate status to Contacted. Assumes that :

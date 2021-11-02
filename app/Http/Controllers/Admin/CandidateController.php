@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helper\UserHelper;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Notification;
 
 use App\Models\User;
 use App\Models\CandidateDetail;
@@ -22,6 +24,10 @@ use App\Models\Softskill;
 use App\Models\SoftskillChange;
 use App\Models\Interest;
 use App\Models\InterestChange;
+
+use App\Mail\CandidateProfileAcceptedMail;
+use App\Mail\CandidateProfileRejectedMail;
+
 
 class CandidateController extends Controller
 {
@@ -179,6 +185,15 @@ class CandidateController extends Controller
 
         $message = 'Candidate Detail Changes for user (' . $candidate_detail_change->candidateDetail->user->name . ') has been approved!';
 
+        Mail::to($candidate_detail_change->candidateDetail->user->email)->send(new CandidateProfileAcceptedMail($candidate_detail_change->candidateDetail->user->name));
+        // create notification
+        $notification = Notification::create([
+            'user_id' => $candidate_detail_change->candidateDetail->user->id,
+            'isInformation' => 1,
+            'title' => 'Permintaan Perubahan Profilmu Diterima',
+            'description' => 'Hi, '.$candidate_detail_change->candidateDetail->user->name.'. Permintaan perubahan profil bootcamp kamu telah diterima oleh admin',
+            'link' => '/candidate-details/my-profile'
+        ]);
         return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 
@@ -387,6 +402,15 @@ class CandidateController extends Controller
         
         $message = 'Candidate Detail Changes for user (' . $candidate_detail_change->candidateDetail->user->name . ') has been rejected!';
 
+        Mail::to($candidate_detail_change->candidateDetail->user->email)->send(new CandidateProfileRejectedMail($candidate_detail_change->candidateDetail->user->name));
+        // create notification
+        $notification = Notification::create([
+            'user_id' => $candidate_detail_change->candidateDetail->user->id,
+            'isInformation' => 1,
+            'title' => 'Permintaan Perubahan Profilmu Ditolak',
+            'description' => 'Hi, '.$candidate_detail_change->candidateDetail->user->name.'. Permintaan perubahan profil bootcamp kamu telah ditolak oleh admin',
+            'link' => '/candidate-details/my-profile'
+        ]);
         return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 }

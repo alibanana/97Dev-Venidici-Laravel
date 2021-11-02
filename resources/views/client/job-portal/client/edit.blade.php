@@ -14,7 +14,7 @@
         <div class="modal-body" style="text-align:center">
             <p class="small-heading" style="font-family:Rubik Medium;color:#2B6CAA">Update Job Portal Profile?</p>
             <p class="normal-text" style="font-family:Rubik Medium;color:#000000;margin-bottom:2vw">Admin approval will be processed within 1 x 24 hours</p>
-            <button type="submit" class="normal-text btn-blue-bordered btn-blue-bordered-active full-width-button" style="font-family: Avenir Medium;cursor:pointer;padding:0.5vw 2vw">Confirm</button>                
+            <button onclick="openLoading()" type="submit" class="normal-text btn-blue-bordered btn-blue-bordered-active full-width-button" style="font-family: Avenir Medium;cursor:pointer;padding:0.5vw 2vw">Confirm</button>                
             <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-top:1vw">OR</p>
             <p class="normal-text" style="font-family:Rubik Medium;color:grey;margin-top:1vw;cursor:pointer" data-dismiss="modal" >Cancel</p>
         </div>
@@ -342,7 +342,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
                     </div>
                 </div>
             </form>
@@ -437,7 +437,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
                     </div>
                 </div>
             </form>
@@ -644,7 +644,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
                 </div>
@@ -741,7 +741,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
 
                     </div>
                 </div>
@@ -907,7 +907,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
                 </div>
@@ -977,7 +977,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
 
                     </div>
                 </div>
@@ -1128,7 +1128,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
                 </div>
@@ -1191,7 +1191,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
                     </div>
                 </div>
             </form>
@@ -1337,7 +1337,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
                 </div>
@@ -1400,7 +1400,7 @@
                     </div>
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
 
                     </div>
                 </div>
@@ -1577,7 +1577,7 @@
                     </div> 
                     <!-- END OF RIGHT SECTION -->
                     <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+                        <button onclick="openLoading()" type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
                 </div>

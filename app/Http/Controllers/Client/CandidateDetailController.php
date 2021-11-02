@@ -10,6 +10,7 @@ use Jenssegers\Agent\Agent;
 
 use App\Helper\Helper;
 use App\Helper\UserHelper;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Review;
 use App\Models\CandidateDetail;
@@ -26,6 +27,9 @@ use App\Models\Softskill;
 use App\Models\SoftskillChange;
 use App\Models\Interest;
 use App\Models\InterestChange;
+
+use App\Mail\NotifyAdminUpdateProfile;
+
 
 class CandidateDetailController extends Controller
 {
@@ -210,6 +214,7 @@ class CandidateDetailController extends Controller
         );
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
 
         return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
@@ -257,7 +262,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_CREATE_WORK_EXPERIENCE_MODAL)->with('work_experience_create_message', $message);
 
     }
@@ -306,7 +312,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_UPDATE_WORK_EXPERIENCE_MODAL)->with('work_experience_update_message', $message);
     }
 
@@ -368,6 +375,8 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
         return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
     }
 
     // Delete an existing WorkExperienceChange object
@@ -433,7 +442,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_CREATE_EDUCATION_MODAL)->with('education_create_message', $message);
     }
 
@@ -481,7 +491,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_UPDATE_EDUCATION_MODAL)->with('education_update_message', $message);
     }
 
@@ -539,7 +550,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 
@@ -597,7 +609,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_CREATE_ACHIEVEMENT_MODAL)->with('achievement_create_message', $message);
     }
 
@@ -637,7 +650,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_UPDATE_ACHIEVEMENT_MODAL)->with('achievement_update_message', $message);
     }
 
@@ -688,7 +702,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 
@@ -744,7 +759,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_CREATE_HARDSKILL_MODAL)->with('hard_skills_create_message', $message);
     }
 
@@ -782,7 +798,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('hardskill_update_message', $message);
     }
 
@@ -831,7 +848,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 
@@ -887,7 +905,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_CREATE_SOFTSKILL_MODAL)->with('soft_skills_create_message', $message);
     }
 
@@ -925,7 +944,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('softskill_update_message', $message);
     }
 
@@ -974,7 +994,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 
@@ -1028,7 +1049,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_CREATE_INTEREST_MODAL)->with('interests_create_message', $message);
     }
 
@@ -1062,7 +1084,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect(self::INDEX_URL_WITH_UPDATE_INTEREST_MODAL)->with('interest_update_message', $message);
     }
 
@@ -1107,7 +1130,8 @@ class CandidateDetailController extends Controller
         ]);
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
-    
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
+
         return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
     }
 

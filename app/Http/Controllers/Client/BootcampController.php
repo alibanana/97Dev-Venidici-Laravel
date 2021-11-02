@@ -376,12 +376,12 @@ class BootcampController extends Controller
         $course_title = $bootcamp->course->title;
         $user_name = $bootcamp->user->name;
         $sentence ="";
-        //Mail::to(auth()->user()->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));
+        Mail::to(auth()->user()->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));
         $admins = UserHelper::findAllAdmins();
-        //foreach($admins as $admin){
-            //$sentence = "Hi Admin!";
-            //Mail::to($admin->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));
-        //}
+        foreach($admins as $admin){
+            $sentence = "Hi Admin!";
+            Mail::to($admin->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));
+        }
 
         // create notification
         $notification = Notification::create([

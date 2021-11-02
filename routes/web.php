@@ -531,6 +531,24 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/emails/bootcamp/full_registration', function () {
             return view('emails/bootcamp_full_registration');
         });
+        Route::get('/emails/bootcamp/full_registration', function () {
+            return view('emails/bootcamp_full_registration');
+        });
+        Route::get('/emails/job-portal/contacted_candidate', function () {
+            return view('emails/job-portal/contacted_candidate');
+        });
+        Route::get('/emails/job-portal/accepted_candidate', function () {
+            return view('emails/job-portal/accepted_candidate');
+        });
+        Route::get('/emails/job-portal/profile_update_accepted', function () {
+            return view('emails/job-portal/profile_update_accepted');
+        });
+        Route::get('/emails/job-portal/admin_profile_update_request', function () {
+            return view('emails/job-portal/admin_profile_update_request');
+        });
+        Route::get('/emails/job-portal/admin_candidate_accepted', function () {
+            return view('emails/job-portal/admin_candidate_accepted');
+        });
     };
 
     /* OTHERS ROUTING */
