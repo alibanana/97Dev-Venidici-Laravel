@@ -161,7 +161,7 @@
 										@foreach ($users as $user)
 											<tr>
 												<td>{{ $users_data['from'] + $loop->index }}</td>
-												<td>{{ $user->name }}
+												<td>{{ $user->name }} <br>
 												{{ $user->email }}</td>
 												@if ($user->userDetail()->exists())
 													<td>{{ $user->userDetail->response }}</td>
