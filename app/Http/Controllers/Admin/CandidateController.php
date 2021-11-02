@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Helper\UserHelper;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Notification;
 
 use App\Models\User;
+use App\Models\UserDetail;
 use App\Models\CandidateDetail;
 use App\Models\CandidateDetailChange;
 use App\Models\WorkExperience;
@@ -22,6 +26,10 @@ use App\Models\Softskill;
 use App\Models\SoftskillChange;
 use App\Models\Interest;
 use App\Models\InterestChange;
+
+use App\Mail\CandidateProfileAcceptedMail;
+use App\Mail\CandidateProfileRejectedMail;
+
 
 class CandidateController extends Controller
 {
@@ -52,20 +60,31 @@ class CandidateController extends Controller
                 $url = route(self::INDEX_ROUTE, request()->except('filter'));
                 return redirect($url);    
             } elseif ($request->filter == self::FILTER_NOT_UPDATED) {
-                // Case #1 - Users have no candidateDetail object yet.
-                // Case #2 - Users have candidateDetail object but all candidateDetail.candidateDetailChanges
-                //           are cancelled.
-
-                // $users = $users->doesntHave('candidateDetail')
-                //     ->orWhereDoesntHave('candidateDetail.candidateDetailChanges');
+                $users = $users->whereIn('id', $this->getListOfNotUpdatedCandidateUserIds());
             } elseif ($request->filter == self::FILTER_PENDING) {
-                // Case #1 - Users have candidateDetail.candidateDetailChanges objects which status are pending (currently).
-
-                // $users = $users->whereDoesntHave('candidateDetail.candidateDetailChanges', function (Builder $query) {
-                //     $query->where('status', 'pending');
-                // });
+                $users = $users->whereIn('id', $this->getListOfPendingCandidateUserIds());
             } elseif ($request->filter == self::FILTER_APPROVED) {
-                // Case #1 - Users candidateDetail.candidateDetailChanges objects are all approved.
+                $users = $users->whereIn('id', $this->getListOfApprovedCandidateUserIds());
+            }
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route(self::INDEX_ROUTE, request()->except('search'));
+                return redirect($url);
+            } else {
+                $userDetails = UserDetail::select(DB::raw('user_id as id'), 'telephone');
+                $users = $users->joinSub($userDetails, 'details', function ($join) {
+                    $join->on('users.id', '=', 'details.id');
+                });
+                
+                $search = $request->search;
+
+                $users = $users->where(function ($query) use ($search) {
+                    $query->where([['name', 'like', "%".$search."%"]])
+                    ->orWhere([['email', 'like', "%".$search."%"]])
+                    ->orWhere([['telephone', 'like', "%".$search."%"]]);
+                });
             }
         }
         
@@ -74,6 +93,30 @@ class CandidateController extends Controller
         $userIdAndScoreMap = $this->generateMapOfUserIdAndScore($users);
 
         return view('admin/job-portal/candidates', compact('users', 'userIdAndAdditionalUserDataMap', 'userIdAndScoreMap'));
+    }
+
+    private function getListOfNotUpdatedCandidateUserIds() {
+        return User::all()->map(function ($user) {
+            if (UserHelper::isCandidateNotUpdated($user)) {
+                return $user->id;
+            }
+        })->toArray();
+    }
+
+    private function getListOfPendingCandidateUserIds() {
+        return User::all()->map(function ($user) {
+            if (UserHelper::isCandidatePending($user)) {
+                return $user->id;
+            }
+        })->toArray();
+    }
+
+    private function getListOfApprovedCandidateUserIds() {
+        return User::all()->map(function ($user) {
+            if (!UserHelper::isCandidateNotUpdated($user) && !UserHelper::isCandidatePending($user)) {
+                return $user->id;
+            }
+        })->toArray();
     }
 
     private function generateMapOfUserIdAndAdditionalUserData($users) {
@@ -200,6 +243,15 @@ class CandidateController extends Controller
 
         $message = 'Candidate Detail Changes for user (' . $candidate_detail_change->candidateDetail->user->name . ') has been approved!';
 
+        Mail::to($candidate_detail_change->candidateDetail->user->email)->send(new CandidateProfileAcceptedMail($candidate_detail_change->candidateDetail->user->name));
+        // create notification
+        $notification = Notification::create([
+            'user_id' => $candidate_detail_change->candidateDetail->user->id,
+            'isInformation' => 1,
+            'title' => 'Permintaan Perubahan Profilmu Diterima',
+            'description' => 'Hi, '.$candidate_detail_change->candidateDetail->user->name.'. Permintaan perubahan profil bootcamp kamu telah diterima oleh admin',
+            'link' => '/candidate-details/my-profile'
+        ]);
         return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 
@@ -408,6 +460,15 @@ class CandidateController extends Controller
         
         $message = 'Candidate Detail Changes for user (' . $candidate_detail_change->candidateDetail->user->name . ') has been rejected!';
 
+        Mail::to($candidate_detail_change->candidateDetail->user->email)->send(new CandidateProfileRejectedMail($candidate_detail_change->candidateDetail->user->name));
+        // create notification
+        $notification = Notification::create([
+            'user_id' => $candidate_detail_change->candidateDetail->user->id,
+            'isInformation' => 1,
+            'title' => 'Permintaan Perubahan Profilmu Ditolak',
+            'description' => 'Hi, '.$candidate_detail_change->candidateDetail->user->name.'. Permintaan perubahan profil bootcamp kamu telah ditolak oleh admin',
+            'link' => '/candidate-details/my-profile'
+        ]);
         return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 }

@@ -16,6 +16,7 @@ use App\Helper\Helper;
 use App\Helper\UserHelper;
 
 use App\Mail\PasswordChangedMail;
+use App\Models\Notification;
 
 use App\Models\Review;
 use App\Models\User;
@@ -33,6 +34,9 @@ use App\Models\Softskill;
 use App\Models\SoftskillChange;
 use App\Models\Interest;
 use App\Models\InterestChange;
+
+use App\Mail\CandidateContactedMail;
+use App\Mail\CandidateAcceptedMail;
 
 class JobPortalController extends Controller
 {
@@ -295,16 +299,37 @@ class JobPortalController extends Controller
         if ($validated['action'] == 'contact') {
             UserHelper::contactCandidate($candidate, Auth::user()->id);
             $message = 'Candidate (' . $candidate->name . ') has been contacted through email.';
+            Mail::to($candidate->email)->send(new CandidateContactedMail($candidate->name,Auth::user()->companyName));
+            // create notification
+            $notification = Notification::create([
+                'user_id' => $candidate->id,
+                'isInformation' => 1,
+                'title' => 'Kamu dikontak Hiring Partner!',
+                'description' => 'Hi, '.$candidate->name.'. Kamu telah di kontak oleh hiring partner venidici: ' . Auth::user()->companyName . '. Silahkan cek email kamu untuk informasi lebih lanjut',
+                'link' => '/dashboard'
+            ]);
         } elseif ($validated['action'] == 'unarchive') {
             UserHelper::unarchiveCandidate($candidate, Auth::user()->id);
             $message = 'Candidate (' . $candidate->name . ') has been removed from your list.';
         } elseif ($validated['action'] == 'accept') {
             UserHelper::hireCandidate($candidate, Auth::user()->id);
             $message = 'Candidate (' . $candidate->name . ') has successfully been accepted on your company.';
+            Mail::to($candidate->email)->send(new CandidateAcceptedMail($candidate->name,Auth::user()->companyName));
+            // create notification
+            $notification = Notification::create([
+                'user_id' => $candidate->id,
+                'isInformation' => 1,
+                'title' => 'Selamat! Kamu diterima oleh Hiring Partner',
+                'description' => 'Hi, '.$candidate->name.'. Kamu telah di diterima oleh hiring partner venidici: ' . Auth::user()->companyName . '. Silahkan cek email kamu untuk informasi lebih lanjut',
+                'link' => '/dashboard'
+            ]);
         } elseif ($validated['action'] == 'cancel') {
             UserHelper::cancelCandidate($candidate, Auth::user()->id);
             $message = 'Candidate (' . $candidate->name . ') status successfully has been updated from accepted to contacted.';
         }
+
+
+
 
         return redirect(self::MY_TABLE_LIST_ROUTE)->with('my_list_message', $message);
     }

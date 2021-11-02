@@ -127,7 +127,7 @@ karir impian!</p>
                                 @csrf
                                     <input type="hidden" name="user_id" value="{{ $candidate->candidateDetail->user->id }}" hidden>
                                     <div class="grey-input-form" style="display: flex;align-items:center;width:100%;background-color:#2B6CAA">
-                                        <select name="action" class="normal-text action-select" id="action-form-{{$candidate->candidateDetail->user_id}}"  style="background:transparent;border:none;color: #ffffff;width:100%;font-family:Rubik Regular;">
+                                        <select onchange="openLoading()" name="action" class="normal-text action-select" id="action-form-{{$candidate->candidateDetail->user_id}}"  style="background:transparent;border:none;color: #ffffff;width:100%;font-family:Rubik Regular;">
                                             <option value="None" disabled selected>Select Action</option>
                                             @if ($candidate->pivot->status == 'archived')
                                                 <option style="color: black" value="contact">Contact</option>
