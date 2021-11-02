@@ -81,7 +81,7 @@
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
-                                    <form action="{{ route('admin.users.index') }}" method="GET">
+                                    <form action="{{ route('admin.job-portal.hiring-partners.index') }}" method="GET">
                                         <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
                                         @if (Request::get('show'))
                                             <input name="show" value="{{ Request::get('show') }}" hidden>

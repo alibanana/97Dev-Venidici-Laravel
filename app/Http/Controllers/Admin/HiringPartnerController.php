@@ -63,18 +63,12 @@ class HiringPartnerController extends Controller
                 $url = route(self::INDEX_ROUTE, request()->except('search'));
                 return redirect($url);
             } else {
-                $userDetails = UserDetail::select(DB::raw('user_id as id'), 'telephone');
-                $users = $users->joinSub($userDetails, 'details', function ($join) {
-                    $join->on('users.id', '=', 'details.id');
-                });
-                
                 $search = $request->search;
 
                 $users = $users->where(function ($query) use ($search) {
-                    $query->where([['name', 'like', "%".$search."%"]])
-                    ->orWhere([['companyName', 'like', "%".$search."%"]])
-                    ->orWhere([['email', 'like', "%".$search."%"]])
-                    ->orWhere([['telephone', 'like', "%".$search."%"]]);
+                    $query->where([['users.name', 'like', "%".$search."%"]])
+                    ->orWhere([['users.companyName', 'like', "%".$search."%"]])
+                    ->orWhere([['users.email', 'like', "%".$search."%"]]);
                 });
             }
         }
