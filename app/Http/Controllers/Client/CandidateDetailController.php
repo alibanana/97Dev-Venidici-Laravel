@@ -149,9 +149,10 @@ class CandidateDetailController extends Controller
                 ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
                 ->first();
 
-            $view_data = array_merge($view_data, ['candidate_detail']);
-        }
-        else{
+            $score = UserHelper::getHighestScoreFromCandidateDetail($candidate_detail);
+
+            $view_data = array_merge($view_data, ['candidate_detail', 'score']);
+        } else{
             return redirect()->route(self::INDEX_ROUTE);
         }
         

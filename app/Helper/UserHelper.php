@@ -46,12 +46,12 @@ class UserHelper {
         return true;
     }
 
-    public static function isRequiredCandidateDetailDataAndRelationshipEmpty(CandidateDetail $candidateDetail) {
+    public static function isRequiredCandidateDetailDataAndRelationshipEmpty($candidateDetail) {
         return self::isCandidateDetailDataNull($candidateDetail) ||
             self::isRequiredCandidateDetailRelationshipDataNull($candidateDetail);
     }
 
-    private static function isCandidateDetailDataNull(CandidateDetail $candidateDetail) {
+    private static function isCandidateDetailDataNull($candidateDetail) {
         return $candidateDetail->preferred_working_location == null ||
             $candidateDetail->linkedin_link == null ||
             $candidateDetail->whatsapp_number == null ||
@@ -61,11 +61,11 @@ class UserHelper {
             $candidateDetail->cv_file == null;
     }
     
-    private static function isRequiredCandidateDetailRelationshipDataNull(CandidateDetail $candidateDetail) {
-        return !$candidateDetail->workExperiences()->exists() ||
-            !$candidateDetail->educations()->exists() ||
-            !$candidateDetail->hardskills()->exists() ||
-            !$candidateDetail->softskills()->exists();
+    private static function isRequiredCandidateDetailRelationshipDataNull($candidateDetail) {
+        return $candidateDetail->workExperiences == null ||
+            $candidateDetail->educations == null ||
+            $candidateDetail->hardskills == null ||
+            $candidateDetail->softskills == null;
     }
 
     public static function isCandidateDetailChangeDataAndRelationshipEmpty(CandidateDetailChange $candidateDetailChange) {
@@ -229,5 +229,13 @@ class UserHelper {
                 ->pluck('interest_id')->toArray();
         }
         return [];
+    }
+
+    // Method get highest score from candidateDetail object.
+    public static function getHighestScoreFromCandidateDetail($candidateDetail) {
+        return $candidateDetail->user->courses()->get()
+            ->map(function ($course) {
+                return $course->pivot->score;
+            })->sortBy('score')->toArray()[0];
     }
 }

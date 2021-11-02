@@ -58,11 +58,10 @@
                             <div class="dataTables_length" id="show_entries">
                                 <label class="w-100">Filter:
 									<select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" onchange="if (this.value) window.location.href=this.value">
-                                        <option>All</option>
-                                        <option>Not yet update profile</option>
-                                        <option>Waiting for approval</option>
-                                        <option>Accepted</option>
-                                        <option>Rejected</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'all']) }}" @if (!Request::has('filter')) selected @endif>All</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'not_updated']) }}" @if (Request::get('filter') == 'not_updated') selected @endif>Not Updated</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'pending']) }}" @if (Request::get('filter') == 'pending') selected @endif>Waiting for approval</option>
+                                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'filter' => 'approved']) }}" @if (Request::get('filter') == 'approved') selected @endif>Accepted</option>
                                     </select>
                                 </label>
                             </div>
@@ -70,7 +69,7 @@
                         <div class="col-sm-12 col-md-8">
                             <div id="dataTable_filter" class="dataTables_filter">
                                 <label class="w-100">Search:
-                                    <form action="{{ route('admin.users.index') }}" method="GET">
+                                    <form action="{{ route('admin.job-portal.candidates.index') }}" method="GET">
                                         <input name="search" value="{{ Request::get('search') }}" type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
                                         @if (Request::get('show'))
                                             <input name="show" value="{{ Request::get('show') }}" hidden>
@@ -104,7 +103,8 @@
                                                 <td>{{ $loop->iteration }}</td>												
                                                 <td>{{ $user->name }}</td>												
                                                 <td>{{ $user->email }}</td>												
-                                                <td>{{ $user->userDetail->telephone }}</td>												
+                                                <td>{{ $user->userDetail->telephone }}</td>	
+                                                <td>{{ $userIdAndScoreMap[$user->id] }}</td>
                                                 <td>
                                                     @if ($userIdAndAdditionalUserDataMap[$user->id]['candidateStatus'] == 'not_updated')
                                                         <span style="color:grey">
@@ -119,10 +119,6 @@
                                                             Accepted
                                                         </span>
                                                     @endif
-                                                </td>
-                                                <td>
-                                                <!-- default score is 0. If 0, render '-' -->
-                                                -
                                                 </td>
                                                 <td>
                                                     <div class="d-sm-flex align-items-center justify-content-center mb-4">

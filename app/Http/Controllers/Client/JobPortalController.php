@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB; 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Jenssegers\Agent\Agent;
 
 use App\Helper\Helper;
@@ -43,14 +44,15 @@ class JobPortalController extends Controller
     private const MY_LIST_INDEX_ROUTE = 'job-portal.my-list.index';
     private const MY_TABLE_LIST_ROUTE = '/job-portal/my-list#daftar-saya';
     private const CONTACTED_CANDIDATES_PAGE_SIZE = 4;
-    private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER = ['< 1 Tahun', '< 2 tahun', '< 3 Tahun', '> 3 Tahun'];
-    private const AVAILABLE_STATUS_FILTER = ['All','Archived', 'Contacted', 'Accepted', 'Hired'];
+    private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER = ['< 1 Tahun', '< 2 Tahun', '< 3 Tahun', '> 3 Tahun'];
     private const AVAILABLE_YEARS_OF_EXPERIENCES_FILTER_AND_DB_VALUE_MAP = [
         '< 1 Tahun' => ['Less than 1 Year of Experience'],
-        '< 2 tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience'],
-        '< 3 tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience', 'Less than 3 Years of Experience'],
-        '> 3 tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience', 'Less than 3 Years of Experience', 'More than 3 Years of Experience']
+        '< 2 Tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience'],
+        '< 3 Tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience', 'Less than 3 Years of Experience'],
+        '> 3 Tahun' => ['Less than 1 Year of Experience', 'Less than 2 Years of Experience', 'Less than 3 Years of Experience', 'More than 3 Years of Experience']
     ];
+    private const HIRING_PARTNER_CANDIDATE_STATUS_LIST = ['archived', 'contacted', 'accepted', 'hired'];
+    private const BOOTCAMP_COURSE_TYPE_ID = 3;
 
     private $notifications; // Stores combined notifications data.
     private $informations; // Stores notification (isInformation == true) data.
@@ -66,7 +68,7 @@ class JobPortalController extends Controller
     }
 
     // Shows the Client Job Portal Page. 
-    public function index() {
+    public function index(Request $request) {
         $agent = new Agent();
         $footer_reviews = Review::orderBy('created_at', 'desc')->get()->take(2);
 
@@ -76,22 +78,65 @@ class JobPortalController extends Controller
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
 
-        $candidateDetails = CandidateDetail::with('user', 'interests')->get()
-            ->filter(function ($candidateDetail, $key) {
-                return !UserHelper::isRequiredCandidateDetailDataAndRelationshipEmpty($candidateDetail);
-            });
+        $candidateDetails = CandidateDetail::with('user', 'workExperiences', 'educations', 'hardskills',
+            'softskills', 'interests');
+
+        $users = User::select('id', 'name');
+        $candidateDetails = $candidateDetails->joinSub($users, 'users', function ($join) {
+            $join->on('candidate_details.user_id', '=', 'users.id');
+        });
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route(self::INDEX_ROUTE, request()->except('search'));
+                return redirect($url);
+            } else {
+                $search = $request->search;
+                $candidateDetails = $candidateDetails->where(function ($query) use ($search) {
+                    $query->where([['name', 'like', "%".$search."%"]])
+                    ->orWhere([['industry', 'like', "%".$search."%"]]);
+                });
+            }
+        }
+
+        if ($request->has('sort')) {
+            if ($request['sort'] == "alpha-asc") {
+                $candidateDetails = $candidateDetails->orderBy('name', 'asc');
+            } elseif ($request['sort'] == "alpha-desc") {
+                $candidateDetails = $candidateDetails->orderBy('name', 'desc');
+            }
+        } else {
+            $candidateDetails = $candidateDetails->orderBy('name', 'asc');
+        }
+
+        if ($request->has('years_of_experience')) {
+            if (!in_array($request->years_of_experience, self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER)) {
+                $url = route(self::INDEX_ROUTE, request()->except('years_of_experience'));
+                return redirect($url);
+            }
+
+            if (in_array($request->years_of_experience, self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER)) {
+                $candidateDetails = $candidateDetails->whereIn('experience_year',
+                    self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER_AND_DB_VALUE_MAP[$request->years_of_experience]);
+            }
+        }
+
+        $candidateDetails = $candidateDetails->get()->filter(function ($candidateDetail, $key) {
+            return !UserHelper::isRequiredCandidateDetailDataAndRelationshipEmpty($candidateDetail);
+        });
 
         $candidateDetailIdAndCombinedInterestMap =
             $this->generateCandidateDetailIdAndCombinedInterestMap($candidateDetails);
-
+        $candidateDetailIdAndScoreMap = $this->generateCandidateDetailIdAndScoreMap($candidateDetails);
         $archivedCandidateIds = Auth::user()->candidates()
             ->select('candidate_id')->pluck('candidate_id')->toArray();
         
         $availableExperienceYearFilters = self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER;
+        $availableStatusFilters = self::HIRING_PARTNER_CANDIDATE_STATUS_LIST;
 
         return view('client/job-portal/company/index', compact('cart_count', 'notifications', 'transactions',
             'informations', 'footer_reviews', 'agent', 'candidateDetails', 'candidateDetailIdAndCombinedInterestMap',
-            'archivedCandidateIds','availableExperienceYearFilters'));
+            'candidateDetailIdAndScoreMap', 'archivedCandidateIds','availableExperienceYearFilters', 'availableStatusFilters'));
     }
 
     private function generateCandidateDetailIdAndCombinedInterestMap($candidateDetails) {
@@ -101,6 +146,20 @@ class JobPortalController extends Controller
                 $combinedInterestsString = $combinedInterestsString . $interest->title . ', ';
             }
             return [$candidateDetail->id => substr($combinedInterestsString, 0, -2)];
+        });
+    }
+
+    private function generateCandidateDetailIdAndScoreMap($candidateDetails) {
+        return $candidateDetails->mapWithKeys(function ($candidateDetail) {
+            if ($candidateDetail->user->courses != null) {
+                $scores = $candidateDetail->user->courses()
+                    ->where('course_type_id', self::BOOTCAMP_COURSE_TYPE_ID)
+                    ->get()->map(function ($course) {
+                        return $course->pivot->score;
+                    })->sortBy('score')->toArray();
+
+                return [$candidateDetail->id => $scores[0]];
+            }
         });
     }
 
@@ -115,18 +174,55 @@ class JobPortalController extends Controller
         $transactions = $this->transactions;
         $cart_count = $this->cart_count;
 
-        $contactedCandidates = Auth::user()->candidates()
+        $candidates = Auth::user()->candidates()
             ->with('candidateDetail');
 
-        // ADD FILTERS & SORTING HERE
+        if ($request->has('sort')) {
+            if ($request['sort'] == "alpha-asc") {
+                $candidates = $candidates->orderBy('name', 'asc');
+            } elseif ($request['sort'] == "alpha-desc") {
+                $candidates = $candidates->orderBy('name', 'desc');
+            }
+        } else {
+            $candidates = $candidates->orderBy('name', 'asc');
+        }
 
-        $contactedCandidates = $contactedCandidates->paginate(self::CONTACTED_CANDIDATES_PAGE_SIZE);
+        if ($request->has('years_of_experience')) {
+            if (!in_array($request->years_of_experience, self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER)) {
+                $url = route(self::MY_LIST_INDEX_ROUTE, request()->except('years_of_experience'));
+                return redirect($url);
+            }
+
+            if (in_array($request->years_of_experience, self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER)) {
+                $candidateDetails = CandidateDetail::select(
+                    DB::raw('user_id as id'), 'experience_year');
+                $candidates = $candidates->joinSub($candidateDetails, 'details', function ($join) {
+                    $join->on('users.id', '=', 'details.id');
+                });
+
+                $candidates = $candidates->whereIn('experience_year',
+                    self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER_AND_DB_VALUE_MAP[$request->years_of_experience]);
+            }
+        }
+
+        if ($request->has('status')) {
+            if (!in_array($request->status, self::HIRING_PARTNER_CANDIDATE_STATUS_LIST)) {
+                $url = route(self::MY_LIST_INDEX_ROUTE, request()->except('status'));
+                return redirect($url);
+            }
+
+            if (in_array($request->status, self::HIRING_PARTNER_CANDIDATE_STATUS_LIST))
+                $candidates = $candidates->where('hiring_partner_candidate.status', $request->status);
+        }
+
+        $candidates = $candidates->paginate(self::CONTACTED_CANDIDATES_PAGE_SIZE);
 
         $availableExperienceYearFilters = self::AVAILABLE_YEARS_OF_EXPERIENCES_FILTER;
-        $availableStatusFilters = self::AVAILABLE_STATUS_FILTER;
+        $availableStatusFilters = self::HIRING_PARTNER_CANDIDATE_STATUS_LIST;
 
         return view('client/job-portal/company/mylist', compact('cart_count', 'notifications', 'transactions',
-            'informations', 'footer_reviews', 'agent', 'contactedCandidates', 'availableExperienceYearFilters','availableStatusFilters'));
+            'informations', 'footer_reviews', 'agent', 'candidates', 'availableExperienceYearFilters',
+            'availableStatusFilters'));
     }
 
     // Shows Candidate Detail Profile Page
@@ -137,6 +233,8 @@ class JobPortalController extends Controller
         $candidate_detail = CandidateDetail::where('user_id', $id)
             ->with('workExperiences', 'educations', 'achievements', 'hardskills', 'softskills')
             ->first();
+
+        $score = UserHelper::getHighestScoreFromCandidateDetail($candidate_detail);
     
         $this->resetNavbarData();
         $notifications = $this->notifications;
@@ -146,7 +244,7 @@ class JobPortalController extends Controller
 
         $isCandidateDetailUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
 
-        $view_data = ['candidate_detail', 'isCandidateDetailUpdated', 'cart_count',
+        $view_data = ['candidate_detail', 'score', 'isCandidateDetailUpdated', 'cart_count',
             'notifications', 'transactions', 'informations', 'footer_reviews', 'agent'];
         
         return view('client/job-portal/company/detail', compact($view_data));

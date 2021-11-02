@@ -43,45 +43,41 @@ karir impian!</p>
             <div class="col-12 p-0" style="display:flex;align-items:center;margin-top:3vw;justify-content:space-between">
                 <div style="display:flex;align-items:center">
 
-                    <div  class="grey-input-form" style="display: flex;align-items:center">
-                        <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
-                        <input type="text" name="search" class="normal-text typeahead" autocomplete="off"
-                            style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Search Skill">
-                    </div>
-                    <div style="margin-left: 1vw;">
-                        <button type="submit" onclick="openLoading()" class="btn-search normal-text"><i class="fas fa-search"></i></button>
-                    </div>
+                    <form action="{{ route('job-portal.index') }}" method="get" style="display:flex">
+                        @if (Request::get('show'))
+                            <input name="show" value="{{ Request::get('show') }}" hidden>
+                        @endif
+                        <div class="grey-input-form" style="display: flex;align-items:center">
+                            <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
+                            <input type="text" name="search" class="normal-text typeahead" autocomplete="off"
+                                style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular"
+                                placeholder="Search Name & Skill" value="{{ Request::get('search') }}">
+                        </div>
+                        <div style="margin-left: 1vw;">
+                            <button type="submit" onclick="openLoading()" class="btn-search normal-text"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
 
                     <div style="margin-left: 3vw;">
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Years of Experience</option>
-                                <option value="all" >Semua</option>
-                                @foreach($availableExperienceYearFilters as $filter)
-                                <option value="{{$filter}}">{{$filter}}</option>
+                            <select name="years_of_experience" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                                style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => 'none']) }}" @if (!Request::has('years_of_experience')) selected @endif>Years of Experiences</option>
+                                @foreach ($availableExperienceYearFilters as $filter)
+                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => $filter]) }}" @if (Request::get('years_of_experience') == $filter) selected @endif>{{ $filter }}</option>
                                 @endforeach
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            </select>
                         </div>  
                     </div>
 
                     <div style="margin-left: 3vw;">
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Sort by</option>
-                                <option value="all" >Semua</option>
-                                <option value="Alphabet Ascending">Alphabet Ascending</option>
-                                <option value="Alphabet Descending">Alphabet Descending</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <select name="sort" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                            style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'none']) }}" @if (!Request::has('sort')) selected @endif>Sort by</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-asc']) }}" @if (Request::get('sort') == 'alpha-asc') selected @endif>Alphabet Ascending</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-desc']) }}" @if (Request::get('sort') == 'alpha-desc') selected @endif>Alphabet Descending</option>
+                            </select>
                         </div>  
                     </div>
                 </div>
@@ -133,7 +129,7 @@ karir impian!</p>
                                 <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw">Interest:</p>
                                 <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;margin-top:0.5vw;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 1 !important;-webkit-box-orient: vertical !important;">{{ $candidateDetailIdAndCombinedInterestMap[$candidateDetail->id] }}</p>
         
-                                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: 98</p>
+                                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: {{ $candidateDetailIdAndScoreMap[$candidateDetail->id] }}</p>
                                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">
                                     @if (in_array($candidateDetail->user->id, $archivedCandidateIds))
                                         <button class="normal-text btn-dark-blue full-width-button" disabled

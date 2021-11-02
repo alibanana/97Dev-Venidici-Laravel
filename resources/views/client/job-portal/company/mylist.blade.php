@@ -36,48 +36,36 @@ karir impian!</p>
                 <div style="display:flex;align-items:center">
                     <div style="">
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Years of Experience</option>
-                                <option value="all" >Semua</option>
+                            <select name="years_of_experience" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                            style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => 'none']) }}" @if (!Request::has('years_of_experience')) selected @endif>Years of Experiences</option>
                                 @foreach ($availableExperienceYearFilters as $filter)
-                                    <option value="{{ $filter }}">{{ $filter }}</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => $filter]) }}" @if (Request::get('years_of_experience') == $filter) selected @endif>{{ $filter }}</option>
                                 @endforeach
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            </select>
                         </div>  
                     </div>
 
                     <div style="margin-left: 3vw;">
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Status</option>
-                                <option value="Business">Business</option>
-                                <option value="Technology">Technology</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <select name="status" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                            style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'status' => 'none']) }}" @if (!Request::has('status')) selected @endif>Status</option>
+                                @foreach ($availableStatusFilters as $filter)
+                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'status' => $filter]) }}" @if (Request::get('status') == $filter) selected @endif>{{ $filter }}</option>
+                                @endforeach
+                            </select>
                         </div>  
                     </div>
 
                     <div style="margin-left: 3vw;">
                         <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="None" disabled selected>Sort by</option>
-                                <option value="Alphabet Ascending">Alphabet Ascending</option>
-                                <option value="Alphabet Descending">Alphabet Descending</option>
-                            </select>                    
-                            @error('')
-                                <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <select name="sort" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                            style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'none']) }}" @if (!Request::has('sort')) selected @endif>Sort by</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-asc']) }}" @if (Request::get('sort') == 'alpha-asc') selected @endif>Alphabet Ascending</option>
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-desc']) }}" @if (Request::get('sort') == 'alpha-desc') selected @endif>Alphabet Descending</option>
+                            </select>
                         </div>  
                     </div>
                 </div>
@@ -109,9 +97,9 @@ karir impian!</p>
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">Action</p>
                     </div>
                 </div>
-                
-                @isset($contactedCandidates)
-                    @foreach ($contactedCandidates as $candidate)
+
+                @isset($candidates)
+                    @foreach ($candidates as $candidate)
                         <div class="row m-0  job-listing-card" style="cursor:pointer" onclick="window.location.href='/job-portal/{{$candidate->candidateDetail->user_id}}'" >
                             <div class="col-8"> 
                                 <div style="display:flex;align-items:center">
@@ -164,7 +152,7 @@ karir impian!</p>
                     <div class="col-12 p-0" style="text-align:center">
                         <div style="padding-top:1.5vw;display:flex;justify-content:center">
                             <div class="mx-auto normal-text" style="font-family: Rubik Regular">
-                                {{ $contactedCandidates->appends(request()->input())->links("pagination::bootstrap-4") }}
+                                {{ $candidates->appends(request()->input())->links("pagination::bootstrap-4") }}
                             </div>
                         </div>
                     </div>

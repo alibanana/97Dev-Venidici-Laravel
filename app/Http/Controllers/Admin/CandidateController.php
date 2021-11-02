@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Helper\UserHelper;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Notification;
 
 use App\Models\User;
+use App\Models\UserDetail;
 use App\Models\CandidateDetail;
 use App\Models\CandidateDetailChange;
 use App\Models\WorkExperience;
@@ -36,10 +38,12 @@ class CandidateController extends Controller
     private const FILTER_NOT_UPDATED = 'not_updated';
     private const FILTER_PENDING = 'pending';
     private const FILTER_APPROVED = 'approved';
+    private const BOOTCAMP_COURSE_TYPE_ID = 3;
 
     // Shows the admin job portal's candidates list page.
     public function index(Request $request) {
-        $users = User::where('isCandidate', true)->with('candidateDetail');
+        $users = User::where('isCandidate', true)
+            ->with('candidateDetail', 'courses');
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
@@ -56,27 +60,63 @@ class CandidateController extends Controller
                 $url = route(self::INDEX_ROUTE, request()->except('filter'));
                 return redirect($url);    
             } elseif ($request->filter == self::FILTER_NOT_UPDATED) {
-                // Case #1 - Users have no candidateDetail object yet.
-                // Case #2 - Users have candidateDetail object but all candidateDetail.candidateDetailChanges
-                //           are cancelled.
-
-                // $users = $users->doesntHave('candidateDetail')
-                //     ->orWhereDoesntHave('candidateDetail.candidateDetailChanges');
+                $users = $users->whereIn('id', $this->getListOfNotUpdatedCandidateUserIds());
             } elseif ($request->filter == self::FILTER_PENDING) {
-                // Case #1 - Users have candidateDetail.candidateDetailChanges objects which status are pending (currently).
-
-                // $users = $users->whereDoesntHave('candidateDetail.candidateDetailChanges', function (Builder $query) {
-                //     $query->where('status', 'pending');
-                // });
+                $users = $users->whereIn('id', $this->getListOfPendingCandidateUserIds());
             } elseif ($request->filter == self::FILTER_APPROVED) {
-                // Case #1 - Users candidateDetail.candidateDetailChanges objects are all approved.
+                $users = $users->whereIn('id', $this->getListOfApprovedCandidateUserIds());
+            }
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route(self::INDEX_ROUTE, request()->except('search'));
+                return redirect($url);
+            } else {
+                $userDetails = UserDetail::select(DB::raw('user_id as id'), 'telephone');
+                $users = $users->joinSub($userDetails, 'details', function ($join) {
+                    $join->on('users.id', '=', 'details.id');
+                });
+                
+                $search = $request->search;
+
+                $users = $users->where(function ($query) use ($search) {
+                    $query->where([['name', 'like', "%".$search."%"]])
+                    ->orWhere([['email', 'like', "%".$search."%"]])
+                    ->orWhere([['telephone', 'like', "%".$search."%"]]);
+                });
             }
         }
         
         $users = $users->with('userDetail')->get();
         $userIdAndAdditionalUserDataMap = $this->generateMapOfUserIdAndAdditionalUserData($users);
+        $userIdAndScoreMap = $this->generateMapOfUserIdAndScore($users);
 
-        return view('admin/job-portal/candidates', compact('users', 'userIdAndAdditionalUserDataMap'));
+        return view('admin/job-portal/candidates', compact('users', 'userIdAndAdditionalUserDataMap', 'userIdAndScoreMap'));
+    }
+
+    private function getListOfNotUpdatedCandidateUserIds() {
+        return User::all()->map(function ($user) {
+            if (UserHelper::isCandidateNotUpdated($user)) {
+                return $user->id;
+            }
+        })->toArray();
+    }
+
+    private function getListOfPendingCandidateUserIds() {
+        return User::all()->map(function ($user) {
+            if (UserHelper::isCandidatePending($user)) {
+                return $user->id;
+            }
+        })->toArray();
+    }
+
+    private function getListOfApprovedCandidateUserIds() {
+        return User::all()->map(function ($user) {
+            if (!UserHelper::isCandidateNotUpdated($user) && !UserHelper::isCandidatePending($user)) {
+                return $user->id;
+            }
+        })->toArray();
     }
 
     private function generateMapOfUserIdAndAdditionalUserData($users) {
@@ -104,13 +144,29 @@ class CandidateController extends Controller
         });
     }
 
+    private function generateMapOfUserIdAndScore($users) {
+        return $users->mapWithKeys(function ($user) {
+            if ($user->courses()->exists()) {
+                $scores = $user->courses()
+                    ->where('course_type_id', self::BOOTCAMP_COURSE_TYPE_ID)
+                    ->get()->map(function ($course) {
+                        return $course->pivot->score;
+                    })->sortBy('score')->toArray();
+
+                return [$user->id => $scores[0]];
+            }
+        });
+    }
+
     // Shows the candidate's detail page.
     public function showCandidate($candidate_id){
         $candidate_detail = CandidateDetail::where('user_id', $candidate_id)
             ->with('user', 'workExperiences', 'educations', 'achievements', 'hardskills', 'softskills', 'interests')
             ->firstOrFail();
+
+        $score = UserHelper::getHighestScoreFromCandidateDetail($candidate_detail);
         
-        return view('admin/job-portal/candidate-profile', compact('candidate_detail'));
+        return view('admin/job-portal/candidate-profile', compact('candidate_detail', 'score'));
     }
 
     // Shows the candidate's changes detail page.
@@ -118,6 +174,8 @@ class CandidateController extends Controller
         $candidate_detail = CandidateDetail::where('id', $candidate_detail_id)
             ->with('user', 'educations', 'achievements', 'hardskills', 'softskills')
             ->firstOrFail();
+
+        $score = UserHelper::getHighestScoreFromCandidateDetail($candidate_detail);
 
         $candidate_detail_change = CandidateDetailChange::where('candidate_detail_id', $candidate_detail_id)
             ->where('status', 'pending')
@@ -164,7 +222,7 @@ class CandidateController extends Controller
 
         $isCandidateDetailNotUpdated = UserHelper::isCandidateNotUpdated($candidate_detail->user);
 
-        return view('admin/job-portal/candidate-profile-change', compact('candidate_detail', 'candidate_detail_change', 'work_experiences_not_updated',
+        return view('admin/job-portal/candidate-profile-change', compact('candidate_detail', 'score', 'candidate_detail_change', 'work_experiences_not_updated',
             'educations_not_updated', 'achievements_not_updated', 'hardskills_not_updated', 'softskills_not_updated', 'interests_not_updated',
             'isCandidateDetailNotUpdated'));
     }

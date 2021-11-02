@@ -21,7 +21,7 @@
                     @isset($candidate_detail->whatsapp_number)
                     <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Phone: <b>{{$candidate_detail->whatsapp_number == null ? '-' : $candidate_detail->whatsapp_number }}</b> </p>
                     @endisset
-                    <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Bootcamp Score: <b>1000</b> </p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Bootcamp Score: <b>{{ $score ?? '-' }}</b> </p>
                     <div style="display:flex;align-items:center;margin-top:3vw">   
                         @isset($candidate_detail->cv_file)
                         <div>

@@ -210,7 +210,7 @@ class BootcampController extends Controller
             return redirect()->route(self::ONLINE_COURSE_SHOW_ROUTE, $course->title);
         }
 
-        $users = BootcampApplication::where('course_id',$id);
+        $users = BootcampApplication::where('course_id', $id)->with('user');
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
@@ -256,7 +256,21 @@ class BootcampController extends Controller
             }
         }
 
-        return view('admin/bootcamp/detail', compact('course', 'users', 'total_revenue', 'users_data'));
+        $userIdAndScoreMap = $this->generateUserIdAndScoreMap($users);
+
+        return view('admin/bootcamp/detail', compact('course', 'users', 'total_revenue', 'users_data', 'userIdAndScoreMap'));
+    }
+
+    private function generateUserIdAndScoreMap($bootcampApplications) {
+        return $bootcampApplications->mapWithKeys(function ($bootcampApplication) {
+            if ($bootcampApplication->user->courses()->where('courses.id', $bootcampApplication->course_id)->exists()) {
+                return [
+                    $bootcampApplication->user->id => $bootcampApplication->user->courses()
+                        ->where('courses.id', $bootcampApplication->course_id)->first()
+                        ->pivot->score
+                ];
+            }
+        });
     }
 
     public function edit($id) {
@@ -361,5 +375,33 @@ class BootcampController extends Controller
     public function syllabusRequests($course_id){
         $course = Course::findOrFail($course_id);
         return view('admin/bootcamp/syllabus-list', compact('course'));
+    }
+
+    // Method to update the score in user_course mapping.
+    public function updateScore(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|integer',
+            'score' => 'required|integer'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route(self::SHOW_ROUTE, $id)
+                ->with('error_validation_on_update_score', 'Oops, looks like something was wrong with your request.')
+                ->withErrors($validated->errors());
+        }
+
+        $validated = $validator->validate();
+
+        $course = Course::findOrFail($id);
+        
+        $user_course_pivot = $course->users()
+            ->where('user_course.user_id', $validated['user_id'])
+            ->firstOrFail()->pivot;
+
+        $user_course_pivot->score = $validated['score'];
+        $user_course_pivot->save();
+
+        $message = 'Bootcamp (' . $course->title . ') score updated to '. $validated['score'];
+        return redirect()->route(self::SHOW_ROUTE, $id)->with('message', $message);
     }
 }
