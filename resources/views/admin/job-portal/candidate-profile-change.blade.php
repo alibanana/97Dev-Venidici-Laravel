@@ -49,6 +49,11 @@
                             @if (!$isCandidateDetailNotUpdated)
                                 <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail->preferred_working_location}} (existing)</p>
                             @endif
+
+                            @if ($candidate_detail_change->preferred_working_location != null)
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Preferred Working Location: {{$candidate_detail_change->preferred_working_location}} ({{$candidate_detail_change->status}})</p>
+                            @endif
+
                             <!-- show pending profile -->
                             
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Bootcamp Score: <b>1000</b> </p>
@@ -110,7 +115,7 @@
                     <div class="collapse show" id="collapseExperiences">
                         @foreach ($work_experiences_not_updated as $workExperience)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
-                                <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p> -->
+                                <!-- -->
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $workExperience->job_position }} at {{ $workExperience->company }}</p>
                                 <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $workExperience->start_date }} - {{ $workExperience->end_date ?? 'Until Now' }}</p>
                                 <p class="normal-text" style="font-family: Rubik Bold;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $workExperience->location }}</p>
@@ -155,7 +160,7 @@
                     <div class="collapse show" id="collapseEducation">
                         @foreach ($educations_not_updated as $education)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
-                                <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p> -->
+                                <!-- -->
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $education->degree }} at {{ $education->major }}</p>
                                 <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $education->start_year }} - {{ $education->end_year ?? 'Until Now' }}</p>
                                 <p class="normal-text" style="font-family: Rubik Bold;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $education->school }}</p>
@@ -200,7 +205,7 @@
                     <div class="collapse show" id="collapseHardskills">
                         @foreach ($hardskills_not_updated as $hardskill)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
-                                <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p>
+                                <!---->
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $hardskill->title }}</p>
                                 <div style="padding-right:8vw;">   
                                     <div style="text-align:right">  
@@ -275,7 +280,7 @@
                     <div class="collapse show" id="collapseAchievements">
                         @foreach ($achievements_not_updated as $achievement)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
-                                <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p> -->
+                                <!-- -->
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $achievement->title }}</p>
                                 <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $achievement->year }}</p>
                                 <p class="normal-text" style="font-family: Rubik Bold;color:#B3B5C2;margin-bottom:0px;margin-top:0.5vw">{{ $achievement->location_of_event }}</p>
@@ -320,7 +325,7 @@
                     <div class="collapse show" id="collapseSoftSkills">
                         @foreach ($softskills_not_updated as $softskill)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
-                                <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p>
+                                <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p>-->
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $softskill->title }}</p>
                                 <div style="padding-right:8vw;">
                                     <div style="text-align:right">
@@ -394,7 +399,7 @@
                     <div class="collapse show" id="collapseInterests">
                         @foreach ($interests_not_updated as $interest)
                             <div class="" style="background-color:#EEEEEE;padding:1.5vw;border-radius:5px;margin-top:1vw">
-                                <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;color: grey">Not Updated</p> -->
+                                <!-- -->
                                 <p class="bigger-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{ $interest->title }}</p>
                             </div>
                         @endforeach
