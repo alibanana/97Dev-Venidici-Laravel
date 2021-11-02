@@ -1904,6 +1904,7 @@ html, body {
 
 
 
+
 @media only screen and (max-width: 768px) { 
 
     .image-qris{
@@ -2098,9 +2099,7 @@ html, body {
         width:80% !important ;
       
     }
-    #icon-wdith-mobile-interest{
-        width:17vw !important
-    }
+    
     
     .popup-change-pass .close{
         right:15px !important;

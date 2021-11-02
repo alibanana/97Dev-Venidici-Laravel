@@ -480,7 +480,7 @@
                             <div class="row m-0 page-container">
                                 <div class="col-12 p-0">
                                     <div style="text-align:center">
-                                        <img src="/assets/images/client/Venidici_Icon.png" id="icon-wdith-mobile-interest" class="img-fluid" style="width:5vw" alt="LOGO">
+                                        <img src="/assets/images/client/Venidici_Icon.png"  class="img-fluid" style="width:5vw" alt="LOGO">
                                         <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:0vw">Ketertarikan anda</p>
                                         <p class="bigger-text" style="font-family:Rubik Regular;color: @if(session('message')) #CE3369 @else #3B3C43 @endif;margin-bottom:0vw">Maksimal 3 pilihan</p>
                                         @if(session('update_interest_success'))
