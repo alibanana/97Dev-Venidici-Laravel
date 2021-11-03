@@ -851,7 +851,7 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
         Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
 
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('hardskill_update_message', $message);
     }
 
     // Cancel existing HardskillChange object.
@@ -870,7 +870,7 @@ class CandidateDetailController extends Controller
 
         $message = 'Thank you! Your changes have been cancelled.';
     
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('hardskill_update_message', $message);
     }
 
     // Store new Achievement in the database.
@@ -947,7 +947,7 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
         Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
 
-        return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('softskill_update_message', $message);
+        return redirect(self::INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL)->with('softskill_update_message', $message);
     }
 
     // Method to update existing SoftskillChange in the database.
@@ -974,7 +974,7 @@ class CandidateDetailController extends Controller
 
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
     
-        return redirect(self::INDEX_URL_WITH_UPDATE_HARDSKILL_MODAL)->with('softskill_update_message', $message);
+        return redirect(self::INDEX_URL_WITH_UPDATE_SOFTSKILL_MODAL)->with('softskill_update_message', $message);
     }
 
     // Create new softskillChange to delete an existing Softskill object.
@@ -997,7 +997,7 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
         Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
 
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('softskill_update_message', $message);
     }
 
     // Cancel existing SoftskillChange object.
@@ -1016,7 +1016,7 @@ class CandidateDetailController extends Controller
 
         $message = 'Thank you! Your changes have been cancelled.';
     
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('softskill_update_message', $message);
     }
 
     // Store new Interest in the database.
@@ -1052,7 +1052,7 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
         Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
 
-        return redirect(self::INDEX_URL_WITH_CREATE_INTEREST_MODAL)->with('interests_create_message', $message);
+        return redirect(self::INDEX_URL_WITH_CREATE_INTEREST_MODAL)->with('interests_update_message', $message);
     }
 
     // Create new interestChange to edit an existing Interest object.
@@ -1133,7 +1133,7 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
         Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
 
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('interest_update_message', $message);
     }
 
     // Cancel existing InterestChange object.
@@ -1152,6 +1152,6 @@ class CandidateDetailController extends Controller
 
         $message = 'Thank you! Your changes have been cancelled.';
     
-        return redirect()->route(self::INDEX_ROUTE)->with('candidate_update_message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('interest_update_message', $message);
     }
 }
