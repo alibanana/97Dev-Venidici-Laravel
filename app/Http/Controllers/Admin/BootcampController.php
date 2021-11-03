@@ -270,6 +270,7 @@ class BootcampController extends Controller
                         ->pivot->score
                 ];
             }
+            return [$bootcampApplication->user->id => null];
         });
     }
 
