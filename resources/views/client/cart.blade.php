@@ -188,7 +188,7 @@
             @elseif(session('message')) 
                 <!-- ALERT MESSAGE -->
                 <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
-                    {{ session('message') }} <span> <a href="/dashboard">Click here</a> </span>to complete your profile
+                    {{ session('message') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <!-- END OF ALERT MESSAGE -->
