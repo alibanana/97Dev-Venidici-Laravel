@@ -401,7 +401,7 @@
             <!-- END OF NOMINAL CARD --> 
 
             @if($invoice->status == 'pending')
-
+            @if($payment_object['data']['attributes']['paymentMethod']['type'] != 'qris')
             <!-- CANCEL PAYMENT -->
             <div style="text-align:center;margin-top:3vw">  
                 <form action="{{ route('customer.cart.cancelPayment', $invoice->xfers_payment_id) }}" method="POST">
@@ -409,6 +409,8 @@
                     <p onclick="openLoading()" class="small-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"><span> <button type="submit" style="border:none;background:none;color:blue">Click here</button> </a> </span> to cancel the payment </p>
                 </form> 
             </div>
+            @endif
+
             <!-- END OF CANCEL PAYMENT -->
             @if(env('APP_ENV') != 'production')
             <!-- RECEIVE PAYMENT -->
