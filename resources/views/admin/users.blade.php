@@ -146,11 +146,15 @@
 											<th>No.</th>
 											<th>Full Name</th>
 											<th>Know Venidici From</th>
+											<th class="text-nowrap">Birth Date</th>
+											<th class="text-nowrap">Gender</th>
 											<th>Telephone</th>
-											<th>Referral Code</th>
+											<th>Address</th>
+											<th>Company</th>
 											<th>Occupancy</th>
-											<th>Stars</th>
 											<th>Status</th>
+											<th>Stars</th>
+											<th>Referral Code</th>
 											<th>User Role</th>
 											<th  class="text-nowrap">Signed Up At</th>
 											<th>Action</th>
@@ -164,9 +168,13 @@
 												{{ $user->email }}</td>
 												@if ($user->userDetail()->exists())
 													<td>{{ $user->userDetail->response }}</td>
-													<td>{{ $user->userDetail->telephone }}</td>
+													<td class="text-nowrap">{{ $user->userDetail->birthdate }}</td>
+													<td class="text-nowrap">{{ $user->userDetail->gender }}</td>
+													<td class="text-nowrap">{{ $user->userDetail->telephone }}</td>
+													<td class="text-nowrap">{{ $user->userDetail->address }} - {{ $user->userDetail->city['name'] }} - {{ $user->userDetail->province['name'] }}</td>
+													<td class="text-nowrap">{{ $user->userDetail->company }}</td>
+													<td class="text-nowrap">{{ $user->userDetail->occupancy }}</td>
 													<td>{{ $user->userDetail->referral_code }}</td>
-													<td>{{ $user->userDetail->occupancy }}</td>
 												@else
 													<td>-</td>
 													<td>-</td>
