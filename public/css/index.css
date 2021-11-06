@@ -3064,3 +3064,8 @@ html, body {
     font-size: 14px;
     text-align: center;
   }
+
+  img{
+      max-width: 100% !important;
+      height: auto;
+  }

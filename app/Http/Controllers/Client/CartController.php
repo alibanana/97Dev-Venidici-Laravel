@@ -76,8 +76,8 @@ class CartController extends Controller
         
         if (auth()->user()->email_verified_at == null)
             return redirect()->back()->with('message','Please verify your email first.');
-        else if (!auth()->user()->isProfileUpdated)
-            return redirect()->back()->with('message','Please complete your profile first.');
+        else if (!auth()->user()->isGeneralInfoUpdated)
+            return redirect()->back()->with('message','Please complete your profile (General Information) first.');
         elseif (count(auth()->user()->carts) == 0)
             return redirect('/cart');
 
@@ -155,8 +155,8 @@ class CartController extends Controller
 
         if (auth()->user()->email_verified_at == null)
             return redirect()->back()->with('success','Please verify your email first.');
-        else if (!auth()->user()->isProfileUpdated)
-            return redirect()->back()->with('success','Please complete your profile first.');
+        else if (!auth()->user()->isGeneralInfoUpdated)
+            return redirect()->back()->with('success','Please complete your profile (General Information) first.');
 
         $validated = $request->validate([
             'course_id' => 'required|integer',

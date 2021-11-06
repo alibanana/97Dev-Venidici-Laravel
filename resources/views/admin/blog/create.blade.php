@@ -163,7 +163,7 @@
                 height : y * 0.8,
                 onMessage: (api, message) => {
                     callback(message.content);
-                }
+                },
             });
         }
     });

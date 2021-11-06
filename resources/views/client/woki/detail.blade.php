@@ -134,7 +134,9 @@
                         @if ($course->price != 0)
                             <form action="{{ route('customer.cart.store') }}" method="post">
                             @csrf
-                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                <input type="hidden" name="course_name" value="{{ $course->title }}">
+                                <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+
                                 <input type="hidden" id="withArtOrNoMobile" name="withArtOrNo" value="0">
                                 <button @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif class="normal-text btn-blue-bordered full-width-button"
                                     style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
@@ -145,7 +147,9 @@
                         @else
                             <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
                             @csrf
-                                <input type="hidden" name="course_id" value="{{$course->id}}">              
+                                <input type="hidden" name="course_name" value="{{$course->title}}">    
+                                <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+          
                                 <button class="normal-text  btn-dark-blue full-width-button"
                                     style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif>Beli Sekarang</button>
                             </form>
@@ -356,8 +360,9 @@
                         </span>
                     @enderror
 
-                    <input type="hidden" name="course_id" value="{{$course->id}}">
-                    
+                    <input type="hidden" name="course_name" value="{{$course->title}}">
+                    <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+
                     <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
                         <button type="submit" onclick="openLoading()" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
@@ -496,7 +501,9 @@
                 @if ($course->price != 0)
                     <form action="{{ route('customer.cart.store') }}" method="post">
                     @csrf
-                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <input type="hidden" name="course_name" value="{{ $course->title }}">
+                        <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+
                         <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
                         <button @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif class="normal-text btn-blue-bordered"
                             style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
@@ -507,7 +514,9 @@
                 @else
                     <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
                     @csrf
-                        <input type="hidden" name="course_id" value="{{$course->id}}">              
+                        <input type="hidden" name="course_name" value="{{$course->title}}">           
+                        <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+   
                         <button class="normal-text  btn-dark-blue"
                             style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif>Beli Sekarang</button>
                     </form>
