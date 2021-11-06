@@ -235,6 +235,10 @@ class CustomAuthController extends Controller
 
     // Shows the Job Portal Login Page.
     public function showJobPortalLogin() {
+        $agent = new Agent();
+        if($agent->isPhone())
+            return view('client/mobile/auth/job-portal-login');
+
         return view('client/job-portal/company/login');
     }
 }

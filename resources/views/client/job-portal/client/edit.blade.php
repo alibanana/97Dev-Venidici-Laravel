@@ -25,7 +25,7 @@
 
 <!-- START OF BASIC INFO SECTION -->
 <div class="row m-0 page-container-inner" style="padding-top:14vw !important;">
-    <div class="col-12 wow bounce p-0" style="height:3.5vw;display:flex;justify-content:center">
+    <div class="col-12 wow bounce p-0 warning-height-candidate-details" style="height:3.5vw;display:flex;justify-content:center">
         <!-- ALERT MESSAGE -->
         <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
             Jangan lupa untuk isi form ini dengan lengkap (Interest dan Achievement Optional), agar profil mu bisa terlihat oleh Hiring Partner Venidici.
@@ -47,7 +47,7 @@
         <p class="medium-heading" style="font-family:Rubik Bold;color:#2B6CAA">Basic Info</p>
     </div>
     <!-- START OF LEFT SECTION -->
-    <div class="col-lg-6 col-xs-12 ps-0 pe-5">
+    <div class="col-lg-6 col-xs-12 ps-0  mpr-0">
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
         <div class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-user"></i>
@@ -102,7 +102,7 @@
     </div> 
     <!-- END OF LEFT SECTION --> 
     <!-- START OF RIGHT SECTION-->
-    <div class="col-lg-6 col-xs-12 pe-0 ps-5">
+    <div class="col-lg-6 col-xs-12 pe-0  mpl">
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-envelope"></i>
@@ -159,7 +159,7 @@
     <div class="col-12 p-0">
         <p class="medium-heading" style="font-family:Rubik Bold;color:#2B6CAA">What’s your experience?</p>
     </div>
-    <div class="col-lg-6 col-xs-12 ps-0 pe-5">
+    <div class="col-lg-6 col-xs-12 ps-0 mpr-0">
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Experience</p>
         <div  class="auth-input-form" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-user popup-krest-font"></i>
@@ -183,7 +183,7 @@
             </span>
         @enderror 
     </div>
-    <div class="col-lg-6 col-xs-12 pe-0 ps-5">
+    <div class="col-lg-6 col-xs-12 pe-0 mpl">
         <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Industry</p>
         <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
             <i style="color:#DAD9E2" class="fas fa-building"></i>
@@ -235,7 +235,7 @@
         </div>
         @endif
         <div class="drop-zone">
-            <span class="drop-zone__prompt" style="font-family:Rubik Regular;color:black;font-size:1.7vw"> <span style="color:#3F92D8" >Upload a file</span> or drag and drop here</span>
+            <span class="drop-zone__prompt cv-mobile-font-size" style="font-family:Rubik Regular;color:black;font-size:1.7vw"> <span style="color:#3F92D8" >Upload a file</span> or drag and drop here</span>
             <input type="file"  name="cv_file" class="drop-zone__input" accept=".pdf">
         </div>
         <!--<input type="file">-->
@@ -259,8 +259,8 @@
 
 <!-- START OF POP UP WORK EXPERIENCE CREATE -->
 <div id="we-create" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" id="mobile-popup-candidate-detail" style="width:65%">
+        <a class="close" id="mobile-popup-candidate-detail-close" href="#closed" >&times;</a>
     
         <div class="content" style="padding:2vw">
             <form action="{{ route('candidate-detail.store-work-experience') }}" method="POST">
@@ -341,8 +341,8 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                        <button type="submit" class="normal-text btn-dark-blue " style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
                     </div>
                 </div>
             </form>
@@ -354,8 +354,8 @@
 
 <!-- START OF POP UP WORK EXPERIENCE UPDATE -->
 <div id="we-update" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
 
@@ -436,7 +436,7 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
                     </div>
                 </div>
@@ -561,8 +561,8 @@
 
 <!-- START OF POP UP EDUCATION CREATE -->
 <div id="edu-create" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -643,7 +643,7 @@
                         </div>
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
@@ -657,8 +657,8 @@
 
 <!-- START OF POP UP EDUCATION UPDATE -->
 <div id="edu-update" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -740,7 +740,7 @@
                         </div>
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
 
                     </div>
@@ -846,8 +846,8 @@
 
 <!-- START OF POP UP ACHIEVEMENT CREATE -->
 <div id="achievement-create" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -906,7 +906,7 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
@@ -920,8 +920,8 @@
 
 <!-- START OF POP UP ACHIEVEMENT UPDATE -->
 <div id="achievement-update" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -976,7 +976,7 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
 
                     </div>
@@ -1079,8 +1079,8 @@
 
 <!-- START OF POP UP Hard Skills Create -->
 <div id="hs-create" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -1127,7 +1127,7 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
@@ -1141,8 +1141,8 @@
 
 <!-- START OF POP UP Hard Skills Update-->
 <div id="hs-update" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -1190,7 +1190,7 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
                     </div>
                 </div>
@@ -1288,8 +1288,8 @@
 
 <!-- START OF POP UP Soft Skill Create -->
 <div id="ss-create" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -1336,7 +1336,7 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
@@ -1350,8 +1350,8 @@
 
 <!-- START OF POP UP Soft Skill Update-->
 <div id="ss-update" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -1399,7 +1399,7 @@
                         @enderror
                     </div>
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Update</button>                
 
                     </div>
@@ -1499,8 +1499,8 @@
 
 <!-- START OF POP UP INTEREST Create -->
 <div id="interest-create" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:65%">
-        <a class="close" href="#closed" >&times;</a>
+    <div class="popup" style="width:65%" id="mobile-popup-candidate-detail">
+        <a class="close" href="#closed" id="mobile-popup-candidate-detail-close">&times;</a>
     
         <div class="content" style="padding:2vw">
             
@@ -1531,7 +1531,7 @@
                         @enderror
                     </div> 
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12 " id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>
                     </div>
                 </div>
@@ -1576,7 +1576,7 @@
                         @enderror
                     </div> 
                     <!-- END OF RIGHT SECTION -->
-                    <div class="col-12 " style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
+                    <div class="col-12" id="add-mobile-candidate-details" style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <button type="submit" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none;border:none">Add</button>                
 
                     </div>
@@ -1603,7 +1603,7 @@
         <!-- START OF ONE CARD -->
         @isset($interests_not_updated)
             @foreach ($interests_not_updated as $interest)
-                <div style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
+                <div id="interest-mobile-tag" style="display:flex;align-items:center;margin-right:2vw;font-family:Rubik Regular;color:#FFFFFF;margin-top:2vw;background-color:#67BBA3;padding:1vw;border-radius:10px">
                     <p class="normal-text" style="margin-bottom:0px">{{$interest->title}}</p>
                     <form method="post" style="margin-left:1vw" action="{{route('candidate-detail.delete-interest', $interest->id)}}"> 
                     @csrf
