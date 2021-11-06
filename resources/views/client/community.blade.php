@@ -111,7 +111,7 @@
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Featured</p>
         @if(count($blogs) == 0)
             <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum tersedia.</span></p>
+                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Featured Blog Belum ditemukan.</span></p>
             </div>
         @endif
         @foreach($blogs as $blog)

@@ -117,7 +117,8 @@
                         @if ($course->price != 0)
                             <form action="{{ route('customer.cart.store') }}" method="post">
                             @csrf
-                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                <input type="hidden" name="course_name" value="{{ $course->title }}">
+                                <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
                                 <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
                                 <button @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif  class="normal-text btn-blue-bordered full-width-button"
                                     style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
@@ -128,7 +129,9 @@
                         @else
                             <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
                             @csrf
-                                <input type="hidden" name="course_id" value="{{$course->id}}">              
+                                <input type="hidden" name="course_name" value="{{$course->title}}">   
+                                <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+           
                                 <button class="normal-text  btn-dark-blue full-width-button"
                                     style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif >Beli Sekarang</button>
                             </form>
@@ -263,8 +266,9 @@
                         </span>
                     @enderror
 
-                    <input type="hidden" name="course_id" value="{{$course->id}}">
-                    
+                    <input type="hidden" name="course_name" value="{{$course->title}}">
+                    <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+
                     <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
                         <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
                         <button type="submit" onclick="openLoading()" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
@@ -383,7 +387,9 @@
                 @if ($course->price != 0)
                     <form action="{{ route('customer.cart.store') }}" method="post">
                     @csrf
-                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <input type="hidden" name="course_name" value="{{ $course->title }}">
+                        <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+
                         <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
                         <button @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif class="normal-text btn-blue-bordered"
                             style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw">Tambah ke Keranjang</button>
@@ -394,7 +400,9 @@
                 @else
                     <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
                     @csrf
-                        <input type="hidden" name="course_id" value="{{$course->id}}">              
+                        <input type="hidden" name="course_name" value="{{$course->title}}">  
+                        <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
+            
                         <button class="normal-text  btn-dark-blue"
                             style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;margin-top:1.5vw" @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif>Beli Sekarang</button>
                     </form>
@@ -433,106 +441,92 @@
         <div class="course-content" id="course-online" style="margin-top:2vw">
                 <div class="row m-0 p-0">
                     @foreach($courseSuggestions as $course)
-                    <div class="col-12 col-md-4 p-0" >
-                        <div style="display: flex;@if($loop->iteration % 3 == 1) justify-content:flex-start @elseif ($loop->iteration % 3 == 2)justify-content:center @elseif ($loop->iteration % 3 == 0) justify-content:flex-end @endif">
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            @if ($course->courseType->type == "Course")
-                            <div class="course-card-green">
-                            @elseif ($course->courseType->type == "Woki")
-                                <div class="course-card-red">
-                            @elseif ($course->courseType->type == "Bootcamp")
-                                <div class="course-card-blue">
-                            @endif
-                                <div class="container">
-                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid online-course-image"  style="object-fit:cover;border-radius:10px 10px 0px 0px;" alt="Course's thumbnail not available..">
-                                    <div class="top-left card-tag small-text">
-                                    @if ($course->courseType->type == "Course")
-                                    Skill-Snack
-                                    @elseif ($course->courseType->type == "Woki")
-                                    Woki
-                                    @elseif ($course->courseType->type == "Bootcamp")
-                                    Bootcamp
-                                    @endif
-                                    </div>
-                                    <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
-                                    </div>
+                    <div class="col-4 p-0" >
+                <div style="display: flex;justify-content:center">
+                    <!-- START OF ONE GREEN COURSE CARD -->
+                    <div class="course-card-green">
+                        <div class="container">
+                            <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
+                            <div class="top-left card-tag small-text">Skill-Snack</div>
+                            <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
+                            </div>
+                        </div>
+                        <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
+                            <div style="height:4.5vw">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
+                                    <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
+                                    <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
                                 </div>
-                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div class="height-online-card">
-                                        <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                            <a href="/online-course/{{$course->title}}" class="normal-text-card" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
-                                            <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
-                                        </div>
-                                        @foreach ($course->hashtags as $tag)
-                                            <a class="small-text" id="card-tag-fontsize" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
-                                        @endforeach
-                                    </div>
-                                    <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
-                                    </div>
+                                @foreach ($course->hashtags as $tag)
+                                    <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
+                                @endforeach
+                            </div>
+                            <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
+                                <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
+                            </div>
 
-                                    <div style="display: flex;justify-content:space-between;margin-top:1vw" >
-                                        <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
-                                        @foreach($course->teachers as $teacher)
-                                            @if ($loop->last && count($course->teachers) != 1)
-                                            dan
-                                            @elseif (!$loop->first)
-                                            ,
-                                            @endif
-                                            {{$teacher->name}}
-                                        @endforeach
-                                        </p>
-                                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
-                                        @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
-                                            @if ($course->total_duration)
-                                                {{ explode(',', $course->total_duration)[0] }} mins
+                            <div style="display: flex;justify-content:space-between;margin-top:1vw" >
+                                <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
+                                @foreach($course->teachers as $teacher)
+                                    @if ($loop->last && count($course->teachers) != 1)
+                                    dan
+                                    @elseif (!$loop->first)
+                                    ,
+                                    @endif
+                                    {{$teacher->name}}
+                                @endforeach
+                                </p>
+                                <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
+                                @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
+                                    @if ($course->total_duration)
+                                        {{ explode(',', $course->total_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @elseif ($course->courseType->type == 'Woki')
+                                    @if ($course->wokiCourseDetail->event_duration)
+                                        {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
+                                    @else
+                                        - mins
+                                    @endif
+                                @endif
+                                </p>
+                                
+                            </div>
+                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                                <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
+                                <div style="display: flex;justify-content:center;margin-left:1vw">
+                                    @for ($i = 1; $i < 6; $i++)
+                                        @if ($i <= $course->average_rating)
+                                            @if ($i == 1)
+                                                <i style="color:#F4C257" class="fas fa-star small-text"></i>
                                             @else
-                                                - mins
+                                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
                                             @endif
-                                        @elseif ($course->courseType->type == 'Woki')
-                                            @if ($course->wokiCourseDetail->event_duration)
-                                                {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
-                                            @else
-                                                - mins
-                                            @endif
-                                        @endif
-                                        </p>
-                                        
-                                    </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
-                                        <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            @for ($i = 1; $i < 6; $i++)
-                                                @if ($i <= $course->average_rating)
-                                                    @if ($i == 1)
-                                                        <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                                    @else
-                                                        <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                                    @endif
-                                                @else
-                                                    @if ($i == 1)
-                                                        <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
-                                                    @else
-                                                        <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                                    @endif
-                                                @endif
-                                            @endfor
-                                        </div>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        @if ($course->price == 0)
-                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
                                         @else
-                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                            @if ($i == 1)
+                                                <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
+                                            @else
+                                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
+                                            @endif
                                         @endif
-                                        <a href="/online-course/{{$course->title}}" class="course-card-button normal-text">Enroll Now</a>
-                                    </div>
+                                    @endfor
                                 </div>
                             </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
+                            <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
+                                @if ($course->price == 0)
+                                    <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
+                                @else
+                                    <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
+                                @endif
+                                <a href="/online-course/{{$course->id}}" class="course-card-button normal-text">Enroll Now</a>
+                            </div>
                         </div>
                     </div>
+                    <!-- END OF ONE GREEN COURSE CARD -->
+                </div>
+            </div>
                     @endforeach
                 </div>
             </div>

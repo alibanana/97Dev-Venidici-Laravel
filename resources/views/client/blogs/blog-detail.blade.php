@@ -32,7 +32,7 @@
                 <div class="row m-0" style="padding-top:1.5vw">
    
                     <div class="col-12 p-0">
-                        <div class="normal-text" style="font-family: Rubik Regular;color:#5F5C5C;white-space:pre-line">{!!$blog->body!!}</div>   
+                        <div class="normal-text img-fluid" style="font-family: Rubik Regular;color:#5F5C5C;white-space:pre-line;">{!!$blog->body!!}</div>   
                     </div>
                 </div>
             </div>

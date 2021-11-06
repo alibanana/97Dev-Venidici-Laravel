@@ -1,134 +1,452 @@
 @extends('./layouts/client-main')
-@section('title', 'Venidici Bootcamp Detail')
+@section('title', 'Venidici Bootcamp')
 
 @section('content')
 
-<!-- START OF POPUP PAYMENT-->
-<div id="payment" class="overlay" style="overflow:scroll">
-    <div class="popup" style="width:50%">
-        <a class="close" href="#" >&times;</a>
+
+
+<!-- START OF POP UP FREE TRIAL REGISTRATION-->
+<div id="free-trial" class="overlay" style="overflow:scroll">
+    <div class="popup">
+        <a class="close" href="#closed" >&times;</a>
+    
         <div class="content" style="padding:2vw">
-            @if($course->price == 0)
-            <form action="{{ route('bootcamp.buyFree', $course->id) }}" method="post">
-            @else
+            
             <form action="{{route('customer.cart.storeOrder')}}" method="POST" enctype="multipart/form-data">
-            @endif
             @csrf
-            <div class="row m-0">
-                
-                <div class="col-12" style="text-align:left;">
-                    @if(session('success'))
-                        <!-- ALERT MESSAGE -->
-                        <div style="text-align:center;margin-top:1vw">
-                            <div class="alert alert-success alert-dismissible fade show small-text"  style="text-align:center;margin-bottom:1vw;width:20vw"role="alert">
-                            {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="row m-0">
+                    <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
+                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid logo-bootcamp-popup"  alt="LOGO">
+                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-top:1vw">Free Intro Week Registration</p>
+                        <p class="bigger-text" style="font-family:Rubik Regular;color:grey;margin-top:1vw">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_trial_price, 0, ',', ',') }} / person</p>
+                        <p class="normal-text" style="font-family:Rubik Regular;color:grey;margin-top:1vw">Free introduction week dilaksanakan pada tanggal 20, 22, dan 24 september 2021. Diatas merupakan uang enrollment fee yang akan dikembalikan setelah menyelesaikan introduction week. Setelah itu, kamu dapat menentukan jika ingin melanjutkan ke full course</p>
+                        @if (session()->has('free_trial_bootcamp_message'))
+                        <div class="p-3 mt-2 mb-0">
+                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                            {{ session()->get('free_trial_bootcamp_message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
-                        <!-- END OF ALERT MESSAGE -->
-                    @endif
-                    <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Pendaftaran</p>
-                    <p class="normal-text" style="font-family:Rubik Regular;color:#DAD9E2;margin-bottom:0px">Bootcamp: {{$course->title}}</p>
-                </div>
-                <div class="col-6" style="">
-                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
-                    <div  class="auth-input-form" style="display: flex;align-items:center">
-                        <i style="color:#DAD9E2" class="fas fa-user"></i>
-                        <input type="text" name="name" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                            placeholder="John Doe" @if(Auth::check())value="{{ old('name', Auth::user()->name) }}"@endif>
-                    </div>  
-                    @error('name')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Phone Number</p>
-                    <div  class="auth-input-form" style="display: flex;align-items:center">
-                        <i style="color:#DAD9E2" class="fas fa-phone-alt"></i>
-                        <input type="text" name="phone" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                            placeholder="Insert phone number" @if(Auth::check()) value="{{ old('phone', Auth::user()->userDetail->telephone) }}" @endif>
-                    </div>  
-                    @error('phone')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    
-                </div> 
-                <!-- END OF LEFT SECTION --> 
-                <!-- RIGHT SECTION -->
-                <div class="col-6" style="">
-                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
-                    <div  class="auth-input-form" style="display: flex;align-items:center">
-                        <i style="color:#DAD9E2" class="fas fa-envelope"></i>
-                        <input type="text" name="email" @if(Auth::check()) value="{{ old('email', Auth::user()->email) }}" @endif class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                            placeholder="Insert email">
-                    </div>  
-                    @error('email')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    @if ($course->price != 0)
-                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Bank and Account Number</p>
-                    <div style="display: flex;align-items:center">
-                        <div  class="auth-input-form" style="display: flex;align-items:center;width:40%">
-                            <i style="color:#DAD9E2" class="fas fa-money-check-alt"></i>
-                            <select name="bankShortCode" class="small-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;margin-left:0.5vw">
-                                <option value="None" disabled selected>Pilih Bank</option>
-                                <option value="bca">BCA</option>
-                                <option value="bri">BRI</option>
-                                <option value="mandiri">Mandiri</option>
-                            </select>                    
-                        </div>  
-                        <div  class="auth-input-form" style="display: flex;align-items:center;margin-left:1vw;width:60%">
-                            <input type="text" name="bank_account_number" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
-                                placeholder="Bank Account Number">
-                        </div>
+                        @endif
                     </div>
-                    <div style="display: flex;align-items:center">
-                         
+                    <!-- START OF LEFT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
+                        <div class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user"></i>
+                            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan nama" 
+                            @if(Auth::check())
+                                value="{{ old('name', Auth::user()->name) }}"
+                            @else
+                                value="{{ old('name') }}"
+                            @endif
+                            >
+                        </div>  
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%;" placeholder="Masukkan tempat lahir" 
+                            value="{{ old('birth_place')}}"
+                            >
+                        </div>  
+                        @error('birth_place')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Kelamin</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
+                            <select class="normal-text" name="gender" style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Gender</option>
+                                <option value="Male"
+                                @if(Auth::check())
+                                    @if(old('gender', Auth::user()->userDetail->gender) == 'Male') selected @endif
+                                @else
+                                    @if(old('gender') == 'Male') selected @endif
+                                @endif
+                                >Male</option>
+                                <option value="Female"
+                                @if(Auth::check())
+                                    @if(old('gender', Auth::user()->userDetail->gender) == 'Female') selected @endif
+                                @else
+                                    @if(old('gender') == 'Female') selected @endif
+                                @endif
+                                >Female</option>
+                            </select>                              
+                        </div> 
+                        @error('gender')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror 
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
+                        <div class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map"></i>
+                            <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;"> -->
+                            <select class="normal-text" name="province_id" style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
+                                @if(!Auth::check())
+                                <option value="" disabled selected>Pilih Provinsi</option>
+                                @else
+                                @if(Auth::user()->userDetail->province_id == null)
+                                    <option value="" disabled selected>Pilih Provinsi</option>
+                                @endif
+                                @foreach($provinces as $province)
+                                    <option value="{{ $province->id }}" 
+                                        @if(old('province_id',Auth::user()->userDetail->province_id) == $province->id)
+
+                                        selected
+                                        @endif
+                                    
+                                    >{{$province->name }}</option>                                    
+                                @endforeach
+                                @endif
+                            </select>                              
+                        </div>  
+                        @error('province_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div> 
+                    <!-- END OF LEFT SECTION --> 
+                    <!-- RIGHT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
+                        <div class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                            <input disabled readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan email"
+                            @if(Auth::check())
+                                value="{{old('email', Auth::user()->email)}}"
+                            @else
+                                value="{{old('email')}}"
+                            @endif
+                            >
+                        </div>  
+                        @error('email')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
+                        @if(Auth::check())
+                        <?php
+                            if (Auth::user()->userDetail->birthdate != null) {
+                                $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
+                                $date = $birthdate[0];
+                                $time = $birthdate[1];
+                            }
+                        ?>
+                        @endif
+                        @if($agent->browser() == "Safari" && Auth::check())
+                            @php
+                                if (Auth::user()->userDetail->birthdate != null) {
+                                    $birthdate_safari = explode('-',$date);
+                                    $year_safari = $birthdate_safari[0];
+                                    $month_safari = $birthdate_safari[1];
+                                    $date_safari = $birthdate_safari[2];
+                                }
+
+                            @endphp
+                            <div style="display: flex;align-items:center;justify-content:space-between">
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <input type="text" name="date_safari" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
+                                        placeholder="Tanggal"  @if(Auth::user()->userDetail->birthdate != null)  value="{{$date_safari}}" @endif>
+                                </div>  
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <select name="month" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                        @php
+                                            $months = array("January"=>"01","February"=>"02","March"=>"03",
+                                            "April"=>"04","May"=>"05","June"=>"06","July"=>"07","August"=>"08",
+                                            "September"=>"09","October"=>"10","November"=>"11","December"=>"12");
+                                        @endphp
+                                        @foreach($months as $key => $value) {
+                                            <option  
+                                            @if(Auth::user()->userDetail->birthdate != null)
+                                                @if($month_safari == $value) selected @endif 
+                                            @endif
+                                            value="{{$value}}" 
+                                            >{{$key}}</option>                                    
+                                        @endforeach
+                                    </select>
+                                </div>  
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <input type="text" name="year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                        placeholder="Tahun" @if(Auth::user()->userDetail->birthdate != null) value="{{$year_safari}}" @endif>
+                                </div>
+
+                            </div>
+
+                        @else 
+                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                                <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                                <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd"
+                                @if(Auth::check())
+                                    value="{{old('birth_date' ?? $date  ?? null )}}"
+                                @else
+                                    value="{{old('birth_date')}}"
+                                @endif
+                                >
+                            </div> 
+                        @endif 
+
+                        @if(session('date_message'))
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ session('date_message') }}</strong>
+                            </span>
+                        @endif
+                        @error('birth_date')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
+                        <div class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
+                            <input type="text" name="phone_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
+                            @if(Auth::check())
+                                value="{{old('phone_no', Auth::user()->userDetail->telephone)}}"
+                            @else
+                                value="{{old('phone_no')}}"
+                            @endif
+                            >
+                        </div>  
+                        @error('phone_no')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
+                        <div class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map"></i>
+                            <select  class="normal-text" name="city_id" style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
+                                @if(Auth::check())
+                                    @if($cities == null && Auth::user()->userDetail->city_id == null)
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                    @else
+                                    <option disabled selected>Pilih Kota</option>
+
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->city_id }}" 
+                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
+                                                @if(old('city_id',Auth::user()->userDetail->city_id) == $city->city_id)
+                                                    selected
+                                                @endif
+                                            @elseif (Request::get('city') == $city->city_id) 
+                                                selected 
+                                            @endif
+                                            >{{$city->name }}
+                                        </option>
+                                    @endforeach          
+                                    @endif
+                                @endif
+                            </select>                              
+                        </div>  
+                        @error('city_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        
+                    </div>
+                    <!-- END OF RIGHT SECTION -->
+
+                    <!-- START OF ADDRESS -->
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
+                        <div readonly class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="address" name="address" rows="3" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()){{old('address', Auth::user()->userDetail->address)}}@else{{old('address')}}@endif</textarea>
+                        </div>  
+                        @error('address')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF ADDRESS -->
+
+                    <!-- START OF LEFT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pendidikan Terakhir</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
+                            <select name="last_degree"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Pendidikan</option>
+                                <option value="SMP" @if(old('last_degree') == 'SMP') selected @endif>SMP</option>
+                                <option value="SMA" @if(old('last_degree') == 'SMA') selected @endif>SMA</option>
+                                <option value="D3" @if(old('last_degree') == 'D3') selected @endif>D3</option>
+                                <option value="S1" @if(old('last_degree') == 'S1') selected @endif>S1</option>
+                            </select>                              
+                        </div>  
+                        @error('last_degree')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Batch yang ingin dikuti</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-layer-group"></i>
+                            <select name="batch"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Batch</option>
+                                @foreach($course->bootcampBatches as $batch)
+                                <option value="{{$batch->date}}" @if(old('batch') == $batch->date) selected @endif>Batch {{ $loop->iteration }} ({{ date('d M Y', strtotime($batch->date))}})</option>
+                                @endforeach
+                            </select>                              
+                        </div>  
+                        @error('batch')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Apakah sedang mencari pekerjaan?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user-md"></i>
+                            <select name="mencari_kerja"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Jawaban</option>
+                                <option value="Sedang Kuliah" @if(old('mencari_kerja') == 'Sedang Kuliah') selected @endif>Sedang Kuliah</option>
+                                <option value="Sedang Mencari Pekerjaan" @if(old('mencari_kerja') == 'Sedang Mencari Pekerjaan') selected @endif>Sedang Mencari Pekerjaan</option>
+                                <option value="Sedang Tidak Mencari Pekerjaan" @if(old('mencari_kerja') == 'Sedang Tidak Mencari Pekerjaan') selected @endif>Sedang Tidak Mencari Pekerjaan</option>
+                            </select>                              
+                        </div>  
+                        @error('mencari_kerja')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Apakah kamu tertarik untuk melanjutkan bootcamp ini?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-info"></i>
+                            <select name="konsiderasi_lanjut"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Jawaban</option>
+                                <option value="Ya" @if(old('konsiderasi_lanjut') == 'Ya') selected @endif>Ya</option>
+                                <option value="Tidak" @if(old('konsiderasi_lanjut') == 'Tidak') selected @endif>Tidak</option>
+                            </select>                              
+                        </div>  
+                        @error('konsiderasi_lanjut')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF LEFT SECTION -->
+
+                    <!-- START OF RIGHT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Institusi</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
+                            <input value="{{old('institution')}}" type="text" name="institution" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Institusi" >
+                        </div>   
+                        @error('institution')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Sumber tahu program ini?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-info"></i>
+                            <input value="{{old('sumber_tahu_program')}}" type="text" name="sumber_tahu_program" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan sumber" >
+                        </div>   
+                        @error('sumber_tahu_program')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
+                            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
+                        </div>   
+                        @error('social_media')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Promotion Code</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-percent"></i>
+                            <input value="{{old('promo_code')}}" type="text" name="promo_code" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Promotion Code" >
+                        </div>   
+                        @error('promo_code')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <!-- END OF RIGHT SECTION -->
+
+                    <!-- START OF EXPECTATION -->
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Ekspektasi yang kamu ingin dapatkan dari bootcamp ini?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="expectation" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan ekspektasi anda" >{{old('expectation')}}</textarea>
+                        </div>  
+                        @error('expectation')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF EXPECTATION -->
+
+                    <!-- START OF LEFT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih Metode Pembayaran</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user-md"></i>
+                            <select name="bankShortCode"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Metode</option>
+                                <option value="bca" @if(old('bankShortCode') == 'bca') selected @endif >BCA</option>
+                                <option value="bri" @if(old('bankShortCode') == 'bri') selected @endif >BRI</option>
+                                <option value="mandiri" @if(old('bankShortCode') == 'mandiri') selected @endif>Mandiri</option>
+                            </select>                              
+                        </div>  
                         @error('bankShortCode')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        @error('bank_account_number')
+                    </div>
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih Metode Pembayaran Bootcamp</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user-md"></i>
+                            <select name="metode_pembayaran_bootcamp"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Metode Pembayaran</option>
+                                <option value="Full Payment" @if(old('metode_pembayaran_bootcamp') == 'Full Payment') selected @endif >Full Payment</option>
+                                <option value="Income Share Agreement" @if(old('metode_pembayaran_bootcamp') == 'Income Share Agreement') selected @endif >Income Share Agreement</option>
+                            </select>                              
+                        </div>  
+                        @error('metode_pembayaran_bootcamp')
                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-
                     </div>
-                    @endif
-                </div>
-                <!-- END OF RIGHT SECTION -->
-                <div class="col-12">
 
-                    <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Address</p>
-                    <div  class="auth-input-form" style="display: flex;align-items:center">
-                        <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
-                        <textarea type="text" name="address" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
-                            placeholder="Insert address">@if(Auth::check()) {{ old('address', Auth::user()->userDetail->address) }} @endif</textarea>
+                    <!-- END OF LEFT SECTION -->
+                    <!-- START OF RIGHT SECTION -->
+
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">No. Rek Untuk Guarantee Return</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-money-check"></i>
+                            <input value="{{ old('bank_account_no') }}" type="text" name="bank_account_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Rekening" >
+                        </div>   
+                        @error('bank_account_no')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('address')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    
-                </div>
-                <div class="col-12" style="text-align:center;padding-top:3vw">
-                    <input type="hidden" name="total_order_price" value="{{$course->price}}">
-                    
-                    <?php
-                        $tomorrow_split = explode(' ', $tomorrow);
-                        $date = $tomorrow_split[0];
-                        $time = $tomorrow_split[1];
-                    ?>
-                    <input type="hidden" name="date" value="{{ $date }}">
-                    <input type="hidden" name="time" value="{{ $time }}">
-                    <input type="hidden" name="course_id" value="{{ $course->id }}">
+                    <!-- END OF RIGHT SECTION -->
+
                     @if(Auth::check())
                         @if(Auth::user()->club != null)
                             @php
@@ -148,532 +466,1834 @@
                             $discount_club_price = 0;
                         @endphp
                     @endif
-                    <input type="hidden" value="{{$discount_club_price}}" name="club_discount">
-                    <input type="hidden" name="discounted_price" value="0">
-                    <input type="hidden" name="promo_code" value="0">
-                    @php
-                        $grand_total = $course->price - $discount_club_price;
-                    @endphp
-                    <input type="hidden" name="grand_total" value="{{$grand_total}}">
-                    @if($course->price != 0)
-                    <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>
-                    @else
-                    <input type="hidden" name="course_id" value="{{$course->id}}">              
-                    <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Daftar Sekarang</button>
-                    @endif
-                    <!--<button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Lanjut ke Pembayaran</button>-->
-                </div>  
-
-            </div>                
+                    
+                    <div class="col-12" style="text-align:center;padding-top:3vw">
+                        <input type="hidden" name="total_order_price" value="{{$course->bootcampCourseDetail->bootcamp_trial_price}}">
+                        <input type="hidden" value="{{$discount_club_price}}" name="club_discount">
+                        <input type="hidden" name="discounted_price" value="0">
+                        <?php
+                            $tomorrow_split = explode(' ', $tomorrow);
+                            $date = $tomorrow_split[0];
+                            $time = $tomorrow_split[1];
+                        ?>
+                        <input type="hidden" name="date" value="{{ $date }}">
+                        <input type="hidden" name="time" value="{{ $time }}">
+                        <input type="hidden" name="course_id" value="{{$course->id}}">
+                        @php
+                            $grand_total = $course->bootcampCourseDetail->bootcamp_trial_price - $discount_club_price;
+                        @endphp
+                        <input type="hidden" name="grand_total" value="{{$grand_total}}">
+                        <div style="text-align: center;margin-bottom:2vw">
+                            <p class="normal-text" style="font-family:Rubik Medium;color:orange;margin-bottom:0.4vw">*Uang Guarantee dapat dikembalikan setelah free trial selesai*</p>
+                        </div>
+                        <button type="submit" onclick="openLoading()" name="action" value="createPaymentObjectBootcamp" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                    </div>  
+                    
+                    <!-- END OF GENNERAL INFORMATION -->
+                </div>
             </form>
 
-            <!-- <div class="col-12" style="text-align:center">
-                {{-- If user has not bought the course and user has not bought the course and the price IS 0. --}}
-                @if($course->price == 0)
-                    <form action="{{ route('bootcamp.buyFree', $course->id) }}" method="post">
-                    @csrf
-                        
-                    </form>
-                @endif
-            </div> -->
         </div>
     </div>
 </div>
-<!-- END OF POPUP PAYMENT-->
+<!-- END OF POP UP FREE TRIAL REGISTRATION-->
 
-<div class="row m-0 page-container bootcamp-detail-bg" style="padding-top:11vw;padding-bottom:10vw">
-    <!-- START OF LEFT SECTION -->
-    <div class="col-9" >
-        <div style="padding-right:10vw">
-            <p class="medium-heading" style="font-family:Hypebeast;color:#2B6CAA">Bootcamp </p>
-
-            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{$course->title}}</p>
+<!-- START OF POP UP FULL REGISTRATION-->
+<div id="full-registration" class="overlay" style="overflow:scroll">
+    <div class="popup">
+        <a class="close" href="#closed" >&times;</a>
+    
+        <div class="content" style="padding:2vw">
             
-            <p class="bigger-text" style="font-family:Rubik Regular;color:#B3B5C2;white-space:pre-line;margin-top:0.4vw">{{$course->subtitle}}</p>
-            <!-- <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;"></a> -->
-            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:2vw">Sebuah kelas oleh
-            @foreach($course->teachers as $teacher)
-            <span style="font-family:Rubik Bold">
-                @if ($loop->last && count($course->teachers) != 1)
-                dan
-                @elseif (!$loop->first)
-                ,
-                @endif
-                {{$teacher->name}}
-            </span>
-            @endforeach
-            </p>
-            <!--<video style="width:42vw;height:20vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px"  controls="false" >
-                <source src="/assets/videos/admin/CEPAT.mp4" type="video/mp4" />
-                <source src="/assets/videos/admin/CEPAT.ogg" type="video/ogg" />
-                Your browser does not support HTML video.
-            </video> -->
-            <div style="margin-top:2vw">
-                <iframe style="width:42vw;height:25vw;display:block;object-fit: cover;margin-top:2vw;border-radius:10px" 
-                    src="{{$course->preview_video}}">
-                </iframe>
-            </div>
-            @if(count($schedules) != 0)
-            <p class="bigger-text" style="font-family:Rubik Medium;margin-top:2vw;color:#3B3C43;;margin-bottom:0px"><i class="fas fa-calendar-week"></i> <span style="margin-left:1vw">{{date_format($schedules[0][0]->date_time,"D, d M Y")}}</span></p>
-            @endif
-            <div style="display:flex;align-items:center;margin-top:0.5vw">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
-                <div style="display: flex;justify-content:center;margin-left:1vw">
-                    @for ($i = 1; $i < 6; $i++)
-                        @if ($i <= $course->average_rating)
-                            @if ($i == 1)
-                                <i style="color:#F4C257" class="fas fa-star sub-description"></i>
-                            @else
-                                <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star sub-description"></i>
-                            @endif
-                        @else
-                            @if ($i == 1)
-                                <i style="color:#B3B5C2" class="fas fa-star sub-description"></i>
-                            @else
-                                <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                            @endif
-                        @endif
-                    @endfor
-                </div>
-            </div>
-            @if(count($schedules) != 0)
-            <!-- WHAT YOU WILL LEARN SECTION -->
-            <div style="background: #EBF5FF;border-radius: 10px;padding:1.5vw;margin-top:2vw">
-                
-                
-                <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
-                    <div class="carousel-inner">
-                        @foreach($schedules as $schedule)
-                        <div class="carousel-item @if($loop->first) active @endif" >
-                            <div style="text-align:center;display:flex;align-items:center;justify-content:center">
-                                <i class="fas fa-arrow-left" class="carousel-control-prev" data-bs-target="#feature-carousel" role="button" data-bs-slide="prev" style="font-size:1.5vw;color:rgba(43, 108, 170, 0.5);margin-right:1vw"></i>
-                                <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">{{date_format($schedule[0]->date_time,"D, d M Y")}}</p>
-                                <i class="fas fa-arrow-right" class="carousel-control-next" data-bs-target="#feature-carousel" role="button" data-bs-slide="next" style="font-size:1.5vw;color:rgba(43, 108, 170, 0.5);margin-left:1vw"></i>
-                            </div>
-                            
-                            <div class="row m-0" style="padding-top:2vw">
-                                @foreach($schedule as $day)
-                                <!-- START OF ONE SCHEDULE -->
-                                <div style="display: flex;">
-                                    <p class="normal-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px">{{date_format($day->date_time,"H:i")}}</p>
-                                    <div>
-                                        <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-left:1vw">{{$day->title}}</p>
-                                        <p class="small-text" style="font-family:Rubik Medium;color:#ABACB0;margin-bottom:0px;margin-left:1vw">Details: {{$day->detail}}</p>
-                                    </div>
-                                </div>
-                                <hr style="background:#B3B5C2;height:0.1vw;border-radius:10px;margin-top:1vw">
-                                <!-- END OF ONE SCHEDULE -->
-                                @endforeach
-
-
+            <form action="{{route('bootcamp.storeFullRegistration', $course->id)}}" method="POST" enctype="multipart/form-data">
+            @csrf
+                <div class="row m-0">
+                    <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
+                        <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid logo-bootcamp-popup"  alt="LOGO">
+                        <p class="medium-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-top:1vw">Full Bootcamp Registration</p>
+                        @if (session()->has('full_registration_bootcamp_message'))
+                        <div class="p-3 mt-2 mb-0">
+                            <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                            {{ session()->get('full_registration_bootcamp_message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
-                        @endforeach
+                        @endif
+                    </div>
+                    <!-- START OF LEFT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Full Name</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user"></i>
+                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan nama" 
+                            @if(Auth::check())
+                                value="{{ old('name', Auth::user()->name) }}"
+                            @else
+                                value="{{ old('name') }}"
+                            @endif
+                            >
+                        </div>  
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tempat Lahir</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map-marker-alt"></i>
+                            <input type="text" name="birth_place" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan tempat lahir" 
+                            value="{{ old('birth_place')}}"
+                            >
+                        </div>  
+                        @error('birth_place')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Jenis Kelamin</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-venus-mars"></i>
+                            <select name="gender"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Gender</option>
+                                <option value="Male"
+                                @if(Auth::check())
+                                    @if(old('gender', Auth::user()->userDetail->gender) == 'Male') selected @endif
+                                @else
+                                    @if(old('gender') == 'Male') selected @endif
+                                @endif
+                                >Male</option>
+                                <option value="Female"
+                                @if(Auth::check())
+                                    @if(old('gender', Auth::user()->userDetail->gender) == 'Female') selected @endif
+                                @else
+                                    @if(old('gender') == 'Female') selected @endif
+                                @endif
+                                >Female</option>
+                            </select>                              
+                        </div> 
+                        @error('gender')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror 
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Provinsi</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map"></i>
+                            <!-- <select onchange="if (this.value){ openLoading(); window.location.href='/bootcamp?province='+this.value+'#full-registration'}"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;"> -->
+                            <select name="province_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
+                                @if(!Auth::check())
+                                <option value="" disabled selected>Pilih Provinsi</option>
+                                @else
+                                @if(Auth::user()->userDetail->province_id == null)
+                                    <option value="" disabled selected>Pilih Provinsi</option>
+                                @endif
+                                @foreach($provinces as $province)
+                                    <option value="{{ $province->id }}" 
+                                        @if(old('province_id',Auth::user()->userDetail->province_id) == $province->id)
+
+                                        selected
+                                        @endif
+                                    
+                                    >{{$province->name }}</option>                                    
+                                @endforeach
+                                @endif
+                            </select>                              
+                        </div>  
+                        @error('province_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div> 
+                    <!-- END OF LEFT SECTION --> 
+                    <!-- RIGHT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Email</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-envelope"></i>
+                            <input readonly type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%" placeholder="Masukkan email"
+                            @if(Auth::check())
+                                value="{{old('email', Auth::user()->email)}}"
+                            @else
+                                value="{{old('email')}}"
+                            @endif
+                            >
+                        </div>  
+                        @error('email')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Tanggal Lahir</p>
+                        @if(Auth::check())
+                        <?php
+                            if (Auth::user()->userDetail->birthdate != null) {
+                                $birthdate = explode(' ', Auth::user()->userDetail->birthdate);
+                                $date = $birthdate[0];
+                                $time = $birthdate[1];
+                            }
+                        ?>
+                        @endif
+
+                        @if($agent->browser() == "Safari" && Auth::check())
+                            @php
+                                if (Auth::user()->userDetail->birthdate != null) {
+                                    $birthdate_safari = explode('-',$date);
+                                    $year_safari = $birthdate_safari[0];
+                                    $month_safari = $birthdate_safari[1];
+                                    $date_safari = $birthdate_safari[2];
+                                }
+
+                            @endphp
+                            <div style="display: flex;align-items:center;justify-content:space-between">
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <input type="text" name="date_safari" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%"
+                                        placeholder="Tanggal"  @if(Auth::user()->userDetail->birthdate != null)  value="{{$date_safari}}" @endif>
+                                </div>  
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <select name="month" id=""  class="normal-text"  style="background:transparent;border:none;color: #3B3C43;;width:100%">
+                                        @php
+                                            $months = array("January"=>"01","February"=>"02","March"=>"03",
+                                            "April"=>"04","May"=>"05","June"=>"06","July"=>"07","August"=>"08",
+                                            "September"=>"09","October"=>"10","November"=>"11","December"=>"12");
+                                        @endphp
+                                        @foreach($months as $key => $value) {
+                                            <option  
+                                            @if(Auth::user()->userDetail->birthdate != null)
+                                                @if($month_safari == $value) selected @endif 
+                                            @endif
+                                            value="{{$value}}" 
+                                            >{{$key}}</option>                                    
+                                        @endforeach
+                                    </select>
+                                </div>  
+                                <div class="auth-input-form" style="width: 30%;">
+                                    <input type="text" name="year" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%"
+                                        placeholder="Tahun" @if(Auth::user()->userDetail->birthdate != null) value="{{$year_safari}}" @endif>
+                                </div>
+
+                            </div>
+
+                        @else 
+                            <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                                <i style="color:#DAD9E2" class="fas fa-birthday-cake"></i>
+                                <input type="date" name="birth_date" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: grey;width:100%;color:#3B3C43" placeholder="yyyy.mm.dd"
+                                @if(Auth::check())
+                                    value="{{old('birth_date' ?? $date  ?? null )}}"
+                                @else
+                                    value="{{old('birth_date')}}"
+                                @endif
+                                >
+                            </div> 
+                        @endif 
+
+                        @if(session('date_message'))
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ session('date_message') }}</strong>
+                            </span>
+                        @endif
+                        @error('birth_date')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Nomor Telepon</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fab fa-whatsapp"></i>
+                            <input name="phone_no" type="text" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color:#3B3C43;width:100%" placeholder="Masukkan Nomor Telepon"
+                            @if(Auth::check())
+                                value="{{old('phone_no', Auth::user()->userDetail->telephone)}}"
+                            @else
+                                value="{{old('phone_no')}}"
+                            @endif
+                            >
+                        </div>  
+                        @error('phone_no')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kota</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-map"></i>
+                            <select name="city_id"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #3B3C43;;width:100%;font-family:Rubik Regular;">
+                                @if(Auth::check())
+                                @if($cities == null && Auth::user()->userDetail->city_id == null)
+                                    <option disabled selected>Pilih Provinsi terlebih dahulu</option>
+                                @else
+                                    <option disabled selected>Pilih Kota</option>
+
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->city_id }}" 
+                                            @if(Auth::user()->userDetail->city_id != null && !Request::get('city'))
+                                                 @if(old('city_id',Auth::user()->userDetail->city_id) == $city->city_id)
+                                                    selected
+                                                @endif
+                                            @elseif (Request::get('city') == $city->city_id) 
+                                                selected 
+                                            @endif
+                                            >{{$city->name }}
+                                        </option>
+                                    @endforeach          
+                                @endif
+                                @endif
+                            </select>                              
+                        </div>  
+                        @error('city_id')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         
                     </div>
-                    
-                    
-                </div>  
-            </div>
-            <!-- END OF WHAT YOU WILL LEARN SECTION -->
-            @endif
-        </div>
-        <!-- START OF PERSYARATAN SECTION -->
-        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:4vw">Persyaratan</p>
-        
-        <div style="display:flex;align-items:center;flex-wrap:wrap;padding-top:1vw">  
-            @foreach($course->courseRequirements as $req)
- 
-            <a class="blue-tag normal-text" style="margin-top:1vw;@if($loop->iteration != 1) margin-left:1vw @endif">{{$req->requirement}}</a>
-            @endforeach
-        </div>
-        <!-- END OF PERSYARATAN SECTION -->
+                    <!-- END OF RIGHT SECTION -->
 
-        <!-- START OF PROFIL PEMBICARA SECTION -->
-        <!--
-        <div style="display:flex;align-items:center;margin-top:3vw">
-            <p class="sub-description profil-text-green profil-text-green-active profil-links"  onclick="changeContent(event, 'tentang-course')" style="font-family:Rubik Medium;margin-bottom:0px;cursor:pointer">Tetang <span style="font-family:Hypebeast;color:#2B6CAA">ONLINE COURSE</span> ini</p>
-            <p class="sub-description profil-text-green profil-links" onclick="changeContent(event, 'profil-pembicara')" style="font-family:Rubik Medium;margin-bottom:0px;cursor:pointer;margin-left:3vw">Profil Pembicara </p>
-
-        </div>
-        -->
-        <!-- START OF PROFIL PEMBICARA SECTION -->
-        <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw;color:#3B3C43">Profil Pembicara</p>
-
-        @foreach($course->teachers as $teacher)
-
-        <!-- START OF ONE LECTURE -->
-        <div style="display:flex;margin-top:2vw;align-items:flex-start">
-            <img src="{{ asset($teacher->image) }}" style="width:5vw;height:5vw;object-fit:cover;filter: drop-shadow(0px 10px 20px rgba(31, 32, 65, 0.1));border-radius:10px;border:2px solid #F2F2F2" class="img-fluid" alt="">
-            <div style="margin-left:1vw">
-                <p class="bigger-text" style="font-family:Rubik Medium;color:#55525B">{{$teacher->name}}</p>
-                <p class="normal-text" style="font-family:Rubik Regular;color:#000000">{{$teacher->description}}</p>
-            </div>
-
-        </div>
-        <!-- END OF ONE LECTURE -->
-        @endforeach
-
-        <!-- END OF PROFIL PEMBICARA SECTION -->
-        <!-- START OF TENTANG ONLINE COURSE -->
-        <p class="sub-description profil-text-blue profil-text-blue-active profil-links" style="font-family:Rubik Medium;margin-bottom:0px;margin-top:4vw">Tetang <span style="font-family:Hypebeast;color:#2B6CAA">BOOTCAMP</span> ini</p>
-        <div  class="bigger-text profil-content" id="tentang-course"  style="margin-top:1vw">
-            <p class="normal-text" style="font-family:Rubik Regular;color:#000000;white-space:pre-line">
-                {{$course->description}}
-            </p>
-        </div>
-        <!-- END OF TENTANG ONLINE COURSE -->
-
-        <!-- START OF REVIEW SECTION -->
-        @if(Auth::check())
-            @if(session('review_message'))
-                <!-- ALERT MESSAGE -->
-                <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
-                    {{ session('review_message') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <!-- END OF ALERT MESSAGE -->
-            @endif
-            <form action="{{ route('customer.review.store') }}" id="review-section" method="POST">
-            @csrf
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4vw">
-                    <p class="sub-description" style="font-family:Rubik Medium;margin-bottom:0px">Ulasan dari pelajar</p>
-                    <p onclick="openReview()" id="add-review-button" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">Tambah Ulasan</p>                
-                </div>
-                <div style="display:none" id="review-area">
-                    <div class="rate" style="margin-top:1vw" >
-                        <input type="radio" id="star5" name="rating" value="5" />
-                        <label for="star5" title="text">5 stars</label>
-                        <input type="radio" id="star4" name="rating" value="4" />
-                        <label for="star4" title="text">4 stars</label>
-                        <input type="radio" id="star3" name="rating" value="3" />
-                        <label for="star3" title="text">3 stars</label>
-                        <input type="radio" id="star2" name="rating" value="2" />
-                        <label for="star2" title="text">2 stars</label>
-                        <input type="radio" id="star1" name="rating" value="1" />
-                        <label for="star1" title="text">1 star</label>
-                    </div>
-                    @error('rating')
-                        <br>
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                    <!-- START OF ADDRESS -->
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Alamat Lengkap</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="address" rows="3" class="normal-text" style="background:transparent;border:none;color:#3B3C43;width:100%" placeholder="Masukkan alamat" >@if (Auth::check()){{old('address', Auth::user()->userDetail->address)}}@else{{old('address')}}@endif</textarea>
+                        </div>  
+                        @error('address')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
                             <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-
-                    <textarea class="normal-text" name="description" placeholder="Masukan review anda disini" id="" style="width:100%;background: #FFFFFF;border: 2px solid #C4C4C4;box-sizing: border-box;border-radius: 5px;margin-top:1vw;padding:0.5vw" rows="4"></textarea>
-                    @error('description')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-
-                    <input type="hidden" name="course_id" value="{{$course->id}}">
-                    
-                    <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
-                        <p onclick="closeReview()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.2vw 2vw;margin-right:1vw">Cancel</p>
-                        <button type="submit" onclick="openLoading()" name="action" value="course_detail_review" class="normal-text btn-dark-blue" style="border:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.35vw 2vw">Kirim</button>
+                            </span>
+                        @enderror
                     </div>
+                    <!-- END OF ADDRESS -->
+
+                    <!-- START OF LEFT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pendidikan Terakhir</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
+                            <select name="last_degree"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Pendidikan</option>
+                                <option value="SMP" @if(old('last_degree') == 'SMP') selected @endif>SMP</option>
+                                <option value="SMA" @if(old('last_degree') == 'SMA') selected @endif>SMA</option>
+                                <option value="D3" @if(old('last_degree') == 'D3') selected @endif>D3</option>
+                                <option value="S1" @if(old('last_degree') == 'S1') selected @endif>S1</option>
+                            </select>                              
+                        </div>  
+                        @error('last_degree')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Batch yang ingin dikuti</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-layer-group"></i>
+                            <select name="batch"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Batch</option>
+                                @foreach($course->bootcampBatches as $batch)
+                                <option value="{{$batch->date}}" @if(old('batch') == $batch->date) selected @endif>Batch {{ $loop->iteration }} ({{ date('d M Y', strtotime($batch->date))}})</option>
+                                @endforeach
+                            </select>                              
+                        </div>  
+                        @error('batch')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Apakah sedang mencari pekerjaan?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user-md"></i>
+                            <select name="mencari_kerja"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Jawaban</option>
+                                <option value="Sedang Kuliah" @if(old('mencari_kerja') == 'Sedang Kuliah') selected @endif>Sedang Kuliah</option>
+                                <option value="Sedang Mencari Pekerjaan" @if(old('mencari_kerja') == 'Sedang Mencari Pekerjaan') selected @endif>Sedang Mencari Pekerjaan</option>
+                                <option value="Sedang Tidak Mencari Pekerjaan" @if(old('mencari_kerja') == 'Sedang Tidak Mencari Pekerjaan') selected @endif>Sedang Tidak Mencari Pekerjaan</option>
+                            </select>                              
+                        </div>  
+                        @error('mencari_kerja')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih Metode Pembayaran Bootcamp</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user-md"></i>
+                            <select name="metode_pembayaran_bootcamp"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Metode Pembayaran</option>
+                                <option value="Full Payment" @if(old('metode_pembayaran_bootcamp') == 'Full Payment') selected @endif >Full Payment</option>
+                                <option value="Income Share Agreement" @if(old('metode_pembayaran_bootcamp') == 'Income Share Agreement') selected @endif >Income Share Agreement</option>
+                            </select>                              
+                        </div>  
+                        @error('metode_pembayaran_bootcamp')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF LEFT SECTION -->
+
+                    <!-- START OF RIGHT SECTION -->
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Institusi</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-graduation-cap"></i>
+                            <input value="{{old('institution')}}" type="text" name="institution" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Institusi" >
+                        </div>   
+                        @error('institution')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Sumber tahu program ini?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-info"></i>
+                            <input value="{{old('sumber_tahu_program')}}" type="text" name="sumber_tahu_program" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan sumber" >
+                        </div>   
+                        @error('sumber_tahu_program')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Linked In</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fab fa-linkedin"></i>
+                            <input value="{{old('social_media')}}" type="text" name="social_media" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Link Linked In" >
+                        </div>   
+                        @error('social_media')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Promotion Code</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-percent"></i>
+                            <input value="{{old('promo_code')}}" type="text" name="promo_code" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Promotion Code" >
+                        </div>   
+                        @error('promo_code')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <!-- END OF RIGHT SECTION -->
+
+                    <!-- START OF EXPECTATION -->
+                    <div class="col-12">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Kenapa kamu memililih Bootcamp ini</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="kenapa_memilih" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan jawaban anda" >{{old('kenapa_memilih')}}</textarea>
+                        </div>  
+                        @error('kenapa_memilih')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Ekspektasi yang kamu ingin dapatkan dari bootcamp ini?</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <textarea name="expectation" rows="3" class="normal-text" style="background:transparent;border:none;color: #3B3C43;width:100%" placeholder="Masukkan ekspektasi anda" >{{old('expectation')}}</textarea>
+                        </div>  
+                        @error('expectation')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <!-- END OF EXPECTATION -->
+
+                    <!-- START OF LEFT SECTION
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">Pilih Metode Pembayaran</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-user-md"></i>
+                            <select name="bankShortCode"  class="normal-text"  style="margin-left:1vw;background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                                <option disabled selected>Pilih Metode</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BRI">BRI</option>
+                                <option value="Mandiri">Mandiri</option>
+                            </select>                              
+                        </div>  
+                        @error('bankShortCode')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <!-- END OF LEFT SECTION
+                    <!-- START OF RIGHT SECTION
+
+                    <div class="col-6">
+                        <p class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;text-align:left !important;margin-bottom:0.4vw;margin-top:1.5vw">No. Rek Untuk Guarantee Return</p>
+                        <div  class="auth-input-form normal-text" style="display: flex;align-items:center">
+                            <i style="color:#DAD9E2" class="fas fa-money-check"></i>
+                            <input type="text" name="bank_account_no" class="normal-text" style="background:transparent;border:none;margin-left:1vw;color: #3B3C43;width:100%" placeholder="Masukkan Nomor Rekening" >
+                        </div>   
+                        @error('bank_account_no')
+                            <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                     END OF RIGHT SECTION -->
+                    
+                    <div class="col-12" style="text-align:center;padding-top:3vw">
+                        <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered" style="font-family: Poppins Medium;margin-bottom:0px">Submit</button>
+                    </div>  
+                    
+                    <!-- END OF GENNERAL INFORMATION -->
                 </div>
             </form>
-        @endif
+        </div>
+    </div>
+</div>
+<!-- END OF POP UP FULL REGISTRATION-->
 
-        @if(count($reviews) == 0)
-            <div style="margin-top:2vw;background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Belum ada review.</span></p>
-            </div>
-        @else
-        <div style="overflow:scroll;height:30vw;margin-top:3vw">
-            <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;">
-            @foreach($reviews as $review)
-            <!-- START OF USER REVIEWS -->
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2vw">
-                <div style="display:flex">
-                    
-                    <img @if($review->user->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ asset(Auth::user()->avatar) }}"  @endif  style="width:4vw;height:4vw;object-fit:cover;border-radius:50%" class="img-fluid" alt="">
-                    <div style="margin-left:1vw">
-                        <p class="normal-text" style="font-family:Rubik Medium;margin-bottom:0px">{{$review->user->name}}</p>
-                        <div style="display: flex;justify-content:flex-start;align-items:center;margin-top:0.5vw">
-                            @for ($i = 1; $i < 6; $i++)
-                                @if($i <= $review->review)
-                                    <i style="color:#F4C257;@if($i != 1) margin-left:0.5vw @endif" class="fas fa-star sub-description"></i>
-                                @else
-                                    <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star sub-description"></i>
-                                @endif
-                            @endfor
-                        </div>
-                    </div>
+
+
+
+@php
+    $a = $course->bootcampCourseDetail->date_start;
+    $b = strtotime($a);
+    
+    $customformat = date('M d,Y H:i:s', $b);
+@endphp
+
+<script>
+    CountDownTimer('{{$customformat}}', 'countdown');
+    function CountDownTimer(dt,id)
+    {
+        var end = new Date(dt);
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            if (distance < 0) {
+
+                clearInterval(timer);
+                document.getElementById('days').innerHTML = 0;
+                document.getElementById('hours').innerHTML = 0 ;
+                document.getElementById('minutes').innerHTML = 0 ;
+                document.getElementById('seconds').innerHTML = 0 ;
+                document.getElementById('days-mobile').innerHTML = 0;
+                document.getElementById('hours-mobile').innerHTML = 0 ;
+                document.getElementById('minutes-mobile').innerHTML = 0 ;
+                document.getElementById('seconds-mobile').innerHTML = 0 ;
+                // document.getElementById('free-trial-button').style.display = "none";
+                // document.getElementById('full-registration-button').style.display = "none";
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+            document.getElementById('days').innerHTML = days;
+            document.getElementById('hours').innerHTML = hours ;
+            document.getElementById('minutes').innerHTML = minutes ;
+            document.getElementById('seconds').innerHTML = seconds ;
+
+            document.getElementById('days-mobile').innerHTML = days;
+            document.getElementById('hours-mobile').innerHTML = hours ;
+            document.getElementById('minutes-mobile').innerHTML = minutes ;
+            document.getElementById('seconds-mobile').innerHTML = seconds ;
+        }
+        timer = setInterval(showRemaining, 1000);
+    }
+</script>
+
+
+<!-- START OF TOP SECTION -->
+<div class="row m-0 page-container bootcamp-bg desktop-display" style="padding-top:11vw;padding-bottom:17vw;">
+    <!-- START OF LECT SECTION -->
+    <div class="col-xs-12 col-md-6 p-0 wow fadeInLeft">
+        <img src="/assets/images/client/Bootcamp_Logo.png"  class="img-fluid bootcamp-logo-image" alt="Bootcamp Logo">
+        <div style="margin-top: 2vw;">
+            <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">{{$course->title}}</p>
+            <!--<p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;white-space:pre-line">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} - {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}} | Via Zoom</p>-->
+            <ul>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">After-hour 16 Weeks classes</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Get a job right away or get a up to 100% refund</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Learn from the best instructors (working in Gojek, Grab, Bukalapak, Wagely, Kumparan)</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Get paid working on a real project</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Flexible payment methods (ISA Available)</p>
+                </li>
+                <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                    <p class="normal-text" style="margin-bottom: 0.3vw;">Beginner friendly, welcome!</p>
+                </li>
+            </ul>
+            <p class="bigger-text" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line">{{$course->subtitle}}</p>
+        </div>
+        <!--<p class="bigger-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-top:2vw">This bootcamp will start in:</p>-->
+        <!-- START OF COUNTDOWN -->
+        <div style="padding:1vw;background-color:#FFFFFF;width:30vw;border-radius:10px;margin-bottom:2vw" id="countdown-card">
+            <div style="display: flex;justify-content:space-between;align-items:center">
+                <div style="text-align: center;border-right:2px solid #2B6CAA;padding-right:2vw">
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Days</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="days"></p>
                 </div>
-                <p class="small-text" style="font-family:Rubik Regular;color:#C4C4C4;">{{$review->created_at->diffForHumans()}}</p>
+                <div style="text-align: center;padding:0vw 2vw;border-right:2px solid #2B6CAA;">
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Hours</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="hours"></p>
+                </div>
+                <div style="text-align: center;padding:0vw 2vw">
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Minutes</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="minutes"></p>
+                </div>
+                <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw">
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px">Seconds</p>
+                    <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="seconds"></p>
+                </div>
             </div>
-            <div style="display: flex;justify-content:space-between;padding-right:1vw">
-                <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-top:1vw;padding-right:1vw">{{$review->description}}</p>
-                @if(Auth::check())
-                    @if($review->user_id == auth()->user()->id)
-                    <form action="{{route('customer.review.destroy', $review->id)}}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" style="background:none;border:none"><i class="fas fa-trash bigger-text" style="color:#CE3369"></i></button>
-                    </form>
-                    @endif
-                @endif
-            </div>
-    
-            <hr style="background:#B3B5C2;height:0.2vw;border-radius:10px;margin-top:2vw">
-    
-            <!-- END OF USER REVIEWS -->
-            @endforeach
+        </div>
+        <!-- END OF COUNT DOWN --> 
 
+        <div style="display:flex">
+            <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply</a>
+            <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw">Attend Free Intro Week</a>
         </div>
-        <div style="background-color:#2B6CAA;height:2vw;text-align:center;border-radius:5px;margin-top:1vw">
-        <i class="fas fa-sort-down sub-description" style="color:#FFFFFF"></i>
-        </div>
-    @endif
-    <!-- END OF REVIEW SECTION -->
-        
     </div>
     <!-- END OF LEFT SECTION -->
 
     <!-- START OF RIGHT SECTION -->
-    <div class="col-3 p-0" >
-        @if(session('success') || session('message'))
-            <!-- ALERT MESSAGE -->
-            <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="col-xs-12 col-md-6 bootcamp-right-heading-bg wow fadeInUp" data-wow-delay="0.5s" style="display: flex;flex-direction: column;justify-content: flex-end;align-items:center;padding:10vw 0vw">
+        <div style="justify-content: center;display:flex;margin-left:10vw" class="wow bounce" data-wow-delay="1s">
+            <!-- START OF BOOTCAMP CARD -->
+            <div  style="padding:1vw;background-color:#E2E2E2;width:20vw;border-radius:10px;transform: rotate(8deg);margin-right:5.5vw">
+                <img src="{{ asset($course->thumbnail) }}" style="width:100%;height:18vw;object-fit:cover;border-radius:10px;border:1px solid #FFFFFF;margin-bottom:0.5vw" class="img-fluid" alt="Bootcamp Logo">
+                <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">{{$course->title}}</p>
             </div>
-            <!-- END OF ALERT MESSAGE -->
-        @elseif(session('message_update')) 
-            <!-- ALERT MESSAGE -->
-            <div class="alert alert-primary alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px"role="alert">
-                {{ session('message_update') }} <span> <a href="/dashboard#edit-profile">Click here</a> </span>to complete your profile
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <!-- END OF BOOTCAMP CARD -->
+
+        </div>
+    </div>
+
+    <!-- END OF RIGHT SECTION -->
+</div>
+<!-- END OF TOP SECTION -->
+
+
+<!-- START OF TOP SECTION MOBILE -->
+<div class="row m-0 page-container p-0 mobile-display" style="display:none">
+    <!-- START OF LECT SECTION -->
+    <div class="col-12 wow fadeInLeft" style="margin-top:5vw;margin-bottom:3vw">
+        <div style="background-color:#2B6CAA; margin-top: 4vw;border-radius: 5px;padding: 7vw 5vw;">
+            <div style="">
+                <img src="/assets/images/client/Bootcamp_Logo.png"  class="img-fluid bootcamp-logo-image" alt="Bootcamp Logo">
+                <p class="medium-heading" style="font-family: Rubik Bold;color:white;white-space:pre-line;margin-top:6vw">{{$course->title}}</p>
+                <!--<p class="sub-description" style="font-family: Rubik Medium;color:white;white-space:pre-line">{{date('d M Y', strtotime($course->bootcampCourseDetail->date_start))}} - {{date('d M Y', strtotime($course->bootcampCourseDetail->date_end))}} | Via Zoom</p>-->
+                <ul>
+                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                        <p class="normal-text" style="margin-bottom: 0.3vw;">After-hour 16 Weeks classes</p>
+                    </li>
+                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                        <p class="normal-text" style="margin-bottom: 0.3vw;">Get a job right away or get a up to 100% refund</p>
+                    </li>
+                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                        <p class="normal-text" style="margin-bottom: 0.3vw;">Learn from the best instructors (working in Gojek, Grab, Bukalapak, Wagely, Kumparan)</p>
+                    </li>
+                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                        <p class="normal-text" style="margin-bottom: 0.3vw;">Get paid working on a real project</p>
+                    </li>
+                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                        <p class="normal-text" style="margin-bottom: 0.3vw;">Flexible payment methods (ISA Available)</p>
+                    </li>
+                    <li style="color:#FFFFFF;font-family: Rubik Regular;">
+                        <p class="normal-text" style="margin-bottom: 0.3vw;">Beginner friendly, welcome!</p>
+                    </li>
+                </ul>
+                <p class="bigger-text" style="font-family: Rubik Regular;color:white;white-space:pre-line">{{$course->subtitle}}</p>
             </div>
-            <!-- END OF ALERT MESSAGE -->
-        @endif
+            <!--<p class="bigger-text" style="font-family: Rubik Medium;color:white;margin-top:2vw">This bootcamp will start in: </p>-->
+            <!-- START OF COUNTDOWN -->
+            <div style="padding:1vw;background-color:white;width:100%;border-radius:5px;margin-bottom:5vw" id="countdown-card">
+                <div style="display: flex;justify-content:space-between;align-items:center">
+                    <div style="text-align: center;border-right:2px solid #2B6CAA;padding-right:2vw;width:33%">
+                        <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Days</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="days-mobile"></p>
+                    </div>
+                    <div style="text-align: center;padding:0vw 2vw;width:33%">
+                        <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Hours</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="hours-mobile"></p>
+                    </div>
+                    <div style="text-align: center;padding:0vw 2vw;width:33%">
+                        <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Minutes</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="minutes-mobile"></p>
+                    </div>
+                    <div style="text-align: center;border-left:2px solid #2B6CAA;padding-left:2vw;width:33%">
+                        <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom:0px;">Seconds</p>
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px;" id="seconds-mobile"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- END OF COUNT DOWN --> 
+                <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;text-align:center;display:inline-block;width:100%">Apply</a>
+                <p class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;margin-bottom:0px;text-align:center;margin-top:2vw;margin-bottom:2vw">OR</p>
 
-        <div class="course-detail-card-green">
-            @if(count($schedules) != 0)
-            @php
-                $customformat = date_format($schedules[0][0]->date_time,"M d,Y H:i:s");
-            @endphp
-            <script>
-				CountDownTimer('{{$customformat}}', 'countdown');
-				function CountDownTimer(dt,id)
-				{
-					var end = new Date(dt);
-					var _second = 1000;
-					var _minute = _second * 60;
-					var _hour = _minute * 60;
-					var _day = _hour * 24;
-					var timer;
-					function showRemaining() {
-						var now = new Date();
-						var distance = end - now;
-						if (distance < 0) {
+                <a href="#payment-section" class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw;margin-left:1vw;text-align:center;display:inline-block;width:100%">Attend Free Intro Week</a>
+        </div>
+    </div>
+    <!-- END OF LEFT SECTION -->
 
-							clearInterval(timer);
-							document.getElementById('countdown-card').style.display = "none";
-							return;
-						}
-						var days = Math.floor(distance / _day);
-						var hours = Math.floor((distance % _day) / _hour);
-						var minutes = Math.floor((distance % _hour) / _minute);
-						var seconds = Math.floor((distance % _minute) / _second);
+    
+</div>
+<!-- END OF TOP SECTION MOBILE-->
 
-						document.getElementById('days').innerHTML = days;
-						document.getElementById('hours').innerHTML = hours ;
-						document.getElementById('minutes').innerHTML = minutes ;
-					}
-					timer = setInterval(showRemaining, 1000);
-				}
-            </script>
-            @endif
-            @if($course->price == 0)
-            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">FREE</p>
-            @else
-            <p class="small-heading" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
-            @endif          
-                
-
-            <a href="#payment" class="normal-text btn-blue-bordered d-block"  style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;text-align:center;margin-top:1.5vw;">Register Now</a>             
-
-
+<!-- START OF INTRODUCTION SECTION -->
+<div class="row m-0 page-container desktop-display" style="padding-bottom:5vw">
+    <div class="col-md-12 col-xs-12 p-0">
+        <p class="small-heading wow flash" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Get to Know Our Beloved Bootcamp</p>
+        <div style="width:80%">
+            <p class="normal-text" style="font-family: Rubik Bold;color:#626262;white-space:pre-line">{{$course->description}}</p>
+        </div>
+    </div>
+    @foreach($course->courseFeatures as $feature)
+    <div class="col-xs-6 col-md-4 p-0" style="display:flex;
+    @if($loop->iteration % 3 == 1)
+    justify-content:flex-start
+    @elseif($loop->iteration % 3 == 2)
+    justify-content:center
+    @elseif($loop->iteration % 3 == 0)
+    justify-content:flex-end
+    @endif
+    ">
+        <div class="krest-card" style="margin-top:1.5vw;height:auto;width:25vw;background-color:#2B6CAA">   
+            <img
+            src="{{asset($feature->icon)}}" 
             
-            <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Kamu akan dapat:</p>
-            <div style="padding-bottom:2vw;border-bottom:4px solid #2B6CAA">
-                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">109 Menit video eksklusif</span></p>
-                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">1 Assesment</span></p>
-                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Akses seumur hidup</span></p>
-                <p class="normal-text" style="font-family:Rubik Regular;color: rgba(43, 108, 170, 0.5);margin-bottom:0px;margin-top:1vw"><i class="fas fa-circle"></i> <span style="margin-left:0.5vw;color:#3B3C43">Sertifikat keberhasilan</span></p>
-            </div>
-            <p class="small-text" style="font-family:Rubik Medium;color: #3B3C43;margin-bottom:2vw;margin-top:2vw;">Butuh pelatihan untuk perusahaan Anda?</p>
-            <div style="text-align:center">
-                <a href="/for-corporate/krest" class="small-text btn-purple-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;margin-top:1vw">Program Krest</a>
-            </div>
-
+            style="width:4vw;height:4vw;object-fit:contain;border-radius:10px" class="img-fluid" alt="ICON IMAGE">
+            <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
+            <p id="krest-card-description" class="normal-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;text-align: justify;text-justify: inter-word;">{{$feature->feature}}</p>
         </div>
-        @if(count($schedules) != 0)
+    </div>
+    @endforeach
+</div>
+<!-- END OF INTRODUCTION SECTION -->
 
-        <!-- START COUNT DOWN CARD -->
-        <div class="course-detail-card-green" id="countdown-card" style="margin-top:2vw">
-            <p class="normal-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Countdown Registration:</p>
-            <div style="border:2px solid #2B6CAA;padding:1vw;display:flex;align-items:center;justify-content:space-between;border-radius:10px;margin-top:1vw">
-                <div style="text-align:center">
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Days</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="days"></p>
-                </div>
-                <div style="text-align:center">
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Hours</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="hours"></p>
-                </div>
-                <div style="text-align:center">
-                    <p class="small-text" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px">Minutes</p>
-                    <p class="small-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px" id="minutes"></p>
-                </div>
+<!-- START OF INTRODUCTION MOBILE SECTION -->
+<div class="row m-0 page-container mobile-display" style="padding-bottom:5vw;display:none;padding-top:10vw">
+    <div class="col-12 p-0">
+        <p class="small-heading wow flash" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Introduction to Our Bootcamp</p>
+        <div style="width:100%">
+            <p class="normal-text" style="font-family: Rubik Bold;color:#626262;white-space:pre-line">{{$course->description}}</p>
+        </div>
+    </div>
+    <div class="row m-0 p-0">
+        @foreach($course->courseFeatures as $feature)
+        
+        <div class="col-12 p-0" style="display:flex;
+        justify-content:center
+        ">
+            <div class="krest-card" style="margin-top:1.5vw;height:auto !important;width:100% !important;background-color:#2B6CAA">   
+                <p id="krest-card-title" class="bigger-text" style="font-family:Rubik Medium;margin-top:1vw">{{$feature->title}}</p>
+                <p id="krest-card-description" class="normal-text" style="font-family:Rubik Regular;color:#FFFFFF;margin-top:1vw;">{{$feature->feature}}</p>
             </div>
         </div>
-        <!-- END OF COUNT DOWN CARD -->
+        @endforeach
+    </div>
+</div>
+<!-- END OF INTRODUCTION MOBILE SECTION -->
+
+<!-- START OF GROWTH HACKING SECTION -->
+<div class="row m-0 page-container" style="background-color: #F6F6F6;padding-top:5vw;padding-bottom:5vw">
+    <div class="col-12 p-0" style="text-align: center;">
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">Find Your “WHY”</p>
+    </div>
+
+    <!-- START OF SLIDER SECTION -->
+    <div class="row m-0 p-0 mobile-display" style="padding:4vw;display:none">
+        <div class="col-12 p-0" id="gallery" style="display:flex;align-items:flex-start;overflow-y: hidden;height:auto;cursor:grab">
+            @foreach($course->bootcampDescriptions as $about)
+
+            <div class="item" @if($loop->iteration > 1) style="margin-left:8vw" @endif >
+                <div style="border-radius: 10px;border: 0.5px solid #2B6CAA;width:60vw;height:auto">
+                    <div style="background-color:#2B6CAA;height:15vw;border-radius:10px 10px 0px 0px">
+                    </div>
+                    <div style="height:auto;text-align:center;padding:2vw">
+                        <img src="{{ asset($about->image) }}" style="width:30vw;border-radius:10px;margin-top:-10vw" class="img-fluid" alt="KREST">
+                        <p class="bigger-text" style="font-family: Poppins Medium;margin-top:3vw">{{$about->title}}</p>
+                        
+                        <p class="normal-text show-read-more" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line;text-align:left">{{$about->description}}</p>
+
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+                
+    </div>
+    <!-- END OF SLIDER SECTION -->
+
+
+
+    <div class="col-12 growth-hacking-title desktop-display" style="">
+        <!-- START OF CONTENT LINKS -->
+        <div style="border: 2px solid #2B6CAA;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+            @foreach($course->bootcampDescriptions as $about)
+            <!-- START OF ONE LINK -->
+            <div style="@if(!$loop->last) border-right: 2px solid #2B6CAA @endif" class="growth-links growth-title @if($loop->first) growth-title-active @endif" onclick="growthHacking(event, 'growth-{{$loop->iteration}}')">
+                <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px">{{$about->title}}</p>
+            </div>
+            <!-- END OF ONE LINK -->
+            @endforeach
+        </div>
+        <!-- END OF CONTENT LINK -->
+    </div>
+    @foreach($course->bootcampDescriptions as $about)
+    <!-- START OF ONE CONTENT SECTION -->
+    <div class="growth-content desktop-display"  id="growth-{{$loop->iteration}}" @if(!$loop->first) style="display:none" @endif >
+        <div class="row m-0 "style="padding-top:4vw">
+            <div class="col-lg-4 col-xs-12 p-0">
+                <img src="{{ asset($about->image) }}" style="width:100%;border-radius:10px" class="img-fluid" alt="KREST">
+
+            </div>
+            <div class="col-lg-8 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+                <div id="growth-hacking-description">
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;white-space:pre-line;text-align: justify;text-justify: inter-word;">{{$about->description}}</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END OF ONE CONTENT SECTION -->
+    @endforeach
+    
+
+</div>
+<!-- END OF GROWTH HACKING SECTION -->
+
+
+<!-- START OF SCHEDULE AND DELIVERY METHOD -->
+<div class="row m-0 page-container" id="schedule-section" style="padding-top:5vw;padding-bottom:5vw">
+    <div class="col-12 p-0" style="margin-bottom:4vw">
+        <div class="container-schedule-delivery">
+            <p class="small-heading schedule-links schedule-title schedule-title-active" onclick="changeSchedule(event, 'bootcamp-schedule')" style="font-family: Rubik Bold;margin-right:3vw;cursor:pointer">Bootcamp Schedule</p>
+            <p class="small-heading schedule-links schedule-title" onclick="changeSchedule(event, 'delivery-method')" style="font-family: Rubik Bold;margin-left:3vw;cursor:pointer">Delivery Method</p>
+        </div>
+    </div>
+    <!-- START OF BOOTCAMP SCHEDULE -->
+    <div class="schedule-content "  id="bootcamp-schedule">
+
+        <div class="row m-0">
+            <!-- START OF LEFT SECTION -->
+            <div class="col-xs-12 col-lg-6 p-0">
+                <div id="schedule-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+                    <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
+                        @foreach($course->bootcampSchedules as $schedule)
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item @if($loop->first) active @endif">
+                            <div style="display: flex;justify-content: center;">
+                                <div class="bootcamp-schedule-card-container">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">{{$schedule->title}}</p>
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;">{{date('d M', strtotime($schedule->date_start))}} - {{date('d M Y', strtotime($schedule->date_end))}}</p>
+                                    <p class="normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-bottom: 0.4vw;">{{$schedule->subtitle}}</p>
+                                    <ul>
+                                        @foreach($schedule->bootcampScheduleDetails as $detail)
+                                        <li style="color:#2B6CAA;font-family: Rubik Regular;">
+                                            <p class="normal-text" style="margin-bottom: 0.3vw;">{{$detail->description}}</p>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev"    data-bs-target="#schedule-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                        <img src="/assets/images/icons/arrow-left.svg" class="left-arrow-delivery-method" id="carousel-control-left-menu-image " style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+                        <span class="visually-hidden">Prev</span>
+                    </a>
+                    <a class="carousel-control-next"   data-bs-target="#schedule-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                        <img src="/assets/images/icons/arrow-right.svg" class="right-arrow-delivery-method" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>  
+            </div>
+            <!-- END OF LEFT SECTION -->
+            <!-- START OF RIGHT SECTION -->
+            <div class="col-lg-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
+                <div style="padding-left: 5vw;" id="plbn">
+                    <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">{{$course->bootcampCourseDetail->what_will_be_taught}}</p>
+                    @if (session()->has('send_syllabus_message'))
+
+                    <div class="p-0 mt-2 mb-0">
+                        <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                        {{ session()->get('send_syllabus_message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    @endif
+                    @if($course->bootcampCourseDetail->syllabus != null) 
+                    <form action="{{route('bootcamp.sendSyllabus', $course->id)}}" method="post">
+                        @csrf
+                        <button  @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif   class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
+                    </form>
+                    @endif
+
+
+                </div>
+
+                
+            </div>
+            <!-- END OF RIGHT SECTION -->        
+        </div>
+    </div>
+    <!-- END OF BOOTCAMP SCHEDULE -->
+    <!-- START OF DELIVERY METHOD -->
+    <div class="schedule-content"  id="delivery-method" style="display: none;">
+        <div class="row m-0">
+            <!-- START OF LEFT SECTION -->
+            <div class="col-xs-12 col-lg-6 p-0">
+                <div id="delivery-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+                    <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item active">
+                            <div style="display: flex;justify-content: center;">
+                                <div class="bootcamp-delivery-method-container">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Experiential learning</p>
+                                    <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Mempercepat proses belajar melalui learning-by-doing dan refleksi dari pengalaman tersebut</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item">
+                            <div style="display: flex;justify-content: center;">
+                                <div class="bootcamp-delivery-method-container">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Online Delivery</p>
+                                    <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Ikuti kelas dari belahan dunia mana saja!</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item">
+                            <div style="display: flex;justify-content: center;">
+                                <div class="bootcamp-delivery-method-container">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Fun and Interactive</p>
+                                    <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Setiap sesi telah kami desain agar menyenangkan untukmu!</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                        <!-- START OF ONE ITEM -->
+                        <div class="carousel-item">
+                            <div style="display: flex;justify-content: center;">
+                                <div class="bootcamp-delivery-method-container">
+                                    <p class="bigger-text" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0.4vw">Go together, go far</p>
+                                    <hr style="background:#2B6CAA;height:0.2vw;border-radius:10px;">
+                                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Dengan buddy system, melangkah bersama untuk berkembang lebih jauh.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ONE ITEM -->
+                    </div>
+                    <a class="carousel-control-prev"   data-bs-target="#delivery-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                        <img src="/assets/images/icons/arrow-left.svg" class="left-arrow-delivery-method" id="carousel-control-left-menu-image " style="width:2vw;z-index:99;margin-left:0px" alt="NEXT">
+                        <span class="visually-hidden">Prev</span>
+                    </a>
+                    <a class="carousel-control-next"   data-bs-target="#delivery-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                        <img src="/assets/images/icons/arrow-right.svg" class="right-arrow-delivery-method" id="carousel-control-right-menu-image" style="width:2vw;z-index:99;margin-right:0px" alt="NEXT">
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>  
+            </div>
+            <!-- END OF LEFT SECTION -->
+            <!-- START OF RIGHT SECTION -->
+            <div class="col-lg-6 col-xs-12 p-0"  style="display: flex;flex-direction: column;justify-content: center;">
+                <div style="padding-left: 5vw;" id="plbn">
+                    <p class="sub-description" style="font-family: Rubik Bold;color:#3B3C43;">What will be taught in our <br> bootcamp?</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">{{$course->bootcampCourseDetail->what_will_be_taught}}</p>
+                    @if (session()->has('send_syllabus_message'))
+
+                    <div class="p-0 mt-2 mb-0">
+                        <div class="alert alert-primary alert-dismissible fade show m-0 normal-text" style="font-family:Rubik Regular" role="alert" >
+                        {{ session()->get('send_syllabus_message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    @endif
+                    @if($course->bootcampCourseDetail->syllabus != null) 
+                    <form action="{{route('bootcamp.sendSyllabus', $course->id)}}" method="post">
+                        @csrf
+                        <button  @if(!Auth::check()) onclick="openLogin()" type="button" @else type="submit" @endif  class="btn-blue-bordered normal-text" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Request for Syllabus</button>
+                    </form>
+                    @endif
+
+                </div>
+            </div>
+            <!-- END OF RIGHT SECTION -->        
+        </div>
+    </div>
+    <!-- END OF DELIVERY METHOD -->
+</div>
+<!-- END OF SCHEDULE AND DELIVERY METHOD -->
+
+<!-- START OF WHAT WILL YOU GET SECTION -->
+<div class="row m-0 page-container desktop-display" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
+    <div class="col-12 p-0" style="text-align: center;">
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">What will you get?</p>
+    </div>
+    <div class="row m-0" style="padding-top:2vw">
+        @if(count($course->bootcampBenefits )< 4)
+        @foreach($course->bootcampBenefits as $benefit)
+        <div class="col-3" style="display:flex;justify-content:center  ">
+            <div class="our-mission-card" style="@if($loop->iteration > 4) margin-top:3vw @endif;height:auto !important" >
+                <div style="text-align:left">
+                    <div style="text-align:center;margin-top:2vw">
+                        <img 
+
+                        src="{{asset($benefit->icon)}}" 
+                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="BENNEFIT ICONS">
+                    </div>
+                    <div style="height:5vw;margin-top:1vw;">
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;display: -webkit-box;
+                        overflow : hidden !important;
+                        text-overflow: ellipsis !important;
+                        -webkit-line-clamp: 3 !important;
+                        -webkit-box-orient: vertical !important;height:">{{$benefit->title}}</p>
+                    </div>
+                    <p class="normal-text" style="font-family: Rubik Regular;margin-top:0.5vw;color:#888888;white-space:pre-line;">{{$benefit->description}}</p>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        @else
+        @foreach($course->bootcampBenefits as $benefit)
+        <div class="col-4" style="display:flex;justify-content:center;@if($loop->iteration > 3) margin-left:8vw; @endif  ">
+            <div class="our-mission-card" style="@if($loop->iteration > 3) margin-top:3vw; @endif" >
+                <div style="text-align:left">
+                    <div style="text-align:center;margin-top:2vw">
+                        <img 
+
+                        src="{{asset($benefit->icon)}}" 
+
+                        style="width:5vw;height:5vw;object-fit:contain" class="img-fluid" alt="BENEFIT ICONS">
+                    </div>
+                    <div style="margin-top:1vw;">
+                        <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">{{$benefit->title}}</p>
+                    </div>
+                    <p class="normal-text" style="font-family: Rubik Regular;margin-top:1vw;color:#888888;white-space:pre-line;">{{$benefit->description}}</p>
+                </div>
+            </div>
+        </div>
+        @endforeach
         @endif
+    </div>
+</div>
+<!-- END OF WHAT WILL YOU GET SECTION -->
 
-        <div style="padding:2vw;background:#FFFFFF">
-            <p class="small-heading" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;margin-top:1.5vw">Ada <span style="font-family:Hypebeast">Pertanyaan?</span> </p>
-            <p class="normal-text" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:1vw;margin-bottom:2vw">Langsung hubungi kami melalui:</p>
-            <a  href="https://api.whatsapp.com/send?phone=+62818180509&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." target="_blank" class="normal-text btn-blue-bordered btn-blue-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;"><i class="fab fa-whatsapp"></i> <span style="margin-left:0.5vw">+628112345678</span></a>
+<!-- START OF WHAT WILL YOU GET MOBILE SECTION -->
+<div class="row m-0 page-container mobile-display" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;display:none">
+    <div class="col-12 p-0" style="text-align: center;">
+        <p class="small-heading wow fadeInUp" data-wow-delay="0.5s" style="font-family: Rubik Bold;color:#2B6CAA;">What will you get?</p>
+    </div>
+    <div class="row m-0 p-0" >
+        @foreach($course->bootcampBenefits as $benefit)
+        <div class="col-12 p-0" style="display:flex;justify-content:center">
+            <div class="our-mission-card-mobile" style="margin-top:3vw">
+                <div style="text-align:left">
+                    <div style="text-align:center;margin-top:2vw">
+                        <img
+                        src="{{asset($benefit->icon)}}" 
+                        style="width:11vw;" class="img-fluid" alt="BENEFIT ICON">
+                    </div>
+                    <div style="margin-top:4vw;">
+                        <p class="bigger-text our-mission-card-title" style="text-align:center;">{{$benefit->title}}</p>
+                    </div>
+                    <p class="normal-text our-mission-card-description" style=";white-space:pre-line">{{$benefit->description}}</p>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+<!-- END OF WHAT WILL YOU GET MOBILE SECTION -->
 
+<!-- START OF BOOTCAMP INI UNTUK SIAPA -->
+<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;">
+    <!-- START OF LEFT SECTION -->
+    <div class="col-lg-5 p-0 col-xs-12 wow fadeInLeft"  style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start;padding-right:5vw">
+        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;margin-bottom:0px">Who is this bootcamp for?</p>
+        <!--<p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Replenish him third creature and meat blessed void a fruit gathered you’re, they’re two waters own morning gathered greater shall had behold had seed.</p>-->
+        <div style="padding-top:2vw">
+            <a href="#payment-section" class="btn-blue-bordered normal-text desktop-display" style="font-family: Rubik Medium;color:#3B3C43;padding:0.5vw 2vw">Apply</a>
+        </div>
+    </div>
+    <!-- END OF LEFT SECTION -->
+
+    <!-- START OF RIGHT SECTION -->
+    <div class="col-lg-7 p-0 col-xs-12">
+        <div class="row m-0 p-0">
+            @php
+                $delay = 0.0;
+            @endphp
+            @foreach($course->bootcampCandidates as $candidate)
+            <!-- START OF ONE CARD -->
+            <div class="col-6 p-0 wow fadeInUp desktop-display" data-wow-delay="{{$delay}}s" @if($loop->iteration > 2) style="margin-top: 5vw;" @endif>
+                <div style="background: rgba(43, 108, 170, 0.1);padding:2vw 1vw 1vw 1vw;border-radius:10px;width:20vw">
+                    <img
+                    src="{{asset($candidate->icon)}}"
+                    style="width:5vw;margin-top:-7vw" class=""  alt="Bootcamp Logo">
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw;">{{$candidate->title}}</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;margin-top:0.5vw">{{$candidate->description}}</p>
+                </div>
+            </div>
+            <!-- END OF ONE CARD -->
+            <!-- START OF ONE CARD -->
+            <div class="col-12 p-0 wow fadeInUp mobile-display"  data-wow-delay="{{$delay}}s" @if($loop->iteration > 0) style="margin-top: 5vw;display:none" @endif>
+                <div style="background: rgba(43, 108, 170, 0.1);padding:3vw;border-radius:10px">
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:4vw">{{$candidate->title}}</p>
+                    <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px">{{$candidate->description}}</p>
+                </div>
+            </div>
+            <!-- END OF ONE CARD -->
+            @php
+                $delay += 0.2;
+            @endphp
+            @endforeach
         </div>
     </div>
     <!-- END OF RIGHT SECTION -->
-    @if(Auth::check())
-    <!-- START OF RECOMMENDED SECTION -->
-    <div class="col-12" style="margin-top:8vw">
-        <p class="sub-description" style="font-family:Rubik Medium;color:#3B3C43;margin-bottom:0px;">Pilihan kelas lainnya untuk kamu</p>
-        <!-- ONLINE COURSE -->
-        <div class="course-content" id="course-online" style="margin-top:2vw">
-                <div class="row m-0 p-0">
-                    @foreach($courseSuggestions as $course)
-                    <div class="col-4 p-0" >
-                        <div style="display: flex;@if($loop->iteration % 3 == 1) justify-content:flex-start @elseif ($loop->iteration % 3 == 2)justify-content:center @elseif ($loop->iteration % 3 == 0) justify-content:flex-end @endif">
-                            <!-- START OF ONE GREEN COURSE CARD -->
-                            <div class="course-card-blue">
-                                <div class="container">
-                                    <img src="{{ asset($course->thumbnail) }}" class="img-fluid" style="object-fit:cover;border-radius:10px 10px 0px 0px;width:100%;height:14vw" alt="Course's thumbnail not available..">
-                                    <div class="top-left card-tag small-text">Bootcamp</div>
-                                    <div class="bottom-left" id="course-card-description" style="opacity:0;bottom:0;text-align:left;">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: #FFFFFF;">{{ $course->description }}</p>
-                                    </div>
-                                </div>
-                                <div style="background:#FFFFFF;padding:1.5vw;border-radius:0px 0px 10px 10px">
-                                    <div style="height:4.5vw">
-                                        <div style="display:flex;justify-content:space-between;margin-bottom:0.5vw">
-                                            <a href="/online-course/{{$course->id}}" class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important;text-decoration:none">{{ $course->title }}</a>
-                                            <!-- <i style="font-size:2vw;padding-left:0.5vw" role="button"  aria-controls="course-collapse-{{ $course->id }}" data-toggle="collapse" href="#course-collapse-{{ $course->id }}" class="fas fa-caret-down"></i> -->
-                                        </div>
-                                        @foreach ($course->hashtags as $tag)
-                                            <a class="small-text" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);background: #FFFFFF;box-shadow: inset 0px 0px 2px #BFBFBF;border-radius: 5px;padding:0.2vw 0.5vw;text-decoration:none;">{{ $tag->hashtag }}</a>
-                                        @endforeach
-                                    </div>
-                                    <div class="collapse" id="course-collapse-{{ $course->id }}" style="margin-top:0.5vw">
-                                        <p class="small-text course-card-description" style="font-family: Rubik Regular;margin-bottom:0px;color: rgba(85, 82, 91, 0.8);">{{ $course->description }}</p>
-                                    </div>
+</div>
+<!-- END OF BOOTCAMP INI UNTUK SIAPA -->
 
-                                    <div style="display: flex;justify-content:space-between;margin-top:1vw" >
-                                        <p class="very-small-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">
-                                        @foreach($course->teachers as $teacher)
-                                            @if ($loop->last && count($course->teachers) != 1)
-                                            dan
-                                            @elseif (!$loop->first)
-                                            ,
-                                            @endif
-                                            {{$teacher->name}}
-                                        @endforeach
-                                        </p>
-                                        <p class="very-small-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#55525B;">
-                                        @if ($course->courseType->type == 'Course' || $course->courseType->type == 'Bootcamp')
-                                            @if ($course->total_duration)
-                                                {{ explode(',', $course->total_duration)[0] }} mins
-                                            @else
-                                                - mins
-                                            @endif
-                                        @elseif ($course->courseType->type == 'Woki')
-                                            @if ($course->wokiCourseDetail->event_duration)
-                                                {{ explode(',', $course->wokiCourseDetail->event_duration)[0] }} mins
-                                            @else
-                                                - mins
-                                            @endif
-                                        @endif
-                                        </p>
-                                        
-                                    </div>
-                                    <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
-                                        <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
-                                        <div style="display: flex;justify-content:center;margin-left:1vw">
-                                            @for ($i = 1; $i < 6; $i++)
-                                                @if ($i <= $course->average_rating)
-                                                    @if ($i == 1)
-                                                        <i style="color:#F4C257" class="fas fa-star small-text"></i>
-                                                    @else
-                                                        <i style="margin-left:0.5vw;color:#F4C257" class="fas fa-star small-text"></i>
-                                                    @endif
-                                                @else
-                                                    @if ($i == 1)
-                                                        <i style="color:#B3B5C2" class="fas fa-star small-text"></i>
-                                                    @else
-                                                        <i style="margin-left:0.5vw;color:#B3B5C2" class="fas fa-star small-text"></i>
-                                                    @endif
-                                                @endif
-                                            @endfor
-                                        </div>
-                                    </div>
-                                    <div style="display: flex;justify-content:space-between;align-items:center;margin-top:1vw">
-                                        @if ($course->price == 0)
-                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">FREE</p>
-                                        @else
-                                            <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->price, 0, ',', ',') }}</p>
-                                        @endif
-                                        <a href="/online-course/{{$course->id}}" class="course-card-button normal-text">Enroll Now</a>
-                                    </div>
-                                </div>
+<!-- START OF HOW TO JOIN SECTION -->
+<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F6F6F6;">
+    
+    <div class="col-lg-12 p-0 col-xs-12" style="text-align:center">
+        <p class="small-heading wow bounce" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Admission Journey</p>
+        <div style="display:flex;justify-content:center">
+            <div class="accordion" id="accordionExample" style="width:50vw;">
+
+                <div class="accordion-item" style="display:flex;" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-radius: 10px 0px 0px 0px;">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">1</p>
+                    </div>
+                    <div class="accordion-admission-item" style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-top: 3px solid rgba(43, 108, 170, 0.25);border-radius: 0px 10px 0px 0px;width: 100%;cursor:pointer">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Online Application</p>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Selesaikan formulir singkat berdurasi 5 menit untuk menginformasikan kami latar belakang, tujuan, dan pengalaman kamu sebelumnya</p>
                             </div>
-                            <!-- END OF ONE GREEN COURSE CARD -->
                         </div>
                     </div>
-                    @endforeach
+                </div>
+                <div class="accordion-item" style="display:flex;" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">2</p>
+                    </div>
+                    <div class="accordion-admission-item" style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;cursor:pointer">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Online Test</p>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Mengerjakan tes analitis dan pengetahuan dasar yang akan dilakukan secara online</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;"  data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">3</p>
+                    </div>
+                    <div class="accordion-admission-item" style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;cursor:pointer">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Free Introduction Class</p>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Menghadiri introduction class tidak berbayar yang diadakan di minggu pertama serta menyelesaikan assignment yang diberikan pada kelas tersebut.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;"  data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">4</p>
+                    </div>
+                    <div class="accordion-admission-item" style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;cursor:pointer">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Video Call</p>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Bertemu via video call dengan Counselor kami untuk memastikan bahwa harapan dan tujuan karir kamu selaras dengan apa yang program kami tawarkan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;"  data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">5</p>
+                    </div>
+                    <div class="accordion-admission-item" style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;cursor:pointer">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Secure Financing</p>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Akhirnya, memilih antara metode pembayaran penuh & angsuran atau melakukan finalisasi skema Income Share Agreement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="display:flex;"  data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                    <div id="left-section" style="width:3vw;background-color:#2B6CAA;display: flex;flex-direction: column;justify-content: center;align-items:center;padding:1vw;border-left: 3px solid rgba(43, 108, 170, 0.25);border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);border-radius: 0px 0px 0px 10px;">
+                        <p class="bigger-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#FFFFFF;">6</p>
+                    </div>
+                    <div class="accordion-admission-item"  style="background:#FFFFFF;padding:1vw;display: flex;flex-direction: column;justify-content: center;align-items:flex-start;border-right: 3px solid rgba(43, 108, 170, 0.25);border-bottom: 3px solid rgba(43, 108, 170, 0.25);width: 100%;border-radius: 0px 0px 10px 0px;cursor:pointer">
+                        <p class="bigger-text accordion" style="font-family: Rubik Bold;margin-bottom:0px;color:#3B3C43;cursor:pointer;text-align:left">Start Class</p>
+                        <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="" style="margin-top:1vw;text-align:left">
+                                <p class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43">Setelah merampungkan hal terkait pembayaran, kamu akhirnya siap mentransformasi karirmu!</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- END OF ONLINE COURSE -->
+        </div>
+
     </div>
-    <!-- END OF RECOMMENDED SECTION -->
-    @endif
+    
+    <!-- END OF RIGHT SECTION -->
 </div>
-<!-- END OF BANNER SECTION -->
+<!-- END OF HOW TO JOIN SECTION -->
+
+<!-- START OF BISA BERKARIR JADI APA SECTION -->
+<div class="row m-0 page-container desktop-display" style="padding-top:5vw;padding-bottom:5vw">
+    <div class="col-12 p-0">
+        <p class="small-heading wow fadeInLeft" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Here are your future career choices</p>
+    </div>
+    @foreach($course->bootcampFutureCareers as $career)
+    <!-- START OF ONE CARD -->
+    <div class="col-md-4 col-xs-6 p-0" style="display: flex;
+    @if($loop->iteration % 3 == 1)
+    justify-content:flex-start;
+    @elseif($loop->iteration % 3 == 2)
+    justify-content:center;
+    @elseif($loop->iteration % 3 == 0)
+    justify-content:flex-end;
+    @endif
+    ">
+        <div style="background: #FFFFFF;border: 3px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:2vw;width:22vw;height:26vw">
+            <div style="text-align:center;margin-bottom:1vw">
+                <img src="{{asset($career->thumbnail)}}" style="width:7vw;" alt="Bootcamp Illustration">
+            </div>
+            <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:0.3vw">{{$career->title}}</p>
+            <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0p;">{{$career->description}}</p>
+        </div>
+    </div>
+    <!-- END OF ONE CARD -->
+    @endforeach
+
+</div>
+<!-- END OF BISA BERKARIR JADI APA SECTION -->
+
+<!-- START OF BISA BERKARIR JADI APA MOBILE SECTION -->
+<div class="row m-0 page-container mobile-display" style="padding-top:5vw;padding-bottom:5vw;display:none">
+    <div class="col-12 p-0">
+        <p class="small-heading wow fadeInLeft mb-0" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Here are your future career choices</p>
+    </div>
+    <div class="row m-0 p-0">
+        @foreach($course->bootcampFutureCareers as $career)
+        <!-- START OF ONE CARD -->
+        <div class="col-12 p-0" style="display:flex;justify-content:center">
+            <div style="background: #FFFFFF;border: 2px solid #2B6CAA;box-shadow: 0px 0px 8px 2px rgba(157, 157, 157, 0.11);border-radius: 10px;padding:3vw;width:100%;height:auto;margin-top:5vw">
+                <div style="text-align:center;margin-bottom:1vw" class="desktop-display">
+                    <img src="{{asset($career->thumbnail)}}" style="width:13vw;" alt="Bootcamp Illustration">
+                </div>
+                <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;margin-bottom:3vw">{{$career->title}}</p>
+                <p class="normal-text" style="font-family: Rubik Regular;color:#3B3C43;margin-bottom:0px;">{{$career->description}}</p>
+            </div>
+        </div>
+        <!-- END OF ONE CARD -->
+        @endforeach
+    </div>
+
+</div>
+<!-- END OF BISA BERKARIR JADI APA MOBILE SECTION -->
+
+<!-- START OF OUR INSTRUCTORS -->
+<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color: #F5F2F2;">
+    <div class="col-12 p-0">
+        <div id="instructors-carousel" class="carousel slide" data-interval="10000" data-ride="carousel">
+            <div class="carousel-inner" style="padding: 0vw 3vw;text-align:center">
+                @foreach($course->teachers as $teacher)
+                <!-- START OF ONE ITEM -->
+                <div class="carousel-item @if($loop->first) active @endif">
+                    <div class="row m-0"> 
+                        <!-- START OF LEFT SECTION -->
+                        <div class="col-12 col-lg-5" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+                            <img src="{{asset($teacher->image)}}" id="instructor-image" class="image-teacher-bootcamp" alt="Bootcamp Instructor">
+                        </div>
+                        <!-- END OF LEFT SECTION -->
+                        <!-- START OF RIGHT SECTION -->
+                        <div class="col-12 col-lg-7 p-0" style="text-align:left">
+                            <p class="small-heading" id="mtm2"  data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Hi! We're Your<span style="color:#67BBA3"> Instructors</span></p>
+                            <p class="normal-text" style="font-family: Rubik Regular;color:#626262;text-align:left">{{$teacher->description}}​</p>
+                            <div style="display:flex;align-items:flex-start">
+                                <div class="desktop-display">
+                                    @if($teacher->company_logo != null)
+                                    <img src="{{asset($teacher->company_logo)}}" id="bootcamp-instructor-company-logo" style="max-width:8vw;height:4vw;object-fit:contain;border-radius:10px;margin-right:1vw" alt="Bootcamp Instructor Company">
+                                    @endif
+                                </div>
+                                <div >
+                                    <p class="bigger-text" style="font-family: Rubik Medium;color:#626262;text-align:left;margin-bottom:0px">{{$teacher->name}}</p>
+                                    @if($teacher->occupancy != null)
+                                    <p class="normal-text" id="mtm2" style="font-family: Rubik Regular;color:#626262;text-align:left">
+                                    {{$teacher->occupancy}}​
+                                    </p>
+                                    @endif
+                                </div>
+                            </div>
+                            @if($teacher->company_logo != null)
+                            <img src="{{asset($teacher->company_logo)}}" class="mobile-display" id="bootcamp-instructor-company-logo" style="display:none;max-width:8vw;height:4vw;object-fit:contain;border-radius:10px;margin-right:1vw" alt="Bootcamp Instructor Company">
+                            @endif
+                            
+                        </div>
+                        <!-- END OF RIGHT SECTION -->
+                    </div>
+                </div>
+                <!-- END OF ONE ITEM -->
+                @endforeach
+            </div>
+            @if(count($course->teachers) > 1)
+            <a class="carousel-control-prev" id="carousel-arrow-mobile"   data-bs-target="#instructors-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+                <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" class="bootcamp-left-arrow" alt="NEXT">
+                <span class="visually-hidden">Prev</span>
+            </a>
+            <a class="carousel-control-next" id="carousel-arrow-mobile"  data-bs-target="#instructors-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+                <img src="/assets/images/icons/arrow-right.svg" class="bootcamp-right-arrow" id="carousel-control-right-menu-image" style="" alt="NEXT">
+                <span class="visually-hidden">Next</span>
+            </a>
+            @endif
+        </div>      
+
+    </div>
+</div>
+<!-- END OF OUR INSTRUCTORS -->
+
+<!-- START OF OUR HIRING PARTNERS SECTION -->
+<div class="row m-0 page-container d-none" style="padding-top:5vw;padding-bottom:5vw;">
+    <!-- START OF LEFT SECTION -->
+    <div class="col-lg-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+        <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;">Our Hiring Partners</p>
+        <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Seorang Growth Marketer di Telkom Omni Communication Assistant (OCA). Welby percaya, Growth Hacking merupakan skill sekaligus pekerjaan berharga yang akan terus diperlukan di setiap divisi dan bagian untuk pertumbuhan bisnis yang optimal.</p>
+
+    </div>
+    <!-- END OF LEFT SECTION -->
+    <!-- START OF RIGHT SECTION -->
+    <div class="col-lg-6 col-xs-12" style="padding-left: 5vw;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap: wrap;">
+            @php
+                $delay = 0.2;
+            @endphp
+            @foreach($course->bootcampHiringPartners as $partner)
+            <img class="wow fadeInUp bootcamp-image-hiring-partner" data-wow-delay="{{$delay}}s" src="{{asset($partner->image)}}"  alt="Bootcamp Partner">
+            @php
+                $delay += 0.2;
+            @endphp
+            @endforeach
+        </div>
+    </div>
+    <!-- END OF RIGHT SECTION -->
+</div>
+<!-- END OF OUR HIRING PARTNERS SECTION -->
+
+<!-- START OF PRICING PLAN -->
+<div class="row m-0 page-container" id="payment-section" style="padding-top:5vw;padding-bottom:5vw;">
+    <div class="col-12 p-0" style="text-align: center;margin-bottom:2vw">
+        <p class="small-heading wow flash" data-wow-delay="0.2s" style="font-family: Rubik Bold;color:#2B6CAA;">Tuition for Future Investment</p>
+    </div>
+    <!-- START OF FULL REGISTRATION -->
+    <div class="col-lg-6 col-xs-12 p-0" >
+        <div class="full-registration-container">
+            <div>
+                <p class="bigger-text" style="font-family: Rubik Bold;color:#FFFFFF;">Full Payment</p>
+                <div class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;">{!! $course->bootcampCourseDetail->full_payment_description !!}</div>
+                <p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;">Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }}</p>
+                <!--<p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;text-decoration: line-through;opacity:0.7;margin-bottom:0.5vw">Rp. 15,000,000</p>
+                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;opacity:0.7;margin-bottom:0.5vw">1st Batch Discount <span style="text-decoration: line-through;"> Rp. 12,000,000</span></p>
+                <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;">Discount tambahan untuk early bird!</p>
+                <p class="sub-description" style="font-family: Rubik Medium;color:#FFFFFF;">Now Rp. {{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }}</p>
+                <p class="small-text" style="font-family: Rubik Regular;color:#FFFFFF;">Valid until 29 August 2021</p>-->
+                @foreach ($course->bootcampFullPaymentFeatures as $feature)
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                    <p class="normal-text" style="color:#FFFFFF;font-family:Rubik Regular">{{$feature->feature}}</p>
+                </div>
+                @endforeach
+                
+            </div>
+            
+
+        </div>
+
+    </div>
+    <!-- END OF FULL REGISTRATION -->
+    <!-- START OF FREE TRIAL -->
+    <div class="col-lg-6 col-xs-12 p-0" id="mtm2">
+        <div class="free-trial-container">
+            <div>
+                <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;">Income Share Agreement</p>
+                <!--<p class="normal-text" style="font-family: Rubik Medium;color:#888888;margin-bottom:0.3vw">Ikut bootcamp tanpa bayar apapun di depan</p>
+                <p class="normal-text" style="font-family: Rubik Medium;color:#888888;">Bayar 30% dari penghasilan selama 18 bulan, maksimal Rp30jt</p>-->
+                <div class="normal-text" style="font-family: Rubik Medium;color:#FFFFFF;">{!! $course->bootcampCourseDetail->income_share_description !!}</div>
+                @foreach ($course->bootcampIncomeShareAgreementFeatures as $feature)
+                <div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">{{$feature->feature}}</p>
+                </div>
+                @endforeach
+                <!--<div style=display:flex;align-items:flex-start>
+                    <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                    <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Fasilitas penempatan kerja dan bayar setelah diterima tanpa bunga dan denda</p>
+                </div>-->
+                
+                
+            </div>
+            
+
+        </div>
+    </div>
+    <div class="col-12 p-0" id="mtm2">
+        <div class="what-will-you-get-container">
+            <div >
+                <div style="text-align: center;margin-bottom:2vw">
+                    <p class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;">What Will You Get?</p>
+                </div>
+                <div class="row m-0">
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:5.5vw>
+
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">80+ jam live workshop expert dari top StartUp di Indonesia</p>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:3vw>
+
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Fasilitas penempatan kerja ketika lulus</p>
+                        </div>
+
+                    </div>
+                    
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:5.5vw>
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">30+ modul dan praktek</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:3vw>
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Sertifikat kelulusan</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:5.5vw>
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Real project untuk memantapkan skill</p>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-xs-12 p-0">
+                        <div class="ml0" style=display:flex;align-items:flex-start;margin-left:3vw>
+                            <i class="fas fa-check normal-text" style="margin-right:0.5vw;color:#67BBA3"></i> 
+                            <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular">Fasilitas bimbingan karir one-on-one dari CV, Interview, Portfolio, sampai konsultasi arah karir</p>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <div class="col-12 desktop-display" style="display:flex;justify-content:center;align-items:center;margin-top:2vw">
+                        <div style="text-align:center">
+                            <a 
+                                @if(Auth::check())
+                                    
+                                    @if(auth()->user()->email_verified_at)
+                                        @if($bootcamp_application_count != 0)
+                                        onclick="return alert('You have a pending or an on going bootcamp application.')"
+                                        @else
+                                        href="#full-registration" 
+                                    @endif
+                    
+                                    @else
+                                        href="/dashboard" 
+                                    @endif
+                                
+                                @else 
+                                    onclick="openLogin()" 
+                                @endi
+                    
+                                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:30vw;">Apply</a>
+                        </div>
+                        <div style="padding-left:2vw;padding-right:2vw">
+                            <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">OR</p>
+                        </div>
+
+                        <div style="text-align:center">
+                            <a  
+                            @if(Auth::check())
+                            
+                                @if(auth()->user()->email_verified_at)
+                                    @if($bootcamp_application_count != 0)
+                                    onclick="return alert('You have a pending or an on going bootcamp application.')"
+                                    @else
+                                    href="#free-trial" 
+                                @endif
+
+                                @else
+                                    href="/dashboard" 
+                                @endif
+                            
+                            @else 
+                                onclick="openLogin()"
+                            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" style="display:inline-block;width:30vw;">Attend Free Intro Week</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 p-0 mobile-display" style="margin-top:4vw;text-align:center;display:none">
+        <div style="">
+            <a 
+                @if(Auth::check())
+                    
+                    @if(auth()->user()->email_verified_at)
+                        @if($bootcamp_application_count != 0)
+                        onclick="return alert('You have a pending or an on going bootcamp application.')"
+                        @else
+                        href="#full-registration" 
+                    @endif
+    
+                    @else
+                        href="/dashboard" 
+                    @endif
+                
+                @else 
+                    onclick="openLogin()" 
+                @endi
+    
+                @endif class="btn-blue-bordered normal-text register-now-button" id="free-trial-button" style="display:inline-block;width:30vw;">Apply</a>
+        </div>
+        <div style="padding-left:2vw;padding-right:2vw;padding-top:2vw">
+            <p class="normal-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0px">OR</p>
+        </div>
+
+        <div style="text-align:center">
+            <a  
+            @if(Auth::check())
+             
+                @if(auth()->user()->email_verified_at)
+                    @if($bootcamp_application_count != 0)
+                    onclick="return alert('You have a pending or an on going bootcamp application.')"
+                    @else
+                    href="#free-trial" 
+                @endif
+
+                @else
+                    href="/dashboard" 
+                @endif
+            
+            @else 
+                onclick="openLogin()"
+            @endif class="btn-blue-bordered normal-text free-trial-button" id="full-registration-button" style="display:inline-block;width:30vw;">Attend Free Intro Week</a>
+        </div>
+    </div>
+    <div class="col-6">
+        
+    </div>
+    <!-- END OF FREE TRIAL -->
+</div>
+<!-- END OF PRICING PLAN -->
+
+<!-- START OF OUR COMMUNITY -->
+<div class="row m-0 page-container" style="padding-top:5vw;padding-bottom:5vw;background-color:#F5F2F2">
+    <!-- START OF LEFT SECTION -->
+    <div class="col-lg-6 col-xs-12" style="display: flex;flex-direction: column;justify-content: center;align-items:flex-start">
+        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Still Hesitating?</p>
+        <p class="normal-text" style="font-family: Rubik Regular;color:#626262;">Jangan sungkan untuk bertanya kepada kami! Mulai dari struktur program, sampai program pembayaran. Apapun akan kami layani sebaik mungkin.</p>
+        <a href="https://api.whatsapp.com/send?phone={{$course->bootcampCourseDetail->whatsapp}}&text=Halo%21%20Saya%20ingin%20bertanya%20tentang%20program%20Bootcamp%20By%20Venidici%20" class="btn-blue-bordered normal-text our-community-bootcamp" >Consult via Whatsapp</a>
+
+    </div>    
+    <!-- END OF LEFT SECTION -->
+    <!-- START OF RIGHT SECTION -->
+    <div class="col-lg-6 p-0 col-xs-12 desktop-display">
+        <img src="/assets/images/client/Community_Asset_3.png" class="img-fluid" style="width:100%;height:20vw;object-fit:cover" alt="">
+    </div>
+    <div class="col-12 p-0 mobile-display" style="display:none;margin-top:3vw">
+        <img src="/assets/images/client/Community_Asset_3.png" class="img-fluid" style="width:100%;height:35vw;object-fit:cover" alt="">
+    </div>        
+    <!-- END OF RIGHT SECTION -->
+</div>
+<!-- END OF OUR COMMUNITY -->
+
+<!-- START OF FAQ SECTION -->
+<div class="row m-0 page-container faq-background" style="padding-top:6vw;padding-bottom:6vw">
+        <div class="col-12 p-0" style="text-align:center">
+        <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">Frequently Asked Questions</p>
+        </div>
+        <!-- START OF QUESTION SECTION -->
+        <div class="col-12 p-0" style="display:flex;justify-content:center;margin-top:1.5vw">
+            <div style="background-color:#F9F9F9;padding:1.5vw;border-radius:10px;width:92%">
+                <!-- START OF ONE FAQ CARD -->
+                <div class="faq-card">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Schedule</p>
+                        <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ1" role="button" aria-expanded="false" aria-controls="collapseFaQ1">
+                            <i class="fas fa-chevron-down"></i>
+                        </p>                                    
+                    </div>
+                    <div class="collapse" id="collapseFaQ1" style="margin-top:1vw">
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Kapan Bootcamp Growth Hacking diadakan?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1A" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1A">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1A" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Tanggal 20 september 2021 sampai 31 Januari 2022 selama 16 minggu terhitung dari waktu kegiatan dimulai. Kami hanya menerima 15-20 siswa untuk mengikuti program ini. Untuk mendapatkan beasiswa anda dapat mendaftar sebelum tanggal 26.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Dimana Venidici berada?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1B" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1B">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1B" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Venidici berpusat di Jakarta, tetapi kelas yang kami adakan secara online dan terbuka untuk seluruh indonesia untuk umum.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Berapa lama kegiatan program bootcamp diadakan?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1C" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1C">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1C" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Program diadakan selama 16 minggu disusun dengan rangkaian silabus tiap minggunya, anda dapat meluangkan waktu anda 15-20 jam pada jam 7-10 pm tiap minggu untuk mendapatkan materi dari mentor di hari selasa, kamis dan sabtu.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Bagaimana jika saya berhalangan untuk hadir dan tidak mengikuti mentoring?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1D" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1D">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1D" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Kami mengadakan dua tipe kelas yaitu sesi live dan recording, jika anda berhalangan untuk hadir dalam waktu yang sudah ditentukan anda dapat mengaksesnya melalui fitur recording. Siswa yang berhalangan hadir diharapkan tetap mengerjakan tugas yang sudah diberikan dan ada minimal kehadiran untuk mengklaim Venidici Guarantee.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Apa yang terjadi jika saya memutuskan untuk tidak melanjutkan program bootcamp tersebut?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ1E" role="button" aria-expanded="false" aria-controls="collapseSubFaQ1E">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ1E" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Kami sangat mengerti apapun yang menjadi alasan siswa tidak dapat melanjutkan program bootcamp kami. Anda dapat melakukan refund dikurangi dengan Rp. 1.500.000 sebagai biaya administrasi terhitung dari minggu pertama kegiatan pembelajaran dimulai.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                    </div>
+                </div>
+                <!-- END OF ONE FAQ CARD -->
+                <!-- START OF ONE FAQ CARD -->
+                <div class="faq-card" style="margin-top: 1vw;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Learning</p>
+                        <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseFaQ2" role="button" aria-expanded="false" aria-controls="collapseFaQ2">
+                            <i class="fas fa-chevron-down"></i>
+                        </p>                                    
+                    </div>
+                    <div class="collapse" id="collapseFaQ2" style="margin-top:1vw">
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Kriteria seperti apakah yang dapat bergabung dalam program bootcamp?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ2A" role="button" aria-expanded="false" aria-controls="collapseSubFaQ2A">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ2A" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Kami melihat dari para pendaftar yang memiliki motivasi tinggi, semangat and ingin belajar, dan pekerja keras. Kami dapat menerima siswa yang bukan berlatar belakang marketing dan IT, kami membutuhkan anda yang memiliki growth mindset dan proaktif untuk berpartisipasi dalam bootcamp ini.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Bagaimana struktur kurikulum program bootcamp?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ2B" role="button" aria-expanded="false" aria-controls="collapseSubFaQ2B">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ2B" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Program dilaksanakan selama 16 minggu yang diadakan pada hari selasa yang akan diadakan secara live dan online interactions (19.00-22.00 pada hari selasa, kamis dan jam 13.00-16.00 hari sabtu)
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                        <!-- START OF ONE FAQ CARD -->
+                        <div class="faq-card" style="margin-top:1vw">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                                <p class="sub-description" style="font-family: Rubik Medium;color:#55525B;margin-bottom:0px">Siapa sajakah para instructor?</p>
+                                <p class="bigger-text" style="margin-bottom:0px;color:#747D88" data-toggle="collapse" href="#collapseSubFaQ2C" role="button" aria-expanded="false" aria-controls="collapseSubFaQ2C">
+                                    <i class="fas fa-chevron-down"></i>
+                                </p>                                    
+                            </div>
+                            <div class="collapse" id="collapseSubFaQ2C" style="margin-top:1vw">
+                                <p class="normal-text" style="color:#3B3C43;font-family:Rubik Regular"> 
+                                Instructors dari Venidici adalah instructors yang memiliki pengalaman kerja 5-10 tahun dan mengajar secara profesional dengan ilmu yang mereka kuasai, instructors berasal dari company ternama di Indonesia yaitu Gojek, Grab, NGO international, Tokopedia, dan lain lain.
+                            </p>
+                            </div>
+                        </div>
+                        <!-- END OF ONE FAQ CARD -->
+                    </div>
+                </div>
+                <!-- END OF ONE FAQ CARD -->
+                
+                
+            </div>
+        </div>
+        <!-- END OF QUESTION SECTION -->
+    </div>
+    <!-- END OF FAQ SECTION -->
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>
-    function changeContent(evt, categoryName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("profil-content")
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("profil-links");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace("profil-text-green-active", "profil-text-green");
-        }
-        document.getElementById(categoryName).style.display = "block";
-        evt.currentTarget.className += " profil-text-green-active";
+$(document).ready(function(){
+	var maxLength = 250;
+	$(".show-read-more").each(function(){
+		var myStr = $(this).text();
+		if($.trim(myStr).length > maxLength){
+			var newStr = myStr.substring(0, maxLength);
+			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+			$(this).empty().html(newStr);
+			$(this).append('<a href="javascript:void(0);" class="read-more"> read more...</a>');
+			$(this).append('<span class="more-text">' +removedStr+ '</span>');
+		}
+	});
+	$(".read-more").click(function(){
+		$(this).siblings(".more-text").contents().unwrap();
+		$(this).remove();
+	});
+});
+</script>
+
+<script>
+var acc = document.getElementsByClassName("accordions");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("mouseover", function() {
+    var grandParent = $(this).parents()[1]
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
     }
+  });
+
+  
+
+}
+</script>
+<script>
+    function growthHacking(evt, categoryName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("growth-content")
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("growth-links");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace("growth-title-active", "growth-title");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " growth-title-active";
+        }
          
 </script>
 <script>
-    function openReview() {
-        document.getElementById('review-area').style.display = "block";
-        document.getElementById('add-review-button').style.display = "none";
-    }
-    function closeReview() {
-        document.getElementById('review-area').style.display = "none";
-        document.getElementById('add-review-button').style.display = "block";
-    }
+    function changeHowToJoin(evt, categoryName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("htj-content")
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("htj-links");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace("htj-title-active", "htj-title");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " htj-title-active";
+        }
          
 </script>
-
+<script>
+    function changeSchedule(evt, categoryName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("schedule-content")
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("schedule-links");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace("schedule-title-active", "schedule-title");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " schedule-title-active";
+        }
+         
+</script>
 @endsection

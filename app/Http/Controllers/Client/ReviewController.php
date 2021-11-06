@@ -30,11 +30,13 @@ class ReviewController extends Controller
             'course_id' => 'required|integer'
         ]);
 
+        $url_prefix = ($request->course_type == 1) ? '/online-course/' : '/woki/';
+
         if($validated->fails() && $request->action == "completed_course") 
             return redirect()->back()->withErrors($validated);
 
         if($validated->fails() && $request->action == "course_detail_review")
-            return redirect('/online-course/'.$request->course_id.'#review-section')
+            return redirect($url_prefix.$request->course_name.'#review-section')
                 ->with('review_message', 'Tidak bisa review kosong.')
                 ->withErrors($validated);
         
@@ -43,13 +45,13 @@ class ReviewController extends Controller
         
         //kalau user belum punya course nya
         if(!$course)
-            return redirect('/online-course/'.$request->course_id.'#review-section')
+            return redirect($url_prefix.$request->course_name.'#review-section')
                 ->with('review_message', 'Kamu belum punya course ini!');
         
         //kalau user belum selesaikan course
         if($request->action == "course_detail_review") {
             if($course->pivot->status == 'on-going' && $course->course_type_id == 1)
-                return redirect('/online-course/'.$request->course_id.'#review-section')
+                return redirect($url_prefix.$request->course_name.'#review-section')
                     ->with('review_message', 'Selesaikan course terlebih dahulu!');
         }
 
@@ -62,7 +64,7 @@ class ReviewController extends Controller
             if ($request->action == "completed_course")
                 return redirect()->back()->with('review_message_double', 'Anda sudah mereview course ini');
             else
-                return redirect('/online-course/'.$request->course_id.'#review-section')
+                return redirect($url_prefix.$request->course_name.'#review-section')
                     ->with('review_message', 'Anda sudah mereview course ini');
         }
 
@@ -82,7 +84,7 @@ class ReviewController extends Controller
                 return redirect()->back()
                     ->with('review_message','Review berhasil dimasukkan, dan kamu mendapatkan 30 Stars!');
             else
-                return redirect('/online-course/'.$request->course_id.'#review-section')
+                return redirect($url_prefix.$request->course_name.'#review-section')
                     ->with('review_message', 'Review berhasil dimasukkan, dan kamu mendapatkan 30 Stars!');
         }
 
@@ -91,7 +93,7 @@ class ReviewController extends Controller
             return redirect()->back()
                 ->with('review_message','Oops.. an error has occured');
         else
-            return redirect('/online-course/'.$request->course_id.'#review-section')
+            return redirect($url_prefix.$request->course_name.'#review-section')
                 ->with('review_message', 'Oops.. an error has occured');
     }
 

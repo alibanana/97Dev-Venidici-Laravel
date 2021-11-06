@@ -77,7 +77,7 @@
     
             </p>
             <div>
-                <a href="/woki" class="normal-text btn-pink" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">See our upcoming workshops</a>
+                <a href="/woki?search=&cat=None" class="normal-text btn-pink" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">See our upcoming workshops</a>
             </div>
         </div>
     </div>
@@ -152,7 +152,7 @@
     Hi, kalau aku Toki! Aku ini agak kebalikan sama Toki, aku punya self-doubt yang tinggi, lack of confidence, and I always live inside my comfort zone. Tapi satu hal yang aku sukai dari diriku, aku punya kelebihan yang sangat menonjol karena memang aku selalu cuma berkutat di sekitar hal itu.
     </p>
             </div>
-            <a href="/woki" class="normal-text btn-red-bordered btn-red-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;margin-left:5vw">Explore Our Library Now!</a>
+            <a href="/woki?search=&cat=None" class="normal-text btn-red-bordered btn-red-bordered-active" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;margin-left:5vw">Explore Our Library Now!</a>
     
         </div>
         <div class="col-5 p-0 wow bounceIn" data-wow-delay="0.3s" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
@@ -390,7 +390,7 @@
     #BertumbuhDanPeduli
             </p>
             <div>
-                <a href="/woki" class="btn-pink normal-text" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">See our upcoming workshops</a>
+                <a href="/woki?search=&cat=None" class="btn-pink normal-text" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">See our upcoming workshops</a>
             </div>
         </div>
     </div>
@@ -493,7 +493,7 @@
     Hi, kalau aku Toki! Aku ini agak kebalikan sama Toki, aku punya self-doubt yang tinggi, lack of confidence, and I always live inside my comfort zone. Tapi satu hal yang aku sukai dari diriku, aku punya kelebihan yang sangat menonjol karena memang aku selalu cuma berkutat di sekitar hal itu.
     </p>
             </div>
-            <a href="/woki" class="btn-red-bordered btn-red-bordered-active normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">Explore Our Library Now!</a>
+            <a href="/woki?search=&cat=None" class="btn-red-bordered btn-red-bordered-active normal-text" style="font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">Explore Our Library Now!</a>
     
         </div>
     </div>
