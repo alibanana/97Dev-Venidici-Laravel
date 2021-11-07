@@ -836,7 +836,7 @@
                             </div>
                             @if (Auth::user()->isCandidate)
                                 <div class="edit-item" style="padding:1vw 3vw " >
-                                    <a href="{{ route('candidate-detail.index') }}" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Job Portal Profile</span></a>   
+                                    <a href="{{ route('candidate-detail.show_profile') }}" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-user-edit"></i> <span style="margin-left:0.5vw">Job Portal Profile</span></a>   
                                 </div>
                             @endif
                             <div class="edit-item" style="padding:1vw 3vw ">

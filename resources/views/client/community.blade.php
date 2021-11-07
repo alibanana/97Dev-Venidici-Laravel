@@ -11,7 +11,7 @@
     background-repeat:no-repeat;
     background-position:center;
     ">
-    <div class="col-md-12 p-0 wow fadeInLeft" data-wow-delay="0.3s">
+    <div class="col-md-12 p-0 wow fadeInLeft" data-wow-delay="0.3s" id="margin-bottom-mobile-community">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">Get your social widen
         with Venidici Community</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:2vw">Wadah buat anak muda penuh yang antusias membangun relasi dan <br> berkembang melalui teknologi digital dan kreativitas untuk <br> mewujudkan Generasi Emas 2045</p>
@@ -26,7 +26,7 @@
 <!-- END OF TOP SECTION -->
 
 <!-- START OF WHY JOIN VENIDICI COMMUNITY -->
-<div class="row m-0 page-container" style="padding-top:4vw;padding-bottom:4vw;background-color:#EAF0F7;height:32vw">
+<div class="row m-0 page-container" id="why-join-community-mobile" style="padding-top:4vw;padding-bottom:4vw;background-color:#EAF0F7;height:32vw">
     <div class="col-12 p-0" style="text-align:center">
         <p class="small-heading" id="mt-mobile-community" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:2vw">Why join Venidici Community?</p>
     </div>
@@ -43,7 +43,7 @@
 
                         </div>
                         <div class="col-lg-6 col-xs-12" style=";display: flex;flex-direction: column;justify-content: center;">
-                            <div class="card-white" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
+                            <div class="card-white" id="why-join-community-mobile" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
                                 <div style="display: flex;flex-direction: column;justify-content: center;">
                                     <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;margin-bottom:0px">Venidici Community mengajak semua anak muda menemukan jati diri mereka yang sebenarnya dengan bergabung dan bertemu orang-orang dari bermacam-macam latar belakang dan berbagai skill set serta passion.</p>
                                 </div>
@@ -60,7 +60,7 @@
 
                         </div>
                         <div class="col-lg-6 col-xs-12" style=";display: flex;flex-direction: column;justify-content: center;">
-                            <div class="card-white" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
+                            <div class="card-white" id="why-join-community-mobile" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
                                 <div style="display: flex;flex-direction: column;justify-content: center;">
                                     <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;margin-bottom:0px">Vici Belajar, Vici Program, Vici Linkedin. Segudang fitur untuk bantu kamu networking, belajar hal-hal insightful baru dan bahkan cari peluang karir melalui info lowongan pekerjaan atau magang. Bagian terbaik, member Venidici Community akan secara reguler mendapat penawaran eksklusif dari program pelatihan Venidici!</p>
                                 </div>
@@ -77,7 +77,7 @@
 
                         </div>
                         <div class="col-lg-6 col-xs-12" style=";display: flex;flex-direction: column;justify-content: center;">
-                            <div class="card-white" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
+                            <div class="card-white" id="why-join-community-mobile" style="display: flex;align-items:center;height:12vw;width:auto;background-color:#2B6CAA;padding:2vw">
                                 <div style="display: flex;flex-direction: column;justify-content: center;">
                                     <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF;margin-bottom:0px">Punya pertanyaan atau masalah terkait program? Atau cuma pengen punya temen diskusi? Tim Vendici dan member keluarga Venidici yang kolaboratif selalu ada buat kamu!</p>
                                 </div>
@@ -107,7 +107,7 @@
     <div class="col-12 p-0">
         <p class="small-heading" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw;margin-bottom:2vw">Venidici Blog</p>
     </div>
-    <div class="col-8" style="border-right:2px solid  #3B3C43;padding:0vw 4vw 0vw 0vw">
+    <div class="col-12 col-lg-8" style="border-right:2px solid  #3B3C43;padding:0vw 4vw 0vw 0vw">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Featured</p>
         @if(count($blogs) == 0)
             <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
@@ -134,7 +134,7 @@
         </div>
 
     </div>
-    <div class="col-4" style="padding:0vw 0vw 0vw 4vw">
+    <div class="col-12 col-lg-4 mpl" style="padding:0vw 0vw 0vw 4vw">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Recommended</p>
 
         @foreach ($recommendedBlogs as $blog)

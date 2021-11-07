@@ -4,12 +4,12 @@
 @section('content')
 
 <!-- START OF BANNER SECTION -->
-<div class="row m-0 page-container-inner desktop-display"
+<div class="row m-0 page-container-inner "
     style="padding-bottom:8vw; padding-top: 14vw ;background-color:#2B6CAA">
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <div class="row m-0">
             <div class="col-lg-3 col-xs-12 p-0">
-                <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="/{{ $candidate_detail->user->avatar }}" @endif style="width:13vw;height:17vw;object-fit:contain;border-radius:5px" class="img-fluid" alt="">
+                <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="/{{ $candidate_detail->user->avatar }}" @endif style="width:13vw;height:17vw;object-fit:contain;border-radius:5px" class="img-fluid " id="mobile-candidate-details-myprofile" alt="">
             </div>
             <div class="col-lg-9 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:left">
                 <div>
@@ -58,8 +58,8 @@
 
 
 <!-- START OF PROFILE SECTION -->
-<div class="row m-0 page-container desktop-display" style="padding-bottom:4vw;padding-top:8vw">
-    <div class="col-lg-6 col-xs-12 ps-0" style="padding-right:4vw">
+<div class="row m-0 page-container " style="padding-bottom:4vw;padding-top:8vw">
+    <div class="col-lg-6 col-xs-12 ps-0 mpr-0" style="padding-right:4vw">
         <!-- START OF ONE SECTION -->
         <div>
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -87,7 +87,7 @@
     </div>
 
 
-    <div class="col-lg-6 col-xs-12 pe-0" style="padding-left:4vw">
+    <div class="col-lg-6 col-xs-12 pe-0 mpl" style="padding-left:4vw">
         <!-- START OF ONE SECTION -->
         <div>
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -114,7 +114,7 @@
     </div>
 
 
-    <div class="col-lg-6 col-xs-12 ps-0" style="padding-right:4vw;margin-top:4vw">
+    <div class="col-lg-6 col-xs-12 ps-0 mpr-0" style="padding-right:4vw;margin-top:4vw">
         <!-- START OF ONE SECTION -->
         <div>
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -150,7 +150,7 @@
         <!-- END OF ONE SECTION -->
     </div>
 
-    <div class="col-lg-6 col-xs-12 pe-0" style="padding-left:4vw;margin-top:4vw">
+    <div class="col-lg-6 col-xs-12 pe-0 mpl" style="padding-left:4vw;margin-top:4vw">
         <!-- START OF ONE SECTION -->
         <div>
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -177,7 +177,7 @@
     </div>
 
 
-    <div class="col-lg-6 col-xs-12 ps-0" style="padding-right:4vw;margin-top:4vw">
+    <div class="col-lg-6 col-xs-12 ps-0 mpr-0" style="padding-right:4vw;margin-top:4vw">
         <!-- START OF ONE SECTION -->
         <div>
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -213,7 +213,7 @@
         <!-- END OF ONE SECTION -->
     </div>
 
-    <div class="col-lg-6 col-xs-12 pe-0" style="padding-left:4vw;margin-top:4vw">
+    <div class="col-lg-6 col-xs-12 pe-0 mpl" style="padding-left:4vw;margin-top:4vw">
         <!-- START OF ONE SECTION -->
         <div>
             <div style="display:flex;justify-content:space-between;align-items:center">

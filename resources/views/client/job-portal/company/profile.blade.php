@@ -73,12 +73,12 @@
 <!-- END OF POPUP CHANGE PASSWORD-->
 
 <!-- START OF BANNER SECTION -->
-<div class="row m-0 page-container desktop-display"
+<div class="row m-0 page-container "
     style="padding-bottom:8vw; padding-top: 14vw ;background-color:#2B6CAA">
     @if(Auth::user()->email_verified_at == null)
-    <div class="col-12 wow bounce" style="height:3.5vw;display:flex;justify-content:center;margin-bottom:2vw">
+    <div class="col-12 wow bounce" id="job-portal-profile-mobile-dashboard-alert" style="height:3.5vw;display:flex;justify-content:center;margin-bottom:2vw">
         <!-- ALERT MESSAGE -->
-        <div class="alert alert-warning alert-dismissible fade show small-text"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
+        <div class="alert alert-warning alert-dismissible fade show small-text" id="job-portal-profile-mobile-dashboard-alert-width"  style="width:60%;text-align:center;margin-bottom:0px"role="alert">
             @if(session('new_email_verification_sent'))
             Email verifikasi baru telah dikirim. Belum dapat? 
             @else
@@ -99,9 +99,9 @@
     @endif
     <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
         <div class="row m-0">
-            <div class="col-12" style="display:flex;justify-content:center;padding:0vw 17vw">
+            <div class="col-12" style="display:flex;justify-content:center;padding:0vw 17vw" id="padding-job-portal-mobile-dashboard">
                 <div class="card-white wow fadeInUp" data-wow-delay="0.3s" style="height:auto;padding:1.5vw 1.5vw;width:100%;display:flex;align-items:center">
-                    <img src="/assets/images/client/Default_Display_Picture.png" style="width:14vw;height:10vw;object-fit:cover;border-radius:10px" class="img-fluid" alt="DISPLAY PICTURE">
+                    <img src="/assets/images/client/Default_Display_Picture.png" style="width:14vw;height:10vw;object-fit:cover;border-radius:10px" class="img-fluid desktop-display" alt="DISPLAY PICTURE">
                     <div style="margin-left:1.5vw;width:100%;">
                         <div style="display:flex;justify-content:space-between;">
                             <p class="sub-description" style="font-family:Rubik Bold;color:#3B3C43;margin-bottom:0px">{{auth()->user()->name}}</p> 
@@ -111,7 +111,7 @@
                                 <!--<a class="small-heading" style="color:grey;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer" role="button" id="editDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>-->
 
 
-                                <div class="dropdown-menu" aria-labelledby="editDropdown" style="border-radius:10px;padding:0px;width:14vw">
+                                <div class="dropdown-menu" id="drop-down-menu-mobile-job-portal" aria-labelledby="editDropdown" style="border-radius:10px;padding:0px;width:14vw">
 
                                     <div class="edit-item">
                                         <a href="#change-password" class="normal-text" style="font-family:Rubik Medium;color:#2B6CAA;margin-bottom:0px;text-decoration:none"><i class="fas fa-unlock-alt"></i> <span style="margin-left:0.87vw">Change Password</span></a>   
