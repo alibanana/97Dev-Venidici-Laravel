@@ -300,16 +300,16 @@ class HiringPartnerController extends Controller
             ->firstOrFail();
 
         if ($validated['action'] == 'contact') {
-            UserHelper::contactCandidate($candidate, $hiringPartner->id);
+            UserHelper::contactCandidate($candidate, $hiringPartner);
             $message = 'Candidate (' . $candidate->name . ') has been contacted through email.';
         } elseif ($validated['action'] == 'unarchive') {
-            UserHelper::unarchiveCandidate($candidate, $hiringPartner->id);
+            UserHelper::unarchiveCandidate($candidate, $hiringPartner);
             $message = 'Candidate (' . $candidate->name . ') has been removed from ('. $hiringPartner->companyName .') list.';
         } elseif ($validated['action'] == 'accept') {
-            UserHelper::hireCandidate($candidate, $hiringPartner->id);
+            UserHelper::hireCandidate($candidate, $hiringPartner);
             $message = 'Candidate (' . $candidate->name . ') has successfully been accepted on ('. $hiringPartner->companyName .').';
         } elseif ($validated['action'] == 'cancel') {
-            UserHelper::cancelCandidate($candidate, $hiringPartner->id);
+            UserHelper::cancelCandidate($candidate, $hiringPartner);
             $message = 'Candidate (' . $candidate->name . ') status successfully has been updated from accepted to contacted.';
         }
 

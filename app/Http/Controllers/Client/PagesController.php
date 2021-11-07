@@ -122,7 +122,7 @@ class PagesController extends Controller
 
         $blogs = Blog::with('hashtag')
             ->orderBy('created_at','desc')
-            ->where('is_featured', TRUE)->paginate(3);
+            ->where('is_featured', TRUE)->get()->take(3);
 
         $recommendedBlogs = Blog::with('hashtag')
             ->orderBy('created_at', 'desc')
