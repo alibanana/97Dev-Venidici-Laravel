@@ -125,7 +125,7 @@
                 </div>
                 <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{ $blog->hashtag->hashtag }}</a>
             </div>
-            <img onclick="window.open('/blog/'+{{$blog->id}},'_self');" src="{{asset($blog->image)}}" class="img-fluid" style="cursor:pointer;width:12vw;height:10vw;object-fit:cover" alt="">
+            <img onclick="window.open('/blog/'+{{$blog->id}},'_self');" src="{{ asset($blog->banner) }}" class="img-fluid" style="cursor:pointer;width:12vw;height:10vw;object-fit:cover" alt="">
         </div>
         <!-- END OF ONE ARTICLE CARD -->
         @endforeach
