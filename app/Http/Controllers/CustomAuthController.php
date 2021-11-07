@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
-use Axiom\Rules\StrongPassword;
 use Axiom\Rules\TelephoneNumber;
 use Throwable;
 use App\Helper\Helper;
@@ -65,10 +64,8 @@ class CustomAuthController extends Controller
             'referral_code' => '',
         ];
 
-
-        // Use StrongPassword validation on production.
         if (App::environment('production'))
-            $validation_rules['password'] = ['required', new StrongPassword];
+            $validation_rules['password'] = ['required', 'alpha_num', 'min:8'];
         else
             $validation_rules['password'] = ['required'];
 

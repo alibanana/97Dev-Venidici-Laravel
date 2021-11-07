@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
-use Axiom\Rules\StrongPassword;
 
 use App\Helper\UserHelper;
 
@@ -144,7 +143,7 @@ class HiringPartnerController extends Controller
         ];
 
         if (App::environment('production'))
-            $validation_rules['password'] = ['required', new StrongPassword];
+            $validation_rules['password'] = ['required', 'alpha_num', 'min:8'];
         else
             $validation_rules['password'] = ['required'];
 
