@@ -2537,7 +2537,13 @@ html, body {
 
     /* START COMMUNITY PAGE SECTION */
     .bg-image-mobile-height{
-        height:93vw !important
+        height:auto  !important
+    }
+    #margin-bottom-mobile-community{
+        margin-bottom:5vw !important
+    }
+    #why-join-community-mobile{
+        height: auto !important;
     }
     #mt-mobile-community{
         margin-top:3vw !important
@@ -2681,6 +2687,50 @@ html, body {
     .edit-item{
         padding-top: 1vw !important;
     }
+    /* candidate detail */
+    .warning-height-candidate-details{
+        height:auto !important
+    }
+    .mpl{
+        padding-left:0vw !important
+    }
+    .mpr-0{
+        padding-right:0vw !important;
+    }
+    .cv-mobile-font-size{
+        font-size: 3vw !important;
+    }
+    #mobile-popup-candidate-detail{
+        width: 90% !important;
+    }
+    #mobile-popup-candidate-detail-close{
+        right: 22px !important;
+        top:6px !important;
+    }
+    #add-mobile-candidate-details{
+        margin-top:5vw !important;
+    }
+    #interest-mobile-tag{
+        padding:3vw !important
+    }
+    #mobile-candidate-details-myprofile{
+        width:30vw !important;
+        height: auto !important;
+        margin-bottom:5vw !important
+    }
+    #job-portal-profile-mobile-dashboard-alert{
+        height: auto!important;
+    }
+    #job-portal-profile-mobile-dashboard-alert-width{
+        width: auto!important;
+    }
+    #padding-job-portal-mobile-dashboard{
+        padding:0vw !important;
+    }
+    #drop-down-menu-mobile-job-portal{
+        transform: translate3d(-126px, 34px, 0px) !important;
+    }
+    
 }
 
 /* MOBILE NAVBAR */
@@ -3063,4 +3113,9 @@ html, body {
     background: rgba(0, 0, 0, 0.75);
     font-size: 14px;
     text-align: center;
+  }
+
+  img{
+      max-width: 100% !important;
+      height: auto;
   }

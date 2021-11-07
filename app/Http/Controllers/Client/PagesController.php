@@ -11,8 +11,6 @@ use Jenssegers\Agent\Agent;
 use Illuminate\Support\Str;
 use App\Helper\Helper;
 use PDF;
-use App\Models\CourseCategory;
-use App\Models\Blog;  
 
 use App\Models\Notification;
 use App\Models\Config;
@@ -24,6 +22,8 @@ use App\Models\UserDetail;
 use App\Models\Course;
 use App\Models\Review;
 use App\Models\InstructorPosition;
+use App\Models\CourseCategory;
+use App\Models\Blog;  
 
 /*
 |--------------------------------------------------------------------------
@@ -117,22 +117,32 @@ class PagesController extends Controller
         // if($agent->isPhone()){
         //     return view('client/mobile/under-construction');
         // }
-        $blogs = Blog::orderBy('created_at','desc')->where('is_featured',TRUE)->paginate(3);
-
+        
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        $blogs = Blog::with('hashtag')
+            ->orderBy('created_at','desc')
+            ->where('is_featured', TRUE)->get()->take(3);
+
+        $recommendedBlogs = Blog::with('hashtag')
+            ->orderBy('created_at', 'desc')
+            ->get()->take(3);
+
+        $viewData = ['footer_reviews', 'blogs', 'recommendedBlogs'];
 
         if(Auth::check()) {
             $this->resetNavbarData();
-
             $notifications = $this->notifications;
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/community', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','blogs'));
+            $recommendedBlogs = Helper::getBlogRecommendation(3);
+
+            $viewData = array_merge($viewData, ['notifications', 'informations', 'transactions', 'cart_count']);
         }
         
-        return view('client/community',compact('footer_reviews','blogs'));
+        return view('client/community', compact($viewData));
     }
 
     public function autocomplete(Request $request){
@@ -327,9 +337,12 @@ class PagesController extends Controller
     }
 
     public function blog_detail($id){
-
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
         $blog = Blog::findOrFail($id);
+
+        $viewData = ['footer_reviews', 'blog'];
+
         if(Auth::check()) {
             $this->resetNavbarData();
 
@@ -338,15 +351,15 @@ class PagesController extends Controller
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/blogs/blog-detail', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','blog'));
+            $viewData = array_merge($viewData, ['notifications', 'informations', 'transactions', 'cart_count']);
         }
         
-        return view('client/blogs/blog-detail',compact('footer_reviews','blog'));
+        return view('client/blogs/blog-detail', compact($viewData));
     }
     public function blog_list(Request $request){
-
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-        $blogs = new Blog;
+
+        $blogs = Blog::with('hashtag');
     
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
@@ -368,17 +381,19 @@ class PagesController extends Controller
         }
 
         $blogs = $blogs->get();
+
+        $viewData = ['footer_reviews', 'blogs'];
+
         if(Auth::check()) {
             $this->resetNavbarData();
-
             $notifications = $this->notifications;
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/blogs/blog-list', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews','blogs'));
+            $viewData = array_merge($viewData, ['notifications', 'informations', 'transactions', 'cart_count']);
         }
         
-        return view('client/blogs/blog-list',compact('footer_reviews','blogs'));
+        return view('client/blogs/blog-list', compact($viewData));
     }
 }

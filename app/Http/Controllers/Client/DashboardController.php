@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use Axiom\Rules\StrongPassword;
 use Carbon\Carbon;
 use Throwable;
 use Jenssegers\Agent\Agent;
@@ -289,11 +288,10 @@ class DashboardController extends Controller
 
     // Changes the user's password in the database.
     public function changePassword(Request $request) {
-        // Use StrongPassword validation on production.
         if (App::environment('production'))
             $validation_rules = [
                 'old_password' => 'required',
-                'password' => ['required', 'confirmed', new StrongPassword]
+                'password' => ['required', 'confirmed', 'alpha_num', 'min:8']
             ];
         else
             $validation_rules = [

@@ -24,6 +24,6 @@ class Hashtag extends Model
     }
 
     public function blogs() {
-        return $this->hasMany(Blog::class, 'blogs');
+        return $this->hasMany(Blog::class);
     }
 }

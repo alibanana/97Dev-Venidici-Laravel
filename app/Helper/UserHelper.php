@@ -9,9 +9,12 @@ use App\Models\CandidateDetail;
 use App\Models\CandidateDetailChange;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+
 use App\Mail\NotifyAdminCandidateAccepted;
+use App\Mail\CandidateContactedMail;
+use App\Mail\CandidateAcceptedMail;
 
-
+use App\Models\Notification;
 
 class UserHelper {
 
@@ -111,37 +114,47 @@ class UserHelper {
     // Method to contact Archived Candidate. Assumes that :
     //  - Candidate has not been hired by another HiringPartner
     //  - Candidate has been mapped to the given HiringPartner
-    public static function contactCandidate(User $candidate, $hiring_partner_id) {
+    public static function contactCandidate(User $candidate, User $hiringPartner) {
         $hiringPartnerCandidatePivot = $candidate->hiringPartners()
-            ->where('hiring_partner_id', $hiring_partner_id)
+            ->where('hiring_partner_id', $hiringPartner->id)
             ->firstOrFail()->pivot;
 
         if ($hiringPartnerCandidatePivot->status == 'archived') {
             $hiringPartnerCandidatePivot->status = 'contacted';
             $hiringPartnerCandidatePivot->save();
         }
+
+        Mail::to($candidate->email)->send(new CandidateContactedMail($candidate->name, $hiringPartner->companyName));
+
+        $notification = Notification::create([
+            'user_id' => $candidate->id,
+            'isInformation' => 1,
+            'title' => 'Kamu dikontak Hiring Partner!',
+            'description' => 'Hi, '.$candidate->name.'. Kamu telah di kontak oleh hiring partner venidici: ' . $hiringPartner->companyName . '. Silahkan cek email kamu untuk informasi lebih lanjut',
+            'link' => '/dashboard'
+        ]);
     }
 
     // Method to unarchive Archived/Contacted/Hired Candidate. Assumes that :
     //  - Candidate has not been hired by another HiringPartner
     //  - Candidate has been mapped to the given HiringPartner
-    public static function unarchiveCandidate(User $candidate, $hiring_partner_id) {
+    public static function unarchiveCandidate(User $candidate, User $hiringPartner) {
         $hiringPartnerCandidatePivot = $candidate->hiringPartners()
-            ->where('hiring_partner_id', $hiring_partner_id)
+            ->where('hiring_partner_id', $hiringPartner->id)
             ->firstOrFail()->pivot;
 
         if (in_array($hiringPartnerCandidatePivot->status, ['archived', 'contacted', 'hired'])) {
-            $candidate->hiringPartners()->detach($hiring_partner_id);
+            $candidate->hiringPartners()->detach($hiringPartner->id);
         }
     }
 
     // Method to hire Archived Candidate. Assumes that :
     //  - Candidate has not been hired by another HiringPartner
     //  - Candidate has been mapped to the given HiringPartner
-    public static function hireCandidate(User $candidate, $hiring_partner_id) {
+    public static function hireCandidate(User $candidate, User $hiringPartner) {
         // Update pivot data of given candidate & hiring partner to 'accepted'.
         $hiringPartnerCandidatePivot = $candidate->hiringPartners()
-            ->where('hiring_partner_id', $hiring_partner_id)
+            ->where('hiring_partner_id', $hiringPartner->id)
             ->firstOrFail()->pivot;
 
         if ($hiringPartnerCandidatePivot->status == 'contacted') {
@@ -156,15 +169,25 @@ class UserHelper {
                     ->update(['status' => 'hired']);
         }
 
-        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminCandidateAccepted($candidate->name, 'PT. ABCD'));
+        Mail::to($candidate->email)->send(new CandidateAcceptedMail($candidate->name, $hiringPartner->companyName));
+
+        Notification::create([
+            'user_id' => $candidate->id,
+            'isInformation' => 1,
+            'title' => 'Selamat! Kamu diterima oleh Hiring Partner',
+            'description' => 'Hi, '.$candidate->name.'. Kamu telah di diterima oleh hiring partner venidici: ' . $hiringPartner->companyName . '. Silahkan cek email kamu untuk informasi lebih lanjut',
+            'link' => '/dashboard'
+        ]);
+
+        Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminCandidateAccepted($candidate->name, $hiringPartner->companyName));
     }
 
     // Method to change Accepted Candidate status to Contacted. Assumes that :
     //  - Candidate has not been hired by another HiringPartner
     //  - Candidate has been mapped to the given HiringPartner
-    public static function cancelCandidate(User $candidate, $hiring_partner_id) {
+    public static function cancelCandidate(User $candidate, User $hiringPartner) {
         $hiringPartnerCandidatePivot = $candidate->hiringPartners()
-            ->where('hiring_partner_id', $hiring_partner_id)
+            ->where('hiring_partner_id', $hiringPartner->id)
             ->firstOrFail()->pivot;
 
         if ($hiringPartnerCandidatePivot->status == 'accepted') {

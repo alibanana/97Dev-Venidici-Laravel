@@ -10,16 +10,17 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable = [
+        'hashtag_id',
         'title',
+        'author',
         'duration',
         'short_description',
         'body',
         'banner',
-        'hashtag_id',
         'is_featured'
     ];
 
     public function hashtag() {
-        return $this->belongsTo(Hashtag::class, 'hashtags');
+        return $this->belongsTo(Hashtag::class);
     }
 }
