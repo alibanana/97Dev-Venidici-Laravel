@@ -6,7 +6,7 @@
 <!-- START OF TOP SECTION -->
 <div class="row m-0  page-container bg-image-mobile-height"
     style="height: 50vw; padding-top: 16vw;
-    background: url('/{{$blog->banner}}') no-repeat center;
+    background: url('{{ $blog->banner }}') no-repeat center;
     background-size: cover;
     background-repeat:no-repeat;
     background-position:center;
@@ -20,7 +20,7 @@
     <div class="col-12" style="padding:0vw 10vw;margin-top:-15vw">
         <div style="background: #FFFFFF;box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);border-radius: 10px;padding:2vw">
             <div style="display:flex;align-items:center;margin-bottom:1vw">
-                <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#2B6CAA;color:#FFFFFF;padding:0.5vw 1vw;text-decoration:none;border-radius:5px;margin-bottom:0px">{{$blog->hashtag}}</p>
+                <p class="normal-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#2B6CAA;color:#FFFFFF;padding:0.5vw 1vw;text-decoration:none;border-radius:5px;margin-bottom:0px">{{ $blog->hashtag->hashtag }}</p>
                 <p class="normal-text" style="margin-top:1vw;font-family: Rubik Regular;color:#55525B;margin-left:1.5vw">- {{$blog->duration}} mins read</p>
             </div>
             <p class="small-heading" style="font-family: Rubik Bold;color:#2B6CAA;">{{$blog->title}}</p>

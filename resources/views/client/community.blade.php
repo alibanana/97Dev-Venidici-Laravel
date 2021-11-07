@@ -18,7 +18,7 @@
         <div style="display:flex;align-items:center">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" target="_blank" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none">Bergabung Sekarang</a>                
             <p class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;margin-left:2vw">OR</a>                
-            <a href="#" class="bigger-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;text-decoration:none;margin-left:2vw">Explore Venidici Blog</a>                
+            <a href="{{ route('blog_list') }}" class="bigger-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;text-decoration:none;margin-left:2vw">Explore Venidici Blog</a>                
         </div>
 
     </div>
@@ -123,7 +123,7 @@
                 <div style="display:flex;align-items:center">
                     <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">{{$blog->created_at->diffForHumans()}} - {{$blog->duration}} mins read</p>
                 </div>
-                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{$blog->hashtag}}</a>
+                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{ $blog->hashtag->hashtag }}</a>
             </div>
             <img onclick="window.open('/blog/'+{{$blog->id}},'_self');" src="{{asset($blog->image)}}" class="img-fluid" style="cursor:pointer;width:12vw;height:10vw;object-fit:cover" alt="">
         </div>
@@ -137,39 +137,17 @@
     <div class="col-4" style="padding:0vw 0vw 0vw 4vw">
         <p class="small-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Recommended</p>
 
-        <!-- START OF ONE RECOMMENDATION ARTICLE CARD -->
-        <div style="margin-top:4vw;display:flex">
-            <div >
-                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
-                <div style="display:flex;align-items:center;margin-top:1vw">
-                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
+        @foreach ($recommendedBlogs as $blog)
+            <div style="margin-top:4vw;display:flex">
+                <div>
+                    <a href="{{ route('blog_detail', $blog->id) }}" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">{{ $blog->title }}</a>
+                    <div style="display:flex;align-items:center;margin-top:1vw">
+                        <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">{{ $blog->created_at->diffForHumans() }} - {{ $blog->duration }} mins read</p>
+                    </div>
+                    <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{ $blog->hashtag->hashtag }}</a>
                 </div>
-                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
             </div>
-        </div>
-        <!-- END OF ONE RECOMMENDATION ARTICLE CARD -->
-        <!-- START OF ONE RECOMMENDATION ARTICLE CARD -->
-        <div style="margin-top:4vw;display:flex">
-            <div >
-                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
-                <div style="display:flex;align-items:center;margin-top:1vw">
-                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
-                </div>
-                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#2B6CAA;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
-            </div>
-        </div>
-        <!-- END OF ONE RECOMMENDATION ARTICLE CARD -->
-        <!-- START OF ONE RECOMMENDATION ARTICLE CARD -->
-        <div style="margin-top:4vw;display:flex">
-            <div >
-                <a href="" class="bigger-text" style="font-family: Rubik Bold;color:#3B3C43;text-decoration:none;display: -webkit-box;overflow : hidden !important;text-overflow: ellipsis !important;-webkit-line-clamp: 2 !important;-webkit-box-orient: vertical !important">This is a breaking news from Jakarta</a>
-                <div style="display:flex;align-items:center;margin-top:1vw">
-                    <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">19 Sept 2021 - 5 mins read</p>
-                </div>
-                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#2B6CAA;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">Technology</a>
-            </div>
-        </div>
-        <!-- END OF ONE RECOMMENDATION ARTICLE CARD -->
+        @endforeach
         
     </div>
 </div>

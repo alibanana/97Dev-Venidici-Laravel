@@ -47,10 +47,10 @@
 <div class="row m-0 page-container" style=";padding-top:2vw">
     <div class="col-12 p-0">
     @if(count($blogs) == 0)
-            <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
-                <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Tidak ditemukan.</span></p>
-            </div>
-        @endif
+        <div style="background: #C4C4C4;border: 2px solid #3B3C43;border-radius: 10px;padding:1vw;text-align:center">
+            <p class="sub-description" style="font-family:Rubik Regular;color:#3B3C43;margin-bottom:0px"> <i class="fas fa-exclamation-triangle"></i> <span style="margin-left:1vw">Tidak ditemukan.</span></p>
+        </div>
+    @endif
     @foreach($blogs as $blog)
         <!-- START OF ONE ARTICLE CARD -->
         <div style="padding-top:4vw;" class="row m-0">
@@ -60,10 +60,10 @@
                 <div style="display:flex;align-items:center">
                     <p class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;">{{$blog->created_at->diffForHumans()}} - {{$blog->duration}} mins read</p>
                 </div>
-                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{$blog->hashtag}}</a>
+                <a class="small-text" style="font-family: Rubik Regular;color:#B3B5C2;background-color:#67BBA3;color:#000000;padding:0.5vw 1vw;text-decoration:none;border-radius:5px">{{ $blog->hashtag->hashtag }}</a>
             </div>
             <div class="col-lg-4 col-xs-12 mobile-display">
-                <img onclick="window.open('/blog/'+{{$blog->id}},'_self');" src="{{asset($blog->image)}}" class="img-fluid" style="cursor:pointer;width:100% !important;height:12vw;object-fit:cover" alt="">
+                <img onclick="window.open('/blog/'+{{$blog->id}}, '_self');" src="{{ asset($blog->banner) }}" class="img-fluid" style="cursor:pointer;width:100% !important;height:12vw;object-fit:cover" alt="">
             </div>
         </div>
         <!-- END OF ONE ARTICLE CARD -->
