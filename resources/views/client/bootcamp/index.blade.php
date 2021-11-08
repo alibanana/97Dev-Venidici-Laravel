@@ -240,7 +240,7 @@
                                 @else
                                     <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#55525B;">Rp{{ number_format($course->bootcampCourseDetail->bootcamp_full_price, 0, ',', ',') }}</p>
                                 @endif
-                                <a href="/bootcamp" class="course-card-button normal-text">Enroll Now</a>
+                                <a href="/bootcamp/{{$course->title}}" class="course-card-button normal-text">Enroll Now</a>
                             </div>
                         </div>
                     </div>

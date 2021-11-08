@@ -178,7 +178,7 @@ class Helper
     // Get blogs recommendations
     public static function getBlogRecommendation($size) {
         $userHashtags = auth()->user()->hashtags()->get()->pluck('hashtag')->toArray();
-        $blogs = Blog::with('hashtags')->get()
+        $blogs = Blog::with('hashtag')->get()
             ->sortByDesc(function ($blog) use ($userHashtags) {
                 $similarityPoint = 0;
                 if (in_array($blog->hashtag, $userHashtags))
