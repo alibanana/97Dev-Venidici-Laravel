@@ -32,44 +32,40 @@ karir impian!</p>
         <!-- START OF DESCRIPTION AND SEARCH SECTION -->
         <div class="row m-0 page-container desktop-display" style="padding-top:8vw">
             <!-- START OF SEARCH SECTION -->
-            <div class="col-12 p-0" style="display:flex;align-items:center;margin-top:3vw;justify-content:space-between">
-                <div style="display:flex;align-items:center">
-                    <div style="">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="years_of_experience" class="normal-text" onchange="if (this.value) window.location.href=this.value"
-                            style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => 'none']) }}" @if (!Request::has('years_of_experience')) selected @endif>Years of Experiences</option>
-                                @foreach ($availableExperienceYearFilters as $filter)
-                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => $filter]) }}" @if (Request::get('years_of_experience') == $filter) selected @endif>{{ $filter }}</option>
-                                @endforeach
-                            </select>
-                        </div>  
-                    </div>
 
-                    <div style="margin-left: 3vw;">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="status" class="normal-text" onchange="if (this.value) window.location.href=this.value"
-                            style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'status' => 'none']) }}" @if (!Request::has('status')) selected @endif>Status</option>
-                                @foreach ($availableStatusFilters as $filter)
-                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'status' => $filter]) }}" @if (Request::get('status') == $filter) selected @endif>{{ $filter }}</option>
-                                @endforeach
-                            </select>
-                        </div>  
-                    </div>
+            <div class="col-lg-3 col-xs-6 ps-0" style="margin-top:3vw">
+                <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
+                    <select name="years_of_experience" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                    style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => 'none']) }}" @if (!Request::has('years_of_experience')) selected @endif>Years of Experiences</option>
+                        @foreach ($availableExperienceYearFilters as $filter)
+                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => $filter]) }}" @if (Request::get('years_of_experience') == $filter) selected @endif>{{ $filter }}</option>
+                        @endforeach
+                    </select>
+                </div>  
+            </div>
+            <div class="col-lg-3 col-xs-6" style="margin-top:3vw">
+                <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
+                    <select name="status" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                    style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'status' => 'none']) }}" @if (!Request::has('status')) selected @endif>Status</option>
+                        @foreach ($availableStatusFilters as $filter)
+                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'status' => $filter]) }}" @if (Request::get('status') == $filter) selected @endif>{{ $filter }}</option>
+                        @endforeach
+                    </select>
+                </div>             
+            </div>
+            <div class="col-lg-3 col-xs-6" style="margin-top:3vw">
+                <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
+                    <select name="sort" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                    style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'none']) }}" @if (!Request::has('sort')) selected @endif>Sort by</option>
+                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-asc']) }}" @if (Request::get('sort') == 'alpha-asc') selected @endif>Alphabet Ascending</option>
+                        <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-desc']) }}" @if (Request::get('sort') == 'alpha-desc') selected @endif>Alphabet Descending</option>
+                    </select>
+                </div>  
+            </div>
 
-                    <div style="margin-left: 3vw;">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="sort" class="normal-text" onchange="if (this.value) window.location.href=this.value"
-                            style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'none']) }}" @if (!Request::has('sort')) selected @endif>Sort by</option>
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-asc']) }}" @if (Request::get('sort') == 'alpha-asc') selected @endif>Alphabet Ascending</option>
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-desc']) }}" @if (Request::get('sort') == 'alpha-desc') selected @endif>Alphabet Descending</option>
-                            </select>
-                        </div>  
-                    </div>
-                </div>
-                </div>
             <!-- END OF SEARCH SECTION -->
 
         </div>
