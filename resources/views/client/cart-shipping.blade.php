@@ -17,7 +17,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- START OF ONE PAYMENT METHOD -->
+                <!-- START OF ONE PAYMENT METHOD
                 <div class="payment-method-card bank-links" style="" id="payment_method_1"  onclick="togglePayment(event, 'checked_icon_1','bca')">
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
@@ -29,7 +29,7 @@
                         </div>    
                     </div>
                 </div>
-                <!-- END OF ONE PAYMENT METHOD -->
+                END OF ONE PAYMENT METHOD -->
 
                 <!-- START OF ONE PAYMENT METHOD -->
                 <div class="payment-method-card bank-links" style="margin-top:1vw" id="payment_method_2"  onclick="togglePayment(event, 'checked_icon_2','bri')">
@@ -77,7 +77,7 @@
                     <div style="display:flex;justify-content:space-between;align-items:center">
                         <div style="display:flex;align-items:center">
                             <img src="/assets/images/client/QRIS_LOGO.png" style="width:4vw;height:3vw;object-fit:contain;border-radius:10px" class="img-fluid image-bank" alt="">
-                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">QRIS</p>
+                            <p class="bigger-text payment-method-text" style="font-family:Rubik Regular;margin-bottom:0px;margin-left:1vw">QRIS (GOPAY, OVO, MBCA, DANA)</p>
                         </div>
                         <div id="checked_icon_5" class="bank-content" style="display:none">
                             <i class="fas fa-check-circle small-heading" style="color:#2B6CAA;margin-right:1vw"></i>
