@@ -146,12 +146,7 @@
 											<th>No.</th>
 											<th>Full Name</th>
 											<th>Know Venidici From</th>
-											<th class="text-nowrap">Birth Date</th>
-											<th class="text-nowrap">Gender</th>
-											<th>Telephone</th>
 											<th>Address</th>
-											<th>Company</th>
-											<th>Occupancy</th>
 											<th>Status</th>
 											<th>Stars</th>
 											<th>Referral Code</th>
@@ -164,29 +159,29 @@
 										@foreach ($users as $user)
 											<tr>
 												<td>{{ $users_data['from'] + $loop->index }}</td>
-												<td>{{ $user->name }}
-												{{ $user->email }}</td>
-												@if ($user->userDetail()->exists())
-													<td>{{ $user->userDetail->response }}</td>
-													<td class="text-nowrap">{{ $user->userDetail->birthdate }}</td>
-													<td class="text-nowrap">{{ $user->userDetail->gender }}</td>
-													<td class="text-nowrap">{{ $user->userDetail->telephone }}</td>
-													<td class="text-nowrap">{{ $user->userDetail->address }} - {{ $user->userDetail->city['name'] }} - {{ $user->userDetail->province['name'] }}</td>
-													<td class="text-nowrap">{{ $user->userDetail->company }}</td>
-													<td class="text-nowrap">{{ $user->userDetail->occupancy }}</td>
-													<td>{{ $user->userDetail->referral_code }}</td>
-												@else
-													<td>-</td>
-													<td>-</td>
-													<td>-</td>
-													<td>-</td>
-												@endif
-												<td>{{ $users_usable_stars[$user->id] }}</td>
+												<td>{{ $user->name }} <br>
+												{{ $user->email }} <br>
+												@isset($user->userDetail->birthdate) 
+												@php
+													$birhdate_exploded = explode(" ", $user->userDetail->birthdate);
+												@endphp
+												Birth date : {{$birhdate_exploded[0]}} <br>
+												@endisset
+												@isset($user->userDetail->gender) Gender : {{ $user->userDetail->gender }} <br> @endisset
+												@isset($user->userDetail->telephone) Telephone : {{ $user->userDetail->telephone }} <br> @endisset
+												@isset($user->userDetail->company) Company : {{ $user->userDetail->company }} <br> @endisset
+												@isset($user->userDetail->occupancy) Occupancy : {{ $user->userDetail->occupancy }} <br> @endisset
+												</td>
+													<td>@isset($user->userDetail->response) {{ $user->userDetail->response }} @endisset</td>
+													<td class="text-nowrap"> @isset($user->userDetail->address) {{ $user->userDetail->address }} - @endisset @isset($user->userDetail->city['name']) {{ $user->userDetail->city['name'] }} - @endisset @isset($user->userDetail->province['name']) {{ $user->userDetail->province['name'] }} @endisset</td>
 												@if ($user->status == 'active')
 													<td style="color:green">Active</td>
 												@else
 													<td style="color:red">Suspended</td>
 												@endif
+													
+												<td>{{ $users_usable_stars[$user->id] }}</td>
+													<td> @isset($user->userDetail->referral_code) {{ $user->userDetail->referral_code }} @endisset </td>
 												<td class="text-nowrap">
 													@if($user->user_role_id == 1)
 														User
