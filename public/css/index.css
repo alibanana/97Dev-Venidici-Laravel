@@ -2730,6 +2730,12 @@ html, body {
     #drop-down-menu-mobile-job-portal{
         transform: translate3d(-126px, 34px, 0px) !important;
     }
+    #height-jobportal-mobile{
+        height: auto !important;
+    }
+    #width-auto-mobile{
+        width: auto !important;
+    }
     
 }
 

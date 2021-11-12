@@ -4,7 +4,7 @@
 @section('content')
 
     <!-- START OF BANNER SECTION -->
-    <div class="row m-0 banner-background page-container desktop-display"
+    <div class="row m-0 banner-background page-container" id="height-jobportal-mobile"
         style="height: 50vw; padding-top: 19vw; text-align: center;
         background-image: url('/assets/images/seeder/homepage_background.png');">
         <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
@@ -30,7 +30,7 @@ karir impian!</p>
     <div class="toggle-content" id="daftar-saya">
 
         <!-- START OF DESCRIPTION AND SEARCH SECTION -->
-        <div class="row m-0 page-container desktop-display" style="padding-top:8vw">
+        <div class="row m-0 page-container " style="padding-top:8vw">
             <!-- START OF SEARCH SECTION -->
             <div class="col-12 p-0" style="display:flex;align-items:center;margin-top:3vw;justify-content:space-between">
                 <div style="display:flex;align-items:center">
@@ -99,13 +99,13 @@ karir impian!</p>
             <!-- START OF TABLE -->
             <div class="col-lg-12" style="margin-top:4vw;background: #FFFFFF;box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);border-radius: 10px;padding:2vw 0vw">
                 <div class="row m-0" style="padding:0vw 2vw 2vw 2vw">
-                    <div class="col-8"> 
+                    <div class="col-4 col-lg-8"> 
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">Candidate</p>
                     </div>
-                    <div class="col-2" style="text-align:center"> 
+                    <div class="col-4 col-lg-2" style="text-align:center"> 
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">Status</p>
                     </div>
-                    <div class="col-2"  style="text-align:center"> 
+                    <div class="col-4 col-lg-2"  style="text-align:center"> 
                         <p class="bigger-text" style="font-family: Rubik Medium;margin-bottom:0px;color:#3B3C43;">Action</p>
                     </div>
                 </div>

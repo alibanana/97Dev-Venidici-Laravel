@@ -4,7 +4,7 @@
 @section('content')
 
     <!-- START OF BANNER SECTION -->
-    <div class="row m-0 banner-background page-container desktop-display"
+    <div class="row m-0 banner-background page-container " id="height-jobportal-mobile"
         style="height: 50vw; padding-top: 19vw; text-align: center;
         background-image: url('/assets/images/seeder/homepage_background.png');">
         <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
@@ -31,7 +31,7 @@ karir impian!</p>
     <div class="toggle-content" id="kandidat-venidici">
 
         <!-- START OF DESCRIPTION AND SEARCH SECTION -->
-        <div class="row m-0 page-container desktop-display" style="padding-bottom:4vw;padding-top:8vw">
+        <div class="row m-0 page-container " style="padding-bottom:4vw;padding-top:8vw">
             <div class="col-12 p-0">
                 <p class="medium-heading" style="font-family: Rubik Bold;color:#2B6CAA">Kandidat dari Venidici</p>
             </div>
@@ -113,10 +113,10 @@ karir impian!</p>
                     @elseif($loop->iteration % 3 == 0)
                     <div class="col-lg-4 col-xs-12 p-0" style="margin-top:4vw;display:flex;justify-content:flex-end">
                     @endif   
-                        <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px;" >
+                        <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px;" id="width-auto-mobile" >
                             <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA;cursor:pointer" onclick="window.location.href='/job-portal/{{$candidateDetail->user_id}}'">
                                 <div class="col-4 ps-0">
-                                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidateDetail->user->userDetail->display_picture }}" @endif style="width:7vw;height:100%;object-fit:cover;border-radius:5px" class="img-fluid" alt="Image not available..">
+                                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidateDetail->user->userDetail->display_picture }}" @endif style="width:7vw;height:100%;object-fit:cover;border-radius:5px" id="width-auto-mobile" class="img-fluid" alt="Image not available..">
                                 </div>
                                 <div class="col-8">
                                     <div style="margin-bottom:0.5vw">
