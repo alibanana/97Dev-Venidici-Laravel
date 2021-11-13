@@ -10,20 +10,20 @@
     <p class="medium-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Epxlore venidici blog</p>
 
     </div>
-    <div class="col-lg-4 col-xs-12">
+    <div class="col-lg-4 col-xs-12" id="margin-bottom-between-iput">
         <div style="display:flex;align-items:center">
 
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <form action="">
-                <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
-                <input  name="search" value="{{ Request::get('search') }}" type="search" class="normal-text typeahead" autocomplete="off"
+                <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid desktop-display" alt="">
+                <input  name="search" value="{{ Request::get('search') }}" type="search" class="normal-text typeahead" autocomplete="off" id="width-blog-mobile-input-article"
                     style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" placeholder="Search Article">
                 @if (Request::get('show'))
                     <input name="show" value="{{ Request::get('show') }}" hidden>
                 @endif
             </div>
             <div style="margin-left: 1vw;">
-                <button type="submit" onclick="openLoading()" class="btn-search normal-text"><i class="fas fa-search"></i></button>
+                <button type="submit" onclick="openLoading()" class="btn-search normal-text" id="button-search-padding-mobile-input-article"><i class="fas fa-search"></i></button>
                 </form>
             </div>
         </div>

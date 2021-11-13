@@ -2731,12 +2731,36 @@ html, body {
         transform: translate3d(-126px, 34px, 0px) !important;
     }
     #height-jobportal-mobile{
-        height: auto !important;
+        height: 65vw !important;
+        padding-top:6vw !important
     }
     #width-auto-mobile{
         width: auto !important;
     }
-    
+    #jp-mobile-input{
+        width:74vw !important;
+    }
+    #margin-left-mobile-jp{
+        margin-left:0vw !important;
+    }
+    #button-added-jp{
+        width:70% !important
+    }
+    #icon-font-size-mobile-jp{
+        font-size:8vw !important
+    }
+    .margin-right-for-icon-jp-mobile{
+        margin-right:3vw  !important
+    }
+    #width-blog-mobile-input-article{
+        width: 67vw !important;
+    }
+    #button-search-padding-mobile-input-article{
+        padding:1.5vw 3vw !important
+    }
+    #margin-bottom-between-iput{
+        margin-bottom:2vw !important
+    }
 }
 
 /* MOBILE NAVBAR */

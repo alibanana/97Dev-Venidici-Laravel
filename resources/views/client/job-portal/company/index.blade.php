@@ -48,9 +48,9 @@ karir impian!</p>
                         <input name="show" value="{{ Request::get('show') }}" hidden>
                     @endif
                     <div class="grey-input-form" style="display: flex;align-items:center">
-                        <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
+                        <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid desktop-display" alt="">
                         <input type="text" name="search" class="normal-text typeahead" autocomplete="off"
-                            style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular"
+                            style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular" id="jp-mobile-input"
                             placeholder="Search Name & Skill" value="{{ Request::get('search') }}">
                     </div>
                     <div style="margin-left: 1vw;">
@@ -59,7 +59,7 @@ karir impian!</p>
                 </form>
             </div>
             <div class="col-lg-3 col-xs-6 p-0" style="margin-top:3vw">
-                <div style="margin-left: 3vw;">
+                <div style="margin-left: 3vw;" id="margin-left-mobile-jp">
                     <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                         <select name="years_of_experience" class="normal-text" onchange="if (this.value) window.location.href=this.value"
                             style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
@@ -72,7 +72,7 @@ karir impian!</p>
                 </div>
             </div>
             <div class="col-lg-3 col-xs-6 p-0" style="margin-top:3vw">
-                <div style="margin-left: 3vw;">
+                <div style="margin-left: 3vw;" id="margin-left-mobile-jp">
                     <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                         <select name="sort" class="normal-text" onchange="if (this.value) window.location.href=this.value"
                         style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
@@ -135,7 +135,7 @@ karir impian!</p>
                                 <p class="normal-text" style="font-family: Rubik Bold;margin-bottom:0px;color:#55525B;margin-top:0.5vw">Bootcamp Score: {{ $candidateDetailIdAndScoreMap[$candidateDetail->id] }}</p>
                                 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2.5vw;">
                                     @if (in_array($candidateDetail->user->id, $archivedCandidateIds))
-                                        <button class="normal-text btn-dark-blue full-width-button" disabled
+                                        <button class="normal-text btn-dark-blue full-width-button" disabled id="button-added-jp"
                                             style="border:none;font-family: Rubik Bold;margin-bottom:0px;">
                                             Added</button>
                                     @else
@@ -148,11 +148,11 @@ karir impian!</p>
                                         </form>
                                     @endif
                                     <div style="display:flex">
-                                        <a href="{{ $candidateDetail->linkedin_link }}" target="_blank" class="sub-description" style="margin-right:1vw;z-index:">
+                                        <a href="{{ $candidateDetail->linkedin_link }}" target="_blank" class="sub-description margin-right-for-icon-jp-mobile" id="icon-font-size-mobile-jp" style="margin-right:1vw;z-index:">
                                             <i class="fab fa-linkedin " style="color:#3B3C43"></i> 
                                         </a>
-                                        <a href="{{ $candidateDetail->cv_file }}" target="_blank" class="sub-description">
-                                            <i class="fas fa-download " style="color:#3B3C43"></i> 
+                                        <a href="{{ $candidateDetail->cv_file }}" target="_blank" class="sub-description " id="icon-font-size-mobile-jp">
+                                            <i class="fas fa-download " style="color:#3B3C43"></i>  
                                         </a>
                                     </div>
         
