@@ -2761,6 +2761,15 @@ html, body {
     #margin-bottom-between-iput{
         margin-bottom:2vw !important
     }
+    #mobile-height-auto-important{
+        height: 50vw !important
+    }
+    .margin-top-mobile-bootcamp{
+        margin-top:11vw !important
+    }
+    #margin-bottom-mobile-banner-section{
+        margin-bottom:11vw !important
+    }
 }
 
 /* MOBILE NAVBAR */
