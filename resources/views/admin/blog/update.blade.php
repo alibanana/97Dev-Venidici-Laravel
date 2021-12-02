@@ -81,7 +81,7 @@
                     <select name="hashtag" class="form-control form-control-user" id="" >
                         <option value="" selected disabled>Pilih Hashtag</option>
                         @foreach ($tags as $tag)
-                            <option value="{{ $tag->id }}" @if($blog->hashtag == $tag->id) selected @endif >{{ $tag->hashtag }}</option>
+                            <option value="{{ $tag->id }}" @if($blog->hashtag_id == $tag->id) selected @endif >{{ $tag->hashtag }}</option>
                         @endforeach
                     </select>
                     @error('hashtag')

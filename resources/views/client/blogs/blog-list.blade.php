@@ -6,9 +6,13 @@
 
 <!-- START OF FILTER SECTION -->
 <div class="row m-0 page-container" style=";padding-top:11vw">
-    <div class="col-12 p-0">
-        <p class="medium-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Epxlore venidici blog</p>
+    <div class="col-12">
+    <p class="medium-heading" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:2vw">Epxlore venidici blog</p>
+
+    </div>
+    <div class="col-lg-4 col-xs-12">
         <div style="display:flex;align-items:center">
+
             <div  class="grey-input-form" style="display: flex;align-items:center">
                 <form action="">
                 <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
@@ -22,23 +26,22 @@
                 <button type="submit" onclick="openLoading()" class="btn-search normal-text"><i class="fas fa-search"></i></button>
                 </form>
             </div>
-
-            <div style="margin-left: 3vw;">
-                <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                    <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;"  onchange="if (this.value) window.location.href=this.value">
-                        <option value="None" disabled selected>Sort</option>
-                        <option value="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
-                        <option value="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}" @if (Request::get('sort') == 'oldest') selected @endif>Oldest</option>
-                    </select>                    
-                    @error('')
-                        <span class="invalid-feedback" role="alert" style="display: block !important;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>  
-            </div>
-
         </div>
+            
+    </div>
+    <div class="col-lg-3 col-xs-12">
+        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
+            <select name="" class="normal-text"  style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;"  onchange="if (this.value) window.location.href=this.value">
+                <option value="None" disabled selected>Sort</option>
+                <option value="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}" @if (Request::get('sort') == 'latest') selected @endif>Latest</option>
+                <option value="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}" @if (Request::get('sort') == 'oldest') selected @endif>Oldest</option>
+            </select>                    
+            @error('')
+                <span class="invalid-feedback" role="alert" style="display: block !important;">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>  
     </div>
 </div>
 <!-- END OF FILTER SECTION -->

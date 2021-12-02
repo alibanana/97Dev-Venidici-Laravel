@@ -200,7 +200,7 @@
                 <div class="accordion" id="accordion{{$section->id}}">
                     <div class="accordion-item" >
                         <h2 class="accordion-header" id="heading{{$section->id}}" style="background: rgba(111, 159, 205, 0.1)">
-                        <button class="accordion-button bigger-text @if($content->section_id != $section->id) collapsed @endif" style="border:none;border-radius:0px;font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$section->id}}" aria-expanded="@if($content->section_id == $section->id) true @else false @endif" aria-controls="collapse{{$section->id}}">
+                        <button class="accordion-button bigger-text @if($content->section_id != $section->id) collapsed @endif" style="border:none;border-radius:0px;font-family: Rubik Regular;margin-bottom:0px;color:#3B3C43;text-align:left" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$section->id}}" aria-expanded="@if($content->section_id == $section->id) true @else false @endif" aria-controls="collapse{{$section->id}}">
                             <span class="bigger-text">{{$section->title}}</span>
                         </button>
                         </h2>

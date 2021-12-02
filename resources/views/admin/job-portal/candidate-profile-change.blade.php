@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <!-- show current profile -->
-                    @if ($isCandidateDetailNotUpdated)
+                    @if (!$isCandidateDetailNotUpdated)
                         <div class="col-12 p-0" style="margin-top:4vw">
                             <p class="small-heading" style="font-family: Rubik Bold;color:#FFFFFF">About me (existing)</p>
                             <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Linked In: {{$candidate_detail->linkedin_link == null ? '-' : $candidate_detail->linkedin_link }}</p>

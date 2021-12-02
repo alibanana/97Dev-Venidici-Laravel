@@ -4,7 +4,7 @@
 @section('content')
 
     <!-- START OF BANNER SECTION -->
-    <div class="row m-0 banner-background page-container desktop-display"
+    <div class="row m-0 banner-background page-container " id="height-jobportal-mobile"
         style="height: 50vw; padding-top: 19vw; text-align: center;
         background-image: url('/assets/images/seeder/homepage_background.png');">
         <div class="col-md-12 p-0 wow fadeInUp" data-wow-delay="0.3s">
@@ -31,59 +31,62 @@ karir impian!</p>
     <div class="toggle-content" id="kandidat-venidici">
 
         <!-- START OF DESCRIPTION AND SEARCH SECTION -->
-        <div class="row m-0 page-container desktop-display" style="padding-bottom:4vw;padding-top:8vw">
+        <div class="row m-0 page-container " style="padding-bottom:4vw;padding-top:8vw">
             <div class="col-12 p-0">
                 <p class="medium-heading" style="font-family: Rubik Bold;color:#2B6CAA">Kandidat dari Venidici</p>
             </div>
             <div class="col-lg-6 col-xs-12 p-0">
                 <p class="bigger-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#000000;margin-top:1vw">Odio vehicula cursus nullam ornare. Elit tincidunt tellus ac non posuere tellus risus pharetra a. Aliquet integer sodales viverra turpis eu senectus ornare urna ornare. Sed aliquam risus nisl, nunc, accumsan vitae.</p>
             </div>
+            <div class="col-lg-6 col-xs-12 p-0">
+            </div>
 
             <!-- START OF SEARCH SECTION -->
-            <div class="col-12 p-0" style="display:flex;align-items:center;margin-top:3vw;justify-content:space-between">
-                <div style="display:flex;align-items:center">
-
-                    <form action="{{ route('job-portal.index') }}" method="get" style="display:flex">
-                        @if (Request::get('show'))
-                            <input name="show" value="{{ Request::get('show') }}" hidden>
-                        @endif
-                        <div class="grey-input-form" style="display: flex;align-items:center">
-                            <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
-                            <input type="text" name="search" class="normal-text typeahead" autocomplete="off"
-                                style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular"
-                                placeholder="Search Name & Skill" value="{{ Request::get('search') }}">
-                        </div>
-                        <div style="margin-left: 1vw;">
-                            <button type="submit" onclick="openLoading()" class="btn-search normal-text"><i class="fas fa-search"></i></button>
-                        </div>
-                    </form>
-
-                    <div style="margin-left: 3vw;">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="years_of_experience" class="normal-text" onchange="if (this.value) window.location.href=this.value"
-                                style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => 'none']) }}" @if (!Request::has('years_of_experience')) selected @endif>Years of Experiences</option>
-                                @foreach ($availableExperienceYearFilters as $filter)
-                                    <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => $filter]) }}" @if (Request::get('years_of_experience') == $filter) selected @endif>{{ $filter }}</option>
-                                @endforeach
-                            </select>
-                        </div>  
+            <div class="col-lg-3 col-xs-12 p-0" style="margin-top:3vw">
+                <form action="{{ route('job-portal.index') }}" method="get" style="display:flex">
+                    @if (Request::get('show'))
+                        <input name="show" value="{{ Request::get('show') }}" hidden>
+                    @endif
+                    <div class="grey-input-form" style="display: flex;align-items:center">
+                        <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
+                        <input type="text" name="search" class="normal-text typeahead" autocomplete="off"
+                            style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw;font-family:Rubik Regular"
+                            placeholder="Search Name & Skill" value="{{ Request::get('search') }}">
                     </div>
-
-                    <div style="margin-left: 3vw;">
-                        <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
-                            <select name="sort" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                    <div style="margin-left: 1vw;">
+                        <button type="submit" onclick="openLoading()" class="btn-search normal-text"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-xs-6 p-0" style="margin-top:3vw">
+                <div style="margin-left: 3vw;">
+                    <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
+                        <select name="years_of_experience" class="normal-text" onchange="if (this.value) window.location.href=this.value"
                             style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'none']) }}" @if (!Request::has('sort')) selected @endif>Sort by</option>
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-asc']) }}" @if (Request::get('sort') == 'alpha-asc') selected @endif>Alphabet Ascending</option>
-                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-desc']) }}" @if (Request::get('sort') == 'alpha-desc') selected @endif>Alphabet Descending</option>
-                            </select>
-                        </div>  
-                    </div>
+                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => 'none']) }}" @if (!Request::has('years_of_experience')) selected @endif>Years of Experiences</option>
+                            @foreach ($availableExperienceYearFilters as $filter)
+                                <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'years_of_experience' => $filter]) }}" @if (Request::get('years_of_experience') == $filter) selected @endif>{{ $filter }}</option>
+                            @endforeach
+                        </select>
+                    </div>  
                 </div>
-
+            </div>
+            <div class="col-lg-3 col-xs-6 p-0" style="margin-top:3vw">
+                <div style="margin-left: 3vw;">
+                    <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
+                        <select name="sort" class="normal-text" onchange="if (this.value) window.location.href=this.value"
+                        style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
+                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'none']) }}" @if (!Request::has('sort')) selected @endif>Sort by</option>
+                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-asc']) }}" @if (Request::get('sort') == 'alpha-asc') selected @endif>Alphabet Ascending</option>
+                            <option value="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'alpha-desc']) }}" @if (Request::get('sort') == 'alpha-desc') selected @endif>Alphabet Descending</option>
+                        </select>
+                    </div>  
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-12 p-0" style="margin-top:3vw;display:flex;justify-content:flex-end;align-items:center">
                 <a href=""  class="normal-text" style="font-family: Rubik Regular;margin-bottom:0px;color:#2B6CAA;">Refresh</a>
             </div>
+
             <!-- END OF SEARCH SECTION -->
 
         </div>
@@ -109,10 +112,10 @@ karir impian!</p>
                     @elseif($loop->iteration % 3 == 0)
                     <div class="col-lg-4 col-xs-12 p-0" style="margin-top:4vw;display:flex;justify-content:flex-end">
                     @endif   
-                        <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px;" >
+                        <div style="width:24vw;border:2px solid #2B6CAA;border-radius:5px;" id="width-auto-mobile" >
                             <div class="row m-0" style=";padding:1vw;background-color:#2B6CAA;cursor:pointer" onclick="window.location.href='/job-portal/{{$candidateDetail->user_id}}'">
                                 <div class="col-4 ps-0">
-                                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidateDetail->user->userDetail->display_picture }}" @endif style="width:7vw;height:100%;object-fit:cover;border-radius:5px" class="img-fluid" alt="Image not available..">
+                                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidateDetail->user->userDetail->display_picture }}" @endif style="width:7vw;height:100%;object-fit:cover;border-radius:5px" id="width-auto-mobile" class="img-fluid" alt="Image not available..">
                                 </div>
                                 <div class="col-8">
                                     <div style="margin-bottom:0.5vw">

@@ -161,11 +161,10 @@
     @if( !Request::is('login') )
       @if( !Request::is('signup') )
       @if( !Request::is('signup-interests') )
-        @if( !Request::is('job-portal') )
-        @if( !Request::is('job-portal/*') )
+        @if( !Request::is('job-portal/login') )
     <!-- START OF MOBILE NAVBAR -->
     <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;
-  top: 0;z-index: 10;">
+        top: 0;z-index: 10;">
       <div >
         <!--    Made by Erik Terwan    -->
         <!--   24th of November 2015   -->
@@ -211,6 +210,9 @@
               <br>
               @endif -->
               <!-- <a href="/login" class="btnSignUp" style="margin-bottom: 20px;">Login</a> -->
+              @if( !Request::is('job-portal/*') )
+              @if( !Request::is('job-portal') )
+
               <table id="menuKiri">
                 <tr>
                   <td>
@@ -268,6 +270,34 @@
       
 
               </table>
+              @endif
+              @endif
+
+              @if( Request::is('job-portal/*') ||  Request::is('job-portal'))
+              <table id="menuKiri">
+                <tr>
+                  <td>
+                  <a href="/job-portal/profile" class="navbar-item @if(Request::is('job-portal/profile'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">My Profile</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/job-portal" class="navbar-item @if(Request::is('job-portal'))navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Cadidate List</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/job-portal/my-list" class="navbar-item @if(Request::is('job-portal/my-list'))navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">My List</a>
+                  </td>
+                </tr>
+
+        
+      
+
+              </table>
+
+              
+              @endif
               
             </ul>
 
@@ -275,6 +305,8 @@
           @if (Auth::check())
 
           <div style="display: flex;">
+            @if( !Request::is('job-portal/*') )
+              @if( !Request::is('job-portal') )
             <a id="cart_icon" class="navbar-item" href="/cart" style="color:#FFFFFF">
               <span class="counter fa-stack has-badge" data-count="{{$cart_count}}">
                 <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart')) navbar-item-active-mobile @endif"></i>
@@ -286,16 +318,16 @@
               </span>
             </a>
             <a class="navbar-item" href="/dashboard" style="color:#FFFFFF;margin-top:1vw"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active-mobile @elseif(Request::is('dashboard/*')) navbar-item-active-mobile @endif"></i></a>
+              @endif
+            @endif
 
           </div>
-          @else
           <img src="/assets/images/client/Logo_white.png" style="height:6vw" class="img-fluid" alt="">
           <!-- <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4vw">Log In</a> -->
           @endif
         </nav>
       </div>
     </div>
-    @endif
     @endif
     @endif
     @endif
