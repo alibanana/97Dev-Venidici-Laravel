@@ -3,7 +3,7 @@
 
 @section('content')
 <!-- START OF BANNER SECTION -->
-<div class="row m-0 banner-background page-container" style="height:40vw;padding-top:16vw;text-align:center">
+<div class="row m-0 banner-background page-container desktop-display" style="height:40vw;padding-top:16vw;text-align:center">
     <div class="col-md-12 p-0">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Venidici Bootcamp</p>
         <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum distinctio, consequatur sapiente doloribus dignissimos ipsum modi, illo facere quod voluptatem nemo dolorum reprehenderit sed aut et cumque corrupti beatae ea?</p>
@@ -14,19 +14,34 @@
 </div>
 
 <!-- END OF BANNER SECTION -->
+<!-- Start of mobile banner section -->
+<div class="row m-0 course-list-banner-background page-container mobile-display" style="height:100vw;padding-top:16vw;text-align:center;display:none">
+    <div class="col-md-12 p-0">
+        <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line" >Venidici Bootcamp</p>
+        <p class="sub-description " id="margin-bottom-mobile-banner-section" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:3vw" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum distinctio, consequatur sapiente doloribus dignissimos ipsum modi, illo facere quod voluptatem nemo dolorum reprehenderit sed aut et cumque corrupti beatae ea?</p>
+        
+        <a href="#search-course-section" class="sub-description btn-blue-bordered btn-blue-bordered-active" style="font-family: Rubik Regular;margin-bottom:0px;cursor:pointer;width:100%;margin-top:5vw;padding:0.8vw 1vw">Search Bootcamp</a>
+
+    </div>
+</div>
+<!-- End of mobile banner section -->
 
 <div style="padding-bottom:5vw">
 </div>
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container review-course-background" style="padding-bottom: 8vw;padding-top:4vw">
     <!-- START OF FEATURE SECTION -->
-    
-    <div class="col-8" style="padding-left:0vw;padding-right:4vw">
+    <div class="col-12 col-lg-4  mobile-display" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+        <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s Bootcamp</p>
+        <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
+        <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
 
+    </div>
+    <div class="col-12 col-lg-8"  style="padding-left:0vw;padding-right:4vw">
         <div id="feature-carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
             <div class="carousel-inner" style="padding: 0vw 3.5vw;">
                 <div class="carousel-item active">
-                    <div class="card-white" style="height:20vw;padding:2.5vw">
+                    <div class="card-white" id="mobile-height-auto-important" style="height:20vw;padding:2.5vw">
                         <div style="display:flex;align-items:center">   
                             <img src="/assets/images/client/Default_Display_Picture.png" style="width:5vw;border-radius:10px" class="img-fluid" alt="">
                             <div style="margin-left:1vw">
@@ -86,7 +101,7 @@
         </div>  
 
     </div>
-    <div class="col-4 p-0 " style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-12 col-lg-4 p-0 desktop-display" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s Bootcamp</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
@@ -160,7 +175,7 @@
         
             @foreach($courses as $course)
 
-            <div class="col-4 p-0" style="margin-top:3vw">
+            <div class="col-12 col-lg-4 p-0" style="margin-top:3vw">
                 <div style="display: flex;justify-content:center">
                     <!-- START OF ONE BLUE COURSE CARD  -->
                     <div class="course-card-blue">
@@ -214,7 +229,7 @@
                                 </p>
                                 
                             </div>-->
-                            <div id="star-section" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
+                            <div id="star-section" class="margin-top-mobile-bootcamp" style="display:flex;align-items:center;margin-top:1vw;padding-bottom:1vw">
                                 <p class="small-text" style="font-family:Rubik Regular;color:#F4C257;margin-bottom:0px">{{ $course->average_rating }}/5</p>
                                 <div style="display: flex;justify-content:center;margin-left:1vw">
                                     @for ($i = 1; $i < 6; $i++)
