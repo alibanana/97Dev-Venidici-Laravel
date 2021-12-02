@@ -95,7 +95,7 @@
                                             <td>{{$blog->title}}</td>
                                             <td>{{$blog->author}}</td>
                                             <td>{{$blog->duration}} mins</td>
-                                            <td>{{$blog->hashtag}}</td>
+                                            <td>{{$blog->hashtag->hashtag}}</td>
                                             <td>
                                                 @if($blog->is_featured)
                                                     <span style="color:green">YES</span>
