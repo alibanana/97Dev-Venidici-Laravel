@@ -44,7 +44,7 @@ karir impian!</p>
                     </select>
                 </div>  
             </div>
-            <div class="col-lg-3 col-xs-6" style="margin-top:3vw">
+            <div class="col-lg-3 col-xs-6 mpl" style="margin-top:3vw">
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                     <select name="status" class="normal-text" onchange="if (this.value) window.location.href=this.value"
                     style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
@@ -55,7 +55,7 @@ karir impian!</p>
                     </select>
                 </div>             
             </div>
-            <div class="col-lg-3 col-xs-6" style="margin-top:3vw">
+            <div class="col-lg-3 col-xs-6 mpl" style="margin-top:3vw">
                 <div class="grey-input-form" style="display: flex;align-items:center;width:100%">
                     <select name="sort" class="normal-text" onchange="if (this.value) window.location.href=this.value"
                     style="background:transparent;border:none;color: #5F5D70;;width:100%;font-family:Rubik Regular;">
@@ -99,7 +99,7 @@ karir impian!</p>
                         <div class="row m-0  job-listing-card" style="cursor:pointer" onclick="window.location.href='/job-portal/{{$candidate->candidateDetail->user_id}}'" >
                             <div class="col-8"> 
                                 <div style="display:flex;align-items:center">
-                                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidate->user->userDetail->display_picture }}" @endif style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid" alt="">
+                                    <img @if(Auth::user()->avatar == null) src="/assets/images/client/Default_Display_Picture.png" @else src="{{ $candidate->user->userDetail->display_picture }}" @endif style="width:5vw;height:5vw;object-fit:cover;border-radius:5px" class="img-fluid desktop-display" alt="">
                                     <div style="margin-left:1vw">
                                         <p class="bigger-text" style="font-family: Rubik Medium;color:#2B6CAA;margin-bottom:0.5vw">{{ $candidate->name }}</p>
                                         <p class="normal-text" style="font-family: Rubik Regular;color:#2B6CAA;margin-bottom:0.5vw">{{ $candidate->candidateDetail->industry }}</p>
