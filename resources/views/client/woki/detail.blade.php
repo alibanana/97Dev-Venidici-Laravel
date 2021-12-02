@@ -134,7 +134,7 @@
                         @if ($course->price != 0)
                             <form action="{{ route('customer.cart.store') }}" method="post">
                             @csrf
-                                <input type="hidden" name="course_name" value="{{ $course->title }}">
+                                <input type="hidden" name="course_id" value="{{$course->id}}">
                                 <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
 
                                 <input type="hidden" id="withArtOrNoMobile" name="withArtOrNo" value="0">
@@ -147,7 +147,7 @@
                         @else
                             <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
                             @csrf
-                                <input type="hidden" name="course_name" value="{{$course->title}}">    
+                                <input type="hidden" name="course_id" value="{{$course->id}}">    
                                 <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
           
                                 <button class="normal-text  btn-dark-blue full-width-button"
@@ -360,7 +360,7 @@
                         </span>
                     @enderror
 
-                    <input type="hidden" name="course_name" value="{{$course->title}}">
+                    <input type="hidden" name="course_id" value="{{$course->id}}">
                     <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
 
                     <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:1vw">
@@ -501,7 +501,7 @@
                 @if ($course->price != 0)
                     <form action="{{ route('customer.cart.store') }}" method="post">
                     @csrf
-                        <input type="hidden" name="course_name" value="{{ $course->title }}">
+                        <input type="hidden" name="course_id" value="{{ $course->id }}">
                         <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
 
                         <input type="hidden" id="withArtOrNo" name="withArtOrNo" value="0">
@@ -514,7 +514,7 @@
                 @else
                     <form action="{{ route('online-course.buyFree', $course->id) }}" method="post">
                     @csrf
-                        <input type="hidden" name="course_name" value="{{$course->title}}">           
+                        <input type="hidden" name="course_id" value="{{$course->id}}">           
                         <input type="hidden" name="course_type" value="{{ $course->course_type_id }}">
    
                         <button class="normal-text  btn-dark-blue"

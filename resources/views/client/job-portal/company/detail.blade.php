@@ -14,7 +14,7 @@
             <div class="col-lg-9 col-xs-12 p-0" style="display: flex;flex-direction: column;justify-content: center;align-items:left">
                 <div>
                     <p class="normal-text" style="font-family: Rubik Regular;color:#FFFFFF">Hi, my name is</p>
-                    <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF">{{auth()->user()->name}}</p>
+                    <p class="medium-heading" style="font-family: Rubik Bold;color:#FFFFFF">{{$candidate_detail->user->name}}</p>
                     @isset($candidate_detail->experience_year)
                     <p class="bigger-text" style="font-family: Rubik Regular;color:#FFFFFF">I have {{$candidate_detail->experience_year}} in {{$candidate_detail->industry}}</p>
                     @endisset
