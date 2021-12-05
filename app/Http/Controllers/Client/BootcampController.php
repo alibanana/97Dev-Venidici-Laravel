@@ -312,7 +312,7 @@ class BootcampController extends Controller
         $validator = Validator::make($request->all(), $validationRules);
         
         if ($validator->fails())
-            return redirect('/bootcamp#full-registration')->withErrors($validator)->withInput($request->all());
+            return redirect('/bootcamp/'.$request->course_title.'#full-registration')->withErrors($validator)->withInput($request->all());
 
         $validated = $validator->validate();
 
@@ -321,7 +321,7 @@ class BootcampController extends Controller
         } else {
             // If browser is safari and bootcamp
             if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
-                return redirect('/bootcamp#full-registration')
+                return redirect('/bootcamp/'.$request->course_title.'#full-registration')
                     ->withInput($request->all())
                     ->with('date_message','The date field is required');
             
@@ -342,13 +342,13 @@ class BootcampController extends Controller
             ]
         )->count();
         if($bootcamp_application != 0)
-            return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message', 'You already have registered for a bootcamp, we will get back to you soon.');
+            return redirect('/bootcamp/'.$request->course_title.'#full-registration')->with('full_registration_bootcamp_message', 'You already have registered for a bootcamp, we will get back to you soon.');
         
         // change promo code.
         if ($validated['promo_code'] != null){
             $promoObject = Promotion::where('code', $validated['promo_code'])->where('isActive',1)->first();
             if ($promoObject == null) 
-                return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message', 'Oops, Promo Code tidak ditemukan..')->withInput($request->all());
+                return redirect('/bootcamp/'.$request->course_title.'#full-registration')->with('full_registration_bootcamp_message', 'Oops, Promo Code tidak ditemukan..')->withInput($request->all());
         }
 
         $bootcamp                       = new BootcampApplication;
@@ -402,7 +402,7 @@ class BootcampController extends Controller
             abort(500);
         }
 
-        return redirect('/bootcamp#full-registration')->with('full_registration_bootcamp_message',"Terimakasih telah mendaftar, we'll get back to you as soon as possible!");
+        return redirect('/bootcamp/'.$request->course_title.'#full-registration')->with('full_registration_bootcamp_message',"Terimakasih telah mendaftar, we'll get back to you as soon as possible!");
     }
 
     public function sendSyllabus($course_id){
@@ -415,7 +415,7 @@ class BootcampController extends Controller
         $syllabusRequest->user_id = $user->id;
         $syllabusRequest->save();
 
-        return redirect('/bootcamp#schedule-section')->with('send_syllabus_message',"Syllabus telah terkirim ke email anda.");
+        return redirect('/bootcamp/'.$course->title.'#schedule-section')->with('send_syllabus_message',"Syllabus telah terkirim ke email anda.");
 
     }
 }

@@ -14,6 +14,7 @@
             
             <form action="{{route('customer.cart.storeOrder')}}" method="POST" enctype="multipart/form-data">
             @csrf
+                <input type="hidden" value="{{$course->title}}" name="course_title">
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
                         <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid logo-bootcamp-popup"  alt="LOGO">
@@ -502,10 +503,11 @@
 <div id="full-registration" class="overlay" style="overflow:scroll">
     <div class="popup">
         <a class="close" href="#closed" >&times;</a>
-    
+
         <div class="content" style="padding:2vw">
             
             <form action="{{route('bootcamp.storeFullRegistration', $course->id)}}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" value="{{$course->title}}" name="course_title">
             @csrf
                 <div class="row m-0">
                     <div class="col-12 p-0" style="text-align:center;margin-top:2vw">
