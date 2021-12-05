@@ -8,6 +8,15 @@ use App\Http\Controllers\Client\OnlineCourseController;
 use App\Http\Controllers\Client\WokiController;
 use App\Http\Controllers\Client\AssessmentController;
 use App\Http\Controllers\Client\KrestController;
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\ReviewController;
+use App\Http\Controllers\Client\DashboardController;
+use App\Http\Controllers\Client\BootcampController;
+use App\Http\Controllers\Client\ContactUsController;
+use App\Http\Controllers\Client\CandidateDetailController;
+use App\Http\Controllers\Client\JobPortalController;
+use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\Admin\AnalyticsController as AdminAnalyticsController;
@@ -27,8 +36,6 @@ use App\Http\Controllers\Admin\BootcampFutureCareerController as AdminBootcampFu
 use App\Http\Controllers\Admin\BootcampHiringPartnerController as AdminBootcampHiringPartnerController;
 use App\Http\Controllers\Admin\BootcampBatchController as AdminBootcampBatchController;
 use App\Http\Controllers\Admin\BootcampPricingContentController as AdminBootcampPricingContentController;
-
-
 use App\Http\Controllers\Admin\ArtSupplyController as AdminArtSupplyController;
 use App\Http\Controllers\Admin\WokiCourseUpdateController as AdminWokiCourseUpdateController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
@@ -40,20 +47,17 @@ use App\Http\Controllers\Admin\HashtagController as AdminHashtagController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\KrestController as AdminKrestController;
 use App\Http\Controllers\Admin\KrestProgramController as AdminKrestProgramController;
+use App\Http\Controllers\Admin\HiringPartnerController as AdminHiringPartnerController;
+use App\Http\Controllers\Admin\CandidateController as AdminCandidateController;
 use App\Http\Controllers\Admin\InstructorController as AdminInstructorController;
 use App\Http\Controllers\Admin\InstructorPositionController as AdminInstructorPositionController;
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\Admin\RedeemController as AdminRedeemController;
 use App\Http\Controllers\Admin\CollaboratorController as AdminCollaboratorController;
 use App\Http\Controllers\Admin\ContactUsController as AdminContactUsController;
-use App\Http\Controllers\SocialController;
-use App\Http\Controllers\Client\CartController;
-use App\Http\Controllers\Client\ReviewController;
-use App\Http\Controllers\Client\DashboardController;
-use App\Http\Controllers\Client\BootcampController;
-use App\Http\Controllers\Api\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,18 +69,7 @@ use App\Http\Controllers\Api\CheckoutController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::middleware(['isSuspended'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth']);
-    Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
-    Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);
-    Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth']);
-    Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth']);
-    Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
-    Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth']);
-    Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
-    Route::put('/bootcamp/upgrade-status', [DashboardController::class, 'upgradeBootcamp'])->name('bootcamp.upgrade-status')->middleware(['auth']);
-
     /*
     |--------------------------------------------------------------------------
     | Custom Auth Routes
@@ -90,51 +83,38 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::get('/signup-interests', [CustomAuthController::class, 'signUpInterestIndex'])->name('custom-auth.signup_interest.index')->middleware('guest');
     Route::post('/register', [CustomAuthController::class, 'storeNewUser'])->name('custom-auth.register')->middleware('guest');
     Route::post('/reset-password', [CustomAuthController::class, 'resetPassword'])->name('custom-auth.reset-password')->middleware('guest');
-
-    /*
-    |--------------------------------------------------------------------------
-    | Client Routes
-    |
-    | Controllers can be found inside -> App\Http\Controllers\Client\
-    | Controllers Used:
-    |   - PagesController
-    |   - CartController
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/search-course', [PagesController::class, 'search_course'])->name('search_course');
-    Route::get('/', [PagesController::class, 'index'])->name('index');
-    Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
-
+    Route::get('/job-portal/login', [CustomAuthController::class, 'showJobPortalLogin'])->name('job-portal.login')->middleware('guest');
+    
     /* START OF CLIENT ROUTING */
+    Route::get('/', [PagesController::class, 'index'])->name('index');
+    Route::post('/search-course', [PagesController::class, 'search_course'])->name('search_course');
+    Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
+    Route::get('/community', [PagesController::class, 'community_index'])->name('customer_community');
+    Route::get('/blog/{id}', [PagesController::class, 'blog_detail'])->name('blog_detail');
+    Route::get('/blogs', [PagesController::class, 'blog_list'])->name('blog_list');
 
-
-    /*  MENJADI PENGAJAR & KOLLABORATOR*/
+    /* DASHBOARD & USER RELATED ROUTES */
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard')->middleware(['auth', 'isNotHiringPartner']);
+    Route::put('/seeNotification', [PagesController::class, 'seeNotification'])->name('customer.seeNotification')->middleware(['auth']);
+    Route::put('/update-profile/{id}', [DashboardController::class, 'update_profile'])->name('customer.update_profile')->middleware(['auth']);
+    Route::put('/update-shipping/{id}', [DashboardController::class, 'update_shipping'])->name('customer.update_shipping')->middleware(['auth']);
+    Route::post('/update-interest', [DashboardController::class, 'update_interest'])->name('customer.update_interest')->middleware(['auth']);
+    Route::post('/change-password', [DashboardController::class, 'changePassword'])->name('customer.change-password')->middleware(['auth', 'verified']);
+    Route::get('/dashboard/redeem-vouchers', [DashboardController::class, 'redeem_index'])->name('customer.redeem_index')->middleware(['auth']);
+    Route::post('/dashboard/redeem-vouchers', [DashboardController::class, 'redeemPromo'])->name('customer.redeemPromo')->middleware(['auth', 'verified']);
+    Route::put('/bootcamp/upgrade-status', [DashboardController::class, 'upgradeBootcamp'])->name('bootcamp.upgrade-status')->middleware(['auth']);
+    
+    /* MENJADI PENGAJAR & KOLLABORATOR*/
     Route::post('/menjadi-pengajar', [AdminInstructorController::class, 'store'])->name('menjadi_pengajar.store');
     Route::post('/menjadi-kolaborator', [AdminCollaboratorController::class, 'store'])->name('collaborators.store');
     Route::post('/add-newsletter', [AdminNewsletterController::class, 'store'])->name('newsletter.store');
 
-    Route::get('/autocomplete', [PagesController::class, 'autocomplete'])->name('autocomplete');
-
-
-    //Route::get('/signup-interests', function () {
-        //return view('client/auth/signup-interests');
-    //});
-
-
-    //Route::get('/cart', function () {
-        //return view('client/cart');
-    //});
-    // Route::get('/dashboard', function () {
-    //     return view('client/user-dashboard');
-    // });
     /* CART ROUTING */
-
     Route::get('/transaction-detail/{id}', [CheckoutController::class, 'transactionDetail'])->name('customer.cart.transactionDetail')->middleware(['auth', 'verified']);
     Route::post('/cancelPayment/{id}', [CheckoutController::class, 'cancelPayment'])->name('customer.cart.cancelPayment')->middleware(['auth', 'verified']);
     Route::post('/receivePayment/{id}', [CheckoutController::class, 'receivePayment'])->name('customer.cart.receivePayment')->middleware(['auth', 'verified']);
     Route::post('/createPayment', [CheckoutController::class, 'store'])->name('customer.cart.storeOrder')->middleware(['auth', 'verified']);
     Route::post('/validate-voucher-code', [CheckoutController::class, 'validateVoucherCode'])->name('customer.cart.validate-voucher-code')->middleware(['auth', 'verified']);
-
     Route::get('/getBankStatus', [CartController::class, 'getBankStatus'])->name('customer.cart.getBankStatus')->middleware(['auth', 'verified']);
     Route::get('/cart', [CartController::class, 'index'])->name('customer.cart.index')->middleware(['auth']);
     Route::get('/payment', [CartController::class, 'shipment_index'])->name('customer.cart.shipment_index')->middleware(['auth']);
@@ -151,11 +131,9 @@ Route::middleware(['isSuspended'])->group(function () {
     // OnlineCourseController
     Route::get('/online-course', [OnlineCourseController::class, 'index'])->name('online-course.index');
     Route::get('/online-course/{course_title}', [OnlineCourseController::class, 'show'])->name('online-course.show');
-
     Route::post('/online-course/{id}', [OnlineCourseController::class, 'buyFree'])->name('online-course.buyFree')->middleware(['auth', 'verified']);
     Route::get('/online-course/{course_id}/assessment', [AssessmentController::class, 'show'])->name('online-course-assesment.show')->middleware(['auth', 'verified']);
     Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assesment.updateAssessmentTimer')->middleware(['auth', 'verified']);
-
     Route::get('online-course/{course_title}/learn/lecture/{content_title}', [OnlineCourseController::class, 'learn'])->name('online-course.learn')->middleware(['auth', 'verified']);
     // WokiController
     Route::get('/woki', [WokiController::class, 'index'])->name('woki.index');
@@ -163,11 +141,10 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::post('/woki/{id}', [WokiController::class, 'buyFree'])->name('woki.buyFree')->middleware(['auth', 'verified']);
     // BootcampController
     Route::get('/bootcamp', [BootcampController::class, 'index'])->name('bootcamp.index');
-    Route::get('/bootcamp/{id}', [BootcampController::class, 'show'])->name('bootcamp.show');
+    Route::get('/bootcamp/{course_title}', [BootcampController::class, 'show'])->name('bootcamp.show');
     Route::post('/bootcamp/{id}', [BootcampController::class, 'buyFree'])->name('bootcamp.buyFree')->middleware(['auth', 'verified']);
     Route::post('/bootcamp/{id}/full-registration', [BootcampController::class, 'storeFullRegistration'])->name('bootcamp.storeFullRegistration')->middleware(['auth']);
     Route::post('/bootcamp/{id}/syllabus', [BootcampController::class, 'sendSyllabus'])->name('bootcamp.sendSyllabus');
-
     // ReviewController
     Route::post('/addReview', [ReviewController::class, 'store'])->name('customer.review.store')->middleware(['auth', 'verified']);
     Route::delete('/deleteReview/{id}', [ReviewController::class, 'destroy'])->name('customer.review.destroy')->middleware(['auth', 'verified']);
@@ -177,49 +154,92 @@ Route::middleware(['isSuspended'])->group(function () {
     Route::put('/online-course/assessment/{id}', [AssessmentController::class, 'update'])->name('online-course-assessment.update')->middleware(['auth', 'verified']);
     Route::put('/online-course/assessment/{id}/reset-user-assessment', [AssessmentController::class, 'resetUserAssessment'])->name('online-course-assessment.reset-user-assessment')->middleware(['auth', 'verified']);
     Route::put('/online-course/assessment/{id}/update-assessment-timer', [AssessmentController::class, 'updateAssessmentTimer'])->name('online-course-assessment.updateAssessmentTimer')->middleware(['auth', 'verified']);
-
-
+    Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contact-us.store');
     /* END OF ONLINE COURSE ROUTING */
 
-    /* START OF WOKI ROUTING */
-    Route::get('/woki/sertifikat-menjadi-seniman', function () {
-        return view('client/woki/detail');
+    /* START OF FOR PUBLIC ROUTING */
+    Route::get('/for-public/online-course', [PagesController::class, 'online_course_index'])->name('customer.online_course_index');
+    Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
+    Route::get('/for-public/bootcamp', [PagesController::class, 'bootcamp_index'])->name('customer.bootcamp_index');
+    Route::get('/pelatihan-venidici', [PagesController::class, 'pelatihan_venidici_index'])->name('customer.pelatihan_venidici_index');
+    /* END OF FOR PUBLIC ROUTING*/
+    
+    /* START OF FOR CORPORATE ROUTING */
+    Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
+    Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
+    /* END OF FOR CORPORATE ROUTING*/
+
+    /* START OF CANDIDATE DETAILS ROUTING */
+    Route::prefix('candidate-details')->name('candidate-detail.')->middleware(['auth', 'isCandidate'])->group(function() {
+        Route::get('/', [CandidateDetailController::class, 'index'])->name('index');
+        Route::get('/my-profile', [CandidateDetailController::class, 'show_profile'])->name('show_profile');
+        Route::post('/basic-info', [CandidateDetailController::class, 'upsertCandidateDetail'])->name('upsert-candidate-detail');
+        Route::post('/work-experiences', [CandidateDetailController::class, 'storeWorkExperience'])->name('store-work-experience');
+        Route::put('/work-experiences/{work_experience_id}', [CandidateDetailController::class, 'updateWorkExperience'])->name('update-work-experience');
+        Route::put('/work-experience-changes/{work_experience_change_id}', [CandidateDetailController::class, 'updateWorkExperienceChange'])->name('update-work-experience-change');
+        Route::delete('/work-experiences/{work_experience_id}', [CandidateDetailController::class, 'deleteWorkExperience'])->name('delete-work-experience');
+        Route::post('/work-experience-changes/{work_experience_change_id}/cancel', [CandidateDetailController::class, 'cancelWorkExperienceChange'])->name('cancel-work-experience-change');
+        Route::post('/educations', [CandidateDetailController::class, 'storeEducation'])->name('store-education');
+        Route::put('/educations/{education_id}', [CandidateDetailController::class, 'updateEducation'])->name('update-education');
+        Route::put('/education-changes/{education_change_id}', [CandidateDetailController::class, 'updateEducationChange'])->name('update-education-change');
+        Route::delete('/educations/{education_id}', [CandidateDetailController::class, 'deleteEducation'])->name('delete-education');
+        Route::post('/education-changes/{education_change_id}/cancel', [CandidateDetailController::class, 'cancelEducationChange'])->name('cancel-education-change');
+        Route::post('/achievements', [CandidateDetailController::class, 'storeAchievement'])->name('store-achievement');
+        Route::put('/achievements/{achievement_id}', [CandidateDetailController::class, 'updateAchievement'])->name('update-achievement');
+        Route::put('/achievement-changes/{achievement_change_id}', [CandidateDetailController::class, 'updateAchievementChange'])->name('update-achievement-change');
+        Route::delete('/achievements/{achievement_id}', [CandidateDetailController::class, 'deleteAchievement'])->name('delete-achievement');
+        Route::post('/achievement-changes/{achievement_change_id}/cancel', [CandidateDetailController::class, 'cancelAchievementChange'])->name('cancel-achievement-change');
+        Route::post('/hardskills', [CandidateDetailController::class, 'storeHardskill'])->name('store-hardskill');
+        Route::put('/hardskills/{hardskill_id}', [CandidateDetailController::class, 'updateHardskill'])->name('update-hardskill');
+        Route::put('/hardskill-changes/{hardskill_change_id}', [CandidateDetailController::class, 'updateHardskillChange'])->name('update-hardskill-change');
+        Route::delete('/hardskills/{hardskill_id}', [CandidateDetailController::class, 'deleteHardskill'])->name('delete-hardskill');
+        Route::post('/hardskill-changes/{hardskill_change_id}/cancel', [CandidateDetailController::class, 'cancelHardskillChange'])->name('cancel-hardskill-change');
+        Route::post('/softskills', [CandidateDetailController::class, 'storeSoftskill'])->name('store-softskill');
+        Route::put('/softskills/{softskill_id}', [CandidateDetailController::class, 'updateSoftskill'])->name('update-softskill');
+        Route::put('/softskill-change/{softskill_change_id}', [CandidateDetailController::class, 'updateSoftskillChange'])->name('update-softskill-change');
+        Route::delete('/softskills/{softskill_id}', [CandidateDetailController::class, 'deleteSoftskill'])->name('delete-softskill');
+        Route::post('/softskill-change/{softskill_change_id}/cancel', [CandidateDetailController::class, 'cancelSoftskillChange'])->name('cancel-softskill-change');
+        Route::post('/interests', [CandidateDetailController::class, 'storeInterest'])->name('store-interest');
+        Route::put('/interests/{interest_id}', [CandidateDetailController::class, 'updateInterest'])->name('update-interest');
+        Route::put('/interest-changes/{interest_change_id}', [CandidateDetailController::class, 'updateInterestChange'])->name('update-interest-change');
+        Route::delete('/interests/{interest_id}', [CandidateDetailController::class, 'deleteInterest'])->name('delete-interest');
+        Route::post('/interest-changes/{interest_change_id}/cancel', [CandidateDetailController::class, 'cancelInterestChange'])->name('cancel-interest-change');
     });
-    /* END OF WOKI ROUTING */
-
-    Route::post('/contact-us', [AdminContactUsController::class, 'store'])->name('admin.contact-us.store');
-
+    /* END OF CANDIDATE DETAILS ROUTING */
 
     /* END OF CLIENT ROUTING */
 
+    /*
+    |--------------------------------------------------------------------------
+    | Client Job Portal Routes
+    |--------------------------------------------------------------------------
+    | Description:
+    | All routes in the group below has the /job-portal prefix, job-portal.* name
+    | and uses ['auth', 'is_hiringPartner'] middleware.
+    */
+    Route::prefix('job-portal')->name('job-portal.')->middleware(['auth', 'isHiringPartner'])->group(function() {
+        Route::get('/', [JobPortalController::class, 'index'])->name('index')->middleware(['verified']);
+        Route::get('/my-list', [JobPortalController::class, 'myListIndex'])->name('my-list.index')->middleware(['verified']);
+        Route::get('/profile', [JobPortalController::class, 'profileIndex'])->name('profile.index');
+        Route::post('/candidate/archive', [JobPortalController::class, 'archiveCandidate'])->name('archive-candidate')->middleware(['verified']);
+        Route::post('/candidate/action', [JobPortalController::class, 'handleCandidateAction'])->name('handle-candidate-action')->middleware(['verified']);
+        Route::get('/{id}', [JobPortalController::class, 'job_portal_candidate_detail'])->name('job_portal_candidate_detail')->middleware(['verified']);
+        Route::post('/change-password', [JobPortalController::class, 'changePassword'])->name('change-password')->middleware(['verified']);
+    });
+
+    
     /*
     |--------------------------------------------------------------------------
     | Admin Routes
     |--------------------------------------------------------------------------
     | Description:
     | All routes in the group below has /admin prefix, admin.* name and uses
-    | ['auth', 'is_admin'] middleware (user must be logged in to access it).
+    | ['auth', 'isAdmin'] middleware (user must be logged in to access it).
     |
     | Controllers can be found inside -> App\Http\Controllers\Admin\
-    | Controllers Used:
-    |   - DashboardController
-    |   - HomepageController
-    |   - AnalyticsController
-    |   - UserController
-    |   - InvoiceController
-    |   - OnlineCourseController
-    |   - OnlineCourseUpdateController // Update is separated because its very complex.
-    |   - WokiCourseController
-    |   - SectionController
-    |   - SectionContentController
-    |   - CourseCategoryController
-    |   - KrestController
-    |   - KrestProgramController
-    |   - HashtagController
     */
     Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(function() {
         // DashboardController
-
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
         // HomepageController
         Route::get('/cms/homepage', [AdminHomepageController::class, 'index'])->name('cms.homepage.index');
@@ -299,25 +319,19 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::post('/bootcamp/{id}/set-publish-status-to-opposite', [AdminBootcampController::class, 'setPublishStatusToOpposite'])->name('bootcamp.set-publish-status-to-opposite');
         Route::delete('/bootcamp/{id}/remove-syllabus', [AdminBootcampController::class, 'removeSyllabus'])->name('bootcamp.remove-syllabus');
         Route::put('/bootcamp/{id}/change_application_status', [AdminBootcampController::class, 'changeApplicationStatus'])->name('bootcamp.change-application-status');
-
+        Route::post('/bootcamp/{id}/udpate-score', [AdminBootcampController::class, 'updateScore'])->name('bootcamp.update-score');
         // BootcampFeatureController
         Route::post('/bootcamp/{id}/store-feature', [AdminBootcampFeatureController::class, 'store'])->name('bootcamp-feature.store');
         Route::delete('/bootcamp-feature/{id}', [AdminBootcampFeatureController::class, 'destroy'])->name('bootcamp-feature.destroy');
         Route::put('/bootcamp-feature/update', [AdminBootcampFeatureController::class, 'update'])->name('bootcamp-feature.update');
-
-
-        
-        // BootcampFeatureController 
+        // BootcampPricingContentController
         Route::post('/bootcamp-full-payment-content/update/{id}', [AdminBootcampPricingContentController::class, 'updateFullPayment'])->name('bootcamp-full-payment-content.update');
         Route::post('/bootcamp-income-share-agreement-content-content/update/{id}', [AdminBootcampPricingContentController::class, 'updateIncomeShareAgreement'])->name('bootcamp-income-share-agreement-content.update');
-        
         // BootcampAboutController
         Route::post('/bootcamp/{id}/store-about', [AdminBootcampAboutController::class, 'store'])->name('bootcamp-about.store');
         Route::get('/bootcamp-about/{id}/update', [AdminBootcampAboutController::class, 'edit'])->name('bootcamp.about-edit');
         Route::put('/bootcamp-about/{id}/update', [AdminBootcampAboutController::class, 'update'])->name('bootcamp-about.update');
         Route::delete('/bootcamp-about/{id}', [AdminBootcampAboutController::class, 'destroy'])->name('bootcamp-about.destroy');
-
-
         // BootcampUpdateController
         Route::get('/bootcamp/{id}/update', [AdminBootcampUpdateController::class, 'edit'])->name('bootcamp.edit');
         Route::put('/bootcamp/{id}/update-basic-info', [AdminBootcampUpdateController::class, 'updateBasicInfo'])->name('bootcamp.update-basic-info');
@@ -326,7 +340,6 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::put('/bootcamp/{id}/attach-teacher', [AdminBootcampUpdateController::class, 'attachTeacher'])->name('bootcamp.attach-teacher');
         Route::put('/bootcamp/{id}/detach-teacher', [AdminBootcampUpdateController::class, 'detachTeacher'])->name('bootcamp.detach-teacher');
         Route::get('/bootcamp-schedules/{id}/update', [AdminBootcampUpdateController::class, 'editBootcampSchedules'])->name('bootcamp.edit-schedules');
-
         // BootcampScheduleController
         // Route::get('/bootcampschedule', [AdminBootcampScheduleController::class, 'index'])->name('bootcampschedule.index');
         // Route::get('/bootcampschedule/create', [AdminBootcampScheduleController::class, 'create'])->name('bootcampschedule.create');
@@ -334,37 +347,31 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/bootcampschedule/{id}/update', [AdminBootcampScheduleController::class, 'edit'])->name('bootcampschedule.edit');
         Route::put('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'update'])->name('bootcampschedule.update');
         Route::delete('/bootcampschedule/{id}', [AdminBootcampScheduleController::class, 'destroy'])->name('bootcampschedule.destroy');
-        
         // BootcampBenefitController
         Route::post('/bootcamp/{id}/store-benefit', [AdminBootcampBenefitController::class, 'store'])->name('bootcamp-benefit.store');
         Route::get('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'edit'])->name('bootcamp.benefit-edit');
         Route::put('/bootcamp-benefit/{id}/update', [AdminBootcampBenefitController::class, 'update'])->name('bootcamp-benefit.update');
         Route::delete('/bootcamp-benefit/{id}', [AdminBootcampBenefitController::class, 'destroy'])->name('bootcamp-benefit.destroy'); 
-
         // BootcampFutureCareerController
         Route::post('/bootcamp/{id}/store-future-career', [AdminBootcampFutureCareerController::class, 'store'])->name('bootcamp-future-career.store');
         Route::get('/bootcamp-future-career/{id}/update', [AdminBootcampFutureCareerController::class, 'edit'])->name('bootcamp.future-career-edit');
         Route::put('/bootcamp-future-career/{id}/update', [AdminBootcampFutureCareerController::class, 'update'])->name('bootcamp-future-career.update');
         Route::delete('/bootcamp-future-career/{id}', [AdminBootcampFutureCareerController::class, 'destroy'])->name('bootcamp-future-career.destroy'); 
-
         // BootcampCandidateController
         Route::post('/bootcamp/{id}/store-candidate', [AdminBootcampCandidateController::class, 'store'])->name('bootcamp-candidate.store');
         Route::get('/bootcamp-candidate/{id}/update', [AdminBootcampCandidateController::class, 'edit'])->name('bootcamp.candidate-edit');
         Route::put('/bootcamp-candidate/{id}/update', [AdminBootcampCandidateController::class, 'update'])->name('bootcamp-candidate.update');
-        Route::delete('/bootcamp-candidate/{id}', [AdminBootcampCandidateController::class, 'destroy'])->name('bootcamp-candidate.destroy');        
-        
+        Route::delete('/bootcamp-candidate/{id}', [AdminBootcampCandidateController::class, 'destroy'])->name('bootcamp-candidate.destroy');
         // BootcampHiringPartnerController
         Route::post('/bootcamp/{id}/store-hiring-partner', [AdminBootcampHiringPartnerController::class, 'store'])->name('bootcamp-hiring-partner.store');
         Route::get('/bootcamp-hiring-partner/{id}/update', [AdminBootcampHiringPartnerController::class, 'edit'])->name('bootcamp.hiring-partner-edit');
         Route::put('/bootcamp-hiring-partner/{id}/update', [AdminBootcampHiringPartnerController::class, 'update'])->name('bootcamp-hiring-partner.update');
-        Route::delete('/bootcamp-hiring-partner/{id}', [AdminBootcampHiringPartnerController::class, 'destroy'])->name('bootcamp-hiring-partner.destroy');        
-        
+        Route::delete('/bootcamp-hiring-partner/{id}', [AdminBootcampHiringPartnerController::class, 'destroy'])->name('bootcamp-hiring-partner.destroy');
         // BootcampBatchController
         Route::post('/bootcamp/{id}/store-batch', [AdminBootcampBatchController::class, 'store'])->name('bootcamp-batch.store');
         Route::get('/bootcamp-batch/{id}/update', [AdminBootcampBatchController::class, 'edit'])->name('bootcamp.batch-edit');
         Route::put('/bootcamp-batch/{id}/update', [AdminBootcampBatchController::class, 'update'])->name('bootcamp-batch.update');
-        Route::delete('/bootcamp-batch/{id}', [AdminBootcampBatchController::class, 'destroy'])->name('bootcamp-batch.destroy');        
-
+        Route::delete('/bootcamp-batch/{id}', [AdminBootcampBatchController::class, 'destroy'])->name('bootcamp-batch.destroy');
         // SectionController
         Route::post('/sections', [AdminSectionController::class, 'store'])->name('sections.store');
         Route::put('/sections/{id}', [AdminSectionController::class, 'update'])->name('sections.update');
@@ -408,6 +415,19 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/krest/programs/{id}/update', [AdminKrestProgramController::class, 'edit'])->name('krest_programs.edit');
         Route::put('/krest/programs/{id}', [AdminKrestProgramController::class, 'update'])->name('krest_programs.update');
         Route::delete('/krest/programs/{id}', [AdminKrestProgramController::class, 'destroy'])->name('krest_programs.destroy');
+        // HiringPartnerController
+        Route::get('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'index'])->name('job-portal.hiring-partners.index');
+        Route::get('/job-portal/hiring-partners/create', [AdminHiringPartnerController::class, 'create'])->name('job-portal.hiring-partners.create');
+        Route::post('/job-portal/hiring-partners', [AdminHiringPartnerController::class, 'store'])->name('job-portal.hiring-partners.store');
+        Route::delete('/job-portal/hiring-partners/{id}', [AdminHiringPartnerController::class, 'destroy'])->name('job-portal.hiring-partners.destroy')->middleware(['isSuper']);
+        Route::get('/job-portal/hiring-partners/{id}/candidates', [AdminHiringPartnerController::class, 'viewSavedCandidates'])->name('job-portal.hiring-partners.view-saved-candidates');
+        Route::post('/job-portal/hiring-partners/candidates-action', [AdminHiringPartnerController::class, 'handleCandidateAction'])->name('job-portal.hiring-partners.candidates-action');
+        // CandidateController
+        Route::get('/job-portal/candidates', [AdminCandidateController::class, 'index'])->name('job-portal.candidates.index');
+        Route::get('/job-portal/{candidate_id}', [AdminCandidateController::class, 'showCandidate'])->name('job-portal.candidates.showCandidate');
+        Route::get('/job-portal/{candidate_detail_id}/changes', [AdminCandidateController::class, 'showCandidateChange'])->name('job-portal.candidates.showCandidateChange');
+        Route::post('/job-portal/approve-change', [AdminCandidateController::class, 'approveChange'])->name('job-portal.candidates.approve-change');
+        Route::post('/job-portal/reject-change', [AdminCandidateController::class, 'rejectChange'])->name('job-portal.candidates.reject-change');
         // HashtagController
         Route::get('/hashtags', [AdminHashtagController::class, 'index'])->name('hashtags.index');
         Route::get('/hashtags/create', [AdminHashtagController::class, 'create'])->name('hashtags.create');
@@ -432,6 +452,14 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/informations/{id}/update', [AdminNotificationController::class, 'edit'])->name('informations.edit');
         Route::put('/informations/{id}', [AdminNotificationController::class, 'update'])->name('informations.update');
         Route::delete('/informations/{id}', [AdminNotificationController::class, 'destroy'])->name('informations.destroy');
+        // BlogController
+        Route::get('/blog', [AdminBlogController::class, 'index'])->name('blog.index');
+        Route::get('/blog/create', [AdminBlogController::class, 'create'])->name('blog.create');
+        Route::post('/blog', [AdminBlogController::class, 'store'])->name('blog.store');
+        Route::get('/blog/{id}/update', [AdminBlogController::class, 'edit'])->name('blog.edit');
+        Route::put('/blog/{id}', [AdminBlogController::class, 'update'])->name('blog.update');
+        Route::delete('/blog/{id}', [AdminBlogController::class, 'destroy'])->name('blog.destroy');
+        Route::post('/blog/{id}/set-isfeatured-status-to-opposite', [AdminBlogController::class, 'setIsFeaturedStatusToOpposite'])->name('blog.set-isfeatured-status-to-opposite');
         // InstructorController
         Route::get('/menjadi-pengajar', [AdminInstructorController::class, 'index'])->name('instructors.index');
         Route::delete('/menjadi-pengajar/{id}', [AdminInstructorController::class, 'destroy'])->name('instructors.destroy');
@@ -462,32 +490,12 @@ Route::middleware(['isSuspended'])->group(function () {
         //CollaboratorController
         Route::get('/donations', [AdminPromotionController::class, 'donations_index'])->name('donations.index');
     });
-
-    /* START ADMIN ROUTING */
-    Route::get('/admin/forgot-password', function () {
-        return view('admin/auth/forgot-password');
-    });
-    Route::get('/admin/reset-password', function () {
-        return view('admin/auth/reset-password');
-    });
+    /* END OF ADMIN ROUTING */
 
     /* START OF GOOGLE AUTH */
     Route::get('login/google', [SocialController::class, 'redirectToGoogle'])->name('login.google');
     Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallback']);
     /* END OF GOOGLE AUTH*/
-
-    /* START OF FOR PUBLIC ROUTING */
-    Route::get('/for-public/online-course', [PagesController::class, 'online_course_index'])->name('customer.online_course_index');
-    Route::get('/for-public/woki', [PagesController::class, 'woki_index'])->name('customer.woki_index');
-    Route::get('/for-public/bootcamp', [PagesController::class, 'bootcamp_index'])->name('customer.bootcamp_index');
-    Route::get('/pelatihan-venidici', [PagesController::class, 'pelatihan_venidici_index'])->name('customer.pelatihan_venidici_index');
-    /* END OF FOR PUBLIC ROUTING*/
-
-    /* START OF FOR CORPORATE ROUTING */
-    Route::get('/for-corporate/krest', [KrestController::class, 'index'])->name('customer.krest_index');
-    Route::post('/for-corporate/krest', [KrestController::class, 'store'])->name('customer.store_krest');
-
-    /* END OF FOR CORPORATE ROUTING*/
 
     // ROUTES TO CHECK EMAIL VIEWS
     if (!App::environment('production')) {
@@ -524,11 +532,32 @@ Route::middleware(['isSuspended'])->group(function () {
         Route::get('/emails/bootcamp/full_registration', function () {
             return view('emails/bootcamp_full_registration');
         });
+        Route::get('/emails/bootcamp/full_registration', function () {
+            return view('emails/bootcamp_full_registration');
+        });
+        Route::get('/emails/job-portal/contacted_candidate', function () {
+            return view('emails/job-portal/contacted_candidate');
+        });
+        Route::get('/emails/job-portal/accepted_candidate', function () {
+            return view('emails/job-portal/accepted_candidate');
+        });
+        Route::get('/emails/job-portal/profile_update_accepted', function () {
+            return view('emails/job-portal/profile_update_accepted');
+        });
+        Route::get('/emails/job-portal/admin_profile_update_request', function () {
+            return view('emails/job-portal/admin_profile_update_request');
+        });
+        Route::get('/emails/job-portal/admin_candidate_accepted', function () {
+            return view('emails/job-portal/admin_candidate_accepted');
+        });
     };
 
-    /* START OF DOMPDF ROUTING */
+    /* OTHERS ROUTING */
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
     Route::post('/certificate/pdf', [PagesController::class, 'print'])->name('print_certificate')->middleware(['auth', 'verified']);
-    /* END OF DOMPDF ROUTING */
+    /* OTHERS ROUTING */
 });
 
 require __DIR__.'/auth.php';

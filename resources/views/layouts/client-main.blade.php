@@ -50,11 +50,11 @@
         fbq('init', '4280190432066581');
         fbq('track', 'PageView');
       </script>
+
       <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=4280190432066581&ev=PageView&noscript=1"
       /></noscript>
       <meta name="facebook-domain-verification" content="9vqji91k0n1eqsy0fdxgqvjy58e80d" />
-
       <!-- End Facebook Pixel Code -->
       
     @endenv
@@ -86,7 +86,7 @@
                   <h5 class="modal-title sub-description" style="font-family:Rubik Bold" id="exampleModalLabel">Contact Us</h5>
               </div>
               <div class="modal-body">
-                <form action="{{route('admin.contact-us.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('contact-us.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                   <div class="row m-0">
                       <div class="col-12 p-0" style="text-align:center">
@@ -154,65 +154,17 @@
     </div>
     <!-- END OF CONTACT US MODAL -->
 
-    <!-- START OF POP UP LOGIN -->
-    <div class="modal fade" id="loginModal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-body">
-                <form action="{{ route('login') }}" method="POST">
-                @csrf
-                    <div class="row m-0"> 
-                        <div class="col-12" style="padding:0vw 4vw;display: flex;flex-direction: column;justify-content: center;">
-                            <div style="text-align:center">
-                                <img src="/assets/images/client/Venidici_Icon.png" class="img-fluid" style="width:5vw" alt="LOGO">
-                                <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Email Address</p>
-                                <div  class="auth-input-form" style="display: flex;align-items:center">
-                                    <i style="color:#DAD9E2" class="fas fa-envelope normal-text"></i>
-                                    <input type="text" name="email" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="johndoe@gmail.com" value="{{ old('email') }}">
-                                </div>  
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;text-align:left !important">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:1vw">Password</p>
-                                <div  class="auth-input-form" style="display: flex;align-items:center">
-                                    <i style="color:#DAD9E2" class="fas fa-lock normal-text"></i>
-                                    <input type="password" name="password" class="normal-text" style="font-family:Rubik Regular;background:transparent;border:none;margin-left:1vw;color: #5F5D70;width:100%" placeholder="*******">
-                                </div> 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;text-align:left !important">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <div style="display:flex;justify-content:space-between;">
-                                    <input type="hidden" name="url" value="{{Request::url()}}">
-                                    <button type="submit" onclick="openLoading()" class="normal-text btn-blue-bordered w-100" style="font-family: Poppins Medium;margin-bottom:0px;margin-top:2vw">Login</button>
-                                </div>
-                                <!-- <p class="normal-text" style="font-family:Rubik Medium;color:#5F5D70;margin-bottom:0.4vw;margin-top:1vw;margin-bottom:1vw">OR</p> -->
-                                <!-- <a href="{{ route('login.google') }}" class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;width:100%;display:inline-block;background-color:#67BBA3;border:none;color:#FFFFFF;border-radius:5px;padding:0.5vw 2vw;text-decoration:none"> <i class="fab fa-google"></i> <span style="margin-left:0.5vw">Login with Google Account</span></a>
-                                    <div style="text-align:center !important">
-                                </div> -->
-                                <p class="normal-text" style="font-family: Rubik Regular;margin-top:1vw;text-decoration:none;color: #3B3C43;">Belum punya akun? <span> <a href="{{ route('custom-auth.signup_general_info.index') }}">Daftar di sini</a> </span> </p>
-                            </div>
-                        </div>   
-                    </div>
-                </form>
-              </div>
-          </div>
-      </div>
-    </div>
-    <!-- END OF POP UP LOGIN -->
+    
     <!-- <div style="padding:4vw;background-color:#2B6CAA;z-index:99;position:fixed;width:100%" class="sticky-top" id="mobile-navbar">
 
     </div> -->
     @if( !Request::is('login') )
       @if( !Request::is('signup') )
       @if( !Request::is('signup-interests') )
+        @if( !Request::is('job-portal/login') )
     <!-- START OF MOBILE NAVBAR -->
     <div class="row m-0 navbarMobile" style="background: #2B6CAA;padding:4vw 2vw 4vw 2vw;display:none;width:100%;z-index:999;
-  top: 0;z-index: 10;">
+        top: 0;z-index: 10;">
       <div >
         <!--    Made by Erik Terwan    -->
         <!--   24th of November 2015   -->
@@ -258,6 +210,9 @@
               <br>
               @endif -->
               <!-- <a href="/login" class="btnSignUp" style="margin-bottom: 20px;">Login</a> -->
+              @if( !Request::is('job-portal/*') )
+              @if( !Request::is('job-portal') )
+
               <table id="menuKiri">
                 <tr>
                   <td>
@@ -315,6 +270,34 @@
       
 
               </table>
+              @endif
+              @endif
+
+              @if( Request::is('job-portal/*') ||  Request::is('job-portal'))
+              <table id="menuKiri">
+                <tr>
+                  <td>
+                  <a href="/job-portal/profile" class="navbar-item @if(Request::is('job-portal/profile'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">My Profile</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/job-portal" class="navbar-item @if(Request::is('job-portal'))navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">Cadidate List</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td  style="padding-top:4vw">
+                  <a href="/job-portal/my-list" class="navbar-item @if(Request::is('job-portal/my-list'))navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4.5vw">My List</a>
+                  </td>
+                </tr>
+
+        
+      
+
+              </table>
+
+              
+              @endif
               
             </ul>
 
@@ -322,6 +305,8 @@
           @if (Auth::check())
 
           <div style="display: flex;">
+            @if( !Request::is('job-portal/*') )
+              @if( !Request::is('job-portal') )
             <a id="cart_icon" class="navbar-item" href="/cart" style="color:#FFFFFF">
               <span class="counter fa-stack has-badge" data-count="{{$cart_count}}">
                 <i class="p3 fas fa-shopping-cart fa-stack-1x xfa-inverse @if(Request::is('cart')) navbar-item-active-mobile @endif"></i>
@@ -333,9 +318,10 @@
               </span>
             </a>
             <a class="navbar-item" href="/dashboard" style="color:#FFFFFF;margin-top:1vw"><i class="fas fa-user @if(Request::is('dashboard'))navbar-item-active-mobile @elseif(Request::is('dashboard/*')) navbar-item-active-mobile @endif"></i></a>
+              @endif
+            @endif
 
           </div>
-          @else
           <img src="/assets/images/client/Logo_white.png" style="height:6vw" class="img-fluid" alt="">
           <!-- <a href="/login" class="btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer;font-size:4vw">Log In</a> -->
           @endif
@@ -345,10 +331,13 @@
     @endif
     @endif
     @endif
+    @endif
     <!-- END OF MOBILE NAVBAR -->
     @if(!Request::is('login'))
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
+        @if( !Request::is('job-portal') )
+        @if( !Request::is('job-portal/*') )
     <!-- START OF NAVBAR -->
     <div class="navbar-floating">
         <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
@@ -357,7 +346,7 @@
         <a href="/for-public/online-course" class="normal-text navbar-item @if(Request::is('online-course/*') || Request::is('for-public/*') || Request::is('woki')|| Request::is('woki/*') || Request::is('online-course') || Request::is('online-course/*')  )navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Public</a>
         <!--<a href="/for-corporate/krest" class="normal-text navbar-item @if(Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>-->
         <a href="/for-corporate/krest" class="normal-text navbar-item @if( Request::is('for-corporate') || Request::is('for-corporate/*'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">For Corporate</a>
-        <a href="/community" class="normal-text navbar-item @if(Request::is('community')) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
+        <a href="/community" class="normal-text navbar-item @if(Request::is('community') || Request::is('blog/*') || Request::is('blogs') ) navbar-item-active @endif " style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Community</a>
         @if (!Auth::check())
         <a href="/login" class="normal-text btn-blue-bordered" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Log In</a>
         @endif
@@ -381,6 +370,20 @@
     <!-- END OF NAVBAR -->
         @endif
       @endif
+        @endif
+      @endif
+    @endif
+
+    @if( Request::is('job-portal') || Request::is('job-portal/*') )
+          @if(!Request::is('job-portal/login') )
+    <!-- START OF JOB PORTAL  NAVBAR -->
+    <div class="navbar-floating" style="width:30vw">
+        <img src="/assets/images/client/icon-transparent.png" style="width: 3.5vw;" class="img-fluid" alt="">
+        <a href="/job-portal" class="normal-text navbar-item @if(Request::is('job-portal'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Job Portal</a>
+        <a href="/job-portal/profile" class="normal-text navbar-item @if( Request::is('job-portal/profile') || Request::is('job-portal/profile'))navbar-item-active @endif" style="font-family: Rubik Medium;margin-bottom:0px;cursor:pointer">Profile</a>
+    </div>
+    <!-- END OF JOB PORTAL  NAVBAR -->
+        @endif
     @endif
     @if(Auth::check())
     <!-- START OF POPUP -->
@@ -638,6 +641,7 @@
       @if(!Request::is('signup'))
         @if(!Request::is('signup-interests'))
           @if(!Request::is('cart'))
+            @if(!Request::is('job-portal/login') )
     <!-- FOOTER DESKTOP-->
     <div class="row m-0 page-container footer-desktop" style="padding-top:5vw;padding-bottom:2vw">
       <div class="col-12 p-0">
@@ -838,6 +842,7 @@
       @endif
         @endif
           @endif
+            @endif
 
     <!-- WOW JS -->
     <script src="/WOW-master/dist/wow.min.js"></script>

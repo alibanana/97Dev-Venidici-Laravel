@@ -67,7 +67,7 @@
             <!-- <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p> -->
             <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Skill Snack Live</p>
             <p class="bigger-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Enjoy sesi live workshop ngomongin berbagai topik dan skill yang bisa kamu pelajari bersama expert-expert di bidangnya.</p>
-            <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">See upcoming live session</a>
+            <a href="/online-course?search=&cat=None" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw">See upcoming live session</a>
     
         </div>
     </div>
@@ -79,7 +79,7 @@
             <p class="big-heading" style="font-family: Rubik Bold;color:#3B3C43">Skill Snack On-Demand</p>
             <p class="bigger-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.</p>
             <div>
-                <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">See upcoming live session</a>
+                <a href="/online-course?search=&cat=None" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw">See upcoming live session</a>
             </div>
     
         </div>
@@ -278,7 +278,7 @@
                     
                     
                 </div>
-                <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Explore courses</a>
+                <a href="/online-course?search=&cat=None"  style="font-family:Rubik Regular;text-decoration:none" class="btn-blue normal-text" >Explore courses</a>
             </div> 
         </div>
     </div>
@@ -342,7 +342,7 @@
             <!-- <p class="small-heading" style="font-family: Rubik Medium;color:#67BBA3">Our History</p> -->
             <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43;margin-top:4vw">Skill Snack Live</p>
             <p class="normal-text" style="margin-bottom:2vw;font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;">Enjoy sesi live workshop ngomongin berbagai topik dan skill yang bisa kamu pelajari bersama expert-expert di bidangnya.</p>
-            <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">See upcoming live session</a>
+            <a href="/online-course?search=&cat=None" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;width:100%;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">See upcoming live session</a>
     
         </div>
     </div>
@@ -354,7 +354,7 @@
             <p class="small-heading" style="font-family: Rubik Bold;color:#3B3C43;margin-top:4vw">Skill Snack On-Demand</p>
             <p class="normal-text" style="font-family: Rubik Regular;color:#000000;white-space:pre-line;padding-top:1vw;">Bukan zamannya belajar itu jadi beban, it’s a privilege! Belajar kapanpun dan dimanapun, kamu yang tentuin karena Skill Snack On-Demand berisi rekaman course-course Venidici dengan rating terbaik. Ketinggalan course live nya? Ga masalah dong.</p>
             <div>
-                <a href="/online-course?cat=Featured" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">See upcoming live session</a>
+                <a href="/online-course?search=&cat=None" class="normal-text btn-dark-blue" style="text-decoration:none;font-family: Poppins Medium;margin-bottom:0px;cursor:pointer;padding:0.5vw 2vw;display:inline-block;width:100%;text-align:center">See upcoming live session</a>
             </div>
     
         </div>
@@ -544,7 +544,7 @@
                     
                     
                 </div>
-                <a href="/online-course?cat=Featured"  style="font-family:Rubik Regular;text-decoration:none;text-align:centerpap" class="btn-blue text-nowrap normal-text" >Explore courses</a>
+                <a href="/online-course?search=&cat=None"  style="font-family:Rubik Regular;text-decoration:none;text-align:centerpap" class="btn-blue text-nowrap normal-text" >Explore courses</a>
             </div> 
         </div>
     </div>

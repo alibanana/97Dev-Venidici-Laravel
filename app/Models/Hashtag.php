@@ -22,4 +22,8 @@ class Hashtag extends Model
     public function users() {
         return $this->belongsToMany(User::class, 'user_hashtag')->withTimestamps();
     }
+
+    public function blogs() {
+        return $this->hasMany(Blog::class);
+    }
 }

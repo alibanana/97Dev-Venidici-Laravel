@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\CourseCategory;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Jenssegers\Agent\Agent;
-use App\Models\Review;
-use App\Helper\Helper;
-use App\Models\Course;
-use App\Helper\CourseHelper;
 use Carbon\Carbon;
+
+use App\Helper\Helper;
+use App\Helper\CourseHelper;
+use App\Helper\UserHelper;
+
+use App\Models\Review;
+use App\Models\Course;
 use App\Models\Invoice;
 use App\Models\SyllabusRequest;
 use App\Models\Order;
@@ -21,11 +26,8 @@ use App\Models\Notification;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Promotion;
 use App\Mail\BootcampFullRegistrationMail;
-
-use Illuminate\Support\Facades\Mail;
 use App\Mail\BootcampSyllabusMail;
 
 class BootcampController extends Controller
@@ -46,52 +48,9 @@ class BootcampController extends Controller
     // Shows the Client's Main Bootcamp Page.
     public function index(Request $request) {
         $agent = new Agent();
-
-        // $course_id = 6;
-        $course = Course::where('course_type_id',3)->where('enrollment_status', 'open')
-        ->where('publish_status', 'published')->where('isDeleted', false)->where('isFeatured',TRUE)->first();
-        if($course == null)
-            return redirect()->back();
-        $provinces = Province::all();
-        $cities = City::all();
-
-        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
-
-        $tomorrow = Carbon::now()->addDays(1);
-        $tomorrow->setTimezone('Asia/Jakarta');
-        if (Auth::check()) {
-            $this->resetNavbarData();
-
-            $notifications = $this->notifications;
-            $informations = $this->informations;
-            $transactions = $this->transactions;
-            $cart_count = $this->cart_count;
-
-            // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
-            //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
-    
-            $bootcamp_application_count = BootcampApplication::where(
-                [   
-                    ['course_id', '=', $course->id],
-                    ['user_id', '=', auth()->user()->id],
-                    ['status', '!=', 'ft_refunded'],
-                    ['status', '!=', 'ft_cancelled'],
-                    ['status', '!=', 'denied'],
-                    
-                ]
-            )->count();
-            
-            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities','tomorrow','bootcamp_application_count','agent'));
-        }
-
-        return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities','tomorrow','agent'));
-    }
-
-    public function index_old(Request $request) {
-        $agent = new Agent();
-        if($agent->isPhone()){
-            return view('client/mobile/under-construction');
-        }
+        // if($agent->isPhone()){
+        //     return view('client/mobile/under-construction');
+        // }
         $course_categories = CourseCategory::all();
         $courses = new Course;
         if ($request->has('cat')) {
@@ -138,43 +97,92 @@ class BootcampController extends Controller
 
         return view('client/bootcamp/index',compact('course_categories','courses','footer_reviews','user_review'));
     }
-
-    // Shows the details for each course.
-    public function show($id) {
-
+    public function indexNew(Request $request) {
         $agent = new Agent();
-        if($agent->isPhone())
-            return view('client/mobile/under-construction');
 
-        $course = Course::findOrFail($id);
+        // $course_id = 6;
+        $course = Course::where('course_type_id',3)->where('enrollment_status', 'open')
+        ->where('publish_status', 'published')->where('isDeleted', false)->where('isFeatured',TRUE)->first();
+        if($course == null)
+            return redirect()->back();
+        $provinces = Province::all();
+        $cities = City::all();
 
-        if ($course->courseType->type == 'Course') {
-            return redirect()->route('online-course.show', $course->id);
-        } elseif ($course->courseType->type == 'Woki') {
-            return redirect()->route('woki.show', $course->id);
-        }
-
-        // Get Schedules Data orderBy DateTime & groupBy Date.
-        $schedules = $this->getSchedulesGroupByDate($course);
-        $reviews = Review::where('course_id',$id)->orderBy('created_at', 'desc')->get();
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
         $tomorrow = Carbon::now()->addDays(1);
         $tomorrow->setTimezone('Asia/Jakarta');
-        // Get courses suggestions.
         if (Auth::check()) {
             $this->resetNavbarData();
-            
+
             $notifications = $this->notifications;
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
-            
-            $courseSuggestions = CourseHelper::getCourseSuggestion(3,'Bootcamp');
-            return view('client/bootcamp/detail', compact('course', 'schedules', 'reviews','cart_count','transactions','informations','notifications','footer_reviews','courseSuggestions','tomorrow'));
-        }
-        
 
-        return view('client/bootcamp/detail', compact('course', 'schedules', 'reviews','footer_reviews','tomorrow'));
+            // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
+            //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
+    
+            $bootcamp_application_count = BootcampApplication::where(
+                [   
+                    ['course_id', '=', $course->id],
+                    ['user_id', '=', auth()->user()->id],
+                    ['status', '!=', 'ft_refunded'],
+                    ['status', '!=', 'ft_cancelled'],
+                    ['status', '!=', 'denied'],
+                    
+                ]
+            )->count();
+            
+            return view('client/bootcamp/index', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities','tomorrow','bootcamp_application_count','agent'));
+        }
+
+        return view('client/bootcamp/index', compact('course','footer_reviews','provinces','cities','tomorrow','agent'));
+    }
+
+    // Shows the details for each course.
+    public function show($course_title) {
+
+        $agent = new Agent();
+        $course = Course::where('course_type_id',3)->where('enrollment_status', 'open')->where('title', $course_title)
+        ->where('publish_status', 'published')->where('isDeleted', false)->where('isFeatured',TRUE)->first();
+
+        
+        if($course == null)
+            return redirect()->back();
+        $provinces = Province::all();
+        $cities = City::all();
+
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        $tomorrow = Carbon::now()->addDays(1);
+        $tomorrow->setTimezone('Asia/Jakarta');
+        if (Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            // Check dulu apakah ada bootcamp_applications yang statusnya BUKAN
+            //ft_refunded, ft_cancelled atau denied , kalo ada, redirect back
+    
+            $bootcamp_application_count = BootcampApplication::where(
+                [   
+                    ['course_id', '=', $course->id],
+                    ['user_id', '=', auth()->user()->id],
+                    ['status', '!=', 'ft_refunded'],
+                    ['status', '!=', 'ft_cancelled'],
+                    ['status', '!=', 'denied'],
+                    
+                ]
+            )->count();
+            
+            return view('client/bootcamp/detail', compact('cart_count','transactions','course','informations','notifications','footer_reviews','provinces','cities','tomorrow','bootcamp_application_count','agent'));
+        }
+
+        return view('client/bootcamp/detail', compact('course','footer_reviews','provinces','cities','tomorrow','agent'));
     }
 
     private function getSchedulesGroupByDate($course) {
@@ -375,7 +383,7 @@ class BootcampController extends Controller
         $user_name = $bootcamp->user->name;
         $sentence ="";
         Mail::to(auth()->user()->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));
-        $admins = User::where('user_role_id','!=',1)->get();
+        $admins = UserHelper::findAllAdmins();
         foreach($admins as $admin){
             $sentence = "Hi Admin!";
             Mail::to($admin->email)->send(new BootcampFullRegistrationMail($course_title,$user_name,$sentence));

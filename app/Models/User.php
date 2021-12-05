@@ -19,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'user_role_id',
         'name',
+        'companyName', // nullable
         'email',
         'provider_id',
         'password',
@@ -27,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'isGeneralInfoUpdated',
         'isShippingUpdated',
         'isProfileUpdated',
+        'isCandidate'
     ];
 
     /**
@@ -56,14 +58,30 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(UserRole::class);
     }
 
+    public function candidateDetail() {
+        return $this->hasOne(CandidateDetail::class);
+    }
+
     public function hashtags() {
         return $this->belongsToMany(Hashtag::class, 'user_hashtag')->withTimestamps();
+    }
+
+    public function candidates() {
+        return $this->belongsToMany(User::class, 'hiring_partner_candidate', 'hiring_partner_id', 'candidate_id')
+            ->withPivot('status') // archived, contacted, accepted, rejected, hired
+            ->withTimestamps();
+    }
+
+    public function hiringPartners() {
+        return $this->belongsToMany(User::class, 'hiring_partner_candidate', 'candidate_id', 'hiring_partner_id')
+            ->withPivot('status') // archived, contacted, accepted, rejected, hired
+            ->withTimestamps();
     }
 
     public function courses() {
         return $this->belongsToMany(Course::class, 'user_course')
             ->withPivot(
-                'status','isAbsent'
+                'status', 'isAbsent', 'score'
             )->withTimestamps();
     }
 

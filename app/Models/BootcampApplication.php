@@ -14,7 +14,7 @@ class BootcampApplication extends Model
         'user_id',
         'invoice_id',
         'name', 
-        'email', 
+        'email',
         'birth_place',
         'birth_date',
         'gender',
@@ -37,7 +37,7 @@ class BootcampApplication extends Model
         'bank_account_number', 
         'is_trial', 
         'is_full_registration', 
-        'status', 
+        'status', // 'ft_pending', 'ft_paid', 'ft_refunded', 'ft_cancelled', 'waiting', 'approved', 'denied'
     ];
 
     public function course() {

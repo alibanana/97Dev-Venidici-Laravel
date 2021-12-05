@@ -23,10 +23,15 @@ use App\Mail\SuspendEmail;
 */ 
 class UserController extends Controller
 {
+    private const INDEX_ROUTE = 'admin.users.index';
+    private const AVAILABLE_FILTERS = ['active', 'suspended', 'birthday-today', 'admin', 'super-admin', 'normal-user'];
+    private const USERS_STATUS_LIST = ['active', 'suspended'];
+    private const USERS_ROLE_LIST = ['admin', 'super-admin', 'normal-user'];
+
     // Shows the Admin Users Page 
     public function index(Request $request) {
-
-        $users = new User;
+        // Filter hiring-partners from users list.
+        $users = User::where('user_role_id', '!=', 4);
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
@@ -39,25 +44,21 @@ class UserController extends Controller
         }
 
         if ($request->has('filter')) {
-            $available_filters = ['active', 'suspended', 'birthday-today', 'admin', 'super-admin', 'normal-user'];
-            if (!in_array($request->filter, $available_filters)) {
-                $url = route('admin.users.index', request()->except('filter'));
+            if (!in_array($request->filter, self::AVAILABLE_FILTERS)) {
+                $url = route(self::INDEX_ROUTE, request()->except('filter'));
                 return redirect($url);    
             }
 
-            $users_status_list = ['active', 'suspended'];
-            $users_role_list = ['admin', 'super-admin', 'normal-user'];
-            if (in_array($request->filter, $users_status_list))
+            if (in_array($request->filter, self::USERS_STATUS_LIST))
                 $users = $users->where('status', $request->filter);
-            elseif (in_array($request->filter, $users_role_list)){
+            elseif (in_array($request->filter, self::USERS_ROLE_LIST)){
                 if($request->filter == 'admin')
                     $users = $users->where('user_role_id', 2);
                 elseif($request->filter == 'super-admin')
                     $users = $users->where('user_role_id', 3);
                 elseif($request->filter == 'normal-user')
                     $users = $users->where('user_role_id', 1);
-            }
-            else {
+            } else {
                 $userDetails = UserDetail::select(DB::raw('user_id as id'), 'birthdate');
 
                 $users = $users->joinSub($userDetails, 'details', function ($join) {
@@ -65,12 +66,11 @@ class UserController extends Controller
                 })->whereMonth('birthdate', Carbon::now()->format('m'))
                     ->whereDay('birthdate', Carbon::now()->format('d'));
             }
-
         }
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route('admin.users.index', request()->except('search'));
+                $url = route(self::INDEX_ROUTE, request()->except('search'));
                 return redirect($url);
             } else {
                 $userDetails = UserDetail::select(DB::raw('user_id as id'), 'telephone', 'referral_code', 'occupancy');
@@ -94,13 +94,12 @@ class UserController extends Controller
 
         if ($request->has('show')) {
             if (!in_array($request->show, $show_options)) {
-                return redirect(route('admin.users.index', request()->except(['search', 'page'])));
+                return redirect(route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
             }
 
             if ($request->show == "All") {
                 if ($request->has('page')) {
-                    return redirect(
-                        route('admin.users.index', request()->except(['search', 'page'])));
+                    return redirect(route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
                 }
 
                 $users = $users->get();
@@ -165,7 +164,7 @@ class UserController extends Controller
 
         $message = $request->stars.' Stars has been added to '.$user_detail->user->name;
 
-        return redirect()->route('admin.users.index')->with('message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 
     // Set user's status to opposite.
@@ -183,7 +182,7 @@ class UserController extends Controller
         $user->save();
         Mail::to($user->email)->send(new SuspendEmail($user));
         
-        return redirect()->route('admin.users.index')->with('message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 
     // Set user's status to opposite.
@@ -201,6 +200,6 @@ class UserController extends Controller
 
         $user->save();
         
-        return redirect()->route('admin.users.index')->with('message', $message);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $message);
     }
 }

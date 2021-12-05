@@ -11,7 +11,6 @@ use Jenssegers\Agent\Agent;
 use Illuminate\Support\Str;
 use App\Helper\Helper;
 use PDF;
-use App\Models\CourseCategory;
 
 use App\Models\Notification;
 use App\Models\Config;
@@ -23,6 +22,8 @@ use App\Models\UserDetail;
 use App\Models\Course;
 use App\Models\Review;
 use App\Models\InstructorPosition;
+use App\Models\CourseCategory;
+use App\Models\Blog;  
 
 /*
 |--------------------------------------------------------------------------
@@ -116,20 +117,32 @@ class PagesController extends Controller
         // if($agent->isPhone()){
         //     return view('client/mobile/under-construction');
         // }
+        
         $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        $blogs = Blog::with('hashtag')
+            ->orderBy('created_at','desc')
+            ->where('is_featured', TRUE)->get()->take(3);
+
+        $recommendedBlogs = Blog::with('hashtag')
+            ->orderBy('created_at', 'desc')
+            ->get()->take(3);
+
+        $viewData = ['footer_reviews', 'blogs', 'recommendedBlogs'];
 
         if(Auth::check()) {
             $this->resetNavbarData();
-
             $notifications = $this->notifications;
             $informations = $this->informations;
             $transactions = $this->transactions;
             $cart_count = $this->cart_count;
 
-            return view('client/community', compact('cart_count', 'notifications', 'transactions','informations','footer_reviews'));
+            $recommendedBlogs = Helper::getBlogRecommendation(3);
+
+            $viewData = array_merge($viewData, ['notifications', 'informations', 'transactions', 'cart_count']);
         }
         
-        return view('client/community',compact('footer_reviews'));
+        return view('client/community', compact($viewData));
     }
 
     public function autocomplete(Request $request){
@@ -321,5 +334,66 @@ class PagesController extends Controller
             return redirect('/pelatihan-venidici?search='.$request->search.'#search-course-section');
 
         }
+    }
+
+    public function blog_detail($id){
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        $blog = Blog::findOrFail($id);
+
+        $viewData = ['footer_reviews', 'blog'];
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            $viewData = array_merge($viewData, ['notifications', 'informations', 'transactions', 'cart_count']);
+        }
+        
+        return view('client/blogs/blog-detail', compact($viewData));
+    }
+    public function blog_list(Request $request){
+        $footer_reviews = Review::orderBy('created_at','desc')->get()->take(2);
+
+        $blogs = Blog::with('hashtag');
+    
+        if ($request->has('sort')) {
+            if ($request['sort'] == "latest") {
+                $blogs = $blogs->orderBy('created_at', 'desc');
+            } else {
+                $blogs = $blogs->orderBy('created_at');
+            }
+        } else {
+            $blogs = $blogs->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('search')) {
+            if ($request->search == "") {
+                $url = route('blog_list', request()->except('search'));
+                return redirect($url);
+            } else {
+                $blogs = $blogs->where('title', 'like', "%".$request->search."%");
+            }
+        }
+
+        $blogs = $blogs->get();
+
+        $viewData = ['footer_reviews', 'blogs'];
+
+        if(Auth::check()) {
+            $this->resetNavbarData();
+            $notifications = $this->notifications;
+            $informations = $this->informations;
+            $transactions = $this->transactions;
+            $cart_count = $this->cart_count;
+
+            $viewData = array_merge($viewData, ['notifications', 'informations', 'transactions', 'cart_count']);
+        }
+        
+        return view('client/blogs/blog-list', compact($viewData));
     }
 }

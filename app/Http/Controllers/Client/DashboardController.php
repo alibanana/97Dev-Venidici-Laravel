@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
-use Axiom\Rules\StrongPassword;
-use Jenssegers\Agent\Agent;
-use App\Helper\Helper;
-use App\Helper\CourseHelper;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Throwable;
+use Jenssegers\Agent\Agent;
 use Axiom\Rules\TelephoneNumber;
 
+use App\Helper\Helper;
+use App\Helper\CourseHelper;
+use App\Helper\UserHelper;
 
 use App\Models\Hashtag;
 use App\Models\Cart;
@@ -31,6 +32,7 @@ use App\Models\Review;
 use App\Models\Course;
 use App\Mail\PasswordChangedMail;
 use App\Models\BootcampApplication;
+
 
 class DashboardController extends Controller
 {
@@ -115,9 +117,11 @@ class DashboardController extends Controller
                 $cities = null;
         }
 
+        $isUserCandidateAndCandidateDetailNotUpdated = UserHelper::isCandidateNotUpdated(Auth::user());
+
         $viewData = compact('provinces', 'cities', 'cart_count', 'transactions', 'interests', 'informations', 'notifications', 'usableStarsCount',
             'liveWorkshopPaginationData', 'onGoingCoursesPaginationData', 'completedCoursesPaginationData', 'userCourseProgress', 'courseSuggestions',
-            'footer_reviews','agent');
+            'isUserCandidateAndCandidateDetailNotUpdated', 'footer_reviews','agent');
 
         return view('client/user-dashboard', $viewData);
     }
@@ -194,8 +198,8 @@ class DashboardController extends Controller
             
         $validated = Validator::make($input,[
             'name'          => 'required',
-            'telephone'     => ['required', new TelephoneNumber],
-            //'telephone'     => 'required',
+            //'telephone'     => ['required', new TelephoneNumber],
+            'telephone'     => 'required',
             'birthdate'     => 'date',
             'gender'        => 'required',
             'company'       => '',
@@ -284,11 +288,10 @@ class DashboardController extends Controller
 
     // Changes the user's password in the database.
     public function changePassword(Request $request) {
-        // Use StrongPassword validation on production.
         if (App::environment('production'))
             $validation_rules = [
                 'old_password' => 'required',
-                'password' => ['required', 'confirmed', new StrongPassword]
+                'password' => ['required', 'confirmed', 'alpha_num', 'min:8']
             ];
         else
             $validation_rules = [
@@ -509,4 +512,8 @@ class DashboardController extends Controller
             return redirect()->back()->with('bootcamp_message', $message);
     
     }
+
+    
+
+    
 }

@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\App;
 use Carbon\Carbon;
 use Jenssegers\Agent\Agent;
+use Throwable;
+
 use App\Helper\Helper;
 use App\Helper\XfersHelper;
-use Throwable;
+use App\Helper\UserHelper;
 
 use Axiom\Rules\TelephoneNumber;
 
@@ -390,7 +392,7 @@ class CheckoutController extends Controller
             $user_name = $invoice->bootcampApplication->user->name;
             $sentence = "";
             Mail::to(auth()->user()->email)->send(new BootcampFreeTrialMail($course_title,$user_name,$sentence));
-            $admins = User::where('user_role_id','!=',1)->get();
+            $admins = UserHelper::findAllAdmins();
             foreach($admins as $admin){
                 $sentence = "Hi Admin!";
                 Mail::to($admin->email)->send(new BootcampFreeTrialMail($course_title,$user_name,$sentence));
@@ -602,7 +604,7 @@ class CheckoutController extends Controller
                 $sentence ="";
                 //Fernandha Dzaky telah membayar Skill Snack dengan
                 Mail::to(auth()->user()->email)->send(new InvoiceMail($invoice,$sentence));
-                $admins = User::where('user_role_id','!=',1)->get();
+                $admins = UserHelper::findAllAdmins();
                 foreach($admins as $admin){
                     $sentence = $invoice->user->name . ' telah membayar dengan ';
                     //Fernandha Dzaky telah membayar Skill Snack dengan

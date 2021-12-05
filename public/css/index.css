@@ -265,7 +265,8 @@ html, body {
     padding-right:8.5vw
 }
 .page-container-inner{
-    padding:4vw 18vw !important;
+    padding-left: 18vw !important;
+    padding-right: 18vw !important;
 }
 /* end of page padding */
 
@@ -2536,7 +2537,13 @@ html, body {
 
     /* START COMMUNITY PAGE SECTION */
     .bg-image-mobile-height{
-        height:93vw !important
+        height:auto  !important
+    }
+    #margin-bottom-mobile-community{
+        margin-bottom:5vw !important
+    }
+    #why-join-community-mobile{
+        height: auto !important;
     }
     #mt-mobile-community{
         margin-top:3vw !important
@@ -2679,6 +2686,89 @@ html, body {
     }
     .edit-item{
         padding-top: 1vw !important;
+    }
+    /* candidate detail */
+    .warning-height-candidate-details{
+        height:auto !important
+    }
+    .mpl{
+        padding-left:0vw !important
+    }
+    .mpr-0{
+        padding-right:0vw !important;
+    }
+    .cv-mobile-font-size{
+        font-size: 3vw !important;
+    }
+    #mobile-popup-candidate-detail{
+        width: 90% !important;
+    }
+    #mobile-popup-candidate-detail-close{
+        right: 22px !important;
+        top:6px !important;
+    }
+    #add-mobile-candidate-details{
+        margin-top:5vw !important;
+    }
+    #interest-mobile-tag{
+        padding:3vw !important
+    }
+    #mobile-candidate-details-myprofile{
+        width:30vw !important;
+        height: auto !important;
+        margin-bottom:5vw !important
+    }
+    #job-portal-profile-mobile-dashboard-alert{
+        height: auto!important;
+    }
+    #job-portal-profile-mobile-dashboard-alert-width{
+        width: auto!important;
+    }
+    #padding-job-portal-mobile-dashboard{
+        padding:0vw !important;
+    }
+    #drop-down-menu-mobile-job-portal{
+        transform: translate3d(-126px, 34px, 0px) !important;
+    }
+    #height-jobportal-mobile{
+        height: 65vw !important;
+        padding-top:6vw !important
+    }
+    #width-auto-mobile{
+        width: auto !important;
+    }
+    #jp-mobile-input{
+        width:74vw !important;
+    }
+    #margin-left-mobile-jp{
+        margin-left:0vw !important;
+    }
+    #button-added-jp{
+        width:70% !important
+    }
+    #icon-font-size-mobile-jp{
+        font-size:8vw !important
+    }
+    .margin-right-for-icon-jp-mobile{
+        margin-right:3vw  !important
+    }
+    #width-blog-mobile-input-article{
+        width: 67vw !important;
+    }
+    #button-search-padding-mobile-input-article{
+        padding:1.5vw 3vw !important
+    }
+    #margin-bottom-between-iput{
+        margin-bottom:2vw !important
+    }
+    #mobile-height-auto-important{
+        height: 50vw !important
+    }
+    .margin-top-mobile-bootcamp{
+        margin-top:11vw !important
+    }
+    #margin-bottom-mobile-banner-section{
+        margin-bottom:11vw !important
     }
 }
 
@@ -2957,4 +3047,114 @@ html, body {
   
   .items::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
+  }
+
+    .btn-blue-toggle{
+    background-color:#FFFFFF;padding:0.8vw 1.5vw;border-radius:0px 10px 10px 0px;cursor:pointer;border:1px solid #FFFFFF;    transition: 0.2s ease-in-out;
+
+}
+.btn-blue-toggle p {
+    color: #2B6CAA;
+}
+.btn-blue-toggle:hover {
+    background-color:#2B6CAA;
+    border:1px solid #2B6CAA
+}
+.btn-blue-toggle:hover p{
+    color:#FFFFFF
+}
+.btn-blue-toggle-active{
+    background-color:#2B6CAA;padding:0.8vw 1.5vw;;cursor:pointer;border:1px solid #2B6CAA
+}
+.btn-blue-toggle-active p {
+    color:#FFFFFF
+}
+
+.a-white{
+    font-family:Rubik Bold;color:#FFFFFF;border:2px solid #FFFFFF;border-radius:5px;padding:0.5vw 2vw;text-decoration:none;transition: 0.2s ease-in-out;
+}
+
+.a-white:hover{
+    color:#2B6CAA !important;
+    background-color: #ffffff;
+}
+
+.job-listing-card{
+    box-shadow: 0px 2px 1px rgba(43, 108, 170, 0.25), 0px -2px 1px rgba(43, 108, 170, 0.25);background-color:#ffffff;padding:2vw;transition: 0.2s ease-in-out;
+}
+.job-listing-card:hover{
+    background-color: #EFF7FE;
+}
+
+
+
+#upload-file-btn-label {
+    cursor: pointer;
+    /* Style as you please, it will become the visible UI component. */
+    background-color: #2B6CAA;
+    padding: 0.5vw;
+    font-family: Rubik Medium;
+    color: white
+ }
+ 
+ #upload-file-btn {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+ }
+
+
+
+.drop-zone {
+    max-width: 100%;
+    height: 14vw;
+    padding: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    color: #cccccc;
+    border: 4px dashed #707070;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+  }
+  
+  .drop-zone--over {
+    border-style: solid;
+  }
+  
+  .drop-zone__input {
+    display: none;
+  }
+  
+  .drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #707070;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  img{
+      max-width: 100% !important;
+      height: auto;
   }

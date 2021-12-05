@@ -151,7 +151,8 @@
 											<th>Stars</th>
 											<th>Referral Code</th>
 											<th>User Role</th>
-											<th  class="text-nowrap">Signed Up At</th>
+											<th>Candidate Status</th>
+											<th class="text-nowrap">Signed Up At</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -191,17 +192,14 @@
 														Super Admin
 													@endif
 												</td>
+												@if ($user->isCandidate)
+													<td style="color:green">Yes</td>
+												@else
+													<td style="color:red">No</td>
+												@endif
 												<td class="text-nowrap">{{ $user->created_at->diffForHumans() }}</td>
-
 												<td>
 													<div class="d-sm-flex align-items-center justify-content-center mb-4">
-														<form action="" method="post">
-																@csrf
-																@method('delete')
-																<div style="padding: 0px 2px">
-																		<button class="d-sm-inline-block btn btn-danger shadow-sm" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
-																</div>
-														</form>
 														<form action="{{ route('admin.users.set-status-to-opposite', $user->id) }}" method="post">
 																@csrf
 																<div style="padding: 0px 2px">

@@ -67,6 +67,11 @@
                                 Your email <span style="font-weight: bold">{{session('email-verification-success') }}</span> has been verified!
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
+                        @elseif (session('validation-error'))
+                            <div class="alert alert-danger alert-dismissible fade show small-text mb-3"  style="width:100%;text-align:center;margin-bottom:0px;margin-top:0.5vw"role="alert">
+                                {{ session('validation-error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         @endif
                         <p style="font-family:Rubik Medium;color:#5F5D70;text-align:left !important;margin-bottom:0.4vw;margin-top:3vw;font-size:4vw">Email Address</p>
                         <div  class="auth-input-form" style="display: flex;align-items:center;padding:2vw">

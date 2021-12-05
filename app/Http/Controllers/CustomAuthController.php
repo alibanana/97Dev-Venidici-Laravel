@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Jenssegers\Agent\Agent;
-use Axiom\Rules\StrongPassword;
 use Axiom\Rules\TelephoneNumber;
 use Throwable;
 use App\Helper\Helper;
@@ -58,17 +57,15 @@ class CustomAuthController extends Controller
 
         $validation_rules = [
             'name' => 'required',
-            //'telephone'     => 'required',
-            'telephone'     => ['required', new TelephoneNumber],
+            'telephone'     => 'required',
+            //'telephone'     => ['required', new TelephoneNumber],
             'email' => 'required|email|unique:users',
             'response' => 'required',
             'referral_code' => '',
         ];
 
-
-        // Use StrongPassword validation on production.
         if (App::environment('production'))
-            $validation_rules['password'] = ['required', new StrongPassword];
+            $validation_rules['password'] = ['required', 'alpha_num', 'min:8'];
         else
             $validation_rules['password'] = ['required'];
 
@@ -231,5 +228,14 @@ class CustomAuthController extends Controller
             $str .= $keyspace[random_int(0, $max)];
         }
         return $str;
+    }
+
+    // Shows the Job Portal Login Page.
+    public function showJobPortalLogin() {
+        $agent = new Agent();
+        if($agent->isPhone())
+            return view('client/mobile/auth/job-portal-login');
+
+        return view('client/job-portal/company/login');
     }
 }

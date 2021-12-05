@@ -25,11 +25,15 @@ use Illuminate\Support\Facades\Mail;
 
 class BootcampController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private const INDEX_ROUTE = 'admin.bootcamp.index';
+    private const SHOW_ROUTE = 'admin.bootcamp.show';
+    private const ONLINE_COURSE_SHOW_ROUTE = 'admin.online-course.show';
+    private const WOKI_SHOW_ROUTE = 'admin.woki.show';
+
+    private const BOOTCAMP_APPLICATION_STATUS_LIST =
+        ['ft_pending', 'ft_paid', 'ft_refunded', 'ft_cancelled', 'waiting', 'approved', 'denied'];
+
+    // Shows the Bootcamp List admin page.
     public function index(Request $request)
     {
         $course_categories = CourseCategory::select('id', 'category')->get();
@@ -51,7 +55,7 @@ class BootcampController extends Controller
 
         if ($request->has('filter')) {
             if (!in_array($request->filter, $course_categories_category_flatten)) {
-                $url = route('admin.bootcamp.index', request()->except('filter'));
+                $url = route(self::INDEX_ROUTE, request()->except('filter'));
                 return redirect($url);
             }
 
@@ -65,7 +69,7 @@ class BootcampController extends Controller
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route('admin.bootcamp.index', request()->except('search'));
+                $url = route(self::INDEX_ROUTE, request()->except('search'));
                 return redirect($url);
             } else {
                 $search = $request->search;
@@ -81,13 +85,13 @@ class BootcampController extends Controller
 
         if ($request->has('show')) {
             if (!in_array($request->show, $show_options)) {
-                return redirect(route('admin.bootcamp.index', request()->except(['search', 'page'])));
+                return redirect(route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
             }
 
             if ($request->show == "All") {
                 if ($request->has('page')) {
                     return redirect(
-                        route('admin.bootcamp.index', request()->except(['search', 'page'])));
+                        route(self::INDEX_ROUTE, request()->except(['search', 'page'])));
                 }
 
                 $courses = $courses->get();
@@ -138,26 +142,14 @@ class BootcampController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    // Shows the Create New Bootcamp admin page.
+    public function create() {
         $course_categories = CourseCategory::select('id', 'category')->get();
         $tags = Hashtag::all();
-
         return view('admin/bootcamp/create', compact('course_categories','tags'));
-
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Stores new Bootcamp in the database.
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
@@ -204,27 +196,21 @@ class BootcampController extends Controller
         $bootcampCourseDetail->trial_date_end       = $validated['trial_date_end'];
         $bootcampCourseDetail->save();
 
-        return redirect()->route('admin.bootcamp.index')->with('message', 'New Bootcamp has been added!');
+        return redirect()->route(self::INDEX_ROUTE)->with('message', 'New Bootcamp has been added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Shows the Bootcamp Detail admin page.
     public function show(Request $request, $id)
     {
         $course = Course::findOrFail($id);
 
         if ($course->courseType->type == 'Woki') {
-            return redirect()->route('admin.bootcamp.show', $id);
-        }
-        elseif($course->courseType->type == 'Course') {
-            return redirect()->route('admin.bootcamp.show', $id);
+            return redirect()->route(self::WOKI_SHOW_ROUTE, $course->title);
+        } elseif ($course->courseType->type == 'Course') {
+            return redirect()->route(self::ONLINE_COURSE_SHOW_ROUTE, $course->title);
         }
 
-        $users = BootcampApplication::where('course_id',$id);
+        $users = BootcampApplication::where('course_id', $id)->with('user');
 
         if ($request->has('sort')) {
             if ($request['sort'] == "latest") {
@@ -235,27 +221,10 @@ class BootcampController extends Controller
         } else {
             $users = $users->orderBy('created_at', 'desc');
         }
+
         if ($request->has('filter')) {
-            if ($request['filter'] == "ft_pending") {
-                $users = $users->where('status', 'ft_pending');
-            }
-            elseif($request['filter'] == "ft_paid") {
-                $users = $users->where('status', 'ft_paid');
-            }
-            elseif($request['filter'] == "ft_refunded") {
-                $users = $users->where('status', 'ft_refunded');
-            }
-            elseif($request['filter'] == "ft_cancelled") {
-                $users = $users->where('status', 'ft_cancelled');
-            }
-            elseif($request['filter'] == "waiting") {
-                $users = $users->where('status', 'waiting');
-            }
-            elseif($request['filter'] == "approved") {
-                $users = $users->where('status', 'approved');
-            }
-            elseif($request['filter'] == "denied") {
-                $users = $users->where('status', 'denied');
+            if (in_array($request['filter'], self::BOOTCAMP_APPLICATION_STATUS_LIST)) {
+                $users = $users->where('status', $request['filter']);
             } else {
                 $users = $users->orderBy('created_at');
             }
@@ -265,7 +234,7 @@ class BootcampController extends Controller
 
         if ($request->has('search')) {
             if ($request->search == "") {
-                $url = route('admin.bootcamp.show', $id, request()->except('search'));
+                $url = route(self::SHOW_ROUTE, $id, request()->except('search'));
                 return redirect($url);
             } else {
                 $search = $request->search;
@@ -287,36 +256,50 @@ class BootcampController extends Controller
             }
         }
 
-        return view('admin/bootcamp/detail', compact('course', 'users', 'total_revenue', 'users_data'));
+        $userIdAndScoreMap = $this->generateUserIdAndScoreMap($users);
+
+        return view('admin/bootcamp/detail', compact('course', 'users', 'total_revenue', 'users_data', 'userIdAndScoreMap'));
     }
 
-    public function edit($id)
-    {
+    private function generateUserIdAndScoreMap($bootcampApplications) {
+        return $bootcampApplications->mapWithKeys(function ($bootcampApplication) {
+            if ($bootcampApplication->user->courses()->where('courses.id', $bootcampApplication->course_id)->exists()) {
+                return [
+                    $bootcampApplication->user->id => $bootcampApplication->user->courses()
+                        ->where('courses.id', $bootcampApplication->course_id)->first()
+                        ->pivot->score
+                ];
+            }
+            return [$bootcampApplication->user->id => null];
+        });
+    }
+
+    public function edit($id) {
         return view('admin/bootcamp/update');
     }
 
     // Archive (isDeleted -> true) Bootcamp Course from the database.
     public function archive($id) {
         $result = CourseHelper::makeIsDeletedTrueById($id);
-        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $result['message']);
     }
 
     // UnArchive (isDeleted -> false) Bootcamp Course from the database.wo
     public function unArchive($id) {
         $result = CourseHelper::makeIsDeletedFalseById($id);
-        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $result['message']);
     }
 
     // Change the isFeatured status of the chosen Online Course to its opposite.
     public function setIsFeaturedStatusToOpposite(Request $request, $id) {
         $result = CourseHelper::setIsFeaturedStatusToOppositeById($id);
-        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $result['message']);
     }
 
     // Change the public status of the chosen Online Course to its opposite.
     public function setPublishStatusToOpposite(Request $request, $id) {
         $result = CourseHelper::setPublishStatusToOppositeById($id);
-        return redirect()->route('admin.bootcamp.index')->with('message', $result['message']);
+        return redirect()->route(self::INDEX_ROUTE)->with('message', $result['message']);
     }
 
     // Remove a syllabus from an existing Course's Section-Content.
@@ -338,40 +321,42 @@ class BootcampController extends Controller
 
     public function changeApplicationStatus(Request $request, $id){
         $application = BootcampApplication::findOrFail($id);
-        if($request->action == 'Approved' || $request->action == 'Upgrade')
-        {
+        $user = $application->user;
+
+        if ($request->action == 'Approved' || $request->action == 'Upgrade') {
             $application->status = 'approved';
             $title = 'Selamat, pendaftaran Bootcamp kamu telah diterima!';
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah diterima. Click disini untuk melihat status';
-            $user = User::findOrFail($application->user_id);
+            $user->isCandidate = true;
             if (!$user->courses->contains($application->course->id)) {
                 $user->courses()->syncWithoutDetaching([$application->course->id]);
                 if ($application->course->assessment()->exists()) {
                     $user->assessments()->syncWithoutDetaching([$application->course->assessment->id]);
                 }
             }
-            
-        }
-        elseif($request->action == 'Reject'){
+        } elseif ($request->action == 'Reject') {
             //kalau daftar full regis
-            if($application->is_full_registration && $application->is_trial == null){
+            if ($application->is_full_registration && $application->is_trial == null) {
                 $application->status = 'denied';
+                $user->isCandidate = false;
             //kalau upgrade
-            }else{
+            } else {
                 $application->status = 'ft_paid';
                 $application->is_full_registration = null;
+                $user->isCandidate = false;
             }
             $title = 'Ouch.. pendaftaran Bootcamp kamu telah ditolak!';    
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp '.$application->course->title.' kamu telah ditolak.';    
-        }
-        elseif($request->action == 'Refund'){
+        } elseif ($request->action == 'Refund') {
             $application->status = 'ft_refunded';
             $description = 'Hi, '.$application->name.'. Pendaftaran bootcamp kamu telah berhasil di refund.';    
-
-            $title = 'Pendaftaran Bootcamp kamu telah di refund!';    
+            $title = 'Pendaftaran Bootcamp kamu telah di refund!';
+            $user->isCandidate = false;
         }
         
         $application->save();
+        $user->save();
+
         $notification_data = [
             'user_id' => $application->user_id,
             'isInformation' => 1,
@@ -385,12 +370,39 @@ class BootcampController extends Controller
 
         $message = 'Application for user (' . $application->name . ') has been changed';
 
-        return redirect()->route('admin.bootcamp.show',$application->course_id)->with('message', $message);
-
+        return redirect()->route(self::SHOW_ROUTE, $application->course_id)->with('message', $message);
     }
 
     public function syllabusRequests($course_id){
         $course = Course::findOrFail($course_id);
         return view('admin/bootcamp/syllabus-list', compact('course'));
+    }
+
+    // Method to update the score in user_course mapping.
+    public function updateScore(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|integer',
+            'score' => 'required|integer'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route(self::SHOW_ROUTE, $id)
+                ->with('error_validation_on_update_score', 'Oops, looks like something was wrong with your request.')
+                ->withErrors($validated->errors());
+        }
+
+        $validated = $validator->validate();
+
+        $course = Course::findOrFail($id);
+        
+        $user_course_pivot = $course->users()
+            ->where('user_course.user_id', $validated['user_id'])
+            ->firstOrFail()->pivot;
+
+        $user_course_pivot->score = $validated['score'];
+        $user_course_pivot->save();
+
+        $message = 'Bootcamp (' . $course->title . ') score updated to '. $validated['score'];
+        return redirect()->route(self::SHOW_ROUTE, $id)->with('message', $message);
     }
 }

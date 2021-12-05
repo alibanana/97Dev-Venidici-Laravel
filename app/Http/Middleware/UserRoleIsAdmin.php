@@ -17,10 +17,11 @@ class UserRoleIsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->userRole->role_name == 'user') {
-            abort(403);
-        }
-        
-        return $next($request);
+        return $this->isUserAdmin() ? $next($request) : abort(403);
+    }
+
+    private function isUserAdmin() {
+        return Auth::user()->userRole->role_name == 'admin' || 
+            Auth::user()->userRole->role_name == 'super-admin';
     }
 }

@@ -201,7 +201,7 @@ END OF OUR PROGRAMS SECTION -->
         <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Find your Skill Snacks here!</p>
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
-                <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid search-course-title-icon" alt="">
+                <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid search-course-title-icon desktop-display" alt="">
                                 
                 <form action="" method="GET">
                     <input type="text" name="search" value="{{ Request::get('search') }}" type="search" class="small-text search-course-title-input-width" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw" placeholder="Course Title">

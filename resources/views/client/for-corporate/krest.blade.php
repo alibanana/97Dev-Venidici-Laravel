@@ -116,7 +116,7 @@
 <!-- END OF MODAL KREST -->
 
 <!-- START OF TOP SECTION -->
-<div class="row page-container m-0 krest-background desktop-display" style="padding-top:10vw;display:flex;align-items:center">
+<div class="row page-container m-0 krest-background desktop-display" style="padding-top:14vw;display:flex;align-items:center">
     
     <div class="col-12 col-md-6 col-l p-0">
         <img src="/assets/images/client/Krest_Logo.png" id="logo-image-krest"  class="img-fluid" alt="KREST">
