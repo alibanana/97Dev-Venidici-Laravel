@@ -1052,7 +1052,7 @@ class CandidateDetailController extends Controller
         $message = 'Thank you! Your changes will be evaluated as soon as possible. We will let you know when its done.';
         Mail::to(env('BOOTCAMP_ADMIN_EMAIL'))->send(new NotifyAdminUpdateProfile($candidateDetail->user->name));
 
-        return redirect(self::INDEX_URL_WITH_CREATE_INTEREST_MODAL)->with('interests_update_message', $message);
+        return redirect(self::INDEX_URL_WITH_CREATE_INTEREST_MODAL)->with('interests_create_message', $message);
     }
 
     // Create new interestChange to edit an existing Interest object.

@@ -118,8 +118,8 @@ class CheckoutController extends Controller
             $validation_rules = [
                 'birth_place'                   => 'required',
                 'gender'                        => 'required',
-                'phone_no' => ['required', new TelephoneNumber],
-                //'phone_no' => 'required',
+                //'phone_no' => ['required', new TelephoneNumber],
+                'phone_no' => 'required',
                 'province_id'                   => 'required',
                 'city_id'                       => 'required',
                 'address'                       => 'required',
@@ -154,8 +154,8 @@ class CheckoutController extends Controller
             // Validation rules that exists on all validation conditions. (noArtKit, hasArtKit)
             $validation_rules = [
                 'name' => 'required',
-                'phone' => ['required', new TelephoneNumber],
-                //'phone' => 'required',
+                //'phone' => ['required', new TelephoneNumber],
+                'phone' => 'required',
                 'grand_total' => 'required|integer',
                 'total_order_price' => 'required|integer',
                 'date' => 'required',
@@ -212,7 +212,7 @@ class CheckoutController extends Controller
 
             // Kalau error field lainnya dan user buys a bootcamp
             // return redirect(route('bootcamp.show', $input['course_id']) . '#payment')->withErrors($validator);
-            return redirect('/bootcamp#free-trial')->withErrors($validator)->withInput($request->all());
+            return redirect('/bootcamp/'.$request->course_title.'#free-trial')->withErrors($validator)->withInput($request->all());
         }
 
         // If validation passed store validated data in a variable.
@@ -224,7 +224,7 @@ class CheckoutController extends Controller
                 $birthdate = $validated['birth_date'];
             } else {
                 if($request['date_safari'] == null || $request['month'] == null || $request['year'] == null)
-                    return redirect('/bootcamp#free-trial')
+                    return redirect('/bootcamp/'.$course_title.'#free-trial')
                         ->withInput($request->all())
                         ->with('date_message','The date field is required');
     
@@ -247,7 +247,7 @@ class CheckoutController extends Controller
             )->count();
 
             if($bootcamp_application != 0)
-                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'You already have registered for a bootcamp, please check your user dashboard.');
+                return redirect('/bootcamp/'.$course_title.'#free-trial')->with('free_trial_bootcamp_message', 'You already have registered for a bootcamp, please check your user dashboard.');
         }
 
         $invoiceNumberResult = Helper::generateInvoiceNumber();
@@ -255,7 +255,7 @@ class CheckoutController extends Controller
             if ($request->action == 'createPaymentObjectBootcamp')
                 // return redirect()->route('bootcamp.show', $validated['course_id'])
                 //     ->with('message', $invoiceNumberResult['message']);
-                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', $invoiceNumberResult['message']);
+                return redirect('/bootcamp/'.$course_title.'#free-trial')->with('free_trial_bootcamp_message', $invoiceNumberResult['message']);
             else
                 return redirect()->back()->with('message', $invoiceNumberResult['message']);
         }
@@ -312,7 +312,7 @@ class CheckoutController extends Controller
         $invoice = Invoice::create($invoice_data);
         if (!$invoice->exists){
             if ($request->action == 'createPaymentObjectBootcamp')
-                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
+                return redirect('/bootcamp/'.$course_title.'#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
             else
                 return redirect()->back()->with('message', 'Oops, something went wrong..');
         }
@@ -329,7 +329,7 @@ class CheckoutController extends Controller
             if ($validated['promo_code'] != null){
                 $promoObject = Promotion::where('code', $validated['promo_code'])->where('isActive',1)->first();
                 if ($promoObject == null) 
-                    return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, Promo Code tidak ditemukan..')->withInput($request->all());
+                    return redirect('/bootcamp/'.$course_title.'#free-trial')->with('free_trial_bootcamp_message', 'Oops, Promo Code tidak ditemukan..')->withInput($request->all());
             }
 
             $order = Order::create([
@@ -345,7 +345,7 @@ class CheckoutController extends Controller
                 $invoice->delete();
                 // return redirect()->route('bootcamp.show', $validated['course_id'])
                 //     ->with('message', 'Oops, something went wrong..');
-                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
+                return redirect('/bootcamp/'.$course_title.'#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
             }
 
             // Create bootcamp_application object.
@@ -385,7 +385,7 @@ class CheckoutController extends Controller
                 $invoice->delete();
                 // return redirect()->route('bootcamp.show', $validated['course_id'])
                 //     ->with('message', 'Oops, something went wrong..');
-                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
+                return redirect('/bootcamp/'.$course_title.'#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
 
             }
             $course_title = $invoice->bootcampApplication->course->title;
@@ -446,7 +446,7 @@ class CheckoutController extends Controller
             if ($request->action == 'createPaymentObjectBootcamp')
                 // return redirect()->route('bootcamp.show', $validated['course_id'])
                 //     ->with('message', $response['errors']['message']);
-                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', $response['errors']['message']);
+                return redirect('/bootcamp/'.$course_title.'#free-trial')->with('free_trial_bootcamp_message', $response['errors']['message']);
             else
                 return redirect()->route('customer.cart.index')->with('message', $response['errors']['message']);
         } 
@@ -480,7 +480,7 @@ class CheckoutController extends Controller
             //if user buys a bootcamp
             if ($request->action == 'createPaymentObjectBootcamp')
                 // return redirect('bootcamp/'.$input['course_id'])->back()->with('message','Oops, something went wrong..');
-                return redirect('/bootcamp#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
+                return redirect('/bootcamp/'.$course_title.'#free-trial')->with('free_trial_bootcamp_message', 'Oops, something went wrong..');
 
             //if user does not buy a bootcamp
             else
