@@ -145,8 +145,7 @@ class BootcampController extends Controller
 
         $agent = new Agent();
         $course = Course::where('course_type_id',3)->where('enrollment_status', 'open')->where('title', $course_title)
-        ->where('publish_status', 'published')->where('isDeleted', false)->where('isFeatured',TRUE)->first();
-
+        ->where('publish_status', 'published')->where('isDeleted', false)->first();
         
         if($course == null)
             return redirect()->back();
