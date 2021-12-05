@@ -31,7 +31,7 @@
 <!-- START OF TESTIMONY SECTION -->
 <div class="row m-0 page-container review-course-background" style="padding-bottom: 8vw;padding-top:4vw">
     <!-- START OF FEATURE SECTION -->
-    <div class="col-12 col-lg-4  mobile-display" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+    <div class="col-12 col-lg-4  mobile-display" style="display: flex;flex-direction: column;justify-content: center;align-items:center;display:none">
         <p class="medium-heading" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;">Take a look at what they say about Venidici’s Bootcamp</p>
         <!--<p class="sub-description" style="font-family: Rubik Medium;color:#3B3C43;white-space:pre-line;margin-top:2vw;margin-bottom:2vw">Want to review us?</p>
         <a href="#" class="btn-blue small-text" style="text-decoration: none;font-family:Rubik Regular;padding:0.8vw 2vw;">Review Now</a>-->
