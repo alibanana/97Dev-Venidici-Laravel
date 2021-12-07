@@ -2770,6 +2770,15 @@ html, body {
     #margin-bottom-mobile-banner-section{
         margin-bottom:11vw !important
     }
+    #margin-bottom-mobile-community{
+        margin-bottom:8vw !important
+    }
+    #width-image-mobile-community{
+        width:20vw !important
+    }
+    .width-arrow-mobile-community{
+        width:6vw !important
+    }
 }
 
 /* MOBILE NAVBAR */

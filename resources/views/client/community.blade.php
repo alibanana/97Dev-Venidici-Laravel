@@ -14,11 +14,18 @@
     <div class="col-md-12 p-0 wow fadeInLeft" data-wow-delay="0.3s" id="margin-bottom-mobile-community">
         <p class="big-heading" style="font-family: Rubik Bold;color:#FFFFFF;white-space:pre-line">Get your social widen
         with Venidici Community</p>
-        <p class="sub-description" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:2vw">Wadah buat anak muda penuh yang antusias membangun relasi dan <br> berkembang melalui teknologi digital dan kreativitas untuk <br> mewujudkan Generasi Emas 2045</p>
-        <div style="display:flex;align-items:center">
+        <p class="sub-description" id="margin-bottom-mobile-community" style="font-family: Rubik Regular;color:#FFFFFF;white-space:pre-line;margin-bottom:2vw">Wadah buat anak muda penuh yang antusias membangun relasi dan <br> berkembang melalui teknologi digital dan kreativitas untuk <br> mewujudkan Generasi Emas 2045</p>
+        <div class="desktop-display" style="display:flex;align-items:center">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" target="_blank" class="normal-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:0px;padding:1vw 2vw;text-decoration:none">Bergabung Sekarang</a>                
             <p class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;margin-left:2vw">OR</a>                
             <a href="{{ route('blog_list') }}" class="bigger-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;text-decoration:none;margin-left:2vw">Explore Venidici Blog</a>                
+        </div>
+        <div class="mobile-display" style="display:none">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUkYQlKFVeiRILETOtUPHhI7eCNV4o36Actdp3Z87935jkUQ/viewform" target="_blank" class="bigger-text btn-dark-blue" style="font-family: Poppins Medium;margin-bottom:1vw;padding:1vw 2vw;text-decoration:none">Bergabung Sekarang</a>    
+                    
+            <p class="normal-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;margin-left:2vw;margin-top:1vw">OR</a>
+            <br>                
+            <a href="{{ route('blog_list') }}" class="bigger-text" style="font-family: Poppins Medium;margin-bottom:0px;color:#FFFFFF;text-decoration:none">Explore Venidici Blog</a>                
         </div>
 
     </div>
@@ -38,7 +45,7 @@
                 <div class="carousel-item active" style="height:auto">
                     <div class="row m-0">
                         <div class="col-lg-6 col-xs-12" style="text-align:center" >
-                                <img src="/assets/images/client/Not_Just_A_Place_Icon.png" class="img-fluid" style="width:8vw;height:auto;object-fit:contain" alt="">
+                                <img src="/assets/images/client/Not_Just_A_Place_Icon.png" class="img-fluid" style="width:8vw;height:auto;object-fit:contain" id="width-image-mobile-community" alt="">
                                 <p class="small-heading" id="mt-mobile-community" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">Not just a place</p>
 
                         </div>
@@ -54,7 +61,7 @@
                 <div class="carousel-item" style="height:auto">
                     <div class="row m-0">
                         <div class="col-lg-6 col-xs-12" style="text-align:center" >
-                                <img src="/assets/images/client/Boost_Career_Icon.png" class="img-fluid" style="width:14vw;height:auto;object-fit:contain" alt="">
+                                <img src="/assets/images/client/Boost_Career_Icon.png" class="img-fluid" style="width:14vw;height:auto;object-fit:contain" id="width-image-mobile-community" alt="">
                                 <p class="small-heading" id="mt-mobile-community" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">
                         Everything You Need to <br> Boost Your Career</p>
 
@@ -71,7 +78,7 @@
                 <div class="carousel-item" style="height:auto">
                     <div class="row m-0">
                         <div class="col-lg-6 col-xs-12" style="text-align:center" >
-                            <img src="/assets/images/client/Get_Support_Icon.png" class="img-fluid" style="width:14vw;height:auto;object-fit:contain" alt="">
+                            <img src="/assets/images/client/Get_Support_Icon.png" class="img-fluid" style="width:14vw;height:auto;object-fit:contain" id="width-image-mobile-community" alt="">
                                 <p class="small-heading" id="mt-mobile-community" style="font-family: Rubik Medium;color:#3B3C43;margin-top:1vw">
                                 Get Support from <br> Fellow Members</p>
 
@@ -86,11 +93,11 @@
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev"   data-bs-target="#feature-carousel" style="width:2vw" role="button"data-bs-slide="prev">
+            <a class="carousel-control-prev width-arrow-mobile-community"    data-bs-target="#feature-carousel" style="width:2vw" role="button"data-bs-slide="prev">
                 <img src="/assets/images/icons/arrow-left.svg" id="carousel-control-left-menu-image" style="width:2.5vw;z-index:99;margin-left:0px" alt="NEXT">
                 <span class="visually-hidden">Prev</span>
             </a>
-            <a class="carousel-control-next"   data-bs-target="#feature-carousel" style="width:2vw"  role="button"data-bs-slide="next">
+            <a class="carousel-control-next width-arrow-mobile-community"   data-bs-target="#feature-carousel" style="width:2vw"  role="button"data-bs-slide="next">
                 <img src="/assets/images/icons/arrow-right.svg" id="carousel-control-right-menu-image" style="width:2.5vw;z-index:99;margin-right:0px" alt="NEXT">
                 <span class="visually-hidden">Next</span>
             </a>
