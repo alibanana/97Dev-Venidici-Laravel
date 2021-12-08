@@ -116,7 +116,7 @@
         <p class="medium-heading" style="font-family: Rubik Medium;color:#55525B;margin-top:1vw;margin-bottom:0px">Find your Bootcamp here!</p>
         <div style="display: flex;margin-top:2vw;justify-content:center;">
             <div  class="grey-input-form" style="display: flex;align-items:center">
-                <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid" alt="">
+                <img src="/assets/images/icons/course-title-icon.png" style="width:auto;height:1vw" class="img-fluid desktop-display" alt="">
                                 
                 <form action="" method="GET">
                     <input type="text" name="search" value="{{ Request::get('search') }}" type="search" class="small-text" style="background:transparent;border:none;margin-left:1vw;color: rgba(0, 0, 0, 0.5);width:15vw" placeholder="Bootcamp Title">
@@ -126,7 +126,7 @@
                     @endif
                     <input type="submit" style="visibility: hidden;" hidden/>
             </div>
-            <div style="margin-left: 1vw;">
+            <div style="margin-left: 1vw;" id="bootcamp-margin-mobile-searchbox">
             <!--
                 <select class="grey-input-form small-text" style="height:100%;appearance:none" aria-label="">-->
                 <select class="grey-input-form small-text" name="cat" style="height:100%;padding-right:4vw" aria-label="">

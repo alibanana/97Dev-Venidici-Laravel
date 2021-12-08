@@ -2546,7 +2546,8 @@ html, body {
         height: auto !important;
     }
     #mt-mobile-community{
-        margin-top:3vw !important
+        margin-top:3vw !important;
+        padding-bottom:4vw !important
     }
     .image-community-mobile{
         width: 86vw !important;
@@ -2777,7 +2778,11 @@ html, body {
         width:20vw !important
     }
     .width-arrow-mobile-community{
-        width:6vw !important
+        width:6vw !important;
+        top:26vw !important
+    }
+    #bootcamp-margin-mobile-searchbox{
+        margin-left:2vw !important
     }
 }
 
